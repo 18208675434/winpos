@@ -86,8 +86,8 @@ namespace QiandamaPOS
         {
             try
             {
-                
-                    lblPrice.Text = "￥" + cart.totalpayment.ToString();
+
+                lblPrice.Text = "￥" + cart.producttotalamt;
                     lblCash.Text = "￥" + cart.cashpayamt.ToString();
                     lblChange.Text = "￥" + cart.totalpayment.ToString();                
                 
@@ -150,7 +150,7 @@ namespace QiandamaPOS
 
         private void frmOnLine_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+            //asf.ControlAutoSize(this);
         }
     }
 }

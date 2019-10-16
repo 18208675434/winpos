@@ -38,18 +38,18 @@ namespace QiandamaPOS
         /// <summary>
         /// 收银主界面传过来的 抹零后的cartModel
         /// </summary>
-        private Cart CurrentCart;
+        private Cart thisCurrentCart;
 
-
-        /// <summary>
-        /// 按比例缩放页面及控件
-        /// </summary>
-        AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
         /// <summary>
         /// 界面初始化录入默认值   修改的话自动清空
         /// </summary>
         bool isfirst = true;
+
+        //<summary>
+        //按比例缩放页面及控件
+        //</summary>
+        AutoSizeFormUtil asf = new AutoSizeFormUtil();
         public frmCashPay()
         {
             InitializeComponent();
@@ -63,20 +63,21 @@ namespace QiandamaPOS
 
 
 
-            CurrentCart = cart;
+            thisCurrentCart = cart;
 
         }
 
         private void frmCash_Shown(object sender, EventArgs e)
         {
             txtCash.SetWatermark("请输入实收现金");
-            txtCash.Text = CurrentCart.payamtbeforecash.ToString();
+            txtCash.Text = thisCurrentCart.payamtbeforecash.ToString();
             btnNext.Focus();
-            lblPrice.Text = "￥" + CurrentCart.payamtbeforecash.ToString();
+            lblPrice.Text = "￥" + thisCurrentCart.payamtbeforecash.ToString();
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
+            thisCurrentCart.cashpayamt = 0;
 
             if (CashPayDataReceiveHandle != null)
                 this.CashPayDataReceiveHandle.BeginInvoke(100, "", null, null);
@@ -98,13 +99,13 @@ namespace QiandamaPOS
                 decimal cash = Convert.ToDecimal(txtCash.Text);
                 string ErrorMsgCart = "";
 
-                CurrentCart.cashpayoption = 1;
-                CurrentCart.cashpayamt = cash;
+                thisCurrentCart.cashpayoption = 1;
+                thisCurrentCart.cashpayamt = cash;
 
-                Cart cart = httputil.RefreshCart(CurrentCart,ref ErrorMsgCart);
+                Cart cart = httputil.RefreshCart(thisCurrentCart,ref ErrorMsgCart);
 
                 
-                CurrentCart = cart;
+                thisCurrentCart = cart;
                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                 {
                     ShowLog(ErrorMsgCart, false);
@@ -141,8 +142,8 @@ namespace QiandamaPOS
                             frmCashChange frmcashchange = new frmCashChange(cart);
 
                             frmcashchange.frmCashChange_SizeChanged(null, null);
-                            frmcashchange.Size = new System.Drawing.Size(this.Width , this.Height);
-
+                           // frmcashchange.Size = new System.Drawing.Size(this.Width , this.Height);
+                            asf.AutoScaleControlTest(frmcashchange, this.Width, this.Height,true);
                             frmcashchange.DataReceiveHandle += FormCashChange_DataReceiveHandle;
                             frmcashchange.ShowDialog();
                             Application.DoEvents();
@@ -159,7 +160,9 @@ namespace QiandamaPOS
                         }
                         else
                         {
-                            frmOnLine frmonline = new frmOnLine(orderresult.orderid, CurrentCart);
+                            frmOnLine frmonline = new frmOnLine(orderresult.orderid, thisCurrentCart);
+                            //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
+                            asf.AutoScaleControlTest(frmonline, this.Width, this.Height,true);
                             frmonline.DataReceiveHandle += FormOnline_DataReceiveHandle;
                             frmonline.ShowDialog();
                             Application.DoEvents();
@@ -190,7 +193,7 @@ namespace QiandamaPOS
             if (type == 1)
             {
                 string ErrorMsg = "";
-                CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg);
+                CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg);
                 if (orderresult == null)
                 {
                     ShowLog("异常" + ErrorMsg, true);
@@ -223,7 +226,7 @@ namespace QiandamaPOS
             if (type == 1)
             {
                 string ErrorMsg = "";
-                CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg);
+                CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg);
                 if (orderresult == null)
                 {
                     ShowLog("异常" + ErrorMsg, true);
@@ -447,6 +450,12 @@ namespace QiandamaPOS
         public void frmCashPay_SizeChanged(object sender, EventArgs e)
         {
             asf.ControlAutoSize(this);
+        }
+
+        private void frmCashPay_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //thisCurrentCart.cashpayamt = 0;
+            //thisCurrentCart.cashpayoption = 0;
         }
     }
 }

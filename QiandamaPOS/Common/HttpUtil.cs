@@ -129,24 +129,17 @@ namespace QiandamaPOS.Common
         }
 
 
-        public scancodememberModel GetScanCodeInfo(string scancode, ref string errormsg)
+        public scancodememberModel GetSkuInfoMember(string scancode, ref string errormsg)
         {
             try
             {
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 string url = "";
-                if (scancode.Length == 13)
-                {
+
                     url = "/pos/product/scancode/getscancodeskumemberdto";
                     sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
                     sort.Add("barcode", scancode);
-                }
-                else
-                {
-                    url = "/pos/product/scancode/getskuInfobyshortcode";
-                    sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
-                    sort.Add("shortcode", scancode.PadLeft(5,'0'));
-                }
+               
                     
               
                 string json = HttpGET(url, sort);
@@ -156,15 +149,49 @@ namespace QiandamaPOS.Common
                 if (rd.code == 0)
                 {
                     scancodememberModel scancodember =new scancodememberModel();
-                    if (scancode.Length == 13)
-                    {
+
                         scancodember = JsonConvert.DeserializeObject<scancodememberModel>(rd.data.ToString());
-                    }
-                    else
-                    {
+                  
+                    return scancodember;
+
+                }
+                else
+                {
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "条码或会员识别异常：" + ex.Message);
+                errormsg = "条码或会员识别异常：" + ex.Message;
+                return null;
+            }
+        }
+
+
+        public scancodememberModel GetSkuInfoByShortCode(string scancode, ref string errormsg)
+        {
+            try
+            {
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                string url = "";
+            
+                    url = "/pos/product/scancode/getskuInfobyshortcode";
+                    sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+                    sort.Add("shortcode", scancode.PadLeft(5, '0'));
+
+                string json = HttpGET(url, sort);
+                //Console.Write("getskuInfobyshortcode:"+ json);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                if (rd.code == 0)
+                {
+                    scancodememberModel scancodember = new scancodememberModel();
+                    
                         Scancodedto scancodedto = JsonConvert.DeserializeObject<Scancodedto>(rd.data.ToString());
                         scancodember.scancodedto = scancodedto;
-                    }
+                    
                     return scancodember;
 
                 }
@@ -825,7 +852,6 @@ namespace QiandamaPOS.Common
                     erromessage = "";
                     MediaList posmedia = JsonConvert.DeserializeObject<MediaList>(rd.data.ToString());
                     return posmedia;
-
                 }
                 else
                 {

@@ -66,8 +66,8 @@ namespace QiandamaPOS
                     frmMain frmmain = new frmMain();
                     //frmmain.frmMain_SizeChanged(null,null);
                     //frmmain.WindowState = FormWindowState.Maximized;
-
-                    asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height,true);
+                    //Screen.PrimaryScreen.Bounds.Height
+                    asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
                     this.Hide();
                     CloseOSK();
 

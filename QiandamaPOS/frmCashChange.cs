@@ -82,7 +82,7 @@ namespace QiandamaPOS
 
         public void frmCashChange_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+           // asf.ControlAutoSize(this);
         }
 
     }

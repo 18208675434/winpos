@@ -62,7 +62,7 @@ namespace QiandamaPOS
             frmExpenseSave frmexpensave = new frmExpenseSave();
             frmexpensave.Opacity = 0.95d;
             frmexpensave.frmExpenseSave_SizeChanged(null,null);
-            frmexpensave.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, Screen.PrimaryScreen.Bounds.Height - 200);
+            frmexpensave.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height - 200);
             frmexpensave.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmexpensave.Width - 50, 100);
             frmexpensave.ShowDialog();
 

@@ -9,8 +9,15 @@ namespace QiandamaPOS.Model
 
     public class scancodememberModel
     {
+
         public Scancodedto scancodedto { get; set; }
+
+        public Member memberresponsevo { get; set; }
         public bool skubarcodeflag { get; set; }
+
+        /// <summary>
+        ///SKU商品    MEMBER 会员
+        /// </summary>
         public string type { get; set; }
     }
 

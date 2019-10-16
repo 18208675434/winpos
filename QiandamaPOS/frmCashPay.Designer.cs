@@ -350,6 +350,7 @@
             this.Name = "frmCashPay";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmCash";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCashPay_FormClosing);
             this.Shown += new System.EventHandler(this.frmCash_Shown);
             this.SizeChanged += new System.EventHandler(this.frmCashPay_SizeChanged);
             this.ResumeLayout(false);

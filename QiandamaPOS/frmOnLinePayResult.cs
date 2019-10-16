@@ -98,6 +98,9 @@ namespace QiandamaPOS
                 MainModel.ShowLog("订单取消失败" + errormsg, true);
             }
             isrun = false;
+
+            if (DataReceiveHandle != null)
+                this.DataReceiveHandle.BeginInvoke(3, "", null, null);
             this.Close();
         }
 
@@ -115,6 +118,8 @@ namespace QiandamaPOS
                 MainModel.ShowLog("订单取消失败" + errormsg, true);
             }
             isrun = false;
+            if (DataReceiveHandle != null)
+                this.DataReceiveHandle.BeginInvoke(3, "", null, null);
             this.Close();
         }
 
@@ -292,11 +297,19 @@ namespace QiandamaPOS
             timerSyncTrade.Enabled = false;
 
             listener.Stop();
+
+
+           // MainModel.frmmainmedia.IniForm();
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("ERROR","在线收银页面关闭异常"+ex.Message);
             }
+        }
+
+        private void frmOnLinePayResult_Shown(object sender, EventArgs e)
+        {
+            MainModel.frmmainmedia.ShowPayInfo("请出示微信/支付宝/银联付款码");
         }
 
 

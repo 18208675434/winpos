@@ -60,6 +60,9 @@
             this.pnlMember = new System.Windows.Forms.Panel();
             this.lblWechartNickName = new System.Windows.Forms.Label();
             this.lblMobil = new System.Windows.Forms.Label();
+            this.pnlPayInfo = new System.Windows.Forms.Panel();
+            this.lblPayInfo = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnl4.SuspendLayout();
             this.pnl3.SuspendLayout();
@@ -72,6 +75,8 @@
             this.pnlOrderDetail.SuspendLayout();
             this.pnlOrderIni.SuspendLayout();
             this.pnlMember.SuspendLayout();
+            this.pnlPayInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -204,7 +209,7 @@
             // 
             this.player.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.player.Enabled = true;
-            this.player.Location = new System.Drawing.Point(911, 833);
+            this.player.Location = new System.Drawing.Point(900, 630);
             this.player.Margin = new System.Windows.Forms.Padding(2);
             this.player.Name = "player";
             this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
@@ -219,7 +224,7 @@
             this.pnlLine.Location = new System.Drawing.Point(0, 0);
             this.pnlLine.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLine.Name = "pnlLine";
-            this.pnlLine.Size = new System.Drawing.Size(703, 1);
+            this.pnlLine.Size = new System.Drawing.Size(691, 1);
             this.pnlLine.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -441,11 +446,46 @@
             this.lblMobil.TabIndex = 5;
             this.lblMobil.Text = "152****6604";
             // 
+            // pnlPayInfo
+            // 
+            this.pnlPayInfo.BackColor = System.Drawing.Color.White;
+            this.pnlPayInfo.Controls.Add(this.lblPayInfo);
+            this.pnlPayInfo.Controls.Add(this.pictureBox1);
+            this.pnlPayInfo.Location = new System.Drawing.Point(15, 5);
+            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlPayInfo.Name = "pnlPayInfo";
+            this.pnlPayInfo.Size = new System.Drawing.Size(711, 723);
+            this.pnlPayInfo.TabIndex = 16;
+            // 
+            // lblPayInfo
+            // 
+            this.lblPayInfo.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblPayInfo.ForeColor = System.Drawing.Color.Gray;
+            this.lblPayInfo.Location = new System.Drawing.Point(40, 512);
+            this.lblPayInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPayInfo.Name = "lblPayInfo";
+            this.lblPayInfo.Size = new System.Drawing.Size(534, 31);
+            this.lblPayInfo.TabIndex = 9;
+            this.lblPayInfo.Text = "请出示付款码";
+            this.lblPayInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(116, 92);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmMainMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 760);
+            this.Controls.Add(this.pnlPayInfo);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pnlGoods);
@@ -475,6 +515,8 @@
             this.pnlOrderIni.PerformLayout();
             this.pnlMember.ResumeLayout(false);
             this.pnlMember.PerformLayout();
+            this.pnlPayInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -512,5 +554,8 @@
         private System.Windows.Forms.Label lblGoodsCount;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlPayInfo;
+        private System.Windows.Forms.Label lblPayInfo;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

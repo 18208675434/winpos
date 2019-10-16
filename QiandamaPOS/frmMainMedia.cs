@@ -41,6 +41,7 @@ namespace QiandamaPOS
             tableLayoutPanel2.Visible = false;
             pnlGoods.Visible = false;
             player.Visible = false;
+            pnlPayInfo.Visible = false;
 
             string ErrorMsg = "";
             MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
@@ -80,6 +81,7 @@ namespace QiandamaPOS
         {
 
                   player.Visible = false;
+                  pnlPayInfo.Visible = false;
                   tableLayoutPanel1.Visible = true;
                   tableLayoutPanel2.Visible = true;
                   pnlGoods.Visible = true;
@@ -198,20 +200,37 @@ namespace QiandamaPOS
 
         public void ShowNumber()
         {
+            try
+            {
+                frmNumber frmnumber = new frmNumber("请输入会员号", true);
 
-            frmNumber frmnumber = new frmNumber("请输入会员号", true);
+                frmnumber.frmNumber_SizeChanged(null, null);
+                frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
+                // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
 
-            frmnumber.frmNumber_SizeChanged(null, null);
-            frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
-           // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
+                frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
 
-            frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
+                //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+                frmnumber.Show();
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("客屏输入会员号异常"+ex.Message);
+            }
 
-            //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            frmnumber.Show();
-            Application.DoEvents();
+        }
 
-
+        public void ShowPayInfo(string lblinfo)
+        {
+            player.Visible = false;
+          
+            tableLayoutPanel1.Visible = false;
+            tableLayoutPanel2.Visible = true;
+            pnlGoods.Visible = false;
+            pnlPayInfo.Visible = true;
+            
+            lblPayInfo.Text = lblinfo;
         }
 
         private void frmMainMedia_SizeChanged(object sender, EventArgs e)

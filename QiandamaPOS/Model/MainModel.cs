@@ -171,7 +171,7 @@ namespace QiandamaPOS.Model
             
 
                 frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
-                frmmsf.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width / 2 - frmmsf.Width, Screen.PrimaryScreen.Bounds.Height/2-50);
+                frmmsf.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width / 2 - frmmsf.Width, SystemInformation.WorkingArea.Height/2-50);
                 LogManager.WriteLog(msg);
                 frmmsf.ShowDialog();
             

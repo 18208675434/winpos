@@ -153,12 +153,12 @@ namespace QiandamaPOS
 
                 frmCashPay frmcash = new frmCashPay(CurrentCart);
                 frmcash.frmCashPay_SizeChanged(null, null);
-                frmcash.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, Screen.PrimaryScreen.Bounds.Height- 200);
+                frmcash.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height- 200);
                 frmcash.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmcash.Width - 80, 100);
 
                 frmcash.CashPayDataReceiveHandle += FormCash_DataReceiveHandle;
                 frmcash.Opacity = 0.95d;
-                frmcash.TopMost = true;
+                //frmcash.TopMost = true;
                 frmcash.ShowDialog();
 
                 Application.DoEvents();
@@ -263,7 +263,7 @@ namespace QiandamaPOS
 
                         frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
                         frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
-                        frmonlinepayresult.TopMost = true;
+                        //frmonlinepayresult.TopMost = true;
                         frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
                         frmonlinepayresult.ShowDialog();
                         frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
@@ -301,9 +301,9 @@ namespace QiandamaPOS
                             frmBalancePayResult frmbalancepayresult = new frmBalancePayResult(orderresult.orderid);
 
                             frmbalancepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                            frmbalancepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, Screen.PrimaryScreen.Bounds.Height / 2);
+                            frmbalancepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height / 2);
                             //frmonlinepayresult.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width - 50, 100);
-                            frmbalancepayresult.TopMost = true;
+                            //frmbalancepayresult.TopMost = true;
                             frmbalancepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
                             frmbalancepayresult.ShowDialog();
                         }
