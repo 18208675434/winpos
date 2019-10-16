@@ -1230,10 +1230,11 @@ namespace QiandamaPOS
         {
             try
             {
-                this.Enabled = false;
-                listener.Stop();
+              
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
+                    this.Enabled = false;
+                    listener.Stop();
                     string ErrorMsgCart = "";
 
                     Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
@@ -1264,13 +1265,15 @@ namespace QiandamaPOS
                             frmonlinepayresult = null;
                         }
                     }
+
+                    listener.Start();
+                    this.Enabled = true;
                 }
 
                 Application.DoEvents();
                 btnUSB.Focus();
                 Application.DoEvents();
-                listener.Start();
-                this.Enabled = true;
+              
             }
             catch (Exception ex)
             {
@@ -1284,10 +1287,12 @@ namespace QiandamaPOS
         {
             try
             {
-                this.Enabled = false;
-                listener.Stop();
+              
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
+                    this.Enabled = false;
+                    listener.Stop();
+
                     CurrentCart.cashpayoption = 1;
                     if (!RefreshCart())
                     {
