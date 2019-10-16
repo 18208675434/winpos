@@ -1377,7 +1377,7 @@ namespace QiandamaPOS
                 ShowLog("在线收银异常" + ex.Message, true);
             }
         }
-
+         
         //代金券支付
         private void btnByCoupon_Click(object sender, EventArgs e)
         {
