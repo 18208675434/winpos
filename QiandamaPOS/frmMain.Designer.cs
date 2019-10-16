@@ -288,7 +288,7 @@
             this.btnLoadBarCode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLoadBarCode.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.btnLoadBarCode.ForeColor = System.Drawing.Color.White;
-            this.btnLoadBarCode.Location = new System.Drawing.Point(721, 68);
+            this.btnLoadBarCode.Location = new System.Drawing.Point(752, 70);
             this.btnLoadBarCode.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadBarCode.Name = "btnLoadBarCode";
             this.btnLoadBarCode.Size = new System.Drawing.Size(260, 60);

@@ -124,16 +124,16 @@
   <data name="dpbtnMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAlCAYAAAAjt+tHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIXSURBVFhHxZi9SxthHMcTIsG5dSp0FaTdDKhLV6dOHQS7
-        S7sUHNwKESq+lNLRqUu7ilMLUlD8D7qVdglRMJbULDUG8p5+fnm+mc7oXfLc5QPHc7nn+3L3nJccpqLQ
-        7XafsOU7nc5Jo9G4LBQKbdvY/8Ox016vt8n8U8n9QWiOgmMKQmFa88g+OmRNEbbHVXZcdHjMY152M4qL
-        BsYsAd/6aWNAxleGrGLDg/GLixgfsg4Z0oq+H+7fG2f1B5nrir8bhI+q1eqNfN6wTMtWzXBYro/yeIfs
-        D6q5HTSZer1ecXL/kP2XYfhTwRItOWl80LGouiBMvpYuNqxDdUG4R1vSxQYd71QXhMkd6WKDjm3VBWF5
-        NqSLDetQXRAmn0sXG9ahuiBMPiwWiy1pvaPsGdXdDvfoyMn9Q/Z31QyHVViW3juWrZq7sTOVxxuhrn4A
-        Z/qYr80recfGvoItU/HhwPDMx6+ifgUXFBsNjDl7+VRWZOSdV9xocBKzrVbrl4sMD56feOcUEw2MD9jy
-        hPxW3si02+0fZL21TMUPB30a4atarXbt7P4g8x/DmqqCMJnhUfncV8cIHZ8Ygi8lSZQPoGtftQ6WfVVz
-        iUHni345+9PNZvPCHU4OOs8Zsnb1L92h5KF7xe79gT4njnWntBQTge6zVKVSqetz4pRKpab9EU6UyZ9A
-        nO+A92H/3rGn4H25XG7oWGK4zt7uf01mNiSHhR0sAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIYSURBVFhHxZi9SxthHMcTIsG5dSp0FaTdDKhLV6dOHQS7
+        S7sUHNwKESq+lNLRqUu7ilMLUlD8D7qVdghEwVhSs9QYyHv6+eX5Zjqjd8lzlw8cz+We78vdc15ymIpC
+        t9t9wpbvdDonjUbjslAotG1j/w/HTnu93ibzTyX3B6E5Co4pCIVpzSP76JA1RdgeV9lx0eExj3nZzSgu
+        GhizBHzrp40BGV8ZsooND8YvLmJ8yDpkSCv6frh/b5zVH2SuK/5uED6qVqs38nnDMi1bNcNhuT7K4x2y
+        P6jmdtBk6vV6xcn9Q/ZfhuFPBUu05KTxQcei6oIw+Vq62LAO1QXhHm1JFxt0vFNdECZ3pIsNOrZVF4Tl
+        2ZAuNqxDdUGYfC5dbFiH6oIw+bBYLLak9Y6yZ1R3O9yjIyf3D9nfVTMcVmFZeu9Ytmruxs5UHm+EuvoB
+        nOljvjav5B0b+wq2TMWHA8MzH7+K+hVcUGw0MObs5VNZkZF3XnGjwUnMtlqtXy4yPHh+4p1TTDQwPmDL
+        E/JbeSPTbrd/kPXWMhU/HPRphK9qtdq1s/uDzH8Ma6oKwmSGR+VzXx0jdHxiCL6UJFE+gK591TpY9lXN
+        JQadL/rl7E83m80Ldzg56DxnyNrVv3SHkofuFbv3B/qcONad0lJMBLrPUpVKpa7PiVMqlZr2RzhRJn8C
+        cb4D3of9e8eegvflcrmhY4nhOnu7/wF1GzYVDUv6MQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnOrderQuery.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
