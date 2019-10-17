@@ -49,6 +49,7 @@
             this.Controls.Add(this.txtMsg);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmInit";
+            this.ShowInTaskbar = false;
             this.Text = "frmInit";
             this.SizeChanged += new System.EventHandler(this.frmInit_SizeChanged);
             this.ResumeLayout(false);

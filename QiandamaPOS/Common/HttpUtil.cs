@@ -181,9 +181,12 @@ namespace QiandamaPOS.Common
                     sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
                     sort.Add("shortcode", scancode.PadLeft(5, '0'));
 
+                    DateTime starttime = DateTime.Now;
                 string json = HttpGET(url, sort);
                 //Console.Write("getskuInfobyshortcode:"+ json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                Console.WriteLine("访问短码接口时间"+(DateTime.Now-starttime).ToString("ssfff"));
 
                 if (rd.code == 0)
                 {
@@ -283,9 +286,11 @@ namespace QiandamaPOS.Common
 
                 string tempjson = JsonConvert.SerializeObject(cart);
 
-
+                DateTime starttime = DateTime.Now;
                
                 string json = HttpPOST(url, tempjson);
+
+                Console.WriteLine("访问购物车接口时间"+(DateTime.Now-starttime).ToString("ssfff"));
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 //Console.Write(json);
                 // return;
@@ -372,11 +377,11 @@ namespace QiandamaPOS.Common
 
                 string tempjson = JsonConvert.SerializeObject(cartpara);
 
-
+                DateTime starttime = DateTime.Now;
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 //Console.Write(json);
-
+                Console.WriteLine("访问购物车接口时间" + (DateTime.Now - starttime).ToString("ssfff"));
                 // return;
                 if (rd.code == 0)
                 {
@@ -1193,7 +1198,81 @@ namespace QiandamaPOS.Common
         }
 
 
+        /// <summary>
+        /// 获取客屏太阳码
+        /// </summary>
+        /// <returns></returns>
+        public string GetMemberCard(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/wechat/suncode/membercard";
 
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    return rd.data.ToString();
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取客屏太阳码异常：" + ex.Message);
+                erromessage = "获取客屏太阳码异常：" + ex.Message;
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 获取图形验证码
+        /// </summary>
+        /// <returns></returns>
+        public AuthCodeImage GetAuthcodeImage(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/account/getauthcodeimage";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    AuthCodeImage authcodeimage = JsonConvert.DeserializeObject<AuthCodeImage>(rd.data.ToString());
+                    return authcodeimage;
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取图形验证码异常：" + ex.Message);
+                erromessage = "获取图形验证码异常：" + ex.Message;
+                return null;
+            }
+        }
 
 
         #region  访问服务端

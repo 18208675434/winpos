@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainMedia));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnl4 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
@@ -38,18 +46,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.pnl1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.pnlGoods = new System.Windows.Forms.Panel();
-            this.player = new AxWMPLib.AxWindowsMediaPlayer();
-            this.pnlLine = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dgvOrderDetail = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlOrderDetail = new System.Windows.Forms.Panel();
-            this.pnlOrderIni = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -60,29 +62,43 @@
             this.pnlMember = new System.Windows.Forms.Panel();
             this.lblWechartNickName = new System.Windows.Forms.Label();
             this.lblMobil = new System.Windows.Forms.Label();
+            this.tabControlMedia = new System.Windows.Forms.TabControl();
+            this.tabPageIni = new System.Windows.Forms.TabPage();
             this.pnlPayInfo = new System.Windows.Forms.Panel();
             this.lblPayInfo = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dgvGood = new System.Windows.Forms.DataGridView();
+            this.pnlMemberCard = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.picMemberCard = new System.Windows.Forms.PictureBox();
+            this.tabPageAdvert = new System.Windows.Forms.TabPage();
+            this.player = new AxWMPLib.AxWindowsMediaPlayer();
+            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnl4.SuspendLayout();
             this.pnl3.SuspendLayout();
             this.pnl2.SuspendLayout();
             this.pnl1.SuspendLayout();
-            this.pnlGoods.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.pnlOrderDetail.SuspendLayout();
-            this.pnlOrderIni.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             this.pnlMember.SuspendLayout();
+            this.tabControlMedia.SuspendLayout();
+            this.tabPageIni.SuspendLayout();
             this.pnlPayInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
+            this.pnlMemberCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).BeginInit();
+            this.tabPageAdvert.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.01107F));
@@ -94,22 +110,22 @@
             this.tableLayoutPanel1.Controls.Add(this.pnl3, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnl2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnl1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(11, 11);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 18);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(703, 60);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(694, 60);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // pnl4
             // 
             this.pnl4.Controls.Add(this.label12);
             this.pnl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl4.Location = new System.Drawing.Point(558, 2);
+            this.pnl4.Location = new System.Drawing.Point(551, 2);
             this.pnl4.Margin = new System.Windows.Forms.Padding(2);
             this.pnl4.Name = "pnl4";
-            this.pnl4.Size = new System.Drawing.Size(143, 56);
+            this.pnl4.Size = new System.Drawing.Size(141, 56);
             this.pnl4.TabIndex = 3;
             // 
             // label12
@@ -128,10 +144,10 @@
             // 
             this.pnl3.Controls.Add(this.label9);
             this.pnl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl3.Location = new System.Drawing.Point(379, 2);
+            this.pnl3.Location = new System.Drawing.Point(375, 2);
             this.pnl3.Margin = new System.Windows.Forms.Padding(2);
             this.pnl3.Name = "pnl3";
-            this.pnl3.Size = new System.Drawing.Size(175, 56);
+            this.pnl3.Size = new System.Drawing.Size(172, 56);
             this.pnl3.TabIndex = 2;
             // 
             // label9
@@ -150,10 +166,10 @@
             // 
             this.pnl2.Controls.Add(this.label7);
             this.pnl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl2.Location = new System.Drawing.Point(234, 2);
+            this.pnl2.Location = new System.Drawing.Point(231, 2);
             this.pnl2.Margin = new System.Windows.Forms.Padding(2);
             this.pnl2.Name = "pnl2";
-            this.pnl2.Size = new System.Drawing.Size(141, 56);
+            this.pnl2.Size = new System.Drawing.Size(140, 56);
             this.pnl2.TabIndex = 1;
             // 
             // label7
@@ -175,7 +191,7 @@
             this.pnl1.Location = new System.Drawing.Point(2, 2);
             this.pnl1.Margin = new System.Windows.Forms.Padding(2);
             this.pnl1.Name = "pnl1";
-            this.pnl1.Size = new System.Drawing.Size(228, 56);
+            this.pnl1.Size = new System.Drawing.Size(225, 56);
             this.pnl1.TabIndex = 0;
             // 
             // label6
@@ -190,63 +206,26 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "商品/条码";
             // 
-            // pnlGoods
-            // 
-            this.pnlGoods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlGoods.AutoScroll = true;
-            this.pnlGoods.BackColor = System.Drawing.Color.White;
-            this.pnlGoods.Controls.Add(this.player);
-            this.pnlGoods.Controls.Add(this.pnlLine);
-            this.pnlGoods.Location = new System.Drawing.Point(11, 73);
-            this.pnlGoods.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlGoods.Name = "pnlGoods";
-            this.pnlGoods.Size = new System.Drawing.Size(703, 676);
-            this.pnlGoods.TabIndex = 12;
-            // 
-            // player
-            // 
-            this.player.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.player.Enabled = true;
-            this.player.Location = new System.Drawing.Point(900, 630);
-            this.player.Margin = new System.Windows.Forms.Padding(2);
-            this.player.Name = "player";
-            this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
-            this.player.Size = new System.Drawing.Size(40, 40);
-            this.player.TabIndex = 15;
-            // 
-            // pnlLine
-            // 
-            this.pnlLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlLine.BackColor = System.Drawing.Color.DarkGray;
-            this.pnlLine.Location = new System.Drawing.Point(0, 0);
-            this.pnlLine.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlLine.Name = "pnlLine";
-            this.pnlLine.Size = new System.Drawing.Size(691, 1);
-            this.pnlLine.TabIndex = 5;
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.pnlMember, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(730, 11);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(715, 20);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(279, 622);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(269, 422);
             this.tableLayoutPanel2.TabIndex = 14;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.dgvOrderDetail);
             this.panel2.Controls.Add(this.panel1);
-            this.panel2.Controls.Add(this.pnlOrderDetail);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.label11);
@@ -254,85 +233,79 @@
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.lblGoodsCount);
             this.panel2.Controls.Add(this.label3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(2, 152);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(275, 468);
+            this.panel2.Size = new System.Drawing.Size(265, 268);
             this.panel2.TabIndex = 7;
+            // 
+            // dgvOrderDetail
+            // 
+            this.dgvOrderDetail.AllowUserToAddRows = false;
+            this.dgvOrderDetail.AllowUserToDeleteRows = false;
+            this.dgvOrderDetail.AllowUserToResizeRows = false;
+            this.dgvOrderDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOrderDetail.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvOrderDetail.BackgroundColor = System.Drawing.Color.White;
+            this.dgvOrderDetail.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvOrderDetail.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvOrderDetail.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvOrderDetail.ColumnHeadersHeight = 66;
+            this.dgvOrderDetail.ColumnHeadersVisible = false;
+            this.dgvOrderDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.dgvOrderDetail.GridColor = System.Drawing.Color.Black;
+            this.dgvOrderDetail.Location = new System.Drawing.Point(5, 63);
+            this.dgvOrderDetail.Name = "dgvOrderDetail";
+            this.dgvOrderDetail.ReadOnly = true;
+            this.dgvOrderDetail.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvOrderDetail.RowHeadersVisible = false;
+            this.dgvOrderDetail.RowTemplate.Height = 90;
+            this.dgvOrderDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrderDetail.Size = new System.Drawing.Size(256, 139);
+            this.dgvOrderDetail.TabIndex = 18;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 14F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGridViewTextBoxColumn1.HeaderText = "商品/条码";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 14F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dataGridViewTextBoxColumn2.HeaderText = "单价(元)";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Silver;
-            this.panel1.Location = new System.Drawing.Point(8, 398);
+            this.panel1.Location = new System.Drawing.Point(8, 216);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(260, 2);
-            this.panel1.TabIndex = 16;
-            // 
-            // pnlOrderDetail
-            // 
-            this.pnlOrderDetail.Controls.Add(this.pnlOrderIni);
-            this.pnlOrderDetail.Location = new System.Drawing.Point(3, 57);
-            this.pnlOrderDetail.Name = "pnlOrderDetail";
-            this.pnlOrderDetail.Size = new System.Drawing.Size(269, 328);
-            this.pnlOrderDetail.TabIndex = 14;
-            // 
-            // pnlOrderIni
-            // 
-            this.pnlOrderIni.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlOrderIni.Controls.Add(this.label16);
-            this.pnlOrderIni.Controls.Add(this.label5);
-            this.pnlOrderIni.Controls.Add(this.label4);
-            this.pnlOrderIni.Controls.Add(this.lblTitle);
-            this.pnlOrderIni.Location = new System.Drawing.Point(3, 3);
-            this.pnlOrderIni.Name = "pnlOrderIni";
-            this.pnlOrderIni.Size = new System.Drawing.Size(263, 322);
-            this.pnlOrderIni.TabIndex = 0;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label16.Location = new System.Drawing.Point(161, 62);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(77, 25);
-            this.label16.TabIndex = 7;
-            this.label16.Text = "-￥0.00";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label5.Location = new System.Drawing.Point(161, 13);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 25);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "￥0.00";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label4.Location = new System.Drawing.Point(5, 62);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 25);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "促销优惠：";
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblTitle.Location = new System.Drawing.Point(5, 13);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(107, 25);
-            this.lblTitle.TabIndex = 4;
-            this.lblTitle.Text = "商品总额：";
+            this.panel1.Size = new System.Drawing.Size(245, 2);
+            this.panel1.TabIndex = 15;
             // 
             // label15
             // 
@@ -359,35 +332,35 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.label11.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label11.Location = new System.Drawing.Point(151, 410);
+            this.label11.Location = new System.Drawing.Point(137, 229);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(38, 31);
+            this.label11.Size = new System.Drawing.Size(35, 30);
             this.label11.TabIndex = 11;
             this.label11.Text = "￥";
             // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(182, 410);
+            this.lblPrice.Location = new System.Drawing.Point(176, 229);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(62, 31);
+            this.lblPrice.Size = new System.Drawing.Size(57, 30);
             this.lblPrice.TabIndex = 10;
             this.lblPrice.Text = "0.00";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.label10.Location = new System.Drawing.Point(12, 410);
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.label10.Location = new System.Drawing.Point(12, 229);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(86, 31);
+            this.label10.Size = new System.Drawing.Size(79, 30);
             this.label10.TabIndex = 9;
             this.label10.Text = "应收：";
             // 
@@ -405,11 +378,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.label3.Location = new System.Drawing.Point(10, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 30);
+            this.label3.Size = new System.Drawing.Size(92, 27);
             this.label3.TabIndex = 2;
             this.label3.Text = "费用明细";
             // 
@@ -421,7 +394,7 @@
             this.pnlMember.Location = new System.Drawing.Point(2, 2);
             this.pnlMember.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMember.Name = "pnlMember";
-            this.pnlMember.Size = new System.Drawing.Size(275, 118);
+            this.pnlMember.Size = new System.Drawing.Size(265, 118);
             this.pnlMember.TabIndex = 6;
             // 
             // lblWechartNickName
@@ -446,16 +419,41 @@
             this.lblMobil.TabIndex = 5;
             this.lblMobil.Text = "152****6604";
             // 
+            // tabControlMedia
+            // 
+            this.tabControlMedia.Controls.Add(this.tabPageIni);
+            this.tabControlMedia.Controls.Add(this.tabPageAdvert);
+            this.tabControlMedia.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMedia.Name = "tabControlMedia";
+            this.tabControlMedia.SelectedIndex = 0;
+            this.tabControlMedia.Size = new System.Drawing.Size(1020, 760);
+            this.tabControlMedia.TabIndex = 18;
+            // 
+            // tabPageIni
+            // 
+            this.tabPageIni.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageIni.Controls.Add(this.pnlPayInfo);
+            this.tabPageIni.Controls.Add(this.dgvGood);
+            this.tabPageIni.Controls.Add(this.pnlMemberCard);
+            this.tabPageIni.Controls.Add(this.tableLayoutPanel1);
+            this.tabPageIni.Controls.Add(this.tableLayoutPanel2);
+            this.tabPageIni.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIni.Name = "tabPageIni";
+            this.tabPageIni.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageIni.Size = new System.Drawing.Size(1012, 734);
+            this.tabPageIni.TabIndex = 0;
+            this.tabPageIni.Text = "tabPage1";
+            // 
             // pnlPayInfo
             // 
             this.pnlPayInfo.BackColor = System.Drawing.Color.White;
             this.pnlPayInfo.Controls.Add(this.lblPayInfo);
             this.pnlPayInfo.Controls.Add(this.pictureBox1);
-            this.pnlPayInfo.Location = new System.Drawing.Point(15, 5);
+            this.pnlPayInfo.Location = new System.Drawing.Point(5, 18);
             this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPayInfo.Name = "pnlPayInfo";
-            this.pnlPayInfo.Size = new System.Drawing.Size(711, 723);
-            this.pnlPayInfo.TabIndex = 16;
+            this.pnlPayInfo.Size = new System.Drawing.Size(694, 711);
+            this.pnlPayInfo.TabIndex = 20;
             // 
             // lblPayInfo
             // 
@@ -480,19 +478,155 @@
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
+            // dgvGood
+            // 
+            this.dgvGood.AllowUserToAddRows = false;
+            this.dgvGood.AllowUserToDeleteRows = false;
+            this.dgvGood.AllowUserToResizeRows = false;
+            this.dgvGood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvGood.BackgroundColor = System.Drawing.Color.White;
+            this.dgvGood.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvGood.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvGood.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvGood.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvGood.ColumnHeadersHeight = 66;
+            this.dgvGood.ColumnHeadersVisible = false;
+            this.dgvGood.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.barcode,
+            this.price,
+            this.num,
+            this.total});
+            this.dgvGood.GridColor = System.Drawing.Color.Black;
+            this.dgvGood.Location = new System.Drawing.Point(5, 82);
+            this.dgvGood.Name = "dgvGood";
+            this.dgvGood.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvGood.RowHeadersVisible = false;
+            this.dgvGood.RowTemplate.Height = 90;
+            this.dgvGood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGood.Size = new System.Drawing.Size(694, 633);
+            this.dgvGood.TabIndex = 19;
+            // 
+            // pnlMemberCard
+            // 
+            this.pnlMemberCard.Controls.Add(this.label1);
+            this.pnlMemberCard.Controls.Add(this.picMemberCard);
+            this.pnlMemberCard.Location = new System.Drawing.Point(715, 450);
+            this.pnlMemberCard.Name = "pnlMemberCard";
+            this.pnlMemberCard.Size = new System.Drawing.Size(269, 278);
+            this.pnlMemberCard.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(20, 234);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(227, 31);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "微信扫码打开电子会员卡";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picMemberCard
+            // 
+            this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picMemberCard.Location = new System.Drawing.Point(25, 3);
+            this.picMemberCard.Name = "picMemberCard";
+            this.picMemberCard.Size = new System.Drawing.Size(220, 220);
+            this.picMemberCard.TabIndex = 0;
+            this.picMemberCard.TabStop = false;
+            // 
+            // tabPageAdvert
+            // 
+            this.tabPageAdvert.Controls.Add(this.player);
+            this.tabPageAdvert.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAdvert.Name = "tabPageAdvert";
+            this.tabPageAdvert.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAdvert.Size = new System.Drawing.Size(1012, 734);
+            this.tabPageAdvert.TabIndex = 1;
+            this.tabPageAdvert.Text = "tabPage2";
+            this.tabPageAdvert.UseVisualStyleBackColor = true;
+            // 
+            // player
+            // 
+            this.player.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.player.Enabled = true;
+            this.player.Location = new System.Drawing.Point(220, 148);
+            this.player.Margin = new System.Windows.Forms.Padding(2);
+            this.player.Name = "player";
+            this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
+            this.player.Size = new System.Drawing.Size(391, 291);
+            this.player.TabIndex = 16;
+            // 
+            // barcode
+            // 
+            this.barcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 16F);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.DefaultCellStyle = dataGridViewCellStyle13;
+            this.barcode.FillWeight = 157.4803F;
+            this.barcode.HeaderText = "商品/条码";
+            this.barcode.Name = "barcode";
+            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.Width = 230;
+            // 
+            // price
+            // 
+            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 18F);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black;
+            this.price.DefaultCellStyle = dataGridViewCellStyle14;
+            this.price.FillWeight = 89.07754F;
+            this.price.HeaderText = "单价(元)";
+            this.price.Name = "price";
+            this.price.Width = 140;
+            // 
+            // num
+            // 
+            this.num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.num.DefaultCellStyle = dataGridViewCellStyle15;
+            this.num.FillWeight = 75.28699F;
+            this.num.HeaderText = "数量";
+            this.num.Name = "num";
+            this.num.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.num.Width = 180;
+            // 
+            // total
+            // 
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("微软雅黑", 18F);
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.OrangeRed;
+            this.total.DefaultCellStyle = dataGridViewCellStyle16;
+            this.total.FillWeight = 89.07754F;
+            this.total.HeaderText = "应付(元)";
+            this.total.Name = "total";
+            this.total.Width = 140;
+            // 
             // frmMainMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 760);
-            this.Controls.Add(this.pnlPayInfo);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.pnlGoods);
+            this.Controls.Add(this.tabControlMedia);
             this.Font = new System.Drawing.Font("宋体", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMainMedia";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMainMedia";
             this.SizeChanged += new System.EventHandler(this.frmMainMedia_SizeChanged);
@@ -505,18 +639,21 @@
             this.pnl2.PerformLayout();
             this.pnl1.ResumeLayout(false);
             this.pnl1.PerformLayout();
-            this.pnlGoods.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.pnlOrderDetail.ResumeLayout(false);
-            this.pnlOrderIni.ResumeLayout(false);
-            this.pnlOrderIni.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).EndInit();
             this.pnlMember.ResumeLayout(false);
             this.pnlMember.PerformLayout();
+            this.tabControlMedia.ResumeLayout(false);
+            this.tabPageIni.ResumeLayout(false);
             this.pnlPayInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).EndInit();
+            this.pnlMemberCard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).EndInit();
+            this.tabPageAdvert.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -532,20 +669,18 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel pnl1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel pnlGoods;
-        private System.Windows.Forms.Panel pnlLine;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel pnlMember;
         private System.Windows.Forms.Label lblWechartNickName;
         private System.Windows.Forms.Label lblMobil;
-        private AxWMPLib.AxWindowsMediaPlayer player;
+        private System.Windows.Forms.TabControl tabControlMedia;
+        private System.Windows.Forms.TabPage tabPageIni;
+        private System.Windows.Forms.TabPage tabPageAdvert;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel pnlOrderDetail;
-        private System.Windows.Forms.Panel pnlOrderIni;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.DataGridView dgvOrderDetail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
@@ -553,9 +688,17 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblGoodsCount;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel1;
+        private AxWMPLib.AxWindowsMediaPlayer player;
+        private System.Windows.Forms.Panel pnlMemberCard;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox picMemberCard;
+        private System.Windows.Forms.DataGridView dgvGood;
         private System.Windows.Forms.Panel pnlPayInfo;
         private System.Windows.Forms.Label lblPayInfo;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn total;
     }
 }

@@ -27,7 +27,7 @@ namespace QiandamaPOS
         private void btnOK_Click(object sender, EventArgs e)
         {
             //TODO 完成收银
-           // DialogResult.
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 

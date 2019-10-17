@@ -151,6 +151,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmCashierResult";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCashierResult";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCashierResult_FormClosing);

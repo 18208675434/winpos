@@ -244,6 +244,7 @@
     <Compile Include="frmTest.Designer.cs">
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AuthCodeImage.cs" />
     <Compile Include="Model\AuthcodeTrade.cs" />
     <Compile Include="Model\BalanceTrade.cs" />
     <Compile Include="Model\Expense.cs" />

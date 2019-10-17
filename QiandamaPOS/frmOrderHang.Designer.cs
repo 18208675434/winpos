@@ -66,14 +66,14 @@
             this.reprint,
             this.cancle});
             this.dgvOrderOnLine.GridColor = System.Drawing.Color.White;
-            this.dgvOrderOnLine.Location = new System.Drawing.Point(12, 70);
+            this.dgvOrderOnLine.Location = new System.Drawing.Point(12, 81);
             this.dgvOrderOnLine.Name = "dgvOrderOnLine";
             this.dgvOrderOnLine.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvOrderOnLine.RowHeadersWidth = 40;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dgvOrderOnLine.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvOrderOnLine.RowTemplate.Height = 23;
-            this.dgvOrderOnLine.Size = new System.Drawing.Size(936, 678);
+            this.dgvOrderOnLine.Size = new System.Drawing.Size(936, 667);
             this.dgvOrderOnLine.TabIndex = 1;
             this.dgvOrderOnLine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderOnLine_CellContentClick);
             // 
@@ -139,7 +139,7 @@
             this.btnExit.ForeColor = System.Drawing.Color.White;
             this.btnExit.Location = new System.Drawing.Point(849, 15);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(99, 39);
+            this.btnExit.Size = new System.Drawing.Size(99, 48);
             this.btnExit.TabIndex = 14;
             this.btnExit.Text = "退出";
             this.btnExit.UseVisualStyleBackColor = false;
@@ -154,7 +154,7 @@
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
             this.btnRefresh.Location = new System.Drawing.Point(538, 15);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(109, 39);
+            this.btnRefresh.Size = new System.Drawing.Size(109, 48);
             this.btnRefresh.TabIndex = 13;
             this.btnRefresh.Text = "刷新";
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -169,7 +169,7 @@
             this.btnClearOrderHang.ForeColor = System.Drawing.Color.White;
             this.btnClearOrderHang.Location = new System.Drawing.Point(676, 15);
             this.btnClearOrderHang.Name = "btnClearOrderHang";
-            this.btnClearOrderHang.Size = new System.Drawing.Size(149, 39);
+            this.btnClearOrderHang.Size = new System.Drawing.Size(149, 48);
             this.btnClearOrderHang.TabIndex = 15;
             this.btnClearOrderHang.Text = "清空挂单";
             this.btnClearOrderHang.UseVisualStyleBackColor = false;
@@ -188,6 +188,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmOrderHang";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmOrderHang";
             this.Shown += new System.EventHandler(this.frmOrderHang_Shown);

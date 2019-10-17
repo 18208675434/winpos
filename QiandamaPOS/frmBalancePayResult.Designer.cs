@@ -49,7 +49,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label1.Location = new System.Drawing.Point(140, 64);
+            this.label1.Location = new System.Drawing.Point(191, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 25);
             this.label1.TabIndex = 0;
@@ -145,7 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.MintCream;
+            this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(500, 500);
             this.Controls.Add(this.pnlWaiting);
             this.Controls.Add(this.btnCancle);
@@ -157,8 +157,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmBalancePayResult";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmPayOnline";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmOnLinePayResult_FormClosing);
             this.Shown += new System.EventHandler(this.frmBalancePayResult_Shown);
             this.SizeChanged += new System.EventHandler(this.frmOnLinePayResult_SizeChanged);

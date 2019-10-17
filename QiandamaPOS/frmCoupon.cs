@@ -185,6 +185,7 @@ namespace QiandamaPOS
                 if (CurrentCart.totalpayment <= CouponAmount)
                 {
                     frmCouponOutcs frmcoupon = new frmCouponOutcs();
+                    frmcoupon.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                     frmcoupon.ShowDialog();
 
                     //收银完成

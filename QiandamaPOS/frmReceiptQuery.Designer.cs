@@ -279,6 +279,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "frmReceiptQuery";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmReceiptQuery";
             this.SizeChanged += new System.EventHandler(this.frmReceiptQuery_SizeChanged);

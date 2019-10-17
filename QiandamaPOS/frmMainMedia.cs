@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,148 +30,220 @@ namespace QiandamaPOS
         {
             InitializeComponent();
 
-
-
             Control.CheckForIllegalCrossThreadCalls = false;
             IniForm();
         }
 
         public void IniForm()
         {
-            tableLayoutPanel1.Visible = false;
-            tableLayoutPanel2.Visible = false;
-            pnlGoods.Visible = false;
-            player.Visible = false;
-            pnlPayInfo.Visible = false;
 
-            string ErrorMsg = "";
-            MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
-
-            if (ErrorMsg != "" || posmedia == null)
-            {
-                //获取异常  显示空白页
-            }
-            else
-            {
-                foreach (Mediadetaildto media in posmedia.mediadetaildtos)
-                {
-                    if (media.mediatype == 1) //图片
-                    {
-                        string ImgUrl = media.content;
-                        Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
-
-                        this.BackgroundImage = _image;
-                        this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-                    }
-                    else if (media.mediatype == 2)
-                    {
-                        string PlayerUrl = media.content;
-                        player.Visible = true;
-                        player.URL = PlayerUrl;
-                        this.player.Ctlcontrols.play();
-
-                        //pictureBox1.BackgroundImage = _image;
-                    }
-                    Delay.Start(3000);
-                }
-            }
-
+            //启动扫描处理线程
+            Thread threadItemExedate = new Thread(IniFormExe);
+            threadItemExedate.IsBackground = true;
+            threadItemExedate.Start();
+           
         }
 
+        private void IniFormExe()
+        {
+            try
+            {
+                tabControlMedia.SelectedIndex = 1;
+
+
+                player.Visible = false;
+
+                //test
+                //string testurl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
+                //Image _imagetest = Image.FromStream(System.Net.WebRequest.Create(testurl).GetResponse().GetResponseStream());
+
+                //tabPageAdvert.BackgroundImage = _imagetest;
+
+                //tabPageAdvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+
+
+                string ErrorMsg = "";
+                MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
+
+                if (ErrorMsg != "" || posmedia == null)
+                {
+                    //获取异常  显示空白页
+                }
+                else
+                {
+                    foreach (Mediadetaildto media in posmedia.mediadetaildtos)
+                    {
+                        if (media.mediatype == 1) //图片
+                        {
+                            string ImgUrl = media.content;
+
+                            //test
+                            ImgUrl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
+                            Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
+
+                            tabPageAdvert.BackgroundImage = _image;
+
+                            tabPageAdvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+                        }
+                        else if (media.mediatype == 2)
+                        {
+                            string PlayerUrl = media.content;
+                            player.Visible = true;
+                            player.URL = PlayerUrl;
+                            this.player.Ctlcontrols.play();
+
+                            //pictureBox1.BackgroundImage = _image;
+                        }
+                        Delay.Start(3000);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("ERROR", "初始化客屏信息异常：" + ex.Message);
+            }
+        }
+
+        private Cart CurrentCart;
+        private Member CurrentMember;
         public void UpdateForm(Cart Cart,Member member)
         {
 
-                  player.Visible = false;
-                  pnlPayInfo.Visible = false;
-                  tableLayoutPanel1.Visible = true;
-                  tableLayoutPanel2.Visible = true;
-                  pnlGoods.Visible = true;
- 
+            pnlPayInfo.Visible = false;
+            tabControlMedia.SelectedIndex = 0;
+            CurrentCart = Cart;
+            CurrentMember = member;
 
+            //启动扫描处理线程
+            Thread threadItemExedate = new Thread(UpdateFormExe);
+            threadItemExedate.IsBackground = true;
+            threadItemExedate.Start();
+
+            //UpdateFormExe();
+            //UpdateFormExe(Cart,member);
+            //Application.DoEvents();
+
+           
+        }
+
+        private void UpdateFormExe()
+        {
             try
             {
-                this.Invoke(new InvokeHandler(delegate()
-                {
-
-                    if (member != null&&member.memberinformationresponsevo!=null&&member.memberheaderresponsevo!=null)
+               
+                    //pnlPayInfo.Visible = false;
+                    dgvGood.Rows.Clear();
+                    dgvOrderDetail.Rows.Clear(); 
+                    if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
-                        string mobil = member.memberheaderresponsevo.mobile;
-                        if (mobil.Length > 8)
-                        {
-                            mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
-                        }
-                        lblMobil.Text = mobil;
-                        lblWechartNickName.Text = member.memberinformationresponsevo.wechatnickname +"  你好！";
-
-                    }
-                    else
-                    {
-                        lblMobil.Text = "";
-                        lblWechartNickName.Text = "会员登录";
-                    }
-
-                    pnlGoods.Controls.Clear();
-                    pnlOrderDetail.Controls.Clear();
-                    if (Cart != null)
-                    {
-                        // lblTotalPrice.Text = "￥" + cart.producttotalamt.ToString();
-                        //lblPromoamt.Text = "-￥" + cart.promoamt.ToString();
-                        int orderCount = Cart.orderpricedetails.Length;
+                        int orderCount = CurrentCart.orderpricedetails.Length;
                         if (orderCount == 0)
                         {
-                            pnlOrderDetail.Controls.Add(pnlOrderIni);
-                            pnlOrderIni.Show();
+
                         }
                         else
                         {
                             for (int i = 0; i < orderCount; i++)
                             {
-                                frmOrderDetail frmorderdetail = new frmOrderDetail(Cart.orderpricedetails[i]);
-                                frmorderdetail.TopLevel = false;
-                                frmorderdetail.Width = pnlOrderDetail.Width;
-                                frmorderdetail.Location = new System.Drawing.Point(0, i * frmorderdetail.Height);
-                                pnlOrderDetail.Controls.Add(frmorderdetail);
-                                frmorderdetail.Show();
+                                dgvOrderDetail.Rows.Add(CurrentCart.orderpricedetails[i].title, CurrentCart.orderpricedetails[i].amount);
+                                dgvOrderDetail.ClearSelection();
                             }
                         }
-                        lblPrice.Text = Cart.totalpayment.ToString("f2");
+                        lblPrice.Text = CurrentCart.totalpayment.ToString("f2");
 
-                        int count = Cart.products.Count;
+                        int count = CurrentCart.products.Count;
                         lblGoodsCount.Text = count.ToString();
-                        if (count == 0)
-                        {
-                            player.Visible = false;
-                            tableLayoutPanel1.Visible = false;
-                            tableLayoutPanel2.Visible = false;
-                            pnlGoods.Visible = false;
-                        }
-                        else
+                        if (count > 0)
                         {
                             for (int i = 0; i < count; i++)
                             {
-                                frmGoodMedia frmgoodmedia = new frmGoodMedia(Cart.products[i]);
-                                frmgoodmedia.TopLevel = false;
+                                //TODO 下划线
 
-                                frmgoodmedia.frmGoodMedia_SizeChanged(null, null);
-                                //frmnumber.WindowState = FormWindowState.Maximized;
-                                frmgoodmedia.Location = new System.Drawing.Point(0, i * frmgoodmedia.Height);
+                                Product pro = CurrentCart.products[i];
 
-                                pnlGoods.Controls.Add(frmgoodmedia);
-                                frmgoodmedia.Width = pnlGoods.Width - 20;
-                                frmgoodmedia.Show();
+                                string barcode = pro.title + "\r\n" + pro.barcode;
+                                string price = "";
+
+                                string num = "";
+ 
+                                string total = "";
+                                switch (pro.pricetagid)
+                                {
+                                    case 1: barcode = "会员价" + "\r\n" + pro.title + "\r\n" + pro.barcode; break;
+                                    case 2: barcode = "折扣" + "\r\n" + pro.title + "\r\n" + pro.barcode; break;
+                                    case 3: barcode = "直降" + "\r\n" + pro.title + "\r\n" + pro.barcode; break;
+                                }
+
+                                if (pro.price.saleprice == pro.price.originprice)
+                                {
+                                    price = "￥" + pro.price.saleprice.ToString();
+                                }
+                                else
+                                {
+                                    price = "￥" + pro.price.saleprice.ToString() + pro.price.salepricedesc + "\r\n" + "￥" + pro.price.originprice + pro.price.originpricedesc;
+                                }                       
+
+                                if (pro.price.total == pro.price.origintotal)
+                                {
+                                    total = "￥" + pro.price.total.ToString();
+                                }
+                                else
+                                {
+                                    price = "￥" + pro.price.total.ToString() + pro.price.salepricedesc + "\r\n" + "￥" + pro.price.origintotal + pro.price.originpricedesc;
+                                }
+
+                                dgvGood.Rows.Add(barcode, price, num, total);
+
+                                dgvGood.ClearSelection();
+
                             }
                         }
                     }
 
-                }));
+
+                    if (CurrentMember != null && CurrentMember.memberinformationresponsevo != null && CurrentMember.memberheaderresponsevo != null)
+                    {
+                        string mobil = CurrentMember.memberheaderresponsevo.mobile;
+                        if (mobil.Length > 8)
+                        {
+                            mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
+                        }
+                        lblMobil.Text = mobil;
+                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+
+                        pnlMemberCard.Visible = false;
+                    }
+                    else
+                    {
+                        lblMobil.Text = "";
+                        lblWechartNickName.Text = "会员登录";
+
+                        string ErrorMsg = "";
+                        string imgurl = httputil.GetMemberCard(ref ErrorMsg);
+                        if (!string.IsNullOrWhiteSpace(httputil.GetMemberCard(ref ErrorMsg)) && ErrorMsg != null)
+                        {
+                            
+                            Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                            picMemberCard.BackgroundImage = _image;
+
+                            int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
+                            picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
+
+                            picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
+                            pnlMemberCard.Visible = true;
+                        }
+
+
+
+                    }
+                
 
                 Application.DoEvents();
 
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("Error", "客屏商品列表加载异常" + ex.Message);
-                // ShowLog("更新显示列表异常" + ex.Message, false);
+                LogManager.WriteLog("ERROR","显示客屏购物车异常："+ex.Message);
             }
         }
 
@@ -178,13 +251,6 @@ namespace QiandamaPOS
         {
             try
             {
-
-                //frmCashierResultMedia frmresult = new frmCashierResultMedia(payinfo.ToString());
-                //frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
-
-                //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-                //frmresult.Show();
-
                 frmCashierResultMedia frmresult = new frmCashierResultMedia(payinfo.ToString());
                 frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
 
@@ -223,19 +289,19 @@ namespace QiandamaPOS
 
         public void ShowPayInfo(string lblinfo)
         {
-            player.Visible = false;
-          
-            tableLayoutPanel1.Visible = false;
-            tableLayoutPanel2.Visible = true;
-            pnlGoods.Visible = false;
+            //player.Visible = false;
+            tabControlMedia.SelectedIndex = 0;
+
+           
+           // pnlMemberCard.Visible = true;
+
             pnlPayInfo.Visible = true;
-            
             lblPayInfo.Text = lblinfo;
         }
 
         private void frmMainMedia_SizeChanged(object sender, EventArgs e)
         {
-           asf.ControlAutoSize(this);
+          // asf.ControlAutoSize(this);
         }
     }
 }

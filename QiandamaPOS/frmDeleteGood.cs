@@ -26,21 +26,21 @@ namespace QiandamaPOS
             lblMsg.Text = proname + "  " + barcode;
         }
 
-        private void btnCancle_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
         private void frmDeleteGood_SizeChanged(object sender, EventArgs e)
         {
            asf.ControlAutoSize(this);
+        }
+
+        private void lbtnCancle_Click(object sender, EventArgs e)
+        {
+            //this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void lbtnOK_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

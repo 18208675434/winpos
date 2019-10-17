@@ -178,6 +178,15 @@ namespace QiandamaPOS
                         }
                        
                     }
+
+                    if (dgvOrderOnLine.Rows.Count > 0)
+                    {
+                        pnlEmptyOrder.Visible = false;
+                    }
+                    else
+                    {
+                        pnlEmptyOrder.Visible = true;
+                    }
                 }
                 LoadingHelper.CloseForm();//关闭
                 ShowLog("刷新完成" , false);

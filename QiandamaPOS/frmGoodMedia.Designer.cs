@@ -188,6 +188,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmGoodMedia";
+            this.ShowInTaskbar = false;
             this.Text = "frmGoodMedia";
             this.SizeChanged += new System.EventHandler(this.frmGoodMedia_SizeChanged);
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -104,25 +104,33 @@ namespace QiandamaPOS
             try
             {
 
-                if (dgvOrderOnLine.Rows.Count <= 0)
-                {
-                    return;
-                }
-
-                frmDeleteGood frmdelete = new frmDeleteGood("是否确认清空所有挂单？", "", "");
-                if (frmdelete.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
+                //if (dgvOrderOnLine.Rows.Count <= 0)
+                //{
+                //    return;
+                //}
                 DirectoryInfo di = new DirectoryInfo(MainModel.OrderPath);
                 List<FileInfo> fList = di.GetFiles().ToList();
-                for (int i = 0; i < fList.Count; i++)
-                {
-                    File.Delete(fList[i].FullName);                   
-                }
 
-                ShowLog("挂单清空成功",false);
-                LoadOrderHang();
+                if (fList.Count > 0)
+                {
+                    frmDeleteGood frmdelete = new frmDeleteGood("是否确认清空所有挂单？", "", "");
+                    if (frmdelete.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+
+
+                    for (int i = 0; i < fList.Count; i++)
+                    {
+                        File.Delete(fList[i].FullName);
+                    }
+
+                    ShowLog("挂单清空成功", false);
+                    LoadOrderHang();
+
+                }
+               
+              
             }
             catch (Exception ex)
             {

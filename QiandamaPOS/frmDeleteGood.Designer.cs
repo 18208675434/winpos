@@ -28,88 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.lblMsgStr = new System.Windows.Forms.Label();
             this.lblMsg = new System.Windows.Forms.Label();
-            this.btnCancle = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.lbtnCancle = new System.Windows.Forms.Label();
+            this.lbtnOK = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "友情提示";
             // 
             // lblMsgStr
             // 
             this.lblMsgStr.AutoSize = true;
-            this.lblMsgStr.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblMsgStr.Location = new System.Drawing.Point(73, 57);
+            this.lblMsgStr.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblMsgStr.Location = new System.Drawing.Point(31, 26);
             this.lblMsgStr.Name = "lblMsgStr";
-            this.lblMsgStr.Size = new System.Drawing.Size(164, 25);
+            this.lblMsgStr.Size = new System.Drawing.Size(206, 31);
             this.lblMsgStr.TabIndex = 1;
             this.lblMsgStr.Text = "是否确认删除商品";
             // 
             // lblMsg
             // 
             this.lblMsg.AutoSize = true;
-            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblMsg.Location = new System.Drawing.Point(73, 90);
+            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblMsg.Location = new System.Drawing.Point(41, 69);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(61, 21);
+            this.lblMsg.Size = new System.Drawing.Size(74, 25);
             this.lblMsg.TabIndex = 2;
             this.lblMsg.Text = "lblMsg";
             // 
-            // btnCancle
+            // lbtnCancle
             // 
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancle.ForeColor = System.Drawing.Color.OrangeRed;
-            this.btnCancle.Location = new System.Drawing.Point(292, 141);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(66, 40);
-            this.btnCancle.TabIndex = 3;
-            this.btnCancle.TabStop = false;
-            this.btnCancle.Text = "取消";
-            this.btnCancle.UseVisualStyleBackColor = true;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
+            this.lbtnCancle.AutoSize = true;
+            this.lbtnCancle.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lbtnCancle.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lbtnCancle.Location = new System.Drawing.Point(381, 109);
+            this.lbtnCancle.Name = "lbtnCancle";
+            this.lbtnCancle.Size = new System.Drawing.Size(50, 25);
+            this.lbtnCancle.TabIndex = 5;
+            this.lbtnCancle.Text = "取消";
+            this.lbtnCancle.Click += new System.EventHandler(this.lbtnCancle_Click);
             // 
-            // btnOK
+            // lbtnOK
             // 
-            this.btnOK.BackColor = System.Drawing.Color.Transparent;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOK.ForeColor = System.Drawing.Color.Green;
-            this.btnOK.Location = new System.Drawing.Point(374, 141);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(66, 40);
-            this.btnOK.TabIndex = 4;
-            this.btnOK.TabStop = false;
-            this.btnOK.Text = "确定";
-            this.btnOK.UseVisualStyleBackColor = false;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.lbtnOK.AutoSize = true;
+            this.lbtnOK.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lbtnOK.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lbtnOK.Location = new System.Drawing.Point(463, 109);
+            this.lbtnOK.Name = "lbtnOK";
+            this.lbtnOK.Size = new System.Drawing.Size(50, 25);
+            this.lbtnOK.TabIndex = 6;
+            this.lbtnOK.Text = "确定";
+            this.lbtnOK.Click += new System.EventHandler(this.lbtnOK_Click);
             // 
             // frmDeleteGood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(450, 191);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.btnCancle);
+            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.ClientSize = new System.Drawing.Size(551, 153);
+            this.ControlBox = false;
+            this.Controls.Add(this.lbtnOK);
+            this.Controls.Add(this.lbtnCancle);
             this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.lblMsgStr);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmDeleteGood";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmDeleteGood";
             this.SizeChanged += new System.EventHandler(this.frmDeleteGood_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -118,10 +101,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMsgStr;
         private System.Windows.Forms.Label lblMsg;
-        private System.Windows.Forms.Button btnCancle;
-        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Label lbtnCancle;
+        private System.Windows.Forms.Label lbtnOK;
     }
 }

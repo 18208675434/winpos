@@ -57,8 +57,9 @@
             this.ClientSize = new System.Drawing.Size(129, 46);
             this.Controls.Add(this.lblMsg);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMsg";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMsg";
             this.SizeChanged += new System.EventHandler(this.frmMsg_SizeChanged);

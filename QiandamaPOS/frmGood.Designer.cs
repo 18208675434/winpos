@@ -247,6 +247,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmGood";
+            this.ShowInTaskbar = false;
             this.Text = "frmGood";
             this.SizeChanged += new System.EventHandler(this.frmGood_SizeChanged);
             this.tableLayoutPanel1.ResumeLayout(false);

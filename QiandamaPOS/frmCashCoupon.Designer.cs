@@ -289,6 +289,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmCashCoupon";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmCashCoupon";
             this.Shown += new System.EventHandler(this.frmCashCoupon_Shown);

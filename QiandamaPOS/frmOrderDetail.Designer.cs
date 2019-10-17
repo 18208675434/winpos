@@ -62,6 +62,7 @@
             this.Controls.Add(this.lblAmount);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOrderDetail";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmOrderDetail";
             this.SizeChanged += new System.EventHandler(this.frmOrderDetail_SizeChanged);

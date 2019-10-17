@@ -66,7 +66,6 @@
             this.lblCouponStr = new System.Windows.Forms.Label();
             this.lblJFUse = new System.Windows.Forms.Label();
             this.lblExitMember = new System.Windows.Forms.Label();
-            this.chkJF = new System.Windows.Forms.CheckBox();
             this.lblJF = new System.Windows.Forms.Label();
             this.lblWechartNickName = new System.Windows.Forms.Label();
             this.lblMobil = new System.Windows.Forms.Label();
@@ -117,6 +116,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.pnl1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnCheckJF = new System.Windows.Forms.Button();
             this.toolStripMain.SuspendLayout();
             this.pnlWaitingMember.SuspendLayout();
             this.pnlMember.SuspendLayout();
@@ -247,11 +247,13 @@
             // btnOrderQuery
             // 
             this.btnOrderQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnOrderQuery.AutoSize = false;
             this.btnOrderQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnOrderQuery.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnOrderQuery.ForeColor = System.Drawing.Color.White;
             this.btnOrderQuery.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderQuery.Image")));
             this.btnOrderQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrderQuery.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.btnOrderQuery.Name = "btnOrderQuery";
             this.btnOrderQuery.Size = new System.Drawing.Size(78, 57);
             this.btnOrderQuery.Text = "订单查询";
@@ -260,27 +262,36 @@
             // btnOrderHang
             // 
             this.btnOrderHang.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnOrderHang.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnOrderHang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnOrderHang.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnOrderHang.ForeColor = System.Drawing.Color.White;
             this.btnOrderHang.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderHang.Image")));
+            this.btnOrderHang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnOrderHang.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnOrderHang.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrderHang.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.btnOrderHang.Name = "btnOrderHang";
-            this.btnOrderHang.Size = new System.Drawing.Size(78, 57);
+            this.btnOrderHang.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnOrderHang.Size = new System.Drawing.Size(94, 57);
             this.btnOrderHang.Text = "挂单列表";
+            this.btnOrderHang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnOrderHang.Click += new System.EventHandler(this.btnOrderHang_Click);
             // 
             // btnOrderCancle
             // 
             this.btnOrderCancle.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnOrderCancle.AutoSize = false;
+            this.btnOrderCancle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnOrderCancle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnOrderCancle.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnOrderCancle.ForeColor = System.Drawing.Color.White;
             this.btnOrderCancle.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderCancle.Image")));
             this.btnOrderCancle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrderCancle.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.btnOrderCancle.Name = "btnOrderCancle";
             this.btnOrderCancle.Size = new System.Drawing.Size(78, 57);
             this.btnOrderCancle.Text = "取消交易";
+            this.btnOrderCancle.Visible = false;
             this.btnOrderCancle.Click += new System.EventHandler(this.btnOrderCancle_Click);
             // 
             // btnLoadBarCode
@@ -288,7 +299,7 @@
             this.btnLoadBarCode.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnLoadBarCode.CausesValidation = false;
             this.btnLoadBarCode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLoadBarCode.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.btnLoadBarCode.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.btnLoadBarCode.ForeColor = System.Drawing.Color.White;
             this.btnLoadBarCode.Location = new System.Drawing.Point(752, 70);
             this.btnLoadBarCode.Margin = new System.Windows.Forms.Padding(2);
@@ -316,7 +327,7 @@
             // 
             this.btnLoadPhone.BackColor = System.Drawing.Color.White;
             this.btnLoadPhone.CausesValidation = false;
-            this.btnLoadPhone.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLoadPhone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoadPhone.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.btnLoadPhone.ForeColor = System.Drawing.Color.Black;
             this.btnLoadPhone.Location = new System.Drawing.Point(15, 82);
@@ -354,11 +365,11 @@
             // pnlMember
             // 
             this.pnlMember.BackColor = System.Drawing.Color.White;
+            this.pnlMember.Controls.Add(this.btnCheckJF);
             this.pnlMember.Controls.Add(this.lblCoupon);
             this.pnlMember.Controls.Add(this.lblCouponStr);
             this.pnlMember.Controls.Add(this.lblJFUse);
             this.pnlMember.Controls.Add(this.lblExitMember);
-            this.pnlMember.Controls.Add(this.chkJF);
             this.pnlMember.Controls.Add(this.lblJF);
             this.pnlMember.Controls.Add(this.lblWechartNickName);
             this.pnlMember.Controls.Add(this.lblMobil);
@@ -379,7 +390,7 @@
             this.lblCoupon.AutoSize = true;
             this.lblCoupon.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.lblCoupon.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.lblCoupon.Location = new System.Drawing.Point(175, 84);
+            this.lblCoupon.Location = new System.Drawing.Point(175, 83);
             this.lblCoupon.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCoupon.Name = "lblCoupon";
             this.lblCoupon.Size = new System.Drawing.Size(69, 20);
@@ -391,7 +402,7 @@
             // 
             this.lblCouponStr.AutoSize = true;
             this.lblCouponStr.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.lblCouponStr.Location = new System.Drawing.Point(11, 84);
+            this.lblCouponStr.Location = new System.Drawing.Point(11, 83);
             this.lblCouponStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCouponStr.Name = "lblCouponStr";
             this.lblCouponStr.Size = new System.Drawing.Size(69, 20);
@@ -424,23 +435,11 @@
             this.lblExitMember.Text = "退出";
             this.lblExitMember.Click += new System.EventHandler(this.lblExitMember_Click);
             // 
-            // chkJF
-            // 
-            this.chkJF.AutoSize = true;
-            this.chkJF.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold);
-            this.chkJF.Location = new System.Drawing.Point(214, 111);
-            this.chkJF.Margin = new System.Windows.Forms.Padding(2);
-            this.chkJF.Name = "chkJF";
-            this.chkJF.Size = new System.Drawing.Size(15, 14);
-            this.chkJF.TabIndex = 7;
-            this.chkJF.UseVisualStyleBackColor = true;
-            this.chkJF.CheckedChanged += new System.EventHandler(this.chkJF_CheckedChanged);
-            // 
             // lblJF
             // 
             this.lblJF.AutoSize = true;
             this.lblJF.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.lblJF.Location = new System.Drawing.Point(73, 104);
+            this.lblJF.Location = new System.Drawing.Point(55, 105);
             this.lblJF.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblJF.Name = "lblJF";
             this.lblJF.Size = new System.Drawing.Size(18, 20);
@@ -451,7 +450,7 @@
             // 
             this.lblWechartNickName.AutoSize = true;
             this.lblWechartNickName.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.lblWechartNickName.Location = new System.Drawing.Point(102, 62);
+            this.lblWechartNickName.Location = new System.Drawing.Point(83, 60);
             this.lblWechartNickName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWechartNickName.Name = "lblWechartNickName";
             this.lblWechartNickName.Size = new System.Drawing.Size(30, 20);
@@ -462,7 +461,7 @@
             // 
             this.lblMobil.AutoSize = true;
             this.lblMobil.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.lblMobil.Location = new System.Drawing.Point(102, 38);
+            this.lblMobil.Location = new System.Drawing.Point(69, 38);
             this.lblMobil.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMobil.Name = "lblMobil";
             this.lblMobil.Size = new System.Drawing.Size(45, 20);
@@ -484,7 +483,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.label19.Location = new System.Drawing.Point(11, 62);
+            this.label19.Location = new System.Drawing.Point(11, 60);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(84, 20);
@@ -505,11 +504,11 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label18.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.label18.Location = new System.Drawing.Point(11, 8);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(88, 25);
+            this.label18.Size = new System.Drawing.Size(92, 27);
             this.label18.TabIndex = 0;
             this.label18.Text = "会员信息";
             // 
@@ -669,11 +668,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.label3.Location = new System.Drawing.Point(10, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 30);
+            this.label3.Size = new System.Drawing.Size(92, 27);
             this.label3.TabIndex = 2;
             this.label3.Text = "费用明细";
             // 
@@ -804,6 +803,7 @@
             // 
             this.dgvGood.AllowUserToAddRows = false;
             this.dgvGood.AllowUserToDeleteRows = false;
+            this.dgvGood.AllowUserToResizeColumns = false;
             this.dgvGood.AllowUserToResizeRows = false;
             this.dgvGood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvGood.BackgroundColor = System.Drawing.Color.White;
@@ -839,10 +839,11 @@
             this.dgvGood.GridColor = System.Drawing.Color.Black;
             this.dgvGood.Location = new System.Drawing.Point(14, 136);
             this.dgvGood.Name = "dgvGood";
+            this.dgvGood.ReadOnly = true;
             this.dgvGood.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvGood.RowHeadersVisible = false;
             this.dgvGood.RowTemplate.Height = 90;
-            this.dgvGood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvGood.Size = new System.Drawing.Size(729, 611);
             this.dgvGood.TabIndex = 17;
             this.dgvGood.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGood_CellContentClick);
@@ -858,6 +859,7 @@
             this.barcode.FillWeight = 157.4803F;
             this.barcode.HeaderText = "商品/条码";
             this.barcode.Name = "barcode";
+            this.barcode.ReadOnly = true;
             this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.barcode.Width = 208;
             // 
@@ -871,6 +873,7 @@
             this.price.FillWeight = 89.07754F;
             this.price.HeaderText = "单价(元)";
             this.price.Name = "price";
+            this.price.ReadOnly = true;
             this.price.Width = 117;
             // 
             // btnJian
@@ -883,6 +886,7 @@
             this.btnJian.DefaultCellStyle = dataGridViewCellStyle7;
             this.btnJian.HeaderText = "";
             this.btnJian.Name = "btnJian";
+            this.btnJian.ReadOnly = true;
             this.btnJian.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.btnJian.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.btnJian.Width = 35;
@@ -896,6 +900,7 @@
             this.num.FillWeight = 75.28699F;
             this.num.HeaderText = "数量";
             this.num.Name = "num";
+            this.num.ReadOnly = true;
             this.num.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.num.Width = 90;
@@ -910,9 +915,10 @@
             this.btnAdd.DefaultCellStyle = dataGridViewCellStyle9;
             this.btnAdd.HeaderText = "";
             this.btnAdd.Name = "btnAdd";
+            this.btnAdd.ReadOnly = true;
             this.btnAdd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.btnAdd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.btnAdd.Width = 35;
+            this.btnAdd.Width = 38;
             // 
             // total
             // 
@@ -924,6 +930,7 @@
             this.total.FillWeight = 89.07754F;
             this.total.HeaderText = "应付(元)";
             this.total.Name = "total";
+            this.total.ReadOnly = true;
             this.total.Width = 118;
             // 
             // delete
@@ -933,6 +940,7 @@
             this.delete.HeaderText = "操作";
             this.delete.Image = ((System.Drawing.Image)(resources.GetObject("delete.Image")));
             this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
             this.delete.Width = 117;
             // 
             // pnlWaiting
@@ -1102,6 +1110,19 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "商品/条码";
             // 
+            // btnCheckJF
+            // 
+            this.btnCheckJF.BackColor = System.Drawing.Color.White;
+            this.btnCheckJF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheckJF.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.btnCheckJF.Location = new System.Drawing.Point(219, 104);
+            this.btnCheckJF.Name = "btnCheckJF";
+            this.btnCheckJF.Size = new System.Drawing.Size(20, 23);
+            this.btnCheckJF.TabIndex = 12;
+            this.btnCheckJF.Text = "√";
+            this.btnCheckJF.UseVisualStyleBackColor = false;
+            this.btnCheckJF.Click += new System.EventHandler(this.btnCheckJF_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1189,7 +1210,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.Button btnPayByCash;
         private System.Windows.Forms.Panel pnlMember;
-        private System.Windows.Forms.CheckBox chkJF;
         private System.Windows.Forms.Label lblJF;
         private System.Windows.Forms.Label lblWechartNickName;
         private System.Windows.Forms.Label lblMobil;
@@ -1232,5 +1252,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn btnAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewImageColumn delete;
+        private System.Windows.Forms.Button btnCheckJF;
     }
 }

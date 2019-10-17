@@ -30,7 +30,11 @@ namespace QiandamaPOS
         }
 
         private void frmLogin_Shown(object sender, EventArgs e)
-        {         
+        {
+
+            string errormesg = "";
+
+            httputil.GetAuthcodeImage(ref errormesg);
 
            //判断日志文件夹是否存在，不存在则新建
            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
@@ -89,10 +93,11 @@ namespace QiandamaPOS
             if (Screen.AllScreens.Count() != 1)
             {
                 // windowstate设置max 不能再页面设置 否则会显示到第一个屏幕
-               // MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height);
-                MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                //MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height+20);
+                asf.AutoScaleControlTest(MainModel.frmmainmedia, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height ,true);
+                MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
 
-                MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+                //MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
                 MainModel.frmmainmedia.Show();
             }
         }
@@ -187,8 +192,10 @@ namespace QiandamaPOS
             pnlPhone.Visible = true;
 
             //手机验证页面 先刷新一次图形验证码
-            this.picCheckCode.Image = Bitmap.FromStream(validCode.CreateCheckCodeImage());
+            //this.picCheckCode.Image = Bitmap.FromStream(validCode.CreateCheckCodeImage());
 
+            GetAuthcodeImage();
+           
         }
 
         private void lblSendCheckCode_Click(object sender, EventArgs e)
@@ -226,7 +233,9 @@ namespace QiandamaPOS
         private void picCheckCode_Click(object sender, EventArgs e)
         {
             //点击图片 刷新验证码
-            this.picCheckCode.Image = Bitmap.FromStream(validCode.CreateCheckCodeImage());
+           // this.picCheckCode.Image = Bitmap.FromStream(validCode.CreateCheckCodeImage());
+
+            GetAuthcodeImage();
 
         }
 
@@ -340,6 +349,62 @@ namespace QiandamaPOS
         {
            asf.ControlAutoSize(this);
         }
+
+
+
+        private void GetAuthcodeImage()
+        {
+            string ErrorMsg = "";
+            AuthCodeImage  authcodeimage = httputil.GetAuthcodeImage(ref ErrorMsg);
+            string ss = authcodeimage.imagestr;
+            int startIndex = ss.IndexOf("base64,");//开始位置
+
+            string inputStr = ss.Substring(startIndex, ss.Length - startIndex);//从开始位置截取一个新的字符串
+
+            byte[] arr = Convert.FromBase64String(inputStr);
+            MemoryStream ms = new MemoryStream(arr);
+            Bitmap bmp = new Bitmap(ms);
+
+            picCheckCode.Image = bmp;
+
+            ms.Close();
+
+            Image _image = bmp;
+        }
+
+
+        private void Base64StringToImage(string txtFileName)
+        {
+            try
+            {
+                //FileStream ifs = new FileStream(txtFileName, FileMode.Open, FileAccess.Read);
+                //StreamReader sr = new StreamReader(ifs);
+
+                String inputStr = txtFileName;
+                byte[] arr = Convert.FromBase64String(inputStr);
+                MemoryStream ms = new MemoryStream(arr);
+                Bitmap bmp = new Bitmap(ms);
+
+                //bmp.Save(txtFileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                //bmp.Save(txtFileName + ".bmp", ImageFormat.Bmp);
+                //bmp.Save(txtFileName + ".gif", ImageFormat.Gif);
+                //bmp.Save(txtFileName + ".png", ImageFormat.Png);
+                ms.Close();
+
+                Image _image = bmp;
+                if (File.Exists(txtFileName))
+                {
+                    File.Delete(txtFileName);
+                }
+                //MessageBox.Show("转换成功！");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Base64StringToImage 转换失败\nException：" + ex.Message);
+            }
+        }
+
+
     }
 
 

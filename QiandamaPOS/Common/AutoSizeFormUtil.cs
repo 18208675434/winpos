@@ -172,6 +172,10 @@ namespace QiandamaPOS.Common
                 if (c.Name.Length > 0 && c.Name.Substring(0, 3) == "dgv")
                 {
                 }
+                else if (c.Controls.Count > 0)
+                {
+
+                }
                 else
                 {
                     c.Font = new Font(c.Font.Name, Math.Min(hSize, wSize), c.Font.Style, c.Font.Unit);

@@ -33,14 +33,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTitle = new System.Windows.Forms.Label();
             this.dgvCoupon = new System.Windows.Forms.DataGridView();
-            this.couponcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.content = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pnlCouponNone = new System.Windows.Forms.Panel();
             this.btnCheckNone = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lblExit = new System.Windows.Forms.Label();
+            this.couponcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.content = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoupon)).BeginInit();
             this.pnlCouponNone.SuspendLayout();
             this.SuspendLayout();
@@ -80,41 +80,6 @@
             this.dgvCoupon.TabIndex = 2;
             this.dgvCoupon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCoupon_CellClick);
             this.dgvCoupon.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvCoupon_CellPainting);
-            // 
-            // couponcode
-            // 
-            this.couponcode.HeaderText = "优惠券号";
-            this.couponcode.Name = "couponcode";
-            this.couponcode.Visible = false;
-            // 
-            // amount
-            // 
-            this.amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.amount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.amount.HeaderText = "券面值";
-            this.amount.Name = "amount";
-            // 
-            // content
-            // 
-            this.content.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.content.DefaultCellStyle = dataGridViewCellStyle2;
-            this.content.HeaderText = "详情";
-            this.content.Name = "content";
-            // 
-            // select
-            // 
-            this.select.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.NullValue = false;
-            this.select.DefaultCellStyle = dataGridViewCellStyle3;
-            this.select.HeaderText = "使用";
-            this.select.Name = "select";
             // 
             // pnlCouponNone
             // 
@@ -161,11 +126,46 @@
             this.lblExit.Text = "关闭";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
             // 
+            // couponcode
+            // 
+            this.couponcode.HeaderText = "优惠券号";
+            this.couponcode.Name = "couponcode";
+            this.couponcode.Visible = false;
+            // 
+            // amount
+            // 
+            this.amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.amount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.amount.HeaderText = "券面值";
+            this.amount.Name = "amount";
+            // 
+            // content
+            // 
+            this.content.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.content.DefaultCellStyle = dataGridViewCellStyle2;
+            this.content.HeaderText = "详情";
+            this.content.Name = "content";
+            // 
+            // select
+            // 
+            this.select.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.NullValue = false;
+            this.select.DefaultCellStyle = dataGridViewCellStyle3;
+            this.select.HeaderText = "使用";
+            this.select.Name = "select";
+            // 
             // frmCoupon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightCyan;
+            this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(450, 600);
             this.Controls.Add(this.lblExit);
             this.Controls.Add(this.pnlCouponNone);
@@ -173,6 +173,7 @@
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmCoupon";
+            this.ShowInTaskbar = false;
             this.Text = "frmCoupon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCoupon_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoupon)).EndInit();
@@ -190,10 +191,10 @@
         private System.Windows.Forms.Panel pnlCouponNone;
         private System.Windows.Forms.Button btnCheckNone;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblExit;
         private System.Windows.Forms.DataGridViewTextBoxColumn couponcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn content;
         private System.Windows.Forms.DataGridViewCheckBoxColumn select;
-        private System.Windows.Forms.Label lblExit;
     }
 }

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblAmount = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblAmount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
@@ -52,27 +52,16 @@
             this.panel1.Size = new System.Drawing.Size(467, 129);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Tomato;
-            this.label1.Location = new System.Drawing.Point(58, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "￥";
-            // 
-            // lblAmount
-            // 
-            this.lblAmount.AutoSize = true;
-            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 30F);
-            this.lblAmount.ForeColor = System.Drawing.Color.Tomato;
-            this.lblAmount.Location = new System.Drawing.Point(86, 45);
-            this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(69, 52);
-            this.lblAmount.TabIndex = 1;
-            this.lblAmount.Text = "20";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label3.ForeColor = System.Drawing.Color.Gray;
+            this.label3.Location = new System.Drawing.Point(191, 72);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 25);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "满40元使用";
             // 
             // label2
             // 
@@ -85,16 +74,27 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "满40元使用";
             // 
-            // label3
+            // lblAmount
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(191, 72);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 25);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "满40元使用";
+            this.lblAmount.AutoSize = true;
+            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 30F);
+            this.lblAmount.ForeColor = System.Drawing.Color.Tomato;
+            this.lblAmount.Location = new System.Drawing.Point(86, 45);
+            this.lblAmount.Name = "lblAmount";
+            this.lblAmount.Size = new System.Drawing.Size(69, 52);
+            this.lblAmount.TabIndex = 1;
+            this.lblAmount.Text = "20";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Tomato;
+            this.label1.Location = new System.Drawing.Point(58, 69);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 28);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "￥";
             // 
             // label4
             // 
@@ -151,7 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(599, 425);
             this.Controls.Add(this.lblExit);
             this.Controls.Add(this.btnOK);
@@ -160,6 +160,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmCouponOutcs";
+            this.ShowInTaskbar = false;
             this.Text = "frmCouponOutcs";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

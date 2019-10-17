@@ -73,7 +73,7 @@
             this.lblPrice.AutoSize = true;
             this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(198, 73);
+            this.lblPrice.Location = new System.Drawing.Point(221, 80);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(105, 30);
@@ -348,6 +348,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmCashPay";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmCash";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCashPay_FormClosing);

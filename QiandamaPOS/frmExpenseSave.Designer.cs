@@ -329,6 +329,7 @@
             this.Controls.Add(this.btnCancle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmExpenseSave";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmExpenseSave";
             this.Shown += new System.EventHandler(this.frmExpenseSave_Shown);
