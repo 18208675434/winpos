@@ -73,11 +73,13 @@ namespace QiandamaPOS
         float hScale = 1;
 
         private Bitmap btnorderhangimage;
+
+        private frmLogin CurrentFrmLogin;
         #endregion
 
 
         #region  页面加载
-        public frmMain()
+        public frmMain(frmLogin frmlogin)
         {
             InitializeComponent();
             wScale =(float) Screen.PrimaryScreen.Bounds.Width / this.Width;
@@ -85,6 +87,7 @@ namespace QiandamaPOS
             Control.CheckForIllegalCrossThreadCalls = false;
             listener.ScanerEvent += Listener_ScanerEvent;
             LoadingHelper.CloseForm();
+            CurrentFrmLogin = frmlogin;
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -121,8 +124,28 @@ namespace QiandamaPOS
             UpdateOrderHang();
 
             toolStripMain.Focus();
+
+            //客屏初始化
+            MainModel.frmmainmedia = new frmMainMedia();
+            if (Screen.AllScreens.Count() != 1)
+            {
+                // windowstate设置max 不能再页面设置 否则会显示到第一个屏幕
+                //MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height+20);
+                asf.AutoScaleControlTest(MainModel.frmmainmedia, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
+
+                //MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+                MainModel.frmmainmedia.Show();
+            }
+
         }
 
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MainModel.frmmainmedia.Close();
+            MainModel.frmmainmedia = null;
+        }
         private void Listener_ScanerEvent(ScanerHook.ScanerCodes codes)
         {
 
@@ -152,6 +175,27 @@ namespace QiandamaPOS
             try { Other.CrearMemory(); }
             catch { }
         }
+
+
+        private void CheckUserAndMember(int resultcode)
+        {
+            try{
+                if (resultcode == MainModel.HttpMemberExpired)
+                        {
+                           
+                        }
+                else if (resultcode == MainModel.HttpUserExpired)
+             {
+                 ClearMember();
+                 btnLoadPhone_Click(null, null);
+             }
+            }
+            catch (Exception ex)
+            {
+                ShowLog("验证用户/会员异常",true);
+            }
+            
+        }
         #endregion
 
 
@@ -167,7 +211,10 @@ namespace QiandamaPOS
             {
                 return;
             }
-            System.Environment.Exit(0);
+
+            CurrentFrmLogin.Show();
+            this.Close();
+            //System.Environment.Exit(0);
         }
 
         private void btnOrderQuery_Click(object sender, EventArgs e)
@@ -198,6 +245,7 @@ namespace QiandamaPOS
 
             ReceiptUtil.EditCancelOrder(1, CurrentCart.totalpayment);
             ClearForm();
+            ClearMember();
         }
 
         //挂单
@@ -219,6 +267,7 @@ namespace QiandamaPOS
 
                         ShowLog("挂单成功", false);
                         ClearForm();
+                        ClearMember();
 
                     }
                 }
@@ -406,7 +455,7 @@ namespace QiandamaPOS
             try
             {
                 this.Enabled = false;
-                frmNumber frmnumber = new frmNumber("请输入商品条码", false);
+                frmNumber frmnumber = new frmNumber("请输入商品条码", false,false);
                 frmnumber.DataReceiveHandle += FormGoodsCode_DataReceiveHandle;
                 frmnumber.Opacity = 0.95d;
                 frmnumber.frmNumber_SizeChanged(null, null);
@@ -433,6 +482,7 @@ namespace QiandamaPOS
             try
             {
                 string ErrorMsgCart = "";
+                int ResultCode = 0;
                 toolStripMain.Focus();
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
@@ -440,11 +490,13 @@ namespace QiandamaPOS
 
                     CurrentCart.pointpayoption = btnCheckJF.Text=="√" ? 1 : 0;
 
-                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart,ref ResultCode);
                     CurrentCart = cart;
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
                         ShowLog(ErrorMsgCart, false);
+
+                        CheckUserAndMember(ResultCode);
                         return false;
                     }
                     else
@@ -483,6 +535,7 @@ namespace QiandamaPOS
                 else
                 {
                     ClearForm();
+                    ClearMember();
                     return true;
                 }
                
@@ -610,9 +663,8 @@ namespace QiandamaPOS
             {
                 if (scancodemember.scancodedto.specnum == 0)
                 {
-                    
-
-                    frmNumber frmnumber = new frmNumber(scancodemember.scancodedto.skuname, false);
+                    this.Enabled = false;
+                    frmNumber frmnumber = new frmNumber(scancodemember.scancodedto.skuname, false,true);
                     frmnumber.Opacity = 0.95d;
                     frmnumber.frmNumber_SizeChanged(null, null);
                     frmnumber.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
@@ -631,6 +683,8 @@ namespace QiandamaPOS
                     {
                         return;
                     }
+
+                    this.Enabled = true;
                 }
 
                 Product pro = new Product();
@@ -642,6 +696,10 @@ namespace QiandamaPOS
 
                 pro.barcode = scancodemember.scancodedto.barcode;
 
+                if (CurrentCart == null)
+                {
+                    CurrentCart = new Cart();
+                }
                 if (CurrentCart.products == null)
                 {
                     List<Product> products = new List<Product>();
@@ -654,14 +712,18 @@ namespace QiandamaPOS
                 }
 
                 string ErrorMsgCart = "";
-
+                int ResultCode = 0;
                 bool IsExits = false;
 
                 
                 lstscancode.Add(scancodemember);
-                Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
+                CurrentCart = cart;
                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                 {
+                    ShowLog(ErrorMsgCart, false);
+
+                    CheckUserAndMember(ResultCode);
                     ShowLog(ErrorMsgCart, false);
                     lstscancode.Remove(scancodemember);
                 }
@@ -673,6 +735,7 @@ namespace QiandamaPOS
             }
             catch (Exception ex)
             {
+                this.Enabled = true;
                 LogManager.WriteLog("ERROR","添加购物车商品异常:"+ex.Message);
             }
         }
@@ -750,7 +813,7 @@ namespace QiandamaPOS
                                 }
                                 else
                                 {
-                                    price = "￥" + pro.price.saleprice.ToString() + pro.price.salepricedesc + "\r\n" + "￥" + pro.price.originprice + pro.price.originpricedesc;
+                                    price = "￥" + pro.price.saleprice.ToString() + "("+pro.price.salepricedesc+")" + "\r\n" + "￥" + pro.price.originprice + "("+pro.price.originpricedesc+")";
                                 }
 
                                 if (pro.goodstagid == 0)  //0是标品  1是称重
@@ -772,7 +835,7 @@ namespace QiandamaPOS
                                 }
                                 else
                                 {
-                                    price = "￥" + pro.price.total.ToString() + pro.price.salepricedesc + "\r\n" + "￥" + pro.price.origintotal + pro.price.originpricedesc;
+                                    total = "￥" + pro.price.total.ToString() + "("+pro.price.salepricedesc+")" + "\r\n" + "￥" + pro.price.origintotal + "("+pro.price.originpricedesc+")";
                                 }
 
                                 dgvGood.Rows.Insert(0, new object[] { barcode, price, jian, num, add, total });
@@ -850,13 +913,15 @@ namespace QiandamaPOS
             dgvOrderDetail.Rows.Clear();
             CurrentCart = new Cart();
 
-            lblJF.Text = "0";
-            lblJFUse.Text = "";
-            MainModel.CurrentMember = null;
-            MainModel.CurrentCouponCode = "";
-            btnCheckJF.Text = "";
-            pnlWaitingMember.Visible = true;
-            pnlMember.Visible = false;
+            //lblJF.Text = "0";
+            //lblJFUse.Text = "";
+            //MainModel.CurrentMember = null;
+            //MainModel.CurrentCouponCode = "";
+            //btnCheckJF.Text = "";
+            //pnlWaitingMember.Visible = true;
+            //pnlMember.Visible = false;
+
+           
 
             pnlPayType1.Visible = true;
             pnlPayType2.Visible = false;
@@ -878,7 +943,7 @@ namespace QiandamaPOS
             {
                 this.Enabled = false;
                 MainModel.frmmainmedia.ShowNumber();
-                frmNumber frmnumber = new frmNumber("请输入会员号", true);
+                frmNumber frmnumber = new frmNumber("请输入会员号", true,false);
                 frmnumber.DataReceiveHandle += FormPhone_DataReceiveHandle;
                 frmnumber.Opacity = 0.95d;
                 frmnumber.frmNumber_SizeChanged(null, null);
@@ -887,6 +952,7 @@ namespace QiandamaPOS
                // frmnumber.TopMost = true;
                 frmnumber.ShowDialog();
 
+                RefreshCart();
                 Application.DoEvents();
                 toolStripMain.Focus();
 
@@ -922,16 +988,15 @@ namespace QiandamaPOS
                         if (ErrorMsgMember != "" || member == null) //会员不存在
                         {
 
-                            pnlWaitingMember.Visible = true;
-                            pnlMember.Visible = false;
-                            MainModel.CurrentMember = null;
+                            //pnlWaitingMember.Visible = true;
+                            //pnlMember.Visible = false;
+                            //MainModel.CurrentMember = null;
+                            ClearMember();
                             ShowLog(ErrorMsgMember, false);
                         }
                         else
                         {
                             LoadMember(member);
-
-
                         }
 
                     }));
@@ -975,7 +1040,7 @@ namespace QiandamaPOS
                 //购物车有商品的话刷新一次
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
-                    RefreshCart();
+                   // RefreshCart();
                 }
             }
             catch (Exception ex)
@@ -992,15 +1057,92 @@ namespace QiandamaPOS
             {
                 return;
             }
-            lblJF.Text = "0";
-            lblJFUse.Text = "";
-            MainModel.CurrentMember = null;
-            //chkJF.Checked = false;
-            btnCheckJF.Text = "";
-            pnlWaitingMember.Visible = true;
-            pnlMember.Visible = false;
+
+            ClearMember();
+           
         }
 
+        //清空会员信息
+        private void ClearMember()
+        {
+            try
+            {
+                lblJF.Text = "0";
+                lblJFUse.Text = "";
+                MainModel.CurrentMember = null;
+                MainModel.CurrentCouponCode = "";
+                //chkJF.Checked = false;
+                btnCheckJF.Text = "";
+                pnlWaitingMember.Visible = true;
+                pnlMember.Visible = false;
+
+
+                //string ErrorMsgCart = "";
+                //int ResultCode = 0;
+                //toolStripMain.Focus();
+                //if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
+                //{
+                //    //CurrentCart.pointpayoption = 1;
+
+                //    CurrentCart.pointpayoption = btnCheckJF.Text == "√" ? 1 : 0;
+
+                //    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
+                //    CurrentCart = cart;
+                //    if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
+                //    {
+                //        ShowLog(ErrorMsgCart, false);
+
+                //        CheckUserAndMember(ResultCode);
+                //        //return false;
+                //    }
+                //    else
+                //    {
+
+                //        UploadDgvGoods(cart);
+
+
+                //        if (btnCheckJF.Text == "√")
+                //        {
+                //            if (MainModel.CurrentMember != null && CurrentCart != null && CurrentCart.pointinfo != null)
+                //            {
+                //                lblJF.Text = CurrentCart.pointinfo.totalpoints;
+                //                lblJFUse.Visible = true;
+                //                lblJFUse.Text = "使用" + CurrentCart.pointinfo.availablepoints + "积分 抵用" + CurrentCart.pointinfo.availablepointsamount + "元";
+
+                //            }
+                //        }
+                //        else
+                //        {
+                //            //lblJF.Text = "0";
+                //            lblJFUse.Visible = false;
+                //            lblJFUse.Text = "";
+                //        }
+
+
+
+                //        btnPayByBalance.Enabled = CurrentCart.paymenttypes.balancepayenabled == 1;
+                //        btnPayByCash.Enabled = CurrentCart.paymenttypes.cashenabled == 1;
+                //        btnPayOnLine.Enabled = CurrentCart.paymenttypes.onlineenabled == 1;
+
+                //       // return true;
+                //    }
+
+                //}
+                //else
+                //{
+                //    ClearForm();
+                //    //ClearMember();
+                //    //return true;
+                //}
+
+
+               // RefreshCart();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
 
       
         private void btnCheckJF_Click(object sender, EventArgs e)
@@ -1079,7 +1221,7 @@ namespace QiandamaPOS
                     frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
                     frmresult.ShowDialog();
                     ClearForm();
-
+                    ClearMember();
                 }
             }
 
@@ -1123,9 +1265,14 @@ namespace QiandamaPOS
                     }
 
                     string ErrorMsgCart = "";
-                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                    int ResultCode = 0;
+                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
+                    CurrentCart = cart;
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
+                        ShowLog(ErrorMsgCart, false);
+
+                        CheckUserAndMember(ResultCode);
                         ShowLog(ErrorMsgCart, false);
                     }
                     else
@@ -1147,9 +1294,14 @@ namespace QiandamaPOS
                     }
 
                     string ErrorMsgCart = "";
-                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                    int ResultCode = 0;
+                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
+                    CurrentCart = cart;
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
+                        ShowLog(ErrorMsgCart, false);
+
+                        CheckUserAndMember(ResultCode);
                         ShowLog(ErrorMsgCart, false);
                     }
                     else
@@ -1179,6 +1331,7 @@ namespace QiandamaPOS
                     frmresult.ShowDialog();
 
                     ClearForm();
+                    ClearMember();
                 }));
 
             }
@@ -1222,7 +1375,12 @@ namespace QiandamaPOS
                     frmresult.ShowDialog();
 
                     ClearForm();
+                    ClearMember();
                 }));
+            }
+            else if (type == MainModel.HttpUserExpired || type == MainModel.HttpMemberExpired)
+            {
+                CheckUserAndMember(type);
             }
 
             if (CurrentCart != null)
@@ -1231,6 +1389,22 @@ namespace QiandamaPOS
                 CurrentCart.cashpayamt = 0;
             }
             RefreshCart();
+
+        }
+
+
+        private void FormCashCoupon_DataReceiveHandle(int type, string orderid)
+        {
+           if (type == MainModel.HttpUserExpired || type == MainModel.HttpMemberExpired)
+            {
+                CheckUserAndMember(type);
+            }
+
+            if (CurrentCart != null)
+            {
+                CurrentCart.cashcouponamt = 0;
+            }
+            //RefreshCart();
 
         }
 
@@ -1353,10 +1527,14 @@ namespace QiandamaPOS
                     this.Enabled = false;
                     listener.Stop();
                     string ErrorMsgCart = "";
-
-                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                    int ResultCode = 0;
+                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
+                    CurrentCart = cart;
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
+                        ShowLog(ErrorMsgCart, false);
+
+                        CheckUserAndMember(ResultCode);
                         ShowLog(ErrorMsgCart, false);
                     }
                     else
@@ -1418,6 +1596,9 @@ namespace QiandamaPOS
                     this.Enabled = false;
                     listener.Stop();
 
+                     
+    
+                    //MemberwiseClone(CurrentCart);
                     frmCashPay frmcash = new frmCashPay(CurrentCart);
                     frmcash.frmCashPay_SizeChanged(null, null);
                     frmcash.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
@@ -1451,6 +1632,7 @@ namespace QiandamaPOS
 
         }
 
+
         //余额支付
         private void btnPayByBalance_Click(object sender, EventArgs e)
         {
@@ -1461,10 +1643,14 @@ namespace QiandamaPOS
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
                     string ErrorMsgCart = "";
-
-                    Cart cart = httputil.RefreshCart(CurrentCart,ref ErrorMsgCart);
+                    int ResultCode = 0;
+                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
+                    CurrentCart = cart;
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
+                        ShowLog(ErrorMsgCart, false);
+
+                        CheckUserAndMember(ResultCode);
                         ShowLog(ErrorMsgCart, false);
                     }
                     else
@@ -1524,6 +1710,7 @@ namespace QiandamaPOS
                     this.Enabled = false;
                     listener.Stop();
                     frmCashCoupon frmcashcoupon = new frmCashCoupon(CurrentCart);
+                    frmcashcoupon.DataReceiveHandle += FormCashCoupon_DataReceiveHandle;
                     frmcashcoupon.frmCashCoupon_SizeChanged(null, null);
                     frmcashcoupon.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
                     frmcashcoupon.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmcashcoupon.Width - 80, 100);
@@ -1531,11 +1718,12 @@ namespace QiandamaPOS
                     frmcashcoupon.Opacity = 0.95d;
                     frmcashcoupon.ShowDialog();
 
-                    //TODO  数据为什么会变为1？？？？？？？？？？？
+                    //TODO  数据为什么会变为1？？？？？？？？？？？ 引用类型 傻不傻！！！
                     CurrentCart.cashcouponamt = 0;
                     if (frmcashcoupon.DialogResult == DialogResult.OK)
                     {
                         ClearForm();
+                        ClearMember();
                     }
                     else
                     {
@@ -1579,7 +1767,7 @@ namespace QiandamaPOS
                 frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
                 frmresult.ShowDialog();
                 ClearForm();
-
+                ClearMember();
             }
         }
 
@@ -1751,6 +1939,7 @@ namespace QiandamaPOS
                 RefreshCart();
             }
 
+            dgvGood.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -1758,6 +1947,7 @@ namespace QiandamaPOS
             }
 
         }
+
 
       
 

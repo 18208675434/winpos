@@ -60,7 +60,8 @@ namespace QiandamaPOS
         {
             InitializeComponent();
             CurrentOrderID = orderid;
-            IniForm(cart);
+            CurrentCart = (Cart)cart.qianClone();
+            IniForm(CurrentCart);
         }
 
 

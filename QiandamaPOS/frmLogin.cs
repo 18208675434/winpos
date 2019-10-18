@@ -67,7 +67,7 @@ namespace QiandamaPOS
                 else
                 {
            
-                    frmMain frmmain = new frmMain();
+                    frmMain frmmain = new frmMain(this);
                     //frmmain.frmMain_SizeChanged(null,null);
                     //frmmain.WindowState = FormWindowState.Maximized;
                     //Screen.PrimaryScreen.Bounds.Height
@@ -76,7 +76,7 @@ namespace QiandamaPOS
                     CloseOSK();
 
                     //asf.AutoScaleControl(frmmain);
-                    frmmain.Show();
+                    frmmain.ShowDialog();
                 }              
 
             }
@@ -88,18 +88,18 @@ namespace QiandamaPOS
             {
                // LoadingHelper.CloseForm();
             }
-            //客屏初始化
-            MainModel.frmmainmedia = new frmMainMedia();
-            if (Screen.AllScreens.Count() != 1)
-            {
-                // windowstate设置max 不能再页面设置 否则会显示到第一个屏幕
-                //MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height+20);
-                asf.AutoScaleControlTest(MainModel.frmmainmedia, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height ,true);
-                MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
+            ////客屏初始化
+            //MainModel.frmmainmedia = new frmMainMedia();
+            //if (Screen.AllScreens.Count() != 1)
+            //{
+            //    // windowstate设置max 不能再页面设置 否则会显示到第一个屏幕
+            //    //MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height+20);
+            //    asf.AutoScaleControlTest(MainModel.frmmainmedia, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height ,true);
+            //    MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
 
-                //MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-                MainModel.frmmainmedia.Show();
-            }
+            //    //MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            //    MainModel.frmmainmedia.Show();
+            //}
         }
 
         #region 账号密码登录
@@ -142,11 +142,15 @@ namespace QiandamaPOS
 
                 INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
                 INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
-                frmMain frmmain = new frmMain();
-                frmmain.WindowState = FormWindowState.Maximized;
+
+                frmMain frmmain = new frmMain(this);
+                asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
                 this.Hide();
                 CloseOSK();
-                frmmain.Show();
+
+                //asf.AutoScaleControl(frmmain);
+                frmmain.ShowDialog();
+               
             }
             else//重新登录账户
             {
@@ -169,11 +173,22 @@ namespace QiandamaPOS
 
                     INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
                     INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
-                    frmMain frmmain = new frmMain();
-                    frmmain.WindowState = FormWindowState.Maximized;
+                    //frmMain frmmain = new frmMain();
+                    //frmmain.WindowState = FormWindowState.Maximized;
+                    //this.Hide();
+                    //CloseOSK();
+                    //frmmain.Show();
+
+                    frmMain frmmain = new frmMain(this);
+                    //frmmain.frmMain_SizeChanged(null,null);
+                    //frmmain.WindowState = FormWindowState.Maximized;
+                    //Screen.PrimaryScreen.Bounds.Height
+                    asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
                     this.Hide();
                     CloseOSK();
-                    frmmain.Show();
+
+                    //asf.AutoScaleControl(frmmain);
+                    frmmain.ShowDialog();
                 }
             }
            
@@ -200,33 +215,67 @@ namespace QiandamaPOS
 
         private void lblSendCheckCode_Click(object sender, EventArgs e)
         {
-            if (validCode.CheckCode != txtCheckCode.Text)
-            {
-                MessageBox.Show("图形验证码不正确，请重新输入！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else
-            {
-                if (txtPhone.Text.Length != 11)
+           if (txtPhone.Text.Length != 11)
                 {
-                    MessageBox.Show("请输入正确的手机号！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //MessageBox.Show("请输入正确的手机号！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MainModel.ShowLog("手机号不正确",false);
                     return;
                 }
                 else
                 {
+                    string ErrorMsg = "";
+                    httputil.SendSmsCode(txtPhone.Text,CurrentImgCodeKey,txtCheckCode.Text,ref ErrorMsg);
                     //TODO 调用接口发送手机验证                    
 
                 }
-            }
+            
         }
 
         private void btnLoginByPhone_Click(object sender, EventArgs e)
         {
-            //TODO  调用接口验证手机验证码
-            frmMain frmmain = new frmMain();
-            frmmain.WindowState = FormWindowState.Maximized;
-            this.Hide();
-            frmmain.Show();
+            SignPara signpara =new SignPara();
+            signpara.imgcode=txtCheckCode.Text;
+            signpara.imgcodekey=CurrentImgCodeKey;
+            signpara.phone=txtPhone.Text;
+            signpara.smscode=txtPhoneCheckCode.Text;
+
+              string ErrorMsg = "";
+                string Token = httputil.SigninWithSmscode(signpara,ref ErrorMsg);
+                if (ErrorMsg != "" || Token == "")
+                {
+                    lblMsg.Text = ErrorMsg;
+                }
+                else
+                {
+                    INIManager.SetIni("System", "POS-Authorization", Token, MainModel.IniPath);
+                    MainModel.Authorization = Token;
+                    if (!LoadUser() || !LoadShopInfo())
+                    {
+                        return;
+                    }
+                    //MainModel.DeviceSN = Token;
+
+
+                    ////INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
+                    ////INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
+                    //frmMain frmmain = new frmMain();
+                    //frmmain.WindowState = FormWindowState.Maximized;
+                    //this.Hide();
+                    //CloseOSK();
+                    //frmmain.Show();
+
+                    frmMain frmmain = new frmMain(this);
+                    //frmmain.frmMain_SizeChanged(null,null);
+                    //frmmain.WindowState = FormWindowState.Maximized;
+                    //Screen.PrimaryScreen.Bounds.Height
+                    asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    this.Hide();
+                    CloseOSK();
+
+                    //asf.AutoScaleControl(frmmain);
+                    frmmain.ShowDialog();
+                }
+          
         }
         #endregion
 
@@ -294,6 +343,11 @@ namespace QiandamaPOS
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(MainModel.Authorization))
+                {
+                    return false;
+                }
+
                 string ErrorMsg = "";
                 userModel currentuser = httputil.GetUser(ref ErrorMsg);
 
@@ -351,15 +405,16 @@ namespace QiandamaPOS
         }
 
 
-
+        private string CurrentImgCodeKey = "";
         private void GetAuthcodeImage()
         {
             string ErrorMsg = "";
             AuthCodeImage  authcodeimage = httputil.GetAuthcodeImage(ref ErrorMsg);
+            CurrentImgCodeKey = authcodeimage.key;
             string ss = authcodeimage.imagestr;
             int startIndex = ss.IndexOf("base64,");//开始位置
 
-            string inputStr = ss.Substring(startIndex, ss.Length - startIndex);//从开始位置截取一个新的字符串
+            string inputStr = ss.Substring(startIndex+7, ss.Length - startIndex-7);//从开始位置截取一个新的字符串
 
             byte[] arr = Convert.FromBase64String(inputStr);
             MemoryStream ms = new MemoryStream(arr);

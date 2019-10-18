@@ -28,7 +28,7 @@ namespace QiandamaPOS
         public frmCoupon(Cart cart,string selectcoupon)
         {
             InitializeComponent();
-            CurrentCart = cart;
+            CurrentCart = (Cart)cart.qianClone();
             SelectCouponCode = selectcoupon;
             UpdateDgvCoupon(cart, selectcoupon);
 
@@ -91,7 +91,16 @@ namespace QiandamaPOS
                         string starttime = MainModel.GetDateTimeByStamp(couponsBean.enabledfrom.ToString()).ToString("yyyy-MM-dd");
                         string endtime = MainModel.GetDateTimeByStamp(couponsBean.enabledto.ToString()).ToString("yyyy-MM-dd");
                         string couponcode = couponsBean.couponcode;
-                        dgvCoupon.Rows.Add(couponcode, "￥" + couponsBean.amount, content + "\r\n" + starttime + "至" + endtime, selectcoupon == couponcode);
+                        string select = "";
+                        if (selectcoupon == couponcode)
+                        {
+                            select = "√";
+                        }
+                        else
+                        {
+                            select = " ";
+                        }
+                        dgvCoupon.Rows.Add(couponcode, "￥" + couponsBean.amount, content + "\r\n" + starttime + "至" + endtime, select);
                     }
 
 

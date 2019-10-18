@@ -41,14 +41,14 @@ namespace QiandamaPOS
         /// </summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
-        public frmNumber(string title,bool isdouble)
+        public frmNumber(string title,bool isdouble,bool isweight)
         {
            
             InitializeComponent();
 
             isDouble = isdouble;
             lblInfo.Text = title;
-            if (title.Contains("重量"))
+            if (isweight)
             {
                 lblg.Visible = true;
             }

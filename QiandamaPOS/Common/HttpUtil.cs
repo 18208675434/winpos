@@ -323,7 +323,7 @@ namespace QiandamaPOS.Common
         /// <param name="lstscancodemember"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public Cart RefreshCart(Cart cart, ref string errormsg)
+        public Cart RefreshCart(Cart cart, ref string errormsg, ref int resultcode)
         {
             try
             {
@@ -380,9 +380,10 @@ namespace QiandamaPOS.Common
                 DateTime starttime = DateTime.Now;
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                //Console.Write(json);
-                Console.WriteLine("访问购物车接口时间" + (DateTime.Now - starttime).ToString("ssfff"));
+                Console.Write(json);
+                //Console.WriteLine("访问购物车接口时间" + (DateTime.Now - starttime).ToString("ssfff"));
                 // return;
+                resultcode = rd.code;
                 if (rd.code == 0)
                 {
                     Cart carttemp = JsonConvert.DeserializeObject<Cart>(rd.data.ToString());
@@ -1271,6 +1272,89 @@ namespace QiandamaPOS.Common
                 LogManager.WriteLog("Error", "获取图形验证码异常：" + ex.Message);
                 erromessage = "获取图形验证码异常：" + ex.Message;
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取短信验证码
+        /// </summary>
+        /// <returns></returns>
+        public bool SendSmsCode(string phone,string imgcodekey,string imgcode, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/account/sendsmscode";
+
+               
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                sort.Add("phone", phone);
+                sort.Add("imgcodekey", imgcodekey);
+                sort.Add("imgcode", imgcode);
+
+                string json = HttpGET(url, sort);
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    bool smcSuccess = Convert.ToBoolean(rd.data.ToString());
+                    return smcSuccess;
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取图形验证码异常：" + ex.Message);
+                erromessage = "获取图形验证码异常：" + ex.Message;
+                return false;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 手机验证码登录
+        /// </summary>
+        /// <returns></returns>
+        public string SigninWithSmscode(SignPara signpara, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/account/signinwithsmscode";
+
+
+                string tempjson = JsonConvert.SerializeObject(signpara);
+                
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+
+                    return rd.data.ToString() ;
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取图形验证码异常：" + ex.Message);
+                erromessage = "获取图形验证码异常：" + ex.Message;
+                return "";
             }
         }
 

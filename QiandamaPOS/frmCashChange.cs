@@ -45,7 +45,7 @@ namespace QiandamaPOS
         public frmCashChange(Cart cart)
         {
             InitializeComponent();
-            CurrentCart = cart;
+            CurrentCart = (Cart)cart.qianClone();
             IniForm(cart);
            
         }

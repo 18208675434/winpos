@@ -262,6 +262,7 @@
     <Compile Include="Model\SaveExpensePara.cs" />
     <Compile Include="Model\Scale.cs" />
     <Compile Include="Model\ScalePara.cs" />
+    <Compile Include="Model\SignWithSmsPara.cs" />
     <Compile Include="Model\synctrade.cs" />
     <Compile Include="Model\syncPara.cs" />
     <Compile Include="Model\tradePara.cs" />

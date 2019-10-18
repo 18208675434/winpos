@@ -157,11 +157,11 @@
             this.lblExit.AutoSize = true;
             this.lblExit.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblExit.ForeColor = System.Drawing.Color.Tomato;
-            this.lblExit.Location = new System.Drawing.Point(319, 9);
+            this.lblExit.Location = new System.Drawing.Point(229, 9);
             this.lblExit.Name = "lblExit";
-            this.lblExit.Size = new System.Drawing.Size(50, 25);
+            this.lblExit.Size = new System.Drawing.Size(140, 25);
             this.lblExit.TabIndex = 19;
-            this.lblExit.Text = "关闭";
+            this.lblExit.Text = "返回收银方式>";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
             // 
             // tabPay

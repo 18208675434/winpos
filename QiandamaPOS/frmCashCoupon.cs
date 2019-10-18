@@ -30,10 +30,22 @@ namespace QiandamaPOS
 
         private Cart CurrentCart = new Cart();
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type">0:支付完成   1：在线收银继续支付 3：取消  12004：会员登录失效   100031：店员登录失效</param>
+        /// <param name="orderid"></param>
+        public delegate void DataRecHandleDelegate(int type, string orderid);
+        /// <summary>
+        /// 数据接收事件
+        /// </summary>
+        public event DataRecHandleDelegate DataReceiveHandle;
+
         public frmCashCoupon(Cart cart)
         {
             InitializeComponent();
-            CurrentCart = cart;
+            CurrentCart = (Cart)cart.qianClone();
             LoadCashCoupon();
         }
 
@@ -52,6 +64,27 @@ namespace QiandamaPOS
             }));
 
         }
+
+
+        private void CheckUserAndMember(int resultcode)
+        {
+            try
+            {
+                if (resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.HttpUserExpired)
+                {
+                    if (DataReceiveHandle != null)
+                        this.DataReceiveHandle.BeginInvoke(resultcode, "", null, null);
+
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                //ShowLog("验证用户/会员异常", true);
+            }
+
+        }
+
 
         private void LoadCashCoupon()
         {
@@ -242,10 +275,11 @@ namespace QiandamaPOS
             if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
             {
                 string ErrorMsgCart = "";
-
-                Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                int ResultCode = 0;
+                Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart,ref ResultCode);
                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                 {
+                    CheckUserAndMember(ResultCode);
                     ShowLog(ErrorMsgCart, false);
                 }
                 else
@@ -281,10 +315,11 @@ namespace QiandamaPOS
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
                     string ErrorMsgCart = "";
-
-                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                    int ResultCode = 0;
+                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart,ref ResultCode);
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
+                        CheckUserAndMember(ResultCode);
                         ShowLog(ErrorMsgCart, false);
                     }
                     else
@@ -375,14 +410,16 @@ namespace QiandamaPOS
             try
             {
                 string ErrorMsgCart = "";
+                int ResultCode = 0;
 
                 if (CurrentCart != null)
                 {
 
-                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart);
+                    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart,ref ResultCode);
                     CurrentCart = cart;
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
+                        CheckUserAndMember(ResultCode);
                         ShowLog(ErrorMsgCart, false);
                         return false;
                     }

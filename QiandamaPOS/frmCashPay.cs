@@ -21,9 +21,10 @@ namespace QiandamaPOS
         private delegate void InvokeHandler();
 
         /// <summary>
-        /// 数据接收处理委托方法
+        /// 
         /// </summary>
-
+        /// <param name="type">0:支付完成   1：在线收银继续支付 3：取消  12004：会员登录失效   100031：店员登录失效</param>
+        /// <param name="orderid"></param>
         public delegate void DataRecHandleDelegate(int type, string orderid);
         /// <summary>
         /// 数据接收事件
@@ -38,7 +39,7 @@ namespace QiandamaPOS
         /// <summary>
         /// 收银主界面传过来的 抹零后的cartModel
         /// </summary>
-        private Cart thisCurrentCart;
+        private Cart thisCurrentCart = new Cart();
 
 
         /// <summary>
@@ -57,16 +58,13 @@ namespace QiandamaPOS
 
         }
 
-        public frmCashPay(Cart cart)
+        public frmCashPay( Cart cart)
         {
             InitializeComponent();
 
-
-
-            thisCurrentCart = cart;
+            thisCurrentCart = (Cart)cart.qianClone();
 
         }
-
         private void frmCash_Shown(object sender, EventArgs e)
         {
             txtCash.SetWatermark("请输入实收现金");
@@ -75,12 +73,32 @@ namespace QiandamaPOS
             lblPrice.Text = "￥" + thisCurrentCart.payamtbeforecash.ToString();
         }
 
+        private void CheckUserAndMember(int resultcode)
+        {
+            try
+            {
+                if (resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.HttpUserExpired)
+                {
+                    if (CashPayDataReceiveHandle != null)
+                        this.CashPayDataReceiveHandle.BeginInvoke(resultcode, "", null, null);
+
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                //ShowLog("验证用户/会员异常", true);
+            }
+
+        }
+
+
         private void btnCancle_Click(object sender, EventArgs e)
         {
             thisCurrentCart.cashpayamt = 0;
 
             if (CashPayDataReceiveHandle != null)
-                this.CashPayDataReceiveHandle.BeginInvoke(100, "", null, null);
+                this.CashPayDataReceiveHandle.BeginInvoke(3, "", null, null);
 
             this.Close();
         }
@@ -98,16 +116,18 @@ namespace QiandamaPOS
             {
                 decimal cash = Convert.ToDecimal(txtCash.Text);
                 string ErrorMsgCart = "";
-
+                int ResultCode = 0;
                 thisCurrentCart.cashpayoption = 1;
                 thisCurrentCart.cashpayamt = cash;
 
-                Cart cart = httputil.RefreshCart(thisCurrentCart,ref ErrorMsgCart);
+                Cart cart = httputil.RefreshCart(thisCurrentCart,ref ErrorMsgCart,ref ResultCode);
 
                 
                 thisCurrentCart = cart;
                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                 {
+                   //fd
+                    CheckUserAndMember(ResultCode);
                     ShowLog(ErrorMsgCart, false);
                 }
                 else

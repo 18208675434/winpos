@@ -63,6 +63,15 @@ namespace QiandamaPOS.Model
         /// </summary>
         public static Member CurrentMember = null;
 
+        /// <summary>
+        /// 接口返回code 120014 代表用户登录过期 需要重新登录
+        /// </summary>
+        public static int HttpUserExpired = 120014;
+        /// <summary>
+        /// 接口返回code 100031 代表会员登录过期 需要重新登录
+        /// </summary>
+        public static int HttpMemberExpired = 100031;
+
         public static string CurrentCouponCode ="";
 
         /// <summary>
@@ -176,6 +185,7 @@ namespace QiandamaPOS.Model
                 frmmsf.ShowDialog();
             
         }
+
 
     }
 }

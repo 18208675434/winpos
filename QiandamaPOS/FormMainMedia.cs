@@ -57,7 +57,7 @@ namespace QiandamaPOS
         public void ShowNumber()
         {
 
-            frmNumber frmnumber = new frmNumber("请输入会员号", true);
+            frmNumber frmnumber = new frmNumber("请输入会员号", true,false);
 
             frmnumber.frmNumber_SizeChanged(null, null);
             frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);

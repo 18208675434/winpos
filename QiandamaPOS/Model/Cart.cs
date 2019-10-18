@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace QiandamaPOS.Model
 {
     [Serializable]
-    public class Cart
+    public class Cart : ICloneable
     {
         public string title { get; set; }
         public decimal totalpayment { get; set; }
@@ -43,6 +43,16 @@ namespace QiandamaPOS.Model
         public decimal payamtbeforecash { get; set; }
 
         public decimal cashcouponamt { get; set; }
+
+        public object Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object qianClone()
+        {
+            return this.MemberwiseClone();
+        }
     }
     [Serializable]
     public class Tenant

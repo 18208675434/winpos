@@ -78,7 +78,7 @@ namespace QiandamaPOS
                             string ImgUrl = media.content;
 
                             //test
-                            ImgUrl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
+                            //ImgUrl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
                             Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
 
                             tabPageAdvert.BackgroundImage = _image;
@@ -106,12 +106,14 @@ namespace QiandamaPOS
 
         private Cart CurrentCart;
         private Member CurrentMember;
-        public void UpdateForm(Cart Cart,Member member)
+
+
+        public void UpdateForm(Cart cart,Member member)
         {
 
             pnlPayInfo.Visible = false;
             tabControlMedia.SelectedIndex = 0;
-            CurrentCart = Cart;
+            CurrentCart = (Cart)cart.qianClone();
             CurrentMember = member;
 
             //启动扫描处理线程
@@ -129,8 +131,7 @@ namespace QiandamaPOS
         private void UpdateFormExe()
         {
             try
-            {
-               
+            {               
                     //pnlPayInfo.Visible = false;
                     dgvGood.Rows.Clear();
                     dgvOrderDetail.Rows.Clear(); 
@@ -180,7 +181,7 @@ namespace QiandamaPOS
                                 }
                                 else
                                 {
-                                    price = "￥" + pro.price.saleprice.ToString() + pro.price.salepricedesc + "\r\n" + "￥" + pro.price.originprice + pro.price.originpricedesc;
+                                    price = "￥" + pro.price.saleprice.ToString() + "(" + pro.price.salepricedesc + ")" + "\r\n" + "￥" + pro.price.originprice + "(" + pro.price.originpricedesc + ")";
                                 }                       
 
                                 if (pro.price.total == pro.price.origintotal)
@@ -189,10 +190,11 @@ namespace QiandamaPOS
                                 }
                                 else
                                 {
-                                    price = "￥" + pro.price.total.ToString() + pro.price.salepricedesc + "\r\n" + "￥" + pro.price.origintotal + pro.price.originpricedesc;
+                                    total = "￥" + pro.price.total.ToString() + "(" + pro.price.salepricedesc + ")" + "\r\n" + "￥" + pro.price.origintotal + "(" + pro.price.originpricedesc + ")";
                                 }
 
-                                dgvGood.Rows.Add(barcode, price, num, total);
+                                dgvGood.Rows.Insert(0, new object[] { barcode, price, num, total });
+                                //dgvGood.Rows.Add(barcode, price, num, total);
 
                                 dgvGood.ClearSelection();
 
@@ -226,7 +228,7 @@ namespace QiandamaPOS
                             Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
                             picMemberCard.BackgroundImage = _image;
 
-                            int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
+                            int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4/ 5;
                             picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
 
                             picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
@@ -268,7 +270,7 @@ namespace QiandamaPOS
         {
             try
             {
-                frmNumber frmnumber = new frmNumber("请输入会员号", true);
+                frmNumber frmnumber = new frmNumber("请输入会员号", true,false);
 
                 frmnumber.frmNumber_SizeChanged(null, null);
                 frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);

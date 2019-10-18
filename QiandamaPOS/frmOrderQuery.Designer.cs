@@ -369,7 +369,7 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.orderat.DefaultCellStyle = dataGridViewCellStyle3;
             this.orderat.FillWeight = 100.195F;
-            this.orderat.HeaderText = "订单时间";
+            this.orderat.HeaderText = "下单时间";
             this.orderat.Name = "orderat";
             this.orderat.Width = 165;
             // 
