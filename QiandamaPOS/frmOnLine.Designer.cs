@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCancle = new System.Windows.Forms.Button();
             this.lblPriceStr = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblChangeStr = new System.Windows.Forms.Label();
@@ -37,21 +36,8 @@
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblOnlinePay = new System.Windows.Forms.Label();
             this.btnPayNext = new System.Windows.Forms.Button();
+            this.lbtnCancle = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnCancle.Location = new System.Drawing.Point(261, 11);
-            this.btnCancle.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(91, 32);
-            this.btnCancle.TabIndex = 1;
-            this.btnCancle.TabStop = false;
-            this.btnCancle.Text = "返回上层》";
-            this.btnCancle.UseVisualStyleBackColor = true;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // lblPriceStr
             // 
@@ -60,15 +46,15 @@
             this.lblPriceStr.Location = new System.Drawing.Point(22, 97);
             this.lblPriceStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPriceStr.Name = "lblPriceStr";
-            this.lblPriceStr.Size = new System.Drawing.Size(138, 35);
+            this.lblPriceStr.Size = new System.Drawing.Size(84, 35);
             this.lblPriceStr.TabIndex = 2;
-            this.lblPriceStr.Text = "应收总额 :";
+            this.lblPriceStr.Text = "应收 :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.label3.Location = new System.Drawing.Point(22, 176);
+            this.label3.Location = new System.Drawing.Point(22, 165);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(138, 35);
@@ -79,7 +65,7 @@
             // 
             this.lblChangeStr.AutoSize = true;
             this.lblChangeStr.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.lblChangeStr.Location = new System.Drawing.Point(22, 259);
+            this.lblChangeStr.Location = new System.Drawing.Point(22, 235);
             this.lblChangeStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChangeStr.Name = "lblChangeStr";
             this.lblChangeStr.Size = new System.Drawing.Size(158, 35);
@@ -91,7 +77,7 @@
             this.lblChange.AutoSize = true;
             this.lblChange.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.lblChange.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblChange.Location = new System.Drawing.Point(211, 259);
+            this.lblChange.Location = new System.Drawing.Point(211, 235);
             this.lblChange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChange.Name = "lblChange";
             this.lblChange.Size = new System.Drawing.Size(129, 35);
@@ -103,7 +89,7 @@
             this.lblCash.AutoSize = true;
             this.lblCash.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.lblCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblCash.Location = new System.Drawing.Point(211, 176);
+            this.lblCash.Location = new System.Drawing.Point(211, 165);
             this.lblCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCash.Name = "lblCash";
             this.lblCash.Size = new System.Drawing.Size(129, 35);
@@ -125,37 +111,49 @@
             // lblOnlinePay
             // 
             this.lblOnlinePay.AutoSize = true;
-            this.lblOnlinePay.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblOnlinePay.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblOnlinePay.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblOnlinePay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblOnlinePay.Location = new System.Drawing.Point(23, 368);
             this.lblOnlinePay.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOnlinePay.Name = "lblOnlinePay";
-            this.lblOnlinePay.Size = new System.Drawing.Size(88, 25);
+            this.lblOnlinePay.Size = new System.Drawing.Size(101, 30);
             this.lblOnlinePay.TabIndex = 9;
             this.lblOnlinePay.Text = "继续收银";
             // 
             // btnPayNext
             // 
             this.btnPayNext.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnPayNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPayNext.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.btnPayNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayNext.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnPayNext.ForeColor = System.Drawing.Color.White;
             this.btnPayNext.Location = new System.Drawing.Point(21, 408);
             this.btnPayNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnPayNext.Name = "btnPayNext";
-            this.btnPayNext.Size = new System.Drawing.Size(331, 70);
+            this.btnPayNext.Size = new System.Drawing.Size(331, 55);
             this.btnPayNext.TabIndex = 10;
             this.btnPayNext.TabStop = false;
-            this.btnPayNext.Text = "微信/支付宝支付";
+            this.btnPayNext.Text = "微信/支付宝/银联云闪付";
             this.btnPayNext.UseVisualStyleBackColor = false;
             this.btnPayNext.Click += new System.EventHandler(this.btnPayNext_Click);
+            // 
+            // lbtnCancle
+            // 
+            this.lbtnCancle.AutoSize = true;
+            this.lbtnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbtnCancle.Location = new System.Drawing.Point(261, 18);
+            this.lbtnCancle.Name = "lbtnCancle";
+            this.lbtnCancle.Size = new System.Drawing.Size(100, 24);
+            this.lbtnCancle.TabIndex = 34;
+            this.lbtnCancle.Text = "返回上层 >";
+            this.lbtnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // frmOnLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 520);
+            this.Controls.Add(this.lbtnCancle);
             this.Controls.Add(this.btnPayNext);
             this.Controls.Add(this.lblOnlinePay);
             this.Controls.Add(this.lblChange);
@@ -164,7 +162,6 @@
             this.Controls.Add(this.lblChangeStr);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblPriceStr);
-            this.Controls.Add(this.btnCancle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmOnLine";
@@ -179,7 +176,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Label lblPriceStr;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblChangeStr;
@@ -188,5 +184,6 @@
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label lblOnlinePay;
         private System.Windows.Forms.Button btnPayNext;
+        private System.Windows.Forms.Label lbtnCancle;
     }
 }

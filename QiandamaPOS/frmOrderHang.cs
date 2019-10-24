@@ -42,6 +42,7 @@ namespace QiandamaPOS
         //按比例缩放页面及控件
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
+
         public frmOrderHang()
         {
             InitializeComponent();
@@ -77,7 +78,7 @@ namespace QiandamaPOS
                                 }
                                 catch { }
                                 //TODO  会员手机号
-                                dgvOrderOnLine.Rows.Add(i.ToString(), "", cart.title, timestr,"继续收银","删除挂单");
+                                dgvOrderOnLine.Rows.Add((i+1).ToString(), "", cart.title, timestr,"继续收银","删除挂单");
 
                                // lstCart.Add(cart);
                             }
@@ -113,12 +114,14 @@ namespace QiandamaPOS
 
                 if (fList.Count > 0)
                 {
+                    this.Enabled = false;
                     frmDeleteGood frmdelete = new frmDeleteGood("是否确认清空所有挂单？", "", "");
                     if (frmdelete.ShowDialog() != DialogResult.OK)
                     {
+                        this.Enabled = true;
                         return;
                     }
-
+                    this.Enabled = true;
 
                     for (int i = 0; i < fList.Count; i++)
                     {
@@ -173,8 +176,7 @@ namespace QiandamaPOS
                                 if (input.Length > 0)
                                 {
                                     Cart cart = (Cart)formatter.Deserialize(input);
-                                    this.DataReceiveHandle.BeginInvoke(1, cart, null, null);
-                                   
+                                    this.DataReceiveHandle.BeginInvoke(1, cart, null, null);                                   
                                 }
                             }
 
@@ -183,13 +185,20 @@ namespace QiandamaPOS
                             this.Close();
 
                         }
-
                     }
                     else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "删除挂单")
                     {
 
-                        File.Delete(BasePath);
+                         this.Enabled = false;
+            frmDeleteGood frmdelete = new frmDeleteGood("确认删除该挂单？", "", "");
+            if (frmdelete.ShowDialog() != DialogResult.OK)
+            {
+                this.Enabled = true;
+                return;
+            }
+            this.Enabled = true;
 
+                        File.Delete(BasePath);
                         ShowLog("挂单删除成功",false);
                         LoadOrderHang();
                     }
@@ -214,7 +223,64 @@ namespace QiandamaPOS
 
         private void frmOrderHang_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+          //  asf.ControlAutoSize(this);
         }
+
+        private void frmOrderHang_EnabledChanged(object sender, EventArgs e)
+        {
+             try
+            {
+                if (this.Enabled)
+                {
+                    picScreen.Visible = false;
+
+                }
+                else
+                {
+                    picScreen.BackgroundImage = MainModel.GetWinformImage(this);
+                    picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
+                    //picScreen.Location = new System.Drawing.Point(0, 0);
+                    picScreen.Visible = true;
+                    // this.Opacity = 0.9d;
+                }
+            }
+            catch (Exception ex)
+            {
+                picScreen.Visible = false;
+                LogManager.WriteLog("修改主窗体背景图异常："+ex.Message);
+            }
+        }
+
+
+        
+        //private Image GetWinformImage()
+        //{
+        //    //获取当前屏幕的图像
+        //    Bitmap b = new Bitmap(this.Width, this.Height);
+        //    this.DrawToBitmap(b, new Rectangle(0, 0, this.Width, this.Height));
+        //    //b.Save(yourFileName);
+        //    return b;
+        //}
+
+
+        //private Image TransparentImage(Image srcImage, float opacity)
+        //{
+        //    float[][] nArray ={ new float[] {1, 0, 0, 0, 0},
+        //          new float[] {0, 1, 0, 0, 0},
+        //          new float[] {0, 0, 1, 0, 0},
+        //          new float[] {0, 0, 0, opacity, 0},
+        //          new float[] {0, 0, 0, 0, 1}};
+        //    ColorMatrix matrix = new ColorMatrix(nArray);
+        //    ImageAttributes attributes = new ImageAttributes();
+        //    attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+        //    Bitmap resultImage = new Bitmap(srcImage.Width, srcImage.Height);
+        //    Graphics g = Graphics.FromImage(resultImage);
+        //    g.DrawImage(srcImage, new Rectangle(0, 0, srcImage.Width, srcImage.Height), 0, 0, srcImage.Width, srcImage.Height, GraphicsUnit.Pixel, attributes);
+
+        //    return resultImage;
+        //}
+
+
+        
     }
 }

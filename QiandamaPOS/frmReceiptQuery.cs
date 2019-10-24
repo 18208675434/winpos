@@ -93,7 +93,7 @@ namespace QiandamaPOS
                     {
 
                         string ReceiptData = dtReceiptData.Value.ToString("yyy-MM-dd");
-                        string ReceiptTime = MainModel.GetDateTimeByStamp(receiptquery.starttime.ToString()).ToString("yyyy-MM-dd HH:mm:ss") + "至" + MainModel.GetDateTimeByStamp(receiptquery.endtime.ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                        string ReceiptTime = MainModel.GetDateTimeByStamp(receiptquery.starttime.ToString()).ToString("yyyy-MM-dd HH:mm:ss")+"\r\n" + "至" +"\r\n"+ MainModel.GetDateTimeByStamp(receiptquery.endtime.ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                         string Cashier = receiptquery.cashier;
                         string NetOperat=receiptquery.netsaleamt.ToString();
                         
@@ -116,6 +116,15 @@ namespace QiandamaPOS
 
                         dgvReceipt.Rows.Add(ReceiptData,ReceiptTime,Cashier,NetOperat,TotalPay,TotalCash,PrintStatus,PosType,"重打交班单");
                         //dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, "", "");
+                    }
+
+                    if (dgvReceipt.Rows.Count > 0)
+                    {
+                        pnlEmptyReceipt.Visible = false;
+                    }
+                    else
+                    {
+                        pnlEmptyReceipt.Visible = true;
                     }
                     ShowLog("刷新完成", false);
                 }
@@ -176,7 +185,12 @@ namespace QiandamaPOS
 
         public void frmReceiptQuery_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+            //asf.ControlAutoSize(this);
+        }
+
+        private void dtReceiptData_ValueChanged(object sender, EventArgs e)
+        {
+            QueryReceipt();
         }
     }
 }

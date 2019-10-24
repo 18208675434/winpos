@@ -31,11 +31,6 @@ namespace QiandamaPOS
 
         private void frmLogin_Shown(object sender, EventArgs e)
         {
-
-            string errormesg = "";
-
-            httputil.GetAuthcodeImage(ref errormesg);
-
            //判断日志文件夹是否存在，不存在则新建
            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Log");
@@ -52,7 +47,7 @@ namespace QiandamaPOS
                     txtPwd.Clear();
                     isReLogin = true;
                     int screenwdith = Screen.PrimaryScreen.Bounds.Width;
-                    this.Location = new System.Drawing.Point((screenwdith - this.Width) / 2, 10);
+                    //this.Location = new System.Drawing.Point((screenwdith - this.Width) / 2, 10);
 
                     lblUser_Click(null, null);
                     lblSN.Text = "设备序列号：" + GlobalUtil.GetPCSN();
@@ -117,9 +112,7 @@ namespace QiandamaPOS
         bool isReLogin = false;
         private void btnLoginByUser_Click(object sender, EventArgs e)
         {
-
           
-
             //TODO  调用接口 验证用户
             string username = txtUser.Text;
             string password = txtPwd.Text;
@@ -149,8 +142,7 @@ namespace QiandamaPOS
                 CloseOSK();
 
                 //asf.AutoScaleControl(frmmain);
-                frmmain.ShowDialog();
-               
+                frmmain.ShowDialog();              
             }
             else//重新登录账户
             {
@@ -191,9 +183,8 @@ namespace QiandamaPOS
                     frmmain.ShowDialog();
                 }
             }
-           
+            
         }
-
         
         #endregion
 
@@ -290,29 +281,29 @@ namespace QiandamaPOS
 
         private void OpenOSK()
         {
-            try
-            {
-                System.Diagnostics.Process.Start(@"C:\Windows\System32\osk.exe");
-            }catch(Exception ex){}
+            //try
+            //{
+            //    System.Diagnostics.Process.Start(@"C:\Windows\System32\osk.exe");
+            //}catch(Exception ex){}
         }
         private void CloseOSK()
         {
-            //程序关闭时，将labelprint.exe一起关闭
-            try
-            {
-                Process[] pro = Process.GetProcesses();
-                for (int i = 0; i < pro.Length - 1; i++)
-                {
-                    if (pro[i].ProcessName=="osk")
-                    {
-                        pro[i].Kill();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("小键盘关闭异常：" + ex.Message);
-            }
+            
+            //try
+            //{
+            //    Process[] pro = Process.GetProcesses();
+            //    for (int i = 0; i < pro.Length - 1; i++)
+            //    {
+            //        if (pro[i].ProcessName=="osk")
+            //        {
+            //            pro[i].Kill();
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogManager.WriteLog("小键盘关闭异常：" + ex.Message);
+            //}
         }
 
         private void txt_MouseCaptureChanged(object sender, EventArgs e)
@@ -457,6 +448,17 @@ namespace QiandamaPOS
             {
                 MessageBox.Show("Base64StringToImage 转换失败\nException：" + ex.Message);
             }
+        }
+
+        private void picExit_Click(object sender, EventArgs e)
+        {
+            frmDeleteGood frmdelete = new frmDeleteGood("是否确认退出系统？", "", "");
+            if (frmdelete.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            System.Environment.Exit(0);
         }
 
 

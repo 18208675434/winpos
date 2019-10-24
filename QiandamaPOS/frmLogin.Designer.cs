@@ -48,10 +48,12 @@
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblMsg = new System.Windows.Forms.Label();
+            this.picExit = new System.Windows.Forms.PictureBox();
             this.pnlUser.SuspendLayout();
             this.pnlPhone.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCheckCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExit)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUser
@@ -76,21 +78,21 @@
             // 
             // lblShopName
             // 
-            this.lblShopName.AutoSize = true;
-            this.lblShopName.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.lblShopName.Location = new System.Drawing.Point(308, 28);
+            this.lblShopName.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblShopName.Location = new System.Drawing.Point(312, 29);
             this.lblShopName.Name = "lblShopName";
-            this.lblShopName.Size = new System.Drawing.Size(123, 30);
+            this.lblShopName.Size = new System.Drawing.Size(150, 25);
             this.lblShopName.TabIndex = 2;
-            this.lblShopName.Text = "天河东路店";
+            this.lblShopName.Text = "登录";
+            this.lblShopName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblUser.Location = new System.Drawing.Point(186, 226);
+            this.lblUser.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblUser.Location = new System.Drawing.Point(203, 210);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(158, 31);
+            this.lblUser.Size = new System.Drawing.Size(145, 30);
             this.lblUser.TabIndex = 3;
             this.lblUser.Text = "账号密码登录";
             this.lblUser.Click += new System.EventHandler(this.lblUser_Click);
@@ -98,10 +100,10 @@
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblPhone.Location = new System.Drawing.Point(408, 226);
+            this.lblPhone.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblPhone.Location = new System.Drawing.Point(397, 210);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(182, 31);
+            this.lblPhone.Size = new System.Drawing.Size(167, 30);
             this.lblPhone.TabIndex = 4;
             this.lblPhone.Text = "手机验证码登录";
             this.lblPhone.Click += new System.EventHandler(this.lblPhone_Click);
@@ -114,6 +116,7 @@
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.Size = new System.Drawing.Size(380, 36);
             this.txtPwd.TabIndex = 5;
+            this.txtPwd.UseSystemPasswordChar = true;
             this.txtPwd.MouseCaptureChanged += new System.EventHandler(this.txt_MouseCaptureChanged);
             // 
             // pnlUser
@@ -122,7 +125,7 @@
             this.pnlUser.Controls.Add(this.txtPwd);
             this.pnlUser.Controls.Add(this.chkAutoLoginUser);
             this.pnlUser.Controls.Add(this.txtUser);
-            this.pnlUser.Location = new System.Drawing.Point(192, 292);
+            this.pnlUser.Location = new System.Drawing.Point(157, 279);
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(441, 247);
             this.pnlUser.TabIndex = 6;
@@ -131,7 +134,8 @@
             // 
             this.btnLoginByUser.BackColor = System.Drawing.Color.OrangeRed;
             this.btnLoginByUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLoginByUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLoginByUser.FlatAppearance.BorderSize = 0;
+            this.btnLoginByUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoginByUser.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold);
             this.btnLoginByUser.ForeColor = System.Drawing.Color.White;
             this.btnLoginByUser.Location = new System.Drawing.Point(26, 175);
@@ -162,7 +166,7 @@
             this.pnlPhone.Controls.Add(this.txtCheckCode);
             this.pnlPhone.Controls.Add(this.chkAutoLoginPhone);
             this.pnlPhone.Controls.Add(this.txtPhone);
-            this.pnlPhone.Location = new System.Drawing.Point(195, 288);
+            this.pnlPhone.Location = new System.Drawing.Point(157, 279);
             this.pnlPhone.Name = "pnlPhone";
             this.pnlPhone.Size = new System.Drawing.Size(441, 279);
             this.pnlPhone.TabIndex = 9;
@@ -170,6 +174,7 @@
             // lblSendCheckCode
             // 
             this.lblSendCheckCode.AutoSize = true;
+            this.lblSendCheckCode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSendCheckCode.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblSendCheckCode.ForeColor = System.Drawing.Color.OrangeRed;
             this.lblSendCheckCode.Location = new System.Drawing.Point(283, 131);
@@ -202,7 +207,8 @@
             // 
             this.btnLoginByPhone.BackColor = System.Drawing.Color.OrangeRed;
             this.btnLoginByPhone.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLoginByPhone.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLoginByPhone.FlatAppearance.BorderSize = 0;
+            this.btnLoginByPhone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoginByPhone.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold);
             this.btnLoginByPhone.ForeColor = System.Drawing.Color.White;
             this.btnLoginByPhone.Location = new System.Drawing.Point(27, 202);
@@ -248,7 +254,7 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(313, 76);
+            this.pictureBox1.Location = new System.Drawing.Point(312, 57);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(150, 150);
             this.pictureBox1.TabIndex = 10;
@@ -257,18 +263,32 @@
             // lblMsg
             // 
             this.lblMsg.AutoSize = true;
-            this.lblMsg.BackColor = System.Drawing.SystemColors.Control;
-            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMsg.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblMsg.ForeColor = System.Drawing.Color.DarkOrange;
-            this.lblMsg.Location = new System.Drawing.Point(205, 265);
+            this.lblMsg.Location = new System.Drawing.Point(170, 252);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(0, 17);
+            this.lblMsg.Size = new System.Drawing.Size(0, 20);
             this.lblMsg.TabIndex = 11;
+            // 
+            // picExit
+            // 
+            this.picExit.BackColor = System.Drawing.Color.Transparent;
+            this.picExit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picExit.BackgroundImage")));
+            this.picExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picExit.Location = new System.Drawing.Point(761, 15);
+            this.picExit.Name = "picExit";
+            this.picExit.Size = new System.Drawing.Size(30, 30);
+            this.picExit.TabIndex = 12;
+            this.picExit.TabStop = false;
+            this.picExit.Click += new System.EventHandler(this.picExit_Click);
             // 
             // frmLogin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(810, 583);
+            this.Controls.Add(this.picExit);
             this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pnlPhone);
@@ -277,7 +297,9 @@
             this.Controls.Add(this.lblUser);
             this.Controls.Add(this.lblShopName);
             this.Controls.Add(this.lblSN);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
@@ -290,6 +312,7 @@
             this.pnlPhone.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCheckCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,6 +339,7 @@
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblMsg;
+        private System.Windows.Forms.PictureBox picExit;
     }
 }
 

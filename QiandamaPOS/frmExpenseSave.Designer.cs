@@ -44,10 +44,10 @@
             this.txtNum = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
-            this.btnCancle = new System.Windows.Forms.Button();
             this.pnlExpenses = new System.Windows.Forms.Panel();
-            this.rdoFu = new System.Windows.Forms.RadioButton();
-            this.rdoZheng = new System.Windows.Forms.RadioButton();
+            this.lbtnCancle = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnMinus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDel
@@ -55,7 +55,7 @@
             this.btnDel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDel.BackgroundImage")));
             this.btnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDel.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btnDel.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btnDel.Location = new System.Drawing.Point(241, 414);
             this.btnDel.Margin = new System.Windows.Forms.Padding(2);
             this.btnDel.Name = "btnDel";
@@ -68,7 +68,7 @@
             // btnDot
             // 
             this.btnDot.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDot.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btnDot.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btnDot.Location = new System.Drawing.Point(131, 414);
             this.btnDot.Margin = new System.Windows.Forms.Padding(2);
             this.btnDot.Name = "btnDot";
@@ -82,7 +82,7 @@
             // btn0
             // 
             this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn0.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn0.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn0.Location = new System.Drawing.Point(21, 414);
             this.btn0.Margin = new System.Windows.Forms.Padding(2);
             this.btn0.Name = "btn0";
@@ -96,7 +96,7 @@
             // btn9
             // 
             this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn9.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn9.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn9.Location = new System.Drawing.Point(241, 354);
             this.btn9.Margin = new System.Windows.Forms.Padding(2);
             this.btn9.Name = "btn9";
@@ -110,7 +110,7 @@
             // btn8
             // 
             this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn8.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn8.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn8.Location = new System.Drawing.Point(131, 354);
             this.btn8.Margin = new System.Windows.Forms.Padding(2);
             this.btn8.Name = "btn8";
@@ -124,7 +124,7 @@
             // btn7
             // 
             this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn7.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn7.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn7.Location = new System.Drawing.Point(21, 354);
             this.btn7.Margin = new System.Windows.Forms.Padding(2);
             this.btn7.Name = "btn7";
@@ -138,7 +138,7 @@
             // btn6
             // 
             this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn6.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn6.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn6.Location = new System.Drawing.Point(241, 294);
             this.btn6.Margin = new System.Windows.Forms.Padding(2);
             this.btn6.Name = "btn6";
@@ -152,7 +152,7 @@
             // btn5
             // 
             this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn5.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn5.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn5.Location = new System.Drawing.Point(131, 294);
             this.btn5.Margin = new System.Windows.Forms.Padding(2);
             this.btn5.Name = "btn5";
@@ -166,7 +166,7 @@
             // btn4
             // 
             this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn4.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn4.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn4.Location = new System.Drawing.Point(21, 294);
             this.btn4.Margin = new System.Windows.Forms.Padding(2);
             this.btn4.Name = "btn4";
@@ -180,7 +180,7 @@
             // btn3
             // 
             this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn3.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn3.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn3.Location = new System.Drawing.Point(241, 234);
             this.btn3.Margin = new System.Windows.Forms.Padding(2);
             this.btn3.Name = "btn3";
@@ -194,7 +194,7 @@
             // btn2
             // 
             this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn2.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn2.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn2.Location = new System.Drawing.Point(131, 234);
             this.btn2.Margin = new System.Windows.Forms.Padding(2);
             this.btn2.Name = "btn2";
@@ -208,7 +208,7 @@
             // btn1
             // 
             this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn1.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.btn1.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn1.Location = new System.Drawing.Point(21, 234);
             this.btn1.Margin = new System.Windows.Forms.Padding(2);
             this.btn1.Name = "btn1";
@@ -222,18 +222,19 @@
             // txtNum
             // 
             this.txtNum.BackColor = System.Drawing.Color.White;
-            this.txtNum.Font = new System.Drawing.Font("微软雅黑", 22F);
-            this.txtNum.Location = new System.Drawing.Point(131, 180);
+            this.txtNum.Font = new System.Drawing.Font("微软雅黑", 26F);
+            this.txtNum.ForeColor = System.Drawing.Color.OrangeRed;
+            this.txtNum.Location = new System.Drawing.Point(131, 176);
             this.txtNum.Margin = new System.Windows.Forms.Padding(2);
             this.txtNum.Name = "txtNum";
-            this.txtNum.Size = new System.Drawing.Size(220, 46);
+            this.txtNum.Size = new System.Drawing.Size(220, 53);
             this.txtNum.TabIndex = 35;
             // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOK.BackColor = System.Drawing.Color.OrangeRed;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.btnOK.ForeColor = System.Drawing.Color.White;
             this.btnOK.Location = new System.Drawing.Point(21, 493);
@@ -249,27 +250,13 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.lblInfo.Location = new System.Drawing.Point(16, 183);
+            this.lblInfo.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblInfo.Location = new System.Drawing.Point(19, 188);
             this.lblInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(57, 30);
+            this.lblInfo.Size = new System.Drawing.Size(68, 31);
             this.lblInfo.TabIndex = 33;
-            this.lblInfo.Text = "金额";
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.btnCancle.Location = new System.Drawing.Point(262, 11);
-            this.btnCancle.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(89, 34);
-            this.btnCancle.TabIndex = 32;
-            this.btnCancle.TabStop = false;
-            this.btnCancle.Text = "返回》";
-            this.btnCancle.UseVisualStyleBackColor = true;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
+            this.lblInfo.Text = "金额:";
             // 
             // pnlExpenses
             // 
@@ -278,38 +265,52 @@
             this.pnlExpenses.Size = new System.Drawing.Size(330, 86);
             this.pnlExpenses.TabIndex = 48;
             // 
-            // rdoFu
+            // lbtnCancle
             // 
-            this.rdoFu.AutoSize = true;
-            this.rdoFu.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.rdoFu.Location = new System.Drawing.Point(76, 197);
-            this.rdoFu.Name = "rdoFu";
-            this.rdoFu.Size = new System.Drawing.Size(38, 29);
-            this.rdoFu.TabIndex = 50;
-            this.rdoFu.TabStop = true;
-            this.rdoFu.Text = "-";
-            this.rdoFu.UseVisualStyleBackColor = true;
+            this.lbtnCancle.AutoSize = true;
+            this.lbtnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbtnCancle.Location = new System.Drawing.Point(262, 9);
+            this.lbtnCancle.Name = "lbtnCancle";
+            this.lbtnCancle.Size = new System.Drawing.Size(100, 24);
+            this.lbtnCancle.TabIndex = 51;
+            this.lbtnCancle.Text = "返回上层 >";
+            this.lbtnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
-            // rdoZheng
+            // btnAdd
             // 
-            this.rdoZheng.AutoSize = true;
-            this.rdoZheng.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.rdoZheng.Location = new System.Drawing.Point(76, 172);
-            this.rdoZheng.Name = "rdoZheng";
-            this.rdoZheng.Size = new System.Drawing.Size(44, 29);
-            this.rdoZheng.TabIndex = 49;
-            this.rdoZheng.TabStop = true;
-            this.rdoZheng.Text = "+";
-            this.rdoZheng.UseVisualStyleBackColor = true;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAdd.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold);
+            this.btnAdd.Location = new System.Drawing.Point(86, 176);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(1);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(40, 22);
+            this.btnAdd.TabIndex = 52;
+            this.btnAdd.Text = "十";
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnMinus
+            // 
+            this.btnMinus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMinus.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold);
+            this.btnMinus.Location = new System.Drawing.Point(86, 207);
+            this.btnMinus.Name = "btnMinus";
+            this.btnMinus.Size = new System.Drawing.Size(40, 22);
+            this.btnMinus.TabIndex = 53;
+            this.btnMinus.Text = "一";
+            this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
             // frmExpenseSave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(374, 567);
-            this.Controls.Add(this.rdoFu);
-            this.Controls.Add(this.rdoZheng);
+            this.Controls.Add(this.btnMinus);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.lbtnCancle);
             this.Controls.Add(this.pnlExpenses);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnDot);
@@ -326,7 +327,6 @@
             this.Controls.Add(this.txtNum);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblInfo);
-            this.Controls.Add(this.btnCancle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmExpenseSave";
             this.ShowInTaskbar = false;
@@ -356,9 +356,9 @@
         private System.Windows.Forms.TextBox txtNum;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label lblInfo;
-        private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Panel pnlExpenses;
-        private System.Windows.Forms.RadioButton rdoFu;
-        private System.Windows.Forms.RadioButton rdoZheng;
+        private System.Windows.Forms.Label lbtnCancle;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnMinus;
     }
 }

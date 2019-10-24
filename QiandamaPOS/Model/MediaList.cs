@@ -9,6 +9,8 @@ namespace QiandamaPOS.Model
 
     public class MediaList
     {
+        //视频默认图片
+        public string defaultvideoimg { get; set; }
         public string[] img { get; set; }
         public object[] video { get; set; }
         public Mediadetaildto[] mediadetaildtos { get; set; }

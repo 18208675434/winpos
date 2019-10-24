@@ -28,15 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainMedia));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.tabControlMedia = new System.Windows.Forms.TabControl();
+            this.tabPageIni = new System.Windows.Forms.TabPage();
+            this.pnlPayInfo = new System.Windows.Forms.Panel();
+            this.lblPayInfo = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlMemberCard = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.picMemberCard = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnl4 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
@@ -62,21 +76,25 @@
             this.pnlMember = new System.Windows.Forms.Panel();
             this.lblWechartNickName = new System.Windows.Forms.Label();
             this.lblMobil = new System.Windows.Forms.Label();
-            this.tabControlMedia = new System.Windows.Forms.TabControl();
-            this.tabPageIni = new System.Windows.Forms.TabPage();
-            this.pnlPayInfo = new System.Windows.Forms.Panel();
-            this.lblPayInfo = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dgvGood = new System.Windows.Forms.DataGridView();
-            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlMemberCard = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.picMemberCard = new System.Windows.Forms.PictureBox();
             this.tabPageAdvert = new System.Windows.Forms.TabPage();
             this.player = new AxWMPLib.AxWindowsMediaPlayer();
+            this.dgvGood = new System.Windows.Forms.DataGridView();
+            this.picBirthday4 = new QiandamaPOS.UserControl.transparentPic(this.components);
+            this.picBirthday3 = new QiandamaPOS.UserControl.transparentPic(this.components);
+            this.picBirthday2 = new QiandamaPOS.UserControl.transparentPic(this.components);
+            this.picBirthday1 = new QiandamaPOS.UserControl.transparentPic(this.components);
+            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnJian = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAdd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControlMedia.SuspendLayout();
+            this.tabPageIni.SuspendLayout();
+            this.pnlPayInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlMemberCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnl4.SuspendLayout();
             this.pnl3.SuspendLayout();
@@ -86,16 +104,103 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             this.pnlMember.SuspendLayout();
-            this.tabControlMedia.SuspendLayout();
-            this.tabPageIni.SuspendLayout();
-            this.pnlPayInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
-            this.pnlMemberCard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).BeginInit();
             this.tabPageAdvert.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tabControlMedia
+            // 
+            this.tabControlMedia.Controls.Add(this.tabPageIni);
+            this.tabControlMedia.Controls.Add(this.tabPageAdvert);
+            this.tabControlMedia.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMedia.Name = "tabControlMedia";
+            this.tabControlMedia.SelectedIndex = 0;
+            this.tabControlMedia.Size = new System.Drawing.Size(1020, 760);
+            this.tabControlMedia.TabIndex = 18;
+            // 
+            // tabPageIni
+            // 
+            this.tabPageIni.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageIni.Controls.Add(this.dgvGood);
+            this.tabPageIni.Controls.Add(this.picBirthday4);
+            this.tabPageIni.Controls.Add(this.picBirthday3);
+            this.tabPageIni.Controls.Add(this.picBirthday2);
+            this.tabPageIni.Controls.Add(this.picBirthday1);
+            this.tabPageIni.Controls.Add(this.pnlPayInfo);
+            this.tabPageIni.Controls.Add(this.pnlMemberCard);
+            this.tabPageIni.Controls.Add(this.tableLayoutPanel1);
+            this.tabPageIni.Controls.Add(this.tableLayoutPanel2);
+            this.tabPageIni.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIni.Name = "tabPageIni";
+            this.tabPageIni.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageIni.Size = new System.Drawing.Size(1012, 734);
+            this.tabPageIni.TabIndex = 0;
+            this.tabPageIni.Text = "tabPage1";
+            // 
+            // pnlPayInfo
+            // 
+            this.pnlPayInfo.BackColor = System.Drawing.Color.White;
+            this.pnlPayInfo.Controls.Add(this.lblPayInfo);
+            this.pnlPayInfo.Controls.Add(this.pictureBox1);
+            this.pnlPayInfo.Location = new System.Drawing.Point(543, 298);
+            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlPayInfo.Name = "pnlPayInfo";
+            this.pnlPayInfo.Size = new System.Drawing.Size(702, 705);
+            this.pnlPayInfo.TabIndex = 20;
+            // 
+            // lblPayInfo
+            // 
+            this.lblPayInfo.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblPayInfo.ForeColor = System.Drawing.Color.Gray;
+            this.lblPayInfo.Location = new System.Drawing.Point(40, 512);
+            this.lblPayInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPayInfo.Name = "lblPayInfo";
+            this.lblPayInfo.Size = new System.Drawing.Size(534, 31);
+            this.lblPayInfo.TabIndex = 9;
+            this.lblPayInfo.Text = "请出示付款码";
+            this.lblPayInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(116, 92);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pnlMemberCard
+            // 
+            this.pnlMemberCard.Controls.Add(this.label1);
+            this.pnlMemberCard.Controls.Add(this.picMemberCard);
+            this.pnlMemberCard.Location = new System.Drawing.Point(726, 445);
+            this.pnlMemberCard.Name = "pnlMemberCard";
+            this.pnlMemberCard.Size = new System.Drawing.Size(269, 278);
+            this.pnlMemberCard.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(20, 234);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(227, 31);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "微信扫码打开电子会员卡";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picMemberCard
+            // 
+            this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picMemberCard.Location = new System.Drawing.Point(25, 3);
+            this.picMemberCard.Name = "picMemberCard";
+            this.picMemberCard.Size = new System.Drawing.Size(220, 220);
+            this.picMemberCard.TabIndex = 0;
+            this.picMemberCard.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -133,7 +238,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label12.Location = new System.Drawing.Point(16, 18);
+            this.label12.Location = new System.Drawing.Point(27, 18);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(107, 25);
@@ -155,7 +260,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label9.Location = new System.Drawing.Point(53, 18);
+            this.label9.Location = new System.Drawing.Point(67, 17);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(50, 25);
@@ -177,7 +282,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label7.Location = new System.Drawing.Point(19, 18);
+            this.label7.Location = new System.Drawing.Point(35, 18);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(107, 25);
@@ -199,7 +304,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(29, 18);
+            this.label6.Location = new System.Drawing.Point(12, 18);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 25);
@@ -212,7 +317,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.pnlMember, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(740, 20);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(751, 18);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -251,14 +356,14 @@
             this.dgvOrderDetail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrderDetail.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvOrderDetail.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvOrderDetail.ColumnHeadersHeight = 66;
             this.dgvOrderDetail.ColumnHeadersVisible = false;
             this.dgvOrderDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -278,11 +383,11 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 14F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn1.HeaderText = "商品/条码";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
@@ -291,10 +396,10 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 14F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewTextBoxColumn2.HeaderText = "单价(元)";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -304,7 +409,7 @@
             this.panel1.BackColor = System.Drawing.Color.Silver;
             this.panel1.Location = new System.Drawing.Point(8, 216);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(245, 2);
+            this.panel1.Size = new System.Drawing.Size(223, 1);
             this.panel1.TabIndex = 15;
             // 
             // label15
@@ -378,11 +483,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label3.Location = new System.Drawing.Point(10, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 27);
+            this.label3.Size = new System.Drawing.Size(88, 25);
             this.label3.TabIndex = 2;
             this.label3.Text = "费用明细";
             // 
@@ -400,201 +505,24 @@
             // lblWechartNickName
             // 
             this.lblWechartNickName.AutoSize = true;
-            this.lblWechartNickName.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblWechartNickName.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.lblWechartNickName.Location = new System.Drawing.Point(11, 60);
             this.lblWechartNickName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWechartNickName.Name = "lblWechartNickName";
-            this.lblWechartNickName.Size = new System.Drawing.Size(128, 24);
+            this.lblWechartNickName.Size = new System.Drawing.Size(116, 21);
             this.lblWechartNickName.TabIndex = 6;
             this.lblWechartNickName.Text = "某某某  你好！";
             // 
             // lblMobil
             // 
             this.lblMobil.AutoSize = true;
-            this.lblMobil.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblMobil.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.lblMobil.Location = new System.Drawing.Point(8, 21);
             this.lblMobil.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMobil.Name = "lblMobil";
-            this.lblMobil.Size = new System.Drawing.Size(119, 24);
+            this.lblMobil.Size = new System.Drawing.Size(101, 21);
             this.lblMobil.TabIndex = 5;
             this.lblMobil.Text = "152****6604";
-            // 
-            // tabControlMedia
-            // 
-            this.tabControlMedia.Controls.Add(this.tabPageIni);
-            this.tabControlMedia.Controls.Add(this.tabPageAdvert);
-            this.tabControlMedia.Location = new System.Drawing.Point(0, 0);
-            this.tabControlMedia.Name = "tabControlMedia";
-            this.tabControlMedia.SelectedIndex = 0;
-            this.tabControlMedia.Size = new System.Drawing.Size(1020, 760);
-            this.tabControlMedia.TabIndex = 18;
-            // 
-            // tabPageIni
-            // 
-            this.tabPageIni.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageIni.Controls.Add(this.pnlPayInfo);
-            this.tabPageIni.Controls.Add(this.dgvGood);
-            this.tabPageIni.Controls.Add(this.pnlMemberCard);
-            this.tabPageIni.Controls.Add(this.tableLayoutPanel1);
-            this.tabPageIni.Controls.Add(this.tableLayoutPanel2);
-            this.tabPageIni.Location = new System.Drawing.Point(4, 22);
-            this.tabPageIni.Name = "tabPageIni";
-            this.tabPageIni.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageIni.Size = new System.Drawing.Size(1012, 734);
-            this.tabPageIni.TabIndex = 0;
-            this.tabPageIni.Text = "tabPage1";
-            // 
-            // pnlPayInfo
-            // 
-            this.pnlPayInfo.BackColor = System.Drawing.Color.White;
-            this.pnlPayInfo.Controls.Add(this.lblPayInfo);
-            this.pnlPayInfo.Controls.Add(this.pictureBox1);
-            this.pnlPayInfo.Location = new System.Drawing.Point(9, 5);
-            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlPayInfo.Name = "pnlPayInfo";
-            this.pnlPayInfo.Size = new System.Drawing.Size(712, 711);
-            this.pnlPayInfo.TabIndex = 20;
-            // 
-            // lblPayInfo
-            // 
-            this.lblPayInfo.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblPayInfo.ForeColor = System.Drawing.Color.Gray;
-            this.lblPayInfo.Location = new System.Drawing.Point(40, 512);
-            this.lblPayInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPayInfo.Name = "lblPayInfo";
-            this.lblPayInfo.Size = new System.Drawing.Size(534, 31);
-            this.lblPayInfo.TabIndex = 9;
-            this.lblPayInfo.Text = "请出示付款码";
-            this.lblPayInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(116, 92);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 400);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            // 
-            // dgvGood
-            // 
-            this.dgvGood.AllowUserToAddRows = false;
-            this.dgvGood.AllowUserToDeleteRows = false;
-            this.dgvGood.AllowUserToResizeRows = false;
-            this.dgvGood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvGood.BackgroundColor = System.Drawing.Color.White;
-            this.dgvGood.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvGood.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvGood.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvGood.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvGood.ColumnHeadersHeight = 66;
-            this.dgvGood.ColumnHeadersVisible = false;
-            this.dgvGood.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.barcode,
-            this.price,
-            this.num,
-            this.total});
-            this.dgvGood.GridColor = System.Drawing.Color.Black;
-            this.dgvGood.Location = new System.Drawing.Point(5, 82);
-            this.dgvGood.Name = "dgvGood";
-            this.dgvGood.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvGood.RowHeadersVisible = false;
-            this.dgvGood.RowTemplate.Height = 90;
-            this.dgvGood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGood.Size = new System.Drawing.Size(715, 633);
-            this.dgvGood.TabIndex = 19;
-            // 
-            // barcode
-            // 
-            this.barcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 14F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.barcode.DefaultCellStyle = dataGridViewCellStyle5;
-            this.barcode.FillWeight = 157.4803F;
-            this.barcode.HeaderText = "商品/条码";
-            this.barcode.Name = "barcode";
-            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.barcode.Width = 230;
-            // 
-            // price
-            // 
-            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 16F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.price.DefaultCellStyle = dataGridViewCellStyle6;
-            this.price.FillWeight = 89.07754F;
-            this.price.HeaderText = "单价(元)";
-            this.price.Name = "price";
-            this.price.Width = 140;
-            // 
-            // num
-            // 
-            this.num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.num.DefaultCellStyle = dataGridViewCellStyle7;
-            this.num.FillWeight = 75.28699F;
-            this.num.HeaderText = "数量";
-            this.num.Name = "num";
-            this.num.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.num.Width = 180;
-            // 
-            // total
-            // 
-            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 16F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.OrangeRed;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.total.DefaultCellStyle = dataGridViewCellStyle8;
-            this.total.FillWeight = 89.07754F;
-            this.total.HeaderText = "应付(元)";
-            this.total.Name = "total";
-            this.total.Width = 140;
-            // 
-            // pnlMemberCard
-            // 
-            this.pnlMemberCard.Controls.Add(this.label1);
-            this.pnlMemberCard.Controls.Add(this.picMemberCard);
-            this.pnlMemberCard.Location = new System.Drawing.Point(726, 450);
-            this.pnlMemberCard.Name = "pnlMemberCard";
-            this.pnlMemberCard.Size = new System.Drawing.Size(269, 278);
-            this.pnlMemberCard.TabIndex = 18;
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(20, 234);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 31);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "微信扫码打开电子会员卡";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // picMemberCard
-            // 
-            this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picMemberCard.Location = new System.Drawing.Point(25, 3);
-            this.picMemberCard.Name = "picMemberCard";
-            this.picMemberCard.Size = new System.Drawing.Size(220, 220);
-            this.picMemberCard.TabIndex = 0;
-            this.picMemberCard.TabStop = false;
             // 
             // tabPageAdvert
             // 
@@ -609,14 +537,210 @@
             // 
             // player
             // 
-            this.player.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.player.Enabled = true;
-            this.player.Location = new System.Drawing.Point(220, 148);
+            this.player.Location = new System.Drawing.Point(5, 14);
             this.player.Margin = new System.Windows.Forms.Padding(2);
             this.player.Name = "player";
             this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
-            this.player.Size = new System.Drawing.Size(391, 291);
+            this.player.Size = new System.Drawing.Size(986, 701);
             this.player.TabIndex = 16;
+            this.player.StatusChange += new System.EventHandler(this.player_StatusChange);
+            // 
+            // dgvGood
+            // 
+            this.dgvGood.AllowUserToAddRows = false;
+            this.dgvGood.AllowUserToDeleteRows = false;
+            this.dgvGood.AllowUserToResizeColumns = false;
+            this.dgvGood.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightCyan;
+            this.dgvGood.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvGood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvGood.BackgroundColor = System.Drawing.Color.White;
+            this.dgvGood.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvGood.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvGood.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvGood.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvGood.ColumnHeadersHeight = 20;
+            this.dgvGood.ColumnHeadersVisible = false;
+            this.dgvGood.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.barcode,
+            this.price,
+            this.btnJian,
+            this.num,
+            this.btnAdd,
+            this.total});
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvGood.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvGood.GridColor = System.Drawing.Color.Black;
+            this.dgvGood.Location = new System.Drawing.Point(6, 81);
+            this.dgvGood.MultiSelect = false;
+            this.dgvGood.Name = "dgvGood";
+            this.dgvGood.ReadOnly = true;
+            this.dgvGood.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvGood.RowHeadersVisible = false;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvGood.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvGood.RowTemplate.Height = 90;
+            this.dgvGood.Size = new System.Drawing.Size(715, 649);
+            this.dgvGood.TabIndex = 205;
+            this.dgvGood.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvGood_CellPainting);
+            // 
+            // picBirthday4
+            // 
+            this.picBirthday4.CanMove = false;
+            this.picBirthday4.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday4.Image")));
+            this.picBirthday4.IsFocus = false;
+            this.picBirthday4.Location = new System.Drawing.Point(733, 428);
+            this.picBirthday4.Name = "picBirthday4";
+            this.picBirthday4.Size = new System.Drawing.Size(260, 280);
+            this.picBirthday4.TabIndex = 204;
+            this.picBirthday4.Text = "transparentPic2";
+            this.picBirthday4.unitScale = null;
+            this.picBirthday4.UnitType = QiandamaPOS.UserControl.EnumUnitType.Station;
+            this.picBirthday4.Visible = false;
+            // 
+            // picBirthday3
+            // 
+            this.picBirthday3.CanMove = false;
+            this.picBirthday3.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday3.Image")));
+            this.picBirthday3.IsFocus = false;
+            this.picBirthday3.Location = new System.Drawing.Point(4, 564);
+            this.picBirthday3.Name = "picBirthday3";
+            this.picBirthday3.Size = new System.Drawing.Size(87, 166);
+            this.picBirthday3.TabIndex = 201;
+            this.picBirthday3.Text = "transparentPic1";
+            this.picBirthday3.unitScale = null;
+            this.picBirthday3.UnitType = QiandamaPOS.UserControl.EnumUnitType.Station;
+            this.picBirthday3.Visible = false;
+            // 
+            // picBirthday2
+            // 
+            this.picBirthday2.CanMove = false;
+            this.picBirthday2.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday2.Image")));
+            this.picBirthday2.IsFocus = false;
+            this.picBirthday2.Location = new System.Drawing.Point(616, 6);
+            this.picBirthday2.Name = "picBirthday2";
+            this.picBirthday2.Size = new System.Drawing.Size(387, 72);
+            this.picBirthday2.TabIndex = 101;
+            this.picBirthday2.Text = "transparentPic1";
+            this.picBirthday2.unitScale = null;
+            this.picBirthday2.UnitType = QiandamaPOS.UserControl.EnumUnitType.Station;
+            this.picBirthday2.Visible = false;
+            // 
+            // picBirthday1
+            // 
+            this.picBirthday1.CanMove = false;
+            this.picBirthday1.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday1.Image")));
+            this.picBirthday1.IsFocus = false;
+            this.picBirthday1.Location = new System.Drawing.Point(9, 6);
+            this.picBirthday1.Name = "picBirthday1";
+            this.picBirthday1.Size = new System.Drawing.Size(513, 72);
+            this.picBirthday1.TabIndex = 25;
+            this.picBirthday1.Text = "transparentPic1";
+            this.picBirthday1.unitScale = null;
+            this.picBirthday1.UnitType = QiandamaPOS.UserControl.EnumUnitType.Station;
+            this.picBirthday1.Visible = false;
+            // 
+            // barcode
+            // 
+            this.barcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.DefaultCellStyle = dataGridViewCellStyle3;
+            this.barcode.FillWeight = 157.4803F;
+            this.barcode.HeaderText = "商品/条码";
+            this.barcode.Name = "barcode";
+            this.barcode.ReadOnly = true;
+            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.Width = 220;
+            // 
+            // price
+            // 
+            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.price.DefaultCellStyle = dataGridViewCellStyle4;
+            this.price.FillWeight = 89.07754F;
+            this.price.HeaderText = "单价(元)";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 155;
+            // 
+            // btnJian
+            // 
+            this.btnJian.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 22F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
+            this.btnJian.DefaultCellStyle = dataGridViewCellStyle5;
+            this.btnJian.HeaderText = "";
+            this.btnJian.Name = "btnJian";
+            this.btnJian.ReadOnly = true;
+            this.btnJian.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnJian.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.btnJian.Width = 40;
+            // 
+            // num
+            // 
+            this.num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.num.DefaultCellStyle = dataGridViewCellStyle6;
+            this.num.FillWeight = 75.28699F;
+            this.num.HeaderText = "数量";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.num.Width = 125;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 22F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Green;
+            this.btnAdd.DefaultCellStyle = dataGridViewCellStyle7;
+            this.btnAdd.HeaderText = "";
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.ReadOnly = true;
+            this.btnAdd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnAdd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.btnAdd.Width = 42;
+            // 
+            // total
+            // 
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.OrangeRed;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.total.DefaultCellStyle = dataGridViewCellStyle8;
+            this.total.FillWeight = 89.07754F;
+            this.total.HeaderText = "应付(元)";
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            this.total.Width = 130;
             // 
             // frmMainMedia
             // 
@@ -632,6 +756,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMainMedia";
             this.SizeChanged += new System.EventHandler(this.frmMainMedia_SizeChanged);
+            this.tabControlMedia.ResumeLayout(false);
+            this.tabPageIni.ResumeLayout(false);
+            this.pnlPayInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pnlMemberCard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnl4.ResumeLayout(false);
             this.pnl4.PerformLayout();
@@ -647,21 +777,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).EndInit();
             this.pnlMember.ResumeLayout(false);
             this.pnlMember.PerformLayout();
-            this.tabControlMedia.ResumeLayout(false);
-            this.tabPageIni.ResumeLayout(false);
-            this.pnlPayInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).EndInit();
-            this.pnlMemberCard.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).EndInit();
             this.tabPageAdvert.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.TabControl tabControlMedia;
+        private System.Windows.Forms.TabPage tabPageAdvert;
+        private AxWMPLib.AxWindowsMediaPlayer player;
+        private System.Windows.Forms.TabPage tabPageIni;
+        private UserControl.transparentPic picBirthday1;
+        private System.Windows.Forms.Panel pnlPayInfo;
+        private System.Windows.Forms.Label lblPayInfo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel pnlMemberCard;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox picMemberCard;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnl4;
         private System.Windows.Forms.Label label12;
@@ -675,9 +810,9 @@
         private System.Windows.Forms.Panel pnlMember;
         private System.Windows.Forms.Label lblWechartNickName;
         private System.Windows.Forms.Label lblMobil;
-        private System.Windows.Forms.TabControl tabControlMedia;
-        private System.Windows.Forms.TabPage tabPageIni;
-        private System.Windows.Forms.TabPage tabPageAdvert;
+        private UserControl.transparentPic picBirthday4;
+        private UserControl.transparentPic picBirthday3;
+        private UserControl.transparentPic picBirthday2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvOrderDetail;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -690,17 +825,12 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblGoodsCount;
         private System.Windows.Forms.Label label3;
-        private AxWMPLib.AxWindowsMediaPlayer player;
-        private System.Windows.Forms.Panel pnlMemberCard;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox picMemberCard;
         private System.Windows.Forms.DataGridView dgvGood;
-        private System.Windows.Forms.Panel pnlPayInfo;
-        private System.Windows.Forms.Label lblPayInfo;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn btnJian;
         private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn btnAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
     }
 }

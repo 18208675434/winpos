@@ -359,8 +359,45 @@ namespace QiandamaPOS
         private void button11_Click(object sender, EventArgs e)
         {
 
+            player.Visible = false;
+            player.Visible = true;
+
+            //WMPLib.IWMPMedia mediaInfo = player.newMedia(txtPlayerURL.Text);
+
+
+            //MessageBox.Show(mediaInfo.duration.ToString());
+
             this.player.URL = txtPlayerURL.Text;
+            //player.fullScreen = true;
+            player.uiMode = "full";
             this.player.Ctlcontrols.play();
+
+           
+            
+            while (!player.status.Contains("停止"))
+            {
+                
+                Delay.Start(100);
+            }
+            player.close();
+          //  MessageBox.Show("播放完成");
+          
+
+        }
+
+        private void player_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+        {
+           // player.statu
+        }
+
+        private void player_StatusChange(object sender, EventArgs e)
+        {
+
+            if (player.status.Contains("正在播放"))
+            {
+                player.fullScreen = true;
+            }
+            txtMsg.Text += DateTime.Now.ToString("ssfff") + player.status + "\r\n";
         }
 
     }

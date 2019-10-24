@@ -46,7 +46,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 24F);
-            this.label1.Location = new System.Drawing.Point(427, 102);
+            this.label1.Location = new System.Drawing.Point(404, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 41);
             this.label1.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(324, 90);
+            this.pictureBox1.Location = new System.Drawing.Point(301, 89);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 80);
             this.pictureBox1.TabIndex = 1;
@@ -85,7 +85,7 @@
             // 
             this.lblMsg.AutoSize = true;
             this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblMsg.Location = new System.Drawing.Point(244, 407);
+            this.lblMsg.Location = new System.Drawing.Point(266, 407);
             this.lblMsg.Name = "lblMsg";
             this.lblMsg.Size = new System.Drawing.Size(316, 25);
             this.lblMsg.TabIndex = 4;
@@ -105,12 +105,12 @@
             // btnOK
             // 
             this.btnOK.BackColor = System.Drawing.Color.OrangeRed;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnOK.ForeColor = System.Drawing.Color.White;
             this.btnOK.Location = new System.Drawing.Point(312, 503);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(235, 69);
+            this.btnOK.Size = new System.Drawing.Size(235, 58);
             this.btnOK.TabIndex = 6;
             this.btnOK.TabStop = false;
             this.btnOK.Text = "继续收银";
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(916, 609);
             this.Controls.Add(this.lblSecond);
             this.Controls.Add(this.btnOK);

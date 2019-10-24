@@ -1,6 +1,8 @@
 ﻿using QiandamaPOS.Common;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -78,6 +80,16 @@ namespace QiandamaPOS.Model
         /// 当前店铺信息
         /// </summary>
         public static DeviceShopInfo CurrentShopInfo;
+
+
+        /// <summary>
+        /// 页面宽度缩放比例
+        /// </summary>
+        public static  float wScale = 1;
+        /// <summary>
+        /// 页面高度缩放比例
+        /// </summary>
+        public static  float hScale = 1;
 
 
         public static string OrderPath
@@ -187,5 +199,59 @@ namespace QiandamaPOS.Model
         }
 
 
+
+        public static  Image GetWinformImage(Form frm)
+        {
+            //获取当前屏幕的图像
+            Bitmap b = new Bitmap(frm.Width, frm.Height);
+            frm.DrawToBitmap(b, new Rectangle(0, 0, frm.Width, frm.Height));
+           
+
+           
+            //b.Save(yourFileName);
+            float opacity =(float) -0.6;
+            
+            //float[][] nArray ={ new float[] {1, 0, 0, 0, 0},
+            //      new float[] {0,1, 0, 0, 0},
+            //      new float[] {0, 0, 1, 0, 0},
+            //      new float[] {0, 0, 0, opacity, 0},
+            //      new float[] {0, 0, 0, 0, 1}};
+
+            float[][] nArray = {new float[] {1,0,0,0,0},
+                                                 new float[] {0,1,0,0,0},
+                                                 new float[] {0,0,1,0,0},
+                                                 new float[] {0,0,0,1,0},
+                                                 new float[] {opacity,opacity,opacity,0,1}};
+
+
+            ColorMatrix matrix = new ColorMatrix(nArray);
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            Bitmap resultImage = new Bitmap(b.Width, b.Height);
+            Graphics g = Graphics.FromImage(resultImage);
+            g.DrawImage(b, new Rectangle(0, 0, b.Width, b.Height), 0, 0, b.Width, b.Height, GraphicsUnit.Pixel, attributes);
+
+            return resultImage;
+
+            //return b;
+        }
+
+
+        public static Image TransparentImage(Image srcImage, float opacity)
+        {
+            float[][] nArray ={ new float[] {1, 0, 0, 0, 0},
+                  new float[] {0, 1, 0, 0, 0},
+                  new float[] {0, 0, 1, 0, 0},
+                  new float[] {0, 0, 0, opacity, 0},
+                  new float[] {0, 0, 0, 0, 1}};
+            ColorMatrix matrix = new ColorMatrix(nArray);
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            Bitmap resultImage = new Bitmap(srcImage.Width, srcImage.Height);
+            Graphics g = Graphics.FromImage(resultImage);
+            g.DrawImage(srcImage, new Rectangle(0, 0, srcImage.Width, srcImage.Height), 0, 0, srcImage.Width, srcImage.Height, GraphicsUnit.Pixel, attributes);
+
+            return resultImage;
+        }
     }
 }

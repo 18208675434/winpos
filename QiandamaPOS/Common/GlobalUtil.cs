@@ -64,7 +64,54 @@ namespace QiandamaPOS.Common
         //        // 无法处理
         //    }
         }
+
+
+
+        /// <summary>
+
+        /// 获取第一分区硬盘编号
+
+        /// </summary>
+
+        /// <returns>返回一个字符串类型</returns>
+
+        public static string GetHardDiskID()
+        {
+
+            try
+            {
+
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
+
+                string strHardDiskID = null;
+
+                foreach (ManagementObject mo in searcher.Get())
+                {
+
+                    strHardDiskID = mo["SerialNumber"].ToString().Trim();
+
+                    break;
+
+                }
+
+                return strHardDiskID;
+
+            }
+
+            catch
+            {
+
+                return "";
+
+            }
+
+        }
+
     }
+
+
+
+
 
     public static class Shuiyin
     {

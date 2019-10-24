@@ -51,11 +51,17 @@ namespace QiandamaPOS
             if (isweight)
             {
                 lblg.Visible = true;
+                txtNum.MaxLength = 6;
             }
             else
             {
                 lblg.Visible = false;
+
+                txtNum.SetWatermark(title);
+
+                btnCancle.Focus();
             }
+            Application.DoEvents();
         }
 
         private void frmCash_Shown(object sender, EventArgs e)
@@ -70,6 +76,7 @@ namespace QiandamaPOS
             NumberUtil.IsUpdate = false;
             NumberUtil.FormGuid = "";
 
+            btnDel.Focus();
             //this.Size = new System.Drawing.Size(Screen.AllScreens[0].Bounds.Width / 3, Screen.AllScreens[0].Bounds.Height - 200);
             //this.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - this.Width - 50, 100);
           
@@ -80,7 +87,7 @@ namespace QiandamaPOS
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            Button btn =(Button)sender;
+            Control btn =(Control)sender;
             UpdatNumberUtil(btn.Name);
             if (DataReceiveHandle != null)
                 this.DataReceiveHandle.BeginInvoke(0, txtNum.Text, null, null);

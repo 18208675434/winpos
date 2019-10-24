@@ -66,6 +66,11 @@ namespace QiandamaPOS.Model
         /// 选中的优惠券号，字符数组，目前仅支持一次选中一张优惠券
         /// </summary>
          public string[] selectedcoupons { set; get; }
+
+        /// <summary>
+        /// 是否为winpos请求，1为是  0或空为否
+        /// </summary>
+         public int fromwinpos { set; get; }
         
     }
 }

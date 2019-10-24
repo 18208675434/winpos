@@ -110,7 +110,7 @@
             // btnCancle
             // 
             this.btnCancle.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancle.ForeColor = System.Drawing.Color.White;
             this.btnCancle.Location = new System.Drawing.Point(87, 341);
@@ -124,7 +124,7 @@
             // btnOK
             // 
             this.btnOK.BackColor = System.Drawing.Color.Tomato;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOK.ForeColor = System.Drawing.Color.White;
             this.btnOK.Location = new System.Drawing.Point(305, 341);
@@ -151,7 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(599, 425);
             this.Controls.Add(this.lblExit);
             this.Controls.Add(this.btnOK);

@@ -129,7 +129,7 @@ namespace QiandamaPOS.Common
         }
 
 
-        public scancodememberModel GetSkuInfoMember(string scancode, ref string errormsg)
+        public scancodememberModel GetSkuInfoMember(string scancode, ref string errormsg,ref int resultcode)
         {
             try
             {
@@ -145,7 +145,7 @@ namespace QiandamaPOS.Common
                 string json = HttpGET(url, sort);
                 //Console.Write("getskuInfobyshortcode:"+ json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
+                resultcode=rd.code;
                 if (rd.code == 0)
                 {
                     scancodememberModel scancodember =new scancodememberModel();
@@ -170,7 +170,7 @@ namespace QiandamaPOS.Common
         }
 
 
-        public scancodememberModel GetSkuInfoByShortCode(string scancode, ref string errormsg)
+        public scancodememberModel GetSkuInfoByShortCode(string scancode, ref string errormsg,ref int resultcode)
         {
             try
             {
@@ -181,13 +181,11 @@ namespace QiandamaPOS.Common
                     sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
                     sort.Add("shortcode", scancode.PadLeft(5, '0'));
 
-                    DateTime starttime = DateTime.Now;
                 string json = HttpGET(url, sort);
                 //Console.Write("getskuInfobyshortcode:"+ json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                Console.WriteLine("访问短码接口时间"+(DateTime.Now-starttime).ToString("ssfff"));
-
+                resultcode = rd.code;
                 if (rd.code == 0)
                 {
                     scancodememberModel scancodember = new scancodememberModel();
@@ -286,11 +284,9 @@ namespace QiandamaPOS.Common
 
                 string tempjson = JsonConvert.SerializeObject(cart);
 
-                DateTime starttime = DateTime.Now;
                
                 string json = HttpPOST(url, tempjson);
 
-                Console.WriteLine("访问购物车接口时间"+(DateTime.Now-starttime).ToString("ssfff"));
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 //Console.Write(json);
                 // return;
@@ -380,7 +376,7 @@ namespace QiandamaPOS.Common
                 DateTime starttime = DateTime.Now;
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                Console.Write(json);
+                Console.WriteLine("购物车信息"+json);
                 //Console.WriteLine("访问购物车接口时间" + (DateTime.Now - starttime).ToString("ssfff"));
                 // return;
                 resultcode = rd.code;
@@ -404,7 +400,7 @@ namespace QiandamaPOS.Common
             }
         }
 
-        public CreateOrderResult CreateOrder(Cart cart,ref string errormsg)
+        public CreateOrderResult CreateOrder(Cart cart,ref string errormsg, ref int resultcode)
         {
             try
             {
@@ -425,6 +421,9 @@ namespace QiandamaPOS.Common
    
 
                 CreateOrderPara order = new CreateOrderPara();
+
+                //winpos收银 固定为1
+                order.fromwinpos = 1;
 
                 order.ordersubtype = "pos";
                 order.products = lstpro;
@@ -463,7 +462,7 @@ namespace QiandamaPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-
+                resultcode = rd.code;
                 // return;
                 if (rd.code == 0)
                 {
@@ -659,7 +658,7 @@ namespace QiandamaPOS.Common
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
-                Console.WriteLine(json);
+                //Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     BalanceTrade codetrade = JsonConvert.DeserializeObject<BalanceTrade>(rd.data.ToString());
@@ -776,7 +775,7 @@ namespace QiandamaPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                Console.WriteLine("订单查询："+json);
+               // Console.WriteLine("订单查询："+json);
 
                 // return;
                 if (rd.code == 0)
@@ -1130,7 +1129,7 @@ namespace QiandamaPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                Console.WriteLine(json);
+               // Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     return Convert.ToBoolean(rd.data);
@@ -1177,7 +1176,7 @@ namespace QiandamaPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                Console.WriteLine(json);
+                //Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     Expense[] expenses = JsonConvert.DeserializeObject<Expense[]>(rd.data.ToString());
@@ -1359,6 +1358,46 @@ namespace QiandamaPOS.Common
         }
 
 
+
+
+        /// <summary>
+        /// 升级winpos
+        /// </summary>
+        /// <returns></returns>
+        public string GetWinPos(ref string erromessage)
+        {
+            try
+            {
+                string url = "/appversion/winposdetail";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    return rd.data.ToString();
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取winpos异常：" + ex.Message);
+                erromessage = "获取winpos异常：" + ex.Message;
+                return null;
+            }
+        }
+
+
         #region  访问服务端
         public string HttpGET(string Url, SortedDictionary<string,string> sortpara)
         {
@@ -1466,7 +1505,7 @@ namespace QiandamaPOS.Common
             string postDataStr = "nonce=" + nonce + "&sign=" + MainModel.GetMD5(signstr);
 
             Url = MainModel.URL + Url+"?" + postDataStr;
-            Console.WriteLine(Url);
+           // Console.WriteLine(Url);
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);

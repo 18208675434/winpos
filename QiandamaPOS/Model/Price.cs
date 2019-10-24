@@ -16,7 +16,7 @@ namespace QiandamaPOS.Model
         /// <summary>
         /// 原价描述
         /// </summary>
-        public decimal originpricedesc { get; set; }
+        public string originpricedesc { get; set; }
         /// <summary>
         /// 原价小计
         /// </summary>
@@ -32,7 +32,7 @@ namespace QiandamaPOS.Model
         /// <summary>
         /// 售价描述
         /// </summary>
-        public decimal salepricedesc { get; set; }
+        public string salepricedesc { get; set; }
         /// <summary>
         /// 规格重量
         /// </summary>

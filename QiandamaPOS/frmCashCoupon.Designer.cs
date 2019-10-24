@@ -155,11 +155,11 @@
             // lblExit
             // 
             this.lblExit.AutoSize = true;
-            this.lblExit.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblExit.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblExit.ForeColor = System.Drawing.Color.Tomato;
-            this.lblExit.Location = new System.Drawing.Point(229, 9);
+            this.lblExit.Location = new System.Drawing.Point(247, 9);
             this.lblExit.Name = "lblExit";
-            this.lblExit.Size = new System.Drawing.Size(140, 25);
+            this.lblExit.Size = new System.Drawing.Size(131, 24);
             this.lblExit.TabIndex = 19;
             this.lblExit.Text = "返回收银方式>";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
@@ -175,20 +175,20 @@
             this.tabPay.Name = "tabPay";
             this.tabPay.Padding = new System.Drawing.Point(0, 0);
             this.tabPay.SelectedIndex = 0;
-            this.tabPay.Size = new System.Drawing.Size(352, 91);
+            this.tabPay.Size = new System.Drawing.Size(352, 80);
             this.tabPay.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabPay.TabIndex = 20;
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.tabPage1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.tabPage1.Controls.Add(this.btnPayByBalance);
             this.tabPage1.Controls.Add(this.btnPayByCash);
             this.tabPage1.Controls.Add(this.btnPayOnLine);
             this.tabPage1.Location = new System.Drawing.Point(4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(344, 82);
+            this.tabPage1.Size = new System.Drawing.Size(344, 71);
             this.tabPage1.TabIndex = 0;
             // 
             // btnPayByBalance
@@ -255,7 +255,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(344, 82);
+            this.tabPage2.Size = new System.Drawing.Size(344, 71);
             this.tabPage2.TabIndex = 1;
             // 
             // btnPayOK
@@ -280,7 +280,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(380, 450);
             this.Controls.Add(this.tabPay);
             this.Controls.Add(this.lblExit);

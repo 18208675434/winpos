@@ -22,6 +22,8 @@ namespace QiandamaPOS
         /// </summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
+        private string CurrentAddOrMinus = "+";
+
         public frmExpenseSave()
         {
             InitializeComponent();
@@ -85,16 +87,7 @@ namespace QiandamaPOS
                 string ErrorMsg = "";
                 bool result = false;
 
-                if (rdoFu.Checked)
-                {
-                    result = httputil.SaveExpense(CurrentExpenseid, Convert.ToDecimal("-"+txtNum.Text), MainModel.CurrentShopInfo.shopid, ref ErrorMsg);
-                }
-                else
-                {
-                    result = httputil.SaveExpense(CurrentExpenseid, Convert.ToDecimal(txtNum.Text), MainModel.CurrentShopInfo.shopid, ref ErrorMsg);
-                }
-                     
-
+                result = httputil.SaveExpense(CurrentExpenseid, Convert.ToDecimal(CurrentAddOrMinus+txtNum.Text), MainModel.CurrentShopInfo.shopid, ref ErrorMsg);
 
                 if (result)
                 {
@@ -153,10 +146,11 @@ namespace QiandamaPOS
 
             int count = pnlExpenses.Controls.Count;
             Button btntemp = new Button();
-            btntemp.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            //btntemp.Location = new System.Drawing.Point(23, 15);
-            btntemp.Name = "button1";
-            btntemp.Size = new System.Drawing.Size(148, 41);
+            btntemp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+
+            btntemp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //btntemp.Name = "button1";
+            btntemp.Size = new System.Drawing.Size((pnlExpenses.Width-20)/3, 41);
             btntemp.TabIndex = 0;
             btntemp.Text = datum.description;
             btntemp.UseVisualStyleBackColor = true;
@@ -171,11 +165,11 @@ namespace QiandamaPOS
 
             if (count > 0)
             {
-                inty = count / 2;
-                intx = count % 2;
+                inty = count / 3;
+                intx = count % 3;
             }
 
-            int left = intx * (pnlExpenses.Width / 2) + 5;
+            int left = intx * (pnlExpenses.Width / 3) + 5;
             int top = inty * (btntemp.Height + 5);
 
             pnlExpenses.Controls.Add(btntemp);
@@ -195,6 +189,13 @@ namespace QiandamaPOS
                Button btn = (Button) sender;
                CurrentExpenseid = btn.Tag.ToString();
 
+               foreach (Control con in pnlExpenses.Controls)
+               {
+                   con.BackColor = Color.White;
+               }
+
+               btn.BackColor = Color.SkyBlue;
+
             }
             catch (Exception ex)
             {
@@ -210,7 +211,7 @@ namespace QiandamaPOS
 
         private void frmExpenseSave_Shown(object sender, EventArgs e)
         {
-            rdoZheng.Checked = true;
+            btnAdd_Click(null, null);
             LoadExpenses();
         }
 
@@ -221,6 +222,20 @@ namespace QiandamaPOS
             {
                 txtNum.Text += ".";
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            CurrentAddOrMinus = "+";
+            btnAdd.ForeColor = Color.Blue;
+            btnMinus.ForeColor = Color.Black;
+        }
+
+        private void btnMinus_Click(object sender, EventArgs e)
+        {
+            CurrentAddOrMinus = "-";
+            btnAdd.ForeColor = Color.Black;
+            btnMinus.ForeColor = Color.Blue;
         }
 
     }

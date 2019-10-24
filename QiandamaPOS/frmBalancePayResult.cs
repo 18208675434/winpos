@@ -272,7 +272,7 @@ namespace QiandamaPOS
 
         public void frmOnLinePayResult_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+           // asf.ControlAutoSize(this);
         }
 
         private void frmOnLinePayResult_FormClosing(object sender, FormClosingEventArgs e)

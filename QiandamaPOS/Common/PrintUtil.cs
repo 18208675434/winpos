@@ -11,12 +11,11 @@ namespace QiandamaPOS.Common
     public class PrintUtil
     {
 
-
         public static bool SEDPrint(PrintDetail printdetail,ref string errormsg)
         {
             try
             {
-                string logofilepath = AppDomain.CurrentDomain.BaseDirectory + "\\Picture\\headlogo.bmp";
+                string logofilepath = AppDomain.CurrentDomain.BaseDirectory + "\\headlogo.bmp";
                 StringBuilder logobuilder = new StringBuilder(logofilepath);
                 if (PrintUtil.OpenDevice() == -1)
                 {
@@ -72,7 +71,7 @@ namespace QiandamaPOS.Common
                 //汉字占两位 TODO 判断前面汉字和英文数字
                 foreach (Orderpricedetail pricedetail in printdetail.orderpricedetails)
                 {
-                    sb.Append(pricedetail.title + pricedetail.amount.PadLeft(28 - pricedetail.title.Length * 2, ' ') + "\n");
+                    sb.Append(pricedetail.title + pricedetail.amount.PadLeft(28 - Encoding.Default.GetBytes(pricedetail.title).Length, ' ') + "\n");
 
                 }
                 sb.Append(DateTime.Now.ToString("-----------------------------" + "\n"));
@@ -96,7 +95,7 @@ namespace QiandamaPOS.Common
 
 
                 PrintUtil.SetAlign(1);
-                string qrcodepath = AppDomain.CurrentDomain.BaseDirectory + "\\Picture\\QrCode.bmp";
+                string qrcodepath = AppDomain.CurrentDomain.BaseDirectory + "\\QrCode.bmp";
                 StringBuilder sbqr = new StringBuilder(qrcodepath);
 
                 PrintUtil.PrintBitmap(sbqr, 3);
@@ -152,17 +151,21 @@ namespace QiandamaPOS.Common
 
                 foreach (OrderPriceDetail basicinfo in receipt.basicinfo)
                 {
-                    sb.Append(basicinfo.title + basicinfo.amount.PadLeft(26-basicinfo.title.Length,' ') + "\n");
-
-                    if (!string.IsNullOrWhiteSpace(basicinfo.subtitle))
+                    try
                     {
-                        sb.Append(basicinfo.subtitle.PadLeft(28 - basicinfo.subtitle.Length*2, ' ') + "\n");
+                        sb.Append(basicinfo.title + basicinfo.amount.PadLeft(28 - Encoding.Default.GetBytes(basicinfo.title).Length, ' ') + "\n");
+
+                        if (!string.IsNullOrWhiteSpace(basicinfo.subtitle))
+                        {
+                            sb.Append(basicinfo.subtitle.PadLeft(28 - Encoding.Default.GetBytes(basicinfo.subtitle).Length, ' ') + "\n");
+                        }
                     }
+                    catch (Exception ex) { }
                 }
 
                 sb.Append(DateTime.Now.ToString("-----------------------------" + "\n"));
 
-                sb.Append(receipt.totalamount.title + receipt.totalamount.amount.PadLeft(28 - receipt.totalamount.title.Length*2, ' ') + "\n");
+                sb.Append(receipt.totalamount.title + receipt.totalamount.amount.PadLeft(28 - Encoding.Default.GetBytes(receipt.totalamount.title).Length, ' ') + "\n");
                 
                 sb.Append(DateTime.Now.ToString("-----------------------------" + "\n"));
 
@@ -170,12 +173,19 @@ namespace QiandamaPOS.Common
 
                 foreach (OrderPriceDetail bottomdetail in receipt.bottomdetails)
                 {
-                    sb.Append(bottomdetail.title + bottomdetail.amount.PadLeft(28 - bottomdetail.title.Length*2, ' ') + "\n");
-
-                    if (!string.IsNullOrWhiteSpace(bottomdetail.subtitle))
+                    try
                     {
-                        sb.Append(bottomdetail.subtitle.PadLeft(30 - bottomdetail.subtitle.Length, ' ') + "\n");
+                        int spacenum = 28 - Encoding.Default.GetBytes(bottomdetail.title).Length - Encoding.Default.GetBytes(bottomdetail.amount).Length;
+                        sb.Append(bottomdetail.title + "".PadLeft(spacenum, ' ') + bottomdetail.amount + "\n");
+
+                        if (!string.IsNullOrWhiteSpace(bottomdetail.subtitle))
+                        {
+                            int spacenum2 = 28 - Encoding.Default.GetBytes(bottomdetail.subtitle).Length;
+
+                            sb.Append("".PadLeft(spacenum2, ' ') + bottomdetail.subtitle + "\n");
+                        }
                     }
+                    catch (Exception ex) { }
                 }
 
 
@@ -316,6 +326,9 @@ namespace QiandamaPOS.Common
         [DllImport("YkPosdll.dll")]
         static extern int YkSetBarCodeHeight(int n);
 
+        [DllImport("YkPosdll.dll")]
+        static extern int YkSetCashBoxDriveMode(int m, int t1, int t2);
+
 
 
         [DllImport("YkPosdll.dll")]
@@ -340,8 +353,20 @@ namespace QiandamaPOS.Common
         public static int OpenDevice()
         {
             int i;
-            i = YkOpenDevice(13, 0);
+
+            int printport = Convert.ToInt16(INIManager.GetIni("System", "PrintPort", MainModel.IniPath));
+            int printbaud = Convert.ToInt16(INIManager.GetIni("System", "PrintBaud", MainModel.IniPath));
+            i = YkOpenDevice( printport, printbaud);
             
+            return i;
+        }
+
+        public static int OpenCashBox()
+        {
+            int i;
+            OpenDevice();
+            i = SetCashBoxDriveMode();
+            CloseDevice();
             return i;
         }
         public static int CloseDevice()
@@ -453,6 +478,22 @@ namespace QiandamaPOS.Common
 
             int i;
             i = YkSetAlign(n);
+            return i;
+        }
+
+
+        /// <summary>
+        /// 设置钱箱驱动方式
+        /// </summary>
+        /// <param name="m">m=0 m=0  2脚  m=1  5脚</param>
+        /// <returns></returns>
+        public static int SetCashBoxDriveMode()
+        {
+            int i;
+            int m = 1;
+            int t1 = 150;
+            int t2 = 250;
+            i = YkSetCashBoxDriveMode(m,t1,t2);
             return i;
         }
     }

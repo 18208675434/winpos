@@ -174,8 +174,10 @@ namespace QiandamaPOS
                         }
                         else
                         {
-                            dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, "补打小票", "退款");
+                            dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, "重打小票", "退款");
                         }
+
+                        dgvOrderOnLine.ClearSelection();
                        
                     }
 
@@ -248,6 +250,17 @@ namespace QiandamaPOS
                     return;
                 if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "退款")
                 {
+
+                    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
+                    this.Enabled = false;
+                    frmDeleteGood frmdelete = new frmDeleteGood("是否确认退款？", "退款单号：" + selectorderid, "");
+                    if (frmdelete.ShowDialog() != DialogResult.OK)
+                    {
+                        this.Enabled = true;
+                        return;
+                    }
+                    this.Enabled = true;
+
                     string orderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
                     string ErrorMsg = "";
                     string result = httputil.Refund(orderid,ref ErrorMsg);
@@ -263,7 +276,7 @@ namespace QiandamaPOS
                     }
                     btnQuery_Click(null, null);
                 }
-                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "补打小票")
+                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "重打小票")
                 {
 
                     ReceiptUtil.EditReprintCount(1);
@@ -308,6 +321,31 @@ namespace QiandamaPOS
         public void frmOrderQuery_SizeChanged(object sender, EventArgs e)
         {
            // asf.ControlAutoSize(this);
+        }
+
+        private void frmOrderQuery_EnabledChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.Enabled)
+                {
+                    picScreen.Visible = false;
+
+                }
+                else
+                {
+                    picScreen.BackgroundImage = MainModel.GetWinformImage(this);
+                    picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
+                    //picScreen.Location = new System.Drawing.Point(0, 0);
+                    picScreen.Visible = true;
+                    // this.Opacity = 0.9d;
+                }
+            }
+            catch (Exception ex)
+            {
+                picScreen.Visible = false;
+                LogManager.WriteLog("修改主窗体背景图异常：" + ex.Message);
+            }
         }
 
         //private void SEDPrint(PrintDetail printdetail)

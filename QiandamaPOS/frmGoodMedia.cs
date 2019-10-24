@@ -14,7 +14,7 @@ namespace QiandamaPOS
 {
     public partial class frmGoodMedia : Form
     {
-
+        
         //<summary>
         //按比例缩放页面及控件
         //</summary>

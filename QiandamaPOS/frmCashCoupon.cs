@@ -215,11 +215,13 @@ namespace QiandamaPOS
                 {
                     frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderid);
 
-                    frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                    frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
-                    frmonlinepayresult.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width - 50, 100);
-
+                    //frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
+                    //frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
+                    frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
                     frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+
+                    //this.Hide();
+                   
                     frmonlinepayresult.ShowDialog();
                     frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
                     frmonlinepayresult = null;
@@ -246,26 +248,31 @@ namespace QiandamaPOS
 
         private void FormOnLinePayResult_DataReceiveHandle(int type, string orderid)
         {
-
-            if (type == 1) //交易完成
+            try
             {
-                this.Invoke(new InvokeHandler(delegate()
+                if (type == 1) //交易完成
                 {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
 
-                    frmCashierResult frmresult = new frmCashierResult(orderid);
-                    frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
-                    frmresult.ShowDialog();
+                        frmCashierResult frmresult = new frmCashierResult(orderid);
+                        frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
+                        frmresult.ShowDialog();
 
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }));
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }));
 
+                }
+                else
+                {
+                   // this.Close();
+                }
             }
-            else if (type == 2) //交易失败
+            catch (Exception ex)
             {
-
+                this.Close();
             }
-
         }
 
 
@@ -286,17 +293,19 @@ namespace QiandamaPOS
                 {
                     CurrentCart = cart;
                     string ErrorMsg = "";
-                    CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg);
-                    if (orderresult == null)
+                    //int ResultCode = 0;
+                    CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
+                    if (ResultCode != 0 || orderresult == null)
                     {
+                        CheckUserAndMember(ResultCode);
                         ShowLog("异常" + ErrorMsg, true);
                     }
                     else if (orderresult.continuepay == 1)
                     {
                         frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderresult.orderid);
-
-                        frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                        frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
+                        frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
+                       // frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
+                       // frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
                         //frmonlinepayresult.TopMost = true;
                         frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
                         frmonlinepayresult.ShowDialog();
@@ -326,9 +335,11 @@ namespace QiandamaPOS
                     {
                         CurrentCart = cart;
                         string ErrorMsg = "";
-                        CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg);
-                        if (orderresult == null)
+                        //int ResultCode = 0;
+                        CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
+                        if (ResultCode != 0 || orderresult == null)
                         {
+                            CheckUserAndMember(ResultCode);
                             ShowLog("异常" + ErrorMsg, true);
                         }
                         else if (orderresult.continuepay == 1)
@@ -336,10 +347,13 @@ namespace QiandamaPOS
                             frmBalancePayResult frmbalancepayresult = new frmBalancePayResult(orderresult.orderid);
 
                             frmbalancepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                            frmbalancepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height / 2);
+                            //frmbalancepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height / 2);
                             //frmonlinepayresult.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width - 50, 100);
                             //frmbalancepayresult.TopMost = true;
+                            frmbalancepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmbalancepayresult.Height) / 2);
                             frmbalancepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+
+                           // this.Hide();
                             frmbalancepayresult.ShowDialog();
                         }
                     }
@@ -358,9 +372,11 @@ namespace QiandamaPOS
         private void btnPayOK_Click(object sender, EventArgs e)
         {
             string ErrorMsg = "";
-            CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg);
-            if (orderresult == null)
+            int ResultCode = 0;
+            CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
+            if (ResultCode != 0 || orderresult == null)
             {
+                CheckUserAndMember(ResultCode);
                 ShowLog("异常" + ErrorMsg, true);
             }
             else if (orderresult.continuepay == 1)

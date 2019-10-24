@@ -114,6 +114,12 @@ namespace QiandamaPOS
 
             try
             {
+
+
+                PrintUtil.OpenCashBox();
+
+                ReceiptUtil.EditOpenMoneyPacketCount(1);
+
                 decimal cash = Convert.ToDecimal(txtCash.Text);
                 string ErrorMsgCart = "";
                 int ResultCode = 0;
@@ -137,9 +143,11 @@ namespace QiandamaPOS
                         if (cart.cashchangeamt == 0) //找零为0 创建订单反馈完成后结束
                         {
                             string ErrorMsg = "";
-                            CreateOrderResult orderresult = httputil.CreateOrder(cart, ref ErrorMsg);
-                            if (orderresult == null)
+                            //int ResultCode = 0;
+                            CreateOrderResult orderresult = httputil.CreateOrder(cart, ref ErrorMsg, ref ResultCode);
+                            if (ResultCode != 0 || orderresult == null)
                             {
+                                CheckUserAndMember(ResultCode);
                                 ShowLog("异常" + ErrorMsg, true);
                             }
                             else if (orderresult.continuepay == 1)
@@ -162,7 +170,6 @@ namespace QiandamaPOS
                             frmCashChange frmcashchange = new frmCashChange(cart);
 
                             frmcashchange.frmCashChange_SizeChanged(null, null);
-                           // frmcashchange.Size = new System.Drawing.Size(this.Width , this.Height);
                             asf.AutoScaleControlTest(frmcashchange, this.Width, this.Height,true);
                             frmcashchange.DataReceiveHandle += FormCashChange_DataReceiveHandle;
                             frmcashchange.ShowDialog();
@@ -173,9 +180,11 @@ namespace QiandamaPOS
                     {
 
                         string ErrorMsg = "";
-                        CreateOrderResult orderresult = httputil.CreateOrder(cart, ref ErrorMsg);
-                        if (orderresult == null)
+                       // int ResultCode = 0;
+                        CreateOrderResult orderresult = httputil.CreateOrder(cart, ref ErrorMsg, ref ResultCode);
+                        if (ResultCode != 0 || orderresult == null)
                         {
+                            CheckUserAndMember(ResultCode);
                             ShowLog("异常" + ErrorMsg, true);
                         }
                         else
@@ -187,7 +196,6 @@ namespace QiandamaPOS
                             frmonline.ShowDialog();
                             Application.DoEvents();
                         }
-
 
                     }
                 }
@@ -213,9 +221,11 @@ namespace QiandamaPOS
             if (type == 1)
             {
                 string ErrorMsg = "";
-                CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg);
-                if (orderresult == null)
+                int ResultCode = 0;
+                CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
+                if (ResultCode != 0 || orderresult == null)
                 {
+                    CheckUserAndMember(ResultCode);
                     ShowLog("异常" + ErrorMsg, true);
                 }
                 else if (orderresult.continuepay == 1)
@@ -246,9 +256,11 @@ namespace QiandamaPOS
             if (type == 1)
             {
                 string ErrorMsg = "";
-                CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg);
-                if (orderresult == null)
+                int ResultCode = 0;
+                CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
+                if (ResultCode != 0 || orderresult == null)
                 {
+                    CheckUserAndMember(ResultCode);
                     ShowLog("异常" + ErrorMsg, true);
                 }
                 else if (orderresult.continuepay == 1)
