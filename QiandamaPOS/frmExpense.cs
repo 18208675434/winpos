@@ -7,7 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
@@ -59,16 +59,18 @@ namespace QiandamaPOS
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
             frmExpenseSave frmexpensave = new frmExpenseSave();
             frmexpensave.Opacity = 0.95d;
             frmexpensave.frmExpenseSave_SizeChanged(null,null);
             frmexpensave.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height - 200);
             frmexpensave.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmexpensave.Width - 50, 100);
             frmexpensave.ShowDialog();
-
+            
+            this.Enabled = true;
             if (frmexpensave.DialogResult == DialogResult.OK)
             {
-               // todo
+                QueryExpense();
 
             }
         }
@@ -102,7 +104,8 @@ namespace QiandamaPOS
                         dgvExpense.Rows.Add(MainModel.GetDateTimeByStamp(exp.createdat.ToString()).ToString(),exp.expensename,exp.expensefee,exp.createby);
                     }
                 }
-
+                dgvExpense.ClearSelection();
+                
                 LoadingHelper.CloseForm();//关闭
             }
             catch (Exception ex)
@@ -121,6 +124,31 @@ namespace QiandamaPOS
         {
             btnToday_Click(null,null);
             //QueryExpense();
+        }
+
+        private void picScreen_EnabledChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.Enabled)
+                {
+                    picScreen.Visible = false;
+
+                }
+                else
+                {
+                    picScreen.BackgroundImage = MainModel.GetWinformImage(this);
+                    picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
+                    //picScreen.Location = new System.Drawing.Point(0, 0);
+                    picScreen.Visible = true;
+                    // this.Opacity = 0.9d;
+                }
+            }
+            catch (Exception ex)
+            {
+                picScreen.Visible = false;
+                LogManager.WriteLog("修改主窗体背景图异常：" + ex.Message);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
@@ -30,30 +30,44 @@ namespace QiandamaPOS
         }
 
 
-
         private void btn_Click(object sender, EventArgs e)
         {
-
-            Button button = (Button)sender;
-            string temptext = txtNum.Text + button.Name.Replace("btn", "");
-
-
-            //小数点后允许两位  现金抹零后不允许再输入零
-            if (txtNum.Text.Length > 3 && txtNum.Text.Substring(txtNum.Text.Length - 3, 1) == ".")
-            {
-                return;
-            }
-
             try
             {
-                Convert.ToDecimal(temptext);
-                txtNum.Text = temptext;
+
+                Button button = (Button)sender;
+                string temptext = txtNum.Text + button.Name.Replace("btn", "");
+
+
+                decimal CheckDecimal = Convert.ToDecimal(txtNum.Text + button.Name.Replace("btn", ""));
+
+                if (CheckDecimal > 100000)
+                {
+                    return;
+                }
+
+
+                //小数点后允许两位  现金抹零后不允许再输入零
+                if (txtNum.Text.Length > 3 && txtNum.Text.Substring(txtNum.Text.Length - 3, 1) == ".")
+                {
+                    return;
+                }
+
+                try
+                {
+                    Convert.ToDecimal(temptext);
+                    txtNum.Text = temptext;
+                }
+                catch
+                {
+
+                }
+                //txtNum.Text += button.Name.Replace("btn", "");
             }
-            catch
+            catch (Exception ex)
             {
 
             }
-            //txtNum.Text += button.Name.Replace("btn", "");
         }
 
 
@@ -75,11 +89,11 @@ namespace QiandamaPOS
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtNum.Text))
+                if (string.IsNullOrEmpty(txtNum.Text))
                 {
                     return;
                 }
-                if (string.IsNullOrWhiteSpace(CurrentExpenseid))
+                if (string.IsNullOrEmpty(CurrentExpenseid))
                 {
                     return;
                 }
@@ -113,7 +127,7 @@ namespace QiandamaPOS
             string ErrorMsg = "";
             List<ExpenseType> lstexpensetype = httputil.GetExpenses(ref ErrorMsg);
 
-            if (!string.IsNullOrWhiteSpace(ErrorMsg) || lstexpensetype == null)
+            if (!string.IsNullOrEmpty(ErrorMsg) || lstexpensetype == null)
             {
                 MainModel.ShowLog(ErrorMsg, false);
             }
@@ -128,17 +142,17 @@ namespace QiandamaPOS
                     }
                 }
             }
-            
 
-            //if (pnlCashCoupons.Controls.Count > 0)
-            //{
-            //    Button btn = (Button)pnlCashCoupons.Controls[0];
-            //    if (btn.Enabled == true)
-            //    {
-            //        btnCash_Click(btn, new EventArgs());
-            //    }
 
-            //}
+            if (pnlExpenses.Controls.Count > 0)
+            {
+                Button btn = (Button)pnlExpenses.Controls[0];
+                if (btn.Enabled == true)
+                {
+                    btnType_Click(btn, new EventArgs());
+                }
+
+            }
         }
 
         private void AddTypeButton(ExpenseType datum)
@@ -236,6 +250,18 @@ namespace QiandamaPOS
             CurrentAddOrMinus = "-";
             btnAdd.ForeColor = Color.Black;
             btnMinus.ForeColor = Color.Blue;
+        }
+
+        private void txtNum_TextChanged(object sender, EventArgs e)
+        {
+            if (txtNum.Text.Length > 0)
+            {
+                btnOK.Enabled = true;
+            }
+            else
+            {
+                btnOK.Enabled = false;
+            }
         }
 
     }

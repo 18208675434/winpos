@@ -5,7 +5,7 @@ using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS.Common

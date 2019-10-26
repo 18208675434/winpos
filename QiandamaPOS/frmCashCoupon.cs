@@ -7,7 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
@@ -34,7 +34,7 @@ namespace QiandamaPOS
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="type">0:支付完成   1：在线收银继续支付 3：取消  12004：会员登录失效   100031：店员登录失效</param>
+        /// <param name="type">0:支付完成   1：在线收银继续支付  2.余额收银 3：取消  12004：会员登录失效   100031：店员登录失效</param>
         /// <param name="orderid"></param>
         public delegate void DataRecHandleDelegate(int type, string orderid);
         /// <summary>
@@ -91,7 +91,7 @@ namespace QiandamaPOS
             string ErrorMsg = "";
             List<string> lstCashCoupons = httputil.GetAvailableCashCoupons(ref ErrorMsg);
 
-            if (!string.IsNullOrWhiteSpace(ErrorMsg))
+            if (!string.IsNullOrEmpty(ErrorMsg))
             {
                 ShowLog(ErrorMsg,false);
             }
@@ -114,12 +114,20 @@ namespace QiandamaPOS
 
         private void btnCash_Click(object sender, EventArgs e)
         {
+
+
             Button btn = (Button)sender;
             decimal casncoupon = Convert.ToDecimal(btn.Tag.ToString());
-                string ErrorMsgCart = "";
-
+              
             CurrentCart.cashcouponamt = casncoupon;
             RefreshCart();
+
+            foreach (Control con in pnlCashCoupons.Controls)
+            {
+                con.BackColor = Color.White;
+            }
+
+            btn.BackColor = Color.SkyBlue;
         }
 
         bool isfirst = true;
@@ -134,6 +142,8 @@ namespace QiandamaPOS
             btntemp.TabIndex = 0;
             btntemp.Text = casnNum;
             btntemp.UseVisualStyleBackColor = true;
+            btntemp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btntemp.BackColor = Color.White;
             btntemp.Tag = casnNum;
 
             if (Convert.ToDecimal(casnNum) > CurrentCart.totalpayment)
@@ -213,19 +223,24 @@ namespace QiandamaPOS
             {
                 this.Invoke(new InvokeHandler(delegate()
                 {
-                    frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderid);
+                    //frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderid);
 
-                    //frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                    //frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
-                    frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
-                    frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+                    ////frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
+                    ////frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
+                    //frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
+                    //frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
 
-                    //this.Hide();
+                    ////this.Hide();
                    
-                    frmonlinepayresult.ShowDialog();
-                    frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
-                    frmonlinepayresult = null;
+                    //frmonlinepayresult.ShowDialog();
+                    //frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
+                    //frmonlinepayresult = null;
 
+                    if (DataReceiveHandle != null)
+                        this.DataReceiveHandle.BeginInvoke(1, orderid, null, null);
+
+
+                    this.Close();
                     // ClearForm();
                 }));
             }
@@ -302,15 +317,20 @@ namespace QiandamaPOS
                     }
                     else if (orderresult.continuepay == 1)
                     {
-                        frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderresult.orderid);
-                        frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
-                       // frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                       // frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
-                        //frmonlinepayresult.TopMost = true;
-                        frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
-                        frmonlinepayresult.ShowDialog();
-                        frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
-                        frmonlinepayresult = null;
+                        //frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderresult.orderid);
+                        //frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
+
+                        //frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+                        //frmonlinepayresult.ShowDialog();
+                        //frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
+                        //frmonlinepayresult = null;
+
+
+                        if (DataReceiveHandle != null)
+                            this.DataReceiveHandle.BeginInvoke(1, orderresult.orderid, null, null);
+
+
+                        this.Close();
                     }
                 }
             }
@@ -344,17 +364,26 @@ namespace QiandamaPOS
                         }
                         else if (orderresult.continuepay == 1)
                         {
-                            frmBalancePayResult frmbalancepayresult = new frmBalancePayResult(orderresult.orderid);
+                           // frmBalancePayResult frmbalancepayresult = new frmBalancePayResult(orderresult.orderid);
 
-                            frmbalancepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                            //frmbalancepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height / 2);
-                            //frmonlinepayresult.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width - 50, 100);
-                            //frmbalancepayresult.TopMost = true;
-                            frmbalancepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmbalancepayresult.Height) / 2);
-                            frmbalancepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+                           // frmbalancepayresult.frmOnLinePayResult_SizeChanged(null, null);
+                           // //frmbalancepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height / 2);
+                           // //frmonlinepayresult.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width - 50, 100);
+                           // //frmbalancepayresult.TopMost = true;
+                           // frmbalancepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmbalancepayresult.Height) / 2);
+                           // frmbalancepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
 
-                           // this.Hide();
-                            frmbalancepayresult.ShowDialog();
+                           //// this.Hide();
+                           // frmbalancepayresult.ShowDialog();
+
+
+
+                            if (DataReceiveHandle != null)
+                                this.DataReceiveHandle.BeginInvoke(2, orderresult.orderid, null, null);
+
+
+                            this.Close();
+
                         }
                     }
                 }

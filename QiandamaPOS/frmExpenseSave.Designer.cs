@@ -229,11 +229,13 @@
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(220, 53);
             this.txtNum.TabIndex = 35;
+            this.txtNum.TextChanged += new System.EventHandler(this.txtNum_TextChanged);
             // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOK.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnOK.Enabled = false;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.btnOK.ForeColor = System.Drawing.Color.White;
@@ -262,7 +264,7 @@
             // 
             this.pnlExpenses.Location = new System.Drawing.Point(21, 59);
             this.pnlExpenses.Name = "pnlExpenses";
-            this.pnlExpenses.Size = new System.Drawing.Size(330, 86);
+            this.pnlExpenses.Size = new System.Drawing.Size(330, 102);
             this.pnlExpenses.TabIndex = 48;
             // 
             // lbtnCancle

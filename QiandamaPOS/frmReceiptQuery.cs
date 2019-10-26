@@ -7,7 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
@@ -191,6 +191,11 @@ namespace QiandamaPOS
         private void dtReceiptData_ValueChanged(object sender, EventArgs e)
         {
             QueryReceipt();
+        }
+
+        private void frmReceiptQuery_Shown(object sender, EventArgs e)
+        {
+            btnToday_Click(null,null);
         }
     }
 }

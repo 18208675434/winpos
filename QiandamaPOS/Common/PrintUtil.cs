@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace QiandamaPOS.Common
 {
@@ -155,7 +155,7 @@ namespace QiandamaPOS.Common
                     {
                         sb.Append(basicinfo.title + basicinfo.amount.PadLeft(28 - Encoding.Default.GetBytes(basicinfo.title).Length, ' ') + "\n");
 
-                        if (!string.IsNullOrWhiteSpace(basicinfo.subtitle))
+                        if (!string.IsNullOrEmpty(basicinfo.subtitle))
                         {
                             sb.Append(basicinfo.subtitle.PadLeft(28 - Encoding.Default.GetBytes(basicinfo.subtitle).Length, ' ') + "\n");
                         }
@@ -178,7 +178,7 @@ namespace QiandamaPOS.Common
                         int spacenum = 28 - Encoding.Default.GetBytes(bottomdetail.title).Length - Encoding.Default.GetBytes(bottomdetail.amount).Length;
                         sb.Append(bottomdetail.title + "".PadLeft(spacenum, ' ') + bottomdetail.amount + "\n");
 
-                        if (!string.IsNullOrWhiteSpace(bottomdetail.subtitle))
+                        if (!string.IsNullOrEmpty(bottomdetail.subtitle))
                         {
                             int spacenum2 = 28 - Encoding.Default.GetBytes(bottomdetail.subtitle).Length;
 
@@ -246,7 +246,7 @@ namespace QiandamaPOS.Common
         //        {
         //            sb.Append(basicinfo.title + basicinfo.amount.PadLeft(26 - basicinfo.title.Length, ' ') + "\n");
 
-        //            if (!string.IsNullOrWhiteSpace(basicinfo.subtitle))
+        //            if (!string.IsNullOrEmpty(basicinfo.subtitle))
         //            {
         //                sb.Append(basicinfo.subtitle.PadLeft(26 - basicinfo.subtitle.Length, ' ') + "\n");
         //            }
@@ -264,7 +264,7 @@ namespace QiandamaPOS.Common
         //        {
         //            sb.Append(bottomdetail.title + bottomdetail.amount.PadLeft(26 - bottomdetail.title.Length, ' ') + "\n");
 
-        //            if (!string.IsNullOrWhiteSpace(bottomdetail.subtitle))
+        //            if (!string.IsNullOrEmpty(bottomdetail.subtitle))
         //            {
         //                sb.Append(bottomdetail.subtitle.PadLeft(26 - bottomdetail.subtitle.Length, ' ') + "\n");
         //            }

@@ -322,6 +322,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(380, 520);
             this.Controls.Add(this.lbtnCancle);
             this.Controls.Add(this.label4);
@@ -352,6 +353,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCashPay_FormClosing);
             this.Shown += new System.EventHandler(this.frmCash_Shown);
             this.SizeChanged += new System.EventHandler(this.frmCashPay_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCashPay_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

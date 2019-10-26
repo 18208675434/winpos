@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS.Model
@@ -40,11 +40,13 @@ namespace QiandamaPOS.Model
         /// <summary>
         /// 设备号
         /// </summary>
-        public static string DeviceSN = INIManager.GetIni("System", "DeviceSN", MainModel.IniPath);
+        public static string DeviceSN = "";
         /// <summary>
         /// 版本号
         /// </summary>
         public static string Version = INIManager.GetIni("System", "Version", MainModel.IniPath);
+
+        public static string TempFilePath = AppDomain.CurrentDomain.BaseDirectory + "TempFile" + "\\";
 
         ///// <summary>
         ///// 商店ID

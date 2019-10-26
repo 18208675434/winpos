@@ -7,7 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
@@ -40,8 +40,8 @@ namespace QiandamaPOS
             try
             {
                 lblTitle.Text = cart.availablecoupons.Length + "张优惠券可用";
-
-                if (!string.IsNullOrWhiteSpace(selectcoupon))
+                
+                if (!string.IsNullOrEmpty(selectcoupon))
                 {
                     btnCheckNone.Text = "";
                 }
@@ -98,7 +98,7 @@ namespace QiandamaPOS
                         }
                         else
                         {
-                            select = " ";
+                            select = "□";
                         }
                         dgvCoupon.Rows.Add(couponcode, "￥" + couponsBean.amount, content + "\r\n" + starttime + "至" + endtime, select);
                     }

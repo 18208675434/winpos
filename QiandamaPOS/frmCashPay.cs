@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using QiandamaPOS.Common;
 using QiandamaPOS.Model;
@@ -69,7 +69,8 @@ namespace QiandamaPOS
         {
             txtCash.SetWatermark("请输入实收现金");
             txtCash.Text = thisCurrentCart.payamtbeforecash.ToString();
-            btnNext.Focus();
+            //btnNext.Focus();
+            btnDel.Focus();
             lblPrice.Text = "￥" + thisCurrentCart.payamtbeforecash.ToString();
         }
 
@@ -488,6 +489,25 @@ namespace QiandamaPOS
         {
             //thisCurrentCart.cashpayamt = 0;
             //thisCurrentCart.cashpayoption = 0;
+        }
+
+        //屏蔽回车和空格键
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (keyData == Keys.Enter || keyData==Keys.Space)
+                return false;
+            else
+                return base.ProcessDialogKey(keyData);
+        }
+
+        private void frmCashPay_KeyDown(object sender, KeyEventArgs e)
+        {
+             //if (e.KeyCode == Keys.Enter)            
+             //{               
+             //    e.Handled = false;   
+             //    //将Handled设置为true，指示已经处理过KeyPress事件                        
+             //}
+
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace QiandamaPOS.Common
 {
@@ -273,7 +273,7 @@ namespace QiandamaPOS.Common
                     cart.uid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
                     cart.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
 
-                    if (!string.IsNullOrWhiteSpace(MainModel.CurrentCouponCode))
+                    if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
                     {
                         string[] strs = new string[1];
                         strs[0] = MainModel.CurrentCouponCode;
@@ -362,7 +362,7 @@ namespace QiandamaPOS.Common
                     cartpara.uid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
                     cartpara.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
 
-                    if (!string.IsNullOrWhiteSpace(MainModel.CurrentCouponCode))
+                    if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
                     {
                         string[] strs = new string[1];
                         strs[0] = MainModel.CurrentCouponCode;
@@ -446,7 +446,7 @@ namespace QiandamaPOS.Common
                       order.uid =MainModel.CurrentMember.memberheaderresponsevo.memberid;
                       order.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
 
-                      if (!string.IsNullOrWhiteSpace(MainModel.CurrentCouponCode))
+                      if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
                       {
                           string[] strs = new string[1];
                           strs[0] = MainModel.CurrentCouponCode;
@@ -1448,7 +1448,7 @@ namespace QiandamaPOS.Common
                     //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
                     request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
                     request.ProtocolVersion = HttpVersion.Version10;
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
                 }
                 else
                 {
@@ -1527,7 +1527,7 @@ namespace QiandamaPOS.Common
                     //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
                     request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
                     request.ProtocolVersion = HttpVersion.Version10;
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
                 }
                 else
                 {
@@ -1545,7 +1545,8 @@ namespace QiandamaPOS.Common
 
                 byte[] by = Encoding.GetEncoding("utf-8").GetBytes(bodyjson);   //请求参数转码
                 request.ContentType = "application/json;charset=UTF-8";
-                request.ContinueTimeout = 500000;
+                //request.ContinueTimeout = 500000;
+                request.Timeout = 1000 * 60;
                 request.ContentLength = by.Length;
 
                 Stream stw = request.GetRequestStream();     //获取绑定相应流

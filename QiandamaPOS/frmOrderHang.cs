@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
@@ -26,7 +26,7 @@ namespace QiandamaPOS
         /// </summary>
         /// <param name="type">未使用</param>
         /// <param name="cart">购物车对象</param>
-        public delegate void DataRecHandleDelegate(int type, Cart cart);
+        public delegate void DataRecHandleDelegate(int type, Cart cart,string phone);
         /// <summary>
         /// 数据接收事件
         /// </summary>
@@ -72,13 +72,28 @@ namespace QiandamaPOS
                             if (input.Length > 0)
                             {
                                 Cart cart = (Cart)formatter.Deserialize(input);
-                                string timestr = fList[i].Name.Replace(".order", "");
+
+                                string shortfilename = fList[i].Name.Replace(".order", "");
+                                string timestr = "";
+                                string phone = "";
+                                if (shortfilename.Contains("-"))
+                                {
+                                     timestr = shortfilename.Split('-')[0];
+                                     phone = shortfilename.Split('-')[1];
+                                }
+                                else
+                                {
+                                    timestr = shortfilename;
+                                }
+
+                                //string timestr = fList[i].Name.Replace(".order", "");
+
                                 try {
                                     timestr = timestr.Substring(0, 4) + "-" + timestr.Substring(4, 2) + "-" + timestr.Substring(6, 2) + " " + timestr.Substring(8, 2) + ":" + timestr.Substring(10, 2) + ":" + timestr.Substring(12, 2);
                                 }
                                 catch { }
                                 //TODO  会员手机号
-                                dgvOrderOnLine.Rows.Add((i+1).ToString(), "", cart.title, timestr,"继续收银","删除挂单");
+                                dgvOrderOnLine.Rows.Add((i+1).ToString(), phone, cart.title, timestr,"继续收银","删除挂单");
 
                                // lstCart.Add(cart);
                             }
@@ -161,7 +176,8 @@ namespace QiandamaPOS
                 if (e.RowIndex < 0)
                     return;
 
-                string filename = Convert.ToDateTime(dgvOrderOnLine.Rows[e.RowIndex].Cells["hangtime"].Value.ToString()).ToString("yyyyMMddHHmmss") + ".order";
+                string phone = dgvOrderOnLine.Rows[e.RowIndex].Cells["phone"].Value.ToString();
+                string filename = Convert.ToDateTime(dgvOrderOnLine.Rows[e.RowIndex].Cells["hangtime"].Value.ToString()).ToString("yyyyMMddHHmmss")+"-"+phone + ".order";
                 string BasePath = MainModel.OrderPath+"\\"+filename;
                 if (File.Exists(BasePath))
                 {
@@ -176,7 +192,9 @@ namespace QiandamaPOS
                                 if (input.Length > 0)
                                 {
                                     Cart cart = (Cart)formatter.Deserialize(input);
-                                    this.DataReceiveHandle.BeginInvoke(1, cart, null, null);                                   
+
+
+                                    this.DataReceiveHandle.BeginInvoke(1, cart,phone, null, null);                                   
                                 }
                             }
 

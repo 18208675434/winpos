@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
@@ -110,6 +110,7 @@ namespace QiandamaPOS
             }
             catch (Exception ex)
             {
+                player.Visible = false;
                // LogManager.WriteLog("ERROR", "初始化客屏信息异常：" + ex.Message);
             }
         }
@@ -122,6 +123,8 @@ namespace QiandamaPOS
         {
             try
             {
+                dgvGood.Visible = true;
+                tableLayoutPanel1.Visible = true;
 
                 pnlPayInfo.Visible = false;
                 tabControlMedia.SelectedIndex = 0;
@@ -208,7 +211,7 @@ namespace QiandamaPOS
                                     //price = "￥" + pro.price.saleprice.ToString() + "("+pro.price.salepricedesc+")" + "\r\n" + "￥" + pro.price.originprice + "("+pro.price.originpricedesc+")";
 
                                     price = pro.price.saleprice.ToString("f2");
-                                    if (!string.IsNullOrWhiteSpace(pro.price.salepricedesc))
+                                    if (!string.IsNullOrEmpty(pro.price.salepricedesc))
                                     {
                                         price += "(" + pro.price.salepricedesc + ")";
                                     }
@@ -222,7 +225,7 @@ namespace QiandamaPOS
                                         price += "\r\n" + pro.price.originprice.ToString("f2");
                                     }
 
-                                    if (!string.IsNullOrWhiteSpace(pro.price.originpricedesc))
+                                    if (!string.IsNullOrEmpty(pro.price.originpricedesc))
                                     {
                                         price += "(" + pro.price.originpricedesc + ")";
                                     }
@@ -250,12 +253,12 @@ namespace QiandamaPOS
 
                                     total = pro.price.total.ToString("f2");
 
-                                    if (!string.IsNullOrWhiteSpace(pro.price.salepricedesc))
+                                    if (!string.IsNullOrEmpty(pro.price.salepricedesc))
                                     {
                                         total += "(" + pro.price.salepricedesc + ")";
                                     }
                                     total += "\r\n" + pro.price.origintotal.ToString("f2");
-                                    if (!string.IsNullOrWhiteSpace(pro.price.originpricedesc))
+                                    if (!string.IsNullOrEmpty(pro.price.originpricedesc))
                                     {
                                         total += "(" + pro.price.originpricedesc + ")";
                                     }
@@ -289,6 +292,8 @@ namespace QiandamaPOS
                         {
                            // pnlBirthday.Visible = true;
                             picBirthday1.Visible = true;
+
+                            
                             picBirthday2.Visible = true;
                             picBirthday3.Visible = true;
                             picBirthday4.Visible = true;
@@ -300,11 +305,6 @@ namespace QiandamaPOS
                             picBirthday3.Visible = false;
                             picBirthday4.Visible = false;
                         }
-                        //picMemberCard.Visible = false;
-                        //picBirthday1.Visible = true;
-                        //picBirthday2.Visible = true;
-                        //picBirthday3.Visible = true;
-                        //picBirthday4.Visible = true;
                     }
                     else
                     {
@@ -314,7 +314,7 @@ namespace QiandamaPOS
                         
                         string ErrorMsg = "";
                         string imgurl = httputil.GetMemberCard(ref ErrorMsg);
-                        if (!string.IsNullOrWhiteSpace(httputil.GetMemberCard(ref ErrorMsg)) && ErrorMsg != null)
+                        if (!string.IsNullOrEmpty(httputil.GetMemberCard(ref ErrorMsg)) && ErrorMsg != null)
                         {
                             
                             Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
@@ -326,7 +326,6 @@ namespace QiandamaPOS
                             picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
                             pnlMemberCard.Visible = true;
                         }
-
 
 
                     }
@@ -390,6 +389,8 @@ namespace QiandamaPOS
 
 
                 // pnlMemberCard.Visible = true;
+                dgvGood.Visible = false;
+                tableLayoutPanel1.Visible = false;
 
                 pnlPayInfo.Visible = true;
                 lblPayInfo.Text = lblinfo;
@@ -422,250 +423,251 @@ namespace QiandamaPOS
         //重绘datagridview单元格
         private void dgvGood_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-
-            if (e.ColumnIndex == 0 && e.RowIndex >= 0 && e.Value != null)//要进行重绘的单元格
+            try
             {
-
-                Graphics gpcEventArgs = e.Graphics;
-                Color clrBack = e.CellStyle.BackColor;
-                //Font fntText = e.CellStyle.Font;//获取单元格字体
-                //先使用北京颜色重画一遍背景
-                gpcEventArgs.FillRectangle(new SolidBrush(clrBack), e.CellBounds);
-                //设置字体的颜色
-                Color oneFore = System.Drawing.Color.Black;
-                Color secFore = System.Drawing.Color.Red;
-                //string strFirstLine = "黑色内容";
-                //string strSecondLine = "红色内容";
-
-                if (!e.Value.ToString().Contains("\r\n"))
+                if (e.ColumnIndex == 0 && e.RowIndex >= 0 && e.Value != null)//要进行重绘的单元格
                 {
-                    return;
-                }
 
-                string tempstr = e.Value.ToString().Replace("\r\n", "*");
-                string strLine1 = "";
-                string strLine2 = "";
-                string strLine3 = "";
+                    Graphics gpcEventArgs = e.Graphics;
+                    Color clrBack = e.CellStyle.BackColor;
+                    //Font fntText = e.CellStyle.Font;//获取单元格字体
+                    //先使用北京颜色重画一遍背景
+                    gpcEventArgs.FillRectangle(new SolidBrush(clrBack), e.CellBounds);
+                    //设置字体的颜色
+                    Color oneFore = System.Drawing.Color.Black;
+                    Color secFore = System.Drawing.Color.Red;
+                    //string strFirstLine = "黑色内容";
+                    //string strSecondLine = "红色内容";
 
-                strLine1 = tempstr.Split('*')[0];
-                strLine2 = tempstr.Split('*')[1];
-                strLine3 = tempstr.Split('*')[2];
-                string[] sts = tempstr.Split('*');
-                //Size sizText = TextRenderer.MeasureText(e.Graphics, strFirstLine, fntText);
-                int intX = e.CellBounds.Left + e.CellStyle.Padding.Left;
-                int intY = e.CellBounds.Top + e.CellStyle.Padding.Top + 10;
-                int intWidth = e.CellBounds.Width - (e.CellStyle.Padding.Left + e.CellStyle.Padding.Right);
-                //int intHeight = sizText.Height + (e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
-
-
-                Font fnt1 = new System.Drawing.Font("微软雅黑", 10F * Math.Min( MainModel.hScale,  MainModel.wScale));
-                //Graphics g = this.CreateGraphics(); //this是指所有control派生出来的类，这里是个form
-
-                SizeF size1 = this.CreateGraphics().MeasureString(strLine1, fnt1);
-                Color titlebackcolor = Color.Black;
-                if (strLine1.Length > 0)
-                {
-                    string typecolor = strLine1.Substring(0, 1);
-                    strLine1 = strLine1.Substring(1, strLine1.Length - 1);
-                    switch (typecolor)
+                    if (!e.Value.ToString().Contains("\r\n"))
                     {
-                        case "1": titlebackcolor = ColorTranslator.FromHtml("#FF7D14"); break;
-                        case "2": titlebackcolor = ColorTranslator.FromHtml("#209FD4"); break;
-                        case "3": titlebackcolor = ColorTranslator.FromHtml("#D42031"); break;
-                        case "4": titlebackcolor = ColorTranslator.FromHtml("#FF000"); break;
-                    }
-                }
-                //第一行
-                TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + 10, intY, intWidth, (int)size1.Height),
-                    Color.White, titlebackcolor, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                //另起一行
-                Font fnt2 = new System.Drawing.Font("微软雅黑", 12F * Math.Min( MainModel.hScale,  MainModel.wScale));
-                SizeF size2 = this.CreateGraphics().MeasureString(strLine2, fnt2);
-
-                intY = intY + (int)size1.Height;
-                TextRenderer.DrawText(e.Graphics, strLine2, fnt2, new Rectangle(intX, intY, intWidth, (int)size2.Height),
-                    Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                //Font fnt20 = new System.Drawing.Font("微软雅黑", 9F, FontStyle.Strikeout);
-                //TextRenderer.DrawText(e.Graphics, strLine2, fnt20, new Rectangle(intX + (int)size2.Width, intY, intWidth, (int)size2.Height),
-                //    Color.Green, Color.Red, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-
-                Font fnt3 = new System.Drawing.Font("微软雅黑", 12F * Math.Min( MainModel.hScale,  MainModel.wScale));
-                intY = intY + (int)size2.Height;
-
-                TextRenderer.DrawText(e.Graphics, strLine3, fnt3, new Rectangle(intX, intY, intWidth, (int)size2.Height), Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-
-                //int y = intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom + dgvGood.RowTemplate.Height;
-                int y = (e.RowIndex + 1) * dgvGood.RowTemplate.Height + dgvGood.ColumnHeadersHeight - 1;
-
-                //Point point1 = new Point(0, y);
-                //Point point2 = new Point(e.CellBounds.Width, y);
-                //Pen blackPen = new Pen(Color.Black, 1);
-                //e.Graphics.DrawLine(blackPen, point1, point2);
-
-                //Point point21 = new Point(10, 0);
-                //Point point22 = new Point(10, intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
-                //Pen blackPen2 = new Pen(Color.Black, 10);
-                //e.Graphics.DrawLine(blackPen2, point21, point21);
-                // e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-                // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
-                e.Handled = true;
-
-                dgvGood.ClearSelection();
-            }
-
-            if ((e.ColumnIndex == 1 || e.ColumnIndex == 5) && e.RowIndex >= 0 && e.Value != null)//要进行重绘的单元格
-            {
-
-                Graphics gpcEventArgs = e.Graphics;
-                Color clrBack = e.CellStyle.BackColor;
-                //Font fntText = e.CellStyle.Font;//获取单元格字体
-                //先使用北京颜色重画一遍背景
-                gpcEventArgs.FillRectangle(new SolidBrush(clrBack), e.CellBounds);
-                //设置字体的颜色
-                Color oneFore = System.Drawing.Color.Black;
-                Color secFore = System.Drawing.Color.Red;
-                //string strFirstLine = "黑色内容";
-                //string strSecondLine = "红色内容";
-
-                if (!e.Value.ToString().Contains("\r\n"))
-                {
-                    return;
-                }
-
-                string tempstr = e.Value.ToString().Replace("\r\n", "*");
-                string strLine1 = "";
-                string strLine2 = "";
-
-
-                strLine1 = tempstr.Split('*')[0];
-                strLine2 = tempstr.Split('*')[1];
-
-                string[] sts = tempstr.Split('*');
-                //Size sizText = TextRenderer.MeasureText(e.Graphics, strFirstLine, fntText);
-                int intX = e.CellBounds.Left + e.CellStyle.Padding.Left;
-                int intY = e.CellBounds.Top + e.CellStyle.Padding.Top + 30;
-                int intWidth = e.CellBounds.Width - (e.CellStyle.Padding.Left + e.CellStyle.Padding.Right);
-                //int intHeight = sizText.Height + (e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
-
-
-                Font fnt1 = new System.Drawing.Font("微软雅黑", 12F * Math.Min( MainModel.hScale,  MainModel.wScale));
-                //Graphics g = this.CreateGraphics(); //this是指所有control派生出来的类，这里是个form
-                SizeF size1 = this.CreateGraphics().MeasureString(strLine1, fnt1);
-
-                if (strLine1.Contains("("))
-                {
-                    int index = strLine1.IndexOf("(");
-
-                    string tempstrline11 = strLine1.Substring(0, index);
-                    string tempstrline12 = strLine1.Substring(index);
-
-                    SizeF siztemp1 = this.CreateGraphics().MeasureString(tempstrline11, fnt1);
-                    SizeF sizetemp2 = this.CreateGraphics().MeasureString(tempstrline12, fnt1);
-
-                    int pianyiX = (int)(e.CellBounds.Width - siztemp1.Width - sizetemp2.Width) / 2;
-                    if (e.ColumnIndex == 5)
-                    {
-                        TextRenderer.DrawText(e.Graphics, tempstrline11, fnt1, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
-                            Color.OrangeRed, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                    }
-                    else
-                    {
-                        TextRenderer.DrawText(e.Graphics, tempstrline11, fnt1, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
-                            Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
+                        return;
                     }
 
-                    Font tempfont2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min( MainModel.hScale,  MainModel.wScale));
+                    string tempstr = e.Value.ToString().Replace("\r\n", "*");
+                    string strLine1 = "";
+                    string strLine2 = "";
+                    string strLine3 = "";
 
-                    TextRenderer.DrawText(e.Graphics, tempstrline12, tempfont2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY + 5, intWidth, (int)siztemp1.Height),
-                      Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+                    strLine1 = tempstr.Split('*')[0];
+                    strLine2 = tempstr.Split('*')[1];
+                    strLine3 = tempstr.Split('*')[2];
+                    string[] sts = tempstr.Split('*');
+                    //Size sizText = TextRenderer.MeasureText(e.Graphics, strFirstLine, fntText);
+                    int intX = e.CellBounds.Left + e.CellStyle.Padding.Left;
+                    int intY = e.CellBounds.Top + e.CellStyle.Padding.Top + 10;
+                    int intWidth = e.CellBounds.Width - (e.CellStyle.Padding.Left + e.CellStyle.Padding.Right);
+                    //int intHeight = sizText.Height + (e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
 
-                }
-                else
-                {
-                    if (e.ColumnIndex == 5)
+
+                    Font fnt1 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
+                    //Graphics g = this.CreateGraphics(); //this是指所有control派生出来的类，这里是个form
+
+                    SizeF size1 = this.CreateGraphics().MeasureString(strLine1, fnt1);
+                    Color titlebackcolor = Color.Black;
+                    if (strLine1.Length > 0)
                     {
-                        //第一行
-                        TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + (int)(e.CellBounds.Width - size1.Width) / 2, intY, intWidth, (int)size1.Height),
-                            Color.OrangeRed, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+                        string typecolor = strLine1.Substring(0, 1);
+                        strLine1 = strLine1.Substring(1, strLine1.Length - 1);
+                        switch (typecolor)
+                        {
+                            case "1": titlebackcolor = ColorTranslator.FromHtml("#FF7D14"); break;
+                            case "2": titlebackcolor = ColorTranslator.FromHtml("#209FD4"); break;
+                            case "3": titlebackcolor = ColorTranslator.FromHtml("#D42031"); break;
+                            case "4": titlebackcolor = ColorTranslator.FromHtml("#FF000"); break;
+                        }
                     }
-                    else
-                    {
-                        //第一行
-                        TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + (int)(e.CellBounds.Width - size1.Width) / 2, intY, intWidth, (int)size1.Height),
-                            Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-                    }
-
-                }
-
-
-                //第二行
-                Font fnt2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min( MainModel.hScale,  MainModel.wScale));
-                bool isstrickout = false;
-                if (strLine2.Contains("strikeout"))
-                {
-                    isstrickout = true;
-                    fnt2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min( MainModel.hScale,  MainModel.wScale), FontStyle.Strikeout);
-                    strLine2 = strLine2.Replace("strikeout", "");
-                }
-                SizeF size2 = this.CreateGraphics().MeasureString(strLine2, fnt2);
-                intY = intY + (int)size1.Height;
-
-                if (strLine2.Contains("("))
-                {
-                    int index = strLine1.IndexOf("(");
-
-                    string tempstrline21 = strLine2.Substring(0, index);
-                    string tempstrline22 = strLine2.Substring(index);
-
-                    SizeF siztemp1 = this.CreateGraphics().MeasureString(tempstrline21, fnt2);
-                    SizeF sizetemp2 = this.CreateGraphics().MeasureString(tempstrline22, fnt2);
-
-                    int pianyiX = (int)(e.CellBounds.Width - siztemp1.Width - sizetemp2.Width) / 2;
                     //第一行
-                    TextRenderer.DrawText(e.Graphics, tempstrline21, fnt2, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
+                    TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + 10, intY, intWidth, (int)size1.Height),
+                        Color.White, titlebackcolor, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+
+                    //另起一行
+                    Font fnt2 = new System.Drawing.Font("微软雅黑", 12F * Math.Min(MainModel.hScale, MainModel.wScale));
+                    SizeF size2 = this.CreateGraphics().MeasureString(strLine2, fnt2);
+
+                    intY = intY + (int)size1.Height;
+                    TextRenderer.DrawText(e.Graphics, strLine2, fnt2, new Rectangle(intX, intY, intWidth, (int)size2.Height),
                         Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
 
-                    Font tempfont2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min( MainModel.hScale,  MainModel.wScale));
+                    //Font fnt20 = new System.Drawing.Font("微软雅黑", 9F, FontStyle.Strikeout);
+                    //TextRenderer.DrawText(e.Graphics, strLine2, fnt20, new Rectangle(intX + (int)size2.Width, intY, intWidth, (int)size2.Height),
+                    //    Color.Green, Color.Red, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
 
-                    TextRenderer.DrawText(e.Graphics, tempstrline22, fnt2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY + 5, intWidth, (int)size2.Height),
-                    Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+
+                    Font fnt3 = new System.Drawing.Font("微软雅黑", 12F * Math.Min(MainModel.hScale, MainModel.wScale));
+                    intY = intY + (int)size2.Height;
+
+                    TextRenderer.DrawText(e.Graphics, strLine3, fnt3, new Rectangle(intX, intY, intWidth, (int)size2.Height), Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
 
 
+                    //int y = intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom + dgvGood.RowTemplate.Height;
+                    int y = (e.RowIndex + 1) * dgvGood.RowTemplate.Height + dgvGood.ColumnHeadersHeight - 1;
+
+                    //Point point1 = new Point(0, y);
+                    //Point point2 = new Point(e.CellBounds.Width, y);
+                    //Pen blackPen = new Pen(Color.Black, 1);
+                    //e.Graphics.DrawLine(blackPen, point1, point2);
+
+                    //Point point21 = new Point(10, 0);
+                    //Point point22 = new Point(10, intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
+                    //Pen blackPen2 = new Pen(Color.Black, 10);
+                    //e.Graphics.DrawLine(blackPen2, point21, point21);
+                    // e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                    // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
+                    e.Handled = true;
+
+                    dgvGood.ClearSelection();
                 }
-                else
+
+                if ((e.ColumnIndex == 1 || e.ColumnIndex == 5) && e.RowIndex >= 0 && e.Value != null)//要进行重绘的单元格
                 {
 
-                    TextRenderer.DrawText(e.Graphics, strLine2, fnt2, new Rectangle(intX + (int)(e.CellBounds.Width - size2.Width) / 2, intY, intWidth, (int)size2.Height),
-                    Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+                    Graphics gpcEventArgs = e.Graphics;
+                    Color clrBack = e.CellStyle.BackColor;
+                    //Font fntText = e.CellStyle.Font;//获取单元格字体
+                    //先使用北京颜色重画一遍背景
+                    gpcEventArgs.FillRectangle(new SolidBrush(clrBack), e.CellBounds);
+                    //设置字体的颜色
+                    Color oneFore = System.Drawing.Color.Black;
+                    Color secFore = System.Drawing.Color.Red;
+                    //string strFirstLine = "黑色内容";
+                    //string strSecondLine = "红色内容";
+
+                    if (!e.Value.ToString().Contains("\r\n"))
+                    {
+                        return;
+                    }
+
+                    string tempstr = e.Value.ToString().Replace("\r\n", "*");
+                    string strLine1 = "";
+                    string strLine2 = "";
+
+
+                    strLine1 = tempstr.Split('*')[0];
+                    strLine2 = tempstr.Split('*')[1];
+
+                    string[] sts = tempstr.Split('*');
+                    //Size sizText = TextRenderer.MeasureText(e.Graphics, strFirstLine, fntText);
+                    int intX = e.CellBounds.Left + e.CellStyle.Padding.Left;
+                    int intY = e.CellBounds.Top + e.CellStyle.Padding.Top + 30;
+                    int intWidth = e.CellBounds.Width - (e.CellStyle.Padding.Left + e.CellStyle.Padding.Right);
+                    //int intHeight = sizText.Height + (e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
+
+
+                    Font fnt1 = new System.Drawing.Font("微软雅黑", 12F * Math.Min(MainModel.hScale, MainModel.wScale));
+                    //Graphics g = this.CreateGraphics(); //this是指所有control派生出来的类，这里是个form
+                    SizeF size1 = this.CreateGraphics().MeasureString(strLine1, fnt1);
+
+                    if (strLine1.Contains("("))
+                    {
+                        int index = strLine1.IndexOf("(");
+
+                        string tempstrline11 = strLine1.Substring(0, index);
+                        string tempstrline12 = strLine1.Substring(index);
+
+                        SizeF siztemp1 = this.CreateGraphics().MeasureString(tempstrline11, fnt1);
+                        SizeF sizetemp2 = this.CreateGraphics().MeasureString(tempstrline12, fnt1);
+
+                        int pianyiX = (int)(e.CellBounds.Width - siztemp1.Width - sizetemp2.Width) / 2;
+                        if (e.ColumnIndex == 5)
+                        {
+                            TextRenderer.DrawText(e.Graphics, tempstrline11, fnt1, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
+                                Color.OrangeRed, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+
+                        }
+                        else
+                        {
+                            TextRenderer.DrawText(e.Graphics, tempstrline11, fnt1, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
+                                Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+
+                        }
+
+                        Font tempfont2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
+
+                        TextRenderer.DrawText(e.Graphics, tempstrline12, tempfont2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY + 5, intWidth, (int)siztemp1.Height),
+                          Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+
+                    }
+                    else
+                    {
+                        if (e.ColumnIndex == 5)
+                        {
+                            //第一行
+                            TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + (int)(e.CellBounds.Width - size1.Width) / 2, intY, intWidth, (int)size1.Height),
+                                Color.OrangeRed, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+                        }
+                        else
+                        {
+                            //第一行
+                            TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + (int)(e.CellBounds.Width - size1.Width) / 2, intY, intWidth, (int)size1.Height),
+                                Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+                        }
+
+                    }
+
+
+                    //第二行
+                    Font fnt2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
+                    bool isstrickout = false;
+                    if (strLine2.Contains("strikeout"))
+                    {
+                        isstrickout = true;
+                        fnt2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale), FontStyle.Strikeout);
+                        strLine2 = strLine2.Replace("strikeout", "");
+                    }
+                    SizeF size2 = this.CreateGraphics().MeasureString(strLine2, fnt2);
+                    intY = intY + (int)size1.Height;
+
+                    if (strLine2.Contains("("))
+                    {
+                        int index = strLine2.IndexOf("(");
+
+                        string tempstrline21 = strLine2.Substring(0, index);
+                        string tempstrline22 = strLine2.Substring(index);
+
+                        SizeF siztemp1 = this.CreateGraphics().MeasureString(tempstrline21, fnt2);
+                        SizeF sizetemp2 = this.CreateGraphics().MeasureString(tempstrline22, fnt2);
+
+                        int pianyiX = (int)(e.CellBounds.Width - siztemp1.Width - sizetemp2.Width) / 2;
+                        //第一行
+                        TextRenderer.DrawText(e.Graphics, tempstrline21, fnt2, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
+                            Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+
+                        Font tempfont2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
+
+                        TextRenderer.DrawText(e.Graphics, tempstrline22, fnt2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY , intWidth, (int)size2.Height),
+                        Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+
+                    }
+                    else
+                    {
+
+                        TextRenderer.DrawText(e.Graphics, strLine2, fnt2, new Rectangle(intX + (int)(e.CellBounds.Width - size2.Width) / 2, intY, intWidth, (int)size2.Height),
+                        Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
+                    }
+
+
+                    //int y = intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom + dgvGood.RowTemplate.Height;
+                    int y = (e.RowIndex + 1) * dgvGood.RowTemplate.Height + dgvGood.ColumnHeadersHeight - 1;
+
+                    //Point point1 = new Point(0, y);
+                    ////Point point2 = new Point(e.CellBounds.Width, y);
+                    //Point point2 = new Point(dgvGood.Width, y);
+                    //Pen blackPen = new Pen(Color.Black, 1);
+                    //e.Graphics.DrawLine(blackPen, point1, point2);
+
+
+                    // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
+                    e.Handled = true;
+
+                    dgvGood.ClearSelection();
                 }
-
-
-
-
-
-                //int y = intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom + dgvGood.RowTemplate.Height;
-                int y = (e.RowIndex + 1) * dgvGood.RowTemplate.Height + dgvGood.ColumnHeadersHeight - 1;
-
-                //Point point1 = new Point(0, y);
-                ////Point point2 = new Point(e.CellBounds.Width, y);
-                //Point point2 = new Point(dgvGood.Width, y);
-                //Pen blackPen = new Pen(Color.Black, 1);
-                //e.Graphics.DrawLine(blackPen, point1, point2);
-
-
-                // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
-                e.Handled = true;
-
-                dgvGood.ClearSelection();
             }
+            catch (Exception ex)
+            {
 
+            }
 
         }
 

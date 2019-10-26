@@ -132,7 +132,9 @@
             // 
             // btnLoginByUser
             // 
-            this.btnLoginByUser.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnLoginByUser.BackColor = System.Drawing.Color.Transparent;
+            this.btnLoginByUser.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoginByUser.BackgroundImage")));
+            this.btnLoginByUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLoginByUser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLoginByUser.FlatAppearance.BorderSize = 0;
             this.btnLoginByUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -205,7 +207,9 @@
             // 
             // btnLoginByPhone
             // 
-            this.btnLoginByPhone.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnLoginByPhone.BackColor = System.Drawing.Color.Transparent;
+            this.btnLoginByPhone.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoginByPhone.BackgroundImage")));
+            this.btnLoginByPhone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLoginByPhone.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLoginByPhone.FlatAppearance.BorderSize = 0;
             this.btnLoginByPhone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -303,6 +307,7 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.Shown += new System.EventHandler(this.frmLogin_Shown);
             this.SizeChanged += new System.EventHandler(this.frmLogin_SizeChanged);
             this.Click += new System.EventHandler(this.frmLogin_Click);

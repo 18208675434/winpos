@@ -10,13 +10,20 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QiandamaPOS
 {
     public partial class frmLogin : Form
     {
+
+        /// <summary>
+        /// 委托解决跨线程调用
+        /// </summary>
+        private delegate void InvokeHandler();
+
         //图形验证码
         ValidCode validCode = new ValidCode(4, ValidCode.CodeType.Alphas);
 
@@ -35,13 +42,101 @@ namespace QiandamaPOS
            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Log");
 
+           Thread threadItemExedate = new Thread(ThreadUpStart);
+           threadItemExedate.IsBackground = true;
+           threadItemExedate.Start();
+
+           Thread threadIniFormExedate = new Thread(IniForm);
+           threadIniFormExedate.IsBackground = true;
+           threadIniFormExedate.Start();
+
+           //string devicesn = GlobalUtil.GetHardDiskID();
+               
+           ////MainModel.DeviceSN = MainModel.GetHardDiskID();
+
+           //INIManager.SetIni("System", "DeviceSN", devicesn, MainModel.IniPath);
+           //MainModel.DeviceSN = devicesn;
+           //lblSN.Text = "设备序列号：" + devicesn;
+
+
+           // try
+           // {
+           //     LoadingHelper.ShowLoadingScreen("用户/门店信息验证中，请稍候");
+            
+           //     if (!LoadUser() || !LoadShopInfo())
+           //     {
+           //         LoadingHelper.CloseForm();
+
+           //         txtUser.Clear();
+           //         txtPwd.Clear();
+           //         isReLogin = true;
+           //         int screenwdith = Screen.PrimaryScreen.Bounds.Width;
+           //         //this.Location = new System.Drawing.Point((screenwdith - this.Width) / 2, 10);
+
+           //         lblUser_Click(null, null);
+           //         //lblSN.Text = "设备序列号：" + GlobalUtil.GetPCSN();
+
+           //         txtUser.SetWatermark("请输入11位手机号");
+           //         txtPwd.SetWatermark("请输入密码");
+
+           //         txtPhone.SetWatermark("请输入11位手机号");
+           //         txtCheckCode.SetWatermark("请输入右侧图形验证码");
+           //         txtPhoneCheckCode.SetWatermark("请输入短信验证码");
+           //     }
+           //     else
+           //     {
+           
+           //         frmMain frmmain = new frmMain(this);
+           //         //frmmain.frmMain_SizeChanged(null,null);
+           //         //frmmain.WindowState = FormWindowState.Maximized;
+           //         //Screen.PrimaryScreen.Bounds.Height
+           //         asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+           //         this.Hide();
+           //         CloseOSK();
+
+           //         //asf.AutoScaleControl(frmmain);
+           //         frmmain.ShowDialog();
+           //     }              
+
+           // }
+           // catch (Exception ex)
+           // {
+           //     LogManager.WriteLog("登录异常："+ex.Message);
+           // }
+           // finally
+           // {
+           //    // LoadingHelper.CloseForm();
+           // }
+           
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            lblUser_Click(null, null);
+        }
+
+        private void IniForm()
+        {
+
+            this.Invoke(new InvokeHandler(delegate()
+        {
+            string devicesn = GlobalUtil.GetHardDiskID();
+
+            //MainModel.DeviceSN = MainModel.GetHardDiskID();
+
+            INIManager.SetIni("System", "DeviceSN", devicesn, MainModel.IniPath);
+            MainModel.DeviceSN = devicesn;
+            lblSN.Text = "设备序列号：" + devicesn;
+
+
             try
             {
-                LoadingHelper.ShowLoadingScreen("用户/门店信息验证中，请稍候");
-            
+              //  LoadingHelper.ShowLoadingScreen("用户/门店信息验证中，请稍候");
+                lblMsg.Text = "用户/门店信息验证中，请稍候...";
+                Application.DoEvents();
                 if (!LoadUser() || !LoadShopInfo())
                 {
-                    LoadingHelper.CloseForm();
+                   // LoadingHelper.CloseForm();
 
                     txtUser.Clear();
                     txtPwd.Clear();
@@ -50,7 +145,7 @@ namespace QiandamaPOS
                     //this.Location = new System.Drawing.Point((screenwdith - this.Width) / 2, 10);
 
                     lblUser_Click(null, null);
-                    lblSN.Text = "设备序列号：" + GlobalUtil.GetPCSN();
+                    //lblSN.Text = "设备序列号：" + GlobalUtil.GetPCSN();
 
                     txtUser.SetWatermark("请输入11位手机号");
                     txtPwd.SetWatermark("请输入密码");
@@ -61,7 +156,7 @@ namespace QiandamaPOS
                 }
                 else
                 {
-           
+
                     frmMain frmmain = new frmMain(this);
                     //frmmain.frmMain_SizeChanged(null,null);
                     //frmmain.WindowState = FormWindowState.Maximized;
@@ -72,29 +167,18 @@ namespace QiandamaPOS
 
                     //asf.AutoScaleControl(frmmain);
                     frmmain.ShowDialog();
-                }              
+                }
 
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("登录异常："+ex.Message);
+                LogManager.WriteLog("登录异常：" + ex.Message);
             }
             finally
             {
-               // LoadingHelper.CloseForm();
+                // LoadingHelper.CloseForm();
             }
-            ////客屏初始化
-            //MainModel.frmmainmedia = new frmMainMedia();
-            //if (Screen.AllScreens.Count() != 1)
-            //{
-            //    // windowstate设置max 不能再页面设置 否则会显示到第一个屏幕
-            //    //MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height+20);
-            //    asf.AutoScaleControlTest(MainModel.frmmainmedia, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height ,true);
-            //    MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
-
-            //    //MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //    MainModel.frmmainmedia.Show();
-            //}
+        }));
         }
 
         #region 账号密码登录
@@ -216,7 +300,7 @@ namespace QiandamaPOS
                 {
                     string ErrorMsg = "";
                     httputil.SendSmsCode(txtPhone.Text,CurrentImgCodeKey,txtCheckCode.Text,ref ErrorMsg);
-                    //TODO 调用接口发送手机验证                    
+                    //TODO 调用接口发送手机验
 
                 }
             
@@ -334,7 +418,7 @@ namespace QiandamaPOS
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(MainModel.Authorization))
+                if (string.IsNullOrEmpty(MainModel.Authorization))
                 {
                     return false;
                 }
@@ -462,6 +546,19 @@ namespace QiandamaPOS
         }
 
 
+        private void ThreadUpStart()
+        {
+            try 
+            {
+                File.Copy(MainModel.TempFilePath + "\\QdamaPOSStart.exe", MainModel.ServerPath + "\\QdamaPOSStart.exe", true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+       
     }
 
 
