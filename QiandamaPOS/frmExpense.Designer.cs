@@ -31,11 +31,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvExpense = new System.Windows.Forms.DataGridView();
+            this.createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expensename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.收入支付项目 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnQuery = new System.Windows.Forms.Button();
@@ -45,10 +50,6 @@
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
-            this.createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expensename = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.收入支付项目 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.picScreen = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpense)).BeginInit();
             this.panel1.SuspendLayout();
@@ -81,19 +82,76 @@
             this.expensename,
             this.收入支付项目,
             this.createby});
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvExpense.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvExpense.GridColor = System.Drawing.Color.White;
             this.dgvExpense.Location = new System.Drawing.Point(12, 170);
             this.dgvExpense.Margin = new System.Windows.Forms.Padding(2);
             this.dgvExpense.Name = "dgvExpense";
+            this.dgvExpense.ReadOnly = true;
             this.dgvExpense.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvExpense.RowHeadersVisible = false;
             this.dgvExpense.RowHeadersWidth = 40;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.dgvExpense.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.dgvExpense.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvExpense.RowTemplate.Height = 23;
             this.dgvExpense.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExpense.Size = new System.Drawing.Size(941, 579);
             this.dgvExpense.TabIndex = 1;
+            // 
+            // createdat
+            // 
+            this.createdat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.createdat.DefaultCellStyle = dataGridViewCellStyle3;
+            this.createdat.FillWeight = 0.3388781F;
+            this.createdat.HeaderText = "记录时间";
+            this.createdat.Name = "createdat";
+            this.createdat.ReadOnly = true;
+            this.createdat.Width = 235;
+            // 
+            // expensename
+            // 
+            this.expensename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.expensename.DefaultCellStyle = dataGridViewCellStyle4;
+            this.expensename.FillWeight = 0.5752775F;
+            this.expensename.HeaderText = "类型";
+            this.expensename.Name = "expensename";
+            this.expensename.ReadOnly = true;
+            this.expensename.Width = 235;
+            // 
+            // 收入支付项目
+            // 
+            this.收入支付项目.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.收入支付项目.DefaultCellStyle = dataGridViewCellStyle5;
+            this.收入支付项目.FillWeight = 1.055388F;
+            this.收入支付项目.HeaderText = "金额";
+            this.收入支付项目.Name = "收入支付项目";
+            this.收入支付项目.ReadOnly = true;
+            this.收入支付项目.Width = 235;
+            // 
+            // createby
+            // 
+            this.createby.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.createby.DefaultCellStyle = dataGridViewCellStyle6;
+            this.createby.FillWeight = 2.030457F;
+            this.createby.HeaderText = "操作人";
+            this.createby.Name = "createby";
+            this.createby.ReadOnly = true;
+            this.createby.Width = 233;
             // 
             // panel1
             // 
@@ -218,50 +276,6 @@
             this.btnExit.Text = "退出";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // createdat
-            // 
-            this.createdat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.createdat.DefaultCellStyle = dataGridViewCellStyle3;
-            this.createdat.FillWeight = 0.3388781F;
-            this.createdat.HeaderText = "记录时间";
-            this.createdat.Name = "createdat";
-            this.createdat.Width = 235;
-            // 
-            // expensename
-            // 
-            this.expensename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.expensename.DefaultCellStyle = dataGridViewCellStyle4;
-            this.expensename.FillWeight = 0.5752775F;
-            this.expensename.HeaderText = "类型";
-            this.expensename.Name = "expensename";
-            this.expensename.Width = 235;
-            // 
-            // 收入支付项目
-            // 
-            this.收入支付项目.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.收入支付项目.DefaultCellStyle = dataGridViewCellStyle5;
-            this.收入支付项目.FillWeight = 1.055388F;
-            this.收入支付项目.HeaderText = "金额";
-            this.收入支付项目.Name = "收入支付项目";
-            this.收入支付项目.Width = 235;
-            // 
-            // createby
-            // 
-            this.createby.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.createby.DefaultCellStyle = dataGridViewCellStyle6;
-            this.createby.FillWeight = 2.030457F;
-            this.createby.HeaderText = "操作人";
-            this.createby.Name = "createby";
-            this.createby.Width = 233;
             // 
             // picScreen
             // 

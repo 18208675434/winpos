@@ -54,6 +54,8 @@ namespace QiandamaPOS
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
+            //CurrentInterval = 30;
+            CurrentInterval = 10;
             QueryExpense();
         }
 
@@ -89,8 +91,8 @@ namespace QiandamaPOS
 
                 dgvExpense.Rows.Clear();
                 string ErrorMsg = "";
-               // Expense[] expenses =  httputil.QueryExpense(CurrentInterval,0,MainModel.CurrentShopInfo.shopid,DateTime.Now.ToString("yyyy-MM-dd"), ref ErrorMsg);
-                Expense[] expenses = httputil.QueryExpense(CurrentInterval, 0, MainModel.CurrentShopInfo.shopid, dtStart.Value.ToString("yyyy-MM-dd"), ref ErrorMsg);
+                Expense[] expenses =  httputil.QueryExpense(CurrentInterval,0,MainModel.CurrentShopInfo.shopid,DateTime.Now.ToString("yyyy-MM-dd"), ref ErrorMsg);
+                //Expense[] expenses = httputil.QueryExpense(CurrentInterval, 0, MainModel.CurrentShopInfo.shopid, DateTime.Now.ToString("yyyy-MM-dd"), ref ErrorMsg);
                 if (ErrorMsg != "" || expenses == null)
                 {
                     MainModel.ShowLog(ErrorMsg, false);
@@ -105,7 +107,18 @@ namespace QiandamaPOS
                     }
                 }
                 dgvExpense.ClearSelection();
+
+                if (dgvExpense.Rows.Count > 0)
+                {
+                    ShowLog("刷新完成",false);
+                }
+                else
+                {
+                    ShowLog("暂无数据", false);
+                }
                 
+
+
                 LoadingHelper.CloseForm();//关闭
             }
             catch (Exception ex)
@@ -150,5 +163,24 @@ namespace QiandamaPOS
                 LogManager.WriteLog("修改主窗体背景图异常：" + ex.Message);
             }
         }
+
+
+
+        /// <summary>
+        /// 委托解决跨线程调用
+        /// </summary>
+        private delegate void InvokeHandler();
+        //TODO  修改样式
+        private void ShowLog(string msg, bool iserror)
+        {
+            this.Invoke(new InvokeHandler(delegate()
+            {
+
+                frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
+                frmmsf.ShowDialog(); LogManager.WriteLog(msg);
+            }));
+
+        }
+
     }
 }

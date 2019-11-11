@@ -11,7 +11,7 @@ namespace QiandamaPOS.Model
     {
         public int hasnextpage { get; set; }
         public string lastorderid { get; set; }
-        public Order[] orders { get; set; }
+        public List<Order> orders { get; set; }
     }
 
     public class Order
@@ -61,9 +61,42 @@ namespace QiandamaPOS.Model
         public int orderstatusvalue { get; set; }
         public int showprint { get; set; }
 
-
         public string customerphone { get; set; }
 
+        public   List<QuereOrderProduct> products {get;set; }
+
+        /// <summary>
+        /// 是否支持部分退 1支持 0不支持 ,
+        /// </summary>
+        public int supportpartrefund { get; set; }
+    }
+
+    public class QuereOrderProduct
+    {
+        public int goodstagid{get;set;}
+
+         public string skucode{get;set;}
+
+         public string title{get;set;}
+
+         public decimal num{get;set;}
+
+         public decimal specnum{get;set;}
+
+         public long orderitemid{get;set;}
+
+        public Price price{get;set;}
+
+        /// <summary>
+        /// 判断本地是否选择部分退款
+        /// </summary>
+        public bool IsSelect { get; set; }
+
+
+        /// <summary>
+        /// 最大数量  标品部分退修改数量时不允许超过该数量
+        /// </summary>
+        public decimal maxnum { get; set; }
 
     }
 

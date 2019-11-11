@@ -26,87 +26,87 @@ namespace QiandamaPOS
         /// 委托解决跨线程调用
         /// </summary>
         private delegate void InvokeHandler();
+
+        private bool isplayer = false;
         public frmMainMedia()
         {
             InitializeComponent();
 
+            //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
-            IniForm();
+           // IniForm(null);
         }
+
         Thread threadIniExedate;
-        public void IniForm()
+        public void IniForm(object obj)
         {
+            isplayer = true;     
+            ThreadPool.QueueUserWorkItem(new WaitCallback(IniFormExe));
+            ////启动扫描处理线程
+            //threadIniExedate = new Thread(IniFormExe);
 
-            //启动扫描处理线程
-            threadIniExedate = new Thread(IniFormExe);
-            threadIniExedate.IsBackground = true;
-            threadIniExedate.Start();
-           
+            //threadIniExedate.IsBackground = true;
+            //threadIniExedate.TrySetApartmentState(ApartmentState.MTA);
+            //threadIniExedate.Start();
         }
 
-        private void IniFormExe()
+        private void IniFormExe(object obj)
         {
             try
             {
-                tabControlMedia.SelectedIndex = 1;
+               tabControlMedia.SelectedIndex = 1;
 
+               player.Visible = false;
 
-                player.Visible = false;
+               string ErrorMsg = "";
+               MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
 
-                //test
-                //string testurl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
-                //Image _imagetest = Image.FromStream(System.Net.WebRequest.Create(testurl).GetResponse().GetResponseStream());
+               if (ErrorMsg != "" || posmedia == null)
+               {
+                   //获取异常  显示空白页
+               }
+               else
+               {
+                   foreach (Mediadetaildto media in posmedia.mediadetaildtos)
+                   {
+                       if (isplayer)
+                       {
+                           if (media.mediatype == 1) //图片
+                           {
+                               player.Visible = false;
+                               string ImgUrl = media.content;
 
-                //tabPageAdvert.BackgroundImage = _imagetest;
+                               //testurl
+                               //ImgUrl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
+                               Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
 
-                //tabPageAdvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+                               tabPageAdvert.BackgroundImage = _image;
 
+                               tabPageAdvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 
-                string ErrorMsg = "";
-                MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
-                player.Visible = false;
-                if (ErrorMsg != "" || posmedia == null)
-                {
-                    //获取异常  显示空白页
-                }
-                else
-                {
-                    foreach (Mediadetaildto media in posmedia.mediadetaildtos)
-                    {
-                        if (media.mediatype == 1) //图片
-                        {
-                            player.Visible = false;
-                            string ImgUrl = media.content;
+                               Application.DoEvents();
+                               Delay.Start(3000);
+                           }
+                           else if (media.mediatype == 2) //视频
+                           {
+                               string PlayerUrl = media.content;
+                               player.Visible = true;
+                               player.URL = PlayerUrl;
+                               this.player.Ctlcontrols.play();
 
-                            //test
-                            //ImgUrl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
-                            Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
+                               while (!player.status.Contains("停止"))
+                               {
+                                   Delay.Start(100);
+                               }
 
-                            tabPageAdvert.BackgroundImage = _image;
-
-                            tabPageAdvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-
-                            Delay.Start(3000);
-                        }
-                        else if (media.mediatype == 2)
-                        {
-                            string PlayerUrl = media.content;
-                            player.Visible = true;
-                            player.URL = PlayerUrl;
-                            this.player.Ctlcontrols.play();
-
-                            while (!player.status.Contains("停止"))
-                            {
-                                Delay.Start(100);
-                            }
-
-                            player.close();
-                            player.Visible = false;
-                            //pictureBox1.BackgroundImage = _image;
-                        }
-                       
-                    }
-                }
+                               player.close();
+                               player.Visible = false;
+                               //pictureBox1.BackgroundImage = _image;
+                           }
+                       }
+                   }
+               }
+     
             }
             catch (Exception ex)
             {
@@ -119,47 +119,49 @@ namespace QiandamaPOS
         private Member CurrentMember;
 
 
-        public void UpdateForm(Cart cart,Member member)
+        public void UpdateForm()
         {
             try
-            {
-                dgvGood.Visible = true;
-                tableLayoutPanel1.Visible = true;
-
-                pnlPayInfo.Visible = false;
-                tabControlMedia.SelectedIndex = 0;
-                CurrentCart = (Cart)cart.qianClone();
-                CurrentMember = member;
-
-                //启动扫描处理线程
-                Thread threadItemExedate = new Thread(UpdateFormExe);
-                threadItemExedate.IsBackground = true;
-                threadItemExedate.Start();
-
-                //UpdateFormExe();
-                //UpdateFormExe(Cart,member);
-                //Application.DoEvents();
+            {        
+                //////启动扫描处理线程
+                //Thread threadItemExedate = new Thread(UpdateFormExe);
+                //threadItemExedate.IsBackground = false;
+                //threadItemExedate.Start();
+                isplayer = false;
+                ThreadPool.QueueUserWorkItem(new WaitCallback(UpdateFormExe));
             }
             catch (Exception ex)
             {
-
+                LogManager.WriteLog("显示客屏购物车异常");
             }
-
-           
         }
 
-        private void UpdateFormExe()
+        //增加线程锁  防止多线程操作datagridview 红叉情况
+        private object thislock = new object();
+        private void UpdateFormExe(object obj)
         {
-            try
+            lock (thislock)
             {
-                try { player.close(); }
-                catch { }
+                try
+                {
+                    DateTime starttime = DateTime.Now;
 
-                try { threadIniExedate.Abort(); }
-                catch { }
+                   
+                    dgvGood.Visible = true;
+                    tableLayoutPanel1.Visible = true;
+
+                    pnlPayInfo.Visible = false;
+                    tabControlMedia.SelectedIndex = 0;
+                    CurrentCart = MainModel.frmMainmediaCart;
+                    CurrentMember = MainModel.CurrentMember;
+                    try { player.close(); }
+                    catch { }
+
+                    try { threadIniExedate.Abort(); }
+                    catch { }
                     //pnlPayInfo.Visible = false;
                     dgvGood.Rows.Clear();
-                    dgvOrderDetail.Rows.Clear(); 
+                    dgvOrderDetail.Rows.Clear();
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
                         int orderCount = CurrentCart.orderpricedetails.Length;
@@ -171,14 +173,19 @@ namespace QiandamaPOS
                         {
                             for (int i = 0; i < orderCount; i++)
                             {
-                                dgvOrderDetail.Rows.Add(CurrentCart.orderpricedetails[i].title, CurrentCart.orderpricedetails[i].amount);
-                                dgvOrderDetail.ClearSelection();
+                                try
+                                {
+                                    dgvOrderDetail.Rows.Add(CurrentCart.orderpricedetails[i].title, CurrentCart.orderpricedetails[i].amount);
+                                }
+                                catch { }
+
                             }
+                            dgvOrderDetail.ClearSelection();
                         }
-                        lblPrice.Text = CurrentCart.totalpayment.ToString("f2");
+                        lblPrice.Text = "￥" + CurrentCart.totalpayment.ToString("f2");
 
                         int count = CurrentCart.products.Count;
-                        lblGoodsCount.Text = count.ToString();
+                        lblGoodsCount.Text = "(" + count.ToString() + "件商品)";
                         if (count > 0)
                         {
                             for (int i = 0; i < count; i++)
@@ -187,7 +194,7 @@ namespace QiandamaPOS
 
                                 Product pro = CurrentCart.products[i];
 
-                                string barcode = "\r\n  " + pro.title + "\r\n  " + pro.barcode;
+                                string barcode = "\r\n  " + pro.title + "\r\n  " + pro.skucode;
                                 string price = "";
                                 string jian = "";
 
@@ -196,10 +203,10 @@ namespace QiandamaPOS
                                 string total = "";
                                 switch (pro.pricetagid)
                                 {
-                                    case 1: barcode = "1" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
-                                    case 2: barcode = "2" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
-                                    case 3: barcode = "3" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
-                                    case 4: barcode = "4" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
+                                    case 1: barcode = "1" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
+                                    case 2: barcode = "2" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
+                                    case 3: barcode = "3" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
+                                    case 4: barcode = "4" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
                                 }
 
                                 if (pro.price.saleprice == pro.price.originprice)
@@ -233,7 +240,7 @@ namespace QiandamaPOS
 
                                 if (pro.goodstagid == 0)  //0是标品  1是称重
                                 {
-                                 
+
                                     num = pro.num.ToString();
                                 }
                                 else
@@ -262,81 +269,106 @@ namespace QiandamaPOS
                                     {
                                         total += "(" + pro.price.originpricedesc + ")";
                                     }
-
-
                                 }
-
-                                dgvGood.Rows.Insert(0, new object[] { barcode, price, jian, num, add, total });
+                                try
+                                {
+                                    dgvGood.Rows.Insert(0, new object[] { barcode, price, jian, num, add, total });
+                                }
+                                catch { }
                             }
-                            dgvGood.ClearSelection();
-
+                            //dgvGood.ClearSelection();
+                            //Application.DoEvents();
 
                         }
                     }
 
+                    Console.WriteLine("客屏加载时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
-                    if (CurrentMember != null && CurrentMember.memberinformationresponsevo != null && CurrentMember.memberheaderresponsevo != null)
-                    {
-                        string mobil = CurrentMember.memberheaderresponsevo.mobile;
-                        if (mobil.Length > 8)
-                        {
-                            mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
-                        }
-                        lblMobil.Text = mobil;
-                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+                }
+                catch (Exception ex)
+                {
+                    //frmMain.listener.Start();
+                    LogManager.WriteLog("ERROR", "显示客屏购物车异常：" + ex.Message + ex.StackTrace);
+                }
+            }
+        }
 
-                        pnlMemberCard.Visible = false;
+        public void LoadMember()
+        {
+            try
+            {
+               DateTime starttime = DateTime.Now;
+               //isplayer = false;
 
+               CurrentMember = MainModel.CurrentMember;
 
-                        if (CurrentMember.memberinformationresponsevo.onbirthday)
-                        {
-                           // pnlBirthday.Visible = true;
-                            picBirthday1.Visible = true;
+               if (CurrentMember != null && CurrentMember.memberinformationresponsevo != null && CurrentMember.memberheaderresponsevo != null)
+               {
+                   string mobil = CurrentMember.memberheaderresponsevo.mobile;
+                   if (mobil.Length > 8)
+                   {
+                       mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
+                   }
+                   lblMobil.Text = mobil;
+                   lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
 
-                            
-                            picBirthday2.Visible = true;
-                            picBirthday3.Visible = true;
-                            picBirthday4.Visible = true;
-                        }
-                        else
-                        {
-                            picBirthday1.Visible = false;
-                            picBirthday2.Visible = false;
-                            picBirthday3.Visible = false;
-                            picBirthday4.Visible = false;
-                        }
-                    }
-                    else
-                    {
-                        lblMobil.Text = "";
-                        lblWechartNickName.Text = "";
-
-                        
-                        string ErrorMsg = "";
-                        string imgurl = httputil.GetMemberCard(ref ErrorMsg);
-                        if (!string.IsNullOrEmpty(httputil.GetMemberCard(ref ErrorMsg)) && ErrorMsg != null)
-                        {
-                            
-                            Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                            picMemberCard.BackgroundImage = _image;
-
-                            int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4/ 5;
-                            picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
-
-                            picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
-                            pnlMemberCard.Visible = true;
-                        }
+                   pnlMemberCard.Visible = false;
 
 
-                    }
-                
+                   if (CurrentMember.memberinformationresponsevo.onbirthday)
+                   {
+                       // pnlBirthday.Visible = true;
+                       picBirthday1.Visible = true;
 
-                Application.DoEvents();
 
+                       picBirthday2.Visible = true;
+                       picBirthday3.Visible = true;
+                       picBirthday4.Visible = true;
+                   }
+                   else
+                   {
+                       picBirthday1.Visible = false;
+                       picBirthday2.Visible = false;
+                       picBirthday3.Visible = false;
+                       picBirthday4.Visible = false;
+                   }
+               }
+               else
+               {
+                   lblMobil.Text = "";
+                   lblWechartNickName.Text = "";
+
+                   string ErrorMsg = "";
+                   string imgurl = httputil.GetMemberCard(ref ErrorMsg);
+                   if (!string.IsNullOrEmpty(httputil.GetMemberCard(ref ErrorMsg)) && ErrorMsg != null)
+                   {
+
+                       Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                       picMemberCard.BackgroundImage = _image;
+
+                       int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
+                       picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
+
+                       picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
+                       
+                       pnlMemberCard.Visible = true;
+                   }
+
+                   picBirthday1.Visible = false;
+                   picBirthday2.Visible = false;
+                   picBirthday3.Visible = false;
+                   picBirthday4.Visible = false;
+               }
+
+               frmMain.listener.Stop();
+
+               frmMain.listener.Start();
+
+               Console.WriteLine("会员加载时间"+(DateTime.Now-starttime).TotalMilliseconds);
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("ERROR","显示客屏购物车异常："+ex.Message);
+                LogManager.WriteLog("加载会员异常"+ex.Message);
             }
         }
 
@@ -344,6 +376,7 @@ namespace QiandamaPOS
         {
             try
             {
+                isplayer = false;
                 frmCashierResultMedia frmresult = new frmCashierResultMedia(payinfo.ToString());
                 frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
 
@@ -361,6 +394,7 @@ namespace QiandamaPOS
         {
             try
             {
+                isplayer = false;
                 frmNumber frmnumber = new frmNumber("请输入会员号", true,false);
 
                 frmnumber.frmNumber_SizeChanged(null, null);
@@ -377,16 +411,15 @@ namespace QiandamaPOS
             {
                 LogManager.WriteLog("客屏输入会员号异常"+ex.Message);
             }
-
         }
 
         public void ShowPayInfo(string lblinfo)
         {
             try
             {
+                isplayer = false;
                 //player.Visible = false;
                 tabControlMedia.SelectedIndex = 0;
-
 
                 // pnlMemberCard.Visible = true;
                 dgvGood.Visible = false;
@@ -415,10 +448,6 @@ namespace QiandamaPOS
                 player.fullScreen = true;
             }
         }
-
-
-
-
 
         //重绘datagridview单元格
         private void dgvGood_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -517,7 +546,7 @@ namespace QiandamaPOS
                     // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
                     e.Handled = true;
 
-                    dgvGood.ClearSelection();
+                   // dgvGood.ClearSelection();
                 }
 
                 if ((e.ColumnIndex == 1 || e.ColumnIndex == 5) && e.RowIndex >= 0 && e.Value != null)//要进行重绘的单元格
@@ -661,7 +690,7 @@ namespace QiandamaPOS
                     // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
                     e.Handled = true;
 
-                    dgvGood.ClearSelection();
+                   // dgvGood.ClearSelection();
                 }
             }
             catch (Exception ex)
@@ -671,7 +700,10 @@ namespace QiandamaPOS
 
         }
 
+        private void frmMainMedia_Load(object sender, EventArgs e)
+        {
 
+        }
 
 
     }

@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Maticsoft.Model;
+using Newtonsoft.Json;
 using QiandamaPOS.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -52,7 +54,7 @@ namespace QiandamaPOS.Common
             catch (Exception ex)
             {
                 LogManager.WriteLog("Error", "验证用户信息异常：" + ex.Message);
-                errormsg = "验证用户信息异常：" + ex.Message;
+                errormsg = "网络连接异常，请检查网络连接";
                 return "";
             }
         }
@@ -87,7 +89,7 @@ namespace QiandamaPOS.Common
             catch (Exception ex)
             {
                 LogManager.WriteLog("Error", "获取用户信息异常：" + ex.Message);
-                errormsg = "获取用户信息异常：" + ex.Message;
+                errormsg = "网络连接异常，请检查网络连接";
                 return null;
             }
         }
@@ -122,8 +124,8 @@ namespace QiandamaPOS.Common
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("Error", "获取门店信息异常：" + ex.Source);
-                errormsg = "获取门店信息异常：" + ex.Message;
+                LogManager.WriteLog("Error", "获取门店信息异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
                 return null;
             }
         }
@@ -164,7 +166,7 @@ namespace QiandamaPOS.Common
             catch (Exception ex)
             {
                 LogManager.WriteLog("Error", "条码或会员识别异常：" + ex.Message);
-                errormsg = "条码或会员识别异常：" + ex.Message;
+                errormsg = "网络连接异常，请检查网络连接";
                 return null;
             }
         }
@@ -204,8 +206,8 @@ namespace QiandamaPOS.Common
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("Error", "条码或会员识别异常：" + ex.Message);
-                errormsg = "条码或会员识别异常：" + ex.Message;
+                LogManager.WriteLog("Error", "短码识别异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
                 return null;
             }
         }
@@ -304,7 +306,7 @@ namespace QiandamaPOS.Common
             catch (Exception ex)
             {
                 LogManager.WriteLog("Error", "购物车信息获取异常：" + ex.Message);
-                errormsg = "购物车信息获取异常：" + ex.Message;
+                errormsg = "网络连接异常，请检查网络连接";
                 return null;
 
             }
@@ -377,7 +379,7 @@ namespace QiandamaPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 Console.WriteLine("购物车信息"+json);
-                //Console.WriteLine("访问购物车接口时间" + (DateTime.Now - starttime).ToString("ssfff"));
+                Console.WriteLine("访问购物车接口时间" + (DateTime.Now - starttime).TotalMilliseconds);
                 // return;
                 resultcode = rd.code;
                 if (rd.code == 0)
@@ -394,7 +396,7 @@ namespace QiandamaPOS.Common
             catch (Exception ex)
             {
                 LogManager.WriteLog("Error", "购物车信息获取异常：" + ex.Message);
-                errormsg = "购物车信息获取异常：" + ex.Message;
+                errormsg = "网络连接异常，请检查网络连接";
                 return null;
 
             }
@@ -478,7 +480,7 @@ namespace QiandamaPOS.Common
             catch (Exception ex)
             {
                 LogManager.WriteLog("Error", "创建订单异常：" + ex.Message);
-                errormsg = "创建订单异常：" + ex.Message;
+                errormsg = "网络连接异常，请检查网络连接";
                 return null;
             }
         }
@@ -834,6 +836,79 @@ namespace QiandamaPOS.Common
             }
         }
 
+        /// <summary>
+        /// 退款
+        /// </summary>
+        /// <returns></returns>
+        public string Refund(RefundPara refundpara, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/refund";
+
+                string tempjson = JsonConvert.SerializeObject(refundpara);
+               // tempjson = "{\"orderid\":\"" + orderid + "\"}";
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    return rd.data.ToString();
+
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "查询历史异常：" + ex.Message);
+                erromessage = "查询历史订单异常：" + ex.Message;
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// 退款试算
+        /// </summary>
+        /// <returns></returns>
+        public Order RefundValuate(RefundPara refundpara, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/refundvaluate";
+
+                string tempjson = JsonConvert.SerializeObject(refundpara);
+                // tempjson = "{\"orderid\":\"" + orderid + "\"}";
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    Order order = JsonConvert.DeserializeObject<Order>(rd.data.ToString());
+                    return order;
+
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "查询历史异常：" + ex.Message);
+                erromessage = "查询历史订单异常：" + ex.Message;
+                return null;
+            }
+        }
+
 
         /// <summary>
         /// 获取客屏信息
@@ -1163,15 +1238,26 @@ namespace QiandamaPOS.Common
                 string url = "/pos/order/pos/queryexpenserecords";
 
                 QueryExpensePara qep = new QueryExpensePara();
-                qep.intervaldays = intervaldays;
-                qep.lastorderid = lastorderid;
-                qep.operatetimestr = operatetimestr;
 
+                if (intervaldays <= 7)
+                {
+                    qep.intervaldays = intervaldays;
+                }
+                else
+                {
+                    qep.operatetimestr = operatetimestr;
+                }
+                
+                qep.lastorderid = lastorderid;
+
+                
+               
+                qep.shopid = MainModel.CurrentShopInfo.shopid;
                
                 string tempjson = JsonConvert.SerializeObject(qep);
                 //string tempjson = "{\"expenseid\":\"" + expenseid + "\",\"expensefee\":" + expensefee + ",\"shopid\":\"" + shopid + "\"}";
 
-
+                Console.WriteLine(tempjson);
 
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -1300,8 +1386,8 @@ namespace QiandamaPOS.Common
                 {
                     erromessage = "";
 
-                    bool smcSuccess = Convert.ToBoolean(rd.data.ToString());
-                    return smcSuccess;
+                    //bool smcSuccess = Convert.ToBoolean(rd.data.ToString());
+                    return true;
                 }
                 else
                 {
@@ -1398,9 +1484,146 @@ namespace QiandamaPOS.Common
         }
 
 
-        #region  访问服务端
-        public string HttpGET(string Url, SortedDictionary<string,string> sortpara)
+
+        /// <summary>
+        /// POS机全量数据同步接口
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="payid"></param>
+        /// <param name="erromessage"></param>
+        public AllProduct QuerySkushopAll(string shopid, int page, int size, ref string erromessage)
         {
+            try
+            {
+                string url = "/pos/product/pos/v2/queryskushopofflinedtobypageforpossync";
+
+
+                string tempjson = "{\"shopid\":\"" + shopid + "\",\"page\":" + page + ",\"size\":" + size + "}";
+
+
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                //Console.WriteLine(json);
+                if (rd.code == 0)
+                {
+                    AllProduct allproduct = JsonConvert.DeserializeObject<AllProduct>(rd.data.ToString());
+                    return allproduct;
+
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "POS机全量数据同步异常：" + ex.Message);
+                erromessage = "POS机全量数据同步异常：" + ex.Message;
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// POS机增量数据同步接口
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="payid"></param>
+        /// <param name="erromessage"></param>
+        public AllProduct QuerySkushopIncrement(string shopid, int page, int size, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/product/pos/v2/getincrementskushopofflinedtoforpossync";
+
+
+                string tempjson = "{\"shopid\":\"" + shopid + "\",\"page\":" + page + ",\"size\":" + size + ",\"timestamp\":\"" + MainModel.LastQuerySkushopCrementTimeStamp + "\"}";
+
+
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                //Console.WriteLine(json);
+                if (rd.code == 0)
+                {
+                    AllProduct allproduct = JsonConvert.DeserializeObject<AllProduct>(rd.data.ToString());
+                    return allproduct;
+
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "POS机增量数据同步异常：" + ex.Message);
+                erromessage = "POS机增量数据同步异常：" + ex.Message;
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 获取面板商品价格
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="payid"></param>
+        /// <param name="erromessage"></param>
+        public List<Product> GetPanelProductPrice(PanelProductPara panelpropara, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/panelproduct/prices";
+
+
+                //panelproduct ppro = new panelproduct();
+                //ppro
+
+                string tempjson = JsonConvert.SerializeObject(panelpropara);
+
+
+                //tempjson = "{\"memberlogin\":0,\"products\":[{\"barcode\":\"20042639\",\"goodstagid\":1,\"isQueryBarcode\":0,\"mainimg\":\"https://pic.qdama.cn/Fszmtkf7p-rpK9wxTT5zcCAZdm9d\",\"num\":1.0,\"pricetagid\":0,\"saleunit\":\"kg\",\"shopid\":\"108888\",\"skucode\":\"20042639\",\"skuname\":\"百香果\",\"specnum\":0.0,\"spectype\":0,\"title\":\"百香果\",\"weightflag\":true},{\"barcode\":\"20048471\",\"goodstagid\":1,\"isQueryBarcode\":0,\"num\":1.0,\"pricetagid\":0,\"saleunit\":\"kg\",\"shopid\":\"108888\",\"skucode\":\"20048471\",\"skuname\":\"百香果W\",\"specnum\":0.0,\"spectype\":0,\"title\":\"百香果W\",\"weightflag\":true}],\"shopid\":\"108888\",\"usertoken\":\"\"}";
+                //tempjson = "{\"memberlogin\":0,\"products\":[{\"mainimg\":\"https://pic.qdama.cn/FsoTxQ-fRfS5EUCEaaQOKlJSaVDd\",\"pricetag\":\"\",\"pricetagid\":0,\"saleunit\":\"kg\",\"skucode\":\"20000011\",\"skuname\":\"油麦菜\"}],\"shopid\":\"501001\",\"usertoken\":\"\"}";
+
+                //tempjson = "{\"memberlogin\":0,\"products\":[{\"mainimg\":\"https://pic.qdama.cn/FsoTxQ-fRfS5EUCEaaQOKlJSaVDd\",\"pricetagid\":0,\"saleunit\":\"kg\",\"skucode\":\"20000011\"}],\"shopid\":\"501001\",\"usertoken\":\"\"}";
+
+                //tempjson = MainModel.GB2312ToUTF8(tempjson);
+                Console.WriteLine("面板商品参数:"+tempjson);
+                string json = HttpPOST(url, tempjson);
+                Console.WriteLine("面板商品返回:" + json);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                //Console.WriteLine(json);
+                if (rd.code == 0)
+                {
+                    List<Product> lstproduct = JsonConvert.DeserializeObject<List<Product>>(rd.data.ToString());
+                    return lstproduct;
+
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取面板商品异常：" + ex.Message);
+                erromessage = "获取面板商品价格异常：" + ex.Message;
+                return null;
+            }
+        }
+
+
+
+
+        #region  访问服务端
+        public string HttpGET(string Url, SortedDictionary<string, string> sortpara)
+        {
+            System.GC.Collect();
             string retString = "";
 
             string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
@@ -1433,13 +1656,7 @@ namespace QiandamaPOS.Common
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
 
-                try
-                {
-                    int timeout = 5000;
-                    if (timeout > 0)
-                        request.Timeout = timeout;
-                }
-                catch { }
+                request.Timeout = 60 * 1000;
 
                 System.Net.ServicePointManager.Expect100Continue = false;
 
@@ -1454,6 +1671,7 @@ namespace QiandamaPOS.Common
                 {
                     request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
                 }
+                
 
                 request.Method = "GET";
 
@@ -1465,22 +1683,36 @@ namespace QiandamaPOS.Common
 
                 request.ContentType = "application/json;charset=UTF-8";
 
-                //byte[] by = Encoding.GetEncoding("utf-8").GetBytes(body);   //请求参数转码
-                ////request.ContentType = "application/json;charset=UTF-8";
-                //request.ContinueTimeout = 500000;
-                //request.ContentLength = by.Length;
+                request.KeepAlive = false;
+                request.UseDefaultCredentials = true;
+                request.ServicePoint.Expect100Continue = false;//important
 
-                //Stream stw = request.GetRequestStream();     //获取绑定相应流
-                //stw.Write(by, 0, by.Length);      //写入流
-                //stw.Close();    //关闭流
 
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
+                System.Net.ServicePointManager.DefaultConnectionLimit = 50;
+                request.Timeout = 5000; //3秒钟无响应 网络有问题
+                if (CheckNet()) { 
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                request.Timeout = 60*1000;
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
                 retString = myStreamReader.ReadToEnd();
+                
                 myStreamReader.Close();
                 myResponseStream.Close();
+
+                try
+                {
+                    response.Close();
+                }
+                catch { }
+                }
+                try
+                {
+                    request.Abort();
+                }
+                catch { }
+                }
             }
             catch (Exception ex)
             {
@@ -1492,6 +1724,7 @@ namespace QiandamaPOS.Common
 
             return retString;
         }
+
 
 
         public string HttpPOST(string Url, string bodyjson)
@@ -1512,13 +1745,7 @@ namespace QiandamaPOS.Common
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
 
-                try
-                {
-                    int timeout = 5000;
-                    if (timeout > 0)
-                        request.Timeout = timeout;
-                }
-                catch { }
+               
 
                 System.Net.ServicePointManager.Expect100Continue = false;
 
@@ -1545,7 +1772,6 @@ namespace QiandamaPOS.Common
 
                 byte[] by = Encoding.GetEncoding("utf-8").GetBytes(bodyjson);   //请求参数转码
                 request.ContentType = "application/json;charset=UTF-8";
-                //request.ContinueTimeout = 500000;
                 request.Timeout = 1000 * 60;
                 request.ContentLength = by.Length;
 
@@ -1553,13 +1779,23 @@ namespace QiandamaPOS.Common
                 stw.Write(by, 0, by.Length);      //写入流
                 stw.Close();    //关闭流
 
+               // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                request.Timeout = 5000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
+                request.Timeout = 60 * 1000;
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
                 retString = myStreamReader.ReadToEnd();
                 myStreamReader.Close();
                 myResponseStream.Close();
+
+
+                try
+                {
+                    request.Abort();
+                    response.Close();
+                }
+                catch { }
             }
             catch (Exception ex)
             {
@@ -1574,6 +1810,37 @@ namespace QiandamaPOS.Common
         {
             // 总是接受  
             return true;
+        }
+
+        //检测IP连接
+        bool CheckNet()
+        {
+            bool var = false;
+
+            try
+            {
+                string ip = "www.baidu.com";
+                Ping pingSender = new Ping();
+
+                PingOptions pingOption = new PingOptions();
+                pingOption.DontFragment = true;
+                string data = "0";
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                int timeout = 500;
+                PingReply reply = pingSender.Send(ip, timeout, buffer);
+                if (reply.Status == IPStatus.Success)
+                    var = true;
+                else
+                    var = false;
+            }
+            catch (Exception ex)
+            {
+                
+                return false;
+                // ShowLog("无法检测网络连接是否正常-" + ex.Message, true);
+            }
+
+            return var;
         }
 
         ////当前时间戳
@@ -1645,6 +1912,7 @@ namespace QiandamaPOS.Common
 
         //    return dicresult;
         //}
+
         #endregion  
     }
 }

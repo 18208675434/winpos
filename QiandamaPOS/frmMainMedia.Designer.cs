@@ -60,7 +60,7 @@
             this.lblPayInfo = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlMemberCard = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblmemberCard = new System.Windows.Forms.Label();
             this.picMemberCard = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnl4 = new System.Windows.Forms.Panel();
@@ -77,9 +77,6 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lblGoodsCount = new System.Windows.Forms.Label();
@@ -177,6 +174,7 @@
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvGood.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvGood.Enabled = false;
             this.dgvGood.GridColor = System.Drawing.Color.Black;
             this.dgvGood.Location = new System.Drawing.Point(6, 81);
             this.dgvGood.MultiSelect = false;
@@ -266,7 +264,7 @@
             // 
             // total
             // 
-            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F);
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.OrangeRed;
@@ -276,7 +274,6 @@
             this.total.HeaderText = "应付(元)";
             this.total.Name = "total";
             this.total.ReadOnly = true;
-            this.total.Width = 130;
             // 
             // picBirthday4
             // 
@@ -370,24 +367,25 @@
             // 
             // pnlMemberCard
             // 
-            this.pnlMemberCard.Controls.Add(this.label1);
+            this.pnlMemberCard.Controls.Add(this.lblmemberCard);
             this.pnlMemberCard.Controls.Add(this.picMemberCard);
             this.pnlMemberCard.Location = new System.Drawing.Point(726, 445);
             this.pnlMemberCard.Name = "pnlMemberCard";
             this.pnlMemberCard.Size = new System.Drawing.Size(269, 278);
             this.pnlMemberCard.TabIndex = 18;
+            this.pnlMemberCard.Visible = false;
             // 
-            // label1
+            // lblmemberCard
             // 
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(20, 234);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 31);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "微信扫码打开电子会员卡";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblmemberCard.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblmemberCard.ForeColor = System.Drawing.Color.Black;
+            this.lblmemberCard.Location = new System.Drawing.Point(27, 234);
+            this.lblmemberCard.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblmemberCard.Name = "lblmemberCard";
+            this.lblmemberCard.Size = new System.Drawing.Size(220, 31);
+            this.lblmemberCard.TabIndex = 10;
+            this.lblmemberCard.Text = "微信扫码打开电子会员卡";
+            this.lblmemberCard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picMemberCard
             // 
@@ -527,9 +525,6 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.dgvOrderDetail);
             this.panel2.Controls.Add(this.panel1);
-            this.panel2.Controls.Add(this.label15);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.lblPrice);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.lblGoodsCount);
@@ -565,15 +560,16 @@
             this.dgvOrderDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
+            this.dgvOrderDetail.Enabled = false;
             this.dgvOrderDetail.GridColor = System.Drawing.Color.Black;
-            this.dgvOrderDetail.Location = new System.Drawing.Point(5, 63);
+            this.dgvOrderDetail.Location = new System.Drawing.Point(11, 63);
             this.dgvOrderDetail.Name = "dgvOrderDetail";
             this.dgvOrderDetail.ReadOnly = true;
             this.dgvOrderDetail.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvOrderDetail.RowHeadersVisible = false;
             this.dgvOrderDetail.RowTemplate.Height = 90;
             this.dgvOrderDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrderDetail.Size = new System.Drawing.Size(228, 139);
+            this.dgvOrderDetail.Size = new System.Drawing.Size(222, 139);
             this.dgvOrderDetail.TabIndex = 18;
             // 
             // dataGridViewTextBoxColumn1
@@ -608,51 +604,17 @@
             this.panel1.Size = new System.Drawing.Size(223, 1);
             this.panel1.TabIndex = 15;
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label15.Location = new System.Drawing.Point(157, 25);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(74, 21);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "件商品）";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label14.Location = new System.Drawing.Point(105, 25);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(26, 21);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "（";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label11.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label11.Location = new System.Drawing.Point(133, 229);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 25);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "￥";
-            // 
             // lblPrice
             // 
-            this.lblPrice.AutoSize = true;
             this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(163, 229);
+            this.lblPrice.Location = new System.Drawing.Point(85, 229);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(50, 25);
+            this.lblPrice.Size = new System.Drawing.Size(146, 25);
             this.lblPrice.TabIndex = 10;
             this.lblPrice.Text = "0.00";
+            this.lblPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
@@ -669,12 +631,12 @@
             // 
             this.lblGoodsCount.AutoSize = true;
             this.lblGoodsCount.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblGoodsCount.Location = new System.Drawing.Point(134, 25);
+            this.lblGoodsCount.Location = new System.Drawing.Point(93, 20);
             this.lblGoodsCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGoodsCount.Name = "lblGoodsCount";
-            this.lblGoodsCount.Size = new System.Drawing.Size(19, 21);
+            this.lblGoodsCount.Size = new System.Drawing.Size(77, 21);
             this.lblGoodsCount.TabIndex = 3;
-            this.lblGoodsCount.Text = "0";
+            this.lblGoodsCount.Text = "(0件商品)";
             // 
             // label3
             // 
@@ -702,23 +664,21 @@
             // 
             this.lblWechartNickName.AutoSize = true;
             this.lblWechartNickName.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblWechartNickName.Location = new System.Drawing.Point(11, 60);
+            this.lblWechartNickName.Location = new System.Drawing.Point(13, 61);
             this.lblWechartNickName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWechartNickName.Name = "lblWechartNickName";
-            this.lblWechartNickName.Size = new System.Drawing.Size(116, 21);
+            this.lblWechartNickName.Size = new System.Drawing.Size(0, 21);
             this.lblWechartNickName.TabIndex = 6;
-            this.lblWechartNickName.Text = "某某某  你好！";
             // 
             // lblMobil
             // 
             this.lblMobil.AutoSize = true;
             this.lblMobil.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblMobil.Location = new System.Drawing.Point(8, 21);
+            this.lblMobil.Location = new System.Drawing.Point(13, 22);
             this.lblMobil.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMobil.Name = "lblMobil";
-            this.lblMobil.Size = new System.Drawing.Size(101, 21);
+            this.lblMobil.Size = new System.Drawing.Size(0, 21);
             this.lblMobil.TabIndex = 5;
-            this.lblMobil.Text = "152****6604";
             // 
             // tabPageAdvert
             // 
@@ -734,11 +694,11 @@
             // player
             // 
             this.player.Enabled = true;
-            this.player.Location = new System.Drawing.Point(5, 14);
+            this.player.Location = new System.Drawing.Point(5, 5);
             this.player.Margin = new System.Windows.Forms.Padding(2);
             this.player.Name = "player";
             this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
-            this.player.Size = new System.Drawing.Size(986, 701);
+            this.player.Size = new System.Drawing.Size(1005, 773);
             this.player.TabIndex = 16;
             this.player.StatusChange += new System.EventHandler(this.player_StatusChange);
             // 
@@ -748,6 +708,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 760);
             this.Controls.Add(this.tabControlMedia);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("宋体", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -755,6 +716,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMainMedia";
+            this.Load += new System.EventHandler(this.frmMainMedia_Load);
             this.SizeChanged += new System.EventHandler(this.frmMainMedia_SizeChanged);
             this.tabControlMedia.ResumeLayout(false);
             this.tabPageIni.ResumeLayout(false);
@@ -795,7 +757,7 @@
         private System.Windows.Forms.Label lblPayInfo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel pnlMemberCard;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblmemberCard;
         private System.Windows.Forms.PictureBox picMemberCard;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnl4;
@@ -818,9 +780,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblGoodsCount;

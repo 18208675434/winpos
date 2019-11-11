@@ -38,9 +38,7 @@ namespace QiandamaPOS
             ////处理非UI线程异常
             //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-
-
-            Application.EnableVisualStyles();
+            //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmLogin());
             //Application.Run(new frmTest());
@@ -62,10 +60,11 @@ namespace QiandamaPOS
             {//循环处理，否则应用程序将会退出
                 if (glExitApp)
                 {//标志应用程序可以退出，否则程序退出后，进程仍然在运行
+                    //MessageBox.Show("异常，系统将自动关闭！");
                     LogManager.WriteLog("ExitApp");
                     return;
                 }
-                System.Threading.Thread.Sleep(2 * 1000);
+                System.Threading.Thread.Sleep(100);
             };
         }
 

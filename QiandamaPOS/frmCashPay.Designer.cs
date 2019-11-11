@@ -33,7 +33,6 @@
             this.lblPrice = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCash = new System.Windows.Forms.TextBox();
             this.btn1 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn3 = new System.Windows.Forms.Button();
@@ -49,6 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lbtnCancle = new System.Windows.Forms.Label();
+            this.txtCash = new QiandamaPOS.UserControl.WaterTextBox();
             this.SuspendLayout();
             // 
             // btnNext
@@ -102,16 +102,6 @@
             this.label1.Size = new System.Drawing.Size(88, 25);
             this.label1.TabIndex = 9;
             this.label1.Text = "现金收银";
-            // 
-            // txtCash
-            // 
-            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 22F);
-            this.txtCash.Location = new System.Drawing.Point(25, 115);
-            this.txtCash.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCash.Name = "txtCash";
-            this.txtCash.Size = new System.Drawing.Size(330, 46);
-            this.txtCash.TabIndex = 18;
-            this.txtCash.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // btn1
             // 
@@ -317,6 +307,15 @@
             this.lbtnCancle.Text = "返回选择收银方式 >";
             this.lbtnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
+            // txtCash
+            // 
+            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 22F);
+            this.txtCash.Location = new System.Drawing.Point(25, 114);
+            this.txtCash.Name = "txtCash";
+            this.txtCash.Size = new System.Drawing.Size(330, 46);
+            this.txtCash.TabIndex = 34;
+            this.txtCash.WaterText = "请输入实收现金";
+            // 
             // frmCashPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -324,6 +323,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(380, 520);
+            this.Controls.Add(this.txtCash);
             this.Controls.Add(this.lbtnCancle);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -339,7 +339,6 @@
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
-            this.Controls.Add(this.txtCash);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.label2);
@@ -365,7 +364,6 @@
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtCash;
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn3;
@@ -381,5 +379,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbtnCancle;
+        private UserControl.WaterTextBox txtCash;
     }
 }

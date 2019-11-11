@@ -22,6 +22,7 @@ namespace QiandamaPOS
         public frmDeleteGood(string msgstr,string proname,string barcode)
         {
             InitializeComponent();
+            this.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - this.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Height) / 2);
             lblMsgStr.Text=msgstr;
             lblMsg.Text = proname + "  " + barcode;
         }

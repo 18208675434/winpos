@@ -92,7 +92,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmDeleteGood";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.SizeChanged += new System.EventHandler(this.frmDeleteGood_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -71,10 +71,10 @@ namespace QiandamaPOS
             threadOrderStatus.Start();
             Delay.Start(1000);
 
-            //Thread threadPrint = new Thread(SEDPrint);
-            //threadPrint.IsBackground = true;
-            //threadPrint.Start();
-            SEDPrint();
+            Thread threadPrint = new Thread(SEDPrint);
+            threadPrint.IsBackground = true;
+            threadPrint.Start();
+            //SEDPrint();
         }
 
         private void SEDPrint()
@@ -91,8 +91,7 @@ namespace QiandamaPOS
                 }
                 else
                 {
-                    this.Invoke(new InvokeHandler(delegate()
-                       {
+                    
                            //显示收银详情
                            foreach (Payinfo pay in printdetail.payinfo)
                            {
@@ -103,10 +102,10 @@ namespace QiandamaPOS
                            if (DataReceiveHandle != null)
                                this.DataReceiveHandle.BeginInvoke(1, lblCashierInfo.Text, null, null);
 
-                       }));
+                       
                     Application.DoEvents();
                     string PrintErrorMsg = "";
-                    bool printresult = PrintUtil.SEDPrint(printdetail, ref PrintErrorMsg);
+                    bool printresult = PrintUtil.SEDPrint(printdetail,false, ref PrintErrorMsg);
 
 
                     if (PrintErrorMsg != "" || !printresult)
@@ -184,7 +183,7 @@ namespace QiandamaPOS
 
         private void frmCashierResult_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+           // asf.ControlAutoSize(this);
         }
 
         private void frmCashierResult_FormClosing(object sender, FormClosingEventArgs e)

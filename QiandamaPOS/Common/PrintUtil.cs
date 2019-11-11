@@ -11,7 +11,7 @@ namespace QiandamaPOS.Common
     public class PrintUtil
     {
 
-        public static bool SEDPrint(PrintDetail printdetail,ref string errormsg)
+        public static bool SEDPrint(PrintDetail printdetail,bool isRefound, ref string errormsg)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace QiandamaPOS.Common
                 PrintUtil.SetFontSize(0, 1);
                 StringBuilder stringb = new StringBuilder("   欢迎光临[钱大妈]不卖隔夜肉\n");
                 PrintUtil.PrintStr(stringb);
-
+                 
                 PrintUtil.SetFontSize(0, 0);
                 PrintUtil.FeedPaper();
                 StringBuilder sb = new StringBuilder();
@@ -71,14 +71,52 @@ namespace QiandamaPOS.Common
                 //汉字占两位 TODO 判断前面汉字和英文数字
                 foreach (Orderpricedetail pricedetail in printdetail.orderpricedetails)
                 {
-                    sb.Append(pricedetail.title + pricedetail.amount.PadLeft(28 - Encoding.Default.GetBytes(pricedetail.title).Length, ' ') + "\n");
+                    if (isRefound)
+                    {
+                        sb.Append(pricedetail.title.Replace("应收","退款") + pricedetail.amount.PadLeft(28 - Encoding.Default.GetBytes(pricedetail.title).Length, ' ') + "\n");
+
+                    }
+                    else
+                    {
+                        sb.Append(pricedetail.title + pricedetail.amount.PadLeft(28 - Encoding.Default.GetBytes(pricedetail.title).Length, ' ') + "\n");
+
+                    }
 
                 }
                 sb.Append(DateTime.Now.ToString("-----------------------------" + "\n"));
 
+               
+                if (isRefound)
+                {
+                    sb.Append("退款" + "\n");
+                }
+
                 foreach (Paydetail paydetail in printdetail.paydetail)
                 {
-                    sb.Append(paydetail.title + paydetail.amount.PadLeft(28 - paydetail.title.Length * 2, ' ') + "\n");
+                    if (isRefound)
+                    {
+                        
+                        sb.Append(paydetail.title.Replace("支付","退款").Replace("退款宝","支付宝") + paydetail.amount.PadLeft(28 - paydetail.title.Length * 2, ' ') + "\n");
+                    }
+                    else
+                    {
+                        sb.Append(paydetail.title + paydetail.amount.PadLeft(28 - paydetail.title.Length * 2, ' ') + "\n");
+                    }
+
+                }
+
+                if (printdetail.pointinfo != null && printdetail.pointinfo.Length > 0)
+                {
+
+                    sb.Append(DateTime.Now.ToString("-----------------------------" + "\n"));
+                    foreach (PointInfo pointinfo in printdetail.pointinfo)
+                    {
+
+                        sb.Append(pointinfo.title + pointinfo.amount.PadLeft(28 - Encoding.Default.GetBytes(pointinfo.title).Length, ' ') + "\n");
+
+
+                    }
+                    
 
                 }
 
@@ -98,7 +136,7 @@ namespace QiandamaPOS.Common
                 string qrcodepath = AppDomain.CurrentDomain.BaseDirectory + "\\QrCode.bmp";
                 StringBuilder sbqr = new StringBuilder(qrcodepath);
 
-                PrintUtil.PrintBitmap(sbqr, 3);
+                PrintUtil.PrintBitmap(sbqr, 0);
 
 
                 PrintUtil.SetFontSize(0, 1);
@@ -361,13 +399,20 @@ namespace QiandamaPOS.Common
             return i;
         }
 
-        public static int OpenCashBox()
+        public static void OpenCashBox()
         {
-            int i;
-            OpenDevice();
-            i = SetCashBoxDriveMode();
-            CloseDevice();
-            return i;
+            try
+            {
+                int i;
+                OpenDevice();
+                i = SetCashBoxDriveMode();
+                CloseDevice();
+               // return i;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("钱箱打开失败"+ex.Message);
+            }
         }
         public static int CloseDevice()
         {

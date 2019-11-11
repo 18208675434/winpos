@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Maticsoft.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace QiandamaPOS.Model
 
     public class Scale
     {
-        public Row[] rows { get; set; }
+        public List<DBSWITCH_KEY_BEANMODEL> rows { get; set; }
         public string total { get; set; }
         public int page { get; set; }
         public int size { get; set; }

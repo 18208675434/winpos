@@ -23,16 +23,33 @@ namespace QiandamaPOS
         public frmMsg(string Msg,bool isrun,int interval)
         {
             InitializeComponent();
-            
-            lblMsg.Text = Msg;
-            this.ClientSize = new System.Drawing.Size(lblMsg.Width+10, this.Size.Height);
-            timerClose.Interval = interval;
-            timerClose.Enabled = true;
+
+            try
+            {
+                lblMsg.Text = Msg;
+
+                timerClose.Interval = interval;
+                timerClose.Enabled = true;
+
+                this.ClientSize = new System.Drawing.Size(lblMsg.Width + 10, this.Size.Height);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("初始化消息页面异常"+ex.Message);
+            }
+         
         }
 
         private void timerClose_Tick(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                this.Close();
+            }
         }
 
         private void frmMsg_SizeChanged(object sender, EventArgs e)
@@ -41,7 +58,7 @@ namespace QiandamaPOS
             //<summary>
             //按比例缩放页面及控件
             //</summary>
-            AutoSizeFormUtil asf = new AutoSizeFormUtil();
+           // AutoSizeFormUtil asf = new AutoSizeFormUtil();
         }
 
 

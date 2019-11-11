@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNumber));
             this.btnOK = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
-            this.txtNum = new System.Windows.Forms.TextBox();
             this.btn1 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn3 = new System.Windows.Forms.Button();
@@ -44,8 +43,10 @@
             this.btnDel = new System.Windows.Forms.Button();
             this.btn00 = new System.Windows.Forms.Button();
             this.btn0 = new System.Windows.Forms.Button();
-            this.lblg = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
+            this.txtNum = new QiandamaPOS.UserControl.WaterTextBox();
+            this.lblg = new System.Windows.Forms.Label();
+            this.lblMsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnOK
@@ -75,17 +76,6 @@
             this.lblInfo.Size = new System.Drawing.Size(126, 25);
             this.lblInfo.TabIndex = 11;
             this.lblInfo.Text = "输入商品条码";
-            // 
-            // txtNum
-            // 
-            this.txtNum.BackColor = System.Drawing.Color.White;
-            this.txtNum.Font = new System.Drawing.Font("微软雅黑", 22F);
-            this.txtNum.Location = new System.Drawing.Point(30, 91);
-            this.txtNum.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNum.Name = "txtNum";
-            this.txtNum.Size = new System.Drawing.Size(330, 46);
-            this.txtNum.TabIndex = 18;
-            this.txtNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // btn1
             // 
@@ -256,16 +246,6 @@
             this.btn0.UseVisualStyleBackColor = true;
             this.btn0.Click += new System.EventHandler(this.btn_Click);
             // 
-            // lblg
-            // 
-            this.lblg.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.lblg.Location = new System.Drawing.Point(333, 91);
-            this.lblg.Name = "lblg";
-            this.lblg.Size = new System.Drawing.Size(27, 46);
-            this.lblg.TabIndex = 31;
-            this.lblg.Text = "g";
-            this.lblg.Visible = false;
-            // 
             // btnCancle
             // 
             this.btnCancle.FlatAppearance.BorderSize = 0;
@@ -279,14 +259,46 @@
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
+            // txtNum
+            // 
+            this.txtNum.Font = new System.Drawing.Font("微软雅黑", 22F);
+            this.txtNum.Location = new System.Drawing.Point(30, 78);
+            this.txtNum.MaxLength = 18;
+            this.txtNum.Name = "txtNum";
+            this.txtNum.Size = new System.Drawing.Size(330, 46);
+            this.txtNum.TabIndex = 35;
+            this.txtNum.WaterText = "请输入实收现金";
+            // 
+            // lblg
+            // 
+            this.lblg.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblg.Location = new System.Drawing.Point(333, 78);
+            this.lblg.Name = "lblg";
+            this.lblg.Size = new System.Drawing.Size(27, 46);
+            this.lblg.TabIndex = 36;
+            this.lblg.Text = "g";
+            this.lblg.Visible = false;
+            // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMsg.ForeColor = System.Drawing.Color.Tomato;
+            this.lblMsg.Location = new System.Drawing.Point(28, 127);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(0, 20);
+            this.lblMsg.TabIndex = 37;
+            // 
             // frmNumber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 498);
-            this.Controls.Add(this.btnCancle);
+            this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.lblg);
+            this.Controls.Add(this.txtNum);
+            this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btn00);
             this.Controls.Add(this.btn0);
@@ -299,7 +311,6 @@
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
-            this.Controls.Add(this.txtNum);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -321,7 +332,6 @@
 
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label lblInfo;
-        private System.Windows.Forms.TextBox txtNum;
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn3;
@@ -334,7 +344,9 @@
         private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.Button btn00;
         private System.Windows.Forms.Button btn0;
-        private System.Windows.Forms.Label lblg;
         private System.Windows.Forms.Button btnCancle;
+        private UserControl.WaterTextBox txtNum;
+        private System.Windows.Forms.Label lblg;
+        private System.Windows.Forms.Label lblMsg;
     }
 }

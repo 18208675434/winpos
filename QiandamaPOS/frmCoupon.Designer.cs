@@ -41,7 +41,7 @@
             this.couponcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.content = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.select = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.select = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoupon)).BeginInit();
             this.pnlCouponNone.SuspendLayout();
             this.SuspendLayout();
@@ -160,11 +160,12 @@
             this.select.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(35, 15, 35, 15);
             this.select.DefaultCellStyle = dataGridViewCellStyle4;
+            this.select.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.select.HeaderText = "使用";
             this.select.Name = "select";
             this.select.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.select.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frmCoupon
             // 
@@ -200,6 +201,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn couponcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn content;
-        private System.Windows.Forms.DataGridViewTextBoxColumn select;
+        private System.Windows.Forms.DataGridViewButtonColumn select;
     }
 }

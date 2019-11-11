@@ -55,7 +55,7 @@ namespace QiandamaPOS
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("devicesn", MainModel.DeviceSN);
 
-                string json = httputil.HttpGET(url,sort);
+                string json = httputil.HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {

@@ -38,9 +38,16 @@ namespace QiandamaPOS
 
         private void frmLogin_Shown(object sender, EventArgs e)
         {
+
+
+          
+
+        //public void QuerySkushopAll(string shopid, int page, int size, ref string erromessage)
+
            //判断日志文件夹是否存在，不存在则新建
            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Log");
+
 
            Thread threadItemExedate = new Thread(ThreadUpStart);
            threadItemExedate.IsBackground = true;
@@ -48,66 +55,7 @@ namespace QiandamaPOS
 
            Thread threadIniFormExedate = new Thread(IniForm);
            threadIniFormExedate.IsBackground = true;
-           threadIniFormExedate.Start();
-
-           //string devicesn = GlobalUtil.GetHardDiskID();
-               
-           ////MainModel.DeviceSN = MainModel.GetHardDiskID();
-
-           //INIManager.SetIni("System", "DeviceSN", devicesn, MainModel.IniPath);
-           //MainModel.DeviceSN = devicesn;
-           //lblSN.Text = "设备序列号：" + devicesn;
-
-
-           // try
-           // {
-           //     LoadingHelper.ShowLoadingScreen("用户/门店信息验证中，请稍候");
-            
-           //     if (!LoadUser() || !LoadShopInfo())
-           //     {
-           //         LoadingHelper.CloseForm();
-
-           //         txtUser.Clear();
-           //         txtPwd.Clear();
-           //         isReLogin = true;
-           //         int screenwdith = Screen.PrimaryScreen.Bounds.Width;
-           //         //this.Location = new System.Drawing.Point((screenwdith - this.Width) / 2, 10);
-
-           //         lblUser_Click(null, null);
-           //         //lblSN.Text = "设备序列号：" + GlobalUtil.GetPCSN();
-
-           //         txtUser.SetWatermark("请输入11位手机号");
-           //         txtPwd.SetWatermark("请输入密码");
-
-           //         txtPhone.SetWatermark("请输入11位手机号");
-           //         txtCheckCode.SetWatermark("请输入右侧图形验证码");
-           //         txtPhoneCheckCode.SetWatermark("请输入短信验证码");
-           //     }
-           //     else
-           //     {
-           
-           //         frmMain frmmain = new frmMain(this);
-           //         //frmmain.frmMain_SizeChanged(null,null);
-           //         //frmmain.WindowState = FormWindowState.Maximized;
-           //         //Screen.PrimaryScreen.Bounds.Height
-           //         asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
-           //         this.Hide();
-           //         CloseOSK();
-
-           //         //asf.AutoScaleControl(frmmain);
-           //         frmmain.ShowDialog();
-           //     }              
-
-           // }
-           // catch (Exception ex)
-           // {
-           //     LogManager.WriteLog("登录异常："+ex.Message);
-           // }
-           // finally
-           // {
-           //    // LoadingHelper.CloseForm();
-           // }
-           
+           threadIniFormExedate.Start(); 
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -138,6 +86,9 @@ namespace QiandamaPOS
                 {
                    // LoadingHelper.CloseForm();
 
+                 
+                   // lblMsg.Text = "";
+
                     txtUser.Clear();
                     txtPwd.Clear();
                     isReLogin = true;
@@ -147,20 +98,20 @@ namespace QiandamaPOS
                     lblUser_Click(null, null);
                     //lblSN.Text = "设备序列号：" + GlobalUtil.GetPCSN();
 
-                    txtUser.SetWatermark("请输入11位手机号");
-                    txtPwd.SetWatermark("请输入密码");
+                    //txtUser.SetWatermark("请输入11位手机号");
+                    //txtPwd.SetWatermark("请输入密码");
 
-                    txtPhone.SetWatermark("请输入11位手机号");
-                    txtCheckCode.SetWatermark("请输入右侧图形验证码");
-                    txtPhoneCheckCode.SetWatermark("请输入短信验证码");
+                    //txtPhone.Font = new System.Drawing.Font("微软雅黑", 10F);
+                    //txtPhone.SetWatermark("请输入11位手机号");
+                    //txtCheckCode.SetWatermark("请输入右侧图形验证码");
+                    //txtPhoneCheckCode.SetWatermark("请输入短信验证码");
                 }
                 else
                 {
+               
 
                     frmMain frmmain = new frmMain(this);
-                    //frmmain.frmMain_SizeChanged(null,null);
-                    //frmmain.WindowState = FormWindowState.Maximized;
-                    //Screen.PrimaryScreen.Bounds.Height
+
                     asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
                     this.Hide();
                     CloseOSK();
@@ -200,36 +151,14 @@ namespace QiandamaPOS
             //TODO  调用接口 验证用户
             string username = txtUser.Text;
             string password = txtPwd.Text;
+            lblMsg.Text = "";
 
             if (username == "" || password == "")
             {
                 lblMsg.Text = "*用户名密码不能为空";
                 return;
             }
-            //如果是当前登录用户 不重新获取token
-            if(username==INIManager.GetIni("System", "UserName", MainModel.IniPath) && password==INIManager.GetIni("System", "PassWord", MainModel.IniPath) && !isReLogin)
-            {
-                if (!LoadUser() || !LoadShopInfo())
-                {
-                    txtUser.Clear();
-                    txtPwd.Clear();
-                    isReLogin = true;
-                    return;
-                }
-
-                INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
-                INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
-
-                frmMain frmmain = new frmMain(this);
-                asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
-                this.Hide();
-                CloseOSK();
-
-                //asf.AutoScaleControl(frmmain);
-                frmmain.ShowDialog();              
-            }
-            else//重新登录账户
-            {
+           
                 string ErrorMsg = "";
                 string Token = httputil.Signin(username,password,ref ErrorMsg);
                 if (ErrorMsg != "" || Token=="")
@@ -244,29 +173,19 @@ namespace QiandamaPOS
                     {
                         return;
                     }
-                    //MainModel.DeviceSN = Token;
                    
 
                     INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
                     INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
-                    //frmMain frmmain = new frmMain();
-                    //frmmain.WindowState = FormWindowState.Maximized;
-                    //this.Hide();
-                    //CloseOSK();
-                    //frmmain.Show();
 
                     frmMain frmmain = new frmMain(this);
-                    //frmmain.frmMain_SizeChanged(null,null);
-                    //frmmain.WindowState = FormWindowState.Maximized;
-                    //Screen.PrimaryScreen.Bounds.Height
+
                     asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
                     this.Hide();
                     CloseOSK();
-
-                    //asf.AutoScaleControl(frmmain);
                     frmmain.ShowDialog();
                 }
-            }
+            
             
         }
         
@@ -298,10 +217,21 @@ namespace QiandamaPOS
                 }
                 else
                 {
-                    string ErrorMsg = "";
-                    httputil.SendSmsCode(txtPhone.Text,CurrentImgCodeKey,txtCheckCode.Text,ref ErrorMsg);
-                    //TODO 调用接口发送手机验
+                 
+                    if (lblSendCheckCode.Text == "发送验证码")
+                    {
+                        string ErrorMsg = "";
+                        if (httputil.SendSmsCode(txtPhone.Text, CurrentImgCodeKey, txtCheckCode.Text, ref ErrorMsg))
+                        {
 
+                            lblSendCheckCode.Text = "60";
+                            timerNow.Enabled = true;
+                        }
+                        else
+                        {
+                            lblMsg.Text = ErrorMsg;
+                        }                        
+                    }
                 }
             
         }
@@ -313,7 +243,7 @@ namespace QiandamaPOS
             signpara.imgcodekey=CurrentImgCodeKey;
             signpara.phone=txtPhone.Text;
             signpara.smscode=txtPhoneCheckCode.Text;
-
+            lblMsg.Text = "";
               string ErrorMsg = "";
                 string Token = httputil.SigninWithSmscode(signpara,ref ErrorMsg);
                 if (ErrorMsg != "" || Token == "")
@@ -328,26 +258,14 @@ namespace QiandamaPOS
                     {
                         return;
                     }
-                    //MainModel.DeviceSN = Token;
 
-
-                    ////INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
-                    ////INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
-                    //frmMain frmmain = new frmMain();
-                    //frmmain.WindowState = FormWindowState.Maximized;
-                    //this.Hide();
-                    //CloseOSK();
-                    //frmmain.Show();
 
                     frmMain frmmain = new frmMain(this);
-                    //frmmain.frmMain_SizeChanged(null,null);
-                    //frmmain.WindowState = FormWindowState.Maximized;
-                    //Screen.PrimaryScreen.Bounds.Height
+
                     asf.AutoScaleControlTest(frmmain, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
                     this.Hide();
                     CloseOSK();
 
-                    //asf.AutoScaleControl(frmmain);
                     frmmain.ShowDialog();
                 }
           
@@ -468,8 +386,8 @@ namespace QiandamaPOS
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("获取用户信息异常：" + ex.Message);
-                lblMsg.Text = "获取用户信息异常，请重新登录：";
+                LogManager.WriteLog("获取门店信息异常：" + ex.Message);
+                lblMsg.Text = "获取门店信息异常，请重新登录：";
                 return false;
             }
         }
@@ -483,23 +401,29 @@ namespace QiandamaPOS
         private string CurrentImgCodeKey = "";
         private void GetAuthcodeImage()
         {
-            string ErrorMsg = "";
-            AuthCodeImage  authcodeimage = httputil.GetAuthcodeImage(ref ErrorMsg);
-            CurrentImgCodeKey = authcodeimage.key;
-            string ss = authcodeimage.imagestr;
-            int startIndex = ss.IndexOf("base64,");//开始位置
+            try
+            {
+                string ErrorMsg = "";
+                AuthCodeImage authcodeimage = httputil.GetAuthcodeImage(ref ErrorMsg);
+                CurrentImgCodeKey = authcodeimage.key;
+                string ss = authcodeimage.imagestr;
+                int startIndex = ss.IndexOf("base64,");//开始位置
 
-            string inputStr = ss.Substring(startIndex+7, ss.Length - startIndex-7);//从开始位置截取一个新的字符串
+                string inputStr = ss.Substring(startIndex + 7, ss.Length - startIndex - 7);//从开始位置截取一个新的字符串
 
-            byte[] arr = Convert.FromBase64String(inputStr);
-            MemoryStream ms = new MemoryStream(arr);
-            Bitmap bmp = new Bitmap(ms);
+                byte[] arr = Convert.FromBase64String(inputStr);
+                MemoryStream ms = new MemoryStream(arr);
+                Bitmap bmp = new Bitmap(ms);
 
-            picCheckCode.Image = bmp;
+                picCheckCode.Image = bmp;
+                ms.Close();
 
-            ms.Close();
+                Image _image = bmp;
+            }
+            catch (Exception ex)
+            {
 
-            Image _image = bmp;
+            }
         }
 
 
@@ -558,7 +482,50 @@ namespace QiandamaPOS
             }
         }
 
-       
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                lblSendCheckCode.Text = (Convert.ToInt16(lblSendCheckCode.Text) - 1).ToString();
+
+                if (lblSendCheckCode.Text == "0")
+                {
+                    lblSendCheckCode.Text = "发送验证码";
+                    timerNow.Enabled = false;
+                }
+            }
+            catch { }
+        }
+
+
+        private int click = 0;
+        private DateTime lastClickTime = DateTime.Now;
+        //切换环境
+        private void lblSN_Click(object sender, EventArgs e)
+        {
+            LogManager.WriteLog(click.ToString());
+            // 两次点击间隔小于100毫秒时，算连续点击
+            if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 5000)
+            {
+                click++;
+                if (click >= 3)
+                {
+                    click = 0;// 连续点击完毕时，清0
+                    frmChangeUrl frmchangeurl = new frmChangeUrl();
+                    frmchangeurl.ShowDialog();
+                }
+            }
+            else
+            {
+                
+                click = 1;// 不是连续点击时，清0
+            }
+            lastClickTime = DateTime.Now;
+        }
+
+     
+
     }
 
 

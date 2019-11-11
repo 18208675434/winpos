@@ -196,8 +196,9 @@ namespace QiandamaPOS.Common
                         {
                             DataGridView dgv = (DataGridView)c;
 
-
+                          
                             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+                            
 
                             dgv.RowTemplate.Height = Convert.ToInt16(dgv.RowTemplate.Height * hScale);
 
@@ -213,6 +214,7 @@ namespace QiandamaPOS.Common
                             {
                                 dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
                                 dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", Math.Min(dgv.ColumnHeadersDefaultCellStyle.Font.Size * wScale, dgv.ColumnHeadersDefaultCellStyle.Font.Size * hScale));
+                                
                                 dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
                             }
                             foreach (DataGridViewColumn dr in dgv.Columns)
@@ -226,8 +228,10 @@ namespace QiandamaPOS.Common
                                     dr.DefaultCellStyle.Alignment = dr.DefaultCellStyle.Alignment;
                                 }
 
-
                             }
+
+                            dgv.AllowUserToResizeColumns = false;
+                            dgv.AllowUserToResizeRows = false;
                         }
                         catch (Exception ex)
                         {

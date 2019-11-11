@@ -55,7 +55,6 @@ namespace QiandamaPOS
         {
             InitializeComponent();
 
-
         }
 
         public frmCashPay( Cart cart)
@@ -67,7 +66,7 @@ namespace QiandamaPOS
         }
         private void frmCash_Shown(object sender, EventArgs e)
         {
-            txtCash.SetWatermark("请输入实收现金");
+           
             txtCash.Text = thisCurrentCart.payamtbeforecash.ToString();
             //btnNext.Focus();
             btnDel.Focus();
@@ -96,28 +95,35 @@ namespace QiandamaPOS
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            thisCurrentCart.cashpayamt = 0;
+            try
+            {
+                if (CashPayDataReceiveHandle != null)
+                    this.CashPayDataReceiveHandle.BeginInvoke(3, "", null, null);
 
-            if (CashPayDataReceiveHandle != null)
-                this.CashPayDataReceiveHandle.BeginInvoke(3, "", null, null);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
 
-            this.Close();
+            }
         }
 
         //下一步需要判断实收现金是否足够 通过cart接口返回值判断
         private void btnNext_Click(object sender, EventArgs e)
         {
+
+            try
+            {
             //必须输入金额才能继续
             if (txtCash.Text.Length == 0)
             {
                 return;
             }
+         
+                Thread threadItemExedate = new Thread(PrintUtil.OpenCashBox);
+                threadItemExedate.IsBackground = true;
+                threadItemExedate.Start();
 
-            try
-            {
-
-
-                PrintUtil.OpenCashBox();
 
                 ReceiptUtil.EditOpenMoneyPacketCount(1);
 
@@ -253,37 +259,47 @@ namespace QiandamaPOS
 
         private void FormOnline_DataReceiveHandle(int type)
         {
-
-            if (type == 1)
+            try
             {
-                string ErrorMsg = "";
-                int ResultCode = 0;
-                CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
-                if (ResultCode != 0 || orderresult == null)
-                {
-                    CheckUserAndMember(ResultCode);
-                    ShowLog("异常" + ErrorMsg, true);
-                }
-                else if (orderresult.continuepay == 1)
-                {
-                    //    //TODO  继续支付
-                    //    ShowLog("需要继续支付", true);
-                    //}
-                    //else
-                    //{
-                    this.Invoke(new InvokeHandler(delegate()
-           {
-               if (CashPayDataReceiveHandle != null)
-                   this.CashPayDataReceiveHandle.BeginInvoke(0, orderresult.orderid, null, null);
 
-               this.Close();
-           }));
+                this.Invoke(new InvokeHandler(delegate()
+              {
+                  if (type == 1)
+                  {
+                      string ErrorMsg = "";
+                      int ResultCode = 0;
+                      CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
+                      if (ResultCode != 0 || orderresult == null)
+                      {
+                          CheckUserAndMember(ResultCode);
+                          ShowLog("异常" + ErrorMsg, true);
+                      }
+                      else if (orderresult.continuepay == 1)
+                      {
+                          //    //TODO  继续支付
+                          //    ShowLog("需要继续支付", true);
+                          //}
+                          //else
+                          //{
 
-                }
+                          if (CashPayDataReceiveHandle != null)
+                              this.CashPayDataReceiveHandle.BeginInvoke(0, orderresult.orderid, null, null);
+
+                          this.Close();
+
+
+                      }
+                  }
+                  else
+                  {
+                      //找零页面返回  不做处理 
+                  }
+
+              }));
             }
-            else
+            catch (Exception ex)
             {
-                //找零页面返回  不做处理 
+
             }
         }
 

@@ -80,17 +80,32 @@ namespace QiandamaPOS.Common
 
             try
             {
-
+                bool isfirst = true;
+                //test
+                //return "WL1VJT4T";
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
 
-                string strHardDiskID = null;
-
+                string strHardDiskID = "";
+                string devicesn = INIManager.GetIni("System", "DeviceSN", QiandamaPOS.Model.MainModel.IniPath);
                 foreach (ManagementObject mo in searcher.Get())
                 {
+                    try
+                    {
+                        string tempstrHardDiskID = mo["SerialNumber"].ToString().Trim();
+                        if (isfirst && !string.IsNullOrEmpty(tempstrHardDiskID))
+                        {
+                            strHardDiskID = tempstrHardDiskID;
+                            isfirst = false;
+                        }
 
-                    strHardDiskID = mo["SerialNumber"].ToString().Trim();
-
-                    break;
+                        if (tempstrHardDiskID == devicesn)
+                        {
+                            strHardDiskID = tempstrHardDiskID;
+                            break;
+                        }
+                    }catch{}
+                   
+                   // break;
 
                 }
 
@@ -121,7 +136,6 @@ namespace QiandamaPOS.Common
         private static extern Int32 SendMessage
          (IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
-
         /// <summary>
         /// 为TextBox设置水印文字
         /// </summary>
@@ -129,7 +143,8 @@ namespace QiandamaPOS.Common
         /// <param name="watermark">水印文字</param>
         public static void SetWatermark(this TextBox textBox, string watermark)
         {
-            SendMessage(textBox.Handle, EM_SETCUEBANNER, 0, watermark);
+            
+            SendMessage(textBox.Handle, EM_SETCUEBANNER, 2, watermark);
         }
     }
 

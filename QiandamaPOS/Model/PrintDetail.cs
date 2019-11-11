@@ -25,7 +25,7 @@ namespace QiandamaPOS.Model
         public string shopname { get; set; }
         public string earnpoint { get; set; }
         public string customerphone { get; set; }
-        public object[] pointinfo { get; set; }
+        public PointInfo[] pointinfo { get; set; }
         public Paydetail[] paydetail { get; set; }
         public Payinfo[] payinfo { get; set; }
         public string cashier { get; set; }
@@ -52,6 +52,13 @@ namespace QiandamaPOS.Model
     }
 
    
+    
+public class PointInfo
+{
+public string title { get; set; }
+public string amount { get; set; }
+public int highlight { get; set; }
+}
 
 
     public class Paydetail

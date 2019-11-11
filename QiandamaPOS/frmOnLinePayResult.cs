@@ -142,7 +142,7 @@ namespace QiandamaPOS
                 string ErrorMsg = "";
                 AuthcodeTrade codetrade = httputil.AuthCodeTrade(CurrentOrderID, CurrentAuthCode, ref ErrorMsg);
 
-                if (ErrorMsg != "" || codetrade == null) //商品不存在或异常
+                if (ErrorMsg != "" || codetrade == null)
                 {
                     MainModel.ShowLog(ErrorMsg, false);
                 }

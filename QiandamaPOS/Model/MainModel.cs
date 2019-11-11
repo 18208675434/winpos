@@ -70,11 +70,11 @@ namespace QiandamaPOS.Model
         /// <summary>
         /// 接口返回code 120014 代表用户登录过期 需要重新登录
         /// </summary>
-        public static int HttpUserExpired = 120014;
+        public static int HttpUserExpired = 100031;
         /// <summary>
         /// 接口返回code 100031 代表会员登录过期 需要重新登录
         /// </summary>
-        public static int HttpMemberExpired = 100031;
+        public static int HttpMemberExpired = 120014;
 
         public static string CurrentCouponCode ="";
 
@@ -93,6 +93,16 @@ namespace QiandamaPOS.Model
         /// </summary>
         public static  float hScale = 1;
 
+        /// <summary>
+        /// 获取全量商品接口时间戳，不是第一次调用的话需要使用上一次返回时间戳
+        /// </summary>
+        public static string LastQuerySkushopAllTimeStamp = "";
+
+
+        /// <summary>
+        /// 获取增量商品接口时间戳，不是第一次调用的话需要使用上一次返回时间戳
+        /// </summary>
+        public static string LastQuerySkushopCrementTimeStamp = "";
 
         public static string OrderPath
         {
@@ -110,10 +120,29 @@ namespace QiandamaPOS.Model
         }
 
 
+        public static string ProductPicPath
+        {
+            get
+            {
+
+                //判断默认文件夹是否存在，不存在就创建
+                DirectoryInfo logDirectory = new DirectoryInfo(System.Windows.Forms.Application.StartupPath + "\\ProductPicPath\\");
+                if (!logDirectory.Exists)
+                    logDirectory.Create();
+
+                return System.Windows.Forms.Application.StartupPath + "\\ProductPicPath\\";
+
+            }
+        }
+
+
         /// <summary>
         /// 客屏对象
         /// </summary>
         public static frmMainMedia frmmainmedia = null;
+
+
+        public static Cart frmMainmediaCart = null;
         
 
         //当前时间戳
@@ -146,7 +175,8 @@ namespace QiandamaPOS.Model
         public static string GetMD5(string str)
         {
 
-            byte[] result = Encoding.Default.GetBytes(str);
+            //byte[] result = Encoding.Default.GetBytes(str);
+            byte[] result = Encoding.UTF8.GetBytes(str);
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] output = md5.ComputeHash(result);
             string md5str = BitConverter.ToString(output).Replace("-", "");
@@ -196,7 +226,8 @@ namespace QiandamaPOS.Model
                 frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
                 frmmsf.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width / 2 - frmmsf.Width, SystemInformation.WorkingArea.Height/2-50);
                 LogManager.WriteLog(msg);
-                frmmsf.ShowDialog();
+                frmmsf.TopMost = true;
+                frmmsf.Show();
             
         }
 
@@ -255,5 +286,55 @@ namespace QiandamaPOS.Model
 
             return resultImage;
         }
+
+
+
+
+        public static string UTF8ToGB2312(string str)
+        {
+            try
+            {   
+                Encoding utf8 = Encoding.GetEncoding(65001);
+                Encoding gb2312 = Encoding.GetEncoding("gb2312");//Encoding.Default ,936
+                byte[] temp = utf8.GetBytes(str);
+                byte[] temp1 = Encoding.Convert(utf8, gb2312, temp);
+                string result = gb2312.GetString(temp1);
+                return result;
+            }
+            catch (Exception ex)//(UnsupportedEncodingException ex)
+           {
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+        public static  string GB2312ToUTF8(string str)
+        {
+            try
+            {
+                Encoding uft8 = Encoding.GetEncoding(65001);
+                Encoding gb2312 = Encoding.GetEncoding("gb2312");
+                byte[] temp = gb2312.GetBytes(str);
+               // MessageBox.Show("gb2312的编码的字节个数：" + temp.Length);
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    //MessageBox.Show(Convert.ToUInt16(temp[i]).ToString());
+                }   
+                byte[] temp1 = Encoding.Convert(gb2312, uft8, temp);
+                //MessageBox.Show("uft8的编码的字节个数：" + temp1.Length);
+                for (int i = 0; i < temp1.Length; i++)
+                {
+                   // MessageBox.Show(Convert.ToUInt16(temp1[i]).ToString());
+                }              
+                string result = uft8.GetString(temp1);
+                return result;
+            }
+            catch (Exception ex)//(UnsupportedEncodingException ex)
+           {
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+
+
     }
 }

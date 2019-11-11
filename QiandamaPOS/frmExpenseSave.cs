@@ -241,15 +241,22 @@ namespace QiandamaPOS
         private void btnAdd_Click(object sender, EventArgs e)
         {
             CurrentAddOrMinus = "+";
-            btnAdd.ForeColor = Color.Blue;
+            btnAdd.ForeColor = Color.White;
+            btnAdd.BackColor = Color.SkyBlue;
+            
             btnMinus.ForeColor = Color.Black;
+            btnMinus.BackColor = Color.White;
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
             CurrentAddOrMinus = "-";
+
             btnAdd.ForeColor = Color.Black;
-            btnMinus.ForeColor = Color.Blue;
+            btnAdd.BackColor = Color.White;
+
+            btnMinus.ForeColor = Color.White ;
+            btnMinus.BackColor = Color.SkyBlue;
         }
 
         private void txtNum_TextChanged(object sender, EventArgs e)

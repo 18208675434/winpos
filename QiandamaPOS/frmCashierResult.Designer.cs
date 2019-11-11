@@ -44,9 +44,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 24F);
-            this.label1.Location = new System.Drawing.Point(404, 101);
+            this.label1.Location = new System.Drawing.Point(439, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 41);
             this.label1.TabIndex = 0;
@@ -54,9 +55,10 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(301, 89);
+            this.pictureBox1.Location = new System.Drawing.Point(336, 89);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 80);
             this.pictureBox1.TabIndex = 1;
@@ -64,8 +66,9 @@
             // 
             // lblCashierInfo
             // 
+            this.lblCashierInfo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblCashierInfo.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblCashierInfo.Location = new System.Drawing.Point(12, 263);
+            this.lblCashierInfo.Location = new System.Drawing.Point(47, 263);
             this.lblCashierInfo.Name = "lblCashierInfo";
             this.lblCashierInfo.Size = new System.Drawing.Size(892, 31);
             this.lblCashierInfo.TabIndex = 2;
@@ -73,9 +76,10 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(24, 354);
+            this.label2.Location = new System.Drawing.Point(137, 352);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(673, 21);
             this.label2.TabIndex = 3;
@@ -83,9 +87,10 @@
             // 
             // lblMsg
             // 
+            this.lblMsg.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMsg.AutoSize = true;
             this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblMsg.Location = new System.Drawing.Point(266, 407);
+            this.lblMsg.Location = new System.Drawing.Point(301, 407);
             this.lblMsg.Name = "lblMsg";
             this.lblMsg.Size = new System.Drawing.Size(316, 25);
             this.lblMsg.TabIndex = 4;
@@ -93,10 +98,11 @@
             // 
             // lblTime
             // 
+            this.lblTime.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblTime.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblTime.Location = new System.Drawing.Point(348, 449);
+            this.lblTime.Location = new System.Drawing.Point(383, 449);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(190, 24);
             this.lblTime.TabIndex = 5;
@@ -104,11 +110,12 @@
             // 
             // btnOK
             // 
+            this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnOK.BackColor = System.Drawing.Color.OrangeRed;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(312, 503);
+            this.btnOK.Location = new System.Drawing.Point(347, 503);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(235, 58);
             this.btnOK.TabIndex = 6;
@@ -124,21 +131,22 @@
             // 
             // lblSecond
             // 
+            this.lblSecond.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblSecond.AutoSize = true;
             this.lblSecond.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblSecond.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblSecond.Location = new System.Drawing.Point(313, 449);
+            this.lblSecond.Location = new System.Drawing.Point(348, 449);
             this.lblSecond.Name = "lblSecond";
             this.lblSecond.Size = new System.Drawing.Size(21, 24);
             this.lblSecond.TabIndex = 7;
-            this.lblSecond.Text = "5";
+            this.lblSecond.Text = "2";
             // 
             // frmCashierResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(916, 609);
+            this.ClientSize = new System.Drawing.Size(987, 609);
             this.Controls.Add(this.lblSecond);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblTime);
@@ -154,6 +162,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCashierResult";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCashierResult_FormClosing);
             this.Shown += new System.EventHandler(this.frmCashierResult_Shown);
             this.SizeChanged += new System.EventHandler(this.frmCashierResult_SizeChanged);

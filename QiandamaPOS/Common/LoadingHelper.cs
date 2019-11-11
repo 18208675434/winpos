@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace QiandamaPOS.Common
 {
@@ -112,9 +113,9 @@ namespace QiandamaPOS.Common
                 }
 
                 loadingForm = new frmLoading();
-
+                loadingForm.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - loadingForm.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - loadingForm.Height) / 2);
                 loadingForm.TopMost = true;
-
+                loadingForm.Opacity = 0.6d;
                 loadingForm.ShowDialog();
 
             }
@@ -134,8 +135,9 @@ namespace QiandamaPOS.Common
 
                 loadingForm = new frmLoading(obj.ToString());
 
+                loadingForm.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - loadingForm.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - loadingForm.Height) / 2);
                 loadingForm.TopMost = true;
-
+                loadingForm.Opacity = 0.6d;
                 loadingForm.ShowDialog();
 
             }
@@ -150,28 +152,42 @@ namespace QiandamaPOS.Common
 
             public static void CloseForm()
             {
+                Thread threadItemExedate = new Thread(LoadingHelper.CloseFormThread);
+                threadItemExedate.IsBackground = true;
+                threadItemExedate.Start();
 
-                Thread.Sleep(50); //可能到这里线程还未起来，所以进行延时，可以确保线程起来，彻底关闭窗口
+            }
 
-                if (loadingForm != null)
+
+
+            public static void CloseFormThread()
+            {
+                try
                 {
+                    Thread.Sleep(50); //可能到这里线程还未起来，所以进行延时，可以确保线程起来，彻底关闭窗口
 
-                    lock (syncLock)
+                    if (loadingForm != null)
                     {
 
-                        Thread.Sleep(50);
-
-                        if (loadingForm != null)
+                        lock (syncLock)
                         {
 
-                            Thread.Sleep(50);  //通过三次延时，确保可以彻底关闭窗口
+                            Thread.Sleep(50);
 
-                            loadingForm.Invoke(new CloseDelegate(LoadingHelper.CloseFormInternal));
+                            if (loadingForm != null)
+                            {
 
+                                Thread.Sleep(50);  //通过三次延时，确保可以彻底关闭窗口
+
+                                loadingForm.Invoke(new CloseDelegate(LoadingHelper.CloseFormInternal));
+
+                            }
                         }
-
                     }
-
+                }
+                catch
+                {
+                    LoadingHelper.CloseFormInternal();
                 }
 
             }
@@ -187,13 +203,9 @@ namespace QiandamaPOS.Common
             private static void CloseFormInternal()
             {
 
-
-
                 loadingForm.closeOrder();
 
                 loadingForm = null;
-
-
 
             }
 

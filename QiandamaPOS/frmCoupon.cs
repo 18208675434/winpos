@@ -98,7 +98,7 @@ namespace QiandamaPOS
                         }
                         else
                         {
-                            select = "□";
+                            select = "";
                         }
                         dgvCoupon.Rows.Add(couponcode, "￥" + couponsBean.amount, content + "\r\n" + starttime + "至" + endtime, select);
                     }
@@ -191,8 +191,10 @@ namespace QiandamaPOS
                 string amount = dgvCoupon.Rows[e.RowIndex].Cells["amount"].Value.ToString();
                 int CouponAmount = Convert.ToInt16(amount.Replace("￥",""));
 
-                if (CurrentCart.totalpayment <= CouponAmount)
+                //可能选择的有优惠券，目前只支持单张优惠券
+                if ((CurrentCart.totalpayment+CurrentCart.couponpromoamt) <= CouponAmount)
                 {
+                    this.Hide();
                     frmCouponOutcs frmcoupon = new frmCouponOutcs();
                     frmcoupon.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                     frmcoupon.ShowDialog();
@@ -205,7 +207,7 @@ namespace QiandamaPOS
                     }
                     else
                     {
-
+                        this.Show();
                     }
                 }
                 else

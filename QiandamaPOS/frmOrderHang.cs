@@ -100,7 +100,17 @@ namespace QiandamaPOS
                         }
                     }
 
-                }               
+                }
+
+                if (dgvOrderOnLine.Rows.Count > 0)
+                {
+                    ShowLog("刷新完成", false);
+                }
+                else
+                {
+                    ShowLog("暂无数据", false);
+                }
+
 
             }
             catch (Exception ex)
@@ -297,8 +307,6 @@ namespace QiandamaPOS
 
         //    return resultImage;
         //}
-
-
         
     }
 }

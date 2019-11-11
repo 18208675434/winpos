@@ -1,4 +1,6 @@
-﻿using QiandamaPOS.Common;
+﻿using Maticsoft.BLL;
+using Maticsoft.Model;
+using QiandamaPOS.Common;
 using QiandamaPOS.Model;
 using System;
 using System.Collections.Generic;
@@ -43,11 +45,6 @@ namespace QiandamaPOS
 
 
         /// <summary>
-        /// 每次扫描商品调用cart接口 商品集合需要包含订单所以商品
-        /// </summary>
-        List<scancodememberModel> lstscancode = new List<scancodememberModel>();
-
-        /// <summary>
         /// 接口访问类
         /// </summary>
         HttpUtil httputil = new HttpUtil();
@@ -55,7 +52,7 @@ namespace QiandamaPOS
         /// <summary>
         /// USB设备监听
         /// </summary>
-        private ScanerHook listener = new ScanerHook();
+        public static  ScanerHook listener = new ScanerHook();
 
         //第三方支付页面
         frmOnLinePayResult frmonlinepayresult = null;
@@ -78,7 +75,7 @@ namespace QiandamaPOS
 
         private frmLogin CurrentFrmLogin;
 
-        private Color MainBackColor;
+        private bool IsScan = true;
         #endregion
 
 
@@ -86,62 +83,96 @@ namespace QiandamaPOS
         public frmMain(frmLogin frmlogin)
         {
             InitializeComponent();
+
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
+
             MainModel.wScale = (float)Screen.PrimaryScreen.Bounds.Width / this.Width;
             MainModel.hScale = (float)SystemInformation.WorkingArea.Height / this.Height;
             // Control.CheckForIllegalCrossThreadCalls = false;
-            listener.ScanerEvent += Listener_ScanerEvent;
+            
             LoadingHelper.CloseForm();
+
+            listener.ScanerEvent += Listener_ScanerEvent;
             CurrentFrmLogin = frmlogin;
+           // Application.DoEvents();
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            //string width = Screen.AllScreens[0].Bounds.Width.ToString();
-            //string height = Screen.AllScreens[0].Bounds.Height.ToString();
-            //MessageBox.Show(width + "  " + height + "  " + Screen.PrimaryScreen.Bounds.Width + "  " + this.Height);
-
-            MainBackColor = this.BackColor;
-            listener.Start();
-
-            timerNow.Interval = 1000;
-            timerNow.Enabled = true;
-
-            timerClearMemory.Interval = 2 * 60 * 1000;
-            timerClearMemory.Enabled = true;
-
-            lblShopName.Text = MainModel.CurrentShopInfo.shopname;
-            dpbtnMenu.Text = MainModel.CurrentUser.nickname + ",你好▼";
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好▼";
-
-            //UpdateOrderHang();
-
-            //启动扫描处理线程
-            Thread threadItemExedate = new Thread(ScanCodeExe);
-            threadItemExedate.IsBackground = true;
-            threadItemExedate.Start();
-
-
-            //启动扫描处理线程
-            Thread threadShortCodeExedate = new Thread(InputShortCodeExe);
-            threadShortCodeExedate.IsBackground = true;
-            threadShortCodeExedate.Start();
-
-            btnorderhangimage = new Bitmap(btnOrderHang.Image, 10, 10);
-            UpdateOrderHang();
-
-            toolStripMain.Focus();
-
-            //客屏初始化
-            MainModel.frmmainmedia = new frmMainMedia();
-            if (Screen.AllScreens.Count() != 1)
+            try
             {
-                // windowstate设置max 不能再页面设置 否则会显示到第一个屏幕
-                //MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height+20);
-                asf.AutoScaleControlTest(MainModel.frmmainmedia, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
-                MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
+                SetBtnPayStarus(false);
 
-                //MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-                MainModel.frmmainmedia.Show();
+                listener.Start();
+
+                timerNow.Interval = 1000;
+                timerNow.Enabled = true;
+
+                timerClearMemory.Interval = 2 * 60 * 1000;
+                timerClearMemory.Enabled = true;
+
+                lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+                dpbtnMenu.Text = MainModel.CurrentUser.nickname + ",你好▼";
+                btnMenu.Text = MainModel.CurrentUser.nickname + "，你好▼";
+
+                //UpdateOrderHang();
+
+               // //启动扫描处理线程
+               // Thread threadItemExedate = new Thread(ScanCodeExe);
+               // threadItemExedate.IsBackground = true;
+               // threadItemExedate.Start();
+               // //ThreadPool.QueueUserWorkItem(new WaitCallback(ScanCodeExe));
+
+               // //启动扫描处理线程
+               // Thread threadShortCodeExedate = new Thread(InputShortCodeExe);
+               // threadShortCodeExedate.IsBackground = true;
+               // threadShortCodeExedate.Start();
+               //// ThreadPool.QueueUserWorkItem(new WaitCallback(InputShortCodeExe));
+
+                //启动全量商品同步线程
+                Thread threadLoadAllProduct = new Thread(LoadAllProduct);
+                threadLoadAllProduct.IsBackground = true;
+                threadLoadAllProduct.Start();
+
+                //启动电子秤同步信息线程
+                Thread threadLoadScale = new Thread(LoadScale);
+                threadLoadScale.IsBackground = true;
+                threadLoadScale.Start();
+
+                timerGetIncrementProduct.Enabled = true;
+
+                btnorderhangimage = new Bitmap(btnOrderHang.Image, 10, 10);
+                UpdateOrderHang();
+
+                toolStripMain.Focus();
+                ////btnmianban.focus();
+
+                Application.DoEvents();
+                //客屏初始化
+                MainModel.frmmainmedia = new frmMainMedia();
+                if (Screen.AllScreens.Count() != 1)
+                {
+                    // windowstate设置max 不能再页面设置 否则会显示到第一个屏幕
+                    //MainModel.frmmainmedia.Size = new System.Drawing.Size(Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height+20);
+                    asf.AutoScaleControlTest(MainModel.frmmainmedia, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height + 20, true);
+                    MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
+
+                    //MainModel.frmmainmedia.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+                    MainModel.frmmainmedia.Show();
+
+                    MainModel.frmmainmedia.IniForm(null);
+                    //MainModel.frmmainmedia.LoadMember();
+                    //ThreadPool.QueueUserWorkItem(new WaitCallback(MainModel.frmmainmedia.IniForm));
+                }
+                toolStripMain.Focus();
+                ////btnmianban.focus();
+
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                ShowLog("初始化页面异常",true);
             }
 
         }
@@ -156,13 +187,17 @@ namespace QiandamaPOS
         private void Listener_ScanerEvent(ScanerHook.ScanerCodes codes)
         {
 
-            if (this.Enabled == true)
-            {
+               //if (this.Enabled == true && IsScan)
+               //{
+               
+               //    QueueScanCode.Enqueue(codes.Result);
+               //}
 
-                QueueScanCode.Enqueue(codes.Result);
-            }
-
-            // textBox1.Text = codes.Result;
+            ThreadPool.QueueUserWorkItem(new WaitCallback(ScanCodeThread), codes.Result);
+            //ParameterizedThreadStart Pts = new ParameterizedThreadStart(ScanCodeThread);
+            //Thread thread = new Thread(Pts);
+            //thread.IsBackground = true;
+            //thread.Start(codes.Result);
         }
 
         public void frmMain_SizeChanged(object sender, EventArgs e)
@@ -184,30 +219,65 @@ namespace QiandamaPOS
         }
 
 
-        private void CheckUserAndMember(int resultcode)
+        private void CheckUserAndMember(int resultcode,string ErrorMsg)
         {
             try
             {
-                if (resultcode == MainModel.HttpMemberExpired)
-                {
-                    frmUserExpired frmuserexpired = new frmUserExpired();
-                    frmuserexpired.TopMost = true;
-                    frmuserexpired.ShowDialog();
+                this.Invoke(new InvokeHandler(delegate()
+          {
+              if (resultcode == MainModel.HttpUserExpired)
+              {
+                  LoadingHelper.CloseForm();
+                  this.Enabled = false;
+                  MainModel.CurrentMember = null;
+                  frmUserExpired frmuserexpired = new frmUserExpired();
+                  frmuserexpired.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmuserexpired.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmuserexpired.Height) / 2);
+                  frmuserexpired.TopMost = true;
+                  frmuserexpired.ShowDialog();
+                  this.Enabled = true;
 
-                    INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
+                  INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
 
-                    CurrentFrmLogin.Show();
-                    this.Close();
+                  CurrentFrmLogin.Show();
+                  this.Close();
 
-                }
-                else if (resultcode == MainModel.HttpUserExpired)
-                {
-                    ClearMember();
-                    btnLoadPhone_Click(null, null);
-                }
+              }
+              else if (resultcode == MainModel.HttpMemberExpired)
+              {
+                  LoadingHelper.CloseForm();
+                  //Application.DoEvents();
+                  this.Enabled = false;
+                  MainModel.CurrentMember = null;
+                  ClearMember();
+                 
+                  frmDeleteGood frmdelete = new frmDeleteGood("会员登录已过期，请重新登录", "", "");
+                  if (frmdelete.ShowDialog() != DialogResult.OK)
+                  {
+                      this.Enabled = true;
+                      return;
+                  }
+                  this.Enabled = true;
+                  ClearForm();
+
+
+
+                  btnLoadPhone_Click(null, null);
+
+
+              }
+              else
+              {
+                  ShowLog(ErrorMsg, false);
+              }
+          }));
+
             }
             catch (Exception ex)
             {
+                this.Invoke(new InvokeHandler(delegate()
+             {
+                 this.Enabled = true;
+             }));
                 ShowLog("验证用户/会员异常", true);
             }
 
@@ -237,32 +307,62 @@ namespace QiandamaPOS
 
         private void btnOrderQuery_Click(object sender, EventArgs e)
         {
+            IsScan = false;
             frmOrderQuery frmorderquery = new frmOrderQuery();
-
             asf.AutoScaleControlTest(frmorderquery, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height - toolStripMain.Height, true);
-
             frmorderquery.Location = new System.Drawing.Point(0, toolStripMain.Height);
-
+            btnOrderCancle.Visible = false;
+            btnOrderHang.Visible = false;
+            btnOrderQuery.Visible = false;
             frmorderquery.ShowDialog();
+
+            IsScan = true;
+            btnOrderHang.Visible = true;
+            btnOrderQuery.Visible = true;
+            if (dgvGood.Rows.Count > 0)
+            {
+                btnOrderCancle.Visible = true;
+            }
         }
 
         private void btnOrderCancle_Click(object sender, EventArgs e)
         {
-            if (CurrentCart == null || CurrentCart.products == null || CurrentCart.products.Count <= 0)
+            try
             {
-                return;
-            }
-            this.Enabled = false;
-            frmDeleteGood frmdelete = new frmDeleteGood("是否确认取消订单？", "", "");
-            if (frmdelete.ShowDialog() != DialogResult.OK)
-            {
+                //if (CurrentCart == null || CurrentCart.products == null || CurrentCart.products.Count <= 0)
+                //{
+                //    return;
+                //}
+
+                if (dgvGood.Rows.Count<=0)
+                {
+                    return;
+                }
+                this.Enabled = false;
+                frmDeleteGood frmdelete = new frmDeleteGood("是否确认取消订单？", "", "");
+                if (frmdelete.ShowDialog() != DialogResult.OK)
+                {
+                    this.Enabled = true;
+                    return;
+                }
+               // DateTime starttime = DateTime.Now;
                 this.Enabled = true;
-                return;
+               // DateTime starttime = DateTime.Now;
+                //可能存在网络中断情况桌面还要清空
+                try
+                {
+                    ReceiptUtil.EditCancelOrder(1, CurrentCart.totalpayment);
+                }
+                catch (Exception ex) { }
+                ClearForm();
+               // Console.WriteLine("清空页面时间"+(DateTime.Now-starttime).TotalMilliseconds);
+                ClearMember();
+                //Console.WriteLine("清空会员时间" + (DateTime.Now - starttime).TotalMilliseconds);
             }
-            this.Enabled = true;
-            ReceiptUtil.EditCancelOrder(1, CurrentCart.totalpayment);
-            ClearForm();
-            ClearMember();
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("取消交易异常"+ex.Message);
+            }
         }
 
         //挂单
@@ -285,26 +385,33 @@ namespace QiandamaPOS
 
                         SerializeOrder(CurrentCart);
 
-                        
-                        ClearForm();
-                        ClearMember();
+                        DateTime starttime = DateTime.Now;
+
+                        if (MainModel.CurrentMember != null)
+                        {
+                            ClearMember();
+                        }
+                        //Application.DoEvents();
                         this.Enabled = true;
                         ShowLog("已挂单", false);
+
+                        ClearForm();
+
+                      
+
 
                     }
                 }
                 else if (btnOrderHang.Text == "挂单列表")
                 {
 
-                    //this.IsMdiContainer = true;
+                    IsScan = false;
                     frmOrderHang frmorderhang = new frmOrderHang();
                     frmorderhang.DataReceiveHandle += FormOrderHang_DataReceiveHandle;
-                    //frmorderhang.Height = this.Height - toolStripMain.Height;
-                    //frmorderhang.Width = Screen.PrimaryScreen.Bounds.Width;
                     asf.AutoScaleControlTest(frmorderhang, Screen.PrimaryScreen.Bounds.Width, this.Height - toolStripMain.Height, true);
                     frmorderhang.Location = new System.Drawing.Point(0, toolStripMain.Height);
-                    //frmorderhang.Parent = this;
                     frmorderhang.ShowDialog();
+                    IsScan = true;
                     UpdateOrderHang();
                 }
             }
@@ -322,21 +429,24 @@ namespace QiandamaPOS
         {
             try
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                string orderpath = "";
-                if (MainModel.CurrentMember != null)
-                {
-                    //cartpara.uid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
-                    orderpath = MainModel.OrderPath + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + MainModel.CurrentMember.memberheaderresponsevo.mobile +".order";
-                }
-                else
-                {
-                    orderpath = MainModel.OrderPath + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + "" + ".order";
-                }
-                using (Stream output = File.Create(orderpath))
-                {
-                    formatter.Serialize(output, cart);
-                }
+                this.BeginInvoke(new InvokeHandler(delegate()
+                  {
+                      BinaryFormatter formatter = new BinaryFormatter();
+                      string orderpath = "";
+                      if (MainModel.CurrentMember != null)
+                      {
+                          //cartpara.uid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
+                          orderpath = MainModel.OrderPath + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + MainModel.CurrentMember.memberheaderresponsevo.mobile + ".order";
+                      }
+                      else
+                      {
+                          orderpath = MainModel.OrderPath + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + "" + ".order";
+                      }
+                      using (Stream output = File.Create(orderpath))
+                      {
+                          formatter.Serialize(output, cart);
+                      }
+                  }));
             }
             catch (Exception ex)
             {
@@ -371,28 +481,17 @@ namespace QiandamaPOS
                     {
                         if (fList[i].Name.Contains(".order"))
                         {
-
                             btnOrderHang.Image = btnorderhangimage;
-
                             break;
                         }
                     }
                 }
-
-
-                //Image _image = btnOrderHang.Image;
-                //Bitmap img = new Bitmap(_image ,10,10);
-
-                //btnOrderHang.Image = img;
-
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("更新挂单按钮异常" + ex.Message);
             }
         }
-
-
 
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -404,8 +503,6 @@ namespace QiandamaPOS
 
             frmtool.Show();
         }
-
-
 
         private void frmToolMain_DataReceiveHandle(ToolType tooltype)
         {
@@ -444,6 +541,22 @@ namespace QiandamaPOS
                     this.Invoke(new InvokeHandler(delegate()
                     {
                         tsmReceiptQuery.PerformClick();
+                    }));
+                }
+
+                if (tooltype == ToolType.Scale)
+                {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
+                        tsmScale.PerformClick();
+                    }));
+                }
+
+                if (tooltype == ToolType.ChangeMode)
+                {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
+                        tsmChangeMode.PerformClick();
                     }));
                 }
                
@@ -511,42 +624,56 @@ namespace QiandamaPOS
 
         private void tsmReceiptQuery_Click(object sender, EventArgs e)
         {
+
+            IsScan = false;
             frmReceiptQuery frmreceiptquery = new frmReceiptQuery();
 
-            asf.AutoScaleControlTest(frmreceiptquery, Screen.PrimaryScreen.Bounds.Width, this.Height - toolStripMain.Height, true);
+            asf.AutoScaleControlTest(frmreceiptquery, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height - toolStripMain.Height, true);
             frmreceiptquery.Location = new System.Drawing.Point(0, toolStripMain.Height);
 
             frmreceiptquery.ShowDialog();
+            IsScan = true;
         }
-
-
-
 
 
         private void tsmScale_Click(object sender, EventArgs e)
         {
-            //frmReceiptQuery frmreceiptquery = new frmReceiptQuery();
-            //frmreceiptquery.Height = this.Height - toolStripMain.Height;
-            //frmreceiptquery.Width = Screen.PrimaryScreen.Bounds.Width;
-            //frmreceiptquery.Location = new System.Drawing.Point(0, toolStripMain.Height);
+            IsScan = false;
+            frmScale frmscal = new frmScale();
 
-            //frmreceiptquery.ShowDialog();
+            asf.AutoScaleControlTest(frmscal, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height - toolStripMain.Height, true);
+            frmscal.Location = new System.Drawing.Point(0, toolStripMain.Height);
+
+            frmscal.ShowDialog();
+            IsScan = true;
         }
 
 
 
         private void tsmExpense_Click(object sender, EventArgs e)
         {
+            IsScan = false;
             frmExpense frmexpense = new frmExpense();
-
-            //frmexpense.frmExpense_SizeChanged(null,null);
-            //frmexpense.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height - toolStripMain.Height);
 
             asf.AutoScaleControlTest(frmexpense, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height - toolStripMain.Height, true);
 
             frmexpense.Location = new System.Drawing.Point(0, toolStripMain.Height);
 
             frmexpense.ShowDialog();
+            IsScan = true;
+        }
+
+        private void tsmChangeMode_Click(object sender, EventArgs e)
+        {
+            IsScan = false;
+            frmChangeMode frmchangemode = new frmChangeMode();
+
+            asf.AutoScaleControlTest(frmchangemode, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+
+            frmchangemode.Location = new System.Drawing.Point(0, 0);
+
+            frmchangemode.ShowDialog();
+            IsScan = true;
         }
 
         #endregion
@@ -557,24 +684,25 @@ namespace QiandamaPOS
         {
             try
             {
-
-                this.Enabled = false;
-                frmNumber frmnumber = new frmNumber("请输入商品条码", false, false);
-                frmnumber.DataReceiveHandle += FormGoodsCode_DataReceiveHandle;
-                // frmnumber.Opacity = 0.95d;
-                frmnumber.frmNumber_SizeChanged(null, null);
-                frmnumber.Size = new System.Drawing.Size(this.Width * 33 / 100, this.Height * 70 / 100);
-                frmnumber.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmnumber.Width - 40, this.Height * 15 / 100);
-                // asf.AutoScaleControlTest(frmnumber,this.Width,this.Height,true);
-                frmnumber.ShowDialog();
-                picScreen.Visible = false;
-                Application.DoEvents();
-                this.Enabled = true;
-                toolStripMain.Focus();
+                        this.Enabled = false;
+                        frmNumber frmnumber = new frmNumber("请输入商品条码", false, false);
+                        frmnumber.DataReceiveHandle += FormGoodsCode_DataReceiveHandle;
+                        // frmnumber.Opacity = 0.95d;
+                        frmnumber.frmNumber_SizeChanged(null, null);
+                        frmnumber.Size = new System.Drawing.Size(this.Width * 33 / 100, this.Height * 70 / 100);
+                        frmnumber.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmnumber.Width - 40, this.Height * 15 / 100);
+                        // asf.AutoScaleControlTest(frmnumber,this.Width,this.Height,true);
+                        frmnumber.ShowDialog();
+                        picScreen.Visible = false;
+                        Application.DoEvents();
+                        this.Enabled = true;
+                        //btnmianban.focus();
+                    
             }
             catch (Exception ex)
             {
                 this.Enabled = true;
+                //btnmianban.focus();
                 LogManager.WriteLog("输入商品条码异常" + ex.Message);
             }
         }
@@ -584,31 +712,33 @@ namespace QiandamaPOS
         {
             try
             {
+                 
+                DateTime starttime = DateTime.Now;
                 string ErrorMsgCart = "";
                 int ResultCode = 0;
-                toolStripMain.Focus();
+               //btnmianban.focus();
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
-                    pnlPayType1.Enabled = true;
+                   // pnlPayType1.Enabled = true;
+                    SetBtnPayStarus(true);
                     pnlPayType2.Enabled = true;
                     //CurrentCart.pointpayoption = 1;
 
                     CurrentCart.pointpayoption = btnCheckJF.Text == "√" ? 1 : 0;
-
+                    
                     Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
-                    CurrentCart = cart;
+                    Console.WriteLine("购物车访问时间" + (DateTime.Now - starttime).TotalMilliseconds);
+                   
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
-                    {
-                        ShowLog(ErrorMsgCart, false);
-
-                        CheckUserAndMember(ResultCode);
+                    {                      
+                        CheckUserAndMember(ResultCode, ErrorMsgCart);
                         return false;
                     }
                     else
                     {
-
+                        CurrentCart = cart;
                         UploadDgvGoods(cart);
-
+                        Console.WriteLine("表格加载时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
                         if (btnCheckJF.Text == "√")
                         {
@@ -617,22 +747,14 @@ namespace QiandamaPOS
                                 lblJF.Text = CurrentCart.pointinfo.totalpoints;
                                 //lblJFUse.Visible = true;
                                 lblJFUse.Text = "使用" + CurrentCart.pointinfo.availablepoints + "积分 抵用" + CurrentCart.pointinfo.availablepointsamount + "元";
-                                lblJFUse.BackColor = Color.Moccasin;
-                                lblJFUse.Visible = true;
-
+                                panel2.Visible = true;
                             }
                         }
                         else
                         {
-                            //lblJF.Text = "0";
-                            //lblJFUse.Visible = false;
                             lblJFUse.Text = "";
-                            lblJFUse.BackColor = Color.White;
-                            // lblJFUse.Visible = false;
-
+                            panel2.Visible = false;
                         }
-
-
 
                         btnPayByBalance.Enabled = CurrentCart.paymenttypes.balancepayenabled == 1;
                         btnPayByCash.Enabled = CurrentCart.paymenttypes.cashenabled == 1;
@@ -640,18 +762,15 @@ namespace QiandamaPOS
 
                         return true;
                     }
-
                 }
                 else
                 {
-                    pnlPayType1.Enabled = false;
+                    SetBtnPayStarus(false);
                     pnlPayType2.Enabled = false;
 
                     ClearForm();
-                    // ClearMember();
                     return true;
                 }
-
 
             }
             catch (Exception ex)
@@ -662,7 +781,107 @@ namespace QiandamaPOS
         }
 
 
-        private void ScanCodeExe()
+        private void ScanCodeThread(object obj)
+        {
+          
+
+                    try
+                    {
+                        LoadingHelper.ShowLoadingScreen();//显示
+                        string goodcode = obj.ToString();
+                        IsScan = false;
+                        LogManager.WriteLog(goodcode);
+                        string ErrorMsg = "";
+                        int ResultCode = 0;
+                        scancodememberModel scancodemember = httputil.GetSkuInfoMember(goodcode, ref ErrorMsg, ref ResultCode);
+
+                        //if (true) //商品不存在或异常
+                        //{
+                        //    CheckUserAndMember(MainModel.HttpMemberExpired);
+                        //    ShowLog(ErrorMsg, false);
+                        //}
+
+                        if (ErrorMsg != "" || scancodemember == null) //商品不存在或异常
+                        {
+                            CheckUserAndMember(ResultCode, ErrorMsg);
+                            //ShowLog(ErrorMsg, false);
+                        }
+                        else
+                        {
+                            if (scancodemember.type == "MEMBER")
+                            {
+                                this.Invoke(new InvokeHandler(delegate()
+                                {
+                                    LoadMember(scancodemember.memberresponsevo);
+                                }));
+                            }
+                            else
+                            {
+
+                                addcart(scancodemember);
+                            }
+                        }
+
+                        IsScan = true;
+                        LoadingHelper.CloseForm();//关闭
+                        Thread.Sleep(1);
+                    }
+                    catch (Exception ex)
+                    {
+                        // listener.Start();
+                        LoadingHelper.CloseForm();//关闭
+                        LogManager.WriteLog("ERROR", "扫描数据处理异常：" + ex.Message);
+                    }
+                    finally
+                    {
+
+                        IsScan = true;
+                        Application.DoEvents();
+                        LoadingHelper.CloseForm();//关闭
+                    }
+              
+            
+        }
+
+        private void InputShortCodeThread(object obj)
+        {          
+                    try
+                    {
+                        LoadingHelper.ShowLoadingScreen();//显示
+
+                        string goodcode = obj.ToString();
+
+                        string ErrorMsg = "";
+                        int ResultCode = 0;
+                        scancodememberModel scancodemember = httputil.GetSkuInfoByShortCode(goodcode, ref ErrorMsg, ref ResultCode);
+
+                        if (ErrorMsg != "" || scancodemember == null) //商品不存在或异常
+                        {
+                            CheckUserAndMember(ResultCode, ErrorMsg);
+                            //ShowLog(ErrorMsg, false);
+                        }
+                        else
+                        {
+                            addcart(scancodemember);
+                        }
+
+                        //LoadingHelper.CloseForm();//关闭
+
+                    }
+                    catch (Exception ex)
+                    {
+                        // LoadingHelper.CloseForm();//关闭
+                        LogManager.WriteLog("ERROR", "扫描数据处理异常：" + ex.Message);
+                    }
+                    finally
+                    {
+                        LoadingHelper.CloseForm();//关闭
+                    }
+               
+        }
+
+
+        private void ScanCodeExe(object obj)
         {
             while (true)
             {
@@ -670,56 +889,60 @@ namespace QiandamaPOS
                 //有数据就处理
                 if (QueueScanCode.Count > 0)
                 {
-
                     try
                     {
+                            LoadingHelper.ShowLoadingScreen();//显示
+                            string goodcode = QueueScanCode.Dequeue();
+                            IsScan = false;
+                            LogManager.WriteLog(goodcode);
+                            string ErrorMsg = "";
+                            int ResultCode = 0;
+                            scancodememberModel scancodemember = httputil.GetSkuInfoMember(goodcode, ref ErrorMsg, ref ResultCode);
 
-                        this.Invoke(new InvokeHandler(delegate()
-             {
-                 LoadingHelper.ShowLoadingScreen();//显示
-                 //this.Enabled = false;
+                            //if (true) //商品不存在或异常
+                            //{
+                            //    CheckUserAndMember(MainModel.HttpMemberExpired);
+                            //    ShowLog(ErrorMsg, false);
+                            //}
 
-                 string goodcode = QueueScanCode.Dequeue();
+                           if (ErrorMsg != "" || scancodemember == null) //商品不存在或异常
+                            {
+                                CheckUserAndMember(ResultCode, ErrorMsg);
+                                //ShowLog(ErrorMsg, false);
+                            }
+                            else
+                            {
+                                if (scancodemember.type == "MEMBER")
+                                {
+                                    this.Invoke(new InvokeHandler(delegate()
+                                    {
+                                        LoadMember(scancodemember.memberresponsevo);
+                                    }));
+                                }
+                                else
+                                {
 
-                 string ErrorMsg = "";
-                 int ResultCode = 0;
-                 scancodememberModel scancodemember = httputil.GetSkuInfoMember(goodcode, ref ErrorMsg, ref ResultCode);
+                                    addcart(scancodemember);
+                                }
+                            }
 
-                 if (ErrorMsg != "" || scancodemember == null) //商品不存在或异常
-                 {
-                     CheckUserAndMember(ResultCode);
-                     ShowLog(ErrorMsg, false);
-                 }
-                 else
-                 {
-                     if (scancodemember.type == "MEMBER")
-                     {
-                         this.Invoke(new InvokeHandler(delegate()
-        {
-            LoadMember(scancodemember.memberresponsevo);
-        }));
-                     }
-                     else
-                     {
-
-                         addcart(scancodemember);
-                     }
-                 }
-                 Application.DoEvents();
-                 RefreshCart();
-                 LoadingHelper.CloseForm();//显示
-                 this.Enabled = true;
-                 toolStripMain.Focus();
-
-             }));
+                            IsScan = true;
+                            LoadingHelper.CloseForm();//关闭
+                            Thread.Sleep(1);
                     }
                     catch (Exception ex)
                     {
-                        this.Enabled = true;
+                       // listener.Start();
                         LoadingHelper.CloseForm();//关闭
                         LogManager.WriteLog("ERROR", "扫描数据处理异常：" + ex.Message);
                     }
+                    finally
+                    {
 
+                        IsScan = true;
+                        Application.DoEvents();
+                        LoadingHelper.CloseForm();//关闭
+                    }
                 }
                 else
                 {
@@ -729,7 +952,7 @@ namespace QiandamaPOS
             }
         }
 
-        private void InputShortCodeExe()
+        private void InputShortCodeExe(object obj)
         {
             while (true)
             {
@@ -741,10 +964,8 @@ namespace QiandamaPOS
                     try
                     {
 
-                        this.Invoke(new InvokeHandler(delegate()
-           {
+                       
                LoadingHelper.ShowLoadingScreen();//显示
-               //this.Enabled = false;
 
                string goodcode = QueueShortCode.Dequeue();
 
@@ -753,26 +974,32 @@ namespace QiandamaPOS
                scancodememberModel scancodemember = httputil.GetSkuInfoByShortCode(goodcode, ref ErrorMsg, ref ResultCode);
 
 
+               //if (true) //商品不存在或异常
+               //{
+               //    CheckUserAndMember(MainModel.HttpMemberExpired, ErrorMsg);
+               //    //ShowLog(ErrorMsg, false);
+               //}
+
                if (ErrorMsg != "" || scancodemember == null) //商品不存在或异常
                {
-                   CheckUserAndMember(ResultCode);
-                   ShowLog(ErrorMsg, false);
+                   CheckUserAndMember(ResultCode, ErrorMsg);
+                   //ShowLog(ErrorMsg, false);
                }
                else
                {
                    addcart(scancodemember);
                }
-           }));
+
+               //LoadingHelper.CloseForm();//关闭
+          
                     }
                     catch (Exception ex)
                     {
-                        //this.Enabled = true;
-                        LoadingHelper.CloseForm();//关闭
+                       // LoadingHelper.CloseForm();//关闭
                         LogManager.WriteLog("ERROR", "扫描数据处理异常：" + ex.Message);
                     }
                     finally
                     {
-                        //this.Enabled = true;
                         LoadingHelper.CloseForm();//关闭
                     }
                 }
@@ -785,99 +1012,82 @@ namespace QiandamaPOS
 
         private void addcart(scancodememberModel scancodemember)
         {
-            try
+
+
+            this.Invoke(new InvokeHandler(delegate()
             {
-                this.Invoke(new InvokeHandler(delegate()
-             {
-                 if (scancodemember.scancodedto.specnum == 0)
-                 {
-                     this.Enabled = false;
-                     frmNumber frmnumber = new frmNumber(scancodemember.scancodedto.skuname, false, true);
-                     frmnumber.Opacity = 0.95d;
-                     frmnumber.frmNumber_SizeChanged(null, null);
+                try
+                {
 
-                     frmnumber.Size = new System.Drawing.Size(this.Width * 33 / 100, this.Height * 70 / 100);
+                    if (scancodemember.scancodedto.weightflag && scancodemember.scancodedto.specnum==0)
+                    {
+                        this.Enabled = false;
+                        frmNumber frmnumber = new frmNumber(scancodemember.scancodedto.skuname, false, true);
+                        frmnumber.Opacity = 0.95d;
+                        frmnumber.frmNumber_SizeChanged(null, null);
 
-                     //frmnumber.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-                     frmnumber.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmnumber.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmnumber.Height) / 2);
-                     frmnumber.ShowDialog();
+                        frmnumber.Size = new System.Drawing.Size(this.Width * 33 / 100, this.Height * 70 / 100);
 
-                     if (frmnumber.DialogResult == DialogResult.OK)
-                     {
-                         scancodemember.scancodedto.specnum = (decimal)frmnumber.NumValue / 1000;
-                         scancodemember.scancodedto.num = 1;
-                     }
-                     else
-                     {
-                         this.Enabled = true;
-                         Application.DoEvents();
-                         return;
-                     }
+                        //frmnumber.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+                        frmnumber.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmnumber.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmnumber.Height) / 2);
+                        frmnumber.ShowDialog();
 
-                     this.Enabled = true;
-                 }
+                        if (frmnumber.DialogResult == DialogResult.OK)
+                        {
+                            scancodemember.scancodedto.specnum = (decimal)frmnumber.NumValue / 1000;
+                            scancodemember.scancodedto.num = 1;
+                        }
+                        else
+                        {
+                            this.Enabled = true;
+                            Application.DoEvents();
+                            return;
+                        }
 
-                 Product pro = new Product();
-                 pro.skucode = scancodemember.scancodedto.skucode;
-                 pro.num = scancodemember.scancodedto.num;
-                 pro.specnum = scancodemember.scancodedto.specnum;
-                 pro.spectype = scancodemember.scancodedto.spectype;
-                 pro.goodstagid = scancodemember.scancodedto.weightflag == true ? 1 : 0;
+                        this.Enabled = true;
+                        Application.DoEvents();
+                    }
 
-                 pro.barcode = scancodemember.scancodedto.barcode;
+                    Product pro = new Product();
+                    pro.skucode = scancodemember.scancodedto.skucode;
+                    pro.num = scancodemember.scancodedto.num;
+                    pro.specnum = scancodemember.scancodedto.specnum;
+                    pro.spectype = scancodemember.scancodedto.spectype;
+                    pro.goodstagid = scancodemember.scancodedto.weightflag == true ? 1 : 0;
 
-                 if (CurrentCart == null)
-                 {
-                     CurrentCart = new Cart();
-                 }
-                 if (CurrentCart.products == null)
-                 {
-                     List<Product> products = new List<Product>();
-                     products.Add(pro);
-                     CurrentCart.products = products;
-                 }
-                 else
-                 {
-                     CurrentCart.products.Add(pro);
-                 }
+                    pro.barcode = scancodemember.scancodedto.barcode;
 
-                 string ErrorMsgCart = "";
-                 int ResultCode = 0;
-                 bool IsExits = false;
+                    if (CurrentCart == null)
+                    {
+                        CurrentCart = new Cart();
+                    }
+                    if (CurrentCart.products == null)
+                    {
+                        List<Product> products = new List<Product>();
+                        products.Add(pro);
+                        CurrentCart.products = products;
+                    }
+                    else
+                    {
+                        CurrentCart.products.Add(pro);
+                    }
+
+                    string ErrorMsgCart = "";
+                    int ResultCode = 0;
+                    bool IsExits = false;
+                    DateTime starttime = DateTime.Now;
+                    RefreshCart();
+                    Console.WriteLine("刷新购物车时间：" + (DateTime.Now - starttime).TotalMilliseconds);
 
 
-                 lstscancode.Add(scancodemember);
-                 Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
-                 CurrentCart = cart;
-                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
-                 {
-                     pnlPayType1.Enabled = false;
-                     pnlPayType2.Enabled = false;
-                     ShowLog(ErrorMsgCart, false);
+                }
+                catch (Exception ex)
+                {
+                    this.Enabled = true;
+                    LogManager.WriteLog("ERROR", "添加购物车商品异常:" + ex.Message);
+                }
 
-                     CheckUserAndMember(ResultCode);
-                     ShowLog(ErrorMsgCart, false);
-                     lstscancode.Remove(scancodemember);
-                 }
-                 else
-                 {
-                     UploadDgvGoods(cart);
-                     pnlPayType1.Enabled = true;
-                     pnlPayType2.Enabled = true;
-                 }
-                 Application.DoEvents();
-             }));
-            }
-            catch (Exception ex)
-            {
-                this.Enabled = true;
-                LogManager.WriteLog("ERROR", "添加购物车商品异常:" + ex.Message);
-            }
-            finally
-            {
-                this.Enabled = true;
-            }
-
+            }));
         }
 
 
@@ -885,7 +1095,17 @@ namespace QiandamaPOS
         //TODO  修改样式
         private void ShowLog(string msg, bool iserror)
         {
-            MainModel.ShowLog(msg, iserror);
+            try
+            {
+                this.BeginInvoke(new InvokeHandler(delegate()
+                     {
+                         MainModel.ShowLog(msg, iserror);
+                     }));
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
@@ -895,15 +1115,15 @@ namespace QiandamaPOS
             {
                 this.Invoke(new InvokeHandler(delegate()
                 {
+
+                    DateTime starttime = DateTime.Now;
                     dgvOrderDetail.Rows.Clear();
                     dgvGood.Rows.Clear();
                     pnlPayType1.Visible = true;
                     pnlPayType2.Visible = false;
+                    //Console.WriteLine("清空时间"+(DateTime.Now-starttime).TotalMilliseconds);
                     if (cart != null && cart.products != null && cart.products.Count > 0)
                     {
-
-                        pnlPayType1.Enabled = true;
-                        pnlPayType2.Enabled = true;
                         int orderCount = cart.orderpricedetails.Length;
                         if (orderCount == 0)
                         {
@@ -914,10 +1134,30 @@ namespace QiandamaPOS
                             for (int i = 0; i < orderCount; i++)
                             {
                                 dgvOrderDetail.Rows.Add(cart.orderpricedetails[i].title, cart.orderpricedetails[i].amount);
-                                dgvOrderDetail.ClearSelection();
+                            }
+                            dgvOrderDetail.ClearSelection();
+                        }
+
+                        if (MainModel.CurrentMember != null)
+                        {
+                            if (CurrentCart.memberpromo!=null && CurrentCart.memberpromo > 0)
+                            {
+                                lblMemberPromo.Text="会员已优惠:￥"+CurrentCart.memberpromo.ToString("f2");
+
+                                pnlMemberPromo.Visible = true;
+                            }
+
+                        }
+                        else
+                        {
+                            if (CurrentCart.memberpromo != null && CurrentCart.memberpromo > 0)
+                            {
+                                lblMemberPromo.Text = "会员可优惠:￥" + CurrentCart.memberpromo.ToString("f2");
+                                pnlMemberPromo.Visible = true;
                             }
                         }
-                        lblPrice.Text = cart.totalpayment.ToString("f2");
+
+                        lblPrice.Text ="￥"+ cart.totalpayment.ToString("f2");
 
                         int count = cart.products.Count;
                         lblGoodsCount.Text = "(" + count.ToString() + "件商品)";
@@ -932,11 +1172,10 @@ namespace QiandamaPOS
                             pnlWaiting.Visible = false;
                             for (int i = 0; i < count; i++)
                             {
-                                //TODO 下划线
 
                                 Product pro = cart.products[i];
 
-                                string barcode = "\r\n  " + pro.title + "\r\n  " + pro.barcode;
+                                string barcode = "\r\n  " + pro.title + "\r\n  " + pro.skucode;
                                 string price = "";
                                 string jian = "";
 
@@ -945,10 +1184,10 @@ namespace QiandamaPOS
                                 string total = "";
                                 switch (pro.pricetagid)
                                 {
-                                    case 1: barcode = "1"+pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
-                                    case 2: barcode = "2" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
-                                    case 3: barcode = "3" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
-                                    case 4: barcode = "4" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.barcode; break;
+                                    case 1: barcode = "1" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
+                                    case 2: barcode = "2" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
+                                    case 3: barcode = "3" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
+                                    case 4: barcode = "4" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode; break;
                                 }
 
                                 if (pro.price.saleprice == pro.price.originprice)
@@ -1015,14 +1254,20 @@ namespace QiandamaPOS
 
 
                                 }
-
+                                //Console.WriteLine("增加数据前" + (DateTime.Now - starttime).TotalMilliseconds);
                                 //isCellPainting = true;
                                 dgvGood.Rows.Insert(0, new object[] { barcode, price, jian, num, add, total });
+
+                                //Console.WriteLine("增加数据后" + (DateTime.Now - starttime).TotalMilliseconds);
                                 //Delay.Start(50);
                                 //isCellPainting = false;
                             }
-                            dgvGood.ClearSelection();
+                            Thread threadItemExedate = new Thread(ShowDgv);
+                            threadItemExedate.IsBackground = true;
+                            threadItemExedate.Start();
 
+                            dgvGood.ClearSelection();
+                            Application.DoEvents();
                             if (cart.pointpayoption == 1 && cart.totalpayment == 0)
                             {
                                 pnlPayType1.Visible = false;
@@ -1033,16 +1278,16 @@ namespace QiandamaPOS
                     }
                     else
                     {
-                        pnlPayType1.Enabled = false;
+                        SetBtnPayStarus(false);
                         pnlPayType2.Enabled = false;
                     }
-
+                    //Console.WriteLine("积分前" + (DateTime.Now - starttime).TotalMilliseconds);
                     CurrentCart = cart;
                     if (MainModel.CurrentMember != null && btnCheckJF.Text == "√" && CurrentCart.pointinfo != null)
                     {
                         lblJFUse.Text = "使用" + CurrentCart.pointinfo.availablepoints + "积分 抵用" + CurrentCart.pointinfo.availablepointsamount + "元";
-                        lblJFUse.BackColor = Color.Moccasin;
-                        //lblJFUse.Visible = true;
+                        panel2.Visible = true;
+
                     }
 
                     if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Length > 0 && pnlPayType2.Visible == false)
@@ -1058,7 +1303,6 @@ namespace QiandamaPOS
                         else
                         {
                             lblCoupon.Text = CurrentCart.availablecoupons.Length + "张可用>";
-
                         }
                     }
                     else
@@ -1066,13 +1310,18 @@ namespace QiandamaPOS
                         lblCoupon.Visible = false;
                         lblCouponStr.Visible = false;
                     }
+                    //Console.WriteLine("优惠券后" + (DateTime.Now - starttime).TotalMilliseconds);
                     UpdateOrderHang();
-                    MainModel.frmmainmedia.UpdateForm(CurrentCart, MainModel.CurrentMember);
-
                 }));
+                    //Console.WriteLine("hang" + (DateTime.Now - starttime).TotalMilliseconds);
+                //btnmianban.focus();
+               // Application.DoEvents();
+
+                MainModel.frmMainmediaCart = CurrentCart;
+                MainModel.frmmainmedia.UpdateForm();
 
 
-                Application.DoEvents();
+               // Application.DoEvents();
 
             }
             catch (Exception ex)
@@ -1081,29 +1330,48 @@ namespace QiandamaPOS
             }
         }
 
+
         private void ClearForm()
+        
         {
+            try
+            {
+                CurrentCart = new Cart();
 
-            dgvGood.Rows.Clear();
-            lblPrice.Text = "0.00";
-            lblGoodsCount.Text = "(0件商品)";
+                isCellPainting = false;
+                dgvGood.Rows.Clear();
 
-            pnlWaiting.Show();
+                Application.DoEvents();
+                isCellPainting = true;
 
-            lstscancode.Clear();
+                lblPrice.Text = "￥" + "0.00";
+                lblGoodsCount.Text = "(0件商品)";
 
-            dgvOrderDetail.Rows.Clear();
-            CurrentCart = new Cart();
+                pnlMemberPromo.Visible = false;
+
+                pnlWaiting.Show();
+
+                //Application.DoEvents();
+
+                dgvOrderDetail.Rows.Clear();
 
 
-            pnlPayType1.Visible = true;
-            pnlPayType2.Visible = false;
-            pnlPayType1.Enabled = false;
-            pnlPayType2.Enabled = false;
+                // pnlPayType1.Enabled = false;
+                SetBtnPayStarus(false);
+                pnlPayType2.Enabled = false;
 
-            UpdateOrderHang();
+                UpdateOrderHang();
 
-            MainModel.frmmainmedia.IniForm();
+               // MainModel.frmmainmedia.IniForm();
+                Application.DoEvents();
+
+                MainModel.frmmainmedia.IniForm(null);
+                //ThreadPool.QueueUserWorkItem(new WaitCallback(MainModel.frmmainmedia.IniForm));
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         #endregion
@@ -1117,8 +1385,8 @@ namespace QiandamaPOS
             try
             {
                 this.Enabled = false;
-                MainModel.frmmainmedia.ShowNumber();
-                frmNumber frmnumber = new frmNumber("请输入会员号", true, false);
+               // MainModel.frmmainmedia.ShowNumber();
+                frmNumber frmnumber = new frmNumber("请输入会员号", false, false);
                 frmnumber.DataReceiveHandle += FormPhone_DataReceiveHandle;
                 frmnumber.Opacity = 0.95d;
                 frmnumber.frmNumber_SizeChanged(null, null);
@@ -1128,9 +1396,9 @@ namespace QiandamaPOS
                 frmnumber.ShowDialog();
 
                 //RefreshCart();
-                Application.DoEvents();
+                //Application.DoEvents();
                 this.Enabled = true;
-                toolStripMain.Focus();
+               //btnmianban.focus();
             }
             catch (Exception ex)
             {
@@ -1164,8 +1432,14 @@ namespace QiandamaPOS
                             //pnlWaitingMember.Visible = true;
                             //pnlMember.Visible = false;
                             //MainModel.CurrentMember = null;
-                            ClearMember();
+                            
                             ShowLog(ErrorMsgMember, false);
+
+                            if (MainModel.CurrentMember != null)
+                            {
+                                ClearMember();
+                            }
+
                         }
                         else
                         {
@@ -1185,9 +1459,11 @@ namespace QiandamaPOS
             }
             finally
             {
-                this.Enabled = true;
-                LoadingHelper.CloseForm();//关闭
-
+                this.Invoke(new InvokeHandler(delegate()
+                  {
+                      this.Enabled = true;
+                      LoadingHelper.CloseForm();//关闭
+                  }));
 
             }
 
@@ -1198,39 +1474,45 @@ namespace QiandamaPOS
         {
             try
             {
-                this.Enabled = false;
-                bool testbooo = this.Enabled;
-                pnlWaitingMember.Visible = false;
-                pnlMember.Visible = true;
-                //this.Enabled = true;
-                lblMobil.Text = member.memberheaderresponsevo.mobile;
-                lblWechartNickName.Text = member.memberinformationresponsevo.wechatnickname;
+                this.Invoke(new InvokeHandler(delegate()
+              {
+                  this.Enabled = false;
 
-                MainModel.CurrentMember = member;
+                  pnlWaitingMember.Visible = false;
+                  pnlMember.Visible = true;
+                  //this.Enabled = true;
+                  lblMobil.Text = member.memberheaderresponsevo.mobile;
+                  lblWechartNickName.Text = member.memberinformationresponsevo.wechatnickname;
 
-                lblJF.Text = member.creditaccountrepvo.availablecredit.ToString();
-                //chkJF.Checked = false;
-                btnCheckJF.Text = "";
-                lblCoupon.Visible = false;
-                lblCouponStr.Visible = false;
+                  MainModel.CurrentMember = member;
 
-                if (member.memberinformationresponsevo.onbirthday)
-                {
-                    picBirthday.Visible = true;
-                }
-                else
-                {
-                    picBirthday.Visible = false;
-                }
-                //RefreshCart();
-                //购物车有商品的话刷新一次
-                if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
-                {
-                    RefreshCart();
-                }
+                  lblJF.Text = member.creditaccountrepvo.availablecredit.ToString();
+                  //chkJF.Checked = false;
+                  btnCheckJF.Text = "";
+                  lblCoupon.Visible = false;
+                  lblCouponStr.Visible = false;
 
-                this.Enabled = true;
-                toolStripMain.Focus();
+                  if (member.memberinformationresponsevo.onbirthday)
+                  {
+                      picBirthday.Visible = true;
+                  }
+                  else
+                  {
+                      picBirthday.Visible = false;
+                  }
+                  //RefreshCart();
+                  //购物车有商品的话刷新一次
+                  if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
+                  {
+                      RefreshCart();
+                  }
+                  this.Enabled = true;
+                  //btnmianban.focus();
+                  Application.DoEvents();
+
+                                  MainModel.frmmainmedia.LoadMember();
+           
+              }));
             }
             catch (Exception ex)
             {
@@ -1261,79 +1543,25 @@ namespace QiandamaPOS
         {
             try
             {
-                lblJF.Text = "0";
-                lblJFUse.Text = "";
-                lblJFUse.BackColor = Color.White;
-                //lblJFUse.Visible = false;
-                MainModel.CurrentMember = null;
-                MainModel.CurrentCouponCode = "";
-                //chkJF.Checked = false;
-                btnCheckJF.Text = "";
-                pnlWaitingMember.Visible = true;
-                pnlMember.Visible = false;
-                picBirthday.Visible = false;
+                this.Invoke(new InvokeHandler(delegate()
+              {
+                  lblJF.Text = "0";
+                  lblJFUse.Text = "";
+                  panel2.Visible = false;
+                  MainModel.CurrentMember = null;
+                  MainModel.CurrentCouponCode = "";
+                  //chkJF.Checked = false;
+                  btnCheckJF.Text = "";
+                  pnlWaitingMember.Visible = true;
+                  pnlMember.Visible = false;
+                  picBirthday.Visible = false;
 
 
-                //string ErrorMsgCart = "";
-                //int ResultCode = 0;
-                //toolStripMain.Focus();
-                //if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
-                //{
-                //    //CurrentCart.pointpayoption = 1;
+                  Application.DoEvents();
+                  MainModel.frmmainmedia.LoadMember();
 
-                //    CurrentCart.pointpayoption = btnCheckJF.Text == "√" ? 1 : 0;
-
-                //    Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
-                //    CurrentCart = cart;
-                //    if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
-                //    {
-                //        ShowLog(ErrorMsgCart, false);
-
-                //        CheckUserAndMember(ResultCode);
-                //        //return false;
-                //    }
-                //    else
-                //    {
-
-                //        UploadDgvGoods(cart);
-
-
-                //        if (btnCheckJF.Text == "√")
-                //        {
-                //            if (MainModel.CurrentMember != null && CurrentCart != null && CurrentCart.pointinfo != null)
-                //            {
-                //                lblJF.Text = CurrentCart.pointinfo.totalpoints;
-                //                lblJFUse.Visible = true;
-                //                lblJFUse.Text = "使用" + CurrentCart.pointinfo.availablepoints + "积分 抵用" + CurrentCart.pointinfo.availablepointsamount + "元";
-
-                //            }
-                //        }
-                //        else
-                //        {
-                //            //lblJF.Text = "0";
-                //            lblJFUse.Visible = false;
-                //            lblJFUse.Text = "";
-                //        }
-
-
-
-                //        btnPayByBalance.Enabled = CurrentCart.paymenttypes.balancepayenabled == 1;
-                //        btnPayByCash.Enabled = CurrentCart.paymenttypes.cashenabled == 1;
-                //        btnPayOnLine.Enabled = CurrentCart.paymenttypes.onlineenabled == 1;
-
-                //       // return true;
-                //    }
-
-                //}
-                //else
-                //{
-                //    ClearForm();
-                //    //ClearMember();
-                //    //return true;
-                //}
-
-
-                // RefreshCart();
+                  // RefreshCart();
+              }));
             }
             catch (Exception ex)
             {
@@ -1407,8 +1635,8 @@ namespace QiandamaPOS
                 CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
                 if (ResultCode != 0 || orderresult == null)
                 {
-                    CheckUserAndMember(ResultCode);
-                    ShowLog("异常" + ErrorMsg, true);
+                    CheckUserAndMember(ResultCode, ErrorMsg);
+                    //ShowLog("异常" + ErrorMsg, true);
                 }
                 else if (orderresult.continuepay == 1)
                 {                    
@@ -1432,26 +1660,35 @@ namespace QiandamaPOS
 
         private void FormOnLinePayResult_DataReceiveHandle(int type, string orderid)
         {
-
-            if (type == 1) //交易完成
+            try
             {
                 this.Invoke(new InvokeHandler(delegate()
-                {
+                      {
+                          if (type == 1) //交易完成
+                          {
+                              this.Invoke(new InvokeHandler(delegate()
+                              {
 
-                    frmCashierResult frmresult = new frmCashierResult(orderid);
-                    frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
-                    frmresult.ShowDialog();
+                                  frmCashierResult frmresult = new frmCashierResult(orderid);
+                                  frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
+                                  frmresult.ShowDialog();
 
-                    ClearForm();
-                    ClearMember();
-                }));
+                                  ClearForm();
+                                  ClearMember();
+                              }));
 
-            }
-            else
-            {
-                MainModel.frmmainmedia.UpdateForm(CurrentCart, MainModel.CurrentMember);
-            }
-            // btnUSB.Focus();
+                          }
+                          else
+                          {
+
+                                    MainModel.frmMainmediaCart = CurrentCart;
+                                    MainModel.frmmainmedia.UpdateForm();
+                          }
+
+                          this.Enabled = true;
+                          // btnUSB.Focus();
+                      }));
+            }catch{}
 
         }
 
@@ -1459,110 +1696,154 @@ namespace QiandamaPOS
         //0 需要微信支付宝继续支付  2、现金支付完成
         private void FormCash_DataReceiveHandle(int type, string orderid)
         {
-            //返回收银方式按钮 关闭现金收银页面
-            if (type == 0)
+            try
             {
                 this.Invoke(new InvokeHandler(delegate()
-                {
-                    frmonlinepayresult = new frmOnLinePayResult(orderid);
+              {
+                  //返回收银方式按钮 关闭现金收银页面
+                  if (type == 0)
+                  {
+                      this.Invoke(new InvokeHandler(delegate()
+                      {
+                          frmonlinepayresult = new frmOnLinePayResult(orderid);
 
-                    frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                    //frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
-                    frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
+                          frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
+                          //frmonlinepayresult.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, this.Height - 200);
+                          frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
 
-                    frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
-                    frmonlinepayresult.ShowDialog();
-                    frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
-                    frmonlinepayresult = null;
+                          frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+                          frmonlinepayresult.ShowDialog();
+                          frmonlinepayresult.DataReceiveHandle -= FormOnLinePayResult_DataReceiveHandle;
+                          frmonlinepayresult = null;
 
-                    // ClearForm();
-                }));
+                          // ClearForm();
+                      }));
+                  }
+                  else if (type == 1)
+                  {
+                      this.Invoke(new InvokeHandler(delegate()
+                      {
+                          frmCashierResult frmresult = new frmCashierResult(orderid);
+                          frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
+                          frmresult.ShowDialog();
+
+                          ClearForm();
+                          ClearMember();
+                      }));
+                  }
+                  else if (type == MainModel.HttpUserExpired || type == MainModel.HttpMemberExpired)
+                  {
+                      CheckUserAndMember(type,"");
+                  }
+
+                  if (CurrentCart != null)
+                  {
+                      CurrentCart.cashpayoption = 0;
+                      CurrentCart.cashpayamt = 0;
+                  }
+
+                  this.Enabled = true;
+                  RefreshCart();
+
+              }));
             }
-            else if (type == 1)
+            catch (Exception ex)
             {
                 this.Invoke(new InvokeHandler(delegate()
-                {
-                    frmCashierResult frmresult = new frmCashierResult(orderid);
-                    frmresult.DataReceiveHandle += FormCashierResult_DataReceiveHandle;
-                    frmresult.ShowDialog();
-
-                    ClearForm();
-                    ClearMember();
-                }));
-            }
-            else if (type == MainModel.HttpUserExpired || type == MainModel.HttpMemberExpired)
-            {
-                CheckUserAndMember(type);
+              {
+                  this.Enabled = true;
+              }));
             }
 
-            if (CurrentCart != null)
-            {
-                CurrentCart.cashpayoption = 0;
-                CurrentCart.cashpayamt = 0;
-            }
-            RefreshCart();
+           
 
         }
 
 
         private void FormCashCoupon_DataReceiveHandle(int type, string orderid)
         {
-            if (type == MainModel.HttpUserExpired || type == MainModel.HttpMemberExpired)
-            {
-                CheckUserAndMember(type);
-            }
-            if (type == 1)
+            try
             {
                 this.Invoke(new InvokeHandler(delegate()
-               {
-                   frmonlinepayresult = new frmOnLinePayResult(orderid);
+              {
+                  if (type == MainModel.HttpUserExpired || type == MainModel.HttpMemberExpired)
+                  {
+                      CheckUserAndMember(type,"");
+                  }
+                  if (type == 1)
+                  {
+                      this.Invoke(new InvokeHandler(delegate()
+                     {
+                         frmonlinepayresult = new frmOnLinePayResult(orderid);
 
-                   frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
-                   frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
+                         frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
+                         frmonlinepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmonlinepayresult.Height) / 2);
 
-                   frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
-                   frmonlinepayresult.ShowDialog();
-                   frmonlinepayresult = null;
-               }));
+                         frmonlinepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+                         frmonlinepayresult.ShowDialog();
+                         frmonlinepayresult = null;
+                     }));
+                  }
+                  else if (type == 2)
+                  {
+                      this.Invoke(new InvokeHandler(delegate()
+                     {
+                         frmBalancePayResult frmbalancepayresult = new frmBalancePayResult(orderid);
+
+                         frmbalancepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmbalancepayresult.Height) / 2);
+
+                         frmbalancepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
+                         frmbalancepayresult.ShowDialog();
+                         frmbalancepayresult = null;
+                     }));
+                  }
+
+                  if (CurrentCart != null)
+                  {
+                      CurrentCart.cashcouponamt = 0;
+                  }
+                  //RefreshCart();
+
+                  this.Enabled = true;
+              }));
             }
-            else if (type == 2)
+            catch (Exception ex)
             {
                 this.Invoke(new InvokeHandler(delegate()
-               {
-                   frmBalancePayResult frmbalancepayresult = new frmBalancePayResult(orderid);
-
-                   frmbalancepayresult.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - frmbalancepayresult.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - frmbalancepayresult.Height) / 2);
-
-                   frmbalancepayresult.DataReceiveHandle += FormOnLinePayResult_DataReceiveHandle;
-                   frmbalancepayresult.ShowDialog();
-                   frmbalancepayresult = null;
-               }));
+              {
+                  this.Enabled = true;
+              }));
             }
-
-            if (CurrentCart != null)
-            {
-                CurrentCart.cashcouponamt = 0;
-            }
-            //RefreshCart();
 
         }
 
         private void FormCashierResult_DataReceiveHandle(int type, string payinfo)
         {
-            if (type == 0)
+            try
             {
                 this.Invoke(new InvokeHandler(delegate()
-                {
+               {
 
-                }));
+                   if (type == 0)
+                   {
+                       this.Invoke(new InvokeHandler(delegate()
+                       {
+
+                       }));
+                   }
+                   else if (type == 1)
+                   {
+                       this.Invoke(new InvokeHandler(delegate()
+                       {
+                           MainModel.frmmainmedia.ShowPayResult(payinfo);
+                       }));
+
+                   }
+               }));
             }
-            else if (type == 1)
+            catch (Exception ex)
             {
-                this.Invoke(new InvokeHandler(delegate()
-                {
-                    MainModel.frmmainmedia.ShowPayResult(payinfo);
-                }));
-
+                
             }
 
         }
@@ -1572,6 +1853,9 @@ namespace QiandamaPOS
         {
             try
             {
+
+                this.Invoke(new InvokeHandler(delegate()
+                {
                 if (type == 0)
                 {
 
@@ -1582,16 +1866,30 @@ namespace QiandamaPOS
                     {
                         if (goodscode.Length == 13)
                         {
-                            QueueScanCode.Enqueue(goodscode);
+                            ThreadPool.QueueUserWorkItem(new WaitCallback(ScanCodeThread),goodscode);
+                            //ParameterizedThreadStart Pts = new ParameterizedThreadStart(ScanCodeThread);
+                            //Thread thread = new Thread(Pts);
+                            //thread.IsBackground = true;
+                            //thread.Start(goodscode);
+                           // QueueScanCode.Enqueue(goodscode);
                         }
                         else
                         {
-                            QueueShortCode.Enqueue(goodscode);
+                            ThreadPool.QueueUserWorkItem(new WaitCallback(InputShortCodeThread), goodscode);
+                            //ParameterizedThreadStart Pts = new ParameterizedThreadStart(InputShortCodeThread);
+                            //Thread thread = new Thread(Pts);
+                            //thread.IsBackground = true;
+                            //thread.Start(goodscode);
+                           // QueueShortCode.Enqueue(goodscode);
                         }
                         
                     }));
 
                 }
+                this.Enabled = true;
+
+                   //btnmianban.focus();
+               }));
             }
             catch (Exception ex)
             {
@@ -1600,9 +1898,12 @@ namespace QiandamaPOS
             }
             finally
             {
-                this.Enabled = true;
-                toolStripMain.Focus();
-                LoadingHelper.CloseForm();//关闭
+                this.Invoke(new InvokeHandler(delegate()
+               {
+                   //btnmianban.focus();
+                   LoadingHelper.CloseForm();//关闭
+               }));
+               
 
 
             }
@@ -1636,6 +1937,7 @@ namespace QiandamaPOS
 
                 this.Invoke(new InvokeHandler(delegate()
           {
+              IsScan = true;
               if (!string.IsNullOrEmpty(phone))
               {
                   string ErrorMsgMember = "";
@@ -1667,7 +1969,6 @@ namespace QiandamaPOS
                   tempscancodedto.barcode = pro.barcode;
 
                   tempscancode.scancodedto = tempscancodedto;
-                  lstscancode.Add(tempscancode);
                   //QueueScanCode.Enqueue(pro.barcode);
               }
 
@@ -1702,8 +2003,8 @@ namespace QiandamaPOS
                     {
                         ShowLog(ErrorMsgCart, false);
 
-                        CheckUserAndMember(ResultCode);
-                        ShowLog(ErrorMsgCart, false);
+                        CheckUserAndMember(ResultCode, ErrorMsgCart);
+                        //ShowLog(ErrorMsgCart, false);
                     }
                     else
                     {
@@ -1713,8 +2014,8 @@ namespace QiandamaPOS
                         CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
                         if (ResultCode != 0 || orderresult == null)
                         {
-                            CheckUserAndMember(ResultCode);
-                            ShowLog("异常" + ErrorMsg, true);
+                            CheckUserAndMember(ResultCode, ErrorMsg);
+                            //ShowLog("异常" + ErrorMsg, true);
                         }
                         else if (orderresult.continuepay == 1)
                         {
@@ -1733,8 +2034,7 @@ namespace QiandamaPOS
                     this.Enabled = true;
                 }
 
-                Application.DoEvents();
-                toolStripMain.Focus();
+               //btnmianban.focus();
                 Application.DoEvents();
 
             }
@@ -1776,12 +2076,14 @@ namespace QiandamaPOS
                     //frmcash.Opacity = 0.95d;
                     frmcash.ShowDialog();
 
+
+                    this.Enabled = true;
                     Application.DoEvents();
 
                     listener.Start();
-                    this.Enabled = true;
-
-                    toolStripMain.Focus();
+                    
+                    
+                   //btnmianban.focus();
                     //btnUSB.Focus();
                 }
             }
@@ -1794,7 +2096,7 @@ namespace QiandamaPOS
                 listener.Start();
                 this.Enabled = true;
 
-                toolStripMain.Focus();
+               //btnmianban.focus();
             }
 
 
@@ -1815,13 +2117,13 @@ namespace QiandamaPOS
                     string ErrorMsgCart = "";
                     int ResultCode = 0;
                     Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
-                    CurrentCart = cart;
+                    //CurrentCart = cart;
                     if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                     {
                         ShowLog(ErrorMsgCart, false);
 
-                        CheckUserAndMember(ResultCode);
-                        ShowLog(ErrorMsgCart, false);
+                        CheckUserAndMember(ResultCode, ErrorMsgCart);
+                        //ShowLog(ErrorMsgCart, false);
                     }
                     else
                     {
@@ -1831,8 +2133,8 @@ namespace QiandamaPOS
                         CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
                         if (ResultCode != 0 || orderresult == null)
                         {
-                            CheckUserAndMember(ResultCode);
-                            ShowLog("异常" + ErrorMsg, true);
+                            CheckUserAndMember(ResultCode, ErrorMsg);
+                            //ShowLog("异常" + ErrorMsg, true);
                         }
                         else if (orderresult.continuepay == 1)
                         {
@@ -1845,12 +2147,14 @@ namespace QiandamaPOS
                             frmbalancepayresult = null;
                         }
                     }
+
+                    listener.Start();
+                    this.Enabled = true;
                 }
                 Application.DoEvents();
 
-                listener.Start();
-                this.Enabled = true;
-                toolStripMain.Focus();
+              
+               //btnmianban.focus();
             }
             catch (Exception ex)
             {
@@ -1861,7 +2165,7 @@ namespace QiandamaPOS
             {
                 listener.Start();
                 this.Enabled = true;
-                toolStripMain.Focus();
+               //btnmianban.focus();
             }
         }
 
@@ -1901,7 +2205,7 @@ namespace QiandamaPOS
                     //}
                     Application.DoEvents();
 
-                    toolStripMain.Focus();
+                   //btnmianban.focus();
                 }
             }
             catch (Exception ex)
@@ -1912,7 +2216,7 @@ namespace QiandamaPOS
             {
                 listener.Start();
                 this.Enabled = true;
-                toolStripMain.Focus();
+               //btnmianban.focus();
             }
 
         }
@@ -1925,8 +2229,8 @@ namespace QiandamaPOS
             CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
             if (ResultCode != 0 || orderresult == null)
             {
-                CheckUserAndMember(ResultCode);
-                ShowLog("异常" + ErrorMsg, true);
+                CheckUserAndMember(ResultCode, ErrorMsg);
+               // ShowLog("异常" + ErrorMsg, true);
             }
             else if (orderresult.continuepay == 1)
             {
@@ -1958,7 +2262,7 @@ namespace QiandamaPOS
 
                 string proinfo = dgvGood.Rows[e.RowIndex].Cells["barcode"].Value.ToString();
                 string[] strs = proinfo.Replace("\r\n", "*").Split('*');
-                string barcode = strs[strs.Length - 1].Trim();
+                string skucode = strs[strs.Length - 1].Trim();
                 string proname = strs[strs.Length - 2].Trim();
                 //增加标品
                 if (dgvGood.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "+")
@@ -1966,7 +2270,7 @@ namespace QiandamaPOS
 
                     for (int i = 0; i < CurrentCart.products.Count; i++)
                     {
-                        if (CurrentCart.products[i].barcode == barcode)
+                        if (CurrentCart.products[i].skucode == skucode)
                         {
                             CurrentCart.products[i].num += 1;
                             break;
@@ -1981,13 +2285,13 @@ namespace QiandamaPOS
                 {
                     for (int i = 0; i < CurrentCart.products.Count; i++)
                     {
-                        if (CurrentCart.products[i].barcode == barcode)
+                        if (CurrentCart.products[i].skucode == skucode)
                         {
 
                             if (CurrentCart.products[i].num == 1)
                             {
                                 this.Enabled = false;
-                                frmDeleteGood frmdelete = new frmDeleteGood("是否确认删除商品？", proname, barcode);
+                                frmDeleteGood frmdelete = new frmDeleteGood("是否确认删除商品？", proname, skucode);
                                 
                                 if (frmdelete.ShowDialog() == DialogResult.OK)
                                 {
@@ -2000,7 +2304,6 @@ namespace QiandamaPOS
                             else
                             {
                                 CurrentCart.products[i].num -= 1;
-
                             }
                             break;
                         }
@@ -2011,7 +2314,7 @@ namespace QiandamaPOS
                 if (e.ColumnIndex == 6)
                 {
                     this.Enabled = false;
-                    frmDeleteGood frmdelete = new frmDeleteGood("是否确认删除商品？", proname, barcode);
+                    frmDeleteGood frmdelete = new frmDeleteGood("是否确认删除商品？", proname, skucode);
                     if (frmdelete.ShowDialog() != DialogResult.OK)
                     {
                         this.Enabled = true;
@@ -2021,7 +2324,7 @@ namespace QiandamaPOS
 
                     foreach (Product pro in CurrentCart.products)
                     {
-                        if (pro.barcode == barcode)
+                        if (pro.skucode == skucode)
                         {
                             CurrentCart.products.Remove(pro);
                             break;
@@ -2040,18 +2343,6 @@ namespace QiandamaPOS
 
         }
 
-        private void frmMain_Click(object sender, EventArgs e)
-        {
-            toolStripMain.Focus();
-        }
-
-
-
-
-        private void control_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
 
         private void panel_Paint(object sender, PaintEventArgs e)
@@ -2115,12 +2406,12 @@ namespace QiandamaPOS
                 else
                 {
                     picScreen.BackgroundImage = MainModel.GetWinformImage(this);
-                    //picScreen.BackgroundImage = TransparentImage(GetWinformImage(), (float)0.15);
                     picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
-                    //picScreen.Location = new System.Drawing.Point(0, 0);
                     picScreen.Visible = true;
-                    // this.Opacity = 0.9d;
+
                 }
+
+                 Application.DoEvents();
             }
             catch (Exception ex)
             {
@@ -2169,12 +2460,54 @@ namespace QiandamaPOS
 
         private void btnMianban_Click(object sender, EventArgs e)
         {
-            //PrintUtil.OpenCashBox();
+
+            //LoadIncrementProduct();
+            try
+            {
+                IsScan = false;
+                frmPanelGoods frmpanel = new frmPanelGoods();
+                asf.AutoScaleControlTest(frmpanel, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height - toolStripMain.Height, true);
+                frmpanel.Location = new System.Drawing.Point(0, toolStripMain.Height);
+                btnOrderCancle.Visible = false;
+                btnOrderHang.Visible = false;
+                btnOrderQuery.Visible = false;
+                frmpanel.ShowDialog();
+
+                IsScan = true;
+                btnOrderHang.Visible = true;
+                btnOrderQuery.Visible = true;
+                if (frmpanel.DialogResult == DialogResult.OK)
+                {
+
+              
+                if (dgvGood.Rows.Count > 0)
+                {
+                    btnOrderCancle.Visible = true;
+                }
+
+                if (CurrentCart == null)
+                {
+                    CurrentCart = new Cart();
+                }
+                if (CurrentCart.products == null)
+                {
+                    CurrentCart.products=frmpanel.SelectProducts;
+                    RefreshCart();
+                }
+                else
+                {
+                    CurrentCart.products.AddRange( frmpanel.SelectProducts);
+                    RefreshCart();
+                }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ShowLog("加载面板商品异常"+ex.Message,true);
+            }
+            
         }
-
-
-
-
 
 
 
@@ -2432,7 +2765,316 @@ namespace QiandamaPOS
         }
 
 
+        private void SetBtnPayStarus(bool isEnable)
+        {
+            if (isEnable)
+            {
 
+                btnPayOnLine.BackColor = Color.Tomato;
+                btnPayByCash.BackColor = Color.DarkOrange;
+                btnPayByBalance.BackColor = Color.DarkTurquoise;
+                btnPayByCoupon.BackColor = Color.MediumSeaGreen;
+
+            }
+            else
+            {
+                btnPayOnLine.BackColor = Color.Silver;
+                btnPayByCash.BackColor = Color.Silver;
+                btnPayByBalance.BackColor = Color.Silver;
+                btnPayByCoupon.BackColor = Color.Silver;
+
+                //btnPayOnLine.ForeColor = Color.White;
+                //btnPayByCash.ForeColor = Color.White;
+                //btnPayByBalance.ForeColor = Color.White;
+                //btnPayByCoupon.ForeColor = Color.White;
+
+            }
+        }
+
+        private void pnlPayType1_EnabledChanged(object sender, EventArgs e)
+        {
+
+            //if(pnlPayType1.Enabled==false){
+            //    btnPayOnLine.BackColor = Color.Silver;
+            //    btnPayByCash.BackColor = Color.Silver;
+            //    btnPayByBalance.BackColor = Color.Silver;
+            //    btnPayByCoupon.BackColor = Color.Silver;
+
+            //    btnPayOnLine.ForeColor = Color.White;
+            //    btnPayByCash.ForeColor = Color.White;
+            //    btnPayByBalance.ForeColor = Color.White;
+            //    btnPayByCoupon.ForeColor = Color.White;
+
+            //}else{
+
+            //    btnPayOnLine.BackColor = Color.Tomato;
+            //    btnPayByCash.BackColor = Color.DarkOrange;
+            //    btnPayByBalance.BackColor = Color.DarkTurquoise;
+            //    btnPayByCoupon.BackColor = Color.MediumSeaGreen;
+
+            //}
+           
+        }
+
+
+        //[System.Runtime.InteropServices.DllImport("user32.dll ")]
+        //public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int wndproc);
+        //[System.Runtime.InteropServices.DllImport("user32.dll ")]
+        //public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        //public const int GWL_STYLE = -16;
+        //public const int WS_DISABLED = 0x8000000;
+
+        //public static void SetControlEnabled(Control c, bool enabled)
+        //{
+        //    if (enabled)
+        //    { SetWindowLong(c.Handle, GWL_STYLE, (~WS_DISABLED) & GetWindowLong(c.Handle, GWL_STYLE)); }
+        //    else
+        //    { SetWindowLong(c.Handle, GWL_STYLE, WS_DISABLED + GetWindowLong(c.Handle, GWL_STYLE)); }
+        //}
+
+
+
+        //屏蔽回车和空格键
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+
+            if (keyData == Keys.Enter || keyData == Keys.Space)
+            {
+                LogManager.WriteLog("检测到回车空格键");
+                return false;
+            }
+
+            else
+                return base.ProcessDialogKey(keyData);
+        }
+
+
+
+        private void ShowDgv()
+        {
+            try
+            {                
+                   if (dgvGood.Rows.Count > 0)
+                   {
+                       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+                       dataGridViewCellStyle1.BackColor = Color.SkyBlue;
+                       Color color = dgvGood.Rows[0].DefaultCellStyle.BackColor;
+
+                       dgvGood.Rows[0].DefaultCellStyle = dataGridViewCellStyle1;
+
+                       Delay.Start(200);
+                       dataGridViewCellStyle1.BackColor = color;
+                       dgvGood.Rows[0].DefaultCellStyle = dataGridViewCellStyle1;
+                   }             
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #region 商品全量/增量数据同步
+
+        DBPRODUCT_BEANBLL productbll = new DBPRODUCT_BEANBLL();
+
+        //当天第一次进入更新全局商品
+        private void LoadAllProduct()
+        {
+            try
+            {
+                string errormesg = "";
+               
+                    int i = 0;
+                    lstproduct.Clear();
+                    
+                   productbll.AddProduct(GetAllProdcut(1,200));
+
+                  
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("更新全部商品异常"+ex.Message);
+            }
+
+        }
+
+        List<DBPRODUCT_BEANMODEL> lstproduct = new List<DBPRODUCT_BEANMODEL>();
+        private List<DBPRODUCT_BEANMODEL> GetAllProdcut(int page,int size)
+        {
+            try
+            {
+                string errormesg = "";
+                AllProduct allproduct = httputil.QuerySkushopAll(MainModel.CurrentShopInfo.shopid, page, size, ref errormesg);
+
+                if (!string.IsNullOrEmpty(errormesg) || allproduct == null)
+                {
+                    LogManager.WriteLog("更新全部商品异常" + errormesg);
+                    return null;
+                }
+                else
+                {
+                    MainModel.LastQuerySkushopCrementTimeStamp = allproduct.timestamp.ToString();
+                    MainModel.LastQuerySkushopAllTimeStamp = allproduct.timestamp.ToString();
+
+                    lstproduct.AddRange(allproduct.rows);
+                    if (allproduct.rows.Count >= size)
+                    {
+                        GetAllProdcut(page+1,size);
+                    }
+                }
+
+                return lstproduct;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("ERROR","获取全量商品异常"+ex.Message);
+                return null;
+            }
+        }
+
+        private void timerGetIncrementProduct_Tick(object sender, EventArgs e)
+        {
+
+            //启动全量商品同步线程
+            Thread threadLoadIncrementProduct = new Thread(LoadIncrementProduct);
+            threadLoadIncrementProduct.IsBackground = true;
+            threadLoadIncrementProduct.Start();
+        }
+
+
+        //每10分钟同步一个增量商品
+        private void LoadIncrementProduct()
+        {
+            try
+            {
+                string errormesg = "";
+
+
+                DateTime starttime = DateTime.Now;
+                int i = 0;
+                lstIncrementproduct.Clear();
+                //productbll.Add(allproduct.rows[0]);
+                productbll.AddProduct(GetIncrementProdcut(1, 100));
+
+                LogManager.WriteLog("添加增量 数据时间" + (DateTime.Now - starttime).TotalMilliseconds);
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("更新全部商品异常" + ex.Message);
+            }
+
+        }
+
+        List<DBPRODUCT_BEANMODEL> lstIncrementproduct = new List<DBPRODUCT_BEANMODEL>();
+        private List<DBPRODUCT_BEANMODEL> GetIncrementProdcut(int page, int size)
+        {
+            try
+            {
+                string errormesg = "";
+                AllProduct allproduct = httputil.QuerySkushopIncrement(MainModel.CurrentShopInfo.shopid, page, size, ref errormesg);
+
+                if (!string.IsNullOrEmpty(errormesg) || allproduct == null)
+                {
+                    LogManager.WriteLog("更新全部商品异常" + errormesg);
+                    return null;
+                }
+                else
+                {
+                    MainModel.LastQuerySkushopCrementTimeStamp = allproduct.timestamp.ToString();
+
+                    lstIncrementproduct.AddRange(allproduct.rows);
+                    if (allproduct.rows.Count >= size)
+                    {
+                        GetIncrementProdcut(page + 1, size);
+                    }
+                }
+
+                return lstIncrementproduct;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("ERROR", "获取全量商品异常" + ex.Message);
+                return null;
+            }
+        }
+
+        #endregion
+
+
+
+
+
+        DBSWITCH_KEY_BEANBLL scalebll = new DBSWITCH_KEY_BEANBLL();
+
+        //当天第一次进入更新全局商品
+        private void LoadScale()
+        {
+            try
+            {
+                string errormesg = "";
+
+                DateTime starttime = DateTime.Now;
+                int i = 0;
+                lstScale.Clear();
+                scalebll.AddScalse(GetScale(1,100));
+
+                LogManager.WriteLog("添加电子秤数据时间" + (DateTime.Now - starttime).TotalMilliseconds);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("更新电子秤数据异常" + ex.Message);
+            }
+
+        }
+
+        List<DBSWITCH_KEY_BEANMODEL> lstScale = new List<DBSWITCH_KEY_BEANMODEL>();
+        private List<DBSWITCH_KEY_BEANMODEL> GetScale(int page, int size)
+        {
+            try
+            {
+                string errormesg = "";
+                Scale scale = httputil.GetScale( page, size, ref errormesg);
+
+                if (!string.IsNullOrEmpty(errormesg) || scale == null)
+                {
+                    LogManager.WriteLog("获取电子秤信息异常" + errormesg);
+                    return null;
+                }
+                else
+                {
+                    lstScale.AddRange(scale.rows);
+                    if (scale.rows.Count >= size)
+                    {
+                        GetScale(page + 1, size);
+                    }
+                }
+
+                return lstScale;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("ERROR", "获取电子秤信息异常" + ex.Message);
+                return null;
+            }
+        }
+
+    
+        ///// <summary>
+        ///// 保证获取焦点，刷新客屏时不失去焦点
+        ///// </summary>
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        var result = base.CreateParams; ;
+        //        result.ExStyle |= 0x08000000; // WS_EX_NOACTIVATE
+        //        return result;
+        //    }
+        //}
 
     }
 }

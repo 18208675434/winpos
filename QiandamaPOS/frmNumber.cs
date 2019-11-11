@@ -47,17 +47,21 @@ namespace QiandamaPOS
             InitializeComponent();
 
             isDouble = isdouble;
+            isDouble = false;
+
             lblInfo.Text = title;
             if (isweight)
             {
                 lblg.Visible = true;
                 txtNum.MaxLength = 6;
+                txtNum.WaterText = "输入商品重量";
             }
             else
             {
                 lblg.Visible = false;
 
-                txtNum.SetWatermark(title);
+               // txtNum.SetWatermark(title);
+                txtNum.WaterText = title;
 
                 btnCancle.Focus();
             }
@@ -104,6 +108,39 @@ namespace QiandamaPOS
                 return;
             }
 
+            if (lblInfo.Text == "请输入会员号")
+            {
+                if (txtNum.Text.Length != 11)
+                {
+                   // ShowLog("请输入正确的手机号！",false);
+                    lblMsg.Text = "手机号格式不正确！";
+                    return;
+                }
+
+                if (txtNum.Text.Length > 0 && txtNum.Text.Substring(0, 1) != "1")
+                {
+                    //ShowLog("请输入正确的手机号！", false);
+                    lblMsg.Text = "手机号格式不正确！";
+                    return;
+                }
+            }
+
+            if (lblInfo.Text == "请输入商品条码")
+            {
+                if (txtNum.Text.Length > 5 && txtNum.Text.Length != 8 && txtNum.Text.Length!=13)
+                {
+                    // ShowLog("请输入正确的手机号！",false);
+                    lblMsg.Text = "只允许输入1-5、8、13 位！";
+                    return;
+                }
+
+                if (txtNum.Text.Length == 8)
+                {
+                    txtNum.Text = txtNum.Text.Substring(2,5);
+                }
+            }
+
+
             this.DialogResult = DialogResult.OK;
             NumValue = Convert.ToDouble(txtNum.Text);
 
@@ -135,6 +172,11 @@ namespace QiandamaPOS
             {
                 txtNum.Text = txtNum.Text.Substring(0,txtNum.Text.Length-1);
             }
+            if (txtNum.Text.Length == 0)
+            {
+                lblMsg.Text = "";
+            }
+
         }
 
 
@@ -247,6 +289,20 @@ namespace QiandamaPOS
         {
             asf.ControlAutoSize(this);
         }
+
+
+        ////信息提示
+        //private void ShowLog(string msg, bool iserror)
+        //{
+        //    this.Invoke(new InvokeHandler(delegate()
+        //    {
+
+        //        frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
+        //        //frmmsf.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+        //        frmmsf.ShowDialog(); LogManager.WriteLog(msg);
+        //    }));
+
+        //}
 
     }
 }

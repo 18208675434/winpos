@@ -121,12 +121,14 @@ namespace QiandamaPOS
                     if (dgvReceipt.Rows.Count > 0)
                     {
                         pnlEmptyReceipt.Visible = false;
+                        ShowLog("刷新完成", false);
                     }
                     else
                     {
                         pnlEmptyReceipt.Visible = true;
+                        ShowLog("暂无数据", false);
                     }
-                    ShowLog("刷新完成", false);
+                   
                 }
 
                 

@@ -12,9 +12,24 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -97,6 +112,18 @@
     </Compile>
     <Compile Include="frmCashierResultMedia.Designer.cs">
       <DependentUpon>frmCashierResultMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeMode.Designer.cs">
+      <DependentUpon>frmChangeMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeUrl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeUrl.Designer.cs">
+      <DependentUpon>frmChangeUrl.cs</DependentUpon>
     </Compile>
     <Compile Include="frmCoupon.cs">
       <SubType>Form</SubType>
@@ -230,6 +257,12 @@
     <Compile Include="frmOrderQuery.Designer.cs">
       <DependentUpon>frmOrderQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPanelGoods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPanelGoods.Designer.cs">
+      <DependentUpon>frmPanelGoods.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPrinterSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +274,24 @@
     </Compile>
     <Compile Include="frmReceiptQuery.Designer.cs">
       <DependentUpon>frmReceiptQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRefundSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRefundSelect.Designer.cs">
+      <DependentUpon>frmRefundSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScale.Designer.cs">
+      <DependentUpon>frmScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmScaleResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScaleResult.Designer.cs">
+      <DependentUpon>frmScaleResult.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTest.cs">
       <SubType>Form</SubType>
@@ -260,12 +311,14 @@
     <Compile Include="frmUserExpired.Designer.cs">
       <DependentUpon>frmUserExpired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AllProduct.cs" />
     <Compile Include="Model\AuthCodeImage.cs" />
     <Compile Include="Model\AuthcodeTrade.cs" />
     <Compile Include="Model\BalanceTrade.cs" />
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\ExpenseType.cs" />
     <Compile Include="Model\Member.cs" />
+    <Compile Include="Model\PanelProductPara.cs" />
     <Compile Include="Model\QueryExpense.cs" />
     <Compile Include="Model\QueryExpensePara.cs" />
     <Compile Include="Model\QueryOrder.cs" />
@@ -275,6 +328,7 @@
     <Compile Include="Model\Receiptdetail.cs" />
     <Compile Include="Model\ReceiptPara.cs" />
     <Compile Include="Model\ReceiptQuery.cs" />
+    <Compile Include="Model\RefundPara.cs" />
     <Compile Include="Model\SaveExpensePara.cs" />
     <Compile Include="Model\Scale.cs" />
     <Compile Include="Model\ScalePara.cs" />
@@ -298,12 +352,23 @@
     <Compile Include="Model\userModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ResourcePos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourcePos.resx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\EnumUnitType.cs" />
     <Compile Include="UserControl\transparentPic.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControl\transparentPic.Designer.cs">
       <DependentUpon>transparentPic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\WaterTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControl\WaterTextBox.Designer.cs">
+      <DependentUpon>WaterTextBox.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormMainMedia.resx">
       <DependentUpon>FormMainMedia.cs</DependentUpon>
@@ -313,6 +378,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCashierResultMedia.resx">
       <DependentUpon>frmCashierResultMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeMode.resx">
+      <DependentUpon>frmChangeMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeUrl.resx">
+      <DependentUpon>frmChangeUrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCoupon.resx">
       <DependentUpon>frmCoupon.cs</DependentUpon>
@@ -380,11 +451,23 @@
     <EmbeddedResource Include="frmOrderQuery.resx">
       <DependentUpon>frmOrderQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPanelGoods.resx">
+      <DependentUpon>frmPanelGoods.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrinterSetting.resx">
       <DependentUpon>frmPrinterSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReceiptQuery.resx">
       <DependentUpon>frmReceiptQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRefundSelect.resx">
+      <DependentUpon>frmRefundSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScale.resx">
+      <DependentUpon>frmScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScaleResult.resx">
+      <DependentUpon>frmScaleResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
@@ -405,6 +488,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resources\ResourcePos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourcePos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -421,6 +508,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="20190918080041866_easyicon_net_512.ico" />
+    <None Include="Resources\White.bmp" />
+    <None Include="Picture\add.png" />
+    <None Include="Picture\minus.png" />
+    <None Include="Picture\icon_delete.png" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -441,6 +532,28 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

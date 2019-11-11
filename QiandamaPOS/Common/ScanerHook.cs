@@ -8,7 +8,6 @@ using System.Threading;
 
 namespace QiandamaPOS.Common
 {
-
     public class ScanerHook
     {
         public delegate void ScanerDelegate(ScanerCodes codes);
@@ -19,7 +18,7 @@ namespace QiandamaPOS.Common
         //private const int WM_SYSKEYDOWN = 0x104;//SYSKEYDOWN
         //private const int WM_SYSKEYUP = 0x105;//SYSKEYUP
         //private static int HookProc(int nCode, Int32 wParam, IntPtr lParam);
-        private int hKeyboardHook = 0;//声明键盘钩子处理的初始值
+        public int hKeyboardHook = 0;//声明键盘钩子处理的初始值
         private ScanerCodes codes = new ScanerCodes();//13为键盘钩子
         //定义成静态，这样不会抛出回收异常
         private static HookProc hookproc;
@@ -79,20 +78,22 @@ namespace QiandamaPOS.Common
                 bool retKeyboard = UnhookWindowsHookEx(hKeyboardHook);
                 hKeyboardHook = 0;
                 return retKeyboard;
-
             }
             return true;
         }
         private int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam)
         {
-
-
+            
             EventMsg msg = (EventMsg)Marshal.PtrToStructure(lParam, typeof(EventMsg));
             codes.Add(msg);
+
+            //LogManager.WriteLog((ScanerEvent==null).ToString()+msg.message+"-"+msg.paramH+"-"+ codes.Result);
             if (ScanerEvent != null && msg.message == 13 && msg.paramH > 0 && !string.IsNullOrEmpty(codes.Result))
             {
+                
                 ScanerEvent(codes);
             }
+
             return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
         }
         public class ScanerCodes

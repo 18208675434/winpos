@@ -24,14 +24,37 @@ namespace QiandamaPOS
         {
 
             InitializeComponent();
-            lblMsg.Text = "";
+            //timerClose.Interval = 2000;
+            //timerClose.Enabled = true;
+            lblMsg1.Text = "";
+            lblMsg2.Text = "";
 
         }
         public frmLoading(string msg)
         {
 
             InitializeComponent();
-            lblMsg.Text = msg;
+
+            try
+            {
+                if (msg.Contains("|"))
+                {
+                    string[] strs = msg.Split('|');
+                    lblMsg1.Text = strs[0];
+                    lblMsg2.Text = strs[1];
+                }
+                else
+                {
+                    lblMsg1.Text = msg;
+                    lblMsg2.Text = "";
+                }
+              
+            }
+            catch
+            {
+
+            }
+           
 
         }
 
@@ -116,7 +139,17 @@ namespace QiandamaPOS
 
         private void frmLoading_SizeChanged(object sender, EventArgs e)
         {
-           asf.ControlAutoSize(this);
+           //asf.ControlAutoSize(this);
+        }
+
+        private void timerClose_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Dispose();
+                this.Close();
+
+            }catch{}
         }
 
     }
@@ -127,5 +160,8 @@ namespace QiandamaPOS
         public delegate void SetUISomeInfo();
 
     }
+
+
+
 
 }

@@ -28,43 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
-            this.txtUser = new System.Windows.Forms.TextBox();
             this.lblSN = new System.Windows.Forms.Label();
             this.lblShopName = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
-            this.txtPwd = new System.Windows.Forms.TextBox();
             this.pnlUser = new System.Windows.Forms.Panel();
+            this.txtPwd = new QiandamaPOS.UserControl.WaterTextBox();
+            this.txtUser = new QiandamaPOS.UserControl.WaterTextBox();
             this.btnLoginByUser = new System.Windows.Forms.Button();
             this.chkAutoLoginUser = new System.Windows.Forms.CheckBox();
             this.pnlPhone = new System.Windows.Forms.Panel();
+            this.txtPhoneCheckCode = new QiandamaPOS.UserControl.WaterTextBox();
+            this.txtCheckCode = new QiandamaPOS.UserControl.WaterTextBox();
+            this.txtPhone = new QiandamaPOS.UserControl.WaterTextBox();
             this.lblSendCheckCode = new System.Windows.Forms.Label();
-            this.txtPhoneCheckCode = new System.Windows.Forms.TextBox();
             this.picCheckCode = new System.Windows.Forms.PictureBox();
             this.btnLoginByPhone = new System.Windows.Forms.Button();
-            this.txtCheckCode = new System.Windows.Forms.TextBox();
             this.chkAutoLoginPhone = new System.Windows.Forms.CheckBox();
-            this.txtPhone = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblMsg = new System.Windows.Forms.Label();
             this.picExit = new System.Windows.Forms.PictureBox();
+            this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.pnlUser.SuspendLayout();
             this.pnlPhone.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCheckCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picExit)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtUser
-            // 
-            this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtUser.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtUser.Location = new System.Drawing.Point(30, 17);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(380, 36);
-            this.txtUser.TabIndex = 0;
-            this.txtUser.MouseCaptureChanged += new System.EventHandler(this.txt_MouseCaptureChanged);
             // 
             // lblSN
             // 
@@ -75,6 +67,7 @@
             this.lblSN.Size = new System.Drawing.Size(164, 21);
             this.lblSN.TabIndex = 1;
             this.lblSN.Text = "设备号：1234567890";
+            this.lblSN.Click += new System.EventHandler(this.lblSN_Click);
             // 
             // lblShopName
             // 
@@ -108,27 +101,39 @@
             this.lblPhone.Text = "手机验证码登录";
             this.lblPhone.Click += new System.EventHandler(this.lblPhone_Click);
             // 
-            // txtPwd
-            // 
-            this.txtPwd.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPwd.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtPwd.Location = new System.Drawing.Point(31, 73);
-            this.txtPwd.Name = "txtPwd";
-            this.txtPwd.Size = new System.Drawing.Size(380, 36);
-            this.txtPwd.TabIndex = 5;
-            this.txtPwd.UseSystemPasswordChar = true;
-            this.txtPwd.MouseCaptureChanged += new System.EventHandler(this.txt_MouseCaptureChanged);
-            // 
             // pnlUser
             // 
-            this.pnlUser.Controls.Add(this.btnLoginByUser);
             this.pnlUser.Controls.Add(this.txtPwd);
-            this.pnlUser.Controls.Add(this.chkAutoLoginUser);
             this.pnlUser.Controls.Add(this.txtUser);
+            this.pnlUser.Controls.Add(this.btnLoginByUser);
+            this.pnlUser.Controls.Add(this.chkAutoLoginUser);
             this.pnlUser.Location = new System.Drawing.Point(157, 279);
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(441, 247);
             this.pnlUser.TabIndex = 6;
+            // 
+            // txtPwd
+            // 
+            this.txtPwd.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPwd.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.txtPwd.Location = new System.Drawing.Point(31, 76);
+            this.txtPwd.MaxLength = 18;
+            this.txtPwd.Name = "txtPwd";
+            this.txtPwd.PasswordChar = '*';
+            this.txtPwd.Size = new System.Drawing.Size(380, 36);
+            this.txtPwd.TabIndex = 17;
+            this.txtPwd.WaterText = "输入密码";
+            // 
+            // txtUser
+            // 
+            this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUser.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.txtUser.Location = new System.Drawing.Point(31, 17);
+            this.txtUser.MaxLength = 18;
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(380, 36);
+            this.txtUser.TabIndex = 16;
+            this.txtUser.WaterText = "输入11位手机号";
             // 
             // btnLoginByUser
             // 
@@ -161,17 +166,50 @@
             // 
             // pnlPhone
             // 
-            this.pnlPhone.Controls.Add(this.lblSendCheckCode);
             this.pnlPhone.Controls.Add(this.txtPhoneCheckCode);
+            this.pnlPhone.Controls.Add(this.txtCheckCode);
+            this.pnlPhone.Controls.Add(this.txtPhone);
+            this.pnlPhone.Controls.Add(this.lblSendCheckCode);
             this.pnlPhone.Controls.Add(this.picCheckCode);
             this.pnlPhone.Controls.Add(this.btnLoginByPhone);
-            this.pnlPhone.Controls.Add(this.txtCheckCode);
             this.pnlPhone.Controls.Add(this.chkAutoLoginPhone);
-            this.pnlPhone.Controls.Add(this.txtPhone);
-            this.pnlPhone.Location = new System.Drawing.Point(157, 279);
+            this.pnlPhone.Location = new System.Drawing.Point(157, 280);
             this.pnlPhone.Name = "pnlPhone";
             this.pnlPhone.Size = new System.Drawing.Size(441, 279);
             this.pnlPhone.TabIndex = 9;
+            // 
+            // txtPhoneCheckCode
+            // 
+            this.txtPhoneCheckCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPhoneCheckCode.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.txtPhoneCheckCode.Location = new System.Drawing.Point(26, 123);
+            this.txtPhoneCheckCode.MaxLength = 18;
+            this.txtPhoneCheckCode.Name = "txtPhoneCheckCode";
+            this.txtPhoneCheckCode.Size = new System.Drawing.Size(241, 36);
+            this.txtPhoneCheckCode.TabIndex = 15;
+            this.txtPhoneCheckCode.WaterText = "输入短信验证码";
+            // 
+            // txtCheckCode
+            // 
+            this.txtCheckCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCheckCode.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.txtCheckCode.Location = new System.Drawing.Point(26, 69);
+            this.txtCheckCode.MaxLength = 18;
+            this.txtCheckCode.Name = "txtCheckCode";
+            this.txtCheckCode.Size = new System.Drawing.Size(241, 36);
+            this.txtCheckCode.TabIndex = 14;
+            this.txtCheckCode.WaterText = "输入右侧图形验证码";
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPhone.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.txtPhone.Location = new System.Drawing.Point(27, 17);
+            this.txtPhone.MaxLength = 18;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(381, 36);
+            this.txtPhone.TabIndex = 13;
+            this.txtPhone.WaterText = "输入11位手机号";
             // 
             // lblSendCheckCode
             // 
@@ -185,16 +223,6 @@
             this.lblSendCheckCode.TabIndex = 10;
             this.lblSendCheckCode.Text = "发送验证码";
             this.lblSendCheckCode.Click += new System.EventHandler(this.lblSendCheckCode_Click);
-            // 
-            // txtPhoneCheckCode
-            // 
-            this.txtPhoneCheckCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPhoneCheckCode.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtPhoneCheckCode.Location = new System.Drawing.Point(27, 126);
-            this.txtPhoneCheckCode.Name = "txtPhoneCheckCode";
-            this.txtPhoneCheckCode.Size = new System.Drawing.Size(240, 36);
-            this.txtPhoneCheckCode.TabIndex = 10;
-            this.txtPhoneCheckCode.MouseCaptureChanged += new System.EventHandler(this.txt_MouseCaptureChanged);
             // 
             // picCheckCode
             // 
@@ -223,16 +251,6 @@
             this.btnLoginByPhone.UseVisualStyleBackColor = false;
             this.btnLoginByPhone.Click += new System.EventHandler(this.btnLoginByPhone_Click);
             // 
-            // txtCheckCode
-            // 
-            this.txtCheckCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCheckCode.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtCheckCode.Location = new System.Drawing.Point(27, 73);
-            this.txtCheckCode.Name = "txtCheckCode";
-            this.txtCheckCode.Size = new System.Drawing.Size(240, 36);
-            this.txtCheckCode.TabIndex = 5;
-            this.txtCheckCode.MouseCaptureChanged += new System.EventHandler(this.txt_MouseCaptureChanged);
-            // 
             // chkAutoLoginPhone
             // 
             this.chkAutoLoginPhone.AutoSize = true;
@@ -243,16 +261,6 @@
             this.chkAutoLoginPhone.TabIndex = 7;
             this.chkAutoLoginPhone.Text = "近7天自动登录";
             this.chkAutoLoginPhone.UseVisualStyleBackColor = true;
-            // 
-            // txtPhone
-            // 
-            this.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPhone.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtPhone.Location = new System.Drawing.Point(27, 17);
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(380, 36);
-            this.txtPhone.TabIndex = 0;
-            this.txtPhone.MouseCaptureChanged += new System.EventHandler(this.txt_MouseCaptureChanged);
             // 
             // pictureBox1
             // 
@@ -286,6 +294,11 @@
             this.picExit.TabIndex = 12;
             this.picExit.TabStop = false;
             this.picExit.Click += new System.EventHandler(this.picExit_Click);
+            // 
+            // timerNow
+            // 
+            this.timerNow.Interval = 1000;
+            this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
             // 
             // frmLogin
             // 
@@ -325,26 +338,27 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.Label lblSN;
         private System.Windows.Forms.Label lblShopName;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Label lblPhone;
-        private System.Windows.Forms.TextBox txtPwd;
         private System.Windows.Forms.Panel pnlUser;
         private System.Windows.Forms.CheckBox chkAutoLoginUser;
         private System.Windows.Forms.Button btnLoginByUser;
         private System.Windows.Forms.Panel pnlPhone;
         private System.Windows.Forms.Label lblSendCheckCode;
-        private System.Windows.Forms.TextBox txtPhoneCheckCode;
         private System.Windows.Forms.PictureBox picCheckCode;
         private System.Windows.Forms.Button btnLoginByPhone;
-        private System.Windows.Forms.TextBox txtCheckCode;
         private System.Windows.Forms.CheckBox chkAutoLoginPhone;
-        private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblMsg;
         private System.Windows.Forms.PictureBox picExit;
+        private UserControl.WaterTextBox txtPhone;
+        private UserControl.WaterTextBox txtPwd;
+        private UserControl.WaterTextBox txtUser;
+        private UserControl.WaterTextBox txtPhoneCheckCode;
+        private UserControl.WaterTextBox txtCheckCode;
+        private System.Windows.Forms.Timer timerNow;
     }
 }
 

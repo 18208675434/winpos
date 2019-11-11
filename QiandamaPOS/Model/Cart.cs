@@ -123,6 +123,34 @@ public int highlight { get; set; }
         public int applyreturn { get; set; }
         public int withexchange { get; set; }
         public string[] tags { get; set; }
+
+        //销售单位
+        public string saleunit { get; set; }
+
+        //商品名称
+        public string skuname { get; set; }
+
+        /// <summary>
+        /// 一级分类ID
+        /// </summary>
+        public string firstcategoryid { get; set; }
+
+        /// <summary>
+        /// 一级分类名称
+        /// </summary>
+        public string firstcategoryname { get; set; }
+
+        public string shopid { get; set; }
+
+        public int isQueryBarcode { get; set; }
+
+        public bool weightflag { get; set; }
+
+
+        public Product ThisClone()
+        {
+            return (Product)this.MemberwiseClone();
+        }
     }
 
 
