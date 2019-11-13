@@ -11,9 +11,9 @@ namespace QiandamaPOS.Model
     {
         //视频默认图片
         public string defaultvideoimg { get; set; }
-        public string[] img { get; set; }
+        public List<string> img { get; set; }
         public object[] video { get; set; }
-        public Mediadetaildto[] mediadetaildtos { get; set; }
+        public List<Mediadetaildto> mediadetaildtos { get; set; }
     }
 
     public class Mediadetaildto

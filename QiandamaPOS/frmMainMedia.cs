@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading;
@@ -15,6 +17,10 @@ namespace QiandamaPOS
 {
     public partial class frmMainMedia : Form
     {
+        #region 成员变量
+        /// <summary>
+        /// 接口访问类
+        /// </summary>
         HttpUtil httputil = new HttpUtil();
 
         /// <summary>
@@ -27,26 +33,101 @@ namespace QiandamaPOS
         /// </summary>
         private delegate void InvokeHandler();
 
+        /// <summary>
+        /// 当前购物车对象
+        /// </summary>
+        private Cart CurrentCart;
+
+
+        /// <summary>
+        /// 当前会员对象
+        /// </summary>
+        private Member CurrentMember;
+
         private bool isplayer = false;
+
+        Thread threadMedia;
+
+        #endregion
+
+
+
+
+        #region 页面加载与关闭
         public frmMainMedia()
         {
             InitializeComponent();
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
-           // IniForm(null);
+            // IniForm(null);
+
+            threadMedia = new Thread(PlayerThread);
+            threadMedia.IsBackground = true;
+            threadMedia.Start();
+         
+          
+            //PlayerThread();
+        }
+        private void frmMainMedia_Load(object sender, EventArgs e)
+        {
+
         }
 
+        private void frmMainMedia_Shown(object sender, EventArgs e)
+        {
+            threadIniExedate = new Thread(IniFormExe);
+            threadIniExedate.IsBackground = true;
+            //threadIniExedate.Priority = ThreadPriority.BelowNormal;
+            threadIniExedate.Start();
+          
+
+            timerMedia.Interval = 10 * 60 * 1000;
+            timerMedia.Enabled = true;
+        }
+
+        private void frmMainMedia_SizeChanged(object sender, EventArgs e)
+        {
+            // asf.ControlAutoSize(this);
+        }
+
+        #endregion
+
+
+
+
+        #region 客屏媒体
+
+        private SortedDictionary<int, Mediadetaildto> sortMedia = new SortedDictionary<int, Mediadetaildto>();
+
+        int sortMediaCount = 0;
         Thread threadIniExedate;
+        //每十分钟刷新一次客屏广告信息
+        private void timerMedia_Tick(object sender, EventArgs e)
+        {
+
+            sortMedia.Clear();
+            threadIniExedate = new Thread(IniFormExe);
+            threadIniExedate.IsBackground = true;
+            //threadIniExedate.Priority = ThreadPriority.BelowNormal;
+            threadIniExedate.Start();
+        }
         public void IniForm(object obj)
         {
-            isplayer = true;     
-            ThreadPool.QueueUserWorkItem(new WaitCallback(IniFormExe));
-            ////启动扫描处理线程
-            //threadIniExedate = new Thread(IniFormExe);
 
+            if ((threadMedia.ThreadState & ThreadState.Suspended)!=0)
+            {
+                threadMedia.Resume();
+            }
+            
+
+            tabControlMedia.SelectedIndex = 1;
+            //isplayer = true;
+            ////ThreadPool.QueueUserWorkItem(new WaitCallback(IniFormExe));
+            //////启动扫描处理线程
+            //threadIniExedate = new Thread(IniFormExe);
             //threadIniExedate.IsBackground = true;
-            //threadIniExedate.TrySetApartmentState(ApartmentState.MTA);
+            ////threadIniExedate.Priority = ThreadPriority.BelowNormal;
             //threadIniExedate.Start();
         }
 
@@ -54,81 +135,210 @@ namespace QiandamaPOS
         {
             try
             {
-               tabControlMedia.SelectedIndex = 1;
+                tabControlMedia.SelectedIndex = 1;
 
-               player.Visible = false;
+                player.Visible = false;
 
-               string ErrorMsg = "";
-               MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
+                string ErrorMsg = "";
+                MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
 
-               if (ErrorMsg != "" || posmedia == null)
-               {
-                   //获取异常  显示空白页
-               }
-               else
-               {
-                   foreach (Mediadetaildto media in posmedia.mediadetaildtos)
-                   {
-                       if (isplayer)
-                       {
-                           if (media.mediatype == 1) //图片
-                           {
-                               player.Visible = false;
-                               string ImgUrl = media.content;
+                if (ErrorMsg != "" || posmedia == null)
+                {
+                    //获取异常  显示空白页
+                }
+                else
+                {
+                    CurrentMediadetaildtos =posmedia.mediadetaildtos;
+                    foreach (Mediadetaildto media in posmedia.mediadetaildtos)
+                    {
+                        ParameterizedThreadStart Pts = new ParameterizedThreadStart(DownLoadFile);
+                        Thread thread = new Thread(Pts);
+                        thread.IsBackground = true;
+                        thread.Start(media);
+                    }
+                }
 
-                               //testurl
-                               //ImgUrl = "https://pic.qdama.cn/Fjxb0w7cS11yuWKLt5vMBGN-O2Yq";
-                               Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
-
-                               tabPageAdvert.BackgroundImage = _image;
-
-                               tabPageAdvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-
-                               Application.DoEvents();
-                               Delay.Start(3000);
-                           }
-                           else if (media.mediatype == 2) //视频
-                           {
-                               string PlayerUrl = media.content;
-                               player.Visible = true;
-                               player.URL = PlayerUrl;
-                               this.player.Ctlcontrols.play();
-
-                               while (!player.status.Contains("停止"))
-                               {
-                                   Delay.Start(100);
-                               }
-
-                               player.close();
-                               player.Visible = false;
-                               //pictureBox1.BackgroundImage = _image;
-                           }
-                       }
-                   }
-               }
-     
             }
             catch (Exception ex)
             {
                 player.Visible = false;
-               // LogManager.WriteLog("ERROR", "初始化客屏信息异常：" + ex.Message);
+                // LogManager.WriteLog("ERROR", "初始化客屏信息异常：" + ex.Message);
             }
         }
 
-        private Cart CurrentCart;
-        private Member CurrentMember;
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="url"></param>
+        private void DownLoadFile(object obj)
+        {
+            try
+            {
+                //sortMedia.Clear();
+                Mediadetaildto media = (Mediadetaildto)obj;
 
+                string url = media.content;
+
+                string remoteUri = System.IO.Path.GetDirectoryName(url);
+
+                string fileName = System.IO.Path.GetFileName(url);
+                string filePath = MainModel.MediaPath + fileName;
+                if (File.Exists(filePath))
+                {
+                    sortMedia.Add(media.sortnum,media);
+                }
+                else
+                {
+                     
+
+                WebClient myWebClient = new WebClient();
+
+                myWebClient.DownloadFile(url, filePath);
+
+                sortMedia.Add(media.sortnum, media);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("ERROR", "下载文件异常：" + ex.Message);
+            }
+        }
+
+
+
+        private bool LoadMediaResult = false;
+        private bool DownLoadImgResult = false;
+        private bool DownLoadMp4Result = false;
+        private List<Mediadetaildto> CurrentMediadetaildtos = new List<Mediadetaildto>();
+        private void PlayerThread()
+        {
+            try
+            {
+                sortMediaCount = sortMedia.Count;
+               // foreach (KeyValuePair<int, Mediadetaildto> keval in sortMedia)
+                    for (int i = 0; i < sortMediaCount;i++ )
+                    //foreach (Mediadetaildto media in CurrentMediadetaildtos)
+                    {
+                        try
+                        {
+                            Mediadetaildto media = sortMedia[i];
+
+                            if (media.mediatype == 1) //图片
+                            {
+                                player.Visible = false;
+                                string ImgUrl = media.content;
+
+                                Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
+
+                                string imgname = media.content.Substring(media.content.LastIndexOf("/") + 1); //URL 最后的值
+
+                                tabPageAdvert.BackgroundImage = _image;
+
+                                if (File.Exists(MainModel.MediaPath + imgname))
+                                {
+
+                                    tabPageAdvert.BackgroundImage = Image.FromFile(MainModel.MediaPath + imgname);
+                                    Application.DoEvents();
+                                    Delay.Start(3000);
+                                }
+                                else
+                                {
+
+                                }
+
+                            }
+                            else if (media.mediatype == 2) //视频
+                            {
+                                string playername = media.content.Substring(media.content.LastIndexOf("/") + 1); //URL 最后的值
+
+                                if (File.Exists(MainModel.MediaPath + playername))
+                                {
+                                    try
+                                    {
+                                        player.Visible = true;
+                                        player.URL = MainModel.MediaPath + playername;
+                                        this.player.Ctlcontrols.play();
+
+                                        while (!player.status.Contains("停止") && player.Visible)
+                                        {
+                                            Delay.Start(100);
+                                        }
+
+                                        //player.close();
+                                        player.Visible = false;
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        //player.close();
+                                        player.Visible = false;
+                                        LogManager.WriteLog("客屏视频播放异常" + ex.Message);
+                                    }
+                                }
+                                else
+                                {
+                                    //player.close();
+                                    player.Visible = false;
+                                }
+
+                                //pictureBox1.BackgroundImage = _image;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogManager.WriteLog("客屏单个广告异常" + ex.Message+ex.StackTrace);
+                        }
+                    }
+                    player.Visible = false;
+            Delay.Start(1000);
+                //Thread.Sleep(100);
+            PlayerThread();
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("客屏广告异常" + ex.Message + ex.StackTrace);
+            }
+        }
+
+        //播放状态是全屏   不是播放状态 此属性不可修改 （异常:灾难性错误）
+        private void player_StatusChange(object sender, EventArgs e)
+        {
+            if (player.status.Contains("正在播放"))
+            {
+                if (!player.fullScreen)
+                    player.fullScreen = true;
+            }
+
+            //player.
+        }
+
+
+        #endregion
+
+
+
+
+        #region  购物车列表
 
         public void UpdateForm()
         {
             try
-            {        
+            {
+              
+                    threadMedia.Suspend();
+                    player.Visible = false;
+                    player.close();
+                
                 //////启动扫描处理线程
-                //Thread threadItemExedate = new Thread(UpdateFormExe);
-                //threadItemExedate.IsBackground = false;
-                //threadItemExedate.Start();
-                isplayer = false;
-                ThreadPool.QueueUserWorkItem(new WaitCallback(UpdateFormExe));
+                Thread threadItemExedate = new Thread(UpdateFormExe);
+                threadItemExedate.IsBackground = false;
+                //threadIniExedate.Priority = ThreadPriority.BelowNormal;
+                threadItemExedate.Start();
+                //isplayer = false;
+                //ThreadPool.QueueUserWorkItem(new WaitCallback(UpdateFormExe));
             }
             catch (Exception ex)
             {
@@ -146,16 +356,27 @@ namespace QiandamaPOS
                 {
                     DateTime starttime = DateTime.Now;
 
-                   
+
                     dgvGood.Visible = true;
                     tableLayoutPanel1.Visible = true;
 
                     pnlPayInfo.Visible = false;
-                    tabControlMedia.SelectedIndex = 0;
+                    try
+                    {
+                        tabControlMedia.SelectedIndex = 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        LogManager.WriteLog("切换窗体异常" +ex.Message);
+                    }
                     CurrentCart = MainModel.frmMainmediaCart;
                     CurrentMember = MainModel.CurrentMember;
-                    try { player.close(); }
-                    catch { }
+                    player.Visible = false;
+                    try { //player.close(); 
+                    }
+                    catch {
+                        LogManager.WriteLog("关闭视频异常");
+                    }
 
                     try { threadIniExedate.Abort(); }
                     catch { }
@@ -293,162 +514,6 @@ namespace QiandamaPOS
             }
         }
 
-        public void LoadMember()
-        {
-            try
-            {
-               DateTime starttime = DateTime.Now;
-               //isplayer = false;
-
-               CurrentMember = MainModel.CurrentMember;
-
-               if (CurrentMember != null && CurrentMember.memberinformationresponsevo != null && CurrentMember.memberheaderresponsevo != null)
-               {
-                   string mobil = CurrentMember.memberheaderresponsevo.mobile;
-                   if (mobil.Length > 8)
-                   {
-                       mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
-                   }
-                   lblMobil.Text = mobil;
-                   lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
-
-                   pnlMemberCard.Visible = false;
-
-
-                   if (CurrentMember.memberinformationresponsevo.onbirthday)
-                   {
-                       // pnlBirthday.Visible = true;
-                       picBirthday1.Visible = true;
-
-
-                       picBirthday2.Visible = true;
-                       picBirthday3.Visible = true;
-                       picBirthday4.Visible = true;
-                   }
-                   else
-                   {
-                       picBirthday1.Visible = false;
-                       picBirthday2.Visible = false;
-                       picBirthday3.Visible = false;
-                       picBirthday4.Visible = false;
-                   }
-               }
-               else
-               {
-                   lblMobil.Text = "";
-                   lblWechartNickName.Text = "";
-
-                   string ErrorMsg = "";
-                   string imgurl = httputil.GetMemberCard(ref ErrorMsg);
-                   if (!string.IsNullOrEmpty(httputil.GetMemberCard(ref ErrorMsg)) && ErrorMsg != null)
-                   {
-
-                       Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                       picMemberCard.BackgroundImage = _image;
-
-                       int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
-                       picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
-
-                       picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
-                       
-                       pnlMemberCard.Visible = true;
-                   }
-
-                   picBirthday1.Visible = false;
-                   picBirthday2.Visible = false;
-                   picBirthday3.Visible = false;
-                   picBirthday4.Visible = false;
-               }
-
-               frmMain.listener.Stop();
-
-               frmMain.listener.Start();
-
-               Console.WriteLine("会员加载时间"+(DateTime.Now-starttime).TotalMilliseconds);
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("加载会员异常"+ex.Message);
-            }
-        }
-
-        public void ShowPayResult(object payinfo)
-        {
-            try
-            {
-                isplayer = false;
-                frmCashierResultMedia frmresult = new frmCashierResultMedia(payinfo.ToString());
-                frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
-
-                frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-                frmresult.Show();
-                Application.DoEvents();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("客屏展示收银成功异常" + ex.Message);
-            }
-        }
-
-        public void ShowNumber()
-        {
-            try
-            {
-                isplayer = false;
-                frmNumber frmnumber = new frmNumber("请输入会员号", true,false);
-
-                frmnumber.frmNumber_SizeChanged(null, null);
-                frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
-                // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
-
-                frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
-
-                //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-                frmnumber.Show();
-                Application.DoEvents();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("客屏输入会员号异常"+ex.Message);
-            }
-        }
-
-        public void ShowPayInfo(string lblinfo)
-        {
-            try
-            {
-                isplayer = false;
-                //player.Visible = false;
-                tabControlMedia.SelectedIndex = 0;
-
-                // pnlMemberCard.Visible = true;
-                dgvGood.Visible = false;
-                tableLayoutPanel1.Visible = false;
-
-                pnlPayInfo.Visible = true;
-                lblPayInfo.Text = lblinfo;
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("客屏提示支付信息异常：" + ex.Message);
-            }
-        }
-
-        private void frmMainMedia_SizeChanged(object sender, EventArgs e)
-        {
-          // asf.ControlAutoSize(this);
-        }
-
-        //播放状态是全屏   不是播放状态 此属性不可修改 （异常:灾难性错误）
-        private void player_StatusChange(object sender, EventArgs e)
-        {
-            if (player.status.Contains("正在播放"))
-            {
-                if(!player.fullScreen)
-                player.fullScreen = true;
-            }
-        }
-
         //重绘datagridview单元格
         private void dgvGood_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -546,7 +611,7 @@ namespace QiandamaPOS
                     // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
                     e.Handled = true;
 
-                   // dgvGood.ClearSelection();
+                    // dgvGood.ClearSelection();
                 }
 
                 if ((e.ColumnIndex == 1 || e.ColumnIndex == 5) && e.RowIndex >= 0 && e.Value != null)//要进行重绘的单元格
@@ -665,7 +730,7 @@ namespace QiandamaPOS
 
                         Font tempfont2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
 
-                        TextRenderer.DrawText(e.Graphics, tempstrline22, fnt2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY , intWidth, (int)size2.Height),
+                        TextRenderer.DrawText(e.Graphics, tempstrline22, fnt2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY, intWidth, (int)size2.Height),
                         Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
 
                     }
@@ -690,7 +755,7 @@ namespace QiandamaPOS
                     // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
                     e.Handled = true;
 
-                   // dgvGood.ClearSelection();
+                    // dgvGood.ClearSelection();
                 }
             }
             catch (Exception ex)
@@ -699,12 +764,194 @@ namespace QiandamaPOS
             }
 
         }
+        #endregion
 
-        private void frmMainMedia_Load(object sender, EventArgs e)
+
+
+        #region 加载会员
+        public void LoadMember()
         {
+            try
+            {
 
+               
+                    threadMedia.Suspend();
+                    player.Visible = false;
+                
+                //ThreadPool.QueueUserWorkItem(new WaitCallback(IniFormExe));
+                ////启动扫描处理线程
+                Thread threadLoadMember = new Thread(LoadMemberThread);
+                threadLoadMember.IsBackground = true;
+                //threadIniExedate.Priority = ThreadPriority.BelowNormal;
+                threadLoadMember.Start();
+            
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
+        public void LoadMemberThread()
+        {
+            try
+            {
+                DateTime starttime = DateTime.Now;
+                //isplayer = false;
 
+                CurrentMember = MainModel.CurrentMember;
+
+                if (CurrentMember != null && CurrentMember.memberinformationresponsevo != null && CurrentMember.memberheaderresponsevo != null)
+                {
+                    string mobil = CurrentMember.memberheaderresponsevo.mobile;
+                    if (mobil.Length > 8)
+                    {
+                        mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
+                    }
+                    lblMobil.Text = mobil;
+                    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+
+                    pnlMemberCard.Visible = false;
+
+
+                    if (CurrentMember.memberinformationresponsevo.onbirthday)
+                    {
+                        // pnlBirthday.Visible = true;
+                        picBirthday1.Visible = true;
+
+
+                        picBirthday2.Visible = true;
+                        picBirthday3.Visible = true;
+                        picBirthday4.Visible = true;
+                    }
+                    else
+                    {
+                        picBirthday1.Visible = false;
+                        picBirthday2.Visible = false;
+                        picBirthday3.Visible = false;
+                        picBirthday4.Visible = false;
+                    }
+                }
+                else
+                {
+                    lblMobil.Text = "";
+                    lblWechartNickName.Text = "";
+
+                    string ErrorMsg = "";
+                    string imgurl = httputil.GetMemberCard(ref ErrorMsg);
+                    if (!string.IsNullOrEmpty(httputil.GetMemberCard(ref ErrorMsg)) && ErrorMsg != null)
+                    {
+
+                        Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                        picMemberCard.BackgroundImage = _image;
+
+                        int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
+                        picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
+
+                        picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
+
+                        pnlMemberCard.Visible = true;
+                    }
+
+                    picBirthday1.Visible = false;
+                    picBirthday2.Visible = false;
+                    picBirthday3.Visible = false;
+                    picBirthday4.Visible = false;
+                }
+
+                //frmMain.listener.Stop();
+
+                //frmMain.listener.Start();
+
+                Console.WriteLine("会员加载时间" + (DateTime.Now - starttime).TotalMilliseconds);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("加载会员异常" + ex.Message);
+            }
+        }
+        #endregion
+
+
+
+        #region  支付提示/结果
+        public void ShowPayResult(object payinfo)
+        {
+            try
+            {
+                
+                    threadMedia.Suspend();
+                    player.Visible = false;
+                
+               
+                frmCashierResultMedia frmresult = new frmCashierResultMedia(payinfo.ToString());
+                frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+
+                frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+                frmresult.Show();
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("客屏展示收银成功异常" + ex.Message);
+            }
+        }
+
+        public void ShowNumber()
+        {
+            try
+            {
+               
+                    threadMedia.Suspend();
+                    player.Visible = false;
+                
+                
+                frmNumber frmnumber = new frmNumber("请输入会员号", true, false);
+
+                frmnumber.frmNumber_SizeChanged(null, null);
+                frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
+                // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
+
+                frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
+
+                //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+                frmnumber.Show();
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("客屏输入会员号异常" + ex.Message);
+            }
+        }
+
+        public void ShowPayInfo(string lblinfo)
+        {
+            try
+            {
+                
+                    threadMedia.Suspend();
+                    player.Visible = false;
+                
+                //player.Visible = false;
+                tabControlMedia.SelectedIndex = 0;
+
+                // pnlMemberCard.Visible = true;
+                dgvGood.Visible = false;
+                tableLayoutPanel1.Visible = false;
+
+                pnlPayInfo.Visible = true;
+                lblPayInfo.Text = lblinfo;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("客屏提示支付信息异常：" + ex.Message);
+            }
+        }
+
+        #endregion
+
+     
+
+   
     }
 }

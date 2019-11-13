@@ -120,6 +120,9 @@ namespace QiandamaPOS.Model
         }
 
 
+        /// <summary>
+        /// 面板商品图片路径
+        /// </summary>
         public static string ProductPicPath
         {
             get
@@ -131,6 +134,24 @@ namespace QiandamaPOS.Model
                     logDirectory.Create();
 
                 return System.Windows.Forms.Application.StartupPath + "\\ProductPicPath\\";
+
+            }
+        }
+
+        /// <summary>
+        /// 客屏媒体路径
+        /// </summary>
+        public static string MediaPath
+        {
+            get
+            {
+
+                //判断默认文件夹是否存在，不存在就创建
+                DirectoryInfo logDirectory = new DirectoryInfo(System.Windows.Forms.Application.StartupPath + "\\MediaPath\\");
+                if (!logDirectory.Exists)
+                    logDirectory.Create();
+
+                return System.Windows.Forms.Application.StartupPath + "\\MediaPath\\";
 
             }
         }
@@ -242,7 +263,7 @@ namespace QiandamaPOS.Model
 
            
             //b.Save(yourFileName);
-            float opacity =(float) -0.6;
+            float opacity =(float) -0.5;
             
             //float[][] nArray ={ new float[] {1, 0, 0, 0, 0},
             //      new float[] {0,1, 0, 0, 0},

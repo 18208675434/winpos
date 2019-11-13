@@ -25,7 +25,7 @@ namespace QiandamaPOS.Common
         /// <param name="password"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public string Signin(string username, string password,ref string errormsg)
+        public string Signin(string username, string password, ref string errormsg)
         {
             try
             {
@@ -59,11 +59,11 @@ namespace QiandamaPOS.Common
             }
         }
 
-     /// <summary>
-     /// 获取用户信息
-     /// </summary>
-     /// <param name="errormsg">返回信息</param>
-     /// <returns></returns>
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="errormsg">返回信息</param>
+        /// <returns></returns>
         public userModel GetUser(ref string errormsg)
         {
             try
@@ -131,29 +131,29 @@ namespace QiandamaPOS.Common
         }
 
 
-        public scancodememberModel GetSkuInfoMember(string scancode, ref string errormsg,ref int resultcode)
+        public scancodememberModel GetSkuInfoMember(string scancode, ref string errormsg, ref int resultcode)
         {
             try
             {
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 string url = "";
 
-                    url = "/pos/product/scancode/getscancodeskumemberdto";
-                    sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
-                    sort.Add("barcode", scancode);
-               
-                    
-              
+                url = "/pos/product/scancode/getscancodeskumemberdto";
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+                sort.Add("barcode", scancode);
+
+
+
                 string json = HttpGET(url, sort);
                 //Console.Write("getskuInfobyshortcode:"+ json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                resultcode=rd.code;
+                resultcode = rd.code;
                 if (rd.code == 0)
                 {
-                    scancodememberModel scancodember =new scancodememberModel();
+                    scancodememberModel scancodember = new scancodememberModel();
 
-                        scancodember = JsonConvert.DeserializeObject<scancodememberModel>(rd.data.ToString());
-                  
+                    scancodember = JsonConvert.DeserializeObject<scancodememberModel>(rd.data.ToString());
+
                     return scancodember;
 
                 }
@@ -172,16 +172,16 @@ namespace QiandamaPOS.Common
         }
 
 
-        public scancodememberModel GetSkuInfoByShortCode(string scancode, ref string errormsg,ref int resultcode)
+        public scancodememberModel GetSkuInfoByShortCode(string scancode, ref string errormsg, ref int resultcode)
         {
             try
             {
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 string url = "";
-            
-                    url = "/pos/product/scancode/getskuInfobyshortcode";
-                    sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
-                    sort.Add("shortcode", scancode.PadLeft(5, '0'));
+
+                url = "/pos/product/scancode/getskuInfobyshortcode";
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+                sort.Add("shortcode", scancode.PadLeft(5, '0'));
 
                 string json = HttpGET(url, sort);
                 //Console.Write("getskuInfobyshortcode:"+ json);
@@ -191,10 +191,10 @@ namespace QiandamaPOS.Common
                 if (rd.code == 0)
                 {
                     scancodememberModel scancodember = new scancodememberModel();
-                    
-                        Scancodedto scancodedto = JsonConvert.DeserializeObject<Scancodedto>(rd.data.ToString());
-                        scancodember.scancodedto = scancodedto;
-                    
+
+                    Scancodedto scancodedto = JsonConvert.DeserializeObject<Scancodedto>(rd.data.ToString());
+                    scancodember.scancodedto = scancodedto;
+
                     return scancodember;
 
                 }
@@ -219,7 +219,7 @@ namespace QiandamaPOS.Common
         /// <param name="lstscancodemember"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public Cart GetCart(int type, List<scancodememberModel> lstscancodemember,decimal cash, ref string errormsg)
+        public Cart GetCart(int type, List<scancodememberModel> lstscancodemember, decimal cash, ref string errormsg)
         {
             try
             {
@@ -238,8 +238,8 @@ namespace QiandamaPOS.Common
                     pro.barcode = lstscancodemember[i].scancodedto.barcode;
 
                     lstpro[i] = pro;
-                }               
-                
+                }
+
 
                 CartPara cart = new CartPara();
                 cart.ordersubtype = "pos";
@@ -266,10 +266,10 @@ namespace QiandamaPOS.Common
                     cart.cashpayoption = 1;
                     cart.cashpayamt = 0;
                     cart.pointpayoption = 1;
-                 
+
                 }
 
-             
+
                 if (MainModel.CurrentMember != null)
                 {
                     cart.uid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
@@ -286,7 +286,7 @@ namespace QiandamaPOS.Common
 
                 string tempjson = JsonConvert.SerializeObject(cart);
 
-               
+
                 string json = HttpPOST(url, tempjson);
 
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -347,17 +347,17 @@ namespace QiandamaPOS.Common
                     }
                     cartpara.products = lstpro;
                 }
-                
+
                 cartpara.shopid = MainModel.CurrentShopInfo.shopid;
 
 
 
-                    cartpara.cashpayoption = cart.cashpayoption;
-                    cartpara.cashpayamt =(decimal) cart.cashpayamt;
-                
-                    cartpara.pointpayoption = cart.pointpayoption;
+                cartpara.cashpayoption = cart.cashpayoption;
+                cartpara.cashpayamt = (decimal)cart.cashpayamt;
 
-                    cartpara.cashcouponamt = cart.cashcouponamt;
+                cartpara.pointpayoption = cart.pointpayoption;
+
+                cartpara.cashcouponamt = cart.cashcouponamt;
 
                 if (MainModel.CurrentMember != null)
                 {
@@ -378,7 +378,7 @@ namespace QiandamaPOS.Common
                 DateTime starttime = DateTime.Now;
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                Console.WriteLine("购物车信息"+json);
+                Console.WriteLine("购物车信息" + json);
                 Console.WriteLine("访问购物车接口时间" + (DateTime.Now - starttime).TotalMilliseconds);
                 // return;
                 resultcode = rd.code;
@@ -402,7 +402,7 @@ namespace QiandamaPOS.Common
             }
         }
 
-        public CreateOrderResult CreateOrder(Cart cart,ref string errormsg, ref int resultcode)
+        public CreateOrderResult CreateOrder(Cart cart, ref string errormsg, ref int resultcode)
         {
             try
             {
@@ -420,7 +420,7 @@ namespace QiandamaPOS.Common
                     pro.barcode = cart.products[i].barcode;
                     lstpro[i] = pro;
                 }
-   
+
 
                 CreateOrderPara order = new CreateOrderPara();
 
@@ -438,22 +438,22 @@ namespace QiandamaPOS.Common
 
                 order.cashcouponamt = cart.cashcouponamt;
                 //现金支付
-                if(order.cashpayoption == 1)
+                if (order.cashpayoption == 1)
                 {
                     order.cashpayamt = (decimal)cart.cashpayamt;
-                    
-                }
-                if(MainModel.CurrentMember!=null)
-                {
-                      order.uid =MainModel.CurrentMember.memberheaderresponsevo.memberid;
-                      order.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
 
-                      if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
-                      {
-                          string[] strs = new string[1];
-                          strs[0] = MainModel.CurrentCouponCode;
-                          order.selectedcoupons = strs;
-                      }
+                }
+                if (MainModel.CurrentMember != null)
+                {
+                    order.uid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
+                    order.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
+
+                    if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
+                    {
+                        string[] strs = new string[1];
+                        strs[0] = MainModel.CurrentCouponCode;
+                        order.selectedcoupons = strs;
+                    }
 
                 }
                 order.pricetotal = (decimal)cart.totalpayment;
@@ -499,7 +499,7 @@ namespace QiandamaPOS.Common
                 string url = "/pos/order/common/cancel";
 
 
-                string tempjson = "{\"orderid\":\"" + orderid +"\",\"reason\":\""+orderid+ "\"}";
+                string tempjson = "{\"orderid\":\"" + orderid + "\",\"reason\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
@@ -518,26 +518,26 @@ namespace QiandamaPOS.Common
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("Error", orderid+"取消订单异常：" + ex.Message);
-                erromessage =orderid+ "取消订单异常：" + ex.Message;
+                LogManager.WriteLog("Error", orderid + "取消订单异常：" + ex.Message);
+                erromessage = orderid + "取消订单异常：" + ex.Message;
                 return false;
             }
         }
 
 
-        public int QueryOrderStatus(string orderid,ref string erromessage)
+        public int QueryOrderStatus(string orderid, ref string erromessage)
         {
             try
             {
                 string url = "/pos/order/pos/querystatus";
-     
+
 
                 string tempjson = JsonConvert.SerializeObject(orderid);
                 tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                                
+
                 if (rd.code == 0)
                 {
                     return Convert.ToInt16(rd.data);
@@ -563,7 +563,7 @@ namespace QiandamaPOS.Common
         /// <param name="orderid"></param>
         /// <param name="authcode"></param>
         /// <param name="erromessage"></param>
-        public AuthcodeTrade AuthCodeTrade(string orderid,string authcode, ref string erromessage)
+        public AuthcodeTrade AuthCodeTrade(string orderid, string authcode, ref string erromessage)
         {
             try
             {
@@ -583,7 +583,7 @@ namespace QiandamaPOS.Common
                 {
                     AuthcodeTrade codetrade = JsonConvert.DeserializeObject<AuthcodeTrade>(rd.data.ToString());
 
-                    return codetrade;                    
+                    return codetrade;
 
                 }
                 else
@@ -607,7 +607,7 @@ namespace QiandamaPOS.Common
         /// <param name="orderid"></param>
         /// <param name="payid"></param>
         /// <param name="erromessage"></param>
-        public synctrade  SyncTrade(string orderid, string payid, ref string erromessage)
+        public synctrade SyncTrade(string orderid, string payid, ref string erromessage)
         {
             try
             {
@@ -737,7 +737,7 @@ namespace QiandamaPOS.Common
                 tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                
+
                 //Console.Write(json);
 
                 // return;
@@ -750,7 +750,7 @@ namespace QiandamaPOS.Common
                 else
                 {
                     erromessage = rd.message;
-                     return null;
+                    return null;
                 }
             }
             catch (Exception ex)
@@ -777,7 +777,7 @@ namespace QiandamaPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-               // Console.WriteLine("订单查询："+json);
+                // Console.WriteLine("订单查询："+json);
 
                 // return;
                 if (rd.code == 0)
@@ -847,7 +847,7 @@ namespace QiandamaPOS.Common
                 string url = "/pos/order/pos/refund";
 
                 string tempjson = JsonConvert.SerializeObject(refundpara);
-               // tempjson = "{\"orderid\":\"" + orderid + "\"}";
+                // tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
@@ -924,8 +924,9 @@ namespace QiandamaPOS.Common
 
 
                 string json = HttpGET(url, sort);
+                Console.WriteLine("媒体："+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
+                
                 // return;
                 if (rd.code == 0)
                 {
@@ -969,7 +970,7 @@ namespace QiandamaPOS.Common
                 {
                     erromessage = "";
                     Receiptdetail receipt = JsonConvert.DeserializeObject<Receiptdetail>(rd.data.ToString());
-                    return receipt ;
+                    return receipt;
 
                 }
                 else
@@ -1185,7 +1186,7 @@ namespace QiandamaPOS.Common
         /// <param name="orderid"></param>
         /// <param name="payid"></param>
         /// <param name="erromessage"></param>
-        public bool SaveExpense(string expenseid, decimal expensefee,string shopid, ref string erromessage)
+        public bool SaveExpense(string expenseid, decimal expensefee, string shopid, ref string erromessage)
         {
             try
             {
@@ -1204,7 +1205,7 @@ namespace QiandamaPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-               // Console.WriteLine(json);
+                // Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     return Convert.ToBoolean(rd.data);
@@ -1247,13 +1248,13 @@ namespace QiandamaPOS.Common
                 {
                     qep.operatetimestr = operatetimestr;
                 }
-                
+
                 qep.lastorderid = lastorderid;
 
-                
-               
+
+
                 qep.shopid = MainModel.CurrentShopInfo.shopid;
-               
+
                 string tempjson = JsonConvert.SerializeObject(qep);
                 //string tempjson = "{\"expenseid\":\"" + expenseid + "\",\"expensefee\":" + expensefee + ",\"shopid\":\"" + shopid + "\"}";
 
@@ -1364,13 +1365,13 @@ namespace QiandamaPOS.Common
         /// 获取短信验证码
         /// </summary>
         /// <returns></returns>
-        public bool SendSmsCode(string phone,string imgcodekey,string imgcode, ref string erromessage)
+        public bool SendSmsCode(string phone, string imgcodekey, string imgcode, ref string erromessage)
         {
             try
             {
                 string url = "/pos/account/sendsmscode";
 
-               
+
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
 
                 sort.Add("phone", phone);
@@ -1417,7 +1418,7 @@ namespace QiandamaPOS.Common
 
 
                 string tempjson = JsonConvert.SerializeObject(signpara);
-                
+
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
@@ -1427,7 +1428,7 @@ namespace QiandamaPOS.Common
                     erromessage = "";
 
 
-                    return rd.data.ToString() ;
+                    return rd.data.ToString();
                 }
                 else
                 {
@@ -1591,7 +1592,7 @@ namespace QiandamaPOS.Common
                 //tempjson = "{\"memberlogin\":0,\"products\":[{\"mainimg\":\"https://pic.qdama.cn/FsoTxQ-fRfS5EUCEaaQOKlJSaVDd\",\"pricetagid\":0,\"saleunit\":\"kg\",\"skucode\":\"20000011\"}],\"shopid\":\"501001\",\"usertoken\":\"\"}";
 
                 //tempjson = MainModel.GB2312ToUTF8(tempjson);
-                Console.WriteLine("面板商品参数:"+tempjson);
+                Console.WriteLine("面板商品参数:" + tempjson);
                 string json = HttpPOST(url, tempjson);
                 Console.WriteLine("面板商品返回:" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -1629,10 +1630,10 @@ namespace QiandamaPOS.Common
             string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
             string nonce = MainModel.getNonce();
 
-            sortpara.Add("nonce",nonce);
+            sortpara.Add("nonce", nonce);
             //string signstr = "kVl55eO1n3DZhWC8Z7" + "devicesn" + devicesn + "nonce" + nonce + Timestamp;
             string signstr = MainModel.PrivateKey;
-            foreach(KeyValuePair<string,string> keyvalue in sortpara)
+            foreach (KeyValuePair<string, string> keyvalue in sortpara)
             {
                 signstr += keyvalue.Key + keyvalue.Value;
             }
@@ -1646,10 +1647,10 @@ namespace QiandamaPOS.Common
             Url = MainModel.URL + Url + "?";
             foreach (KeyValuePair<string, string> keyvalue in sortpara)
             {
-                Url += keyvalue.Key +"="+ keyvalue.Value +"&";
+                Url += keyvalue.Key + "=" + keyvalue.Value + "&";
             }
             Url += postDataStr;
-           // //Console.Write(Url);
+            // //Console.Write(Url);
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
@@ -1671,7 +1672,7 @@ namespace QiandamaPOS.Common
                 {
                     request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
                 }
-                
+
 
                 request.Method = "GET";
 
@@ -1688,36 +1689,37 @@ namespace QiandamaPOS.Common
                 request.ServicePoint.Expect100Continue = false;//important
 
 
-                System.Net.ServicePointManager.DefaultConnectionLimit = 50;
+                System.Net.ServicePointManager.DefaultConnectionLimit = 100;
                 request.Timeout = 5000; //3秒钟无响应 网络有问题
-                if (CheckNet()) { 
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                if (CheckNet())
                 {
-                request.Timeout = 60*1000;
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                
-                myStreamReader.Close();
-                myResponseStream.Close();
+                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    {
+                        request.Timeout = 60 * 1000;
+                        Stream myResponseStream = response.GetResponseStream();
+                        StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+                        retString = myStreamReader.ReadToEnd();
 
-                try
-                {
-                    response.Close();
-                }
-                catch { }
-                }
-                try
-                {
-                    request.Abort();
-                }
-                catch { }
+                        myStreamReader.Close();
+                        myResponseStream.Close();
+
+                        try
+                        {
+                            response.Close();
+                        }
+                        catch { }
+                    }
+                    try
+                    {
+                        request.Abort();
+                    }
+                    catch { }
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.StackTrace);
-                 LogManager.WriteLog("访问服务器出错:" + ex.Message);
+                LogManager.WriteLog("访问服务器出错:" + ex.Message);
                 MainModel.ShowLog("访问服务器出错,请检查网络连接！", false);
 
             }
@@ -1737,15 +1739,15 @@ namespace QiandamaPOS.Common
             string signstr = MainModel.PrivateKey + "nonce" + nonce + Timestamp + bodyjson;
             string postDataStr = "nonce=" + nonce + "&sign=" + MainModel.GetMD5(signstr);
 
-            Url = MainModel.URL + Url+"?" + postDataStr;
-           // Console.WriteLine(Url);
+            Url = MainModel.URL + Url + "?" + postDataStr;
+            // Console.WriteLine(Url);
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
 
-               
+
 
                 System.Net.ServicePointManager.Expect100Continue = false;
 
@@ -1779,28 +1781,47 @@ namespace QiandamaPOS.Common
                 stw.Write(by, 0, by.Length);      //写入流
                 stw.Close();    //关闭流
 
-               // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                System.Net.ServicePointManager.DefaultConnectionLimit = 100;
+
+                // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 request.Timeout = 5000;
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                request.Timeout = 60 * 1000;
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                myStreamReader.Close();
-                myResponseStream.Close();
 
-
-                try
+                if (CheckNet())
                 {
-                    request.Abort();
-                    response.Close();
+                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    {
+                        request.Timeout = 60 * 1000;
+                        Stream myResponseStream = response.GetResponseStream();
+                        StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+                        retString = myStreamReader.ReadToEnd();
+
+                        myStreamReader.Close();
+                        myResponseStream.Close();
+
+                        try
+                        {
+                            response.Close();
+                        }
+                        catch { }
+                    }
+                    try
+                    {
+                        request.Abort();
+                    }
+                    catch { }
                 }
-                catch { }
+
+                //try
+                //{
+                //    request.Abort();
+                //    response.Close();
+                //}
+                //catch { }
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("访问服务器出错:" + ex.Message);
-                MainModel.ShowLog("访问服务器出错,请检查网络连接！",false);
+                //MainModel.ShowLog("访问服务器出错,请检查网络连接！", false);
             }
 
             return retString;
@@ -1835,7 +1856,7 @@ namespace QiandamaPOS.Common
             }
             catch (Exception ex)
             {
-                
+
                 return false;
                 // ShowLog("无法检测网络连接是否正常-" + ex.Message, true);
             }
@@ -1913,6 +1934,6 @@ namespace QiandamaPOS.Common
         //    return dicresult;
         //}
 
-        #endregion  
+        #endregion
     }
 }

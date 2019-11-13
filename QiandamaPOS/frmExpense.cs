@@ -135,6 +135,10 @@ namespace QiandamaPOS
 
         private void frmExpense_Shown(object sender, EventArgs e)
         {
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
+            timerNow.Interval = 1000;
+            timerNow.Enabled = true;
+
             btnToday_Click(null,null);
             //QueryExpense();
         }
@@ -180,6 +184,12 @@ namespace QiandamaPOS
                 frmmsf.ShowDialog(); LogManager.WriteLog(msg);
             }));
 
+        }
+
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        
         }
 
     }

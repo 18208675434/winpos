@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,14 +43,33 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.lblTime = new System.Windows.Forms.ToolStripLabel();
             this.lblShopName = new System.Windows.Forms.ToolStripLabel();
+            this.btnMenu = new System.Windows.Forms.ToolStripButton();
+            this.dpbtnMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsmReceipt = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmExpense = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmChangeMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmScale = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmReceiptQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmPrintSet = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.btnOrderQuery = new System.Windows.Forms.ToolStripButton();
+            this.btnOrderHang = new System.Windows.Forms.ToolStripButton();
+            this.btnOrderCancle = new System.Windows.Forms.ToolStripButton();
             this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.timerClearMemory = new System.Windows.Forms.Timer(this.components);
             this.pnlPayType1 = new System.Windows.Forms.Panel();
+            this.btnPayByCoupon = new System.Windows.Forms.Button();
+            this.btnPayByBalance = new System.Windows.Forms.Button();
+            this.btnPayByCash = new System.Windows.Forms.Button();
+            this.btnPayOnLine = new System.Windows.Forms.Button();
             this.pnlPayType2 = new System.Windows.Forms.Panel();
             this.btnPayOK = new System.Windows.Forms.Button();
             this.dgvGood = new System.Windows.Forms.DataGridView();
@@ -59,8 +79,10 @@
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlWaiting = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnl5 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
@@ -74,7 +96,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.timerGetIncrementProduct = new System.Windows.Forms.Timer(this.components);
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.picBirthday = new QiandamaPOS.UserControl.transparentPic(this.components);
             this.picScreen = new System.Windows.Forms.PictureBox();
             this.pnlMember = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -92,12 +113,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.btnMianban = new System.Windows.Forms.Button();
             this.btnLoadBarCode = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btnPayByCoupon = new System.Windows.Forms.Button();
-            this.btnPayByBalance = new System.Windows.Forms.Button();
-            this.btnPayByCash = new System.Windows.Forms.Button();
-            this.btnPayOnLine = new System.Windows.Forms.Button();
             this.pnlOrdreDetail = new System.Windows.Forms.Panel();
             this.pnlMemberPromo = new System.Windows.Forms.Panel();
             this.lblMemberPromo = new System.Windows.Forms.Label();
@@ -113,27 +128,14 @@
             this.btnLoadPhone = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnMenu = new System.Windows.Forms.ToolStripButton();
-            this.dpbtnMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsmReceipt = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmExpense = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmChangeMode = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmScale = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmReceiptQuery = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmPrintSet = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnOrderQuery = new System.Windows.Forms.ToolStripButton();
-            this.btnOrderHang = new System.Windows.Forms.ToolStripButton();
-            this.btnOrderCancle = new System.Windows.Forms.ToolStripButton();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.picBirthday = new QiandamaPOS.UserControl.transparentPic(this.components);
             this.toolStripMain.SuspendLayout();
             this.pnlPayType1.SuspendLayout();
             this.pnlPayType2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             this.pnlWaiting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnl5.SuspendLayout();
             this.pnl4.SuspendLayout();
@@ -143,7 +145,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.pnlMember.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlOrdreDetail.SuspendLayout();
             this.pnlMemberPromo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
@@ -186,6 +187,153 @@
             this.lblShopName.Size = new System.Drawing.Size(90, 57);
             this.lblShopName.Text = "天河东路店";
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnMenu.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.btnMenu.ForeColor = System.Drawing.Color.White;
+            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
+            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(127, 57);
+            this.btnMenu.Text = "某某某，你好";
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
+            // dpbtnMenu
+            // 
+            this.dpbtnMenu.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.dpbtnMenu.AutoSize = false;
+            this.dpbtnMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmReceipt,
+            this.toolStripSeparator2,
+            this.tsmExit,
+            this.tsmExpense,
+            this.toolStripSeparator1,
+            this.tsmChangeMode,
+            this.tsmScale,
+            this.toolStripSeparator3,
+            this.tsmReceiptQuery,
+            this.toolStripSeparator4,
+            this.tsmPrintSet});
+            this.dpbtnMenu.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.dpbtnMenu.ForeColor = System.Drawing.Color.White;
+            this.dpbtnMenu.Image = ((System.Drawing.Image)(resources.GetObject("dpbtnMenu.Image")));
+            this.dpbtnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.dpbtnMenu.Name = "dpbtnMenu";
+            this.dpbtnMenu.Size = new System.Drawing.Size(164, 57);
+            this.dpbtnMenu.Text = "某某某，你好 ▼";
+            this.dpbtnMenu.Visible = false;
+            // 
+            // tsmReceipt
+            // 
+            this.tsmReceipt.AutoSize = false;
+            this.tsmReceipt.BackColor = System.Drawing.Color.Black;
+            this.tsmReceipt.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.tsmReceipt.ForeColor = System.Drawing.Color.White;
+            this.tsmReceipt.Image = ((System.Drawing.Image)(resources.GetObject("tsmReceipt.Image")));
+            this.tsmReceipt.Name = "tsmReceipt";
+            this.tsmReceipt.Size = new System.Drawing.Size(184, 40);
+            this.tsmReceipt.Text = "交班";
+            this.tsmReceipt.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsmReceipt.Click += new System.EventHandler(this.tsmReceipt_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.AutoSize = false;
+            this.toolStripSeparator2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(173, 1);
+            // 
+            // tsmExit
+            // 
+            this.tsmExit.AutoSize = false;
+            this.tsmExit.BackColor = System.Drawing.Color.Black;
+            this.tsmExit.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.tsmExit.ForeColor = System.Drawing.Color.White;
+            this.tsmExit.Image = ((System.Drawing.Image)(resources.GetObject("tsmExit.Image")));
+            this.tsmExit.Name = "tsmExit";
+            this.tsmExit.Size = new System.Drawing.Size(184, 40);
+            this.tsmExit.Text = "退出";
+            this.tsmExit.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // tsmExpense
+            // 
+            this.tsmExpense.AutoSize = false;
+            this.tsmExpense.BackColor = System.Drawing.Color.Black;
+            this.tsmExpense.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.tsmExpense.ForeColor = System.Drawing.Color.White;
+            this.tsmExpense.Image = ((System.Drawing.Image)(resources.GetObject("tsmExpense.Image")));
+            this.tsmExpense.Name = "tsmExpense";
+            this.tsmExpense.Size = new System.Drawing.Size(184, 40);
+            this.tsmExpense.Text = "营业外支出";
+            this.tsmExpense.Click += new System.EventHandler(this.tsmExpense_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.AutoSize = false;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 1);
+            // 
+            // tsmChangeMode
+            // 
+            this.tsmChangeMode.AutoSize = false;
+            this.tsmChangeMode.BackColor = System.Drawing.Color.Black;
+            this.tsmChangeMode.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.tsmChangeMode.ForeColor = System.Drawing.Color.White;
+            this.tsmChangeMode.Image = ((System.Drawing.Image)(resources.GetObject("tsmChangeMode.Image")));
+            this.tsmChangeMode.Name = "tsmChangeMode";
+            this.tsmChangeMode.Size = new System.Drawing.Size(184, 40);
+            this.tsmChangeMode.Text = "切换模式";
+            this.tsmChangeMode.Click += new System.EventHandler(this.tsmChangeMode_Click);
+            // 
+            // tsmScale
+            // 
+            this.tsmScale.AutoSize = false;
+            this.tsmScale.BackColor = System.Drawing.Color.Black;
+            this.tsmScale.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.tsmScale.ForeColor = System.Drawing.Color.White;
+            this.tsmScale.Image = ((System.Drawing.Image)(resources.GetObject("tsmScale.Image")));
+            this.tsmScale.Name = "tsmScale";
+            this.tsmScale.Size = new System.Drawing.Size(184, 40);
+            this.tsmScale.Text = "电子秤管理";
+            this.tsmScale.Click += new System.EventHandler(this.tsmScale_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.AutoSize = false;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(173, 1);
+            // 
+            // tsmReceiptQuery
+            // 
+            this.tsmReceiptQuery.AutoSize = false;
+            this.tsmReceiptQuery.BackColor = System.Drawing.Color.Black;
+            this.tsmReceiptQuery.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.tsmReceiptQuery.ForeColor = System.Drawing.Color.White;
+            this.tsmReceiptQuery.Image = ((System.Drawing.Image)(resources.GetObject("tsmReceiptQuery.Image")));
+            this.tsmReceiptQuery.Name = "tsmReceiptQuery";
+            this.tsmReceiptQuery.Size = new System.Drawing.Size(184, 40);
+            this.tsmReceiptQuery.Text = "交班查询";
+            this.tsmReceiptQuery.Click += new System.EventHandler(this.tsmReceiptQuery_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.AutoSize = false;
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(173, 1);
+            // 
+            // tsmPrintSet
+            // 
+            this.tsmPrintSet.AutoSize = false;
+            this.tsmPrintSet.BackColor = System.Drawing.Color.Black;
+            this.tsmPrintSet.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.tsmPrintSet.ForeColor = System.Drawing.Color.White;
+            this.tsmPrintSet.Image = ((System.Drawing.Image)(resources.GetObject("tsmPrintSet.Image")));
+            this.tsmPrintSet.Name = "tsmPrintSet";
+            this.tsmPrintSet.Size = new System.Drawing.Size(184, 40);
+            this.tsmPrintSet.Text = "打印机设置";
+            this.tsmPrintSet.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
+            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -193,6 +341,62 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(32, 57);
             this.toolStripLabel1.Text = "      ";
             this.toolStripLabel1.ToolTipText = "54435435";
+            // 
+            // btnOrderQuery
+            // 
+            this.btnOrderQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnOrderQuery.AutoSize = false;
+            this.btnOrderQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOrderQuery.BackgroundImage")));
+            this.btnOrderQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOrderQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnOrderQuery.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.btnOrderQuery.ForeColor = System.Drawing.Color.White;
+            this.btnOrderQuery.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderQuery.Image")));
+            this.btnOrderQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrderQuery.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
+            this.btnOrderQuery.Name = "btnOrderQuery";
+            this.btnOrderQuery.Size = new System.Drawing.Size(78, 35);
+            this.btnOrderQuery.Text = "订单查询";
+            this.btnOrderQuery.Click += new System.EventHandler(this.btnOrderQuery_Click);
+            // 
+            // btnOrderHang
+            // 
+            this.btnOrderHang.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnOrderHang.AutoSize = false;
+            this.btnOrderHang.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOrderHang.BackgroundImage")));
+            this.btnOrderHang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOrderHang.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.btnOrderHang.ForeColor = System.Drawing.Color.White;
+            this.btnOrderHang.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderHang.Image")));
+            this.btnOrderHang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnOrderHang.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnOrderHang.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrderHang.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
+            this.btnOrderHang.Name = "btnOrderHang";
+            this.btnOrderHang.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnOrderHang.Size = new System.Drawing.Size(85, 35);
+            this.btnOrderHang.Text = "挂单列表";
+            this.btnOrderHang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnOrderHang.Click += new System.EventHandler(this.btnOrderHang_Click);
+            // 
+            // btnOrderCancle
+            // 
+            this.btnOrderCancle.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnOrderCancle.AutoSize = false;
+            this.btnOrderCancle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnOrderCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOrderCancle.BackgroundImage")));
+            this.btnOrderCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOrderCancle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnOrderCancle.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.btnOrderCancle.ForeColor = System.Drawing.Color.White;
+            this.btnOrderCancle.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderCancle.Image")));
+            this.btnOrderCancle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrderCancle.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
+            this.btnOrderCancle.Name = "btnOrderCancle";
+            this.btnOrderCancle.Size = new System.Drawing.Size(78, 35);
+            this.btnOrderCancle.Text = "取消交易";
+            this.btnOrderCancle.Visible = false;
+            this.btnOrderCancle.Click += new System.EventHandler(this.btnOrderCancle_Click);
             // 
             // timerNow
             // 
@@ -214,6 +418,83 @@
             this.pnlPayType1.Size = new System.Drawing.Size(337, 149);
             this.pnlPayType1.TabIndex = 14;
             this.pnlPayType1.EnabledChanged += new System.EventHandler(this.pnlPayType1_EnabledChanged);
+            // 
+            // btnPayByCoupon
+            // 
+            this.btnPayByCoupon.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnPayByCoupon.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPayByCoupon.FlatAppearance.BorderSize = 0;
+            this.btnPayByCoupon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayByCoupon.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.btnPayByCoupon.ForeColor = System.Drawing.Color.White;
+            this.btnPayByCoupon.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByCoupon.Image")));
+            this.btnPayByCoupon.Location = new System.Drawing.Point(176, 81);
+            this.btnPayByCoupon.Name = "btnPayByCoupon";
+            this.btnPayByCoupon.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.btnPayByCoupon.Size = new System.Drawing.Size(150, 60);
+            this.btnPayByCoupon.TabIndex = 26;
+            this.btnPayByCoupon.Text = "\r\n代金券";
+            this.btnPayByCoupon.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayByCoupon.UseVisualStyleBackColor = false;
+            this.btnPayByCoupon.Click += new System.EventHandler(this.btnByCoupon_Click);
+            // 
+            // btnPayByBalance
+            // 
+            this.btnPayByBalance.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.btnPayByBalance.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPayByBalance.FlatAppearance.BorderSize = 0;
+            this.btnPayByBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayByBalance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.btnPayByBalance.ForeColor = System.Drawing.Color.White;
+            this.btnPayByBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByBalance.Image")));
+            this.btnPayByBalance.Location = new System.Drawing.Point(10, 81);
+            this.btnPayByBalance.Name = "btnPayByBalance";
+            this.btnPayByBalance.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.btnPayByBalance.Size = new System.Drawing.Size(150, 60);
+            this.btnPayByBalance.TabIndex = 25;
+            this.btnPayByBalance.Text = "\r\n余 额";
+            this.btnPayByBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayByBalance.UseVisualStyleBackColor = false;
+            this.btnPayByBalance.Click += new System.EventHandler(this.btnPayByBalance_Click);
+            // 
+            // btnPayByCash
+            // 
+            this.btnPayByCash.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnPayByCash.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPayByCash.FlatAppearance.BorderSize = 0;
+            this.btnPayByCash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayByCash.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.btnPayByCash.ForeColor = System.Drawing.Color.White;
+            this.btnPayByCash.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByCash.Image")));
+            this.btnPayByCash.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPayByCash.Location = new System.Drawing.Point(176, 6);
+            this.btnPayByCash.Name = "btnPayByCash";
+            this.btnPayByCash.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.btnPayByCash.Size = new System.Drawing.Size(150, 60);
+            this.btnPayByCash.TabIndex = 24;
+            this.btnPayByCash.Text = "\r\n现 金";
+            this.btnPayByCash.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayByCash.UseVisualStyleBackColor = false;
+            this.btnPayByCash.Click += new System.EventHandler(this.btnPayByCash_Click);
+            // 
+            // btnPayOnLine
+            // 
+            this.btnPayOnLine.BackColor = System.Drawing.Color.Tomato;
+            this.btnPayOnLine.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPayOnLine.FlatAppearance.BorderSize = 0;
+            this.btnPayOnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayOnLine.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.btnPayOnLine.ForeColor = System.Drawing.Color.White;
+            this.btnPayOnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnPayOnLine.Image")));
+            this.btnPayOnLine.Location = new System.Drawing.Point(10, 6);
+            this.btnPayOnLine.Name = "btnPayOnLine";
+            this.btnPayOnLine.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.btnPayOnLine.Size = new System.Drawing.Size(150, 60);
+            this.btnPayOnLine.TabIndex = 23;
+            this.btnPayOnLine.Text = "\r\n微信/支付宝/银联云闪付\r\n";
+            this.btnPayOnLine.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayOnLine.UseVisualStyleBackColor = false;
+            this.btnPayOnLine.Click += new System.EventHandler(this.btnPayOnLine_Click);
             // 
             // pnlPayType2
             // 
@@ -385,6 +666,15 @@
             this.total.ReadOnly = true;
             this.total.Width = 130;
             // 
+            // delete
+            // 
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.delete.FillWeight = 89.07754F;
+            this.delete.HeaderText = "操作";
+            this.delete.Image = ((System.Drawing.Image)(resources.GetObject("delete.Image")));
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            // 
             // pnlWaiting
             // 
             this.pnlWaiting.BackColor = System.Drawing.Color.White;
@@ -407,6 +697,17 @@
             this.label8.Size = new System.Drawing.Size(312, 27);
             this.label8.TabIndex = 9;
             this.label8.Text = "请用扫码枪扫描商品条码开始收银";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(151, 59);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(111, 88);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -553,20 +854,6 @@
             this.dataGridViewImageColumn1.HeaderText = "操作";
             this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            // 
-            // picBirthday
-            // 
-            this.picBirthday.CanMove = false;
-            this.picBirthday.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday.Image")));
-            this.picBirthday.IsFocus = false;
-            this.picBirthday.Location = new System.Drawing.Point(853, 121);
-            this.picBirthday.Name = "picBirthday";
-            this.picBirthday.Size = new System.Drawing.Size(246, 32);
-            this.picBirthday.TabIndex = 24;
-            this.picBirthday.Text = "transparentPic1";
-            this.picBirthday.unitScale = null;
-            this.picBirthday.UnitType = QiandamaPOS.UserControl.EnumUnitType.Station;
-            this.picBirthday.Visible = false;
             // 
             // picScreen
             // 
@@ -805,103 +1092,6 @@
             this.btnLoadBarCode.UseVisualStyleBackColor = false;
             this.btnLoadBarCode.Click += new System.EventHandler(this.btnLoadBarCode_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(151, 59);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(111, 88);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            // 
-            // delete
-            // 
-            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.delete.FillWeight = 89.07754F;
-            this.delete.HeaderText = "操作";
-            this.delete.Image = ((System.Drawing.Image)(resources.GetObject("delete.Image")));
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            // 
-            // btnPayByCoupon
-            // 
-            this.btnPayByCoupon.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnPayByCoupon.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnPayByCoupon.FlatAppearance.BorderSize = 0;
-            this.btnPayByCoupon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayByCoupon.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.btnPayByCoupon.ForeColor = System.Drawing.Color.White;
-            this.btnPayByCoupon.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByCoupon.Image")));
-            this.btnPayByCoupon.Location = new System.Drawing.Point(176, 81);
-            this.btnPayByCoupon.Name = "btnPayByCoupon";
-            this.btnPayByCoupon.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.btnPayByCoupon.Size = new System.Drawing.Size(150, 60);
-            this.btnPayByCoupon.TabIndex = 26;
-            this.btnPayByCoupon.Text = "\r\n代金券";
-            this.btnPayByCoupon.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayByCoupon.UseVisualStyleBackColor = false;
-            this.btnPayByCoupon.Click += new System.EventHandler(this.btnByCoupon_Click);
-            // 
-            // btnPayByBalance
-            // 
-            this.btnPayByBalance.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.btnPayByBalance.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnPayByBalance.FlatAppearance.BorderSize = 0;
-            this.btnPayByBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayByBalance.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.btnPayByBalance.ForeColor = System.Drawing.Color.White;
-            this.btnPayByBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByBalance.Image")));
-            this.btnPayByBalance.Location = new System.Drawing.Point(10, 81);
-            this.btnPayByBalance.Name = "btnPayByBalance";
-            this.btnPayByBalance.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.btnPayByBalance.Size = new System.Drawing.Size(150, 60);
-            this.btnPayByBalance.TabIndex = 25;
-            this.btnPayByBalance.Text = "\r\n余 额";
-            this.btnPayByBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayByBalance.UseVisualStyleBackColor = false;
-            this.btnPayByBalance.Click += new System.EventHandler(this.btnPayByBalance_Click);
-            // 
-            // btnPayByCash
-            // 
-            this.btnPayByCash.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnPayByCash.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnPayByCash.FlatAppearance.BorderSize = 0;
-            this.btnPayByCash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayByCash.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.btnPayByCash.ForeColor = System.Drawing.Color.White;
-            this.btnPayByCash.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByCash.Image")));
-            this.btnPayByCash.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPayByCash.Location = new System.Drawing.Point(176, 6);
-            this.btnPayByCash.Name = "btnPayByCash";
-            this.btnPayByCash.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.btnPayByCash.Size = new System.Drawing.Size(150, 60);
-            this.btnPayByCash.TabIndex = 24;
-            this.btnPayByCash.Text = "\r\n现 金";
-            this.btnPayByCash.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayByCash.UseVisualStyleBackColor = false;
-            this.btnPayByCash.Click += new System.EventHandler(this.btnPayByCash_Click);
-            // 
-            // btnPayOnLine
-            // 
-            this.btnPayOnLine.BackColor = System.Drawing.Color.Tomato;
-            this.btnPayOnLine.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnPayOnLine.FlatAppearance.BorderSize = 0;
-            this.btnPayOnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayOnLine.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.btnPayOnLine.ForeColor = System.Drawing.Color.White;
-            this.btnPayOnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnPayOnLine.Image")));
-            this.btnPayOnLine.Location = new System.Drawing.Point(10, 6);
-            this.btnPayOnLine.Name = "btnPayOnLine";
-            this.btnPayOnLine.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.btnPayOnLine.Size = new System.Drawing.Size(150, 60);
-            this.btnPayOnLine.TabIndex = 23;
-            this.btnPayOnLine.Text = "\r\n微信/支付宝/银联云闪付\r\n";
-            this.btnPayOnLine.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayOnLine.UseVisualStyleBackColor = false;
-            this.btnPayOnLine.Click += new System.EventHandler(this.btnPayOnLine_Click);
-            // 
             // pnlOrdreDetail
             // 
             this.pnlOrdreDetail.BackColor = System.Drawing.Color.Transparent;
@@ -1119,208 +1309,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "用户未登录";
             // 
-            // btnMenu
+            // backgroundWorker1
             // 
-            this.btnMenu.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnMenu.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.btnMenu.ForeColor = System.Drawing.Color.White;
-            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(127, 57);
-            this.btnMenu.Text = "某某某，你好";
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+           // this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-            // dpbtnMenu
+            // picBirthday
             // 
-            this.dpbtnMenu.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.dpbtnMenu.AutoSize = false;
-            this.dpbtnMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmReceipt,
-            this.toolStripSeparator2,
-            this.tsmExit,
-            this.tsmExpense,
-            this.toolStripSeparator1,
-            this.tsmChangeMode,
-            this.tsmScale,
-            this.toolStripSeparator3,
-            this.tsmReceiptQuery,
-            this.toolStripSeparator4,
-            this.tsmPrintSet});
-            this.dpbtnMenu.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.dpbtnMenu.ForeColor = System.Drawing.Color.White;
-            this.dpbtnMenu.Image = ((System.Drawing.Image)(resources.GetObject("dpbtnMenu.Image")));
-            this.dpbtnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.dpbtnMenu.Name = "dpbtnMenu";
-            this.dpbtnMenu.Size = new System.Drawing.Size(164, 57);
-            this.dpbtnMenu.Text = "某某某，你好 ▼";
-            this.dpbtnMenu.Visible = false;
-            // 
-            // tsmReceipt
-            // 
-            this.tsmReceipt.AutoSize = false;
-            this.tsmReceipt.BackColor = System.Drawing.Color.Black;
-            this.tsmReceipt.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.tsmReceipt.ForeColor = System.Drawing.Color.White;
-            this.tsmReceipt.Image = ((System.Drawing.Image)(resources.GetObject("tsmReceipt.Image")));
-            this.tsmReceipt.Name = "tsmReceipt";
-            this.tsmReceipt.Size = new System.Drawing.Size(184, 40);
-            this.tsmReceipt.Text = "交班";
-            this.tsmReceipt.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            this.tsmReceipt.Click += new System.EventHandler(this.tsmReceipt_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.AutoSize = false;
-            this.toolStripSeparator2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(181, 1);
-            // 
-            // tsmExit
-            // 
-            this.tsmExit.AutoSize = false;
-            this.tsmExit.BackColor = System.Drawing.Color.Black;
-            this.tsmExit.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.tsmExit.ForeColor = System.Drawing.Color.White;
-            this.tsmExit.Image = ((System.Drawing.Image)(resources.GetObject("tsmExit.Image")));
-            this.tsmExit.Name = "tsmExit";
-            this.tsmExit.Size = new System.Drawing.Size(184, 40);
-            this.tsmExit.Text = "退出";
-            this.tsmExit.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // tsmExpense
-            // 
-            this.tsmExpense.AutoSize = false;
-            this.tsmExpense.BackColor = System.Drawing.Color.Black;
-            this.tsmExpense.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.tsmExpense.ForeColor = System.Drawing.Color.White;
-            this.tsmExpense.Image = ((System.Drawing.Image)(resources.GetObject("tsmExpense.Image")));
-            this.tsmExpense.Name = "tsmExpense";
-            this.tsmExpense.Size = new System.Drawing.Size(184, 40);
-            this.tsmExpense.Text = "营业外支出";
-            this.tsmExpense.Click += new System.EventHandler(this.tsmExpense_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.AutoSize = false;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(181, 1);
-            // 
-            // tsmChangeMode
-            // 
-            this.tsmChangeMode.AutoSize = false;
-            this.tsmChangeMode.BackColor = System.Drawing.Color.Black;
-            this.tsmChangeMode.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.tsmChangeMode.ForeColor = System.Drawing.Color.White;
-            this.tsmChangeMode.Image = ((System.Drawing.Image)(resources.GetObject("tsmChangeMode.Image")));
-            this.tsmChangeMode.Name = "tsmChangeMode";
-            this.tsmChangeMode.Size = new System.Drawing.Size(184, 40);
-            this.tsmChangeMode.Text = "切换模式";
-            this.tsmChangeMode.Click += new System.EventHandler(this.tsmChangeMode_Click);
-            // 
-            // tsmScale
-            // 
-            this.tsmScale.AutoSize = false;
-            this.tsmScale.BackColor = System.Drawing.Color.Black;
-            this.tsmScale.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.tsmScale.ForeColor = System.Drawing.Color.White;
-            this.tsmScale.Image = ((System.Drawing.Image)(resources.GetObject("tsmScale.Image")));
-            this.tsmScale.Name = "tsmScale";
-            this.tsmScale.Size = new System.Drawing.Size(184, 40);
-            this.tsmScale.Text = "电子秤管理";
-            this.tsmScale.Click += new System.EventHandler(this.tsmScale_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.AutoSize = false;
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(181, 1);
-            // 
-            // tsmReceiptQuery
-            // 
-            this.tsmReceiptQuery.AutoSize = false;
-            this.tsmReceiptQuery.BackColor = System.Drawing.Color.Black;
-            this.tsmReceiptQuery.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.tsmReceiptQuery.ForeColor = System.Drawing.Color.White;
-            this.tsmReceiptQuery.Image = ((System.Drawing.Image)(resources.GetObject("tsmReceiptQuery.Image")));
-            this.tsmReceiptQuery.Name = "tsmReceiptQuery";
-            this.tsmReceiptQuery.Size = new System.Drawing.Size(184, 40);
-            this.tsmReceiptQuery.Text = "交班查询";
-            this.tsmReceiptQuery.Click += new System.EventHandler(this.tsmReceiptQuery_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.AutoSize = false;
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(181, 1);
-            // 
-            // tsmPrintSet
-            // 
-            this.tsmPrintSet.AutoSize = false;
-            this.tsmPrintSet.BackColor = System.Drawing.Color.Black;
-            this.tsmPrintSet.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.tsmPrintSet.ForeColor = System.Drawing.Color.White;
-            this.tsmPrintSet.Image = ((System.Drawing.Image)(resources.GetObject("tsmPrintSet.Image")));
-            this.tsmPrintSet.Name = "tsmPrintSet";
-            this.tsmPrintSet.Size = new System.Drawing.Size(184, 40);
-            this.tsmPrintSet.Text = "打印机设置";
-            this.tsmPrintSet.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
-            // 
-            // btnOrderQuery
-            // 
-            this.btnOrderQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnOrderQuery.AutoSize = false;
-            this.btnOrderQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOrderQuery.BackgroundImage")));
-            this.btnOrderQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnOrderQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnOrderQuery.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.btnOrderQuery.ForeColor = System.Drawing.Color.White;
-            this.btnOrderQuery.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderQuery.Image")));
-            this.btnOrderQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOrderQuery.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
-            this.btnOrderQuery.Name = "btnOrderQuery";
-            this.btnOrderQuery.Size = new System.Drawing.Size(78, 35);
-            this.btnOrderQuery.Text = "订单查询";
-            this.btnOrderQuery.Click += new System.EventHandler(this.btnOrderQuery_Click);
-            // 
-            // btnOrderHang
-            // 
-            this.btnOrderHang.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnOrderHang.AutoSize = false;
-            this.btnOrderHang.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOrderHang.BackgroundImage")));
-            this.btnOrderHang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnOrderHang.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.btnOrderHang.ForeColor = System.Drawing.Color.White;
-            this.btnOrderHang.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderHang.Image")));
-            this.btnOrderHang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnOrderHang.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnOrderHang.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOrderHang.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
-            this.btnOrderHang.Name = "btnOrderHang";
-            this.btnOrderHang.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnOrderHang.Size = new System.Drawing.Size(85, 35);
-            this.btnOrderHang.Text = "挂单列表";
-            this.btnOrderHang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnOrderHang.Click += new System.EventHandler(this.btnOrderHang_Click);
-            // 
-            // btnOrderCancle
-            // 
-            this.btnOrderCancle.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnOrderCancle.AutoSize = false;
-            this.btnOrderCancle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnOrderCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOrderCancle.BackgroundImage")));
-            this.btnOrderCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnOrderCancle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnOrderCancle.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.btnOrderCancle.ForeColor = System.Drawing.Color.White;
-            this.btnOrderCancle.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderCancle.Image")));
-            this.btnOrderCancle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOrderCancle.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
-            this.btnOrderCancle.Name = "btnOrderCancle";
-            this.btnOrderCancle.Size = new System.Drawing.Size(78, 35);
-            this.btnOrderCancle.Text = "取消交易";
-            this.btnOrderCancle.Visible = false;
-            this.btnOrderCancle.Click += new System.EventHandler(this.btnOrderCancle_Click);
+            this.picBirthday.CanMove = false;
+            this.picBirthday.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday.Image")));
+            this.picBirthday.IsFocus = false;
+            this.picBirthday.Location = new System.Drawing.Point(853, 121);
+            this.picBirthday.Name = "picBirthday";
+            this.picBirthday.Size = new System.Drawing.Size(246, 32);
+            this.picBirthday.TabIndex = 24;
+            this.picBirthday.Text = "transparentPic1";
+            this.picBirthday.unitScale = null;
+            this.picBirthday.UnitType = QiandamaPOS.UserControl.EnumUnitType.Station;
+            this.picBirthday.Visible = false;
             // 
             // frmMain
             // 
@@ -1361,6 +1366,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).EndInit();
             this.pnlWaiting.ResumeLayout(false);
             this.pnlWaiting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnl5.ResumeLayout(false);
             this.pnl5.PerformLayout();
@@ -1376,7 +1382,6 @@
             this.pnlMember.ResumeLayout(false);
             this.pnlMember.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlOrdreDetail.ResumeLayout(false);
             this.pnlOrdreDetail.PerformLayout();
             this.pnlMemberPromo.ResumeLayout(false);
@@ -1475,5 +1480,6 @@
         private System.Windows.Forms.Label lblMemberPromo;
         private System.Windows.Forms.Timer timerGetIncrementProduct;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

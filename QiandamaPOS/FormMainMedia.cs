@@ -1,4 +1,5 @@
-﻿using QiandamaPOS.Model;
+﻿using QiandamaPOS.Common;
+using QiandamaPOS.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,12 @@ namespace QiandamaPOS
 {
     public partial class FormMainMedia : Form
     {
+
+
+        //<summary>
+        //按比例缩放页面及控件
+        //</summary>
+        AutoSizeFormUtil asf = new AutoSizeFormUtil();
         public FormMainMedia()
         {
             InitializeComponent();
@@ -59,7 +66,8 @@ namespace QiandamaPOS
 
             frmNumber frmnumber = new frmNumber("请输入会员号", true,false);
 
-            frmnumber.frmNumber_SizeChanged(null, null);
+            asf.AutoScaleControlTest(frmnumber, this.Width / 3, this.Height - 200,true);
+            //frmnumber.frmNumber_SizeChanged(null, null);
             frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
             // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
 

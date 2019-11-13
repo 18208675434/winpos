@@ -50,6 +50,11 @@ namespace QiandamaPOS
         
         private void frmOrderHang_Shown(object sender, EventArgs e)
         {
+
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
+            timerNow.Interval = 1000;
+            timerNow.Enabled = true;
+
             LoadOrderHang();
         }
 
@@ -277,6 +282,11 @@ namespace QiandamaPOS
                 picScreen.Visible = false;
                 LogManager.WriteLog("修改主窗体背景图异常："+ex.Message);
             }
+        }
+
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
 

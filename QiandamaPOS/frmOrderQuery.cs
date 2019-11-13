@@ -44,6 +44,10 @@ namespace QiandamaPOS
 
         private void frmOrderQuery_Shown(object sender, EventArgs e)
         {
+
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
+            timerNow.Interval = 1000;
+            timerNow.Enabled = true;
             Application.DoEvents();
             //picScreen.BackgroundImage = MainModel.GetWinformImage(this);
             ////启动扫描处理线程
@@ -538,6 +542,11 @@ namespace QiandamaPOS
         {
             dgvOrderOnLine.Rows.Clear();
             QueryOrder();
+        }
+
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         //private void SEDPrint(PrintDetail printdetail)

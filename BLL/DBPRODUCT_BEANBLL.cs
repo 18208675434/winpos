@@ -198,6 +198,13 @@ namespace Maticsoft.BLL
         {
             return dal.GetModelBySkuCode(skucode);
         }
+
+
+        public DBPRODUCT_BEANMODEL GetModelByGoodsID(string goodid)
+        {
+            return dal.GetModelByGoodsID(goodid);
+        }
+
 		#endregion  ExtensionMethod
 	}
 }

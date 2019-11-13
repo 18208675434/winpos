@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using QiandamaPOS.Common;
 using System.Threading;
+using QiandamaPOS.Model;
 
 namespace QiandamaPOS
 {
@@ -70,6 +71,8 @@ namespace QiandamaPOS
 
         private void frmCash_Shown(object sender, EventArgs e)
         {
+
+            txtNum.Font = new System.Drawing.Font("微软雅黑", txtNum.Font.Size * Math.Min(MainModel.hScale, MainModel.wScale));
             if (isDouble)
             {
                  threadItemExedate = new Thread(UpdteForm);
@@ -81,12 +84,6 @@ namespace QiandamaPOS
             NumberUtil.FormGuid = "";
 
             btnDel.Focus();
-            //this.Size = new System.Drawing.Size(Screen.AllScreens[0].Bounds.Width / 3, Screen.AllScreens[0].Bounds.Height - 200);
-            //this.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - this.Width - 50, 100);
-          
-           // this.Size = new System.Drawing.Size(Screen.AllScreens[0].Bounds.Width / 3, Screen.AllScreens[0].Bounds.Height - 200);
-            //this.Location = new System.Drawing.Point(400, 10);
-            //txtNum.SetWatermark("请输入实收现金");
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
@@ -101,52 +98,59 @@ namespace QiandamaPOS
         //下一步需要判断实收现金是否足够
         private void btnNext_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            UpdatNumberUtil(btn.Name);
-            if (txtNum.Text.Length == 0)
+            try
             {
-                return;
-            }
-
-            if (lblInfo.Text == "请输入会员号")
-            {
-                if (txtNum.Text.Length != 11)
+                Button btn = (Button)sender;
+                UpdatNumberUtil(btn.Name);
+                if (txtNum.Text.Length == 0)
                 {
-                   // ShowLog("请输入正确的手机号！",false);
-                    lblMsg.Text = "手机号格式不正确！";
                     return;
                 }
 
-                if (txtNum.Text.Length > 0 && txtNum.Text.Substring(0, 1) != "1")
+                if (lblInfo.Text == "请输入会员号")
                 {
-                    //ShowLog("请输入正确的手机号！", false);
-                    lblMsg.Text = "手机号格式不正确！";
-                    return;
-                }
-            }
+                    if (txtNum.Text.Length != 11)
+                    {
+                        // ShowLog("请输入正确的手机号！",false);
+                        lblMsg.Text = "手机号格式不正确！";
+                        return;
+                    }
 
-            if (lblInfo.Text == "请输入商品条码")
+                    if (txtNum.Text.Length > 0 && txtNum.Text.Substring(0, 1) != "1")
+                    {
+                        //ShowLog("请输入正确的手机号！", false);
+                        lblMsg.Text = "手机号格式不正确！";
+                        return;
+                    }
+                }
+
+                if (lblInfo.Text == "请输入商品条码")
+                {
+                    if (txtNum.Text.Length > 5 && txtNum.Text.Length != 8 && txtNum.Text.Length != 13)
+                    {
+                        // ShowLog("请输入正确的手机号！",false);
+                        lblMsg.Text = "只允许输入1-5、8、13 位！";
+                        return;
+                    }
+
+                    if (txtNum.Text.Length == 8)
+                    {
+                        txtNum.Text = txtNum.Text.Substring(2, 5);
+                    }
+                }
+
+
+                this.DialogResult = DialogResult.OK;
+                NumValue = Convert.ToDouble(txtNum.Text);
+
+                if (DataReceiveHandle != null)
+                    this.DataReceiveHandle.BeginInvoke(1, txtNum.Text, null, null);
+                this.Close();
+            }
+            catch (Exception ex)
             {
-                if (txtNum.Text.Length > 5 && txtNum.Text.Length != 8 && txtNum.Text.Length!=13)
-                {
-                    // ShowLog("请输入正确的手机号！",false);
-                    lblMsg.Text = "只允许输入1-5、8、13 位！";
-                    return;
-                }
-
-                if (txtNum.Text.Length == 8)
-                {
-                    txtNum.Text = txtNum.Text.Substring(2,5);
-                }
+                LogManager.WriteLog("数字窗体关闭异常"+ex.StackTrace);
             }
-
-
-            this.DialogResult = DialogResult.OK;
-            NumValue = Convert.ToDouble(txtNum.Text);
-
-            if (DataReceiveHandle != null)
-                this.DataReceiveHandle.BeginInvoke(1,txtNum.Text, null, null);
-            this.Close();
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -287,7 +291,7 @@ namespace QiandamaPOS
 
         public void frmNumber_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+           // asf.ControlAutoSize(this);
         }
 
 

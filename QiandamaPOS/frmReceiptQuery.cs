@@ -197,7 +197,16 @@ namespace QiandamaPOS
 
         private void frmReceiptQuery_Shown(object sender, EventArgs e)
         {
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
+            timerNow.Interval = 1000;
+            timerNow.Enabled = true;
+
             btnToday_Click(null,null);
+        }
+
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 }
