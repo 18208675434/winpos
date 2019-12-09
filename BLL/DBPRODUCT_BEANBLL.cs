@@ -12,157 +12,125 @@ namespace Maticsoft.BLL
 		private readonly Maticsoft.DAL.DBPRODUCT_BEANDAL dal=new Maticsoft.DAL.DBPRODUCT_BEANDAL();
 		public DBPRODUCT_BEANBLL()
 		{}
-		#region  BasicMethod
+        #region  BasicMethod
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
+        public bool Exists(int _id)
+        {
+            return dal.Exists(_id);
+        }
 
-		/// <summary>
-		/// 得到最大ID
-		/// </summary>
-		public int GetMaxId()
-		{
-			return dal.GetMaxId();
-		}
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public int Add(Maticsoft.Model.DBPRODUCT_BEANMODEL model)
+        {
+            return dal.Add(model);
+        }
 
-		/// <summary>
-		/// 是否存在该记录
-		/// </summary>
-		public bool Exists(int _id)
-		{
-			return dal.Exists(_id);
-		}
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(Maticsoft.Model.DBPRODUCT_BEANMODEL model)
+        {
+            return dal.Update(model);
+        }
 
-		/// <summary>
-		/// 增加一条数据
-		/// </summary>
-		public int  Add(Maticsoft.Model.DBPRODUCT_BEANMODEL model)
-		{
-			return dal.Add(model);
-		}
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(int _id)
+        {
 
-		/// <summary>
-		/// 更新一条数据
-		/// </summary>
-		public bool Update(Maticsoft.Model.DBPRODUCT_BEANMODEL model)
-		{
-			return dal.Update(model);
-		}
+            return dal.Delete(_id);
+        }
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool DeleteList(string _idlist)
+        {
+            return dal.DeleteList(_idlist);
+        }
 
-		/// <summary>
-		/// 删除一条数据
-		/// </summary>
-		public bool Delete(int _id)
-		{
-			
-			return dal.Delete(_id);
-		}
-		/// <summary>
-		/// 删除一条数据
-		/// </summary>
-		public bool DeleteList(string _idlist )
-		{
-			return dal.DeleteList(_idlist );
-		}
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public Maticsoft.Model.DBPRODUCT_BEANMODEL GetModel(int _id)
+        {
 
-		/// <summary>
-		/// 得到一个对象实体
-		/// </summary>
-		public Maticsoft.Model.DBPRODUCT_BEANMODEL GetModel(int _id)
-		{
-			
-			return dal.GetModel(_id);
-		}
+            return dal.GetModel(_id);
+        }
 
-        ///// <summary>
-        ///// 得到一个对象实体，从缓存中
-        ///// </summary>
-        //public Maticsoft.Model.DBPRODUCT_BEAN GetModelByCache(int _id)
+    
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public DataSet GetList(string strWhere)
+        {
+            return dal.GetList(strWhere);
+        }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<Maticsoft.Model.DBPRODUCT_BEANMODEL> GetModelList(string strWhere)
+        {
+            DataSet ds = dal.GetList(strWhere);
+            return DataTableToList(ds.Tables[0]);
+        }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<Maticsoft.Model.DBPRODUCT_BEANMODEL> DataTableToList(DataTable dt)
+        {
+            List<Maticsoft.Model.DBPRODUCT_BEANMODEL> modelList = new List<Maticsoft.Model.DBPRODUCT_BEANMODEL>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                Maticsoft.Model.DBPRODUCT_BEANMODEL model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = dal.DataRowToModel(dt.Rows[n]);
+                    if (model != null)
+                    {
+                        modelList.Add(model);
+                    }
+                }
+            }
+            return modelList;
+        }
+
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public DataSet GetAllList()
+        {
+            return GetList("");
+        }
+
+        /// <summary>
+        /// 分页获取数据列表
+        /// </summary>
+        public int GetRecordCount(string strWhere)
+        {
+            return dal.GetRecordCount(strWhere);
+        }
+        /// <summary>
+        /// 分页获取数据列表
+        /// </summary>
+        public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
+        {
+            return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
+        }
+        /// <summary>
+        /// 分页获取数据列表
+        /// </summary>
+        //public DataSet GetList(int PageSize,int PageIndex,string strWhere)
         //{
-			
-        //    string CacheKey = "DBPRODUCT_BEANModel-" + _id;
-        //    object objModel = Maticsoft.Common.DataCache.GetCache(CacheKey);
-        //    if (objModel == null)
-        //    {
-        //        try
-        //        {
-        //            objModel = dal.GetModel(_id);
-        //            if (objModel != null)
-        //            {
-        //                int ModelCache = Maticsoft.Common.ConfigHelper.GetConfigInt("ModelCache");
-        //                Maticsoft.Common.DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
-        //            }
-        //        }
-        //        catch{}
-        //    }
-        //    return (Maticsoft.Model.DBPRODUCT_BEAN)objModel;
+        //return dal.GetList(PageSize,PageIndex,strWhere);
         //}
 
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public DataSet GetList(string strWhere)
-		{
-			return dal.GetList(strWhere);
-		}
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public List<Maticsoft.Model.DBPRODUCT_BEANMODEL> GetModelList(string strWhere)
-		{
-			DataSet ds = dal.GetList(strWhere);
-			return DataTableToList(ds.Tables[0]);
-		}
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public List<Maticsoft.Model.DBPRODUCT_BEANMODEL> DataTableToList(DataTable dt)
-		{
-			List<Maticsoft.Model.DBPRODUCT_BEANMODEL> modelList = new List<Maticsoft.Model.DBPRODUCT_BEANMODEL>();
-			int rowsCount = dt.Rows.Count;
-			if (rowsCount > 0)
-			{
-				Maticsoft.Model.DBPRODUCT_BEANMODEL model;
-				for (int n = 0; n < rowsCount; n++)
-				{
-					model = dal.DataRowToModel(dt.Rows[n]);
-					if (model != null)
-					{
-						modelList.Add(model);
-					}
-				}
-			}
-			return modelList;
-		}
-
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public DataSet GetAllList()
-		{
-			return GetList("");
-		}
-
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		public int GetRecordCount(string strWhere)
-		{
-			return dal.GetRecordCount(strWhere);
-		}
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
-		{
-			return dal.GetListByPage( strWhere,  orderby,  startIndex,  endIndex);
-		}
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		//public DataSet GetList(int PageSize,int PageIndex,string strWhere)
-		//{
-			//return dal.GetList(PageSize,PageIndex,strWhere);
-		//}
-
-		#endregion  BasicMethod
+        #endregion  BasicMethod
 		#region  ExtensionMethod
 
             /// <summary>
@@ -182,9 +150,9 @@ namespace Maticsoft.BLL
             return dal.UpdateBySkuCode(model);
         }
 
-        public bool AddProduct(List<Maticsoft.Model.DBPRODUCT_BEANMODEL> lstmodel)
+        public bool AddProduct(List<Maticsoft.Model.DBPRODUCT_BEANMODEL> lstmodel,string createurl)
         {
-            return dal.AddProduct(lstmodel);
+            return dal.AddProduct(lstmodel,createurl);
 
         }
 
@@ -194,15 +162,15 @@ namespace Maticsoft.BLL
         }
 
 
-        public DBPRODUCT_BEANMODEL GetModelBySkuCode(string skucode)
+        public DBPRODUCT_BEANMODEL GetModelBySkuCode(string skucode,string createurl)
         {
-            return dal.GetModelBySkuCode(skucode);
+            return dal.GetModelBySkuCode(skucode,createurl);
         }
 
 
-        public DBPRODUCT_BEANMODEL GetModelByGoodsID(string goodid)
+        public DBPRODUCT_BEANMODEL GetModelByGoodsID(string goodid,string creaturl)
         {
-            return dal.GetModelByGoodsID(goodid);
+            return dal.GetModelByGoodsID(goodid, creaturl);
         }
 
 		#endregion  ExtensionMethod

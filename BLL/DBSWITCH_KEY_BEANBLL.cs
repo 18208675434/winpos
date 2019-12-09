@@ -166,9 +166,9 @@ namespace Maticsoft.BLL
 		#region  ExtensionMethod
 
 
-        public bool AddScalse(List<Maticsoft.Model.DBSWITCH_KEY_BEANMODEL> lstmodel)
+        public bool AddScalse(List<Maticsoft.Model.DBSWITCH_KEY_BEANMODEL> lstmodel,string createurl)
         {
-            return dal.AddScales(lstmodel);
+            return dal.AddScales(lstmodel,createurl);
 
         }
 
