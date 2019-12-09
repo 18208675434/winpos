@@ -2663,7 +2663,7 @@ namespace WinSaasPOS
                     if (strsmsg.Length >= 4)
                     {
                         string purchase = strsmsg[3];
-
+                         
 
 
                         if (purchase.Length > 0 && purchase.Substring(purchase.Length - 1) == "?")
