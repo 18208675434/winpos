@@ -2659,10 +2659,11 @@ namespace WinSaasPOS
                     string msg = dgvGood.Rows[e.RowIndex].Cells[0].Value.ToString();
                     string tempstr = msg.Replace("\r\n", "*");
 
-                    string[] strsmsg = tempstr.Split('*');
+                    string[] strsmsg = tempstr.Split('*'); 
                     if (strsmsg.Length >= 4)
                     {
                         string purchase = strsmsg[3];
+
 
 
                         if (purchase.Length > 0 && purchase.Substring(purchase.Length - 1) == "?")
