@@ -65,10 +65,17 @@ namespace WinSaasPOS
             // IniForm(null);
 
 
-            //线程优先级低 不能占用数据处理线程资源
+            ////线程优先级低 不能占用数据处理线程资源
+            //threadMedia = new Thread(PlayerThread);
+            //threadMedia.Priority = ThreadPriority.BelowNormal;
+            //threadMedia.IsBackground = true;
+            //threadMedia.Start();
+
             threadMedia = new Thread(PlayerThread);
-            threadMedia.Priority = ThreadPriority.BelowNormal;
             threadMedia.IsBackground = true;
+            //thread.SetApartmentState(ApartmentState.Unknown);
+            threadMedia.SetApartmentState(ApartmentState.STA);
+            //thread.Priority = ThreadPriority.Lowest;
             threadMedia.Start();
          
           
@@ -157,15 +164,14 @@ namespace WinSaasPOS
                     //LoginLogo.bmp
                     try
                     {
-                         Image _image = Image.FromStream(System.Net.WebRequest.Create(posmedia.tenantlogo).GetResponse().GetResponseStream());
+                        Image _image = Image.FromStream(System.Net.WebRequest.Create(posmedia.tenantlogo).GetResponse().GetResponseStream());
 
-                        
-                         _image.Save(MainModel.MediaPath + "LoginLogo.bmp");
-                         //picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
+                        _image.Save(MainModel.MediaPath + "LoginLogo.bmp");
+                        //picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
                     }
-                    catch(Exception ex) 
+                    catch (Exception ex)
                     {
-                        LogManager.WriteLog("下载商户图标异常"+ex.Message);
+                        LogManager.WriteLog("下载商户图标异常" + ex.Message);
                     }
 
                     CurrentMediadetaildtos =posmedia.mediadetaildtos;
@@ -226,7 +232,6 @@ namespace WinSaasPOS
         }
 
 
-
         private bool LoadMediaResult = false;
         private bool DownLoadImgResult = false;
         private bool DownLoadMp4Result = false;
@@ -235,14 +240,23 @@ namespace WinSaasPOS
         {
             try
             {
-                sortMediaCount = sortMedia.Count;
-               // foreach (KeyValuePair<int, Mediadetaildto> keval in sortMedia)
-                    for (int i = 0; i < sortMediaCount;i++ )
-                    //foreach (Mediadetaildto media in CurrentMediadetaildtos)
+                if (sortMedia.Count > 0)
+                {
+                    
+
+                    List<Mediadetaildto> lstmedia = new List<Mediadetaildto>();
+                    foreach (KeyValuePair<int, Mediadetaildto> kv in sortMedia)
+                    { 
+                        lstmedia.Add((Mediadetaildto)MainModel.Clone(kv.Value));
+                    }
+                   // SortedDictionary<int, Mediadetaildto> sortTempMedia = (SortedDictionary<int, Mediadetaildto>)MainModel.Clone(sortMedia);
+                    foreach (Mediadetaildto media in lstmedia)
                     {
+                        //for (int i = 0; i < sortMediaCount;i++ )
+                        //{
                         try
                         {
-                            Mediadetaildto media = sortMedia[i];
+                            //Mediadetaildto media = kv.Value;
 
                             if (media.mediatype == 1) //图片
                             {
@@ -253,7 +267,6 @@ namespace WinSaasPOS
 
                                 string imgname = media.content.Substring(media.content.LastIndexOf("/") + 1); //URL 最后的值
 
-                                //tabPageAdvert.BackgroundImage = _image;
 
                                 if (File.Exists(MainModel.MediaPath + imgname))
                                 {
@@ -261,11 +274,11 @@ namespace WinSaasPOS
                                     imgback.Tag = imgname;
 
                                     //同一个图片不更换 以免屏幕闪动
-                                    if (tabPageAdvert.BackgroundImage ==null || tabPageAdvert.BackgroundImage.Tag.ToString()!=imgname)
+                                    if (tabPageAdvert.BackgroundImage == null || tabPageAdvert.BackgroundImage.Tag.ToString() != imgname)
                                     {
                                         tabPageAdvert.BackgroundImage = imgback;
                                     }
-                                    
+
                                     //Application.DoEvents();
                                     Delay.Start(3000);
                                 }
@@ -287,22 +300,26 @@ namespace WinSaasPOS
                                         player.URL = MainModel.MediaPath + playername;
                                         this.player.Ctlcontrols.play();
 
+
+                                     
+                                        //访问过于频繁会异常  消息筛选器显示应用程序正在使用中
+                                        Delay.Start(100);
+                                        //MainModel.IsPlayer = true;
+
                                         while (!player.status.Contains("停止") && player.Visible)
                                         {
-                                            Delay.Start(100);
+                                            Delay.Start(500);
+                                            //MainModel.IsPlayer = true;
                                         }
 
-                                        //player.close();
+                                        player.close();
                                         player.Visible = false;
 
                                     }
                                     catch (Exception ex)
                                     {
-                                        this.player.Ctlcontrols.stop();
-                                        player.Dispose();
-                                        //player.close();
                                         player.Visible = false;
-                                        LogManager.WriteLog("客屏视频播放异常" + ex.Message);
+                                       // LogManager.WriteLog("客屏视频播放异常" + ex.Message + ex.StackTrace);
                                     }
                                 }
                                 else
@@ -316,14 +333,15 @@ namespace WinSaasPOS
                         }
                         catch (Exception ex)
                         {
-                            LogManager.WriteLog("客屏单个广告异常" + ex.Message+ex.StackTrace);
+                            LogManager.WriteLog("客屏单个广告异常" + ex.Message + ex.StackTrace);
                         }
                     }
+                }
                     player.Visible = false;
             Delay.Start(1000);
             PlayerThread();
 
-
+                
             }
             catch (Exception ex)
             {
@@ -334,18 +352,17 @@ namespace WinSaasPOS
         //播放状态是全屏   不是播放状态 此属性不可修改 （异常:灾难性错误）
         private void player_StatusChange(object sender, EventArgs e)
         {
+
+            MainModel.IsPlayer = true;
             if (player.status.Contains("正在播放"))
             {
                 if (!player.fullScreen)
                     player.fullScreen = true;
             }
-
-            //player.
+            
         }
 
-
         #endregion
-
 
 
 
@@ -355,11 +372,13 @@ namespace WinSaasPOS
         {
             try
             {
-              
+                try
+                {
                     threadMedia.Suspend();
                     player.Visible = false;
                     player.close();
-                
+                }
+                catch { }
                 //////启动扫描处理线程
                 Thread threadItemExedate = new Thread(UpdateFormExe);
                 threadItemExedate.IsBackground = false;
@@ -382,7 +401,6 @@ namespace WinSaasPOS
             {
                 try
                 {
-                    DateTime starttime = DateTime.Now;
 
 
                     dgvGood.Visible = true;
@@ -422,28 +440,36 @@ namespace WinSaasPOS
                         {
                             for (int i = 0; i < orderCount; i++)
                             {
+
                                 try
                                 {
-                                    dgvOrderDetail.Rows.Add(CurrentCart.orderpricedetails[i].title, CurrentCart.orderpricedetails[i].amount);
+                                    if (this.IsHandleCreated)
+                                    {
+                                        this.Invoke(new InvokeHandler(delegate()
+                                        {
+                                            dgvOrderDetail.Rows.Add(CurrentCart.orderpricedetails[i].title, CurrentCart.orderpricedetails[i].amount);
+                                        }));
+                                    }
                                 }
-                                catch { }
+                                catch
+                                {
+                                    dgvOrderDetail.Refresh();
+                                }
+                               
 
                             }
 
                             if (CurrentCart.cashpayamt != null && CurrentCart.cashpayamt > 0)
                             {
-                                dgvOrderDetail.Rows.Add("已付现金", "￥"+CurrentCart.cashpayamt.ToString("f2"));
+                                if (this.IsHandleCreated)
+                                {
+                                    this.Invoke(new InvokeHandler(delegate()
+                                    {
+                                        dgvOrderDetail.Rows.Add("已付现金", "￥" + CurrentCart.cashpayamt.ToString("f2"));
+                                    }));
+                                }
+                                
                             }
-
-                            //if (CurrentCart.cashpayamt != null && CurrentCart.cashpayamt > 0)
-                            //{
-                            //    dgvOrderDetail.Rows.Add("已付现金", "￥" + CurrentCart.cashpayamt.ToString("f2"));
-                            //}
-
-
-                         
-
-
 
                             dgvOrderDetail.ClearSelection();
                         }
@@ -500,14 +526,6 @@ namespace WinSaasPOS
                                     default: barcode = "\r\n  " + pro.title + "\r\n  " + pro.skucode + "\r\n"; break;
                                 }
 
-                                if (!string.IsNullOrEmpty(pro.price.purchaselimitdesc))
-                                {
-                                    barcode += pro.price.purchaselimitdesc;
-                                    if (!string.IsNullOrEmpty(pro.price.purchaselimitsubdesc))
-                                    {
-                                        barcode += "?";
-                                    }
-                                }
 
                                 if (pro.price.saleprice == pro.price.originprice)
                                 {
@@ -572,9 +590,17 @@ namespace WinSaasPOS
                                 }
                                 try
                                 {
-                                    dgvGood.Rows.Insert(0, new object[] { barcode, price, jian, num, add, total });
+                                    if (this.IsHandleCreated)
+                                    {
+                                        this.Invoke(new InvokeHandler(delegate()
+                                       {
+                                           dgvGood.Rows.Insert(0, new object[] { barcode, price, jian, num, add, total });
+                                       }));
+                                    }
                                 }
-                                catch { }
+                                catch {
+                                    dgvGood.Refresh();
+                                }
                             }
                             //dgvGood.ClearSelection();
                             //Application.DoEvents();
@@ -582,7 +608,6 @@ namespace WinSaasPOS
                         }
                     }
 
-                    Console.WriteLine("客屏加载时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
 
                     if (MainModel.CurrentMember == null)
@@ -596,7 +621,7 @@ namespace WinSaasPOS
                             picBirthday2.Visible = false ;
                             picBirthday3.Visible = false ;
                             picBirthday4.Visible = false ;
-
+                            
                             this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
                             this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
                             this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
@@ -678,7 +703,15 @@ namespace WinSaasPOS
                 }
                 catch (Exception ex)
                 {
-                    //frmMain.listener.Start();
+                    try
+                    {
+                        dgvGood.Refresh();
+                        dgvOrderDetail.Refresh();
+                    }
+                    catch
+                    {
+
+                    }
                     LogManager.WriteLog("ERROR", "显示客屏购物车异常：" + ex.Message + ex.StackTrace);
                 }
             }
@@ -795,7 +828,7 @@ namespace WinSaasPOS
 
                     if (!string.IsNullOrEmpty(strLine4))
                     {
-
+                        int piayiX = 5;
                         bool havePic = false;
                         if (strLine4.Contains("?"))
                         {
@@ -810,15 +843,6 @@ namespace WinSaasPOS
 
                         TextRenderer.DrawText(e.Graphics, strLine4, fnt4, new Rectangle(intX + 10, intY, intWidth, (int)size4.Height), Color.Orange, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
 
-                        int piayiX = 5;
-                        // havePic = true;
-                        if (havePic)
-                        {
-                            Image imgtest = Resources.ResourcePos.Qustion;
-
-                            e.Graphics.DrawImageUnscaled(imgtest, (int)size4.Width + 10, intY, 15, 15);
-                            piayiX = (int)size4.Height + 5;
-                        }
 
                         Point point1 = new Point(10, intY);
                         Point point2 = new Point((int)size4.Width + 10 + piayiX, intY);
@@ -830,8 +854,6 @@ namespace WinSaasPOS
                         e.Graphics.DrawLine(blackPen, point1, point3);
                         e.Graphics.DrawLine(blackPen, point2, point4);
                         e.Graphics.DrawLine(blackPen, point3, point4);
-
-
                     }
 
 
@@ -849,7 +871,7 @@ namespace WinSaasPOS
                     //Point point22 = new Point(10, intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
                     //Pen blackPen2 = new Pen(Color.Black, 10);
                     //e.Graphics.DrawLine(blackPen2, point21, point21);
-                    // e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                     // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
                     e.Handled = true;
@@ -1006,6 +1028,7 @@ namespace WinSaasPOS
 
             }
         }
+
         #endregion
 
 
@@ -1171,29 +1194,29 @@ namespace WinSaasPOS
 
         public void ShowNumber()
         {
-            try
-            {
+            //try
+            //{
                
-                    threadMedia.Suspend();
-                    player.Visible = false;
+            //        threadMedia.Suspend();
+            //        player.Visible = false;
 
 
-                    frmNumber frmnumber = new frmNumber("请输入会员号", NumberType.MemberCode);
+            //        frmNumber frmnumber = new frmNumber("请输入会员号", NumberType.MemberCode);
 
-                frmnumber.frmNumber_SizeChanged(null, null);
-                frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
-                // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
+            //    frmnumber.frmNumber_SizeChanged(null, null);
+            //    frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
+            //    // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
 
-                frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
+            //    frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
 
-                //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-                frmnumber.Show();
-                Application.DoEvents();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("客屏输入会员号异常" + ex.Message);
-            }
+            //    //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            //    frmnumber.Show();
+            //    Application.DoEvents();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogManager.WriteLog("客屏输入会员号异常" + ex.Message);
+            //}
         }
 
         public void ShowPayInfo(string lblinfo,bool isError)
@@ -1285,7 +1308,20 @@ namespace WinSaasPOS
 
         #endregion
 
-     
+
+
+                /// <summary>
+        /// 数据处理委托方法
+        /// </summary>
+        /// <param name="type">0：返回  1：确认数字</param>
+        public delegate void DataRecHandleDelegate(string scancode);
+        /// <summary>
+        /// 数据接收事件
+        /// </summary>
+        public event DataRecHandleDelegate DataReceiveHandle;
+
+
+
 
    
     }

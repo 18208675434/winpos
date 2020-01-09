@@ -17,7 +17,7 @@ namespace WinSaasPOS.Common
 {
     public class HttpUtil
     {
-
+        
         /// <summary>
         /// 登录接口
         /// </summary>
@@ -43,7 +43,6 @@ namespace WinSaasPOS.Common
                 {
                     string Token = rd.data.ToString();
                     return Token;
-
                 }
                 else
                 {
@@ -109,7 +108,6 @@ namespace WinSaasPOS.Common
                 sort.Add("devicesn", devicesn);
 
                 string json = HttpGET(url, sort);
-                Console.WriteLine("门店信息："+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -270,7 +268,7 @@ namespace WinSaasPOS.Common
 
                 }
 
-               
+
 
 
                 if (MainModel.CurrentMember != null)
@@ -293,7 +291,6 @@ namespace WinSaasPOS.Common
                 string json = HttpPOST(url, tempjson);
 
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                Console.Write("购物车接口"+json);
                 // return;
                 if (rd.code == 0)
                 {
@@ -328,6 +325,7 @@ namespace WinSaasPOS.Common
         {
             try
             {
+               
                 string url = "/pos/order/pos/cart";
 
 
@@ -377,9 +375,10 @@ namespace WinSaasPOS.Common
 
                 cartpara.balancepayoption = cart.balancepayoption;
 
-                if(cart.paypasswordtype==1){
-                    cartpara.paypasswordtype=1;
-                    cartpara.paypassword=cart.paypassword;
+                if (cart.paypasswordtype == 1)
+                {
+                    cartpara.paypasswordtype = 1;
+                    cartpara.paypassword = cart.paypassword;
                 }
 
                 ////TODO  如果修改价钱为0 则表示不修改  值修改为订单总价格
@@ -404,8 +403,8 @@ namespace WinSaasPOS.Common
                 //回参没有，需要加
                 try
                 {
-                     balancepaypassword = cart.paypassword;
-                     balancepaypasswordtype = cart.paypasswordtype;
+                    balancepaypassword = cart.paypassword;
+                    balancepaypasswordtype = cart.paypasswordtype;
                 }
                 catch (Exception ex)
                 {
@@ -413,6 +412,9 @@ namespace WinSaasPOS.Common
                 }
 
                 string json = HttpPOST(url, tempjson);
+
+
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -511,7 +513,7 @@ namespace WinSaasPOS.Common
                 {
                     tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
                 }
-                
+
                 ////Console.Write(tempjson);
 
                 string json = HttpPOST(url, tempjson);
@@ -626,10 +628,8 @@ namespace WinSaasPOS.Common
                 trade.orderid = orderid;
                 trade.authcode = authcode;
                 string tempjson = JsonConvert.SerializeObject(trade);
-                Console.WriteLine("第三方支付参数" + tempjson);
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                Console.WriteLine("第三方支付结果" + json);
                 //TODO
 
                 if (rd.code == 0)
@@ -660,7 +660,7 @@ namespace WinSaasPOS.Common
         /// <param name="orderid"></param>
         /// <param name="payid"></param>
         /// <param name="erromessage"></param>
-        public synctrade SyncTrade(string orderid, string payid, ref string erromessage,ref string returnerrormsg)
+        public synctrade SyncTrade(string orderid, string payid, ref string erromessage, ref string returnerrormsg)
         {
             try
             {
@@ -670,12 +670,10 @@ namespace WinSaasPOS.Common
                 trade.orderid = orderid;
                 trade.payid = payid;
                 string tempjson = JsonConvert.SerializeObject(trade);
-                Console.WriteLine("支付结果参数" + tempjson);
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                LogManager.WriteLog("第三方支付查询："+json);
-                Console.WriteLine("支付结果查询"+json);
+                LogManager.WriteLog("第三方支付查询：" + json);
                 if (rd.code == 0)
                 {
                     synctrade sync = JsonConvert.DeserializeObject<synctrade>(rd.data.ToString());
@@ -815,7 +813,7 @@ namespace WinSaasPOS.Common
 
                 if (rd.code == 0)
                 {
-                    Member  member = JsonConvert.DeserializeObject<Member>(rd.data.ToString());
+                    Member member = JsonConvert.DeserializeObject<Member>(rd.data.ToString());
 
                     return member;
 
@@ -842,12 +840,12 @@ namespace WinSaasPOS.Common
         /// <param name="orderid"></param>
         /// <param name="authcode"></param>
         /// <param name="erromessage"></param>
-        public VerifyBalancePwd VerifyBalancePwd(string paypassword, ref string erromessage,ref int resultcode)
+        public VerifyBalancePwd VerifyBalancePwd(string paypassword, ref string erromessage, ref int resultcode)
         {
             try
             {
 
-              
+
                 string url = "/pos/member/balance/verifypassword";
 
                 SortedDictionary<string, object> sort = new SortedDictionary<string, object>();
@@ -860,8 +858,7 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpPOST(url, tempjson);
-                Console.WriteLine("会员密码校验传参" + tempjson);
-                Console.WriteLine("会员密码校验"+json);
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 resultcode = rd.code;
@@ -1093,9 +1090,8 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpGET(url, sort);
-                Console.WriteLine("媒体："+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                
+
                 // return;
                 if (rd.code == 0)
                 {
@@ -1130,11 +1126,11 @@ namespace WinSaasPOS.Common
 
                 string tempjson = JsonConvert.SerializeObject(receiptpara);
 
-               // LogManager.WriteLog("交班参数"+tempjson);
+                // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
-               // LogManager.WriteLog("交班结果" + json);
+                // LogManager.WriteLog("交班结果" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                
+
 
                 // return;
                 if (rd.code == 0)
@@ -1350,7 +1346,6 @@ namespace WinSaasPOS.Common
             }
         }
 
-
         /// <summary>
         /// 保存营业外支出收入
         /// </summary>
@@ -1422,24 +1417,19 @@ namespace WinSaasPOS.Common
 
                 qep.lastorderid = lastorderid;
 
-
-
                 qep.shopid = MainModel.CurrentShopInfo.shopid;
 
                 string tempjson = JsonConvert.SerializeObject(qep);
                 //string tempjson = "{\"expenseid\":\"" + expenseid + "\",\"expensefee\":" + expensefee + ",\"shopid\":\"" + shopid + "\"}";
 
-                Console.WriteLine(tempjson);
 
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                //Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     Expense[] expenses = JsonConvert.DeserializeObject<Expense[]>(rd.data.ToString());
                     return expenses;
-
                 }
                 else
                 {
@@ -1703,19 +1693,18 @@ namespace WinSaasPOS.Common
         /// <param name="orderid"></param>
         /// <param name="payid"></param>
         /// <param name="erromessage"></param>
-        public AllProduct QuerySkushopIncrement(string shopid, int page, int size, ref string erromessage)
+        public AllProduct QuerySkushopIncrement(string shopid, int page, int size, ref string erromessage, ref int resultcode)
         {
             try
             {
                 string url = "/pos/product/pos/getincrementskushopofflinedtoforpossync";
 
-
                 string tempjson = "{\"shopid\":\"" + shopid + "\",\"page\":" + page + ",\"size\":" + size + ",\"timestamp\":\"" + MainModel.LastQuerySkushopCrementTimeStamp + "\"}";
 
-
                 string json = HttpPOST(url, tempjson);
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                resultcode = rd.code;
                 //Console.WriteLine(json);
                 if (rd.code == 0)
                 {
@@ -1744,7 +1733,7 @@ namespace WinSaasPOS.Common
         /// <param name="orderid"></param>
         /// <param name="payid"></param>
         /// <param name="erromessage"></param>
-        public List<Product> GetPanelProductPrice(PanelProductPara panelpropara, ref string erromessage,ref int resultcode)
+        public List<Product> GetPanelProductPrice(PanelProductPara panelpropara, ref string erromessage, ref int resultcode)
         {
             try
             {
@@ -1763,9 +1752,7 @@ namespace WinSaasPOS.Common
                 //tempjson = "{\"memberlogin\":0,\"products\":[{\"mainimg\":\"https://pic.qdama.cn/FsoTxQ-fRfS5EUCEaaQOKlJSaVDd\",\"pricetagid\":0,\"saleunit\":\"kg\",\"skucode\":\"20000011\"}],\"shopid\":\"501001\",\"usertoken\":\"\"}";
 
                 //tempjson = MainModel.GB2312ToUTF8(tempjson);
-                Console.WriteLine(DateTime.Now.ToString("ssfff")+ "面板商品参数:" + tempjson);
                 string json = HttpPOST(url, tempjson);
-                Console.WriteLine(DateTime.Now.ToString("ssfff") + "面板商品返回:" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
                 //Console.WriteLine(json);
@@ -1789,6 +1776,165 @@ namespace WinSaasPOS.Common
             }
         }
 
+
+        #region  电视屏接口
+
+        /// <summary>
+        /// 获取电视屏模板  蔬菜
+        /// </summary>
+        /// <returns></returns>
+        public string GetTVshowpageForPromotion(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/led/gettvshowpageforpromotion";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    return rd.data.ToString();
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取电视屏模板（蔬菜）异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取电视屏模板  猪肉
+        /// </summary>
+        /// <returns></returns>
+        public string GetTVshowpageForPork(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/led/gettvshowpageforpork";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    return rd.data.ToString();
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取电视屏模板（猪肉）异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 畅销商品
+        /// </summary>
+        /// <returns></returns>
+        public PosActivesSku GetActiveSkus(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/led/getactiveskus";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+
+                string json = HttpGET(url, sort);
+
+                Console.WriteLine(json);
+               // return json;
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    PosActivesSku posactivessku = JsonConvert.DeserializeObject<PosActivesSku>(rd.data.ToString());
+
+
+                    return posactivessku;
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取畅销商品异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 促销商品
+        /// </summary>
+        /// <returns></returns>
+        public PosActivesSku GetPromotionSkus(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/led/getpromotionskus";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+
+                string json = HttpGET(url, sort);
+                //return json;
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    PosActivesSku posactivessku = JsonConvert.DeserializeObject<PosActivesSku>(rd.data.ToString());
+
+                    return posactivessku;
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取促销商品异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+        #endregion
 
 
 
@@ -1862,30 +2008,58 @@ namespace WinSaasPOS.Common
 
                 System.Net.ServicePointManager.DefaultConnectionLimit = 100;
                 request.Timeout = 60 * 1000; //3秒钟无响应 网络有问题
-                if (CheckNet())
+
+                ParameterizedThreadStart Pts = new ParameterizedThreadStart(GetResponseResult);
+                Thread thread = new Thread(Pts);
+                thread.IsBackground = true;
+                thread.Start(request);
+
+                while (thread.IsAlive)
                 {
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                    {
-                        request.Timeout = 60 * 1000;
-                        Stream myResponseStream = response.GetResponseStream();
-                        StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                        retString = myStreamReader.ReadToEnd();
-
-                        myStreamReader.Close();
-                        myResponseStream.Close();
-
-                        try
-                        {
-                            response.Close();
-                        }
-                        catch { }
-                    }
-                    try
-                    {
-                        request.Abort();
-                    }
-                    catch { }
+                    Delay.Start(100);
                 }
+
+                int id = thread.ManagedThreadId;
+
+                try
+                {
+                    retString = dicresult[id];
+                    dicresult.Remove(id);
+                }
+                catch (Exception ex)
+                {
+                    LogManager.WriteLog("线程返回异常" + ex.Message);
+                }
+
+                try
+                {
+                    request.Abort();
+                }
+                catch { }
+                //if (CheckNet())
+                //{
+                //    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                //    {
+                //        request.Timeout = 60 * 1000;
+                //        Stream myResponseStream = response.GetResponseStream();
+                //        StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+                //        retString = myStreamReader.ReadToEnd();
+
+                //        myStreamReader.Close();
+                //        myResponseStream.Close();
+
+                //        try
+                //        {
+                //            response.Close();
+                //        }
+                //        catch { }
+                //    }
+                //    try
+                //    {
+                //        request.Abort();
+                //    }
+                //    catch { }
+                //}
             }
             catch (Exception ex)
             {
@@ -1954,41 +2128,54 @@ namespace WinSaasPOS.Common
 
                 System.Net.ServicePointManager.DefaultConnectionLimit = 100;
 
-                // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                //request.Timeout = 5000;
+                ParameterizedThreadStart Pts = new ParameterizedThreadStart(GetResponseResult);
+                Thread thread = new Thread(Pts);
+                thread.IsBackground = true;
+                thread.Start(request);
 
-                if (CheckNet())
+                while (thread.IsAlive)
                 {
-                    request.Timeout = 60 * 1000;
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                    {
-                        request.Timeout = 60 * 1000;
-                        Stream myResponseStream = response.GetResponseStream();
-                        StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                        retString = myStreamReader.ReadToEnd();
-
-                        myStreamReader.Close();
-                        myResponseStream.Close();
-
-                        try
-                        {
-                            response.Close();
-                        }
-                        catch { }
-                    }
-                    try
-                    {
-                        request.Abort();
-                    }
-                    catch { }
+                    Delay.Start(100);
                 }
 
-                //try
+                int id = thread.ManagedThreadId;
+
+                try
+                {
+                    retString = dicresult[id];
+                    dicresult.Remove(id);
+                }
+                catch (Exception ex)
+                {
+                    LogManager.WriteLog("线程返回异常" + ex.Message);
+                }
+
+                //request.Timeout = 60 * 1000;
+                //using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 //{
-                //    request.Abort();
-                //    response.Close();
+                //    request.Timeout = 60 * 1000;
+                //    Stream myResponseStream = response.GetResponseStream();
+                //    StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+                //    retString = myStreamReader.ReadToEnd();
+
+                //    myStreamReader.Close();
+                //    myResponseStream.Close();
+
+                //    try
+                //    {
+                //        response.Close();
+                //    }
+                //    catch { }
                 //}
-                //catch { }
+
+
+                try
+                {
+                    request.Abort();
+                }
+                catch { }
+
+
             }
             catch (Exception ex)
             {
@@ -2035,6 +2222,38 @@ namespace WinSaasPOS.Common
             }
 
             return var;
+        }
+
+        public Dictionary<int, string> dicresult = new Dictionary<int, string>();
+        private void GetResponseResult(object obj)
+        {
+            try
+            {
+                WebRequest request = (WebRequest)obj;
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    request.Timeout = 60 * 1000;
+                    Stream myResponseStream = response.GetResponseStream();
+                    StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+                    string result = myStreamReader.ReadToEnd();
+
+                    dicresult.Add(Thread.CurrentThread.ManagedThreadId, result);
+                    myStreamReader.Close();
+                    myResponseStream.Close();
+
+                    try
+                    {
+                        response.Close();
+                    }
+                    catch { }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("接口访问异常" + ex.Message + ex.StackTrace);
+            }
         }
 
         ////当前时间戳

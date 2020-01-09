@@ -28,7 +28,7 @@ namespace WinSaasPOS
         /// <summary>
         /// 当前订单ID
         /// </summary>
-        string CurrentOrderID = "";
+         string CurrentOrderID = "";
 
         /// <summary>
         /// 当前付款码
@@ -75,6 +75,17 @@ namespace WinSaasPOS
             InitializeComponent();
             CurrentOrderID = orderid;
             listener.ScanerEvent += Listener_ScanerEvent;
+
+            try
+            {
+               // this.Size = new System.Drawing.Size(Convert.ToInt32(380 * MainModel.wScale), Convert.ToInt32(480 * MainModel.hScale));
+                AutoScaleControl();
+                this.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - this.Width) / 2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("自适应在线收银页面异常"+ex.Message);
+            }
 
             listener.Start();
         }
@@ -157,7 +168,7 @@ namespace WinSaasPOS
 
                     IsScan = false;
                     frmPayFail frmpayfail = new frmPayFail(ErrorMsg);
-                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     frmpayfail.Location = new System.Drawing.Point(0, 0);
                     frmpayfail.TopMost = true;
                     frmpayfail.ShowDialog();
@@ -180,6 +191,7 @@ namespace WinSaasPOS
                         if (DataReceiveHandle != null)
                             this.DataReceiveHandle.BeginInvoke(1, codetrade.orderid, null, null);
                         isrun = false;
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else
@@ -204,7 +216,7 @@ namespace WinSaasPOS
         {
             try
             {
-                pnlWaiting.Visible = true;
+                LoadingHelper.ShowLoadingScreen("支付中...");
                 string errormsg = "";
                 string retunerrormsg = "";
                 synctrade sync = httputil.SyncTrade(orderid, payid, ref errormsg,ref retunerrormsg);
@@ -225,18 +237,18 @@ namespace WinSaasPOS
                 }
                 else if (sync.status == "REQUEST_CLOSE")
                 {
-                    pnlWaiting.Visible = false;
+                    LoadingHelper.CloseForm();
                     timerSyncTrade.Enabled = false;
                     MainModel.ShowLog("交易关闭,请重新扫码付款！", false);
                 }
                 else if (sync.status == "FAIL")
                 {
-                    pnlWaiting.Visible = false;
+                    LoadingHelper.CloseForm();
                     timerSyncTrade.Enabled = false;
 
                     IsScan = false;
                     frmPayFail frmpayfail = new frmPayFail(retunerrormsg);
-                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     frmpayfail.Location = new System.Drawing.Point(0, 0);
                     frmpayfail.TopMost = true;
                     frmpayfail.ShowDialog();
@@ -256,12 +268,12 @@ namespace WinSaasPOS
                 }
                 else if (sync.status == "SUCCESS")
                 {
-                    btnCancle.Enabled = true;
                     lblExit.Enabled = true;
-                    pnlWaiting.Visible = false;
+                    LoadingHelper.CloseForm();
                     if (DataReceiveHandle != null)
                         this.DataReceiveHandle.BeginInvoke(1,sync.orderid, null, null);
                     isrun = false;
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 if (isrun)
@@ -273,6 +285,10 @@ namespace WinSaasPOS
             catch
             {
 
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
             }
            
         }
@@ -357,6 +373,48 @@ namespace WinSaasPOS
             MainModel.frmmainmedia.ShowPayInfo("请出示微信/支付宝付款码",false);
         }
 
+
+
+
+
+
+
+        private void AutoScaleControl()
+        {
+
+            try
+            {
+                float wScale = (float)Screen.AllScreens[0].Bounds.Width / 3 / this.Width;
+                float hScale = (float)Screen.AllScreens[0].Bounds.Height * 3 / 5 / this.Height;
+
+                this.Size = new System.Drawing.Size(Convert.ToInt32(Screen.AllScreens[0].Bounds.Width / 3), Convert.ToInt32(Screen.AllScreens[0].Bounds.Height * 3 / 5));
+
+
+
+                foreach (Control c in this.Controls)
+                {
+                    c.Left = (int)Math.Ceiling(c.Left * wScale);
+                    c.Top = (int)Math.Ceiling(c.Top * hScale);
+
+                    c.Width = (int)Math.Ceiling(c.Width * wScale);
+                    c.Height = (int)Math.Ceiling(c.Height * hScale);
+
+                    float wSize = c.Font.Size * wScale;
+                    float hSize = c.Font.Size * hScale;
+
+
+
+                    c.Font = new Font(c.Font.Name, Math.Min(hSize, wSize), c.Font.Style, c.Font.Unit);
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+        }
 
     }
 }

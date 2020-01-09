@@ -1,4 +1,5 @@
-﻿using System;
+﻿using WinSaasPOS.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,6 @@ namespace WinSaasPOS.Common
 
             public static void ShowLoadingScreen()
             {
-
                 try
                 {
                     // Make sure it is only launched once.
@@ -58,15 +58,13 @@ namespace WinSaasPOS.Common
                     if (loadingForm != null)
                         return;
 
-                  
-
-                    Thread thread = new Thread(new ThreadStart(LoadingHelper.ShowForm));
-
+                    MainModel.HideTask();
+                    ParameterizedThreadStart Pts = new ParameterizedThreadStart(LoadingHelper.ShowForm);
+                    Thread thread = new Thread(Pts);
                     thread.IsBackground = true;
-
                     thread.SetApartmentState(ApartmentState.STA);
+                    thread.Start("加载中...");
 
-                    thread.Start();
                 }
                 catch (Exception ex)
                 {
@@ -77,7 +75,6 @@ namespace WinSaasPOS.Common
                     catch { }
                     LogManager.WriteLog("显示等待窗口异常"+ex.Message);
                 }
-
             }
 
               public static void ShowLoadingScreen(string msg)
@@ -86,22 +83,15 @@ namespace WinSaasPOS.Common
                       // Make sure it is only launched once.
 
                 if (loadingForm != null)
-
                     return;
-
+                MainModel.HideTask();
                 ParameterizedThreadStart Pts = new ParameterizedThreadStart(LoadingHelper.ShowForm);
                 Thread thread = new Thread(Pts);
                 thread.IsBackground = true;
                 thread.SetApartmentState(ApartmentState.STA);
+                //thread.Priority = ThreadPriority.Lowest;
                 thread.Start(msg);
-
-                //Thread thread = new Thread(new ThreadStart(LoadingHelper.ShowForm));
-
-                //thread.IsBackground = true;
-
-                //thread.SetApartmentState(ApartmentState.STA);
-
-                //thread.Start();
+                
                   }
                   catch (Exception ex)
                   {
@@ -112,17 +102,12 @@ namespace WinSaasPOS.Common
                       catch { }
                       LogManager.WriteLog("显示等待窗口异常" + ex.Message);
                   }
-
             }
-
            
 
             /// <summary>
-
             /// 显示窗口
-
             /// </summary>
-
             private static void ShowForm()
             {
                 try
@@ -137,9 +122,9 @@ namespace WinSaasPOS.Common
                     }
 
                     loadingForm = new frmLoading();
-                    loadingForm.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - loadingForm.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - loadingForm.Height) / 2);
-                    loadingForm.TopMost = true;
-                    loadingForm.Opacity = 0.6d;
+                    loadingForm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - loadingForm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - loadingForm.Height) / 2);
+                    //loadingForm.TopMost = true;
+                    loadingForm.Opacity = 0.5d;
                     loadingForm.ShowDialog();
                 }
                 catch (Exception ex)
@@ -154,27 +139,25 @@ namespace WinSaasPOS.Common
 
             }
 
-
             private static void ShowForm(object obj)
             {
                 try { 
 
                 if (loadingForm != null)
                 {
-
+                    return;
                     loadingForm.closeOrder();
+                   
 
                     loadingForm = null;
-
                 }
 
                 loadingForm = new frmLoading(obj.ToString());
-
-                loadingForm.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - loadingForm.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - loadingForm.Height) / 2);
+                loadingForm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - loadingForm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - loadingForm.Height) / 2);
+                //loadingForm.Size = new System.Drawing.Size(50,50);
                 loadingForm.TopMost = true;
-                loadingForm.Opacity = 0.6d;
+                loadingForm.Opacity = 0.5d;
                 loadingForm.ShowDialog();
-
                 }
                 catch (Exception ex)
                 {
@@ -185,17 +168,11 @@ namespace WinSaasPOS.Common
                     catch { }
                     LogManager.WriteLog("显示等待窗口异常" + ex.Message);
                 }
-
             }
 
-
-
             /// <summary>
-
             /// 关闭窗口
-
             /// </summary>
-
             public static void CloseForm()
             {
                 //try
@@ -204,15 +181,12 @@ namespace WinSaasPOS.Common
                 //}
                 //catch
                 //{
-
-                //}
-                
+                //}                
+                //MainModel.ShowTaskThread();
                 Thread threadItemExedate = new Thread(LoadingHelper.CloseFormThread);
                 threadItemExedate.IsBackground = true;
                 threadItemExedate.Start();
-
             }
-
 
 
             public static void CloseFormThread()
@@ -257,12 +231,27 @@ namespace WinSaasPOS.Common
             {
                 try
                 {
-                    loadingForm.closeOrder();
+                    //loadingForm.closeOrder();
+                    loadingForm.Close();
 
                     loadingForm = null;
                 }
                 catch (Exception ex)
                 {
+                    try
+                    {
+                        Delay.Start(150);
+                        loadingForm.closeOrder();
+
+                        loadingForm = null;
+                    }
+                    catch (Exception ex1)
+                    {
+                        try { Delay.Start(100); loadingForm.Close(); }
+                        catch { }
+                        LogManager.WriteLog("关闭等待窗口异常1" + ex1.Message);
+                    }
+
                     LogManager.WriteLog("关闭等待窗口异常" + ex.Message);
                 }
 

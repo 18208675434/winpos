@@ -71,69 +71,66 @@ namespace WinSaasPOS
             threadOrderStatus.Start();
             Delay.Start(1000);
 
-            RetryPrintCount = 0;
             Thread threadPrint = new Thread(SEDPrint);
             threadPrint.IsBackground = true;
             threadPrint.Start();
             //SEDPrint();
         }
 
-        /// <summary>
-        /// 打印重试次数，防止订单完成小票打印详情获取不到 最多获取三次
-        /// </summary>
-        int RetryPrintCount = 0;
         private void SEDPrint()
         {
-            if (isrun)
+            try
             {
-                
-                string ErrorMsg = "";
-                PrintDetail printdetail = httputil.GetPrintDetail(CurrentOrderID, ref ErrorMsg);
-                if (ErrorMsg != "" || printdetail == null)
+                if (isrun)
                 {
-                    LogManager.WriteLog("获取打印小票信息异常：" + ErrorMsg);
-                    Delay.Start(100);
-                    RetryPrintCount++;
-                    if (RetryPrintCount < 3)
+                    string ErrorMsg = "";
+                    PrintDetail printdetail = httputil.GetPrintDetail(CurrentOrderID, ref ErrorMsg);
+                    if (ErrorMsg != "" || printdetail == null)
                     {
+                        LogManager.WriteLog("获取打印小票信息异常：" + ErrorMsg);
+                        Delay.Start(100);
                         SEDPrint();
-                    }
-                   
-                }
-                else
-                {                    
-                           //显示收银详情
-                           foreach (Payinfo pay in printdetail.payinfo)
-                           {
-                               lblCashierInfo.Text += pay.type + " ￥" + pay.amount + "|";
-                           }
-                           lblCashierInfo.Text = lblCashierInfo.Text.TrimEnd('|');
-
-                           if (DataReceiveHandle != null)
-                               this.DataReceiveHandle.BeginInvoke(1, lblCashierInfo.Text, null, null);
-
-                       
-                    Application.DoEvents();
-                    string PrintErrorMsg = "";
-                    bool printresult = PrintUtil.PrintOrder(printdetail,false, ref PrintErrorMsg);
-
-
-                    if (PrintErrorMsg != "" || !printresult)
-                    {
-                        LogManager.WriteLog("打印小票异常" + PrintErrorMsg);
-                        //ShowLog(PrintErrorMsg,true);
                     }
                     else
                     {
-                        LogManager.WriteLog(DateTime.Now.ToString() + printresult.ToString() + OrderResult.ToString());
-                        printresult = true;
-                        if (OrderResult)
-                        {
-                            this.Close();
-                        }
-                    }
 
+                        //显示收银详情
+                        foreach (Payinfo pay in printdetail.payinfo)
+                        {
+                            lblCashierInfo.Text += pay.type + " ￥" + pay.amount + "|";
+                        }
+                        lblCashierInfo.Text = lblCashierInfo.Text.TrimEnd('|');
+
+                        if (DataReceiveHandle != null)
+                            this.DataReceiveHandle.BeginInvoke(1, lblCashierInfo.Text, null, null);
+
+
+                        Application.DoEvents();
+                        string PrintErrorMsg = "";
+                        bool printresult = PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
+
+
+                        if (PrintErrorMsg != "" || !printresult)
+                        {
+                            LogManager.WriteLog("打印小票异常" + PrintErrorMsg);
+                            //ShowLog(PrintErrorMsg,true);
+                        }
+                        else
+                        {
+                            LogManager.WriteLog(DateTime.Now.ToString() + printresult.ToString() + OrderResult.ToString());
+                            printresult = true;
+                            if (OrderResult)
+                            {
+                                this.Close();
+                            }
+                        }
+
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("获取订单打印详情异常"+ex.Message,true);
             }
 
         }

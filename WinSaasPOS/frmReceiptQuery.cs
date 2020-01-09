@@ -31,7 +31,10 @@ namespace WinSaasPOS
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
-
+        /// <summary>
+        /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
+        /// </summary>
+        private bool IsEnable = true;
 
         private Bitmap bmpReprint;
         private Bitmap bmpWhite;
@@ -44,13 +47,19 @@ namespace WinSaasPOS
         private void btnToday_Click(object sender, EventArgs e)
         {
             try{
-                this.Enabled = false;
+
+
+                if (!IsEnable)
+                {
+                    return;
+                }
+                IsEnable = false;
             btnToday.FlatAppearance.BorderColor = Color.Red;
             btnYesterday.FlatAppearance.BorderColor = Color.Gray;
 
             dtReceiptData.Value = DateTime.Now;
 
-           // QueryReceipt();
+            QueryReceipt();
 
              }
             catch (Exception ex)
@@ -59,7 +68,7 @@ namespace WinSaasPOS
             }
             finally
             {
-                this.Enabled = true;
+                IsEnable = true;
             }
         }
 
@@ -67,14 +76,17 @@ namespace WinSaasPOS
         {
             try
             {
-                this.Enabled = false;
+                if (!IsEnable)
+                {
+                    return;
+                }
+                IsEnable = false;
                 btnToday.FlatAppearance.BorderColor = Color.Gray;
                 btnYesterday.FlatAppearance.BorderColor = Color.Red;
 
                 dtReceiptData.Value = DateTime.Now.AddDays(-1);
 
-              //  QueryReceipt();
-                this.Enabled = true;
+                QueryReceipt();
             }
             catch (Exception ex)
             {
@@ -82,13 +94,17 @@ namespace WinSaasPOS
             }
             finally
             {
-                this.Enabled = true;
+                IsEnable = true;
             }
         }
 
         private void btnQuery_Click(object sender, EventArgs e)
         { try
             {
+                if (!IsEnable)
+                {
+                    return;
+                }
             QueryReceipt();
             }
         catch (Exception ex)
@@ -97,12 +113,16 @@ namespace WinSaasPOS
         }
         finally
         {
-            this.Enabled = true;
+            IsEnable = true;
         }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             this.Close();
         }
 
@@ -147,7 +167,6 @@ namespace WinSaasPOS
                         string Cashier = receiptquery.cashier;
                         string NetOperat=receiptquery.netsaleamt.ToString("f2");
                         
-
                         string TotalPay= receiptquery.totalpayment.ToString("f2");
 
                         string TotalCash=receiptquery.cashtotalamt.ToString("f2");
@@ -166,7 +185,7 @@ namespace WinSaasPOS
                     else
                     {
                         pnlEmptyReceipt.Visible = true;
-                        MainModel.ShowLog("暂无数据", false);
+                       // MainModel.ShowLog("暂无数据", false);
                     }                  
                 }
                 
@@ -187,13 +206,16 @@ namespace WinSaasPOS
         {
             try
             {
-
+                if (!IsEnable)
+                {
+                    return;
+                }
                 if (e.RowIndex < 0)
                     return;
                 if (dgvReceipt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
                 {
 
-                    this.Enabled = false;
+                    IsEnable = false;
                     LoadingHelper.ShowLoadingScreen("加载中...");
                     ReceiptQuery receiptquery = CurrentLisstReceipt[e.RowIndex];
 
@@ -201,7 +223,7 @@ namespace WinSaasPOS
                     bool receiptresult = PrintUtil.ReceiptPrint(receiptquery.receiptdetail, ref ErrorMsgReceipt);
 
                     LoadingHelper.CloseForm();
-                    this.Enabled = true;
+                    
                     if (receiptresult)
                     {
                         MainModel.ShowLog("打印完成", false);
@@ -222,7 +244,7 @@ namespace WinSaasPOS
             finally
             {
                 LoadingHelper.CloseForm();
-                this.Enabled = true;
+                IsEnable = true;
             }
         }
 
@@ -231,18 +253,16 @@ namespace WinSaasPOS
             //asf.ControlAutoSize(this);
         }
 
-        private void dtReceiptData_ValueChanged(object sender, EventArgs e)
-        {
-            QueryReceipt();
-        }
+      
 
         private void frmReceiptQuery_Shown(object sender, EventArgs e)
         {
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
             LoadBmp();
+            Application.DoEvents();
             btnToday_Click(null,null);
         }
 
@@ -250,9 +270,10 @@ namespace WinSaasPOS
         {
             try
             {
+                //int height = dgvReceipt.RowTemplate.Height * 55 / 100;
+                //bmpReprint = new Bitmap(Resources.ResourcePos.ReprintReceipt, dgvReceipt.Columns["Reprint"].Width * 80 / 100, height);
 
-                int height = dgvReceipt.RowTemplate.Height * 55 / 100;
-                bmpReprint = new Bitmap(Resources.ResourcePos.ReprintReceipt, dgvReceipt.Columns["Reprint"].Width * 80 / 100, height);
+                bmpReprint = (Bitmap)MainModel.GetControlImage(btnReprintPic);
                 bmpWhite = Resources.ResourcePos.White;
 
             }
@@ -265,6 +286,15 @@ namespace WinSaasPOS
         private void timerNow_Tick(object sender, EventArgs e)
         {
             lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private void btnWindows_Click(object sender, EventArgs e)
+        {
+            MainModel.ShowWindows();
+        }
+        private void dtReceiptData_CloseUp(object sender, EventArgs e)
+        {
+            QueryReceipt();
         }
     }
 }

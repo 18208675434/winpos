@@ -50,18 +50,17 @@ namespace WinSaasPOS
                 {
                     foreach (Availablecoupon couponsBean in cart.availablecoupons)
                     {
-
-                        string amount = "";
                         string content = "";
-
-                        if ("Cash" == couponsBean.catalog || "CashReduction" == couponsBean.catalog)
-                        {
-                            amount = "￥" + couponsBean.amount.ToString("f2");
-                        }
-                        else if ("DiscountCoupon"==couponsBean.catalog)
-                        {
-                            amount = couponsBean.amount.ToString()+"折";
-                        }
+                        //if ("Cash" == couponsBean.catalog || "CashReduction" == couponsBean.catalog)
+                        //{
+                        //    //txt_flag.setVisibility(View.VISIBLE);
+                        //    //txt_price.setText(String.format("%.2f", couponsBean.getAmount()));
+                        //}
+                        //else if ("DiscountCoupon".equals(couponsBean.getCatalog()))
+                        //{
+                        //    txt_flag.setVisibility(View.GONE);
+                        //    txt_price.setText(couponsBean.getAmount() + "折");
+                        //}
                         if ("Cash" == couponsBean.catalog)
                         {
                             content = "      现金券";
@@ -101,7 +100,7 @@ namespace WinSaasPOS
                         {
                             select = "";
                         }
-                        dgvCoupon.Rows.Add(couponcode, amount, content + "\r\n" + starttime + "至" + endtime, select);
+                        dgvCoupon.Rows.Add(couponcode, "￥" + couponsBean.amount.ToString("f2"), content + "\r\n" + starttime + "至" + endtime, select);
                     }
 
 
@@ -193,17 +192,11 @@ namespace WinSaasPOS
             try
             {
                 if (e.RowIndex < 0)
-                    return;                
+                    return;
 
-                SelectCouponCode = dgvCoupon.Rows[e.RowIndex].Cells["couponcode"].Value.ToString();
+                string  TempSelectCouponCode = dgvCoupon.Rows[e.RowIndex].Cells["couponcode"].Value.ToString();
                 string amount = dgvCoupon.Rows[e.RowIndex].Cells["amount"].Value.ToString();
-                decimal CouponAmount = 0;
-                try
-                {
-                   CouponAmount= Convert.ToDecimal(amount.Replace("￥", ""));
-                }
-                catch { }
-                   
+                decimal CouponAmount = Convert.ToDecimal(amount.Replace("￥",""));
 
                 //可能选择的有优惠券，目前只支持单张优惠券
                 if ((CurrentCart.totalpayment+CurrentCart.couponpromoamt) <= CouponAmount)
@@ -211,7 +204,7 @@ namespace WinSaasPOS
                     this.Hide();
 
 
-                    Availablecoupon couponsBean = CurrentCart.availablecoupons.Where(r=> r.couponcode == SelectCouponCode).ToList()[0];
+                    Availablecoupon couponsBean = CurrentCart.availablecoupons.Where(r => r.couponcode == TempSelectCouponCode).ToList()[0];
 
                     frmCouponOutcs frmcoupon = new frmCouponOutcs(couponsBean);
                     frmcoupon.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -220,6 +213,7 @@ namespace WinSaasPOS
                     //收银完成
                     if(frmcoupon.DialogResult==DialogResult.OK)
                     {
+                        SelectCouponCode = dgvCoupon.Rows[e.RowIndex].Cells["couponcode"].Value.ToString();
                         this.DialogResult = DialogResult.Yes;
                         this.Close();
                     }
@@ -234,6 +228,7 @@ namespace WinSaasPOS
                 }
                 else
                 {
+                    SelectCouponCode = dgvCoupon.Rows[e.RowIndex].Cells["couponcode"].Value.ToString();
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -253,6 +248,5 @@ namespace WinSaasPOS
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
     }
 }

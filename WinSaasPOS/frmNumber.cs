@@ -38,7 +38,6 @@ namespace WinSaasPOS
 
         public string strNumValue = "";
 
-        Thread threadItemExedate;
         /// <summary>
         /// 按比例缩放页面及控件
         /// </summary>
@@ -46,6 +45,30 @@ namespace WinSaasPOS
 
         private NumberType CurrentNumberType;
 
+
+        public frmNumber()
+        {
+
+            InitializeComponent();
+            txtNum.TextChanged += txtNum_TextChanged;
+            btnCancle.Click += btnCancle_Click;
+            lblShuiyin.Click += lblShuiyin_Click;
+            btnNext.Click += btnNext_Click;
+            btn0.Click += btn_Click;
+            btn00.Click += btn_Click;
+            btn1.Click += btn_Click;
+            btn2.Click += btn_Click;
+            btn3.Click += btn_Click;
+            btn4.Click += btn_Click;
+            btn5.Click += btn_Click;
+            btn6.Click += btn_Click;
+            btn7.Click += btn_Click;
+            btn8.Click += btn_Click;
+            btn9.Click += btn_Click;
+
+            btnDel.Click += btnDel_Click;
+          
+        }
         public frmNumber(string title,NumberType numbertype)
         {
            
@@ -54,39 +77,71 @@ namespace WinSaasPOS
             CurrentNumberType = numbertype;
 
             lblInfo.Text = title;
-            switch (numbertype)
-            {
-                case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; break;
-                case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; break;
-                case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true; txtNum.Width=txtNum.Width-lblg.Width-5; break;
-            }
 
+            Application.DoEvents();
         }
 
-        private void frmCash_Shown(object sender, EventArgs e)
+
+        private void frmNumber_Load(object sender, EventArgs e)
         {
-            
-            txtNum.Font = new System.Drawing.Font("微软雅黑", txtNum.Font.Size * Math.Min(MainModel.hScale, MainModel.wScale));
-            if (isDouble)
+            try
             {
-                 threadItemExedate = new Thread(UpdteForm);
-                threadItemExedate.IsBackground = true;
-                threadItemExedate.Start();
+                switch (CurrentNumberType)
+                {
+                    case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; break;
+                    case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; break;
+                    case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true;  break;
+                }
+
+                txtNum.Font = new System.Drawing.Font("微软雅黑", txtNum.Font.Size * Math.Min(MainModel.hScale, MainModel.wScale));
+              
+                NumberUtil.IsUpdate = false;
+                NumberUtil.FormGuid = "";
+
+                btnNext.Focus();
+                Application.DoEvents();
             }
-
-            NumberUtil.IsUpdate = false;
-            NumberUtil.FormGuid = "";
-
-            btnDel.Focus();
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("加载number页面异常" + ex.Message);
+            }
         }
+
+
+        public void UpInfo(string title, NumberType numbertype)
+        {
+            try
+            {
+                NumValue = 0;
+
+                strNumValue = "";
+                txtNum.Text = "";
+                lblMsg.Text = "";
+                lblInfo.Text = title;
+                CurrentNumberType = numbertype;
+                switch (numbertype)
+                {
+                    case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; break;
+                    case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; break;
+                    case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true;  break;
+                }
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("刷新数字窗体异常"+ex.Message);
+            }
+        }
+
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            Control btn =(Control)sender;
+            Control btn = (Control)sender;
             UpdatNumberUtil(btn.Name);
             if (DataReceiveHandle != null)
                 this.DataReceiveHandle.BeginInvoke(0, txtNum.Text, null, null);
-            this.Close();
+            //this.Close();
+            this.Hide();
         }
 
         //下一步需要判断实收现金是否足够
@@ -140,7 +195,9 @@ namespace WinSaasPOS
                 strNumValue = txtNum.Text;
                 if (DataReceiveHandle != null)
                     this.DataReceiveHandle.BeginInvoke(1, txtNum.Text, null, null);
-                this.Close();
+               // this.Close();
+
+                this.Hide();
             }
             catch (Exception ex)
             {
@@ -192,7 +249,6 @@ namespace WinSaasPOS
             {
                 lblMsg.Text = "";
             }
-
         }
 
 
@@ -202,7 +258,6 @@ namespace WinSaasPOS
             try
             {
                 TextBox txt = sender as TextBox;
-
                 e.Handled = true;
                 char ch = e.KeyChar;
 
@@ -290,21 +345,6 @@ namespace WinSaasPOS
             }
         }
 
-        private void frmNumber_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            isrun = false;
-
-            if (threadItemExedate != null && threadItemExedate.IsAlive)
-            {
-                threadItemExedate.Abort();
-
-            }
-        }
-
-        public void frmNumber_SizeChanged(object sender, EventArgs e)
-        {
-           // asf.ControlAutoSize(this);
-        }
 
         private void lblShuiyin_Click(object sender, EventArgs e)
         {
@@ -321,26 +361,32 @@ namespace WinSaasPOS
             {
                 lblShuiyin.Visible = true;
             }
+
+            try
+            {
+                double doublenum = Convert.ToDouble(txtNum.Text);
+
+                if (doublenum > 0)
+                {
+                    btnNext.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    btnNext.BackColor = Color.Silver;
+                }
+            }
+            catch
+            {
+                btnNext.BackColor = Color.Silver;
+            }
         }
 
-
-        ////信息提示
-        //private void ShowLog(string msg, bool iserror)
-        //{
-        //    this.Invoke(new InvokeHandler(delegate()
-        //    {
-
-        //        frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
-        //        //frmmsf.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-        //        frmmsf.ShowDialog(); LogManager.WriteLog(msg);
-        //    }));
-
-        //}
 
     }
 
     public enum NumberType
     {
+        None,
         BarCode,
         MemberCode,
         ProWeight

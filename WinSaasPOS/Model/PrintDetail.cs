@@ -12,7 +12,7 @@ namespace WinSaasPOS.Model
         public string title { get; set; }
         public decimal totalpayment { get; set; }
         public ProductDetail[] products { get; set; }
-        public Orderpricedetail[] orderpricedetails { get; set; }
+        public OrderPriceDetail[] orderpricedetails { get; set; }
         public string shopid { get; set; }
         public decimal productcount { get; set; }
         public int ordersubtypeflag { get; set; }

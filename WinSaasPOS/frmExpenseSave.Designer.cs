@@ -54,9 +54,10 @@
             // 
             this.btnDel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDel.BackgroundImage")));
             this.btnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDel.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDel.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btnDel.Location = new System.Drawing.Point(241, 414);
+            this.btnDel.Location = new System.Drawing.Point(239, 411);
             this.btnDel.Margin = new System.Windows.Forms.Padding(2);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(110, 60);
@@ -67,9 +68,10 @@
             // 
             // btnDot
             // 
-            this.btnDot.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDot.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnDot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDot.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btnDot.Location = new System.Drawing.Point(131, 414);
+            this.btnDot.Location = new System.Drawing.Point(130, 411);
             this.btnDot.Margin = new System.Windows.Forms.Padding(2);
             this.btnDot.Name = "btnDot";
             this.btnDot.Size = new System.Drawing.Size(110, 60);
@@ -81,9 +83,10 @@
             // 
             // btn0
             // 
-            this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn0.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn0.Location = new System.Drawing.Point(21, 414);
+            this.btn0.Location = new System.Drawing.Point(21, 411);
             this.btn0.Margin = new System.Windows.Forms.Padding(2);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(110, 60);
@@ -95,9 +98,10 @@
             // 
             // btn9
             // 
-            this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn9.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn9.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn9.Location = new System.Drawing.Point(241, 354);
+            this.btn9.Location = new System.Drawing.Point(239, 352);
             this.btn9.Margin = new System.Windows.Forms.Padding(2);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(110, 60);
@@ -109,9 +113,10 @@
             // 
             // btn8
             // 
-            this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn8.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn8.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn8.Location = new System.Drawing.Point(131, 354);
+            this.btn8.Location = new System.Drawing.Point(130, 352);
             this.btn8.Margin = new System.Windows.Forms.Padding(2);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(110, 60);
@@ -123,9 +128,10 @@
             // 
             // btn7
             // 
-            this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn7.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn7.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn7.Location = new System.Drawing.Point(21, 354);
+            this.btn7.Location = new System.Drawing.Point(21, 352);
             this.btn7.Margin = new System.Windows.Forms.Padding(2);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(110, 60);
@@ -137,9 +143,10 @@
             // 
             // btn6
             // 
-            this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn6.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn6.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn6.Location = new System.Drawing.Point(241, 294);
+            this.btn6.Location = new System.Drawing.Point(239, 293);
             this.btn6.Margin = new System.Windows.Forms.Padding(2);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(110, 60);
@@ -151,9 +158,10 @@
             // 
             // btn5
             // 
-            this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn5.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn5.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn5.Location = new System.Drawing.Point(131, 294);
+            this.btn5.Location = new System.Drawing.Point(130, 293);
             this.btn5.Margin = new System.Windows.Forms.Padding(2);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(110, 60);
@@ -165,9 +173,10 @@
             // 
             // btn4
             // 
-            this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn4.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn4.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn4.Location = new System.Drawing.Point(21, 294);
+            this.btn4.Location = new System.Drawing.Point(21, 293);
             this.btn4.Margin = new System.Windows.Forms.Padding(2);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(110, 60);
@@ -179,9 +188,10 @@
             // 
             // btn3
             // 
-            this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn3.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn3.Location = new System.Drawing.Point(241, 234);
+            this.btn3.Location = new System.Drawing.Point(239, 234);
             this.btn3.Margin = new System.Windows.Forms.Padding(2);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(110, 60);
@@ -193,9 +203,10 @@
             // 
             // btn2
             // 
-            this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn2.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn2.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.btn2.Location = new System.Drawing.Point(131, 234);
+            this.btn2.Location = new System.Drawing.Point(130, 234);
             this.btn2.Margin = new System.Windows.Forms.Padding(2);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(110, 60);
@@ -207,7 +218,8 @@
             // 
             // btn1
             // 
-            this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn1.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn1.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.btn1.Location = new System.Drawing.Point(21, 234);
             this.btn1.Margin = new System.Windows.Forms.Padding(2);
@@ -234,8 +246,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOK.BackColor = System.Drawing.Color.OrangeRed;
-            this.btnOK.Enabled = false;
+            this.btnOK.BackColor = System.Drawing.Color.Silver;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.btnOK.ForeColor = System.Drawing.Color.White;

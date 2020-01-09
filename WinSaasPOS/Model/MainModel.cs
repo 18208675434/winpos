@@ -1,4 +1,6 @@
-﻿using WinSaasPOS.Common;
+﻿using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
+using WinSaasPOS.Common;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,21 +8,28 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Security;
 
 namespace WinSaasPOS.Model
 {
     public class MainModel
     {
+        //判断客屏是否播放视屏  是的话把焦点还给主界面
+        public static bool IsPlayer = false;
+
         /// <summary>
         /// INI目录
         /// </summary>
         public static string IniPath = AppDomain.CurrentDomain.BaseDirectory + "Config.ini";
+
+        /// <summary>
+        /// StartINI目录
+        /// </summary>
+        public static string StartIniPath = AppDomain.CurrentDomain.BaseDirectory + "StartConfig.ini";
 
         /// <summary>
         /// 程序根目录
@@ -35,7 +44,7 @@ namespace WinSaasPOS.Model
         /// 环境
         /// </summary>
         public static string URL = INIManager.GetIni("System", "URL", MainModel.IniPath);
-        
+
         /// <summary>
         /// POS端 token
         /// </summary>
@@ -87,14 +96,14 @@ namespace WinSaasPOS.Model
         /// <summary>
         /// 小主，当前选择优惠券无效
         /// </summary>
-        public static int Code_260011=260011;//小主，当前选择优惠券无效
+        public static int Code_260011 = 260011;//小主，当前选择优惠券无效
 
         /// <summary>
         /// 商品价格或促销发生变化，请重新指定成交价    释放修改价格 重新刷新购物车
         /// </summary>
         public static int Code_260058 = 260058;//小主，当前选择优惠券无效
 
-        public static string CurrentCouponCode ="";
+        public static string CurrentCouponCode = "";
 
         /// <summary>
         /// 当前店铺信息
@@ -143,18 +152,46 @@ namespace WinSaasPOS.Model
 
 
 
+        /// <summary>
+        /// 电视屏蔬菜模板页面
+        /// </summary>
+        public static string PromotionJson = "";
+
+        /// <summary>
+        /// 电视屏猪肉模板页面
+        /// </summary>
+        public static string PorkJson = "";
 
 
+        /// <summary>
+        /// 畅销商品  蔬菜60个不足的话本地不足 010开头  后面补充30个猪肉 030开头
+        /// </summary>
+        public static PosActivesSku TVActivesSku = null;
 
 
+         /// <summary>
+        /// 畅销商品  蔬菜60个不足的话本地不足 010开头
+        /// </summary>
+        public static PosActivesSku TVSingleActivesSku = null;
+
+        /// <summary>
+        /// 今日有促销商品 010开头 本地不补充
+        /// </summary>
+        public static PosActivesSku TVPromotionSkus = null;
+
+        /// <summary>
+        /// 猪肉数据 
+        /// </summary>
+        public static PosActivesSku TVPorkSkus = null;
+        
         /// <summary>
         /// 页面宽度缩放比例
         /// </summary>
-        public static  float wScale = 1;
+        public static float wScale = 1;
         /// <summary>
         /// 页面高度缩放比例
         /// </summary>
-        public static  float hScale = 1;
+        public static float hScale = 1;
 
         /// <summary>
         /// 获取全量商品接口时间戳，不是第一次调用的话需要使用上一次返回时间戳
@@ -219,20 +256,48 @@ namespace WinSaasPOS.Model
             }
         }
 
-
         /// <summary>
         /// 客屏对象
         /// </summary>
         public static frmMainMedia frmmainmedia = null;
 
+        /// <summary>
+        ///数字窗体页面
+        /// </summary>
+        public static frmNumber frmnumber = null;
+
+        /// <summary>
+        /// 现金支付窗体页面
+        /// </summary>
+        public static frmCashPay frmcashpay = null;
+
+        /// <summary>
+        /// 现金券窗体页面
+        /// </summary>
+        public static frmCashCoupon frmcashcoupon = null;
+
+        /// <summary>
+        /// 主界面菜单窗体页面
+        /// </summary>
+        public static frmToolMain frmtoolmain = null;
+
+        /// <summary>
+        /// 修改订单金额窗体页面
+        /// </summary>
+        public static frmModifyPrice frmmodifyprice = null;
+
+        /// <summary>
+        /// 打印机设置窗体
+        /// </summary>
+        public static frmPrinterSetting frmprintersetting = null;
+
 
         public static Cart frmMainmediaCart = null;
-        
 
-        public static frmLoadingTop frmloading=null;
+        public static frmLoadingTop frmloading = null;
 
         //当前时间戳
-        public static  string getStampByDateTime(DateTime datetime)
+        public static string getStampByDateTime(DateTime datetime)
         {
 
             //DateTime datetime = DateTime.Now;
@@ -312,45 +377,68 @@ namespace WinSaasPOS.Model
                 MsgHelper.AutoShowForm(msg);
                 LogManager.WriteLog(msg);
             }
-         
+
         }
 
-
-
-        public static  Image GetWinformImage(Form frm)
+        public static Image GetControlImage(Control con)
         {
-            //获取当前屏幕的图像
-            Bitmap b = new Bitmap(frm.Width, frm.Height);
-            frm.DrawToBitmap(b, new Rectangle(0, 0, frm.Width, frm.Height));
-           
+            try
+            {
+                //获取单元格图片内容
+                Bitmap b = new Bitmap(con.Width, con.Height);
 
-           
-            //b.Save(yourFileName);
-            float opacity =(float) -0.5;
-            
-            //float[][] nArray ={ new float[] {1, 0, 0, 0, 0},
-            //      new float[] {0,1, 0, 0, 0},
-            //      new float[] {0, 0, 1, 0, 0},
-            //      new float[] {0, 0, 0, opacity, 0},
-            //      new float[] {0, 0, 0, 0, 1}};
 
-            float[][] nArray = {new float[] {1,0,0,0,0},
+                con.DrawToBitmap(b, new Rectangle(0, 0, con.Width, con.Height));
+                return b;
+            }
+            catch (Exception ex)
+            {
+                return new Bitmap(con.Width, con.Height);
+            }
+        }
+
+        public static Image GetWinformImage(Form frm)
+        {
+            try
+            {
+                //获取当前屏幕的图像
+                Bitmap b = new Bitmap(frm.Width, frm.Height);
+                frm.DrawToBitmap(b, new Rectangle(0, 0, frm.Width, frm.Height));
+
+
+
+                //b.Save(yourFileName);
+                float opacity = (float)-0.5;
+
+                //float[][] nArray ={ new float[] {1, 0, 0, 0, 0},
+                //      new float[] {0,1, 0, 0, 0},
+                //      new float[] {0, 0, 1, 0, 0},
+                //      new float[] {0, 0, 0, opacity, 0},
+                //      new float[] {0, 0, 0, 0, 1}};
+
+                float[][] nArray = {new float[] {1,0,0,0,0},
                                                  new float[] {0,1,0,0,0},
                                                  new float[] {0,0,1,0,0},
                                                  new float[] {0,0,0,1,0},
                                                  new float[] {opacity,opacity,opacity,0,1}};
 
 
-            ColorMatrix matrix = new ColorMatrix(nArray);
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-            Bitmap resultImage = new Bitmap(b.Width, b.Height);
-            Graphics g = Graphics.FromImage(resultImage);
-            g.DrawImage(b, new Rectangle(0, 0, b.Width, b.Height), 0, 0, b.Width, b.Height, GraphicsUnit.Pixel, attributes);
+                ColorMatrix matrix = new ColorMatrix(nArray);
+                ImageAttributes attributes = new ImageAttributes();
+                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                Bitmap resultImage = new Bitmap(b.Width, b.Height);
+                Graphics g = Graphics.FromImage(resultImage);
+                g.DrawImage(b, new Rectangle(0, 0, b.Width, b.Height), 0, 0, b.Width, b.Height, GraphicsUnit.Pixel, attributes);
 
-            return resultImage;
+                return resultImage;
 
-            //return b;
+                //return b;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("获取页面截图异常"+ex.Message);
+                return new Bitmap(frm.Width, frm.Height);
+            }
         }
 
 
@@ -377,7 +465,7 @@ namespace WinSaasPOS.Model
         public static string UTF8ToGB2312(string str)
         {
             try
-            {   
+            {
                 Encoding utf8 = Encoding.GetEncoding(65001);
                 Encoding gb2312 = Encoding.GetEncoding("gb2312");//Encoding.Default ,936
                 byte[] temp = utf8.GetBytes(str);
@@ -386,34 +474,34 @@ namespace WinSaasPOS.Model
                 return result;
             }
             catch (Exception ex)//(UnsupportedEncodingException ex)
-           {
+            {
                 MessageBox.Show(ex.ToString());
                 return null;
             }
         }
-        public static  string GB2312ToUTF8(string str)
+        public static string GB2312ToUTF8(string str)
         {
             try
             {
                 Encoding uft8 = Encoding.GetEncoding(65001);
                 Encoding gb2312 = Encoding.GetEncoding("gb2312");
                 byte[] temp = gb2312.GetBytes(str);
-               // MessageBox.Show("gb2312的编码的字节个数：" + temp.Length);
+                // MessageBox.Show("gb2312的编码的字节个数：" + temp.Length);
                 for (int i = 0; i < temp.Length; i++)
                 {
                     //MessageBox.Show(Convert.ToUInt16(temp[i]).ToString());
-                }   
+                }
                 byte[] temp1 = Encoding.Convert(gb2312, uft8, temp);
                 //MessageBox.Show("uft8的编码的字节个数：" + temp1.Length);
                 for (int i = 0; i < temp1.Length; i++)
                 {
-                   // MessageBox.Show(Convert.ToUInt16(temp1[i]).ToString());
-                }              
+                    // MessageBox.Show(Convert.ToUInt16(temp1[i]).ToString());
+                }
                 string result = uft8.GetString(temp1);
                 return result;
             }
             catch (Exception ex)//(UnsupportedEncodingException ex)
-           {
+            {
                 MessageBox.Show(ex.ToString());
                 return null;
             }
@@ -451,7 +539,7 @@ namespace WinSaasPOS.Model
         /// <param name="xmlPublicKey"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-       public static string RSAEncrypt(string PublicKey, string content)
+        public static string RSAEncrypt(string PublicKey, string content)
         {
             try
             {
@@ -467,7 +555,7 @@ namespace WinSaasPOS.Model
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("计算RSA公钥异常"+PublicKey+":"+content+":"+ex.Message);
+                LogManager.WriteLog("计算RSA公钥异常" + PublicKey + ":" + content + ":" + ex.Message);
                 return "";
             }
         }
@@ -494,6 +582,103 @@ namespace WinSaasPOS.Model
                 return rsa.ToXmlString(false);
             }
         }
+
+
+
+        public static bool TaskIsShow = true;
+
+        //Win+D    页面FormBoardStyle  属性不能为none 否则返回windows页面只要有焦点事件就会打开程序
+
+        [DllImport("User32.dll")]
+        public static extern void keybd_event(Byte bVk, Byte bScan, Int32 dwFlags, Int32 dwExtraInfo);
+
+        public static void ShowWindows()
+        {
+            try
+            {
+                //try
+                //{
+
+                //    ShowWindow(FindWindow("Shell_TrayWnd", null), (int)SW_SHOW);
+                //}
+                //catch (Exception ex)
+                //{
+                //    LogManager.WriteLog("显示任务栏异常" + ex.Message);
+                //}
+                ShowTask();
+                keybd_event(0x5b, 0, 0, 0); //0x5b是left win的代码，这一句使key按下，下一句使key释放。 
+                keybd_event(68, 0, 0, 0);
+                keybd_event(0x5b, 0, 0x2, 0);
+                keybd_event(68, 0, 0x2, 0);
+                //this.WindowState = FormWindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("显示windows桌面异常" + ex.Message);
+            }
+        }
+
+
+
+        public static void ShowTaskThread()
+        {
+            TaskIsShow = true;
+            Thread thread = new Thread(ShowTask);
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        public static  void ShowTask()
+        {
+            try
+            {
+                TaskIsShow = true;
+                ShowWindow(FindWindow("Shell_TrayWnd", null), (int)SW_SHOW);
+            }
+            catch(Exception ex) {
+                LogManager.WriteLog("显示任务栏异常"+ex.Message);
+            }
+        }
+
+        public static void HideTaskThread()
+        {
+           
+            if (TaskIsShow)
+            {
+                Thread thread = new Thread(HideTask);
+                thread.IsBackground = true;
+                thread.Start();
+            }
+          
+        }
+        public static void HideTask()
+        {
+            try
+            {
+                if (TaskIsShow)
+                {
+                    ShowWindow(FindWindow("Shell_TrayWnd", null), (int)SW_HIDE);
+                    TaskIsShow = false;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("隐藏任务栏异常" + ex.Message);
+            }
+            
+        }
+
+
+        private const int SW_HIDE = 0;
+        private const int SW_SHOW = 5;
+        [DllImport("user32.dll")]
+        internal static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        internal static extern int ShowWindow(IntPtr hWin, int nCmdShow);
+
+
 
 
     }

@@ -18,7 +18,7 @@ namespace WinSaasPOS.Common
         //private const int WM_SYSKEYDOWN = 0x104;//SYSKEYDOWN
         //private const int WM_SYSKEYUP = 0x105;//SYSKEYUP
         //private static int HookProc(int nCode, Int32 wParam, IntPtr lParam);
-        public int hKeyboardHook = 0;//声明键盘钩子处理的初始值
+        public static int hKeyboardHook = 0;//声明键盘钩子处理的初始值
         private ScanerCodes codes = new ScanerCodes();//13为键盘钩子
         //定义成静态，这样不会抛出回收异常
         private static HookProc hookproc;
@@ -87,10 +87,10 @@ namespace WinSaasPOS.Common
             EventMsg msg = (EventMsg)Marshal.PtrToStructure(lParam, typeof(EventMsg));
             codes.Add(msg);
 
-            //LogManager.WriteLog((ScanerEvent==null).ToString()+msg.message+"-"+msg.paramH+"-"+ codes.Result);
+           // LogManager.WriteLog((ScanerEvent==null).ToString()+msg.message+"-"+msg.paramH+"-"+ codes.Result);
             if (ScanerEvent != null && msg.message == 13 && msg.paramH > 0 && !string.IsNullOrEmpty(codes.Result))
             {
-                
+              //  LogManager.WriteLog("扫描事件"+codes.Result);
                 ScanerEvent(codes);
             }
 
@@ -98,7 +98,7 @@ namespace WinSaasPOS.Common
         }
         public class ScanerCodes
         {
-            private int ts = 100; // 指定输入间隔为300毫秒以内时为连续输入  
+            private int ts = 30; // 指定输入间隔为300毫秒以内时为连续输入  
             private List<List<EventMsg>> _keys = new List<List<EventMsg>>();
             private List<int> _keydown = new List<int>();   // 保存组合键状态  
             private List<string> _result = new List<string>();  // 返回结果集  

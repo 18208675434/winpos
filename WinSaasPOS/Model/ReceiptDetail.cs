@@ -24,13 +24,13 @@ namespace WinSaasPOS.Model
     }
 
 
-    public class OrderPriceDetail
-    {
-        public string title { get; set; }
-        public string amount { get; set; }
-        public int highlight { get; set; }
-        public string subtitle { get; set; }
-    }
+    //public class OrderPriceDetail
+    //{
+    //    public string title { get; set; }
+    //    public string amount { get; set; }
+    //    public int highlight { get; set; }
+    //    public string subtitle { get; set; }
+    //}
 
     //public class Devicecode
     //{

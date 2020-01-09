@@ -201,10 +201,10 @@
             this.pnlPayInfo.Controls.Add(this.lblPayInfo2);
             this.pnlPayInfo.Controls.Add(this.lblPayInfo1);
             this.pnlPayInfo.Controls.Add(this.picPayInfo);
-            this.pnlPayInfo.Location = new System.Drawing.Point(16, 60);
+            this.pnlPayInfo.Location = new System.Drawing.Point(28, 18);
             this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPayInfo.Name = "pnlPayInfo";
-            this.pnlPayInfo.Size = new System.Drawing.Size(704, 699);
+            this.pnlPayInfo.Size = new System.Drawing.Size(693, 699);
             this.pnlPayInfo.TabIndex = 300;
             // 
             // picPayError
@@ -735,11 +735,11 @@
             // player
             // 
             this.player.Enabled = true;
-            this.player.Location = new System.Drawing.Point(5, 5);
+            this.player.Location = new System.Drawing.Point(2, 2);
             this.player.Margin = new System.Windows.Forms.Padding(2);
             this.player.Name = "player";
             this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
-            this.player.Size = new System.Drawing.Size(1005, 773);
+            this.player.Size = new System.Drawing.Size(1008, 776);
             this.player.TabIndex = 16;
             this.player.StatusChange += new System.EventHandler(this.player_StatusChange);
             // 
@@ -751,6 +751,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1020, 760);
             this.Controls.Add(this.tabControlMedia);
             this.DoubleBuffered = true;
@@ -758,6 +759,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMainMedia";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMainMedia";

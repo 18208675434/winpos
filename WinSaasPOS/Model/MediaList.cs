@@ -13,7 +13,6 @@ namespace WinSaasPOS.Model
         public string defaultvideoimg { get; set; }
         public List<string> img { get; set; }
         public object[] video { get; set; }
-
         //商户logo
         public string tenantlogo { get; set; }
         public List<Mediadetaildto> mediadetaildtos { get; set; }

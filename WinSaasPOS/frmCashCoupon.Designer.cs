@@ -39,26 +39,23 @@
             this.lblPriceStr = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblExit = new System.Windows.Forms.Label();
-            this.tabPay = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnPayOK = new System.Windows.Forms.Button();
+            this.picScreen = new System.Windows.Forms.PictureBox();
+            this.lblNext = new System.Windows.Forms.Label();
             this.btnPayByBalance = new System.Windows.Forms.Button();
             this.btnPayByCash = new System.Windows.Forms.Button();
             this.btnPayOnLine = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnPayOK = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
-            this.tabPay.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label1.Location = new System.Drawing.Point(12, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 25);
+            this.label1.Size = new System.Drawing.Size(90, 21);
             this.label1.TabIndex = 12;
             this.label1.Text = "选择代金券";
             // 
@@ -71,76 +68,76 @@
             // 
             // lblNeedCash
             // 
-            this.lblNeedCash.AutoSize = true;
-            this.lblNeedCash.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblNeedCash.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblNeedCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblNeedCash.Location = new System.Drawing.Point(207, 99);
+            this.lblNeedCash.Location = new System.Drawing.Point(178, 99);
             this.lblNeedCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNeedCash.Name = "lblNeedCash";
-            this.lblNeedCash.Size = new System.Drawing.Size(79, 30);
+            this.lblNeedCash.Size = new System.Drawing.Size(165, 30);
             this.lblNeedCash.TabIndex = 19;
             this.lblNeedCash.Text = "￥0.00";
+            this.lblNeedCash.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblCash
             // 
-            this.lblCash.AutoSize = true;
-            this.lblCash.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblCash.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblCash.Location = new System.Drawing.Point(207, 59);
+            this.lblCash.Location = new System.Drawing.Point(178, 59);
             this.lblCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCash.Name = "lblCash";
-            this.lblCash.Size = new System.Drawing.Size(79, 30);
+            this.lblCash.Size = new System.Drawing.Size(165, 30);
             this.lblCash.TabIndex = 18;
             this.lblCash.Text = "￥0.00";
+            this.lblCash.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblPrice
             // 
-            this.lblPrice.AutoSize = true;
-            this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(207, 19);
+            this.lblPrice.Location = new System.Drawing.Point(178, 19);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(79, 30);
+            this.lblPrice.Size = new System.Drawing.Size(165, 30);
             this.lblPrice.TabIndex = 17;
             this.lblPrice.Text = "￥0.00";
+            this.lblPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblChangeStr
             // 
             this.lblChangeStr.AutoSize = true;
-            this.lblChangeStr.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblChangeStr.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblChangeStr.Location = new System.Drawing.Point(18, 99);
             this.lblChangeStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChangeStr.Name = "lblChangeStr";
-            this.lblChangeStr.Size = new System.Drawing.Size(130, 30);
+            this.lblChangeStr.Size = new System.Drawing.Size(113, 25);
             this.lblChangeStr.TabIndex = 16;
             this.lblChangeStr.Text = "还需支付 ：";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label3.Location = new System.Drawing.Point(18, 59);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 30);
+            this.label3.Size = new System.Drawing.Size(118, 25);
             this.label3.TabIndex = 15;
-            this.label3.Text = "代金券折扣 :";
+            this.label3.Text = "代金券抵扣 :";
             // 
             // lblPriceStr
             // 
             this.lblPriceStr.AutoSize = true;
-            this.lblPriceStr.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblPriceStr.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblPriceStr.Location = new System.Drawing.Point(18, 19);
             this.lblPriceStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPriceStr.Name = "lblPriceStr";
-            this.lblPriceStr.Size = new System.Drawing.Size(106, 30);
+            this.lblPriceStr.Size = new System.Drawing.Size(93, 25);
             this.lblPriceStr.TabIndex = 14;
             this.lblPriceStr.Text = "应收总额:";
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel2.Controls.Add(this.lblNeedCash);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.lblPrice);
@@ -155,134 +152,129 @@
             // lblExit
             // 
             this.lblExit.AutoSize = true;
-            this.lblExit.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblExit.ForeColor = System.Drawing.Color.Tomato;
-            this.lblExit.Location = new System.Drawing.Point(247, 9);
+            this.lblExit.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblExit.ForeColor = System.Drawing.Color.Black;
+            this.lblExit.Location = new System.Drawing.Point(258, 9);
             this.lblExit.Name = "lblExit";
-            this.lblExit.Size = new System.Drawing.Size(131, 24);
+            this.lblExit.Size = new System.Drawing.Size(118, 21);
             this.lblExit.TabIndex = 19;
             this.lblExit.Text = "返回收银方式>";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
-            // 
-            // tabPay
-            // 
-            this.tabPay.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabPay.Controls.Add(this.tabPage1);
-            this.tabPay.Controls.Add(this.tabPage2);
-            this.tabPay.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.tabPay.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabPay.Location = new System.Drawing.Point(17, 358);
-            this.tabPay.Name = "tabPay";
-            this.tabPay.Padding = new System.Drawing.Point(0, 0);
-            this.tabPay.SelectedIndex = 0;
-            this.tabPay.Size = new System.Drawing.Size(352, 80);
-            this.tabPay.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabPay.TabIndex = 20;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.tabPage1.Controls.Add(this.btnPayByBalance);
-            this.tabPage1.Controls.Add(this.btnPayByCash);
-            this.tabPage1.Controls.Add(this.btnPayOnLine);
-            this.tabPage1.Location = new System.Drawing.Point(4, 5);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(344, 71);
-            this.tabPage1.TabIndex = 0;
-            // 
-            // btnPayByBalance
-            // 
-            this.btnPayByBalance.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.btnPayByBalance.CausesValidation = false;
-            this.btnPayByBalance.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPayByBalance.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnPayByBalance.ForeColor = System.Drawing.Color.White;
-            this.btnPayByBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByBalance.Image")));
-            this.btnPayByBalance.Location = new System.Drawing.Point(239, 5);
-            this.btnPayByBalance.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPayByBalance.Name = "btnPayByBalance";
-            this.btnPayByBalance.Size = new System.Drawing.Size(100, 60);
-            this.btnPayByBalance.TabIndex = 17;
-            this.btnPayByBalance.TabStop = false;
-            this.btnPayByBalance.Text = "余额";
-            this.btnPayByBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayByBalance.UseVisualStyleBackColor = false;
-            this.btnPayByBalance.Click += new System.EventHandler(this.btnPayByBalance_Click);
-            // 
-            // btnPayByCash
-            // 
-            this.btnPayByCash.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnPayByCash.CausesValidation = false;
-            this.btnPayByCash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPayByCash.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnPayByCash.ForeColor = System.Drawing.Color.White;
-            this.btnPayByCash.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByCash.Image")));
-            this.btnPayByCash.Location = new System.Drawing.Point(125, 5);
-            this.btnPayByCash.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPayByCash.Name = "btnPayByCash";
-            this.btnPayByCash.Size = new System.Drawing.Size(100, 60);
-            this.btnPayByCash.TabIndex = 16;
-            this.btnPayByCash.TabStop = false;
-            this.btnPayByCash.Text = "现 金";
-            this.btnPayByCash.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayByCash.UseVisualStyleBackColor = false;
-            this.btnPayByCash.Click += new System.EventHandler(this.btnPayByCash_Click);
-            // 
-            // btnPayOnLine
-            // 
-            this.btnPayOnLine.BackColor = System.Drawing.Color.Tomato;
-            this.btnPayOnLine.CausesValidation = false;
-            this.btnPayOnLine.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPayOnLine.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnPayOnLine.ForeColor = System.Drawing.Color.White;
-            this.btnPayOnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnPayOnLine.Image")));
-            this.btnPayOnLine.Location = new System.Drawing.Point(5, 5);
-            this.btnPayOnLine.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPayOnLine.Name = "btnPayOnLine";
-            this.btnPayOnLine.Size = new System.Drawing.Size(100, 60);
-            this.btnPayOnLine.TabIndex = 15;
-            this.btnPayOnLine.TabStop = false;
-            this.btnPayOnLine.Text = "微信/支付宝";
-            this.btnPayOnLine.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayOnLine.UseVisualStyleBackColor = false;
-            this.btnPayOnLine.Click += new System.EventHandler(this.btnPayOnLine_Click_1);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.tabPage2.Controls.Add(this.btnPayOK);
-            this.tabPage2.Location = new System.Drawing.Point(4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(344, 71);
-            this.tabPage2.TabIndex = 1;
             // 
             // btnPayOK
             // 
             this.btnPayOK.BackColor = System.Drawing.Color.Tomato;
             this.btnPayOK.CausesValidation = false;
-            this.btnPayOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPayOK.FlatAppearance.BorderSize = 0;
+            this.btnPayOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPayOK.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnPayOK.ForeColor = System.Drawing.Color.White;
-            this.btnPayOK.Location = new System.Drawing.Point(28, 15);
+            this.btnPayOK.Location = new System.Drawing.Point(17, 401);
             this.btnPayOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnPayOK.Name = "btnPayOK";
-            this.btnPayOK.Size = new System.Drawing.Size(289, 52);
+            this.btnPayOK.Size = new System.Drawing.Size(350, 50);
             this.btnPayOK.TabIndex = 16;
             this.btnPayOK.TabStop = false;
             this.btnPayOK.Text = "完成交易";
             this.btnPayOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPayOK.UseVisualStyleBackColor = false;
+            this.btnPayOK.Visible = false;
             this.btnPayOK.Click += new System.EventHandler(this.btnPayOK_Click);
+            // 
+            // picScreen
+            // 
+            this.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picScreen.Location = new System.Drawing.Point(0, 0);
+            this.picScreen.Name = "picScreen";
+            this.picScreen.Size = new System.Drawing.Size(10, 10);
+            this.picScreen.TabIndex = 24;
+            this.picScreen.TabStop = false;
+            this.picScreen.Visible = false;
+            // 
+            // lblNext
+            // 
+            this.lblNext.AutoSize = true;
+            this.lblNext.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblNext.ForeColor = System.Drawing.Color.Black;
+            this.lblNext.Location = new System.Drawing.Point(13, 368);
+            this.lblNext.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNext.Name = "lblNext";
+            this.lblNext.Size = new System.Drawing.Size(82, 24);
+            this.lblNext.TabIndex = 20;
+            this.lblNext.Text = "继续收银";
+            // 
+            // btnPayByBalance
+            // 
+            this.btnPayByBalance.BackColor = System.Drawing.Color.Silver;
+            this.btnPayByBalance.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPayByBalance.FlatAppearance.BorderSize = 0;
+            this.btnPayByBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayByBalance.Font = new System.Drawing.Font("微软雅黑", 8.5F);
+            this.btnPayByBalance.ForeColor = System.Drawing.Color.White;
+            this.btnPayByBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByBalance.Image")));
+            this.btnPayByBalance.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPayByBalance.Location = new System.Drawing.Point(262, 401);
+            this.btnPayByBalance.Name = "btnPayByBalance";
+            this.btnPayByBalance.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
+            this.btnPayByBalance.Size = new System.Drawing.Size(107, 50);
+            this.btnPayByBalance.TabIndex = 28;
+            this.btnPayByBalance.Text = "余 额";
+            this.btnPayByBalance.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPayByBalance.UseVisualStyleBackColor = false;
+            this.btnPayByBalance.Click += new System.EventHandler(this.btnPayByBalance_Click);
+            // 
+            // btnPayByCash
+            // 
+            this.btnPayByCash.BackColor = System.Drawing.Color.Silver;
+            this.btnPayByCash.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPayByCash.FlatAppearance.BorderSize = 0;
+            this.btnPayByCash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayByCash.Font = new System.Drawing.Font("微软雅黑", 8.5F);
+            this.btnPayByCash.ForeColor = System.Drawing.Color.White;
+            this.btnPayByCash.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByCash.Image")));
+            this.btnPayByCash.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPayByCash.Location = new System.Drawing.Point(157, 401);
+            this.btnPayByCash.Name = "btnPayByCash";
+            this.btnPayByCash.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
+            this.btnPayByCash.Size = new System.Drawing.Size(101, 50);
+            this.btnPayByCash.TabIndex = 27;
+            this.btnPayByCash.Text = "现 金";
+            this.btnPayByCash.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPayByCash.UseVisualStyleBackColor = false;
+            this.btnPayByCash.Click += new System.EventHandler(this.btnPayByCash_Click);
+            // 
+            // btnPayOnLine
+            // 
+            this.btnPayOnLine.BackColor = System.Drawing.Color.Silver;
+            this.btnPayOnLine.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPayOnLine.FlatAppearance.BorderSize = 0;
+            this.btnPayOnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayOnLine.Font = new System.Drawing.Font("微软雅黑", 7.5F);
+            this.btnPayOnLine.ForeColor = System.Drawing.Color.White;
+            this.btnPayOnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnPayOnLine.Image")));
+            this.btnPayOnLine.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPayOnLine.Location = new System.Drawing.Point(17, 401);
+            this.btnPayOnLine.Name = "btnPayOnLine";
+            this.btnPayOnLine.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
+            this.btnPayOnLine.Size = new System.Drawing.Size(136, 50);
+            this.btnPayOnLine.TabIndex = 26;
+            this.btnPayOnLine.Text = "微信/支付宝/银联云闪付\r\n";
+            this.btnPayOnLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPayOnLine.UseVisualStyleBackColor = false;
+            this.btnPayOnLine.Click += new System.EventHandler(this.btnPayOnLine_Click_1);
             // 
             // frmCashCoupon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(380, 450);
-            this.Controls.Add(this.tabPay);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(380, 480);
+            this.Controls.Add(this.picScreen);
+            this.Controls.Add(this.btnPayByBalance);
+            this.Controls.Add(this.btnPayByCash);
+            this.Controls.Add(this.btnPayOnLine);
+            this.Controls.Add(this.lblNext);
+            this.Controls.Add(this.btnPayOK);
             this.Controls.Add(this.lblExit);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlCashCoupons);
@@ -293,12 +285,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmCashCoupon";
             this.Shown += new System.EventHandler(this.frmCashCoupon_Shown);
+            this.EnabledChanged += new System.EventHandler(this.frmCashCoupon_EnabledChanged);
             this.SizeChanged += new System.EventHandler(this.frmCashCoupon_SizeChanged);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tabPay.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,12 +307,11 @@
         private System.Windows.Forms.Label lblPriceStr;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblExit;
-        private System.Windows.Forms.TabControl tabPay;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button btnPayOK;
+        private System.Windows.Forms.PictureBox picScreen;
+        private System.Windows.Forms.Label lblNext;
         private System.Windows.Forms.Button btnPayByBalance;
         private System.Windows.Forms.Button btnPayByCash;
         private System.Windows.Forms.Button btnPayOnLine;
-        private System.Windows.Forms.Button btnPayOK;
     }
 }

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -32,31 +33,42 @@ namespace WinSaasPOS
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
         public frmLogin()
         {
-            InitializeComponent(); 
+            InitializeComponent();          
         }
 
         private void frmLogin_Shown(object sender, EventArgs e)
         {
-
-
-        //public void QuerySkushopAll(string shopid, int page, int size, ref string erromessage)
-
-           //判断日志文件夹是否存在，不存在则新建
-           if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
+            Application.DoEvents();
+            // MainModel.HideTaskThread();
+            MainModel.ShowTask();
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Log");
 
+            Thread threadItemExedate = new Thread(ThreadUpStart);
+            threadItemExedate.IsBackground = true;
+            threadItemExedate.Start();
 
-           Thread threadItemExedate = new Thread(ThreadUpStart);
-           threadItemExedate.IsBackground = true;
-           threadItemExedate.Start();
+            Thread threadIniFormExedate = new Thread(IniForm);
+            threadIniFormExedate.IsBackground = true;
+            threadIniFormExedate.Start();
+            
 
-           Thread threadIniFormExedate = new Thread(IniForm);
-           threadIniFormExedate.IsBackground = true;
-           threadIniFormExedate.Start(); 
+            //客屏初始化
+            MainModel.frmmainmedia = new frmMainMedia();
+            if (Screen.AllScreens.Count() > 1)
+            {
+                asf.AutoScaleControlTest(MainModel.frmmainmedia, 1020, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height + 20, true);
+                MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
+
+                MainModel.frmmainmedia.Show();
+                MainModel.frmmainmedia.IniForm(null);
+
+            }
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
+
             //每次开启页面都要加载，页面关闭值null
             string imgname = "LoginLogo.bmp";
             if (File.Exists(MainModel.MediaPath + imgname))
@@ -68,8 +80,8 @@ namespace WinSaasPOS
             {
 
             }
-
-            lblUser_Click(null, null);
+            Application.DoEvents();
+            lblLobinByUser_Click(null, null);
         }
 
         private void IniForm()
@@ -80,11 +92,32 @@ namespace WinSaasPOS
 
             this.Enabled = false;
             LoadingHelper.ShowLoadingScreen("加载中...");
-            //string devicesn = GlobalUtil.GetHardDiskID();
-            string devicesn = GlobalUtil.GetMacAddress();
-            //MainModel.DeviceSN = MainModel.GetHardDiskID();
 
-            INIManager.SetIni("System", "DeviceSN", devicesn, MainModel.IniPath);
+            //电脑可能会有多个mac地址，取第一次获取的mac地址为准  同时同步start.exe 获取的mac
+            string currentmac = "";
+            try
+            {
+                if (File.Exists(MainModel.StartIniPath))
+                {
+                     currentmac = INIManager.GetIni("System", "DeviceSN", MainModel.StartIniPath);
+                }
+                else
+                {
+                     currentmac = INIManager.GetIni("System", "DeviceSN", MainModel.IniPath);
+                }
+            }
+            catch { }
+
+            string devicesn = GlobalUtil.GetMacAddress(currentmac);
+
+
+
+            //没有网络的时候获取不到MAC地址  ？？？  会被替换
+            if (devicesn.Length > 10)
+            {
+                INIManager.SetIni("System", "DeviceSN", devicesn, MainModel.IniPath);
+
+            }
             MainModel.DeviceSN = devicesn;
             //lblSN.Text = "设备序列号：" + devicesn;
             txtSN.Text = devicesn;
@@ -99,13 +132,14 @@ namespace WinSaasPOS
                     this.Enabled = true;
                     LoadingHelper.CloseForm();
                     //lblMsg.Text = "验证失败，请重新登录";
-                    //Application.DoEvents();
+                    Application.DoEvents();
                     txtUser.Clear();
                     txtPwd.Clear();
                     isReLogin = true;
-                    int screenwdith = Screen.PrimaryScreen.Bounds.Width;
+                    int screenwdith = Screen.AllScreens[0].Bounds.Width;
 
-                    lblUser_Click(null, null);
+                    pnlbtnLoginByUser.Refresh();
+                    lblLobinByUser_Click(null, null);
 
                 }
                 else
@@ -115,10 +149,10 @@ namespace WinSaasPOS
 
                     frmMain frmmain = new frmMain(this);
 
-                    asf.AutoScaleControlTest(frmmain,1178,760, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     picTenantLogo.BackgroundImage = null;
-                    this.Hide();
-                    CloseOSK();
+                    //this.Hide();
+                    //CloseOSK();
 
                     //asf.AutoScaleControl(frmmain);
                     frmmain.ShowDialog();
@@ -127,23 +161,27 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("登录异常：" + ex.Message);
+                LogManager.WriteLog("登录异常：" + ex.Message+ex.StackTrace);
             }
             finally
             {
                 this.Enabled = true;
                 LoadingHelper.CloseForm();
-                // LoadingHelper.CloseForm();
             }
         }));
         }
 
         #region 账号密码登录
 
-        private void lblUser_Click(object sender, EventArgs e)
+        private void lblLobinByUser_Click(object sender, EventArgs e)
         {
-            lblUser.ForeColor = Color.Green;
-            lblPhone.ForeColor = Color.Black;
+            //lblLoginByUser.ForeColor = Color.Green;
+            //lblLoginByPhone.ForeColor = Color.Black;
+
+            lblLoginByUser.Image = Resources.ResourcePos.Line_red;
+            lblLoginByUser.Font = new Font(lblLoginByUser.Font.Name,lblLoginByUser.Font.Size,FontStyle.Bold);
+            lblLoginByPhone.Image = null;
+            lblLoginByPhone.Font = new Font(lblLoginByPhone.Font.Name, lblLoginByPhone.Font.Size, FontStyle.Regular);
 
             pnlUser.Visible = true;
             pnlPhone.Visible = false;
@@ -197,16 +235,17 @@ namespace WinSaasPOS
 
                     frmMain frmmain = new frmMain(this);
 
-                    asf.AutoScaleControlTest(frmmain,1178,760, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                    LoadingHelper.CloseForm();
                     picTenantLogo.BackgroundImage = null;
-                    this.Hide();
-                    CloseOSK();
+                    //this.Hide();
+                    //CloseOSK();
                     frmmain.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("登录异常：" + ex.Message, false);
+                MainModel.ShowLog("登录异常：" + ex.Message+ex.StackTrace, false);
             }
             finally
             {
@@ -219,14 +258,22 @@ namespace WinSaasPOS
         #endregion
 
         #region 手机验证码登录
-        private void lblPhone_Click(object sender, EventArgs e)
+        private void lblLoginByPhone_Click(object sender, EventArgs e)
         {
-            lblUser.ForeColor = Color.Black;
-            lblPhone.ForeColor = Color.Green;
+            //lblLoginByUser.ForeColor = Color.Black;
+            //lblLoginByPhone.ForeColor = Color.Green;
+
+
+
+            lblLoginByUser.Image = null;
+            lblLoginByUser.Font = new Font(lblLoginByUser.Font.Name, lblLoginByUser.Font.Size, FontStyle.Regular);
+            lblLoginByPhone.Image = Resources.ResourcePos.Line_red;
+            lblLoginByPhone.Font = new Font(lblLoginByPhone.Font.Name, lblLoginByPhone.Font.Size, FontStyle.Bold);
 
             pnlUser.Visible = false;
             pnlPhone.Visible = true;
 
+            Application.DoEvents();
             //手机验证页面 先刷新一次图形验证码
             //this.picCheckCode.Image = Bitmap.FromStream(validCode.CreateCheckCodeImage());
 
@@ -239,7 +286,8 @@ namespace WinSaasPOS
             if (!CheckPhone(txtPhone.Text))
             {
                 return;
-            }                                
+            }
+                               
                     if (lblSendCheckCode.Text == "发送验证码")
                     {
                         string ErrorMsg = "";
@@ -306,17 +354,18 @@ namespace WinSaasPOS
 
                     frmMain frmmain = new frmMain(this);
 
-                    asf.AutoScaleControlTest(frmmain,1178,760, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                    LoadingHelper.CloseForm();
                     picTenantLogo.BackgroundImage = null;
-                    this.Hide();
-                    CloseOSK();
+                    //this.Hide();
+                    //CloseOSK();
 
                     frmmain.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("登录异常："+ex.Message,false);
+                MainModel.ShowLog("登录异常："+ex.Message+ex.StackTrace,false);
             }
             finally
             {
@@ -377,12 +426,15 @@ namespace WinSaasPOS
 
         private void frmLogin_Click(object sender, EventArgs e)
         {
-            CloseOSK();
+            //CloseOSK();
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CloseOSK();
+            MainModel.ShowTask();
+            MainModel.frmmainmedia.Close();
+            MainModel.frmmainmedia = null;
+            ////CloseOSK();
         }
 
 
@@ -524,11 +576,18 @@ namespace WinSaasPOS
         private void picExit_Click(object sender, EventArgs e)
         {
             frmDeleteGood frmdelete = new frmDeleteGood("是否确认退出系统？", "", "");
+            
             if (frmdelete.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-
+            try
+            {
+                MainModel.frmmainmedia.Close();
+                MainModel.frmmainmedia = null;
+            }
+            catch { }
+            MainModel.ShowTask();
             System.Environment.Exit(0);
         }
 
@@ -537,7 +596,7 @@ namespace WinSaasPOS
         {
             try 
             {
-                File.Copy(MainModel.TempFilePath + "\\WinSaasPosStart.exe", MainModel.ServerPath + "\\WinSaasPosStart.exe", true);
+                File.Copy(MainModel.TempFilePath + "\\WinSaasPOSStart.exe", MainModel.ServerPath + "\\WinSaasPOSStart.exe", true);
             }
             catch (Exception ex)
             {
@@ -561,7 +620,6 @@ namespace WinSaasPOS
             catch { }
         }
 
-
         private int click = 0;
         private DateTime lastClickTime = DateTime.Now;
         //切换环境
@@ -569,7 +627,7 @@ namespace WinSaasPOS
         {
             //LogManager.WriteLog(click.ToString());
             //// 两次点击间隔小于100毫秒时，算连续点击
-            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 1000)
+            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
             //{
             //    click++;
             //    if (click >= 3)
@@ -581,6 +639,7 @@ namespace WinSaasPOS
             //}
             //else
             //{
+
             //    click = 1;// 不是连续点击时，清0
             //}
             //lastClickTime = DateTime.Now;
@@ -610,6 +669,175 @@ namespace WinSaasPOS
             return true;
         }
 
+        private void txtUser_TextChanged(object sender, EventArgs e)
+        {
+            if (txtUser.Text.Length > 0)
+            {
+                lblUser.Visible = false;
+            }
+            else
+            {
+                lblUser.Visible = true;
+            }
+        }
+
+        private void lblUser_Click(object sender, EventArgs e)
+        {
+            txtUser.Focus();
+        }
+
+        private void txtPwd_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPwd.Text.Length > 0)
+            {
+                lblPwd.Visible = false;
+            }
+            else
+            {
+                lblPwd.Visible = true;
+            }
+        }
+
+        private void lblPwd_Click(object sender, EventArgs e)
+        {
+            txtPwd.Focus();
+        }
+
+        private void txtPhone_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPhone.Text.Length > 0)
+            {
+                lblPhone.Visible = false;
+            }
+            else
+            {
+                lblPhone.Visible = true;
+            }
+        }
+
+        private void lblPhone_Click(object sender, EventArgs e)
+        {
+            txtPhone.Focus();
+        }
+
+      
+        private void txtCheckCode_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCheckCode.Text.Length > 0)
+            {
+                lblCheckCode.Visible = false;
+            }
+            else
+            {
+                lblCheckCode.Visible = true;
+            }
+        }
+
+        private void lblCheckCode_Click(object sender, EventArgs e)
+        {
+            txtCheckCode.Focus();
+        }
+
+        private void txtPhoneCheckCode_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPhoneCheckCode.Text.Length > 0)
+            {
+                lblPhoneCheckCode.Visible = false;
+            }
+            else
+            {
+                lblPhoneCheckCode.Visible = true;
+            }
+        }
+
+        private void lblPhoneCheckCode_Click(object sender, EventArgs e)
+        {
+            txtPhoneCheckCode.Focus();
+        }
+
+
+        private void Control_Paint(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                Control con = (Control)sender;
+
+                // Draw(e.ClipRectangle, e.Graphics, 100, false, Color.FromArgb(113, 113, 113), Color.FromArgb(0, 0, 0));
+                //base.OnPaint(e);
+                Graphics g = e.Graphics;
+                // g.DrawString("", new Font("微软雅黑", 9, FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 10));
+
+                LinearGradientBrush myLinearGradientBrush = new LinearGradientBrush(e.ClipRectangle, Color.OrangeRed, Color.OrangeRed, LinearGradientMode.Vertical);
+                //填充         
+
+                ////四边圆角
+                GraphicsPath gp = new GraphicsPath();
+                gp.AddArc(e.ClipRectangle.X, e.ClipRectangle.Y, con.Height, con.Height, 180, 90);
+                gp.AddArc(e.ClipRectangle.Width - 2 - con.Height, e.ClipRectangle.Y, con.Height, con.Height, 270, 90);
+                gp.AddArc(e.ClipRectangle.Width - 2 - con.Height, e.ClipRectangle.Height - 1 - con.Height, con.Height, con.Height, 0, 90);
+                gp.AddArc(e.ClipRectangle.Y, e.ClipRectangle.Height - 1 - con.Height, con.Height, con.Height, 90, 90);
+                gp.CloseAllFigures();
+
+                g.FillPath(myLinearGradientBrush, gp);
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnWindows_Click(object sender, EventArgs e)
+        {
+            MainModel.ShowTask();
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadingHelper.ShowLoadingScreen();
+
+            Delay.Start(2000);
+
+            LoadingHelper.CloseForm();
+        }
+
+        frmLoading loadingForm;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //frmLoading frm = new frmLoading();
+
+            //frm.ShowDialog();
+            
+            Thread thread = new Thread(ShowForm);
+            thread.IsBackground = false;           
+           // thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+
+            Delay.Start(3000);
+
+            loadingForm.Close();
+        }
+
+        private  void ShowForm()
+        {
+            try
+            {
+
+                    loadingForm = new frmLoading();
+                    loadingForm.TopMost = true;
+
+                    loadingForm.ShowDialog();
+                    
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+        }
+
         private void frmLogin_Activated(object sender, EventArgs e)
         {
             try
@@ -627,6 +855,7 @@ namespace WinSaasPOS
             }
             catch { }
         }
+
     }
 
 

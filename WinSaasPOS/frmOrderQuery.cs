@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading;
@@ -17,14 +18,14 @@ namespace WinSaasPOS
     {
         HttpUtil httputil = new HttpUtil();
 
-        
+
         /// <summary>
         /// 委托解决跨线程调用
         /// </summary>
         private delegate void InvokeHandler();
 
         //间隔天数
-        private int CurrentInterval =0;
+        private int CurrentInterval = 0;
 
 
         //<summary>
@@ -35,56 +36,66 @@ namespace WinSaasPOS
         private QueryOrder CurrentQueryOrder = null;
 
 
-        private string LastOrderid="0";
+        private string LastOrderid = "0";
 
 
         private Bitmap bmpReprint;
         private Bitmap bmpRefund;
         private Bitmap bmpWhite;
 
+        /// <summary>
+        /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
+        /// </summary>
+        private bool IsEnable = true;
+
         public frmOrderQuery()
         {
             InitializeComponent();
-           // Application.EnableVisualStyles();
+
+          
+            // Application.EnableVisualStyles();
         }
 
         private void frmOrderQuery_Shown(object sender, EventArgs e)
         {
 
-
             LoadBmp();
 
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
             Application.DoEvents();
 
-            btnToday_Click(null,null);
-    
-            
+            btnToday_Click(null, null);
         }
 
         private void LoadBmp()
         {
             try
             {
+                bmpRefund = (Bitmap)MainModel.GetControlImage(btnRefundPic);
+                bmpReprint = (Bitmap)MainModel.GetControlImage(btnReprintPic);
+                //int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
+                //bmpRefund = new Bitmap(Resources.ResourcePos.Refund, dgvOrderOnLine.Columns["cancle"].Width * 80 / 100, height);
 
-                int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
-                bmpRefund = new Bitmap(Resources.ResourcePos.Refund, dgvOrderOnLine.Columns["cancle"].Width * 80 / 100, height);
-                
-                bmpReprint = new Bitmap(Resources.ResourcePos.Reprint, dgvOrderOnLine.Columns["reprint"].Width * 80 / 100, height);
+                //bmpReprint = new Bitmap(Resources.ResourcePos.Reprint, dgvOrderOnLine.Columns["reprint"].Width * 80 / 100, height);
                 bmpWhite = Resources.ResourcePos.White;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                LogManager.WriteLog("加载页面图片异常"+ex.Message);
+                LogManager.WriteLog("加载页面图片异常" + ex.Message);
             }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             this.Close();
         }
 
@@ -92,7 +103,13 @@ namespace WinSaasPOS
         {
             try
             {
-                ShowPicScreen = false; this.Enabled = false;
+
+                if (!IsEnable)
+                {
+                    return;
+                }
+
+                IsEnable = false;
                 btnToday.FlatAppearance.BorderColor = Color.Red;
                 btnYesterday.FlatAppearance.BorderColor = Color.Gray;
                 btnWeek.FlatAppearance.BorderColor = Color.Gray;
@@ -105,11 +122,11 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("查询当天订单信息异常："+ex.Message);
+                LogManager.WriteLog("查询当天订单信息异常：" + ex.Message);
             }
             finally
             {
-                this.Enabled = true;
+                IsEnable = true;
             }
         }
 
@@ -118,27 +135,32 @@ namespace WinSaasPOS
 
             try
             {
-                ShowPicScreen = false; this.Enabled = false;
-                   btnToday.FlatAppearance.BorderColor = Color.Gray;
-                   btnYesterday.FlatAppearance.BorderColor = Color.Red;
-                   btnWeek.FlatAppearance.BorderColor = Color.Gray;
 
-                   dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 00:00:00");
-                   dtEnd.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59");
-                   CurrentInterval = 1;
-                   LastOrderid = "0";
-                   dgvOrderOnLine.Rows.Clear();
-               
-                   QueryOrder();
+                if (!IsEnable)
+                {
+                    return;
+                }
 
-              }
+                IsEnable = false;
+                btnToday.FlatAppearance.BorderColor = Color.Gray;
+                btnYesterday.FlatAppearance.BorderColor = Color.Red;
+                btnWeek.FlatAppearance.BorderColor = Color.Gray;
+
+                dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 00:00:00");
+                dtEnd.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59");
+                CurrentInterval = 1;
+                LastOrderid = "0";
+                dgvOrderOnLine.Rows.Clear();
+
+                QueryOrder();
+            }
             catch (Exception ex)
             {
-                LogManager.WriteLog("查询昨天订单信息异常："+ex.Message);
+                LogManager.WriteLog("查询昨天订单信息异常：" + ex.Message);
             }
             finally
             {
-                this.Enabled = true;
+                IsEnable = true;
             }
         }
 
@@ -146,31 +168,43 @@ namespace WinSaasPOS
         {
             try
             {
-                ShowPicScreen = false; this.Enabled = false;
-                   btnToday.FlatAppearance.BorderColor = Color.Gray;
-                   btnYesterday.FlatAppearance.BorderColor = Color.Gray;
-                   btnWeek.FlatAppearance.BorderColor = Color.Red;
 
-                   dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd") + " 00:00:00");
-                   dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-                   CurrentInterval = 7;
-                   LastOrderid = "0";
-                   dgvOrderOnLine.Rows.Clear();
-                   QueryOrder();
-                  
-  }
+                if (!IsEnable)
+                {
+                    return;
+                }
+
+                IsEnable = false;
+                btnToday.FlatAppearance.BorderColor = Color.Gray;
+                btnYesterday.FlatAppearance.BorderColor = Color.Gray;
+                btnWeek.FlatAppearance.BorderColor = Color.Red;
+
+                dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd") + " 00:00:00");
+                dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
+                CurrentInterval = 7;
+                LastOrderid = "0";
+                dgvOrderOnLine.Rows.Clear();
+                QueryOrder();
+
+            }
             catch (Exception ex)
             {
-                LogManager.WriteLog("查询最近一周订单信息异常："+ex.Message);
+                LogManager.WriteLog("查询最近一周订单信息异常：" + ex.Message);
             }
             finally
             {
-                this.Enabled = true;
+                IsEnable = true;
             }
         }
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
+
+            if (!IsEnable)
+            {
+                return;
+            }
+
             this.Invoke(new InvokeHandler(delegate()
                {
                    LastOrderid = "0";
@@ -191,20 +225,22 @@ namespace WinSaasPOS
             try
             {
 
-            
+
                 DateTime starttime = DateTime.Now;
-                LoadingHelper.ShowLoadingScreen();//显示
-               
+
+
 
                 string phone = txtPhone.Text;
                 string orderid = txtOrderID.Text;
 
                 if (phone.Length != 0 && phone.Length != 11)
                 {
-                    ShowLog("手机号格式不正确！", false);
+                    MainModel.ShowLog("手机号格式不正确！", false);
                     LoadingHelper.CloseForm();//关闭
                     return;
                 }
+
+                LoadingHelper.ShowLoadingScreen();//显示
 
                 QueryOrderPara queryorderpara = new QueryOrderPara();
                 queryorderpara.customerphone = txtPhone.Text;
@@ -218,29 +254,32 @@ namespace WinSaasPOS
                 string ErrorMsg = "";
                 QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
 
-                Console.WriteLine("访问接口时间"+(DateTime.Now-starttime).TotalMilliseconds);
+                Console.WriteLine("访问接口时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
                 //CurrentQueryOrder = queryorder;
-                if (LastOrderid == "0")
-                {
-                    CurrentQueryOrder = queryorder;
-                }
-                else
-                {
-                    foreach (Order order in queryorder.orders)
-                    {
-                        CurrentQueryOrder.orders.Add(order);
-                    }
-                }
-               
+            
+
                 if (ErrorMsg != "" || queryorder == null)
                 {
-                    ShowLog(ErrorMsg, false);
+                    MainModel.ShowLog(ErrorMsg, false);
                 }
                 else
                 {
-                    //dgvOrderOnLine.Rows.Clear();
-                    this.Enabled = true; //很重要  为false 时datagridview 界面滚动条显示不全
+
+                    if (LastOrderid == "0")
+                    {
+                        CurrentQueryOrder = queryorder;
+                    }
+                    else
+                    {
+                        foreach (Order order in queryorder.orders)
+                        {
+                            CurrentQueryOrder.orders.Add(order);
+                        }
+                    }
+
+                    HaveNextPage = queryorder.hasnextpage == 1 ? true : false;
+
                     foreach (Order order in queryorder.orders)
                     {
                         string AliPayAmt = order.alipayamt;
@@ -250,11 +289,11 @@ namespace WinSaasPOS
                         string YLPayAmt = order.ylpayamt;
                         string PointPayAmt = order.pointpayamt;
                         string CashCouponAmt = order.cashcouponamt;
-                        
+
                         string totalpay = "";
                         if (!string.IsNullOrEmpty(AliPayAmt))
                         {
-                            totalpay += "支付宝：" + AliPayAmt+" ";
+                            totalpay += "支付宝：" + AliPayAmt + " ";
                         }
                         if (!string.IsNullOrEmpty(BalanceAmt))
                         {
@@ -283,7 +322,7 @@ namespace WinSaasPOS
                             totalpay += "代金券：" + CashCouponAmt + " ";
                         }
 
-                        if (order.orderstatusvalue==5)
+                        if (order.orderstatusvalue == 5)
                         {
                             dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite);
                         }
@@ -291,45 +330,23 @@ namespace WinSaasPOS
                         {
                             dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund);
                         }
-                        
+
                     }
                     dgvOrderOnLine.ClearSelection();
                     Console.WriteLine("页面显示时间" + (DateTime.Now - starttime).TotalMilliseconds);
                     Application.DoEvents();
 
-                    if (LastOrderid != "0")
-                    {
-                        btnFirst.Enabled = true;
-                    }
-                    else
-                    {
-                        btnFirst.Enabled = false;
-                    }
-
-                    if (queryorder.hasnextpage == 1)
-                    {
-                        LastOrderid = queryorder.lastorderid;
-                        btnNext.Enabled = true;
-                        HaveNextPage = true;
-                    }
-                    else
-                    {
-                        HaveNextPage = false;
-                        btnNext.Enabled = false;
-                    }
-                 
-
 
                     if (dgvOrderOnLine.Rows.Count > 0)
                     {
                         pnlEmptyOrder.Visible = false;
-                       
-                       // ShowLog("刷新完成", false);
+
+                        // ShowLog("刷新完成", false);
                     }
                     else
                     {
                         pnlEmptyOrder.Visible = true;
-                        ShowLog("暂无数据", false);
+                        // ShowLog("暂无数据", false);
                     }
                 }
 
@@ -344,7 +361,7 @@ namespace WinSaasPOS
             catch (Exception ex)
             {
                 LoadingHelper.CloseForm();//关闭
-                ShowLog("查询订单异常："+ex.Message,true);
+                MainModel.ShowLog("查询订单异常：" + ex.Message, true);
             }
             finally
             {
@@ -360,7 +377,7 @@ namespace WinSaasPOS
             //DateTime datetime = DateTime.Now;
             var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
             var result = (long)(datetime - startTime).TotalMilliseconds;
-         
+
             return result.ToString();
         }
 
@@ -380,25 +397,27 @@ namespace WinSaasPOS
         }
 
 
+        ////TODO  修改样式
+        //private void ShowLog(string msg, bool iserror)
+        //{
 
-        //TODO  修改样式
-        private void ShowLog(string msg, bool iserror)
-        {
+        //    MsgHelper.AutoShowForm(msg);
+        //    //this.BeginInvoke(new InvokeHandler(delegate()
+        //    //{
+        //    //    frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
+        //    //    frmmsf.ShowDialog(); LogManager.WriteLog(msg);
+        //    //}));
 
-            MsgHelper.AutoShowForm(msg);
-            //this.BeginInvoke(new InvokeHandler(delegate()
-            //{
-
-            //    frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
-            //    frmmsf.ShowDialog(); LogManager.WriteLog(msg);
-            //}));
-
-        }
+        //}
 
         private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
+                if (!IsEnable)
+                {
+                    return;
+                }
 
                 if (e.RowIndex < 0)
                     return;
@@ -464,8 +483,7 @@ namespace WinSaasPOS
                 {
 
                     string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                    this.Enabled = false;
-
+                    IsEnable = false;
 
                     // Order SelectOrder =(Order) CurrentQueryOrder.orders.Where(r => r.orderid == selectorderid).ToList()[0];
                     Order SelectOrder = null;
@@ -480,15 +498,20 @@ namespace WinSaasPOS
 
                     if (SelectOrder == null)
                     {
-                        ShowLog("订单不存在，请刷新", false);
-                        this.Enabled = true;
+                        MainModel.ShowLog("订单不存在，请刷新", false);
+                        
                         return;
                     }
+                    LoadPicScreen(true);
 
                     frmRefundSelect frmrefund = new frmRefundSelect(SelectOrder);
+                    this.Invoke(new InvokeHandler(delegate()
+             {
+                
 
-                    frmrefund.ShowDialog();
-
+                 frmrefund.ShowDialog();
+             }));
+                     LoadPicScreen(false);
                     if (frmrefund.DialogResult == DialogResult.OK)
                     {
 
@@ -532,10 +555,11 @@ namespace WinSaasPOS
                             totalpay += "代金券：" + CashCouponAmt + " ";
                         }
 
-                        frmDeleteGood frmdelete = new frmDeleteGood("是否确认退款？", totalpay, "");
-                        if (frmdelete.ShowDialog() != DialogResult.OK)
+
+                        FrmConfirmBack frmconfirmback = new FrmConfirmBack("是否确认退款？", totalpay, "");
+                        frmconfirmback.Location = new Point(0, 0);
+                        if (frmconfirmback.ShowDialog() != DialogResult.OK)
                         {
-                            this.Enabled = true;
                             return;
                         }
                         string orderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
@@ -543,11 +567,11 @@ namespace WinSaasPOS
                         string resultorderid = httputil.Refund(frmrefund.Refrefundpara, ref ErrorMsg);
                         if (ErrorMsg != "")
                         {
-                            ShowLog(ErrorMsg, true);
+                            MainModel.ShowLog(ErrorMsg, true);
                         }
                         else
                         {
-                             ShowLog("退款成功", false);
+                            MainModel.ShowLog("退款成功", false);
 
                             //ErrorMsg = "";
                             //PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
@@ -558,7 +582,7 @@ namespace WinSaasPOS
                             //else
                             //{
                             //    string PrintErrorMsg = "";
-                            //    bool printresult = PrintUtil.SEDPrint(printdetail, true, ref PrintErrorMsg);
+                            //    bool printresult = PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
 
                             //    if (PrintErrorMsg != "" || !printresult)
                             //    {
@@ -571,21 +595,21 @@ namespace WinSaasPOS
 
                             //}
                         }
+                        //后端订单信息更新需要时间，延时刷新
+                        Delay.Start(300);
                         btnQuery_Click(null, null);
                     }
 
 
-
-
-                    this.Enabled = true;
                 }
                 else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
                 {
-                    ShowPicScreen = true; this.Enabled = false;
-                    frmDeleteGood frmdelete = new frmDeleteGood("确认重打小票？", "", "");
-                    if (frmdelete.ShowDialog() != DialogResult.OK)
+                    IsEnable = false;
+
+                    FrmConfirmBack frmconfirmback = new FrmConfirmBack("确认重打小票？", "", "");
+                    frmconfirmback.Location = new Point(0, 0);
+                    if (frmconfirmback.ShowDialog() != DialogResult.OK)
                     {
-                        this.Enabled = true;
                         return;
                     }
 
@@ -597,78 +621,67 @@ namespace WinSaasPOS
                     PrintDetail printdetail = httputil.GetPrintDetail(orderid, ref ErrorMsg);
 
 
-                    if (ErrorMsg != "" || printdetail==null)
+                    if (ErrorMsg != "" || printdetail == null)
                     {
-                      
+
                         LoadingHelper.CloseForm();
-                        this.Enabled = true;
-                        ShowLog(ErrorMsg, true);
+                        MainModel.ShowLog(ErrorMsg, true);
                     }
                     else
                     {
                         //SEDPrint(printdetail);
-                        string PrintErrorMsg ="";
-                       bool printresult= PrintUtil.PrintOrder(printdetail,false, ref PrintErrorMsg);
+                        string PrintErrorMsg = "";
+                        bool printresult = PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
 
-                       if (PrintErrorMsg != "" || !printresult)
-                       {
-                           ShowLog(PrintErrorMsg,true);
-                       }
-                       else
-                       {
-                           ShowLog("打印完成",false);
-                       }
-                       
+                        if (PrintErrorMsg != "" || !printresult)
+                        {
+                            MainModel.ShowLog(PrintErrorMsg, true);
+                        }
+                        else
+                        {
+                            MainModel.ShowLog("打印完成", false);
+                        }
+
                     }
                     Delay.Start(300);
-                    this.Enabled = true;
                     LoadingHelper.CloseForm();
                     btnQuery_Click(null, null);
                 }
             }
             catch (Exception ex)
             {
-                this.Enabled = true;
-                LogManager.WriteLog("ERROR","订单查询操作异常"+ex.Message);
+
+                LogManager.WriteLog("ERROR", "订单查询操作异常" + ex.Message);
             }
             finally
             {
                 LoadingHelper.CloseForm();
-                this.Enabled = true;
-                
+                IsEnable = true;
+                LoadPicScreen(false);
+
             }
         }
 
         public void frmOrderQuery_SizeChanged(object sender, EventArgs e)
         {
-           // asf.ControlAutoSize(this);
+            // asf.ControlAutoSize(this);
         }
 
-        private bool ShowPicScreen=true;
-        private void frmOrderQuery_EnabledChanged(object sender, EventArgs e)
+
+        private void LoadPicScreen(bool isShown)
         {
             try
             {
-
-
-                if (this.Enabled)
+                if (isShown)
                 {
-                    picScreen.Visible = false;
-
+                    picScreen.BackgroundImage = MainModel.GetWinformImage(this);
+                    picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
+                    picScreen.Visible = true;
                 }
                 else
                 {
-                    if (ShowPicScreen)
-                    {
-                        picScreen.BackgroundImage = MainModel.GetWinformImage(this);
-                        picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
-                        picScreen.Visible = true;
-                    }
-                    else
-                    {
-                        ShowPicScreen = true;
-                    }
-
+                    //picScreen.Size = new System.Drawing.Size(0, 0);
+                    picScreen.Visible = false;
                 }
 
                 Application.DoEvents();
@@ -680,8 +693,19 @@ namespace WinSaasPOS
             }
         }
 
+        private void picScreen_Click(object sender, EventArgs e)
+        {
+            LoadPicScreen(false);
+        }
+
+
+
         private void btnFirst_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             LastOrderid = "0";
             dgvOrderOnLine.Rows.Clear();
             QueryOrder();
@@ -711,9 +735,9 @@ namespace WinSaasPOS
                     }
                     else
                     {
-                        MainModel.ShowLog("没有更多数据了",false);
+                        MainModel.ShowLog("没有更多数据了", false);
                     }
-                    
+
                     //if (sortProductByFirstCategoryid[CurrentFirstCategoryid].Count > 0 && sortProductByFirstCategoryid[CurrentFirstCategoryid].Count <= dgvGoodPic.Rows.Count * 4)
                     //{
                     //    lblOver.Visible = true;
@@ -725,6 +749,75 @@ namespace WinSaasPOS
                 }
             }
         }
+
+
+        public void btnWindows_Click(object sender, EventArgs e)
+        {
+            MainModel.ShowWindows();
+        }
+
+        private void btnQueryOnline_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsEnable)
+                {
+                    return;
+                }
+
+                btnQueryOnline.BackColor = Color.White;
+                btnQueryOffLine.BackColor = Color.LightSteelBlue;
+
+                dgvOrderOnLine.Visible = true;
+                dgvOrderOffLine.Visible = false;
+
+                if (dgvOrderOnLine.Rows.Count > 0)
+                {
+                    pnlEmptyOrder.Visible = false;
+                }
+                else
+                {
+                    pnlEmptyOrder.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("切换订单查询模式异常" + ex.Message, true);
+            }
+        }
+
+        private void btnQueryOffLine_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsEnable)
+                {
+                    return;
+                }
+
+                btnQueryOnline.BackColor = Color.LightSteelBlue;
+                btnQueryOffLine.BackColor = Color.White;
+
+                pnlEmptyOrder.Visible = true;
+                dgvOrderOnLine.Visible = false;
+                dgvOrderOffLine.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("切换订单查询模式异常" + ex.Message, true);
+            }
+        }
+
+
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ExStyle |= 0x02000000;
+        //        return cp;
+        //    }
+        //}
 
     }
 }

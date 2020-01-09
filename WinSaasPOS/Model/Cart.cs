@@ -12,24 +12,24 @@ namespace WinSaasPOS.Model
 
     [Serializable]
     public class orderpromotion
-{
-public string title { get; set; }
-public string amount { get; set; }
-public int highlight { get; set; }
-}
+    {
+        public string title { get; set; }
+        public string amount { get; set; }
+        public int highlight { get; set; }
+    }
 
 
 
 
 
     [Serializable]
-    public class Cart 
+    public class Cart
     {
 
         public string title { get; set; }
         public decimal totalpayment { get; set; }
         public List<Product> products { get; set; }
-        public Orderpricedetail[] orderpricedetails { get; set; }
+        public OrderPriceDetail[] orderpricedetails { get; set; }
         public Tenant tenant { get; set; }
         public Pickupinfo pickupinfo { get; set; }
         public string shopid { get; set; }
@@ -40,7 +40,7 @@ public int highlight { get; set; }
         public int facepayoption { get; set; }
         public int cashpayoption { get; set; }
 
-        
+
         /// <summary>
         /// 2019-11-25 是否使用会余额抵扣 1为是 0或空为否（非必填）
         /// </summary>
@@ -90,7 +90,7 @@ public int highlight { get; set; }
         /// <summary>
         /// 修改购物车价格前价格
         /// </summary>
-        public decimal totalpaymentbeforefix{get;set;}
+        public decimal totalpaymentbeforefix { get; set; }
 
         /// <summary>
         /// 修改购物车价格
@@ -217,7 +217,7 @@ public int highlight { get; set; }
         public long createdat { get; set; }
 
     }
-    
+
 
 
     [Serializable]

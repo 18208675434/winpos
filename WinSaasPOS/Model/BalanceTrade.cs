@@ -45,7 +45,5 @@ namespace WinSaasPOS.Model
         /// 错误信息
         /// </summary>
         public string errormessage { set; get; }
-
-
     }
 }

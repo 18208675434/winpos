@@ -29,11 +29,14 @@ namespace WinSaasPOS
         public frmExpense()
         {
             InitializeComponent();
+
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+            lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void btnToday_Click(object sender, EventArgs e)
         {
-
             try
             {
                 ShowPicScreen = false; this.Enabled = false;
@@ -119,8 +122,8 @@ namespace WinSaasPOS
             frmExpenseSave frmexpensave = new frmExpenseSave();
             frmexpensave.Opacity = 0.95d;
             frmexpensave.frmExpenseSave_SizeChanged(null,null);
-            frmexpensave.Size = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 3, SystemInformation.WorkingArea.Height - 200);
-            frmexpensave.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - frmexpensave.Width - 50, 100);
+            frmexpensave.Size = new System.Drawing.Size(Screen.AllScreens[0].Bounds.Width / 3, Screen.AllScreens[0].Bounds.Height - 200);
+            frmexpensave.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmexpensave.Width - 50, 100);
             frmexpensave.ShowDialog();
             
             this.Enabled = true;
@@ -168,7 +171,7 @@ namespace WinSaasPOS
                 }
                 else
                 {
-                    ShowLog("暂无数据", false);
+                   // ShowLog("暂无数据", false);
                 }
                 
 
@@ -189,15 +192,23 @@ namespace WinSaasPOS
 
         private void frmExpense_Shown(object sender, EventArgs e)
         {
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
+            //btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+            //lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+            //timerNow.Interval = 1000;
+            //timerNow.Enabled = true;
+
+            //btnToday_Click(null,null);
+            //QueryExpense();
+        }
+        private void frmExpense_Load(object sender, EventArgs e)
+        {
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
-
-            btnToday_Click(null,null);
-            //QueryExpense();
+            Application.DoEvents();
+            btnToday_Click(null, null);
         }
-
 
         private bool ShowPicScreen = true;
         private void picScreen_EnabledChanged(object sender, EventArgs e)
@@ -260,6 +271,13 @@ namespace WinSaasPOS
             lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         
         }
+
+        private void btnWindows_Click(object sender, EventArgs e)
+        {
+            MainModel.ShowWindows();
+        }
+
+
 
     }
 }

@@ -128,10 +128,11 @@ namespace WinSaasPOS.Common
         /// 获取本机MAC地址  
         /// </summary>  
         /// <returns>本机MAC地址</returns>  
-        public static string GetMacAddress()
+        public static string GetMacAddress(string oldmac)
         {
             try
             {
+                List<string> lstmac = new List<string>();
                 string strMac = string.Empty;
                 ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
                 ManagementObjectCollection moc = mc.GetInstances();
@@ -143,12 +144,35 @@ namespace WinSaasPOS.Common
                         strMac = strMac.Replace(":", "");
                         strMac = strMac.Replace("-", "");
                         if (strMac.Length > 10)
-                            break;
+                        {
+                            lstmac.Add(strMac);
+                        }
+                           
                     }
                 }
+
+                
                 moc = null;
                 mc = null;
-                return strMac;
+
+                if (lstmac.Count > 0)
+                {
+                    if (lstmac.Contains(oldmac))
+                    {
+                        return oldmac;
+                    }
+                    else
+                    {
+                        return lstmac[0];
+                    }
+
+                }
+                else
+                {
+                    return "unknown";
+                }
+
+               
             }
             catch (Exception ex)
             {
@@ -157,7 +181,6 @@ namespace WinSaasPOS.Common
 
             }
         }
-
     }
 
 
