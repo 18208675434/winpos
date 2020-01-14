@@ -53,17 +53,7 @@ namespace WinSaasPOS
             threadIniFormExedate.Start();
             
 
-            //客屏初始化
-            MainModel.frmmainmedia = new frmMainMedia();
-            if (Screen.AllScreens.Count() > 1)
-            {
-                asf.AutoScaleControlTest(MainModel.frmmainmedia, 1020, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height + 20, true);
-                MainModel.frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
-
-                MainModel.frmmainmedia.Show();
-                MainModel.frmmainmedia.IniForm(null);
-
-            }
+          
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -432,8 +422,7 @@ namespace WinSaasPOS
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             MainModel.ShowTask();
-            MainModel.frmmainmedia.Close();
-            MainModel.frmmainmedia = null;
+           
             ////CloseOSK();
         }
 
@@ -625,24 +614,24 @@ namespace WinSaasPOS
         //切换环境
         private void lblSN_Click(object sender, EventArgs e)
         {
-            //LogManager.WriteLog(click.ToString());
-            //// 两次点击间隔小于100毫秒时，算连续点击
-            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
-            //{
-            //    click++;
-            //    if (click >= 3)
-            //    {
-            //        click = 0;// 连续点击完毕时，清0
-            //        frmChangeUrl frmchangeurl = new frmChangeUrl();
-            //        frmchangeurl.ShowDialog();
-            //    }
-            //}
-            //else
-            //{
+            LogManager.WriteLog(click.ToString());
+            // 两次点击间隔小于100毫秒时，算连续点击
+            if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
+            {
+                click++;
+                if (click >= 3)
+                {
+                    click = 0;// 连续点击完毕时，清0
+                    frmChangeUrl frmchangeurl = new frmChangeUrl();
+                    frmchangeurl.ShowDialog();
+                }
+            }
+            else
+            {
 
-            //    click = 1;// 不是连续点击时，清0
-            //}
-            //lastClickTime = DateTime.Now;
+                click = 1;// 不是连续点击时，清0
+            }
+            lastClickTime = DateTime.Now;
         }
 
 
@@ -842,20 +831,58 @@ namespace WinSaasPOS
         {
             try
             {
-                string imgname = "LoginLogo.bmp";
-                if (File.Exists(MainModel.MediaPath + imgname))
-                {
-                    picTenantLogo.BackgroundImage = Image.FromFile(MainModel.MediaPath + imgname);
+                //string imgname = "LoginLogo.bmp";
+                //if (File.Exists(MainModel.MediaPath + imgname))
+                //{
+                //    picTenantLogo.BackgroundImage = Image.FromFile(MainModel.MediaPath + imgname);
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
-                }
+                //}
             }
             catch { }
         }
 
+        #region 解决闪烁问题
+        //protected override void WndProc(ref Message m)
+        //{
+        //    if (m.Msg == 0x0014) // 禁掉清除背景消息
+        //        return;
+        //    base.WndProc(ref m);
+        //}
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
+        #endregion
+
+
+        //控制仅允许录入数字
+        private void TextNUMBER_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                TextBox txt = sender as TextBox;
+                e.Handled = true;
+                char ch = e.KeyChar;
+
+                if (ch >= '0' && ch <= '9')
+                    e.Handled = false;
+
+                if (ch == (char)Keys.Back)
+                    e.Handled = false;
+
+            }
+            catch { }
+        }
     }
 
 

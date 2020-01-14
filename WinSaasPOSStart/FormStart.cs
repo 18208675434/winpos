@@ -33,17 +33,22 @@ namespace WinSaasPosStart
         public FormStart()
         {
             InitializeComponent();
-
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void FormStart_Shown(object sender, EventArgs e)
         {
-            string devicesn = MainModel.GetMacAddress();
+            //电脑可能会有多个mac地址，取第一次获取的mac地址为准  同时同步start.exe 获取的mac
+            string currentmac = "";
+            try
+            {
+                currentmac = INIManager.GetIni("System", "DeviceSN", MainModel.StartIniPath);
+            }
+            catch { }
+            string devicesn = MainModel.GetMacAddress(currentmac);
             txtDeviceSN.Text = devicesn;
             MainModel.DeviceSN = devicesn;
-            //MainModel.DeviceSN = MainModel.GetHardDiskID();
 
             INIManager.SetIni("System", "DeviceSN",devicesn, MainModel.StartIniPath);
             //INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
@@ -58,28 +63,25 @@ namespace WinSaasPosStart
         private void LoadForm()
         {
             try {
-
-          //      this.Invoke(new InvokeHandler(delegate()
-          //{
+                this.Enabled = false;
               if (!File.Exists(MainModel.IniPath))//判断文件是否存在 不存在配置文件 程序需要重新下载
               {
 
+                  LoadingHelper.ShowLoadingScreen("版本信息检查中...");
                   ShowStatus("版本信息检查中...");
                   StartType = 0;
 
                   MainModel.Version = "--";
-                  txtDeviceSN.Text = MainModel.GetMacAddress();
+                  txtDeviceSN.Text = MainModel.DeviceSN;
 
                   string ErrorMsg = "";
                   VersionInfo versioninfo = httputil.GetWinPosVersion(ref ErrorMsg);
+
+                  LoadingHelper.CloseForm();
                   if (ErrorMsg != "" || versioninfo == null)
                   {
-                      this.Invoke(new InvokeHandler(delegate()
-                      {
                       MessageBox.Show(ErrorMsg);
-                  }));
 
-                      //StartPOS();
                   }
                   else
                   {
@@ -88,32 +90,24 @@ namespace WinSaasPosStart
                       lblVersion.Text = versioninfo.apkversiondto.version;
                       txtVersion.Text = versioninfo.apkversiondto.description;
 
-                      if (CurrentVersionInfo != null && (CurrentVersionInfo.testsn == null || CurrentVersionInfo.testsn.Length == 0 || CurrentVersionInfo.testsn.Contains(MainModel.DeviceSN)))
-                      {
-                          UpdateFile();
-                      }
-                      else
-                      {
-                          StartPOS();
-                      }
-
-
-
+                      UpdateFile();
                   }
 
               }
               else
               {
+
+                  LoadingHelper.ShowLoadingScreen("版本信息检查中...");
                   //string CurrentVersion = "0.0.0";
                   string CurrentVersion = INIManager.GetIni("System", "Version", MainModel.IniPath);
 
                   string ErrorMsg = "";
                   VersionInfo versioninfo = httputil.GetWinPosVersion(ref ErrorMsg);
+                  LoadingHelper.CloseForm();
                   if (ErrorMsg != "" || versioninfo == null)
                   {
                       MessageBox.Show(ErrorMsg);
 
-                      //StartPOS();
                   }
                   else
                   {
@@ -150,20 +144,14 @@ namespace WinSaasPosStart
                               else
                               {
                                   StartPOS();
-                              }
-
-                             
+                              }                           
                           }
                           else
                           {
                               StartPOS();
                           }
-                          // UpdateFile();
-                      
-
                   }
               }
-          //}));
                
             }
             catch (Exception ex)
@@ -172,39 +160,13 @@ namespace WinSaasPosStart
                 MessageBox.Show("更新异常" + ex.Message);
 
             }
-        }
-
-
-        //下载文件
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string ErrorMsg = "";
-            VersionInfo versioninfo = httputil.GetWinPosVersion(ref ErrorMsg);
-            if (ErrorMsg != "" || versioninfo == null)
+            finally
             {
-                MessageBox.Show("手动更新失败："+ErrorMsg);             
-            }
-            else
-            {
-                CurrentVersionInfo = versioninfo;
-                lblVersion.Text = versioninfo.apkversiondto.version;
-                txtVersion.Text = versioninfo.apkversiondto.description;
-
-                if (CurrentVersionInfo != null && (CurrentVersionInfo.testsn == null || CurrentVersionInfo.testsn.Length == 0 || CurrentVersionInfo.testsn.Contains(MainModel.DeviceSN)))
-                {
-                    UpdateFile();
-                }
-                else
-                {
-                   // StartPOS();
-                }
-               
-                //UpdateFile();
-
+                this.Enabled = true;
+                LoadingHelper.CloseForm();
             }
         }
+
 
         /// <summary>
         /// 更新程序文件
@@ -216,11 +178,9 @@ namespace WinSaasPosStart
                 this.Enabled = false;
                 LoadingHelper.ShowLoadingScreen("系统升级中|请稍候...");
                 
-
           //      this.Invoke(new InvokeHandler(delegate()
           //{
               string pathurl = CurrentVersionInfo.apkversiondto.url;
-
 
               ShowStatus("文件下载中...");
               Application.DoEvents();
@@ -230,7 +190,6 @@ namespace WinSaasPosStart
               }             
 
               ShowStatus("文件下载完成");
-
 
               //更新文件
               string[] files = Directory.GetFiles(MainModel.ServerPath);
@@ -291,75 +250,6 @@ namespace WinSaasPosStart
             }
         }
 
-
-        private void UpdateFileTest()
-        {
-            try
-            {
-                string pathurl = "https://image-test.zhuizhikeji.com/WinPos-v1.0.1.zip";
-
-                ShowStatus("文件下载中...");
-                DownLoadFile(pathurl);
-
-                ShowStatus("文件下载完成");
-
-
-
-
-                //更新文件
-                string[] files = Directory.GetFiles(MainModel.ServerPath);
-                List<string> lstfilename = new List<string>();
-                foreach (string file in files)
-                {
-                    lstfilename.Add(Path.GetFileName(file));
-                }
-
-
-                ShowStatus("文件更新中...");
-                string[] filesTemp = Directory.GetFiles(MainModel.TempFilePath);
-
-                foreach (string file in filesTemp)
-                {
-                    string fileName = Path.GetFileName(file);
-                    if (!files.Contains(file))
-                    {
-                        //配置文件已存在不更新
-                        if ((fileName == "Config.ini" && lstfilename.Contains("Conofig.ini")) || (fileName == "StartConfig.ini" && lstfilename.Contains("StartConfig.ini"))) //已存在配置文件不更新
-                        {
-
-                        }
-                        else
-                        {
-                            //防止文件正在使用
-                            try
-                            {
-                                File.Copy(file, MainModel.ServerPath + fileName, true);
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
-                        }
-
-                    }
-
-                }
-
-
-                ShowStatus("更新完成");
-
-                INIManager.SetIni("System", "Version", lblVersion.Text, MainModel.IniPath);
-
-                StartPOS();
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("更新文件异常" + ex.Message);
-                ShowStatus("更新异常" + ex.Message);
-            }
-        }
-
         /// <summary>
         /// 下载文件 并解压
         /// </summary>
@@ -399,8 +289,7 @@ namespace WinSaasPosStart
             catch (Exception ex)
             {
                 LogManager.WriteLog("下载文件异常：" + ex.Message);
-                ShowStatus("下载文件异常：" + ex.Message);
-                
+                ShowStatus("下载文件异常：" + ex.Message);                
                 return false;
             }
         }
@@ -449,42 +338,41 @@ namespace WinSaasPosStart
             //this.Invoke(new InvokeHandler(delegate()
             //{
             //lblStatus.Text = msg;
-                
            // }));
-
         }
 
         private void btnStartPos_Click(object sender, EventArgs e)
         {
             try
             {
-                string ErrorMsg = "";
-                VersionInfo versioninfo = httputil.GetWinPosVersion(ref ErrorMsg);
-                if (ErrorMsg != "" || versioninfo == null)
-                {
-                    MessageBox.Show(ErrorMsg);
-                    //ShowStatus("检查版本信息异常：" + ErrorMsg);
-                }
-                else
-                {
-                    CurrentVersionInfo = versioninfo;
-                    lblVersion.Text = versioninfo.apkversiondto.version;
-                    txtVersion.Text = versioninfo.apkversiondto.description;
 
-                    if (CurrentVersionInfo != null && (CurrentVersionInfo.testsn == null || CurrentVersionInfo.testsn.Length == 0 || CurrentVersionInfo.testsn.Contains(MainModel.DeviceSN)))
-                    {
-                        UpdateFile();
+                LoadForm();
+                //string ErrorMsg = "";
+                //VersionInfo versioninfo = httputil.GetWinPosVersion(ref ErrorMsg);
+                //if (ErrorMsg != "" || versioninfo == null)
+                //{
+                //    MessageBox.Show(ErrorMsg);
+                //}
+                //else
+                //{
+                //    CurrentVersionInfo = versioninfo;
+                //    lblVersion.Text = versioninfo.apkversiondto.version;
+                //    txtVersion.Text = versioninfo.apkversiondto.description;
 
-                        Application.DoEvents();
-                        StartPOS();
-                    }
-                    else
-                    {
-                        StartPOS();
-                    }
+                //    if (CurrentVersionInfo != null && (CurrentVersionInfo.testsn == null || CurrentVersionInfo.testsn.Length == 0 || CurrentVersionInfo.testsn.Contains(MainModel.DeviceSN)))
+                //    {
+                //        UpdateFile();
 
-                }
-                Application.DoEvents();
+                //        Application.DoEvents();
+                //        StartPOS();
+                //    }
+                //    else
+                //    {
+                //        StartPOS();
+                //    }
+
+                //}
+                //Application.DoEvents();
                 
             }
             catch (Exception ex)
@@ -495,10 +383,6 @@ namespace WinSaasPosStart
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            UpdateFileTest();
-        }
 
         private void btnCopyCode_Click(object sender, EventArgs e)
         {

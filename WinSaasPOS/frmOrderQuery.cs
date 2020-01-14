@@ -225,11 +225,6 @@ namespace WinSaasPOS
             try
             {
 
-
-                DateTime starttime = DateTime.Now;
-
-
-
                 string phone = txtPhone.Text;
                 string orderid = txtOrderID.Text;
 
@@ -254,9 +249,6 @@ namespace WinSaasPOS
                 string ErrorMsg = "";
                 QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
 
-                Console.WriteLine("访问接口时间" + (DateTime.Now - starttime).TotalMilliseconds);
-
-                //CurrentQueryOrder = queryorder;
             
 
                 if (ErrorMsg != "" || queryorder == null)
@@ -333,7 +325,6 @@ namespace WinSaasPOS
 
                     }
                     dgvOrderOnLine.ClearSelection();
-                    Console.WriteLine("页面显示时间" + (DateTime.Now - starttime).TotalMilliseconds);
                     Application.DoEvents();
 
 
@@ -350,13 +341,9 @@ namespace WinSaasPOS
                     }
                 }
 
-                Console.WriteLine("loading开始时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
                 LoadingHelper.CloseForm();//关闭
-                Console.WriteLine("loading关闭时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
-                //Application.DoEvents();
-                Console.WriteLine("完成时间" + (DateTime.Now - starttime).TotalMilliseconds);
             }
             catch (Exception ex)
             {
@@ -595,6 +582,7 @@ namespace WinSaasPOS
 
                             //}
                         }
+                        IsEnable = true;
                         //后端订单信息更新需要时间，延时刷新
                         Delay.Start(300);
                         btnQuery_Click(null, null);

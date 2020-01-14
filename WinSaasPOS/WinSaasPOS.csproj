@@ -96,6 +96,7 @@
     <Compile Include="Common\NumberUtil.cs" />
     <Compile Include="Common\PrintUtil.cs" />
     <Compile Include="Common\ReceiptUtil.cs" />
+    <Compile Include="Common\ScaleUtil.cs" />
     <Compile Include="Common\ScanerHook.cs" />
     <Compile Include="Common\ScanItem.cs" />
     <Compile Include="Common\TableClass.cs" />
@@ -691,6 +692,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="20190918080041866_easyicon_net_512.ico" />
+    <None Include="Resources\border__minus.bmp" />
+    <None Include="Resources\border__minus1.bmp" />
+    <None Include="Resources\border_add.bmp" />
     <Content Include="Resources\FixDisenable.bmp" />
     <Content Include="Resources\FixEnable.bmp" />
     <None Include="Resources\Qustion.bmp" />

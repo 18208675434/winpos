@@ -53,7 +53,7 @@ namespace WinSaasPOS
             InitializeComponent();
         }
 
-        public frmCashCoupon(Cart cart)
+        public frmCashCoupon(Cart cart,List<string> lstcash)
         {
             InitializeComponent();
             try
@@ -63,7 +63,7 @@ namespace WinSaasPOS
             }
             catch { }
             CurrentCart = (Cart)cart.qianClone();
-            LoadCashCoupon();
+            LoadCashCoupon(lstcash);
         }
 
         private void frmCashCoupon_Shown(object sender, EventArgs e)
@@ -135,17 +135,17 @@ namespace WinSaasPOS
         }
 
 
-        public void LoadCashCoupon()
+        public void LoadCashCoupon(List<string> lstCashCoupons)
         {
             try
             {
-                string ErrorMsg = "";
-                List<string> lstCashCoupons = httputil.GetAvailableCashCoupons(ref ErrorMsg);
+                //string ErrorMsg = "";
+                //List<string> lstCashCoupons = httputil.GetAvailableCashCoupons(ref ErrorMsg);
 
-                if (!string.IsNullOrEmpty(ErrorMsg))
-                {
-                    MainModel.ShowLog(ErrorMsg, false);
-                }
+                //if (!string.IsNullOrEmpty(ErrorMsg))
+                //{
+                //    MainModel.ShowLog(ErrorMsg, false);
+                //}
                 //加载之前先清空，页面只隐藏 不释放资源
                 pnlCashCoupons.Controls.Clear();
                 foreach (string casncoupon in lstCashCoupons)
@@ -181,7 +181,9 @@ namespace WinSaasPOS
             }
 
             CurrentCart.cashcouponamt = casncoupon;
-            RefreshCart();
+            CurrentCart.totalpayment=CartTotalPayment-casncoupon;
+            //RefreshCart();
+            UpdateBtnStatus();
 
             foreach (Control con in pnlCashCoupons.Controls)
             {
@@ -689,6 +691,7 @@ namespace WinSaasPOS
                             btnPayOnLine.BackColor = Color.Silver;
                         }
 
+
                         MainModel.frmMainmediaCart = CurrentCart;
                         MainModel.frmmainmedia.UpdateForm();
 
@@ -772,6 +775,84 @@ namespace WinSaasPOS
             catch (Exception ex)
             {
                 LogManager.WriteLog("刷新现金券窗体异常" + ex.Message);
+            }
+        }
+
+
+        private void UpdateBtnStatus()
+        {
+            try
+            {
+                lblCash.Text = "￥" +  CurrentCart.cashcouponamt.ToString("f2");
+                lblNeedCash.Text = "￥" + CurrentCart.totalpayment.ToString("f2");
+
+                if (CurrentCart.totalpayment == 0)
+                {
+                    lblNext.Visible = false;
+                    btnPayOK.Visible = true;
+                    btnPayByCash.Visible = false;
+                    btnPayByBalance.Visible = false;
+                    btnPayOnLine.Visible = false;
+                }
+                else
+                {
+                    lblNext.Visible = true;
+                    btnPayOK.Visible = false;
+                    btnPayByCash.Visible = true;
+                    btnPayByBalance.Visible = true;
+                    btnPayOnLine.Visible = true;
+                }
+
+                //tag=1 允许访问 0 或其他不允许   改变enabled背景色丑
+                if (CurrentCart.paymenttypes.balancepayenabled == 1)
+                {
+                    btnPayByBalance.Tag = 1;
+                    btnPayByBalance.BackColor = Color.DarkTurquoise;
+                }
+                else
+                {
+                    if (CurrentCart.availablebalanceamount >= CartTotalPayment)
+                    {
+                        btnPayByBalance.Tag = 1;
+                        btnPayByBalance.BackColor = Color.DarkTurquoise;
+                    }
+                    else
+                    {
+                        btnPayByBalance.Tag = 0;
+                        btnPayByBalance.BackColor = Color.Silver;
+                    }
+                   
+                }
+
+                if (CurrentCart.paymenttypes.cashenabled == 1)
+                {
+                    btnPayByCash.Tag = 1;
+                    btnPayByCash.BackColor = Color.DarkOrange;
+                }
+                else
+                {
+                    btnPayByCash.Tag = 0;
+                    btnPayByCash.BackColor = Color.Silver;
+                }
+
+                if (CurrentCart.paymenttypes.onlineenabled == 1)
+                {
+                    btnPayOnLine.Tag = 1;
+                    btnPayOnLine.BackColor = Color.Tomato;
+                }
+                else
+                {
+                    btnPayOnLine.Tag = 0;
+                    btnPayOnLine.BackColor = Color.Silver;
+                }
+
+
+                //MainModel.frmMainmediaCart = CurrentCart;
+                //MainModel.frmmainmedia.UpdateForm();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("更新代金券页面按钮状态异常"+ex.Message);
             }
         }
 

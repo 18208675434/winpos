@@ -90,10 +90,11 @@ namespace WinSaasPosStart
         /// 获取本机MAC地址  
         /// </summary>  
         /// <returns>本机MAC地址</returns>  
-        public static string GetMacAddress()
+        public static string GetMacAddress(string oldmac)
         {
             try
             {
+                List<string> lstmac = new List<string>();
                 string strMac = string.Empty;
                 ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
                 ManagementObjectCollection moc = mc.GetInstances();
@@ -105,20 +106,77 @@ namespace WinSaasPosStart
                         strMac = strMac.Replace(":", "");
                         strMac = strMac.Replace("-", "");
                         if (strMac.Length > 10)
-                            break;
+                        {
+                            lstmac.Add(strMac);
+                        }
+
                     }
                 }
+
+
                 moc = null;
                 mc = null;
-                return strMac;
+
+                if (lstmac.Count > 0)
+                {
+                    if (lstmac.Contains(oldmac))
+                    {
+                        return oldmac;
+                    }
+                    else
+                    {
+                        return lstmac[0];
+                    }
+
+                }
+                else
+                {
+                    return "unknown";
+                }
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                LogManager.WriteLog("获取MAC地址异常："+ex.Message);
+                LogManager.WriteLog("获取MAC地址异常：" + ex.Message);
                 return "unknown";
 
             }
         }
+
+        ///// <summary>  
+        ///// 获取本机MAC地址  
+        ///// </summary>  
+        ///// <returns>本机MAC地址</returns>  
+        //public static string GetMacAddress()
+        //{
+        //    try
+        //    {
+        //        string strMac = string.Empty;
+        //        ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+        //        ManagementObjectCollection moc = mc.GetInstances();
+        //        foreach (ManagementObject mo in moc)
+        //        {
+        //            if ((bool)mo["IPEnabled"] == true)
+        //            {
+        //                strMac = mo["MacAddress"].ToString();
+        //                strMac = strMac.Replace(":", "");
+        //                strMac = strMac.Replace("-", "");
+        //                if (strMac.Length > 10)
+        //                    break;
+        //            }
+        //        }
+        //        moc = null;
+        //        mc = null;
+        //        return strMac;
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        LogManager.WriteLog("获取MAC地址异常："+ex.Message);
+        //        return "unknown";
+
+        //    }
+        //}
 
         //当前时间戳
         public static string getStampByDateTime(DateTime datetime)

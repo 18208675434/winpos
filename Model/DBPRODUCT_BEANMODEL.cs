@@ -1,14 +1,14 @@
 ﻿using System;
 namespace Maticsoft.Model
 {
-	/// <summary>
-	/// DBPRODUCT_BEAN:实体类(属性说明自动提取数据库字段的描述信息)
-	/// </summary>
-	[Serializable]
-	public partial class DBPRODUCT_BEANMODEL
-	{
-		public DBPRODUCT_BEANMODEL()
-		{}
+    /// <summary>
+    /// DBPRODUCT_BEAN:实体类(属性说明自动提取数据库字段的描述信息)
+    /// </summary>
+    [Serializable]
+    public partial class DBPRODUCT_BEANMODEL
+    {
+        public DBPRODUCT_BEANMODEL()
+        { }
         #region Model
         private Int64 __id;
         private string _skucode;
@@ -62,6 +62,7 @@ namespace Maticsoft.Model
         private string _first_letter;
         private string _all_first_letter;
         private Int64 _shelflife;
+        private Int64 _skutype;
         /// <summary>
         /// 
         /// </summary>
@@ -478,8 +479,16 @@ namespace Maticsoft.Model
             set { _shelflife = value; }
             get { return _shelflife; }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Int64 SKUTYPE
+        {
+            set { _skutype = value; }
+            get { return _skutype; }
+        }
         #endregion Model
 
-	}
+    }
 }
 

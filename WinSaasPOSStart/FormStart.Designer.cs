@@ -36,7 +36,6 @@
             this.txtVersion = new System.Windows.Forms.TextBox();
             this.lblCurrentVersion = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.picExit = new System.Windows.Forms.PictureBox();
             this.btnStartPos = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -121,22 +120,6 @@
             this.label3.Size = new System.Drawing.Size(90, 21);
             this.label3.TabIndex = 6;
             this.label3.Text = "当前版本：";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(1, 2);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(212, 31);
-            this.btnUpdate.TabIndex = 10;
-            this.btnUpdate.Text = "手动更新";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Visible = false;
-            this.btnUpdate.Click += new System.EventHandler(this.button2_Click);
             // 
             // picExit
             // 
@@ -258,7 +241,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnStartPos);
             this.Controls.Add(this.picExit);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.lblCurrentVersion);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtVersion);
@@ -286,7 +268,6 @@
         private System.Windows.Forms.TextBox txtVersion;
         private System.Windows.Forms.Label lblCurrentVersion;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.PictureBox picExit;
         private System.Windows.Forms.Button btnStartPos;
         private System.Windows.Forms.Label label4;

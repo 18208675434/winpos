@@ -109,9 +109,9 @@
             this.lblChangeStr.Location = new System.Drawing.Point(18, 99);
             this.lblChangeStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChangeStr.Name = "lblChangeStr";
-            this.lblChangeStr.Size = new System.Drawing.Size(113, 25);
+            this.lblChangeStr.Size = new System.Drawing.Size(99, 25);
             this.lblChangeStr.TabIndex = 16;
-            this.lblChangeStr.Text = "还需支付 ：";
+            this.lblChangeStr.Text = "还需支付 :";
             // 
             // label3
             // 
@@ -131,9 +131,9 @@
             this.lblPriceStr.Location = new System.Drawing.Point(18, 19);
             this.lblPriceStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPriceStr.Name = "lblPriceStr";
-            this.lblPriceStr.Size = new System.Drawing.Size(93, 25);
+            this.lblPriceStr.Size = new System.Drawing.Size(99, 25);
             this.lblPriceStr.TabIndex = 14;
-            this.lblPriceStr.Text = "应收总额:";
+            this.lblPriceStr.Text = "应收总额 :";
             // 
             // panel2
             // 
@@ -152,11 +152,11 @@
             // lblExit
             // 
             this.lblExit.AutoSize = true;
-            this.lblExit.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblExit.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblExit.ForeColor = System.Drawing.Color.Black;
-            this.lblExit.Location = new System.Drawing.Point(258, 9);
+            this.lblExit.Location = new System.Drawing.Point(266, 9);
             this.lblExit.Name = "lblExit";
-            this.lblExit.Size = new System.Drawing.Size(118, 21);
+            this.lblExit.Size = new System.Drawing.Size(103, 20);
             this.lblExit.TabIndex = 19;
             this.lblExit.Text = "返回收银方式>";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);

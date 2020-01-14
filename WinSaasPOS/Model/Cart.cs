@@ -50,7 +50,7 @@ namespace WinSaasPOS.Model
         /// 余额支付金额
         /// </summary>
         public decimal balancepayamt { get; set; }
-
+        public decimal availablebalanceamount { set; get; }
 
 
         /// <summary>
@@ -140,6 +140,7 @@ namespace WinSaasPOS.Model
         public int onlineenabled { get; set; }
         public int facepayenabled { get; set; }
         public int balancepayenabled { get; set; }
+        public int cashcouponpayenabled { get; set; }
     }
     [Serializable]
     public class Product

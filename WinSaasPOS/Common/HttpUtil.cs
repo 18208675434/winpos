@@ -46,6 +46,7 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "signin:" + json); }catch { }
                     errormsg = rd.message;
                     return "";
                 }
@@ -81,6 +82,7 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "GetUser:" + json); }catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -117,6 +119,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "getdeviceshopinfovo:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -158,6 +162,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "getscancodeskumemberdto:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -199,6 +205,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "getskuInfobyshortcode:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -299,6 +307,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "cart:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -412,7 +422,7 @@ namespace WinSaasPOS.Common
                 }
 
                 string json = HttpPOST(url, tempjson);
-
+                Console.WriteLine(json);
 
 
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -429,6 +439,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "cart:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -528,6 +540,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "create:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -567,6 +581,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "cancel:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return false;
                 }
@@ -600,6 +616,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "querystatus:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return 0;
                 }
@@ -641,6 +659,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "authcodetrade:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -686,6 +706,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "synctrade:" + json); }
+                    catch { }
                     returnerrormsg = rd.message;
                     erromessage = rd.message;
                     return null;
@@ -728,6 +750,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "trade:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -766,6 +790,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "querytrade:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -820,6 +846,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "barcoderecognition:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -873,6 +901,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "verifypassword:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -915,6 +945,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "detail:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -954,6 +986,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "query:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -990,6 +1024,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "refund:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return "";
                 }
@@ -1026,6 +1062,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "refund:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return "";
                 }
@@ -1063,6 +1101,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "refundvaluate:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1101,6 +1141,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "getposmedialistwithoutlogin:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1142,6 +1184,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "receipt:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1178,6 +1222,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "queryreceipt:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1214,6 +1260,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "member:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1255,6 +1303,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "queryshopscaledtosbypage:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1267,6 +1317,84 @@ namespace WinSaasPOS.Common
             }
         }
 
+        /// <summary>
+        /// 分页获取门店秤信息
+        /// </summary>
+        /// <returns></returns>
+        public ScaleForSaas GetScaleForSaas(int page, int size, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/product/scalestemp/gettempforshoppaginglist"; 
+                              
+
+                ScalePara scalepara = new ScalePara();
+                scalepara.shopid = MainModel.CurrentShopInfo.shopid;
+                scalepara.page = page;
+                scalepara.size = size;
+
+                string tempjson = JsonConvert.SerializeObject(scalepara);
+
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    ScaleForSaas scale = JsonConvert.DeserializeObject<ScaleForSaas>(rd.data.ToString());
+                    return scale;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "queryshopscaledtosbypage:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取门店秤信息异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 分页获取门店秤信息
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckScaleUpdate()
+        {
+            try
+            {
+                string url = "/pos/product/scalestemp/checkshoptempupdated";
+
+                string tempjson = "{\"lastrequestat\":\"" + MainModel.LastScaleTimeStamp + "\",\"shopid\":\"" + MainModel.CurrentShopInfo.shopid + "\"}";
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    bool result = Convert.ToBoolean(rd.data);
+                    return result;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "checkshoptempupdated:" + json); }
+                    catch { }
+                    return false ;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取门店秤信息异常：" + ex.Message);
+                return false ;
+            }
+        }
 
 
         /// <summary>
@@ -1281,7 +1409,7 @@ namespace WinSaasPOS.Common
                 string url = "/pos/order/pos/availablecashcoupons";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-
+                sort.Add("shopid",MainModel.CurrentShopInfo.shopid);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -1296,6 +1424,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "availablecashcoupons:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return lstCashCoupon;
                 }
@@ -1334,6 +1464,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "getallexpensesdto:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1379,6 +1511,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "saveexpenserecord:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return false;
                 }
@@ -1433,6 +1567,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "queryexpenserecords:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1471,6 +1607,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "membercard:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1510,6 +1648,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "getauthcodeimage:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1553,6 +1693,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "sendsmscode:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return false;
                 }
@@ -1593,6 +1735,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "signinwithsmscode:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return "";
                 }
@@ -1633,6 +1777,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "winposdetail:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1675,6 +1821,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "queryskushopofflinedtobypageforpossync:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1714,6 +1862,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "getincrementskushopofflinedtoforpossync:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }
@@ -1764,6 +1914,8 @@ namespace WinSaasPOS.Common
                 }
                 else
                 {
+                    try { LogManager.WriteLog("Error", "prices:" + json); }
+                    catch { }
                     erromessage = rd.message;
                     return null;
                 }

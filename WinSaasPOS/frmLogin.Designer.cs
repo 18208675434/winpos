@@ -132,7 +132,7 @@
             this.pnlUser.Controls.Add(this.txtPwd);
             this.pnlUser.Controls.Add(this.lblUser);
             this.pnlUser.Controls.Add(this.txtUser);
-            this.pnlUser.Location = new System.Drawing.Point(368, 235);
+            this.pnlUser.Location = new System.Drawing.Point(368, 238);
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(440, 247);
             this.pnlUser.TabIndex = 6;
@@ -210,6 +210,7 @@
             this.txtPwd.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPwd.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.txtPwd.Location = new System.Drawing.Point(42, 87);
+            this.txtPwd.MaxLength = 18;
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(347, 29);
@@ -234,10 +235,12 @@
             this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUser.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.txtUser.Location = new System.Drawing.Point(42, 24);
+            this.txtUser.MaxLength = 11;
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(347, 29);
             this.txtUser.TabIndex = 18;
             this.txtUser.TextChanged += new System.EventHandler(this.txtUser_TextChanged);
+            this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // chkAutoLoginUser
             // 
@@ -447,10 +450,12 @@
             this.txtPhoneCheckCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPhoneCheckCode.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.txtPhoneCheckCode.Location = new System.Drawing.Point(42, 139);
+            this.txtPhoneCheckCode.MaxLength = 8;
             this.txtPhoneCheckCode.Name = "txtPhoneCheckCode";
             this.txtPhoneCheckCode.Size = new System.Drawing.Size(249, 29);
             this.txtPhoneCheckCode.TabIndex = 24;
             this.txtPhoneCheckCode.TextChanged += new System.EventHandler(this.txtPhoneCheckCode_TextChanged);
+            this.txtPhoneCheckCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picCheckCode
             // 
@@ -491,10 +496,12 @@
             this.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPhone.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.txtPhone.Location = new System.Drawing.Point(42, 24);
+            this.txtPhone.MaxLength = 11;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(347, 29);
             this.txtPhone.TabIndex = 18;
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picExit
             // 

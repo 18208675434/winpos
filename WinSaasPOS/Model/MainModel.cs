@@ -204,6 +204,8 @@ namespace WinSaasPOS.Model
         /// </summary>
         public static string LastQuerySkushopCrementTimeStamp = "";
 
+        public static string LastScaleTimeStamp = "";
+
         public static string OrderPath
         {
             get

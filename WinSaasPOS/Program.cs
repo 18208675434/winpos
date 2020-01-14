@@ -22,15 +22,15 @@ namespace WinSaasPOS
             //获取包含当前进程的一个列表
             System.Diagnostics.Process[] processList = System.Diagnostics.Process.GetProcessesByName(currentProcess.ProcessName);
 
-            ////如果前进程已经存在
-            //if (processList.Length > 1)
-            //{
-            //    if (MessageBox.Show("检测到系统已在运行，不允许重复运行系统？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
-            //        != DialogResult.OK)
-            //        return;
-            //    return;
-            //}
-
+            //如果前进程已经存在
+            if (processList.Length > 1)
+            {
+                if (MessageBox.Show("检测到系统已在运行，不允许重复运行系统？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+                    != DialogResult.OK)
+                    return;
+                return;
+            }
+            
             //处理未捕获的异常
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             //处理UI线程异常

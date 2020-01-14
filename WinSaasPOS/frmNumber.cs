@@ -173,6 +173,15 @@ namespace WinSaasPOS
                     }
                 }
 
+                if (CurrentNumberType == NumberType.ProWeight)
+                {
+
+                    if (Convert.ToDouble(txtNum.Text) == 0)
+                    {
+                        return;
+                    }
+                }
+
                 if (lblInfo.Text == "请输入商品条码")
                 {
                     //if (txtNum.Text.Length > 5 && txtNum.Text.Length != 8 && txtNum.Text.Length != 13)
@@ -212,21 +221,34 @@ namespace WinSaasPOS
 
             Button button = (Button)sender;
 
+            //条码控制20位
             if (CurrentNumberType == NumberType.BarCode && txtNum.Text.Length >= 20)
             {
                 return;
             }
 
+            //会员号控制11位
             if (CurrentNumberType == NumberType.MemberCode && txtNum.Text.Length >= 11)
             {
                 return;
             }
 
+            //商品重量控制最大6位
             if (CurrentNumberType == NumberType.ProWeight && txtNum.Text.Length >= 6)
             {
                 return;
             }
 
+            //控制重量信息第一位不为0
+            if (CurrentNumberType == NumberType.ProWeight && txtNum.Text.Length >= 5 && button.Name=="btn00")
+            {
+                return;
+            }
+            if (CurrentNumberType == NumberType.ProWeight && txtNum.Text == "" && (button.Name == "btn00" || button.Name == "btn0"))
+            {
+                return;
+            }
+          
          
             txtNum.Text += button.Name.Replace("btn", "");
         }
