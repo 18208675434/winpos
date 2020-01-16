@@ -92,15 +92,13 @@ namespace WinSaasPOS
             threadIniExedate.IsBackground = true;
             //threadIniExedate.Priority = ThreadPriority.BelowNormal;
             threadIniExedate.Start();
-          
+
+
+            lblShopName.Text = "欢迎光临 "+ MainModel.CurrentShopInfo.shopname;
+            timerNow.Enabled = true;
 
             timerMedia.Interval = 10 * 60 * 1000;
             timerMedia.Enabled = true;
-        }
-
-        private void frmMainMedia_SizeChanged(object sender, EventArgs e)
-        {
-            // asf.ControlAutoSize(this); 
         }
 
         #endregion
@@ -375,6 +373,10 @@ namespace WinSaasPOS
                 }
                 catch { }
 
+               // UpdateFormExe("");
+
+                tlpnlRight.Left = pnlMemberCard.Left;
+
                 UpdateFormExe("");
                 ////////启动扫描处理线程
                 //Thread threadItemExedate = new Thread(UpdateFormExe);
@@ -386,6 +388,9 @@ namespace WinSaasPOS
                 LogManager.WriteLog("显示客屏购物车异常");
             }
         }
+
+
+        bool isfirstmembercard = true;
 
         //增加线程锁  防止多线程操作datagridview 红叉情况
         private object thislock = new object();
@@ -457,6 +462,34 @@ namespace WinSaasPOS
                                 }
                                
 
+                            }
+
+                            if (MainModel.CurrentMember != null)
+                            {
+                                if (CurrentCart.memberpromo != null && CurrentCart.memberpromo > 0)
+                                {
+
+                                    btnMemberPromo.Text = "会员已优惠:￥" + CurrentCart.memberpromo.ToString("f2");
+
+                                    btnMemberPromo.Visible = true;
+                                }
+                                else
+                                {
+                                    btnMemberPromo.Visible = false;
+                                }
+
+                            }
+                            else
+                            {
+                                if (CurrentCart.memberpromo != null && CurrentCart.memberpromo > 0)
+                                {
+                                    btnMemberPromo.Text = "会员可优惠:￥" + CurrentCart.memberpromo.ToString("f2");
+                                    btnMemberPromo.Visible = true;
+                                }
+                                else
+                                {
+                                    btnMemberPromo.Visible = false;
+                                }
                             }
 
                             if (CurrentCart.cashpayamt != null && CurrentCart.cashpayamt > 0)
@@ -551,8 +584,9 @@ namespace WinSaasPOS
                             this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
                             this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
 
-                        if (imgmembercard == null)
+                        if (imgmembercard == null && isfirstmembercard)
                         {
+                            isfirstmembercard = false;
                             string ErrorMsg = "";
                             string imgurl = httputil.GetMemberCard(ref ErrorMsg);
                             if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
@@ -699,7 +733,16 @@ namespace WinSaasPOS
                         mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
                     }
                     lblMobil.Text = mobil;
-                    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+
+                    if (!string.IsNullOrEmpty(CurrentMember.memberinformationresponsevo.nickname))
+                    {
+                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.nickname + "  你好！";
+
+                    }
+                    else
+                    {
+                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+                    }
 
                     pnlMemberCard.Visible = false;
 
@@ -1109,6 +1152,48 @@ namespace WinSaasPOS
             }
         }
 
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +GetWeek();
+        }
+
+
+        private string GetWeek()
+        {
+            try
+            {
+                string week = string.Empty;
+                switch ((int)DateTime.Now.DayOfWeek)
+                {
+                    case 0:
+                        week = "（星期日）";
+                        break;
+                    case 1:
+                        week = "（星期一）";
+                        break;
+                    case 2:
+                        week = "（星期二）";
+                        break;
+                    case 3:
+                        week = "（星期三）";
+                        break;
+                    case 4:
+                        week = "（星期四）";
+                        break;
+                    case 5:
+                        week = "（星期五）";
+                        break;
+                    default:
+                        week = "（星期六）";
+                        break;
+                }
+                return week;
+            }
+            catch
+            {
+                return "";
+            }
+        }
    
     }
 }

@@ -321,7 +321,7 @@ namespace WinSaasPOS
 
         }
 
-        private void FormCashPay_DataReceiveHandle(int type, string orderid)
+        private void FormCashPay_DataReceiveHandle(int type, string orderid,Cart cart)
         {
             try
             {
@@ -330,7 +330,7 @@ namespace WinSaasPOS
                     this.Invoke(new InvokeHandler(delegate()
                     {
                         this.Enabled = false;
-                        frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderid);
+                        frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderid,cart);
                         frmonlinepayresult.TopMost = true;
                         frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
                         frmonlinepayresult.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmonlinepayresult.Height) / 2);
@@ -346,6 +346,12 @@ namespace WinSaasPOS
                             if (DataReceiveHandle != null)
                                 this.DataReceiveHandle.BeginInvoke(1, SuccessOrderID, null, null);
                            this.Hide();  // this.Close();
+                        }
+                        else if (frmonlinepayresult.DialogResult == DialogResult.None)
+                        {
+                            if (DataReceiveHandle != null)
+                                this.DataReceiveHandle.BeginInvoke(0, "", null, null);
+                            this.Hide();
                         }
                         // ClearForm();
                         this.Enabled = true;
@@ -428,7 +434,7 @@ namespace WinSaasPOS
                             LoadingHelper.CloseForm();
 
 
-                            frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderresult.orderid);
+                            frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(orderresult.orderid,CurrentCart);
 
                             frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
                             frmonlinepayresult.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmonlinepayresult.Height) / 2);
@@ -443,6 +449,12 @@ namespace WinSaasPOS
                                 if (DataReceiveHandle != null)
                                     this.DataReceiveHandle.BeginInvoke(1, SuccessOrderID, null, null);
                                this.Hide();  // this.Close();
+                            }
+                            else if (frmonlinepayresult.DialogResult == DialogResult.Abort)
+                            {
+                                if (DataReceiveHandle != null)
+                                    this.DataReceiveHandle.BeginInvoke(0, "", null, null);
+                                this.Hide();
                             }
                         }
                     }
@@ -514,7 +526,7 @@ namespace WinSaasPOS
                         {
                             this.Invoke(new InvokeHandler(delegate()
                             {
-                                frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(frmmix.CrrentOrderid);
+                                frmOnLinePayResult frmonlinepayresult = new frmOnLinePayResult(frmmix.CrrentOrderid,CurrentCart);
 
                                 frmonlinepayresult.frmOnLinePayResult_SizeChanged(null, null);
                                 frmonlinepayresult.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmonlinepayresult.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmonlinepayresult.Height) / 2);
@@ -528,6 +540,13 @@ namespace WinSaasPOS
                                     if (DataReceiveHandle != null)
                                         this.DataReceiveHandle.BeginInvoke(1, SuccessOrderID, null, null);
                                    this.Hide();  // this.Close();
+                                }
+
+                                else if (frmonlinepayresult.DialogResult == DialogResult.None)
+                                {
+                                    if (DataReceiveHandle != null)
+                                        this.DataReceiveHandle.BeginInvoke(0, "", null, null);
+                                    this.Hide();
                                 }
                                 // ClearForm();
                             }));

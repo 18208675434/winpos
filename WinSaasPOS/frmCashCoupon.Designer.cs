@@ -70,7 +70,7 @@
             // 
             this.lblNeedCash.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblNeedCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblNeedCash.Location = new System.Drawing.Point(178, 99);
+            this.lblNeedCash.Location = new System.Drawing.Point(202, 93);
             this.lblNeedCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNeedCash.Name = "lblNeedCash";
             this.lblNeedCash.Size = new System.Drawing.Size(165, 30);
@@ -82,7 +82,7 @@
             // 
             this.lblCash.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblCash.Location = new System.Drawing.Point(178, 59);
+            this.lblCash.Location = new System.Drawing.Point(202, 56);
             this.lblCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCash.Name = "lblCash";
             this.lblCash.Size = new System.Drawing.Size(165, 30);
@@ -94,7 +94,7 @@
             // 
             this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(178, 19);
+            this.lblPrice.Location = new System.Drawing.Point(202, 16);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(165, 30);
@@ -106,7 +106,7 @@
             // 
             this.lblChangeStr.AutoSize = true;
             this.lblChangeStr.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblChangeStr.Location = new System.Drawing.Point(18, 99);
+            this.lblChangeStr.Location = new System.Drawing.Point(11, 99);
             this.lblChangeStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChangeStr.Name = "lblChangeStr";
             this.lblChangeStr.Size = new System.Drawing.Size(99, 25);
@@ -117,7 +117,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label3.Location = new System.Drawing.Point(18, 59);
+            this.label3.Location = new System.Drawing.Point(11, 59);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(118, 25);
@@ -128,7 +128,7 @@
             // 
             this.lblPriceStr.AutoSize = true;
             this.lblPriceStr.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblPriceStr.Location = new System.Drawing.Point(18, 19);
+            this.lblPriceStr.Location = new System.Drawing.Point(11, 19);
             this.lblPriceStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPriceStr.Name = "lblPriceStr";
             this.lblPriceStr.Size = new System.Drawing.Size(99, 25);
@@ -144,9 +144,9 @@
             this.panel2.Controls.Add(this.lblChangeStr);
             this.panel2.Controls.Add(this.lblCash);
             this.panel2.Controls.Add(this.lblPriceStr);
-            this.panel2.Location = new System.Drawing.Point(17, 200);
+            this.panel2.Location = new System.Drawing.Point(0, 200);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(352, 152);
+            this.panel2.Size = new System.Drawing.Size(379, 152);
             this.panel2.TabIndex = 18;
             // 
             // lblExit
@@ -154,11 +154,11 @@
             this.lblExit.AutoSize = true;
             this.lblExit.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblExit.ForeColor = System.Drawing.Color.Black;
-            this.lblExit.Location = new System.Drawing.Point(266, 9);
+            this.lblExit.Location = new System.Drawing.Point(248, 9);
             this.lblExit.Name = "lblExit";
-            this.lblExit.Size = new System.Drawing.Size(103, 20);
+            this.lblExit.Size = new System.Drawing.Size(131, 20);
             this.lblExit.TabIndex = 19;
-            this.lblExit.Text = "返回收银方式>";
+            this.lblExit.Text = "返回选择收银方式>";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
             // 
             // btnPayOK
@@ -169,7 +169,7 @@
             this.btnPayOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPayOK.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnPayOK.ForeColor = System.Drawing.Color.White;
-            this.btnPayOK.Location = new System.Drawing.Point(17, 401);
+            this.btnPayOK.Location = new System.Drawing.Point(17, 411);
             this.btnPayOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnPayOK.Name = "btnPayOK";
             this.btnPayOK.Size = new System.Drawing.Size(350, 50);
@@ -196,7 +196,7 @@
             this.lblNext.AutoSize = true;
             this.lblNext.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblNext.ForeColor = System.Drawing.Color.Black;
-            this.lblNext.Location = new System.Drawing.Point(13, 368);
+            this.lblNext.Location = new System.Drawing.Point(13, 378);
             this.lblNext.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNext.Name = "lblNext";
             this.lblNext.Size = new System.Drawing.Size(82, 24);
@@ -213,7 +213,7 @@
             this.btnPayByBalance.ForeColor = System.Drawing.Color.White;
             this.btnPayByBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByBalance.Image")));
             this.btnPayByBalance.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnPayByBalance.Location = new System.Drawing.Point(262, 401);
+            this.btnPayByBalance.Location = new System.Drawing.Point(262, 411);
             this.btnPayByBalance.Name = "btnPayByBalance";
             this.btnPayByBalance.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
             this.btnPayByBalance.Size = new System.Drawing.Size(107, 50);
@@ -233,7 +233,7 @@
             this.btnPayByCash.ForeColor = System.Drawing.Color.White;
             this.btnPayByCash.Image = ((System.Drawing.Image)(resources.GetObject("btnPayByCash.Image")));
             this.btnPayByCash.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnPayByCash.Location = new System.Drawing.Point(157, 401);
+            this.btnPayByCash.Location = new System.Drawing.Point(157, 411);
             this.btnPayByCash.Name = "btnPayByCash";
             this.btnPayByCash.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
             this.btnPayByCash.Size = new System.Drawing.Size(101, 50);
@@ -249,16 +249,16 @@
             this.btnPayOnLine.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnPayOnLine.FlatAppearance.BorderSize = 0;
             this.btnPayOnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayOnLine.Font = new System.Drawing.Font("微软雅黑", 7.5F);
+            this.btnPayOnLine.Font = new System.Drawing.Font("微软雅黑", 8.5F);
             this.btnPayOnLine.ForeColor = System.Drawing.Color.White;
             this.btnPayOnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnPayOnLine.Image")));
             this.btnPayOnLine.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnPayOnLine.Location = new System.Drawing.Point(17, 401);
+            this.btnPayOnLine.Location = new System.Drawing.Point(17, 411);
             this.btnPayOnLine.Name = "btnPayOnLine";
             this.btnPayOnLine.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
             this.btnPayOnLine.Size = new System.Drawing.Size(136, 50);
             this.btnPayOnLine.TabIndex = 26;
-            this.btnPayOnLine.Text = "微信/支付宝/银联云闪付\r\n";
+            this.btnPayOnLine.Text = "微信/支付宝";
             this.btnPayOnLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPayOnLine.UseVisualStyleBackColor = false;
             this.btnPayOnLine.Click += new System.EventHandler(this.btnPayOnLine_Click_1);

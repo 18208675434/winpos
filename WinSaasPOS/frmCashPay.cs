@@ -25,7 +25,7 @@ namespace WinSaasPOS
         /// </summary>
         /// <param name="type">0:支付完成   1：在线收银继续支付 3：取消  12004：会员登录失效   100031：店员登录失效</param>
         /// <param name="orderid"></param>
-        public delegate void DataRecHandleDelegate(int type, string orderid);
+        public delegate void DataRecHandleDelegate(int type, string orderid,Cart cart);
         /// <summary>
         /// 数据接收事件
         /// </summary>
@@ -81,10 +81,6 @@ namespace WinSaasPOS
         {
             try
             {
-                txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
-                btnNext.Focus();
-
-                lblPrice.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
 
                 txtCash.TextChanged += txtNum_TextChanged;
                 lblShuiyin.Click += lblShuiyin_Click;
@@ -102,6 +98,13 @@ namespace WinSaasPOS
                 btn7.Click += btn_Click;
                 btn8.Click += btn_Click;
                 btn9.Click += btn_Click;
+
+                txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
+                btnNext.Focus();
+
+                lblPrice.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
+
+              
             }
             catch (Exception ex)
             {
@@ -150,7 +153,7 @@ namespace WinSaasPOS
                 if (resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.HttpUserExpired)
                 {
                     if (DataReceiveHandle != null)
-                        this.DataReceiveHandle.BeginInvoke(resultcode, "", null, null);
+                        this.DataReceiveHandle.BeginInvoke(resultcode, "",thisCurrentCart, null, null);
                     //this.DialogResult = DialogResult.OK;
                     cashpaytype = resultcode;
                     cashpayorderid = "";
@@ -170,7 +173,7 @@ namespace WinSaasPOS
             try
             {
                 if (DataReceiveHandle != null)
-                    this.DataReceiveHandle.BeginInvoke(3, "", null, null);
+                    this.DataReceiveHandle.BeginInvoke(3, "", thisCurrentCart, null, null);
 
                 //this.DialogResult = DialogResult.OK;
                 cashpaytype = 3;
@@ -179,7 +182,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-
+                LogManager.WriteLog("关闭现金支付窗体异常"+ex.Message);
             }
         }
 
@@ -244,7 +247,7 @@ namespace WinSaasPOS
                         {
 
                             if (DataReceiveHandle != null)
-                                this.DataReceiveHandle.BeginInvoke(1, orderresult.orderid, null, null);
+                                this.DataReceiveHandle.BeginInvoke(1, orderresult.orderid, thisCurrentCart, null, null);
                             this.DialogResult = DialogResult.OK;
                             cashpaytype = 1;
                             cashpayorderid = orderresult.orderid;
@@ -308,7 +311,7 @@ namespace WinSaasPOS
                             {
 
                                 if (DataReceiveHandle != null)
-                                    this.DataReceiveHandle.BeginInvoke(0, orderresult.orderid, null, null);
+                                    this.DataReceiveHandle.BeginInvoke(0, orderresult.orderid, thisCurrentCart, null, null);
                                 this.DialogResult = DialogResult.OK;
                                 cashpaytype = 0;
                                 cashpayorderid = orderresult.orderid;
@@ -349,7 +352,7 @@ namespace WinSaasPOS
                             {
 
                                 if (DataReceiveHandle != null)
-                                    this.DataReceiveHandle.BeginInvoke(0, orderresult.orderid, null, null);
+                                    this.DataReceiveHandle.BeginInvoke(0, orderresult.orderid, thisCurrentCart, null, null);
                                 this.DialogResult = DialogResult.OK;
                                 cashpaytype = 0;
                                 cashpayorderid = orderresult.orderid;
@@ -406,7 +409,7 @@ namespace WinSaasPOS
                 {
 
                     if (DataReceiveHandle != null)
-                        this.DataReceiveHandle.BeginInvoke(1, orderresult.orderid, null, null);
+                        this.DataReceiveHandle.BeginInvoke(1, orderresult.orderid, thisCurrentCart, null, null);
 
                     this.DialogResult = DialogResult.OK;
                     cashpaytype = 1;

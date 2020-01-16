@@ -648,6 +648,7 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(trade);
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
                 //TODO
 
                 if (rd.code == 0)
@@ -693,7 +694,6 @@ namespace WinSaasPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                LogManager.WriteLog("第三方支付查询：" + json);
                 if (rd.code == 0)
                 {
                     synctrade sync = JsonConvert.DeserializeObject<synctrade>(rd.data.ToString());

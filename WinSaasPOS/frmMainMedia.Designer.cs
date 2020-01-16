@@ -63,6 +63,13 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblPriceTag = new System.Windows.Forms.Label();
             this.picDelete = new System.Windows.Forms.PictureBox();
+            this.picBirthday4 = new WinSaasPOS.UserControl.transparentPic(this.components);
+            this.picBirthday3 = new WinSaasPOS.UserControl.transparentPic(this.components);
+            this.picBirthday2 = new WinSaasPOS.UserControl.transparentPic(this.components);
+            this.picBirthday1 = new WinSaasPOS.UserControl.transparentPic(this.components);
+            this.pnlHead = new System.Windows.Forms.Panel();
+            this.lblShopName = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.pnlPayInfo = new System.Windows.Forms.Panel();
             this.picPayError = new System.Windows.Forms.PictureBox();
             this.picShowPay = new System.Windows.Forms.PictureBox();
@@ -90,6 +97,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tlpnlRight = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMemberPromo = new System.Windows.Forms.Button();
             this.dgvOrderDetail = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,10 +112,7 @@
             this.tabPageAdvert = new System.Windows.Forms.TabPage();
             this.player = new AxWMPLib.AxWindowsMediaPlayer();
             this.timerMedia = new System.Windows.Forms.Timer(this.components);
-            this.picBirthday4 = new WinSaasPOS.UserControl.transparentPic(this.components);
-            this.picBirthday3 = new WinSaasPOS.UserControl.transparentPic(this.components);
-            this.picBirthday2 = new WinSaasPOS.UserControl.transparentPic(this.components);
-            this.picBirthday1 = new WinSaasPOS.UserControl.transparentPic(this.components);
+            this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.tabControlMedia.SuspendLayout();
             this.tabPageIni.SuspendLayout();
             this.pnlDgvItem.SuspendLayout();
@@ -117,6 +122,7 @@
             this.pnlSinglePrice.SuspendLayout();
             this.pnlBarCode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
+            this.pnlHead.SuspendLayout();
             this.pnlPayInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picShowPay)).BeginInit();
@@ -141,10 +147,10 @@
             // 
             this.tabControlMedia.Controls.Add(this.tabPageIni);
             this.tabControlMedia.Controls.Add(this.tabPageAdvert);
-            this.tabControlMedia.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMedia.Location = new System.Drawing.Point(-5, -3);
             this.tabControlMedia.Name = "tabControlMedia";
             this.tabControlMedia.SelectedIndex = 0;
-            this.tabControlMedia.Size = new System.Drawing.Size(1020, 760);
+            this.tabControlMedia.Size = new System.Drawing.Size(1030, 760);
             this.tabControlMedia.TabIndex = 18;
             // 
             // tabPageIni
@@ -155,15 +161,16 @@
             this.tabPageIni.Controls.Add(this.picBirthday3);
             this.tabPageIni.Controls.Add(this.picBirthday2);
             this.tabPageIni.Controls.Add(this.picBirthday1);
+            this.tabPageIni.Controls.Add(this.pnlHead);
             this.tabPageIni.Controls.Add(this.pnlPayInfo);
             this.tabPageIni.Controls.Add(this.pnlMemberCard);
             this.tabPageIni.Controls.Add(this.dgvGood);
             this.tabPageIni.Controls.Add(this.tableLayoutPanel1);
             this.tabPageIni.Controls.Add(this.tlpnlRight);
             this.tabPageIni.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIni.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageIni.Name = "tabPageIni";
-            this.tabPageIni.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageIni.Size = new System.Drawing.Size(1012, 734);
+            this.tabPageIni.Size = new System.Drawing.Size(1022, 734);
             this.tabPageIni.TabIndex = 0;
             this.tabPageIni.Text = "tabPage1";
             // 
@@ -384,6 +391,91 @@
             this.picDelete.TabStop = false;
             this.picDelete.Visible = false;
             // 
+            // picBirthday4
+            // 
+            this.picBirthday4.CanMove = false;
+            this.picBirthday4.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday4.Image")));
+            this.picBirthday4.IsFocus = false;
+            this.picBirthday4.Location = new System.Drawing.Point(747, 443);
+            this.picBirthday4.Name = "picBirthday4";
+            this.picBirthday4.Size = new System.Drawing.Size(253, 284);
+            this.picBirthday4.TabIndex = 204;
+            this.picBirthday4.Text = "transparentPic2";
+            this.picBirthday4.unitScale = null;
+            this.picBirthday4.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
+            // 
+            // picBirthday3
+            // 
+            this.picBirthday3.CanMove = false;
+            this.picBirthday3.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday3.Image")));
+            this.picBirthday3.IsFocus = false;
+            this.picBirthday3.Location = new System.Drawing.Point(4, 579);
+            this.picBirthday3.Name = "picBirthday3";
+            this.picBirthday3.Size = new System.Drawing.Size(77, 151);
+            this.picBirthday3.TabIndex = 201;
+            this.picBirthday3.Text = "transparentPic1";
+            this.picBirthday3.unitScale = null;
+            this.picBirthday3.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
+            // 
+            // picBirthday2
+            // 
+            this.picBirthday2.CanMove = false;
+            this.picBirthday2.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday2.Image")));
+            this.picBirthday2.IsFocus = false;
+            this.picBirthday2.Location = new System.Drawing.Point(624, 1);
+            this.picBirthday2.Name = "picBirthday2";
+            this.picBirthday2.Size = new System.Drawing.Size(387, 84);
+            this.picBirthday2.TabIndex = 101;
+            this.picBirthday2.Text = "transparentPic1";
+            this.picBirthday2.unitScale = null;
+            this.picBirthday2.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
+            // 
+            // picBirthday1
+            // 
+            this.picBirthday1.CanMove = false;
+            this.picBirthday1.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday1.Image")));
+            this.picBirthday1.IsFocus = false;
+            this.picBirthday1.Location = new System.Drawing.Point(0, 0);
+            this.picBirthday1.Name = "picBirthday1";
+            this.picBirthday1.Size = new System.Drawing.Size(513, 85);
+            this.picBirthday1.TabIndex = 25;
+            this.picBirthday1.Text = "transparentPic1";
+            this.picBirthday1.unitScale = null;
+            this.picBirthday1.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
+            // 
+            // pnlHead
+            // 
+            this.pnlHead.BackColor = System.Drawing.Color.Black;
+            this.pnlHead.Controls.Add(this.lblShopName);
+            this.pnlHead.Controls.Add(this.lblTime);
+            this.pnlHead.Font = new System.Drawing.Font("宋体", 9F);
+            this.pnlHead.Location = new System.Drawing.Point(0, 0);
+            this.pnlHead.Name = "pnlHead";
+            this.pnlHead.Size = new System.Drawing.Size(1026, 52);
+            this.pnlHead.TabIndex = 302;
+            // 
+            // lblShopName
+            // 
+            this.lblShopName.AutoSize = true;
+            this.lblShopName.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.lblShopName.ForeColor = System.Drawing.Color.White;
+            this.lblShopName.Location = new System.Drawing.Point(468, 19);
+            this.lblShopName.Name = "lblShopName";
+            this.lblShopName.Size = new System.Drawing.Size(39, 20);
+            this.lblShopName.TabIndex = 37;
+            this.lblShopName.Text = "店铺";
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.lblTime.ForeColor = System.Drawing.Color.White;
+            this.lblTime.Location = new System.Drawing.Point(20, 19);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(159, 20);
+            this.lblTime.TabIndex = 36;
+            this.lblTime.Text = "2019-10-10 12:12:39";
+            // 
             // pnlPayInfo
             // 
             this.pnlPayInfo.BackColor = System.Drawing.Color.White;
@@ -392,10 +484,10 @@
             this.pnlPayInfo.Controls.Add(this.lblPayInfo2);
             this.pnlPayInfo.Controls.Add(this.lblPayInfo1);
             this.pnlPayInfo.Controls.Add(this.picPayInfo);
-            this.pnlPayInfo.Location = new System.Drawing.Point(28, 18);
+            this.pnlPayInfo.Location = new System.Drawing.Point(28, 72);
             this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPayInfo.Name = "pnlPayInfo";
-            this.pnlPayInfo.Size = new System.Drawing.Size(693, 699);
+            this.pnlPayInfo.Size = new System.Drawing.Size(693, 643);
             this.pnlPayInfo.TabIndex = 300;
             // 
             // picPayError
@@ -460,16 +552,16 @@
             this.pnlMemberCard.BackColor = System.Drawing.Color.Transparent;
             this.pnlMemberCard.Controls.Add(this.lblmemberCard);
             this.pnlMemberCard.Controls.Add(this.picMemberCard);
-            this.pnlMemberCard.Location = new System.Drawing.Point(726, 445);
+            this.pnlMemberCard.Location = new System.Drawing.Point(751, 460);
             this.pnlMemberCard.Name = "pnlMemberCard";
-            this.pnlMemberCard.Size = new System.Drawing.Size(269, 278);
+            this.pnlMemberCard.Size = new System.Drawing.Size(248, 265);
             this.pnlMemberCard.TabIndex = 18;
             // 
             // lblmemberCard
             // 
-            this.lblmemberCard.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblmemberCard.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblmemberCard.ForeColor = System.Drawing.Color.Black;
-            this.lblmemberCard.Location = new System.Drawing.Point(27, 234);
+            this.lblmemberCard.Location = new System.Drawing.Point(13, 224);
             this.lblmemberCard.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblmemberCard.Name = "lblmemberCard";
             this.lblmemberCard.Size = new System.Drawing.Size(220, 31);
@@ -480,7 +572,7 @@
             // picMemberCard
             // 
             this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picMemberCard.Location = new System.Drawing.Point(25, 3);
+            this.picMemberCard.Location = new System.Drawing.Point(12, 3);
             this.picMemberCard.Name = "picMemberCard";
             this.picMemberCard.Size = new System.Drawing.Size(220, 220);
             this.picMemberCard.TabIndex = 0;
@@ -524,7 +616,7 @@
             this.dgvGood.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvGood.Enabled = false;
             this.dgvGood.GridColor = System.Drawing.Color.LightGray;
-            this.dgvGood.Location = new System.Drawing.Point(24, 81);
+            this.dgvGood.Location = new System.Drawing.Point(24, 135);
             this.dgvGood.MultiSelect = false;
             this.dgvGood.Name = "dgvGood";
             this.dgvGood.ReadOnly = true;
@@ -533,7 +625,7 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
             this.dgvGood.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvGood.RowTemplate.Height = 90;
-            this.dgvGood.Size = new System.Drawing.Size(696, 649);
+            this.dgvGood.Size = new System.Drawing.Size(696, 590);
             this.dgvGood.TabIndex = 205;
             // 
             // barcode
@@ -643,7 +735,7 @@
             this.tableLayoutPanel1.Controls.Add(this.pnl3, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnl2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnl1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(24, 18);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(24, 72);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -745,31 +837,44 @@
             this.tlpnlRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpnlRight.Controls.Add(this.panel2, 0, 1);
             this.tlpnlRight.Controls.Add(this.pnlMember, 0, 0);
-            this.tlpnlRight.Location = new System.Drawing.Point(751, 18);
+            this.tlpnlRight.Location = new System.Drawing.Point(749, 69);
             this.tlpnlRight.Margin = new System.Windows.Forms.Padding(2);
             this.tlpnlRight.Name = "tlpnlRight";
             this.tlpnlRight.RowCount = 3;
             this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
             this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0F));
-            this.tlpnlRight.Size = new System.Drawing.Size(244, 422);
+            this.tlpnlRight.Size = new System.Drawing.Size(244, 389);
             this.tlpnlRight.TabIndex = 14;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.btnMemberPromo);
             this.panel2.Controls.Add(this.dgvOrderDetail);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.lblPrice);
             this.panel2.Controls.Add(this.lblPriceContent);
             this.panel2.Controls.Add(this.lblGoodsCount);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(2, 149);
+            this.panel2.Location = new System.Drawing.Point(2, 138);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(240, 270);
+            this.panel2.Size = new System.Drawing.Size(240, 248);
             this.panel2.TabIndex = 7;
+            // 
+            // btnMemberPromo
+            // 
+            this.btnMemberPromo.BackColor = System.Drawing.Color.Linen;
+            this.btnMemberPromo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnMemberPromo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMemberPromo.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.btnMemberPromo.Location = new System.Drawing.Point(10, 220);
+            this.btnMemberPromo.Name = "btnMemberPromo";
+            this.btnMemberPromo.Size = new System.Drawing.Size(215, 22);
+            this.btnMemberPromo.TabIndex = 20;
+            this.btnMemberPromo.UseVisualStyleBackColor = false;
+            this.btnMemberPromo.Visible = false;
             // 
             // dgvOrderDetail
             // 
@@ -797,14 +902,14 @@
             this.dataGridViewTextBoxColumn2});
             this.dgvOrderDetail.Enabled = false;
             this.dgvOrderDetail.GridColor = System.Drawing.Color.Black;
-            this.dgvOrderDetail.Location = new System.Drawing.Point(11, 63);
+            this.dgvOrderDetail.Location = new System.Drawing.Point(11, 44);
             this.dgvOrderDetail.Name = "dgvOrderDetail";
             this.dgvOrderDetail.ReadOnly = true;
             this.dgvOrderDetail.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvOrderDetail.RowHeadersVisible = false;
             this.dgvOrderDetail.RowTemplate.Height = 90;
             this.dgvOrderDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrderDetail.Size = new System.Drawing.Size(222, 139);
+            this.dgvOrderDetail.Size = new System.Drawing.Size(222, 128);
             this.dgvOrderDetail.TabIndex = 18;
             // 
             // dataGridViewTextBoxColumn1
@@ -834,7 +939,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Silver;
-            this.panel1.Location = new System.Drawing.Point(8, 216);
+            this.panel1.Location = new System.Drawing.Point(5, 179);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(223, 1);
             this.panel1.TabIndex = 15;
@@ -843,7 +948,7 @@
             // 
             this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(97, 229);
+            this.lblPrice.Location = new System.Drawing.Point(94, 192);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(134, 25);
@@ -855,7 +960,7 @@
             // 
             this.lblPriceContent.AutoSize = true;
             this.lblPriceContent.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblPriceContent.Location = new System.Drawing.Point(12, 229);
+            this.lblPriceContent.Location = new System.Drawing.Point(9, 192);
             this.lblPriceContent.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPriceContent.Name = "lblPriceContent";
             this.lblPriceContent.Size = new System.Drawing.Size(64, 24);
@@ -897,22 +1002,20 @@
             // 
             // lblWechartNickName
             // 
-            this.lblWechartNickName.AutoSize = true;
             this.lblWechartNickName.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblWechartNickName.Location = new System.Drawing.Point(13, 61);
+            this.lblWechartNickName.Location = new System.Drawing.Point(11, 56);
             this.lblWechartNickName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWechartNickName.Name = "lblWechartNickName";
-            this.lblWechartNickName.Size = new System.Drawing.Size(0, 21);
+            this.lblWechartNickName.Size = new System.Drawing.Size(220, 57);
             this.lblWechartNickName.TabIndex = 6;
             // 
             // lblMobil
             // 
-            this.lblMobil.AutoSize = true;
             this.lblMobil.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.lblMobil.Location = new System.Drawing.Point(13, 22);
             this.lblMobil.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMobil.Name = "lblMobil";
-            this.lblMobil.Size = new System.Drawing.Size(0, 21);
+            this.lblMobil.Size = new System.Drawing.Size(218, 21);
             this.lblMobil.TabIndex = 5;
             // 
             // tabPageAdvert
@@ -922,7 +1025,7 @@
             this.tabPageAdvert.Location = new System.Drawing.Point(4, 22);
             this.tabPageAdvert.Name = "tabPageAdvert";
             this.tabPageAdvert.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAdvert.Size = new System.Drawing.Size(1012, 734);
+            this.tabPageAdvert.Size = new System.Drawing.Size(1022, 734);
             this.tabPageAdvert.TabIndex = 1;
             this.tabPageAdvert.Text = "tabPage2";
             this.tabPageAdvert.UseVisualStyleBackColor = true;
@@ -942,57 +1045,10 @@
             // 
             this.timerMedia.Tick += new System.EventHandler(this.timerMedia_Tick);
             // 
-            // picBirthday4
+            // timerNow
             // 
-            this.picBirthday4.CanMove = false;
-            this.picBirthday4.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday4.Image")));
-            this.picBirthday4.IsFocus = false;
-            this.picBirthday4.Location = new System.Drawing.Point(733, 424);
-            this.picBirthday4.Name = "picBirthday4";
-            this.picBirthday4.Size = new System.Drawing.Size(253, 284);
-            this.picBirthday4.TabIndex = 204;
-            this.picBirthday4.Text = "transparentPic2";
-            this.picBirthday4.unitScale = null;
-            this.picBirthday4.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
-            // 
-            // picBirthday3
-            // 
-            this.picBirthday3.CanMove = false;
-            this.picBirthday3.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday3.Image")));
-            this.picBirthday3.IsFocus = false;
-            this.picBirthday3.Location = new System.Drawing.Point(4, 579);
-            this.picBirthday3.Name = "picBirthday3";
-            this.picBirthday3.Size = new System.Drawing.Size(77, 151);
-            this.picBirthday3.TabIndex = 201;
-            this.picBirthday3.Text = "transparentPic1";
-            this.picBirthday3.unitScale = null;
-            this.picBirthday3.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
-            // 
-            // picBirthday2
-            // 
-            this.picBirthday2.CanMove = false;
-            this.picBirthday2.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday2.Image")));
-            this.picBirthday2.IsFocus = false;
-            this.picBirthday2.Location = new System.Drawing.Point(624, 1);
-            this.picBirthday2.Name = "picBirthday2";
-            this.picBirthday2.Size = new System.Drawing.Size(387, 84);
-            this.picBirthday2.TabIndex = 101;
-            this.picBirthday2.Text = "transparentPic1";
-            this.picBirthday2.unitScale = null;
-            this.picBirthday2.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
-            // 
-            // picBirthday1
-            // 
-            this.picBirthday1.CanMove = false;
-            this.picBirthday1.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday1.Image")));
-            this.picBirthday1.IsFocus = false;
-            this.picBirthday1.Location = new System.Drawing.Point(0, 0);
-            this.picBirthday1.Name = "picBirthday1";
-            this.picBirthday1.Size = new System.Drawing.Size(513, 85);
-            this.picBirthday1.TabIndex = 25;
-            this.picBirthday1.Text = "transparentPic1";
-            this.picBirthday1.unitScale = null;
-            this.picBirthday1.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
+            this.timerNow.Interval = 1000;
+            this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
             // 
             // frmMainMedia
             // 
@@ -1012,7 +1068,6 @@
             this.Text = "frmMainMedia";
             this.Load += new System.EventHandler(this.frmMainMedia_Load);
             this.Shown += new System.EventHandler(this.frmMainMedia_Shown);
-            this.SizeChanged += new System.EventHandler(this.frmMainMedia_SizeChanged);
             this.tabControlMedia.ResumeLayout(false);
             this.tabPageIni.ResumeLayout(false);
             this.pnlDgvItem.ResumeLayout(false);
@@ -1025,6 +1080,8 @@
             this.pnlBarCode.ResumeLayout(false);
             this.pnlBarCode.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
+            this.pnlHead.ResumeLayout(false);
+            this.pnlHead.PerformLayout();
             this.pnlPayInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPayError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picShowPay)).EndInit();
@@ -1046,7 +1103,6 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).EndInit();
             this.pnlMember.ResumeLayout(false);
-            this.pnlMember.PerformLayout();
             this.tabPageAdvert.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
@@ -1121,5 +1177,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn num;
         private System.Windows.Forms.DataGridViewTextBoxColumn btnAdd;
         private System.Windows.Forms.DataGridViewImageColumn total;
+        private System.Windows.Forms.Button btnMemberPromo;
+        private System.Windows.Forms.Panel pnlHead;
+        private System.Windows.Forms.Label lblShopName;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer timerNow;
     }
 }

@@ -60,9 +60,12 @@ namespace WinSaasPOS
             }
             catch { }
 
+            //等待两秒处理失败强制退出
+            int waitingcount = 0;
             while (true)
             {//循环处理，否则应用程序将会退出
-                if (glExitApp)
+                waitingcount++;
+                if (glExitApp && waitingcount>20)
                 {//标志应用程序可以退出，否则程序退出后，进程仍然在运行
                     //MessageBox.Show("异常，系统将自动关闭！");
                     LogManager.WriteLog("ExitApp");

@@ -56,18 +56,22 @@ namespace WinSaasPOS
             // Application.EnableVisualStyles();
         }
 
-        private void frmOrderQuery_Shown(object sender, EventArgs e)
+
+        private void frmOrderQuery_Load(object sender, EventArgs e)
         {
-
-            LoadBmp();
-
             btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
             Application.DoEvents();
+        }
+        private void frmOrderQuery_Shown(object sender, EventArgs e)
+        {
 
+            LoadBmp();
+
+           
             btnToday_Click(null, null);
         }
 
@@ -650,12 +654,6 @@ namespace WinSaasPOS
             }
         }
 
-        public void frmOrderQuery_SizeChanged(object sender, EventArgs e)
-        {
-            // asf.ControlAutoSize(this);
-        }
-
-
         private void LoadPicScreen(bool isShown)
         {
             try
@@ -796,7 +794,26 @@ namespace WinSaasPOS
             }
         }
 
+        //控制仅允许录入数字
+        private void TextNUMBER_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                TextBox txt = sender as TextBox;
+                e.Handled = true;
+                char ch = e.KeyChar;
 
+                if (ch >= '0' && ch <= '9')
+                    e.Handled = false;
+
+                if (ch == (char)Keys.Back)
+                    e.Handled = false;
+
+            }
+            catch { }
+        }
+
+     
         //protected override CreateParams CreateParams
         //{
         //    get

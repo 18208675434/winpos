@@ -53,7 +53,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(90, 141);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(200, 220);
@@ -68,7 +68,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(186, 21);
             this.label2.TabIndex = 8;
-            this.label2.Text = "请使用扫码枪扫码付款码";
+            this.label2.Text = "请使用扫码枪扫扫描付款码";
             // 
             // label1
             // 
