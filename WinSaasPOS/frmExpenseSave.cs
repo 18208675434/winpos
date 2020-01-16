@@ -97,6 +97,18 @@ namespace WinSaasPOS
                 {
                     return;
                 }
+                try
+                {
+                    double doublenum = Convert.ToDouble(txtNum.Text);
+                    if (doublenum <= 0)
+                    {
+                        return;
+                    }
+                }
+                catch
+                {
+                    return;
+                }
 
                 string ErrorMsg = "";
                 bool result = false;
@@ -261,13 +273,22 @@ namespace WinSaasPOS
 
         private void txtNum_TextChanged(object sender, EventArgs e)
         {
-            if (txtNum.Text.Length > 0)
+            try
             {
-                btnOK.Enabled = true;
+                double doublenum = Convert.ToDouble(txtNum.Text);
+
+                if (doublenum > 0)
+                {
+                    btnOK.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    btnOK.BackColor = Color.Silver;
+                }
             }
-            else
+            catch
             {
-                btnOK.Enabled = false;
+                btnOK.BackColor = Color.Silver;
             }
         }
 

@@ -33,4 +33,24 @@ namespace WinSaasPOS.Model
         public string pno { get; set; }
     }
 
+
+
+
+
+    public class ScaleForSaas
+    {
+        public string requestedat { get; set; }
+        public Templist templist { get; set; }
+    }
+
+    public class Templist
+    {
+        public int page { get; set; }
+        public List<DBSCALE_KEY_BEANMODEL> rows { get; set; }
+        public int size { get; set; }
+        public int total { get; set; }
+    }
+
+
+
 }

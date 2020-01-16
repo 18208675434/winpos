@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AA4D73D7-B16A-41A2-93C1-CE17B5086961}</ProjectGuid>
+    <ProjectGuid>{8F74C97F-B3CA-4BC4-A0D2-358FF59E2B32}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WinSaasPOS</RootNamespace>
@@ -89,28 +89,36 @@
   <ItemGroup>
     <Compile Include="Common\AutoSizeFormUtil.cs" />
     <Compile Include="Common\GlobalUtil.cs" />
+    <Compile Include="Common\HttpServer.cs" />
     <Compile Include="Common\HttpUtil.cs" />
     <Compile Include="Common\LoadingHelper.cs" />
     <Compile Include="Common\MsgHelper.cs" />
     <Compile Include="Common\NumberUtil.cs" />
     <Compile Include="Common\PrintUtil.cs" />
     <Compile Include="Common\ReceiptUtil.cs" />
+    <Compile Include="Common\ScaleUtil.cs" />
     <Compile Include="Common\ScanerHook.cs" />
     <Compile Include="Common\ScanItem.cs" />
     <Compile Include="Common\TableClass.cs" />
     <Compile Include="Common\ValidCode.cs" />
     <Compile Include="Common\WClass.cs" />
-    <Compile Include="FormMainMedia.cs">
+    <Compile Include="FormTestShow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMainMedia.Designer.cs">
-      <DependentUpon>FormMainMedia.cs</DependentUpon>
+    <Compile Include="FormTestShow.Designer.cs">
+      <DependentUpon>FormTestShow.cs</DependentUpon>
     </Compile>
     <Compile Include="frmBalanceOnLine.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBalanceOnLine.Designer.cs">
       <DependentUpon>frmBalanceOnLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBalancePayResultBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBalancePayResultBack.Designer.cs">
+      <DependentUpon>frmBalancePayResultBack.cs</DependentUpon>
     </Compile>
     <Compile Include="frmBalancePwdGuest.cs">
       <SubType>Form</SubType>
@@ -136,23 +144,23 @@
     <Compile Include="frmCashCoupon.Designer.cs">
       <DependentUpon>frmCashCoupon.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPayFail.cs">
+    <Compile Include="frmCashCouponBack.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPayFail.Designer.cs">
-      <DependentUpon>frmPayFail.cs</DependentUpon>
+    <Compile Include="frmCashCouponBack.Designer.cs">
+      <DependentUpon>frmCashCouponBack.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPaySuccessMedia.cs">
+    <Compile Include="frmCashierResultMedia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPaySuccessMedia.Designer.cs">
-      <DependentUpon>frmPaySuccessMedia.cs</DependentUpon>
+    <Compile Include="frmCashierResultMedia.Designer.cs">
+      <DependentUpon>frmCashierResultMedia.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmModifyPrice.cs">
+    <Compile Include="frmCashPayBack.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmModifyPrice.Designer.cs">
-      <DependentUpon>frmModifyPrice.cs</DependentUpon>
+    <Compile Include="frmCashPayBack.Designer.cs">
+      <DependentUpon>frmCashPayBack.cs</DependentUpon>
     </Compile>
     <Compile Include="frmChangeMode.cs">
       <SubType>Form</SubType>
@@ -165,6 +173,12 @@
     </Compile>
     <Compile Include="frmChangeUrl.Designer.cs">
       <DependentUpon>frmChangeUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConfirmBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConfirmBack.Designer.cs">
+      <DependentUpon>FrmConfirmBack.cs</DependentUpon>
     </Compile>
     <Compile Include="frmCoupon.cs">
       <SubType>Form</SubType>
@@ -226,6 +240,30 @@
     <Compile Include="frmMainMedia.Designer.cs">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmModifyPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModifyPrice.Designer.cs">
+      <DependentUpon>frmModifyPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmModifyPriceBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModifyPriceBack.Designer.cs">
+      <DependentUpon>frmModifyPriceBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNumberBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNumberBack.Designer.cs">
+      <DependentUpon>frmNumberBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmNumberCenter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmNumberCenter.Designer.cs">
+      <DependentUpon>FrmNumberCenter.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOnLine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,11 +294,11 @@
     <Compile Include="frmCashPay.Designer.cs">
       <DependentUpon>frmCashPay.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPaySuccess.cs">
+    <Compile Include="frmCashierResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPaySuccess.Designer.cs">
-      <DependentUpon>frmPaySuccess.cs</DependentUpon>
+    <Compile Include="frmCashierResult.Designer.cs">
+      <DependentUpon>frmCashierResult.cs</DependentUpon>
     </Compile>
     <Compile Include="frmBalancePayResult.cs">
       <SubType>Form</SubType>
@@ -292,6 +330,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOnLinePayResultBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOnLinePayResultBack.Designer.cs">
+      <DependentUpon>frmOnLinePayResultBack.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOrderHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,17 +354,47 @@
     <Compile Include="frmPanelGoods.Designer.cs">
       <DependentUpon>frmPanelGoods.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPayFail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPayFail.Designer.cs">
+      <DependentUpon>frmPayFail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPaySuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaySuccess.Designer.cs">
+      <DependentUpon>frmPaySuccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPaySuccessMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaySuccessMedia.Designer.cs">
+      <DependentUpon>frmPaySuccessMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPayTimeOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPayTimeOut.Designer.cs">
+      <DependentUpon>FrmPayTimeOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrinterInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrinterInfo.Designer.cs">
+      <DependentUpon>frmPrinterInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPrinterSetting.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPrinterSetting.Designer.cs">
       <DependentUpon>frmPrinterSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPurchasingMsg.cs">
+    <Compile Include="frmPrinterSettingBack.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPurchasingMsg.Designer.cs">
-      <DependentUpon>frmPurchasingMsg.cs</DependentUpon>
+    <Compile Include="frmPrinterSettingBack.Designer.cs">
+      <DependentUpon>frmPrinterSettingBack.cs</DependentUpon>
     </Compile>
     <Compile Include="frmReceiptQuery.cs">
       <SubType>Form</SubType>
@@ -395,13 +469,14 @@
     <Compile Include="Model\CreateOrderResult.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\MediaList.cs" />
-    <Compile Include="Model\OrderPricedetail.cs" />
+    <Compile Include="Model\OrderPriceDetail.cs" />
     <Compile Include="Model\Price.cs" />
     <Compile Include="Model\PrintDetail.cs" />
     <Compile Include="Model\product.cs" />
     <Compile Include="Model\ResultData.cs" />
     <Compile Include="Model\DeviceShopInfo.cs" />
     <Compile Include="Model\scancodememberModel.cs" />
+    <Compile Include="Model\TVShowSkus.cs" />
     <Compile Include="Model\userModel.cs" />
     <Compile Include="Model\VerifyBalancePwd.cs" />
     <Compile Include="Program.cs" />
@@ -424,12 +499,14 @@
     <Compile Include="UserControl\WaterTextBox.Designer.cs">
       <DependentUpon>WaterTextBox.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormMainMedia.resx">
-      <DependentUpon>FormMainMedia.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="FormTestShow.resx">
+      <DependentUpon>FormTestShow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBalanceOnLine.resx">
       <DependentUpon>frmBalanceOnLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBalancePayResultBack.resx">
+      <DependentUpon>frmBalancePayResultBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBalancePwdGuest.resx">
       <DependentUpon>frmBalancePwdGuest.cs</DependentUpon>
@@ -446,20 +523,23 @@
     <EmbeddedResource Include="frmCashCoupon.resx">
       <DependentUpon>frmCashCoupon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPayFail.resx">
-      <DependentUpon>frmPayFail.cs</DependentUpon>
+    <EmbeddedResource Include="frmCashCouponBack.resx">
+      <DependentUpon>frmCashCouponBack.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPaySuccessMedia.resx">
-      <DependentUpon>frmPaySuccessMedia.cs</DependentUpon>
+    <EmbeddedResource Include="frmCashierResultMedia.resx">
+      <DependentUpon>frmCashierResultMedia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmModifyPrice.resx">
-      <DependentUpon>frmModifyPrice.cs</DependentUpon>
+    <EmbeddedResource Include="frmCashPayBack.resx">
+      <DependentUpon>frmCashPayBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChangeMode.resx">
       <DependentUpon>frmChangeMode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChangeUrl.resx">
       <DependentUpon>frmChangeUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConfirmBack.resx">
+      <DependentUpon>FrmConfirmBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCoupon.resx">
       <DependentUpon>frmCoupon.cs</DependentUpon>
@@ -491,6 +571,18 @@
     <EmbeddedResource Include="frmMainMedia.resx">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmModifyPrice.resx">
+      <DependentUpon>frmModifyPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModifyPriceBack.resx">
+      <DependentUpon>frmModifyPriceBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNumberBack.resx">
+      <DependentUpon>frmNumberBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmNumberCenter.resx">
+      <DependentUpon>FrmNumberCenter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmOnLine.resx">
       <DependentUpon>frmOnLine.cs</DependentUpon>
     </EmbeddedResource>
@@ -506,8 +598,8 @@
     <EmbeddedResource Include="frmCashPay.resx">
       <DependentUpon>frmCashPay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPaySuccess.resx">
-      <DependentUpon>frmPaySuccess.cs</DependentUpon>
+    <EmbeddedResource Include="frmCashierResult.resx">
+      <DependentUpon>frmCashierResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBalancePayResult.resx">
       <DependentUpon>frmBalancePayResult.cs</DependentUpon>
@@ -525,6 +617,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmOnLinePayResultBack.resx">
+      <DependentUpon>frmOnLinePayResultBack.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmOrderHang.resx">
       <DependentUpon>frmOrderHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -534,11 +629,26 @@
     <EmbeddedResource Include="frmPanelGoods.resx">
       <DependentUpon>frmPanelGoods.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPayFail.resx">
+      <DependentUpon>frmPayFail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaySuccess.resx">
+      <DependentUpon>frmPaySuccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaySuccessMedia.resx">
+      <DependentUpon>frmPaySuccessMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPayTimeOut.resx">
+      <DependentUpon>FrmPayTimeOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrinterInfo.resx">
+      <DependentUpon>frmPrinterInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrinterSetting.resx">
       <DependentUpon>frmPrinterSetting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPurchasingMsg.resx">
-      <DependentUpon>frmPurchasingMsg.cs</DependentUpon>
+    <EmbeddedResource Include="frmPrinterSettingBack.resx">
+      <DependentUpon>frmPrinterSettingBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReceiptQuery.resx">
       <DependentUpon>frmReceiptQuery.cs</DependentUpon>
@@ -590,28 +700,32 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\border_round_gray.bmp" />
-    <None Include="Resources\round_red.bmp" />
-    <None Include="Resources\addbak.bmp" />
+    <Content Include="20190918080041866_easyicon_net_512.ico" />
+    <None Include="Resources\border__minus.bmp" />
+    <None Include="Resources\border__minus1.bmp" />
+    <None Include="Resources\border_add.bmp" />
+    <Content Include="Resources\FixDisenable.bmp" />
+    <Content Include="Resources\FixEnable.bmp" />
     <None Include="Resources\Qustion.bmp" />
     <Content Include="SaasLogo.ico" />
-    <None Include="Resources\border_round.bmp" />
-    <None Include="Resources\FixDisenable.bmp" />
-    <None Include="Resources\FixEnable.bmp" />
-    <None Include="Resources\test.bmp" />
+    <None Include="Resources\Line_red.bmp" />
+    <None Include="Resources\border_white.bmp" />
+    <None Include="Resources\Image1.png" />
     <None Include="Resources\ReprintReceipt.bmp" />
-    <None Include="Resources\Reprint1.bmp" />
-    <None Include="Resources\Reprint.bmp" />
-    <None Include="Resources\Refund.bmp" />
-    <None Include="Resources\Image1.bmp" />
     <None Include="Resources\DelHang.bmp" />
     <None Include="Resources\Continue.bmp" />
-    <None Include="Resources\border_red.bmp" />
+    <None Include="Resources\test.bmp" />
+    <None Include="Resources\Image1.bmp" />
+    <None Include="Resources\Refund.bmp" />
+    <None Include="Resources\Reprint1.bmp" />
+    <None Include="Resources\Reprint.bmp" />
     <None Include="Resources\border_gray.bmp" />
+    <None Include="Resources\border_red.bmp" />
     <None Include="Resources\White.bmp" />
     <None Include="Picture\add.png" />
     <None Include="Picture\minus.png" />
     <None Include="Picture\icon_delete.png" />
+    <None Include="Picture\add1.png" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>

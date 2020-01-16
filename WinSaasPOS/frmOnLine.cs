@@ -46,7 +46,6 @@ namespace WinSaasPOS
 
        // string CurrentOrderID = "";
 
-
         //<summary>
         //按比例缩放页面及控件
         //</summary>

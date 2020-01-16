@@ -30,7 +30,7 @@ namespace WinSaasPOS
                     return;
                 return;
             }
-
+            
             //处理未捕获的异常
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             //处理UI线程异常
@@ -42,13 +42,12 @@ namespace WinSaasPOS
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmLogin());
             //Application.Run(new frmTest());
-
         }
 
         /// <summary>
         /// 是否退出应用程序
         /// </summary>
-        static bool glExitApp = false;
+        static bool glExitApp = true;
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
@@ -56,9 +55,17 @@ namespace WinSaasPOS
             LogManager.WriteLog("IsTerminating : " + e.IsTerminating.ToString());
             LogManager.WriteLog(e.ExceptionObject.ToString());
 
+            try {
+                WinSaasPOS.Model.MainModel.ShowTask();
+            }
+            catch { }
+
+            //等待两秒处理失败强制退出
+            int waitingcount = 0;
             while (true)
             {//循环处理，否则应用程序将会退出
-                if (glExitApp)
+                waitingcount++;
+                if (glExitApp && waitingcount>20)
                 {//标志应用程序可以退出，否则程序退出后，进程仍然在运行
                     //MessageBox.Show("异常，系统将自动关闭！");
                     LogManager.WriteLog("ExitApp");

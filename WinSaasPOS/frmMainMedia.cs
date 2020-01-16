@@ -65,10 +65,17 @@ namespace WinSaasPOS
             // IniForm(null);
 
 
-            //线程优先级低 不能占用数据处理线程资源
+            ////线程优先级低 不能占用数据处理线程资源
+            //threadMedia = new Thread(PlayerThread);
+            //threadMedia.Priority = ThreadPriority.BelowNormal;
+            //threadMedia.IsBackground = true;
+            //threadMedia.Start();
+
             threadMedia = new Thread(PlayerThread);
-            threadMedia.Priority = ThreadPriority.BelowNormal;
             threadMedia.IsBackground = true;
+            //thread.SetApartmentState(ApartmentState.Unknown);
+            threadMedia.SetApartmentState(ApartmentState.STA);
+            //thread.Priority = ThreadPriority.Lowest;
             threadMedia.Start();
          
           
@@ -85,15 +92,13 @@ namespace WinSaasPOS
             threadIniExedate.IsBackground = true;
             //threadIniExedate.Priority = ThreadPriority.BelowNormal;
             threadIniExedate.Start();
-          
+
+
+            lblShopName.Text = "欢迎光临 "+ MainModel.CurrentShopInfo.shopname;
+            timerNow.Enabled = true;
 
             timerMedia.Interval = 10 * 60 * 1000;
             timerMedia.Enabled = true;
-        }
-
-        private void frmMainMedia_SizeChanged(object sender, EventArgs e)
-        {
-            // asf.ControlAutoSize(this);
         }
 
         #endregion
@@ -127,13 +132,7 @@ namespace WinSaasPOS
             
 
             tabControlMedia.SelectedIndex = 1;
-            //isplayer = true;
-            ////ThreadPool.QueueUserWorkItem(new WaitCallback(IniFormExe));
-            //////启动扫描处理线程
-            //threadIniExedate = new Thread(IniFormExe);
-            //threadIniExedate.IsBackground = true;
-            ////threadIniExedate.Priority = ThreadPriority.BelowNormal;
-            //threadIniExedate.Start();
+
         }
 
         private void IniFormExe(object obj)
@@ -157,15 +156,14 @@ namespace WinSaasPOS
                     //LoginLogo.bmp
                     try
                     {
-                         Image _image = Image.FromStream(System.Net.WebRequest.Create(posmedia.tenantlogo).GetResponse().GetResponseStream());
+                        Image _image = Image.FromStream(System.Net.WebRequest.Create(posmedia.tenantlogo).GetResponse().GetResponseStream());
 
-                        
-                         _image.Save(MainModel.MediaPath + "LoginLogo.bmp");
-                         //picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
+                        _image.Save(MainModel.MediaPath + "LoginLogo.bmp");
+                        //picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
                     }
-                    catch(Exception ex) 
+                    catch (Exception ex)
                     {
-                        LogManager.WriteLog("下载商户图标异常"+ex.Message);
+                        LogManager.WriteLog("下载商户图标异常" + ex.Message);
                     }
 
                     CurrentMediadetaildtos =posmedia.mediadetaildtos;
@@ -226,7 +224,6 @@ namespace WinSaasPOS
         }
 
 
-
         private bool LoadMediaResult = false;
         private bool DownLoadImgResult = false;
         private bool DownLoadMp4Result = false;
@@ -235,14 +232,22 @@ namespace WinSaasPOS
         {
             try
             {
-                sortMediaCount = sortMedia.Count;
-               // foreach (KeyValuePair<int, Mediadetaildto> keval in sortMedia)
-                    for (int i = 0; i < sortMediaCount;i++ )
-                    //foreach (Mediadetaildto media in CurrentMediadetaildtos)
+                if (sortMedia.Count > 0)
+                {                    
+
+                    List<Mediadetaildto> lstmedia = new List<Mediadetaildto>();
+                    foreach (KeyValuePair<int, Mediadetaildto> kv in sortMedia)
+                    { 
+                        lstmedia.Add((Mediadetaildto)MainModel.Clone(kv.Value));
+                    }
+                   // SortedDictionary<int, Mediadetaildto> sortTempMedia = (SortedDictionary<int, Mediadetaildto>)MainModel.Clone(sortMedia);
+                    foreach (Mediadetaildto media in lstmedia)
                     {
+                        //for (int i = 0; i < sortMediaCount;i++ )
+                        //{
                         try
                         {
-                            Mediadetaildto media = sortMedia[i];
+                            //Mediadetaildto media = kv.Value;
 
                             if (media.mediatype == 1) //图片
                             {
@@ -253,7 +258,6 @@ namespace WinSaasPOS
 
                                 string imgname = media.content.Substring(media.content.LastIndexOf("/") + 1); //URL 最后的值
 
-                                //tabPageAdvert.BackgroundImage = _image;
 
                                 if (File.Exists(MainModel.MediaPath + imgname))
                                 {
@@ -261,11 +265,11 @@ namespace WinSaasPOS
                                     imgback.Tag = imgname;
 
                                     //同一个图片不更换 以免屏幕闪动
-                                    if (tabPageAdvert.BackgroundImage ==null || tabPageAdvert.BackgroundImage.Tag.ToString()!=imgname)
+                                    if (tabPageAdvert.BackgroundImage == null || tabPageAdvert.BackgroundImage.Tag.ToString() != imgname)
                                     {
                                         tabPageAdvert.BackgroundImage = imgback;
                                     }
-                                    
+
                                     //Application.DoEvents();
                                     Delay.Start(3000);
                                 }
@@ -287,27 +291,32 @@ namespace WinSaasPOS
                                         player.URL = MainModel.MediaPath + playername;
                                         this.player.Ctlcontrols.play();
 
+
+                                     
+                                        //访问过于频繁会异常  消息筛选器显示应用程序正在使用中
+                                        Delay.Start(100);
+                                        //MainModel.IsPlayer = true;
+
                                         while (!player.status.Contains("停止") && player.Visible)
                                         {
-                                            Delay.Start(100);
+                                            Delay.Start(500);
+                                            //MainModel.IsPlayer = true;
                                         }
 
-                                        //player.close();
+                                        player.Ctlcontrols.stop();
                                         player.Visible = false;
 
                                     }
                                     catch (Exception ex)
                                     {
-                                        this.player.Ctlcontrols.stop();
-                                        player.Dispose();
-                                        //player.close();
                                         player.Visible = false;
-                                        LogManager.WriteLog("客屏视频播放异常" + ex.Message);
+                                       // LogManager.WriteLog("客屏视频播放异常" + ex.Message + ex.StackTrace);
                                     }
                                 }
                                 else
                                 {
-                                    //player.close();
+                                    player.Ctlcontrols.stop();
+
                                     player.Visible = false;
                                 }
 
@@ -316,14 +325,16 @@ namespace WinSaasPOS
                         }
                         catch (Exception ex)
                         {
-                            LogManager.WriteLog("客屏单个广告异常" + ex.Message+ex.StackTrace);
+                            LogManager.WriteLog("客屏单个广告异常" + ex.Message + ex.StackTrace);
                         }
                     }
-                    player.Visible = false;
+                }
+            player.Visible = false;
             Delay.Start(1000);
+            Application.DoEvents();
             PlayerThread();
 
-
+                
             }
             catch (Exception ex)
             {
@@ -334,18 +345,17 @@ namespace WinSaasPOS
         //播放状态是全屏   不是播放状态 此属性不可修改 （异常:灾难性错误）
         private void player_StatusChange(object sender, EventArgs e)
         {
+
+            MainModel.IsPlayer = true;
             if (player.status.Contains("正在播放"))
             {
                 if (!player.fullScreen)
                     player.fullScreen = true;
             }
-
-            //player.
+            
         }
 
-
         #endregion
-
 
 
 
@@ -355,24 +365,32 @@ namespace WinSaasPOS
         {
             try
             {
-              
+                try
+                {
                     threadMedia.Suspend();
                     player.Visible = false;
-                    player.close();
-                
-                //////启动扫描处理线程
-                Thread threadItemExedate = new Thread(UpdateFormExe);
-                threadItemExedate.IsBackground = false;
-                //threadIniExedate.Priority = ThreadPriority.BelowNormal;
-                threadItemExedate.Start();
-                //isplayer = false;
-                //ThreadPool.QueueUserWorkItem(new WaitCallback(UpdateFormExe));
+                    player.Ctlcontrols.stop();
+                }
+                catch { }
+
+               // UpdateFormExe("");
+
+                tlpnlRight.Left = pnlMemberCard.Left;
+
+                UpdateFormExe("");
+                ////////启动扫描处理线程
+                //Thread threadItemExedate = new Thread(UpdateFormExe);
+                //threadItemExedate.IsBackground = false;
+                //threadItemExedate.Start();
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("显示客屏购物车异常");
             }
         }
+
+
+        bool isfirstmembercard = true;
 
         //增加线程锁  防止多线程操作datagridview 红叉情况
         private object thislock = new object();
@@ -382,7 +400,6 @@ namespace WinSaasPOS
             {
                 try
                 {
-                    DateTime starttime = DateTime.Now;
 
 
                     dgvGood.Visible = true;
@@ -409,7 +426,13 @@ namespace WinSaasPOS
                     try { threadIniExedate.Abort(); }
                     catch { }
                     //pnlPayInfo.Visible = false;
-                    dgvGood.Rows.Clear();
+                    if (this.IsHandleCreated)
+                    {
+                        this.Invoke(new InvokeHandler(delegate()
+                        {
+                            dgvGood.Rows.Clear();
+                        }));
+                    }
                     dgvOrderDetail.Rows.Clear();
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
@@ -422,28 +445,63 @@ namespace WinSaasPOS
                         {
                             for (int i = 0; i < orderCount; i++)
                             {
+
                                 try
                                 {
-                                    dgvOrderDetail.Rows.Add(CurrentCart.orderpricedetails[i].title, CurrentCart.orderpricedetails[i].amount);
+                                    if (this.IsHandleCreated)
+                                    {
+                                        this.Invoke(new InvokeHandler(delegate()
+                                        {
+                                            dgvOrderDetail.Rows.Add(CurrentCart.orderpricedetails[i].title, CurrentCart.orderpricedetails[i].amount);
+                                        }));
+                                    }
                                 }
-                                catch { }
+                                catch
+                                {
+                                    dgvOrderDetail.Refresh();
+                                }
+                               
 
+                            }
+
+                            if (MainModel.CurrentMember != null)
+                            {
+                                if (CurrentCart.memberpromo != null && CurrentCart.memberpromo > 0)
+                                {
+
+                                    btnMemberPromo.Text = "会员已优惠:￥" + CurrentCart.memberpromo.ToString("f2");
+
+                                    btnMemberPromo.Visible = true;
+                                }
+                                else
+                                {
+                                    btnMemberPromo.Visible = false;
+                                }
+
+                            }
+                            else
+                            {
+                                if (CurrentCart.memberpromo != null && CurrentCart.memberpromo > 0)
+                                {
+                                    btnMemberPromo.Text = "会员可优惠:￥" + CurrentCart.memberpromo.ToString("f2");
+                                    btnMemberPromo.Visible = true;
+                                }
+                                else
+                                {
+                                    btnMemberPromo.Visible = false;
+                                }
                             }
 
                             if (CurrentCart.cashpayamt != null && CurrentCart.cashpayamt > 0)
                             {
-                                dgvOrderDetail.Rows.Add("已付现金", "￥"+CurrentCart.cashpayamt.ToString("f2"));
+                                if (this.IsHandleCreated)
+                                {
+                                    this.Invoke(new InvokeHandler(delegate()
+                                    {
+                                        dgvOrderDetail.Rows.Add("已付现金", "￥" + CurrentCart.cashpayamt.ToString("f2"));
+                                    }));
+                                }                                
                             }
-
-                            //if (CurrentCart.cashpayamt != null && CurrentCart.cashpayamt > 0)
-                            //{
-                            //    dgvOrderDetail.Rows.Add("已付现金", "￥" + CurrentCart.cashpayamt.ToString("f2"));
-                            //}
-
-
-                         
-
-
 
                             dgvOrderDetail.ClearSelection();
                         }
@@ -478,116 +536,41 @@ namespace WinSaasPOS
                         lblGoodsCount.Text = "(" + goodscount.ToString() + "件商品)";
                         if (count > 0)
                         {
+                            this.Enabled = true;
                             for (int i = 0; i < count; i++)
                             {
-                                //TODO 下划线
+                                Product temppro = CurrentCart.products[i].ThisClone();
 
-                                Product pro = CurrentCart.products[i];
-
-                                string barcode = "\r\n  " + pro.title + "\r\n  " + pro.skucode;
-                                string price = "";
-                                string jian = "";
-
-                                string num = "";
-                                string add = "";
-                                string total = "";
-                                switch (pro.pricetagid)
+                                string pronum = "";
+                                if (temppro.goodstagid == 0)
                                 {
-                                    case 1: barcode = "1" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode + "\r\n"; break;
-                                    case 2: barcode = "2" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode + "\r\n"; break;
-                                    case 3: barcode = "3" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode + "\r\n"; break;
-                                    case 4: barcode = "4" + pro.pricetag + "\r\n  " + pro.title + "\r\n  " + pro.skucode + "\r\n"; break;
-                                    default: barcode = "\r\n  " + pro.title + "\r\n  " + pro.skucode + "\r\n"; break;
-                                }
-
-                                if (!string.IsNullOrEmpty(pro.price.purchaselimitdesc))
-                                {
-                                    barcode += pro.price.purchaselimitdesc;
-                                    if (!string.IsNullOrEmpty(pro.price.purchaselimitsubdesc))
-                                    {
-                                        barcode += "?";
-                                    }
-                                }
-
-                                if (pro.price.saleprice == pro.price.originprice)
-                                {
-                                    price = pro.price.saleprice.ToString("f2");
+                                    pronum = temppro.num.ToString();
                                 }
                                 else
                                 {
-                                    //price = "￥" + pro.price.saleprice.ToString() + "("+pro.price.salepricedesc+")" + "\r\n" + "￥" + pro.price.originprice + "("+pro.price.originpricedesc+")";
-
-                                    price = pro.price.saleprice.ToString("f2");
-                                    if (!string.IsNullOrEmpty(pro.price.salepricedesc))
-                                    {
-                                        price += "(" + pro.price.salepricedesc + ")";
-                                    }
-
-                                    if (pro.price.strikeout == 1)
-                                    {
-                                        price += "\r\n" + "strikeout" + pro.price.originprice.ToString("f2");
-                                    }
-                                    else
-                                    {
-                                        price += "\r\n" + pro.price.originprice.ToString("f2");
-                                    }
-
-                                    if (!string.IsNullOrEmpty(pro.price.originpricedesc))
-                                    {
-                                        price += "(" + pro.price.originpricedesc + ")";
-                                    }
+                                    pronum = temppro.price.specnum + temppro.price.unit;
                                 }
-
-                                if (pro.goodstagid == 0)  //0是标品  1是称重
+                                if (this.IsHandleCreated)
                                 {
-
-                                    num = pro.num.ToString();
-                                }
-                                else
-                                {
-                                    add = "";
-                                    jian = "";
-                                    num = pro.price.specnum + pro.price.unit;
-                                }
-
-                                if (pro.price.total == pro.price.origintotal)
-                                {
-                                    total = pro.price.total.ToString("f2");
-                                }
-                                else
-                                {
-                                    //total = "￥" + pro.price.total.ToString() + "("+pro.price.salepricedesc+")" + "\r\n" + "￥" + pro.price.origintotal + "("+pro.price.originpricedesc+")";
-
-                                    total = pro.price.total.ToString("f2");
-
-                                    if (!string.IsNullOrEmpty(pro.price.salepricedesc))
+                                    this.Invoke(new InvokeHandler(delegate()
                                     {
-                                        total += "(" + pro.price.salepricedesc + ")";
-                                    }
-                                    total += "\r\n" + pro.price.origintotal.ToString("f2");
-                                    if (!string.IsNullOrEmpty(pro.price.originpricedesc))
-                                    {
-                                        total += "(" + pro.price.originpricedesc + ")";
-                                    }
+                                        List<Bitmap> lstbmp = GetDgvRow(temppro);
+                                        if (lstbmp != null && lstbmp.Count == 3)
+                                        {
+                                            dgvGood.Rows.Insert(0, new object[] { lstbmp[0], lstbmp[1], "", pronum, "", lstbmp[2] });
+                                        }
+                                    }));
                                 }
-                                try
-                                {
-                                    dgvGood.Rows.Insert(0, new object[] { barcode, price, jian, num, add, total });
-                                }
-                                catch { }
+                              
                             }
-                            //dgvGood.ClearSelection();
-                            //Application.DoEvents();
-
+                            Application.DoEvents();
                         }
                     }
 
-                    Console.WriteLine("客屏加载时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
 
                     if (MainModel.CurrentMember == null)
                     {
-
 
                         tabPageIni.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
                             picBirthday1.Visible = false ;
@@ -596,13 +579,14 @@ namespace WinSaasPOS
                             picBirthday2.Visible = false ;
                             picBirthday3.Visible = false ;
                             picBirthday4.Visible = false ;
-
+                            
                             this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
                             this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
                             this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
 
-                        if (imgmembercard == null)
+                        if (imgmembercard == null && isfirstmembercard)
                         {
+                            isfirstmembercard = false;
                             string ErrorMsg = "";
                             string imgurl = httputil.GetMemberCard(ref ErrorMsg);
                             if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
@@ -674,338 +658,36 @@ namespace WinSaasPOS
                             lblWechartNickName.Text = lblWechartNickName.Text.Replace("生日快乐！", "");
                         }
                     }
-
+                    this.Enabled = true;
                 }
                 catch (Exception ex)
                 {
-                    //frmMain.listener.Start();
+                    try
+                    {
+                        dgvGood.Refresh();
+                        dgvOrderDetail.Refresh();
+                    }
+                    catch
+                    {
+
+                    }
                     LogManager.WriteLog("ERROR", "显示客屏购物车异常：" + ex.Message + ex.StackTrace);
                 }
             }
         }
 
 
-
-        public void UpdateOrderDetail(List<string> lstorderdetail)
+        public void UpDgvScorll(int value)
         {
             try
             {
-                for (int i = 0; i < lstorderdetail.Count; i++)
-                {
-                    if (i == lstorderdetail.Count - 1)
-                    {
+                dgvGood.FirstDisplayedScrollingRowIndex = value;
 
-                    }
-                    else
-                    {
-
-                    }
-                }
+            }catch{
             }
-            catch (Exception ex)
-            {
-
-            }
-            Dictionary<string, string> dic = new Dictionary<string, string>();
+            
         }
 
-        bool isCellPainting = true;
-        //重绘datagridview单元格
-        private void dgvGood_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-
-            try
-            {
-                if (e.ColumnIndex == 0 && e.RowIndex >= 0 && e.Value != null && isCellPainting)//要进行重绘的单元格
-                {
-
-                    Graphics gpcEventArgs = e.Graphics;
-                    Color clrBack = e.CellStyle.BackColor;
-                    //Font fntText = e.CellStyle.Font;//获取单元格字体
-                    //先使用北京颜色重画一遍背景
-                    gpcEventArgs.FillRectangle(new SolidBrush(clrBack), e.CellBounds);
-                    //设置字体的颜色
-                    Color oneFore = System.Drawing.Color.Black;
-                    Color secFore = System.Drawing.Color.Red;
-                    //string strFirstLine = "黑色内容";
-                    //string strSecondLine = "红色内容";
-
-                    if (!e.Value.ToString().Contains("\r\n"))
-                    {
-                        return;
-                    }
-
-                    string tempstr = e.Value.ToString().Replace("\r\n", "*");
-                    string strLine1 = "";
-                    string strLine2 = "";
-                    string strLine3 = "";
-                    string strLine4 = "";
-
-                    strLine1 = tempstr.Split('*')[0];
-                    strLine2 = tempstr.Split('*')[1];
-                    strLine3 = tempstr.Split('*')[2];
-                    strLine4 = tempstr.Split('*')[3];
-                    string[] sts = tempstr.Split('*');
-                    //Size sizText = TextRenderer.MeasureText(e.Graphics, strFirstLine, fntText);
-                    int intX = e.CellBounds.Left + e.CellStyle.Padding.Left;
-                    int intY = e.CellBounds.Top + e.CellStyle.Padding.Top + 10;
-                    int intWidth = e.CellBounds.Width - (e.CellStyle.Padding.Left + e.CellStyle.Padding.Right);
-                    //int intHeight = sizText.Height + (e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
-
-
-                    Font fnt1 = new System.Drawing.Font("微软雅黑", 9F * Math.Min(MainModel.hScale, MainModel.wScale));
-                    //Graphics g = this.CreateGraphics(); //this是指所有control派生出来的类，这里是个form
-
-                    SizeF size1 = this.CreateGraphics().MeasureString(strLine1, fnt1);
-                    Color titlebackcolor = Color.Black;
-                    if (strLine1.Length > 0)
-                    {
-
-                        string typecolor = strLine1.Substring(0, 1);
-                        strLine1 = strLine1.Substring(1, strLine1.Length - 1);
-                        switch (typecolor)
-                        {
-                            case "1": titlebackcolor = ColorTranslator.FromHtml("#FF7D14"); break;
-                            case "2": titlebackcolor = ColorTranslator.FromHtml("#209FD4"); break;
-                            case "3": titlebackcolor = ColorTranslator.FromHtml("#D42031"); break;
-                            case "4": titlebackcolor = ColorTranslator.FromHtml("#FF000"); break;
-                        }
-                    }
-                    //第一行
-                    TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + 10, intY, intWidth, (int)size1.Height),
-                        Color.White, titlebackcolor, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                    //另起一行
-                    Font fnt2 = new System.Drawing.Font("微软雅黑", 12F * Math.Min(MainModel.hScale, MainModel.wScale));
-                    SizeF size2 = this.CreateGraphics().MeasureString(strLine2, fnt2);
-
-                    intY = intY + (int)size1.Height;
-                    TextRenderer.DrawText(e.Graphics, strLine2, fnt2, new Rectangle(intX, intY, intWidth, (int)size2.Height),
-                        Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                    //Font fnt20 = new System.Drawing.Font("微软雅黑", 9F, FontStyle.Strikeout);
-                    //TextRenderer.DrawText(e.Graphics, strLine2, fnt20, new Rectangle(intX + (int)size2.Width, intY, intWidth, (int)size2.Height),
-                    //    Color.Green, Color.Red, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                    Font fnt3 = new System.Drawing.Font("微软雅黑", 12F * Math.Min(MainModel.hScale, MainModel.wScale));
-                    intY = intY + (int)size2.Height;
-
-                    TextRenderer.DrawText(e.Graphics, strLine3, fnt3, new Rectangle(intX, intY, intWidth, (int)size2.Height), Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-
-                    if (!string.IsNullOrEmpty(strLine4))
-                    {
-
-                        bool havePic = false;
-                        if (strLine4.Contains("?"))
-                        {
-                            strLine4 = strLine4.TrimEnd('?');
-                            havePic = true;
-                        }
-                        //限购商品显示
-                        intY = intY + (int)size2.Height;
-
-                        Font fnt4 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
-                        SizeF size4 = this.CreateGraphics().MeasureString(strLine4, fnt4);
-
-                        TextRenderer.DrawText(e.Graphics, strLine4, fnt4, new Rectangle(intX + 10, intY, intWidth, (int)size4.Height), Color.Orange, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                        int piayiX = 5;
-                        // havePic = true;
-                        if (havePic)
-                        {
-                            Image imgtest = Resources.ResourcePos.Qustion;
-
-                            e.Graphics.DrawImageUnscaled(imgtest, (int)size4.Width + 10, intY, 15, 15);
-                            piayiX = (int)size4.Height + 5;
-                        }
-
-                        Point point1 = new Point(10, intY);
-                        Point point2 = new Point((int)size4.Width + 10 + piayiX, intY);
-                        Point point3 = new Point(10, intY + (int)size4.Height);
-                        Point point4 = new Point((int)size4.Width + 10 + piayiX, intY + (int)size4.Height);
-
-                        Pen blackPen = new Pen(Color.Orange, (float)1.5);
-                        e.Graphics.DrawLine(blackPen, point1, point2);
-                        e.Graphics.DrawLine(blackPen, point1, point3);
-                        e.Graphics.DrawLine(blackPen, point2, point4);
-                        e.Graphics.DrawLine(blackPen, point3, point4);
-
-
-                    }
-
-
-
-
-                    //int y = intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom + dgvGood.RowTemplate.Height;
-                    int y = (e.RowIndex + 1) * dgvGood.RowTemplate.Height + dgvGood.ColumnHeadersHeight - 1;
-
-                    //Point point1 = new Point(0, y);
-                    //Point point2 = new Point(e.CellBounds.Width, y);
-                    //Pen blackPen = new Pen(Color.Black, 1);
-                    //e.Graphics.DrawLine(blackPen, point1, point2);
-
-                    //Point point21 = new Point(10, 0);
-                    //Point point22 = new Point(10, intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
-                    //Pen blackPen2 = new Pen(Color.Black, 10);
-                    //e.Graphics.DrawLine(blackPen2, point21, point21);
-                    // e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-                    // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
-                    e.Handled = true;
-
-                    dgvGood.ClearSelection();
-                }
-
-                if ((e.ColumnIndex == 1 || e.ColumnIndex == 5) && e.RowIndex >= 0 && e.Value != null && isCellPainting)//要进行重绘的单元格
-                {
-
-                    Graphics gpcEventArgs = e.Graphics;
-                    Color clrBack = e.CellStyle.BackColor;
-                    //Font fntText = e.CellStyle.Font;//获取单元格字体
-                    //先使用北京颜色重画一遍背景
-                    gpcEventArgs.FillRectangle(new SolidBrush(clrBack), e.CellBounds);
-                    //设置字体的颜色
-                    Color oneFore = System.Drawing.Color.Black;
-                    Color secFore = System.Drawing.Color.Red;
-                    //string strFirstLine = "黑色内容";
-                    //string strSecondLine = "红色内容";
-
-                    if (!e.Value.ToString().Contains("\r\n"))
-                    {
-                        return;
-                    }
-
-                    string tempstr = e.Value.ToString().Replace("\r\n", "*");
-                    string strLine1 = "";
-                    string strLine2 = "";
-
-
-                    strLine1 = tempstr.Split('*')[0];
-                    strLine2 = tempstr.Split('*')[1];
-
-                    string[] sts = tempstr.Split('*');
-                    //Size sizText = TextRenderer.MeasureText(e.Graphics, strFirstLine, fntText);
-                    int intX = e.CellBounds.Left + e.CellStyle.Padding.Left;
-                    int intY = e.CellBounds.Top + e.CellStyle.Padding.Top + 30;
-                    int intWidth = e.CellBounds.Width - (e.CellStyle.Padding.Left + e.CellStyle.Padding.Right);
-                    //int intHeight = sizText.Height + (e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
-
-
-                    Font fnt1 = new System.Drawing.Font("微软雅黑", 12F * Math.Min(MainModel.hScale, MainModel.wScale));
-                    //Graphics g = this.CreateGraphics(); //this是指所有control派生出来的类，这里是个form
-                    SizeF size1 = this.CreateGraphics().MeasureString(strLine1, fnt1);
-
-                    if (strLine1.Contains("("))
-                    {
-                        int index = strLine1.IndexOf("(");
-
-                        string tempstrline11 = strLine1.Substring(0, index);
-                        string tempstrline12 = strLine1.Substring(index);
-
-                        SizeF siztemp1 = this.CreateGraphics().MeasureString(tempstrline11, fnt1);
-                        SizeF sizetemp2 = this.CreateGraphics().MeasureString(tempstrline12, fnt1);
-
-                        int pianyiX = (int)(e.CellBounds.Width - siztemp1.Width - sizetemp2.Width) / 2;
-                        if (e.ColumnIndex == 5)
-                        {
-                            TextRenderer.DrawText(e.Graphics, tempstrline11, fnt1, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
-                                Color.OrangeRed, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                        }
-                        else
-                        {
-                            TextRenderer.DrawText(e.Graphics, tempstrline11, fnt1, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
-                                Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                        }
-
-                        Font tempfont2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
-
-                        TextRenderer.DrawText(e.Graphics, tempstrline12, tempfont2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY, intWidth, (int)siztemp1.Height),
-                          Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                    }
-                    else
-                    {
-                        if (e.ColumnIndex == 5)
-                        {
-                            //第一行
-                            TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + (int)(e.CellBounds.Width - size1.Width) / 2, intY, intWidth, (int)size1.Height),
-                                Color.OrangeRed, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-                        }
-                        else
-                        {
-                            //第一行
-                            TextRenderer.DrawText(e.Graphics, strLine1, fnt1, new Rectangle(intX + (int)(e.CellBounds.Width - size1.Width) / 2, intY, intWidth, (int)size1.Height),
-                                Color.Black, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-                        }
-
-                    }
-
-
-                    //第二行
-                    Font fnt2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
-                    bool isstrickout = false;
-                    if (strLine2.Contains("strikeout"))
-                    {
-                        isstrickout = true;
-                        fnt2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale), FontStyle.Strikeout);
-                        strLine2 = strLine2.Replace("strikeout", "");
-                    }
-                    SizeF size2 = this.CreateGraphics().MeasureString(strLine2, fnt2);
-                    intY = intY + (int)size1.Height;
-
-                    if (strLine2.Contains("("))
-                    {
-                        int index = strLine2.IndexOf("(");
-
-                        string tempstrline21 = strLine2.Substring(0, index);
-                        string tempstrline22 = strLine2.Substring(index);
-
-                        SizeF siztemp1 = this.CreateGraphics().MeasureString(tempstrline21, fnt2);
-                        SizeF sizetemp2 = this.CreateGraphics().MeasureString(tempstrline22, fnt2);
-
-                        int pianyiX = (int)(e.CellBounds.Width - siztemp1.Width - sizetemp2.Width) / 2;
-                        //第一行
-                        TextRenderer.DrawText(e.Graphics, tempstrline21, fnt2, new Rectangle(intX + pianyiX, intY, intWidth, (int)siztemp1.Height),
-                            Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                        Font tempfont2 = new System.Drawing.Font("微软雅黑", 10F * Math.Min(MainModel.hScale, MainModel.wScale));
-
-                        TextRenderer.DrawText(e.Graphics, tempstrline22, fnt2, new Rectangle(intX + (int)siztemp1.Width + pianyiX, intY, intWidth, (int)size2.Height),
-                        Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-
-                    }
-                    else
-                    {
-                        TextRenderer.DrawText(e.Graphics, strLine2, fnt2, new Rectangle(intX + (int)(e.CellBounds.Width - size2.Width) / 2, intY, intWidth, (int)size2.Height),
-                        Color.DimGray, TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis);
-                    }
-
-
-                    //int y = intY + (int)size2.Height + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom + dgvGood.RowTemplate.Height;
-                    int y = (e.RowIndex + 1) * dgvGood.RowTemplate.Height + dgvGood.ColumnHeadersHeight - 1;
-
-                    //Point point1 = new Point(0, y);
-                    ////Point point2 = new Point(e.CellBounds.Width, y);
-                    //Point point2 = new Point(dgvGood.Width, y);
-                    //Pen blackPen = new Pen(Color.Black, 1);
-                    //e.Graphics.DrawLine(blackPen, point1, point2);
-
-
-                    // dgv2.Rows[e.RowIndex].Height = (int)size1.Height+(int)size2.Height*2 + e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom+1;
-                    e.Handled = true;
-
-                    dgvGood.ClearSelection();
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
         #endregion
 
 
@@ -1051,7 +733,16 @@ namespace WinSaasPOS
                         mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
                     }
                     lblMobil.Text = mobil;
-                    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+
+                    if (!string.IsNullOrEmpty(CurrentMember.memberinformationresponsevo.nickname))
+                    {
+                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.nickname + "  你好！";
+
+                    }
+                    else
+                    {
+                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+                    }
 
                     pnlMemberCard.Visible = false;
 
@@ -1171,29 +862,29 @@ namespace WinSaasPOS
 
         public void ShowNumber()
         {
-            try
-            {
+            //try
+            //{
                
-                    threadMedia.Suspend();
-                    player.Visible = false;
+            //        threadMedia.Suspend();
+            //        player.Visible = false;
 
 
-                    frmNumber frmnumber = new frmNumber("请输入会员号", NumberType.MemberCode);
+            //        frmNumber frmnumber = new frmNumber("请输入会员号", NumberType.MemberCode);
 
-                frmnumber.frmNumber_SizeChanged(null, null);
-                frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
-                // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
+            //    frmnumber.frmNumber_SizeChanged(null, null);
+            //    frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
+            //    // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
 
-                frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
+            //    frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
 
-                //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-                frmnumber.Show();
-                Application.DoEvents();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("客屏输入会员号异常" + ex.Message);
-            }
+            //    //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            //    frmnumber.Show();
+            //    Application.DoEvents();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogManager.WriteLog("客屏输入会员号异常" + ex.Message);
+            //}
         }
 
         public void ShowPayInfo(string lblinfo,bool isError)
@@ -1285,8 +976,224 @@ namespace WinSaasPOS
 
         #endregion
 
-     
 
+
+                /// <summary>
+        /// 数据处理委托方法
+        /// </summary>
+        /// <param name="type">0：返回  1：确认数字</param>
+        public delegate void DataRecHandleDelegate(string scancode);
+        /// <summary>
+        /// 数据接收事件
+        /// </summary>
+        public event DataRecHandleDelegate DataReceiveHandle;
+
+
+
+
+        private List<Bitmap> GetDgvRow(Product pro)
+        {
+            try
+            {
+                Bitmap bmpbarcode;
+                Bitmap bmpPrice;
+
+                Bitmap bmpTotal;
+
+
+
+                Bitmap add = Resources.ResourcePos.empty;
+                lblTitle.Text = pro.title;
+                lblSkuCode.Text = pro.skucode;
+                //第一行图片
+                switch (pro.pricetagid)
+                {
+                    case 1: lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF7D14"); lblPriceTag.Text = pro.pricetag; break;
+                    case 2: lblPriceTag.BackColor = ColorTranslator.FromHtml("#209FD4"); lblPriceTag.Text = pro.pricetag; break;
+                    case 3: lblPriceTag.BackColor = ColorTranslator.FromHtml("#D42031"); lblPriceTag.Text = pro.pricetag; break;
+                    case 4: lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF000"); lblPriceTag.Text = pro.pricetag; break;
+                    default: lblPriceTag.Text = ""; break;
+                }
+                //test
+                //barcode += "测试限购商品?";
+                if (!string.IsNullOrEmpty(pro.price.purchaselimitdesc))
+                {
+                    if (!string.IsNullOrEmpty(pro.price.purchaselimitsubdesc))
+                    {
+                        btnPurchaseLimit.Text = pro.price.purchaselimitdesc + "?";
+                    }
+                    else
+                    {
+                        btnPurchaseLimit.Text = pro.price.purchaselimitdesc;
+                    }
+                }
+                else
+                {
+                    btnPurchaseLimit.Visible = false;
+                }
+                bmpbarcode = new Bitmap(pnlBarCode.Width, pnlBarCode.Height);
+                bmpbarcode.Tag = pro;
+                pnlBarCode.DrawToBitmap(bmpbarcode, new Rectangle(0, 0, pnlBarCode.Width, pnlBarCode.Height));
+
+
+                //第二列图片
+                if (pro.price.saleprice == pro.price.originprice)
+                {
+                    lblSinglePrice.Text = pro.price.saleprice.ToString("f2");
+
+                    lblSinglePrice.Left = (pnlSinglePrice.Width - lblSinglePrice.Width) / 2;
+
+                    lblPriceDesc.Text = "";
+                    lblOriginPrice.Text = "";
+                }
+                else
+                {
+
+                    lblSinglePrice.Text = pro.price.saleprice.ToString("f2");
+                    if (!string.IsNullOrEmpty(pro.price.salepricedesc))
+                    {
+                        lblPriceDesc.Text = pro.price.salepricedesc;
+                    }
+
+                    if (pro.price.strikeout == 1)
+                    {
+                        lblOriginPrice.Text = pro.price.originprice.ToString("f2");
+                        lblOriginPrice.Font = new Font(lblOriginPrice.Font.Name, lblOriginPrice.Font.Size, FontStyle.Strikeout);
+                    }
+                    else
+                    {
+                        lblOriginPrice.Text = pro.price.originprice.ToString("f2");
+                        lblOriginPrice.Font = new Font(lblOriginPrice.Font.Name, lblOriginPrice.Font.Size, FontStyle.Regular);
+                    }
+
+                    if (!string.IsNullOrEmpty(pro.price.originpricedesc))
+                    {
+                        lblOriginPrice.Text += "(" + pro.price.originpricedesc + ")";
+                    }
+
+                    lblSinglePrice.Left = (pnlSinglePrice.Width - lblSinglePrice.Width - lblPriceDesc.Width) / 2;
+                    lblPriceDesc.Left = lblSinglePrice.Left + lblSinglePrice.Width;
+                    lblOriginPrice.Left = (pnlSinglePrice.Width - lblOriginPrice.Width) / 2;
+                }
+                bmpPrice = new Bitmap(pnlSinglePrice.Width, pnlSinglePrice.Height);
+                bmpPrice.Tag = pro;
+                pnlSinglePrice.DrawToBitmap(bmpPrice, new Rectangle(0, 0, pnlSinglePrice.Width, pnlSinglePrice.Height));
+
+
+              
+
+
+                if (pro.price.total == pro.price.origintotal)
+                {
+                    lblTotal.Text = pro.price.total.ToString("f2");
+
+                    lblTotalDesc.Text = "";
+                    lblOriginTotal.Text = "";
+
+                    lblTotal.Left = (pnlTotal.Width - lblTotal.Width) / 2;
+                }
+                else
+                {
+                    //total = "￥" + pro.price.total.ToString() + "("+pro.price.salepricedesc+")" + "\r\n" + "￥" + pro.price.origintotal + "("+pro.price.originpricedesc+")";
+
+                    lblTotal.Text = pro.price.total.ToString("f2");
+
+                    if (!string.IsNullOrEmpty(pro.price.salepricedesc))
+                    {
+                        lblTotalDesc.Text = "(" + pro.price.salepricedesc + ")";
+                    }
+                    else
+                    {
+                        lblTotalDesc.Text = "";
+                    }
+
+
+                    if (pro.price.strikeout == 1)
+                    {
+                        lblOriginTotal.Text = pro.price.origintotal.ToString("f2");
+                        lblOriginTotal.Font = new Font(lblOriginTotal.Font.Name, lblOriginTotal.Font.Size, FontStyle.Strikeout);
+                    }
+                    else
+                    {
+                        lblOriginTotal.Text = pro.price.origintotal.ToString("f2");
+                        lblOriginTotal.Font = new Font(lblOriginTotal.Font.Name, lblOriginTotal.Font.Size, FontStyle.Regular);
+                    }
+
+
+                    if (!string.IsNullOrEmpty(pro.price.originpricedesc))
+                    {
+                        lblOriginTotal.Text += "(" + pro.price.originpricedesc + ")";
+                    }
+
+
+                    lblTotal.Left = (pnlTotal.Width - lblTotal.Width - lblTotalDesc.Width) / 2;
+                    lblTotalDesc.Left = lblTotal.Left + lblTotal.Width;
+                    lblOriginTotal.Left = (pnlTotal.Width - lblOriginTotal.Width) / 2;
+
+                }
+
+                bmpTotal = new Bitmap(pnlTotal.Width, pnlTotal.Height);
+                bmpTotal.Tag = pro;
+                pnlTotal.DrawToBitmap(bmpTotal, new Rectangle(0, 0, pnlTotal.Width, pnlTotal.Height));
+
+
+                List<Bitmap> lstbmp = new List<Bitmap>();
+                lstbmp.Add(bmpbarcode);
+                lstbmp.Add(bmpPrice);
+                lstbmp.Add(bmpTotal);
+
+
+                return lstbmp;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("解析商品信息异常" + ex.Message, true);
+                return null;
+            }
+        }
+
+        private void timerNow_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +GetWeek();
+        }
+
+
+        private string GetWeek()
+        {
+            try
+            {
+                string week = string.Empty;
+                switch ((int)DateTime.Now.DayOfWeek)
+                {
+                    case 0:
+                        week = "（星期日）";
+                        break;
+                    case 1:
+                        week = "（星期一）";
+                        break;
+                    case 2:
+                        week = "（星期二）";
+                        break;
+                    case 3:
+                        week = "（星期三）";
+                        break;
+                    case 4:
+                        week = "（星期四）";
+                        break;
+                    case 5:
+                        week = "（星期五）";
+                        break;
+                    default:
+                        week = "（星期六）";
+                        break;
+                }
+                return week;
+            }
+            catch
+            {
+                return "";
+            }
+        }
    
     }
 }

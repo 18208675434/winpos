@@ -43,7 +43,7 @@
             // 
             this.lblCashPay.AutoSize = true;
             this.lblCashPay.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.lblCashPay.Location = new System.Drawing.Point(36, 61);
+            this.lblCashPay.Location = new System.Drawing.Point(18, 60);
             this.lblCashPay.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCashPay.Name = "lblCashPay";
             this.lblCashPay.Size = new System.Drawing.Size(92, 27);
@@ -53,82 +53,82 @@
             // lblPriceStr
             // 
             this.lblPriceStr.AutoSize = true;
-            this.lblPriceStr.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblPriceStr.Location = new System.Drawing.Point(35, 114);
+            this.lblPriceStr.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblPriceStr.Location = new System.Drawing.Point(18, 114);
             this.lblPriceStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPriceStr.Name = "lblPriceStr";
-            this.lblPriceStr.Size = new System.Drawing.Size(75, 31);
+            this.lblPriceStr.Size = new System.Drawing.Size(69, 30);
             this.lblPriceStr.TabIndex = 2;
             this.lblPriceStr.Text = "应收 :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.label3.Location = new System.Drawing.Point(35, 173);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.label3.Location = new System.Drawing.Point(18, 169);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 31);
+            this.label3.Size = new System.Drawing.Size(113, 30);
             this.label3.TabIndex = 3;
             this.label3.Text = "实收现金 :";
             // 
             // lblChangeStr
             // 
             this.lblChangeStr.AutoSize = true;
-            this.lblChangeStr.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblChangeStr.Location = new System.Drawing.Point(35, 229);
+            this.lblChangeStr.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblChangeStr.Location = new System.Drawing.Point(18, 221);
             this.lblChangeStr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChangeStr.Name = "lblChangeStr";
-            this.lblChangeStr.Size = new System.Drawing.Size(93, 31);
+            this.lblChangeStr.Size = new System.Drawing.Size(86, 30);
             this.lblChangeStr.TabIndex = 4;
             this.lblChangeStr.Text = "找零 ：";
             // 
             // lblChange
             // 
-            this.lblChange.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblChange.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblChange.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblChange.Location = new System.Drawing.Point(179, 229);
+            this.lblChange.Location = new System.Drawing.Point(206, 221);
             this.lblChange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChange.Name = "lblChange";
             this.lblChange.Size = new System.Drawing.Size(162, 31);
             this.lblChange.TabIndex = 7;
-            this.lblChange.Text = "￥100.00";
+            this.lblChange.Text = "￥0.00";
             this.lblChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblCash
             // 
-            this.lblCash.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblCash.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblCash.Location = new System.Drawing.Point(179, 173);
+            this.lblCash.Location = new System.Drawing.Point(206, 169);
             this.lblCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCash.Name = "lblCash";
             this.lblCash.Size = new System.Drawing.Size(162, 31);
             this.lblCash.TabIndex = 6;
-            this.lblCash.Text = "￥100.00";
+            this.lblCash.Text = "￥0.00";
             this.lblCash.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblPrice
             // 
-            this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(173, 114);
+            this.lblPrice.Location = new System.Drawing.Point(200, 114);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(168, 31);
             this.lblPrice.TabIndex = 5;
-            this.lblPrice.Text = "￥1";
+            this.lblPrice.Text = "￥0.00";
             this.lblPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnPayOK
             // 
             this.btnPayOK.BackColor = System.Drawing.Color.OrangeRed;
             this.btnPayOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayOK.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.btnPayOK.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnPayOK.ForeColor = System.Drawing.Color.White;
-            this.btnPayOK.Location = new System.Drawing.Point(23, 421);
+            this.btnPayOK.Location = new System.Drawing.Point(11, 443);
             this.btnPayOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnPayOK.Name = "btnPayOK";
-            this.btnPayOK.Size = new System.Drawing.Size(333, 55);
+            this.btnPayOK.Size = new System.Drawing.Size(357, 55);
             this.btnPayOK.TabIndex = 8;
             this.btnPayOK.TabStop = false;
             this.btnPayOK.Text = "完成交易";

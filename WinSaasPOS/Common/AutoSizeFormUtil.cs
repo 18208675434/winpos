@@ -38,7 +38,7 @@ namespace WinSaasPOS.Common
                 cR.Height = c.Height;
                 cR.Size = c.Font.Size;
                 _oldCtrl.Add(cR);
-                
+
                 // 控件可能嵌套子控件
                 if (c.Controls.Count > 0)
                     AddControl(c);
@@ -55,7 +55,7 @@ namespace WinSaasPOS.Common
                 cR.Width = mForm.Width;
                 cR.Height = mForm.Height;
                 cR.Size = mForm.Font.Size;
-                
+
                 _oldCtrl.Add(cR);
 
                 AddControl(mForm);
@@ -75,7 +75,7 @@ namespace WinSaasPOS.Common
             string debug = "";
             string tet = debug;
             string name = mForm.Name;
-           
+
             foreach (Control c in mForm.Controls)
             {
                 ctrlLeft = _oldCtrl[_ctrlNo].Left;
@@ -150,7 +150,7 @@ namespace WinSaasPOS.Common
                 string test = type.Name;
                 if (isParent)
                 {
-                    wScale = (float)NewWidth /OldWidth;
+                    wScale = (float)NewWidth / OldWidth;
                     hScale = (float)NewHeight / OldHeight;
                     mForm.Size = new System.Drawing.Size((int)Math.Ceiling(OldWidth * wScale), (int)Math.Ceiling(OldHeight * hScale));
                 }
@@ -170,14 +170,28 @@ namespace WinSaasPOS.Common
                         // c.Paint += control_Paint;
 
                     }
+
+                   //// this.btnMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+                   // if (c.Anchor == ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left))))
+                   // {
+
+                   // }
+
+                   
+                      
+                   
+
+                    
                     c.Left = (int)Math.Ceiling(c.Left * wScale);
                     c.Top = (int)Math.Ceiling(c.Top * hScale);
 
                     c.Width = (int)Math.Ceiling(c.Width * wScale);
                     c.Height = (int)Math.Ceiling(c.Height * hScale);
-
+                   
                     wSize = c.Font.Size * wScale;
                     hSize = c.Font.Size * hScale;
+
+                   
                     if (c.Name.Length > 0 && c.Name.Substring(0, 3) == "dgv")
                     {
                     }
@@ -190,16 +204,16 @@ namespace WinSaasPOS.Common
                         c.Font = new Font(c.Font.Name, Math.Min(hSize, wSize), c.Font.Style, c.Font.Unit);
 
                     }
-
+                    
 
                     if (c.Name.Length > 0 && c.Name.Substring(0, 3) == "dgv")
                     {
                         try
                         {
                             DataGridView dgv = (DataGridView)c;
-                          
+
                             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-                            
+
 
                             dgv.RowTemplate.Height = Convert.ToInt16(dgv.RowTemplate.Height * hScale);
 
@@ -214,7 +228,7 @@ namespace WinSaasPOS.Common
                             {
                                 dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
                                 dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", Math.Min(dgv.ColumnHeadersDefaultCellStyle.Font.Size * wScale, dgv.ColumnHeadersDefaultCellStyle.Font.Size * hScale));
-                                
+
                                 dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
                             }
                             foreach (DataGridViewColumn dr in dgv.Columns)
@@ -239,17 +253,17 @@ namespace WinSaasPOS.Common
                         }
                     }
 
-                    
+
                     // 先缩放控件本身 再缩放子控件
-                    if (c.Controls.Count > 0)
+                    if (c.Controls.Count > 0 )
                     {
-                        AutoScaleControlTest(c, 0,0,0, 0, false);
+                        AutoScaleControlTest(c, 0, 0, 0, 0, false);
                     }
                 }
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("缩放页面比例异常："+ex.Message);
+                LogManager.WriteLog("缩放页面比例异常：" + ex.Message);
             }
         }
 
@@ -272,7 +286,7 @@ namespace WinSaasPOS.Common
 
             g.DrawString(con.Text, con.Font, new SolidBrush(Color.White), new PointF((con.Width - size2.Width) / 2, (con.Height - size2.Height) / 2));
 
-           // con.Paint -= control_Paint;
+            // con.Paint -= control_Paint;
         }
 
 

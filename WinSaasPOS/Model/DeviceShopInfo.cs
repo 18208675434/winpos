@@ -16,11 +16,11 @@ namespace WinSaasPOS.Model
          /// 商户编号
          /// </summary>
          public string tenantid { set; get; }
-
          /// <summary>
          /// 商户名称
          /// </summary>
          public string tenantname { set; get; }
+
          /// <summary>
          /// 门店编码
          /// </summary>

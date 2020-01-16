@@ -7,10 +7,12 @@ using System.Threading;
 namespace WinSaasPOS.Model
 {
     [Serializable]
-    public class Orderpricedetail
+    public class OrderPriceDetail
     {
+
         public string title { get; set; }
         public string amount { get; set; }
         public int highlight { get; set; }
+        public string subtitle { get; set; }
     }
 }

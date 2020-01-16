@@ -22,19 +22,17 @@ namespace WinSaasPOS
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
         public frmLoading()
         {
-
             InitializeComponent();
+           // this.Size = new System.Drawing.Size(50,50);
             timerClose.Interval =61*1000;
             timerClose.Enabled = true;
             lblMsg1.Text = "";
             lblMsg2.Text = "";
-
         }
         public frmLoading(string msg)
         {
-
             InitializeComponent();
-
+           // this.Size = new System.Drawing.Size(50, 50);
             try
             {
                 if (msg.Contains("|"))
@@ -47,25 +45,19 @@ namespace WinSaasPOS
                 {
                     lblMsg1.Text = msg;
                     lblMsg2.Text = "";
-                }
-              
+                }              
             }
             catch
             {
 
             }
            
-
         }
 
 
-
         /// <summary>
-
         /// 关闭命令
-
         /// </summary>
-
         public void closeOrder()
         {
             try
@@ -122,30 +114,34 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                try { this.Close(); }
-                catch
+                try {
+                    Delay.Start(50);
+                    this.Dispose();
+                    this.Close(); }
+                catch(Exception ex1)
                 {
-
+                    LogManager.WriteLog("二次关闭显示窗体页面异常" + ex1.Message);
                 }
                 
                 LogManager.WriteLog("关闭显示窗体页面异常"+ex.Message);
             }
-
         }
 
 
 
         private void LoaderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-            if (!this.IsDisposed)
+            try
             {
+                if (!this.IsDisposed)
+                {
 
-                this.Dispose(true);
+                    this.Dispose(true);
+
+                }
 
             }
-
-
+            catch { }
 
         }
 
@@ -167,10 +163,10 @@ namespace WinSaasPOS
     }
 
     class CONSTANTDEFINE
-    {
+    {     
 
         public delegate void SetUISomeInfo();
-
+    
     }
 
 
