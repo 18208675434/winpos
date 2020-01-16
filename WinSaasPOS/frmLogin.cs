@@ -614,24 +614,24 @@ namespace WinSaasPOS
         //切换环境
         private void lblSN_Click(object sender, EventArgs e)
         {
-            LogManager.WriteLog(click.ToString());
-            // 两次点击间隔小于100毫秒时，算连续点击
-            if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
-            {
-                click++;
-                if (click >= 3)
-                {
-                    click = 0;// 连续点击完毕时，清0
-                    frmChangeUrl frmchangeurl = new frmChangeUrl();
-                    frmchangeurl.ShowDialog();
-                }
-            }
-            else
-            {
+            //LogManager.WriteLog(click.ToString());
+            //// 两次点击间隔小于100毫秒时，算连续点击
+            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
+            //{
+            //    click++;
+            //    if (click >= 3)
+            //    {
+            //        click = 0;// 连续点击完毕时，清0
+            //        frmChangeUrl frmchangeurl = new frmChangeUrl();
+            //        frmchangeurl.ShowDialog();
+            //    }
+            //}
+            //else
+            //{
 
-                click = 1;// 不是连续点击时，清0
-            }
-            lastClickTime = DateTime.Now;
+            //    click = 1;// 不是连续点击时，清0
+            //}
+            //lastClickTime = DateTime.Now;
         }
 
 

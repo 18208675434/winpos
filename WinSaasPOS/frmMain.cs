@@ -3154,7 +3154,7 @@ namespace WinSaasPOS
                     //case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData); break;
                     //case Keys.Enter: QueueScanCode.Enqueue(scancode.ToString()); scancode = new StringBuilder(); return !base.ProcessDialogKey(keyData); break;
                 }
-                if (keyData == Keys.Enter || scancode.ToString().Length >= 18)
+                if (keyData == Keys.Enter)
                 {
                     QueueScanCode.Enqueue(scancode.ToString().Trim());
                     scancode = new StringBuilder();
