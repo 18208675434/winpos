@@ -25,8 +25,6 @@ namespace WinSaasPOS.Model
         /// </summary>
         public Memberinformationresponsevo memberinformationresponsevo { get; set; }
         public Creditaccountrepvo creditaccountrepvo { get; set; }
-
-        public Barcoderecognitionresponse barcoderecognitionresponse { get; set; }
     }
 
     public class Memberheaderresponsevo
@@ -96,21 +94,11 @@ namespace WinSaasPOS.Model
         /// </summary>
         public bool onbirthday { get; set; }
     }
+
     public class Creditaccountrepvo
     {
-        public string id { get; set; }
         public string memberid { get; set; }
-        public float totalcredit { get; set; }
-        public float availablecredit { get; set; }
-        public bool freezable { get; set; }
+        public decimal availablecredit { get; set; }
     }
-
-
-    public class Barcoderecognitionresponse
-    {
-        public string memberid { get; set; }
-        public float balance { get; set; }
-    }
-
 
 }

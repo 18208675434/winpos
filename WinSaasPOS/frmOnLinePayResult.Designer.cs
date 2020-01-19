@@ -34,43 +34,38 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblExit = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnCancle = new System.Windows.Forms.Button();
-            this.pnlWaiting = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.timerAuthCodeTrade = new System.Windows.Forms.Timer(this.components);
             this.timerSyncTrade = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.pnlWaiting.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.label1.Location = new System.Drawing.Point(121, 78);
+            this.label1.Location = new System.Drawing.Point(106, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 30);
+            this.label1.Size = new System.Drawing.Size(176, 30);
             this.label1.TabIndex = 0;
-            this.label1.Text = "微信/支付宝";
+            this.label1.Text = "微信/支付宝支付";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label2.Location = new System.Drawing.Point(87, 125);
+            this.label2.Location = new System.Drawing.Point(100, 111);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(186, 21);
+            this.label2.Size = new System.Drawing.Size(202, 21);
             this.label2.TabIndex = 1;
-            this.label2.Text = "请使用扫码枪扫码付款码";
+            this.label2.Text = "请使用扫码枪扫扫描付款码";
             // 
             // lblExit
             // 
             this.lblExit.AutoSize = true;
             this.lblExit.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.lblExit.ForeColor = System.Drawing.Color.Tomato;
-            this.lblExit.Location = new System.Drawing.Point(331, 9);
+            this.lblExit.Location = new System.Drawing.Point(316, 9);
             this.lblExit.Name = "lblExit";
             this.lblExit.Size = new System.Drawing.Size(52, 27);
             this.lblExit.TabIndex = 2;
@@ -80,57 +75,12 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(89, 197);
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(92, 153);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(195, 196);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 220);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.BackColor = System.Drawing.Color.Gray;
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancle.ForeColor = System.Drawing.Color.White;
-            this.btnCancle.Location = new System.Drawing.Point(108, 409);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(133, 52);
-            this.btnCancle.TabIndex = 4;
-            this.btnCancle.TabStop = false;
-            this.btnCancle.Text = "取消收银";
-            this.btnCancle.UseVisualStyleBackColor = false;
-            this.btnCancle.Visible = false;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
-            // 
-            // pnlWaiting
-            // 
-            this.pnlWaiting.Controls.Add(this.label3);
-            this.pnlWaiting.Controls.Add(this.pictureBox2);
-            this.pnlWaiting.Location = new System.Drawing.Point(91, 162);
-            this.pnlWaiting.Name = "pnlWaiting";
-            this.pnlWaiting.Size = new System.Drawing.Size(186, 164);
-            this.pnlWaiting.TabIndex = 6;
-            this.pnlWaiting.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.label3.Location = new System.Drawing.Point(47, 122);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 30);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "支付中...";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(38, 18);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(111, 101);
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
             // 
             // timerAuthCodeTrade
             // 
@@ -147,13 +97,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(393, 500);
-            this.Controls.Add(this.pnlWaiting);
-            this.Controls.Add(this.btnCancle);
+            this.ClientSize = new System.Drawing.Size(380, 480);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblExit);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
@@ -165,9 +114,6 @@
             this.Shown += new System.EventHandler(this.frmOnLinePayResult_Shown);
             this.SizeChanged += new System.EventHandler(this.frmOnLinePayResult_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.pnlWaiting.ResumeLayout(false);
-            this.pnlWaiting.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,10 +125,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblExit;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnCancle;
-        private System.Windows.Forms.Panel pnlWaiting;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Timer timerAuthCodeTrade;
         private System.Windows.Forms.Timer timerSyncTrade;
     }

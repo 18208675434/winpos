@@ -25,11 +25,11 @@ namespace WinSaasPOS
         /// </summary>
         /// <param name="type">0:支付完成   1：在线收银继续支付 3：取消  12004：会员登录失效   100031：店员登录失效</param>
         /// <param name="orderid"></param>
-        public delegate void DataRecHandleDelegate(int type, string orderid);
+        public delegate void DataRecHandleDelegate(int type, string orderid,Cart cart);
         /// <summary>
         /// 数据接收事件
         /// </summary>
-        public event DataRecHandleDelegate CashPayDataReceiveHandle;
+        public event DataRecHandleDelegate DataReceiveHandle;
 
         /// <summary>
         /// 接口访问类
@@ -67,20 +67,83 @@ namespace WinSaasPOS
 
         }
 
-        public frmCashPay( Cart cart)
+        public frmCashPay(Cart cart)
         {
             InitializeComponent();
 
             thisCurrentCart = (Cart)cart.qianClone();
-
+            btnNext.Focus();
         }
+
+
+
+        private void frmCashPay_Load(object sender, EventArgs e)
+        {
+            try
+            {
+
+                txtCash.TextChanged += txtNum_TextChanged;
+                lblShuiyin.Click += lblShuiyin_Click;
+                lbtnCancle.Click += btnCancle_Click;
+                btnDot.Click += btnDot_Click;
+                btnDel.Click += btnDel_Click;
+                btnNext.Click += btnNext_Click;
+                btn0.Click += btn_Click;
+                btn1.Click += btn_Click;
+                btn2.Click += btn_Click;
+                btn3.Click += btn_Click;
+                btn4.Click += btn_Click;
+                btn5.Click += btn_Click;
+                btn6.Click += btn_Click;
+                btn7.Click += btn_Click;
+                btn8.Click += btn_Click;
+                btn9.Click += btn_Click;
+
+                txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
+                btnNext.Focus();
+
+                lblPrice.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
+
+              
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("现金页面初始化异常" + ex.Message, true);
+            }
+        }
+
         private void frmCash_Shown(object sender, EventArgs e)
         {
 
-            txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
-            //btnNext.Focus();
-            btnDel.Focus();
-            lblPrice.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
+
+        }
+
+
+        public void UpInfo(Cart cart)
+        {
+            try
+            {
+
+                isfirst = true;
+
+
+
+                int cashpaytype = 0;
+
+
+                string cashpayorderid = "";
+
+                thisCurrentCart = (Cart)cart.qianClone();
+                txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
+                btnNext.Focus();
+
+                lblPrice.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("刷新数字窗体异常" + ex.Message);
+            }
         }
 
         private void CheckUserAndMember(int resultcode)
@@ -89,12 +152,12 @@ namespace WinSaasPOS
             {
                 if (resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.HttpUserExpired)
                 {
-                    //if (CashPayDataReceiveHandle != null)
-                    //    this.CashPayDataReceiveHandle.BeginInvoke(resultcode, "", null, null);
+                    if (DataReceiveHandle != null)
+                        this.DataReceiveHandle.BeginInvoke(resultcode, "",thisCurrentCart, null, null);
                     //this.DialogResult = DialogResult.OK;
                     cashpaytype = resultcode;
                     cashpayorderid = "";
-                    this.Close();
+                    this.Hide();    //this.close();
                 }
             }
             catch (Exception ex)
@@ -109,17 +172,17 @@ namespace WinSaasPOS
         {
             try
             {
-                //if (CashPayDataReceiveHandle != null)
-                //    this.CashPayDataReceiveHandle.BeginInvoke(3, "", null, null);
+                if (DataReceiveHandle != null)
+                    this.DataReceiveHandle.BeginInvoke(3, "", thisCurrentCart, null, null);
 
                 //this.DialogResult = DialogResult.OK;
                 cashpaytype = 3;
                 cashpayorderid = "";
-                this.Close();
+                this.Hide();    //this.close();
             }
             catch (Exception ex)
             {
-
+                LogManager.WriteLog("关闭现金支付窗体异常"+ex.Message);
             }
         }
 
@@ -133,7 +196,7 @@ namespace WinSaasPOS
                 {
                     double doublenum = Convert.ToDouble(txtCash.Text);
 
-                    if (doublenum <= 0 && thisCurrentCart.payamtbeforecash>0)
+                    if (doublenum <= 0 && thisCurrentCart.payamtbeforecash > 0)
                     {
                         return;
                     }
@@ -157,151 +220,157 @@ namespace WinSaasPOS
                 //thisCurrentCart.cashpayamt = cash;
 
                 //Cart cart = httputil.RefreshCart(thisCurrentCart,ref ErrorMsgCart,ref ResultCode);
-                if (!RefreshCart(cash,false))
+                if (!RefreshCart(cash, false))
                 {
                     return;
                 }
-               
-               
-                    if (thisCurrentCart.totalpayment == 0)
+
+
+                if (thisCurrentCart.totalpayment == 0)
+                {
+                    if (thisCurrentCart.cashchangeamt == 0) //找零为0 创建订单反馈完成后结束
                     {
-                        if (thisCurrentCart.cashchangeamt == 0) //找零为0 创建订单反馈完成后结束
+                        string ErrorMsg = "";
+                        int ResultCode = 0;
+                        CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
+                        if (ResultCode != 0 || orderresult == null)
+                        {
+                            CheckUserAndMember(ResultCode);
+                            ShowLog("异常" + ErrorMsg, true);
+                        }
+                        else if (orderresult.continuepay == 1)
+                        {
+                            //TODO  继续支付
+                            ShowLog("需要继续支付", true);
+                        }
+                        else
+                        {
+
+                            if (DataReceiveHandle != null)
+                                this.DataReceiveHandle.BeginInvoke(1, orderresult.orderid, thisCurrentCart, null, null);
+                            this.DialogResult = DialogResult.OK;
+                            cashpaytype = 1;
+                            cashpayorderid = orderresult.orderid;
+                            this.Hide();    //this.close();
+
+                        }
+                    }
+                    else//进入找零界面
+                    {
+                        //MainModel.
+
+                        MainModel.frmMainmediaCart = thisCurrentCart;
+                        MainModel.frmmainmedia.UpdateForm();
+
+                        frmCashChange frmcashchange = new frmCashChange(thisCurrentCart);
+
+                        frmcashchange.frmCashChange_SizeChanged(null, null);
+                        asf.AutoScaleControlTest(frmcashchange, 380, 540, this.Width, this.Height, true);
+                        frmcashchange.Location = this.Location;
+                        frmcashchange.DataReceiveHandle += FormCashChange_DataReceiveHandle;
+                        frmcashchange.TopMost = true;
+                        frmcashchange.ShowDialog();
+                        Application.DoEvents();
+                    }
+                }
+                else
+                {
+
+                    // string ErrorMsg = "";
+                    //// int ResultCode = 0;
+                    // CreateOrderResult orderresult = httputil.CreateOrder(cart, ref ErrorMsg, ref ResultCode);
+                    // if (ResultCode != 0 || orderresult == null)
+                    // {
+                    //     CheckUserAndMember(ResultCode);
+                    //     ShowLog("异常" + ErrorMsg, true);
+                    // }
+                    // else
+                    // {
+                    //通过是否有余额值判断
+                    if (thisCurrentCart.balancepayamt != null && thisCurrentCart.balancepayamt > 0)
+                    {
+                        frmBalanceOnLine frmbalanceonline = new frmBalanceOnLine(thisCurrentCart);
+                        //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
+                        asf.AutoScaleControlTest(frmbalanceonline, 380, 540, this.Width, this.Height, true);
+                        frmbalanceonline.Location = this.Location;
+                        frmbalanceonline.TopMost = true;
+                        frmbalanceonline.ShowDialog();
+
+                        if (frmbalanceonline.DialogResult == DialogResult.OK)
                         {
                             string ErrorMsg = "";
                             int ResultCode = 0;
-                            CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
+                            int BalanceResultCode = 0;
+                            CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref BalanceResultCode);
                             if (ResultCode != 0 || orderresult == null)
                             {
-                                CheckUserAndMember(ResultCode);
+                                CheckUserAndMember(BalanceResultCode);
                                 ShowLog("异常" + ErrorMsg, true);
                             }
                             else if (orderresult.continuepay == 1)
                             {
-                                //TODO  继续支付
-                                ShowLog("需要继续支付", true);
-                            }
-                            else
-                            {
 
-                                //if (CashPayDataReceiveHandle != null)
-                                //    this.CashPayDataReceiveHandle.BeginInvoke(1, orderresult.orderid, null, null);
+                                if (DataReceiveHandle != null)
+                                    this.DataReceiveHandle.BeginInvoke(0, orderresult.orderid, thisCurrentCart, null, null);
                                 this.DialogResult = DialogResult.OK;
-                                cashpaytype = 1;
+                                cashpaytype = 0;
                                 cashpayorderid = orderresult.orderid;
-                                this.Close();
-
+                                this.Hide();    //this.close();
+                                Application.DoEvents();
                             }
+
                         }
-                        else//进入找零界面
+                        else
                         {
-                            //MainModel.
-
-                            MainModel.frmMainmediaCart = thisCurrentCart;
-                            MainModel.frmmainmedia.UpdateForm();
-
-                            frmCashChange frmcashchange = new frmCashChange(thisCurrentCart);
-
-                            frmcashchange.frmCashChange_SizeChanged(null, null);
-                            asf.AutoScaleControlTest(frmcashchange,380,520, this.Width, this.Height,true);
-                            frmcashchange.Location = this.Location;
-                            frmcashchange.DataReceiveHandle += FormCashChange_DataReceiveHandle;
-                            frmcashchange.TopMost = true;
-                            frmcashchange.ShowDialog();
-                            Application.DoEvents();
+                            RefreshCart(0, true);
                         }
                     }
                     else
                     {
+                        frmOnLine frmonline = new frmOnLine(thisCurrentCart);
+                        //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
+                        asf.AutoScaleControlTest(frmonline, 380, 540, this.Width, this.Height, true);
+                        frmonline.Location = this.Location;
+                        // frmonline.DataReceiveHandle += FormOnline_DataReceiveHandle;
+                        frmonline.TopMost = true;
+                        frmonline.ShowDialog();
 
-                       // string ErrorMsg = "";
-                       //// int ResultCode = 0;
-                       // CreateOrderResult orderresult = httputil.CreateOrder(cart, ref ErrorMsg, ref ResultCode);
-                       // if (ResultCode != 0 || orderresult == null)
-                       // {
-                       //     CheckUserAndMember(ResultCode);
-                       //     ShowLog("异常" + ErrorMsg, true);
-                       // }
-                       // else
-                       // {
-                            //通过是否有余额值判断
-                        if (thisCurrentCart.balancepayamt != null && thisCurrentCart.balancepayamt > 0)
+                        if (frmonline.DialogResult == DialogResult.OK)
+                        {
+                            this.Hide();
+                            string ErrorMsg = "";
+                            int ResultCode = 0;
+                            int OnlineResultCode = 0;
+                            CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref OnlineResultCode);
+                            if (ResultCode != 0 || orderresult == null)
                             {
-                                frmBalanceOnLine frmbalanceonline = new frmBalanceOnLine(thisCurrentCart);
-                                //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
-                                asf.AutoScaleControlTest(frmbalanceonline,380,520, this.Width, this.Height, true);
-                                frmbalanceonline.Location = this.Location;
-                                frmbalanceonline.TopMost = true;
-                                frmbalanceonline.ShowDialog();
-
-                                if (frmbalanceonline.DialogResult == DialogResult.OK)
-                                {
-
-                              
-                                        string ErrorMsg = "";
-                                        int ResultCode = 0;
-                                        int BalanceResultCode = 0;
-                                        CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref BalanceResultCode);
-                                        if (ResultCode != 0 || orderresult == null)
-                                        {
-                                            CheckUserAndMember(BalanceResultCode);
-                                            ShowLog("异常" + ErrorMsg, true);
-                                        }
-                                        else if (orderresult.continuepay == 1)
-                                        {
-                                            this.DialogResult = DialogResult.OK;
-                                            cashpaytype = 0;
-                                            cashpayorderid = orderresult.orderid;
-                                            this.Close();
-                                            Application.DoEvents();
-                                        }
-
-                                }
-                                else
-                                {
-                                    RefreshCart(0,true);
-                                }
+                                this.Show();
+                                CheckUserAndMember(OnlineResultCode);
+                                ShowLog("异常" + ErrorMsg, true);
                             }
-                            else
+                            else if (orderresult.continuepay == 1)
                             {
-                                frmOnLine frmonline = new frmOnLine(thisCurrentCart);
-                                //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
-                                asf.AutoScaleControlTest(frmonline,380,520, this.Width, this.Height, true);
-                                frmonline.Location = this.Location;
-                               // frmonline.DataReceiveHandle += FormOnline_DataReceiveHandle;
-                                frmonline.TopMost = true;
-                                frmonline.ShowDialog();
 
-                                if (frmonline.DialogResult == DialogResult.OK)
-                                {
-                                    string ErrorMsg = "";
-                                    int ResultCode = 0;
-                                    int OnlineResultCode = 0;
-                                    CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref OnlineResultCode);
-                                    if (ResultCode != 0 || orderresult == null)
-                                    {
-                                        CheckUserAndMember(OnlineResultCode);
-                                        ShowLog("异常" + ErrorMsg, true);
-                                    }
-                                    else if (orderresult.continuepay == 1)
-                                    {
-                                        this.DialogResult = DialogResult.OK;
-                                        cashpaytype = 0;
-                                        cashpayorderid = orderresult.orderid;
-                                        this.Close();
-                                        Application.DoEvents();
-                                    }
-                                }
-                                else
-                                {
-                                    RefreshCart(0,true);
-                                }
+                                if (DataReceiveHandle != null)
+                                    this.DataReceiveHandle.BeginInvoke(0, orderresult.orderid, thisCurrentCart, null, null);
+                                this.DialogResult = DialogResult.OK;
+                                cashpaytype = 0;
+                                cashpayorderid = orderresult.orderid;
+                                this.Hide();    //this.close();
+                                //Application.DoEvents();
                             }
-                           
-                            Application.DoEvents();
-                       // }
-
+                        }
+                        else
+                        {
+                            RefreshCart(0, true);
+                        }
                     }
-                
+
+                    Application.DoEvents();
+                    // }
+
+                }
+
 
 
 
@@ -314,7 +383,7 @@ namespace WinSaasPOS
             //if (DataReceiveHandle != null)
             //    this.DataReceiveHandle.BeginInvoke(1,Convert.ToDouble(txtCash.Text), null, null);
 
-            //this.Close();
+            //this.Hide();    //this.close();
         }
 
 
@@ -339,30 +408,30 @@ namespace WinSaasPOS
                 else
                 {
 
-                    //if (CashPayDataReceiveHandle != null)
-                    //    this.CashPayDataReceiveHandle.BeginInvoke(1, orderresult.orderid, null, null);
+                    if (DataReceiveHandle != null)
+                        this.DataReceiveHandle.BeginInvoke(1, orderresult.orderid, thisCurrentCart, null, null);
 
                     this.DialogResult = DialogResult.OK;
                     cashpaytype = 1;
                     cashpayorderid = orderresult.orderid;
-                    this.Close();
+                    this.Hide();    //this.close();
                 }
             }
             else
             {
-                RefreshCart(0,true);
+                RefreshCart(0, true);
                 //找零页面返回  不做处理 
             }
         }
 
 
-        private bool RefreshCart(decimal cash,bool updateCash)
+        private bool RefreshCart(decimal cash, bool updateCash)
         {
             try
             {
                 this.Enabled = false;
                 LoadingHelper.ShowLoadingScreen("加载中...");
-                
+
                 string ErrorMsgCart = "";
                 int ResultCode = 0;
                 thisCurrentCart.cashpayoption = 1;
@@ -379,7 +448,8 @@ namespace WinSaasPOS
                     CheckUserAndMember(ResultCode);
                     ShowLog(ErrorMsgCart, false);
                     return false;
-                }else
+                }
+                else
                 {
                     thisCurrentCart = cart;
 
@@ -401,7 +471,7 @@ namespace WinSaasPOS
             catch (Exception ex)
             {
 
-                MainModel.ShowLog("刷新购物车异常"+ex.Message,true);
+                MainModel.ShowLog("刷新购物车异常" + ex.Message, true);
                 return false;
             }
             finally
@@ -437,25 +507,17 @@ namespace WinSaasPOS
             try
             {
                 //小数点后允许一位  现金抹零后不允许再输入零
-                if (txtCash.Text.Length > 2 && txtCash.Text.Substring(txtCash.Text.Length - 2,1)==".")
+                if (txtCash.Text.Length > 2 && txtCash.Text.Substring(txtCash.Text.Length - 2, 1) == ".")
                 {
                     return;
                 }
                 //限制金额不超过100000
 
-                //try
-                //{
-                //    decimal tempcash = Convert.ToDecimal(txtCash.Text + btn.Name.Replace("btn", ""));
-                //    decimal tempprice = Convert.ToDecimal(CurrentCart.totalpayment);
-                //    if (Check(tempprice, tempcash - tempprice))
-                //    {
-                //        txtCash.Text += btn.Name.Replace("btn", "");
-                //    }
-                //}
-                //catch
-                //{
-                //    txtCash.Text += btn.Name.Replace("btn", "");
-                //}
+                //第一位是0 后面只能输入.
+                if (txtCash.Text == "0")
+                {
+                    return;
+                }
 
                 decimal CheckDecimal = Convert.ToDecimal(txtCash.Text + btn.Name.Replace("btn", ""));
 
@@ -470,8 +532,8 @@ namespace WinSaasPOS
 
             }
 
-            
-           
+
+
         }
 
         private void btnDot_Click(object sender, EventArgs e)
@@ -589,7 +651,7 @@ namespace WinSaasPOS
 
         public void frmCashPay_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+            //asf.ControlAutoSize(this);
         }
 
         private void frmCashPay_FormClosing(object sender, FormClosingEventArgs e)
@@ -601,7 +663,7 @@ namespace WinSaasPOS
         //屏蔽回车和空格键
         protected override bool ProcessDialogKey(Keys keyData)
         {
-            if (keyData == Keys.Enter || keyData==Keys.Space)
+            if (keyData == Keys.Enter || keyData == Keys.Space)
                 return false;
             else
                 return base.ProcessDialogKey(keyData);
@@ -609,11 +671,11 @@ namespace WinSaasPOS
 
         private void frmCashPay_KeyDown(object sender, KeyEventArgs e)
         {
-             //if (e.KeyCode == Keys.Enter)            
-             //{               
-             //    e.Handled = false;   
-             //    //将Handled设置为true，指示已经处理过KeyPress事件                        
-             //}
+            //if (e.KeyCode == Keys.Enter)            
+            //{               
+            //    e.Handled = false;   
+            //    //将Handled设置为true，指示已经处理过KeyPress事件                        
+            //}
 
         }
 
@@ -626,6 +688,24 @@ namespace WinSaasPOS
             else
             {
                 lblShuiyin.Visible = true;
+            }
+
+            try
+            {
+                double doublenum = Convert.ToDouble(txtCash.Text);
+
+                if (doublenum > 0)
+                {
+                    btnNext.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    btnNext.BackColor = Color.Silver;
+                }
+            }
+            catch
+            {
+                btnNext.BackColor = Color.Silver;
             }
         }
 

@@ -50,7 +50,7 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblTitle.Location = new System.Drawing.Point(25, 34);
+            this.lblTitle.Location = new System.Drawing.Point(39, 44);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(156, 25);
             this.lblTitle.TabIndex = 0;
@@ -152,7 +152,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(30, 20);
+            this.label2.Location = new System.Drawing.Point(14, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(138, 28);
             this.label2.TabIndex = 0;

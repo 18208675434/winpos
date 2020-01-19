@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace WinSaasPOS.Model
 {
-    public  class CreateOrderPara
+    public class CreateOrderPara
     {
         /// <summary>
         /// 是否自动选择一张最优惠的券（非必填）
@@ -70,7 +70,7 @@ namespace WinSaasPOS.Model
         /// <summary>
         /// 用户ID，配合usertoken使用，检验当前用户登录是否有效（非必填）
         /// </summary>
-        public string uid { set; get; } 
+        public string uid { set; get; }
         /// <summary>
         /// 用户 收音机登录获取到的token数据，用于下单校验（非必填）
         /// </summary>
@@ -83,17 +83,17 @@ namespace WinSaasPOS.Model
         /// <summary>
         /// 选中的优惠券号，字符数组，目前仅支持一次选中一张优惠券
         /// </summary>
-         public string[] selectedcoupons { set; get; }
+        public string[] selectedcoupons { set; get; }
 
         /// <summary>
         /// 是否为winpos请求，1为是  0或空为否
         /// </summary>
-         public int fromwinpos { set; get; }
+        public int fromwinpos { set; get; }
 
-         /// <summary>
-         /// 修改购物车价钱
-         /// </summary>
-         public decimal fixpricetotal { set; get; }
-        
+        /// <summary>
+        /// 修改购物车价钱
+        /// </summary>
+        public decimal fixpricetotal { set; get; }
+
     }
 }

@@ -28,7 +28,9 @@ namespace WinSaasPOS
         /// <summary>
         /// 当前订单ID
         /// </summary>
-        string CurrentOrderID = "";
+         string CurrentOrderID = "";
+
+         Cart CurrentCart = new Cart();
 
         /// <summary>
         /// 当前付款码
@@ -70,11 +72,23 @@ namespace WinSaasPOS
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
-        public frmOnLinePayResult(string orderid)
+        public frmOnLinePayResult(string orderid,Cart cart)
         {
             InitializeComponent();
             CurrentOrderID = orderid;
+            CurrentCart =(Cart) cart.qianClone();
             listener.ScanerEvent += Listener_ScanerEvent;
+
+            try
+            {
+               // this.Size = new System.Drawing.Size(Convert.ToInt32(380 * MainModel.wScale), Convert.ToInt32(480 * MainModel.hScale));
+                AutoScaleControl();
+                this.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - this.Width) / 2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("自适应在线收银页面异常"+ex.Message);
+            }
 
             listener.Start();
         }
@@ -94,6 +108,7 @@ namespace WinSaasPOS
 
         private void lblExit_Click(object sender, EventArgs e)
         {
+            
             string errormsg = "";
             bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsg);
 
@@ -103,35 +118,16 @@ namespace WinSaasPOS
             }
             else
             {
-                MainModel.ShowLog("订单取消失败" + errormsg, true);
+                LogManager.WriteLog("订单取消失败" + errormsg);
                // return;
             }
             isrun = false;
-
+            this.DialogResult = DialogResult.Cancel;
             if (DataReceiveHandle != null)
                 this.DataReceiveHandle.BeginInvoke(3, "", null, null);
             this.Close();
         }
 
-        private void btnCancle_Click(object sender, EventArgs e)
-        {
-            string errormsg = "";
-            bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsg);
-
-            if (result)
-            {
-                LogManager.WriteLog("取消订单" + CurrentOrderID);
-            }
-            else
-            {
-                MainModel.ShowLog("订单取消失败" + errormsg, true);
-               // return;
-            }
-            isrun = false;
-            if (DataReceiveHandle != null)
-                this.DataReceiveHandle.BeginInvoke(3, "", null, null);
-            this.Close();
-        }
 
 
         public void PayOnLine(string authcode)
@@ -151,24 +147,67 @@ namespace WinSaasPOS
             {
                 string ErrorMsg = "";
                 AuthcodeTrade codetrade = httputil.AuthCodeTrade(CurrentOrderID, CurrentAuthCode, ref ErrorMsg);
-
+                Console.WriteLine("authcodetrade"+CurrentOrderID+"    "+CurrentAuthCode);
                 if (ErrorMsg != "" || codetrade == null)
                 {
 
                     IsScan = false;
                     frmPayFail frmpayfail = new frmPayFail(ErrorMsg);
-                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     frmpayfail.Location = new System.Drawing.Point(0, 0);
                     frmpayfail.TopMost = true;
                     frmpayfail.ShowDialog();
 
                     if (frmpayfail.DialogResult == DialogResult.OK) //重新尝试
                     {
-                        MainModel.frmmainmedia.ShowPayInfo("请出示微信/支付宝付款码", false);
+
+
+                        string ErrorMsgCart = "";
+                        int ResultCodecart = 0;
+                        CurrentCart= httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCodecart);
+
+
+
+
+                        string errormsg = "";
+                        bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsg);
+
+                        string ErrorMsgre = "";
+                        int ResultCode = -1;
+                        CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsgre, ref ResultCode);
+                        if (ResultCode != 0 || orderresult == null)
+                        {
+                            MainModel.ShowLog("重建订单异常"+ErrorMsgre,true);
+                        }
+                        else if (orderresult.continuepay == 1)
+                        {
+                            CurrentOrderID = orderresult.orderid;
+                            
+                        }
+
+                        IsScan = true;
+                        //MainModel.frmmainmedia.ShowPayInfo("请出示微信/支付宝付款码", false);
                     }
                     else
                     {
-                        lblExit_Click(null, null);
+                        string errormsg = "";
+                        bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsg);
+
+                        if (result)
+                        {
+                            LogManager.WriteLog("取消订单" + CurrentOrderID);
+                        }
+                        else
+                        {
+                            MainModel.ShowLog("订单取消失败" + errormsg, true);
+                            // return;
+                        }
+                        isrun = false;
+                        
+                        this.DialogResult = DialogResult.Abort;
+                        if (DataReceiveHandle != null)
+                            this.DataReceiveHandle.BeginInvoke(3, "", null, null);
+                        this.Close();
                     }
 
                     IsScan = true;
@@ -180,14 +219,17 @@ namespace WinSaasPOS
                         if (DataReceiveHandle != null)
                             this.DataReceiveHandle.BeginInvoke(1, codetrade.orderid, null, null);
                         isrun = false;
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else
                     {
+
+                        LoadingHelper.ShowLoadingScreen("支付中...");
                         timerAuthCodeTrade.Enabled = false;
                         timerSyncTrade.Enabled = true;
                         CurrentPayID = codetrade.payid;
-                        SyncTrade(CurrentOrderID, codetrade.payid);  
+                        SyncTrade(CurrentOrderID, CurrentPayID);  
                     }
                  
                 }
@@ -204,11 +246,12 @@ namespace WinSaasPOS
         {
             try
             {
-                pnlWaiting.Visible = true;
+               
+
                 string errormsg = "";
                 string retunerrormsg = "";
                 synctrade sync = httputil.SyncTrade(orderid, payid, ref errormsg,ref retunerrormsg);
-
+                Console.WriteLine("synctrade" + orderid + "    " + payid);
                 if (errormsg != "" || sync == null)
                 {
 
@@ -225,43 +268,93 @@ namespace WinSaasPOS
                 }
                 else if (sync.status == "REQUEST_CLOSE")
                 {
-                    pnlWaiting.Visible = false;
+                    LoadingHelper.CloseForm();
                     timerSyncTrade.Enabled = false;
                     MainModel.ShowLog("交易关闭,请重新扫码付款！", false);
                 }
                 else if (sync.status == "FAIL")
                 {
-                    pnlWaiting.Visible = false;
+                    LoadingHelper.CloseForm();
                     timerSyncTrade.Enabled = false;
 
                     IsScan = false;
                     frmPayFail frmpayfail = new frmPayFail(retunerrormsg);
-                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.PrimaryScreen.Bounds.Width, SystemInformation.WorkingArea.Height, true);
+                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     frmpayfail.Location = new System.Drawing.Point(0, 0);
                     frmpayfail.TopMost = true;
                     frmpayfail.ShowDialog();
 
                     if (frmpayfail.DialogResult == DialogResult.OK) //重新尝试
                     {
-                        MainModel.frmmainmedia.ShowPayInfo("请出示微信/支付宝付款码", false);
+
+                        string errormsgre = "";
+                        bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsgre);
+                        //if (result)
+                        //{
+                        //    LogManager.WriteLog("取消订单" + CurrentOrderID);
+                        //}
+                        //else
+                        //{
+                        //    MainModel.ShowLog("订单取消失败" + errormsg, true);
+                        //    // return;
+                        //}
+
+                        string ErrorMsgCart = "";
+                        int ResultCodecart = 0;
+                       CurrentCart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCodecart);
+
+                       
+                        string ErrorMsgre = "";
+                        int ResultCode = -1;
+
+                        
+                        CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsgre, ref ResultCode);
+                        if (ResultCode != 0 || orderresult == null)
+                        {
+                            MainModel.ShowLog("重建订单异常" + ErrorMsgre, true);
+                        }
+                        else if (orderresult.continuepay == 1)
+                        {
+                            CurrentOrderID = orderresult.orderid;
+
+                            Console.WriteLine("新订单号"+orderresult.orderid);
+
+                        }
+                        IsScan = true;
                     }
                     else
                     {
-                        lblExit_Click(null,null);
+
+                        string errormsg1 = "";
+                        bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsg1);
+
+                        if (result)
+                        {
+                            LogManager.WriteLog("取消订单" + CurrentOrderID);
+                        }
+                        else
+                        {
+                            MainModel.ShowLog("订单取消失败" + errormsg, true);
+                            // return;
+                        }
+                        isrun = false;
+                        this.DialogResult = DialogResult.Abort;
+                        if (DataReceiveHandle != null)
+                            this.DataReceiveHandle.BeginInvoke(3, "", null, null);
+                        this.Close();
+                        
                     }
 
-                    IsScan = true;
-
-                    MainModel.ShowLog("交易失败,请重新扫码付款！", false);
+                  
                 }
                 else if (sync.status == "SUCCESS")
                 {
-                    btnCancle.Enabled = true;
                     lblExit.Enabled = true;
-                    pnlWaiting.Visible = false;
+                    LoadingHelper.CloseForm();
                     if (DataReceiveHandle != null)
                         this.DataReceiveHandle.BeginInvoke(1,sync.orderid, null, null);
                     isrun = false;
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 if (isrun)
@@ -273,7 +366,7 @@ namespace WinSaasPOS
             catch
             {
 
-            }
+            }          
            
         }
 
@@ -312,15 +405,34 @@ namespace WinSaasPOS
                 {
                     //ShowLog("交易超时！", false);
                     MainModel.ShowLog("交易超时！", false);
+
+                    LoadingHelper.CloseForm();
                     timerSyncTrade.Enabled = false;
+                    this.Activate();
                     isrun = false;
+                    this.Hide();
+                    FrmPayTimeOut frmpaytimeout = new FrmPayTimeOut();
+                    frmpaytimeout.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaytimeout.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaytimeout.Height) / 2);
+                    frmpaytimeout.TopMost = true;
+                    frmpaytimeout.ShowDialog();
+
+                    this.DialogResult = DialogResult.Cancel;
+                    if (DataReceiveHandle != null)
+                        this.DataReceiveHandle.BeginInvoke(3, "", null, null);
+
+                    this.Close();
+                   
                 }
-
-
-                if (isrun && CurrentPayID != "" && isrun)
+                else
                 {
-                    SyncTrade(CurrentOrderID, CurrentPayID);
+                    if (isrun && CurrentPayID != "" && isrun)
+                    {
+                        SyncTrade(CurrentOrderID, CurrentPayID);
+                    }
                 }
+
+
+               
 
             }
         }
@@ -357,6 +469,46 @@ namespace WinSaasPOS
             MainModel.frmmainmedia.ShowPayInfo("请出示微信/支付宝付款码",false);
         }
 
+
+
+
+
+        private void AutoScaleControl()
+        {
+
+            try
+            {
+                float wScale = (float)Screen.AllScreens[0].Bounds.Width / 3 / this.Width;
+                float hScale = (float)Screen.AllScreens[0].Bounds.Height * 3 / 5 / this.Height;
+
+                this.Size = new System.Drawing.Size(Convert.ToInt32(Screen.AllScreens[0].Bounds.Width / 3), Convert.ToInt32(Screen.AllScreens[0].Bounds.Height * 3 / 5));
+
+
+
+                foreach (Control c in this.Controls)
+                {
+                    c.Left = (int)Math.Ceiling(c.Left * wScale);
+                    c.Top = (int)Math.Ceiling(c.Top * hScale);
+
+                    c.Width = (int)Math.Ceiling(c.Width * wScale);
+                    c.Height = (int)Math.Ceiling(c.Height * hScale);
+
+                    float wSize = c.Font.Size * wScale;
+                    float hSize = c.Font.Size * hScale;
+
+
+
+                    c.Font = new Font(c.Font.Name, Math.Min(hSize, wSize), c.Font.Style, c.Font.Unit);
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+        }
 
     }
 }

@@ -47,8 +47,6 @@ namespace WinSaasPOS
             InitializeComponent();
             CurrentCart = (Cart)cart.qianClone();
             IniForm(cart);
-            //MainModel.
-           // MainModel.frmmainmedia.UpdateForm(cart);
            
         }
 
@@ -70,8 +68,8 @@ namespace WinSaasPOS
         //返回上层
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            if (DataReceiveHandle != null)
-                this.DataReceiveHandle.BeginInvoke(0, null, null);
+            //if (DataReceiveHandle != null)
+            //    this.DataReceiveHandle.BeginInvoke(0, null, null);
 
             this.Close();
         }

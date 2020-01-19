@@ -20,7 +20,5 @@ namespace WinSaasPOS.Model
         /// 设备ID
         /// </summary>
         public string deviceid { set; get; }
-
-        public int interval { set; get; }
     }
 }

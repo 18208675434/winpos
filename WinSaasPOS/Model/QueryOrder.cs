@@ -79,7 +79,7 @@ namespace WinSaasPOS.Model
 
          public string title{get;set;}
 
-         public decimal num{get;set;}
+         public int num{get;set;}
 
          public decimal specnum{get;set;}
 
