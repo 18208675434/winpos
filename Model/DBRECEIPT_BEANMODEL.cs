@@ -10,27 +10,27 @@ namespace Maticsoft.Model
 		public DBRECEIPT_BEANMODEL()
 		{}
 		#region Model
-		private int __id;
+		private Int64 __id;
 		private string _cashier;
 		private decimal _cashtotalamt;
-		private int _endtime;
+		private Int64 _endtime;
 		private decimal _netsaleamt;
 		private string _operatetimestr;
 		private string _receiptdetail;
-		private int _starttime;
+		private Int64 _starttime;
 		private decimal _totalpayment;
-		private int _syn_time;
+		private Int64 _syn_time;
 		private string _offline_receipt_id;
-		private int _create_time;
+		private Int64 _create_time;
 		private string _create_sn;
 		private string _create_url_ip;
-		private int _version_code;
+		private Int64 _version_code;
 		private string _backups_sn;
 		private string _backups_sn_time;
 		/// <summary>
 		/// 
 		/// </summary>
-		public int _id
+		public Int64 _id
 		{
 			set{ __id=value;}
 			get{return __id;}
@@ -54,7 +54,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int ENDTIME
+		public Int64 ENDTIME
 		{
 			set{ _endtime=value;}
 			get{return _endtime;}
@@ -86,7 +86,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int STARTTIME
+		public Int64 STARTTIME
 		{
 			set{ _starttime=value;}
 			get{return _starttime;}
@@ -102,7 +102,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int SYN_TIME
+		public Int64 SYN_TIME
 		{
 			set{ _syn_time=value;}
 			get{return _syn_time;}
@@ -118,7 +118,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int CREATE_TIME
+		public Int64 CREATE_TIME
 		{
 			set{ _create_time=value;}
 			get{return _create_time;}
@@ -142,7 +142,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int VERSION_CODE
+		public Int64 VERSION_CODE
 		{
 			set{ _version_code=value;}
 			get{return _version_code;}

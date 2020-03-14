@@ -64,8 +64,23 @@ namespace WinSaasPOS
 
         private void frmOrderHang_Load(object sender, EventArgs e)
         {
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
+            btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10, btnCancle.Left + btnCancle.Width);
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+            btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
+            if (MainModel.IsOffLine)
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OffLineType; btnOnLineType.Text = "   离线";
+                pnlDgvHead.Visible = false;
+                pnlDgvHeadOffLine.Visible = true;
+                dgvOrderOnLine.Columns["phone"].Visible = false;
+            }
+            else
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OnLineType; btnOnLineType.Text = "   在线";
+                pnlDgvHead.Visible = true;
+                pnlDgvHeadOffLine.Visible = false;
+            }
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
             LoadBmp();
@@ -99,9 +114,15 @@ namespace WinSaasPOS
             {
                 dgvOrderOnLine.Rows.Clear();
 
-
-                DirectoryInfo di = new DirectoryInfo(MainModel.OrderPath);
+                string orderpath = MainModel.OrderPath;
+                if (MainModel.IsOffLine)
+                {
+                    orderpath = MainModel.OffLineOrderPath;
+                }
+                DirectoryInfo di = new DirectoryInfo(orderpath);
                 List<FileInfo> fList = di.GetFiles().ToList();
+                fList.Reverse(); //名称开头是时间，文件倒序  挂单也就倒序
+
                 for (int i = 0; i < fList.Count; i++)
                 {
 
@@ -136,8 +157,11 @@ namespace WinSaasPOS
                                         timestr = timestr.Substring(0, 4) + "-" + timestr.Substring(4, 2) + "-" + timestr.Substring(6, 2) + " " + timestr.Substring(8, 2) + ":" + timestr.Substring(10, 2) + ":" + timestr.Substring(12, 2);
                                     }
                                     catch { }
+
+                                    
+                                    string title = cart.products[0].title + "等共" + cart.goodscount + "件商品";
                                     //TODO  会员手机号
-                                    dgvOrderOnLine.Rows.Add((i + 1).ToString(), phone, cart.title, timestr, bmpContinue, bmpDelHang);
+                                    dgvOrderOnLine.Rows.Add((i + 1).ToString(), phone, title, timestr, bmpContinue, bmpDelHang);
 
                                     // lstCart.Add(cart);
                                 }
@@ -180,57 +204,6 @@ namespace WinSaasPOS
             this.Close();
         }
 
-        // 清空所有挂单
-        private void btnClearOrderHang_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!IsEnable)
-                {
-                    return;
-                }
-                //if (dgvOrderOnLine.Rows.Count <= 0)
-                //{
-                //    return;
-                //}
-                DirectoryInfo di = new DirectoryInfo(MainModel.OrderPath);
-                List<FileInfo> fList = di.GetFiles().ToList();
-
-                if (fList.Count > 0)
-                {
-                    IsEnable = false;
-
-                    FrmConfirmBack frmconfirmback = new FrmConfirmBack("是否确认清空所有挂单？", "", "");
-                    frmconfirmback.Location = new Point(0, 0);
-                    if (frmconfirmback.ShowDialog() != DialogResult.OK)
-                    {
-                        return;
-                    }
-
-                    for (int i = 0; i < fList.Count; i++)
-                    {
-                        File.Delete(fList[i].FullName);
-                    }
-
-                    MainModel.ShowLog("挂单清空成功", false);
-                    LoadOrderHang();
-
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("清空挂单信息异常" + ex.Message);
-            }
-            finally
-            {
-                IsEnable = true;
-                LoadPicScreen(false);
-            }
-        }
-
-      
 
         private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -248,7 +221,16 @@ namespace WinSaasPOS
 
                 string phone = dgvOrderOnLine.Rows[e.RowIndex].Cells["phone"].Value.ToString();
                 string filename = Convert.ToDateTime(dgvOrderOnLine.Rows[e.RowIndex].Cells["hangtime"].Value.ToString()).ToString("yyyyMMddHHmmss") + "-" + phone + ".order";
-                string BasePath = MainModel.OrderPath + "\\" + filename;
+                string BasePath = "";
+                if (MainModel.IsOffLine)
+                {
+                    BasePath=MainModel.OffLineOrderPath + "\\" + filename;
+                }
+                else
+                {
+                    BasePath = MainModel.OrderPath + "\\" + filename;
+                }
+                
                 if (File.Exists(BasePath))
                 {
                     if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpContinue)

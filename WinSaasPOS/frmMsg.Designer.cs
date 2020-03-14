@@ -65,6 +65,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMsg";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoaderForm_FormClosing);
             this.SizeChanged += new System.EventHandler(this.frmMsg_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();

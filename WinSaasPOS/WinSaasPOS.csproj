@@ -94,11 +94,13 @@
     <Compile Include="Common\LoadingHelper.cs" />
     <Compile Include="Common\MsgHelper.cs" />
     <Compile Include="Common\NumberUtil.cs" />
+    <Compile Include="Common\OrderUtil.cs" />
     <Compile Include="Common\PrintUtil.cs" />
     <Compile Include="Common\ReceiptUtil.cs" />
     <Compile Include="Common\ScaleUtil.cs" />
     <Compile Include="Common\ScanerHook.cs" />
     <Compile Include="Common\ScanItem.cs" />
+    <Compile Include="Common\ServerDataUtil.cs" />
     <Compile Include="Common\TableClass.cs" />
     <Compile Include="Common\ValidCode.cs" />
     <Compile Include="Common\WClass.cs" />
@@ -107,6 +109,12 @@
     </Compile>
     <Compile Include="FormTestShow.Designer.cs">
       <DependentUpon>FormTestShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddUser.Designer.cs">
+      <DependentUpon>frmAddUser.cs</DependentUpon>
     </Compile>
     <Compile Include="frmBalanceOnLine.cs">
       <SubType>Form</SubType>
@@ -162,6 +170,18 @@
     <Compile Include="frmCashPayBack.Designer.cs">
       <DependentUpon>frmCashPayBack.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCashPayOffLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCashPayOffLine.Designer.cs">
+      <DependentUpon>frmCashPayOffLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCashPayOffLineBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCashPayOffLineBack.Designer.cs">
+      <DependentUpon>frmCashPayOffLineBack.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmChangeMode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +199,24 @@
     </Compile>
     <Compile Include="FrmConfirmBack.Designer.cs">
       <DependentUpon>FrmConfirmBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfirmChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmChange.Designer.cs">
+      <DependentUpon>frmConfirmChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfirmReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmReceipt.Designer.cs">
+      <DependentUpon>frmConfirmReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConfirmReceiptBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConfirmReceiptBack.Designer.cs">
+      <DependentUpon>FrmConfirmReceiptBack.cs</DependentUpon>
     </Compile>
     <Compile Include="frmCoupon.cs">
       <SubType>Form</SubType>
@@ -234,11 +272,23 @@
     <Compile Include="frmLoadingTop.Designer.cs">
       <DependentUpon>frmLoadingTop.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLoginOffLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoginOffLine.Designer.cs">
+      <DependentUpon>frmLoginOffLine.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMainMedia.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMainMedia.Designer.cs">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainOffLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainOffLine.Designer.cs">
+      <DependentUpon>frmMainOffLine.cs</DependentUpon>
     </Compile>
     <Compile Include="frmModifyPrice.cs">
       <SubType>Form</SubType>
@@ -442,10 +492,41 @@
     <Compile Include="Model\AuthCodeImage.cs" />
     <Compile Include="Model\AuthcodeTrade.cs" />
     <Compile Include="Model\BalanceTrade.cs" />
+    <Compile Include="Model\ConditionType.cs" />
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\ExpenseType.cs" />
     <Compile Include="Model\Member.cs" />
+    <Compile Include="Model\OffLineOrder.cs" />
+    <Compile Include="Model\OffLineReceipt.cs" />
+    <Compile Include="Model\OffLineUser.cs" />
     <Compile Include="Model\PanelProductPara.cs" />
+    <Compile Include="Model\promotionaction\AbstractPromoAction.cs" />
+    <Compile Include="Model\promotionaction\CycleDesignatedDiscountPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\DesignatedDiscountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderDiscountPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderDynamicAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderStepAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\PackageSellingPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\PromoAction.cs" />
+    <Compile Include="Model\promotionaction\PromoActionFactory.cs" />
+    <Compile Include="Model\promotionaction\StepDiscountOffPromotionAction.cs" />
+    <Compile Include="Model\Promotion\ActivityEnabledTimeInfo.cs" />
+    <Compile Include="Model\Promotion\AmountDistributor.cs" />
+    <Compile Include="Model\Promotion\CalculateBean.cs" />
+    <Compile Include="Model\Promotion\CollectionUtils.cs" />
+    <Compile Include="Model\Promotion\CommonConstant.cs" />
+    <Compile Include="Model\Promotion\EnumPromotionType.cs" />
+    <Compile Include="Model\Promotion\EvaluateScopePromotion.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineOrderPromotion.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineSingleCalculate .cs" />
+    <Compile Include="Model\Promotion\MoneyUtils.cs" />
+    <Compile Include="Model\Promotion\OffLinePromos.cs" />
+    <Compile Include="Model\Promotion\PromotionContextConvertUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionInfoUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionRealmDetail.cs" />
+    <Compile Include="Model\Promotion\PromotionsInvalidBean.cs" />
+    <Compile Include="Model\Promotion\TripletBean.cs" />
     <Compile Include="Model\QueryExpense.cs" />
     <Compile Include="Model\QueryExpensePara.cs" />
     <Compile Include="Model\QueryOrder.cs" />
@@ -502,6 +583,9 @@
     <EmbeddedResource Include="FormTestShow.resx">
       <DependentUpon>FormTestShow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAddUser.resx">
+      <DependentUpon>frmAddUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBalanceOnLine.resx">
       <DependentUpon>frmBalanceOnLine.cs</DependentUpon>
     </EmbeddedResource>
@@ -532,6 +616,12 @@
     <EmbeddedResource Include="frmCashPayBack.resx">
       <DependentUpon>frmCashPayBack.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCashPayOffLine.resx">
+      <DependentUpon>frmCashPayOffLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCashPayOffLineBack.resx">
+      <DependentUpon>frmCashPayOffLineBack.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChangeMode.resx">
       <DependentUpon>frmChangeMode.cs</DependentUpon>
     </EmbeddedResource>
@@ -540,6 +630,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmConfirmBack.resx">
       <DependentUpon>FrmConfirmBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfirmChange.resx">
+      <DependentUpon>frmConfirmChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfirmReceipt.resx">
+      <DependentUpon>frmConfirmReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConfirmReceiptBack.resx">
+      <DependentUpon>FrmConfirmReceiptBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCoupon.resx">
       <DependentUpon>frmCoupon.cs</DependentUpon>
@@ -568,8 +667,14 @@
     <EmbeddedResource Include="frmLoadingTop.resx">
       <DependentUpon>frmLoadingTop.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLoginOffLine.resx">
+      <DependentUpon>frmLoginOffLine.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMainMedia.resx">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainOffLine.resx">
+      <DependentUpon>frmMainOffLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifyPrice.resx">
       <DependentUpon>frmModifyPrice.cs</DependentUpon>
@@ -707,6 +812,8 @@
     <Content Include="Resources\FixDisenable.bmp" />
     <Content Include="Resources\FixEnable.bmp" />
     <None Include="Resources\Qustion.bmp" />
+    <None Include="Resources\OffLineType.bmp" />
+    <None Include="Resources\OnLineType.bmp" />
     <Content Include="SaasLogo.ico" />
     <None Include="Resources\Line_red.bmp" />
     <None Include="Resources\border_white.bmp" />

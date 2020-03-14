@@ -164,7 +164,23 @@ namespace Maticsoft.BLL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(string offlineorderid)
+        {
 
+            return dal.Delete(offlineorderid);
+        }
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public Maticsoft.Model.DBORDER_BEANMODEL GetModel(string offlineorderid)
+        {
+
+            return dal.GetModel(offlineorderid);
+        }
 		#endregion  ExtensionMethod
 	}
 }

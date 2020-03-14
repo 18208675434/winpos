@@ -50,23 +50,7 @@ namespace WinSaasPOS
         {
 
             InitializeComponent();
-            txtNum.TextChanged += txtNum_TextChanged;
-            btnCancle.Click += btnCancle_Click;
-            lblShuiyin.Click += lblShuiyin_Click;
-            btnNext.Click += btnNext_Click;
-            btn0.Click += btn_Click;
-            btn00.Click += btn_Click;
-            btn1.Click += btn_Click;
-            btn2.Click += btn_Click;
-            btn3.Click += btn_Click;
-            btn4.Click += btn_Click;
-            btn5.Click += btn_Click;
-            btn6.Click += btn_Click;
-            btn7.Click += btn_Click;
-            btn8.Click += btn_Click;
-            btn9.Click += btn_Click;
-
-            btnDel.Click += btnDel_Click;
+          
           
         }
         public frmNumber(string title,NumberType numbertype)
@@ -86,12 +70,14 @@ namespace WinSaasPOS
         {
             try
             {
+
                 switch (CurrentNumberType)
                 {
-                    case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; break;
-                    case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; break;
-                    case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true;  break;
+                    case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; btnBack.Width = btnNext.Width; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
+                    case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; btnBack.Width = btnNext.Width; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
+                    case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true; btnBack.Width = lblg.Left - btnBack.Left - 2; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
                 }
+               
 
                 txtNum.Font = new System.Drawing.Font("微软雅黑", txtNum.Font.Size * Math.Min(MainModel.hScale, MainModel.wScale));
               
@@ -119,11 +105,11 @@ namespace WinSaasPOS
                 lblMsg.Text = "";
                 lblInfo.Text = title;
                 CurrentNumberType = numbertype;
-                switch (numbertype)
+                switch (CurrentNumberType)
                 {
-                    case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; break;
-                    case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; break;
-                    case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true;  break;
+                    case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; btnBack.Width = btnNext.Width; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
+                    case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; btnBack.Width = btnNext.Width; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
+                    case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true; btnBack.Width = lblg.Left - btnBack.Left - 2; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
                 }
                 Application.DoEvents();
             }

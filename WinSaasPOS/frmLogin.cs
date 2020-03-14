@@ -14,6 +14,9 @@ using System.Text;
 using System.Threading;
 using System.Threading;
 using System.Windows.Forms;
+using Maticsoft.BLL;
+using Newtonsoft.Json;
+using Maticsoft.Model;
 
 namespace WinSaasPOS
 {
@@ -33,7 +36,9 @@ namespace WinSaasPOS
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
         public frmLogin()
         {
-            InitializeComponent();          
+            InitializeComponent();
+            MainModel.IsOffLine = false;
+            INIManager.SetIni("System", "IsOffLine", "0", MainModel.IniPath);
         }
 
         private void frmLogin_Shown(object sender, EventArgs e)
@@ -58,7 +63,8 @@ namespace WinSaasPOS
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-
+            MainModel.IsOffLine = false;
+            INIManager.SetIni("System", "IsOffLine", "0", MainModel.IniPath);
             //每次开启页面都要加载，页面关闭值null
             string imgname = "LoginLogo.bmp";
             if (File.Exists(MainModel.MediaPath + imgname))
@@ -213,6 +219,7 @@ namespace WinSaasPOS
                 else
                 {
                     INIManager.SetIni("System", "POS-Authorization", Token, MainModel.IniPath);
+                    INIManager.SetIni("OffLine", "POS-Authorization", Token, MainModel.IniPath);
                     MainModel.Authorization = Token;
                     if (!LoadUser() || !LoadShopInfo())
                     {
@@ -335,6 +342,7 @@ namespace WinSaasPOS
                 else
                 {
                     INIManager.SetIni("System", "POS-Authorization", Token, MainModel.IniPath);
+                    INIManager.SetIni("OffLine", "POS-Authorization", Token, MainModel.IniPath);
                     MainModel.Authorization = Token;
                     if (!LoadUser() || !LoadShopInfo())
                     {
@@ -421,7 +429,15 @@ namespace WinSaasPOS
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainModel.ShowTask();
+            try
+            {
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("清理登录页面资源异常"+ex.Message);
+            }
+           // MainModel.ShowTask();
            
             ////CloseOSK();
         }
@@ -460,6 +476,8 @@ namespace WinSaasPOS
                 return false;
             }
         }
+
+        private JSON_BEANBLL jsonbll = new JSON_BEANBLL();
         private bool LoadShopInfo()
         {
 
@@ -480,6 +498,15 @@ namespace WinSaasPOS
                     MainModel.CurrentShopInfo = shopinfo;
                     MainModel.ShopName = shopinfo.shopname;
 
+
+                    jsonbll.Delete("SHOPINFO");
+                    JSON_BEANMODEL jsonmodel = new JSON_BEANMODEL();
+                    jsonmodel.CONDITION = "SHOPINFO";
+                    jsonmodel.CREATE_TIME = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    jsonmodel.DEVICESN = MainModel.DeviceSN;
+                    jsonmodel.CREATE_URL_IP = MainModel.URL;
+                    jsonmodel.JSON = JsonConvert.SerializeObject(shopinfo);
+                    jsonbll.Add(jsonmodel);
                   
 
                     return true;
@@ -572,8 +599,8 @@ namespace WinSaasPOS
             }
             try
             {
-                MainModel.frmmainmedia.Close();
-                MainModel.frmmainmedia = null;
+                //MainModel.frmmainmedia.Close();
+                //MainModel.frmmainmedia = null;
             }
             catch { }
             MainModel.ShowTask();
@@ -614,24 +641,23 @@ namespace WinSaasPOS
         //切换环境
         private void lblSN_Click(object sender, EventArgs e)
         {
-            //LogManager.WriteLog(click.ToString());
-            //// 两次点击间隔小于100毫秒时，算连续点击
-            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
-            //{
-            //    click++;
-            //    if (click >= 3)
-            //    {
-            //        click = 0;// 连续点击完毕时，清0
-            //        frmChangeUrl frmchangeurl = new frmChangeUrl();
-            //        frmchangeurl.ShowDialog();
-            //    }
-            //}
-            //else
-            //{
-
-            //    click = 1;// 不是连续点击时，清0
-            //}
-            //lastClickTime = DateTime.Now;
+            LogManager.WriteLog(click.ToString());
+            // 两次点击间隔小于100毫秒时，算连续点击
+            if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
+            {
+                click++;
+                if (click >= 3)
+                {
+                    click = 0;// 连续点击完毕时，清0
+                    frmChangeUrl frmchangeurl = new frmChangeUrl();
+                    frmchangeurl.ShowDialog();
+                }
+            }
+            else
+            {
+                click = 1;// 不是连续点击时，清0
+            }
+            lastClickTime = DateTime.Now;
         }
 
 
@@ -768,7 +794,7 @@ namespace WinSaasPOS
                 gp.CloseAllFigures();
 
                 g.FillPath(myLinearGradientBrush, gp);
-                
+
             }
             catch (Exception ex)
             {
@@ -829,20 +855,7 @@ namespace WinSaasPOS
 
         private void frmLogin_Activated(object sender, EventArgs e)
         {
-            try
-            {
-                //string imgname = "LoginLogo.bmp";
-                //if (File.Exists(MainModel.MediaPath + imgname))
-                //{
-                //    picTenantLogo.BackgroundImage = Image.FromFile(MainModel.MediaPath + imgname);
 
-                //}
-                //else
-                //{
-
-                //}
-            }
-            catch { }
         }
 
         #region 解决闪烁问题
@@ -882,6 +895,52 @@ namespace WinSaasPOS
 
             }
             catch { }
+        }
+
+        private void lbtnChangeOffLine_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (MainModel.frmloginoffline != null)
+            {
+                try { MainModel.frmloginoffline.Dispose(); }
+                catch { }
+                
+            }
+            MainModel.frmloginoffline = new frmLoginOffLine();
+            MainModel.frmloginoffline.Show();
+            this.Hide();
+            //if (MainModel.frmloginoffline == null)
+            //{
+            //    MainModel.frmloginoffline = new frmLoginOffLine();
+            //    MainModel.frmloginoffline.Show();
+            //    this.Hide();
+            //}
+            //else
+            //{
+            //    MainModel.frmloginoffline.Show();
+            //    this.Hide();
+            //}
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string names = "";
+            int num = Application.OpenForms.Count;
+            for (int i = 0; i < num; i++)
+            {
+                
+                Form f = Application.OpenForms[i];
+                if (f.Name != "frmLogin" && f.Name != "frmLoginOffLine")
+                {
+                    num = num - 1;
+                    i = i - 1;
+                    try
+                    {
+                        f.Dispose();
+                      
+                    }
+                    catch { }
+                }
+            }
         }
     }
 

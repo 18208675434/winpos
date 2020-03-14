@@ -1,4 +1,7 @@
-﻿using WinSaasPOS.Common;
+﻿using Maticsoft.BLL;
+using Maticsoft.Model;
+using Newtonsoft.Json;
+using WinSaasPOS.Common;
 using WinSaasPOS.Model;
 using System;
 using System.Collections.Generic;
@@ -41,6 +44,7 @@ namespace WinSaasPOS
 
         private Bitmap bmpReprint;
         private Bitmap bmpRefund;
+        private Bitmap bmpNotRefund;
         private Bitmap bmpWhite;
 
         /// <summary>
@@ -48,30 +52,61 @@ namespace WinSaasPOS
         /// </summary>
         private bool IsEnable = true;
 
+        /// <summary>
+        /// 本地订单表操作类
+        /// </summary>
+        private DBORDER_BEANBLL orderbll = new DBORDER_BEANBLL();
+
+        private bool thisisoffline = false;
+
         public frmOrderQuery()
         {
             InitializeComponent();
-
+           
           
             // Application.EnableVisualStyles();
         }
-
-
         private void frmOrderQuery_Load(object sender, EventArgs e)
         {
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
+            btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10, btnCancle.Left + btnCancle.Width);
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+            btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
+            if (MainModel.IsOffLine)
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OffLineType; btnOnLineType.Text = "   离线";
+            }
+            else
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OnLineType; btnOnLineType.Text = "   在线";
+            }
             lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
             Application.DoEvents();
+
+            if (MainModel.IsOffLine)
+            {
+                lblPhone.Visible = false;
+                txtPhone.Visible = false;
+                lblPhoneShuiyin.Visible = false;
+                lblOrderID.Location = lblPhone.Location;
+                txtOrderID.Location = txtPhone.Location;
+                lblOrderIDShuiyin.Location = lblPhoneShuiyin.Location;
+
+                pnlDgvOffLineHead.Top = btnQueryOffLine.Top;
+                dgvOrderOffLine.Top = pnlDgvOffLineHead.Top + pnlDgvOffLineHead.Height + 2;
+                dgvOrderOffLine.Height = this.Height - pnlDgvOffLineHead.Top - pnlDgvOffLineHead.Height;
+                btnQueryOffLine.PerformClick();
+            }
+
         }
         private void frmOrderQuery_Shown(object sender, EventArgs e)
         {
-
+            Application.DoEvents();
             LoadBmp();
 
-           
             btnToday_Click(null, null);
         }
 
@@ -81,6 +116,9 @@ namespace WinSaasPOS
             {
                 bmpRefund = (Bitmap)MainModel.GetControlImage(btnRefundPic);
                 bmpReprint = (Bitmap)MainModel.GetControlImage(btnReprintPic);
+                bmpNotRefund = (Bitmap)MainModel.GetControlImage(btnNotRefundPic);
+
+
                 //int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
                 //bmpRefund = new Bitmap(Resources.ResourcePos.Refund, dgvOrderOnLine.Columns["cancle"].Width * 80 / 100, height);
 
@@ -239,7 +277,87 @@ namespace WinSaasPOS
                     return;
                 }
 
-                LoadingHelper.ShowLoadingScreen();//显示
+                
+
+                if ( thisisoffline)
+                {
+                    long endtime =Convert.ToInt64(getStampByDateTime(dtEnd.Value));
+                    long starttime =Convert.ToInt64( getStampByDateTime(dtStart.Value));
+
+                    string strwhere = " ORDERAT >" + starttime + " and ORDERAT < "+endtime ;
+                    if (!string.IsNullOrEmpty(phone))
+                    {
+                        strwhere += " and CUSTOMERPHONE = '"+phone+"' ";
+
+                    }
+                    if (!string.IsNullOrEmpty(orderid))
+                    {
+                        strwhere += " and OFFLINEORDERID = '" + orderid + "' ";
+                    }
+                    strwhere += " order by CREATE_TIME desc";
+                    List<DBORDER_BEANMODEL> lstorderoffline =  orderbll.GetModelList(strwhere);
+
+
+                    dgvOrderOffLine.Rows.Clear();
+                    if (lstorderoffline != null && lstorderoffline.Count > 0)
+                    {
+                        foreach (DBORDER_BEANMODEL order in lstorderoffline)
+                        {
+
+                            if (order.ORDERSTATUSVALUE == 5)//已退款
+                            {
+                                if (order.SYN_TIME == null || order.SYN_TIME == 0)
+                                {
+                                    dgvOrderOffLine.Rows.Add(GetDateTimeByStamp(order.ORDERAT.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.OFFLINEORDERID, order.CUSTOMERPHONE, order.TITLE, "现金："+order.PRICETOTAL.ToString("f2"), order.ORDERSTATUS,"未同步", bmpWhite, bmpWhite);
+
+                                }
+                                else
+                                {
+                                    dgvOrderOffLine.Rows.Add(GetDateTimeByStamp(order.ORDERAT.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.OFFLINEORDERID, order.CUSTOMERPHONE, order.TITLE, "现金：" + order.PRICETOTAL.ToString("f2"), order.ORDERSTATUS, "已同步", bmpWhite, bmpWhite);
+                                }
+                            }
+                            else
+                            {
+                                if (order.SYN_TIME == null || order.SYN_TIME == 0)
+                                {
+                                    if (MainModel.IsOffLine)
+                                    {
+                                        dgvOrderOffLine.Rows.Add(GetDateTimeByStamp(order.ORDERAT.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.OFFLINEORDERID, order.CUSTOMERPHONE, order.TITLE, "现金：" + order.PRICETOTAL.ToString("f2"), order.ORDERSTATUS, "未同步", bmpReprint, bmpRefund);
+
+                                    }
+                                    else
+                                    {
+                                        dgvOrderOffLine.Rows.Add(GetDateTimeByStamp(order.ORDERAT.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.OFFLINEORDERID, order.CUSTOMERPHONE, order.TITLE, "现金：" + order.PRICETOTAL.ToString("f2"), order.ORDERSTATUS, "未同步", bmpReprint, bmpNotRefund);
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    dgvOrderOffLine.Rows.Add(GetDateTimeByStamp(order.ORDERAT.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.OFFLINEORDERID, order.CUSTOMERPHONE, order.TITLE, "现金：" + order.PRICETOTAL.ToString("f2"), order.ORDERSTATUS, "已同步", bmpReprint, bmpRefund);
+
+                                }
+
+                            }
+                        }
+                    }
+
+
+                    if (dgvOrderOffLine.Rows.Count > 0)
+                    {
+                        pnlEmptyOrder.Visible = false;
+
+                        //  MainModel.ShowLog("刷新完成", false);
+                    }
+                    else
+                    {
+                        pnlEmptyOrder.Visible = true;
+                        //  MainModel.ShowLog("暂无数据", false);
+                    }
+                }
+                if(!thisisoffline && !MainModel.IsOffLine)
+                {
+                    LoadingHelper.ShowLoadingScreen();//显示
 
                 QueryOrderPara queryorderpara = new QueryOrderPara();
                 queryorderpara.customerphone = txtPhone.Text;
@@ -253,11 +371,12 @@ namespace WinSaasPOS
                 string ErrorMsg = "";
                 QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
 
+                //CurrentQueryOrder = queryorder;
             
 
                 if (ErrorMsg != "" || queryorder == null)
                 {
-                    MainModel.ShowLog(ErrorMsg, false);
+                     MainModel.ShowLog(ErrorMsg, false);
                 }
                 else
                 {
@@ -336,23 +455,23 @@ namespace WinSaasPOS
                     {
                         pnlEmptyOrder.Visible = false;
 
-                        // ShowLog("刷新完成", false);
+                        //  MainModel.ShowLog("刷新完成", false);
                     }
                     else
                     {
                         pnlEmptyOrder.Visible = true;
-                        // ShowLog("暂无数据", false);
+                        //  MainModel.ShowLog("暂无数据", false);
                     }
                 }
-
-
                 LoadingHelper.CloseForm();//关闭
 
+                //Application.DoEvents();
+                }
             }
             catch (Exception ex)
             {
                 LoadingHelper.CloseForm();//关闭
-                MainModel.ShowLog("查询订单异常：" + ex.Message, true);
+                 MainModel.ShowLog("查询订单异常：" + ex.Message, true);
             }
             finally
             {
@@ -388,18 +507,6 @@ namespace WinSaasPOS
         }
 
 
-        ////TODO  修改样式
-        //private void ShowLog(string msg, bool iserror)
-        //{
-
-        //    MsgHelper.AutoShowForm(msg);
-        //    //this.BeginInvoke(new InvokeHandler(delegate()
-        //    //{
-        //    //    frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
-        //    //    frmmsf.ShowDialog(); LogManager.WriteLog(msg);
-        //    //}));
-
-        //}
 
         private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -431,7 +538,7 @@ namespace WinSaasPOS
 
                 //    if (SelectOrder == null)
                 //    {
-                //        ShowLog("订单不存在，请刷新", false);
+                //         MainModel.ShowLog("订单不存在，请刷新", false);
                 //        this.Enabled = true;
                 //        return;
                 //    }
@@ -457,12 +564,12 @@ namespace WinSaasPOS
                 //    string resultorderid = httputil.Refund(refundpara, ref ErrorMsg);
                 //    if (ErrorMsg != "")
                 //    {
-                //        ShowLog(ErrorMsg, true);
+                //         MainModel.ShowLog(ErrorMsg, true);
                 //    }
                 //    else
                 //    {
 
-                //        ShowLog("退款成功", false);
+                //         MainModel.ShowLog("退款成功", false);
 
                 //    }
 
@@ -489,7 +596,7 @@ namespace WinSaasPOS
 
                     if (SelectOrder == null)
                     {
-                        MainModel.ShowLog("订单不存在，请刷新", false);
+                         MainModel.ShowLog("订单不存在，请刷新", false);
                         
                         return;
                     }
@@ -547,7 +654,7 @@ namespace WinSaasPOS
                         }
 
 
-                        FrmConfirmBack frmconfirmback = new FrmConfirmBack("是否确认退款？", totalpay, "");
+                        FrmConfirmBack frmconfirmback = new FrmConfirmBack("确认退款？", "应退 "+ totalpay, "");
                         frmconfirmback.Location = new Point(0, 0);
                         if (frmconfirmback.ShowDialog() != DialogResult.OK)
                         {
@@ -558,17 +665,17 @@ namespace WinSaasPOS
                         string resultorderid = httputil.Refund(frmrefund.Refrefundpara, ref ErrorMsg);
                         if (ErrorMsg != "")
                         {
-                            MainModel.ShowLog(ErrorMsg, true);
+                             MainModel.ShowLog(ErrorMsg, true);
                         }
                         else
                         {
-                            MainModel.ShowLog("退款成功", false);
+                             MainModel.ShowLog("退款成功", false);
 
                             //ErrorMsg = "";
                             //PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
                             //if (ErrorMsg != "" || printdetail == null)
                             //{
-                            //    ShowLog(ErrorMsg, true);
+                            //     MainModel.ShowLog(ErrorMsg, true);
                             //}
                             //else
                             //{
@@ -577,11 +684,11 @@ namespace WinSaasPOS
 
                             //    if (PrintErrorMsg != "" || !printresult)
                             //    {
-                            //        ShowLog(PrintErrorMsg, true);
+                            //         MainModel.ShowLog(PrintErrorMsg, true);
                             //    }
                             //    else
                             //    {
-                            //        //  ShowLog("打印完成", false);
+                            //        //   MainModel.ShowLog("打印完成", false);
                             //    }
 
                             //}
@@ -612,12 +719,10 @@ namespace WinSaasPOS
                     string ErrorMsg = "";
                     PrintDetail printdetail = httputil.GetPrintDetail(orderid, ref ErrorMsg);
 
-
                     if (ErrorMsg != "" || printdetail == null)
                     {
-
                         LoadingHelper.CloseForm();
-                        MainModel.ShowLog(ErrorMsg, true);
+                         MainModel.ShowLog(ErrorMsg, true);
                     }
                     else
                     {
@@ -627,15 +732,16 @@ namespace WinSaasPOS
 
                         if (PrintErrorMsg != "" || !printresult)
                         {
-                            MainModel.ShowLog(PrintErrorMsg, true);
+                             MainModel.ShowLog(PrintErrorMsg, true);
                         }
                         else
                         {
-                            MainModel.ShowLog("打印完成", false);
+                             MainModel.ShowLog("打印完成", false);
                         }
 
                     }
                     Delay.Start(300);
+                    IsEnable = true;
                     LoadingHelper.CloseForm();
                     btnQuery_Click(null, null);
                 }
@@ -653,6 +759,12 @@ namespace WinSaasPOS
 
             }
         }
+
+        public void frmOrderQuery_SizeChanged(object sender, EventArgs e)
+        {
+            // asf.ControlAutoSize(this);
+        }
+
 
         private void LoadPicScreen(bool isShown)
         {
@@ -751,11 +863,17 @@ namespace WinSaasPOS
                     return;
                 }
 
+
+                thisisoffline = false;
+
                 btnQueryOnline.BackColor = Color.White;
                 btnQueryOffLine.BackColor = Color.LightSteelBlue;
 
                 dgvOrderOnLine.Visible = true;
+                pnlDgvHead.Visible = true;
                 dgvOrderOffLine.Visible = false;
+                pnlDgvOffLineHead.Visible = false;
+
 
                 if (dgvOrderOnLine.Rows.Count > 0)
                 {
@@ -780,17 +898,176 @@ namespace WinSaasPOS
                 {
                     return;
                 }
-
+                thisisoffline = true;
                 btnQueryOnline.BackColor = Color.LightSteelBlue;
                 btnQueryOffLine.BackColor = Color.White;
 
-                pnlEmptyOrder.Visible = true;
                 dgvOrderOnLine.Visible = false;
-                dgvOrderOffLine.Visible = true;
+                pnlDgvHead.Visible = false;
+
+                dgvOrderOffLine.Visible = true;              
+                pnlDgvOffLineHead.Visible = true;
+
+                if (dgvOrderOffLine.Rows.Count > 0)
+                {
+                    pnlEmptyOrder.Visible = false;
+                }
+                else
+                {
+                    pnlEmptyOrder.Visible = false;
+                }
+                Application.DoEvents();
+                btnToday.PerformClick();
             }
             catch (Exception ex)
             {
                 MainModel.ShowLog("切换订单查询模式异常" + ex.Message, true);
+            }
+        }
+
+        private void dgvOrderOffLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (!IsEnable)
+                {
+                    return;
+                }
+
+                if (e.RowIndex < 0)
+                    return;
+              
+
+                if (dgvOrderOffLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefund)
+                {
+                    
+                    string selectorderid = dgvOrderOffLine.Rows[e.RowIndex].Cells["OffLineOrderID"].Value.ToString();
+                    IsEnable = false;
+
+                   DBORDER_BEANMODEL order = orderbll.GetModel(selectorderid);
+
+
+                   if (order == null)
+                    {
+                         MainModel.ShowLog("订单不存在，请刷新", false);  
+
+                        return;
+                    }
+
+                   FrmConfirmBack frmconfirmback = new FrmConfirmBack("确认退款？", "应退 现金：" + order.PRICETOTAL.ToString("f2"), "");
+                   frmconfirmback.Location = new Point(0, 0);
+                   if (frmconfirmback.ShowDialog() != DialogResult.OK)
+                   {
+                       return;
+                   }
+
+                  
+                       LoadingHelper.ShowLoadingScreen("加载中...");
+                       OffLineOrder offlineorder = JsonConvert.DeserializeObject<OffLineOrder>(order.ORDER_JSON);
+
+                      
+                        offlineorder.hasrefunded = 1;
+                       
+
+
+                       string errormsg = "";
+                       bool result = true;
+                       if (!MainModel.IsOffLine)
+                       {
+                           result = httputil.OffLineRefund(offlineorder, ref errormsg);
+                       }
+                        
+                       LoadingHelper.CloseForm();
+
+                       if (result)
+                       {
+                           order.ORDERSTATUSVALUE = 5;
+                           order.ORDERSTATUS = "已退款";
+
+                           long timenow = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
+                           order.REFUND_TIME = timenow;
+
+                           if (!MainModel.IsOffLine) //在线情况下已调用退款接口，更新和退款时间一致防止再上传    
+                           {
+                               order.SYN_TIME = timenow;
+                           }
+                           
+                           orderbll.Update(order);
+
+                           ReceiptUtil.EditRefund(1, order.PRICETOTAL);
+                            MainModel.ShowLog("退款成功", false);
+                       }
+                       else
+                       {
+                            MainModel.ShowLog("退款失败"+errormsg, false);
+                       }
+                   
+                  
+                                IsEnable = true;
+                        //后端订单信息更新需要时间，延时刷新
+                        Delay.Start(300);
+                        btnQuery_Click(null, null);
+                    
+
+
+                }
+
+                else if (dgvOrderOffLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpNotRefund)
+                {
+
+                    MainModel.ShowLog("在线收银模式下，未同步的订单不可以进行退款操作",false);
+
+
+                }
+                else if (dgvOrderOffLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
+                {
+                    IsEnable = false;
+
+                    FrmConfirmBack frmconfirmback = new FrmConfirmBack("确认重打小票？", "", "");
+                    frmconfirmback.Location = new Point(0, 0);
+                    if (frmconfirmback.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+
+                    LoadingHelper.ShowLoadingScreen("加载中...");
+                    ReceiptUtil.EditReprintCount(1);
+
+                    string orderid = dgvOrderOffLine.Rows[e.RowIndex].Cells["OffLineOrderID"].Value.ToString();
+
+                    DBORDER_BEANMODEL offlineorder= orderbll.GetModel(orderid);
+
+                   
+                        
+                        string PrintErrorMsg = "";
+                        bool printresult = PrintUtil.PrintOrder(orderid, false, ref PrintErrorMsg);
+
+                        if (PrintErrorMsg != "" || !printresult)
+                        {
+                             MainModel.ShowLog(PrintErrorMsg, true);
+                        }
+                        else
+                        {
+                             MainModel.ShowLog("打印完成", false);
+                        }
+
+                        IsEnable = true;
+                    Delay.Start(300);
+                    LoadingHelper.CloseForm();
+                    btnQuery_Click(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                LogManager.WriteLog("ERROR", "订单查询操作异常" + ex.Message);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
+                IsEnable = true;
+                LoadPicScreen(false);
+
             }
         }
 
@@ -813,7 +1090,55 @@ namespace WinSaasPOS
             catch { }
         }
 
+        private void dtEnd_MouseDown(object sender, MouseEventArgs e)
+        {
+            dtEnd.Focus();
+            SendKeys.Send("{F4}");
+        }
+
+        private void dtStart_MouseDown(object sender, MouseEventArgs e)
+        {
+            dtStart.Focus();
+            SendKeys.Send("{F4}");
+        }
+
+        private void txtPhone_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPhone.Text.Length > 0)
+            {
+                lblPhoneShuiyin.Visible = false;
+            }
+            else
+            {
+                lblPhoneShuiyin.Visible = true;
+            }
+        }
+
+        private void lblPhoneShuiyin_Click(object sender, EventArgs e)
+        {
+            lblPhoneShuiyin.Focus();
+        }
+
+        private void txtOrderID_TextChanged(object sender, EventArgs e)
+        {
+            if (txtOrderID.Text.Length > 0)
+            {
+                
+                lblOrderIDShuiyin.Visible = false;
+            }
+            else
+            {
+                lblOrderIDShuiyin.Visible = true;
+            }
+        }
+
+        private void lblOrderIDShuiyin_Click(object sender, EventArgs e)
+        {
+            txtOrderID.Focus();
+        }
+
      
+
         //protected override CreateParams CreateParams
         //{
         //    get

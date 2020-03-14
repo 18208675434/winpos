@@ -16,11 +16,18 @@ namespace WinSaasPOS.Model
         public OrderPriceDetail shiftcode { get; set; }
         public OrderPriceDetail title { get; set; }
         public OrderPriceDetail totalamount { get; set; }
-        public OrderPriceDetail[] basicinfo { get; set; }
-        public OrderPriceDetail[] incomedetails { get; set; }
-        public OrderPriceDetail[] bottomdetails { get; set; }
+        public List<OrderPriceDetail> basicinfo { get; set; }
+        public List<OrderPriceDetail> incomedetails { get; set; }
+        public List<OrderPriceDetail> bottomdetails { get; set; }
         public long starttime { get; set; }
         public long endtime { get; set; }
+
+
+
+        public string saleclerkphone { get; set; }
+        public string shopid { get; set; }
+        public string DeviceSN { get; set; }
+        public string createurlip { get; set; }
     }
 
 

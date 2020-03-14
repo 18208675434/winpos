@@ -58,7 +58,14 @@ namespace WinSaasPOS
 
                 lblPrice.Text = "￥" + cart.payamtbeforecash.ToString("f2");
                 lblCash.Text = "￥" + cart.cashpayamt.ToString("f2");
-                lblChange.Text = "￥" + cart.cashchangeamt.ToString("f2");                                           
+                lblChange.Text = "￥" + cart.cashchangeamt.ToString("f2");
+
+
+                Dictionary<string, string> dicdetail = new Dictionary<string, string>();
+                dicdetail.Add("应付：", "￥" + cart.payamtbeforecash.ToString("f2"));
+                dicdetail.Add("已付现金：",  "￥" + cart.cashpayamt.ToString("f2"));
+
+                MainModel.frmmainmedia.UpdateDgvOrderDetail(dicdetail, "找零：", "￥" + cart.cashchangeamt.ToString("f2"));
             }
             catch (Exception ex)
             {

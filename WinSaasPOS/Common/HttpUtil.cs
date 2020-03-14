@@ -405,7 +405,9 @@ namespace WinSaasPOS.Common
 
                 if (cart.fixpricetotal == 0)
                 {
+
                     tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
+                    tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
                 }
 
                 string balancepaypassword = null;
@@ -422,7 +424,7 @@ namespace WinSaasPOS.Common
                 }
 
                 string json = HttpPOST(url, tempjson);
-                Console.WriteLine(json);
+                //Console.WriteLine(json);
 
 
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -523,7 +525,11 @@ namespace WinSaasPOS.Common
 
                 if (cart.fixpricetotal == 0)
                 {
-                    tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
+
+
+                        tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
+                        tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
+                    
                 }
 
                 ////Console.Write(tempjson);
@@ -740,7 +746,7 @@ namespace WinSaasPOS.Common
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
-                //Console.WriteLine(json);
+                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     BalanceTrade codetrade = JsonConvert.DeserializeObject<BalanceTrade>(rd.data.ToString());
@@ -891,7 +897,7 @@ namespace WinSaasPOS.Common
 
                 resultcode = rd.code;
                 //TODO
-                //Console.WriteLine(json);
+                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     VerifyBalancePwd verifyresult = JsonConvert.DeserializeObject<VerifyBalancePwd>(rd.data.ToString());
@@ -975,7 +981,7 @@ namespace WinSaasPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                // Console.WriteLine("订单查询："+json);
+                // //Console.WriteLine("订单查询："+json);
 
                 // return;
                 if (rd.code == 0)
@@ -1503,7 +1509,7 @@ namespace WinSaasPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                // Console.WriteLine(json);
+                // //Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     return Convert.ToBoolean(rd.data);
@@ -1810,9 +1816,10 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpPOST(url, tempjson);
+                //Console.WriteLine(json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                //Console.WriteLine(json);
+                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     AllProduct allproduct = JsonConvert.DeserializeObject<AllProduct>(rd.data.ToString());
@@ -1853,7 +1860,7 @@ namespace WinSaasPOS.Common
 
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
-                //Console.WriteLine(json);
+                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     AllProduct allproduct = JsonConvert.DeserializeObject<AllProduct>(rd.data.ToString());
@@ -1905,7 +1912,7 @@ namespace WinSaasPOS.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
-                //Console.WriteLine(json);
+                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     List<Product> lstproduct = JsonConvert.DeserializeObject<List<Product>>(rd.data.ToString());
@@ -2019,7 +2026,7 @@ namespace WinSaasPOS.Common
 
                 string json = HttpGET(url, sort);
 
-                Console.WriteLine(json);
+                //Console.WriteLine(json);
                // return json;
 
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -2088,6 +2095,284 @@ namespace WinSaasPOS.Common
         }
         #endregion
 
+        #region 离线接口
+        /// <summary>
+        /// 添加员工
+        /// </summary>
+        /// <param name="lstuser"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public List<OffLineUser> PosUser(List<OffLineUser> lstuser, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/account/sysuser/upload/posuser";
+
+
+
+                string testjson = JsonConvert.SerializeObject(lstuser);
+
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string Token = rd.data.ToString();
+
+                    List<OffLineUser> lstuserresult = JsonConvert.DeserializeObject<List<OffLineUser>>(Token);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "posuser:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "添加离线用户异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 添加离线订单
+        /// </summary>
+        /// <param name="offlineorder"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public bool CreateOffLineOrder(OffLineOrder offlineorder, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/order/pos/offline/create";
+
+
+
+                string tempjson = JsonConvert.SerializeObject(offlineorder);
+
+                if (offlineorder.fixpricetotal == 0)
+                {
+                    
+                    tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
+                    tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
+                }
+
+                string json = HttpPOST(url, tempjson);
+                ////Console.WriteLine(json);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return Convert.ToBoolean(rd.data.ToString().Contains("上传成功"));
+
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "create:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "提交离线订单异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 离线订单退款
+        /// </summary>
+        /// <param name="offlineorder"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public bool OffLineRefund(OffLineOrder offlineorder, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/order/pos/offline/refund";
+
+
+
+                string tempjson = JsonConvert.SerializeObject(offlineorder);
+                if (offlineorder.fixpricetotal == 0)
+                {
+
+                    tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
+                    tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
+                }
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    //TODO
+                    return Convert.ToBoolean(rd.data.ToString().Contains("成功"));
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "create:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "提交离线订单异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 提交离线交班信息
+        /// </summary>
+        /// <param name="receipt"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public bool UpdateOffLineReceipt(OffLineReceipt receipt, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/order/pos/offline/receipt/upload";
+
+                string testjson = JsonConvert.SerializeObject(receipt);
+
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return Convert.ToBoolean(rd.data.ToString());
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "upload:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "提交离线交班异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// POS机全量数据同步接口
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="payid"></param>
+        /// <param name="erromessage"></param>
+        public List<DBPROMOTION_CACHE_BEANMODEL> QueryPromotionAll(string shopid, int skip, int size, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/activity/promotion/listbyshop";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                sort.Add("shopid", shopid);
+                sort.Add("skip", skip + "");
+                sort.Add("size", size + "");
+
+                string json = HttpGET(url, sort);
+                ////Console.WriteLine(json);
+
+                //string tempjson = "{\"shopid\":\"" + shopid + "\",\"skip\":" + skip + ",\"size\":" + size + "}";
+
+
+                //string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                ////Console.WriteLine(json);
+                if (rd.code == 0)
+                {
+
+                    List<DBPROMOTION_CACHE_BEANMODEL> lstpromotion = JsonConvert.DeserializeObject<List<DBPROMOTION_CACHE_BEANMODEL>>(rd.data.ToString());
+
+                    return lstpromotion;
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "listbyshop:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "POS机促销商品拉取异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// POS机过滤促销数据同步接口
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="payid"></param>
+        /// <param name="erromessage"></param>
+        public string QueryPromotionFilter(string shopid, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/offline/promotionswithfilterinfo";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                sort.Add("shopid", shopid);
+                //sort.Add("skip", skip + "");
+                //sort.Add("size", size + "");
+
+                string json = HttpGET(url, sort);
+                ////Console.WriteLine(json);
+
+                //string tempjson = "{\"shopid\":\"" + shopid + "\",\"skip\":" + skip + ",\"size\":" + size + "}";
+
+
+                //string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                ////Console.WriteLine(json);
+                if (rd.code == 0)
+                {
+
+                    return rd.data.ToString();
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "promotionswithfilterinfo:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "POS机促销过滤拉取异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+        #endregion
 
 
         #region  访问服务端
@@ -2237,14 +2522,12 @@ namespace WinSaasPOS.Common
             string postDataStr = "nonce=" + nonce + "&sign=" + MainModel.GetMD5(signstr);
 
             Url = MainModel.URL + Url + "?" + postDataStr;
-            // Console.WriteLine(Url);
+            // //Console.WriteLine(Url);
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
-
-
 
                 System.Net.ServicePointManager.Expect100Continue = false;
 

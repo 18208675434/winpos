@@ -72,7 +72,15 @@ namespace WinSaasPOS
                 //lblPrice.Text = "￥" + cart.producttotalamt.ToString("f2");
                 lblPrice.Text = "￥" + cart.payamtbeforecash.ToString("f2"); 
                 lblCash.Text = "￥" + cart.cashpayamt.ToString("f2");
-                lblChange.Text = "￥" + cart.totalpayment.ToString("f2");                
+                lblChange.Text = "￥" + cart.totalpayment.ToString("f2");
+
+
+                Dictionary<string, string> dicdetail = new Dictionary<string, string>();
+                dicdetail.Add("应付：", "￥" + cart.payamtbeforecash.ToString("f2"));
+                dicdetail.Add("已付现金：", "￥" + cart.cashpayamt.ToString("f2"));
+
+                MainModel.frmmainmedia.UpdateDgvOrderDetail(dicdetail, "还需支付：", "￥" + cart.totalpayment.ToString("f2"));
+
             }
             catch (Exception ex)
             {
@@ -112,20 +120,6 @@ namespace WinSaasPOS
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-        }
-
-        //信息提示
-        private void ShowLog(string msg, bool iserror)
-        {
-
-            MsgHelper.AutoShowForm(msg);
-            //this.Invoke(new InvokeHandler(delegate()
-            //{
-
-            //    frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
-            //    frmmsf.ShowDialog(); LogManager.WriteLog(msg);
-            //}));
-
         }
 
         private void frmOnLine_SizeChanged(object sender, EventArgs e)

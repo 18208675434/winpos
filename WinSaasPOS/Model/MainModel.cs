@@ -80,6 +80,16 @@ namespace WinSaasPOS.Model
         public static Member CurrentMember = null;
 
         /// <summary>
+        ///  //当前离线登录手机号
+        /// </summary>
+        public static string CurrentUserPhone = "";
+
+        /// <summary>
+        /// 当前是否是离线状态
+        /// </summary>
+        public static bool IsOffLine = false;
+
+        /// <summary>
         /// 接口返回code 100031;//店员登录失效
         /// </summary>
         public static int HttpUserExpired = 100031;
@@ -223,6 +233,25 @@ namespace WinSaasPOS.Model
 
 
         /// <summary>
+        /// 离线挂单文件路径
+        /// </summary>
+        public static string OffLineOrderPath
+        {
+            get
+            {
+
+                //判断默认文件夹是否存在，不存在就创建
+                DirectoryInfo logDirectory = new DirectoryInfo(System.Windows.Forms.Application.StartupPath + "\\OffLineOrderPath\\");
+                if (!logDirectory.Exists)
+                    logDirectory.Create();
+
+                return System.Windows.Forms.Application.StartupPath + "\\OffLineOrderPath\\";
+
+            }
+        }
+
+
+        /// <summary>
         /// 面板商品图片路径
         /// </summary>
         public static string ProductPicPath
@@ -274,6 +303,11 @@ namespace WinSaasPOS.Model
         public static frmCashPay frmcashpay = null;
 
         /// <summary>
+        /// 现金支付窗体页面
+        /// </summary>
+        public static frmCashPayOffLine frmcashpayoffline = null;
+
+        /// <summary>
         /// 现金券窗体页面
         /// </summary>
         public static frmCashCoupon frmcashcoupon = null;
@@ -297,6 +331,17 @@ namespace WinSaasPOS.Model
         public static Cart frmMainmediaCart = null;
 
         public static frmLoadingTop frmloading = null;
+
+
+        /// <summary>
+        /// 在线登录窗体
+        /// </summary>
+        public static frmLogin frmlogin = null;
+
+        /// <summary>
+        /// 离线登录窗体
+        /// </summary>
+        public static frmLoginOffLine frmloginoffline = null;
 
         //当前时间戳
         public static string getStampByDateTime(DateTime datetime)
@@ -376,7 +421,8 @@ namespace WinSaasPOS.Model
         {
             if (!string.IsNullOrEmpty(msg))
             {
-                MsgHelper.AutoShowForm(msg);
+                //MsgHelper.AutoShowForm(msg);
+                MsgHelper.ShowForm(msg);
                 LogManager.WriteLog(msg);
             }
 
@@ -397,6 +443,44 @@ namespace WinSaasPOS.Model
             {
                 return new Bitmap(con.Width, con.Height);
             }
+        }
+
+
+        /// <summary>
+        /// 截取图片区域，返回所截取的图片  注意超出范围是黑色
+        /// </summary>
+        /// <param name="SrcImage"></param>
+        /// <param name="pos"></param>
+        /// <param name="cutWidth"></param>
+        /// <param name="cutHeight"></param>
+        /// <returns></returns>
+        public static Image cutImage(Image SrcImage, Point pos, int cutWidth, int cutHeight)
+        {
+
+            Image cutedImage = null;
+
+            //先初始化一个位图对象，来存储截取后的图像
+            Bitmap bmpDest = new Bitmap(cutWidth, cutHeight, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+            Graphics g = Graphics.FromImage(bmpDest);
+
+            //矩形定义,将要在被截取的图像上要截取的图像区域的左顶点位置和截取的大小
+            Rectangle rectSource = new Rectangle(pos.X, pos.Y, cutWidth, cutHeight);
+
+
+            //矩形定义,将要把 截取的图像区域 绘制到初始化的位图的位置和大小
+            //rectDest说明，将把截取的区域，从位图左顶点开始绘制，绘制截取的区域原来大小
+            Rectangle rectDest = new Rectangle(0, 0, cutWidth, cutHeight);
+
+            //第一个参数就是加载你要截取的图像对象，第二个和第三个参数及如上所说定义截取和绘制图像过程中的相关属性，第四个属性定义了属性值所使用的度量单位
+            g.DrawImage(SrcImage, rectDest, rectSource, GraphicsUnit.Pixel);
+
+            //在GUI上显示被截取的图像
+            cutedImage = (Image)bmpDest;
+
+            g.Dispose();
+
+            return cutedImage;
+
         }
 
         public static Image GetWinformImage(Form frm)

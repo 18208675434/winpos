@@ -27,10 +27,10 @@ namespace Maticsoft.Model
         private string _barcode;
         private string _specdesc;
         private Int64 _goodstagid;
-        private Int64 _weightflag;
+        private int _weightflag;
         private decimal _num;
         private decimal _specnum;
-        private Int64 _spectype;
+        private int _spectype;
         private string _pricetag;
         private Int64 _pricetagid;
         private string _create_url_ip;
@@ -202,7 +202,7 @@ namespace Maticsoft.Model
         /// <summary>
         /// 
         /// </summary>
-        public Int64 WEIGHTFLAG
+        public int WEIGHTFLAG
         {
             set { _weightflag = value; }
             get { return _weightflag; }
@@ -226,7 +226,7 @@ namespace Maticsoft.Model
         /// <summary>
         /// 
         /// </summary>
-        public Int64 SPECTYPE
+        public int SPECTYPE
         {
             set { _spectype = value; }
             get { return _spectype; }
