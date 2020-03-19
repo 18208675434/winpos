@@ -12,6 +12,9 @@ using System.Text;
 using System.Threading;
 using System.Threading;
 using System.Windows.Forms;
+using Maticsoft.Model;
+using Newtonsoft.Json;
+using Maticsoft.BLL;
 
 namespace WinSaasPOS
 {
@@ -134,7 +137,7 @@ namespace WinSaasPOS
             tabControlMedia.SelectedIndex = 1;
 
         }
-
+        private JSON_BEANBLL jsonbll = new JSON_BEANBLL();
         private void IniFormExe(object obj)
         {
             try
@@ -143,36 +146,78 @@ namespace WinSaasPOS
 
                 player.Visible = false;
 
-                string ErrorMsg = "";
-                MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
 
-                if (ErrorMsg != "" || posmedia == null)
+                if (MainModel.IsOffLine)
                 {
-                    //获取异常  显示空白页
+                    JSON_BEANMODEL jsonmodel = jsonbll.GetModel("MEDIA");
+                    if (jsonmodel != null && jsonmodel.JSON != null)
+                    {
+                        MediaList medialist = JsonConvert.DeserializeObject<MediaList>(jsonmodel.JSON);
+
+
+                        foreach (Mediadetaildto media in medialist.mediadetaildtos)
+                        {
+
+                            string url = media.content;
+                            string remoteUri = System.IO.Path.GetDirectoryName(url);
+
+                            string fileName = System.IO.Path.GetFileName(url);
+                            string filePath = MainModel.MediaPath + fileName;
+                            if (File.Exists(filePath))
+                            {
+                                sortMedia.Add(media.sortnum, media);
+                            }
+                        }
+
+                      
+                       
+
+                    }
                 }
                 else
                 {
-                    //下载商户图片
-                    //LoginLogo.bmp
-                    try
-                    {
-                        Image _image = Image.FromStream(System.Net.WebRequest.Create(posmedia.tenantlogo).GetResponse().GetResponseStream());
+                    string ErrorMsg = "";
+                    MediaList posmedia = httputil.GetPosMedia(ref ErrorMsg);
 
-                        _image.Save(MainModel.MediaPath + "LoginLogo.bmp");
-                        //picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
-                    }
-                    catch (Exception ex)
+                    if (ErrorMsg != "" || posmedia == null)
                     {
-                        LogManager.WriteLog("下载商户图标异常" + ex.Message);
+                        //获取异常  显示空白页
                     }
+                    else
+                    {
+                        //保存本地
+                        jsonbll.Delete("MEDIA");
+                        JSON_BEANMODEL jsonmodel = new JSON_BEANMODEL();
+                        jsonmodel.CONDITION = "MEDIA";
+                        jsonmodel.CREATE_TIME = DateTime.Now.ToString("yyyyMMddHHmmss");
+                        jsonmodel.DEVICESN = MainModel.DeviceSN;
+                        jsonmodel.CREATE_URL_IP = MainModel.URL;
+                        jsonmodel.JSON = JsonConvert.SerializeObject(posmedia);
+                        jsonbll.Add(jsonmodel);
 
-                    CurrentMediadetaildtos =posmedia.mediadetaildtos;
-                    foreach (Mediadetaildto media in posmedia.mediadetaildtos)
-                    {
-                        ParameterizedThreadStart Pts = new ParameterizedThreadStart(DownLoadFile);
-                        Thread thread = new Thread(Pts);
-                        thread.IsBackground = true;
-                        thread.Start(media);
+                        
+                        //下载商户图片
+                        //LoginLogo.bmp
+                        try
+                        {
+                            Image _image = Image.FromStream(System.Net.WebRequest.Create(posmedia.tenantlogo).GetResponse().GetResponseStream());
+
+                            _image.Save(MainModel.MediaPath + "LoginLogo.bmp");
+                            //picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
+                        }
+                        catch (Exception ex)
+                        {
+                           // LogManager.WriteLog("下载商户图标异常" + ex.Message);
+                        }
+
+                        CurrentMediadetaildtos = posmedia.mediadetaildtos;
+                        foreach (Mediadetaildto media in posmedia.mediadetaildtos)
+                        {
+                            ParameterizedThreadStart Pts = new ParameterizedThreadStart(DownLoadFile);
+                            Thread thread = new Thread(Pts);
+                            thread.IsBackground = true;
+                            thread.Start(media);
+                        }
                     }
                 }
 
@@ -412,14 +457,16 @@ namespace WinSaasPOS
                     }
                     catch (Exception ex)
                     {
-                        LogManager.WriteLog("切换窗体异常" +ex.Message);
+                        LogManager.WriteLog("切换窗体异常" + ex.Message);
                     }
                     CurrentCart = MainModel.frmMainmediaCart;
                     CurrentMember = MainModel.CurrentMember;
                     player.Visible = false;
-                    try { //player.close(); 
+                    try
+                    { //player.close(); 
                     }
-                    catch {
+                    catch
+                    {
                         LogManager.WriteLog("关闭视频异常");
                     }
 
@@ -436,7 +483,7 @@ namespace WinSaasPOS
                     dgvOrderDetail.Rows.Clear();
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
-                        int orderCount = CurrentCart.orderpricedetails.Length;
+                        int orderCount = CurrentCart.orderpricedetails.Count;
                         if (orderCount == 0)
                         {
 
@@ -460,7 +507,7 @@ namespace WinSaasPOS
                                 {
                                     dgvOrderDetail.Refresh();
                                 }
-                               
+
 
                             }
 
@@ -500,31 +547,31 @@ namespace WinSaasPOS
                                     {
                                         dgvOrderDetail.Rows.Add("已付现金", "￥" + CurrentCart.cashpayamt.ToString("f2"));
                                     }));
-                                }                                
+                                }
                             }
 
                             dgvOrderDetail.ClearSelection();
                         }
 
-                         if (CurrentCart.cashchangeamt!=null && CurrentCart.cashchangeamt > 0)
-                            {
-                                lblPriceContent.Text = "找零:";
-                                lblPrice.Text = "￥" + CurrentCart.cashchangeamt.ToString("f2");
-                            }
+                        if (CurrentCart.cashchangeamt != null && CurrentCart.cashchangeamt > 0)
+                        {
+                            lblPriceContent.Text = "找零:";
+                            lblPrice.Text = "￥" + CurrentCart.cashchangeamt.ToString("f2");
+                        }
 
-                         else
-                         {
-                             if (dgvOrderDetail.Rows.Count > 1)
-                             {
-                                 lblPriceContent.Text = "还需支付:";
-                             }
-                             else
-                             {
-                                 lblPriceContent.Text = "应付:";
-                             }
-                             lblPrice.Text = "￥" + CurrentCart.totalpayment.ToString("f2");
-                         }
-                        
+                        else
+                        {
+                            if (dgvOrderDetail.Rows.Count > 1)
+                            {
+                                lblPriceContent.Text = "还需支付:";
+                            }
+                            else
+                            {
+                                lblPriceContent.Text = "应付:";
+                            }
+                            lblPrice.Text = "￥" + CurrentCart.totalpayment.ToString("f2");
+                        }
+
 
                         int count = CurrentCart.products.Count;
                         int goodscount = 0;
@@ -561,28 +608,43 @@ namespace WinSaasPOS
                                         }
                                     }));
                                 }
-                              
+
                             }
                             Application.DoEvents();
                         }
                     }
 
+                    //离线模式不展示会员相关信息
+                    if (MainModel.IsOffLine)
+                    {
+                        picBirthday1.Visible = false;
 
 
-                    if (MainModel.CurrentMember == null)
+                        picBirthday2.Visible = false;
+                        picBirthday3.Visible = false;
+                        picBirthday4.Visible = false;
+
+                        this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
+                        this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
+                        this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
+
+                        pnlMemberCard.Visible = false;
+                    }
+
+                    else if (MainModel.CurrentMember == null)
                     {
 
                         tabPageIni.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-                            picBirthday1.Visible = false ;
+                        picBirthday1.Visible = false;
 
 
-                            picBirthday2.Visible = false ;
-                            picBirthday3.Visible = false ;
-                            picBirthday4.Visible = false ;
-                            
-                            this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
-                            this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
-                            this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
+                        picBirthday2.Visible = false;
+                        picBirthday3.Visible = false;
+                        picBirthday4.Visible = false;
+
+                        this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
+                        this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
+                        this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
 
                         if (imgmembercard == null && isfirstmembercard)
                         {
@@ -645,7 +707,7 @@ namespace WinSaasPOS
                             picBirthday3.Visible = true;
                             picBirthday4.Visible = true;
 
-                       
+
                         }
                         else
                         {
@@ -688,6 +750,29 @@ namespace WinSaasPOS
             
         }
 
+
+        public void UpdateDgvOrderDetail(Dictionary<string,string> orderdetail, string pricecontent,string price)
+        {
+            try
+            {
+                
+                    dgvOrderDetail.Rows.Clear();
+                    foreach (KeyValuePair<string, string> keyvalue in orderdetail)
+                    {
+                        dgvOrderDetail.Rows.Add(keyvalue.Key, keyvalue.Value);
+                    }
+                    lblPriceContent.Text = pricecontent;
+                    lblPrice.Text = price;
+
+                    dgvOrderDetail.ClearSelection();
+                    
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("更新客屏订单详情异常"+ex.Message);
+            }
+
+        }
         #endregion
 
 
@@ -720,6 +805,10 @@ namespace WinSaasPOS
         {
             try
             {
+                if (MainModel.IsOffLine)
+                {
+                    return;
+                }
                 DateTime starttime = DateTime.Now;
                 //isplayer = false;
 
@@ -770,7 +859,7 @@ namespace WinSaasPOS
                         picBirthday3.Visible = true;
                         picBirthday4.Visible = true;
 
-                       
+
                     }
                     else
                     {
@@ -816,7 +905,7 @@ namespace WinSaasPOS
                         pnlMemberCard.Visible = true;
                         //Application.DoEvents();
                     }
-                  
+
                 }
 
                 //frmMain.listener.Stop();
@@ -1192,6 +1281,19 @@ namespace WinSaasPOS
             catch
             {
                 return "";
+            }
+        }
+
+        private void frmMainMedia_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                player.Ctlcontrols.stop();
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+
             }
         }
    

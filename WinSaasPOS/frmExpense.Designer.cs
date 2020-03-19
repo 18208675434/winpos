@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,6 +54,7 @@
             this.picScreen = new System.Windows.Forms.PictureBox();
             this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.pnlHead = new System.Windows.Forms.Panel();
+            this.btnOnLineType = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnWindows = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
@@ -81,7 +83,7 @@
             this.dgvExpense.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvExpense.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvExpense.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -110,10 +112,18 @@
             this.dgvExpense.Name = "dgvExpense";
             this.dgvExpense.ReadOnly = true;
             this.dgvExpense.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvExpense.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvExpense.RowHeadersVisible = false;
             this.dgvExpense.RowHeadersWidth = 40;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.dgvExpense.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.dgvExpense.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvExpense.RowTemplate.Height = 80;
             this.dgvExpense.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExpense.Size = new System.Drawing.Size(1155, 537);
@@ -196,9 +206,10 @@
             this.btnQuery.BackColor = System.Drawing.Color.Transparent;
             this.btnQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnQuery.BackgroundImage")));
             this.btnQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnQuery.FlatAppearance.BorderSize = 0;
             this.btnQuery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuery.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btnQuery.ForeColor = System.Drawing.Color.White;
+            this.btnQuery.ForeColor = System.Drawing.Color.Black;
             this.btnQuery.Location = new System.Drawing.Point(1036, 20);
             this.btnQuery.Margin = new System.Windows.Forms.Padding(2);
             this.btnQuery.Name = "btnQuery";
@@ -271,6 +282,7 @@
             this.dtStart.Size = new System.Drawing.Size(169, 30);
             this.dtStart.TabIndex = 5;
             this.dtStart.Value = new System.DateTime(2019, 9, 24, 16, 10, 45, 0);
+            this.dtStart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dtStart_MouseDown);
             // 
             // label3
             // 
@@ -302,6 +314,7 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.Black;
+            this.pnlHead.Controls.Add(this.btnOnLineType);
             this.pnlHead.Controls.Add(this.btnMenu);
             this.pnlHead.Controls.Add(this.btnWindows);
             this.pnlHead.Controls.Add(this.lblShopName);
@@ -311,6 +324,25 @@
             this.pnlHead.Name = "pnlHead";
             this.pnlHead.Size = new System.Drawing.Size(1178, 60);
             this.pnlHead.TabIndex = 37;
+            // 
+            // btnOnLineType
+            // 
+            this.btnOnLineType.BackColor = System.Drawing.Color.Black;
+            this.btnOnLineType.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOnLineType.BackgroundImage")));
+            this.btnOnLineType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOnLineType.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOnLineType.FlatAppearance.BorderSize = 0;
+            this.btnOnLineType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOnLineType.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.btnOnLineType.ForeColor = System.Drawing.Color.White;
+            this.btnOnLineType.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnOnLineType.Location = new System.Drawing.Point(268, 19);
+            this.btnOnLineType.Name = "btnOnLineType";
+            this.btnOnLineType.Size = new System.Drawing.Size(60, 25);
+            this.btnOnLineType.TabIndex = 45;
+            this.btnOnLineType.Text = "   在线";
+            this.btnOnLineType.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnOnLineType.UseVisualStyleBackColor = false;
             // 
             // btnMenu
             // 
@@ -511,5 +543,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnOnLineType;
     }
 }

@@ -82,23 +82,6 @@ namespace WinSaasPOS
             try
             {
 
-                txtCash.TextChanged += txtNum_TextChanged;
-                lblShuiyin.Click += lblShuiyin_Click;
-                lbtnCancle.Click += btnCancle_Click;
-                btnDot.Click += btnDot_Click;
-                btnDel.Click += btnDel_Click;
-                btnNext.Click += btnNext_Click;
-                btn0.Click += btn_Click;
-                btn1.Click += btn_Click;
-                btn2.Click += btn_Click;
-                btn3.Click += btn_Click;
-                btn4.Click += btn_Click;
-                btn5.Click += btn_Click;
-                btn6.Click += btn_Click;
-                btn7.Click += btn_Click;
-                btn8.Click += btn_Click;
-                btn9.Click += btn_Click;
-
                 txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
                 btnNext.Focus();
 
@@ -114,8 +97,6 @@ namespace WinSaasPOS
 
         private void frmCash_Shown(object sender, EventArgs e)
         {
-
-
         }
 
 
@@ -259,8 +240,8 @@ namespace WinSaasPOS
                     {
                         //MainModel.
 
-                        MainModel.frmMainmediaCart = thisCurrentCart;
-                        MainModel.frmmainmedia.UpdateForm();
+                        //MainModel.frmMainmediaCart = thisCurrentCart;
+                        //MainModel.frmmainmedia.UpdateForm();
 
                         frmCashChange frmcashchange = new frmCashChange(thisCurrentCart);
 
@@ -323,6 +304,8 @@ namespace WinSaasPOS
                         else
                         {
                             RefreshCart(0, true);
+                            MainModel.frmMainmediaCart = thisCurrentCart;
+                            MainModel.frmmainmedia.UpdateForm();
                         }
                     }
                     else
@@ -363,6 +346,8 @@ namespace WinSaasPOS
                         else
                         {
                             RefreshCart(0, true);
+                            MainModel.frmMainmediaCart = thisCurrentCart;
+                            MainModel.frmmainmedia.UpdateForm();
                         }
                     }
 
@@ -421,6 +406,9 @@ namespace WinSaasPOS
             {
                 RefreshCart(0, true);
                 //找零页面返回  不做处理 
+
+                MainModel.frmMainmediaCart = thisCurrentCart;
+                MainModel.frmmainmedia.UpdateForm();
             }
         }
 
@@ -460,10 +448,14 @@ namespace WinSaasPOS
                         isfirst = true;
                     }
 
+                    //Dictionary<string, string> dicdetail = new Dictionary<string, string>();
+                    //dicdetail.Add("应付：", "￥" + thisCurrentCart.payamtbeforecash.ToString("f2"));
+                    //dicdetail.Add("已付现金：", "￥" + thisCurrentCart.cashpayamt.ToString("f2"));
 
+                    //MainModel.frmmainmedia.UpdateDgvOrderDetail(dicdetail, "还需支付：", "￥" + thisCurrentCart.totalpayment.ToString("f2"));
 
-                    MainModel.frmMainmediaCart = thisCurrentCart;
-                    MainModel.frmmainmedia.UpdateForm();
+                    //MainModel.frmMainmediaCart = thisCurrentCart;
+                    //MainModel.frmmainmedia.UpdateForm();
 
                     return true;
                 }
@@ -485,7 +477,7 @@ namespace WinSaasPOS
         private void ShowLog(string msg, bool iserror)
         {
 
-            MsgHelper.AutoShowForm(msg);
+            MsgHelper.ShowForm(msg);
             //this.Invoke(new InvokeHandler(delegate()
             //{
 

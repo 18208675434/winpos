@@ -68,6 +68,7 @@
             this.timerGetIncrementProduct = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.pnlHead = new System.Windows.Forms.Panel();
+            this.btnOnLineType = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnWindows = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
@@ -534,6 +535,7 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.Black;
+            this.pnlHead.Controls.Add(this.btnOnLineType);
             this.pnlHead.Controls.Add(this.btnMenu);
             this.pnlHead.Controls.Add(this.btnWindows);
             this.pnlHead.Controls.Add(this.lblShopName);
@@ -547,8 +549,28 @@
             this.pnlHead.Size = new System.Drawing.Size(1178, 60);
             this.pnlHead.TabIndex = 31;
             // 
+            // btnOnLineType
+            // 
+            this.btnOnLineType.BackColor = System.Drawing.Color.Black;
+            this.btnOnLineType.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOnLineType.BackgroundImage")));
+            this.btnOnLineType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOnLineType.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOnLineType.FlatAppearance.BorderSize = 0;
+            this.btnOnLineType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOnLineType.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.btnOnLineType.ForeColor = System.Drawing.Color.White;
+            this.btnOnLineType.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnOnLineType.Location = new System.Drawing.Point(268, 17);
+            this.btnOnLineType.Name = "btnOnLineType";
+            this.btnOnLineType.Size = new System.Drawing.Size(60, 25);
+            this.btnOnLineType.TabIndex = 42;
+            this.btnOnLineType.Text = "   在线";
+            this.btnOnLineType.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnOnLineType.UseVisualStyleBackColor = false;
+            // 
             // btnMenu
             // 
+            this.btnMenu.AutoSize = true;
             this.btnMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnMenu.BackColor = System.Drawing.Color.Black;
             this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -561,9 +583,9 @@
             this.btnMenu.ForeColor = System.Drawing.Color.White;
             this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
             this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenu.Location = new System.Drawing.Point(1029, 1);
+            this.btnMenu.Location = new System.Drawing.Point(1033, 15);
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(149, 54);
+            this.btnMenu.Size = new System.Drawing.Size(142, 30);
             this.btnMenu.TabIndex = 40;
             this.btnMenu.Text = "某某某，你好  ∨";
             this.btnMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1227,7 +1249,7 @@
             // 
             this.btnModifyPrice.BackColor = System.Drawing.Color.Silver;
             this.btnModifyPrice.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnModifyPrice.FlatAppearance.BorderColor = System.Drawing.Color.SteelBlue;
+            this.btnModifyPrice.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnModifyPrice.FlatAppearance.BorderSize = 0;
             this.btnModifyPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModifyPrice.Font = new System.Drawing.Font("微软雅黑", 10F);
@@ -1463,10 +1485,10 @@
             this.picLoading.CanMove = false;
             this.picLoading.Image = ((System.Drawing.Image)(resources.GetObject("picLoading.Image")));
             this.picLoading.IsFocus = false;
-            this.picLoading.Location = new System.Drawing.Point(479, 318);
+            this.picLoading.Location = new System.Drawing.Point(477, 310);
             this.picLoading.Name = "picLoading";
             this.picLoading.Size = new System.Drawing.Size(50, 54);
-            this.picLoading.TabIndex = 40;
+            this.picLoading.TabIndex = 53;
             this.picLoading.Text = "transparentPic1";
             this.picLoading.unitScale = null;
             this.picLoading.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
@@ -1477,10 +1499,10 @@
             this.picBirthday.CanMove = false;
             this.picBirthday.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday.Image")));
             this.picBirthday.IsFocus = false;
-            this.picBirthday.Location = new System.Drawing.Point(850, 125);
+            this.picBirthday.Location = new System.Drawing.Point(852, 123);
             this.picBirthday.Name = "picBirthday";
-            this.picBirthday.Size = new System.Drawing.Size(201, 32);
-            this.picBirthday.TabIndex = 26;
+            this.picBirthday.Size = new System.Drawing.Size(199, 34);
+            this.picBirthday.TabIndex = 52;
             this.picBirthday.Text = "transparentPic1";
             this.picBirthday.unitScale = null;
             this.picBirthday.UnitType = WinSaasPOS.UserControl.EnumUnitType.Station;
@@ -1494,15 +1516,15 @@
             this.ClientSize = new System.Drawing.Size(1178, 760);
             this.ControlBox = false;
             this.Controls.Add(this.picScreen);
+            this.Controls.Add(this.picLoading);
+            this.Controls.Add(this.picBirthday);
             this.Controls.Add(this.pnlFalsh);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlDgvItem);
             this.Controls.Add(this.pnlDgvHead);
-            this.Controls.Add(this.picLoading);
             this.Controls.Add(this.btnScan);
             this.Controls.Add(this.pnlDgvRight);
             this.Controls.Add(this.pnlHead);
-            this.Controls.Add(this.picBirthday);
             this.Controls.Add(this.pnlMember);
             this.Controls.Add(this.btnMianban);
             this.Controls.Add(this.btnLoadBarCode);
@@ -1518,7 +1540,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.TransparencyKey = System.Drawing.Color.GhostWhite;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
@@ -1610,7 +1631,7 @@
         private System.Windows.Forms.Button btnJFUse;
         private System.Windows.Forms.Button btnMemberPromo;
         private System.Windows.Forms.PictureBox picDelete;
-        private UserControl.transparentPic picBirthday;
+        //private UserControl.transparentPic picBirthday;
         private System.Windows.Forms.Panel pnlHead;
         private System.Windows.Forms.Button btnWindows;
         private System.Windows.Forms.Label lblShopName;
@@ -1626,7 +1647,7 @@
         private System.Windows.Forms.Panel pnlPrice;
         private System.Windows.Forms.Panel pnlDgvRight;
         private System.Windows.Forms.Button btnScan;
-        private UserControl.transparentPic picLoading;
+       // private UserControl.transparentPic picLoading;
         private System.Windows.Forms.Button btnModifyPrice;
         private System.Windows.Forms.Panel pnlDgvHead;
         private System.Windows.Forms.Panel pnlDgvItem;
@@ -1656,5 +1677,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnPayByCoupon;
         private System.Windows.Forms.Panel pnlFalsh;
+        private System.Windows.Forms.Button btnOnLineType;
+        private UserControl.transparentPic picBirthday;
+        private UserControl.transparentPic picLoading;
     }
 }

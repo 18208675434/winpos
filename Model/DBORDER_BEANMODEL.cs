@@ -10,30 +10,30 @@ namespace Maticsoft.Model
 		public DBORDER_BEANMODEL()
 		{}
 		#region Model
-		private int __id;
+		private Int64 __id;
 		private string _offlineorderid;
 		private string _order_json;
-		private int _orderat;
+		private Int64 _orderat;
 		private string _customerphone;
 		private string _title;
 		private decimal _pricetotal;
 		private string _orderstatus;
 		private string _synstatus;
-		private int _syn_time;
-		private int _orderstatusvalue;
-		private int _refund_time;
-		private int _create_time;
+		private Int64 _syn_time;
+		private Int64 _orderstatusvalue;
+		private Int64 _refund_time;
+		private Int64 _create_time;
 		private string _create_sn;
 		private string _backups_sns;
 		private string _backups_time;
 		private string _backups_refund_sn;
 		private string _backups_refund_time;
 		private string _create_url_ip;
-		private int _version_code;
+		private Int64 _version_code;
 		/// <summary>
 		/// 
 		/// </summary>
-		public int _id
+		public Int64 _id
 		{
 			set{ __id=value;}
 			get{return __id;}
@@ -57,7 +57,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int ORDERAT
+		public Int64 ORDERAT
 		{
 			set{ _orderat=value;}
 			get{return _orderat;}
@@ -105,7 +105,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int SYN_TIME
+		public Int64 SYN_TIME
 		{
 			set{ _syn_time=value;}
 			get{return _syn_time;}
@@ -113,7 +113,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int ORDERSTATUSVALUE
+		public Int64 ORDERSTATUSVALUE
 		{
 			set{ _orderstatusvalue=value;}
 			get{return _orderstatusvalue;}
@@ -121,7 +121,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int REFUND_TIME
+		public Int64 REFUND_TIME
 		{
 			set{ _refund_time=value;}
 			get{return _refund_time;}
@@ -129,7 +129,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int CREATE_TIME
+		public Int64 CREATE_TIME
 		{
 			set{ _create_time=value;}
 			get{return _create_time;}
@@ -185,7 +185,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int VERSION_CODE
+		public Int64 VERSION_CODE
 		{
 			set{ _version_code=value;}
 			get{return _version_code;}

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using WinSaasPOS.Model.Promotion;
 
 namespace WinSaasPOS.Model
 {
@@ -28,8 +29,9 @@ namespace WinSaasPOS.Model
 
         public string title { get; set; }
         public decimal totalpayment { get; set; }
+        public decimal origintotal{ get; set; }
         public List<Product> products { get; set; }
-        public OrderPriceDetail[] orderpricedetails { get; set; }
+        public List<OrderPriceDetail> orderpricedetails { get; set; }
         public Tenant tenant { get; set; }
         public Pickupinfo pickupinfo { get; set; }
         public string shopid { get; set; }
@@ -96,8 +98,21 @@ namespace WinSaasPOS.Model
         /// 修改购物车价格
         /// </summary>
         public decimal fixpricetotal { get; set; }
+
+
+        /// <summary>
+        /// //指定优惠    =  原来离线订单应付  -  修改后的价格
+        /// </summary>
+        public decimal fixpricepromoamt { get; set; }
+
+
         //面板商品排序
         public SortType sorttype { get; set; }
+
+        /// <summary>
+        /// 购物车商品数量
+        /// </summary>
+        public int goodscount { get; set; }
 
         public Cart Clone()
         {
@@ -180,6 +195,16 @@ namespace WinSaasPOS.Model
         /// </summary>
         public string firstcategoryname { get; set; }
 
+        /// <summary>
+        /// 二级分类ID
+        /// </summary>
+        public string secondcategoryid { get; set; }
+
+        /// <summary>
+        /// 级分类ID
+        /// </summary>
+        public string categoryid { get; set; }
+
         public string shopid { get; set; }
 
         public int isQueryBarcode { get; set; }
@@ -216,6 +241,15 @@ namespace WinSaasPOS.Model
         /// 面板商品上新排序用 （时间戳）
         /// </summary>
         public long createdat { get; set; }
+
+
+        public List<OffLinePromos> offlinepromos { get; set; }
+
+        public decimal PaySubAmt { get; set; }
+        public decimal PromoSubAmt { get; set; }
+
+
+        public int RowNum = 0;
 
     }
 

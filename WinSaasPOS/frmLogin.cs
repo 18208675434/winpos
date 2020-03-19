@@ -14,6 +14,9 @@ using System.Text;
 using System.Threading;
 using System.Threading;
 using System.Windows.Forms;
+using Maticsoft.BLL;
+using Newtonsoft.Json;
+using Maticsoft.Model;
 
 namespace WinSaasPOS
 {
@@ -33,7 +36,9 @@ namespace WinSaasPOS
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
         public frmLogin()
         {
-            InitializeComponent();          
+            InitializeComponent();
+            MainModel.IsOffLine = false;
+            INIManager.SetIni("System", "IsOffLine", "0", MainModel.IniPath);
         }
 
         private void frmLogin_Shown(object sender, EventArgs e)
@@ -58,7 +63,8 @@ namespace WinSaasPOS
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-
+            MainModel.IsOffLine = false;
+            INIManager.SetIni("System", "IsOffLine", "0", MainModel.IniPath);
             //每次开启页面都要加载，页面关闭值null
             string imgname = "LoginLogo.bmp";
             if (File.Exists(MainModel.MediaPath + imgname))
@@ -137,14 +143,11 @@ namespace WinSaasPOS
                     this.Enabled = true;
                     LoadingHelper.CloseForm();
 
+                    ClearText();
                     frmMain frmmain = new frmMain(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     picTenantLogo.BackgroundImage = null;
-                    //this.Hide();
-                    //CloseOSK();
-
-                    //asf.AutoScaleControl(frmmain);
                     frmmain.ShowDialog();
                 }
 
@@ -213,6 +216,7 @@ namespace WinSaasPOS
                 else
                 {
                     INIManager.SetIni("System", "POS-Authorization", Token, MainModel.IniPath);
+                    INIManager.SetIni("OffLine", "POS-Authorization", Token, MainModel.IniPath);
                     MainModel.Authorization = Token;
                     if (!LoadUser() || !LoadShopInfo())
                     {
@@ -223,6 +227,7 @@ namespace WinSaasPOS
                     INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
                     INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
 
+                    ClearText();
                     frmMain frmmain = new frmMain(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
@@ -335,13 +340,14 @@ namespace WinSaasPOS
                 else
                 {
                     INIManager.SetIni("System", "POS-Authorization", Token, MainModel.IniPath);
+                    INIManager.SetIni("OffLine", "POS-Authorization", Token, MainModel.IniPath);
                     MainModel.Authorization = Token;
                     if (!LoadUser() || !LoadShopInfo())
                     {
                         return;
                     }
 
-
+                    ClearText();
                     frmMain frmmain = new frmMain(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
@@ -421,7 +427,15 @@ namespace WinSaasPOS
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainModel.ShowTask();
+            try
+            {
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("清理登录页面资源异常"+ex.Message);
+            }
+           // MainModel.ShowTask();
            
             ////CloseOSK();
         }
@@ -460,6 +474,8 @@ namespace WinSaasPOS
                 return false;
             }
         }
+
+        private JSON_BEANBLL jsonbll = new JSON_BEANBLL();
         private bool LoadShopInfo()
         {
 
@@ -480,6 +496,15 @@ namespace WinSaasPOS
                     MainModel.CurrentShopInfo = shopinfo;
                     MainModel.ShopName = shopinfo.shopname;
 
+
+                    jsonbll.Delete("SHOPINFO");
+                    JSON_BEANMODEL jsonmodel = new JSON_BEANMODEL();
+                    jsonmodel.CONDITION = "SHOPINFO";
+                    jsonmodel.CREATE_TIME = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    jsonmodel.DEVICESN = MainModel.DeviceSN;
+                    jsonmodel.CREATE_URL_IP = MainModel.URL;
+                    jsonmodel.JSON = JsonConvert.SerializeObject(shopinfo);
+                    jsonbll.Add(jsonmodel);
                   
 
                     return true;
@@ -572,8 +597,8 @@ namespace WinSaasPOS
             }
             try
             {
-                MainModel.frmmainmedia.Close();
-                MainModel.frmmainmedia = null;
+                //MainModel.frmmainmedia.Close();
+                //MainModel.frmmainmedia = null;
             }
             catch { }
             MainModel.ShowTask();
@@ -628,7 +653,6 @@ namespace WinSaasPOS
             //}
             //else
             //{
-
             //    click = 1;// 不是连续点击时，清0
             //}
             //lastClickTime = DateTime.Now;
@@ -768,7 +792,7 @@ namespace WinSaasPOS
                 gp.CloseAllFigures();
 
                 g.FillPath(myLinearGradientBrush, gp);
-                
+
             }
             catch (Exception ex)
             {
@@ -831,16 +855,16 @@ namespace WinSaasPOS
         {
             try
             {
-                //string imgname = "LoginLogo.bmp";
-                //if (File.Exists(MainModel.MediaPath + imgname))
-                //{
-                //    picTenantLogo.BackgroundImage = Image.FromFile(MainModel.MediaPath + imgname);
+                string imgname = "LoginLogo.bmp";
+                if (File.Exists(MainModel.MediaPath + imgname))
+                {
+                    picTenantLogo.BackgroundImage = Image.FromFile(MainModel.MediaPath + imgname);
 
-                //}
-                //else
-                //{
+                }
+                else
+                {
 
-                //}
+                }
             }
             catch { }
         }
@@ -882,6 +906,69 @@ namespace WinSaasPOS
 
             }
             catch { }
+        }
+
+        private void lbtnChangeOffLine_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (MainModel.frmloginoffline != null)
+            {
+                try { MainModel.frmloginoffline.Dispose(); }
+                catch { }
+                
+            }
+            MainModel.frmloginoffline = new frmLoginOffLine();
+            MainModel.frmloginoffline.Show();
+            this.Hide();
+            //if (MainModel.frmloginoffline == null)
+            //{
+            //    MainModel.frmloginoffline = new frmLoginOffLine();
+            //    MainModel.frmloginoffline.Show();
+            //    this.Hide();
+            //}
+            //else
+            //{
+            //    MainModel.frmloginoffline.Show();
+            //    this.Hide();
+            //}
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string names = "";
+            int num = Application.OpenForms.Count;
+            for (int i = 0; i < num; i++)
+            {
+                
+                Form f = Application.OpenForms[i];
+                if (f.Name != "frmLogin" && f.Name != "frmLoginOffLine")
+                {
+                    num = num - 1;
+                    i = i - 1;
+                    try
+                    {
+                        f.Dispose();
+                      
+                    }
+                    catch { }
+                }
+            }
+        }
+
+
+        private void ClearText()
+        {
+            try
+            {
+                txtUser.Text = "";
+                txtPwd.Text = "";
+                txtPhone.Text = "";
+                txtCheckCode.Text = "";
+                txtPhoneCheckCode.Text = "";
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("清空登录页面信息异常"+ex.Message);
+            }
         }
     }
 

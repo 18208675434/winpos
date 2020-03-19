@@ -1,4 +1,6 @@
-﻿using WinSaasPOS.Common;
+﻿using Maticsoft.BLL;
+using Maticsoft.Model;
+using WinSaasPOS.Common;
 using WinSaasPOS.Model;
 using System;
 using System.Collections.Generic;
@@ -81,7 +83,7 @@ namespace WinSaasPOS
 
         public void frmExpenseSave_SizeChanged(object sender, EventArgs e)
         {
-            asf.ControlAutoSize(this);
+          //  asf.ControlAutoSize(this);
         }
 
 
@@ -113,7 +115,28 @@ namespace WinSaasPOS
                 string ErrorMsg = "";
                 bool result = false;
 
-                result = httputil.SaveExpense(CurrentExpenseid, Convert.ToDecimal(CurrentAddOrMinus+txtNum.Text), MainModel.CurrentShopInfo.shopid, ref ErrorMsg);
+                if (MainModel.IsOffLine)
+                {
+
+                    DBEXPENSE_BEANMODEL expense = new DBEXPENSE_BEANMODEL();
+                    expense.SHOPID = MainModel.CurrentShopInfo.shopid;
+                    expense.CREATEAT = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
+                    expense.CREATEURLIP = MainModel.URL;
+                    expense.DEVICESN = MainModel.DeviceSN;
+                    expense.EXPENSEID = CurrentExpenseid;
+                    expense.EXPENSENAME = CurrentExpensename;
+                    expense.EXPENSEFEE = Convert.ToDecimal(CurrentAddOrMinus + txtNum.Text);
+                    expense.TYPE = "0";
+                    expense.CREATEBY = MainModel.CurrentUser.nickname;
+                    int addnum = expensebll.Add(expense);
+                    result = addnum > 0;
+
+                }
+                else
+                {
+                    result = httputil.SaveExpense(CurrentExpenseid, Convert.ToDecimal(CurrentAddOrMinus + txtNum.Text), MainModel.CurrentShopInfo.shopid, ref ErrorMsg);
+
+                }
 
                 if (result)
                 {
@@ -133,56 +156,130 @@ namespace WinSaasPOS
          
         }
 
+        private DBFEE_BEANBLL feebll = new DBFEE_BEANBLL();
+        private DBEXPENSE_BEANBLL expensebll = new DBEXPENSE_BEANBLL();
 
-        private void LoadExpenses()
+        List<DBFEE_BEANMODEL> LstFee ;
+        private int page = 1;
+        private int sizeofpage = 0; //分页显示每页9个
+        private void LoadExpensesFirst()
         {
-            string ErrorMsg = "";
-            List<ExpenseType> lstexpensetype = httputil.GetExpenses(ref ErrorMsg);
-
-            if (!string.IsNullOrEmpty(ErrorMsg) || lstexpensetype == null)
+            try
             {
-                MainModel.ShowLog(ErrorMsg, false);
-            }
-            else
-            {
-                foreach (ExpenseType dat in lstexpensetype)
+                LstFee = feebll.GetModelList("");
+                if (LstFee != null && LstFee.Count > 0)
                 {
-                    if (dat.visibleflag == "1")
+                    //foreach (DBFEE_BEANMODEL fee in LstFee)
+                    //{
+                    //    AddTypeButton(fee);
+                    //}
+                    if (LstFee.Count > 9)
                     {
-                        AddTypeButton(dat);
+                        btnNext.Visible = true;
+                        btnLast.Visible = true;
+                    }
+                    else
+                    {
+                        btnNext.Visible = false ;
+                        btnLast.Visible = false ;
+                    }
+
+                    LoadExpenses();
+
+                    if (pnlExpenses.Controls.Count > 0)
+                    {
+                        Button btn = (Button)pnlExpenses.Controls[0];
+                        if (btn.Enabled == true)
+                        {
+                            btnType_Click(btn, new EventArgs());
+                        }
 
                     }
                 }
+
+              
             }
-
-
-            if (pnlExpenses.Controls.Count > 0)
+            catch (Exception ex)
             {
-                Button btn = (Button)pnlExpenses.Controls[0];
-                if (btn.Enabled == true)
-                {
-                    btnType_Click(btn, new EventArgs());
-                }
-
+                MainModel.ShowLog("加载营业外支出项目异常"+ex.Message,true);
             }
+
         }
 
-        private void AddTypeButton(ExpenseType datum)
+        private void LoadExpenses()
+        {
+            try
+            {
+                int maxCount = page * 9;
+                int minCount = (page - 1) * 9;
+
+                //有下一页
+                if (LstFee.Count > maxCount)
+                {
+                    btnNext.Enabled = true;
+                    btnNext.ForeColor = Color.Black;
+                    btnNext.FlatAppearance.BorderColor = Color.Black;
+                }
+                else
+                {
+                    btnNext.Enabled = false;
+                    btnNext.ForeColor = Color.Silver;
+                    btnNext.FlatAppearance.BorderColor = Color.Silver;
+                }
+
+                if (page > 1)
+                {
+                    btnLast.Enabled = true;
+                    btnLast.ForeColor = Color.Black;
+                    btnLast.FlatAppearance.BorderColor = Color.Black;
+                }
+                else
+                {
+                    btnLast.Enabled = false;
+                    btnLast.ForeColor = Color.Silver;
+                    btnLast.FlatAppearance.BorderColor = Color.Silver;
+                }
+
+                pnlExpenses.Controls.Clear();
+                int addcount =Math.Min(maxCount,LstFee.Count);
+                for (int i = minCount; i < addcount; i++)
+                {
+                    AddTypeButton(LstFee[i]);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("加载分页营业外支出项目异常" + ex.Message, true);
+            }
+
+        }
+
+
+        private void AddTypeButton(DBFEE_BEANMODEL dbfee)
         {
 
             int count = pnlExpenses.Controls.Count;
             Button btntemp = new Button();
-            btntemp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            btntemp.Font = new System.Drawing.Font("微软雅黑", 7.5F * Math.Min(MainModel.hScale, MainModel.wScale), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 
             btntemp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btntemp.FlatAppearance.BorderColor = Color.Gainsboro;
             //btntemp.Name = "button1";
-            btntemp.Size = new System.Drawing.Size((pnlExpenses.Width-20)/3, 41);
+            btntemp.Size = new System.Drawing.Size((pnlExpenses.Width - 20) / 3, (pnlExpenses.Height - 20) / 3);
             btntemp.TabIndex = 0;
-            btntemp.Text = datum.description;
+            btntemp.Text = dbfee.DISCRIPTION;
             btntemp.UseVisualStyleBackColor = true;
-            btntemp.Tag = datum.expensesid;
+            btntemp.Tag = dbfee.FEE_ID;
+            if (dbfee.FEE_ID == CurrentExpenseid)
+            {
+                btntemp.BackColor = Color.SkyBlue;
+            }
+            else
+            {
+                btntemp.BackColor = Color.White;
 
-         
+            }
 
             btntemp.Click += new System.EventHandler(btnType_Click);
 
@@ -195,7 +292,7 @@ namespace WinSaasPOS
                 intx = count % 3;
             }
 
-            int left = intx * (pnlExpenses.Width / 3) + 5;
+            int left = intx * ((pnlExpenses.Width) / 3) + 5;
             int top = inty * (btntemp.Height + 5);
 
             pnlExpenses.Controls.Add(btntemp);
@@ -207,6 +304,7 @@ namespace WinSaasPOS
 
 
         private string CurrentExpenseid = "";
+        private string CurrentExpensename = "";
         private void btnType_Click(object sender, EventArgs e)
         {
 
@@ -214,6 +312,7 @@ namespace WinSaasPOS
             {
                Button btn = (Button) sender;
                CurrentExpenseid = btn.Tag.ToString();
+               CurrentExpensename = btn.Text;
 
                foreach (Control con in pnlExpenses.Controls)
                {
@@ -238,7 +337,7 @@ namespace WinSaasPOS
         private void frmExpenseSave_Shown(object sender, EventArgs e)
         {
             btnAdd_Click(null, null);
-            LoadExpenses();
+            LoadExpensesFirst();
         }
 
         private void btnDot_Click(object sender, EventArgs e)
@@ -290,6 +389,19 @@ namespace WinSaasPOS
             {
                 btnOK.BackColor = Color.Silver;
             }
+        }
+
+        //上一页
+        private void btnLast_Click(object sender, EventArgs e)
+        {
+            page -= 1;
+            LoadExpenses();
+        }
+        //下一页
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            page += 1;
+            LoadExpenses();
         }
 
     }

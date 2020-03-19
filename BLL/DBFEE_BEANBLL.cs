@@ -164,7 +164,10 @@ namespace Maticsoft.BLL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
-
+        public bool DeleteAll()
+        {
+            return dal.DeleteAll();
+        }
 		#endregion  ExtensionMethod
 	}
 }

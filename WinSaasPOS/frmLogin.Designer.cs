@@ -71,6 +71,9 @@
             this.picExit = new System.Windows.Forms.PictureBox();
             this.picTenantLogo = new System.Windows.Forms.PictureBox();
             this.btnWindows = new System.Windows.Forms.Button();
+            this.lbtnChangeOffLine = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlUser.SuspendLayout();
             this.pnlbtnLoginByUser.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -132,7 +135,7 @@
             this.pnlUser.Controls.Add(this.txtPwd);
             this.pnlUser.Controls.Add(this.lblUser);
             this.pnlUser.Controls.Add(this.txtUser);
-            this.pnlUser.Location = new System.Drawing.Point(368, 238);
+            this.pnlUser.Location = new System.Drawing.Point(368, 236);
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(440, 247);
             this.pnlUser.TabIndex = 6;
@@ -427,9 +430,9 @@
             this.lblPhoneCheckCode.ForeColor = System.Drawing.Color.DarkGray;
             this.lblPhoneCheckCode.Location = new System.Drawing.Point(43, 144);
             this.lblPhoneCheckCode.Name = "lblPhoneCheckCode";
-            this.lblPhoneCheckCode.Size = new System.Drawing.Size(90, 21);
+            this.lblPhoneCheckCode.Size = new System.Drawing.Size(106, 21);
             this.lblPhoneCheckCode.TabIndex = 26;
-            this.lblPhoneCheckCode.Text = "请输入密码";
+            this.lblPhoneCheckCode.Text = "请输入验证码";
             this.lblPhoneCheckCode.Click += new System.EventHandler(this.lblPhoneCheckCode_Click);
             // 
             // lblCheckCode
@@ -545,11 +548,51 @@
             this.btnWindows.UseVisualStyleBackColor = false;
             this.btnWindows.Click += new System.EventHandler(this.btnWindows_Click);
             // 
+            // lbtnChangeOffLine
+            // 
+            this.lbtnChangeOffLine.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbtnChangeOffLine.AutoSize = true;
+            this.lbtnChangeOffLine.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbtnChangeOffLine.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lbtnChangeOffLine.Location = new System.Drawing.Point(587, 556);
+            this.lbtnChangeOffLine.Name = "lbtnChangeOffLine";
+            this.lbtnChangeOffLine.Size = new System.Drawing.Size(106, 21);
+            this.lbtnChangeOffLine.TabIndex = 46;
+            this.lbtnChangeOffLine.TabStop = true;
+            this.lbtnChangeOffLine.Text = "离线收银模式";
+            this.lbtnChangeOffLine.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbtnChangeOffLine_LinkClicked);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(450, 556);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(138, 21);
+            this.label2.TabIndex = 45;
+            this.label2.Text = "网络异常？切换为";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(128, 302);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 69);
+            this.button1.TabIndex = 47;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // frmLogin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.ControlBox = false;
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lbtnChangeOffLine);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnWindows);
             this.Controls.Add(this.pnlUser);
             this.Controls.Add(this.pnlPhone);
@@ -564,7 +607,7 @@
             this.Controls.Add(this.lblLoginByUser);
             this.Controls.Add(this.lblShopName);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -639,6 +682,9 @@
         private System.Windows.Forms.Panel pnlbtnLoginByPhone;
         private System.Windows.Forms.Label lblbtnLoginByPhone;
         private System.Windows.Forms.Button btnWindows;
+        private System.Windows.Forms.LinkLabel lbtnChangeOffLine;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -1,4 +1,6 @@
-﻿using WinSaasPOS.Common;
+﻿using Maticsoft.BLL;
+using Maticsoft.Model;
+using WinSaasPOS.Common;
 using WinSaasPOS.Model;
 using System;
 using System.Collections.Generic;
@@ -30,9 +32,18 @@ namespace WinSaasPOS
         {
             InitializeComponent();
 
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
+            if (MainModel.IsOffLine)
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OffLineType; btnOnLineType.Text = "   离线";
+            }
+            else
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OnLineType; btnOnLineType.Text = "   在线";
+            }
         }
 
         private void btnToday_Click(object sender, EventArgs e)
@@ -121,8 +132,10 @@ namespace WinSaasPOS
             this.Enabled = false;
             frmExpenseSave frmexpensave = new frmExpenseSave();
             frmexpensave.Opacity = 0.95d;
-            frmexpensave.frmExpenseSave_SizeChanged(null,null);
-            frmexpensave.Size = new System.Drawing.Size(Screen.AllScreens[0].Bounds.Width / 3, Screen.AllScreens[0].Bounds.Height - 200);
+            //frmexpensave.frmExpenseSave_SizeChanged(null,null);
+           // frmexpensave.Size = new System.Drawing.Size(Screen.AllScreens[0].Bounds.Width / 3, Screen.AllScreens[0].Bounds.Height - 200);
+            asf.AutoScaleControlTest(frmexpensave, 374, 567, Screen.AllScreens[0].Bounds.Width / 3, Screen.AllScreens[0].Bounds.Height - 200, true);
+
             frmexpensave.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmexpensave.Width - 50, 100);
             frmexpensave.ShowDialog();
             
@@ -139,42 +152,84 @@ namespace WinSaasPOS
             this.Close();
         }
 
-
+        private DBEXPENSE_BEANBLL expensebll = new DBEXPENSE_BEANBLL();
+       
         private void QueryExpense()
         {
             try
             {
-                LoadingHelper.ShowLoadingScreen();//显示         
+                      
 
                 dgvExpense.Rows.Clear();
-                string ErrorMsg = "";
-                Expense[] expenses =  httputil.QueryExpense(CurrentInterval,0,MainModel.CurrentShopInfo.shopid,DateTime.Now.ToString("yyyy-MM-dd"), ref ErrorMsg);
-                //Expense[] expenses = httputil.QueryExpense(CurrentInterval, 0, MainModel.CurrentShopInfo.shopid, DateTime.Now.ToString("yyyy-MM-dd"), ref ErrorMsg);
-                if (ErrorMsg != "" || expenses == null)
+
+                if (MainModel.IsOffLine)
                 {
-                    MainModel.ShowLog(ErrorMsg, false);
+                    DateTime EndTime = Convert.ToDateTime(dtStart.Value.ToString("yyyy-MM-dd") + " 23:59:59");
+                    long endtime = Convert.ToInt64(MainModel.getStampByDateTime(EndTime));
+
+                    DateTime StartTime = Convert.ToDateTime(DateTime.Now.AddDays(-CurrentInterval).ToString("yyyy-MM-dd") + " 00:00:00");
+                    long starttime = Convert.ToInt64(MainModel.getStampByDateTime(StartTime));
+
+                    string strwhere = " CREATEAT >" + starttime + " and CREATEAT < " + endtime + " and CREATE_URL_IP='" + MainModel.URL + "' "; ;
+                  
+
+                    List<DBEXPENSE_BEANMODEL> lstexpense =expensebll.GetModelList(strwhere);
+
+                    if (lstexpense != null && lstexpense.Count > 0)
+                    {
+                        foreach (DBEXPENSE_BEANMODEL expense in lstexpense)
+                        {
+                            dgvExpense.Rows.Add(MainModel.GetDateTimeByStamp(expense.CREATEAT.ToString()).ToString(), expense.EXPENSENAME, expense.EXPENSEFEE, expense.CREATEBY);
+
+                        }
+                    }
+                   
+                    dgvExpense.ClearSelection();
+
+                    if (dgvExpense.Rows.Count > 0)
+                    {
+                        MainModel.ShowLog("刷新完成", false);
+                    }
+                    else
+                    {
+                        // ShowLog("暂无数据", false);
+                    }
+
                 }
                 else
                 {
 
-                    foreach (Expense exp in expenses)
+                    LoadingHelper.ShowLoadingScreen();//显示   
+
+                    string ErrorMsg = "";
+                    Expense[] expenses = httputil.QueryExpense(CurrentInterval, 0, MainModel.CurrentShopInfo.shopid, DateTime.Now.ToString("yyyy-MM-dd"), ref ErrorMsg);
+                    //Expense[] expenses = httputil.QueryExpense(CurrentInterval, 0, MainModel.CurrentShopInfo.shopid, DateTime.Now.ToString("yyyy-MM-dd"), ref ErrorMsg);
+                    if (ErrorMsg != "" || expenses == null)
+                    {
+                        MainModel.ShowLog(ErrorMsg, false);
+                    }
+                    else
                     {
 
-                        dgvExpense.Rows.Add(MainModel.GetDateTimeByStamp(exp.createdat.ToString()).ToString(),exp.expensename,exp.expensefee,exp.createby);
+                        foreach (Expense exp in expenses)
+                        {
+
+                            dgvExpense.Rows.Add(MainModel.GetDateTimeByStamp(exp.createdat.ToString()).ToString(), exp.expensename, exp.expensefee, exp.createby);
+                        }
                     }
-                }
-                dgvExpense.ClearSelection();
+                    dgvExpense.ClearSelection();
 
-                if (dgvExpense.Rows.Count > 0)
-                {
-                    ShowLog("刷新完成",false);
-                }
-                else
-                {
-                   // ShowLog("暂无数据", false);
-                }
-                
+                    if (dgvExpense.Rows.Count > 0)
+                    {
+                        MainModel.ShowLog("刷新完成", false);
+                    }
+                    else
+                    {
+                        // ShowLog("暂无数据", false);
+                    }
 
+                }
+             
 
                 LoadingHelper.CloseForm();//关闭
             }
@@ -182,6 +237,10 @@ namespace WinSaasPOS
             {
                 LoadingHelper.CloseForm();//关闭
                 MainModel.ShowLog("查询订单异常：" + ex.Message, true);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();//关闭
             }
         }
 
@@ -192,7 +251,7 @@ namespace WinSaasPOS
 
         private void frmExpense_Shown(object sender, EventArgs e)
         {
-            //btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+            //btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
             //lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             //timerNow.Interval = 1000;
             //timerNow.Enabled = true;
@@ -202,7 +261,7 @@ namespace WinSaasPOS
         }
         private void frmExpense_Load(object sender, EventArgs e)
         {
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
@@ -252,19 +311,7 @@ namespace WinSaasPOS
         /// 委托解决跨线程调用
         /// </summary>
         private delegate void InvokeHandler();
-        //TODO  修改样式
-        private void ShowLog(string msg, bool iserror)
-        {
-
-            MsgHelper.AutoShowForm(msg);
-            //this.Invoke(new InvokeHandler(delegate()
-            //{
-
-            //    frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
-            //    frmmsf.ShowDialog(); LogManager.WriteLog(msg);
-            //}));
-
-        }
+    
 
         private void timerNow_Tick(object sender, EventArgs e)
         {
@@ -275,6 +322,12 @@ namespace WinSaasPOS
         private void btnWindows_Click(object sender, EventArgs e)
         {
             MainModel.ShowWindows();
+        }
+
+        private void dtStart_MouseDown(object sender, MouseEventArgs e)
+        {
+            dtStart.Focus();
+            SendKeys.Send("{F4}");
         }
 
 

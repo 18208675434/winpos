@@ -63,5 +63,19 @@ namespace WinSaasPOS.Model
         /// </summary>
         public string purchaselimitsubdesc { get; set; }
 
+
+
+        //以下为促销字段
+        public string Promotioncode { get; set; }
+        public string Outerpromocode { get; set; }
+        public string Pricekind { get; set; }
+
+        public int pricetagid { get; set; }
+        public string pricetag { get; set; }
+
+        public string Costcenterinfo { get; set; }
+
+        public decimal pricepromoamt { get; set; }
+
     }
 }

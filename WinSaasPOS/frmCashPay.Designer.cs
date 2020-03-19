@@ -68,6 +68,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "确定并打开钱箱";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // lblPrice
             // 
@@ -116,6 +117,7 @@
             this.btn1.TabStop = false;
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn2
             // 
@@ -130,6 +132,7 @@
             this.btn2.TabStop = false;
             this.btn2.Text = "2";
             this.btn2.UseVisualStyleBackColor = true;
+            this.btn2.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn3
             // 
@@ -144,6 +147,7 @@
             this.btn3.TabStop = false;
             this.btn3.Text = "3";
             this.btn3.UseVisualStyleBackColor = true;
+            this.btn3.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn6
             // 
@@ -158,6 +162,7 @@
             this.btn6.TabStop = false;
             this.btn6.Text = "6";
             this.btn6.UseVisualStyleBackColor = true;
+            this.btn6.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn5
             // 
@@ -172,6 +177,7 @@
             this.btn5.TabStop = false;
             this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = true;
+            this.btn5.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn4
             // 
@@ -186,6 +192,7 @@
             this.btn4.TabStop = false;
             this.btn4.Text = "4";
             this.btn4.UseVisualStyleBackColor = true;
+            this.btn4.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn9
             // 
@@ -200,6 +207,7 @@
             this.btn9.TabStop = false;
             this.btn9.Text = "9";
             this.btn9.UseVisualStyleBackColor = true;
+            this.btn9.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn8
             // 
@@ -214,6 +222,7 @@
             this.btn8.TabStop = false;
             this.btn8.Text = "8";
             this.btn8.UseVisualStyleBackColor = true;
+            this.btn8.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn7
             // 
@@ -228,6 +237,7 @@
             this.btn7.TabStop = false;
             this.btn7.Text = "7";
             this.btn7.UseVisualStyleBackColor = true;
+            this.btn7.Click += new System.EventHandler(this.btn_Click);
             // 
             // btnDel
             // 
@@ -243,6 +253,7 @@
             this.btnDel.TabIndex = 30;
             this.btnDel.TabStop = false;
             this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnDot
             // 
@@ -257,6 +268,7 @@
             this.btnDot.TabStop = false;
             this.btnDot.Text = "·";
             this.btnDot.UseVisualStyleBackColor = true;
+            this.btnDot.Click += new System.EventHandler(this.btnDot_Click);
             // 
             // btn0
             // 
@@ -271,6 +283,7 @@
             this.btn0.TabStop = false;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = true;
+            this.btn0.Click += new System.EventHandler(this.btn_Click);
             // 
             // label3
             // 
@@ -305,6 +318,7 @@
             this.lbtnCancle.Size = new System.Drawing.Size(155, 21);
             this.lbtnCancle.TabIndex = 33;
             this.lbtnCancle.Text = "返回选择收银方式 >";
+            this.lbtnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // lblShuiyin
             // 
@@ -318,6 +332,7 @@
             this.lblShuiyin.TabIndex = 42;
             this.lblShuiyin.Text = "请输入实收现金";
             this.lblShuiyin.Visible = false;
+            this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
             // 
             // txtCash
             // 
@@ -328,6 +343,7 @@
             this.txtCash.Name = "txtCash";
             this.txtCash.Size = new System.Drawing.Size(342, 36);
             this.txtCash.TabIndex = 43;
+            this.txtCash.TextChanged += new System.EventHandler(this.txtNum_TextChanged);
             // 
             // btnBack
             // 

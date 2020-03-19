@@ -8,6 +8,9 @@ using System.Threading;
 using System.Drawing.Printing;
 using System.Drawing;
 using System.Windows.Forms;
+using Maticsoft.BLL;
+using Newtonsoft.Json;
+using Maticsoft.Model;
 
 namespace WinSaasPOS.Common
 {
@@ -219,7 +222,12 @@ namespace WinSaasPOS.Common
                         pd.PrinterSettings.PrinterName = PrintName;//选择打印机
                     }
 
-                    pd.Print();
+                    //pd.Print();
+
+                    ParameterizedThreadStart Pts = new ParameterizedThreadStart(PrintThread);
+                    Thread threadprint = new Thread(Pts);
+                    threadprint.IsBackground = true;
+                    threadprint.Start(pd);
 
                     Application.DoEvents();
                     return true;
@@ -235,7 +243,186 @@ namespace WinSaasPOS.Common
         }
 
 
+        public static object lockprintingOffLine = new object();
+        public static bool PrintOrder(string offlineorderid, bool isRefound, ref string errormsg)
+        {
+            lock (lockprintingOffLine)
+            {
+                try
+                {
+                    try { LogManager.WriteLog("打印离线订单:" + offlineorderid); }
+                    catch { }
 
+                    DBORDER_BEANBLL orderbll = new DBORDER_BEANBLL();
+                    DBORDER_BEANMODEL order = orderbll.GetModel(offlineorderid);
+                    if (order == null)
+                    {
+                        errormsg = "离线订单不存在" + offlineorderid;
+                        return false;
+                    }
+                    OffLineOrder offlineorder = JsonConvert.DeserializeObject<OffLineOrder>(order.ORDER_JSON);
+
+
+                    try
+                    {
+                        PageSize = Convert.ToInt32(INIManager.GetIni("Print", "PageSize", MainModel.IniPath));
+
+                        LocationX = Convert.ToInt32(INIManager.GetIni("Print", "LocationX", MainModel.IniPath));
+
+                        PrintName = INIManager.GetIni("Print", "PrintName", MainModel.IniPath);
+                    }
+                    catch { }
+
+                    // PageSize = PageSize - 10;
+                    fontHead = new System.Drawing.Font("宋体", 11F * PageSize / 58);
+                    //SizeF  sizehead = CreateGraphics().MeasureString("多个字可以减少字符间距误差微软多个字可以减少字符间距误差宋体", fontHead);
+                    // HeadCharCountOfLine = HeadCharCountOfLine * 58 / PageSize;
+                    HeadCharHeightOfLine = (double)HeadCharHeightOfLine * PageSize / 58;
+
+
+                    fontBody = new System.Drawing.Font("宋体", 8.5F * PageSize / 58);
+                    // SizeF sizeBody = CreateGraphics().MeasureString("多个字可以减少字符间距误差微软多个字可以减少字符间距误差宋体", fontBody);
+                    // BodyCharCountOfLine = BodyCharCountOfLine * 58 / PageSize;
+                    BodyCharHeightOfLine = (double)BodyCharHeightOfLine * PageSize / 58;
+                    // int length = (int)Math.Floor(58 / (0.254 * sizeBody.Width) * 2 * 30) - 8;  //-8 预留两个汉字空白
+
+                    //每次打印先清空之前内容
+                    lstPrintStr = new List<string>();
+
+
+                    lstPrintStr.Add(MergeStr("欢迎光临["+MainModel.CurrentShopInfo.tenantname+"]", "", BodyCharCountOfLine, PageSize));
+                    lstPrintStr.Add(" ");
+
+                    lstPrintStr.Add("订单号：" + offlineorderid + "\n");
+                    lstPrintStr.Add("门店：" + MainModel.CurrentShopInfo.shopname + "\n");
+                    lstPrintStr.Add("地址：" + MainModel.CurrentShopInfo.address + "\n");
+                    lstPrintStr.Add("电话：" + MainModel.CurrentShopInfo.tel + "\n");
+                    lstPrintStr.Add(MergeStr("收银员：" + MainModel.CurrentUser.nickname, "机：" + MainModel.CurrentShopInfo.deviceid, BodyCharCountOfLine, PageSize));
+                    lstPrintStr.Add(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss" + "\n"));
+                    lstPrintStr.Add(getStrLine());
+
+                    foreach (Product pro in offlineorder.products)
+                    {
+                        lstPrintStr.Add(DateTime.Now.ToString(pro.skucode + "  " + pro.title));
+                        if (pro.goodstagid == 0)//标品
+                        {
+                            string priceandnum = "   " + pro.price.saleprice.ToString("f2") + "  X  " + pro.num;
+
+                            //lstPrintStr.Add(priceandnum + pro.price.total.ToString().PadLeft(length - 2 - priceandnum.Length, ' '));
+
+                            lstPrintStr.Add(MergeStr(priceandnum, pro.price.total.ToString("f2"), BodyCharCountOfLine, PageSize - 6));
+                        }
+                        else if (pro.goodstagid == 1) //散称称重
+                        {
+                            string priceandnum = "   " + pro.price.saleprice.ToString("f2") + "  X  " + pro.specnum;
+
+                            //lstPrintStr.Add(priceandnum + pro.price.total.ToString().PadLeft(length - 2 - priceandnum.Length, ' '));
+
+                            lstPrintStr.Add(MergeStr(priceandnum, pro.price.total.ToString("f2"), BodyCharCountOfLine, PageSize - 6));
+                        }
+                        else if (pro.goodstagid == 2) //多规格原称重
+                        {
+
+                            string priceandnum = "   " + pro.price.saleprice.ToString("f2") + "  X  " + pro.specnum;
+                            // lstPrintStr.Add(priceandnum + pro.price.total.ToString().PadLeft(length - 2 - priceandnum.Length, ' '));
+                            lstPrintStr.Add(MergeStr(priceandnum, pro.price.total.ToString("f2"), BodyCharCountOfLine, PageSize - 6));
+                        }
+
+                    }
+                    lstPrintStr.Add(getStrLine());
+
+
+                    if (isRefound)
+                    {
+
+                        lstPrintStr.Add(MergeStr("件数合计", offlineorder.goodscount.ToString(), BodyCharCountOfLine, PageSize));
+                        lstPrintStr.Add(MergeStr("原价合计", offlineorder.origintotal.ToString("f2"), BodyCharCountOfLine, PageSize));
+                        if (offlineorder.promoamt > 0)
+                        {
+                            lstPrintStr.Add(MergeStr("优惠金额", "-" + offlineorder.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                        }
+                        if (offlineorder.fixpricepromoamt > 0)
+                        {
+                            lstPrintStr.Add(MergeStr("整单优惠", "-" + offlineorder.fixpricepromoamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                        }
+
+                        lstPrintStr.Add(MergeStr("退款金额", offlineorder.pricetotal.ToString("f2"), BodyCharCountOfLine, PageSize));
+                    }
+                    else
+                    {
+                        lstPrintStr.Add(MergeStr("件数合计", offlineorder.goodscount.ToString(), BodyCharCountOfLine, PageSize));
+                        lstPrintStr.Add(MergeStr("原价合计", offlineorder.origintotal.ToString("f2"), BodyCharCountOfLine, PageSize));
+
+                        if (offlineorder.promoamt > 0)
+                        {
+                            lstPrintStr.Add(MergeStr("优惠金额","-"+ offlineorder.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                        }
+                        if (offlineorder.fixpricepromoamt > 0)
+                        {
+                            lstPrintStr.Add(MergeStr("整单优惠", "-" + offlineorder.fixpricepromoamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                        }
+                        lstPrintStr.Add(MergeStr("应收金额", offlineorder.pricetotal.ToString("f2"), BodyCharCountOfLine, PageSize));
+                    }
+
+                    lstPrintStr.Add(getStrLine());
+
+                    if (isRefound)
+                    {
+                        lstPrintStr.Add("退款");
+                    }
+
+
+                    if (isRefound)
+                    {
+                        lstPrintStr.Add(MergeStr("现金退款", offlineorder.cashpayamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                        lstPrintStr.Add(MergeStr("找零", offlineorder.cashchangeamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+
+                    }
+                    else
+                    {
+                        lstPrintStr.Add(MergeStr("现金收银", offlineorder.cashpayamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                        lstPrintStr.Add(MergeStr("找零", offlineorder.cashchangeamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                    }
+
+                    lstPrintStr.Add(getStrLine());
+
+                    lstPrintStr.Add("多谢惠顾，欢迎下次光临！");
+
+                    lstPrintStr.Add(MergeStr("  ", "", BodyCharCountOfLine, PageSize));
+
+                    PrintDocument pd = new PrintDocument();
+
+                    pd.PrintPage += new PrintPageEventHandler(pd_OrderPrintPage);
+
+
+                    ////不弹框<正在打印>直接打印
+                    PrintController PrintStandard = new StandardPrintController();
+                    pd.PrintController = PrintStandard;
+
+                    if (!string.IsNullOrEmpty(PrintName))
+                    {
+                        pd.PrinterSettings.PrinterName = PrintName;//选择打印机
+                    }
+
+                    //pd.Print();
+
+                    ParameterizedThreadStart Pts = new ParameterizedThreadStart(PrintThread);
+                    Thread threadprint = new Thread(Pts);
+                    threadprint.IsBackground = true;
+                    threadprint.Start(pd);
+
+                    Application.DoEvents();
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    LogManager.WriteLog("ERROR", "打印订单小票出现异常" + ex.Message + ex.StackTrace);
+                    errormsg = "打印订单小票出现异常" + ex.Message;
+                    return false;
+                }
+            }
+        }
 
         public static object lockreceiptprint = new object();
         public static bool ReceiptPrint(Receiptdetail receipt, ref string errormsg)
@@ -300,7 +487,33 @@ namespace WinSaasPOS.Common
 
                     lstPrintStr.Add(getStrLine());
 
-                    lstPrintStr.Add(receipt.totalamount.title + receipt.totalamount.amount.PadLeft(28 - Encoding.Default.GetBytes(receipt.totalamount.title).Length, ' '));
+                   lstPrintStr.Add( MergeStr(receipt.totalamount.title, receipt.totalamount.amount, BodyCharCountOfLine, PageSize));
+                    //lstPrintStr.Add(receipt.totalamount.title + receipt.totalamount.amount.PadLeft(28 - Encoding.Default.GetBytes(receipt.totalamount.title).Length, ' '));
+
+                    foreach (OrderPriceDetail incomedetail in receipt.incomedetails)
+                    {
+                        try
+                        {
+                            decimal tempamount = 0;
+                            try
+                            {
+                                tempamount = Convert.ToDecimal(incomedetail.amount);
+                            }
+                            catch { }
+                            if (tempamount > 0)
+                            {
+                                lstPrintStr.Add(MergeStr(incomedetail.title, incomedetail.amount, BodyCharCountOfLine, PageSize));
+
+                                if (!string.IsNullOrEmpty(incomedetail.subtitle))
+                                {
+                                    lstPrintStr.Add(MergeStr("", incomedetail.subtitle, BodyCharCountOfLine, PageSize));
+                                }
+                            }
+                            
+                        }
+                        catch (Exception ex) { }
+                    }
+
 
                     lstPrintStr.Add(getStrLine());
 
@@ -342,7 +555,12 @@ namespace WinSaasPOS.Common
                     {
                         pd.PrinterSettings.PrinterName = PrintName;//选择打印机
                     }
-                    pd.Print();
+                   // pd.Print();
+
+                    ParameterizedThreadStart Pts = new ParameterizedThreadStart(PrintThread);
+                    Thread threadprint = new Thread(Pts);
+                    threadprint.IsBackground = true;
+                    threadprint.Start(pd);
 
                     return true;
                 }
@@ -355,7 +573,16 @@ namespace WinSaasPOS.Common
             }
         }
 
-
+       
+        public static void PrintThread(object obj){
+            try{
+                 PrintDocument pd=(PrintDocument)obj;
+                pd.Print();
+                pd.Dispose();
+            }catch(Exception ex){
+                LogManager.WriteLog("打印异常"+ex.Message);
+            }
+        }
 
 
         /// <summary>

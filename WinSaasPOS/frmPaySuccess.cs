@@ -83,32 +83,10 @@ namespace WinSaasPOS
             {
                 if (isrun)
                 {
-                    string ErrorMsg = "";
-                    PrintDetail printdetail = httputil.GetPrintDetail(CurrentOrderID, ref ErrorMsg);
-                    if (ErrorMsg != "" || printdetail == null)
+                    if (MainModel.IsOffLine)
                     {
-                        LogManager.WriteLog("获取打印小票信息异常：" + ErrorMsg);
-                        Delay.Start(100);
-                        SEDPrint();
-                    }
-                    else
-                    {
-
-                        //显示收银详情
-                        foreach (Payinfo pay in printdetail.payinfo)
-                        {
-                            lblCashierInfo.Text += pay.type + " ￥" + pay.amount + "|";
-                        }
-                        lblCashierInfo.Text = lblCashierInfo.Text.TrimEnd('|');
-
-                        if (DataReceiveHandle != null)
-                            this.DataReceiveHandle.BeginInvoke(1, lblCashierInfo.Text, null, null);
-
-
-                        Application.DoEvents();
                         string PrintErrorMsg = "";
-                        bool printresult = PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
-
+                        bool printresult = PrintUtil.PrintOrder(CurrentOrderID, false, ref PrintErrorMsg);
 
                         if (PrintErrorMsg != "" || !printresult)
                         {
@@ -124,8 +102,57 @@ namespace WinSaasPOS
                                 this.Close();
                             }
                         }
-
+                        return;
                     }
+                    else
+                    {
+
+
+                        string ErrorMsg = "";
+                        PrintDetail printdetail = httputil.GetPrintDetail(CurrentOrderID, ref ErrorMsg);
+                        if (ErrorMsg != "" || printdetail == null)
+                        {
+                            LogManager.WriteLog("获取打印小票信息异常：" + ErrorMsg);
+                            Delay.Start(100);
+                            SEDPrint();
+                        }
+                        else
+                        {
+
+                            //显示收银详情
+                            foreach (Payinfo pay in printdetail.payinfo)
+                            {
+                                lblCashierInfo.Text += pay.type + " ￥" + pay.amount + "|";
+                            }
+                            lblCashierInfo.Text = lblCashierInfo.Text.TrimEnd('|');
+
+                            if (DataReceiveHandle != null)
+                                this.DataReceiveHandle.BeginInvoke(1, lblCashierInfo.Text, null, null);
+
+
+                            Application.DoEvents();
+                            string PrintErrorMsg = "";
+                            bool printresult = PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
+
+
+                            if (PrintErrorMsg != "" || !printresult)
+                            {
+                                LogManager.WriteLog("打印小票异常" + PrintErrorMsg);
+                                //ShowLog(PrintErrorMsg,true);
+                            }
+                            else
+                            {
+                                LogManager.WriteLog(DateTime.Now.ToString() + printresult.ToString() + OrderResult.ToString());
+                                printresult = true;
+                                if (OrderResult)
+                                {
+                                    this.Close();
+                                }
+                            }
+
+                        }
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -141,7 +168,11 @@ namespace WinSaasPOS
             {
                 try
                 {
-
+                    if (MainModel.IsOffLine)
+                    {
+                        OrderResult = true;
+                        return;
+                    }
 
                     string ErrorMsg = "";
                     int status = httputil.QueryOrderStatus(CurrentOrderID, ref ErrorMsg);

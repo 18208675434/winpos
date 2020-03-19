@@ -1,4 +1,7 @@
-﻿using WinSaasPOS.Common;
+﻿using Maticsoft.BLL;
+using Maticsoft.Model;
+using Newtonsoft.Json;
+using WinSaasPOS.Common;
 using WinSaasPOS.Model;
 using System;
 using System.Collections.Generic;
@@ -24,6 +27,8 @@ namespace WinSaasPOS
         private delegate void InvokeHandler();
 
         List<ReceiptQuery> CurrentLisstReceipt = new List<ReceiptQuery>();
+
+        List<DBRECEIPT_BEANMODEL> CurrentListReceiptOffLine = new List<DBRECEIPT_BEANMODEL>();
 
 
         //<summary>
@@ -85,7 +90,6 @@ namespace WinSaasPOS
                 btnYesterday.FlatAppearance.BorderColor = Color.Red;
 
                 dtReceiptData.Value = DateTime.Now.AddDays(-1);
-
                 QueryReceipt();
             }
             catch (Exception ex)
@@ -98,24 +102,6 @@ namespace WinSaasPOS
             }
         }
 
-        private void btnQuery_Click(object sender, EventArgs e)
-        { try
-            {
-                if (!IsEnable)
-                {
-                    return;
-                }
-            QueryReceipt();
-            }
-        catch (Exception ex)
-        {
-            LogManager.WriteLog("交班查询异常" + ex.Message);
-        }
-        finally
-        {
-            IsEnable = true;
-        }
-        }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -126,6 +112,8 @@ namespace WinSaasPOS
             this.Close();
         }
 
+
+        private DBRECEIPT_BEANBLL receiptbll = new DBRECEIPT_BEANBLL();
         /// <summary>
         /// 查询交班
         /// </summary>
@@ -134,7 +122,51 @@ namespace WinSaasPOS
         {
             try
             {
-                LoadingHelper.ShowLoadingScreen("加载中...");
+                if (MainModel.IsOffLine)
+                {
+                    string operatertimestr = dtReceiptData.Value.ToString("yyyy-MM-dd");
+                    string strwhere = " OPERATETIMESTR = '" + operatertimestr + "' and CREATE_URL_IP='" + MainModel.URL+"' order by CREATE_TIME desc";
+
+                    CurrentListReceiptOffLine = receiptbll.GetModelList(strwhere);
+                    dgvReceipt.Rows.Clear();
+                    if (CurrentListReceiptOffLine != null && CurrentListReceiptOffLine.Count > 0)
+                    {
+                        foreach (DBRECEIPT_BEANMODEL receipt in CurrentListReceiptOffLine)
+                        {
+                            //receipt.RECEIPTDETAIL;
+
+                            string ReceiptData = dtReceiptData.Value.ToString("yyy-MM-dd");
+                            string ReceiptTime = MainModel.GetDateTimeByStamp(receipt.STARTTIME.ToString()).ToString("yyyy-MM-dd HH:mm:ss") + "\r\n" + "至" + "\r\n" + MainModel.GetDateTimeByStamp(receipt.ENDTIME.ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                            string Cashier = receipt.CASHIER;
+                            string NetOperat = receipt.NETSALEAMT.ToString("f2");
+
+                            string TotalPay = receipt.TOTALPAYMENT.ToString("f2");
+
+                            string TotalCash = receipt.CASHTOTALAMT.ToString("f2"); 
+
+                            string PrintStatus =  "已打印" ;
+                            string PosType = "离线模式";
+
+                            dgvReceipt.Rows.Add(ReceiptData, ReceiptTime, Cashier, NetOperat, TotalPay, TotalCash, PrintStatus, PosType, bmpReprint);
+                        }
+                    }
+
+                    if (dgvReceipt.Rows.Count > 0)
+                    {
+                        pnlEmptyReceipt.Visible = false;
+                        MainModel.ShowLog("刷新完成", false);
+                    }
+                    else
+                    {
+                        pnlEmptyReceipt.Visible = true;
+                        MainModel.ShowLog("暂无数据", false);
+                    }    
+                }
+                else
+                {
+
+               
+               // LoadingHelper.ShowLoadingScreen("加载中...");
                 string operatertimestr = dtReceiptData.Value.ToString("yyyy-MM-dd");
                 string shopid = MainModel.CurrentShopInfo.shopid;
                 string deviceid = MainModel.CurrentShopInfo.deviceid.ToString();
@@ -185,10 +217,10 @@ namespace WinSaasPOS
                     else
                     {
                         pnlEmptyReceipt.Visible = true;
-                       // MainModel.ShowLog("暂无数据", false);
+                        MainModel.ShowLog("暂无数据", false);
                     }                  
                 }
-                
+                }
             }
             catch (Exception ex)
             {
@@ -215,23 +247,49 @@ namespace WinSaasPOS
                 if (dgvReceipt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
                 {
 
-                    IsEnable = false;
-                    LoadingHelper.ShowLoadingScreen("加载中...");
-                    ReceiptQuery receiptquery = CurrentLisstReceipt[e.RowIndex];
-
-                    string ErrorMsgReceipt = "";
-                    bool receiptresult = PrintUtil.ReceiptPrint(receiptquery.receiptdetail, ref ErrorMsgReceipt);
-
-                    LoadingHelper.CloseForm();
-                    
-                    if (receiptresult)
+                    if (MainModel.IsOffLine)
                     {
-                        MainModel.ShowLog("打印完成", false);
+                        IsEnable = false;
+                        //LoadingHelper.ShowLoadingScreen("加载中...");
+                        DBRECEIPT_BEANMODEL receipt = CurrentListReceiptOffLine[e.RowIndex];
+
+                        Receiptdetail receiptdetail = JsonConvert.DeserializeObject<Receiptdetail>(receipt.RECEIPTDETAIL);
+                        string ErrorMsgReceipt = "";
+                        bool receiptresult = PrintUtil.ReceiptPrint(receiptdetail, ref ErrorMsgReceipt);
+
+                       // LoadingHelper.CloseForm();
+
+                        if (receiptresult)
+                        {
+                            MainModel.ShowLog("打印完成", false);
+                        }
+                        else
+                        {
+                            MainModel.ShowLog(ErrorMsgReceipt, true);
+                        }
                     }
                     else
                     {
-                        MainModel.ShowLog(ErrorMsgReceipt, true);
+                        IsEnable = false;
+                        LoadingHelper.ShowLoadingScreen("加载中...");
+                        ReceiptQuery receiptquery = CurrentLisstReceipt[e.RowIndex];
+
+                        string ErrorMsgReceipt = "";
+                        bool receiptresult = PrintUtil.ReceiptPrint(receiptquery.receiptdetail, ref ErrorMsgReceipt);
+
+                        LoadingHelper.CloseForm();
+
+                        if (receiptresult)
+                        {
+                            MainModel.ShowLog("打印完成", false);
+                        }
+                        else
+                        {
+                            MainModel.ShowLog(ErrorMsgReceipt, true);
+                        }
                     }
+
+                  
                    
                 }
                 dgvReceipt.ClearSelection();
@@ -239,7 +297,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-
+                MainModel.ShowLog("重打交班单异常"+ex.Message,true);
             }
             finally
             {
@@ -253,12 +311,21 @@ namespace WinSaasPOS
             //asf.ControlAutoSize(this);
         }
 
-      
 
         private void frmReceiptQuery_Shown(object sender, EventArgs e)
         {
-            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好  ";
+            btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
+            btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10, btnCancle.Left + btnCancle.Width);
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+            btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
+            if (MainModel.IsOffLine)
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OffLineType; btnOnLineType.Text = "   离线";
+            }
+            else
+            {
+                btnOnLineType.BackgroundImage = Resources.ResourcePos.OnLineType; btnOnLineType.Text = "   在线";
+            }
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
             LoadBmp();
@@ -292,9 +359,38 @@ namespace WinSaasPOS
         {
             MainModel.ShowWindows();
         }
+
         private void dtReceiptData_CloseUp(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
+            IsEnable = false;
+
+
             QueryReceipt();
+            IsEnable = true;
+        }
+
+
+        private void dtReceiptData_ValueChanged(object sender, EventArgs e)
+        {
+            dtReceiptData.Focus();
+            SendKeys.Send("{F4}");
+        }
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            dtReceiptData.Focus();
+            SendKeys.Send("{F4}");
+        }
+
+        private void dtReceiptData_MouseDown(object sender, MouseEventArgs e)
+        {
+            dtReceiptData.Focus();
+            SendKeys.Send("{F4}");
         }
     }
 }

@@ -48,6 +48,8 @@
             this.lbtnCancle = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
+            this.btnLast = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDel
@@ -245,7 +247,6 @@
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOK.BackColor = System.Drawing.Color.Silver;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 18F);
@@ -273,6 +274,7 @@
             // 
             // pnlExpenses
             // 
+            this.pnlExpenses.AutoScroll = true;
             this.pnlExpenses.Location = new System.Drawing.Point(21, 59);
             this.pnlExpenses.Name = "pnlExpenses";
             this.pnlExpenses.Size = new System.Drawing.Size(330, 102);
@@ -282,11 +284,11 @@
             // 
             this.lbtnCancle.AutoSize = true;
             this.lbtnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lbtnCancle.Location = new System.Drawing.Point(262, 9);
+            this.lbtnCancle.Location = new System.Drawing.Point(298, 9);
             this.lbtnCancle.Name = "lbtnCancle";
-            this.lbtnCancle.Size = new System.Drawing.Size(100, 24);
+            this.lbtnCancle.Size = new System.Drawing.Size(64, 24);
             this.lbtnCancle.TabIndex = 51;
-            this.lbtnCancle.Text = "返回上层 >";
+            this.lbtnCancle.Text = "返回 >";
             this.lbtnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // btnAdd
@@ -315,12 +317,49 @@
             this.btnMinus.UseVisualStyleBackColor = true;
             this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
+            // btnLast
+            // 
+            this.btnLast.Enabled = false;
+            this.btnLast.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLast.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold);
+            this.btnLast.ForeColor = System.Drawing.Color.Silver;
+            this.btnLast.Location = new System.Drawing.Point(27, 32);
+            this.btnLast.Margin = new System.Windows.Forms.Padding(1);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(40, 24);
+            this.btnLast.TabIndex = 54;
+            this.btnLast.Text = "<";
+            this.btnLast.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Visible = false;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNext.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold);
+            this.btnNext.ForeColor = System.Drawing.Color.Silver;
+            this.btnNext.Location = new System.Drawing.Point(69, 32);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(1);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(40, 24);
+            this.btnNext.TabIndex = 55;
+            this.btnNext.Text = ">";
+            this.btnNext.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Visible = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
             // frmExpenseSave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(374, 567);
+            this.Controls.Add(this.btnNext);
+            this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnMinus);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lbtnCancle);
@@ -373,5 +412,7 @@
         private System.Windows.Forms.Label lbtnCancle;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnMinus;
+        private System.Windows.Forms.Button btnLast;
+        private System.Windows.Forms.Button btnNext;
     }
 }

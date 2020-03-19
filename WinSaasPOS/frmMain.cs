@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading;
 using System.Threading;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace WinSaasPOS
 {
@@ -67,6 +68,24 @@ namespace WinSaasPOS
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
         /// </summary>
         private  bool IsEnable=true;
+
+
+
+           //扫描数据处理线程
+                Thread threadScanCode;
+
+                //刷新焦点线程  防止客屏播放视频抢走焦点
+                Thread threadCheckActivate ;
+                //启动全量商品同步线程
+                Thread threadLoadAllProduct;
+
+                //启动电视屏服务
+                Thread threadServerStart;
+
+                //更新离线数据
+                Thread threadUploadOffLineDate;
+
+                private bool IsRun = true;
         #endregion
 
         #region  页面加载
@@ -83,13 +102,22 @@ namespace WinSaasPOS
             ShowLoading(false);// LoadingHelper.CloseForm();
 
             CurrentFrmLogin = frmlogin;
+            
+            //防止标品加减框变形
+            btnIncrease.Size = new System.Drawing.Size(35, 35);
+            btnNum.Size = new System.Drawing.Size(90, 35);
+            btnNum.Left = pnlNum.Width - btnNum.Width + 3;
 
             LoadingHelper.ShowLoadingScreen("页面初始化...");
         }
         private void frmMain_Shown(object sender, EventArgs e)
         {
+            Application.DoEvents();
+            MainModel.IsOffLine = false;
             CurrentFrmLogin.Hide();
             LoadingHelper.CloseForm();
+            LoadCart();
+           
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -101,32 +129,34 @@ namespace WinSaasPOS
                 timerNow.Interval = 1000;
                 timerNow.Enabled = true;
 
-                timerClearMemory.Interval = 2 * 60 * 1000;
+                timerClearMemory.Interval = 6 * 60 * 1000;
                 timerClearMemory.Enabled = true;
 
                 lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+                btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
 
                 //∨ 从右往左排列 被当成图形   从左向右 右侧间距太大
                 btnMenu.Text = MainModel.CurrentUser.nickname + "，你好 ∨";
-
+                btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10,btnOrderHang.Left+btnOrderHang.Width);
                 picBirthday.Visible = false;
                 
 
                 //扫描数据处理线程
-                Thread threadScanCode = new Thread(ScanCodeThread);
+                 threadScanCode = new Thread(ScanCodeThread);
                 threadScanCode.IsBackground = true;
                 threadScanCode.Start();
 
                 //刷新焦点线程  防止客屏播放视频抢走焦点
-                Thread threadCheckActivate = new Thread(CheckActivate);
+                 threadCheckActivate = new Thread(CheckActivate);
                 threadCheckActivate.IsBackground = true;
                 threadCheckActivate.Start();
 
                 //启动全量商品同步线程
-                Thread threadLoadAllProduct = new Thread(LoadAllProduct);
+                 threadLoadAllProduct = new Thread(LoadAllProduct);
                 threadLoadAllProduct.IsBackground = true;
                 threadLoadAllProduct.Start();
 
+                ClearHistoryData();
                 ////启动电子秤同步信息线程
                 //Thread threadLoadScale = new Thread(LoadScale);
                 //threadLoadScale.IsBackground = true;
@@ -140,10 +170,16 @@ namespace WinSaasPOS
                 //threadLoadFrmIni.Start();
 
 
-                ////启动电视屏服务
-                //Thread threadServerStart = new Thread(HttpServerStart);
-                //threadServerStart.IsBackground = true;
-                //threadServerStart.Start();
+                //启动电视屏服务
+                 threadServerStart = new Thread(HttpServerStart);
+                threadServerStart.IsBackground = true;
+                threadServerStart.Start();
+
+
+                //更新离线数据
+                 threadUploadOffLineDate = new Thread(UploadOffLineData);
+                threadUploadOffLineDate.IsBackground = false;
+                threadUploadOffLineDate.Start();
 
                 timerGetIncrementProduct.Enabled = true;
 
@@ -172,7 +208,7 @@ namespace WinSaasPOS
                 }
                 catch { }
                
-                Application.DoEvents();
+                //Application.DoEvents();
 
                 ////启动电视屏服务
                 //Thread threadCheckPrint = new Thread(CheckPrint);
@@ -206,12 +242,103 @@ namespace WinSaasPOS
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //MainModel.ShowTaskThread();
+
+            IsRun = false;
+            SaveCart();
+            try { threadScanCode.Abort(); }
+            catch { }
+
+            try { threadCheckActivate.Abort(); }
+            catch { }
+
+            try { threadServerStart.Abort(); }
+            catch { }
+
+            try { threadServerStart.Abort(); }
+            catch { }
+
+
+            try { MainModel.frmnumber.Dispose(); }
+            catch { } MainModel.frmnumber = null;
+            try { MainModel.frmcashpay.Dispose(); }
+            catch { } MainModel.frmcashpay = null;
+            try { MainModel.frmcashpayoffline.Dispose(); }
+            catch { } MainModel.frmcashpayoffline = null;
+            try { MainModel.frmcashcoupon.Dispose(); }
+            catch { } MainModel.frmcashcoupon = null;
+            try { MainModel.frmtoolmain.Dispose(); }
+            catch { } MainModel.frmtoolmain = null;
+            try { MainModel.frmmodifyprice.Dispose(); }
+            catch { } MainModel.frmmodifyprice = null;
+            try { MainModel.frmprintersetting.Dispose(); }
+            catch { } MainModel.frmprintersetting = null;
+            try { MainModel.frmloading.Dispose(); }
+            catch { } MainModel.frmloading = null;
+            
+
+            timerNow.Enabled = false;
+            timerGetIncrementProduct.Enabled = false;
 
             MainModel.frmmainmedia.Close();
             MainModel.frmmainmedia = null;
             MainModel.ShowTask();
-            CurrentFrmLogin.Show();
+           // CurrentFrmLogin.Show();
+            this.Dispose();
+        }
+
+        JSON_BEANBLL jsonbll = new JSON_BEANBLL();
+        private void SaveCart()
+        {
+            try
+            {
+                if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
+                {
+                   
+                    jsonbll.Delete(ConditionType.CurrentCart);
+
+                    foreach (Product pro in CurrentCart.products)
+                    {
+                        pro.weightflag = Convert.ToBoolean(pro.goodstagid);
+                    }
+
+                    JSON_BEANMODEL jsonmodel = new JSON_BEANMODEL();
+                    jsonmodel.CONDITION = ConditionType.CurrentCart;
+                    jsonmodel.CREATE_TIME = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    jsonmodel.DEVICESN = MainModel.DeviceSN;
+                    jsonmodel.CREATE_URL_IP = MainModel.URL;
+                    jsonmodel.JSON = JsonConvert.SerializeObject(CurrentCart);
+                    jsonbll.Add(jsonmodel);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("保存购物车信息异常"+ex.Message);
+            }
+        }
+
+        private void LoadCart()
+        {
+            try
+            {
+              
+                    JSON_BEANMODEL jsonbmodel = jsonbll.GetModel(ConditionType.CurrentCart);
+                    jsonbll.Delete(ConditionType.CurrentCart);
+
+                  //测试的时候会出现
+                    if (jsonbmodel != null && jsonbmodel.CREATE_URL_IP == MainModel.URL)
+                    {
+
+                        Cart lastCart = JsonConvert.DeserializeObject<Cart>(jsonbmodel.JSON);
+
+                        CurrentCart = lastCart;
+                        RefreshCart(new List<Product>());
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("加载购物车信息异常" + ex.Message);
+            }
         }
 
 
@@ -251,8 +378,8 @@ namespace WinSaasPOS
         {
             try
             {
-                //this.Invoke(new InvokeHandler(delegate()
-                //{
+                this.Invoke(new InvokeHandler(delegate()
+                {
                     if (resultcode == MainModel.HttpUserExpired)
                     {
                         ShowLoading(false);// LoadingHelper.CloseForm();
@@ -274,7 +401,6 @@ namespace WinSaasPOS
                         ShowLoading(false);// LoadingHelper.CloseForm();
                         MainModel.CurrentMember = null;
                         ClearMember();
-
                        
                         FrmConfirmBack frmconfirmback = new FrmConfirmBack("会员登录已过期，请重新登录", "", "");
 
@@ -300,7 +426,7 @@ namespace WinSaasPOS
                     {
                         ShowLog(ErrorMsg, false);
                     }
-               // }));
+                }));
 
             }
             catch (Exception ex)
@@ -368,6 +494,7 @@ namespace WinSaasPOS
                 asf.AutoScaleControlTest(frmorderquery, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmorderquery.Location = new System.Drawing.Point(0, 0);
                 frmorderquery.ShowDialog();
+                frmorderquery.Dispose();
                 IsEnable = true;
             }
             catch (Exception ex)
@@ -408,7 +535,7 @@ namespace WinSaasPOS
                 //可能存在网络中断情况桌面还要清空
                 try
                 {
-                    ReceiptUtil.EditCancelOrder(1, CurrentCart.totalpayment);
+                    ReceiptUtil.EditCancelOrder(1, CurrentCart.totalpayment+CurrentCart.totalpromoamt);
                 }
                 catch (Exception ex) { }
 
@@ -476,6 +603,7 @@ namespace WinSaasPOS
                     asf.AutoScaleControlTest(frmorderhang, 1178, 760, Screen.AllScreens[0].Bounds.Width, this.Height, true);
                     frmorderhang.Location = new System.Drawing.Point(0, 0);
                     frmorderhang.ShowDialog();
+                    frmorderhang.Dispose();
                     IsEnable = true;
                     if (frmorderhang.DialogResult == DialogResult.OK)
                     {
@@ -542,14 +670,13 @@ namespace WinSaasPOS
         }
 
         /// <summary>
-        /// 序列化购物单
+        /// 序列化购物单             
         /// </summary>
         /// <param name="order"></param>
         public void SerializeOrder(Cart cart)
         {
             try
-            {
-                
+            {               
                     BinaryFormatter formatter = new BinaryFormatter();
                     string orderpath = "";
                     if (MainModel.CurrentMember != null)
@@ -766,9 +893,17 @@ namespace WinSaasPOS
                     }
                     ReceiptUtil.ClearReceipt();
 
+
                     INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
+                    MainModel.Authorization = "";
+
+                    FrmConfirmReceiptBack frmconfirmreceiptback = new FrmConfirmReceiptBack(receipt);
+                    frmconfirmreceiptback.Location = new Point(0, 0);
+                    frmconfirmreceiptback.ShowDialog();
+
                     CurrentFrmLogin.Show();
                     this.Close();
+
                 }
             }
             catch (Exception ex)
@@ -799,6 +934,8 @@ namespace WinSaasPOS
                 frmreceiptquery.Location = new System.Drawing.Point(0, 0);
 
                 frmreceiptquery.ShowDialog();
+
+                frmreceiptquery.Dispose();
             }
             catch (Exception ex)
             {
@@ -863,6 +1000,25 @@ namespace WinSaasPOS
             frmchangemode.Location = new System.Drawing.Point(0, 0);
 
             frmchangemode.ShowDialog();
+            frmchangemode.Dispose();
+
+            if (frmchangemode.DialogResult == DialogResult.OK)
+            {
+
+                INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
+                MainModel.Authorization = "";
+               // this.Hide();
+             if (MainModel.frmloginoffline != null)
+            {
+                try { MainModel.frmloginoffline.Dispose(); }
+                catch { }                
+            }
+            MainModel.frmloginoffline = new frmLoginOffLine();
+            MainModel.frmloginoffline.Show();
+
+            this.Dispose();
+                
+            }
             }
             catch (Exception ex)
             {
@@ -889,7 +1045,9 @@ namespace WinSaasPOS
 
                 if (frmnumberback.DialogResult == DialogResult.OK)
                 {
-                    string goodscode = frmnumberback.NumValue.ToString();
+                    //数字过长会变成 +E 形式
+                    //string goodscode = frmnumberback.NumValue.ToString();
+                    string goodscode = frmnumberback.strNumValue;
 
                     QueueScanCode.Enqueue(goodscode);
                    
@@ -1211,7 +1369,7 @@ namespace WinSaasPOS
         private object thislockScanCode = new object();
         private void ScanCodeThread(object obj)
         {
-            while (true)
+            while (IsRun)
             {             
                 if (QueueScanCode.Count > 0 && IsEnable)
                 {
@@ -1320,7 +1478,7 @@ namespace WinSaasPOS
 
                 if (goodcode.Length == 18 && !checkEanCodeIsError(goodcode, 18) && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
                 {
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" INNERBARCODE='" + goodcode.Substring(2, 10) + "'");
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" INNERBARCODE='" + goodcode.Substring(2, 10) + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         isINNERBARCODE = true;
@@ -1329,7 +1487,7 @@ namespace WinSaasPOS
                     else
                     {
                         isINNERBARCODE = false;
-                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'");
+                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                         if (lstdbpro != null && lstdbpro.Count > 0)
                         {
                             dbpro = lstdbpro[0];
@@ -1340,7 +1498,7 @@ namespace WinSaasPOS
                 {
 
                     isINNERBARCODE = false;
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'");
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' "+ " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         dbpro = lstdbpro[0];
@@ -1404,7 +1562,8 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("条码验证异常"+ex.Message ,true );
+               
+                LogManager.WriteLog("条码验证异常" + ex.Message);
                 return null;
             }
         }
@@ -1560,11 +1719,6 @@ namespace WinSaasPOS
             {
                 try
                 {
-                    ////this.Invoke(new InvokeHandler(delegate()
-                    ////{
-                    //Thread threadOrderdetail = new Thread(UploadOrderDetail);
-                    //threadOrderdetail.IsBackground = true;
-                    //threadOrderdetail.Start();
 
                    UploadOrderDetail();
                     DateTime starttime = DateTime.Now;
@@ -1593,7 +1747,7 @@ namespace WinSaasPOS
                         {
                             goodscount += pro.num;
                         }
-
+                        CurrentCart.goodscount = goodscount;
                         lblGoodsCount.Text = "(" + goodscount.ToString() + "件商品)";
                         if (count == 0)
                         {
@@ -2847,12 +3001,14 @@ namespace WinSaasPOS
 
                                 if (frmconfirmback.ShowDialog() == DialogResult.OK)
                                 {
+                                    ReceiptUtil.EditCancelSingle(1, CurrentCart.products[i].price.origintotal);
                                     CurrentCart.products.RemoveAt(i);
                                 }
 
                             }
                             else
                             {
+                                ReceiptUtil.EditCancelSingle(1, CurrentCart.products[i].price.origintotal);
                                 CurrentCart.products[i].num -= 1;
                             }
                             break;
@@ -2878,6 +3034,7 @@ namespace WinSaasPOS
                     {
                         if (delpro.skucode == pro.skucode && delpro.specnum==pro.specnum)
                         {
+                            ReceiptUtil.EditCancelSingle(delpro.num, delpro.price.origintotal);
                             CurrentCart.products.Remove(delpro);
                             break;
                         }
@@ -3270,10 +3427,10 @@ namespace WinSaasPOS
 
         private void timerGetIncrementProduct_Tick(object sender, EventArgs e)
         {
-            //启动增量商品同步线程
-            Thread threadLoadIncrementProduct = new Thread(LoadIncrementProduct);
-            threadLoadIncrementProduct.IsBackground = true;
-            threadLoadIncrementProduct.Start();
+            ////启动增量商品同步线程
+            //Thread threadLoadIncrementProduct = new Thread(LoadIncrementProduct);
+            //threadLoadIncrementProduct.IsBackground = true;
+            //threadLoadIncrementProduct.Start();
 
             ////每10分钟刷新一次电视屏数据信息
             Thread threadLoadTVSkus = new Thread(LoadTVSkus);
@@ -3385,6 +3542,30 @@ namespace WinSaasPOS
             {
                 LogManager.WriteLog("ERROR", "获取全量商品异常" + ex.Message);
                 return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 清理本地历史数据
+        /// </summary>
+        private void ClearHistoryData()
+        {
+            try
+            {
+
+                long currentstamp =Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now.AddDays(-7)));
+
+                string strwhere = " CREATE_TIME <"+currentstamp+" and SYN_TIME>0";
+                orderbll.ClearHistory(strwhere);
+
+                receiptbll.ClearHistory(strwhere);
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("清理本地历史数据异常"+ex.Message);
             }
         }
         #endregion
@@ -3659,7 +3840,7 @@ namespace WinSaasPOS
         /// </summary>
         private void CheckActivate()
         {
-            while (true)
+            while (IsRun)
             {
                 try
                 {
@@ -3683,7 +3864,6 @@ namespace WinSaasPOS
                 Thread.Sleep(100);
             }
         }
-
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -3807,7 +3987,7 @@ namespace WinSaasPOS
                     MainModel.TVSingleActivesSku.posactiveskudetails = new List<TVProduct>();
                 }
 
-                string strwhere = " STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and CATEGORYID like '010%' and skucode not in(" + exitsSkucode + ") ";
+                string strwhere = " STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and CATEGORYID like '010%' and skucode not in(" + exitsSkucode + ") " + " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ";
 
                 String[] notlikes = { "结算专用", "(", "A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
                 if (notlikes != null && notlikes.Length > 0)
@@ -4066,7 +4246,7 @@ namespace WinSaasPOS
                 pnlTotal.DrawToBitmap(bmpTotal, new Rectangle(0, 0, pnlTotal.Width, pnlTotal.Height));
 
 
-                bmpdelete = new Bitmap(picDelete.Image, dgvGood.RowTemplate.Height * 26 / 100, dgvGood.RowTemplate.Height * 26 / 100);
+                bmpdelete = new Bitmap(picDelete.Image, dgvGood.RowTemplate.Height * 20 / 100, dgvGood.RowTemplate.Height * 20 / 100);
                 bmpdelete.Tag = pro;
 
 
@@ -4121,6 +4301,261 @@ namespace WinSaasPOS
             {
                 Console.WriteLine("滚动条");
                 MainModel.frmmainmedia.UpDgvScorll(dgvGood.FirstDisplayedScrollingRowIndex);
+            }
+        }
+
+
+
+
+
+        private void UploadOffLineData()
+        {
+            try
+            {
+                UploadPosUser();
+                UploadOffLineOrder();
+                UploadOffLineRefund();
+                UploadOffLineReceiptr();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        SYSTEM_USER_BEANBLL userbll = new SYSTEM_USER_BEANBLL();
+        private void UploadPosUser()
+        {
+            try
+            {
+
+                //List<OffLineUser> lstoffuser = new List<OffLineUser>();
+                //List<SYSTEM_USER_BEANMODEL> lstuser = userbll.GetModelList(" CREATE_URL_IP = '" + MainModel.URL + "'");
+
+                //if (lstuser != null && lstuser.Count > 0)
+                //{
+                //    foreach (SYSTEM_USER_BEANMODEL user in lstuser)
+                //    {
+                //        OffLineUser offuser = new OffLineUser();
+                //        offuser.loginaccount = user.LOGINACCOUNT;
+                //        offuser.nickname = user.NICKNAME;
+                //        lstoffuser.Add(offuser);
+                //    }
+                //}
+                //else
+                //{
+                //    //  return;
+                //}
+                string errormsg = "";
+                List<OffLineUser> lstresultoffuser = httputil.GetUserForPos(ref errormsg);
+
+                if (lstresultoffuser != null && lstresultoffuser.Count > 0)
+                {
+                    userbll.DeleteAll();
+
+                    foreach (OffLineUser offuser in lstresultoffuser)
+                    {
+                        SYSTEM_USER_BEANMODEL adduser = new SYSTEM_USER_BEANMODEL();
+                        adduser.NICKNAME = offuser.nickname;
+                        adduser.LOGINACCOUNT = offuser.loginaccount;
+                        adduser.CREATE_URL_IP = MainModel.URL;
+
+                        userbll.Add(adduser);
+                    }
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("添加离线员工信异常" + ex.Message);
+            }
+        }
+
+        DBORDER_BEANBLL orderbll = new DBORDER_BEANBLL();
+        private void UploadOffLineOrder()
+        {
+            try
+            {
+
+                List<DBORDER_BEANMODEL> lstorder = orderbll.GetModelList(" SYN_TIME=null or SYN_TIME=0 " + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+
+                if (lstorder != null && lstorder.Count > 0)
+                {
+                    foreach (DBORDER_BEANMODEL order in lstorder)
+                    {
+                        OffLineOrder offlineorder = JsonConvert.DeserializeObject<OffLineOrder>(order.ORDER_JSON);
+
+                        if (order.ORDERSTATUSVALUE == 5)
+                        {
+                            offlineorder.hasrefunded = 1;
+                        }
+
+
+                        string errormsg = "";
+                        bool result = httputil.CreateOffLineOrder(offlineorder, ref errormsg);
+                        if (result)
+                        {
+                            LogManager.WriteLog("离线订单同步完成" + order.OFFLINEORDERID);
+                            order.SYN_TIME = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
+                            orderbll.Update(order);
+                        }
+                        else
+                        {
+                            LogManager.WriteLog("离线订单同步失败" + order.OFFLINEORDERID + "  " + errormsg);
+                        }
+
+
+                    }
+                }
+                else
+                {
+                    //  return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("同步离线订单异常" + ex.Message);
+            }
+        }
+
+
+        private void UploadOffLineRefund()
+        {
+            try
+            {
+
+                List<DBORDER_BEANMODEL> lstorder = orderbll.GetModelList(" REFUND_TIME> SYN_TIME " + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+
+                if (lstorder != null && lstorder.Count > 0)
+                {
+                    foreach (DBORDER_BEANMODEL order in lstorder)
+                    {
+                        if (order.SYN_TIME != null && order.SYN_TIME > 0)
+                        {
+                            OffLineOrder offlineorder = JsonConvert.DeserializeObject<OffLineOrder>(order.ORDER_JSON);
+
+                            //if (order.ORDERSTATUSVALUE == 5)
+                            //{
+                            //    offlineorder.hasrefunded = 1;
+                            //}
+
+                            offlineorder.hasrefunded = 1;
+                            string errormsg = "";
+                            bool result = httputil.OffLineRefund(offlineorder, ref errormsg);
+
+                            order.SYN_TIME = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
+                            orderbll.Update(order);
+                        }
+                    }
+                }
+                else
+                {
+                    //  return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("同步离线订单异常" + ex.Message);
+            }
+        }
+
+
+        DBRECEIPT_BEANBLL receiptbll = new DBRECEIPT_BEANBLL();
+        private void UploadOffLineReceiptr()
+        {
+            try
+            {
+
+                List<DBRECEIPT_BEANMODEL> lstreceipt = receiptbll.GetModelList(" SYN_TIME=null or SYN_TIME=0 " + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+
+                if (lstreceipt != null && lstreceipt.Count > 0)
+                {
+                    foreach (DBRECEIPT_BEANMODEL receipt in lstreceipt)
+                    {
+                        Receiptdetail receiptdetail = JsonConvert.DeserializeObject<Receiptdetail>(receipt.RECEIPTDETAIL);
+
+                        OffLineReceipt o = new OffLineReceipt();
+                        o.id = (int)receipt._id;
+                        o.cashier = receipt.CASHIER;
+                        o.operatetimestr = receipt.OPERATETIMESTR;
+                        o.starttime = receipt.STARTTIME;
+                        o.endtime = receipt.ENDTIME;
+                        o.netsaleamt = receipt.NETSALEAMT;
+                        o.totalpayment = receipt.TOTALPAYMENT;
+                        o.cashtotalamt = receipt.TOTALPAYMENT;
+                        o.receiptdetail = receiptdetail;
+                        o.hasprint = 1;
+                        o.onlinemode = 0;
+                        o.shopid = receiptdetail.shopid;
+                        o.devicecode = receiptdetail.DeviceSN;
+                        o.offlinereceiptid = receipt.OFFLINE_RECEIPT_ID;
+                        o.createurlip = receipt.CREATE_URL_IP;
+                        o.saleclerkphone = receiptdetail.saleclerkphone;
+                        string errormsg = "";
+                        bool result = httputil.UpdateOffLineReceipt(o, ref errormsg);
+
+                        receipt.SYN_TIME = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
+                        receiptbll.Update(receipt);
+
+                    }
+                }
+                else
+                {
+                    //  return;
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("同步离线交班异常" + ex.Message);
+            }
+        }
+
+
+        private void ChangeMQTT(object obj)
+        {
+            try
+            {
+                bool isstart = (bool)obj;
+                if (isstart)
+                {
+                    //启用标签打印程序
+                    if (File.Exists(MainModel.ServerPath + @"MQTTClient.exe"))
+                    {
+                        System.Diagnostics.Process.Start(MainModel.ServerPath + @"MQTTClient.exe");
+                        LogManager.WriteLog("MQTT 启动");
+                    }
+                    else
+                    {
+                        LogManager.WriteLog("缺少MQTT程序");
+
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Process[] pro = System.Diagnostics.Process.GetProcesses();
+                    for (int i = 0; i < pro.Length - 1; i++)
+                    {
+                        if (pro[i].ProcessName == "MQTTClient")
+                        {
+                            pro[i].Kill();
+                            LogManager.WriteLog("MQTT 关闭");
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("启动/关闭 MQTT程序异常");
             }
         }
 

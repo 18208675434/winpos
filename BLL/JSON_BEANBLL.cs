@@ -163,9 +163,25 @@ namespace Maticsoft.BLL
 		//}
 
 		#endregion  BasicMethod
-		#region  ExtensionMethod
+        #region  ExtensionMethod
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(string condition)
+        {
 
-		#endregion  ExtensionMethod
+            return dal.Delete(condition);
+        }
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public Maticsoft.Model.JSON_BEANMODEL GetModel(string condition)
+        {
+
+            return dal.GetModel(condition);
+        }
+        #endregion  ExtensionMethod
 	}
 }
 

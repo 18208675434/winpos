@@ -109,6 +109,7 @@
     <Compile Include="DBFEE_BEANBLL.cs" />
     <Compile Include="DBORDER_BEANBLL.cs" />
     <Compile Include="DBPRODUCT_BEANBLL.cs" />
+    <Compile Include="DBPROMOTION_CACHE_BEANBLL.cs" />
     <Compile Include="DBRECEIPT_BEANBLL.cs" />
     <Compile Include="DBSCALE_KEY_BEANBLL.cs" />
     <Compile Include="DBSPECIAL_PRICE_BEANBLL.cs" />

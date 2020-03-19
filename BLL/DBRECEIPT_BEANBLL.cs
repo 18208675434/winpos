@@ -10,6 +10,8 @@ namespace Maticsoft.BLL
 	public partial class DBRECEIPT_BEANBLL
 	{
 		private readonly Maticsoft.DAL.DBRECEIPT_BEANDAL dal=new Maticsoft.DAL.DBRECEIPT_BEANDAL();
+
+      
 		public DBRECEIPT_BEANBLL()
 		{}
 		#region  BasicMethod
@@ -164,7 +166,11 @@ namespace Maticsoft.BLL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
+        public bool ClearHistory(string strWhere)
+        {
 
+            return dal.ClearHistory(strWhere);
+        }
 		#endregion  ExtensionMethod
 	}
 }

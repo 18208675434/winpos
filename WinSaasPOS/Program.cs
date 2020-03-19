@@ -40,7 +40,24 @@ namespace WinSaasPOS
 
            // Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+
+
+            string isoffline = "0";
+            try
+            {
+                isoffline = INIManager.GetIni("System", "IsOffLine", WinSaasPOS.Model.MainModel.IniPath);
+            }
+            catch { }
+
+            if (isoffline == "1")
+            {
+                Application.Run(new frmLoginOffLine());
+            }
+            else
+            {
+                Application.Run(new frmLogin());
+            }
+            //Application.Run(new frmLogin());
             //Application.Run(new frmTest());
         }
 

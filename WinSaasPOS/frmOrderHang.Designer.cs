@@ -41,14 +41,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvOrderOnLine = new System.Windows.Forms.DataGridView();
             this.timerNow = new System.Windows.Forms.Timer(this.components);
-            this.pnlDgvHead = new System.Windows.Forms.Panel();
+            this.pnlDgvHeadOffLine = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.picScreen = new System.Windows.Forms.PictureBox();
             this.pnlHead = new System.Windows.Forms.Panel();
+            this.btnOnLineType = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnWindows = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
@@ -56,6 +56,12 @@
             this.btnCancle = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
             this.btnDelHang = new System.Windows.Forms.Button();
+            this.pnlDgvHead = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.serialno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,9 +69,10 @@
             this.Continue = new System.Windows.Forms.DataGridViewImageColumn();
             this.DelHang = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderOnLine)).BeginInit();
-            this.pnlDgvHead.SuspendLayout();
+            this.pnlDgvHeadOffLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.pnlHead.SuspendLayout();
+            this.pnlDgvHead.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvOrderOnLine
@@ -122,25 +129,25 @@
             // 
             this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
             // 
-            // pnlDgvHead
+            // pnlDgvHeadOffLine
             // 
-            this.pnlDgvHead.BackColor = System.Drawing.Color.White;
-            this.pnlDgvHead.Controls.Add(this.label6);
-            this.pnlDgvHead.Controls.Add(this.label5);
-            this.pnlDgvHead.Controls.Add(this.label7);
-            this.pnlDgvHead.Controls.Add(this.label10);
-            this.pnlDgvHead.Controls.Add(this.label11);
-            this.pnlDgvHead.Location = new System.Drawing.Point(12, 73);
-            this.pnlDgvHead.Name = "pnlDgvHead";
-            this.pnlDgvHead.Size = new System.Drawing.Size(1154, 49);
-            this.pnlDgvHead.TabIndex = 33;
+            this.pnlDgvHeadOffLine.BackColor = System.Drawing.Color.White;
+            this.pnlDgvHeadOffLine.Controls.Add(this.label6);
+            this.pnlDgvHeadOffLine.Controls.Add(this.label5);
+            this.pnlDgvHeadOffLine.Controls.Add(this.label7);
+            this.pnlDgvHeadOffLine.Controls.Add(this.label11);
+            this.pnlDgvHeadOffLine.Location = new System.Drawing.Point(12, 73);
+            this.pnlDgvHeadOffLine.Name = "pnlDgvHeadOffLine";
+            this.pnlDgvHeadOffLine.Size = new System.Drawing.Size(1154, 49);
+            this.pnlDgvHeadOffLine.TabIndex = 33;
+            this.pnlDgvHeadOffLine.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(1032, 13);
+            this.label6.Location = new System.Drawing.Point(1047, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 23);
             this.label6.TabIndex = 37;
@@ -151,7 +158,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(783, 13);
+            this.label5.Location = new System.Drawing.Point(707, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 23);
             this.label5.TabIndex = 36;
@@ -162,22 +169,11 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(484, 13);
+            this.label7.Location = new System.Drawing.Point(254, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(78, 23);
             this.label7.TabIndex = 35;
             this.label7.Text = "商品明细";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(183, 13);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 23);
-            this.label10.TabIndex = 33;
-            this.label10.Text = "会员手机号";
             // 
             // label11
             // 
@@ -205,6 +201,7 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.Black;
+            this.pnlHead.Controls.Add(this.btnOnLineType);
             this.pnlHead.Controls.Add(this.btnMenu);
             this.pnlHead.Controls.Add(this.btnWindows);
             this.pnlHead.Controls.Add(this.lblShopName);
@@ -215,8 +212,28 @@
             this.pnlHead.Size = new System.Drawing.Size(1178, 60);
             this.pnlHead.TabIndex = 36;
             // 
+            // btnOnLineType
+            // 
+            this.btnOnLineType.BackColor = System.Drawing.Color.Black;
+            this.btnOnLineType.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOnLineType.BackgroundImage")));
+            this.btnOnLineType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOnLineType.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOnLineType.FlatAppearance.BorderSize = 0;
+            this.btnOnLineType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOnLineType.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.btnOnLineType.ForeColor = System.Drawing.Color.White;
+            this.btnOnLineType.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnOnLineType.Location = new System.Drawing.Point(268, 19);
+            this.btnOnLineType.Name = "btnOnLineType";
+            this.btnOnLineType.Size = new System.Drawing.Size(60, 25);
+            this.btnOnLineType.TabIndex = 45;
+            this.btnOnLineType.Text = "   在线";
+            this.btnOnLineType.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnOnLineType.UseVisualStyleBackColor = false;
+            // 
             // btnMenu
             // 
+            this.btnMenu.AutoSize = true;
             this.btnMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnMenu.BackColor = System.Drawing.Color.Black;
             this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -229,9 +246,9 @@
             this.btnMenu.ForeColor = System.Drawing.Color.White;
             this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
             this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenu.Location = new System.Drawing.Point(1029, 1);
+            this.btnMenu.Location = new System.Drawing.Point(1033, 15);
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(149, 54);
+            this.btnMenu.Size = new System.Drawing.Size(142, 30);
             this.btnMenu.TabIndex = 44;
             this.btnMenu.Text = "某某某，你好  ∨";
             this.btnMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -332,6 +349,74 @@
             this.btnDelHang.UseVisualStyleBackColor = false;
             this.btnDelHang.Visible = false;
             // 
+            // pnlDgvHead
+            // 
+            this.pnlDgvHead.BackColor = System.Drawing.Color.White;
+            this.pnlDgvHead.Controls.Add(this.label1);
+            this.pnlDgvHead.Controls.Add(this.label2);
+            this.pnlDgvHead.Controls.Add(this.label3);
+            this.pnlDgvHead.Controls.Add(this.label4);
+            this.pnlDgvHead.Controls.Add(this.label8);
+            this.pnlDgvHead.Location = new System.Drawing.Point(12, 73);
+            this.pnlDgvHead.Name = "pnlDgvHead";
+            this.pnlDgvHead.Size = new System.Drawing.Size(1154, 49);
+            this.pnlDgvHead.TabIndex = 38;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(1041, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 23);
+            this.label1.TabIndex = 37;
+            this.label1.Text = "操作";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(783, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 23);
+            this.label2.TabIndex = 36;
+            this.label2.Text = "挂单时间";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(484, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 23);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "商品明细";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(183, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 23);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "会员手机号";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(18, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(44, 23);
+            this.label8.TabIndex = 32;
+            this.label8.Text = "序号";
+            // 
             // serialno
             // 
             this.serialno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -341,8 +426,6 @@
             this.serialno.FillWeight = 100.195F;
             this.serialno.HeaderText = "序号";
             this.serialno.Name = "serialno";
-            this.serialno.ReadOnly = true;
-            this.serialno.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.serialno.Width = 85;
             // 
             // phone
@@ -353,8 +436,6 @@
             this.phone.FillWeight = 100.195F;
             this.phone.HeaderText = "会员手机号";
             this.phone.Name = "phone";
-            this.phone.ReadOnly = true;
-            this.phone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // title
             // 
@@ -364,8 +445,6 @@
             this.title.FillWeight = 100.195F;
             this.title.HeaderText = "商品明细";
             this.title.Name = "title";
-            this.title.ReadOnly = true;
-            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // hangtime
             // 
@@ -375,11 +454,10 @@
             this.hangtime.FillWeight = 100.195F;
             this.hangtime.HeaderText = "挂单时间";
             this.hangtime.Name = "hangtime";
-            this.hangtime.ReadOnly = true;
-            this.hangtime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Continue
             // 
+            this.Continue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 14F);
@@ -389,11 +467,13 @@
             this.Continue.FillWeight = 30F;
             this.Continue.HeaderText = "继续收银";
             this.Continue.Name = "Continue";
-            this.Continue.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Continue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Continue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Continue.Width = 89;
             // 
             // DelHang
             // 
+            this.DelHang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 14F);
@@ -403,7 +483,8 @@
             this.DelHang.FillWeight = 30F;
             this.DelHang.HeaderText = "删除挂单";
             this.DelHang.Name = "DelHang";
-            this.DelHang.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DelHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DelHang.Width = 89;
             // 
             // frmOrderHang
             // 
@@ -417,6 +498,7 @@
             this.Controls.Add(this.btnDelHang);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.pnlHead);
+            this.Controls.Add(this.pnlDgvHeadOffLine);
             this.Controls.Add(this.pnlDgvHead);
             this.Controls.Add(this.dgvOrderOnLine);
             this.DoubleBuffered = true;
@@ -429,11 +511,13 @@
             this.Load += new System.EventHandler(this.frmOrderHang_Load);
             this.SizeChanged += new System.EventHandler(this.frmOrderHang_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderOnLine)).EndInit();
-            this.pnlDgvHead.ResumeLayout(false);
-            this.pnlDgvHead.PerformLayout();
+            this.pnlDgvHeadOffLine.ResumeLayout(false);
+            this.pnlDgvHeadOffLine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).EndInit();
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();
+            this.pnlDgvHead.ResumeLayout(false);
+            this.pnlDgvHead.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -443,11 +527,10 @@
         private System.Windows.Forms.DataGridView dgvOrderOnLine;
         private System.Windows.Forms.PictureBox picScreen;
         private System.Windows.Forms.Timer timerNow;
-        private System.Windows.Forms.Panel pnlDgvHead;
+        private System.Windows.Forms.Panel pnlDgvHeadOffLine;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel pnlHead;
         private System.Windows.Forms.Button btnMenu;
@@ -457,6 +540,13 @@
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnContinue;
         private System.Windows.Forms.Button btnDelHang;
+        private System.Windows.Forms.Button btnOnLineType;
+        private System.Windows.Forms.Panel pnlDgvHead;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialno;
         private System.Windows.Forms.DataGridViewTextBoxColumn phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn title;

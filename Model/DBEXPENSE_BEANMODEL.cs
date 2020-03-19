@@ -10,8 +10,8 @@ namespace Maticsoft.Model
 		public DBEXPENSE_BEANMODEL()
 		{}
 		#region Model
-		private int __id;
-		private int _createat;
+        private Int64 __id;
+		private Int64 _createat;
 		private string _createurlip;
 		private string _devicecode;
 		private string _devicesn;
@@ -23,12 +23,12 @@ namespace Maticsoft.Model
 		private string _shopid;
 		private string _expensename;
 		private string _type;
-		private int _versioncode;
-		private int _syntime;
+        private Int64 _versioncode;
+        private Int64 _syntime;
 		/// <summary>
 		/// 
 		/// </summary>
-		public int _id
+        public Int64 _id
 		{
 			set{ __id=value;}
 			get{return __id;}
@@ -36,7 +36,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int CREATEAT
+		public Int64 CREATEAT
 		{
 			set{ _createat=value;}
 			get{return _createat;}
@@ -132,7 +132,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int VERSIONCODE
+        public Int64 VERSIONCODE
 		{
 			set{ _versioncode=value;}
 			get{return _versioncode;}
@@ -140,7 +140,7 @@ namespace Maticsoft.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int SYNTIME
+        public Int64 SYNTIME
 		{
 			set{ _syntime=value;}
 			get{return _syntime;}

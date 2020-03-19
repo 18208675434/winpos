@@ -918,6 +918,7 @@
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 12F);
             dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn1.HeaderText = "商品/条码";
@@ -931,6 +932,7 @@
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F);
             dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.White;
             this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn2.HeaderText = "单价(元)";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -1066,6 +1068,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMainMedia";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMainMedia_FormClosing);
             this.Load += new System.EventHandler(this.frmMainMedia_Load);
             this.Shown += new System.EventHandler(this.frmMainMedia_Shown);
             this.tabControlMedia.ResumeLayout(false);
@@ -1140,8 +1143,6 @@
         private UserControl.transparentPic picBirthday2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvOrderDetail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label lblPriceContent;
@@ -1182,5 +1183,7 @@
         private System.Windows.Forms.Label lblShopName;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer timerNow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }

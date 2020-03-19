@@ -108,6 +108,7 @@
     <Compile Include="DBFEE_BEANMODEL.cs" />
     <Compile Include="DBORDER_BEANMODEL.cs" />
     <Compile Include="DBPRODUCT_BEANMODEL.cs" />
+    <Compile Include="DBPROMOTION_CACHE_BEANMODEL.cs" />
     <Compile Include="DBRECEIPT_BEANMODEL.cs" />
     <Compile Include="DBSCALE_KEY_BEANMODEL.cs" />
     <Compile Include="DBSPECIAL_PRICE_BEANMODEL.cs" />

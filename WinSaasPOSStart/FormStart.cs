@@ -209,7 +209,7 @@ namespace WinSaasPosStart
                   if (!files.Contains(file))
                   {
                       //配置文件已存在不更新
-                      if ((fileName == "Config.ini" && lstfilename.Contains("Conofig.ini")) || (fileName == "StartConfig.ini" && lstfilename.Contains("StartConfig.ini"))) //已存在配置文件不更新
+                      if ((fileName == "Config.ini" && lstfilename.Contains("Conofig.ini")) || (fileName == "StartConfig.ini" && lstfilename.Contains("StartConfig.ini")) || (fileName == "OffLine.db" && lstfilename.Contains("OffLine.db"))) //已存在配置文件不更新
                       {
 
                       }
