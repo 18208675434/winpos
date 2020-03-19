@@ -135,7 +135,7 @@
             this.pnlUser.Controls.Add(this.txtPwd);
             this.pnlUser.Controls.Add(this.lblUser);
             this.pnlUser.Controls.Add(this.txtUser);
-            this.pnlUser.Location = new System.Drawing.Point(368, 238);
+            this.pnlUser.Location = new System.Drawing.Point(368, 236);
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(440, 247);
             this.pnlUser.TabIndex = 6;
@@ -430,9 +430,9 @@
             this.lblPhoneCheckCode.ForeColor = System.Drawing.Color.DarkGray;
             this.lblPhoneCheckCode.Location = new System.Drawing.Point(43, 144);
             this.lblPhoneCheckCode.Name = "lblPhoneCheckCode";
-            this.lblPhoneCheckCode.Size = new System.Drawing.Size(90, 21);
+            this.lblPhoneCheckCode.Size = new System.Drawing.Size(106, 21);
             this.lblPhoneCheckCode.TabIndex = 26;
-            this.lblPhoneCheckCode.Text = "请输入密码";
+            this.lblPhoneCheckCode.Text = "请输入验证码";
             this.lblPhoneCheckCode.Click += new System.EventHandler(this.lblPhoneCheckCode_Click);
             // 
             // lblCheckCode
