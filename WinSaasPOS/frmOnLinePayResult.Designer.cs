@@ -56,9 +56,9 @@
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.label2.Location = new System.Drawing.Point(100, 111);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(202, 21);
+            this.label2.Size = new System.Drawing.Size(186, 21);
             this.label2.TabIndex = 1;
-            this.label2.Text = "请使用扫码枪扫扫描付款码";
+            this.label2.Text = "请使用扫码枪扫描付款码";
             // 
             // lblExit
             // 

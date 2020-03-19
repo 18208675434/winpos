@@ -170,7 +170,7 @@ namespace WinSaasPOS
                     DateTime StartTime = Convert.ToDateTime(DateTime.Now.AddDays(-CurrentInterval).ToString("yyyy-MM-dd") + " 00:00:00");
                     long starttime = Convert.ToInt64(MainModel.getStampByDateTime(StartTime));
 
-                    string strwhere = " CREATEAT >" + starttime + " and CREATEAT < "+endtime ;
+                    string strwhere = " CREATEAT >" + starttime + " and CREATEAT < " + endtime + " and CREATE_URL_IP='" + MainModel.URL + "' "; ;
                   
 
                     List<DBEXPENSE_BEANMODEL> lstexpense =expensebll.GetModelList(strwhere);

@@ -173,6 +173,11 @@ namespace Maticsoft.BLL
             return dal.Delete(offlineorderid);
         }
 
+        public bool ClearHistory(string strWhere)
+        {
+            return dal.ClearHistory(strWhere);
+        }
+
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

@@ -128,8 +128,45 @@ namespace WinSaasPOS
 
                     if (fList[i].Name.Contains(".order"))
                     {
+
+
+                       
+
                         try
                         {
+
+                            string shortfilename = fList[i].Name.Replace(".order", "");
+                            string timestr = "";
+                            string phone = "";
+                            if (shortfilename.Contains("-"))
+                            {
+                                timestr = shortfilename.Split('-')[0];
+                                phone = shortfilename.Split('-')[1];
+                            }
+                            else
+                            {
+                                timestr = shortfilename;
+                            }
+
+                            //string timestr = fList[i].Name.Replace(".order", "");
+
+                            try
+                            {
+                                timestr = timestr.Substring(0, 4) + "-" + timestr.Substring(4, 2) + "-" + timestr.Substring(6, 2) + " " + timestr.Substring(8, 2) + ":" + timestr.Substring(10, 2) + ":" + timestr.Substring(12, 2);
+
+                               
+                            }
+                            catch { }
+
+                            //挂单只保存30分钟
+                            if ((DateTime.Now - Convert.ToDateTime(timestr)).TotalMinutes > 30)
+                            {
+                                File.Delete(fList[i].FullName);
+                            }
+                            else
+                            {
+
+                            
                             //反序列化
                             using (Stream input = File.OpenRead(fList[i].FullName))
                             {
@@ -137,34 +174,13 @@ namespace WinSaasPOS
                                 {
                                     Cart cart = (Cart)formatter.Deserialize(input);
 
-                                    string shortfilename = fList[i].Name.Replace(".order", "");
-                                    string timestr = "";
-                                    string phone = "";
-                                    if (shortfilename.Contains("-"))
-                                    {
-                                        timestr = shortfilename.Split('-')[0];
-                                        phone = shortfilename.Split('-')[1];
-                                    }
-                                    else
-                                    {
-                                        timestr = shortfilename;
-                                    }
-
-                                    //string timestr = fList[i].Name.Replace(".order", "");
-
-                                    try
-                                    {
-                                        timestr = timestr.Substring(0, 4) + "-" + timestr.Substring(4, 2) + "-" + timestr.Substring(6, 2) + " " + timestr.Substring(8, 2) + ":" + timestr.Substring(10, 2) + ":" + timestr.Substring(12, 2);
-                                    }
-                                    catch { }
-
-                                    
                                     string title = cart.products[0].title + "等共" + cart.goodscount + "件商品";
                                     //TODO  会员手机号
                                     dgvOrderOnLine.Rows.Add((i + 1).ToString(), phone, title, timestr, bmpContinue, bmpDelHang);
 
                                     // lstCart.Add(cart);
                                 }
+                            }
                             }
                         }
                         catch (Exception ex)

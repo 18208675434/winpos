@@ -143,14 +143,11 @@ namespace WinSaasPOS
                     this.Enabled = true;
                     LoadingHelper.CloseForm();
 
+                    ClearText();
                     frmMain frmmain = new frmMain(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     picTenantLogo.BackgroundImage = null;
-                    //this.Hide();
-                    //CloseOSK();
-
-                    //asf.AutoScaleControl(frmmain);
                     frmmain.ShowDialog();
                 }
 
@@ -230,6 +227,7 @@ namespace WinSaasPOS
                     INIManager.SetIni("System", "UserName", username, MainModel.IniPath);
                     INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
 
+                    ClearText();
                     frmMain frmmain = new frmMain(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
@@ -349,7 +347,7 @@ namespace WinSaasPOS
                         return;
                     }
 
-
+                    ClearText();
                     frmMain frmmain = new frmMain(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
@@ -641,23 +639,23 @@ namespace WinSaasPOS
         //切换环境
         private void lblSN_Click(object sender, EventArgs e)
         {
-            LogManager.WriteLog(click.ToString());
-            // 两次点击间隔小于100毫秒时，算连续点击
-            if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
-            {
-                click++;
-                if (click >= 3)
-                {
-                    click = 0;// 连续点击完毕时，清0
-                    frmChangeUrl frmchangeurl = new frmChangeUrl();
-                    frmchangeurl.ShowDialog();
-                }
-            }
-            else
-            {
-                click = 1;// 不是连续点击时，清0
-            }
-            lastClickTime = DateTime.Now;
+            //LogManager.WriteLog(click.ToString());
+            //// 两次点击间隔小于100毫秒时，算连续点击
+            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
+            //{
+            //    click++;
+            //    if (click >= 3)
+            //    {
+            //        click = 0;// 连续点击完毕时，清0
+            //        frmChangeUrl frmchangeurl = new frmChangeUrl();
+            //        frmchangeurl.ShowDialog();
+            //    }
+            //}
+            //else
+            //{
+            //    click = 1;// 不是连续点击时，清0
+            //}
+            //lastClickTime = DateTime.Now;
         }
 
 
@@ -855,7 +853,20 @@ namespace WinSaasPOS
 
         private void frmLogin_Activated(object sender, EventArgs e)
         {
+            try
+            {
+                string imgname = "LoginLogo.bmp";
+                if (File.Exists(MainModel.MediaPath + imgname))
+                {
+                    picTenantLogo.BackgroundImage = Image.FromFile(MainModel.MediaPath + imgname);
 
+                }
+                else
+                {
+
+                }
+            }
+            catch { }
         }
 
         #region 解决闪烁问题
@@ -940,6 +951,23 @@ namespace WinSaasPOS
                     }
                     catch { }
                 }
+            }
+        }
+
+
+        private void ClearText()
+        {
+            try
+            {
+                txtUser.Text = "";
+                txtPwd.Text = "";
+                txtPhone.Text = "";
+                txtCheckCode.Text = "";
+                txtPhoneCheckCode.Text = "";
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("清空登录页面信息异常"+ex.Message);
             }
         }
     }

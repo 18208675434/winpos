@@ -421,8 +421,8 @@ namespace WinSaasPOS.Model
         {
             if (!string.IsNullOrEmpty(msg))
             {
-                //MsgHelper.AutoShowForm(msg);
-                MsgHelper.ShowForm(msg);
+                MsgHelper.AutoShowForm(msg);
+                //MsgHelper.ShowForm(msg);
                 LogManager.WriteLog(msg);
             }
 

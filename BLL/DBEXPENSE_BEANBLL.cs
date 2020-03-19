@@ -165,6 +165,15 @@ namespace Maticsoft.BLL
 		#endregion  BasicMethod
 		#region  ExtensionMethod
 
+        /// <summary>
+        /// 按条件删除
+        /// </summary>
+        public bool ClearHistory(string strWhere)
+        {
+
+            return dal.ClearHistory(strWhere);
+        }
+
 		#endregion  ExtensionMethod
 	}
 }

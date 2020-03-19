@@ -307,7 +307,6 @@ namespace WinSaasPOS.Common
                 lstbo.Add(getOrderpriceDetail("0", "会员赠送积分", "0" + "次"));
                 receiptdetail.bottomdetails = lstbo;
 
-
                 DBRECEIPT_BEANMODEL d = new DBRECEIPT_BEANMODEL();
                 d.CASHIER = MainModel.CurrentUser.nickname;
                 d.CASHTOTALAMT = totaypayamt;
@@ -320,6 +319,7 @@ namespace WinSaasPOS.Common
                 d.OFFLINE_RECEIPT_ID = GetOffLineReceiptID(receiptdetail);
                 d.CREATE_TIME = endtime;
                 d.CREATE_SN = MainModel.DeviceSN;
+                d.CREATE_URL_IP = MainModel.URL;
 
                 receiptbll.Add(d);
                 INIManager.SetIni("OffLine", "StartTime", "", MainModel.IniPath);

@@ -2110,7 +2110,7 @@ namespace WinSaasPOS.Common
                 string url = "/pos/account/sysuser/upload/posuser";
 
 
-
+              
                 string testjson = JsonConvert.SerializeObject(lstuser);
 
                 string json = HttpPOST(url, testjson);
@@ -2138,6 +2138,49 @@ namespace WinSaasPOS.Common
             }
         }
 
+
+        /// <summary>
+        /// 获取员工列表
+        /// </summary>
+        /// <param name="lstuser"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public List<OffLineUser> GetUserForPos(ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/account/sysuser/list/userforpos";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url,sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string Token = rd.data.ToString();
+
+                    List<OffLineUser> lstuserresult = JsonConvert.DeserializeObject<List<OffLineUser>>(Token);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "userforpos:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "添加离线用户异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
         /// <summary>
         /// 添加离线订单
         /// </summary>
@@ -2151,7 +2194,11 @@ namespace WinSaasPOS.Common
 
                 string url = "/pos/order/pos/offline/create";
 
-
+                //正式环境需要校验
+                if (offlineorder.createurlip.Contains("pos.zhuizhikeji"))
+                {
+                    offlineorder.createurlip = "pos.zhuizhikeji";
+                }
 
                 string tempjson = JsonConvert.SerializeObject(offlineorder);
 
@@ -2200,7 +2247,11 @@ namespace WinSaasPOS.Common
 
                 string url = "/pos/order/pos/offline/refund";
 
-
+                //正式环境需要校验
+                if (offlineorder.createurlip.Contains("pos.zhuizhikeji"))
+                {
+                    offlineorder.createurlip = "pos.zhuizhikeji";
+                }
 
                 string tempjson = JsonConvert.SerializeObject(offlineorder);
                 if (offlineorder.fixpricetotal == 0)
@@ -2245,6 +2296,13 @@ namespace WinSaasPOS.Common
             {
 
                 string url = "/pos/order/pos/offline/receipt/upload";
+
+
+                //正式环境需要校验
+                if (receipt.createurlip.Contains("pos.zhuizhikeji"))
+                {
+                    receipt.createurlip = "pos.zhuizhikeji";
+                }
 
                 string testjson = JsonConvert.SerializeObject(receipt);
 

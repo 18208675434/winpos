@@ -241,7 +241,6 @@ namespace WinSaasPOS
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-
             if (!IsEnable)
             {
                 return;
@@ -259,14 +258,13 @@ namespace WinSaasPOS
         private bool HaveNextPage = true;
 
         /// <summary>
-        /// 查询订单 
+        /// 查询订单
         /// </summary>
         /// <param name="interval"></param>
         private void QueryOrder()
         {
             try
             {
-
                 string phone = txtPhone.Text;
                 string orderid = txtOrderID.Text;
 
@@ -277,14 +275,12 @@ namespace WinSaasPOS
                     return;
                 }
 
-                
-
                 if ( thisisoffline)
                 {
                     long endtime =Convert.ToInt64(getStampByDateTime(dtEnd.Value));
                     long starttime =Convert.ToInt64( getStampByDateTime(dtStart.Value));
 
-                    string strwhere = " ORDERAT >" + starttime + " and ORDERAT < "+endtime ;
+                    string strwhere = " ORDERAT >" + starttime + " and ORDERAT < "+endtime +" and CREATE_URL_IP='" + MainModel.URL+"' ";
                     if (!string.IsNullOrEmpty(phone))
                     {
                         strwhere += " and CUSTOMERPHONE = '"+phone+"' ";
@@ -883,6 +879,8 @@ namespace WinSaasPOS
                 {
                     pnlEmptyOrder.Visible = false;
                 }
+
+                btnToday.PerformClick();
             }
             catch (Exception ex)
             {
@@ -987,7 +985,7 @@ namespace WinSaasPOS
                            long timenow = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
                            order.REFUND_TIME = timenow;
 
-                           if (!MainModel.IsOffLine) //在线情况下已调用退款接口，更新和退款时间一致防止再上传    
+                           if (!MainModel.IsOffLine) //在线情况下已调用退款接口，更新和退款时间一致防止再上传
                            {
                                order.SYN_TIME = timenow;
                            }

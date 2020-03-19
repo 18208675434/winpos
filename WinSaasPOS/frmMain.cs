@@ -102,6 +102,7 @@ namespace WinSaasPOS
             ShowLoading(false);// LoadingHelper.CloseForm();
 
             CurrentFrmLogin = frmlogin;
+            
             //防止标品加减框变形
             btnIncrease.Size = new System.Drawing.Size(35, 35);
             btnNum.Size = new System.Drawing.Size(90, 35);
@@ -115,7 +116,7 @@ namespace WinSaasPOS
             MainModel.IsOffLine = false;
             CurrentFrmLogin.Hide();
             LoadingHelper.CloseForm();
-           
+            LoadCart();
            
         }
         private void frmMain_Load(object sender, EventArgs e)
@@ -155,6 +156,7 @@ namespace WinSaasPOS
                 threadLoadAllProduct.IsBackground = true;
                 threadLoadAllProduct.Start();
 
+                ClearHistoryData();
                 ////启动电子秤同步信息线程
                 //Thread threadLoadScale = new Thread(LoadScale);
                 //threadLoadScale.IsBackground = true;
@@ -241,8 +243,8 @@ namespace WinSaasPOS
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-
             IsRun = false;
+            SaveCart();
             try { threadScanCode.Abort(); }
             catch { }
 
@@ -284,6 +286,61 @@ namespace WinSaasPOS
             this.Dispose();
         }
 
+        JSON_BEANBLL jsonbll = new JSON_BEANBLL();
+        private void SaveCart()
+        {
+            try
+            {
+                if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
+                {
+                   
+                    jsonbll.Delete(ConditionType.CurrentCart);
+
+                    foreach (Product pro in CurrentCart.products)
+                    {
+                        pro.weightflag = Convert.ToBoolean(pro.goodstagid);
+                    }
+
+                    JSON_BEANMODEL jsonmodel = new JSON_BEANMODEL();
+                    jsonmodel.CONDITION = ConditionType.CurrentCart;
+                    jsonmodel.CREATE_TIME = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    jsonmodel.DEVICESN = MainModel.DeviceSN;
+                    jsonmodel.CREATE_URL_IP = MainModel.URL;
+                    jsonmodel.JSON = JsonConvert.SerializeObject(CurrentCart);
+                    jsonbll.Add(jsonmodel);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("保存购物车信息异常"+ex.Message);
+            }
+        }
+
+        private void LoadCart()
+        {
+            try
+            {
+              
+                    JSON_BEANMODEL jsonbmodel = jsonbll.GetModel(ConditionType.CurrentCart);
+                    jsonbll.Delete(ConditionType.CurrentCart);
+
+                  //测试的时候会出现
+                    if (jsonbmodel != null && jsonbmodel.CREATE_URL_IP == MainModel.URL)
+                    {
+
+                        Cart lastCart = JsonConvert.DeserializeObject<Cart>(jsonbmodel.JSON);
+
+                        CurrentCart = lastCart;
+                        RefreshCart(new List<Product>());
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("加载购物车信息异常" + ex.Message);
+            }
+        }
+
 
         public void frmMain_SizeChanged(object sender, EventArgs e)
         {
@@ -321,8 +378,8 @@ namespace WinSaasPOS
         {
             try
             {
-                //this.Invoke(new InvokeHandler(delegate()
-                //{
+                this.Invoke(new InvokeHandler(delegate()
+                {
                     if (resultcode == MainModel.HttpUserExpired)
                     {
                         ShowLoading(false);// LoadingHelper.CloseForm();
@@ -344,7 +401,6 @@ namespace WinSaasPOS
                         ShowLoading(false);// LoadingHelper.CloseForm();
                         MainModel.CurrentMember = null;
                         ClearMember();
-
                        
                         FrmConfirmBack frmconfirmback = new FrmConfirmBack("会员登录已过期，请重新登录", "", "");
 
@@ -370,7 +426,7 @@ namespace WinSaasPOS
                     {
                         ShowLog(ErrorMsg, false);
                     }
-               // }));
+                }));
 
             }
             catch (Exception ex)
@@ -989,7 +1045,9 @@ namespace WinSaasPOS
 
                 if (frmnumberback.DialogResult == DialogResult.OK)
                 {
-                    string goodscode = frmnumberback.NumValue.ToString();
+                    //数字过长会变成 +E 形式
+                    //string goodscode = frmnumberback.NumValue.ToString();
+                    string goodscode = frmnumberback.strNumValue;
 
                     QueueScanCode.Enqueue(goodscode);
                    
@@ -1420,7 +1478,7 @@ namespace WinSaasPOS
 
                 if (goodcode.Length == 18 && !checkEanCodeIsError(goodcode, 18) && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
                 {
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" INNERBARCODE='" + goodcode.Substring(2, 10) + "'");
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" INNERBARCODE='" + goodcode.Substring(2, 10) + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         isINNERBARCODE = true;
@@ -1429,7 +1487,7 @@ namespace WinSaasPOS
                     else
                     {
                         isINNERBARCODE = false;
-                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'");
+                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                         if (lstdbpro != null && lstdbpro.Count > 0)
                         {
                             dbpro = lstdbpro[0];
@@ -1440,7 +1498,7 @@ namespace WinSaasPOS
                 {
 
                     isINNERBARCODE = false;
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'");
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' "+ " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         dbpro = lstdbpro[0];
@@ -1504,7 +1562,8 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("条码验证异常"+ex.Message ,true );
+               
+                LogManager.WriteLog("条码验证异常" + ex.Message);
                 return null;
             }
         }
@@ -3485,6 +3544,30 @@ namespace WinSaasPOS
                 return null;
             }
         }
+
+
+        /// <summary>
+        /// 清理本地历史数据
+        /// </summary>
+        private void ClearHistoryData()
+        {
+            try
+            {
+
+                long currentstamp =Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now.AddDays(-7)));
+
+                string strwhere = " CREATE_TIME <"+currentstamp+" and SYN_TIME>0";
+                orderbll.ClearHistory(strwhere);
+
+                receiptbll.ClearHistory(strwhere);
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("清理本地历史数据异常"+ex.Message);
+            }
+        }
         #endregion
 
 
@@ -3904,7 +3987,7 @@ namespace WinSaasPOS
                     MainModel.TVSingleActivesSku.posactiveskudetails = new List<TVProduct>();
                 }
 
-                string strwhere = " STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and CATEGORYID like '010%' and skucode not in(" + exitsSkucode + ") ";
+                string strwhere = " STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and CATEGORYID like '010%' and skucode not in(" + exitsSkucode + ") " + " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ";
 
                 String[] notlikes = { "结算专用", "(", "A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
                 if (notlikes != null && notlikes.Length > 0)
@@ -4163,7 +4246,7 @@ namespace WinSaasPOS
                 pnlTotal.DrawToBitmap(bmpTotal, new Rectangle(0, 0, pnlTotal.Width, pnlTotal.Height));
 
 
-                bmpdelete = new Bitmap(picDelete.Image, dgvGood.RowTemplate.Height * 26 / 100, dgvGood.RowTemplate.Height * 26 / 100);
+                bmpdelete = new Bitmap(picDelete.Image, dgvGood.RowTemplate.Height * 20 / 100, dgvGood.RowTemplate.Height * 20 / 100);
                 bmpdelete.Tag = pro;
 
 
@@ -4247,25 +4330,25 @@ namespace WinSaasPOS
             try
             {
 
-                List<OffLineUser> lstoffuser = new List<OffLineUser>();
-                List<SYSTEM_USER_BEANMODEL> lstuser = userbll.GetModelList(" CREATE_URL_IP = '" + MainModel.URL + "'");
+                //List<OffLineUser> lstoffuser = new List<OffLineUser>();
+                //List<SYSTEM_USER_BEANMODEL> lstuser = userbll.GetModelList(" CREATE_URL_IP = '" + MainModel.URL + "'");
 
-                if (lstuser != null && lstuser.Count > 0)
-                {
-                    foreach (SYSTEM_USER_BEANMODEL user in lstuser)
-                    {
-                        OffLineUser offuser = new OffLineUser();
-                        offuser.loginaccount = user.LOGINACCOUNT;
-                        offuser.nickname = user.NICKNAME;
-                        lstoffuser.Add(offuser);
-                    }
-                }
-                else
-                {
-                    //  return;
-                }
+                //if (lstuser != null && lstuser.Count > 0)
+                //{
+                //    foreach (SYSTEM_USER_BEANMODEL user in lstuser)
+                //    {
+                //        OffLineUser offuser = new OffLineUser();
+                //        offuser.loginaccount = user.LOGINACCOUNT;
+                //        offuser.nickname = user.NICKNAME;
+                //        lstoffuser.Add(offuser);
+                //    }
+                //}
+                //else
+                //{
+                //    //  return;
+                //}
                 string errormsg = "";
-                List<OffLineUser> lstresultoffuser = httputil.PosUser(lstoffuser, ref errormsg);
+                List<OffLineUser> lstresultoffuser = httputil.GetUserForPos(ref errormsg);
 
                 if (lstresultoffuser != null && lstresultoffuser.Count > 0)
                 {
@@ -4297,7 +4380,7 @@ namespace WinSaasPOS
             try
             {
 
-                List<DBORDER_BEANMODEL> lstorder = orderbll.GetModelList(" SYN_TIME=null or SYN_TIME=0");
+                List<DBORDER_BEANMODEL> lstorder = orderbll.GetModelList(" SYN_TIME=null or SYN_TIME=0 " + " and CREATE_URL_IP='" + MainModel.URL + "' ");
 
                 if (lstorder != null && lstorder.Count > 0)
                 {
@@ -4345,7 +4428,7 @@ namespace WinSaasPOS
             try
             {
 
-                List<DBORDER_BEANMODEL> lstorder = orderbll.GetModelList(" REFUND_TIME> SYN_TIME");
+                List<DBORDER_BEANMODEL> lstorder = orderbll.GetModelList(" REFUND_TIME> SYN_TIME " + " and CREATE_URL_IP='" + MainModel.URL + "' ");
 
                 if (lstorder != null && lstorder.Count > 0)
                 {
@@ -4388,7 +4471,7 @@ namespace WinSaasPOS
             try
             {
 
-                List<DBRECEIPT_BEANMODEL> lstreceipt = receiptbll.GetModelList(" SYN_TIME=null or SYN_TIME=0");
+                List<DBRECEIPT_BEANMODEL> lstreceipt = receiptbll.GetModelList(" SYN_TIME=null or SYN_TIME=0 " + " and CREATE_URL_IP='" + MainModel.URL + "' ");
 
                 if (lstreceipt != null && lstreceipt.Count > 0)
                 {

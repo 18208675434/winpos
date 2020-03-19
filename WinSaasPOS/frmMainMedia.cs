@@ -207,7 +207,7 @@ namespace WinSaasPOS
                         }
                         catch (Exception ex)
                         {
-                            LogManager.WriteLog("下载商户图标异常" + ex.Message);
+                           // LogManager.WriteLog("下载商户图标异常" + ex.Message);
                         }
 
                         CurrentMediadetaildtos = posmedia.mediadetaildtos;

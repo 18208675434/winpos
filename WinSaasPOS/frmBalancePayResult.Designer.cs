@@ -68,7 +68,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(186, 21);
             this.label2.TabIndex = 8;
-            this.label2.Text = "请使用扫码枪扫扫描付款码";
+            this.label2.Text = "请使用扫码枪扫描付款码";
             // 
             // label1
             // 

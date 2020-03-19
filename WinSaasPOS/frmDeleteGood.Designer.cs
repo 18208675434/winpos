@@ -37,20 +37,20 @@
             // lblMsgStr
             // 
             this.lblMsgStr.AutoSize = true;
-            this.lblMsgStr.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.lblMsgStr.Location = new System.Drawing.Point(18, 10);
+            this.lblMsgStr.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblMsgStr.Location = new System.Drawing.Point(20, 20);
             this.lblMsgStr.Name = "lblMsgStr";
-            this.lblMsgStr.Size = new System.Drawing.Size(189, 30);
+            this.lblMsgStr.Size = new System.Drawing.Size(164, 25);
             this.lblMsgStr.TabIndex = 1;
             this.lblMsgStr.Text = "是否确认删除商品";
             // 
             // lblMsg
             // 
             this.lblMsg.AutoSize = true;
-            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblMsg.Location = new System.Drawing.Point(20, 56);
+            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblMsg.Location = new System.Drawing.Point(21, 56);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(70, 24);
+            this.lblMsg.Size = new System.Drawing.Size(61, 21);
             this.lblMsg.TabIndex = 2;
             this.lblMsg.Text = "lblMsg";
             // 
@@ -58,7 +58,7 @@
             // 
             this.lbtnCancle.AutoSize = true;
             this.lbtnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lbtnCancle.ForeColor = System.Drawing.Color.DeepPink;
+            this.lbtnCancle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             this.lbtnCancle.Location = new System.Drawing.Point(366, 124);
             this.lbtnCancle.Name = "lbtnCancle";
             this.lbtnCancle.Size = new System.Drawing.Size(46, 24);

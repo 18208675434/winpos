@@ -125,7 +125,7 @@ namespace WinSaasPOS
                 if (MainModel.IsOffLine)
                 {
                     string operatertimestr = dtReceiptData.Value.ToString("yyyy-MM-dd");
-                    string strwhere = " OPERATETIMESTR = '" + operatertimestr + "' order by CREATE_TIME desc";
+                    string strwhere = " OPERATETIMESTR = '" + operatertimestr + "' and CREATE_URL_IP='" + MainModel.URL+"' order by CREATE_TIME desc";
 
                     CurrentListReceiptOffLine = receiptbll.GetModelList(strwhere);
                     dgvReceipt.Rows.Clear();
@@ -250,14 +250,14 @@ namespace WinSaasPOS
                     if (MainModel.IsOffLine)
                     {
                         IsEnable = false;
-                        LoadingHelper.ShowLoadingScreen("加载中...");
+                        //LoadingHelper.ShowLoadingScreen("加载中...");
                         DBRECEIPT_BEANMODEL receipt = CurrentListReceiptOffLine[e.RowIndex];
 
                         Receiptdetail receiptdetail = JsonConvert.DeserializeObject<Receiptdetail>(receipt.RECEIPTDETAIL);
                         string ErrorMsgReceipt = "";
                         bool receiptresult = PrintUtil.ReceiptPrint(receiptdetail, ref ErrorMsgReceipt);
 
-                        LoadingHelper.CloseForm();
+                       // LoadingHelper.CloseForm();
 
                         if (receiptresult)
                         {
