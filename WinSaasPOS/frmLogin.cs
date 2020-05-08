@@ -533,6 +533,7 @@ namespace WinSaasPOS
             try
             {
                 string ErrorMsg = "";
+
                 AuthCodeImage authcodeimage = httputil.GetAuthcodeImage(ref ErrorMsg);
                 CurrentImgCodeKey = authcodeimage.key;
                 string ss = authcodeimage.imagestr;

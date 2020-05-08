@@ -275,7 +275,6 @@ namespace WinSaasPOS
             try { MainModel.frmloading.Dispose(); }
             catch { } MainModel.frmloading = null;
             
-
             timerNow.Enabled = false;
             timerGetIncrementProduct.Enabled = false;
 
@@ -948,7 +947,6 @@ namespace WinSaasPOS
         {
             try
             {
-
                 MainModel.ShowLog("暂未开通",false);
                 //frmScale frmscal = new frmScale();
 
@@ -1397,7 +1395,6 @@ namespace WinSaasPOS
                             if (scancodemember != null)
                             {
                                 LstScancodemember.Add(scancodemember);
-                                //LstScanCode.Remove(scancode);
                             }
                             else
                             {
@@ -2153,6 +2150,7 @@ namespace WinSaasPOS
                 {
                     this.Invoke(new InvokeHandler(delegate()
                     {
+
                         IsEnable = false;
                         pnlWaitingMember.Visible = false;
                         pnlMember.Visible = true;
@@ -3763,7 +3761,7 @@ namespace WinSaasPOS
             //thread.IsBackground = true;
             //thread.Start("2500004010008");
             //FormTestShow frm = new FormTestShow();
-            //frm.ShowDialog();
+            //frm.ShowDialog();b
 
             //ThreadPool.QueueUserWorkItem(ScanCodeThread, "2500004010008");
             //ScanCodeThread("2500004010008");
@@ -3955,7 +3953,6 @@ namespace WinSaasPOS
                 if (string.IsNullOrEmpty(ErrorMsg))
                 {
                     MainModel.PromotionJson = httputil.GetTVshowpageForPromotion(ref ErrorMsg);
-
                 }
 
                 if (string.IsNullOrEmpty(ErrorMsg))
