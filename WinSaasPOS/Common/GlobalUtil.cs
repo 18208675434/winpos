@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -181,6 +182,48 @@ namespace WinSaasPOS.Common
 
             }
         }
+
+
+
+
+
+
+        public static void OpenOSK()
+        {
+            try
+            {
+                string tabtipfile = @"C:\Program Files\Common Files\microsoft shared\ink\TabTip.exe";
+                string oskfile = @"C:\Windows\System32\osk.exe";
+                if (File.Exists(tabtipfile))
+                {
+                    System.Diagnostics.Process.Start(tabtipfile);
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(oskfile);
+                }
+            }
+            catch (Exception ex) { }
+        }
+        public static void CloseOSK()
+        {
+
+            try
+            {
+                Process[] pro = Process.GetProcesses();
+                for (int i = 0; i < pro.Length - 1; i++)
+                {
+                    if (pro[i].ProcessName == "osk" || pro[i].ProcessName == "TabTip")
+                    {
+                        pro[i].Kill();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("小键盘关闭异常：" + ex.Message);
+            }
+        }
     }
 
 
@@ -206,5 +249,10 @@ namespace WinSaasPOS.Common
             SendMessage(textBox.Handle, EM_SETCUEBANNER, 2, watermark);
         }
     }
+
+
+
+
+
 
 }

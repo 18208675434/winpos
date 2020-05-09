@@ -56,8 +56,10 @@ namespace WinSaasPOS
             Thread threadIniFormExedate = new Thread(IniForm);
             threadIniFormExedate.IsBackground = true;
             threadIniFormExedate.Start();
-            
 
+            //每十分钟更新一次
+            timerTen.Interval = 10 * 60 * 1000;
+            timerTen.Enabled = true;
           
         }
 
@@ -380,44 +382,12 @@ namespace WinSaasPOS
 
         }
 
-        private void OpenOSK()
+
+        private void txt_Enter(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    System.Diagnostics.Process.Start(@"C:\Windows\System32\osk.exe");
-            //}catch(Exception ex){}
-        }
-        private void CloseOSK()
-        {
-            
-            //try
-            //{
-            //    Process[] pro = Process.GetProcesses();
-            //    for (int i = 0; i < pro.Length - 1; i++)
-            //    {
-            //        if (pro[i].ProcessName=="osk")
-            //        {
-            //            pro[i].Kill();
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogManager.WriteLog("小键盘关闭异常：" + ex.Message);
-            //}
+            GlobalUtil.OpenOSK();
         }
 
-        private void txt_MouseCaptureChanged(object sender, EventArgs e)
-        {
-            //TextBox txt = (TextBox)sender;
-            //if (txt.Focused)
-            //{
-            //    OpenOSK();
-            //}
-
-            OpenOSK();
-
-        }
 
 
         private void frmLogin_Click(object sender, EventArgs e)
@@ -965,12 +935,60 @@ namespace WinSaasPOS
                 txtPhone.Text = "";
                 txtCheckCode.Text = "";
                 txtPhoneCheckCode.Text = "";
+                GlobalUtil.CloseOSK();
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("清空登录页面信息异常"+ex.Message);
             }
         }
+
+
+
+
+        #region 电视屏
+
+
+        private void timerTen_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                timerTen.Enabled = false;
+
+                DataUtil.LoadTVSkus();
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("定时任务异常" + ex.Message);
+            }
+            finally
+            {
+                timerTen.Enabled = true;
+            }
+        }
+
+        private void HttpServerStart()
+        {
+            try
+            {
+                //DataUtil.LoadTVSkus();
+
+                HttpServer httpServer;
+                httpServer = new MyHttpServer(8080);
+                Thread threadHttpServer = new Thread(new ThreadStart(httpServer.listen));
+                threadHttpServer.IsBackground = true;
+                threadHttpServer.Start();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("启动电视屏服务异常：" + ex.Message);
+            }
+        }
+
+        #endregion
+
+       
     }
 
 

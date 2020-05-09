@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AutoSizeFormUtil.cs" />
+    <Compile Include="Common\DataUtil.cs" />
     <Compile Include="Common\GlobalUtil.cs" />
     <Compile Include="Common\HttpServer.cs" />
     <Compile Include="Common\HttpUtil.cs" />
@@ -488,6 +489,41 @@
     <Compile Include="frmUserExpired.Designer.cs">
       <DependentUpon>frmUserExpired.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperUI\BackHelper.cs" />
+    <Compile Include="HelperUI\ChangeScaleModelHelper.cs" />
+    <Compile Include="HelperUI\ConfirmHelper.cs" />
+    <Compile Include="HelperUI\FormBackGround.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormBackGround.Designer.cs">
+      <DependentUpon>FormBackGround.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormChangeScaleModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormChangeScaleModel.Designer.cs">
+      <DependentUpon>FormChangeScaleModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormConfirm.Designer.cs">
+      <DependentUpon>FormConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormNumber.Designer.cs">
+      <DependentUpon>FormNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormToast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormToast.Designer.cs">
+      <DependentUpon>FormToast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\NumberHelper.cs" />
+    <Compile Include="HelperUI\ToastHelper.cs" />
     <Compile Include="Model\AllProduct.cs" />
     <Compile Include="Model\AuthCodeImage.cs" />
     <Compile Include="Model\AuthcodeTrade.cs" />
@@ -560,6 +596,31 @@
     <Compile Include="Model\TVShowSkus.cs" />
     <Compile Include="Model\userModel.cs" />
     <Compile Include="Model\VerifyBalancePwd.cs" />
+    <Compile Include="MyControl\CircleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\CircleButton.Designer.cs">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\EnumUnitType.cs" />
+    <Compile Include="MyControl\KeyBoard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\KeyBoard.Designer.cs">
+      <DependentUpon>KeyBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\RoundButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\RoundButton.Designer.cs">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\RoundPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\RoundPanel.Designer.cs">
+      <DependentUpon>RoundPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ResourcePos.Designer.cs">
@@ -775,6 +836,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserExpired.resx">
       <DependentUpon>frmUserExpired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormBackGround.resx">
+      <DependentUpon>FormBackGround.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormChangeScaleModel.resx">
+      <DependentUpon>FormChangeScaleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormConfirm.resx">
+      <DependentUpon>FormConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormNumber.resx">
+      <DependentUpon>FormNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormToast.resx">
+      <DependentUpon>FormToast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\CircleButton.resx">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\KeyBoard.resx">
+      <DependentUpon>KeyBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\RoundButton.resx">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\RoundPanel.resx">
+      <DependentUpon>RoundPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

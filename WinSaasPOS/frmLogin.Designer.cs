@@ -74,6 +74,7 @@
             this.lbtnChangeOffLine = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.timerTen = new System.Windows.Forms.Timer(this.components);
             this.pnlUser.SuspendLayout();
             this.pnlbtnLoginByUser.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -219,6 +220,7 @@
             this.txtPwd.Size = new System.Drawing.Size(347, 29);
             this.txtPwd.TabIndex = 21;
             this.txtPwd.TextChanged += new System.EventHandler(this.txtPwd_TextChanged);
+            this.txtPwd.Enter += new System.EventHandler(this.txt_Enter);
             // 
             // lblUser
             // 
@@ -243,6 +245,7 @@
             this.txtUser.Size = new System.Drawing.Size(347, 29);
             this.txtUser.TabIndex = 18;
             this.txtUser.TextChanged += new System.EventHandler(this.txtUser_TextChanged);
+            this.txtUser.Enter += new System.EventHandler(this.txt_Enter);
             this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // chkAutoLoginUser
@@ -458,6 +461,7 @@
             this.txtPhoneCheckCode.Size = new System.Drawing.Size(249, 29);
             this.txtPhoneCheckCode.TabIndex = 24;
             this.txtPhoneCheckCode.TextChanged += new System.EventHandler(this.txtPhoneCheckCode_TextChanged);
+            this.txtPhoneCheckCode.Enter += new System.EventHandler(this.txt_Enter);
             this.txtPhoneCheckCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picCheckCode
@@ -480,6 +484,7 @@
             this.txtCheckCode.Size = new System.Drawing.Size(264, 29);
             this.txtCheckCode.TabIndex = 21;
             this.txtCheckCode.TextChanged += new System.EventHandler(this.txtCheckCode_TextChanged);
+            this.txtCheckCode.Enter += new System.EventHandler(this.txt_Enter);
             // 
             // lblPhone
             // 
@@ -504,6 +509,7 @@
             this.txtPhone.Size = new System.Drawing.Size(347, 29);
             this.txtPhone.TabIndex = 18;
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
+            this.txtPhone.Enter += new System.EventHandler(this.txt_Enter);
             this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picExit
@@ -685,6 +691,7 @@
         private System.Windows.Forms.LinkLabel lbtnChangeOffLine;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer timerTen;
     }
 }
 

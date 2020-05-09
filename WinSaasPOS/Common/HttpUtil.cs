@@ -1938,6 +1938,83 @@ namespace WinSaasPOS.Common
 
         #region  电视屏接口
 
+        #region saas
+        public string GetTVshowpage(string shopid, string lednum, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/led/gettvshowpage";
+
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("shopid", shopid);
+                sort.Add("lednum", lednum);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    return rd.data.ToString();
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取电视屏模板（蔬菜）异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        public PosActivesSku GetActiveSkus(string shopid, string lednum, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/led/getactiveskus";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("shopid", shopid);
+                sort.Add("lednum", lednum);
+
+                string json = HttpGET(url, sort);
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    PosActivesSku posactivessku = JsonConvert.DeserializeObject<PosActivesSku>(rd.data.ToString());
+
+
+                    return posactivessku;
+                }
+                else
+                {
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取畅销商品异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+
+        #endregion
+
+        #region 钱大妈
         /// <summary>
         /// 获取电视屏模板  蔬菜
         /// </summary>
@@ -2026,9 +2103,6 @@ namespace WinSaasPOS.Common
 
                 string json = HttpGET(url, sort);
 
-                //Console.WriteLine(json);
-               // return json;
-
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -2093,6 +2167,8 @@ namespace WinSaasPOS.Common
                 return null;
             }
         }
+        #endregion
+
         #endregion
 
         #region 离线接口
@@ -2511,7 +2587,7 @@ namespace WinSaasPOS.Common
 
                 while (thread.IsAlive)
                 {
-                    Delay.Start(100);
+                    Delay.Start(10);
                 }
 
                 int id = thread.ManagedThreadId;
@@ -2628,7 +2704,7 @@ namespace WinSaasPOS.Common
 
                 while (thread.IsAlive)
                 {
-                    Delay.Start(100);
+                    Delay.Start(10);
                 }
 
                 int id = thread.ManagedThreadId;

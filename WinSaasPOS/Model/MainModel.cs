@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using WinSaasPOS.HelperUI;
 
 namespace WinSaasPOS.Model
 {
@@ -163,36 +164,26 @@ namespace WinSaasPOS.Model
 
 
         /// <summary>
-        /// 电视屏蔬菜模板页面
+        /// 电视屏1
         /// </summary>
-        public static string PromotionJson = "";
+        public static string TvShowPage1 = "";
 
         /// <summary>
-        /// 电视屏猪肉模板页面
+        /// 电视屏2
         /// </summary>
-        public static string PorkJson = "";
+        public static string TvShowPage2 = "";
 
 
         /// <summary>
-        /// 畅销商品  蔬菜60个不足的话本地不足 010开头  后面补充30个猪肉 030开头
+        /// 促销商品1
         /// </summary>
-        public static PosActivesSku TVActivesSku = null;
-
-
-         /// <summary>
-        /// 畅销商品  蔬菜60个不足的话本地不足 010开头
-        /// </summary>
-        public static PosActivesSku TVSingleActivesSku = null;
+        public static PosActivesSku TVActivesSku1 = null;
 
         /// <summary>
-        /// 今日有促销商品 010开头 本地不补充
+        /// 促销商品2
         /// </summary>
-        public static PosActivesSku TVPromotionSkus = null;
+        public static PosActivesSku TVActivesSku2 = null;
 
-        /// <summary>
-        /// 猪肉数据 
-        /// </summary>
-        public static PosActivesSku TVPorkSkus = null;
         
         /// <summary>
         /// 页面宽度缩放比例
@@ -202,6 +193,11 @@ namespace WinSaasPOS.Model
         /// 页面高度缩放比例
         /// </summary>
         public static float hScale = 1;
+
+        /// <summary>
+        /// 页面宽高比例中间值
+        /// </summary>
+        public static float midScale = 1;
 
         /// <summary>
         /// 获取全量商品接口时间戳，不是第一次调用的话需要使用上一次返回时间戳
@@ -421,9 +417,14 @@ namespace WinSaasPOS.Model
         {
             if (!string.IsNullOrEmpty(msg))
             {
-                MsgHelper.AutoShowForm(msg);
-                //MsgHelper.ShowForm(msg);
-                LogManager.WriteLog(msg);
+
+                ToastHelper.AutoToast(msg, 1500);
+                //MsgHelper.AutoShowForm(msg);
+                if (iserror)
+                {
+                    LogManager.WriteLog(msg);
+
+                }
             }
 
         }

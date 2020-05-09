@@ -83,10 +83,14 @@ namespace WinSaasPOS
             }
             timerNow.Interval = 1000;
             timerNow.Enabled = true;
+            Application.DoEvents();
+        }
+
+        private void frmOrderHang_Shown(object sender, EventArgs e)
+        {
             LoadBmp();
             LoadOrderHang();
         }
-
 
         private void LoadBmp()
         {
@@ -353,6 +357,8 @@ namespace WinSaasPOS
         {
             MainModel.ShowWindows();
         }
+
+     
 
 
     }

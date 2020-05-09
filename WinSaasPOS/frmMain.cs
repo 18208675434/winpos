@@ -98,6 +98,7 @@ namespace WinSaasPOS
 
             MainModel.wScale = (float)Screen.AllScreens[0].Bounds.Width / this.Width;
             MainModel.hScale = (float)Screen.AllScreens[0].Bounds.Height / this.Height;
+            MainModel.midScale = (MainModel.wScale + MainModel.hScale) / 2;
 
             ShowLoading(false);// LoadingHelper.CloseForm();
 
@@ -168,13 +169,6 @@ namespace WinSaasPOS
                 //Thread threadLoadFrmIni = new Thread(LoadFormIni);
                 //threadLoadFrmIni.IsBackground = true;
                 //threadLoadFrmIni.Start();
-
-
-                //启动电视屏服务
-                 threadServerStart = new Thread(HttpServerStart);
-                threadServerStart.IsBackground = true;
-                threadServerStart.Start();
-
 
                 //更新离线数据
                  threadUploadOffLineDate = new Thread(UploadOffLineData);
@@ -1232,12 +1226,9 @@ namespace WinSaasPOS
           
                 try
                 {
-                   
-                    //isGoodRefresh = true;
-                    //ShowPicScreen = false;
-                    IsEnable = false;
-                   //ShowLoading(true);// LoadingHelper.ShowLoadingScreen();
 
+                    DateTime starttime = DateTime.Now;
+                    IsEnable = false;
                     ShowLoading(true);
                     string ErrorMsgCart = "";
                     int ResultCode = 0;
@@ -1251,6 +1242,8 @@ namespace WinSaasPOS
                         //增加或删除商品整单优惠重置
                         CurrentCart.fixpricetotal = 0;
                         Cart cart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
+
+                        Console.WriteLine("购物车接口时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
                         if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                         {
@@ -2039,7 +2032,6 @@ namespace WinSaasPOS
                 UpdateOrderHang();
 
                 ShowLoading(false);// LoadingHelper.CloseForm();
-                MsgHelper.CloseForm();
 
                 Application.DoEvents();
 
@@ -2337,9 +2329,9 @@ namespace WinSaasPOS
                 }
                 LoadPicScreen(true);
                 frmCoupon frmcoupon = new frmCoupon(CurrentCart, MainModel.CurrentCouponCode);
-                //frmcoupon.Opacity = 0.95d;
-
-                frmcoupon.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+                asf.AutoScaleControlTest(frmcoupon, 380, 480, 380 * MainModel.wScale, 480 * MainModel.hScale, true);
+                frmcoupon.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmcoupon.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmcoupon.Height) / 2);
+                frmcoupon.TopMost = true;
                 frmcoupon.ShowDialog();
 
                 LoadPicScreen(false);
@@ -3429,12 +3421,6 @@ namespace WinSaasPOS
             //Thread threadLoadIncrementProduct = new Thread(LoadIncrementProduct);
             //threadLoadIncrementProduct.IsBackground = true;
             //threadLoadIncrementProduct.Start();
-
-            ////每10分钟刷新一次电视屏数据信息
-            Thread threadLoadTVSkus = new Thread(LoadTVSkus);
-            threadLoadTVSkus.IsBackground = true;
-            threadLoadTVSkus.Start();            
-
             //if (httputil.CheckScaleUpdate())
             //{
             //    //启动电子秤同步信息线程
@@ -3924,135 +3910,6 @@ namespace WinSaasPOS
             }
         }
 
-
-
-        private void HttpServerStart()
-        {
-            try
-            {
-                LoadTVSkus();
-
-                HttpServer httpServer;
-                httpServer = new MyHttpServer(8080);
-                Thread threadHttpServer = new Thread(new ThreadStart(httpServer.listen));
-                threadHttpServer.IsBackground = true;
-                threadHttpServer.Start();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("启动电视屏服务异常："+ex.Message);
-            }
-        }
-
-
-        private void LoadTVSkus()
-        {
-            try
-            {
-                string ErrorMsg = "";
-                if (string.IsNullOrEmpty(ErrorMsg))
-                {
-                    MainModel.PromotionJson = httputil.GetTVshowpageForPromotion(ref ErrorMsg);
-                }
-
-                if (string.IsNullOrEmpty(ErrorMsg))
-                {
-                    MainModel.PorkJson = httputil.GetTVshowpageForPork(ref ErrorMsg);
-
-                }
-                MainModel.TVPromotionSkus = httputil.GetPromotionSkus(ref ErrorMsg);
-                MainModel.TVSingleActivesSku = httputil.GetActiveSkus(ref ErrorMsg);
-
-                int activecount =60;
-                string exitsSkucode = "";
-                if (MainModel.TVSingleActivesSku != null && MainModel.TVSingleActivesSku.posactiveskudetails.Count != 0)
-                {
-                    activecount = 60 - MainModel.TVSingleActivesSku.posactiveskudetails.Count;
-                    List<string> lstresult = MainModel.TVSingleActivesSku.posactiveskudetails.Select(t => t.skucode).ToList();
-                    foreach (string str in lstresult)
-                    {
-                        exitsSkucode += "'" + str + "',";
-                    }
-                    exitsSkucode = exitsSkucode.TrimEnd(',');
-                }
-                else
-                {
-                    if (MainModel.TVSingleActivesSku == null)
-                    {
-                        MainModel.TVSingleActivesSku = new PosActivesSku();
-                    }
-                    MainModel.TVSingleActivesSku.posactiveskudetails = new List<TVProduct>();
-                }
-
-                string strwhere = " STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and CATEGORYID like '010%' and skucode not in(" + exitsSkucode + ") " + " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ";
-
-                String[] notlikes = { "结算专用", "(", "A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
-                if (notlikes != null && notlikes.Length > 0)
-                {
-                    for (int i = 0; i < notlikes.Length; i++)
-                    {
-                            strwhere += " AND SKUNAME NOT LIKE '%" + notlikes[i] + "%'";
-                    }
-                }
-
-                strwhere+=" order by saleprice desc limit "+activecount;
-                List<DBPRODUCT_BEANMODEL> lstpro = productbll.GetModelList(strwhere);
-                if(lstpro!=null && lstpro.Count>0){
-                    foreach (DBPRODUCT_BEANMODEL dbpro in lstpro)
-                    {  
-                        TVProduct tvpro = new TVProduct();
-                        tvpro.categoryid = dbpro.SKUCODE;
-                        tvpro.originalprice = dbpro.ORIGINPRICE;
-                        tvpro.promotionprice = dbpro.SALEPRICE;
-                        tvpro.saleunit = dbpro.SALESUNIT;
-                        tvpro.skucode = dbpro.SKUCODE;
-                        tvpro.skuname = dbpro.SKUNAME;
-                        tvpro.weightflag = dbpro.WEIGHTFLAG == 1 ? true : false;
-
-                        MainModel.TVSingleActivesSku.posactiveskudetails.Add(tvpro);
-                    }
-                }
-
-                string prokwhere = " STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and CATEGORYID like '030%' ";
-                String[] notlikespork = { "结算专用", "(", "A", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-                prokwhere = "CATEGORYID LIKE '030%'";
-                if (notlikes != null && notlikespork.Length > 0)
-                {
-                    for (int i = 0; i < notlikespork.Length; i++)
-                    {
-                        prokwhere += " AND SKUNAME NOT LIKE '%" + notlikespork[i] + "%'";
-                    }
-                }
-                prokwhere += " order by saleprice desc limit 30";
-                List<DBPRODUCT_BEANMODEL> lstporkpro = productbll.GetModelList(prokwhere);
-                if (lstporkpro != null && lstporkpro.Count > 0)
-                {
-                    MainModel.TVPorkSkus = new PosActivesSku();
-                    MainModel.TVPorkSkus.posactiveskudetails = new List<TVProduct>();
-                
-                    foreach (DBPRODUCT_BEANMODEL dbpro in lstporkpro)
-                    {
-
-                        TVProduct tvpro = new TVProduct();
-                        tvpro.categoryid = dbpro.SKUCODE;
-                        tvpro.originalprice = dbpro.ORIGINPRICE;
-                        tvpro.promotionprice = dbpro.SALEPRICE;
-                        tvpro.saleunit = dbpro.SALESUNIT;
-                        tvpro.skucode = dbpro.SKUCODE;
-                        tvpro.skuname = dbpro.SKUNAME;
-                        tvpro.weightflag = dbpro.WEIGHTFLAG == 1 ? true : false;
-
-                        MainModel.TVPorkSkus.posactiveskudetails.Add(tvpro);
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("加载电视屏数据异常"+ex.Message);
-            }
-        }
 
 
         private List<Bitmap> GetDgvRow(Product pro)
