@@ -50,6 +50,12 @@ namespace Maticsoft.Model
         private string _shopid;
         private string _create_url_ip;
         private Int64 _onlyuseinoriginal;
+
+
+
+
+
+        
         /// <summary>
         /// 
         /// </summary>
@@ -348,6 +354,30 @@ namespace Maticsoft.Model
             get { return _onlyuseinoriginal; }
         }
         #endregion Model
+
+
+
+        //ADD 0511
+        private Int64 _onlymember;
+        private string _membertags;
+        private Int64 _purchaselimit;
+        public Int64 ONLYMEMBER
+        {
+            set { _onlymember = value; }
+            get { return _onlymember; }
+        }
+
+        public Int64 PURCHASELIMIT
+        {
+            set { _purchaselimit = value; }
+            get { return _purchaselimit; }
+        }
+
+        public string MEMBERTAGS
+        {
+            set { _membertags = value; }
+            get { return _membertags; }
+        }
 
     }
 }

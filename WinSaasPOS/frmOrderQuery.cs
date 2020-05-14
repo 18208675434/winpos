@@ -1114,7 +1114,7 @@ namespace WinSaasPOS
 
         private void lblPhoneShuiyin_Click(object sender, EventArgs e)
         {
-            lblPhoneShuiyin.Focus();
+            txtPhone.Focus();
         }
 
         private void txtOrderID_TextChanged(object sender, EventArgs e)

@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using WinSaasPOS.Model.HalfOffLine;
 
 namespace WinSaasPOS.Common
 {
@@ -216,109 +217,6 @@ namespace WinSaasPOS.Common
                 LogManager.WriteLog("Error", "短码识别异常：" + ex.Message);
                 errormsg = "网络连接异常，请检查网络连接";
                 return null;
-            }
-        }
-
-        /// <summary>
-        /// 购物车接口
-        /// </summary>
-        /// param name="lstscancodemember"> 0:扫描刷新购物车（cashpayoption=0,cashpayamt=0)  1：抹零（cashpayoption1,cashpayamt=0)  2：现金支付（cashpayoption=1,cashpayamt=支付金额)  3:积分+现金</param>
-        /// <param name="lstscancodemember"></param>
-        /// <param name="errormsg"></param>
-        /// <returns></returns>
-        public Cart GetCart(int type, List<scancodememberModel> lstscancodemember, decimal cash, ref string errormsg)
-        {
-            try
-            {
-                string url = "/pos/order/pos/cart";
-
-                product[] lstpro = new product[lstscancodemember.Count];
-                for (int i = 0; i < lstscancodemember.Count; i++)
-                {
-                    product pro = new product();
-                    pro.skucode = lstscancodemember[i].scancodedto.skucode;
-                    pro.num = lstscancodemember[i].scancodedto.num;
-                    pro.specnum = lstscancodemember[i].scancodedto.specnum.ToString();
-                    pro.spectype = lstscancodemember[i].scancodedto.spectype;
-                    pro.goodstagid = lstscancodemember[i].scancodedto.weightflag == true ? 1 : 0;
-
-                    pro.barcode = lstscancodemember[i].scancodedto.barcode;
-
-                    lstpro[i] = pro;
-                }
-
-
-                CartPara cart = new CartPara();
-                cart.ordersubtype = "pos";
-                cart.products = lstpro;
-                cart.shopid = MainModel.CurrentShopInfo.shopid;
-
-                if (type == 0)
-                {
-                    cart.cashpayoption = 0;
-                    cart.cashpayamt = 0;
-                }
-                else if (type == 1)
-                {
-                    cart.cashpayoption = 1;
-                    cart.cashpayamt = 0;
-                }
-                else if (type == 2)
-                {
-                    cart.cashpayoption = 1;
-                    cart.cashpayamt = cash;
-                }
-                else if (type == 3)
-                {
-                    cart.cashpayoption = 1;
-                    cart.cashpayamt = 0;
-                    cart.pointpayoption = 1;
-
-                }
-
-
-
-
-                if (MainModel.CurrentMember != null)
-                {
-                    cart.uid = MainModel.CurrentMember.memberid;
-                    cart.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
-
-                    if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
-                    {
-                        string[] strs = new string[1];
-                        strs[0] = MainModel.CurrentCouponCode;
-                        cart.selectedcoupons = strs;
-                    }
-
-                }
-
-                string tempjson = JsonConvert.SerializeObject(cart);
-
-
-                string json = HttpPOST(url, tempjson);
-
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                // return;
-                if (rd.code == 0)
-                {
-                    Cart carttemp = JsonConvert.DeserializeObject<Cart>(rd.data.ToString());
-                    return carttemp;
-                }
-                else
-                {
-                    try { LogManager.WriteLog("Error", "cart:" + json); }
-                    catch { }
-                    errormsg = rd.message;
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("Error", "购物车信息获取异常：" + ex.Message);
-                errormsg = "网络连接异常，请检查网络连接";
-                return null;
-
             }
         }
 
@@ -2506,6 +2404,212 @@ namespace WinSaasPOS.Common
                 return null;
             }
         }
+        #endregion
+
+        #region 半离线会员信息
+
+        /// <summary>
+        /// 获取会员标签信息
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public List<long> MemberOperationItem(string memberid, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/member/memberoperation/item";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("memberid", memberid);
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+
+                    List<long> lstuserresult = JsonConvert.DeserializeObject<List<long>>(strdata);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "item:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取会员标签信息异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 当前会员等级
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public Gradesettinggetgrade GradesttingGetGrade(string memberid, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/member/gradesetting/getgrade";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("memberid", memberid);
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+
+                    Gradesettinggetgrade lstuserresult = JsonConvert.DeserializeObject<Gradesettinggetgrade>(strdata);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "getgrade:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取当前会员等级异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 当前会员等级商户设置
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public MemberTenantmembergradeconfig GetTenantMembergradeConfig( ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/member/gradesetting/gettenantmembergradeconfig";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+
+                    MemberTenantmembergradeconfig lstuserresult = JsonConvert.DeserializeObject<MemberTenantmembergradeconfig>(strdata);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "gettenantmembergradeconfig:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取当前会员等级商户设置异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取积分规则
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public TenantCreditConfig GetTenantCreditConfig(ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/member/credit/gettenantcreditconfig";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+
+                    TenantCreditConfig lstuserresult = JsonConvert.DeserializeObject<TenantCreditConfig>(strdata);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "gettenantcreditconfig:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取积分规则异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 用户可用券列表
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public List<PromotionCoupon> ListMemberCouponAvailable(string memberid, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/activity/membercoupon/listmembercouponavailable";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("memberid", memberid);
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+                    List<PromotionCoupon> lstuserresult = JsonConvert.DeserializeObject<List<PromotionCoupon>>(strdata);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "listmembercouponavailable:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取用户可用券列表异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
         #endregion
 
 

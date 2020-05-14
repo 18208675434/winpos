@@ -146,7 +146,7 @@ namespace WinSaasPOS
                     LoadingHelper.CloseForm();
 
                     ClearText();
-                    frmMain frmmain = new frmMain(this);
+                    frmMainHalfOffLine frmmain = new frmMainHalfOffLine(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     picTenantLogo.BackgroundImage = null;
@@ -230,7 +230,7 @@ namespace WinSaasPOS
                     INIManager.SetIni("System", "PassWord", password, MainModel.IniPath);
 
                     ClearText();
-                    frmMain frmmain = new frmMain(this);
+                    frmMainHalfOffLine frmmain = new frmMainHalfOffLine(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     LoadingHelper.CloseForm();
@@ -350,7 +350,7 @@ namespace WinSaasPOS
                     }
 
                     ClearText();
-                    frmMain frmmain = new frmMain(this);
+                    frmMainHalfOffLine frmmain = new frmMainHalfOffLine(this);
 
                     asf.AutoScaleControlTest(frmmain, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     LoadingHelper.CloseForm();
@@ -566,12 +566,7 @@ namespace WinSaasPOS
             {
                 return;
             }
-            try
-            {
-                //MainModel.frmmainmedia.Close();
-                //MainModel.frmmainmedia = null;
-            }
-            catch { }
+
             MainModel.ShowTask();
             System.Environment.Exit(0);
         }

@@ -25,6 +25,11 @@ namespace WinSaasPOS.Model
         /// </summary>
         public Memberinformationresponsevo memberinformationresponsevo { get; set; }
         public Creditaccountrepvo creditaccountrepvo { get; set; }
+
+        /// <summary>
+        /// 是否使用积分  主界面勾选/取消勾选积分修改状态
+        /// </summary>
+        public bool isUsePoint { get; set; }
     }
 
     public class Memberheaderresponsevo

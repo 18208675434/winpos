@@ -73,6 +73,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.62.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -278,6 +282,12 @@
     </Compile>
     <Compile Include="frmLoginOffLine.Designer.cs">
       <DependentUpon>frmLoginOffLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainHalfOffLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainHalfOffLine.Designer.cs">
+      <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMainMedia.cs">
       <SubType>Form</SubType>
@@ -531,6 +541,13 @@
     <Compile Include="Model\ConditionType.cs" />
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\ExpenseType.cs" />
+    <Compile Include="Model\HalfOffLine\Coupons.cs" />
+    <Compile Include="Model\HalfOffLine\Gradesettinggetgrade.cs" />
+    <Compile Include="Model\HalfOffLine\HalfOffLineUtil.cs" />
+    <Compile Include="Model\HalfOffLine\MemberDiscount.cs" />
+    <Compile Include="Model\HalfOffLine\MemberTenantmembergradeconfig.cs" />
+    <Compile Include="Model\HalfOffLine\PromotionCoupon.cs" />
+    <Compile Include="Model\HalfOffLine\TenantCreditConfig.cs" />
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\OffLineOrder.cs" />
     <Compile Include="Model\OffLineReceipt.cs" />
@@ -549,20 +566,30 @@
     <Compile Include="Model\promotionaction\StepDiscountOffPromotionAction.cs" />
     <Compile Include="Model\Promotion\ActivityEnabledTimeInfo.cs" />
     <Compile Include="Model\Promotion\AmountDistributor.cs" />
+    <Compile Include="Model\Promotion\CalculateAvailablePointsCommandImpl.cs" />
     <Compile Include="Model\Promotion\CalculateBean.cs" />
     <Compile Include="Model\Promotion\CollectionUtils.cs" />
+    <Compile Include="Model\promotionaction\CombinedSellingPromotionAction.cs" />
     <Compile Include="Model\Promotion\CommonConstant.cs" />
     <Compile Include="Model\Promotion\EnumPromotionType.cs" />
     <Compile Include="Model\Promotion\EvaluateScopePromotion.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineCouponsCalculate.cs" />
     <Compile Include="Model\Promotion\ImplOfflineOrderPromotion.cs" />
     <Compile Include="Model\Promotion\ImplOfflineSingleCalculate .cs" />
+    <Compile Include="Model\Promotion\ImplOfflineSingleCalculateNew.cs" />
+    <Compile Include="Model\Promotion\MemberRightsForGradeBean.cs" />
     <Compile Include="Model\Promotion\MoneyUtils.cs" />
     <Compile Include="Model\Promotion\OffLinePromos.cs" />
+    <Compile Include="Model\Promotion\OrderThresholdUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionCache.cs" />
+    <Compile Include="Model\Promotion\PromotionConditionUtils.cs" />
     <Compile Include="Model\Promotion\PromotionContextConvertUtils.cs" />
     <Compile Include="Model\Promotion\PromotionInfoUtils.cs" />
     <Compile Include="Model\Promotion\PromotionRealmDetail.cs" />
     <Compile Include="Model\Promotion\PromotionsInvalidBean.cs" />
+    <Compile Include="Model\Promotion\temp.cs" />
     <Compile Include="Model\Promotion\TripletBean.cs" />
+    <Compile Include="Model\Promotion\TripletBeanForCoupon.cs" />
     <Compile Include="Model\QueryExpense.cs" />
     <Compile Include="Model\QueryExpensePara.cs" />
     <Compile Include="Model\QueryOrder.cs" />
@@ -731,6 +758,9 @@
     <EmbeddedResource Include="frmLoginOffLine.resx">
       <DependentUpon>frmLoginOffLine.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMainHalfOffLine.resx">
+      <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMainMedia.resx">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
     </EmbeddedResource>
@@ -893,7 +923,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="20190918080041866_easyicon_net_512.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />
     <None Include="Resources\border_add.bmp" />
@@ -947,6 +976,10 @@
       <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
       <Name>Model</Name>
@@ -964,6 +997,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

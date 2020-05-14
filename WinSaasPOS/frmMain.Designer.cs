@@ -134,7 +134,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.pnlFalsh = new System.Windows.Forms.Panel();
             this.picLoading = new WinSaasPOS.UserControl.transparentPic(this.components);
             this.picBirthday = new WinSaasPOS.UserControl.transparentPic(this.components);
             this.pnlPayType1.SuspendLayout();
@@ -1471,15 +1470,6 @@
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
-            // pnlFalsh
-            // 
-            this.pnlFalsh.BackColor = System.Drawing.Color.Linen;
-            this.pnlFalsh.Location = new System.Drawing.Point(10, 144);
-            this.pnlFalsh.Name = "pnlFalsh";
-            this.pnlFalsh.Size = new System.Drawing.Size(817, 90);
-            this.pnlFalsh.TabIndex = 51;
-            this.pnlFalsh.Visible = false;
-            // 
             // picLoading
             // 
             this.picLoading.CanMove = false;
@@ -1518,7 +1508,6 @@
             this.Controls.Add(this.picScreen);
             this.Controls.Add(this.picLoading);
             this.Controls.Add(this.picBirthday);
-            this.Controls.Add(this.pnlFalsh);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlDgvItem);
             this.Controls.Add(this.pnlDgvHead);
@@ -1675,7 +1664,6 @@
         private System.Windows.Forms.Button btnIncrease;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnPayByCoupon;
-        private System.Windows.Forms.Panel pnlFalsh;
         private System.Windows.Forms.Button btnOnLineType;
         private UserControl.transparentPic picBirthday;
         private UserControl.transparentPic picLoading;

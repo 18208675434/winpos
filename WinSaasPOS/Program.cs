@@ -16,7 +16,6 @@ namespace WinSaasPOS
         [STAThread]
         static void Main()
         {
-
             //获取当前进程的一个伪句柄
             System.Diagnostics.Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
 
@@ -31,7 +30,7 @@ namespace WinSaasPOS
                     return;
                 return;
             }
-            
+
             //处理未捕获的异常
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             //处理UI线程异常
@@ -39,10 +38,10 @@ namespace WinSaasPOS
             //处理非UI线程异常
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-           // Application.EnableVisualStyles();
+            // Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
+            changedb();
             string isoffline = "0";
             try
             {
@@ -73,7 +72,8 @@ namespace WinSaasPOS
             LogManager.WriteLog("IsTerminating : " + e.IsTerminating.ToString());
             LogManager.WriteLog(e.ExceptionObject.ToString());
 
-            try {
+            try
+            {
                 WinSaasPOS.Model.MainModel.ShowTask();
             }
             catch { }
@@ -83,7 +83,7 @@ namespace WinSaasPOS
             while (true)
             {//循环处理，否则应用程序将会退出
                 waitingcount++;
-                if (glExitApp && waitingcount>20)
+                if (glExitApp && waitingcount > 20)
                 {//标志应用程序可以退出，否则程序退出后，进程仍然在运行
                     //MessageBox.Show("异常，系统将自动关闭！");
                     LogManager.WriteLog("ExitApp");
@@ -100,5 +100,51 @@ namespace WinSaasPOS
 
             //throw new NotImplementedException();
         }
+
+        public static void changedb()
+        {
+
+            //try
+            //{
+            //    string isexits = "select sql from sqlite_master where type = 'table' and name = 'android_metadata'";
+
+            //    object obj = Maticsoft.DBUtility.DbHelperSQLite.GetSingle(isexits);
+
+
+
+            //    System.Collections.ArrayList lststring = new System.Collections.ArrayList();
+            //    bool needadd = false;
+            //    if (!obj.ToString().Contains("ONLYMEMBER"))
+            //    {
+            //        lststring.Add("ALTER TABLE android_metadata ADD COLUMN 'ONLYMEMBER' INTEGER");
+            //        needadd = true;
+            //    }
+
+            //    if (!obj.ToString().Contains("MEMBERTAGS"))
+            //    {
+            //        lststring.Add("ALTER TABLE android_metadata ADD COLUMN 'MEMBERTAGS' TEXT");
+            //        needadd = true;
+
+            //    }
+
+            //    if (!obj.ToString().Contains("PURCHASELIMIT"))
+            //    {
+            //        lststring.Add("ALTER TABLE android_metadata ADD COLUMN 'PURCHASELIMIT' INTEGER");
+            //        needadd = true;
+
+            //    }
+            //    if (needadd)
+            //    {
+            //        Maticsoft.DBUtility.DbHelperSQLite.ExecuteSqlTran(lststring);
+
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+        }
+
+
     }
 }

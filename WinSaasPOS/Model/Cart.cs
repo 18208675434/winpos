@@ -28,6 +28,11 @@ namespace WinSaasPOS.Model
     {
 
         public string title { get; set; }
+
+        /// <summary>
+        /// 促销计算后的金额
+        /// </summary>
+        public decimal payamt { get; set; }
         public decimal totalpayment { get; set; }
         public decimal origintotal{ get; set; }
         public List<Product> products { get; set; }
@@ -67,14 +72,14 @@ namespace WinSaasPOS.Model
 
 
         public int selfpickenabled { get; set; }
-        public Availablecoupon[] availablecoupons { get; set; }
-        public Unavailablecoupon[] unavailablecoupons { get; set; }
+        public List<Availablecoupon> availablecoupons { get; set; }
+        public List<Unavailablecoupon> unavailablecoupons { get; set; }
         public Pointinfo pointinfo { get; set; }
         public int selectcouponcount { get; set; }
         public string orderplaceid { get; set; }
         public decimal promoamt { get; set; }
         public decimal producttotalamt { get; set; }
-        public int couponpromoamt { get; set; }
+        public decimal couponpromoamt { get; set; }
         public decimal totalpromoamt { get; set; }
         public orderpromotion[] orderpromotions { get; set; }
         public decimal memberpromo { get; set; }
@@ -123,6 +128,24 @@ namespace WinSaasPOS.Model
         {
             return (Cart)this.MemberwiseClone();
         }
+
+        //ADD 2020-05-11 半离线新增
+        //前端计算的最终应付金额
+        public decimal poscalculateamt { get; set; }
+        //订单级别促销计算前商品总价 计算完单品后
+        public decimal postotalbeforeordercalulateamt { get; set; }
+        //订单级别促销优惠
+        public decimal posorderpromoat { get; set; }
+        //优惠券优惠金额
+        public decimal poscouponpromoamt { get; set; }
+        //积分优惠金额
+        public decimal pospointpromoamt { get; set; }
+        //使用积分
+        public long pospointofuser { get; set; }
+
+        public Dictionary<String, String> selectedcoupons { get; set; }
+
+
     }
     [Serializable]
     public class Tenant
@@ -143,10 +166,10 @@ namespace WinSaasPOS.Model
     [Serializable]
     public class Pointinfo
     {
-        public string availablepoints { get; set; }
+        public long availablepoints { get; set; }
         public decimal availablepointsamount { get; set; }
         public string availablepointsmsg { get; set; }
-        public string totalpoints { get; set; }
+        public long totalpoints { get; set; }
     }
     [Serializable]
     public class Paymenttypes
@@ -251,8 +274,21 @@ namespace WinSaasPOS.Model
 
         public int RowNum = 0;
 
-    }
 
+        //ADD 半离线新增 2020-05-11
+        public bool canmixcoupon = true;//是否促销和优惠券可以混合使用
+
+        public int purchaselimit; // >0 为限购 否则不限购
+
+
+        //add 2020-05-13 半离线新增
+        /// <summary>
+        /// 原价
+        /// </summary>
+        public decimal originprice { get; set; }
+
+        public TransitionPriceDetail transitionPriceDetail { get; set; }
+    }
 
 
     [Serializable]
@@ -280,6 +316,9 @@ namespace WinSaasPOS.Model
         public string availableshopdesc { get; set; }
         public string promotioncode { get; set; }
         public string couponcode { get; set; }
+
+        //ADD 半离线2019-05-12
+        public Decimal discountamt = WinSaasPOS.Model.Promotion.CommonConstant.ZERODECIMAL;//券抵扣金额
     }
     [Serializable]
     public class Unavailablecoupon
@@ -308,5 +347,22 @@ namespace WinSaasPOS.Model
         public string couponcode { get; set; }
     }
 
+        [Serializable]
+    public class TransitionPriceDetail
+    {
+        //售价
+            public Decimal originprice { get; set; }
+        //促销类型
+            public String priceKind { get; set; }
 
+            public int pricetagid { get; set; }
+            public String pricetag { get; set; }
+            public Decimal pricepromoamt { get; set; }//折上折中间优惠价格
+            public String code { get; set; }
+            public String outercode { get; set; }
+            public String costcenterinfo { get; set; }
+            public String promoaction { get; set; }
+            public String promosubtype { get; set; }
+            public String promotype { get; set; }
+    }
 }

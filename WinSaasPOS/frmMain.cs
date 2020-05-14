@@ -139,8 +139,7 @@ namespace WinSaasPOS
                 //∨ 从右往左排列 被当成图形   从左向右 右侧间距太大
                 btnMenu.Text = MainModel.CurrentUser.nickname + "，你好 ∨";
                 btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10,btnOrderHang.Left+btnOrderHang.Width);
-                picBirthday.Visible = false;
-                
+                picBirthday.Visible = false;             
 
                 //扫描数据处理线程
                  threadScanCode = new Thread(ScanCodeThread);
@@ -220,15 +219,12 @@ namespace WinSaasPOS
 
                     MainModel.frmmainmedia.Show();
                     MainModel.frmmainmedia.IniForm(null);
-
                 }
-              
             }
             catch (Exception ex)
             {
                 ShowLog("初始化页面异常" + ex.Message + ex.StackTrace, true);
             }
-           // CurrentFrmLogin.Hide();
             this.Activate();
         }
 
@@ -999,7 +995,6 @@ namespace WinSaasPOS
 
                 INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
                 MainModel.Authorization = "";
-               // this.Hide();
              if (MainModel.frmloginoffline != null)
             {
                 try { MainModel.frmloginoffline.Dispose(); }
@@ -1124,7 +1119,7 @@ namespace WinSaasPOS
                     {
                         if (MainModel.CurrentMember != null && CurrentCart != null && CurrentCart.pointinfo != null)
                         {
-                            lblJF.Text = CurrentCart.pointinfo.totalpoints;
+                            lblJF.Text = CurrentCart.pointinfo.totalpoints.ToString();
                             //lblJFUse.Visible = true;
 
 
@@ -1262,7 +1257,7 @@ namespace WinSaasPOS
                             {
                                 if (MainModel.CurrentMember != null && CurrentCart != null && CurrentCart.pointinfo != null)
                                 {
-                                    lblJF.Text = CurrentCart.pointinfo.totalpoints;
+                                    lblJF.Text = CurrentCart.pointinfo.totalpoints.ToString();
                                     //lblJFUse.Visible = true;
                                     btnJFUse.Text = "使用" + CurrentCart.pointinfo.availablepoints + "积分 抵用" + CurrentCart.pointinfo.availablepointsamount + "元";
                                     btnJFUse.Visible = true;
@@ -1802,7 +1797,7 @@ namespace WinSaasPOS
                     }
 
                   
-                    if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Length > 0 )
+                    if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Count > 0 )
                     {
 
                         lblCoupon.Visible = true;
@@ -1815,7 +1810,7 @@ namespace WinSaasPOS
                         }
                         else
                         {
-                            lblCoupon.Text = CurrentCart.availablecoupons.Length + "张可用>";
+                            lblCoupon.Text = CurrentCart.availablecoupons.Count + "张可用>";
                         }
                     }
                     else
@@ -3352,7 +3347,6 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                pnlFalsh.Visible = false;
                 LogManager.WriteLog("突出新增商品异常"+ex.Message);
             }
         }

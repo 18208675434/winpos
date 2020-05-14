@@ -20,6 +20,11 @@ namespace WinSaasPOS
         /// </summary>
         public string SelectCouponCode = "";
 
+        /// <summary>
+        /// 选中券的促销码
+        /// </summary>
+        public string SelectPromotionCode = "";
+
         public string StrValue = "";
 
         /// <summary>
@@ -31,7 +36,7 @@ namespace WinSaasPOS
             InitializeComponent();
             CurrentCart = (Cart)cart.qianClone();
             SelectCouponCode = selectcoupon;
-           
+            SelectPromotionCode = MainModel.CurrentPromotionCode;
         }
 
 
@@ -45,7 +50,7 @@ namespace WinSaasPOS
         {
             try
             {
-                lblTitle.Text = cart.availablecoupons.Length + "张可用";
+                lblTitle.Text = cart.availablecoupons.Count + "张可用";
                 
                 if (!string.IsNullOrEmpty(selectcoupon))
                 {
@@ -57,7 +62,7 @@ namespace WinSaasPOS
                 }
 
                 dgvCoupon.Rows.Clear();
-                if (cart != null && cart.availablecoupons != null && cart.availablecoupons.Length > 0)
+                if (cart != null && cart.availablecoupons != null && cart.availablecoupons.Count > 0)
                 {
                     foreach (Availablecoupon couponsBean in cart.availablecoupons)
                     {                      
@@ -109,6 +114,7 @@ namespace WinSaasPOS
                     if(frmcoupon.DialogResult==DialogResult.OK)
                     {
                         SelectCouponCode = couponsBean.couponcode;
+                        SelectPromotionCode = couponsBean.promotioncode;
                         this.DialogResult = DialogResult.Yes;
                         this.Close();
                     }
@@ -124,6 +130,7 @@ namespace WinSaasPOS
                 else
                 {
                     SelectCouponCode = couponsBean.couponcode;
+                    SelectPromotionCode = couponsBean.promotioncode;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -140,6 +147,7 @@ namespace WinSaasPOS
         private void pnlCouponNone_Click(object sender, EventArgs e)
         {
             SelectCouponCode = "";
+            SelectPromotionCode = "";
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

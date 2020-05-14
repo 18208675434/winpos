@@ -224,6 +224,39 @@ namespace WinSaasPOS.Common
                 LogManager.WriteLog("小键盘关闭异常：" + ex.Message);
             }
         }
+
+
+        /// <summary>
+        /// 判断是否有交集
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list1"></param>
+        /// <param name="list2"></param>
+        /// <returns></returns>
+        public static bool IsArrayIntersection<T>(List<T> list1, List<T> list2)
+        {
+            try
+            {
+                List<T> t = list1.Distinct().ToList();
+
+                var exceptArr = t.Except(list2).ToList();
+
+                if (exceptArr.Count < t.Count)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("判断集合是否有交集异常"+ex.Message);
+                return false;
+            }
+
+        }
     }
 
 
