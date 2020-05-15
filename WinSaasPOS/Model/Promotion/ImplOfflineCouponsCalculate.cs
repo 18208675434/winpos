@@ -82,7 +82,11 @@ namespace WinSaasPOS.Model.Promotion
 
         List<PromotionCoupon> listcoupon = PromotionCache.getInstance().getListcoupon();//查询出优惠券
         evaluateCoupons(cartBean, listcoupon);
-        applyOrderCouponPromo(cartBean, listcoupon);
+
+        if (cartBean.totalpayment > 0)
+        {
+            applyOrderCouponPromo(cartBean, listcoupon);
+        }
         map.Clear();
     }
 

@@ -203,7 +203,9 @@ namespace WinSaasPOS.Common
                     System.Diagnostics.Process.Start(oskfile);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+                LogManager.WriteLog("开启键盘异常"+ex.Message);
+            }
         }
         public static void CloseOSK()
         {

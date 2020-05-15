@@ -57,6 +57,13 @@ namespace WinSaasPOS
             {
                 Application.Run(new frmLogin());
             }
+
+            try
+            {
+                GlobalUtil.CloseOSK();
+                WinSaasPOS.Model.MainModel.ShowTask();
+            }
+            catch { }
             //Application.Run(new frmLogin());
             //Application.Run(new frmTest());
         }
@@ -74,6 +81,7 @@ namespace WinSaasPOS
 
             try
             {
+                GlobalUtil.CloseOSK();
                 WinSaasPOS.Model.MainModel.ShowTask();
             }
             catch { }
@@ -104,45 +112,45 @@ namespace WinSaasPOS
         public static void changedb()
         {
 
-            //try
-            //{
-            //    string isexits = "select sql from sqlite_master where type = 'table' and name = 'android_metadata'";
+            try
+            {
+                string isexits = "select sql from sqlite_master where type = 'table' and name = 'DBPROMOTION_CACHE_BEAN'";
 
-            //    object obj = Maticsoft.DBUtility.DbHelperSQLite.GetSingle(isexits);
+                object obj = Maticsoft.DBUtility.DbHelperSQLite.GetSingle(isexits);
 
 
 
-            //    System.Collections.ArrayList lststring = new System.Collections.ArrayList();
-            //    bool needadd = false;
-            //    if (!obj.ToString().Contains("ONLYMEMBER"))
-            //    {
-            //        lststring.Add("ALTER TABLE android_metadata ADD COLUMN 'ONLYMEMBER' INTEGER");
-            //        needadd = true;
-            //    }
+                System.Collections.ArrayList lststring = new System.Collections.ArrayList();
+                bool needadd = false;
+                if (!obj.ToString().Contains("ONLYMEMBER"))
+                {
+                    lststring.Add("ALTER TABLE DBPROMOTION_CACHE_BEAN ADD COLUMN 'ONLYMEMBER' INTEGER");
+                    needadd = true;
+                }
 
-            //    if (!obj.ToString().Contains("MEMBERTAGS"))
-            //    {
-            //        lststring.Add("ALTER TABLE android_metadata ADD COLUMN 'MEMBERTAGS' TEXT");
-            //        needadd = true;
+                if (!obj.ToString().Contains("MEMBERTAGS"))
+                {
+                    lststring.Add("ALTER TABLE DBPROMOTION_CACHE_BEAN ADD COLUMN 'MEMBERTAGS' TEXT");
+                    needadd = true;
 
-            //    }
+                }
 
-            //    if (!obj.ToString().Contains("PURCHASELIMIT"))
-            //    {
-            //        lststring.Add("ALTER TABLE android_metadata ADD COLUMN 'PURCHASELIMIT' INTEGER");
-            //        needadd = true;
+                if (!obj.ToString().Contains("PURCHASELIMIT"))
+                {
+                    lststring.Add("ALTER TABLE DBPROMOTION_CACHE_BEAN ADD COLUMN 'PURCHASELIMIT' INTEGER");
+                    needadd = true;
 
-            //    }
-            //    if (needadd)
-            //    {
-            //        Maticsoft.DBUtility.DbHelperSQLite.ExecuteSqlTran(lststring);
+                }
+                if (needadd)
+                {
+                    Maticsoft.DBUtility.DbHelperSQLite.ExecuteSqlTran(lststring);
 
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
+                }
+            }
+            catch (Exception ex)
+            {
 
-            //}
+            }
         }
 
 

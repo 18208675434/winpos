@@ -385,7 +385,16 @@ namespace WinSaasPOS
 
         private void txt_Enter(object sender, EventArgs e)
         {
-            GlobalUtil.OpenOSK();
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                GlobalUtil.OpenOSK();
+                txt.Focus();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("焦点打开键盘异常"+ex.Message);
+            }
         }
 
 
@@ -399,15 +408,19 @@ namespace WinSaasPOS
         {
             try
             {
-                this.Dispose();
+                try
+                {
+                    GlobalUtil.CloseOSK();
+                    WinSaasPOS.Model.MainModel.ShowTask();
+                    this.Dispose();
+                }
+                catch { }
+                
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("清理登录页面资源异常"+ex.Message);
             }
-           // MainModel.ShowTask();
-           
-            ////CloseOSK();
         }
 
 
@@ -567,7 +580,12 @@ namespace WinSaasPOS
                 return;
             }
 
-            MainModel.ShowTask();
+            try
+            {
+                GlobalUtil.CloseOSK();
+                WinSaasPOS.Model.MainModel.ShowTask();
+            }
+            catch { }
             System.Environment.Exit(0);
         }
 
@@ -699,7 +717,6 @@ namespace WinSaasPOS
             txtPhone.Focus();
         }
 
-      
         private void txtCheckCode_TextChanged(object sender, EventArgs e)
         {
             if (txtCheckCode.Text.Length > 0)
@@ -741,10 +758,7 @@ namespace WinSaasPOS
             {
                 Control con = (Control)sender;
 
-                // Draw(e.ClipRectangle, e.Graphics, 100, false, Color.FromArgb(113, 113, 113), Color.FromArgb(0, 0, 0));
-                //base.OnPaint(e);
                 Graphics g = e.Graphics;
-                // g.DrawString("", new Font("微软雅黑", 9, FontStyle.Regular), new SolidBrush(Color.White), new PointF(10, 10));
 
                 LinearGradientBrush myLinearGradientBrush = new LinearGradientBrush(e.ClipRectangle, Color.OrangeRed, Color.OrangeRed, LinearGradientMode.Vertical);
                 //填充         

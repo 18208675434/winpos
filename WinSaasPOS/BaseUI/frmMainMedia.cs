@@ -77,7 +77,7 @@ namespace WinSaasPOS
             threadMedia = new Thread(PlayerThread);
             threadMedia.IsBackground = true;
             //thread.SetApartmentState(ApartmentState.Unknown);
-            threadMedia.SetApartmentState(ApartmentState.STA);
+            //threadMedia.SetApartmentState(ApartmentState.STA);
             //thread.Priority = ThreadPriority.Lowest;
             threadMedia.Start();
          
@@ -931,7 +931,6 @@ namespace WinSaasPOS
                 
                     threadMedia.Suspend();
                     player.Visible = false;
-                
                
                 frmPaySuccessMedia frmresult = new frmPaySuccessMedia(payinfo.ToString());
                 frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);

@@ -19,8 +19,6 @@ namespace MQTTClient
         [STAThread]
         static void Main()
         {
-
-
             //获取当前进程的一个伪句柄
             System.Diagnostics.Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
 

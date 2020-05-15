@@ -91,6 +91,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseUI\MainHelper.cs" />
     <Compile Include="Common\AutoSizeFormUtil.cs" />
     <Compile Include="Common\DataUtil.cs" />
     <Compile Include="Common\GlobalUtil.cs" />
@@ -277,28 +278,28 @@
     <Compile Include="frmLoadingTop.Designer.cs">
       <DependentUpon>frmLoadingTop.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLoginOffLine.cs">
+    <Compile Include="BaseUI\frmLoginOffLine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoginOffLine.Designer.cs">
+    <Compile Include="BaseUI\frmLoginOffLine.Designer.cs">
       <DependentUpon>frmLoginOffLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMainHalfOffLine.cs">
+    <Compile Include="BaseUI\frmMainHalfOffLine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainHalfOffLine.Designer.cs">
+    <Compile Include="BaseUI\frmMainHalfOffLine.Designer.cs">
       <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMainMedia.cs">
+    <Compile Include="BaseUI\frmMainMedia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainMedia.Designer.cs">
+    <Compile Include="BaseUI\frmMainMedia.Designer.cs">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMainOffLine.cs">
+    <Compile Include="BaseUI\frmMainOffLine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainOffLine.Designer.cs">
+    <Compile Include="BaseUI\frmMainOffLine.Designer.cs">
       <DependentUpon>frmMainOffLine.cs</DependentUpon>
     </Compile>
     <Compile Include="frmModifyPrice.cs">
@@ -379,16 +380,16 @@
     <Compile Include="frmCashChange.Designer.cs">
       <DependentUpon>frmCashChange.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="BaseUI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
+    <Compile Include="BaseUI\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="BaseUI\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
+    <Compile Include="BaseUI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="frmOnLinePayResultBack.cs">
@@ -545,9 +546,12 @@
     <Compile Include="Model\HalfOffLine\Gradesettinggetgrade.cs" />
     <Compile Include="Model\HalfOffLine\HalfOffLineUtil.cs" />
     <Compile Include="Model\HalfOffLine\MemberDiscount.cs" />
+    <Compile Include="Model\HalfOffLine\Memberoperationitem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberrightsItem.cs" />
     <Compile Include="Model\HalfOffLine\MemberTenantmembergradeconfig.cs" />
     <Compile Include="Model\HalfOffLine\PromotionCoupon.cs" />
     <Compile Include="Model\HalfOffLine\TenantCreditConfig.cs" />
+    <Compile Include="Model\HalfOffLine\Tenantmemberrightsdiscountconfig.cs" />
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\OffLineOrder.cs" />
     <Compile Include="Model\OffLineReceipt.cs" />
@@ -755,16 +759,16 @@
     <EmbeddedResource Include="frmLoadingTop.resx">
       <DependentUpon>frmLoadingTop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoginOffLine.resx">
+    <EmbeddedResource Include="BaseUI\frmLoginOffLine.resx">
       <DependentUpon>frmLoginOffLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMainHalfOffLine.resx">
+    <EmbeddedResource Include="BaseUI\frmMainHalfOffLine.resx">
       <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMainMedia.resx">
+    <EmbeddedResource Include="BaseUI\frmMainMedia.resx">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMainOffLine.resx">
+    <EmbeddedResource Include="BaseUI\frmMainOffLine.resx">
       <DependentUpon>frmMainOffLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifyPrice.resx">
@@ -807,10 +811,10 @@
     <EmbeddedResource Include="frmCashChange.resx">
       <DependentUpon>frmCashChange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="BaseUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="BaseUI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOnLinePayResultBack.resx">

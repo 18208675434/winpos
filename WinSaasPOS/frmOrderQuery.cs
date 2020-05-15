@@ -1135,17 +1135,39 @@ namespace WinSaasPOS
             txtOrderID.Focus();
         }
 
-     
+        private void txt_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                GlobalUtil.OpenOSK();
+                txt.Focus();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
+            }
+        }
 
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-        //}
+        private void txt_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!txtPhone.Focused && !txtOrderID.Focused)
+                {
+                    GlobalUtil.CloseOSK();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("失去焦点关闭键盘异常" + ex.Message);
+            }
+        }
+
+        private void frmOrderQuery_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GlobalUtil.CloseOSK();
+        }
 
     }
 }

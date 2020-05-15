@@ -590,6 +590,10 @@
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // timerTen
+            // 
+            this.timerTen.Tick += new System.EventHandler(this.timerTen_Tick);
+            // 
             // frmLogin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;

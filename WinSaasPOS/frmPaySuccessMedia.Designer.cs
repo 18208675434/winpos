@@ -43,27 +43,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 24F);
-            this.label1.Location = new System.Drawing.Point(826, 257);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.label1.Location = new System.Drawing.Point(560, 177);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 41);
+            this.label1.Size = new System.Drawing.Size(131, 35);
             this.label1.TabIndex = 0;
             this.label1.Text = "收银成功";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(723, 245);
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(483, 168);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // lblCashierInfo
             // 
             this.lblCashierInfo.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblCashierInfo.Location = new System.Drawing.Point(411, 418);
+            this.lblCashierInfo.Location = new System.Drawing.Point(271, 231);
             this.lblCashierInfo.Name = "lblCashierInfo";
             this.lblCashierInfo.Size = new System.Drawing.Size(892, 31);
             this.lblCashierInfo.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(423, 509);
+            this.label2.Location = new System.Drawing.Point(272, 314);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(673, 21);
             this.label2.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             this.lblMsg.AutoSize = true;
             this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblMsg.Location = new System.Drawing.Point(774, 592);
+            this.lblMsg.Location = new System.Drawing.Point(554, 405);
             this.lblMsg.Name = "lblMsg";
             this.lblMsg.Size = new System.Drawing.Size(137, 25);
             this.lblMsg.TabIndex = 4;
@@ -99,19 +99,19 @@
             this.lblSecond.AutoSize = true;
             this.lblSecond.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblSecond.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblSecond.Location = new System.Drawing.Point(849, 545);
+            this.lblSecond.Location = new System.Drawing.Point(610, 353);
             this.lblSecond.Name = "lblSecond";
             this.lblSecond.Size = new System.Drawing.Size(21, 24);
             this.lblSecond.TabIndex = 8;
             this.lblSecond.Text = "2";
             this.lblSecond.Visible = false;
             // 
-            // frmCashierResultMedia
+            // frmPaySuccessMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1800, 1000);
+            this.ClientSize = new System.Drawing.Size(1178, 760);
             this.Controls.Add(this.lblSecond);
             this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.label2);
@@ -121,7 +121,7 @@
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "frmCashierResultMedia";
+            this.Name = "frmPaySuccessMedia";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmCashierResult";

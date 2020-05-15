@@ -579,6 +579,7 @@
             this.btnWindows.TabIndex = 43;
             this.btnWindows.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnWindows.UseVisualStyleBackColor = false;
+            this.btnWindows.Visible = false;
             this.btnWindows.Click += new System.EventHandler(this.btnWindows_Click);
             // 
             // lblShopName

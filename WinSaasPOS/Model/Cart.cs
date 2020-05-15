@@ -179,6 +179,10 @@ namespace WinSaasPOS.Model
         public int facepayenabled { get; set; }
         public int balancepayenabled { get; set; }
         public int cashcouponpayenabled { get; set; }
+
+
+        public int balancemixpayenabled { get; set; }
+        public int swipecardpayenabled { get; set; }  
     }
     [Serializable]
     public class Product

@@ -15,17 +15,17 @@ namespace WinSaasPOS.Model.HalfOffLine
         /// <summary>
         /// 当前会员标签信息
         /// </summary>
-        public static List<long> listvalidatePromotionMemberTags =new List<long>();
+        public static List<long> listvalidatePromotionMemberTags = new List<long>();
 
         /// <summary>
         /// 会员等级商户设置
         /// </summary>
-        public static MemberTenantmembergradeconfig  membertenantmembergradeconfig=null;
+        public static MemberTenantmembergradeconfig membertenantmembergradeconfig = null;
 
-       /// <summary>
-       /// 当前会员等级
-       /// </summary>
-        public static Gradesettinggetgrade gradesettinggetgrade=null;
+        /// <summary>
+        /// 当前会员等级
+        /// </summary>
+        public static Gradesettinggetgrade gradesettinggetgrade = null;
 
         /// <summary>
         /// 积分规则
@@ -35,6 +35,18 @@ namespace WinSaasPOS.Model.HalfOffLine
         /// 优惠券
         /// </summary>
         public static List<PromotionCoupon> listcoupon = null;//查询出优惠券
+
+
+        /// <summary>
+        /// 是否能享受会员权益
+        /// </summary>
+        public static bool enjoymemberrights = false;
+
+        /// <summary>
+        /// 会员权益配置
+        /// </summary>
+        public static MemberrightsItem memberrightsitem = null;
+
 
         public static void LoadMemberInfo()
         {
@@ -46,10 +58,13 @@ namespace WinSaasPOS.Model.HalfOffLine
                 GetTenantCreditConfig();
                 GetTenantMembergradeConfig();
                 ListMemberCouponAvailable();
+                EnjoyMemberRights();
+
+                GetTenantMemberRightsConfigUsing();
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("加载会员信息异常"+ex.Message);
+                LogManager.WriteLog("加载会员信息异常" + ex.Message);
             }
         }
         public static void ClearMemberInfo()
@@ -61,11 +76,14 @@ namespace WinSaasPOS.Model.HalfOffLine
                 gradesettinggetgrade = null;
                 tenantCreditConfig = null;
                 listcoupon = null;
+                enjoymemberrights = false;
+                memberrightsitem = null;
+
                 PromotionCache.getInstance().onDestory();
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("清除会员信息异常" +ex.Message);
+                LogManager.WriteLog("清除会员信息异常" + ex.Message);
             }
         }
 
@@ -82,8 +100,7 @@ namespace WinSaasPOS.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                List<long> objresult = httputil.MemberOperationItem(memberid, ref ErrorMsg);
-
+                Memberoperationitem objresult= httputil.MemberOperationItem(memberid, ref ErrorMsg);
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
                     listvalidatePromotionMemberTags = null;
@@ -91,7 +108,7 @@ namespace WinSaasPOS.Model.HalfOffLine
                 }
                 else
                 {
-                    listvalidatePromotionMemberTags = objresult;
+                    listvalidatePromotionMemberTags = objresult.tagids;
                 }
             }
             catch (Exception ex)
@@ -138,7 +155,7 @@ namespace WinSaasPOS.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                MemberTenantmembergradeconfig objresult = httputil.GetTenantMembergradeConfig( ref ErrorMsg);
+                MemberTenantmembergradeconfig objresult = httputil.GetTenantMembergradeConfig(ref ErrorMsg);
 
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
@@ -194,7 +211,7 @@ namespace WinSaasPOS.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                List<PromotionCoupon> objresult = httputil.ListMemberCouponAvailable(memberid,ref ErrorMsg);
+                List<PromotionCoupon> objresult = httputil.ListMemberCouponAvailable(memberid, ref ErrorMsg);
 
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
@@ -212,7 +229,77 @@ namespace WinSaasPOS.Model.HalfOffLine
             }
         }
 
+        public static void EnjoyMemberRights()
+        {
+            try
+            {
+                string ErrorMsg = "";
+                bool objresult = httputil.EnjoyMemberRights(memberid, ref ErrorMsg);
+
+                if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
+                {
+                    enjoymemberrights = false;
+                    LogManager.WriteLog("是否能享受会员权益失败" + ErrorMsg);
+                }
+                else
+                {
+                    enjoymemberrights = objresult;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("是否能享受会员权益异常" + ex.Message);
+            }
+        }
+
+        public static void GetTenantMemberRightsConfigUsing()
+        {
+            try
+            {
+                string ErrorMsg = "";
+                MemberrightsItem objresult = httputil.GetTenantMemberRightsConfigUsing(memberid, ref ErrorMsg);
+
+                if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
+                {
+                    memberrightsitem = null;
+                    LogManager.WriteLog("会员权益配置获取失败" + ErrorMsg);
+                }
+                else
+                {
+                    memberrightsitem = objresult;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("会员权益配置获取异常" + ex.Message);
+            }
+        }
+
         #endregion
+
+
+        public static Paymenttypes paymenttypes = null;
+        public static void GetAvailablePaymentTypes()
+        {
+            try
+            {
+                string ErrorMsg = "";
+                Paymenttypes objresult = httputil.GetAvailablePaymentTypes(MainModel.CurrentShopInfo.shopid, ref ErrorMsg);
+                if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
+                {
+                    paymenttypes = null;
+                    LogManager.WriteLog("GetAvailablePaymentTypes失败" + ErrorMsg);
+                }
+                else
+                {
+                    paymenttypes = objresult;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("GetAvailablePaymentTypes异常" + ex.Message);
+            }
+        }
 
     }
 }

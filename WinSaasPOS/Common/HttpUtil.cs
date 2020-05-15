@@ -2370,24 +2370,14 @@ namespace WinSaasPOS.Common
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
 
                 sort.Add("shopid", shopid);
-                //sort.Add("skip", skip + "");
-                //sort.Add("size", size + "");
 
                 string json = HttpGET(url, sort);
-                ////Console.WriteLine(json);
 
-                //string tempjson = "{\"shopid\":\"" + shopid + "\",\"skip\":" + skip + ",\"size\":" + size + "}";
-
-
-                //string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
-
                     return rd.data.ToString();
-
                 }
                 else
                 {
@@ -2406,14 +2396,14 @@ namespace WinSaasPOS.Common
         }
         #endregion
 
-        #region 半离线会员信息
+        #region 半离线会员信息 及设置
 
         /// <summary>
         /// 获取会员标签信息
         /// </summary>
         /// <param name="memberid"></param>
         /// <param name="errormsg"></param>
-        public List<long> MemberOperationItem(string memberid, ref string errormsg)
+        public Memberoperationitem MemberOperationItem(string memberid, ref string errormsg)
         {
             try
             {
@@ -2430,7 +2420,7 @@ namespace WinSaasPOS.Common
                 {
                     string strdata = rd.data.ToString();
 
-                    List<long> lstuserresult = JsonConvert.DeserializeObject<List<long>>(strdata);
+                    Memberoperationitem lstuserresult = JsonConvert.DeserializeObject<Memberoperationitem>(strdata);
                     return lstuserresult;
                 }
                 else
@@ -2610,6 +2600,127 @@ namespace WinSaasPOS.Common
             }
         }
 
+
+        /// <summary>
+        /// 会员是否能享受会员权益
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public bool EnjoyMemberRights(string memberid, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/memberrights/enjoymemberrights";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("memberid", memberid);
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+
+                    return Convert.ToBoolean(rd.data.ToString());
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "enjoymemberrights:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "enjoymemberrights异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 会员权益配置获取
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public MemberrightsItem GetTenantMemberRightsConfigUsing(string memberid, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/memberrights/item";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("memberid", memberid);
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+                    MemberrightsItem result = JsonConvert.DeserializeObject<MemberrightsItem>(strdata);
+                    return result;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "memberrights/item:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "memberrights/item异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取商户可用支付类型
+        /// </summary>
+        /// <param name="shopid"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public Paymenttypes GetAvailablePaymentTypes(string shopid, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/availablepaymenttypes ";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("shopid", shopid);
+                string testjson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+                    Paymenttypes lstuserresult = JsonConvert.DeserializeObject<Paymenttypes>(strdata);
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "availablepaymenttypes:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取可用支付类型异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
         #endregion
 
 
