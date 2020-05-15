@@ -1136,6 +1136,8 @@ namespace WinSaasPOS
                 }
                 else
                 {
+                    lblPriceDesc.Text = "";
+                    lblOriginPrice.Text = "";
 
                     lblSinglePrice.Text = pro.price.saleprice.ToString("f2");
                     if (!string.IsNullOrEmpty(pro.price.salepricedesc))
