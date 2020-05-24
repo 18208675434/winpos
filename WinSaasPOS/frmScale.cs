@@ -230,7 +230,6 @@ namespace WinSaasPOS
                     string ErrorMsg="";
                     bool SendScaleResult = scaleutil.SendScaleByScaleIp(ScaleIP,ref ErrorMsg);
 
-                    
 
                     if (SendScaleResult)
                     {
