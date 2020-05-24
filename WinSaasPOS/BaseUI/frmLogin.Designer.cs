@@ -105,9 +105,9 @@
             this.lblLoginByUser.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblLoginByUser.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.lblLoginByUser.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLoginByUser.Location = new System.Drawing.Point(466, 188);
+            this.lblLoginByUser.Location = new System.Drawing.Point(463, 188);
             this.lblLoginByUser.Name = "lblLoginByUser";
-            this.lblLoginByUser.Size = new System.Drawing.Size(110, 29);
+            this.lblLoginByUser.Size = new System.Drawing.Size(128, 29);
             this.lblLoginByUser.TabIndex = 3;
             this.lblLoginByUser.Text = "账号密码登录";
             this.lblLoginByUser.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -118,9 +118,9 @@
             this.lblLoginByPhone.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblLoginByPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.lblLoginByPhone.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLoginByPhone.Location = new System.Drawing.Point(600, 188);
+            this.lblLoginByPhone.Location = new System.Drawing.Point(597, 188);
             this.lblLoginByPhone.Name = "lblLoginByPhone";
-            this.lblLoginByPhone.Size = new System.Drawing.Size(129, 29);
+            this.lblLoginByPhone.Size = new System.Drawing.Size(143, 29);
             this.lblLoginByPhone.TabIndex = 4;
             this.lblLoginByPhone.Text = "手机验证码登录";
             this.lblLoginByPhone.TextAlign = System.Drawing.ContentAlignment.TopCenter;

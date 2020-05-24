@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPayFail));
-            this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnChangePayType = new System.Windows.Forms.Button();
             this.btnTryAgain = new System.Windows.Forms.Button();
@@ -49,11 +47,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlHead.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // timerNow
-            // 
-            this.timerNow.Interval = 1000;
-            this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
             // 
             // panel1
             // 
@@ -218,6 +211,7 @@
             this.btnWindows.TabIndex = 43;
             this.btnWindows.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnWindows.UseVisualStyleBackColor = false;
+            this.btnWindows.Visible = false;
             this.btnWindows.Click += new System.EventHandler(this.btnWindows_Click);
             // 
             // lblShopName
@@ -286,7 +280,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timerNow;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnChangePayType;
         private System.Windows.Forms.Button btnTryAgain;

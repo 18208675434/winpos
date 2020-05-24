@@ -76,7 +76,7 @@ namespace WinSaasPOS
         private  bool IsEnable=true;
         DBPRODUCT_BEANBLL productbll = new DBPRODUCT_BEANBLL();
 
-        private ImplOfflineSingleCalculate singlecalculate = new ImplOfflineSingleCalculate(MainModel.CurrentShopInfo.tenantid,MainModel.CurrentShopInfo.shopid);
+        private ImplOfflineSingleCalculateNew singlecalculate = new ImplOfflineSingleCalculateNew(MainModel.CurrentShopInfo.tenantid,MainModel.CurrentShopInfo.shopid);
 
 
         private ImplOfflineOrderPromotion ordercalculate = new ImplOfflineOrderPromotion(MainModel.CurrentShopInfo.tenantid, MainModel.CurrentShopInfo.shopid);
@@ -162,17 +162,17 @@ namespace WinSaasPOS
               
                 SetBtnPayStarus(false);
 
-                timerNow.Interval = 1000;
-                timerNow.Enabled = true;
 
                 timerClearMemory.Interval = 8 * 60 * 1000;
                 timerClearMemory.Enabled = true;
 
+                lblTime.Text = MainModel.Titledata;
                 lblShopName.Text = MainModel.CurrentShopInfo.shopname;
                 btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
                 //∨ 从右往左排列 被当成图形   从左向右 右侧间距太大
                 btnMenu.Text = MainModel.CurrentUser.nickname + "，你好 ∨";
-                btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10, btnOrderHang.Left + btnOrderHang.Width);
+
+                btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width - 10, btnOrderQuery.Left + btnOrderQuery.Width);
 
 
                 //扫描数据处理线程
@@ -263,9 +263,12 @@ namespace WinSaasPOS
             try { MainModel.frmloading.Dispose();  }
             catch { } MainModel.frmloading = null;
 
-            timerNow.Enabled = false;
+            try
+            {
+                MainModel.frmmainmedia.Close();
 
-            MainModel.frmmainmedia.Close();
+            }
+            catch { }
             MainModel.frmmainmedia = null;
             MainModel.ShowTask();
            // CurrentFrmLoginOffLine.Show();
@@ -307,7 +310,8 @@ namespace WinSaasPOS
                     if (jsonbmodel != null && jsonbmodel.CREATE_URL_IP == MainModel.URL)
                     {
                         Cart lastCart = JsonConvert.DeserializeObject<Cart>(jsonbmodel.JSON);
-
+                        lastCart.promoamt = 0;
+                        lastCart.fixpricepromoamt = 0;
                         foreach (Product pro in lastCart.products)
                         {
                             pro.pricetagid = 0;
@@ -715,7 +719,7 @@ namespace WinSaasPOS
 
             frmToolMain frmtool = new frmToolMain();
 
-            asf.AutoScaleControlTest(frmtool, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 413), true);
+            asf.AutoScaleControlTest(frmtool, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
             frmtool.DataReceiveHandle += frmToolMain_DataReceiveHandle;
             frmtool.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtool.Width - 15, pnlHead.Height + 10);
             frmtool.Show();
@@ -1154,7 +1158,7 @@ namespace WinSaasPOS
                 bool isINNERBARCODE = false;
                 string skucode = "";
                 int pronum = 0;
-                if (goodcode.Length == 18 && !checkEanCodeIsError(goodcode, 18) && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
+                if (goodcode.Length == 18 && !WinSaasPOS.BaseUI.MainHelper.checkEanCodeIsError(goodcode, 18) && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
                 {
                     List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" INNERBARCODE='" + goodcode.Substring(2, 10) + "' " + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
@@ -1188,7 +1192,7 @@ namespace WinSaasPOS
                 {
 
 
-                    if (goodcode.Length == 18 && !checkEanCodeIsError(goodcode, 18))
+                    if (goodcode.Length == 18 && !WinSaasPOS.BaseUI.MainHelper.checkEanCodeIsError(goodcode, 18))
                 {
 
                     if (dbpro.WEIGHTFLAG == 1)
@@ -1248,44 +1252,6 @@ namespace WinSaasPOS
         }
 
 
-        public static bool checkEanCodeIsError(String barCode, int num)
-        {
-            if (barCode.Length != num)
-            {
-                return true;
-            }
-            try
-            {
-                String code = barCode.Substring(0, num - 1);
-                String checkBit = barCode.Substring(num - 1);
-                int c1 = 0, c2 = 0;
-                for (int i = 0; i < code.Length; i += 2)
-                {
-                    char c = code[i];
-                    int n = c - '0';
-                    c1 += n;
-                }
-                for (int i = 1; i < code.Length; i += 2)
-                {
-                    char c = code[i];
-                    int n = c - '0';
-                    c2 += n;
-                }
-                String check = (10 - (c1 + c2 * 3) % 10) % 10 + "";
-                if (check == checkBit)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-                return true;
-            }
-        }
 
         private void addcart( List<DBPRODUCT_BEANMODEL> lstpro)
         {
@@ -1395,22 +1361,51 @@ namespace WinSaasPOS
         }
 
 
-
         //TODO  修改样式
         private void ShowLog(string msg, bool iserror)
         {
+            ParameterizedThreadStart Pts = new ParameterizedThreadStart(showlogthread);
+            Thread threadmqtt = new Thread(Pts);
+            threadmqtt.IsBackground = true;
+            threadmqtt.Start(msg);
+        }
+
+        private void showlogthread(object obj)
+        {
             try
             {
+                lblToast.Text = obj.ToString();
+                if (this.IsHandleCreated)
+                {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
+                        lblToast.Visible = true;
+                    }));
+                }
+                else
+                {
+                    lblToast.Visible = true;
+                }
 
-                    MainModel.ShowLog(msg, iserror);               
+                Thread.Sleep(1000);
+                if (this.IsHandleCreated)
+                {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
+                        lblToast.Visible = false;
+                    }));
+                }
+                else
+                {
+                    lblToast.Visible = false;
+
+                }
             }
             catch (Exception ex)
             {
 
             }
         }
-
-
 
 
         private object thislockDgvGood = new object();
@@ -1505,7 +1500,7 @@ namespace WinSaasPOS
                                 List<Bitmap> lstbmp = GetDgvRow(temppro);
                                 if (lstbmp != null && lstbmp.Count == 6)
                                 {
-                                    dgvGood.Rows.Insert(0, new object[] { lstbmp[0], lstbmp[1], lstbmp[2], lstbmp[3], lstbmp[4], lstbmp[5] });
+                                    dgvGood.Rows.Insert(0, new object[] {(1+ i).ToString(), lstbmp[0], lstbmp[1], lstbmp[2], lstbmp[3], lstbmp[4], lstbmp[5] });
                                 }
                             }
                             try { dgvGood.FirstDisplayedScrollingRowIndex = oldrowindex; }
@@ -2166,7 +2161,7 @@ namespace WinSaasPOS
                 ////dgvGood.Rows[e.RowIndex].Cells[e.ColumnIndex].OwningColumn.Name = "num";
                 //string pronum = dgvGood.Rows[e.RowIndex].Cells["num"].Value.ToString();
                 //增加标品
-                if (e.ColumnIndex == 3 && pro.goodstagid == 0)
+                if (e.ColumnIndex == 4 && pro.goodstagid == 0)
                 {
                     for (int i = 0; i < CurrentCart.products.Count; i++)
                     {
@@ -2186,7 +2181,7 @@ namespace WinSaasPOS
                 }
                 //减少标品
 
-                if (e.ColumnIndex == 2 && pro.goodstagid == 0)
+                if (e.ColumnIndex == 3 && pro.goodstagid == 0)
                 {
                     for (int i = 0; i < CurrentCart.products.Count; i++)
                     {
@@ -2197,7 +2192,7 @@ namespace WinSaasPOS
                             {
 
 
-                                FrmConfirmBack frmconfirmback = new FrmConfirmBack("是否确认删除商品？", pro.skuname, pro.skucode);
+                                FrmConfirmBack frmconfirmback = new FrmConfirmBack("确认删除", pro.title, pro.skucode);
 
                                 frmconfirmback.Location = new Point(0, 0);
 
@@ -2225,10 +2220,10 @@ namespace WinSaasPOS
                     UploadDgvGoods(CurrentCart);
                 }
 
-                if (e.ColumnIndex == 5)
+                if (e.ColumnIndex == 6)
                 {
 
-                    FrmConfirmBack frmconfirmback = new FrmConfirmBack("是否确认删除商品？", pro.skuname, pro.skucode);
+                    FrmConfirmBack frmconfirmback = new FrmConfirmBack("确认删除", pro.title, pro.skucode);
 
                     frmconfirmback.Location = new Point(0, 0);
 
@@ -2757,17 +2752,46 @@ namespace WinSaasPOS
         private void LoadFormIni()
         {
             try {
+                if (MainModel.frmnumber != null)
+                {
+                    try
+                    {
+                        MainModel.frmnumber.Close();
+                        MainModel.frmnumber.Dispose();
+                    }
+                    catch { }
+                }
                 //数字弹窗初始化
                 MainModel.frmnumber = new frmNumber();
                 asf.AutoScaleControlTest(MainModel.frmnumber, 380, 540, this.Width * 36 / 100, this.Height * 70 / 100, true);
                 MainModel.frmnumber.TopMost = true;
 
+
+                if (MainModel.frmcashpay != null)
+                {
+                    try
+                    {
+                        MainModel.frmcashpay.Close();
+                        MainModel.frmcashpay.Dispose();
+                    }
+                    catch { }
+                }
                 //现金支付窗体
                 MainModel.frmcashpay = new frmCashPay();
                 asf.AutoScaleControlTest(MainModel.frmcashpay, 380, 520, Screen.AllScreens[0].Bounds.Width * 36 / 100, Screen.AllScreens[0].Bounds.Height * 70 / 100, true);
                 MainModel.frmcashpay.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - MainModel.frmcashpay.Width - 40, Screen.AllScreens[0].Bounds.Height * 15 / 100);
                 MainModel.frmcashpay.TopMost = true;
 
+
+                if (MainModel.frmcashcoupon != null)
+                {
+                    try
+                    {
+                        MainModel.frmcashcoupon.Close();
+                        MainModel.frmcashcoupon.Dispose();
+                    }
+                    catch { }
+                }
                 //现金券弹窗
                 MainModel.frmcashcoupon = new frmCashCoupon();
                 asf.AutoScaleControlTest(MainModel.frmcashcoupon, 380, 480, Screen.AllScreens[0].Bounds.Width * 36 / 100, Screen.AllScreens[0].Bounds.Height * 70 / 100, true);
@@ -2775,6 +2799,16 @@ namespace WinSaasPOS
                 MainModel.frmcashcoupon.TopMost = true;
 
 
+
+                if (MainModel.frmmodifyprice != null)
+                {
+                    try
+                    {
+                        MainModel.frmmodifyprice.Close();
+                        MainModel.frmmodifyprice.Dispose();
+                    }
+                    catch { }
+                }
                 //修改订单金额弹窗
                 MainModel.frmmodifyprice = new frmModifyPrice();
                 asf.AutoScaleControlTest(MainModel.frmmodifyprice, 380, 520, Screen.AllScreens[0].Bounds.Width * 36 / 100, Screen.AllScreens[0].Bounds.Height * 70 / 100, true);

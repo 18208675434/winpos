@@ -65,24 +65,10 @@ namespace WinSaasPOS
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
-            // IniForm(null);
-
-
-            ////线程优先级低 不能占用数据处理线程资源
-            //threadMedia = new Thread(PlayerThread);
-            //threadMedia.Priority = ThreadPriority.BelowNormal;
-            //threadMedia.IsBackground = true;
-            //threadMedia.Start();
 
             threadMedia = new Thread(PlayerThread);
             threadMedia.IsBackground = true;
-            //thread.SetApartmentState(ApartmentState.Unknown);
-            //threadMedia.SetApartmentState(ApartmentState.STA);
-            //thread.Priority = ThreadPriority.Lowest;
             threadMedia.Start();
-         
-          
-            //PlayerThread();
         }
         private void frmMainMedia_Load(object sender, EventArgs e)
         {
@@ -127,14 +113,20 @@ namespace WinSaasPOS
         }
         public void IniForm(object obj)
         {
-
-            if ((threadMedia.ThreadState & ThreadState.Suspended)!=0)
+            try
             {
-                threadMedia.Resume();
-            }
-            
+                if ((threadMedia.ThreadState & ThreadState.Suspended) != 0)
+                {
+                    threadMedia.Resume();
+                }
 
-            tabControlMedia.SelectedIndex = 1;
+
+                tabControlMedia.SelectedIndex = 1;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("客屏 ini异常"+ex.Message);
+            }
 
         }
         private JSON_BEANBLL jsonbll = new JSON_BEANBLL();
@@ -279,12 +271,14 @@ namespace WinSaasPOS
             {
                 if (sortMedia.Count > 0)
                 {                    
-
+                    
                     List<Mediadetaildto> lstmedia = new List<Mediadetaildto>();
                     foreach (KeyValuePair<int, Mediadetaildto> kv in sortMedia)
                     { 
                         lstmedia.Add((Mediadetaildto)MainModel.Clone(kv.Value));
                     }
+
+
                    // SortedDictionary<int, Mediadetaildto> sortTempMedia = (SortedDictionary<int, Mediadetaildto>)MainModel.Clone(sortMedia);
                     foreach (Mediadetaildto media in lstmedia)
                     {
@@ -314,15 +308,12 @@ namespace WinSaasPOS
                                     {
                                         tabPageAdvert.BackgroundImage = imgback;
                                     }
-
-                                    //Application.DoEvents();
                                     Delay.Start(3000);
                                 }
                                 else
                                 {
 
                                 }
-
                             }
                             else if (media.mediatype == 2) //视频
                             {
@@ -334,7 +325,11 @@ namespace WinSaasPOS
                                     {
                                         player.Visible = true;
                                         player.URL = MainModel.MediaPath + playername;
-                                        this.player.Ctlcontrols.play();
+
+                                        //player.currentPlaylist.appendItem(player.newMedia(MainModel.MediaPath + playername));
+
+                                        player.uiMode = "none";
+                                        //this.player.Ctlcontrols.play();
 
 
                                      
@@ -376,7 +371,7 @@ namespace WinSaasPOS
                 }
             player.Visible = false;
             Delay.Start(1000);
-            Application.DoEvents();
+            //Application.DoEvents();
             PlayerThread();
 
                 
@@ -406,6 +401,7 @@ namespace WinSaasPOS
 
         #region  购物车列表
 
+        public delegate void deleteUpdateForm(object obj);
         public void UpdateForm()
         {
             try
@@ -413,17 +409,19 @@ namespace WinSaasPOS
                 try
                 {
                     threadMedia.Suspend();
-                    player.Visible = false;
+
                     player.Ctlcontrols.stop();
+                    player.Visible = false;
                 }
                 catch { }
-
-               // UpdateFormExe("");
-
                 tlpnlRight.Left = pnlMemberCard.Left;
 
+                //deleteUpdateForm delete = new deleteUpdateForm(UpdateFormExe);
+                //delete.BeginInvoke("",null,null);
                 UpdateFormExe("");
-                ////////启动扫描处理线程
+
+                //UpdateFormExe("");
+                //////启动扫描处理线程
                 //Thread threadItemExedate = new Thread(UpdateFormExe);
                 //threadItemExedate.IsBackground = false;
                 //threadItemExedate.Start();
@@ -448,7 +446,7 @@ namespace WinSaasPOS
 
 
                     dgvGood.Visible = true;
-                    tableLayoutPanel1.Visible = true;
+                    pnlDgvHead.Visible = true;
 
                     pnlPayInfo.Visible = false;
                     try
@@ -604,7 +602,7 @@ namespace WinSaasPOS
                                         List<Bitmap> lstbmp = GetDgvRow(temppro);
                                         if (lstbmp != null && lstbmp.Count == 3)
                                         {
-                                            dgvGood.Rows.Insert(0, new object[] { lstbmp[0], lstbmp[1], "", pronum, "", lstbmp[2] });
+                                            dgvGood.Rows.Insert(0, new object[] { (1 + i).ToString(), lstbmp[0], lstbmp[1], "", pronum, "", lstbmp[2] });
                                         }
                                     }));
                                 }
@@ -688,7 +686,7 @@ namespace WinSaasPOS
                         this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 0);
                         pnlMemberCard.Visible = false;
 
-                        if (CurrentMember.memberinformationresponsevo.onbirthday)
+                        if (CurrentMember.membertenantresponsevo.onbirthday)
                         {
                             // pnlBirthday.Visible = true;
                             if (!lblWechartNickName.Text.Contains("生日快乐！"))
@@ -823,24 +821,23 @@ namespace WinSaasPOS
                     }
                     lblMobil.Text = mobil;
 
-                    if (!string.IsNullOrEmpty(CurrentMember.memberinformationresponsevo.nickname))
-                    {
-                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.nickname + "  你好！";
-
-                    }
-                    else
-                    {
-                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
-                    }
+                    //if (!string.IsNullOrEmpty(CurrentMember.memberinformationresponsevo.nickname))
+                    //{
+                    //    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.nickname + "  你好！";
+                    //}
+                    //else
+                    //{
+                    //    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+                    //}
+                    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
 
                     pnlMemberCard.Visible = false;
-
 
                     this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 35);
                     this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
                     this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 0);
 
-                    if (CurrentMember.memberinformationresponsevo.onbirthday)
+                    if (CurrentMember.membertenantresponsevo.onbirthday)
                     {
                         // pnlBirthday.Visible = true;
                         if (!lblWechartNickName.Text.Contains("生日快乐！"))
@@ -986,7 +983,7 @@ namespace WinSaasPOS
                 tabControlMedia.SelectedIndex = 0;
 
                 dgvGood.Visible = false;
-                tableLayoutPanel1.Visible = false;
+                pnlDgvHead.Visible = false;
 
                 pnlPayInfo.Visible = true;
 
@@ -1027,8 +1024,6 @@ namespace WinSaasPOS
         {
             try
             {
-
-               
                 bool showorclose = (bool)obj;
                 if (showorclose) //打开
                 {
@@ -1040,7 +1035,6 @@ namespace WinSaasPOS
                         frmbalancepwdguest.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + pnlPayInfo.Location.X, pnlPayInfo.Location.Y);
                         frmbalancepwdguest.TopMost = true;
                         asf.AutoScaleControlTest(frmbalancepwdguest,704,699, pnlPayInfo.Width, pnlPayInfo.Height, true);
-
                     }
 
                     frmbalancepwdguest.ShowDialog();
@@ -1099,7 +1093,7 @@ namespace WinSaasPOS
                     case 1: lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF7D14"); lblPriceTag.Text = pro.pricetag; break;
                     case 2: lblPriceTag.BackColor = ColorTranslator.FromHtml("#209FD4"); lblPriceTag.Text = pro.pricetag; break;
                     case 3: lblPriceTag.BackColor = ColorTranslator.FromHtml("#D42031"); lblPriceTag.Text = pro.pricetag; break;
-                    case 4: lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF000"); lblPriceTag.Text = pro.pricetag; break;
+                    case 4: lblPriceTag.BackColor = ColorTranslator.FromHtml("#250D05"); lblPriceTag.Text = pro.pricetag; break;
                     default: lblPriceTag.Text = ""; break;
                 }
                 //test

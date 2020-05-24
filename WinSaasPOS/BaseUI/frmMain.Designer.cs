@@ -41,7 +41,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.timerClearMemory = new System.Windows.Forms.Timer(this.components);
             this.pnlPayType1 = new System.Windows.Forms.Panel();
             this.btnPayByCoupon = new System.Windows.Forms.Button();
@@ -66,7 +65,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.timerGetIncrementProduct = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.btnOnLineType = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
@@ -159,10 +157,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             this.pnlWaitingMember.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // timerNow
-            // 
-            this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
             // 
             // timerClearMemory
             // 
@@ -1577,7 +1571,6 @@
         private System.Windows.Forms.Label lblPriceStr;
         private System.Windows.Forms.Label lblGoodsCount;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Timer timerNow;
         private System.Windows.Forms.Timer timerClearMemory;
         private System.Windows.Forms.Panel pnlMember;
         private System.Windows.Forms.Label lblJF;
@@ -1615,7 +1608,6 @@
         
         private System.Windows.Forms.Timer timerGetIncrementProduct;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnJFUse;
         private System.Windows.Forms.Button btnMemberPromo;
         private System.Windows.Forms.PictureBox picDelete;

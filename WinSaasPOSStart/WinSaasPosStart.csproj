@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>SaasLogo.ico</ApplicationIcon>
+    <ApplicationIcon>SassPos256.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>0DED75DF95E81B8440CBD10F4D479045B2942AD1</ManifestCertificateThumbprint>
@@ -122,6 +122,7 @@
     <Compile Include="frmLoading.Designer.cs">
       <DependentUpon>frmLoading.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpRequest.cs" />
     <Compile Include="HttpUtil.cs" />
     <Compile Include="LoadingHelper.cs" />
     <Compile Include="MainModel.cs" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <Content Include="Qdama.ico" />
     <Content Include="SaasLogo.ico" />
+    <Content Include="SassPos256.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

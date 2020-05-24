@@ -115,14 +115,14 @@ namespace WinSaasPOS.Model
         public static int Code_260058 = 260058;//小主，当前选择优惠券无效
 
         public static string CurrentCouponCode = "";
-        public static string CurrentPromotionCode = "";
+        public static Availablecoupon Currentavailabecoupno = null;
 
         /// <summary>
         /// 当前店铺信息
         /// </summary>
         public static DeviceShopInfo CurrentShopInfo;
 
-
+        public static string Titledata = DateTime.Now.ToString("yyyy-MM-dd ") + GlobalUtil.GetWeek();
 
 
 

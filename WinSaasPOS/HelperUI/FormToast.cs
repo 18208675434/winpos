@@ -28,9 +28,17 @@ namespace WinSaasPOS.HelperUI
 
                 this.Size = new System.Drawing.Size(lblMsg.Width + 40, lblMsg.Size.Height + 20);
                 this.Location = new Point((Screen.AllScreens[0].Bounds.Width - this.Width)/2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
+                Application.DoEvents();
             }
             catch (Exception ex)
             {
+                try
+                {
+                    ToastHelper.frmtoast = null;
+                    this.Dispose();
+                }
+                catch { }
+                
                 LogManager.WriteLog("信息框更新异常"+ex.Message);
             }
         }

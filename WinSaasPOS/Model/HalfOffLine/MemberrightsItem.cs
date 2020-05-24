@@ -7,17 +7,18 @@ namespace WinSaasPOS.Model.HalfOffLine
 {
     public class MemberrightsItem
     {
-        private bool enable;
-        private float onemonthfee;
-        private Tenantmemberrightsdiscountconfig tenantmemberrightsdiscountconfig;
-        private Tenantmemberrightsfreightfreeconfig tenantmemberrightsfreightfreeconfig;
+        public bool enable;
+        public float onemonthfee;
+        public Tenantmemberrightsdiscountconfig tenantmemberrightsdiscountconfig;
+        public Tenantmemberrightsfreightfreeconfig tenantmemberrightsfreightfreeconfig;
 
+        public bool memberrightsfunctionenable;
     }
 
     public class Tenantmemberrightsfreightfreeconfig
     {
-        private bool freightfreeenabled;
-        private String title;
-        private String description;
+        public bool freightfreeenabled;
+        public String title;
+        public String description;
     }
 }

@@ -64,6 +64,7 @@ namespace WinSaasPOS
 
         private void frmOrderHang_Load(object sender, EventArgs e)
         {
+            lblTime.Text = MainModel.Titledata;
             btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
             btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10, btnCancle.Left + btnCancle.Width);
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
@@ -81,8 +82,7 @@ namespace WinSaasPOS
                 pnlDgvHead.Visible = true;
                 pnlDgvHeadOffLine.Visible = false;
             }
-            timerNow.Interval = 1000;
-            timerNow.Enabled = true;
+
             Application.DoEvents();
         }
 
@@ -348,14 +348,16 @@ namespace WinSaasPOS
         }
 
 
-        private void timerNow_Tick(object sender, EventArgs e)
-        {
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        }
+
 
         private void btnWindows_Click(object sender, EventArgs e)
         {
             MainModel.ShowWindows();
+        }
+
+        private void frmOrderHang_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
 
      

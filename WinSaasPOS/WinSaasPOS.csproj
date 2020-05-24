@@ -51,7 +51,7 @@
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>SaasLogo.ico</ApplicationIcon>
+    <ApplicationIcon>SassPos256.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -95,6 +95,7 @@
     <Compile Include="Common\AutoSizeFormUtil.cs" />
     <Compile Include="Common\DataUtil.cs" />
     <Compile Include="Common\GlobalUtil.cs" />
+    <Compile Include="Common\HttpRequest.cs" />
     <Compile Include="Common\HttpServer.cs" />
     <Compile Include="Common\HttpUtil.cs" />
     <Compile Include="Common\LoadingHelper.cs" />
@@ -548,6 +549,7 @@
     <Compile Include="Model\HalfOffLine\MemberDiscount.cs" />
     <Compile Include="Model\HalfOffLine\Memberoperationitem.cs" />
     <Compile Include="Model\HalfOffLine\MemberrightsItem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberTenantItem.cs" />
     <Compile Include="Model\HalfOffLine\MemberTenantmembergradeconfig.cs" />
     <Compile Include="Model\HalfOffLine\PromotionCoupon.cs" />
     <Compile Include="Model\HalfOffLine\TenantCreditConfig.cs" />
@@ -560,9 +562,11 @@
     <Compile Include="Model\promotionaction\AbstractPromoAction.cs" />
     <Compile Include="Model\promotionaction\CycleDesignatedDiscountPromotionAction.cs" />
     <Compile Include="Model\promotionaction\DesignatedDiscountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\FixedTradeOffOrderAmountOffPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderAmountOffPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderDiscountPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderDynamicAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderPaymentPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderStepAmountOffPromotionAction.cs" />
     <Compile Include="Model\promotionaction\PackageSellingPromotionAction.cs" />
     <Compile Include="Model\promotionaction\PromoAction.cs" />
@@ -577,9 +581,9 @@
     <Compile Include="Model\Promotion\CommonConstant.cs" />
     <Compile Include="Model\Promotion\EnumPromotionType.cs" />
     <Compile Include="Model\Promotion\EvaluateScopePromotion.cs" />
+    <Compile Include="Model\Promotion\ImplApplyPayPromoCalculate.cs" />
     <Compile Include="Model\Promotion\ImplOfflineCouponsCalculate.cs" />
     <Compile Include="Model\Promotion\ImplOfflineOrderPromotion.cs" />
-    <Compile Include="Model\Promotion\ImplOfflineSingleCalculate .cs" />
     <Compile Include="Model\Promotion\ImplOfflineSingleCalculateNew.cs" />
     <Compile Include="Model\Promotion\MemberRightsForGradeBean.cs" />
     <Compile Include="Model\Promotion\MoneyUtils.cs" />
@@ -767,6 +771,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BaseUI\frmMainMedia.resx">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="BaseUI\frmMainOffLine.resx">
       <DependentUpon>frmMainOffLine.cs</DependentUpon>
@@ -813,6 +818,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BaseUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="BaseUI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -927,6 +933,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="20200522060242172_easyicon_net_512.ico" />
+    <Content Include="SassPos256.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />
     <None Include="Resources\border_add.bmp" />

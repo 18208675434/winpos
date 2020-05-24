@@ -101,7 +101,7 @@ namespace WinSaasPOS
                 pnlLine2.Height = 1;
                 //pnlLine3.Height = 1;
                 pnlLine4.Height = 1;
-                pnlLine5.Height = 1;
+               // pnlLine5.Height = 1;
                 pnlLine6.Height = 1;
                 pnlLine7.Height = 1;
 

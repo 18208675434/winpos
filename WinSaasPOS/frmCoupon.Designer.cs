@@ -63,7 +63,7 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.lblTitle.ForeColor = System.Drawing.Color.Tomato;
-            this.lblTitle.Location = new System.Drawing.Point(109, 27);
+            this.lblTitle.Location = new System.Drawing.Point(115, 25);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(63, 20);
             this.lblTitle.TabIndex = 0;
@@ -172,7 +172,7 @@
             this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.btnCancle.Location = new System.Drawing.Point(342, 12);
             this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(26, 26);
+            this.btnCancle.Size = new System.Drawing.Size(28, 28);
             this.btnCancle.TabIndex = 36;
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
@@ -256,30 +256,33 @@
             // lblUnit
             // 
             this.lblUnit.AutoSize = true;
-            this.lblUnit.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblUnit.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblUnit.ForeColor = System.Drawing.Color.Red;
-            this.lblUnit.Location = new System.Drawing.Point(70, 28);
+            this.lblUnit.Location = new System.Drawing.Point(74, 28);
             this.lblUnit.Name = "lblUnit";
-            this.lblUnit.Size = new System.Drawing.Size(26, 21);
+            this.lblUnit.Size = new System.Drawing.Size(23, 20);
             this.lblUnit.TabIndex = 2;
             this.lblUnit.Text = "折";
             // 
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.lblAmount.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.lblAmount.ForeColor = System.Drawing.Color.Red;
             this.lblAmount.Location = new System.Drawing.Point(32, 17);
             this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(47, 35);
+            this.lblAmount.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblAmount.Size = new System.Drawing.Size(42, 31);
             this.lblAmount.TabIndex = 1;
             this.lblAmount.Text = "20";
+            this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmCoupon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(380, 480);
             this.Controls.Add(this.pnlItem);
             this.Controls.Add(this.picSelect);

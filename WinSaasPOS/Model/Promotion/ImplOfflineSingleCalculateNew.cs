@@ -95,15 +95,19 @@ public class ImplOfflineSingleCalculateNew {
             memberPricePair = calcmemberPrice(productBean);//会员价促销
             memberDiscountPricePair = calcmemberDiscountPrice(productBean);//会员打折
         }
-
         TripletBeanForCoupon memberGradePricePair = null;
         DBPROMOTION_CACHE_BEANMODEL memberGradeDiscountPricePromo = null;
         bool gradeMember = false;
         if (PromotionCache.getInstance().isLoginMember) {
-            if (PromotionCache.getInstance().getMemberRightsForGradeBean() != null && PromotionCache.getInstance().getMemberRightsForGradeBean().getMemberGradeDiscountPricePromo() != null && PromotionCache.getInstance().getMemberRightsForGradeBean().getMemberGradeDiscountPricePromo().CANBECOMBINED!=1) {
+            if (PromotionCache.getInstance().getMemberRightsForGradeBean() != null) 
+            {
                 gradeMember = PromotionCache.getInstance().getMemberRightsForGradeBean().isGradeMember();
-                memberGradePricePair = calcPaidUpMemberPrice(PromotionCache.getInstance().getMemberRightsForGradeBean().getMemberGradeDiscountPricePromo(), productBean);
                 memberGradeDiscountPricePromo = PromotionCache.getInstance().getMemberRightsForGradeBean().getMemberGradeDiscountPricePromo();
+
+                if (memberGradeDiscountPricePromo != null && memberGradeDiscountPricePromo.CANBECOMBINED != 1)
+                {
+                    memberGradePricePair = calcPaidUpMemberPrice(memberGradeDiscountPricePromo, productBean);
+                }
             }
         }
 
@@ -120,15 +124,31 @@ public class ImplOfflineSingleCalculateNew {
                 currentPriceTriplet = comparePricePair(currentPriceTriplet, memberGradePricePair);
             }
         }
+        else
+        {
+            if (currentPriceTriplet != null)
+            {
+                if (gradeMember && memberGradeDiscountPricePromo != null && memberGradeDiscountPricePromo.CANBECOMBINED != 1)
+                {
+                    currentPriceTriplet = comparePricePair(currentPriceTriplet, memberGradePricePair);
+                }
+
+            }
+        }
 
         TripletBeanForCoupon paidUpDiscountPrice = null;
         //会员等级 折上折
         if (gradeMember && memberGradeDiscountPricePromo != null && memberGradeDiscountPricePromo.CANBECOMBINED==1) {
             Decimal originprice = productBean.originprice;
-            productBean.originprice=currentPriceTriplet.getOriginprice();// .setOriginprice(currentPriceTriplet.getOriginprice());
-            paidUpDiscountPrice = calcPaidUpMemberPrice(memberGradeDiscountPricePromo, productBean);
+            if (currentPriceTriplet != null)
+            {
+                productBean.originprice = currentPriceTriplet.getOriginprice();// .setOriginprice(currentPriceTriplet.getOriginprice());
+            }
             
-            if (paidUpDiscountPrice != null) {
+            paidUpDiscountPrice = calcPaidUpMemberPrice(memberGradeDiscountPricePromo, productBean);
+
+            if (currentPriceTriplet != null && currentPriceTriplet.getPriceKind() != EnumPromotionType.MARKET_PRICE)
+            {
                 //存储中间价格信息
                 if (currentPriceTriplet.getPriceKind()!= EnumPromotionType.MARKET_PRICE) {
                     TransitionPriceDetail transitionPriceDetail1 = new TransitionPriceDetail();
@@ -182,7 +202,6 @@ public class ImplOfflineSingleCalculateNew {
                         productBean.purchaselimit=(int)currentPriceTriplet.getPromoTriplet().PURCHASELIMIT;
                     } else {
 
-
                         productBean.price.originprice=currentPriceTriplet.getOriginprice();//.setOriginprice(Double.parseDouble(String.format("%.2f", currentPriceTriplet.getOriginprice())));
                         productBean.price.flag = 1;
                         productBean.price.originpricedesc="会员价";//.setOriginpricedesc("会员价");
@@ -208,9 +227,9 @@ public class ImplOfflineSingleCalculateNew {
                 } else {
                     productBean.price.strikeout=0;
                 }
-                 LogManager.WriteLog("productBean--->" + productBean.skucode + "---name-->" + productBean.title + "---price-->" + productBean.price.saleprice + "code-->" + currentPriceTriplet.getPromoTriplet().CODE);
+                 LogManager.WriteLog("promotion","productBean--->" + productBean.skucode + "---name-->" + productBean.title + "---price-->" + productBean.price.saleprice + "code-->" + currentPriceTriplet.getPromoTriplet().CODE);
             } else {
-                 LogManager.WriteLog("products.get(i).getPrice()  is null or promotion 不合法");
+                 LogManager.WriteLog("promotion","products.get(i).getPrice()  is null or promotion 不合法");
             }
         }
         if (!map.ContainsKey(productBean.skucode)) {
@@ -241,13 +260,13 @@ public class ImplOfflineSingleCalculateNew {
                 bool isEligible = false;
                 if (EnumPromotionType.ALWAYS_PASS.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE)) {
                     if (evaluateSkuScope(dbPromotionCacheBean, productBean)) {
-                         LogManager.WriteLog("code--single-->" + dbPromotionCacheBean.CODE);
+                         LogManager.WriteLog("promotion","code--single-->" + dbPromotionCacheBean.CODE);
                         isEligible = true;
                     }
                 } else if (EnumPromotionType.GOODS_ID_MATCH.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE)) {
                     if (evaluateSkuScope(dbPromotionCacheBean, productBean)) {
                         if (dbPromotionCacheBean.PROMOCONDITIONCONTEXT.Equals(productBean.skucode)) {
-                             LogManager.WriteLog("code--single-->" + dbPromotionCacheBean.CODE);
+                             LogManager.WriteLog("promotion","code--single-->" + dbPromotionCacheBean.CODE);
                             isEligible = true;
                         }
                     }
@@ -258,47 +277,48 @@ public class ImplOfflineSingleCalculateNew {
                 }
             }
         }
+
         return null;
     }
 
     //促销价
     private TripletBeanForCoupon calcPromotionPrice(Product productBean)  {
         List<DBPROMOTION_CACHE_BEANMODEL> list = PromotionCache.getInstance().getList(1, productBean.skucode);//SQliteUtils.getInstance().QueryPromotionBySkucode(productBean.skucode, tenantId, shopId);
-//         LogManager.WriteLog("calcPromotionPrice list  ---->" + list.size());
+//         LogManager.WriteLog("promotion","calcPromotionPrice list  ---->" + list.size());
         return calcPromotionPrice(list, productBean);
     }
 
     //打折价
     private TripletBeanForCoupon calcPromotionDiscountPrice(Product productBean) {
         List<DBPROMOTION_CACHE_BEANMODEL> list = PromotionCache.getInstance().getList(2, productBean.firstcategoryid);//SQliteUtils.getInstance().QueryPromotionByCategory(productBean.getFirstcategoryid(), tenantId, shopId);
-//         LogManager.WriteLog("calcPromotionDiscountPrice list  ---->" + list.size());
+//         LogManager.WriteLog("promotion","calcPromotionDiscountPrice list  ---->" + list.size());
         return calcPromotionPrice(list, productBean);
     }
 
     //会员价
     private TripletBeanForCoupon calcmemberPrice(Product productBean)  {
         List<DBPROMOTION_CACHE_BEANMODEL> list = PromotionCache.getInstance().getList(3, productBean.skucode);//SQliteUtils.getInstance().QueryPromotionBymember(productBean.skucode, tenantId, shopId);
-//         LogManager.WriteLog("calcmemberPrice--list  ------>" + list.size());
+//         LogManager.WriteLog("promotion","calcmemberPrice--list  ------>" + list.size());
         return calcPromotionPrice(list, productBean);
     }
 
     //会员折扣价
     private TripletBeanForCoupon calcmemberDiscountPrice(Product productBean) {
         List<DBPROMOTION_CACHE_BEANMODEL> list = PromotionCache.getInstance().getList(4, productBean.firstcategoryid);//SQliteUtils.getInstance().QueryPromotionByMemberDiscount(productBean.getFirstcategoryid(), tenantId, shopId);
-//         LogManager.WriteLog("calcmemberDiscountPrice list  ---->" + list.size());
+//         LogManager.WriteLog("promotion","calcmemberDiscountPrice list  ---->" + list.size());
         return calcPromotionPrice(list, productBean);
     }
 
     //判断是否符合促销逻辑
     private bool evaluateSkuScope(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, Product productBean) {
-        // 是否仅会员专享
-        bool isOnlyMemberEvaluate = false;
-        if (!EnumPromotionType.MEMBER_PRICE_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_GRADE_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION)) {
-            isOnlyMemberEvaluate = true;
-        }
-        if (isOnlyMemberEvaluate && dbPromotionCacheBean.ONLYMEMBER==1 && !PromotionCache.getInstance().isLoginMember) {
-            return false;
-        }
+        //// 是否仅会员专享
+        //bool isOnlyMemberEvaluate = false;
+        //if (!EnumPromotionType.MEMBER_PRICE_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_GRADE_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION)) {
+        //    isOnlyMemberEvaluate = true;
+        //}
+        //if (isOnlyMemberEvaluate && dbPromotionCacheBean.ONLYMEMBER==1 && !PromotionCache.getInstance().isLoginMember) {
+        //    return false;
+        //}
 
         if (!PromotionInfoUtils.isInTimeRange(dbPromotionCacheBean)) {
             return false;
@@ -329,7 +349,7 @@ public class ImplOfflineSingleCalculateNew {
             if (realmDetail.skuCodesToExclude != null && realmDetail.skuCodesToExclude.Contains(productBean.skucode)) {
                 return false;
             }
-            if (PromotionCache.getCategoryIds(productBean)!=null) {
+            if (CollectionUtils.isEmpty(PromotionCache.getCategoryIds(productBean))) {
                 return false;
             }
             if (realmDetail.catalogsToInclude != null && !GlobalUtil.IsArrayIntersection(realmDetail.catalogsToInclude,
@@ -390,7 +410,7 @@ public class ImplOfflineSingleCalculateNew {
             if (MoneyUtils.isFirstEqualToSecond(newPrice, productBean.originprice)) {
                 priceKind = EnumPromotionType.MARKET_PRICE;
             }
-//             LogManager.WriteLog("newPrice--->" + newPrice);
+//             LogManager.WriteLog("promotion","newPrice--->" + newPrice);
             return new TripletBeanForCoupon(newPrice, priceKind, dbPromotionCacheBean, pricetagid, pricetag);
         }
         return null;
@@ -399,7 +419,8 @@ public class ImplOfflineSingleCalculateNew {
     //单品计算逻辑
     private Decimal getCalculationPrice(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, Product productBean){
         if ((EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) || EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION))) {//打折
-            Decimal discount = Math.Round(MoneyUtils.newMoney(dbPromotionCacheBean.PROMOACTIONCONTEXT), 2, MidpointRounding.AwayFromZero);
+
+            Decimal discount = Math.Round(MoneyUtils.newMoney(dbPromotionCacheBean.PROMOACTIONCONTEXT) / 10, 4, MidpointRounding.AwayFromZero);
             Decimal originprice = productBean.price.originprice;
             if (MoneyUtils.isBiggerThanZero(discount) && MoneyUtils.isFirstBiggerThanSecond(Decimal.One, discount)) {
                 originprice = MoneyUtils.multiply(originprice, discount);
@@ -412,10 +433,10 @@ public class ImplOfflineSingleCalculateNew {
 
     public TripletBeanForCoupon calcPaidUpMemberPrice(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, Product productBean){
         if (evaluateSkuScope(dbPromotionCacheBean, productBean)) {
-            if (EnumPromotionType.MEMBER_GRADE_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION)) {
+            if (EnumPromotionType.MEMBER_GRADE_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION)  || EnumPromotionType.PAID_UP_MEMBER_PRICE_DISCOUNT.Equals(dbPromotionCacheBean.PROMOACTION)) {
                 int pricetagid = -1;
                 String pricetag = "";
-                Decimal discount = Math.Round(MoneyUtils.newMoney(dbPromotionCacheBean.PROMOACTIONCONTEXT), 2, MidpointRounding.AwayFromZero);
+                Decimal discount = Math.Round(MoneyUtils.newMoney(dbPromotionCacheBean.PROMOACTIONCONTEXT)/10, 2, MidpointRounding.AwayFromZero);
                 Decimal originprice = productBean.price.originprice;
 
                 Decimal newPrice = Decimal.Zero;

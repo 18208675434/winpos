@@ -53,6 +53,7 @@ namespace WinSaasPOS
             threadItemExedate.IsBackground = true;
             threadItemExedate.Start();
 
+            //IniForm();
             Thread threadIniFormExedate = new Thread(IniForm);
             threadIniFormExedate.IsBackground = true;
             threadIniFormExedate.Start();
@@ -594,6 +595,7 @@ namespace WinSaasPOS
         {
             try 
             {
+                File.Copy(MainModel.TempFilePath + "\\锥智收银机.exe", MainModel.ServerPath + "\\锥智收银机.exe", true);
                 File.Copy(MainModel.TempFilePath + "\\WinSaasPOSStart.exe", MainModel.ServerPath + "\\WinSaasPOSStart.exe", true);
             }
             catch (Exception ex)

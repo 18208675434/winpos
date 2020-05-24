@@ -66,10 +66,38 @@ namespace WinSaasPOS
             InitializeComponent();
 
             thisCurrentCart = (Cart)cart.qianClone();
-            int tempcash = (int)(cart.totalpayment * 10);
-            relaycash = (decimal)tempcash / 10;
+            CalculateCash();
+            //int tempcash = (int)(cart.totalpayment * 10);
+            //relaycash = (decimal)tempcash / 10;
             btnNext.Focus();
             
+        }
+
+        private void CalculateCash()
+        {
+            try
+            {
+                if (MainModel.CurrentShopInfo.changerule == 1)  //抹角
+                {
+                    relaycash = Math.Floor(thisCurrentCart.totalpayment) ;
+                }
+                else if (MainModel.CurrentShopInfo.changerule == 2)//抹分
+                {
+                    relaycash =Math.Floor(thisCurrentCart.totalpayment * 10)/10 ;
+                }
+                else if (MainModel.CurrentShopInfo.changerule == 3) //分进位
+                {
+                    relaycash = Math.Ceiling(thisCurrentCart.totalpayment*10)/10;
+                }
+                else if (MainModel.CurrentShopInfo.changerule == 4) //分四舍五入
+                {
+                    relaycash = Math.Round(thisCurrentCart.totalpayment, 2,MidpointRounding.AwayFromZero);
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("金额计算异常"+ex.Message,true);
+            }
         }
 
 

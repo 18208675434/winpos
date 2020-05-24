@@ -29,7 +29,7 @@ namespace WinSaasPOS.Model.promotionaction
         return 2;
     }
 
-    protected Decimal calculateScopeDiscountAmtAtRuntime(List<Product> products) {
+    protected override  Decimal calculateScopeDiscountAmtAtRuntime(List<Product> products) {
         Decimal result = 0;
         foreach (Product item in products) {
             result = MoneyUtils.add(result, item.PaySubAmt);

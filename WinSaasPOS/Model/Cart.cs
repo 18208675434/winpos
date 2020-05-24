@@ -143,9 +143,10 @@ namespace WinSaasPOS.Model
         //使用积分
         public long pospointofuser { get; set; }
 
-        public Dictionary<String, String> selectedcoupons { get; set; }
+        public Dictionary<String, Availablecoupon> selectedcoupons { get; set; }
 
-
+        //Add 2020-05-18  
+        public decimal balancepaypromoamt;
     }
     [Serializable]
     public class Tenant
@@ -179,7 +180,6 @@ namespace WinSaasPOS.Model
         public int facepayenabled { get; set; }
         public int balancepayenabled { get; set; }
         public int cashcouponpayenabled { get; set; }
-
 
         public int balancemixpayenabled { get; set; }
         public int swipecardpayenabled { get; set; }  
@@ -323,6 +323,9 @@ namespace WinSaasPOS.Model
 
         //ADD 半离线2019-05-12
         public Decimal discountamt = WinSaasPOS.Model.Promotion.CommonConstant.ZERODECIMAL;//券抵扣金额
+
+        public Exchangeconditioncontext exchangeconditioncontext { get; set; }
+                                        
     }
     [Serializable]
     public class Unavailablecoupon
@@ -349,6 +352,16 @@ namespace WinSaasPOS.Model
         public string availableshopdesc { get; set; }
         public string promotioncode { get; set; }
         public string couponcode { get; set; }
+
+        public Exchangeconditioncontext exchangeconditioncontext { get; set; }
+    }
+
+      [Serializable]
+    public class Exchangeconditioncontext
+    {
+          public int exchangetype { get; set; }
+
+          public int exchangeamount { get; set; }
     }
 
         [Serializable]

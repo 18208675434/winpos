@@ -23,7 +23,7 @@ namespace WinSaasPOS
         /// <summary>
         /// 选中券的促销码
         /// </summary>
-        public string SelectPromotionCode = "";
+        public Availablecoupon SelectPromotionCode =null;
 
         public string StrValue = "";
 
@@ -36,7 +36,7 @@ namespace WinSaasPOS
             InitializeComponent();
             CurrentCart = (Cart)cart.qianClone();
             SelectCouponCode = selectcoupon;
-            SelectPromotionCode = MainModel.CurrentPromotionCode;
+            SelectPromotionCode = MainModel.Currentavailabecoupno;
         }
 
 
@@ -64,6 +64,11 @@ namespace WinSaasPOS
                 dgvCoupon.Rows.Clear();
                 if (cart != null && cart.availablecoupons != null && cart.availablecoupons.Count > 0)
                 {
+                    try
+                    {
+                        cart.availablecoupons = cart.availablecoupons.OrderByDescending(x => x.amount).ToList(); 
+                    }
+                    catch { }
                     foreach (Availablecoupon couponsBean in cart.availablecoupons)
                     {                      
                         dgvCoupon.Rows.Add(GetItemImg(couponsBean));
@@ -114,7 +119,7 @@ namespace WinSaasPOS
                     if(frmcoupon.DialogResult==DialogResult.OK)
                     {
                         SelectCouponCode = couponsBean.couponcode;
-                        SelectPromotionCode = couponsBean.promotioncode;
+                        SelectPromotionCode = couponsBean;
                         this.DialogResult = DialogResult.Yes;
                         this.Close();
                     }
@@ -130,7 +135,7 @@ namespace WinSaasPOS
                 else
                 {
                     SelectCouponCode = couponsBean.couponcode;
-                    SelectPromotionCode = couponsBean.promotioncode;
+                    SelectPromotionCode = couponsBean;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -147,7 +152,7 @@ namespace WinSaasPOS
         private void pnlCouponNone_Click(object sender, EventArgs e)
         {
             SelectCouponCode = "";
-            SelectPromotionCode = "";
+            SelectPromotionCode = null;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -173,7 +178,7 @@ namespace WinSaasPOS
                 {
                     content = "现金券";
                     lblUnit.Text = "￥";
-                    lblUnit.Left = 15;
+                    lblUnit.Left = 6;
                     lblAmount.Left = lblUnit.Right;
                 }
                 else if ("DiscountCoupon" == couponsBean.catalog)
@@ -187,7 +192,7 @@ namespace WinSaasPOS
                         content = "满" + couponsBean.orderminamount + "元使用";
                     }
 
-                    lblAmount.Left = 15;
+                    lblAmount.Left = 6;
                     lblUnit.Text = "折";
                     lblUnit.Left = lblAmount.Right;
                 }
@@ -206,6 +211,27 @@ namespace WinSaasPOS
                     lblUnit.Left = 15;
                     lblAmount.Left = lblUnit.Right;
                 }
+                else if ("ExchangeCoupon".Equals(couponsBean.catalog))
+                {                   
+                    if (couponsBean.exchangeconditioncontext != null)
+                    {
+                        
+                        content = couponsBean.availableskudesc;
+                        if (couponsBean.exchangeconditioncontext.exchangetype == 1)
+                        {
+                            lblUnit.Text = "";
+                            lblAmount.Text = "兑换券";
+                            lblAmount.Left = 10;
+                        }
+                        else if (couponsBean.exchangeconditioncontext.exchangetype == 2)
+                        {
+                            lblUnit.Text = "";
+                            lblAmount.Text = couponsBean.exchangeconditioncontext.exchangeamount + "元兑";
+                            lblAmount.Left = 10;
+                        }
+                    }
+                }
+                lblUnit.Top = lblAmount.Top + lblAmount.Height - lblUnit.Height;
                 
                 lblContent.Text = content;
   

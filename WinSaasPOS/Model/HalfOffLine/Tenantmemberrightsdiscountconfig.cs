@@ -23,33 +23,33 @@ namespace WinSaasPOS.Model.HalfOffLine
         //            "skucodestoexcludevo": [],
         //            "skucodestoinclude": [],
         //            "skucodestoincludevo": []
-        private float discount;
-        private String title;
-        private String description;
-        private bool unionpromotion;
-        private String realmtype;
-        private List<String> catalogstoinclude;
-        private List<String> catalogstoexclude;
-        private List<String> skucodestoexclude;
-        private List<String> skucodestoinclude;
+        public float discount;
+        public String title;
+        public String description;
+        public bool unionpromotion;
+        public String realmtype;
+        public List<String> catalogstoinclude;
+        public List<String> catalogstoexclude;
+        public List<String> skucodestoexclude;
+        public List<String> skucodestoinclude;
 
-        private List<SkuResponseVo> skucodestoincludevo;
-        private List<CatalogsResponseVo> catalogstoincludevo;
-        private List<SkuResponseVo> skucodestoexcludevo;
-        private List<CatalogsResponseVo> catalogstoexcludevo;
+        public List<SkuResponseVo> skucodestoincludevo;
+        public List<CatalogsResponseVo> catalogstoincludevo;
+        public List<SkuResponseVo> skucodestoexcludevo;
+        public List<CatalogsResponseVo> catalogstoexcludevo;
     }
 
     public class SkuResponseVo
     {
-        private String skucode;
-        private String skuname;
-        private String spec;
+        public String skucode;
+        public String skuname;
+        public String spec;
 
     }
 
     public class CatalogsResponseVo
     {
-        private String id;
-        private String name;
+        public String id;
+        public String name;
     }
 }

@@ -126,14 +126,11 @@ namespace WinSaasPOS
             {
                 
                 SetBtnPayStarus(false);
-
-                timerNow.Interval = 1000;
-                timerNow.Enabled = true;
-
                 timerClearMemory.Interval = 6 * 60 * 1000;
                 timerClearMemory.Enabled = true;
 
                 lblShopName.Text = MainModel.CurrentShopInfo.shopname;
+                lblTime.Text = MainModel.Titledata;
                 btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
 
                 //∨ 从右往左排列 被当成图形   从左向右 右侧间距太大
@@ -265,7 +262,6 @@ namespace WinSaasPOS
             try { MainModel.frmloading.Dispose(); }
             catch { } MainModel.frmloading = null;
             
-            timerNow.Enabled = false;
             timerGetIncrementProduct.Enabled = false;
 
             MainModel.frmmainmedia.Close();
@@ -340,20 +336,7 @@ namespace WinSaasPOS
         
         bool isshowpic = false;
         //实时时间显示
-        private void timerNow_Tick(object sender, EventArgs e)
-        {
 
-            ////button4_Click(null,null);
-            ////button4.PerformClick();
-            ////***否则点击完 dgv 监听键盘事件监听不到 return和0
-            //btnScan.Select();
-           // button4.Focus();
-            //button4.Visible = false;
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            //isshowpic = !isshowpic;
-            //LoadPicScreen(isshowpic);
-        }
 
         //定时清理内存
         private void timerClearMemory_Tick(object sender, EventArgs e)
@@ -743,7 +726,7 @@ namespace WinSaasPOS
             {
                 MainModel.frmtoolmain = new frmToolMain();
 
-                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
+                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
                 MainModel.frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                 MainModel.frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - MainModel.frmtoolmain.Width - 15, pnlHead.Height + 10);
                 MainModel.frmtoolmain.Show();
@@ -1461,7 +1444,7 @@ namespace WinSaasPOS
 
                 bool isINNERBARCODE = false;
 
-                if (goodcode.Length == 18 && !checkEanCodeIsError(goodcode, 18) && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
+                if (goodcode.Length == 18 && !WinSaasPOS.BaseUI.MainHelper.checkEanCodeIsError(goodcode, 18) && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
                 {
                     List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" INNERBARCODE='" + goodcode.Substring(2, 10) + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
@@ -1553,45 +1536,6 @@ namespace WinSaasPOS
             }
         }
 
-
-        public static bool checkEanCodeIsError(String barCode, int num)
-        {
-            if (barCode.Length != num)
-            {
-                return true;
-            }
-            try
-            {
-                String code = barCode.Substring(0, num - 1);
-                String checkBit = barCode.Substring(num - 1);
-                int c1 = 0, c2 = 0;
-                for (int i = 0; i < code.Length; i += 2)
-                {
-                    char c = code[i];
-                    int n = c - '0';
-                    c1 += n;
-                }
-                for (int i = 1; i < code.Length; i += 2)
-                {
-                    char c = code[i];
-                    int n = c - '0';
-                    c2 += n;
-                }
-                String check = (10 - (c1 + c2 * 3) % 10) % 10 + "";
-                if (check == checkBit)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-                return true;
-            }
-        }
 
         private void addcart( List<scancodememberModel> lstscancodemember)
         {
@@ -2147,7 +2091,6 @@ namespace WinSaasPOS
                         if (!string.IsNullOrEmpty(member.memberinformationresponsevo.nickname))
                         {
                             lblWechartNickName.Text = member.memberinformationresponsevo.nickname;
-
                         }
                         else
                         {
@@ -2181,7 +2124,7 @@ namespace WinSaasPOS
                         
                         Application.DoEvents();
 
-                        if (member.memberinformationresponsevo.onbirthday)
+                        if (member.membertenantresponsevo.onbirthday)
                         {
 
                             picBirthday.Visible = true;
@@ -3892,7 +3835,7 @@ namespace WinSaasPOS
 
                 //菜单栏窗体
                 MainModel.frmtoolmain = new frmToolMain();
-                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
+                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
                 MainModel.frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                 MainModel.frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - MainModel.frmtoolmain.Width - 15, pnlHead.Height + 10);
              

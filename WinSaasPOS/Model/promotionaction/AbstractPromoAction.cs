@@ -18,6 +18,8 @@ namespace WinSaasPOS.Model.promotionaction
 
         //这是分摊的逻辑
         protected abstract List<Product> processDistribute(EvaluateScopePromotion cartBean, List<Product> products, Decimal discount);
+
+        protected abstract Decimal calculateScopeDiscountAmtAtRuntime(List<Product> products);
     }
 
 }

@@ -672,7 +672,7 @@ namespace WinSaasPOS
             {
                 double doublenum = Convert.ToDouble(txtCash.Text);
 
-                if (doublenum > 0)
+                if (doublenum > 0 || thisCurrentCart.totalpayment==0)
                 {
                     btnNext.BackColor = Color.OrangeRed;
                 }

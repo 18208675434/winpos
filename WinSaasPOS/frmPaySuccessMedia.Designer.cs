@@ -63,7 +63,7 @@
             // lblCashierInfo
             // 
             this.lblCashierInfo.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblCashierInfo.Location = new System.Drawing.Point(271, 231);
+            this.lblCashierInfo.Location = new System.Drawing.Point(154, 231);
             this.lblCashierInfo.Name = "lblCashierInfo";
             this.lblCashierInfo.Size = new System.Drawing.Size(892, 31);
             this.lblCashierInfo.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(272, 314);
+            this.label2.Location = new System.Drawing.Point(268, 314);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(673, 21);
             this.label2.TabIndex = 3;

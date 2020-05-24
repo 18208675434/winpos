@@ -20,21 +20,57 @@ public class ImplOfflineOrderPromotion {
     }
 
     //查找适合的促销对象
-    public void doAction(List<Product> products) {
+    public void doAction(List<Product> products,Cart cartBean) {
 
         try{
         if (products != null && products.Count > 0) {
             List<Product> allProducts = new List<Product>();
             allProducts.AddRange(products);
+
+            if (cartBean != null && cartBean.selectedcoupons != null && cartBean.selectedcoupons.Count > 0)
+            {
+                foreach (String key in cartBean.selectedcoupons.Keys)
+                {
+                    try
+                    {
+                        Availablecoupon couponsBean = cartBean.selectedcoupons[key];// .getSelectedcoupons().get(key);
+                        if (couponsBean != null && couponsBean.catalog.Equals("ExchangeCoupon"))
+                        {
+                            List<DBPROMOTION_CACHE_BEANMODEL> list = PromotionCache.getInstance().getList(5, couponsBean.promotioncode);//SQliteUtils.getInstance().QueryPromotionByCode(code, tenantId, shopId);
+                            if (list != null && list.Count > 0)
+                            {
+                                DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean = list[0];
+                                if (dbPromotionCacheBean != null)
+                                {
+                                    EvaluateScopePromotion evaluateScopePromotion = new EvaluateScopePromotion();
+                                    if (PromotionCache.getInstance().getPromotionConditionUtils() != null && PromotionCache.getInstance().getPromotionConditionUtils().evaluateScope(dbPromotionCacheBean, allProducts, evaluateScopePromotion))
+                                    {
+                                        //剔除第0个商品
+                                        if (evaluateScopePromotion.getList() != null && evaluateScopePromotion.getList().Count > 0)
+                                        {
+                                            allProducts.Remove(evaluateScopePromotion.getList()[0]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        //e.printStackTrace();
+                    }
+                }
+            }
+
             List<DBPROMOTION_CACHE_BEANMODEL> promotiolist = PromotionCache.getInstance().getList(6, EnumPromotionType.PromotionType_ORDER);//SQliteUtils.getInstance().queryOrderPromotion(tenantId, shopId);
             if (promotiolist != null && promotiolist.Count > 0) {
-                LogManager.WriteLog("promotiolist  ---->" + promotiolist.Count);
+                 LogManager.WriteLog("promotion","promotiolist  ---->" + promotiolist.Count);
                 PromotionInfoUtils.sortPromotion(promotiolist);
                 calcPromotionPrice(promotiolist, allProducts);
             }
         }
     }catch(Exception ex){
-        LogManager.WriteLog("查找适合的促销对象异常"+ex.Message);
+         LogManager.WriteLog("promotion","查找适合的促销对象异常"+ex.Message);
     }
     }
 
@@ -52,7 +88,7 @@ public class ImplOfflineOrderPromotion {
                     if (PromotionCache.getInstance().getPromotionConditionUtils() != null && PromotionCache.getInstance().getPromotionConditionUtils().evaluateScope(dbPromotionCacheBean, allProducts, evaluateScopePromotion))
                     {
 
-                        LogManager.WriteLog("getCode  ---->" + dbPromotionCacheBean.CODE);
+                         LogManager.WriteLog("promotion","getCode  ---->" + dbPromotionCacheBean.CODE);
                         // evaluateScopePromotion.getList() 传入满足的list 商品
                         bool isEligible = false;
                         //判断是件数条件判断，走件数判断逻辑
@@ -99,14 +135,14 @@ public class ImplOfflineOrderPromotion {
                            // allProducts.RemoveAll(evaluateScopePromotion.getList());
                         }
 
-                       LogManager.WriteLog("allProducts  after remove---->" + allProducts.Count);
+                        LogManager.WriteLog("promotion","allProducts  after remove---->" + allProducts.Count);
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            LogManager.WriteLog("遍历所有的促销对象异常"+ex.Message);
+             LogManager.WriteLog("promotion","遍历所有的促销对象异常"+ex.Message);
         }
     }
 

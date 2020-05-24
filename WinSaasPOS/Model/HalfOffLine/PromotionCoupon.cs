@@ -54,6 +54,7 @@ namespace WinSaasPOS.Model.HalfOffLine
     public Decimal discountamt = WinSaasPOS.Model.Promotion.CommonConstant.ZERODECIMAL;//券抵扣金额
     public PromoAction promoAction;
 
+    public Exchangeconditioncontext exchangeconditioncontext { get; set; }
 }
 
 }

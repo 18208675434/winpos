@@ -35,9 +35,6 @@
             this.pnlExit = new System.Windows.Forms.Panel();
             this.lblExit = new System.Windows.Forms.Label();
             this.picExit = new System.Windows.Forms.PictureBox();
-            this.pnlScale = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pnlChangeMode = new System.Windows.Forms.Panel();
             this.lblChangeMode = new System.Windows.Forms.Label();
             this.picChangeMode = new System.Windows.Forms.PictureBox();
@@ -52,15 +49,12 @@
             this.pnlLine1 = new System.Windows.Forms.Panel();
             this.pnlLine2 = new System.Windows.Forms.Panel();
             this.pnlLine4 = new System.Windows.Forms.Panel();
-            this.pnlLine5 = new System.Windows.Forms.Panel();
             this.pnlLine6 = new System.Windows.Forms.Panel();
             this.pnlLine7 = new System.Windows.Forms.Panel();
             this.pnlReceipt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.pnlExit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picExit)).BeginInit();
-            this.pnlScale.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.pnlChangeMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picChangeMode)).BeginInit();
             this.pnlReceiptQuery.SuspendLayout();
@@ -135,39 +129,6 @@
             this.picExit.TabStop = false;
             this.picExit.Click += new System.EventHandler(this.pnlExit_Click);
             // 
-            // pnlScale
-            // 
-            this.pnlScale.Controls.Add(this.label7);
-            this.pnlScale.Controls.Add(this.pictureBox4);
-            this.pnlScale.Location = new System.Drawing.Point(11, 166);
-            this.pnlScale.Name = "pnlScale";
-            this.pnlScale.Size = new System.Drawing.Size(147, 39);
-            this.pnlScale.TabIndex = 6;
-            this.pnlScale.Click += new System.EventHandler(this.pnlScale_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(48, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 20);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "电子秤管理";
-            this.label7.Click += new System.EventHandler(this.pnlScale_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(13, 7);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pnlScale_Click);
-            // 
             // pnlChangeMode
             // 
             this.pnlChangeMode.Controls.Add(this.lblChangeMode);
@@ -205,7 +166,7 @@
             // 
             this.pnlReceiptQuery.Controls.Add(this.lblReceiptQuery);
             this.pnlReceiptQuery.Controls.Add(this.picReceiptQuery);
-            this.pnlReceiptQuery.Location = new System.Drawing.Point(11, 216);
+            this.pnlReceiptQuery.Location = new System.Drawing.Point(11, 166);
             this.pnlReceiptQuery.Name = "pnlReceiptQuery";
             this.pnlReceiptQuery.Size = new System.Drawing.Size(147, 39);
             this.pnlReceiptQuery.TabIndex = 8;
@@ -238,7 +199,7 @@
             // 
             this.pnlPrintSet.Controls.Add(this.lblPrintSet);
             this.pnlPrintSet.Controls.Add(this.picPrintSet);
-            this.pnlPrintSet.Location = new System.Drawing.Point(11, 268);
+            this.pnlPrintSet.Location = new System.Drawing.Point(11, 218);
             this.pnlPrintSet.Name = "pnlPrintSet";
             this.pnlPrintSet.Size = new System.Drawing.Size(147, 39);
             this.pnlPrintSet.TabIndex = 10;
@@ -272,7 +233,7 @@
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(3, 317);
+            this.lblDeviceSN.Location = new System.Drawing.Point(3, 267);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(56, 17);
             this.lblDeviceSN.TabIndex = 2;
@@ -283,7 +244,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.lblVersion.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblVersion.Location = new System.Drawing.Point(3, 339);
+            this.lblVersion.Location = new System.Drawing.Point(3, 289);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(56, 17);
             this.lblVersion.TabIndex = 12;
@@ -313,18 +274,10 @@
             this.pnlLine4.Size = new System.Drawing.Size(160, 1);
             this.pnlLine4.TabIndex = 14;
             // 
-            // pnlLine5
-            // 
-            this.pnlLine5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
-            this.pnlLine5.Location = new System.Drawing.Point(6, 209);
-            this.pnlLine5.Name = "pnlLine5";
-            this.pnlLine5.Size = new System.Drawing.Size(160, 1);
-            this.pnlLine5.TabIndex = 14;
-            // 
             // pnlLine6
             // 
             this.pnlLine6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
-            this.pnlLine6.Location = new System.Drawing.Point(6, 261);
+            this.pnlLine6.Location = new System.Drawing.Point(6, 211);
             this.pnlLine6.Name = "pnlLine6";
             this.pnlLine6.Size = new System.Drawing.Size(160, 1);
             this.pnlLine6.TabIndex = 15;
@@ -332,7 +285,7 @@
             // pnlLine7
             // 
             this.pnlLine7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
-            this.pnlLine7.Location = new System.Drawing.Point(6, 311);
+            this.pnlLine7.Location = new System.Drawing.Point(6, 261);
             this.pnlLine7.Name = "pnlLine7";
             this.pnlLine7.Size = new System.Drawing.Size(160, 1);
             this.pnlLine7.TabIndex = 16;
@@ -342,10 +295,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(178, 370);
+            this.ClientSize = new System.Drawing.Size(178, 315);
             this.Controls.Add(this.pnlLine7);
             this.Controls.Add(this.pnlLine6);
-            this.Controls.Add(this.pnlLine5);
             this.Controls.Add(this.pnlLine4);
             this.Controls.Add(this.pnlLine2);
             this.Controls.Add(this.pnlLine1);
@@ -353,7 +305,6 @@
             this.Controls.Add(this.lblDeviceSN);
             this.Controls.Add(this.pnlPrintSet);
             this.Controls.Add(this.pnlReceiptQuery);
-            this.Controls.Add(this.pnlScale);
             this.Controls.Add(this.pnlChangeMode);
             this.Controls.Add(this.pnlExit);
             this.Controls.Add(this.pnlReceipt);
@@ -369,9 +320,6 @@
             this.pnlExit.ResumeLayout(false);
             this.pnlExit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picExit)).EndInit();
-            this.pnlScale.ResumeLayout(false);
-            this.pnlScale.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.pnlChangeMode.ResumeLayout(false);
             this.pnlChangeMode.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picChangeMode)).EndInit();
@@ -394,9 +342,6 @@
         private System.Windows.Forms.Panel pnlExit;
         private System.Windows.Forms.Label lblExit;
         private System.Windows.Forms.PictureBox picExit;
-        private System.Windows.Forms.Panel pnlScale;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Panel pnlChangeMode;
         private System.Windows.Forms.Label lblChangeMode;
         private System.Windows.Forms.PictureBox picChangeMode;
@@ -411,7 +356,6 @@
         private System.Windows.Forms.Panel pnlLine1;
         private System.Windows.Forms.Panel pnlLine2;
         private System.Windows.Forms.Panel pnlLine4;
-        private System.Windows.Forms.Panel pnlLine5;
         private System.Windows.Forms.Panel pnlLine6;
         private System.Windows.Forms.Panel pnlLine7;
     }

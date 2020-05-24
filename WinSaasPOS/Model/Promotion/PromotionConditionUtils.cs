@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WinSaasPOS.Common;
+using WinSaasPOS.Model.HalfOffLine;
 
 namespace WinSaasPOS.Model.Promotion
 {
@@ -28,7 +29,48 @@ namespace WinSaasPOS.Model.Promotion
     public void setPromotionNight(String promotionNight) {
 //        this.promotionNight = promotionNight;
     }
-       
+
+           private bool notValidMemberFlag(DBPROMOTION_CACHE_BEANMODEL promotion) {
+//        MemberTenantResponseDto memberTenantResponseDto = memberTenantServiceClient.get(String.valueOf(orderEntity.getOrderHeader().getCustomerId()), orderEntity.getOrderHeader().getTenantId());
+//        if (memberTenantResponseDto != null) {
+//            context.setMemberFlag(1);
+//            if (memberTenantResponseDto.getFirstRechargeAt() != null) {
+//                context.setMemberFlag(2);
+//            }
+//        }
+
+
+        // 是否仅会员专享
+        List<String> memberPriceActions = new List<string>();
+        memberPriceActions.Add(EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION);
+        memberPriceActions.Add(EnumPromotionType.MEMBER_PRICE_ACTION);
+        memberPriceActions.Add(EnumPromotionType.PAID_UP_MEMBER_PRICE_DISCOUNT);
+//        Lists.newArrayList(PromotionactionType.MEMBER_PRICE_DISCOUNT.getValue(), PromotionActionType.MEMBER_PRICE.getValue(), PromotionActionType.PAID_UP_MEMBER_PRICE_DISCOUNT.getValue());
+        List<int> evaluateMemberFlag = new List<int>();
+        evaluateMemberFlag.Add(1);
+        evaluateMemberFlag.Add(2);
+        bool memberFlagEvaluate = (promotion.PROMOACTION == null || !memberPriceActions.Contains(promotion.PROMOACTION))
+                && evaluateMemberFlag.Contains((int)promotion.MEMBERFLAG);
+        if (memberFlagEvaluate) {
+            if (promotion.MEMBERFLAG == 1) {
+                return !PromotionCache.getInstance().isLoginMember;
+            } else if (promotion.MEMBERFLAG== 2) {
+                MemberTenantItem memberTenantResponseDto = PromotionCache.getInstance().membertenantitem;
+                int memberFlag = 0;
+                if (memberTenantResponseDto != null) {
+                    memberFlag = 1;
+                    if (memberTenantResponseDto.firstrechargeat != null) {
+                        memberFlag = 2;
+                    }
+                }
+//                Integer memberFlag = (Integer) context.get(PromotionCondition.VAR_MEMBER_FLAG);
+//                return memberFlag == null || memberFlag < promotion.getMemberflag();
+                return memberFlag == 0 || memberFlag < promotion.MEMBERFLAG;
+            }
+        }
+        return false;
+    }
+
     // 基础类，在单品基础上要加上订单类型判断，订单金额汇总，可用商品行标识，件数汇总等
     public bool evaluateScope(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, List<Product> products, EvaluateScopePromotion evaluateScopePromotion) {
         Decimal promotionItemTotalAmt = new Decimal(0);
@@ -37,11 +79,16 @@ namespace WinSaasPOS.Model.Promotion
 //        ZzLog.e(dbPromotionCacheBean.getCode() + "--" + dbPromotionCacheBean.getEligibilitycondition());
 
         // 是否仅会员专享
-        bool isOnlyMemberEvaluate = false;
-        if (!EnumPromotionType.MEMBER_PRICE_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_GRADE_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION)) {
-            isOnlyMemberEvaluate = true;
-        }
-        if (isOnlyMemberEvaluate && dbPromotionCacheBean.ONLYMEMBER==1 && !PromotionCache.getInstance().isLoginMember) {
+        //bool isOnlyMemberEvaluate = false;
+        //if (!EnumPromotionType.MEMBER_PRICE_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION) && !EnumPromotionType.MEMBER_GRADE_PRICE_DISCOUNT_ACTION.Equals(dbPromotionCacheBean.PROMOACTION)) {
+        //    isOnlyMemberEvaluate = true;
+        //}
+        //if (isOnlyMemberEvaluate && dbPromotionCacheBean.ONLYMEMBER==1 && !PromotionCache.getInstance().isLoginMember) {
+        //    return false;
+        //}
+
+        if (notValidMemberFlag(dbPromotionCacheBean))
+        {
             return false;
         }
 
@@ -64,6 +111,7 @@ namespace WinSaasPOS.Model.Promotion
                 for (int i = 0; i < products.Count; i++) {
                     Product tempProduct = products[i];
                     if (tempProduct != null) {
+                      
                         if (isEligibleRow(dbPromotionCacheBean, products[i])) {
                             list.Add(tempProduct);
 //                            listScope.add(i);//我给商品标记的第几行
@@ -270,6 +318,93 @@ namespace WinSaasPOS.Model.Promotion
 //        }
         return true;
     }
+
+
+    /*** start 订单级别门槛判断及使用***************/
+    //判断是否达到促销门槛
+    public PromoActionFactory getPromoActionFactoryByThreshold(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, EvaluateScopePromotion evaluateScopePromotion)
+    {
+       // ZzLog.e("getCode  ---->" + dbPromotionCacheBean.getCode());
+        bool isEligible = false;
+        //判断是件数条件判断，走件数判断逻辑
+        if (EnumPromotionType.ITEM_COUNT_THRESHOLD.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE))
+        {
+            isEligible = OrderThresholdUtils.ItemCountThresholdevaluate(dbPromotionCacheBean, evaluateScopePromotion.getList(), evaluateScopePromotion);
+        }
+        else if (EnumPromotionType.ORDER_AMOUNT_THRESHOLD.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE))
+        {
+            //判断是金额条件判断，走金额判断逻辑
+            isEligible = OrderThresholdUtils.OrderAmountThresholdvaluate(dbPromotionCacheBean, evaluateScopePromotion.getList(), evaluateScopePromotion);
+        }
+        else if (EnumPromotionType.ITEM_COMBINED_THRESHOLD.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE))
+        {
+            //组合促销判断条件
+            isEligible = OrderThresholdUtils.CombinedThresholdPromotionCondition(dbPromotionCacheBean, evaluateScopePromotion.getList(), evaluateScopePromotion);
+        }
+        else
+        {
+            isEligible = true;
+        }
+
+        PromoActionFactory promoActionFactory = null;
+        //如果满足了，进行促销计算
+        if (isEligible)
+        {
+            if (PromotionContextConvertUtils.isSingleLinePromotion(dbPromotionCacheBean))
+            {
+                //特殊处理单行优惠
+                promoActionFactory = SingleLinePromotioncalculate(dbPromotionCacheBean, evaluateScopePromotion.getList());
+            }
+            else
+            {
+                promoActionFactory = promactioncalculate(dbPromotionCacheBean, evaluateScopePromotion.getList(), evaluateScopePromotion);
+            }
+        }
+        //剔除商品
+        //                if (evaluateScopePromotion.getList() != null && evaluateScopePromotion.getList().size() > 0) {
+        //                    //剔除满足的list商品
+        //                    allProducts.removeAll(evaluateScopePromotion.getList());
+        //                }
+        return promoActionFactory;
+    }
+
+    //根据不同的促销方式进行计算
+    private PromoActionFactory promactioncalculate(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, List<Product> products, EvaluateScopePromotion evaluateScopePromotion)
+    {
+        PromoActionFactory promoActionFactory = new PromoActionFactory(dbPromotionCacheBean);
+        return promoActionFactory;
+    }
+
+    //根据不同的促销方式进行计算  //特殊处理单行优惠
+    private PromoActionFactory SingleLinePromotioncalculate(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, List<Product> products) {
+        if (products != null && products.Count > 0) {
+            for (int i = 0; i < products.Count; i++) {
+                List<Product> newproducts = new List<Product>();
+                newproducts.Add(products[i]);
+                EvaluateScopePromotion evaluateScopePromotion = new EvaluateScopePromotion();
+
+                if (PromotionCache.getInstance().getPromotionConditionUtils() != null && PromotionCache.getInstance().getPromotionConditionUtils().evaluateScope(dbPromotionCacheBean, newproducts, evaluateScopePromotion)) {
+                    bool isEligible = false;
+                    //判断是件数条件判断，走件数判断逻辑
+                    if (EnumPromotionType.ITEM_COUNT_THRESHOLD.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE)) {
+                        isEligible = OrderThresholdUtils.ItemCountThresholdevaluate(dbPromotionCacheBean, newproducts, evaluateScopePromotion);
+                    } else if (EnumPromotionType.ORDER_AMOUNT_THRESHOLD.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE)) {
+                        //判断是金额条件判断，走金额判断逻辑
+                        isEligible = OrderThresholdUtils.OrderAmountThresholdvaluate(dbPromotionCacheBean, newproducts, evaluateScopePromotion);
+                    } else {
+                        isEligible = true;
+                    }
+                    if (isEligible) {
+                        return promactioncalculate(dbPromotionCacheBean, newproducts, evaluateScopePromotion);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+       /*** end 订单级别门槛判断及使用***************/
+
+
 }
 
 }

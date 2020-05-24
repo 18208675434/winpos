@@ -58,7 +58,6 @@
             this.txtQuery = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblOver = new System.Windows.Forms.Label();
-            this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.pnlSort = new System.Windows.Forms.Panel();
             this.btnOrderBySalePrice = new System.Windows.Forms.Button();
             this.btnOrderByCreateDate = new System.Windows.Forms.Button();
@@ -99,7 +98,6 @@
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.timerShown = new System.Windows.Forms.Timer(this.components);
             this.pnlPicSelectItem = new System.Windows.Forms.Panel();
             this.btnSelectNum = new System.Windows.Forms.Button();
             this.picDelect = new System.Windows.Forms.PictureBox();
@@ -143,7 +141,7 @@
             this.pnlQuery.Location = new System.Drawing.Point(12, 77);
             this.pnlQuery.Name = "pnlQuery";
             this.pnlQuery.Size = new System.Drawing.Size(340, 40);
-            this.pnlQuery.TabIndex = 0;
+            this.pnlQuery.TabIndex = 104;
             this.pnlQuery.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlQuery_Paint);
             // 
             // lblShuiyin
@@ -156,7 +154,7 @@
             this.lblShuiyin.Location = new System.Drawing.Point(66, 9);
             this.lblShuiyin.Name = "lblShuiyin";
             this.lblShuiyin.Size = new System.Drawing.Size(107, 20);
-            this.lblShuiyin.TabIndex = 2;
+            this.lblShuiyin.TabIndex = 103;
             this.lblShuiyin.Text = "请输入商品编码";
             this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
             // 
@@ -169,8 +167,10 @@
             this.txtQuery.MaxLength = 18;
             this.txtQuery.Name = "txtQuery";
             this.txtQuery.Size = new System.Drawing.Size(252, 25);
-            this.txtQuery.TabIndex = 1;
+            this.txtQuery.TabIndex = 100;
             this.txtQuery.TextChanged += new System.EventHandler(this.txtQuery_TextChanged);
+            this.txtQuery.Enter += new System.EventHandler(this.txt_Enter);
+            this.txtQuery.Leave += new System.EventHandler(this.txt_Leave);
             // 
             // pictureBox1
             // 
@@ -194,10 +194,6 @@
             this.lblOver.TabIndex = 33;
             this.lblOver.Text = "没有更多数据了";
             this.lblOver.Visible = false;
-            // 
-            // timerNow
-            // 
-            this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
             // 
             // pnlSort
             // 
@@ -885,10 +881,6 @@
             this.delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.delete.Width = 55;
             // 
-            // timerShown
-            // 
-            this.timerShown.Tick += new System.EventHandler(this.timerShown_Tick);
-            // 
             // pnlPicSelectItem
             // 
             this.pnlPicSelectItem.BackColor = System.Drawing.Color.White;
@@ -1144,7 +1136,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmPanelGoods";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPanelGoods_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPanelGoods_FormClosed);
             this.Load += new System.EventHandler(this.frmPanelGoods_Load);
             this.Shown += new System.EventHandler(this.frmPanelGoods_Shown);
             this.pnlQuery.ResumeLayout(false);
@@ -1182,7 +1174,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.PictureBox picScreen;
         private System.Windows.Forms.Label lblOver;
-        private System.Windows.Forms.Timer timerNow;
         private System.Windows.Forms.Panel pnlSort;
         private System.Windows.Forms.Button btnOrderBySalePrice;
         private System.Windows.Forms.Button btnOrderByCreateDate;
@@ -1224,7 +1215,6 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn4;
         private System.Windows.Forms.DataGridViewImageColumn delete;
-        private System.Windows.Forms.Timer timerShown;
         private System.Windows.Forms.Panel pnlPicSelectItem;
         private System.Windows.Forms.PictureBox picDelect;
         private System.Windows.Forms.Label lblSelectPrice;

@@ -137,7 +137,6 @@ namespace WinSaasPOS
                             dgvScale.Rows.Add((i + 1).ToString().PadLeft(2, '0'), lstScale[0].TEMPNAME, lstScale[0].IP, lstScale[0].SCALESTYPE, "-", ResourcePos.White, bmpSendScale);
                         }
                     }
-
                 }
                
                 }));

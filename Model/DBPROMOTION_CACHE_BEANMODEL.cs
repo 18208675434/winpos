@@ -361,6 +361,9 @@ namespace Maticsoft.Model
         private Int64 _onlymember;
         private string _membertags;
         private Int64 _purchaselimit;
+        private Int64 _memberflag;
+
+
         public Int64 ONLYMEMBER
         {
             set { _onlymember = value; }
@@ -379,5 +382,11 @@ namespace Maticsoft.Model
             get { return _membertags; }
         }
 
+
+        public Int64 MEMBERFLAG
+        {
+            set { _memberflag = value; }
+            get { return _memberflag; }
+        }
     }
 }

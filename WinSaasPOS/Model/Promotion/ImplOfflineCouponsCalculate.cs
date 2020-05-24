@@ -76,8 +76,8 @@ namespace WinSaasPOS.Model.Promotion
         }
         else
         {
-            cartBean.selectedcoupons = new Dictionary<string, string>();
-            cartBean.selectedcoupons.Add(MainModel.CurrentCouponCode, MainModel.CurrentPromotionCode);
+            cartBean.selectedcoupons = new Dictionary<string, Availablecoupon>();
+            cartBean.selectedcoupons.Add(MainModel.CurrentCouponCode, MainModel.Currentavailabecoupno);
         }
 
         List<PromotionCoupon> listcoupon = PromotionCache.getInstance().getListcoupon();//查询出优惠券
@@ -140,6 +140,8 @@ namespace WinSaasPOS.Model.Promotion
                     couponsBean.orderminamount = coupon.orderminamount;
                     couponsBean.discountamt = coupon.discountamt;
                     couponsBean.amount = coupon.amount;
+                    couponsBean.availableskudesc = coupon.availableskudesc;
+                    couponsBean.exchangeconditioncontext = coupon.exchangeconditioncontext;
                     availablecoupons.Add(couponsBean);
                 }
             }
@@ -172,7 +174,7 @@ namespace WinSaasPOS.Model.Promotion
     //判断是否达到促销门槛
     private PromoActionFactory getPromoActionFactoryByThreshold(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, EvaluateScopePromotion evaluateScopePromotion)
     {
-        LogManager.WriteLog("getCode  ---->" + dbPromotionCacheBean.CODE);
+        LogManager.WriteLog("promotion", "getCode  ---->" + dbPromotionCacheBean.CODE);
         bool isEligible = false;
         //判断是件数条件判断，走件数判断逻辑
         if (EnumPromotionType.ITEM_COUNT_THRESHOLD.Equals(dbPromotionCacheBean.PROMOCONDITIONTYPE))
@@ -276,8 +278,8 @@ namespace WinSaasPOS.Model.Promotion
         foreach(String key in cartBean.selectedcoupons.Keys) {
             TripletBeanForCoupon promoTriplet = null;
 //            if ("orderCoupon".equals(type)) {
-            String Promotioncode = cartBean.selectedcoupons[key];
-            LogManager.WriteLog("--Promotioncode-->" + Promotioncode);
+            String Promotioncode = cartBean.selectedcoupons[key].promotioncode;
+            LogManager.WriteLog("promotion", "--Promotioncode-->" + Promotioncode);
             DBPROMOTION_CACHE_BEANMODEL DBPROMOTION_CACHE_BEANMODEL = getDBPROMOTION_CACHE_BEANMODEL(Promotioncode);//SQliteUtils.getInstance().QueryPromotionByCode(Promotioncode, tenantId, shopId);
             if (DBPROMOTION_CACHE_BEANMODEL != null) {
                 promoTriplet = new TripletBeanForCoupon();
@@ -306,7 +308,7 @@ namespace WinSaasPOS.Model.Promotion
         List<KeyValuePair<TripletBeanForCoupon, EvaluateScopePromotion>> bestValue = null;
         Decimal bestDiscountValue = Decimal.Zero;
         long bestMaxRank = 0;
-
+        List<Product> allProducts = new List<Product>();
         foreach ( List<TripletBeanForCoupon> promoBucket in promoBuckets) {
             try {
                 if (promoBucket==null || promoBucket.Count==0) {
@@ -337,6 +339,12 @@ namespace WinSaasPOS.Model.Promotion
                                  }
                              }
                          }
+
+                         if (evaluateScopePromotion.getList() != null && evaluateScopePromotion.getList().Count > 0)
+                         {
+                             allProducts.AddRange(evaluateScopePromotion.getList());
+                         }
+
                     }
                 }
 
@@ -351,7 +359,7 @@ namespace WinSaasPOS.Model.Promotion
                     bestMaxRank = maxRank;
                 }
             } catch (Exception exp) {
-                LogManager.WriteLog(exp.Message);
+                LogManager.WriteLog("promotion", exp.Message);
                 //exp.printStackTrace();
             }
         }
@@ -360,7 +368,7 @@ namespace WinSaasPOS.Model.Promotion
             Decimal discount = Decimal.Zero;
             foreach (KeyValuePair<TripletBeanForCoupon, EvaluateScopePromotion> bucketContext in bestValue) {
                 if (bucketContext.Key.getPromoAction() != null) {
-                    Decimal couponsdiscount = bucketContext.Key.getPromoAction().getDiscountValue(bucketContext.Value, cartBean.products, bucketContext.Key.getPromoTriplet());
+                    Decimal couponsdiscount = bucketContext.Key.getPromoAction().getDiscountValue(bucketContext.Value, allProducts, bucketContext.Key.getPromoTriplet());
                     discount = MoneyUtils.add(discount, couponsdiscount);
                 }
             }

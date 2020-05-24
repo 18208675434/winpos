@@ -81,6 +81,8 @@ namespace WinSaasPOS
 
         private void frmPanelGoods_Load(object sender, EventArgs e)
         {
+
+            lblTime.Text = MainModel.Titledata;
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
             if (MainModel.IsOffLine)
@@ -107,41 +109,21 @@ namespace WinSaasPOS
 
         private void frmPanelGoods_Shown(object sender, EventArgs e)
         {
+            
             Application.DoEvents();
-            timerShown.Interval = 50;
-            timerShown.Enabled = true;
+            Other.CrearMemory();
+            imgSelect = btnOrderBySaleCount.BackgroundImage;
+            imgNotSelect = btnOrderBySalePrice.BackgroundImage;
 
-            timerNow.Interval = 1000;
-            timerNow.Enabled = true;
+            LoadProduct();
 
-
-        }
-        private void timerShown_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                timerShown.Enabled = false;
-
-                imgSelect = btnOrderBySaleCount.BackgroundImage;
-                imgNotSelect = btnOrderBySalePrice.BackgroundImage;
-
-                LoadProduct();
-
-                IniForm();
-                //Thread threadIniForm = new Thread(IniForm);
-                //threadIniForm.IsBackground = true;
-                //threadIniForm.Start();
+            IniForm();
+            //扫描数据处理线程
+            Thread threadScanCode = new Thread(ScanCodeThread);
+            threadScanCode.IsBackground = false;
+            threadScanCode.Start();
 
 
-                //扫描数据处理线程
-                Thread threadScanCode = new Thread(ScanCodeThread);
-                threadScanCode.IsBackground = false;
-                threadScanCode.Start();
-            }
-            catch (Exception ex)
-            {
-                LoadingHelper.CloseForm();
-            }
         }
 
         private void LoadProduct()
@@ -163,6 +145,8 @@ namespace WinSaasPOS
                     product.firstcategoryid = pro.FIRSTCATEGORYID;
                     product.firstcategoryname = pro.FIRSTCATEGORYNAME;
                     product.barcode = pro.SKUCODE;
+                    product.secondcategoryid = pro.SECONDCATEGORYID;
+                    
                     //product.isQueryBarcode = 0;
                     product.weightflag = Convert.ToBoolean(pro.WEIGHTFLAG);
                     product.shopid = pro.SHOPID;
@@ -172,8 +156,7 @@ namespace WinSaasPOS
                     product.salecount = (int)pro.SALECOUNT;
                     product.createdat = pro.CREATEDAT;
 
-                    if (MainModel.IsOffLine)
-                    {
+                   
                         Price price = new Price();
                         price.saleprice = pro.SALEPRICE;
                         price.originprice = pro.SALEPRICE;
@@ -187,7 +170,7 @@ namespace WinSaasPOS
                         //product.panelbmp = GetItemImg(product);
 
                         //singlecalculate.calculate(product);
-                    }
+                    
                     //product.price = new Price();
                     LstAllProduct.Add(product);
                 }
@@ -257,10 +240,6 @@ namespace WinSaasPOS
         }
 
 
-        private void timerNow_Tick(object sender, EventArgs e)
-        {
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        }
 
         private void pnlQuery_Paint(object sender, PaintEventArgs e)
         {
@@ -415,19 +394,29 @@ namespace WinSaasPOS
         {
             try
             {
-
                 IsEnable = false;
                 int dgrowscount = dgvGoodPic.Rows.Count * 4;
 
                 LoadBtnSortStatus(sortCartByFirstCategoryid[CurrentFirstCategoryid].sorttype);
                 List<Product> templstprodcut = sortCartByFirstCategoryid[CurrentFirstCategoryid].products;
 
-               
+                switch (sortCartByFirstCategoryid[CurrentFirstCategoryid].sorttype)
+                {
+                    case SortType.SaleCount: templstprodcut = templstprodcut.OrderByDescending(r => r.salecount).ToList(); break;
+                    case SortType.CreateDate: templstprodcut = templstprodcut.OrderByDescending(r => r.createdat).ToList(); break;
+                    case SortType.SalePriceAsc: templstprodcut = templstprodcut.OrderBy(r => r.price.saleprice).ToList(); break;
+                    case SortType.SalePriceDesc: templstprodcut = templstprodcut.OrderByDescending(r => r.price.saleprice).ToList(); break;
+                    default: templstprodcut.OrderBy(r => r.salecount); break;
+                }
 
                 List<Product> tempIsLoadlstprodcut = templstprodcut.Where(r => r.isLoadPanel == true).ToList();
 
                 List<Product> tempNotLoadlstprodcut = templstprodcut.Where(r => r.isLoadPanel == false).ToList();
 
+                if (isnewType)
+                {
+                    dgvGoodPic.Rows.Clear();
+                }
                 if (templstprodcut.Count > dgrowscount)
                 {
                     if (isnewType)
@@ -444,6 +433,8 @@ namespace WinSaasPOS
                             default: templstprodcut.OrderBy(r => r.salecount); break;
                         }
                         tempNotLoadlstprodcut = templstprodcut;
+
+                        tempIsLoadlstprodcut = new List<Product>();
                     }
 
                     if ((tempIsLoadlstprodcut.Count == 0 || isnew) && tempNotLoadlstprodcut.Count > 0)
@@ -456,7 +447,7 @@ namespace WinSaasPOS
 
                         //防止转换json  死循环   bmp.tag 是product
                         lstNewProduct.ForEach(r => r.panelbmp = null);
-
+                        lstNewProduct.ForEach(r=> r.isLoadPanel=false);
                         if (!MainModel.IsOffLine) { 
                         PanelProductPara panelpara = new PanelProductPara();
                         if (MainModel.CurrentMember != null)
@@ -757,16 +748,15 @@ namespace WinSaasPOS
                     {
                         CurrentCart = cart;
                         dgvGoodSelect.Rows.Clear();
-                        for (int i = CurrentCart.products.Count; i > 0; i--)
-                        {
-                            Product protemp = CurrentCart.products[i - 1];
 
+                        foreach (Product protemp in CurrentCart.products)
+                        {
                             List<Image> lstbmp = GetSelect(protemp);
                             if (lstbmp != null && lstbmp.Count == 3)
                             {
                                 dgvGoodSelect.Rows.Insert(0, new object[] { lstbmp[0], lstbmp[1], lstbmp[2] });
 
-                               //singlecalculate.calculate(protemp);
+                                //singlecalculate.calculate(protemp);
                                 if (!protemp.weightflag)  //0是标品  1是称重
                                 {
                                     selectcount += protemp.num;
@@ -777,21 +767,37 @@ namespace WinSaasPOS
                                 }
                             }
                         }
+                        //for (int i = CurrentCart.products.Count; i > 0; i--)
+                        //{
+                        //    Product protemp = CurrentCart.products[i - 1];
+
+                        //    List<Image> lstbmp = GetSelect(protemp);
+                        //    if (lstbmp != null && lstbmp.Count == 3)
+                        //    {
+                        //        dgvGoodSelect.Rows.Insert(0, new object[] { lstbmp[0], lstbmp[1], lstbmp[2] });
+
+                        //       //singlecalculate.calculate(protemp);
+                        //        if (!protemp.weightflag)  //0是标品  1是称重
+                        //        {
+                        //            selectcount += protemp.num;
+                        //        }
+                        //        else
+                        //        {
+                        //            selectcount++;
+                        //        }
+                        //    }
+                        //}
                     }
                 }
                 else
                 {
                     dgvGoodSelect.Rows.Clear();
-                    for (int i = CurrentCart.products.Count; i > 0; i--)
+
+                    foreach (Product protemp in CurrentCart.products)
                     {
-
-                        Product protemp = CurrentCart.products[i - 1];
-
-
                         List<Image> lstbmp = GetSelect(protemp);
                         if (lstbmp != null && lstbmp.Count == 3)
                         {
-
                             dgvGoodSelect.Rows.Insert(0, new object[] { lstbmp[0], lstbmp[1], lstbmp[2] });
 
                             //singlecalculate.calculate(protemp);
@@ -805,6 +811,29 @@ namespace WinSaasPOS
                             }
                         }
                     }
+                    //for (int i = CurrentCart.products.Count; i > 0; i--)
+                    //{
+
+                    //    Product protemp = CurrentCart.products[i - 1];
+
+
+                    //    List<Image> lstbmp = GetSelect(protemp);
+                    //    if (lstbmp != null && lstbmp.Count == 3)
+                    //    {
+
+                    //        dgvGoodSelect.Rows.Insert(0, new object[] { lstbmp[0], lstbmp[1], lstbmp[2] });
+
+                    //        //singlecalculate.calculate(protemp);
+                    //        if (!protemp.weightflag)  //0是标品  1是称重
+                    //        {
+                    //            selectcount += protemp.num;
+                    //        }
+                    //        else
+                    //        {
+                    //            selectcount++;
+                    //        }
+                    //    }
+                    //}
                 }
                 
                 if (selectcount > 0)
@@ -1188,6 +1217,22 @@ namespace WinSaasPOS
                 string strquery = txtQuery.Text;
                 List<Product> templstprodcut = LstAllProduct.Where(r => r.skuname.Contains(strquery) || r.skucode.Contains(strquery)).ToList();
 
+                try
+                {
+                    switch (querysorttype)
+                    {
+                        case SortType.SaleCount: templstprodcut = templstprodcut.OrderByDescending(r => r.salecount).ToList(); break;
+                        case SortType.CreateDate: templstprodcut = templstprodcut.OrderByDescending(r => r.createdat).ToList(); break;
+                        case SortType.SalePriceAsc: templstprodcut = templstprodcut.OrderBy(r => r.price.saleprice).ToList(); break;
+                        case SortType.SalePriceDesc: templstprodcut = templstprodcut.OrderByDescending(r => r.price.saleprice).ToList(); break;
+                        default: templstprodcut = templstprodcut.OrderBy(r => r.salecount).ToList(); break;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+
                 //查询最多查询20个
                 int newcount = Math.Min(templstprodcut.Count, 20);
                 templstprodcut = templstprodcut.GetRange(0, newcount);
@@ -1505,7 +1550,7 @@ namespace WinSaasPOS
                 case 1: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF7D14"); break;
                 case 2: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#209FD4"); break;
                 case 3: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#D42031"); break;
-                case 4: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF000"); break;
+                case 4: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#250D05"); break;
                 default: lblPriceTag.Text = ""; break;
             }
 
@@ -1718,7 +1763,7 @@ namespace WinSaasPOS
             if (dgvGoodPic.Visible)
             {
                 sortCartByFirstCategoryid[CurrentFirstCategoryid].sorttype = thissorttype;
-                UpdateDgvGood(false,false);
+                UpdateDgvGood(false,true);
             }
             else
             {
@@ -1905,11 +1950,19 @@ namespace WinSaasPOS
             }
         }
 
-        private void frmPanelGoods_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmPanelGoods_FormClosed(object sender, FormClosedEventArgs e)
         {
-            timerNow.Enabled = false;
-            IsRun = false;
+            try
+            {
+                Other.CrearMemory();
+                IsRun = false;
+                GlobalUtil.CloseOSK();
+              //  Dispose();
+            }
+            catch { }
+
         }
+     
 
         private void dgvCategory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1956,6 +2009,35 @@ namespace WinSaasPOS
                 MainModel.ShowLog("选择分类异常"+ex.Message,true);
             }
         }
+
+        private void txt_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                GlobalUtil.OpenOSK();
+                txt.Focus();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
+            }
+        }
+
+        private void txt_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                    GlobalUtil.CloseOSK();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("失去焦点关闭键盘异常" + ex.Message);
+            }
+        }
+
+       
     }
 
 

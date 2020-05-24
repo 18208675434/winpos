@@ -25,10 +25,13 @@ namespace WinSaasPOS
             //如果前进程已经存在
             if (processList.Length > 1)
             {
-                if (MessageBox.Show("检测到系统已在运行，不允许重复运行系统？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+                if (MessageBox.Show("检测到系统已在运行，是否重新启动？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
                     != DialogResult.OK)
+                {
                     return;
-                return;
+                }
+                  
+                processList[1].Kill();
             }
 
             //处理未捕获的异常
@@ -91,7 +94,7 @@ namespace WinSaasPOS
             while (true)
             {//循环处理，否则应用程序将会退出
                 waitingcount++;
-                if (glExitApp && waitingcount > 20)
+                if (glExitApp && waitingcount > 30)
                 {//标志应用程序可以退出，否则程序退出后，进程仍然在运行
                     //MessageBox.Show("异常，系统将自动关闭！");
                     LogManager.WriteLog("ExitApp");
@@ -118,8 +121,6 @@ namespace WinSaasPOS
 
                 object obj = Maticsoft.DBUtility.DbHelperSQLite.GetSingle(isexits);
 
-
-
                 System.Collections.ArrayList lststring = new System.Collections.ArrayList();
                 bool needadd = false;
                 if (!obj.ToString().Contains("ONLYMEMBER"))
@@ -132,15 +133,20 @@ namespace WinSaasPOS
                 {
                     lststring.Add("ALTER TABLE DBPROMOTION_CACHE_BEAN ADD COLUMN 'MEMBERTAGS' TEXT");
                     needadd = true;
-
                 }
 
                 if (!obj.ToString().Contains("PURCHASELIMIT"))
                 {
                     lststring.Add("ALTER TABLE DBPROMOTION_CACHE_BEAN ADD COLUMN 'PURCHASELIMIT' INTEGER");
                     needadd = true;
-
                 }
+
+                if (!obj.ToString().Contains("MEMBERFLAG"))
+                {
+                    lststring.Add("ALTER TABLE DBPROMOTION_CACHE_BEAN ADD COLUMN 'MEMBERFLAG' INTEGER");
+                    needadd = true;
+                }
+
                 if (needadd)
                 {
                     Maticsoft.DBUtility.DbHelperSQLite.ExecuteSqlTran(lststring);

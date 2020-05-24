@@ -47,6 +47,9 @@ public class EnumPromotionType {
     //组合促销阈值
     public static String ITEM_COMBINED_THRESHOLD = "combined.threshold";
 
+    //会员权益折扣
+    public static String PAID_UP_MEMBER_PRICE_DISCOUNT = "paid.up.member.price.discount";
+    public static long PAID_UP_MEMBER_RIGHTS_DISCOUNT_PROMO_ID = 2019000000002L;
 
 //    ALWAYS_PASS("always.pass","无条件通过"),
 //
@@ -113,6 +116,11 @@ public class EnumPromotionType {
     //会员等级价
     public static String MEMBER_GRADE_PRICE = "member.grade.price";
 
+    //支付立减
+    public static String PAYMENT_REDUCE = "payment.reduce";
+
+    //
+    public static String FIXED_TRADE_OFF = "fixed.trade.off";
 
 //    FIXED_AMOUNT_OFF("fix.amount.off", "整单满减"),
 //    STEP_AMOUNT_OFF("step.amount.off", "阶梯满减"),

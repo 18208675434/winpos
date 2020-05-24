@@ -22,7 +22,7 @@ namespace Maticsoft.DAL
             strSql.Append("select count(1) from DBPROMOTION_CACHE_BEAN");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
-					new SQLiteParameter("@_id", DbType.Int64,4)
+					new SQLiteParameter("@_id", DbType.Int32,4)
 			};
             parameters[0].Value = _id;
 
@@ -37,13 +37,13 @@ namespace Maticsoft.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into DBPROMOTION_CACHE_BEAN(");
-            strSql.Append("CODE,RANK,TENANTSCOPE,DISTRICTSCOPE,SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE,PROMOACTION,ELIGIBILITYCONDITION,PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT,PROMOACTIONCONTEXT,NAME,DESCRIPTION,TAG,CANBECOMBINED,ENABLED,SALECHANNEL,ENABLEDFROM,ENABLEDTO,ENABLEDTIMEINFO,CREATEDAT,UPDATEDAT,CREATEDBY,UPDATEDBY,FROMOUTER,OUTERCODE,COSTCENTERINFO,COSTRULECONTEXT,CANMIXCOUPON,ORDERSUBTYPE,AVAILABLECATEGORY,TENANTID,SHOPID,CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT)");
+            strSql.Append("CODE,RANK,TENANTSCOPE,DISTRICTSCOPE,SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE,PROMOACTION,ELIGIBILITYCONDITION,PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT,PROMOACTIONCONTEXT,NAME,DESCRIPTION,TAG,CANBECOMBINED,ENABLED,SALECHANNEL,ENABLEDFROM,ENABLEDTO,ENABLEDTIMEINFO,CREATEDAT,UPDATEDAT,CREATEDBY,UPDATEDBY,FROMOUTER,OUTERCODE,COSTCENTERINFO,COSTRULECONTEXT,CANMIXCOUPON,ORDERSUBTYPE,AVAILABLECATEGORY,TENANTID,SHOPID,CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT,MEMBERFLAG)");
             strSql.Append(" values (");
-            strSql.Append("@CODE,@RANK,@TENANTSCOPE,@DISTRICTSCOPE,@SHOPSCOPE,@PROMOTYPE,@PROMOSUBTYPE,@PROMOACTION,@ELIGIBILITYCONDITION,@PROMOCONDITIONTYPE,@PROMOCONDITIONCONTEXT,@PROMOACTIONCONTEXT,@NAME,@DESCRIPTION,@TAG,@CANBECOMBINED,@ENABLED,@SALECHANNEL,@ENABLEDFROM,@ENABLEDTO,@ENABLEDTIMEINFO,@CREATEDAT,@UPDATEDAT,@CREATEDBY,@UPDATEDBY,@FROMOUTER,@OUTERCODE,@COSTCENTERINFO,@COSTRULECONTEXT,@CANMIXCOUPON,@ORDERSUBTYPE,@AVAILABLECATEGORY,@TENANTID,@SHOPID,@CREATE_URL_IP,@ONLYUSEINORIGINAL,@ONLYMEMBER,@MEMBERTAGS,@PURCHASELIMIT)");
+            strSql.Append("@CODE,@RANK,@TENANTSCOPE,@DISTRICTSCOPE,@SHOPSCOPE,@PROMOTYPE,@PROMOSUBTYPE,@PROMOACTION,@ELIGIBILITYCONDITION,@PROMOCONDITIONTYPE,@PROMOCONDITIONCONTEXT,@PROMOACTIONCONTEXT,@NAME,@DESCRIPTION,@TAG,@CANBECOMBINED,@ENABLED,@SALECHANNEL,@ENABLEDFROM,@ENABLEDTO,@ENABLEDTIMEINFO,@CREATEDAT,@UPDATEDAT,@CREATEDBY,@UPDATEDBY,@FROMOUTER,@OUTERCODE,@COSTCENTERINFO,@COSTRULECONTEXT,@CANMIXCOUPON,@ORDERSUBTYPE,@AVAILABLECATEGORY,@TENANTID,@SHOPID,@CREATE_URL_IP,@ONLYUSEINORIGINAL,@ONLYMEMBER,@MEMBERTAGS,@PURCHASELIMIT,@MEMBERFLAG)");
             strSql.Append(";select LAST_INSERT_ROWID()");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@CODE", DbType.String),
-					new SQLiteParameter("@RANK", DbType.Int64,8),
+					new SQLiteParameter("@RANK", DbType.Int32,8),
 					new SQLiteParameter("@TENANTSCOPE", DbType.String),
 					new SQLiteParameter("@DISTRICTSCOPE", DbType.String),
 					new SQLiteParameter("@SHOPSCOPE", DbType.String),
@@ -57,30 +57,31 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@NAME", DbType.String),
 					new SQLiteParameter("@DESCRIPTION", DbType.String),
 					new SQLiteParameter("@TAG", DbType.String),
-					new SQLiteParameter("@CANBECOMBINED", DbType.Int64,8),
-					new SQLiteParameter("@ENABLED", DbType.Int64,8),
-					new SQLiteParameter("@SALECHANNEL", DbType.Int64,8),
-					new SQLiteParameter("@ENABLEDFROM", DbType.Int64,8),
-					new SQLiteParameter("@ENABLEDTO", DbType.Int64,8),
+					new SQLiteParameter("@CANBECOMBINED", DbType.Int32,8),
+					new SQLiteParameter("@ENABLED", DbType.Int32,8),
+					new SQLiteParameter("@SALECHANNEL", DbType.Int32,8),
+					new SQLiteParameter("@ENABLEDFROM", DbType.Int32,8),
+					new SQLiteParameter("@ENABLEDTO", DbType.Int32,8),
 					new SQLiteParameter("@ENABLEDTIMEINFO", DbType.String),
-					new SQLiteParameter("@CREATEDAT", DbType.Int64,8),
-					new SQLiteParameter("@UPDATEDAT", DbType.Int64,8),
+					new SQLiteParameter("@CREATEDAT", DbType.Int32,8),
+					new SQLiteParameter("@UPDATEDAT", DbType.Int32,8),
 					new SQLiteParameter("@CREATEDBY", DbType.String),
 					new SQLiteParameter("@UPDATEDBY", DbType.String),
-					new SQLiteParameter("@FROMOUTER", DbType.Int64,8),
+					new SQLiteParameter("@FROMOUTER", DbType.Int32,8),
 					new SQLiteParameter("@OUTERCODE", DbType.String),
 					new SQLiteParameter("@COSTCENTERINFO", DbType.String),
 					new SQLiteParameter("@COSTRULECONTEXT", DbType.String),
-					new SQLiteParameter("@CANMIXCOUPON", DbType.Int64,8),
-					new SQLiteParameter("@ORDERSUBTYPE", DbType.Int64,8),
+					new SQLiteParameter("@CANMIXCOUPON", DbType.Int32,8),
+					new SQLiteParameter("@ORDERSUBTYPE", DbType.Int32,8),
 					new SQLiteParameter("@AVAILABLECATEGORY", DbType.String),
 					new SQLiteParameter("@TENANTID", DbType.String),
 					new SQLiteParameter("@SHOPID", DbType.String),
 					new SQLiteParameter("@CREATE_URL_IP", DbType.String),
-					new SQLiteParameter("@ONLYUSEINORIGINAL", DbType.Int64,8),
-					new SQLiteParameter("@ONLYMEMBER", DbType.Int64,8),
+					new SQLiteParameter("@ONLYUSEINORIGINAL", DbType.Int32,8),
+					new SQLiteParameter("@ONLYMEMBER", DbType.Int32,8),
 					new SQLiteParameter("@MEMBERTAGS", DbType.String),
-					new SQLiteParameter("@PURCHASELIMIT", DbType.Int64,8)};
+					new SQLiteParameter("@PURCHASELIMIT", DbType.Int32,8),
+					new SQLiteParameter("@MEMBERFLAG", DbType.Int32,8)};
             parameters[0].Value = model.CODE;
             parameters[1].Value = model.RANK;
             parameters[2].Value = model.TENANTSCOPE;
@@ -120,6 +121,7 @@ namespace Maticsoft.DAL
             parameters[36].Value = model.ONLYMEMBER;
             parameters[37].Value = model.MEMBERTAGS;
             parameters[38].Value = model.PURCHASELIMIT;
+            parameters[39].Value = model.MEMBERFLAG;
 
             object obj = DbHelperSQLite.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -176,11 +178,12 @@ namespace Maticsoft.DAL
             strSql.Append("ONLYUSEINORIGINAL=@ONLYUSEINORIGINAL,");
             strSql.Append("ONLYMEMBER=@ONLYMEMBER,");
             strSql.Append("MEMBERTAGS=@MEMBERTAGS,");
-            strSql.Append("PURCHASELIMIT=@PURCHASELIMIT");
+            strSql.Append("PURCHASELIMIT=@PURCHASELIMIT,");
+            strSql.Append("MEMBERFLAG=@MEMBERFLAG");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@CODE", DbType.String),
-					new SQLiteParameter("@RANK", DbType.Int64,8),
+					new SQLiteParameter("@RANK", DbType.Int32,8),
 					new SQLiteParameter("@TENANTSCOPE", DbType.String),
 					new SQLiteParameter("@DISTRICTSCOPE", DbType.String),
 					new SQLiteParameter("@SHOPSCOPE", DbType.String),
@@ -194,31 +197,32 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@NAME", DbType.String),
 					new SQLiteParameter("@DESCRIPTION", DbType.String),
 					new SQLiteParameter("@TAG", DbType.String),
-					new SQLiteParameter("@CANBECOMBINED", DbType.Int64,8),
-					new SQLiteParameter("@ENABLED", DbType.Int64,8),
-					new SQLiteParameter("@SALECHANNEL", DbType.Int64,8),
-					new SQLiteParameter("@ENABLEDFROM", DbType.Int64,8),
-					new SQLiteParameter("@ENABLEDTO", DbType.Int64,8),
+					new SQLiteParameter("@CANBECOMBINED", DbType.Int32,8),
+					new SQLiteParameter("@ENABLED", DbType.Int32,8),
+					new SQLiteParameter("@SALECHANNEL", DbType.Int32,8),
+					new SQLiteParameter("@ENABLEDFROM", DbType.Int32,8),
+					new SQLiteParameter("@ENABLEDTO", DbType.Int32,8),
 					new SQLiteParameter("@ENABLEDTIMEINFO", DbType.String),
-					new SQLiteParameter("@CREATEDAT", DbType.Int64,8),
-					new SQLiteParameter("@UPDATEDAT", DbType.Int64,8),
+					new SQLiteParameter("@CREATEDAT", DbType.Int32,8),
+					new SQLiteParameter("@UPDATEDAT", DbType.Int32,8),
 					new SQLiteParameter("@CREATEDBY", DbType.String),
 					new SQLiteParameter("@UPDATEDBY", DbType.String),
-					new SQLiteParameter("@FROMOUTER", DbType.Int64,8),
+					new SQLiteParameter("@FROMOUTER", DbType.Int32,8),
 					new SQLiteParameter("@OUTERCODE", DbType.String),
 					new SQLiteParameter("@COSTCENTERINFO", DbType.String),
 					new SQLiteParameter("@COSTRULECONTEXT", DbType.String),
-					new SQLiteParameter("@CANMIXCOUPON", DbType.Int64,8),
-					new SQLiteParameter("@ORDERSUBTYPE", DbType.Int64,8),
+					new SQLiteParameter("@CANMIXCOUPON", DbType.Int32,8),
+					new SQLiteParameter("@ORDERSUBTYPE", DbType.Int32,8),
 					new SQLiteParameter("@AVAILABLECATEGORY", DbType.String),
 					new SQLiteParameter("@TENANTID", DbType.String),
 					new SQLiteParameter("@SHOPID", DbType.String),
 					new SQLiteParameter("@CREATE_URL_IP", DbType.String),
-					new SQLiteParameter("@ONLYUSEINORIGINAL", DbType.Int64,8),
-					new SQLiteParameter("@ONLYMEMBER", DbType.Int64,8),
+					new SQLiteParameter("@ONLYUSEINORIGINAL", DbType.Int32,8),
+					new SQLiteParameter("@ONLYMEMBER", DbType.Int32,8),
 					new SQLiteParameter("@MEMBERTAGS", DbType.String),
-					new SQLiteParameter("@PURCHASELIMIT", DbType.Int64,8),
-					new SQLiteParameter("@_id", DbType.Int64,8)};
+					new SQLiteParameter("@PURCHASELIMIT", DbType.Int32,8),
+					new SQLiteParameter("@MEMBERFLAG", DbType.Int32,8),
+					new SQLiteParameter("@_id", DbType.Int32,8)};
             parameters[0].Value = model.CODE;
             parameters[1].Value = model.RANK;
             parameters[2].Value = model.TENANTSCOPE;
@@ -258,7 +262,8 @@ namespace Maticsoft.DAL
             parameters[36].Value = model.ONLYMEMBER;
             parameters[37].Value = model.MEMBERTAGS;
             parameters[38].Value = model.PURCHASELIMIT;
-            parameters[39].Value = model._id;
+            parameters[39].Value = model.MEMBERFLAG;
+            parameters[40].Value = model._id;
 
             int rows = DbHelperSQLite.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -281,7 +286,7 @@ namespace Maticsoft.DAL
             strSql.Append("delete from DBPROMOTION_CACHE_BEAN ");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
-					new SQLiteParameter("@_id", DbType.Int64,4)
+					new SQLiteParameter("@_id", DbType.Int32,4)
 			};
             parameters[0].Value = _id;
 
@@ -322,10 +327,10 @@ namespace Maticsoft.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,CODE,RANK,TENANTSCOPE,DISTRICTSCOPE,SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE,PROMOACTION,ELIGIBILITYCONDITION,PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT,PROMOACTIONCONTEXT,NAME,DESCRIPTION,TAG,CANBECOMBINED,ENABLED,SALECHANNEL,ENABLEDFROM,ENABLEDTO,ENABLEDTIMEINFO,CREATEDAT,UPDATEDAT,CREATEDBY,UPDATEDBY,FROMOUTER,OUTERCODE,COSTCENTERINFO,COSTRULECONTEXT,CANMIXCOUPON,ORDERSUBTYPE,AVAILABLECATEGORY,TENANTID,SHOPID,CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT from DBPROMOTION_CACHE_BEAN ");
+            strSql.Append("select _id,CODE,RANK,TENANTSCOPE,DISTRICTSCOPE,SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE,PROMOACTION,ELIGIBILITYCONDITION,PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT,PROMOACTIONCONTEXT,NAME,DESCRIPTION,TAG,CANBECOMBINED,ENABLED,SALECHANNEL,ENABLEDFROM,ENABLEDTO,ENABLEDTIMEINFO,CREATEDAT,UPDATEDAT,CREATEDBY,UPDATEDBY,FROMOUTER,OUTERCODE,COSTCENTERINFO,COSTRULECONTEXT,CANMIXCOUPON,ORDERSUBTYPE,AVAILABLECATEGORY,TENANTID,SHOPID,CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT,MEMBERFLAG from DBPROMOTION_CACHE_BEAN ");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
-					new SQLiteParameter("@_id", DbType.Int64,4)
+					new SQLiteParameter("@_id", DbType.Int32,4)
 			};
             parameters[0].Value = _id;
 
@@ -510,6 +515,10 @@ namespace Maticsoft.DAL
                 {
                     model.PURCHASELIMIT = Int64.Parse(row["PURCHASELIMIT"].ToString());
                 }
+                if (row["MEMBERFLAG"] != null && row["MEMBERFLAG"].ToString() != "")
+                {
+                    model.MEMBERFLAG = Int64.Parse(row["MEMBERFLAG"].ToString());
+                }
             }
             return model;
         }
@@ -520,7 +529,7 @@ namespace Maticsoft.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,CODE,RANK,TENANTSCOPE,DISTRICTSCOPE,SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE,PROMOACTION,ELIGIBILITYCONDITION,PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT,PROMOACTIONCONTEXT,NAME,DESCRIPTION,TAG,CANBECOMBINED,ENABLED,SALECHANNEL,ENABLEDFROM,ENABLEDTO,ENABLEDTIMEINFO,CREATEDAT,UPDATEDAT,CREATEDBY,UPDATEDBY,FROMOUTER,OUTERCODE,COSTCENTERINFO,COSTRULECONTEXT,CANMIXCOUPON,ORDERSUBTYPE,AVAILABLECATEGORY,TENANTID,SHOPID,CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT ");
+            strSql.Append("select _id,CODE,RANK,TENANTSCOPE,DISTRICTSCOPE,SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE,PROMOACTION,ELIGIBILITYCONDITION,PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT,PROMOACTIONCONTEXT,NAME,DESCRIPTION,TAG,CANBECOMBINED,ENABLED,SALECHANNEL,ENABLEDFROM,ENABLEDTO,ENABLEDTIMEINFO,CREATEDAT,UPDATEDAT,CREATEDBY,UPDATEDBY,FROMOUTER,OUTERCODE,COSTCENTERINFO,COSTRULECONTEXT,CANMIXCOUPON,ORDERSUBTYPE,AVAILABLECATEGORY,TENANTID,SHOPID,CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT,MEMBERFLAG ");
             strSql.Append(" FROM DBPROMOTION_CACHE_BEAN ");
             if (strWhere.Trim() != "")
             {
@@ -585,8 +594,8 @@ namespace Maticsoft.DAL
             SQLiteParameter[] parameters = {
                     new SQLiteParameter("@tblName", DbType.VarChar, 255),
                     new SQLiteParameter("@fldName", DbType.VarChar, 255),
-                    new SQLiteParameter("@PageSize", DbType.Int64),
-                    new SQLiteParameter("@PageIndex", DbType.Int64),
+                    new SQLiteParameter("@PageSize", DbType.Int32),
+                    new SQLiteParameter("@PageIndex", DbType.Int32),
                     new SQLiteParameter("@IsReCount", DbType.bit),
                     new SQLiteParameter("@OrderType", DbType.bit),
                     new SQLiteParameter("@strWhere", DbType.VarChar,1000),
@@ -633,10 +642,10 @@ namespace Maticsoft.DAL
                 StringBuilder strSqladd = new StringBuilder();
 
                 strSqladd.Append("insert into DBPROMOTION_CACHE_BEAN(");
-                strSqladd.Append(" CODE, RANK, TENANTSCOPE, DISTRICTSCOPE, SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE, PROMOACTION, ELIGIBILITYCONDITION, PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT, PROMOACTIONCONTEXT, NAME, DESCRIPTION, TAG,CANBECOMBINED, ENABLED, SALECHANNEL, ENABLEDFROM, ENABLEDTO, ENABLEDTIMEINFO, CREATEDAT,UPDATEDAT, CREATEDBY, UPDATEDBY, FROMOUTER, OUTERCODE, COSTCENTERINFO, COSTRULECONTEXT,CANMIXCOUPON, ORDERSUBTYPE, AVAILABLECATEGORY, TENANTID, SHOPID, CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT )");
+                strSqladd.Append(" CODE, RANK, TENANTSCOPE, DISTRICTSCOPE, SHOPSCOPE,PROMOTYPE,PROMOSUBTYPE, PROMOACTION, ELIGIBILITYCONDITION, PROMOCONDITIONTYPE,PROMOCONDITIONCONTEXT, PROMOACTIONCONTEXT, NAME, DESCRIPTION, TAG,CANBECOMBINED, ENABLED, SALECHANNEL, ENABLEDFROM, ENABLEDTO, ENABLEDTIMEINFO, CREATEDAT,UPDATEDAT, CREATEDBY, UPDATEDBY, FROMOUTER, OUTERCODE, COSTCENTERINFO, COSTRULECONTEXT,CANMIXCOUPON, ORDERSUBTYPE, AVAILABLECATEGORY, TENANTID, SHOPID, CREATE_URL_IP,ONLYUSEINORIGINAL,ONLYMEMBER,MEMBERTAGS,PURCHASELIMIT,MEMBERFLAG )");
                 strSqladd.Append(" values (");
 
-                strSqladd.Append(" '" + m.CODE + "', '" + m.RANK + "', '" + m.TENANTSCOPE + "', '" + m.DISTRICTSCOPE + "', '" + m.SHOPSCOPE + "', '" + m.PROMOTYPE + "', '" + m.PROMOSUBTYPE + "','" + m.PROMOACTION + "', '" + m.ELIGIBILITYCONDITION + "', '" + m.PROMOCONDITIONTYPE + "', '" + m.PROMOCONDITIONCONTEXT + "','" + m.PROMOACTIONCONTEXT + "', '" + m.NAME + "', '" + m.DESCRIPTION + "', '" + m.TAG + "', '" + m.CANBECOMBINED + "', '" + m.ENABLED + "','" + m.SALECHANNEL + "', '" + m.ENABLEDFROM + "', '" + m.ENABLEDTO + "', '" + m.ENABLEDTIMEINFO + "', '" + m.CREATEDAT + "', '" + m.UPDATEDAT + "','CREATEDBY','" + m.UPDATEDBY + "', '" + m.FROMOUTER + "', '" + m.OUTERCODE + "', '" + m.COSTCENTERINFO + "', '" + m.COSTRULECONTEXT + "','" + m.CANMIXCOUPON + "', '" + m.ORDERSUBTYPE + "', '" + m.AVAILABLECATEGORY + "', '" + tenantid + "', '" + shopid + "', '" + URL + "', '" + m.ONLYUSEINORIGINAL + "', " + m.ONLYMEMBER +", '" + m.MEMBERTAGS +"', " + m.PURCHASELIMIT + ")");
+                strSqladd.Append(" '" + m.CODE + "', '" + m.RANK + "', '" + m.TENANTSCOPE + "', '" + m.DISTRICTSCOPE + "', '" + m.SHOPSCOPE + "', '" + m.PROMOTYPE + "', '" + m.PROMOSUBTYPE + "','" + m.PROMOACTION + "', '" + m.ELIGIBILITYCONDITION + "', '" + m.PROMOCONDITIONTYPE + "', '" + m.PROMOCONDITIONCONTEXT + "','" + m.PROMOACTIONCONTEXT + "', '" + m.NAME + "', '" + m.DESCRIPTION + "', '" + m.TAG + "', '" + m.CANBECOMBINED + "', '" + m.ENABLED + "','" + m.SALECHANNEL + "', '" + m.ENABLEDFROM + "', '" + m.ENABLEDTO + "', '" + m.ENABLEDTIMEINFO + "', '" + m.CREATEDAT + "', '" + m.UPDATEDAT + "','CREATEDBY','" + m.UPDATEDBY + "', '" + m.FROMOUTER + "', '" + m.OUTERCODE + "', '" + m.COSTCENTERINFO + "', '" + m.COSTRULECONTEXT + "','" + m.CANMIXCOUPON + "', '" + m.ORDERSUBTYPE + "', '" + m.AVAILABLECATEGORY + "', '" + tenantid + "', '" + shopid + "', '" + URL + "', '" + m.ONLYUSEINORIGINAL + "', " + m.ONLYMEMBER + ", '" + m.MEMBERTAGS + "', " + m.PURCHASELIMIT + ", " + m.MEMBERFLAG + ")");
                                      
 
 
@@ -698,7 +707,8 @@ namespace Maticsoft.DAL
             strSql.Append("ONLYUSEINORIGINAL=@ONLYUSEINORIGINAL,");
             strSql.Append("ONLYMEMBER=@ONLYMEMBER,");
             strSql.Append("MEMBERTAGS=@MEMBERTAGS,");
-            strSql.Append("PURCHASELIMIT=@PURCHASELIMIT");
+            strSql.Append("PURCHASELIMIT=@PURCHASELIMIT,");
+            strSql.Append("MEMBERFLAG=@MEMBERFLAG");
             strSql.Append(" where CODE=@CODE");
             SQLiteParameter[] parameters = {
 					
@@ -741,6 +751,7 @@ namespace Maticsoft.DAL
                     new SQLiteParameter("@ONLYMEMBER", DbType.Int64,8),
 					new SQLiteParameter("@MEMBERTAGS", DbType.String),
 					new SQLiteParameter("@PURCHASELIMIT", DbType.Int64,8),
+                    new SQLiteParameter("@MEMBERFLAG", DbType.Int64,8),
 					new SQLiteParameter("@CODE", DbType.String)};
             parameters[0].Value = model.RANK;
             parameters[1].Value = model.TENANTSCOPE;
@@ -780,7 +791,8 @@ namespace Maticsoft.DAL
             parameters[35].Value = model.ONLYMEMBER;
             parameters[36].Value = model.MEMBERTAGS;
             parameters[37].Value = model.PURCHASELIMIT;
-            parameters[38].Value = model.CODE;
+            parameters[38].Value = model.MEMBERFLAG;
+            parameters[39].Value = model.CODE;
 
             int rows = DbHelperSQLite.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

@@ -447,7 +447,7 @@ namespace WinSaasPOS
             try
             {
 
-            
+                LoadingHelper.CloseForm();
             isrun = false;
 
             timerAuthCodeTrade.Enabled = false;

@@ -30,17 +30,13 @@ namespace MQTTClient
         private DeviceShopInfo CurrentShopInfo;
         public Form1()
         {
-
-           
             InitializeComponent();
 
-           
            // Task.Run(async () => { await ConnectMqttServerAsync(); });
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -155,7 +151,10 @@ namespace MQTTClient
 
                     if (promotion != null)
                     {
+
                         LogManager.WriteLog("MQTT", "接收到商品变更" + promotion.CODE);
+
+                        INIManager.SetIni("MQTT", "IsChange","1", MainModel.IniPath);
                         if (promotionbll.ExistsByCode(promotion.CODE))
                         {
                             promotion.TENANTID = CurrentShopInfo.tenantid;
@@ -249,6 +248,7 @@ namespace MQTTClient
 
         private void FmMqttClient_Load(object sender, EventArgs e)
         {
+           // button1_Click(null,null);
             //Dictionary<string, string> dic = new Dictionary<string, string>();
             //dic.Add("ClientId", "123");
             //dic.Add("Topic", "ttt");
@@ -265,20 +265,20 @@ namespace MQTTClient
                
                 DBPROMOTION_CACHE_BEANMODEL promotion = JsonConvert.DeserializeObject<DBPROMOTION_CACHE_BEANMODEL>(json);
 
-                if (promotionbll.ExistsByCode(promotion.CODE))
-                {
-                    promotion.TENANTID = CurrentShopInfo.tenantid;
-                    promotion.SHOPID = CurrentShopInfo.shopid;
-                    promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
-                    promotionbll.UpdateByCode(promotion);
-                }
-                else
-                {
-                    promotion.TENANTID = CurrentShopInfo.tenantid;
-                    promotion.SHOPID = CurrentShopInfo.shopid;
-                    promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
-                    promotionbll.Add(promotion);
-                }
+                //if (promotionbll.ExistsByCode(promotion.CODE))
+                //{
+                //    promotion.TENANTID = CurrentShopInfo.tenantid;
+                //    promotion.SHOPID = CurrentShopInfo.shopid;
+                //    promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
+                //    promotionbll.UpdateByCode(promotion);
+                //}
+                //else
+                //{
+                //    promotion.TENANTID = CurrentShopInfo.tenantid;
+                //    promotion.SHOPID = CurrentShopInfo.shopid;
+                //    promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
+                //    promotionbll.Add(promotion);
+                //}
 
 
             }

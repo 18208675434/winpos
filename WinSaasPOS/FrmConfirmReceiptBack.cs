@@ -19,10 +19,14 @@ namespace WinSaasPOS
         public FrmConfirmReceiptBack()
         {
             InitializeComponent();
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
         public FrmConfirmReceiptBack(Receiptdetail receipt)
         {
             InitializeComponent();
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
             Parareceipt = receipt;
         }
        
@@ -42,7 +46,6 @@ namespace WinSaasPOS
                 this.Close();
             }
         }
-
 
 
         private void FormDelete_DataReceiveHandle(int type)
@@ -66,7 +69,11 @@ namespace WinSaasPOS
             }
             finally
             {
-                this.Close();
+                try
+                {
+                    this.Close();
+                }
+                catch { }
             }
         }
     }

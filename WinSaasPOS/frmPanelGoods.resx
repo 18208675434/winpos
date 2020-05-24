@@ -135,9 +135,6 @@
         rdbtfypy2MPo/etxAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="timerNow.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>21, 22</value>
-  </metadata>
   <data name="btnOrderBySalePrice.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAA8oAAAFGCAYAAACygma+AAAABGdBTUEAALGPC/xhBQAAEZNJREFUeF7t
@@ -827,9 +824,6 @@
         RcD/blfyJanDTeH+S5mV/u6i8wPv79E0YnHBmgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="timerShown.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>120, 24</value>
-  </metadata>
   <data name="picDelect.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAmCAYAAABOFCLqAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6

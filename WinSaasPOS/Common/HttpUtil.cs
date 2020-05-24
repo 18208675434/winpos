@@ -19,6 +19,7 @@ namespace WinSaasPOS.Common
     public class HttpUtil
     {
         
+       
         /// <summary>
         /// 登录接口
         /// </summary>
@@ -39,6 +40,11 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpPOST(url, testjson);
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return "";
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -74,6 +80,12 @@ namespace WinSaasPOS.Common
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
 
                 string json = HttpGET(url, sort);
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -111,6 +123,11 @@ namespace WinSaasPOS.Common
                 sort.Add("devicesn", devicesn);
 
                 string json = HttpGET(url, sort);
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -149,7 +166,11 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpGET(url, sort);
-                //Console.Write("getskuInfobyshortcode:"+ json);
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
                 if (rd.code == 0)
@@ -190,7 +211,11 @@ namespace WinSaasPOS.Common
                 sort.Add("shortcode", scancode.PadLeft(5, '0'));
 
                 string json = HttpGET(url, sort);
-                //Console.Write("getskuInfobyshortcode:"+ json);
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 resultcode = rd.code;
@@ -322,9 +347,11 @@ namespace WinSaasPOS.Common
                 }
 
                 string json = HttpPOST(url, tempjson);
-                //Console.WriteLine(json);
-
-
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -430,9 +457,12 @@ namespace WinSaasPOS.Common
                     
                 }
 
-                ////Console.Write(tempjson);
-
                 string json = HttpPOST(url, tempjson);
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 resultcode = rd.code;
@@ -474,6 +504,12 @@ namespace WinSaasPOS.Common
 
                 string tempjson = "{\"orderid\":\"" + orderid + "\",\"reason\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return false;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -510,6 +546,12 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(orderid);
                 tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return 0;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -551,6 +593,12 @@ namespace WinSaasPOS.Common
                 trade.authcode = authcode;
                 string tempjson = JsonConvert.SerializeObject(trade);
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -596,6 +644,12 @@ namespace WinSaasPOS.Common
                 trade.payid = payid;
                 string tempjson = JsonConvert.SerializeObject(trade);
                 string json = HttpPOST(url, tempjson);
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -641,10 +695,15 @@ namespace WinSaasPOS.Common
                 string tempjson = "{\"outtradeno\":\"" + orderid + "\",\"authcode\":\"" + authcode + "\"}";
 
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                //TODO
-                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     BalanceTrade codetrade = JsonConvert.DeserializeObject<BalanceTrade>(rd.data.ToString());
@@ -684,6 +743,12 @@ namespace WinSaasPOS.Common
                 string tempjson = "{\"outtradeno\":\"" + orderid + "\"}";
 
                 string json = HttpPOST(url, tempjson);
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -739,6 +804,13 @@ namespace WinSaasPOS.Common
                 sort.Add("sncode", MainModel.DeviceSN);
                 string tempjson = JsonConvert.SerializeObject(sort);
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -776,8 +848,6 @@ namespace WinSaasPOS.Common
         {
             try
             {
-
-
                 string url = "/pos/member/balance/verifypassword";
 
                 SortedDictionary<string, object> sort = new SortedDictionary<string, object>();
@@ -790,12 +860,14 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpPOST(url, tempjson);
-
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 resultcode = rd.code;
-                //TODO
-                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     VerifyBalancePwd verifyresult = JsonConvert.DeserializeObject<VerifyBalancePwd>(rd.data.ToString());
@@ -836,9 +908,12 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(orderid);
                 tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
-                //Console.Write(json);
 
                 // return;
                 if (rd.code == 0)
@@ -877,9 +952,14 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);
 
                 string json = HttpPOST(url, tempjson);
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                // //Console.WriteLine("订单查询："+json);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
                 if (rd.code == 0)
@@ -917,6 +997,12 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(orderid);
                 tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -955,6 +1041,11 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(refundpara);
                 // tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return "";
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -993,6 +1084,13 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(refundpara);
                 // tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1034,6 +1132,12 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1074,6 +1178,12 @@ namespace WinSaasPOS.Common
 
                 // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 // LogManager.WriteLog("交班结果" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
@@ -1115,6 +1225,12 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(queryreceiptpara);
 
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1153,6 +1269,12 @@ namespace WinSaasPOS.Common
                 string tempjson = "{\"memberinfo\":\"" + memberinfo + "\"}";
 
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1196,6 +1318,13 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(scalepara);
 
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1240,6 +1369,13 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(scalepara);
 
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1278,6 +1414,11 @@ namespace WinSaasPOS.Common
 
                 string tempjson = "{\"lastrequestat\":\"" + MainModel.LastScaleTimeStamp + "\",\"shopid\":\"" + MainModel.CurrentShopInfo.shopid + "\"}";
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    return false ;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1316,6 +1457,11 @@ namespace WinSaasPOS.Common
                 sort.Add("shopid",MainModel.CurrentShopInfo.shopid);
 
                 string json = HttpGET(url, sort);
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1356,6 +1502,12 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1405,9 +1557,14 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return false;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                // //Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     return Convert.ToBoolean(rd.data);
@@ -1462,6 +1619,13 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -1500,6 +1664,13 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1540,6 +1711,13 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1584,7 +1762,11 @@ namespace WinSaasPOS.Common
                 sort.Add("imgcode", imgcode);
 
                 string json = HttpGET(url, sort);
-
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return false;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1627,6 +1809,13 @@ namespace WinSaasPOS.Common
                 string tempjson = JsonConvert.SerializeObject(signpara);
 
                 string json = HttpPOST(url, tempjson);
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1670,6 +1859,13 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1714,10 +1910,15 @@ namespace WinSaasPOS.Common
 
 
                 string json = HttpPOST(url, tempjson);
-                //Console.WriteLine(json);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     AllProduct allproduct = JsonConvert.DeserializeObject<AllProduct>(rd.data.ToString());
@@ -1755,10 +1956,13 @@ namespace WinSaasPOS.Common
                 string tempjson = "{\"shopid\":\"" + shopid + "\",\"page\":" + page + ",\"size\":" + size + ",\"timestamp\":\"" + MainModel.LastQuerySkushopCrementTimeStamp + "\"}";
 
                 string json = HttpPOST(url, tempjson);
-
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
-                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     AllProduct allproduct = JsonConvert.DeserializeObject<AllProduct>(rd.data.ToString());
@@ -1808,9 +2012,15 @@ namespace WinSaasPOS.Common
 
                 //tempjson = MainModel.GB2312ToUTF8(tempjson);
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
-                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
                     List<Product> lstproduct = JsonConvert.DeserializeObject<List<Product>>(rd.data.ToString());
@@ -1849,6 +2059,13 @@ namespace WinSaasPOS.Common
                 sort.Add("lednum", lednum);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1883,7 +2100,11 @@ namespace WinSaasPOS.Common
                 sort.Add("lednum", lednum);
 
                 string json = HttpGET(url, sort);
-
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -2088,6 +2309,13 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(lstuser);
 
                 string json = HttpPOST(url, testjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2131,6 +2359,13 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url,sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2184,7 +2419,13 @@ namespace WinSaasPOS.Common
                 }
 
                 string json = HttpPOST(url, tempjson);
-                ////Console.WriteLine(json);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return false;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2235,6 +2476,13 @@ namespace WinSaasPOS.Common
                     tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
                 }
                 string json = HttpPOST(url, tempjson);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return false;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2322,15 +2570,14 @@ namespace WinSaasPOS.Common
                 sort.Add("size", size + "");
 
                 string json = HttpGET(url, sort);
-                ////Console.WriteLine(json);
-
-                //string tempjson = "{\"shopid\":\"" + shopid + "\",\"skip\":" + skip + ",\"size\":" + size + "}";
-
-
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 //string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                ////Console.WriteLine(json);
                 if (rd.code == 0)
                 {
 
@@ -2372,7 +2619,11 @@ namespace WinSaasPOS.Common
                 sort.Add("shopid", shopid);
 
                 string json = HttpGET(url, sort);
-
+                if (string.IsNullOrEmpty(json))
+                {
+                    erromessage = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -2415,6 +2666,13 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2456,6 +2714,12 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2496,6 +2760,12 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2536,6 +2806,12 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2577,6 +2853,13 @@ namespace WinSaasPOS.Common
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2611,13 +2894,19 @@ namespace WinSaasPOS.Common
             try
             {
 
-                string url = "/memberrights/enjoymemberrights";
+                string url = "/pos/member/memberrights/enjoymemberrights";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("memberid", memberid);
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return false;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2651,13 +2940,19 @@ namespace WinSaasPOS.Common
             try
             {
 
-                string url = "/memberrights/item";
+                string url = "/pos/member/memberrights/item";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("memberid", memberid);
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2692,13 +2987,19 @@ namespace WinSaasPOS.Common
             try
             {
 
-                string url = "/pos/availablepaymenttypes ";
+                string url = "/pos/order/pos/availablepaymenttypes";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("shopid", shopid);
                 string testjson = JsonConvert.SerializeObject(sort);
 
                 string json = HttpGET(url, sort);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2721,395 +3022,548 @@ namespace WinSaasPOS.Common
                 return null;
             }
         }
-        #endregion
 
 
-        #region  访问服务端
-        public string HttpGET(string Url, SortedDictionary<string, string> sortpara)
+        /// <summary>
+        /// 获取商户会员信息
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public MemberTenantItem GetmemberTenantItem(string memberid, ref string errormsg)
         {
-            System.GC.Collect();
-            string retString = "";
-
-            string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
-            string nonce = MainModel.getNonce();
-
-            sortpara.Add("nonce", nonce);
-            //string signstr = "kVl55eO1n3DZhWC8Z7" + "devicesn" + devicesn + "nonce" + nonce + Timestamp;
-            string signstr = MainModel.PrivateKey;
-            foreach (KeyValuePair<string, string> keyvalue in sortpara)
-            {
-                signstr += keyvalue.Key + keyvalue.Value;
-            }
-            signstr += Timestamp;
-
-            //string body = "{\"devicesn\":\"" + devicesn + "\"}";
-
-            string postDataStr = "sign=" + MainModel.GetMD5(signstr);
-            //Url += "?" + "devicesn=" + devicesn + "&" + postDataStr;
-
-            Url = MainModel.URL + Url + "?";
-            foreach (KeyValuePair<string, string> keyvalue in sortpara)
-            {
-                Url += keyvalue.Key + "=" + keyvalue.Value + "&";
-            }
-            Url += postDataStr;
-            // //Console.Write(Url);
             try
             {
-                ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
+                string url = "/pos/member/membertenant/item";
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("memberid", memberid);
+                string testjson = JsonConvert.SerializeObject(sort);
 
-                request.Timeout = 60 * 1000;
+                string json = HttpGET(url, sort);
 
-                System.Net.ServicePointManager.Expect100Continue = false;
-
-                if (Url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+                if (string.IsNullOrEmpty(json))
                 {
-                    //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
-                    request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
-                    request.ProtocolVersion = HttpVersion.Version10;
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+                    MemberTenantItem result = JsonConvert.DeserializeObject<MemberTenantItem>(strdata);
+                    return result;
                 }
                 else
                 {
-                    request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
+                    try { LogManager.WriteLog("Error", "membertenant/item" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
                 }
-
-
-                request.Method = "GET";
-
-                ////请求头
-                request.Headers.Add("v", MainModel.Version);
-                request.Headers.Add("X-ZZ-Device-Sn", MainModel.DeviceSN);
-                request.Headers.Add("POS-Authorization", MainModel.Authorization);
-                request.Headers.Add("X-ZZ-Timestamp", Timestamp);
-
-                request.ContentType = "application/json;charset=UTF-8";
-
-                request.KeepAlive = false;
-                request.UseDefaultCredentials = true;
-                request.ServicePoint.Expect100Continue = false;//important
-
-
-                System.Net.ServicePointManager.DefaultConnectionLimit = 100;
-                request.Timeout = 60 * 1000; //3秒钟无响应 网络有问题
-
-                ParameterizedThreadStart Pts = new ParameterizedThreadStart(GetResponseResult);
-                Thread thread = new Thread(Pts);
-                thread.IsBackground = true;
-                thread.Start(request);
-
-                while (thread.IsAlive)
-                {
-                    Delay.Start(10);
-                }
-
-                int id = thread.ManagedThreadId;
-
-                try
-                {
-                    retString = dicresult[id];
-                    dicresult.Remove(id);
-                }
-                catch (Exception ex)
-                {
-                    LogManager.WriteLog("线程返回异常" + ex.Message);
-                }
-
-                try
-                {
-                    request.Abort();
-                }
-                catch { }
-                //if (CheckNet())
-                //{
-                //    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                //    {
-                //        request.Timeout = 60 * 1000;
-                //        Stream myResponseStream = response.GetResponseStream();
-                //        StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                //        retString = myStreamReader.ReadToEnd();
-
-                //        myStreamReader.Close();
-                //        myResponseStream.Close();
-
-                //        try
-                //        {
-                //            response.Close();
-                //        }
-                //        catch { }
-                //    }
-                //    try
-                //    {
-                //        request.Abort();
-                //    }
-                //    catch { }
-                //}
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.StackTrace);
-                LogManager.WriteLog("访问服务器出错:" + ex.Message);
-                MainModel.ShowLog("访问服务器出错,请检查网络连接！", false);
-
+                LogManager.WriteLog("Error", "membertenant/item异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
             }
-
-            return retString;
         }
 
+        #endregion
+        private HttpRequest httprequest = new HttpRequest();
+        public string HttpGET(string Url, SortedDictionary<string, string> sortpara)
+        {
+            //FormHttp frmhttp = new FormHttp();
 
+            //frmhttp.Url = Url;
+            //frmhttp.sortpara = sortpara;
+            //frmhttp.ShowDialog();
 
+            //frmhttp.Dispose();
+
+            //return frmhttp.json;
+            //return httprequest.HttpGET(Url, sortpara);
+            Other.CrearMemory();
+            return httprequest.HttpGetJson(Url,sortpara);
+        }
         public string HttpPOST(string Url, string bodyjson)
         {
 
-            string retString = "";
+            //FormHttp frmhttp = new FormHttp();
 
-            string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
-            string nonce = MainModel.getNonce();
-            string signstr = MainModel.PrivateKey + "nonce" + nonce + Timestamp + bodyjson;
-            string postDataStr = "nonce=" + nonce + "&sign=" + MainModel.GetMD5(signstr);
+            //frmhttp.Url = Url;
+            //frmhttp.bodyjson = bodyjson;
+            //frmhttp.ShowDialog();
 
-            Url = MainModel.URL + Url + "?" + postDataStr;
-            // //Console.WriteLine(Url);
-            try
-            {
-                ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
+            //frmhttp.Dispose();
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
-
-                System.Net.ServicePointManager.Expect100Continue = false;
-
-                if (Url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
-                {
-                    //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
-                    request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
-                    request.ProtocolVersion = HttpVersion.Version10;
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
-                }
-                else
-                {
-                    request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
-                }
-
-                request.Method = "POST";
-
-                ////请求头
-                request.Headers.Add("v", MainModel.Version);
-                request.Headers.Add("X-ZZ-Device-Sn", MainModel.DeviceSN);
-                request.Headers.Add("POS-Authorization", MainModel.Authorization);
-                request.Headers.Add("X-ZZ-Timestamp", Timestamp);
-
-
-                byte[] by = Encoding.GetEncoding("utf-8").GetBytes(bodyjson);   //请求参数转码
-                request.ContentType = "application/json;charset=UTF-8";
-                request.Timeout = 1000 * 60;
-                request.ContentLength = by.Length;
-
-                Stream stw = request.GetRequestStream();     //获取绑定相应流
-                stw.Write(by, 0, by.Length);      //写入流
-                stw.Close();    //关闭流
-
-                System.Net.ServicePointManager.DefaultConnectionLimit = 100;
-
-                ParameterizedThreadStart Pts = new ParameterizedThreadStart(GetResponseResult);
-                Thread thread = new Thread(Pts);
-                thread.IsBackground = true;
-                thread.Start(request);
-
-                while (thread.IsAlive)
-                {
-                    Delay.Start(10);
-                }
-
-                int id = thread.ManagedThreadId;
-
-                try
-                {
-                    retString = dicresult[id];
-                    dicresult.Remove(id);
-                }
-                catch (Exception ex)
-                {
-                    LogManager.WriteLog("线程返回异常" + ex.Message);
-                }
-
-                //request.Timeout = 60 * 1000;
-                //using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                //{
-                //    request.Timeout = 60 * 1000;
-                //    Stream myResponseStream = response.GetResponseStream();
-                //    StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                //    retString = myStreamReader.ReadToEnd();
-
-                //    myStreamReader.Close();
-                //    myResponseStream.Close();
-
-                //    try
-                //    {
-                //        response.Close();
-                //    }
-                //    catch { }
-                //}
-
-
-                try
-                {
-                    request.Abort();
-                }
-                catch { }
-
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("访问服务器出错:" + ex.Message);
-                //MainModel.ShowLog("访问服务器出错,请检查网络连接！", false);
-            }
-
-            return retString;
+            //return frmhttp.json;
+           // return httprequest.HttpPOST(Url, bodyjson);
+            Other.CrearMemory();
+            return httprequest.HttpPostJson(Url,bodyjson);
+            
         }
 
-        internal bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
-        {
-            // 总是接受  
-            return true;
-        }
+        //#region  访问服务端
 
-        //检测IP连接
-        bool CheckNet()
-        {
-            return true;
-            bool var = false;
 
-            try
-            {
-                string ip = "www.baidu.com";
-                Ping pingSender = new Ping();
 
-                PingOptions pingOption = new PingOptions();
-                pingOption.DontFragment = true;
-                string data = "0";
-                byte[] buffer = Encoding.ASCII.GetBytes(data);
-                int timeout = 1000;
-                PingReply reply = pingSender.Send(ip, timeout, buffer);
-                if (reply.Status == IPStatus.Success)
-                    var = true;
-                else
-                    var = false;
-            }
-            catch (Exception ex)
-            {
-
-                return true;
-                // ShowLog("无法检测网络连接是否正常-" + ex.Message, true);
-            }
-
-            return var;
-        }
-
-        public Dictionary<int, string> dicresult = new Dictionary<int, string>();
-        private void GetResponseResult(object obj)
-        {
-            try
-            {
-                WebRequest request = (WebRequest)obj;
-
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    request.Timeout = 60 * 1000;
-                    Stream myResponseStream = response.GetResponseStream();
-                    StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                    string result = myStreamReader.ReadToEnd();
-
-                    dicresult.Add(Thread.CurrentThread.ManagedThreadId, result);
-                    myStreamReader.Close();
-                    myResponseStream.Close();
-
-                    try
-                    {
-                        response.Close();
-                    }
-                    catch { }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("接口访问异常" + ex.Message + ex.StackTrace);
-            }
-        }
-
-        ////当前时间戳
-        //private string getStampByDateTime(DateTime datetime )
-        //{
-
-        //    //DateTime datetime = DateTime.Now;
-        //    var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-        //    var result = (long)(datetime - startTime).TotalMilliseconds;
-
-        //    return result.ToString();
-        //}
-
-        //private DateTime  GetDateTimeByStamp(string stamp)
+        //public string HttpGET(string Url, SortedDictionary<string, string> sortpara)
         //{
         //    try
         //    {
-        //        long result = Convert.ToInt64(stamp);
-        //        DateTime datetime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-        //        datetime = datetime.AddMilliseconds(result);
-        //        return datetime;
+        //        string retString = "";
+        //        GetPara para = new GetPara();
+        //        para.Url = Url;
+        //        para.sortpara = sortpara;
+        //        ParameterizedThreadStart Pts = new ParameterizedThreadStart(HttpGETThread);
+        //        Thread thread = new Thread(Pts);
+        //        thread.IsBackground = true;
+        //        thread.Start(para);
+
+        //        while (thread.IsAlive)
+        //        {
+        //            Delay.Start(10);
+        //        }
+
+        //        int id = thread.ManagedThreadId;
+
+        //        try
+        //        {
+        //            retString = dicresult[id];
+        //            dicresult.Remove(id);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            LogManager.WriteLog("线程返回异常" + ex.Message);
+        //        }
+
+        //        return retString;
+        //    }
+        //    catch {
+        //        return "";
+        //    }
+        //}
+
+        //public void HttpGETThread(object obj)
+        //{
+        //    GetPara para =(GetPara) obj;
+
+        //    string Url=para.Url;
+        //    SortedDictionary<string, string> sortpara = para.sortpara;
+            
+        //    System.GC.Collect();
+        //    string retString = "";
+
+        //    string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
+        //    string nonce = MainModel.getNonce();
+
+        //    sortpara.Add("nonce", nonce);
+        //    //string signstr = "kVl55eO1n3DZhWC8Z7" + "devicesn" + devicesn + "nonce" + nonce + Timestamp;
+        //    string signstr = MainModel.PrivateKey;
+        //    foreach (KeyValuePair<string, string> keyvalue in sortpara)
+        //    {
+        //        signstr += keyvalue.Key + keyvalue.Value;
+        //    }
+        //    signstr += Timestamp;
+
+        //    //string body = "{\"devicesn\":\"" + devicesn + "\"}";
+
+        //    string postDataStr = "sign=" + MainModel.GetMD5(signstr);
+        //    //Url += "?" + "devicesn=" + devicesn + "&" + postDataStr;
+
+        //    Url = MainModel.URL + Url + "?";
+        //    foreach (KeyValuePair<string, string> keyvalue in sortpara)
+        //    {
+        //        Url += keyvalue.Key + "=" + keyvalue.Value + "&";
+        //    }
+        //    Url += postDataStr;
+        //    try
+        //    {
+        //        ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
+
+        //        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+
+        //        request.Timeout = 60 * 1000;
+
+        //        System.Net.ServicePointManager.Expect100Continue = false;
+
+        //        if (Url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+        //            request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
+        //            request.ProtocolVersion = HttpVersion.Version10;
+        //            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+        //        }
+        //        else
+        //        {
+        //            request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
+        //        }
+
+
+        //        request.Method = "GET";
+
+        //        ////请求头
+        //        request.Headers.Add("v", MainModel.Version);
+        //        request.Headers.Add("X-ZZ-Device-Sn", MainModel.DeviceSN);
+        //        request.Headers.Add("POS-Authorization", MainModel.Authorization);
+        //        request.Headers.Add("X-ZZ-Timestamp", Timestamp);
+
+        //        request.ContentType = "application/json;charset=UTF-8";
+
+        //        request.KeepAlive = false;
+        //        request.UseDefaultCredentials = true;
+        //        request.ServicePoint.Expect100Continue = false;//important
+
+
+        //        System.Net.ServicePointManager.DefaultConnectionLimit = 100;
+        //        request.Timeout = 60 * 1000; //3秒钟无响应 网络有问题
+
+        //        //ParameterizedThreadStart Pts = new ParameterizedThreadStart(GetResponseResult);
+        //        //Thread thread = new Thread(Pts);
+        //        //thread.IsBackground = true;
+        //        //thread.Start(request);
+
+        //        //    while (thread.IsAlive)
+        //        //    {
+        //        //        Delay.Start(10);
+        //        //    }
+
+        //        //int id = thread.ManagedThreadId;
+
+        //        //try
+        //        //{
+        //        //    retString = dicresult[id];
+        //        //    dicresult.Remove(id);
+        //        //}
+        //        //catch (Exception ex)
+        //        //{
+        //        //    LogManager.WriteLog("线程返回异常" + ex.Message);
+        //        //}
+
+
+               
+        //            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        //            {
+        //                request.Timeout = 60 * 1000;
+        //                Stream myResponseStream = response.GetResponseStream();
+        //                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+        //                retString = myStreamReader.ReadToEnd();
+
+        //                myStreamReader.Close();
+        //                myResponseStream.Close();
+
+        //                try
+        //                {
+        //                    response.Close();
+        //                }
+        //                catch { }
+        //            }
+        //            try
+        //            {
+        //                request.Abort();
+        //            }
+        //            catch { }
+              
+
+        //        dicresult.Add(Thread.CurrentThread.ManagedThreadId, retString);
         //    }
         //    catch (Exception ex)
         //    {
-        //        return DateTime.Now;
+        //        //MessageBox.Show(ex.StackTrace);
+        //        LogManager.WriteLog("访问服务器出错:" + ex.Message);
+        //        MainModel.ShowLog("访问服务器出错,请检查网络连接！", false);
+
         //    }
+            
+        //    //return retString;
         //}
 
-        ////MD5 加密
-        //private string GetMD5(string str)
-        //{
 
-        //    byte[] result = Encoding.Default.GetBytes(str);
-        //    MD5 md5 = new MD5CryptoServiceProvider();
-        //    byte[] output = md5.ComputeHash(result);
-        //    string md5str = BitConverter.ToString(output).Replace("-", ""); 
-        //    return md5str;
-        //}
 
-        ////获取20位随机码 nonce
-        //private string getNonce()
+        //public string HttpPOST(string Url, string bodyjson)
         //{
-        //    string randomstr = "0,1,2,3,4,5,6,7,8,9,0,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
-        //    string[] strRandom = randomstr.Split(',');
-        //    Random rd = new Random();
-        //    string result = "";
-        //    for (int i = 0; i < 20; i++)
+        //    try
         //    {
-        //        int num = rd.Next(35);
+        //        string retString = "";
+        //        PostPara para = new PostPara();
+        //        para.Url = Url;
+        //        para.bodyjson = bodyjson;
+        //        ParameterizedThreadStart Pts = new ParameterizedThreadStart(HttpPOSTThread);
+        //        Thread thread = new Thread(Pts);
+        //        thread.IsBackground = true;
+        //        thread.Start(para);
 
-        //        result += strRandom[num];
+        //        while (thread.IsAlive)
+        //        {
+        //            Delay.Start(10);
+        //        }
+
+        //        int id = thread.ManagedThreadId;
+
+        //        try
+        //        {
+        //            retString = dicresult[id];
+        //            dicresult.Remove(id);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            LogManager.WriteLog("线程返回异常" + ex.Message);
+        //        }
+
+        //        return retString;
         //    }
-
-        //    return result;
-        //}
-
-        ////键值对排序
-        //private Dictionary<string,string> SortDictory(Dictionary<string,string> dictionary)
-        //{
-        //    System.Collections.ArrayList lst = new System.Collections.ArrayList(dictionary.Keys);
-        //    lst.Sort();
-        //    //lst.Reverse();  //反转排序
-        //    Dictionary<string, string> dicresult = new Dictionary<string, string>();
-
-        //    foreach (string key in lst)
+        //    catch
         //    {
-        //        dicresult.Add(key, dictionary[key]);
+        //        return "";
         //    }
-
-        //    return dicresult;
         //}
 
-        #endregion
+
+
+        //public void HttpPOSTThread(object obj)
+        //{
+        //    PostPara para = (PostPara) obj;
+        //    string Url=para.Url;
+        //    string bodyjson = para.bodyjson;
+        //    string retString = "";
+
+        //    string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
+        //    string nonce = MainModel.getNonce();
+        //    string signstr = MainModel.PrivateKey + "nonce" + nonce + Timestamp + bodyjson;
+        //    string postDataStr = "nonce=" + nonce + "&sign=" + MainModel.GetMD5(signstr);
+
+        //    Url = MainModel.URL + Url + "?" + postDataStr;
+        //    try
+        //    {
+        //        ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
+
+        //        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+
+        //        System.Net.ServicePointManager.Expect100Continue = false;
+
+        //        if (Url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+        //            request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
+        //            request.ProtocolVersion = HttpVersion.Version10;
+        //            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+        //        }
+        //        else
+        //        {
+        //            request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
+        //        }
+
+        //        request.Method = "POST";
+
+        //        ////请求头
+        //        request.Headers.Add("v", MainModel.Version);
+        //        request.Headers.Add("X-ZZ-Device-Sn", MainModel.DeviceSN);
+        //        request.Headers.Add("POS-Authorization", MainModel.Authorization);
+        //        request.Headers.Add("X-ZZ-Timestamp", Timestamp);
+
+
+        //        byte[] by = Encoding.GetEncoding("utf-8").GetBytes(bodyjson);   //请求参数转码
+        //        request.ContentType = "application/json;charset=UTF-8";
+        //        request.Timeout = 1000 * 60;
+        //        request.ContentLength = by.Length;
+
+        //        Stream stw = request.GetRequestStream();     //获取绑定相应流
+        //        stw.Write(by, 0, by.Length);      //写入流
+        //        stw.Close();    //关闭流
+
+        //        System.Net.ServicePointManager.DefaultConnectionLimit = 100;
+
+
+        //        request.Timeout = 60 * 1000;
+        //        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        //        {
+        //            request.Timeout = 60 * 1000;
+        //            Stream myResponseStream = response.GetResponseStream();
+        //            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+        //            retString = myStreamReader.ReadToEnd();
+
+        //            myStreamReader.Close();
+        //            myResponseStream.Close();
+
+        //            try
+        //            {
+        //                response.Close();
+        //            }
+        //            catch { }
+        //        }
+
+
+        //        try
+        //        {
+        //            request.Abort();
+        //        }
+        //        catch { }
+
+        //        dicresult.Add(Thread.CurrentThread.ManagedThreadId, retString);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogManager.WriteLog("访问服务器出错:" + ex.Message);
+        //        //MainModel.ShowLog("访问服务器出错,请检查网络连接！", false);
+        //    }
+
+        //    //return retString;
+        //}
+
+        //internal bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
+        //{
+        //    // 总是接受  
+        //    return true;
+        //}
+
+        ////检测IP连接
+        //bool CheckNet()
+        //{
+        //    return true;
+        //    bool var = false;
+
+        //    try
+        //    {
+        //        string ip = "www.baidu.com";
+        //        Ping pingSender = new Ping();
+
+        //        PingOptions pingOption = new PingOptions();
+        //        pingOption.DontFragment = true;
+        //        string data = "0";
+        //        byte[] buffer = Encoding.ASCII.GetBytes(data);
+        //        int timeout = 1000;
+        //        PingReply reply = pingSender.Send(ip, timeout, buffer);
+        //        if (reply.Status == IPStatus.Success)
+        //            var = true;
+        //        else
+        //            var = false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        return true;
+        //        // ShowLog("无法检测网络连接是否正常-" + ex.Message, true);
+        //    }
+
+        //    return var;
+        //}
+
+        //public Dictionary<int, string> dicresult = new Dictionary<int, string>();
+        //private void GetResponseResult(object obj)
+        //{
+        //    try
+        //    {
+        //        WebRequest request = (WebRequest)obj;
+
+        //        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        //        {
+        //            request.Timeout = 60 * 1000;
+        //            Stream myResponseStream = response.GetResponseStream();
+        //            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+        //            string result = myStreamReader.ReadToEnd();
+
+        //            dicresult.Add(Thread.CurrentThread.ManagedThreadId, result);
+        //            myStreamReader.Close();
+        //            myResponseStream.Close();
+
+        //            try
+        //            {
+        //                response.Close();
+        //            }
+        //            catch { }
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogManager.WriteLog("接口访问异常" + ex.Message + ex.StackTrace);
+        //    }
+        //}
+
+        //////当前时间戳
+        ////private string getStampByDateTime(DateTime datetime )
+        ////{
+
+        ////    //DateTime datetime = DateTime.Now;
+        ////    var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+        ////    var result = (long)(datetime - startTime).TotalMilliseconds;
+
+        ////    return result.ToString();
+        ////}
+
+        ////private DateTime  GetDateTimeByStamp(string stamp)
+        ////{
+        ////    try
+        ////    {
+        ////        long result = Convert.ToInt64(stamp);
+        ////        DateTime datetime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+        ////        datetime = datetime.AddMilliseconds(result);
+        ////        return datetime;
+        ////    }
+        ////    catch (Exception ex)
+        ////    {
+        ////        return DateTime.Now;
+        ////    }
+        ////}
+
+        //////MD5 加密
+        ////private string GetMD5(string str)
+        ////{
+
+        ////    byte[] result = Encoding.Default.GetBytes(str);
+        ////    MD5 md5 = new MD5CryptoServiceProvider();
+        ////    byte[] output = md5.ComputeHash(result);
+        ////    string md5str = BitConverter.ToString(output).Replace("-", ""); 
+        ////    return md5str;
+        ////}
+
+        //////获取20位随机码 nonce
+        ////private string getNonce()
+        ////{
+        ////    string randomstr = "0,1,2,3,4,5,6,7,8,9,0,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
+        ////    string[] strRandom = randomstr.Split(',');
+        ////    Random rd = new Random();
+        ////    string result = "";
+        ////    for (int i = 0; i < 20; i++)
+        ////    {
+        ////        int num = rd.Next(35);
+
+        ////        result += strRandom[num];
+        ////    }
+
+        ////    return result;
+        ////}
+
+        //////键值对排序
+        ////private Dictionary<string,string> SortDictory(Dictionary<string,string> dictionary)
+        ////{
+        ////    System.Collections.ArrayList lst = new System.Collections.ArrayList(dictionary.Keys);
+        ////    lst.Sort();
+        ////    //lst.Reverse();  //反转排序
+        ////    Dictionary<string, string> dicresult = new Dictionary<string, string>();
+
+        ////    foreach (string key in lst)
+        ////    {
+        ////        dicresult.Add(key, dictionary[key]);
+        ////    }
+
+        ////    return dicresult;
+        ////}
+
+        //#endregion
+    }
+
+
+    public class PostPara
+    {
+       public string Url; 
+        public string bodyjson;
+    }
+    public class GetPara
+    {
+        public string Url; 
+        public SortedDictionary<string, string> sortpara;
     }
 }

@@ -9,7 +9,7 @@ namespace WinSaasPOS.HelperUI
 {
     public class ToastHelper
     {
-        private static FormToast frmtoast = null;
+        public static FormToast frmtoast = null;
 
                   
         public static void IniFormToast()
@@ -77,7 +77,10 @@ namespace WinSaasPOS.HelperUI
             }
             catch (Exception ex)
             {
+                frmtoast = null;
                 HideFormToast();
+
+                LogManager.WriteLog("AutoToast异常" + ex.Message);
             }
            
         }

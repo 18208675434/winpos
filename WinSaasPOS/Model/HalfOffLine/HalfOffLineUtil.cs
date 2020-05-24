@@ -301,5 +301,29 @@ namespace WinSaasPOS.Model.HalfOffLine
             }
         }
 
+
+        public static MemberTenantItem membertenantitem = null;
+        public static void GetMemberTenantItem()
+        {
+            try
+            {
+                string ErrorMsg = "";
+                MemberTenantItem objresult = httputil.GetmemberTenantItem(MainModel.CurrentShopInfo.tenantid, ref ErrorMsg);
+                if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
+                {
+                    membertenantitem = null;
+                    LogManager.WriteLog("GetAvailablePaymentTypes失败" + ErrorMsg);
+                }
+                else
+                {
+                    membertenantitem = objresult;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("GetMemberTenantItem异常" + ex.Message);
+            }
+        }
+
     }
 }
