@@ -69,6 +69,7 @@ namespace WinSaasPOS
         private void frmOrderQuery_Load(object sender, EventArgs e)
         {
 
+            lblTime.Text = MainModel.Titledata;
             btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
             btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10, btnCancle.Left + btnCancle.Width);
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
@@ -82,8 +83,7 @@ namespace WinSaasPOS
                 btnOnLineType.BackgroundImage = Resources.ResourcePos.OnLineType; btnOnLineType.Text = "   在线";
             }
             lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            timerNow.Interval = 1000;
-            timerNow.Enabled = true;
+
             Application.DoEvents();
 
             if (MainModel.IsOffLine)
@@ -376,7 +376,6 @@ namespace WinSaasPOS
                 }
                 else
                 {
-
                     if (LastOrderid == "0")
                     {
                         CurrentQueryOrder = queryorder;
@@ -388,7 +387,7 @@ namespace WinSaasPOS
                             CurrentQueryOrder.orders.Add(order);
                         }
                     }
-
+                    LastOrderid = queryorder.lastorderid;
                     HaveNextPage = queryorder.hasnextpage == 1 ? true : false;
 
                     foreach (Order order in queryorder.orders)
@@ -441,11 +440,9 @@ namespace WinSaasPOS
                         {
                             dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund);
                         }
-
                     }
                     dgvOrderOnLine.ClearSelection();
                     Application.DoEvents();
-
 
                     if (dgvOrderOnLine.Rows.Count > 0)
                     {
@@ -602,7 +599,6 @@ namespace WinSaasPOS
                     this.Invoke(new InvokeHandler(delegate()
              {
                 
-
                  frmrefund.ShowDialog();
              }));
                      LoadPicScreen(false);
@@ -811,10 +807,6 @@ namespace WinSaasPOS
             QueryOrder();
         }
 
-        private void timerNow_Tick(object sender, EventArgs e)
-        {
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        }
 
         private void dgvOrderOnLine_Scroll(object sender, ScrollEventArgs e)
         {
@@ -1114,7 +1106,7 @@ namespace WinSaasPOS
 
         private void lblPhoneShuiyin_Click(object sender, EventArgs e)
         {
-            lblPhoneShuiyin.Focus();
+            txtPhone.Focus();
         }
 
         private void txtOrderID_TextChanged(object sender, EventArgs e)
@@ -1135,17 +1127,44 @@ namespace WinSaasPOS
             txtOrderID.Focus();
         }
 
-     
+        private void txt_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                GlobalUtil.OpenOSK();
+                txt.Focus();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
+            }
+        }
 
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-        //}
+        private void txt_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!txtPhone.Focused && !txtOrderID.Focused)
+                {
+                    GlobalUtil.CloseOSK();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("失去焦点关闭键盘异常" + ex.Message);
+            }
+        }
+
+        private void frmOrderQuery_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                GlobalUtil.CloseOSK();
+                //this.Dispose();
+            }
+            catch { }
+        }
 
     }
 }

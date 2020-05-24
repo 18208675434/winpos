@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinSaasPOS", "WinSaasPOS\Wi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinSaasPosStart", "WinSaasPOSStart\WinSaasPosStart.csproj", "{6C3918F6-9AEF-4957-9799-32666102BBEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinSaasPOS_Scale", "WinSaasPos_Scale\WinSaasPOS_Scale.csproj", "{591E1832-3A41-45FB-B61E-1D74DA6D7001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTClient", "MQTTClient\MQTTClient.csproj", "{1776BABF-16E0-4006-BB4E-38952289E92E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +101,26 @@ Global
 		{6C3918F6-9AEF-4957-9799-32666102BBEE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6C3918F6-9AEF-4957-9799-32666102BBEE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6C3918F6-9AEF-4957-9799-32666102BBEE}.Release|x86.ActiveCfg = Release|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{591E1832-3A41-45FB-B61E-1D74DA6D7001}.Release|x86.ActiveCfg = Release|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1776BABF-16E0-4006-BB4E-38952289E92E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

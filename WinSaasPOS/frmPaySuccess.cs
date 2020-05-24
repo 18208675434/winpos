@@ -226,8 +226,13 @@ namespace WinSaasPOS
 
         private void frmCashierResult_FormClosing(object sender, FormClosingEventArgs e)
         {
-            isrun = false;
-            this.Dispose();
+            try
+            {
+                isrun = false;
+                this.Dispose();
+            }
+            catch { }
+           
         }
 
 

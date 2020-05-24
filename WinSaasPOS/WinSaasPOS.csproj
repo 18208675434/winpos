@@ -51,7 +51,7 @@
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>SaasLogo.ico</ApplicationIcon>
+    <ApplicationIcon>SassPos256.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -73,6 +73,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.62.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -87,8 +91,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseUI\MainHelper.cs" />
     <Compile Include="Common\AutoSizeFormUtil.cs" />
+    <Compile Include="Common\DataUtil.cs" />
     <Compile Include="Common\GlobalUtil.cs" />
+    <Compile Include="Common\HttpRequest.cs" />
     <Compile Include="Common\HttpServer.cs" />
     <Compile Include="Common\HttpUtil.cs" />
     <Compile Include="Common\LoadingHelper.cs" />
@@ -272,22 +279,28 @@
     <Compile Include="frmLoadingTop.Designer.cs">
       <DependentUpon>frmLoadingTop.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLoginOffLine.cs">
+    <Compile Include="BaseUI\frmLoginOffLine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoginOffLine.Designer.cs">
+    <Compile Include="BaseUI\frmLoginOffLine.Designer.cs">
       <DependentUpon>frmLoginOffLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMainMedia.cs">
+    <Compile Include="BaseUI\frmMainHalfOffLine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainMedia.Designer.cs">
+    <Compile Include="BaseUI\frmMainHalfOffLine.Designer.cs">
+      <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUI\frmMainMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseUI\frmMainMedia.Designer.cs">
       <DependentUpon>frmMainMedia.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMainOffLine.cs">
+    <Compile Include="BaseUI\frmMainOffLine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainOffLine.Designer.cs">
+    <Compile Include="BaseUI\frmMainOffLine.Designer.cs">
       <DependentUpon>frmMainOffLine.cs</DependentUpon>
     </Compile>
     <Compile Include="frmModifyPrice.cs">
@@ -368,16 +381,16 @@
     <Compile Include="frmCashChange.Designer.cs">
       <DependentUpon>frmCashChange.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="BaseUI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
+    <Compile Include="BaseUI\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="BaseUI\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
+    <Compile Include="BaseUI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="frmOnLinePayResultBack.cs">
@@ -488,6 +501,41 @@
     <Compile Include="frmUserExpired.Designer.cs">
       <DependentUpon>frmUserExpired.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperUI\BackHelper.cs" />
+    <Compile Include="HelperUI\ChangeScaleModelHelper.cs" />
+    <Compile Include="HelperUI\ConfirmHelper.cs" />
+    <Compile Include="HelperUI\FormBackGround.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormBackGround.Designer.cs">
+      <DependentUpon>FormBackGround.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormChangeScaleModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormChangeScaleModel.Designer.cs">
+      <DependentUpon>FormChangeScaleModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormConfirm.Designer.cs">
+      <DependentUpon>FormConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormNumber.Designer.cs">
+      <DependentUpon>FormNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormToast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormToast.Designer.cs">
+      <DependentUpon>FormToast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\NumberHelper.cs" />
+    <Compile Include="HelperUI\ToastHelper.cs" />
     <Compile Include="Model\AllProduct.cs" />
     <Compile Include="Model\AuthCodeImage.cs" />
     <Compile Include="Model\AuthcodeTrade.cs" />
@@ -495,6 +543,17 @@
     <Compile Include="Model\ConditionType.cs" />
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\ExpenseType.cs" />
+    <Compile Include="Model\HalfOffLine\Coupons.cs" />
+    <Compile Include="Model\HalfOffLine\Gradesettinggetgrade.cs" />
+    <Compile Include="Model\HalfOffLine\HalfOffLineUtil.cs" />
+    <Compile Include="Model\HalfOffLine\MemberDiscount.cs" />
+    <Compile Include="Model\HalfOffLine\Memberoperationitem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberrightsItem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberTenantItem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberTenantmembergradeconfig.cs" />
+    <Compile Include="Model\HalfOffLine\PromotionCoupon.cs" />
+    <Compile Include="Model\HalfOffLine\TenantCreditConfig.cs" />
+    <Compile Include="Model\HalfOffLine\Tenantmemberrightsdiscountconfig.cs" />
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\OffLineOrder.cs" />
     <Compile Include="Model\OffLineReceipt.cs" />
@@ -503,9 +562,11 @@
     <Compile Include="Model\promotionaction\AbstractPromoAction.cs" />
     <Compile Include="Model\promotionaction\CycleDesignatedDiscountPromotionAction.cs" />
     <Compile Include="Model\promotionaction\DesignatedDiscountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\FixedTradeOffOrderAmountOffPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderAmountOffPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderDiscountPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderDynamicAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderPaymentPromotionAction.cs" />
     <Compile Include="Model\promotionaction\OrderStepAmountOffPromotionAction.cs" />
     <Compile Include="Model\promotionaction\PackageSellingPromotionAction.cs" />
     <Compile Include="Model\promotionaction\PromoAction.cs" />
@@ -513,20 +574,30 @@
     <Compile Include="Model\promotionaction\StepDiscountOffPromotionAction.cs" />
     <Compile Include="Model\Promotion\ActivityEnabledTimeInfo.cs" />
     <Compile Include="Model\Promotion\AmountDistributor.cs" />
+    <Compile Include="Model\Promotion\CalculateAvailablePointsCommandImpl.cs" />
     <Compile Include="Model\Promotion\CalculateBean.cs" />
     <Compile Include="Model\Promotion\CollectionUtils.cs" />
+    <Compile Include="Model\promotionaction\CombinedSellingPromotionAction.cs" />
     <Compile Include="Model\Promotion\CommonConstant.cs" />
     <Compile Include="Model\Promotion\EnumPromotionType.cs" />
     <Compile Include="Model\Promotion\EvaluateScopePromotion.cs" />
+    <Compile Include="Model\Promotion\ImplApplyPayPromoCalculate.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineCouponsCalculate.cs" />
     <Compile Include="Model\Promotion\ImplOfflineOrderPromotion.cs" />
-    <Compile Include="Model\Promotion\ImplOfflineSingleCalculate .cs" />
+    <Compile Include="Model\Promotion\ImplOfflineSingleCalculateNew.cs" />
+    <Compile Include="Model\Promotion\MemberRightsForGradeBean.cs" />
     <Compile Include="Model\Promotion\MoneyUtils.cs" />
     <Compile Include="Model\Promotion\OffLinePromos.cs" />
+    <Compile Include="Model\Promotion\OrderThresholdUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionCache.cs" />
+    <Compile Include="Model\Promotion\PromotionConditionUtils.cs" />
     <Compile Include="Model\Promotion\PromotionContextConvertUtils.cs" />
     <Compile Include="Model\Promotion\PromotionInfoUtils.cs" />
     <Compile Include="Model\Promotion\PromotionRealmDetail.cs" />
     <Compile Include="Model\Promotion\PromotionsInvalidBean.cs" />
+    <Compile Include="Model\Promotion\temp.cs" />
     <Compile Include="Model\Promotion\TripletBean.cs" />
+    <Compile Include="Model\Promotion\TripletBeanForCoupon.cs" />
     <Compile Include="Model\QueryExpense.cs" />
     <Compile Include="Model\QueryExpensePara.cs" />
     <Compile Include="Model\QueryOrder.cs" />
@@ -560,6 +631,31 @@
     <Compile Include="Model\TVShowSkus.cs" />
     <Compile Include="Model\userModel.cs" />
     <Compile Include="Model\VerifyBalancePwd.cs" />
+    <Compile Include="MyControl\CircleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\CircleButton.Designer.cs">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\EnumUnitType.cs" />
+    <Compile Include="MyControl\KeyBoard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\KeyBoard.Designer.cs">
+      <DependentUpon>KeyBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\RoundButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\RoundButton.Designer.cs">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\RoundPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\RoundPanel.Designer.cs">
+      <DependentUpon>RoundPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ResourcePos.Designer.cs">
@@ -667,13 +763,17 @@
     <EmbeddedResource Include="frmLoadingTop.resx">
       <DependentUpon>frmLoadingTop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoginOffLine.resx">
+    <EmbeddedResource Include="BaseUI\frmLoginOffLine.resx">
       <DependentUpon>frmLoginOffLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMainMedia.resx">
-      <DependentUpon>frmMainMedia.cs</DependentUpon>
+    <EmbeddedResource Include="BaseUI\frmMainHalfOffLine.resx">
+      <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMainOffLine.resx">
+    <EmbeddedResource Include="BaseUI\frmMainMedia.resx">
+      <DependentUpon>frmMainMedia.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseUI\frmMainOffLine.resx">
       <DependentUpon>frmMainOffLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifyPrice.resx">
@@ -716,10 +816,11 @@
     <EmbeddedResource Include="frmCashChange.resx">
       <DependentUpon>frmCashChange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="BaseUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="BaseUI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOnLinePayResultBack.resx">
@@ -776,6 +877,33 @@
     <EmbeddedResource Include="frmUserExpired.resx">
       <DependentUpon>frmUserExpired.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormBackGround.resx">
+      <DependentUpon>FormBackGround.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormChangeScaleModel.resx">
+      <DependentUpon>FormChangeScaleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormConfirm.resx">
+      <DependentUpon>FormConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormNumber.resx">
+      <DependentUpon>FormNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormToast.resx">
+      <DependentUpon>FormToast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\CircleButton.resx">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\KeyBoard.resx">
+      <DependentUpon>KeyBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\RoundButton.resx">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\RoundPanel.resx">
+      <DependentUpon>RoundPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -805,7 +933,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="20190918080041866_easyicon_net_512.ico" />
+    <Content Include="20200522060242172_easyicon_net_512.ico" />
+    <Content Include="SassPos256.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />
     <None Include="Resources\border_add.bmp" />
@@ -859,6 +988,10 @@
       <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
       <Name>Model</Name>
@@ -876,6 +1009,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

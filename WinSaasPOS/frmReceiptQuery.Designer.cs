@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -62,7 +61,6 @@
             this.pnlEmptyReceipt = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.pnlDgvHead = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -385,10 +383,6 @@
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
-            // timerNow
-            // 
-            this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
-            // 
             // pnlDgvHead
             // 
             this.pnlDgvHead.BackColor = System.Drawing.Color.White;
@@ -579,6 +573,7 @@
             this.btnWindows.TabIndex = 43;
             this.btnWindows.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnWindows.UseVisualStyleBackColor = false;
+            this.btnWindows.Visible = false;
             this.btnWindows.Click += new System.EventHandler(this.btnWindows_Click);
             // 
             // lblShopName
@@ -670,7 +665,6 @@
         private System.Windows.Forms.Panel pnlEmptyReceipt;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Timer timerNow;
         private System.Windows.Forms.Panel pnlDgvHead;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;

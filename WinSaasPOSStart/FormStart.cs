@@ -80,8 +80,8 @@ namespace WinSaasPosStart
                   LoadingHelper.CloseForm();
                   if (ErrorMsg != "" || versioninfo == null)
                   {
-                      MessageBox.Show(ErrorMsg);
-
+                      MessageBox.Show("检查最新版本失败"+ErrorMsg);
+                      StartPOS();
                   }
                   else
                   {
@@ -106,8 +106,8 @@ namespace WinSaasPosStart
                   LoadingHelper.CloseForm();
                   if (ErrorMsg != "" || versioninfo == null)
                   {
-                      MessageBox.Show(ErrorMsg);
-
+                      MessageBox.Show("检查最新版本失败"+ErrorMsg);
+                      StartPOS();
                   }
                   else
                   {
