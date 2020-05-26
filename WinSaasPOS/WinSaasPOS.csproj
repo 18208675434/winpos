@@ -93,7 +93,6 @@
   <ItemGroup>
     <Compile Include="BaseUI\MainHelper.cs" />
     <Compile Include="Common\AutoSizeFormUtil.cs" />
-    <Compile Include="Common\DataUtil.cs" />
     <Compile Include="Common\GlobalUtil.cs" />
     <Compile Include="Common\HttpRequest.cs" />
     <Compile Include="Common\HttpServer.cs" />
@@ -104,7 +103,8 @@
     <Compile Include="Common\OrderUtil.cs" />
     <Compile Include="Common\PrintUtil.cs" />
     <Compile Include="Common\ReceiptUtil.cs" />
-    <Compile Include="Common\ScaleUtil.cs" />
+    <Compile Include="ScaleUI\ScaleDataHelper.cs" />
+    <Compile Include="ScaleUI\ScaleUtil.cs" />
     <Compile Include="Common\ScanerHook.cs" />
     <Compile Include="Common\ScanItem.cs" />
     <Compile Include="Common\ServerDataUtil.cs" />
@@ -471,16 +471,16 @@
     <Compile Include="frmRefundSelect.Designer.cs">
       <DependentUpon>frmRefundSelect.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmScale.cs">
+    <Compile Include="ScaleUI\frmScale.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmScale.Designer.cs">
+    <Compile Include="ScaleUI\frmScale.Designer.cs">
       <DependentUpon>frmScale.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmScaleResult.cs">
+    <Compile Include="ScaleUI\frmScaleResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmScaleResult.Designer.cs">
+    <Compile Include="ScaleUI\frmScaleResult.Designer.cs">
       <DependentUpon>frmScaleResult.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTest.cs">
@@ -663,6 +663,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourcePos.resx</DependentUpon>
     </Compile>
+    <Compile Include="ScaleUI\Scale_Toledo.cs" />
     <Compile Include="UserControl\EnumUnitType.cs" />
     <Compile Include="UserControl\transparentPic.cs">
       <SubType>Component</SubType>
@@ -862,10 +863,10 @@
     <EmbeddedResource Include="frmRefundSelect.resx">
       <DependentUpon>frmRefundSelect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmScale.resx">
+    <EmbeddedResource Include="ScaleUI\frmScale.resx">
       <DependentUpon>frmScale.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmScaleResult.resx">
+    <EmbeddedResource Include="ScaleUI\frmScaleResult.resx">
       <DependentUpon>frmScaleResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">

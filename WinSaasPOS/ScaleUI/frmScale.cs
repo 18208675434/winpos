@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using WinSaasPOS.ScaleUI;
 
 namespace WinSaasPOS
 {
@@ -57,11 +58,10 @@ namespace WinSaasPOS
 
         private void frmScale_Shown(object sender, EventArgs e)
         {
+            lblTime.Text = MainModel.Titledata;
             lblShopName.Text = MainModel.CurrentShopInfo.shopname;
             btnMenu.Text = MainModel.CurrentUser.nickname + "，你好   ";
             btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width-10, btnCancle.Left + btnCancle.Width);
-            timerNow.Interval = 1000;
-            timerNow.Enabled = true;
             
             if (MainModel.IsOffLine)
             {
@@ -71,7 +71,7 @@ namespace WinSaasPOS
             {
                 btnOnLineType.BackgroundImage = Resources.ResourcePos.OnLineType; btnOnLineType.Text = "   在线";
             }
-
+            btnOnLineType.Left = lblShopName.Left + lblShopName.Width + 10;
             //bmpSendScale = new Bitmap(picSendScale.Image, dgvScale.Columns["operation"].Width * 80 / 100, dgvScale.RowTemplate.Height*80/100);
 
             //bmpSendSccleSuccess = new Bitmap(picScaleSuccess.Image, dgvScale.Columns["ScaleStatus"].Width * 60 / 100, dgvScale.RowTemplate.Height * 50 / 100);
@@ -167,11 +167,11 @@ namespace WinSaasPOS
               }
 
 
-              SendScaleByScaleIp(scaleips);
-            //ParameterizedThreadStart Pts = new ParameterizedThreadStart(SendScaleByScaleIp);
-            //Thread thread = new Thread(Pts);
-            //thread.IsBackground = true;
-            //thread.Start(scaleips);
+             // SendScaleByScaleIp(scaleips);
+              ParameterizedThreadStart Pts = new ParameterizedThreadStart(SendScaleByScaleIp);
+              Thread thread = new Thread(Pts);
+              thread.IsBackground = true;
+              thread.Start(scaleips);
         }
 
         private void dgvScale_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -190,12 +190,12 @@ namespace WinSaasPOS
                 List<string> scaleips = new List<string>();
                 scaleips.Add(scaleip);                
                 
-                SendScaleByScaleIp(scaleips);
+                //SendScaleByScaleIp(scaleips);
 
-                //ParameterizedThreadStart Pts = new ParameterizedThreadStart(SendScaleByScaleIp);
-                //Thread thread = new Thread(Pts);
-                //thread.IsBackground = true;
-                //thread.Start(scaleips);
+                ParameterizedThreadStart Pts = new ParameterizedThreadStart(SendScaleByScaleIp);
+                Thread thread = new Thread(Pts);
+                thread.IsBackground = true;
+                thread.Start(scaleips);
              
                // LoadScale();
             }
@@ -204,7 +204,7 @@ namespace WinSaasPOS
                 MainModel.ShowLog("传秤出现异常：" + ex.Message, true);
             }
         }
-
+        Scale_Toledo scaletoledo = new Scale_Toledo();
         private void SendScaleByScaleIp(object scaleips)
         {
             try
@@ -225,10 +225,17 @@ namespace WinSaasPOS
                         MainModel.ShowLog(ScaleIP +"秤无商品信息",false);
                         return;
                     }
+                    string scaletype = lstscale[0].SCALESTYPE;
                     LoadingHelper.ShowLoadingScreen(lstscale[0].TEMPNAME+"|"+"传秤数据下发中");
-                 
-                    string ErrorMsg="";
-                    bool SendScaleResult = scaleutil.SendScaleByScaleIp(ScaleIP,ref ErrorMsg);
+
+
+                    if (scaletype != "bplus")
+                    {
+                        MainModel.ShowLog("暂未匹配秤：" + lstscale[0].TEMPNAME,false);
+                        return; 
+                    }
+                    string errormsg ="";
+                    bool SendScaleResult = scaletoledo.SendToledoData(ScaleIP,"3001",out errormsg);
 
 
                     if (SendScaleResult)
@@ -323,45 +330,6 @@ namespace WinSaasPOS
             }
         }
 
-
-        //检测IP连接
-        bool CheckNet()
-        {
-            bool var = false;
-
-            try
-            {
-                string ip = "www.baidu.com";
-                Ping pingSender = new Ping();
-
-                PingOptions pingOption = new PingOptions();
-                pingOption.DontFragment = true;
-                string data = "0";
-                byte[] buffer = Encoding.ASCII.GetBytes(data);
-                int timeout = 500;
-                PingReply reply = pingSender.Send(ip, timeout, buffer);
-                if (reply.Status == IPStatus.Success)
-                    var = true;
-                else
-                    var = false;
-            }
-            catch (Exception ex)
-            {
-
-                return false;
-                // ShowLog("无法检测网络连接是否正常-" + ex.Message, true);
-            }
-
-            return var;
-        }
-
-        private void timerNow_Tick(object sender, EventArgs e)
-        {
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-        }
-
-
         //Win+D    页面FormBoardStyle  属性不能为none 否则返回windows页面只要有焦点事件就会打开程序
 
         [DllImport("User32.dll")]
@@ -371,7 +339,6 @@ namespace WinSaasPOS
         {
             try
             {
-
                 MainModel.ShowTask();
                 MainModel.ShowWindows();
                 keybd_event(0x5b, 0, 0, 0); //0x5b是left win的代码，这一句使key按下，下一句使key释放。 
@@ -385,7 +352,6 @@ namespace WinSaasPOS
                 LogManager.WriteLog("最小化窗体异常" + ex.Message);
             }
         }
-
 
 
         private void LoadPicScreen(bool isShown)
@@ -412,13 +378,5 @@ namespace WinSaasPOS
                 LogManager.WriteLog("修改电子秤背景图异常：" + ex.Message);
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            picScreen.Visible = true;
-            Delay.Start(2000);
-            picScreen.Visible = false;
-        }
-
     }
 }

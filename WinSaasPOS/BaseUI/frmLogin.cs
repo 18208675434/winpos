@@ -966,7 +966,9 @@ namespace WinSaasPOS
             {
                 timerTen.Enabled = false;
 
-                DataUtil.LoadTVSkus();
+                ServerDataUtil.LoadIncrementProduct();
+                ServerDataUtil.LoadTVSkus();
+
 
             }
             catch (Exception ex)

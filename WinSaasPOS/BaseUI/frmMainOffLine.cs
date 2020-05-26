@@ -719,7 +719,7 @@ namespace WinSaasPOS
 
             frmToolMain frmtool = new frmToolMain();
 
-            asf.AutoScaleControlTest(frmtool, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
+            asf.AutoScaleControlTest(frmtool, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
             frmtool.DataReceiveHandle += frmToolMain_DataReceiveHandle;
             frmtool.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtool.Width - 15, pnlHead.Height + 10);
             frmtool.Show();

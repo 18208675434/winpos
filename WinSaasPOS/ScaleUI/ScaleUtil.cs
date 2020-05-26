@@ -279,6 +279,4 @@ namespace WinSaasPOS.Common
 
     }
 
-
-
 }

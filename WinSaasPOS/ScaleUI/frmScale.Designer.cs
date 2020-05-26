@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -60,7 +59,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.picScreen = new System.Windows.Forms.PictureBox();
             this.picScaleFaild = new System.Windows.Forms.PictureBox();
-            this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.pnlHead = new System.Windows.Forms.Panel();
             this.btnOnLineType = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
@@ -363,10 +361,6 @@
             this.picScaleFaild.TabStop = false;
             this.picScaleFaild.Visible = false;
             // 
-            // timerNow
-            // 
-            this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
-            // 
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.Black;
@@ -441,6 +435,7 @@
             this.btnWindows.TabIndex = 43;
             this.btnWindows.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnWindows.UseVisualStyleBackColor = false;
+            this.btnWindows.Visible = false;
             this.btnWindows.Click += new System.EventHandler(this.btnWindows_Click);
             // 
             // lblShopName
@@ -586,7 +581,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox picScreen;
         private System.Windows.Forms.PictureBox picScaleFaild;
-        private System.Windows.Forms.Timer timerNow;
         private System.Windows.Forms.Panel pnlHead;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnMenu;
