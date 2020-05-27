@@ -175,6 +175,7 @@
             this.Name = "frmScaleResult";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmScaleResult";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmScaleResult_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.picStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSecuss)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFaile)).EndInit();

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using WinSaasPOS.ScaleUI;
 
 namespace WinSaasPOS.Common
 {
@@ -18,11 +19,11 @@ namespace WinSaasPOS.Common
         private static JSON_BEANBLL jsonbll = new JSON_BEANBLL();
         private static DBPRODUCT_BEANBLL productbll = new DBPRODUCT_BEANBLL();
         #region  拉去全部促销商品
-        private DBPROMOTION_CACHE_BEANBLL promotionbll = new DBPROMOTION_CACHE_BEANBLL();
-        List<DBPROMOTION_CACHE_BEANMODEL> lstAllPromotion = new List<DBPROMOTION_CACHE_BEANMODEL>();
+        private static DBPROMOTION_CACHE_BEANBLL promotionbll = new DBPROMOTION_CACHE_BEANBLL();
+       private static  List<DBPROMOTION_CACHE_BEANMODEL> lstAllPromotion = new List<DBPROMOTION_CACHE_BEANMODEL>();
 
 
-        public void UpdatePromotion()
+        public static void UpdatePromotion()
         {
             try
             {
@@ -66,7 +67,7 @@ namespace WinSaasPOS.Common
                 LogManager.WriteLog("加载促销商品异常" + ex.Message);
             }
         }
-        public List<DBPROMOTION_CACHE_BEANMODEL> GetAllPromotion(int page, int size)
+        public static List<DBPROMOTION_CACHE_BEANMODEL> GetAllPromotion(int page, int size)
         {
             try
             {
@@ -198,7 +199,7 @@ namespace WinSaasPOS.Common
 
         #region 增量商品
 
-
+        private static Scale_Toledo scaletoledo = new Scale_Toledo();
         public static void LoadIncrementProduct()
         {
             try
@@ -216,8 +217,10 @@ namespace WinSaasPOS.Common
                 {
                     productbll.AddProduct(lstpro, MainModel.URL);
                     LogManager.WriteLog("添加增量商品数量：" + lstpro.Count);
+                    scaletoledo.SendIncrementPLU(lstpro);
                 }
 
+                
             }
             catch (Exception ex)
             {

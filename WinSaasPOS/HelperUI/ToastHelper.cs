@@ -39,7 +39,7 @@ namespace WinSaasPOS.HelperUI
                 {
                     IniFormToast();
                 }
-                frmtoast.UpInfo(msg);
+                frmtoast.currentmsg = msg;
                 frmtoast.Show();
             }
             catch (Exception ex)
@@ -53,9 +53,13 @@ namespace WinSaasPOS.HelperUI
         {
              try
             {
+
                 if (frmtoast != null)
                 {
                     frmtoast.Hide();
+
+                    frmtoast.Close();
+                    frmtoast = null;
                 }
               
             }

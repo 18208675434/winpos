@@ -14,7 +14,7 @@ namespace WinSaasPOS.ScaleUI
 {
     public class Scale_Toledo
     {
-        private string FilePath = AppDomain.CurrentDomain.BaseDirectory + "ToledoData";
+       
         private string TaskFileName = "Task.xml";
         private string DeviceListFileName = "DeviceList.xml";
         private string CommandFileName = "Command.xml";
@@ -76,13 +76,13 @@ namespace WinSaasPOS.ScaleUI
                 if (!SendLable(scaleip, port))
                 {
                     msg = scaleip + "标签传递失败";
-                    return false;
+                    //return false;
                 }
 
                 if (!SendBarcode(scaleip, port))
                 {
                     msg = scaleip + "条码传递失败";
-                    return false;
+                    //return false;
                 }
 
                 if (!SendPLU(scaleip, port))
@@ -129,6 +129,17 @@ namespace WinSaasPOS.ScaleUI
         {
             try
             {
+
+                if (!File.Exists(GetFilePath() + "\\" + "LBL00001.xml"))
+                {
+                    File.Copy(AppDomain.CurrentDomain.BaseDirectory + "LBL00001.xml", GetFilePath() + "\\" + "LBL00001.xml", true);
+                }
+
+                if (!File.Exists(GetFilePath() + "\\" + "LBL00002.xml"))
+                {
+                    File.Copy(AppDomain.CurrentDomain.BaseDirectory + "LBL00002.xml", GetFilePath() + "\\" + "LBL00002.xml", true);
+                }
+
                 string taskid = Guid.NewGuid().ToString();
                 CreateTaskFile(taskid);
                 CreateDeviceListFile("1",ipaddress,port);
@@ -183,7 +194,56 @@ namespace WinSaasPOS.ScaleUI
             }
         }
 
+        /// <summary>
+        /// 发送PLU 有增量商品时调用 不清空数据
+        /// </summary>
+        /// <param name="ipaddress"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
+        public bool SendIncrementPLU( List<DBPRODUCT_BEANMODEL> lstpro)
+        {
+            try
+            {
+                string ipaddress = "";
+                string port="";
+                List<DBSCALE_KEY_BEANMODEL> lstScale = scalebll.GetModelList(" SCALESTYPE ='" + "bplus" + "' and CREATE_URL_IP ='" + MainModel.URL + "'");
+                if (lstScale != null && lstScale.Count > 0)
+                {
+                    ipaddress = lstScale[0].IP;
+                    port = lstScale[0].PORT;
+                }
+                else
+                {
+                    return false;
+                }
 
+                string taskid = Guid.NewGuid().ToString();
+
+                CreateTaskFile(taskid);
+                CreateDeviceListFile("1", ipaddress, port);
+                CreateCommandFile("Item", false);
+
+                CreateDataFile(lstpro);
+
+                ExecuteTaskInFile(taskid);
+                if (!CheckTaskResult())
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 发送PLU
+        /// </summary>
+        /// <param name="ipaddress"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
         private bool SendPLU(string ipaddress, string port)
         {
             try
@@ -267,7 +327,7 @@ namespace WinSaasPOS.ScaleUI
 
         private void ExecuteTaskInFile(string taskid)
         {
-            bool result = ExecuteTaskInFile(taskid, FilePath + "\\" + TaskFileName, FilePath + "\\" + "TaskResult.xml", true);  
+            bool result = ExecuteTaskInFile(taskid, GetFilePath() + "\\" + TaskFileName, GetFilePath() + "\\" + "TaskResult.xml", true);  
         }
 
 
@@ -280,15 +340,6 @@ namespace WinSaasPOS.ScaleUI
         {
             try
             {
-                if (!Directory.Exists(FilePath))
-                {
-                    Directory.CreateDirectory(FilePath);
-                }
-
-                //if (File.Exists(FilePath + TaskFileName))
-                //{
-                //    File.Delete();
-                //}
 
                 XmlDocument xmlDoc = new XmlDocument();
                 //创建类型声明节点  
@@ -302,7 +353,7 @@ namespace WinSaasPOS.ScaleUI
                 CreateNode(xmlDoc, xnCommands, "TaskAction", "123");
                 CreateNode(xmlDoc, xnCommands, "DataFile", DeviceListFileName); //电子秤列表文件名
 
-                xmlDoc.Save(FilePath + "\\" + TaskFileName);
+                xmlDoc.Save(GetFilePath() + "\\" + TaskFileName);
 
             }
             catch (Exception ex)
@@ -321,10 +372,6 @@ namespace WinSaasPOS.ScaleUI
 
             try
             {
-                if (!Directory.Exists(FilePath))
-                {
-                    Directory.CreateDirectory(FilePath);
-                }
 
                 XmlDocument xmlDoc = new XmlDocument();
                 //创建类型声明节点  
@@ -349,7 +396,7 @@ namespace WinSaasPOS.ScaleUI
                 CreateNode(xmlDoc, scalenode, "Enabled", "true");
                 CreateNode(xmlDoc, scalenode, "DataFile", CommandFileName); //存放命令字 文件名
 
-                xmlDoc.Save(FilePath + "\\" + DeviceListFileName);
+                xmlDoc.Save(GetFilePath() + "\\" + DeviceListFileName);
 
             }
             catch (Exception ex)
@@ -368,10 +415,6 @@ namespace WinSaasPOS.ScaleUI
 
             try
             {
-                if (!Directory.Exists(FilePath))
-                {
-                    Directory.CreateDirectory(FilePath);
-                }
 
                 XmlDocument xmlDoc = new XmlDocument();
                 //创建类型声明节点  
@@ -387,7 +430,7 @@ namespace WinSaasPOS.ScaleUI
                 CreateNode(xmlDoc, commandnode, "DataFile", DataFileName);//存放命令字数据文件名
                 CreateNode(xmlDoc, commandnode, "ClearData", cleardata.ToString()); //下发前是否清空数据
 
-                xmlDoc.Save(FilePath + "\\" + CommandFileName);
+                xmlDoc.Save(GetFilePath() + "\\" + CommandFileName);
 
             }
             catch (Exception ex)
@@ -402,9 +445,9 @@ namespace WinSaasPOS.ScaleUI
         /// <param name="lstpro"></param>
         private void CreateDataFile(List<DBPRODUCT_BEANMODEL> lstpro)
         {
-            if (!Directory.Exists(FilePath))
+            if (!Directory.Exists(GetFilePath()))
             {
-                Directory.CreateDirectory(FilePath);
+                Directory.CreateDirectory(GetFilePath());
             }
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -479,7 +522,7 @@ namespace WinSaasPOS.ScaleUI
 
                 //包装日期 推荐日期  保质日期   
                 XmlNode datesnode = CreateNode(xmlDoc, itemnode, "Dates", "");
-                XmlNode dateoffsetnode1 = CreateNode(xmlDoc, datesnode, "DateOffset", pro.BESTDAYS.ToString());
+                XmlNode dateoffsetnode1 = CreateNode(xmlDoc, datesnode, "DateOffset", pro.SHELFLIFE.ToString());
                 AddAttribute(dateoffsetnode1, "Type", "BestBefore");//推荐日期
 
                 AddAttribute(dateoffsetnode1, "UnitOfOffset", "day");
@@ -488,13 +531,12 @@ namespace WinSaasPOS.ScaleUI
 
 
 
-                XmlNode dateoffsetnode2 = CreateNode(xmlDoc, datesnode, "DateOffset", pro.BESTDAYS.ToString());
+                XmlNode dateoffsetnode2 = CreateNode(xmlDoc, datesnode, "DateOffset", pro.SHELFLIFE.ToString());
                 AddAttribute(dateoffsetnode2, "Type", "SellBy");//保质期
 
                 AddAttribute(dateoffsetnode2, "UnitOfOffset", "day");
                 AddAttribute(dateoffsetnode2, "PrintFormat", "DDMMYY");
                 AddAttribute(dateoffsetnode2, "PrintEnabled", "true");
-
 
                 XmlNode dateoffsetnode3 = CreateNode(xmlDoc, datesnode, "DateOffset", DateTime.Now.ToString("yyyy-MM-dd"));
                 AddAttribute(dateoffsetnode3, "Type", "PackedDate");//包装日期
@@ -505,7 +547,7 @@ namespace WinSaasPOS.ScaleUI
 
             }
 
-            xmlDoc.Save(FilePath + "\\" + DataFileName);
+            xmlDoc.Save(GetFilePath() + "\\" + DataFileName);
 
         }
 
@@ -515,10 +557,6 @@ namespace WinSaasPOS.ScaleUI
         /// <param name="lstpro"></param>
         private void CreateETFile(List<DBPRODUCT_BEANMODEL> lstpro)
         {
-            if (!Directory.Exists(FilePath))
-            {
-                Directory.CreateDirectory(FilePath);
-            }
 
             XmlDocument xmlDoc = new XmlDocument();
             //创建类型声明节点  
@@ -558,7 +596,7 @@ namespace WinSaasPOS.ScaleUI
                   
                 }
             }
-            xmlDoc.Save(FilePath + "\\" + DataFileName);
+            xmlDoc.Save(GetFilePath() + "\\" + DataFileName);
 
         }
 
@@ -569,10 +607,6 @@ namespace WinSaasPOS.ScaleUI
         /// <param name="labelno"></param>
         private void CreateLabelFile(string datafile, string labelno)
         {
-            if (!Directory.Exists(FilePath))
-            {
-                Directory.CreateDirectory(FilePath);
-            }
 
             XmlDocument xmlDoc = new XmlDocument();
             //创建类型声明节点  
@@ -587,7 +621,7 @@ namespace WinSaasPOS.ScaleUI
             CreateNode(xmlDoc, labelformatnode, "LabelNo", labelno);
             CreateNode(xmlDoc, labelformatnode, "DataFile", datafile);
 
-            xmlDoc.Save(FilePath + "\\" + DataFileName);
+            xmlDoc.Save(GetFilePath() + "\\" + DataFileName);
         }
 
         /// <summary>
@@ -595,10 +629,6 @@ namespace WinSaasPOS.ScaleUI
         /// </summary>
         private void CreateBarcodeFile()
         {
-            if (!Directory.Exists(FilePath))
-            {
-                Directory.CreateDirectory(FilePath);
-            }
 
             XmlDocument xmlDoc = new XmlDocument();
             //创建类型声明节点  
@@ -624,7 +654,7 @@ namespace WinSaasPOS.ScaleUI
             CreateNode(xmlDoc, barcodenode2, "Description", "2");
             CreateNode(xmlDoc, barcodenode2, "Definition", "2600PPPPPPPP00001C");
 
-            xmlDoc.Save(FilePath + "\\" + DataFileName);
+            xmlDoc.Save(GetFilePath() + "\\" + DataFileName);
 
         }
 
@@ -633,11 +663,6 @@ namespace WinSaasPOS.ScaleUI
         /// </summary>
         public void CreatePresetFile()
         {
-            if (!Directory.Exists(FilePath))
-            {
-                Directory.CreateDirectory(FilePath);
-            }
-
             XmlDocument xmlDoc = new XmlDocument();
             //创建类型声明节点  
             XmlNode node = xmlDoc.CreateXmlDeclaration("1.0", "utf-8", "");
@@ -687,7 +712,7 @@ namespace WinSaasPOS.ScaleUI
 
             }
 
-            xmlDoc.Save(FilePath + "\\" + DataFileName);
+            xmlDoc.Save(GetFilePath() + "\\" + DataFileName);
         }
         #endregion
         /// <summary>    
@@ -755,6 +780,25 @@ namespace WinSaasPOS.ScaleUI
         private void WriteToledoLog(string log)
         {
             LogManager.WriteLog("ToledoLog", log);
+        }
+
+        public string GetFilePath()
+        {
+            try
+            {
+                 string FilePath = AppDomain.CurrentDomain.BaseDirectory + "ToledoData";
+
+                 if (!Directory.Exists(FilePath))
+                 {
+                     Directory.CreateDirectory(FilePath);
+                 }
+
+                 return FilePath;
+            }
+            catch (Exception ex)
+            {
+                return AppDomain.CurrentDomain.BaseDirectory + "ToledoData";
+            }
         }
     }
 }

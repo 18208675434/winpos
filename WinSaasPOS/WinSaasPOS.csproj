@@ -103,6 +103,12 @@
     <Compile Include="Common\OrderUtil.cs" />
     <Compile Include="Common\PrintUtil.cs" />
     <Compile Include="Common\ReceiptUtil.cs" />
+    <Compile Include="ScaleUI\FormSending.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScaleUI\FormSending.Designer.cs">
+      <DependentUpon>FormSending.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScaleUI\ScaleDataHelper.cs" />
     <Compile Include="ScaleUI\ScaleUtil.cs" />
     <Compile Include="Common\ScanerHook.cs" />
@@ -862,6 +868,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRefundSelect.resx">
       <DependentUpon>frmRefundSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleUI\FormSending.resx">
+      <DependentUpon>FormSending.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScaleUI\frmScale.resx">
       <DependentUpon>frmScale.cs</DependentUpon>

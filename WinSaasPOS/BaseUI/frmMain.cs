@@ -4350,6 +4350,11 @@ namespace WinSaasPOS
             }
         }
 
+        private void frmMain_Activated(object sender, EventArgs e)
+        {
+            MainModel.HideTask();
+        }
+
 
     }
 }

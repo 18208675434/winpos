@@ -54,6 +54,7 @@
             this.Name = "FormToast";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormToast";
+            this.Activated += new System.EventHandler(this.FormToast_Activated);
             this.Resize += new System.EventHandler(this.FormToast_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();

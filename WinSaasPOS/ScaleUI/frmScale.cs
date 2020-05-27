@@ -51,9 +51,17 @@ namespace WinSaasPOS
         Bitmap bmpSendScaleFailed;
         Bitmap bmpSendScale;
 
+        /// <summary>
+        /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
+        /// </summary>
+        private bool IsEnable = true;
+
         public frmScale()
         {
             InitializeComponent();
+
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void frmScale_Shown(object sender, EventArgs e)
@@ -149,13 +157,20 @@ namespace WinSaasPOS
 
         private void btnExits_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             this.Dispose();
             this.Close();
         }
 
         private void btnTransferAll_Click(object sender, EventArgs e)
         {
-
+            if (!IsEnable)
+            {
+                return;
+            }
             if (dgvScale.Rows.Count <= 0)
             {
                 return;
@@ -178,6 +193,11 @@ namespace WinSaasPOS
         {
             try
             {
+
+                if (!IsEnable)
+                {
+                    return;
+                }
                 if (e.RowIndex < 0)
                     return;
                 if (e.ColumnIndex != 6)
@@ -209,8 +229,7 @@ namespace WinSaasPOS
         {
             try
             {
-                LoadPicScreen(true);
-
+                IsEnable = false;
                 List<string> lstscaleip = (List<string>)scaleips;
 
                 List<string> lstSendPLUStr = new List<string>(); //PLU主档
@@ -223,31 +242,44 @@ namespace WinSaasPOS
                     if (lstscale == null || lstscale.Count <= 0)
                     {
                         MainModel.ShowLog(ScaleIP +"秤无商品信息",false);
-                        return;
+                        continue;
+                        //return;
                     }
                     string scaletype = lstscale[0].SCALESTYPE;
-                    LoadingHelper.ShowLoadingScreen(lstscale[0].TEMPNAME+"|"+"传秤数据下发中");
-
+                    //LoadingHelper.ShowLoadingScreen(lstscale[0].TEMPNAME+"|"+"传秤数据下发中");
+                  
 
                     if (scaletype != "bplus")
                     {
                         MainModel.ShowLog("暂未匹配秤：" + lstscale[0].TEMPNAME,false);
-                        return; 
+                        continue;
+                        //return; 
                     }
+
+                    ShowSending(lstscale[0].TEMPNAME + "|" + "传秤数据下发中");
+
+                    //ParameterizedThreadStart Pts = new ParameterizedThreadStart(ShowSending);
+                    //Thread thread = new Thread(Pts);
+                    //thread.IsBackground = true;
+                    //thread.Start(lstscale[0].TEMPNAME + "|" + "传秤数据下发中");
+
+
                     string errormsg ="";
                     bool SendScaleResult = scaletoledo.SendToledoData(ScaleIP,"3001",out errormsg);
 
-
+                   
                     if (SendScaleResult)
                     {
                        
                         LogManager.WriteLog(ScaleIP+"传秤完成");
                         if (lstscaleip.Count == 1)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
                         {
-                            LoadingHelper.CloseForm();
+                            LoadPicScreen(true);
+                            ClsoeSending();
+                           // LoadingHelper.CloseForm();
                             frmScaleResult frmscaleresult = new frmScaleResult(true, lstscale[0].TEMPNAME,"下发成功");
                         frmscaleresult.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmscaleresult.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmscaleresult.Height) / 2);
-                       // frmscaleresult.TopMost = true;
+                        frmscaleresult.TopMost = true;
                         frmscaleresult.ShowDialog();
                         }
 
@@ -274,9 +306,11 @@ namespace WinSaasPOS
                         frmScaleResult frmscaleresult = new frmScaleResult(false, lstscale[0].TEMPNAME,"下发失败");
                         if (lstscaleip.Count == 1)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
                         {
-                            LoadingHelper.CloseForm();
+                            LoadPicScreen(true);
+                            ClsoeSending();
+                           // LoadingHelper.CloseForm();
                             frmscaleresult.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmscaleresult.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmscaleresult.Height) / 2);
-                           // frmscaleresult.TopMost = true;
+                            frmscaleresult.TopMost = true;
                             frmscaleresult.ShowDialog();
                         }
 
@@ -300,13 +334,12 @@ namespace WinSaasPOS
                             {
                                 
                                 SendScaleByScaleIp(scaleips);
-                                return;
+                                continue;
+                                //return;
                             }
                         }
-                        //false
                     }
 
-                    LoadingHelper.CloseForm();
 
                 }
                 LoadScale();
@@ -316,15 +349,15 @@ namespace WinSaasPOS
             catch (Exception ex)
             {
 
-                   LoadingHelper.CloseForm();
+                  
                    LoadPicScreen(false);
                 MainModel.ShowLog("传秤异常" + ex.Message, true);
             }
             finally
             {
-               
-                    LoadingHelper.CloseForm();
+                ClsoeSending();
                     LoadPicScreen(false);
+                    IsEnable = true;
                     Application.DoEvents();
 
             }
@@ -339,6 +372,12 @@ namespace WinSaasPOS
         {
             try
             {
+
+                if (!IsEnable)
+                {
+                    return;
+                }
+
                 MainModel.ShowTask();
                 MainModel.ShowWindows();
                 keybd_event(0x5b, 0, 0, 0); //0x5b是left win的代码，这一句使key按下，下一句使key释放。 
@@ -358,24 +397,74 @@ namespace WinSaasPOS
         {
             try
             {
-                if (isShown)
+                this.Invoke(new InvokeHandler(delegate()
                 {
-                    picScreen.BackgroundImage = MainModel.GetWinformImage(this);
-                    picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
-                    picScreen.Visible = true;
-                }
-                else
-                {
-                    //picScreen.Size = new System.Drawing.Size(0, 0);
-                    picScreen.Visible = false;
-                }
+                    if (isShown)
+                    {
+                        if (!picScreen.Visible)
+                        {
+                            picScreen.BackgroundImage = MainModel.GetWinformImage(this);
+                            picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
+                            picScreen.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        picScreen.Visible = false;
+                    }
 
-                Application.DoEvents();
+
+                    Application.DoEvents();
+                }));
             }
             catch (Exception ex)
             {
                 picScreen.Visible = false;
                 LogManager.WriteLog("修改电子秤背景图异常：" + ex.Message);
+            }
+        }
+
+
+        private FormSending frmsending = null;
+        private void ShowSending(object msg)
+        {
+            try
+            {
+
+                lblMsg.Text = msg.ToString();
+                pnlSending.Size = new System.Drawing.Size(lblMsg.Width + 40, pnlSending.Height);
+                picLoading.Left = (pnlSending.Width - picLoading.Width) / 2;
+                pnlSending.Left = (this.Width - pnlSending.Width) / 2;
+
+                pnlSending.Visible = true;
+
+                //if (frmsending != null)
+                //{
+                //    frmsending.Close();
+                //}
+
+                //frmsending = new FormSending(msg.ToString());
+                //frmsending.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmsending.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmsending.Height) / 2);
+                //frmsending.TopMost = true;
+                //frmsending.Show();
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("展示发送中异常"+ex.Message,true);
+            }
+        }
+        private void ClsoeSending()
+        {
+            try
+            {
+
+                pnlSending.Visible = false;
+                //frmsending.Close();
+                //frmsending.Dispose();
+            }
+            catch(Exception ex)
+            {
+                MainModel.ShowLog("关闭发送中异常" + ex.Message, true);
             }
         }
     }

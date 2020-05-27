@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using Maticsoft.BLL;
 using Newtonsoft.Json;
 using Maticsoft.Model;
+using System.Runtime.Remoting.Messaging;
 
 namespace WinSaasPOS
 {
@@ -44,8 +45,7 @@ namespace WinSaasPOS
         private void frmLogin_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
-            // MainModel.HideTaskThread();
-            MainModel.ShowTask();
+            MainModel.HideTask(); 
             if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Log");
 
@@ -625,23 +625,35 @@ namespace WinSaasPOS
         //切换环境
         private void lblSN_Click(object sender, EventArgs e)
         {
-            //LogManager.WriteLog(click.ToString());
-            //// 两次点击间隔小于100毫秒时，算连续点击
-            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
-            //{
-            //    click++;
-            //    if (click >= 3)
-            //    {
-            //        click = 0;// 连续点击完毕时，清0
-            //        frmChangeUrl frmchangeurl = new frmChangeUrl();
-            //        frmchangeurl.ShowDialog();
-            //    }
-            //}
-            //else
-            //{
-            //    click = 1;// 不是连续点击时，清0
-            //}
-            //lastClickTime = DateTime.Now;
+            try
+            {
+                string isdebug = INIManager.GetIni("System", "IsDebug", MainModel.StartIniPath);
+                if (isdebug == "1")
+                {
+
+                }
+                LogManager.WriteLog(click.ToString());
+                // 两次点击间隔小于100毫秒时，算连续点击
+                if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
+                {
+                    click++;
+                    if (click >= 3)
+                    {
+                        click = 0;// 连续点击完毕时，清0
+                        frmChangeUrl frmchangeurl = new frmChangeUrl();
+                        frmchangeurl.ShowDialog();
+                    }
+                }
+                else
+                {
+                    click = 1;// 不是连续点击时，清0
+                }
+                lastClickTime = DateTime.Now;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
@@ -957,47 +969,46 @@ namespace WinSaasPOS
 
 
 
-        #region 电视屏
+        #region 定时器 
 
-
+        public delegate void deleteTimeTen();
         private void timerTen_Tick(object sender, EventArgs e)
         {
             try
             {
                 timerTen.Enabled = false;
 
-                ServerDataUtil.LoadIncrementProduct();
-                ServerDataUtil.LoadTVSkus();
 
+                deleteTimeTen operation = new deleteTimeTen(TimerTenAction);
+
+                operation.BeginInvoke(new System.AsyncCallback(GetCallbackHandler), "Async parameter");                
 
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("定时任务异常" + ex.Message);
-            }
-            finally
-            {
                 timerTen.Enabled = true;
             }
+            
         }
 
-        private void HttpServerStart()
+        public void TimerTenAction()
         {
-            try
-            {
-                //DataUtil.LoadTVSkus();
-
-                HttpServer httpServer;
-                httpServer = new MyHttpServer(8080);
-                Thread threadHttpServer = new Thread(new ThreadStart(httpServer.listen));
-                threadHttpServer.IsBackground = true;
-                threadHttpServer.Start();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("启动电视屏服务异常：" + ex.Message);
-            }
+            ServerDataUtil.LoadIncrementProduct();
+            ServerDataUtil.LoadTVSkus();
+            LogManager.WriteLog("定时10分钟刷新数据完成");
         }
+
+          public void GetCallbackHandler(IAsyncResult iar)
+        {
+            this.BeginInvoke(new EventHandler(delegate
+            {
+                timerTen.Enabled = true;
+
+            })); 
+        }
+
+
 
         #endregion
 

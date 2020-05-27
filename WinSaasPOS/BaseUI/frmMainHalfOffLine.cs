@@ -72,8 +72,6 @@ namespace WinSaasPOS
         /// </summary>
         private  bool IsEnable=true;
 
-
-
            //扫描数据处理线程
                 Thread threadScanCode;
 
@@ -107,7 +105,6 @@ namespace WinSaasPOS
         /// 积分
         /// </summary     
         private CalculateAvailablePointsCommandImpl pointcalculate = new CalculateAvailablePointsCommandImpl();
-                private ServerDataUtil serverdatautil = new ServerDataUtil();
         #endregion
 
         #region  页面加载
@@ -122,7 +119,6 @@ namespace WinSaasPOS
             MainModel.hScale = (float)Screen.AllScreens[0].Bounds.Height / this.Height;
             MainModel.midScale = (MainModel.wScale + MainModel.hScale) / 2;
 
-            ShowLoading(false);// LoadingHelper.CloseForm();
 
             CurrentFrmLogin = frmlogin;
             
@@ -156,6 +152,7 @@ namespace WinSaasPOS
         {
             try
             {
+                DateTime starttime = DateTime.Now;
                 LoadingHelper.ShowLoadingScreen("页面初始化...");
 
                 SetBtnPayStarus(false);
@@ -188,7 +185,7 @@ namespace WinSaasPOS
                 threadLoadAllProduct.Start();
 
                 //启动促销商品同步线程
-                Thread threadLoadPromotion = new Thread(serverdatautil.UpdatePromotion);
+                Thread threadLoadPromotion = new Thread(ServerDataUtil.UpdatePromotion);
                 threadLoadPromotion.IsBackground = false;
                 threadLoadPromotion.Start();
 
@@ -199,11 +196,11 @@ namespace WinSaasPOS
                 threadLoadScale.Start();
 
 
-                LoadFormIni();
-                ////弹窗初始化线程
-                //Thread threadLoadFrmIni = new Thread(LoadFormIni);
-                //threadLoadFrmIni.IsBackground = true;
-                //threadLoadFrmIni.Start();
+                //LoadFormIni();
+                //弹窗初始化线程
+                Thread threadLoadFrmIni = new Thread(LoadFormIni);
+                threadLoadFrmIni.IsBackground = true;
+                threadLoadFrmIni.Start();
 
                 //更新离线数据
                  threadUploadOffLineDate = new Thread(UploadOffLineData);
@@ -231,8 +228,7 @@ namespace WinSaasPOS
                     }
                     catch { }
                     picLoading.Size = new Size(55, 55);
-                    pnlPriceLine.Height = 1;
-               
+                    pnlPriceLine.Height = 1;              
                 }
                 catch { }
                
@@ -248,7 +244,9 @@ namespace WinSaasPOS
 
                     MainModel.frmmainmedia.Show();
                     MainModel.frmmainmedia.IniForm(null);
-                }             
+                }    
+         
+                Console.WriteLine("初始化页面时间" + (DateTime.Now - starttime).Milliseconds);
             }
             catch (Exception ex)
             {
@@ -300,8 +298,6 @@ namespace WinSaasPOS
 
             MainModel.frmmainmedia.Close();
             MainModel.frmmainmedia = null;
-            MainModel.ShowTask();
-           // CurrentFrmLogin.Show();
             this.Dispose();
         }
 

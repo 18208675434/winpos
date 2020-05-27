@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmScale));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvScale = new System.Windows.Forms.DataGridView();
             this.serianno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.scalename = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,12 +69,17 @@
             this.btnSendScale = new System.Windows.Forms.Button();
             this.btnFaile = new System.Windows.Forms.Button();
             this.btnSuccess = new System.Windows.Forms.Button();
+            this.pnlSending = new System.Windows.Forms.Panel();
+            this.lblMsg = new System.Windows.Forms.Label();
+            this.picLoading = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSendScale)).BeginInit();
             this.pnlDgvHead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picScaleFaild)).BeginInit();
             this.pnlHead.SuspendLayout();
+            this.pnlSending.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvScale
@@ -88,14 +93,14 @@
             this.dgvScale.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvScale.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvScale.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvScale.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvScale.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvScale.ColumnHeadersHeight = 50;
             this.dgvScale.ColumnHeadersVisible = false;
             this.dgvScale.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -106,14 +111,14 @@
             this.lasttime,
             this.ScaleStatus,
             this.operation});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvScale.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvScale.DefaultCellStyle = dataGridViewCellStyle29;
             this.dgvScale.GridColor = System.Drawing.Color.Silver;
             this.dgvScale.Location = new System.Drawing.Point(12, 125);
             this.dgvScale.MultiSelect = false;
@@ -121,8 +126,8 @@
             this.dgvScale.ReadOnly = true;
             this.dgvScale.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvScale.RowHeadersVisible = false;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvScale.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvScale.RowsDefaultCellStyle = dataGridViewCellStyle30;
             this.dgvScale.RowTemplate.Height = 50;
             this.dgvScale.Size = new System.Drawing.Size(1154, 554);
             this.dgvScale.TabIndex = 25;
@@ -130,89 +135,91 @@
             // 
             // serianno
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.serianno.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle22.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.serianno.DefaultCellStyle = dataGridViewCellStyle22;
             this.serianno.FillWeight = 10F;
             this.serianno.HeaderText = "编号";
             this.serianno.Name = "serianno";
             this.serianno.ReadOnly = true;
-            this.serianno.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.serianno.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // scalename
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.scalename.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.scalename.DefaultCellStyle = dataGridViewCellStyle23;
             this.scalename.FillWeight = 25F;
             this.scalename.HeaderText = "秤名称";
             this.scalename.Name = "scalename";
             this.scalename.ReadOnly = true;
-            this.scalename.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.scalename.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // scaleip
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
-            this.scaleip.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle24.Padding = new System.Windows.Forms.Padding(5);
+            this.scaleip.DefaultCellStyle = dataGridViewCellStyle24;
             this.scaleip.FillWeight = 25F;
             this.scaleip.HeaderText = "秤IP";
             this.scaleip.Name = "scaleip";
             this.scaleip.ReadOnly = true;
-            this.scaleip.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.scaleip.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.scaleip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // scaletype
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.scaletype.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle25.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.scaletype.DefaultCellStyle = dataGridViewCellStyle25;
             this.scaletype.FillWeight = 25F;
             this.scaletype.HeaderText = "电子秤类型";
             this.scaletype.Name = "scaletype";
             this.scaletype.ReadOnly = true;
-            this.scaletype.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.scaletype.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // lasttime
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lasttime.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.lasttime.DefaultCellStyle = dataGridViewCellStyle26;
             this.lasttime.FillWeight = 25F;
             this.lasttime.HeaderText = "上次同步时间";
             this.lasttime.Name = "lasttime";
             this.lasttime.ReadOnly = true;
+            this.lasttime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ScaleStatus
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle7.NullValue")));
-            this.ScaleStatus.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle27.NullValue")));
+            this.ScaleStatus.DefaultCellStyle = dataGridViewCellStyle27;
             this.ScaleStatus.FillWeight = 9F;
             this.ScaleStatus.HeaderText = "传秤状态";
             this.ScaleStatus.Name = "ScaleStatus";
             this.ScaleStatus.ReadOnly = true;
+            this.ScaleStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // operation
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle8.NullValue")));
-            this.operation.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle28.NullValue")));
+            this.operation.DefaultCellStyle = dataGridViewCellStyle28;
             this.operation.FillWeight = 15F;
             this.operation.HeaderText = "操作";
             this.operation.Name = "operation";
             this.operation.ReadOnly = true;
-            this.operation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.operation.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.operation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // btnExits
@@ -530,6 +537,38 @@
             this.btnSuccess.UseVisualStyleBackColor = false;
             this.btnSuccess.Visible = false;
             // 
+            // pnlSending
+            // 
+            this.pnlSending.BackColor = System.Drawing.Color.Silver;
+            this.pnlSending.Controls.Add(this.lblMsg);
+            this.pnlSending.Controls.Add(this.picLoading);
+            this.pnlSending.Location = new System.Drawing.Point(271, 314);
+            this.pnlSending.Name = "pnlSending";
+            this.pnlSending.Size = new System.Drawing.Size(168, 135);
+            this.pnlSending.TabIndex = 41;
+            this.pnlSending.Visible = false;
+            // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblMsg.ForeColor = System.Drawing.Color.White;
+            this.lblMsg.Location = new System.Drawing.Point(13, 86);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(136, 24);
+            this.lblMsg.TabIndex = 4;
+            this.lblMsg.Text = "传秤数据下发中";
+            // 
+            // picLoading
+            // 
+            this.picLoading.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picLoading.Image = ((System.Drawing.Image)(resources.GetObject("picLoading.Image")));
+            this.picLoading.Location = new System.Drawing.Point(55, 18);
+            this.picLoading.Name = "picLoading";
+            this.picLoading.Size = new System.Drawing.Size(54, 52);
+            this.picLoading.TabIndex = 3;
+            this.picLoading.TabStop = false;
+            // 
             // frmScale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -537,6 +576,7 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1178, 760);
             this.ControlBox = false;
+            this.Controls.Add(this.pnlSending);
             this.Controls.Add(this.picScreen);
             this.Controls.Add(this.btnSuccess);
             this.Controls.Add(this.btnFaile);
@@ -562,6 +602,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picScaleFaild)).EndInit();
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();
+            this.pnlSending.ResumeLayout(false);
+            this.pnlSending.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLoading)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -590,6 +633,7 @@
         private System.Windows.Forms.Button btnSendScale;
         private System.Windows.Forms.Button btnFaile;
         private System.Windows.Forms.Button btnSuccess;
+        private System.Windows.Forms.Button btnOnLineType;
         private System.Windows.Forms.DataGridViewTextBoxColumn serianno;
         private System.Windows.Forms.DataGridViewTextBoxColumn scalename;
         private System.Windows.Forms.DataGridViewTextBoxColumn scaleip;
@@ -597,6 +641,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lasttime;
         private System.Windows.Forms.DataGridViewImageColumn ScaleStatus;
         private System.Windows.Forms.DataGridViewImageColumn operation;
-        private System.Windows.Forms.Button btnOnLineType;
+        private System.Windows.Forms.Panel pnlSending;
+        private System.Windows.Forms.Label lblMsg;
+        private System.Windows.Forms.PictureBox picLoading;
     }
 }

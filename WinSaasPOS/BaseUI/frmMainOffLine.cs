@@ -332,21 +332,6 @@ namespace WinSaasPOS
 
         
         bool isshowpic = false;
-        //实时时间显示
-        private void timerNow_Tick(object sender, EventArgs e)
-        {
-
-            ////button4_Click(null,null);
-            ////button4.PerformClick();
-            ////***否则点击完 dgv 监听键盘事件监听不到 return和0
-            //btnScan.Select();
-           // button4.Focus();
-            //button4.Visible = false;
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            //isshowpic = !isshowpic;
-            //LoadPicScreen(isshowpic);
-        }
 
         //定时清理内存
         private void timerClearMemory_Tick(object sender, EventArgs e)
@@ -722,8 +707,7 @@ namespace WinSaasPOS
             asf.AutoScaleControlTest(frmtool, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
             frmtool.DataReceiveHandle += frmToolMain_DataReceiveHandle;
             frmtool.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtool.Width - 15, pnlHead.Height + 10);
-            frmtool.Show();
-     
+            frmtool.Show();     
             }
             catch (Exception ex)
             {
@@ -2295,7 +2279,6 @@ namespace WinSaasPOS
                     if (!picScreen.Visible)
                     {
                         picScreen.BackgroundImage = MainModel.GetWinformImage(this);
-                       // picScreen.BackgroundImage = picCheck.BackgroundImage;
                         picScreen.Size = new System.Drawing.Size(this.Width, this.Height);
                         picScreen.Visible = true;
                     }                   
@@ -3079,7 +3062,6 @@ namespace WinSaasPOS
 
                     }
 
-
                 }
             }
             catch (Exception ex)
@@ -3091,6 +3073,11 @@ namespace WinSaasPOS
                 this.Enabled = true;
 
             }
+        }
+
+        private void frmMainOffLine_Activated(object sender, EventArgs e)
+        {
+            MainModel.HideTask();
         }
 
     }

@@ -92,7 +92,7 @@ namespace WinSaasPOS.Common
                         }
 
                         sb.Append("33" + ",");  //条码格式编号
-                        sb.Append(pro.BESTDAYS + ",");  //保质期
+                        sb.Append(pro.SHELFLIFE + ",");  //保质期
                         sb.Append("" + ","); //销售日期？
                         sb.Append("0" + ","); //包装日期 固定0当天
                         sb.Append(17 + ",");  //标签格式编号  ？
