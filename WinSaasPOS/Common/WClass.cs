@@ -865,17 +865,29 @@ namespace WinSaasPOS.Common
     {
         [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize")]
         public static extern int SetProcessWorkingSetSize(IntPtr process, int minSize, int maxSize);
+
+        public delegate void deleteClear() ;
+
+        public static void CrearMemory()
+        {
+            deleteClear delete = new deleteClear(CrearMemoryDelete);
+            delete.BeginInvoke(null,null);
+        }
         /// <summary>
         /// 内存清理
         /// </summary>
-        public static void CrearMemory()
+        public static void CrearMemoryDelete()
         {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            try
             {
-                SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+                }
             }
+            catch { }
         }
 
         /// <summary>

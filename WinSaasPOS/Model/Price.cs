@@ -77,5 +77,10 @@ namespace WinSaasPOS.Model
 
         public decimal pricepromoamt { get; set; }
 
+        /// <summary>
+        /// add 2020-05-13  半离线用
+        /// </summary>
+        public int flag { get; set; }
+
     }
 }

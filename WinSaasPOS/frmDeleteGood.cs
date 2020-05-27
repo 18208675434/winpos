@@ -56,7 +56,7 @@ namespace WinSaasPOS
 
                 this.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - this.Width) / 2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
                 lblMsgStr.Text = msgstr;
-                lblMsg.Text = proname + "  " + barcode;
+                lblMsg.Text = proname + "\r\n" + barcode;
             }
             catch (Exception ex)
             {

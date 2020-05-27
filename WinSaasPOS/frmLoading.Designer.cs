@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoading));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblMsg1 = new System.Windows.Forms.Label();
-            this.timerClose = new System.Windows.Forms.Timer(this.components);
             this.lblMsg2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -57,11 +55,6 @@
             this.lblMsg1.TabIndex = 1;
             this.lblMsg1.Text = "label1";
             this.lblMsg1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // timerClose
-            // 
-            this.timerClose.Interval = 2000;
-            this.timerClose.Tick += new System.EventHandler(this.timerClose_Tick);
             // 
             // lblMsg2
             // 
@@ -93,8 +86,6 @@
             this.Text = "frmLoading";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoaderForm_FormClosing);
-            this.SizeChanged += new System.EventHandler(this.frmLoading_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -104,7 +95,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblMsg1;
-        private System.Windows.Forms.Timer timerClose;
         private System.Windows.Forms.Label lblMsg2;
     }
 }

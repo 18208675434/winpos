@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -181,6 +182,122 @@ namespace WinSaasPOS.Common
 
             }
         }
+
+
+
+
+        /// <summary>
+        /// 获取当前星期几
+        /// </summary>
+        /// <returns></returns>
+        public static string GetWeek()
+        {
+            try
+            {
+                string week = string.Empty;
+                switch ((int)DateTime.Now.DayOfWeek)
+                {
+                    case 0:
+                        week = "(星期日)";
+                        break;
+                    case 1:
+                        week = "(星期一)";
+                        break;
+                    case 2:
+                        week = "(星期二)";
+                        break;
+                    case 3:
+                        week = "(星期三)";
+                        break;
+                    case 4:
+                        week = "(星期四)";
+                        break;
+                    case 5:
+                        week = "(星期五)";
+                        break;
+                    default:
+                        week = "(星期六)";
+                        break;
+                }
+                return week;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        public static void OpenOSK()
+        {
+            try
+            {
+                string tabtipfile = @"C:\Program Files\Common Files\microsoft shared\ink\TabTip.exe";
+                string oskfile = @"C:\Windows\System32\osk.exe";
+                if (File.Exists(tabtipfile))
+                {
+                    System.Diagnostics.Process.Start(tabtipfile);
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(oskfile);
+                }
+            }
+            catch (Exception ex) {
+                LogManager.WriteLog("开启键盘异常"+ex.Message);
+            }
+        }
+        public static void CloseOSK()
+        {
+
+            try
+            {
+                Process[] pro = Process.GetProcesses();
+                for (int i = 0; i < pro.Length - 1; i++)
+                {
+                    if (pro[i].ProcessName == "osk" || pro[i].ProcessName == "TabTip")
+                    {
+                        pro[i].Kill();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("小键盘关闭异常：" + ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// 判断是否有交集
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list1"></param>
+        /// <param name="list2"></param>
+        /// <returns></returns>
+        public static bool IsArrayIntersection<T>(List<T> list1, List<T> list2)
+        {
+            try
+            {
+                List<T> t = list1.Distinct().ToList();
+
+                var exceptArr = t.Except(list2).ToList();
+
+                if (exceptArr.Count < t.Count)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("判断集合是否有交集异常"+ex.Message);
+                return false;
+            }
+
+        }
     }
 
 
@@ -206,5 +323,10 @@ namespace WinSaasPOS.Common
             SendMessage(textBox.Handle, EM_SETCUEBANNER, 2, watermark);
         }
     }
+
+
+
+
+
 
 }

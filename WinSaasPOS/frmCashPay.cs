@@ -217,12 +217,12 @@ namespace WinSaasPOS
                         if (ResultCode != 0 || orderresult == null)
                         {
                             CheckUserAndMember(ResultCode);
-                            ShowLog("异常" + ErrorMsg, true);
+                            MainModel.ShowLog("异常" + ErrorMsg, true);
                         }
                         else if (orderresult.continuepay == 1)
                         {
                             //TODO  继续支付
-                            ShowLog("需要继续支付", true);
+                            MainModel.ShowLog("需要继续支付", true);
                         }
                         else
                         {
@@ -286,7 +286,7 @@ namespace WinSaasPOS
                             if (ResultCode != 0 || orderresult == null)
                             {
                                 CheckUserAndMember(BalanceResultCode);
-                                ShowLog("异常" + ErrorMsg, true);
+                                MainModel.ShowLog("异常" + ErrorMsg, true);
                             }
                             else if (orderresult.continuepay == 1)
                             {
@@ -329,7 +329,7 @@ namespace WinSaasPOS
                             {
                                 this.Show();
                                 CheckUserAndMember(OnlineResultCode);
-                                ShowLog("异常" + ErrorMsg, true);
+                                MainModel.ShowLog("异常" + ErrorMsg, true);
                             }
                             else if (orderresult.continuepay == 1)
                             {
@@ -362,7 +362,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                ShowLog("现金支付异常：" + ex.Message, false);
+                MainModel.ShowLog("现金支付异常：" + ex.Message, false);
             }
 
             //if (DataReceiveHandle != null)
@@ -383,12 +383,12 @@ namespace WinSaasPOS
                 if (ResultCode != 0 || orderresult == null)
                 {
                     CheckUserAndMember(ResultCode);
-                    ShowLog("异常" + ErrorMsg, true);
+                    MainModel.ShowLog("异常" + ErrorMsg, true);
                 }
                 else if (orderresult.continuepay == 1)
                 {
                     //TODO  继续支付
-                    ShowLog("需要继续支付", true);
+                    MainModel.ShowLog("需要继续支付", true);
                 }
                 else
                 {
@@ -434,7 +434,7 @@ namespace WinSaasPOS
                     LoadingHelper.CloseForm();
                     //fd
                     CheckUserAndMember(ResultCode);
-                    ShowLog(ErrorMsgCart, false);
+                    MainModel.ShowLog(ErrorMsgCart, false);
                     return false;
                 }
                 else
@@ -471,20 +471,6 @@ namespace WinSaasPOS
                 this.Enabled = true;
                 LoadingHelper.CloseForm();
             }
-        }
-
-        //TODO  修改样式
-        private void ShowLog(string msg, bool iserror)
-        {
-
-            MsgHelper.ShowForm(msg);
-            //this.Invoke(new InvokeHandler(delegate()
-            //{
-
-            //    frmMsg frmmsf = new frmMsg(msg, iserror, 1000);
-            //    frmmsf.ShowDialog(); LogManager.WriteLog(msg);
-            //}));
-
         }
 
         #region  小键盘按键
@@ -686,7 +672,7 @@ namespace WinSaasPOS
             {
                 double doublenum = Convert.ToDouble(txtCash.Text);
 
-                if (doublenum > 0)
+                if (doublenum > 0 || thisCurrentCart.totalpayment==0)
                 {
                     btnNext.BackColor = Color.OrangeRed;
                 }

@@ -49,6 +49,11 @@ namespace WinSaasPOS.Model
          /// <summary>
          /// 门店电话
          /// </summary>
-         public string tel { set; get; } 
+         public string tel { set; get; }
+
+        /// <summary>
+        /// 门店配置订单金额计算规则 1：抹角  2：抹分  3：分进位  4：分四舍五入
+        /// </summary>
+         public int changerule { set; get; }
     }
 }

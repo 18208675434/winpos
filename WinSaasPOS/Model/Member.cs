@@ -25,6 +25,15 @@ namespace WinSaasPOS.Model
         /// </summary>
         public Memberinformationresponsevo memberinformationresponsevo { get; set; }
         public Creditaccountrepvo creditaccountrepvo { get; set; }
+
+        public Barcoderecognitionresponse barcoderecognitionresponse { get; set; }
+
+        public Membertenantresponsevo membertenantresponsevo { get; set; }
+
+        /// <summary>
+        /// 是否使用积分  主界面勾选/取消勾选积分修改状态
+        /// </summary>
+        public bool isUsePoint { get; set; }
     }
 
     public class Memberheaderresponsevo
@@ -101,4 +110,22 @@ namespace WinSaasPOS.Model
         public decimal availablecredit { get; set; }
     }
 
+
+    public class Barcoderecognitionresponse
+    {
+        public string memberid { get; set; }
+        public decimal balance { get; set; }
+    }
+
+    public class Membertenantresponsevo
+    {
+        public string memberid { get; set; }
+        public string tenantid { get; set; }
+
+        public string shopid { get; set; }
+        public int gender { get; set; }
+        public long birthday { get; set; }
+        public long firstorderat { get; set; }
+        public bool onbirthday { get; set; }
+    }
 }
