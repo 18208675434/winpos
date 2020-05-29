@@ -282,10 +282,11 @@ namespace WinSaasPOS
         {
             try
             {
+                jsonbll.Delete(ConditionType.CurrentCart);
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
 
-                    jsonbll.Delete(ConditionType.CurrentCart);
+                  
                     JSON_BEANMODEL jsonmodel = new JSON_BEANMODEL();
                     jsonmodel.CONDITION = ConditionType.CurrentCart;
                     jsonmodel.CREATE_TIME = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -807,6 +808,9 @@ namespace WinSaasPOS
                     return;
                 }
 
+                
+
+
                 IsEnable = false;
                 Receiptdetail receiptdetail = ReceiptUtil.GetReceiptDetailOffLine();
                 IsEnable = true;
@@ -820,7 +824,8 @@ namespace WinSaasPOS
                frmconfirmreceiptback.Location = new Point(0, 0);
                frmconfirmreceiptback.ShowDialog();
 
-               CurrentFrmLoginOffLine.Show();  
+               CurrentFrmLoginOffLine.Show();
+               CurrentCart = null;
                this.Close();
 
             }
@@ -966,7 +971,9 @@ namespace WinSaasPOS
             }
             MainModel.frmlogin = new frmLogin();
             MainModel.frmlogin.Show();
-            this.Dispose();
+
+            CurrentCart = null;
+            this.Close();
                 
                 //tsmReceipt_Click(null,null);
             }
@@ -3059,9 +3066,7 @@ namespace WinSaasPOS
                         MainModel.frmMainmediaCart = CurrentCart;
                         MainModel.frmmainmedia.UpdateForm();
                         this.Activate();
-
                     }
-
                 }
             }
             catch (Exception ex)
@@ -3071,13 +3076,19 @@ namespace WinSaasPOS
             finally
             {
                 this.Enabled = true;
-
             }
         }
 
         private void frmMainOffLine_Activated(object sender, EventArgs e)
         {
-            MainModel.HideTask();
+            try
+            {
+                if (this.WindowState != FormWindowState.Minimized)
+                {
+                    MainModel.HideTask();
+                }
+            }
+            catch { }
         }
 
     }

@@ -1679,7 +1679,7 @@ namespace WinSaasPOS
                 {
                     return;
                 }
-
+                Other.CrearMemory();
                 SortType thissorttype = SortType.SaleCount;
 
                 //已选择该排序，不需要再刷新
@@ -1716,6 +1716,8 @@ namespace WinSaasPOS
                 {
                     return;
                 }
+
+                Other.CrearMemory();
                 SortType thissorttype = SortType.CreateDate;
                 //已选择该排序，不需要再刷新
                 if (btnOrderByCreateDate.BackgroundImage == imgSelect)
@@ -1750,6 +1752,7 @@ namespace WinSaasPOS
             {
                 return;
             }
+            Other.CrearMemory();
             SortType thissorttype;
             if (btnOrderBySalePrice.Text == "价格↓")
             {
@@ -1974,6 +1977,8 @@ namespace WinSaasPOS
                 }
                 if (e.RowIndex < 0)
                     return;
+
+                Other.CrearMemory();
                 IsEnable = false;
                
                 string categoryid = dgvCategory.Rows[e.RowIndex].Cells["FirstcategoryID"].Value.ToString();

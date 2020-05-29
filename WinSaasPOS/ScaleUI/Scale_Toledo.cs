@@ -52,6 +52,12 @@ namespace WinSaasPOS.ScaleUI
         {
             try
             {
+                if (!GlobalUtil.CheckIP(scaleip))
+                {
+                    msg = "电子秤连接失败";
+                    return false;
+                }
+
                 msg = "";
                 CurrentLstScaleKey = scalebll.GetModelList(" IP='" + scaleip + "' and CREATE_URL_IP ='" + MainModel.URL + "'");
                 if (CurrentLstScaleKey == null || CurrentLstScaleKey.Count <= 0)
@@ -70,7 +76,7 @@ namespace WinSaasPOS.ScaleUI
 
                 if (CurrentLstPro == null || CurrentLstPro.Count == 0)
                 {
-                    msg = scaleip + "为匹配到商品";
+                    msg = scaleip + "未匹配到商品";
                     return false;
                 }
                 if (!SendLable(scaleip, port))
@@ -465,7 +471,17 @@ namespace WinSaasPOS.ScaleUI
             {
                 XmlNode itemnode = CreateNode(xmlDoc, xnCommands, "Item", "");
 
+                //名称超过12秤无法打印
+                if (pro != null && pro.SKUNAME != null && pro.SKUNAME.Length > 12)
+                {
+                    pro.SKUNAME = pro.SKUNAME.Substring(0,12);
+                }
 
+                //名称超过12秤无法打印
+                if (pro != null && pro.SALEPRICE != null && pro.SALEPRICE > 9999)
+                {
+                    pro.SALEPRICE = 9999;
+                }
                 //标签号
                 XmlNode labelformatsnode = CreateNode(xmlDoc, itemnode, "LabelFormats", "");
                 XmlNode labelformatidnode;
@@ -753,13 +769,11 @@ namespace WinSaasPOS.ScaleUI
             node.Attributes.Append(attr);
         }
 
-
+        private string TaskResultMsg="";
         private bool CheckTaskResult()
         {
             try
             {
-
-
                 XmlDocument doc = new XmlDocument();
 
                 doc.Load(resultpath);
@@ -768,6 +782,20 @@ namespace WinSaasPOS.ScaleUI
 
                 XmlNode modelxn = scaleposxn.SelectSingleNode("ReturnCode");
                 string result = modelxn.InnerText;
+
+                switch (result)
+                {
+                    case ("DataFileError"): TaskResultMsg = "数据文件错误"; break;
+                        case("ScaleSpaceFullError"): TaskResultMsg="电子秤空间不足";break;
+                        case ("TaskTypeError"): TaskResultMsg = "任务类型错误"; break;
+                        case ("TaskRepeatError"): TaskResultMsg = "任务重复"; break;
+                        case ("TransferError"): TaskResultMsg = "传输错误"; break;
+                        case ("ScaleDataError"): TaskResultMsg = "电子秤数据错误"; break;
+                        case ("ConnectError"): TaskResultMsg = "电子秤连接错误"; break;
+                        case ("ServiceError"): TaskResultMsg = "服务连接不上错误"; break;
+                        default: TaskResultMsg = result; break;
+
+                }
 
                 return result == "OK";
             }
@@ -800,5 +828,7 @@ namespace WinSaasPOS.ScaleUI
                 return AppDomain.CurrentDomain.BaseDirectory + "ToledoData";
             }
         }
+
+
     }
 }

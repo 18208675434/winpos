@@ -26,6 +26,8 @@ namespace WinSaasPOS
         /// </summary>
         private bool IsEnable = true;
 
+        JSON_BEANBLL jsonbll = new JSON_BEANBLL();
+
         public frmChangeMode()
         {
             InitializeComponent();
@@ -152,6 +154,8 @@ namespace WinSaasPOS
 
                 if (frmConfirm.DialogResult == DialogResult.OK)
                 {
+                    jsonbll.Delete(ConditionType.CurrentCart);
+
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -190,6 +194,8 @@ namespace WinSaasPOS
 
                 if (frmConfirm.DialogResult == DialogResult.OK)
                 {
+
+                    jsonbll.Delete(ConditionType.CurrentCart);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

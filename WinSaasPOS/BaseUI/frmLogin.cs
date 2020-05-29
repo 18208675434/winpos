@@ -49,6 +49,15 @@ namespace WinSaasPOS
             if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Log");
 
+
+            //用户控件没有重新绘图 修改大小才会触发roundradius
+            rbtnLoginByPhone.RoundRadius = rbtnLoginByPhone.Height;
+            rbtnLoginByUser.RoundRadius = rbtnLoginByUser.Height;
+            rbtnLoginByUser.Height += 1;
+            rbtnLoginByPhone.Height += 1;
+
+            Application.DoEvents();
+
             Thread threadItemExedate = new Thread(ThreadUpStart);
             threadItemExedate.IsBackground = true;
             threadItemExedate.Start();
@@ -137,7 +146,6 @@ namespace WinSaasPOS
                     isReLogin = true;
                     int screenwdith = Screen.AllScreens[0].Bounds.Width;
 
-                    pnlbtnLoginByUser.Refresh();
                     lblLobinByUser_Click(null, null);
 
                 }
@@ -189,6 +197,12 @@ namespace WinSaasPOS
         {
             try
             {
+
+                if (txtSN.Text.Length < 10)
+                {
+                    GetDeviceSn();
+                }
+
                 lblMsg.Text = "";
                 if (!CheckPhone(txtUser.Text))
                 {
@@ -300,14 +314,17 @@ namespace WinSaasPOS
                             MainModel.ShowLog(ErrorMsg, false);
                         }                        
                     }
-                
-            
         }
 
         private void btnLoginByPhone_Click(object sender, EventArgs e)
         {
             try
             {
+                if (txtSN.Text.Length < 10)
+                {
+                    GetDeviceSn();
+                }
+
                 lblMsg.Text = "";
                 if (!CheckPhone(txtPhone.Text))
                 {
@@ -967,7 +984,43 @@ namespace WinSaasPOS
         }
 
 
+        private void GetDeviceSn()
+        {
+            try
+            {
+                //电脑可能会有多个mac地址，取第一次获取的mac地址为准  同时同步start.exe 获取的mac
+                string currentmac = "";
+                try
+                {
+                    if (File.Exists(MainModel.StartIniPath))
+                    {
+                        currentmac = INIManager.GetIni("System", "DeviceSN", MainModel.StartIniPath);
+                    }
+                    else
+                    {
+                        currentmac = INIManager.GetIni("System", "DeviceSN", MainModel.IniPath);
+                    }
+                }
+                catch { }
 
+                string devicesn = GlobalUtil.GetMacAddress(currentmac);
+
+
+
+                //没有网络的时候获取不到MAC地址  ？？？  会被替换
+                if (devicesn.Length > 10)
+                {
+                    INIManager.SetIni("System", "DeviceSN", devicesn, MainModel.IniPath);
+
+                }
+                MainModel.DeviceSN = devicesn;
+                //lblSN.Text = "设备序列号：" + devicesn;
+                txtSN.Text = devicesn;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
 
         #region 定时器 
 

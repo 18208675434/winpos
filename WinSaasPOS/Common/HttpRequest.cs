@@ -239,10 +239,8 @@ namespace WinSaasPOS.Common
             }
             catch (WebException ex)
             {
-                //MessageBox.Show(ex.StackTrace);
                 LogManager.WriteLog("访问服务器出错:" + ex.Message);
                 MainModel.ShowLog("访问服务器出错,请检查网络连接！", false);
-
             }
 
             return retString;
@@ -416,10 +414,15 @@ namespace WinSaasPOS.Common
         /// <returns></returns>
         public static bool IsConnectInternet()
         {
-            DateTime starttime = DateTime.Now;
-            int Description = 0;
-             return InternetGetConnectedState(Description, 0);
-
+            try
+            {
+                int Description = 0;
+                return InternetGetConnectedState(Description, 0);
+            }
+            catch (Exception ex)
+            {
+                return true; //异常不影响调用
+            }
             //Console.WriteLine((DateTime.Now -starttime).TotalMilliseconds+"");
             //return result;
         }

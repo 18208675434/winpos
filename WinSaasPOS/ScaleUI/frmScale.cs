@@ -151,18 +151,37 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("加载电子秤信息异常" + ex.Message, true);
+                //ShowLog("加载电子秤信息异常" + ex.Message, true);
             }
         }
 
         private void btnExits_Click(object sender, EventArgs e)
         {
-            if (!IsEnable)
+            //if (!IsEnable)
+            //{
+            //    return;
+            //}
+
+            try
             {
-                return;
+                try
+                {
+                    if (frmsending != null)
+                    {
+                        frmsending.Close();
+                        frmsending.Dispose();
+                    }
+                }
+                catch { }
+                this.Close();
+                this.Dispose();
+                
             }
-            this.Dispose();
-            this.Close();
+            catch (Exception ex)
+            {
+
+            }
+          
         }
 
         private void btnTransferAll_Click(object sender, EventArgs e)
@@ -221,7 +240,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("传秤出现异常：" + ex.Message, true);
+                ShowLog("传秤出现异常：" + ex.Message, true);
             }
         }
         Scale_Toledo scaletoledo = new Scale_Toledo();
@@ -241,7 +260,7 @@ namespace WinSaasPOS
                     List<DBSCALE_KEY_BEANMODEL> lstscale = scalebll.GetModelList(" IP='" + ScaleIP + "' and CREATE_URL_IP ='"+MainModel.URL+"'");
                     if (lstscale == null || lstscale.Count <= 0)
                     {
-                        MainModel.ShowLog(ScaleIP +"秤无商品信息",false);
+                        ShowLog(ScaleIP +"秤无商品信息",false);
                         continue;
                         //return;
                     }
@@ -251,7 +270,7 @@ namespace WinSaasPOS
 
                     if (scaletype != "bplus")
                     {
-                        MainModel.ShowLog("暂未匹配秤：" + lstscale[0].TEMPNAME,false);
+                        ShowLog("暂未匹配秤：" + lstscale[0].TEMPNAME,false);
                         continue;
                         //return; 
                     }
@@ -266,16 +285,16 @@ namespace WinSaasPOS
 
                     string errormsg ="";
                     bool SendScaleResult = scaletoledo.SendToledoData(ScaleIP,"3001",out errormsg);
-
+                    ClsoeSending();
                    
                     if (SendScaleResult)
                     {
                        
                         LogManager.WriteLog(ScaleIP+"传秤完成");
-                        if (lstscaleip.Count == 1)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
+                        if (lstscaleip.Count == 1 && !this.IsDisposed)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
                         {
                             LoadPicScreen(true);
-                            ClsoeSending();
+                            
                            // LoadingHelper.CloseForm();
                             frmScaleResult frmscaleresult = new frmScaleResult(true, lstscale[0].TEMPNAME,"下发成功");
                         frmscaleresult.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmscaleresult.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmscaleresult.Height) / 2);
@@ -303,15 +322,16 @@ namespace WinSaasPOS
                     {
                         Application.DoEvents();
                         LogManager.WriteLog(ScaleIP + "传秤失败");
-                        frmScaleResult frmscaleresult = new frmScaleResult(false, lstscale[0].TEMPNAME,"下发失败");
-                        if (lstscaleip.Count == 1)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
+                        frmScaleResult frmscaleresult = new frmScaleResult(false, lstscale[0].TEMPNAME, errormsg);
+                        if (lstscaleip.Count == 1 && !this.IsDisposed)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
                         {
                             LoadPicScreen(true);
-                            ClsoeSending();
                            // LoadingHelper.CloseForm();
                             frmscaleresult.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmscaleresult.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmscaleresult.Height) / 2);
                             frmscaleresult.TopMost = true;
                             frmscaleresult.ShowDialog();
+
+                            LoadPicScreen(false);
                         }
 
                         DBTRANSFER_SCALE_STATUS_BEANMODEL scalestatusmodel = new DBTRANSFER_SCALE_STATUS_BEANMODEL();
@@ -328,7 +348,7 @@ namespace WinSaasPOS
                         {
                             scalestatusbll.Add(scalestatusmodel);
                         }
-                        if (lstscaleip.Count == 1)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
+                        if (lstscaleip.Count == 1 && !this.IsDisposed)  ///==1 代表是单个传秤 显示传秤状态   否则为一键传秤 只更新表信息不弹窗
                         {
                             if (frmscaleresult.DialogResult == DialogResult.Retry)
                             {
@@ -351,7 +371,7 @@ namespace WinSaasPOS
 
                   
                    LoadPicScreen(false);
-                MainModel.ShowLog("传秤异常" + ex.Message, true);
+                ShowLog("传秤异常" + ex.Message, true);
             }
             finally
             {
@@ -413,7 +433,6 @@ namespace WinSaasPOS
                         picScreen.Visible = false;
                     }
 
-
                     Application.DoEvents();
                 }));
             }
@@ -425,19 +444,43 @@ namespace WinSaasPOS
         }
 
 
+        private void ShowLog(string msg,bool iserror)
+        {
+            try
+            {
+                if (!this.IsDisposed)
+                {
+                    MainModel.ShowLog(msg, iserror);
+                }
+               
+            }
+            catch { }
+        }
+
         private FormSending frmsending = null;
         private void ShowSending(object msg)
         {
             try
             {
+                //lblMsg.Text = msg.ToString();
+                //pnlSending.Size = new System.Drawing.Size(lblMsg.Width + 40, pnlSending.Height);
+                //picLoading.Left = (pnlSending.Width - picLoading.Width) / 2;
+                //pnlSending.Left = (this.Width - pnlSending.Width) / 2;
 
-                lblMsg.Text = msg.ToString();
-                pnlSending.Size = new System.Drawing.Size(lblMsg.Width + 40, pnlSending.Height);
-                picLoading.Left = (pnlSending.Width - picLoading.Width) / 2;
-                pnlSending.Left = (this.Width - pnlSending.Width) / 2;
+                //pnlSending.Visible = true;
 
-                pnlSending.Visible = true;
+                this.Invoke(new Action(() =>
+                {
+                    if (frmsending != null)
+                    {
+                        frmsending.Close();
+                    }
 
+                    frmsending = new FormSending(msg.ToString());
+                    frmsending.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmsending.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmsending.Height) / 2);
+                    frmsending.TopMost = true;
+                    frmsending.Show();
+                }));
                 //if (frmsending != null)
                 //{
                 //    frmsending.Close();
@@ -450,7 +493,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("展示发送中异常"+ex.Message,true);
+              //  ShowLog("展示发送中异常"+ex.Message,true);
             }
         }
         private void ClsoeSending()
@@ -458,13 +501,19 @@ namespace WinSaasPOS
             try
             {
 
-                pnlSending.Visible = false;
+                this.Invoke(new Action(() =>
+                {
+                    frmsending.Close();
+                    frmsending.Dispose();
+                }));
+
+                //pnlSending.Visible = false;
                 //frmsending.Close();
                 //frmsending.Dispose();
             }
             catch(Exception ex)
             {
-                MainModel.ShowLog("关闭发送中异常" + ex.Message, true);
+               // ShowLog("关闭发送中异常" + ex.Message, true);
             }
         }
     }

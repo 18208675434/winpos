@@ -306,10 +306,12 @@ namespace WinSaasPOS
         {
             try
             {
+
+                jsonbll.Delete(ConditionType.CurrentCart);
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
                    
-                    jsonbll.Delete(ConditionType.CurrentCart);
+                   
 
                     foreach (Product pro in CurrentCart.products)
                     {
@@ -890,6 +892,8 @@ namespace WinSaasPOS
                     frmconfirmreceiptback.ShowDialog();
 
                     CurrentFrmLogin.Show();
+
+                    CurrentCart = null;
                     this.Close();
 
                 }
@@ -1002,8 +1006,8 @@ namespace WinSaasPOS
             }
             MainModel.frmloginoffline = new frmLoginOffLine();
             MainModel.frmloginoffline.Show();
-
-            this.Dispose();
+            CurrentCart = null;
+            this.Close();
                 
             }
             }
@@ -4128,7 +4132,11 @@ namespace WinSaasPOS
         {
             try
             {
-                MainModel.HideTask();
+                if (this.WindowState != FormWindowState.Minimized)
+                {
+                    MainModel.HideTask();
+                }
+                //MainModel.HideTask();
             }
             catch { }
         }

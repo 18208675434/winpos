@@ -268,6 +268,7 @@
             this.Name = "frmPayFail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPayFail_FormClosed);
             this.Shown += new System.EventHandler(this.frmPayFail_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
