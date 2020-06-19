@@ -58,6 +58,7 @@ namespace MQTTClient
                 mqttClient.ApplicationMessageReceived += MqttClient_ApplicationMessageReceived;
                 mqttClient.Connected += MqttClient_Connected;
                 mqttClient.Disconnected += MqttClient_Disconnected;
+                
             }
 
             try
@@ -88,6 +89,9 @@ namespace MQTTClient
                     ClientId = ClientId,
                     UserName = UserName,
                     Password = PassWord,
+                    CleanSession=true,
+                    KeepAlivePeriod=TimeSpan.FromSeconds(10),
+                    DefaultCommunicationTimeout=TimeSpan.FromSeconds(10),
                 };
                 await mqttClient.ConnectAsync(options);
             

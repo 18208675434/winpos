@@ -49,9 +49,12 @@ namespace WinSaasPOS
 
         private bool isplayer = false;
 
-        Thread threadMedia;
+        //Thread threadMedia;
 
         private Image imgmembercard = null;
+
+
+        private bool PlayerOpen = false;
 
         #endregion
 
@@ -66,9 +69,9 @@ namespace WinSaasPOS
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
 
-            threadMedia = new Thread(PlayerThread);
-            threadMedia.IsBackground = true;
-            threadMedia.Start();
+            //threadMedia = new Thread(PlayerThread);
+            //threadMedia.IsBackground = true;
+            //threadMedia.Start();
         }
         private void frmMainMedia_Load(object sender, EventArgs e)
         {
@@ -79,7 +82,6 @@ namespace WinSaasPOS
         {
             threadIniExedate = new Thread(IniFormExe);
             threadIniExedate.IsBackground = true;
-            //threadIniExedate.Priority = ThreadPriority.BelowNormal;
             threadIniExedate.Start();
 
 
@@ -115,13 +117,14 @@ namespace WinSaasPOS
         {
             try
             {
-                if ((threadMedia.ThreadState & ThreadState.Suspended) != 0)
-                {
-                    threadMedia.Resume();
-                }
-
+               
 
                 tabControlMedia.SelectedIndex = 1;
+                if (PlayerOpen)
+                {
+                    player.uiMode = "none";
+                    player.Ctlcontrols.play();
+                }
             }
             catch (Exception ex)
             {
@@ -161,9 +164,6 @@ namespace WinSaasPOS
                             }
                         }
 
-                      
-                       
-
                     }
                 }
                 else
@@ -195,7 +195,6 @@ namespace WinSaasPOS
                             Image _image = Image.FromStream(System.Net.WebRequest.Create(posmedia.tenantlogo).GetResponse().GetResponseStream());
 
                             _image.Save(MainModel.MediaPath + "LoginLogo.bmp");
-                            //picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
                         }
                         catch (Exception ex)
                         {
@@ -237,6 +236,14 @@ namespace WinSaasPOS
                 string remoteUri = System.IO.Path.GetDirectoryName(url);
 
                 string fileName = System.IO.Path.GetFileName(url);
+                //图片没有后缀名  player控件加载无法播放
+                if (media.mediatype == 1 && !fileName.Contains("."))
+                {
+                    fileName += ".png";
+                }
+                
+
+
                 string filePath = MainModel.MediaPath + fileName;
                 if (File.Exists(filePath))
                 {
@@ -253,6 +260,8 @@ namespace WinSaasPOS
                 sortMedia.Add(media.sortnum, media);
                 }
 
+
+                PlayerThread();
             }
             catch (Exception ex)
             {
@@ -269,112 +278,70 @@ namespace WinSaasPOS
         {
             try
             {
+
+                PlayerOpen = false;
                 if (sortMedia.Count > 0)
-                {                    
-                    
+                {
+
+
                     List<Mediadetaildto> lstmedia = new List<Mediadetaildto>();
                     foreach (KeyValuePair<int, Mediadetaildto> kv in sortMedia)
-                    { 
+                    {
                         lstmedia.Add((Mediadetaildto)MainModel.Clone(kv.Value));
                     }
 
 
-                   // SortedDictionary<int, Mediadetaildto> sortTempMedia = (SortedDictionary<int, Mediadetaildto>)MainModel.Clone(sortMedia);
-                    foreach (Mediadetaildto media in lstmedia)
+
+                    if (lstmedia.Count == 1 && lstmedia[0].mediatype == 1)
                     {
-                        //for (int i = 0; i < sortMediaCount;i++ )
-                        //{
-                        try
+
+                        string fileName = System.IO.Path.GetFileName(lstmedia[0].content);
+                        if (!fileName.Contains("."))
                         {
-                            //Mediadetaildto media = kv.Value;
+                            fileName += ".png";
+                        }
 
-                            if (media.mediatype == 1) //图片
+                        Image _image = Image.FromFile(MainModel.MediaPath + fileName);
+                        tabPageAdvert.BackgroundImage = _image;
+                    }
+                    else
+                    {
+                        PlayerOpen = true;
+                        player.currentPlaylist.clear();
+
+                        foreach (Mediadetaildto media in lstmedia)
+                        {
+                            if (media.mediatype == 1)
                             {
-                                player.Visible = false;
-                                string ImgUrl = media.content;
-
-                                Image _image = Image.FromStream(System.Net.WebRequest.Create(ImgUrl).GetResponse().GetResponseStream());
-
-                                string imgname = media.content.Substring(media.content.LastIndexOf("/") + 1); //URL 最后的值
-
-
-                                if (File.Exists(MainModel.MediaPath + imgname))
+                                string fileName = System.IO.Path.GetFileName(media.content);
+                                if (!fileName.Contains("."))
                                 {
-                                    Image imgback = Image.FromFile(MainModel.MediaPath + imgname);
-                                    imgback.Tag = imgname;
-
-                                    //同一个图片不更换 以免屏幕闪动
-                                    if (tabPageAdvert.BackgroundImage == null || tabPageAdvert.BackgroundImage.Tag.ToString() != imgname)
-                                    {
-                                        tabPageAdvert.BackgroundImage = imgback;
-                                    }
-                                    Delay.Start(3000);
+                                    fileName += ".png";
                                 }
-                                else
-                                {
 
+                                if (File.Exists(MainModel.MediaPath + fileName))
+                                {
+                                    player.currentPlaylist.appendItem(player.newMedia(MainModel.MediaPath + fileName));
                                 }
                             }
-                            else if (media.mediatype == 2) //视频
+                            else if (media.mediatype == 2)
                             {
                                 string playername = media.content.Substring(media.content.LastIndexOf("/") + 1); //URL 最后的值
 
                                 if (File.Exists(MainModel.MediaPath + playername))
                                 {
-                                    try
-                                    {
-                                        player.Visible = true;
-                                        player.URL = MainModel.MediaPath + playername;
-
-                                        //player.currentPlaylist.appendItem(player.newMedia(MainModel.MediaPath + playername));
-
-                                        player.uiMode = "none";
-                                        //this.player.Ctlcontrols.play();
-
-
-                                     
-                                        //访问过于频繁会异常  消息筛选器显示应用程序正在使用中
-                                        Delay.Start(100);
-                                        //MainModel.IsPlayer = true;
-
-                                        while (!player.status.Contains("停止") && player.Visible)
-                                        {
-                                            Delay.Start(500);
-                                            //MainModel.IsPlayer = true;
-                                        }
-
-                                        player.Ctlcontrols.stop();
-                                        player.Visible = false;
-
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        player.Visible = false;
-                                       // LogManager.WriteLog("客屏视频播放异常" + ex.Message + ex.StackTrace);
-                                    }
+                                    player.currentPlaylist.appendItem(player.newMedia(MainModel.MediaPath + playername));
                                 }
-                                else
-                                {
-                                    player.Ctlcontrols.stop();
-
-                                    player.Visible = false;
-                                }
-
-                                //pictureBox1.BackgroundImage = _image;
                             }
                         }
-                        catch (Exception ex)
+
+                        if (player.currentPlaylist.count > 0)
                         {
-                            LogManager.WriteLog("客屏单个广告异常" + ex.Message + ex.StackTrace);
+                            player.settings.setMode("loop", true);
+                            player.Ctlcontrols.play();
                         }
                     }
                 }
-            player.Visible = false;
-            Delay.Start(1000);
-            //Application.DoEvents();
-            PlayerThread();
-
-                
             }
             catch (Exception ex)
             {
@@ -397,8 +364,6 @@ namespace WinSaasPOS
 
         #endregion
 
-
-
         #region  购物车列表
 
         public delegate void deleteUpdateForm(object obj);
@@ -408,10 +373,13 @@ namespace WinSaasPOS
             {
                 try
                 {
-                    threadMedia.Suspend();
 
-                    player.Ctlcontrols.stop();
-                    player.Visible = false;
+                    if (PlayerOpen)
+                    {
+                        player.Ctlcontrols.stop();
+                        player.Visible = false;
+                    }
+                  
                 }
                 catch { }
                 tlpnlRight.Left = pnlMemberCard.Left;
@@ -780,7 +748,7 @@ namespace WinSaasPOS
         {
             try
             {       
-                   threadMedia.Suspend();
+                  // threadMedia.Suspend();
                 //    player.Visible = false;
                 
                 ////ThreadPool.QueueUserWorkItem(new WaitCallback(IniFormExe));
@@ -925,9 +893,12 @@ namespace WinSaasPOS
         {
             try
             {
-                
-                    threadMedia.Suspend();
+
+                if (PlayerOpen)
+                {
+                    player.Ctlcontrols.stop();
                     player.Visible = false;
+                }
                
                 frmPaySuccessMedia frmresult = new frmPaySuccessMedia(payinfo.ToString());
                 frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
@@ -943,42 +914,16 @@ namespace WinSaasPOS
         }
 
 
-
-
-        public void ShowNumber()
-        {
-            //try
-            //{
-               
-            //        threadMedia.Suspend();
-            //        player.Visible = false;
-
-
-            //        frmNumber frmnumber = new frmNumber("请输入会员号", NumberType.MemberCode);
-
-            //    frmnumber.frmNumber_SizeChanged(null, null);
-            //    frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
-            //    // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
-
-            //    frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
-
-            //    //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //    frmnumber.Show();
-            //    Application.DoEvents();
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogManager.WriteLog("客屏输入会员号异常" + ex.Message);
-            //}
-        }
-
         public void ShowPayInfo(string lblinfo,bool isError)
         {
             try
             {
-                
-                threadMedia.Suspend();
-                player.Visible = false;
+
+                if (PlayerOpen)
+                {
+                    player.Ctlcontrols.stop();
+                    player.Visible = false;
+                }
                 
                 tabControlMedia.SelectedIndex = 0;
 
@@ -1012,7 +957,11 @@ namespace WinSaasPOS
         frmBalancePwdGuest frmbalancepwdguest = null;
         public void ShowBalancePwd(bool showorclose)
         {
-            threadMedia.Suspend();
+            if (PlayerOpen)
+            {
+                player.Ctlcontrols.stop();
+                player.Visible = false;
+            }
 
             ParameterizedThreadStart Pts = new ParameterizedThreadStart(SowBalancePwdThread);
             Thread thread = new Thread(Pts);

@@ -716,7 +716,7 @@
             this.pnlDgvItem.Controls.Add(this.pnlSinglePrice);
             this.pnlDgvItem.Controls.Add(this.pnlBarCode);
             this.pnlDgvItem.Controls.Add(this.picDelete);
-            this.pnlDgvItem.Location = new System.Drawing.Point(12, -360);
+            this.pnlDgvItem.Location = new System.Drawing.Point(12, 360);
             this.pnlDgvItem.Name = "pnlDgvItem";
             this.pnlDgvItem.Size = new System.Drawing.Size(816, 106);
             this.pnlDgvItem.TabIndex = 47;
@@ -1522,6 +1522,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Activated += new System.EventHandler(this.frmMain_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);

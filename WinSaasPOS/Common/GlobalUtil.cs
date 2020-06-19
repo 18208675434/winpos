@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -297,6 +298,38 @@ namespace WinSaasPOS.Common
                 return false;
             }
 
+        }
+
+
+
+        //检测IP连接
+        public static  bool CheckIP(string ip)
+        {
+            bool var = false;
+
+            try
+            {
+                Ping pingSender = new Ping();
+
+                PingOptions pingOption = new PingOptions();
+                pingOption.DontFragment = true;
+                string data = "0";
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                int timeout = 2000;
+                PingReply reply = pingSender.Send(ip, timeout, buffer);
+                if (reply.Status == IPStatus.Success)
+                    var = true;
+                else
+                    var = false;
+            }
+            catch (Exception ex)
+            {
+
+                return true;
+                // ShowLog("无法检测网络连接是否正常-" + ex.Message, true);
+            }
+
+            return var;
         }
     }
 

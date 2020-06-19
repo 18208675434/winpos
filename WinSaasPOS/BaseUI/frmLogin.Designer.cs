@@ -34,8 +34,7 @@
             this.lblLoginByUser = new System.Windows.Forms.Label();
             this.lblLoginByPhone = new System.Windows.Forms.Label();
             this.pnlUser = new System.Windows.Forms.Panel();
-            this.pnlbtnLoginByUser = new System.Windows.Forms.Panel();
-            this.lblbtnLoginByUser = new System.Windows.Forms.Label();
+            this.rbtnLoginByUser = new WinSaasPOS.RoundButton();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -52,8 +51,7 @@
             this.txtSN = new System.Windows.Forms.TextBox();
             this.lblSN = new System.Windows.Forms.Label();
             this.pnlPhone = new System.Windows.Forms.Panel();
-            this.pnlbtnLoginByPhone = new System.Windows.Forms.Panel();
-            this.lblbtnLoginByPhone = new System.Windows.Forms.Label();
+            this.rbtnLoginByPhone = new WinSaasPOS.RoundButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -76,11 +74,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.timerTen = new System.Windows.Forms.Timer(this.components);
             this.pnlUser.SuspendLayout();
-            this.pnlbtnLoginByUser.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel8.SuspendLayout();
             this.pnlPhone.SuspendLayout();
-            this.pnlbtnLoginByPhone.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -129,7 +125,7 @@
             // pnlUser
             // 
             this.pnlUser.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pnlUser.Controls.Add(this.pnlbtnLoginByUser);
+            this.pnlUser.Controls.Add(this.rbtnLoginByUser);
             this.pnlUser.Controls.Add(this.panel10);
             this.pnlUser.Controls.Add(this.panel8);
             this.pnlUser.Controls.Add(this.lblPwd);
@@ -141,28 +137,24 @@
             this.pnlUser.Size = new System.Drawing.Size(440, 247);
             this.pnlUser.TabIndex = 6;
             // 
-            // pnlbtnLoginByUser
+            // rbtnLoginByUser
             // 
-            this.pnlbtnLoginByUser.Controls.Add(this.lblbtnLoginByUser);
-            this.pnlbtnLoginByUser.Location = new System.Drawing.Point(43, 190);
-            this.pnlbtnLoginByUser.Name = "pnlbtnLoginByUser";
-            this.pnlbtnLoginByUser.Size = new System.Drawing.Size(353, 45);
-            this.pnlbtnLoginByUser.TabIndex = 32;
-            this.pnlbtnLoginByUser.Click += new System.EventHandler(this.btnLoginByUser_Click);
-            this.pnlbtnLoginByUser.Paint += new System.Windows.Forms.PaintEventHandler(this.Control_Paint);
-            // 
-            // lblbtnLoginByUser
-            // 
-            this.lblbtnLoginByUser.AutoSize = true;
-            this.lblbtnLoginByUser.BackColor = System.Drawing.Color.OrangeRed;
-            this.lblbtnLoginByUser.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblbtnLoginByUser.ForeColor = System.Drawing.Color.White;
-            this.lblbtnLoginByUser.Location = new System.Drawing.Point(150, 11);
-            this.lblbtnLoginByUser.Name = "lblbtnLoginByUser";
-            this.lblbtnLoginByUser.Size = new System.Drawing.Size(42, 21);
-            this.lblbtnLoginByUser.TabIndex = 0;
-            this.lblbtnLoginByUser.Text = "登录";
-            this.lblbtnLoginByUser.Click += new System.EventHandler(this.btnLoginByUser_Click);
+            this.rbtnLoginByUser.AllBackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByUser.BackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByUser.Image = null;
+            this.rbtnLoginByUser.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnLoginByUser.Location = new System.Drawing.Point(42, 171);
+            this.rbtnLoginByUser.Name = "rbtnLoginByUser";
+            this.rbtnLoginByUser.PenColor = System.Drawing.Color.Black;
+            this.rbtnLoginByUser.PenWidth = 1;
+            this.rbtnLoginByUser.RoundRadius = 45;
+            this.rbtnLoginByUser.ShowImg = false;
+            this.rbtnLoginByUser.ShowText = "登录";
+            this.rbtnLoginByUser.Size = new System.Drawing.Size(353, 46);
+            this.rbtnLoginByUser.TabIndex = 33;
+            this.rbtnLoginByUser.TextForeColor = System.Drawing.Color.White;
+            this.rbtnLoginByUser.WhetherEnable = true;
+            this.rbtnLoginByUser.ButtonClick += new System.EventHandler(this.btnLoginByUser_Click);
             // 
             // panel10
             // 
@@ -219,8 +211,8 @@
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(347, 29);
             this.txtPwd.TabIndex = 21;
+            this.txtPwd.Click += new System.EventHandler(this.txt_OskClick);
             this.txtPwd.TextChanged += new System.EventHandler(this.txtPwd_TextChanged);
-            this.txtPwd.Enter += new System.EventHandler(this.txt_Enter);
             // 
             // lblUser
             // 
@@ -244,8 +236,8 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(347, 29);
             this.txtUser.TabIndex = 18;
+            this.txtUser.Click += new System.EventHandler(this.txt_OskClick);
             this.txtUser.TextChanged += new System.EventHandler(this.txtUser_TextChanged);
-            this.txtUser.Enter += new System.EventHandler(this.txt_Enter);
             this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // chkAutoLoginUser
@@ -328,7 +320,7 @@
             // pnlPhone
             // 
             this.pnlPhone.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pnlPhone.Controls.Add(this.pnlbtnLoginByPhone);
+            this.pnlPhone.Controls.Add(this.rbtnLoginByPhone);
             this.pnlPhone.Controls.Add(this.panel6);
             this.pnlPhone.Controls.Add(this.panel4);
             this.pnlPhone.Controls.Add(this.panel2);
@@ -347,28 +339,24 @@
             this.pnlPhone.TabIndex = 24;
             this.pnlPhone.Visible = false;
             // 
-            // pnlbtnLoginByPhone
+            // rbtnLoginByPhone
             // 
-            this.pnlbtnLoginByPhone.Controls.Add(this.lblbtnLoginByPhone);
-            this.pnlbtnLoginByPhone.Location = new System.Drawing.Point(41, 218);
-            this.pnlbtnLoginByPhone.Name = "pnlbtnLoginByPhone";
-            this.pnlbtnLoginByPhone.Size = new System.Drawing.Size(353, 45);
-            this.pnlbtnLoginByPhone.TabIndex = 31;
-            this.pnlbtnLoginByPhone.Click += new System.EventHandler(this.btnLoginByPhone_Click);
-            this.pnlbtnLoginByPhone.Paint += new System.Windows.Forms.PaintEventHandler(this.Control_Paint);
-            // 
-            // lblbtnLoginByPhone
-            // 
-            this.lblbtnLoginByPhone.AutoSize = true;
-            this.lblbtnLoginByPhone.BackColor = System.Drawing.Color.OrangeRed;
-            this.lblbtnLoginByPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblbtnLoginByPhone.ForeColor = System.Drawing.Color.White;
-            this.lblbtnLoginByPhone.Location = new System.Drawing.Point(150, 11);
-            this.lblbtnLoginByPhone.Name = "lblbtnLoginByPhone";
-            this.lblbtnLoginByPhone.Size = new System.Drawing.Size(42, 21);
-            this.lblbtnLoginByPhone.TabIndex = 0;
-            this.lblbtnLoginByPhone.Text = "登录";
-            this.lblbtnLoginByPhone.Click += new System.EventHandler(this.btnLoginByPhone_Click);
+            this.rbtnLoginByPhone.AllBackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByPhone.BackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByPhone.Image = null;
+            this.rbtnLoginByPhone.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnLoginByPhone.Location = new System.Drawing.Point(41, 214);
+            this.rbtnLoginByPhone.Name = "rbtnLoginByPhone";
+            this.rbtnLoginByPhone.PenColor = System.Drawing.Color.Black;
+            this.rbtnLoginByPhone.PenWidth = 1;
+            this.rbtnLoginByPhone.RoundRadius = 45;
+            this.rbtnLoginByPhone.ShowImg = false;
+            this.rbtnLoginByPhone.ShowText = "登录";
+            this.rbtnLoginByPhone.Size = new System.Drawing.Size(354, 46);
+            this.rbtnLoginByPhone.TabIndex = 34;
+            this.rbtnLoginByPhone.TextForeColor = System.Drawing.Color.White;
+            this.rbtnLoginByPhone.WhetherEnable = true;
+            this.rbtnLoginByPhone.ButtonClick += new System.EventHandler(this.btnLoginByPhone_Click);
             // 
             // panel6
             // 
@@ -460,8 +448,8 @@
             this.txtPhoneCheckCode.Name = "txtPhoneCheckCode";
             this.txtPhoneCheckCode.Size = new System.Drawing.Size(249, 29);
             this.txtPhoneCheckCode.TabIndex = 24;
+            this.txtPhoneCheckCode.Click += new System.EventHandler(this.txt_OskClick);
             this.txtPhoneCheckCode.TextChanged += new System.EventHandler(this.txtPhoneCheckCode_TextChanged);
-            this.txtPhoneCheckCode.Enter += new System.EventHandler(this.txt_Enter);
             this.txtPhoneCheckCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picCheckCode
@@ -483,8 +471,8 @@
             this.txtCheckCode.Name = "txtCheckCode";
             this.txtCheckCode.Size = new System.Drawing.Size(264, 29);
             this.txtCheckCode.TabIndex = 21;
+            this.txtCheckCode.Click += new System.EventHandler(this.txt_OskClick);
             this.txtCheckCode.TextChanged += new System.EventHandler(this.txtCheckCode_TextChanged);
-            this.txtCheckCode.Enter += new System.EventHandler(this.txt_Enter);
             // 
             // lblPhone
             // 
@@ -508,8 +496,8 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(347, 29);
             this.txtPhone.TabIndex = 18;
+            this.txtPhone.Click += new System.EventHandler(this.txt_OskClick);
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
-            this.txtPhone.Enter += new System.EventHandler(this.txt_Enter);
             this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picExit
@@ -630,14 +618,10 @@
             this.Click += new System.EventHandler(this.frmLogin_Click);
             this.pnlUser.ResumeLayout(false);
             this.pnlUser.PerformLayout();
-            this.pnlbtnLoginByUser.ResumeLayout(false);
-            this.pnlbtnLoginByUser.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.pnlPhone.ResumeLayout(false);
             this.pnlPhone.PerformLayout();
-            this.pnlbtnLoginByPhone.ResumeLayout(false);
-            this.pnlbtnLoginByPhone.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -687,15 +671,13 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel pnlbtnLoginByUser;
-        private System.Windows.Forms.Label lblbtnLoginByUser;
-        private System.Windows.Forms.Panel pnlbtnLoginByPhone;
-        private System.Windows.Forms.Label lblbtnLoginByPhone;
         private System.Windows.Forms.Button btnWindows;
         private System.Windows.Forms.LinkLabel lbtnChangeOffLine;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timerTen;
+        private RoundButton rbtnLoginByUser;
+        private RoundButton rbtnLoginByPhone;
     }
 }
 

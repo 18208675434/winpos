@@ -20,7 +20,7 @@ namespace Maticsoft.DAL
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(int _id)
+        public bool Exists(long _id)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from DBPRODUCT_BEAN");
@@ -41,9 +41,9 @@ namespace Maticsoft.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into DBPRODUCT_BEAN(");
-            strSql.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE)");
+            strSql.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG)");
             strSql.Append(" values (");
-            strSql.Append("@SKUCODE,@GOODS_ID,@CATEGORYID,@CATEGORYNAME,@ORIGINPRICE,@SALEPRICE,@SPECIAL_PRICE,@TOTALSTOCKQTY,@SALESUNIT,@SHOPID,@TENANTID,@TITLE,@SKUNAME,@BARCODE,@SPECDESC,@GOODSTAGID,@WEIGHTFLAG,@NUM,@SPECNUM,@SPECTYPE,@PRICETAG,@PRICETAGID,@CREATE_URL_IP,@TAGFORMAT,@BARCODEFORMAT,@BESTDAYS,@SPINFO,@QRCODECONTENT,@INGREDIENT,@LOCATION,@SPEC,@STORE_TYPE,@COMPANY,@REMARK,@SPECIALMESSAGE,@FIRSTCATEGORYID,@FIRSTCATEGORYNAME,@SECONDCATEGORYID,@SECONDCATEGORYNAME,@PANELFLAG,@PANELSHOWFLAG,@MAINIMG,@STATUS,@SPECIAL_STATUS,@IS_QUERY_BARCODE,@CREATEDAT,@SALECOUNT,@INNERBARCODE,@FIRST_LETTER,@ALL_FIRST_LETTER,@SHELFLIFE,@SKUTYPE)");
+            strSql.Append("@SKUCODE,@GOODS_ID,@CATEGORYID,@CATEGORYNAME,@ORIGINPRICE,@SALEPRICE,@SPECIAL_PRICE,@TOTALSTOCKQTY,@SALESUNIT,@SHOPID,@TENANTID,@TITLE,@SKUNAME,@BARCODE,@SPECDESC,@GOODSTAGID,@WEIGHTFLAG,@NUM,@SPECNUM,@SPECTYPE,@PRICETAG,@PRICETAGID,@CREATE_URL_IP,@TAGFORMAT,@BARCODEFORMAT,@BESTDAYS,@SPINFO,@QRCODECONTENT,@INGREDIENT,@LOCATION,@SPEC,@STORE_TYPE,@COMPANY,@REMARK,@SPECIALMESSAGE,@FIRSTCATEGORYID,@FIRSTCATEGORYNAME,@SECONDCATEGORYID,@SECONDCATEGORYNAME,@PANELFLAG,@PANELSHOWFLAG,@MAINIMG,@STATUS,@SPECIAL_STATUS,@IS_QUERY_BARCODE,@CREATEDAT,@SALECOUNT,@INNERBARCODE,@FIRST_LETTER,@ALL_FIRST_LETTER,@SHELFLIFE,@SKUTYPE,@SCALEFLAG)");
             strSql.Append(";select LAST_INSERT_ROWID()");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@SKUCODE", DbType.String),
@@ -97,7 +97,8 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@FIRST_LETTER", DbType.String),
 					new SQLiteParameter("@ALL_FIRST_LETTER", DbType.String),
 					new SQLiteParameter("@SHELFLIFE", DbType.Int64,8),
-					new SQLiteParameter("@SKUTYPE", DbType.Int64,8)};
+					new SQLiteParameter("@SKUTYPE", DbType.Int64,8),
+					new SQLiteParameter("@SCALEFLAG", DbType.Int64,8)};
             parameters[0].Value = model.SKUCODE;
             parameters[1].Value = model.GOODS_ID;
             parameters[2].Value = model.CATEGORYID;
@@ -150,6 +151,7 @@ namespace Maticsoft.DAL
             parameters[49].Value = model.ALL_FIRST_LETTER;
             parameters[50].Value = model.SHELFLIFE;
             parameters[51].Value = model.SKUTYPE;
+            parameters[52].Value = model.SCALEFLAG;
 
             object obj = DbHelperSQLite.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -219,7 +221,8 @@ namespace Maticsoft.DAL
             strSql.Append("FIRST_LETTER=@FIRST_LETTER,");
             strSql.Append("ALL_FIRST_LETTER=@ALL_FIRST_LETTER,");
             strSql.Append("SHELFLIFE=@SHELFLIFE,");
-            strSql.Append("SKUTYPE=@SKUTYPE");
+            strSql.Append("SKUTYPE=@SKUTYPE,");
+            strSql.Append("SCALEFLAG=@SCALEFLAG");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@SKUCODE", DbType.String),
@@ -274,6 +277,7 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@ALL_FIRST_LETTER", DbType.String),
 					new SQLiteParameter("@SHELFLIFE", DbType.Int64,8),
 					new SQLiteParameter("@SKUTYPE", DbType.Int64,8),
+					new SQLiteParameter("@SCALEFLAG", DbType.Int64,8),
 					new SQLiteParameter("@_id", DbType.Int64,8)};
             parameters[0].Value = model.SKUCODE;
             parameters[1].Value = model.GOODS_ID;
@@ -327,7 +331,8 @@ namespace Maticsoft.DAL
             parameters[49].Value = model.ALL_FIRST_LETTER;
             parameters[50].Value = model.SHELFLIFE;
             parameters[51].Value = model.SKUTYPE;
-            parameters[52].Value = model._id;
+            parameters[52].Value = model.SCALEFLAG;
+            parameters[53].Value = model._id;
 
             int rows = DbHelperSQLite.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -391,7 +396,7 @@ namespace Maticsoft.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE from DBPRODUCT_BEAN ");
+            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG from DBPRODUCT_BEAN ");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@_id", DbType.Int64,4)
@@ -631,6 +636,10 @@ namespace Maticsoft.DAL
                 {
                     model.SKUTYPE = Int64.Parse(row["SKUTYPE"].ToString());
                 }
+                if (row["SCALEFLAG"] != null && row["SCALEFLAG"].ToString() != "")
+                {
+                    model.SCALEFLAG = Int64.Parse(row["SCALEFLAG"].ToString());
+                }
             }
             return model;
         }
@@ -641,7 +650,7 @@ namespace Maticsoft.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE ");
+            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG ");
             strSql.Append(" FROM DBPRODUCT_BEAN ");
             if (strWhere.Trim() != "")
             {
@@ -743,7 +752,7 @@ namespace Maticsoft.DAL
             }
             else
             {
-                cmdresult = int.Parse(obj.ToString());
+                cmdresult =int.Parse(obj.ToString());
             }
             if (cmdresult == 0)
             {
@@ -814,7 +823,8 @@ namespace Maticsoft.DAL
             strSql.Append("FIRST_LETTER=@FIRST_LETTER,");
             strSql.Append("ALL_FIRST_LETTER=@ALL_FIRST_LETTER,");
             strSql.Append("SHELFLIFE=@SHELFLIFE,");
-            strSql.Append("SKUTYPE=@SKUTYPE");
+            strSql.Append("SKUTYPE=@SKUTYPE,");
+            strSql.Append("SCALEFLAG=@SCALEFLAG");
             strSql.Append(" where SKUCODE=@SKUCODE");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@SKUCODE", DbType.String),
@@ -869,6 +879,7 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@ALL_FIRST_LETTER", DbType.String),
 					new SQLiteParameter("@SHELFLIFE", DbType.Int64,8),
 					new SQLiteParameter("@SKUTYPE", DbType.Int64,8),
+                    new SQLiteParameter("@SCALEFLAG", DbType.Int64,8),
 					new SQLiteParameter("@_id", DbType.Int64,8)};
             parameters[0].Value = model.SKUCODE;
             parameters[1].Value = model.GOODS_ID;
@@ -922,7 +933,8 @@ namespace Maticsoft.DAL
             parameters[49].Value = model.ALL_FIRST_LETTER;
             parameters[50].Value = model.SHELFLIFE;
             parameters[51].Value = model.SKUTYPE;
-            parameters[52].Value = model._id;
+            parameters[52].Value = model.SCALEFLAG;
+            parameters[53].Value = model._id;
 
             int rows = DbHelperSQLite.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -948,15 +960,15 @@ namespace Maticsoft.DAL
                 string strdel = "delete from DBPRODUCT_BEAN where SKUCODE='"+model.SKUCODE+"'";
                 StringBuilder strSqladd = new StringBuilder();
                 strSqladd.Append("insert into DBPRODUCT_BEAN(");
-                strSqladd.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE)");
+                strSqladd.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG)");
                 strSqladd.Append(" values (");
                 if (model.SKUCODE.Length >= 8)
                 {
-                    strSqladd.Append("'" + model.SKUCODE + "','" + model.SKUCODE.Substring(2, 5) + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + model.BARCODE + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE + ")");
+                    strSqladd.Append("'" + model.SKUCODE + "','" + model.SKUCODE.Substring(2, 5) + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + model.BARCODE + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE+"," + model.SCALEFLAG + ")");
                 }
                 else
                 {
-                    strSqladd.Append("'" + model.SKUCODE + "','" + model.GOODS_ID + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + model.BARCODE + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE + ")");
+                    strSqladd.Append("'" + model.SKUCODE + "','" + model.GOODS_ID + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + model.BARCODE + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE + "," + model.SCALEFLAG + ")");
 
                 }
 

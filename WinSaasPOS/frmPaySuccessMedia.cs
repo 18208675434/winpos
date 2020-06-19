@@ -122,6 +122,7 @@ namespace WinSaasPOS
 
             if (lblSecond.Text == "0")
             {
+                timerClose.Enabled = false;
                 this.Close();
             }
 
@@ -130,6 +131,15 @@ namespace WinSaasPOS
         private void frmCashierResultMedia_SizeChanged(object sender, EventArgs e)
         {
             asf.ControlAutoSize(this);
+        }
+
+        private void frmPaySuccessMedia_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                this.Dispose();
+            }
+            catch { }
         }
 
 

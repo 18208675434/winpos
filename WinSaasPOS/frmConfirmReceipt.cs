@@ -48,6 +48,7 @@ namespace WinSaasPOS
 
                 this.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - this.Width) / 2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
 
+                
             }
             catch (Exception ex)
             {

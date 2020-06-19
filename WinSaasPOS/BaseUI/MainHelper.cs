@@ -288,6 +288,13 @@ namespace WinSaasPOS.BaseUI
         public static void CouponCalculate(Cart cart)
         {
             impcouponcalculate.calculate(cart);  //优惠券
+
+            //add 202006-18
+            if (cart.couponpromoamt == 0)
+            {
+                MainModel.CurrentCouponCode = "";
+                MainModel.Currentavailabecoupno = null;
+            }
         }
 
         /// <summary>
@@ -434,7 +441,12 @@ namespace WinSaasPOS.BaseUI
                     else
                     {
                         isINNERBARCODE = false;
+
+
+                       
+
                         lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+
                         if (lstdbpro != null && lstdbpro.Count > 0)
                         {
                             dbpro = lstdbpro[0];
@@ -445,7 +457,16 @@ namespace WinSaasPOS.BaseUI
                 {
 
                     isINNERBARCODE = false;
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = null;
+                    if (!checkEanCodeIsError(goodcode, 13) && goodcode.Length > 2 && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
+                    {
+                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode.Substring(2, 5) + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                    }
+                    else
+                    {
+                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                    }
+                   // List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         dbpro = lstdbpro[0];
@@ -471,7 +492,8 @@ namespace WinSaasPOS.BaseUI
                             }
                             else
                             {
-                                dbpro.NUM = 1;
+                                return null;
+                               // dbpro.NUM = 1;
                             }
 
                         }
@@ -493,12 +515,33 @@ namespace WinSaasPOS.BaseUI
                     }
                     else
                     {
-                        dbpro.NUM = 1;
+                        if (dbpro.WEIGHTFLAG == 1)
+                        {
+                            if (!checkEanCodeIsError(goodcode, 13))
+                            {
+                                int num = Convert.ToInt32(goodcode.Substring(goodcode.Length - 6, 5));
+                                decimal decimalnum = (decimal)num / 1000;
+
+                                dbpro.SPECNUM = decimalnum;
+                                dbpro.NUM = 1;
+                            }
+                            else
+                            {
+                                return null;
+                            }
+
+                            
+                        }
+                        else
+                        {
+                            dbpro.SPECNUM = 1;
+                            dbpro.NUM = 1;
+                        }
+                      
                     }
 
                 }
 
-                //防止重量为0的条码  TODO 
                 if (dbpro != null && dbpro.WEIGHTFLAG == 1 && dbpro.SPECNUM == 0)
                 {
                     dbpro = null;

@@ -63,6 +63,7 @@ namespace Maticsoft.Model
         private string _all_first_letter;
         private Int64 _shelflife;
         private Int64 _skutype;
+        private Int64 _scaleflag;
         /// <summary>
         /// 
         /// </summary>
@@ -486,6 +487,15 @@ namespace Maticsoft.Model
         {
             set { _skutype = value; }
             get { return _skutype; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Int64 SCALEFLAG
+        {
+            set { _scaleflag = value; }
+            get { return _scaleflag; }
         }
         #endregion Model
 

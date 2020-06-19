@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using Maticsoft.BLL;
 using Newtonsoft.Json;
 using Maticsoft.Model;
+using System.Runtime.Remoting.Messaging;
 
 namespace WinSaasPOS
 {
@@ -44,10 +45,18 @@ namespace WinSaasPOS
         private void frmLogin_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
-            // MainModel.HideTaskThread();
-            MainModel.ShowTask();
+            MainModel.HideTask(); 
             if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Log");
+
+
+            //用户控件没有重新绘图 修改大小才会触发roundradius
+            rbtnLoginByPhone.RoundRadius = rbtnLoginByPhone.Height;
+            rbtnLoginByUser.RoundRadius = rbtnLoginByUser.Height;
+            rbtnLoginByUser.Height += 1;
+            rbtnLoginByPhone.Height += 1;
+
+            Application.DoEvents();
 
             Thread threadItemExedate = new Thread(ThreadUpStart);
             threadItemExedate.IsBackground = true;
@@ -137,7 +146,6 @@ namespace WinSaasPOS
                     isReLogin = true;
                     int screenwdith = Screen.AllScreens[0].Bounds.Width;
 
-                    pnlbtnLoginByUser.Refresh();
                     lblLobinByUser_Click(null, null);
 
                 }
@@ -189,6 +197,12 @@ namespace WinSaasPOS
         {
             try
             {
+
+                if (txtSN.Text.Length < 10)
+                {
+                    GetDeviceSn();
+                }
+
                 lblMsg.Text = "";
                 if (!CheckPhone(txtUser.Text))
                 {
@@ -300,14 +314,17 @@ namespace WinSaasPOS
                             MainModel.ShowLog(ErrorMsg, false);
                         }                        
                     }
-                
-            
         }
 
         private void btnLoginByPhone_Click(object sender, EventArgs e)
         {
             try
             {
+                if (txtSN.Text.Length < 10)
+                {
+                    GetDeviceSn();
+                }
+
                 lblMsg.Text = "";
                 if (!CheckPhone(txtPhone.Text))
                 {
@@ -380,22 +397,6 @@ namespace WinSaasPOS
            // this.picCheckCode.Image = Bitmap.FromStream(validCode.CreateCheckCodeImage());
 
             GetAuthcodeImage();
-
-        }
-
-
-        private void txt_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
-                txt.Focus();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("焦点打开键盘异常"+ex.Message);
-            }
         }
 
 
@@ -625,23 +626,35 @@ namespace WinSaasPOS
         //切换环境
         private void lblSN_Click(object sender, EventArgs e)
         {
-            //LogManager.WriteLog(click.ToString());
-            //// 两次点击间隔小于100毫秒时，算连续点击
-            //if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
-            //{
-            //    click++;
-            //    if (click >= 3)
-            //    {
-            //        click = 0;// 连续点击完毕时，清0
-            //        frmChangeUrl frmchangeurl = new frmChangeUrl();
-            //        frmchangeurl.ShowDialog();
-            //    }
-            //}
-            //else
-            //{
-            //    click = 1;// 不是连续点击时，清0
-            //}
-            //lastClickTime = DateTime.Now;
+            try
+            {
+                string isdebug = INIManager.GetIni("System", "IsDebug", MainModel.StartIniPath);
+                if (isdebug == "1")
+                {
+
+                }
+                LogManager.WriteLog(click.ToString());
+                // 两次点击间隔小于100毫秒时，算连续点击
+                if ((DateTime.Now - lastClickTime).TotalMilliseconds <= 2000)
+                {
+                    click++;
+                    if (click >= 3)
+                    {
+                        click = 0;// 连续点击完毕时，清0
+                        frmChangeUrl frmchangeurl = new frmChangeUrl();
+                        frmchangeurl.ShowDialog();
+                    }
+                }
+                else
+                {
+                    click = 1;// 不是连续点击时，清0
+                }
+                lastClickTime = DateTime.Now;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
@@ -682,6 +695,11 @@ namespace WinSaasPOS
 
         private void lblUser_Click(object sender, EventArgs e)
         {
+
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtUser.Focus();
         }
 
@@ -699,6 +717,11 @@ namespace WinSaasPOS
 
         private void lblPwd_Click(object sender, EventArgs e)
         {
+
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtPwd.Focus();
         }
 
@@ -716,6 +739,10 @@ namespace WinSaasPOS
 
         private void lblPhone_Click(object sender, EventArgs e)
         {
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtPhone.Focus();
         }
 
@@ -733,6 +760,10 @@ namespace WinSaasPOS
 
         private void lblCheckCode_Click(object sender, EventArgs e)
         {
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtCheckCode.Focus();
         }
 
@@ -750,6 +781,10 @@ namespace WinSaasPOS
 
         private void lblPhoneCheckCode_Click(object sender, EventArgs e)
         {
+
+            GlobalUtil.OpenOSK();
+            Delay.Start(100);
+            this.Activate();
             txtPhoneCheckCode.Focus();
         }
 
@@ -955,51 +990,108 @@ namespace WinSaasPOS
         }
 
 
+        private void GetDeviceSn()
+        {
+            try
+            {
+                //电脑可能会有多个mac地址，取第一次获取的mac地址为准  同时同步start.exe 获取的mac
+                string currentmac = "";
+                try
+                {
+                    if (File.Exists(MainModel.StartIniPath))
+                    {
+                        currentmac = INIManager.GetIni("System", "DeviceSN", MainModel.StartIniPath);
+                    }
+                    else
+                    {
+                        currentmac = INIManager.GetIni("System", "DeviceSN", MainModel.IniPath);
+                    }
+                }
+                catch { }
+
+                string devicesn = GlobalUtil.GetMacAddress(currentmac);
 
 
-        #region 电视屏
 
+                //没有网络的时候获取不到MAC地址  ？？？  会被替换
+                if (devicesn.Length > 10)
+                {
+                    INIManager.SetIni("System", "DeviceSN", devicesn, MainModel.IniPath);
 
+                }
+                MainModel.DeviceSN = devicesn;
+                //lblSN.Text = "设备序列号：" + devicesn;
+                txtSN.Text = devicesn;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        #region 定时器 
+
+        public delegate void deleteTimeTen();
         private void timerTen_Tick(object sender, EventArgs e)
         {
             try
             {
                 timerTen.Enabled = false;
 
-                DataUtil.LoadTVSkus();
+
+                deleteTimeTen operation = new deleteTimeTen(TimerTenAction);
+
+                operation.BeginInvoke(new System.AsyncCallback(GetCallbackHandler), "Async parameter");                
 
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("定时任务异常" + ex.Message);
-            }
-            finally
-            {
                 timerTen.Enabled = true;
             }
+            
         }
 
-        private void HttpServerStart()
+        public void TimerTenAction()
         {
-            try
-            {
-                //DataUtil.LoadTVSkus();
-
-                HttpServer httpServer;
-                httpServer = new MyHttpServer(8080);
-                Thread threadHttpServer = new Thread(new ThreadStart(httpServer.listen));
-                threadHttpServer.IsBackground = true;
-                threadHttpServer.Start();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("启动电视屏服务异常：" + ex.Message);
-            }
+            ServerDataUtil.LoadIncrementProduct();
+            ServerDataUtil.LoadTVSkus();
+            LogManager.WriteLog("定时10分钟刷新数据完成");
         }
+
+          public void GetCallbackHandler(IAsyncResult iar)
+        {
+            this.BeginInvoke(new EventHandler(delegate
+            {
+                timerTen.Enabled = true;
+
+            })); 
+        }
+
+
 
         #endregion
 
-       
+
+
+
+
+          private void txt_OskClick(object sender, EventArgs e)
+          {
+              try
+              {
+                  TextBox txt = (TextBox)sender;
+                  GlobalUtil.OpenOSK();
+                  Delay.Start(100);
+                  this.Activate();
+                  txt.Focus();
+              }
+              catch (Exception ex)
+              {
+                  LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
+              }
+          }
+
+
     }
 
 

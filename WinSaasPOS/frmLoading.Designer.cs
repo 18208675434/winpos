@@ -86,6 +86,7 @@
             this.Text = "frmLoading";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.Activated += new System.EventHandler(this.frmLoading_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

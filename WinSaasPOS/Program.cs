@@ -117,12 +117,27 @@ namespace WinSaasPOS
 
             try
             {
+
                 string isexits = "select sql from sqlite_master where type = 'table' and name = 'DBPROMOTION_CACHE_BEAN'";
 
                 object obj = Maticsoft.DBUtility.DbHelperSQLite.GetSingle(isexits);
 
                 System.Collections.ArrayList lststring = new System.Collections.ArrayList();
                 bool needadd = false;
+
+
+                string isexitsScalerow = "select sql from sqlite_master where type = 'table' and name = 'DBSCALE_KEY_BEAN'";
+
+                object objscalerow = Maticsoft.DBUtility.DbHelperSQLite.GetSingle(isexitsScalerow);
+
+                if (!objscalerow.ToString().Contains("SCALESROW"))
+                {
+                    lststring.Add("ALTER TABLE DBSCALE_KEY_BEAN ADD COLUMN 'SCALESROW' INTEGER");
+                    needadd = true;
+                }
+
+
+               
                 if (!obj.ToString().Contains("ONLYMEMBER"))
                 {
                     lststring.Add("ALTER TABLE DBPROMOTION_CACHE_BEAN ADD COLUMN 'ONLYMEMBER' INTEGER");
@@ -147,6 +162,16 @@ namespace WinSaasPOS
                     needadd = true;
                 }
 
+
+                string isexitsproduct = "select sql from sqlite_master where type = 'table' and name = 'DBPRODUCT_BEAN'";
+
+                object objproduct = Maticsoft.DBUtility.DbHelperSQLite.GetSingle(isexitsproduct);
+
+                if (!objproduct.ToString().Contains("SCALEFLAG"))
+                {
+                    lststring.Add("ALTER TABLE DBPRODUCT_BEAN ADD COLUMN 'SCALEFLAG' INTEGER");
+                    needadd = true;
+                }
                 if (needadd)
                 {
                     Maticsoft.DBUtility.DbHelperSQLite.ExecuteSqlTran(lststring);
@@ -155,7 +180,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-
+                LogManager.WriteLog("修改数据库异常"+ex.Message);
             }
         }
 

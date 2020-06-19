@@ -40,9 +40,9 @@ namespace Maticsoft.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into DBSCALE_KEY_BEAN(");
-            strSql.Append("TEMPID,TEMPNAME,SCALESID,IP,PORT,SHOPID,SETTINGPAGE,SCALESTYPE,XPOS,YPOS,NOPOS,SKUCODE,CREATE_URL_IP,SYN_TIME,ERROR_TIME,STATUS)");
+            strSql.Append("TEMPID,TEMPNAME,SCALESID,IP,PORT,SHOPID,SETTINGPAGE,SCALESTYPE,XPOS,YPOS,NOPOS,SKUCODE,CREATE_URL_IP,SYN_TIME,ERROR_TIME,STATUS,SCALESROW)");
             strSql.Append(" values (");
-            strSql.Append("@TEMPID,@TEMPNAME,@SCALESID,@IP,@PORT,@SHOPID,@SETTINGPAGE,@SCALESTYPE,@XPOS,@YPOS,@NOPOS,@SKUCODE,@CREATE_URL_IP,@SYN_TIME,@ERROR_TIME,@STATUS)");
+            strSql.Append("@TEMPID,@TEMPNAME,@SCALESID,@IP,@PORT,@SHOPID,@SETTINGPAGE,@SCALESTYPE,@XPOS,@YPOS,@NOPOS,@SKUCODE,@CREATE_URL_IP,@SYN_TIME,@ERROR_TIME,@STATUS,@SCALESROW)");
             strSql.Append(";select LAST_INSERT_ROWID()");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@TEMPID", DbType.String),
@@ -58,9 +58,10 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@NOPOS", DbType.Int32,8),
 					new SQLiteParameter("@SKUCODE", DbType.String),
 					new SQLiteParameter("@CREATE_URL_IP", DbType.String),
-					new SQLiteParameter("@SYN_TIME", DbType.Int32,8),
-					new SQLiteParameter("@ERROR_TIME", DbType.Int32,8),
-					new SQLiteParameter("@STATUS", DbType.Int32,8)};
+					new SQLiteParameter("@SYN_TIME", DbType.Int64,8),
+					new SQLiteParameter("@ERROR_TIME", DbType.Int64,8),
+					new SQLiteParameter("@STATUS", DbType.Int32,8),
+					new SQLiteParameter("@SCALESROW", DbType.Int32,8)};
             parameters[0].Value = model.TEMPID;
             parameters[1].Value = model.TEMPNAME;
             parameters[2].Value = model.SCALESID;
@@ -77,6 +78,7 @@ namespace Maticsoft.DAL
             parameters[13].Value = model.SYN_TIME;
             parameters[14].Value = model.ERROR_TIME;
             parameters[15].Value = model.STATUS;
+            parameters[16].Value = model.SCALESROW;
 
             object obj = DbHelperSQLite.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -110,7 +112,8 @@ namespace Maticsoft.DAL
             strSql.Append("CREATE_URL_IP=@CREATE_URL_IP,");
             strSql.Append("SYN_TIME=@SYN_TIME,");
             strSql.Append("ERROR_TIME=@ERROR_TIME,");
-            strSql.Append("STATUS=@STATUS");
+            strSql.Append("STATUS=@STATUS,");
+            strSql.Append("SCALESROW=@SCALESROW");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@TEMPID", DbType.String),
@@ -126,9 +129,10 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@NOPOS", DbType.Int32,8),
 					new SQLiteParameter("@SKUCODE", DbType.String),
 					new SQLiteParameter("@CREATE_URL_IP", DbType.String),
-					new SQLiteParameter("@SYN_TIME", DbType.Int32,8),
-					new SQLiteParameter("@ERROR_TIME", DbType.Int32,8),
+					new SQLiteParameter("@SYN_TIME", DbType.Int64,8),
+					new SQLiteParameter("@ERROR_TIME", DbType.Int64,8),
 					new SQLiteParameter("@STATUS", DbType.Int32,8),
+					new SQLiteParameter("@SCALESROW", DbType.Int32,8),
 					new SQLiteParameter("@_id", DbType.Int32,8)};
             parameters[0].Value = model.TEMPID;
             parameters[1].Value = model.TEMPNAME;
@@ -146,7 +150,8 @@ namespace Maticsoft.DAL
             parameters[13].Value = model.SYN_TIME;
             parameters[14].Value = model.ERROR_TIME;
             parameters[15].Value = model.STATUS;
-            parameters[16].Value = model._id;
+            parameters[16].Value = model.SCALESROW;
+            parameters[17].Value = model._id;
 
             int rows = DbHelperSQLite.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -210,7 +215,7 @@ namespace Maticsoft.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,TEMPID,TEMPNAME,SCALESID,IP,PORT,SHOPID,SETTINGPAGE,SCALESTYPE,XPOS,YPOS,NOPOS,SKUCODE,CREATE_URL_IP,SYN_TIME,ERROR_TIME,STATUS from DBSCALE_KEY_BEAN ");
+            strSql.Append("select _id,TEMPID,TEMPNAME,SCALESID,IP,PORT,SHOPID,SETTINGPAGE,SCALESTYPE,XPOS,YPOS,NOPOS,SKUCODE,CREATE_URL_IP,SYN_TIME,ERROR_TIME,STATUS,SCALESROW from DBSCALE_KEY_BEAN ");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@_id", DbType.Int32,4)
@@ -296,15 +301,19 @@ namespace Maticsoft.DAL
                 }
                 if (row["SYN_TIME"] != null && row["SYN_TIME"].ToString() != "")
                 {
-                    model.SYN_TIME = int.Parse(row["SYN_TIME"].ToString());
+                    model.SYN_TIME = Int64.Parse(row["SYN_TIME"].ToString());
                 }
                 if (row["ERROR_TIME"] != null && row["ERROR_TIME"].ToString() != "")
                 {
-                    model.ERROR_TIME = int.Parse(row["ERROR_TIME"].ToString());
+                    model.ERROR_TIME = Int64.Parse(row["ERROR_TIME"].ToString());
                 }
                 if (row["STATUS"] != null && row["STATUS"].ToString() != "")
                 {
                     model.STATUS = int.Parse(row["STATUS"].ToString());
+                }
+                if (row["SCALESROW"] != null && row["SCALESROW"].ToString() != "")
+                {
+                    model.SCALESROW = int.Parse(row["SCALESROW"].ToString());
                 }
             }
             return model;
@@ -316,7 +325,7 @@ namespace Maticsoft.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,TEMPID,TEMPNAME,SCALESID,IP,PORT,SHOPID,SETTINGPAGE,SCALESTYPE,XPOS,YPOS,NOPOS,SKUCODE,CREATE_URL_IP,SYN_TIME,ERROR_TIME,STATUS ");
+            strSql.Append("select _id,TEMPID,TEMPNAME,SCALESID,IP,PORT,SHOPID,SETTINGPAGE,SCALESTYPE,XPOS,YPOS,NOPOS,SKUCODE,CREATE_URL_IP,SYN_TIME,ERROR_TIME,STATUS,SCALESROW ");
             strSql.Append(" FROM DBSCALE_KEY_BEAN ");
             if (strWhere.Trim() != "")
             {
@@ -401,7 +410,7 @@ namespace Maticsoft.DAL
         #region  ExtensionMethod
 
 
-        public bool AddScales(System.Collections.Generic.List<Maticsoft.Model.DBSCALE_KEY_BEANMODEL> lstmodel, string createurl,string shopid)
+        public bool AddScales(System.Collections.Generic.List<Maticsoft.Model.DBSCALE_KEY_BEANMODEL> lstmodel, string createurl, string shopid)
         {
 
             System.Collections.ArrayList lststring = new System.Collections.ArrayList();
@@ -438,10 +447,10 @@ namespace Maticsoft.DAL
                     strSql2.Append("'" + model.PORT + "',");
                 }
 
-                
-                    strSql1.Append("SHOPID,");
-                    strSql2.Append("'" + shopid + "',");
-               
+
+                strSql1.Append("SHOPID,");
+                strSql2.Append("'" + shopid + "',");
+
                 //if (model.SHOPID != null)
                 //{
                 //    strSql1.Append("SHOPID,");
@@ -492,6 +501,14 @@ namespace Maticsoft.DAL
                     strSql1.Append("ERROR_TIME,");
                     strSql2.Append("" + model.ERROR_TIME + ",");
                 }
+
+                if (model.ERROR_TIME != null)
+                {
+                    strSql1.Append("SCALESROW,");
+                    strSql2.Append("" + model.SCALESROW + ",");
+                }
+
+
                 if (model.STATUS != null)
                 {
                     strSql1.Append("STATUS,");

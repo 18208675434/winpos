@@ -328,8 +328,7 @@ namespace WinSaasPOS.Model.Promotion
 
         if(MainModel.CurrentMember!=null){
             creditaccountrepvo=MainModel.CurrentMember.creditaccountrepvo;
-        }
-       
+        } 
     }
 
     //促销变化时
