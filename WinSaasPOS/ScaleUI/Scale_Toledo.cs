@@ -538,26 +538,25 @@ namespace WinSaasPOS.ScaleUI
 
                 //包装日期 推荐日期  保质日期   
                 XmlNode datesnode = CreateNode(xmlDoc, itemnode, "Dates", "");
-                XmlNode dateoffsetnode1 = CreateNode(xmlDoc, datesnode, "DateOffset", pro.SHELFLIFE.ToString());
-                AddAttribute(dateoffsetnode1, "Type", "BestBefore");//推荐日期
+                //XmlNode dateoffsetnode1 = CreateNode(xmlDoc, datesnode, "DateOffset", pro.SHELFLIFE.ToString());
+                //AddAttribute(dateoffsetnode1, "Type", "BestBefore");//推荐日期
 
-                AddAttribute(dateoffsetnode1, "UnitOfOffset", "day");
-                AddAttribute(dateoffsetnode1, "PrintFormat", "MMDD");
-                AddAttribute(dateoffsetnode1, "PrintEnabled", "true");
-
+                //AddAttribute(dateoffsetnode1, "UnitOfOffset", "day");
+                //AddAttribute(dateoffsetnode1, "PrintFormat", "MMDD");
+                //AddAttribute(dateoffsetnode1, "PrintEnabled", "true");
 
 
                 XmlNode dateoffsetnode2 = CreateNode(xmlDoc, datesnode, "DateOffset", pro.SHELFLIFE.ToString());
                 AddAttribute(dateoffsetnode2, "Type", "SellBy");//保质期
 
                 AddAttribute(dateoffsetnode2, "UnitOfOffset", "day");
-                AddAttribute(dateoffsetnode2, "PrintFormat", "DDMMYY");
+                AddAttribute(dateoffsetnode2, "PrintFormat", "YYDDMM");
                 AddAttribute(dateoffsetnode2, "PrintEnabled", "true");
 
-                XmlNode dateoffsetnode3 = CreateNode(xmlDoc, datesnode, "DateOffset", DateTime.Now.ToString("yyyy-MM-dd"));
+                XmlNode dateoffsetnode3 = CreateNode(xmlDoc, datesnode, "DateOffset","0");  //打印当天日期  此日期会影响保质期
                 AddAttribute(dateoffsetnode3, "Type", "PackedDate");//包装日期
 
-                AddAttribute(dateoffsetnode3, "UnitOfOffset", "date");
+                AddAttribute(dateoffsetnode3, "UnitOfOffset", "day");
                 AddAttribute(dateoffsetnode3, "PrintFormat", "YYMMDD");
                 AddAttribute(dateoffsetnode3, "PrintEnabled", "true");
 

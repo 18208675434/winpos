@@ -98,6 +98,7 @@ namespace WinSaasPOS.Common
                         sb.Append(17 + ",");  //标签格式编号  ？
                         sb.Append("997" + ","); //主组号
 
+
                         if (string.IsNullOrEmpty(pro.LOCATION))
                         {
                             sb.Append("  " + ",");

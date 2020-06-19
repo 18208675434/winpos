@@ -105,8 +105,8 @@ namespace WinSaasPOS
 
                 Availablecoupon couponsBean = (Availablecoupon)selectimg.Tag;
 
-                //可能选择的有优惠券，目前只支持单张优惠券
-                if ((CurrentCart.totalpayment+CurrentCart.couponpromoamt) <= couponsBean.amount)
+                //可能选择的有优惠券，目前只支持单张优惠券  不能计算打折券
+                if (("Cash" == couponsBean.catalog || "CashReduction" == couponsBean.catalog) && (Math.Max(CurrentCart.totalpayment, CurrentCart.totalpaymentbeforefix) + CurrentCart.couponpromoamt) <= couponsBean.amount)
                 {
                     this.Hide();
 

@@ -216,7 +216,7 @@
             this.lblPrintSet.AutoSize = true;
             this.lblPrintSet.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.lblPrintSet.ForeColor = System.Drawing.Color.White;
-            this.lblPrintSet.Location = new System.Drawing.Point(47, 9);
+            this.lblPrintSet.Location = new System.Drawing.Point(49, 7);
             this.lblPrintSet.Name = "lblPrintSet";
             this.lblPrintSet.Size = new System.Drawing.Size(84, 20);
             this.lblPrintSet.TabIndex = 1;

@@ -382,7 +382,7 @@ public class ImplOfflineSingleCalculateNew {
 
     private TripletBeanForCoupon getNewPriceAndKind(DBPROMOTION_CACHE_BEANMODEL dbPromotionCacheBean, Product productBean) {
         Decimal newPrice = getCalculationPrice(dbPromotionCacheBean, productBean);
-        if (MoneyUtils.isFirstBiggerThanOrEqualToSecond(productBean.originprice, newPrice)) {
+        if (MoneyUtils.isFirstBiggerThanSecond(productBean.originprice, newPrice)) {
             String priceKind = EnumPromotionType.PROMOTION_PRICE;
             int pricetagid = -1;
             String pricetag = "";

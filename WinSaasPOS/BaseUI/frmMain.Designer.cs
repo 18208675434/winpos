@@ -716,7 +716,7 @@
             this.pnlDgvItem.Controls.Add(this.pnlSinglePrice);
             this.pnlDgvItem.Controls.Add(this.pnlBarCode);
             this.pnlDgvItem.Controls.Add(this.picDelete);
-            this.pnlDgvItem.Location = new System.Drawing.Point(12, -360);
+            this.pnlDgvItem.Location = new System.Drawing.Point(12, 360);
             this.pnlDgvItem.Name = "pnlDgvItem";
             this.pnlDgvItem.Size = new System.Drawing.Size(816, 106);
             this.pnlDgvItem.TabIndex = 47;

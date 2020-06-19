@@ -24,11 +24,25 @@ public class FixedTradeOffOrderAmountOffPromotionAction : OrderAmountOffPromotio
 
 
     protected  Decimal thiscalculateScopeDiscountAmtAtRuntime(List<Product> products)
-    {
+    {  
         Decimal result = 0;
         foreach (Product item in products)
         {
             result = MoneyUtils.add(result, item.PaySubAmt);
+            if (item.goodstagid == 0)
+            {
+                try
+                {
+                    decimal scaleprice = MoneyUtils.divide(result,item.num);
+                    result = scaleprice;
+                }
+                catch { }
+            }
+            else
+            {
+
+            }
+
             break;
         }
         return result;

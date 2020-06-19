@@ -34,6 +34,7 @@
             this.lblLoginByUser = new System.Windows.Forms.Label();
             this.lblLoginByPhone = new System.Windows.Forms.Label();
             this.pnlUser = new System.Windows.Forms.Panel();
+            this.rbtnLoginByUser = new WinSaasPOS.RoundButton();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -50,6 +51,7 @@
             this.txtSN = new System.Windows.Forms.TextBox();
             this.lblSN = new System.Windows.Forms.Label();
             this.pnlPhone = new System.Windows.Forms.Panel();
+            this.rbtnLoginByPhone = new WinSaasPOS.RoundButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -71,8 +73,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.timerTen = new System.Windows.Forms.Timer(this.components);
-            this.rbtnLoginByUser = new WinSaasPOS.RoundButton();
-            this.rbtnLoginByPhone = new WinSaasPOS.RoundButton();
             this.pnlUser.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -132,10 +132,29 @@
             this.pnlUser.Controls.Add(this.txtPwd);
             this.pnlUser.Controls.Add(this.lblUser);
             this.pnlUser.Controls.Add(this.txtUser);
-            this.pnlUser.Location = new System.Drawing.Point(367, 236);
+            this.pnlUser.Location = new System.Drawing.Point(368, 236);
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(440, 247);
             this.pnlUser.TabIndex = 6;
+            // 
+            // rbtnLoginByUser
+            // 
+            this.rbtnLoginByUser.AllBackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByUser.BackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByUser.Image = null;
+            this.rbtnLoginByUser.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnLoginByUser.Location = new System.Drawing.Point(42, 171);
+            this.rbtnLoginByUser.Name = "rbtnLoginByUser";
+            this.rbtnLoginByUser.PenColor = System.Drawing.Color.Black;
+            this.rbtnLoginByUser.PenWidth = 1;
+            this.rbtnLoginByUser.RoundRadius = 45;
+            this.rbtnLoginByUser.ShowImg = false;
+            this.rbtnLoginByUser.ShowText = "登录";
+            this.rbtnLoginByUser.Size = new System.Drawing.Size(353, 46);
+            this.rbtnLoginByUser.TabIndex = 33;
+            this.rbtnLoginByUser.TextForeColor = System.Drawing.Color.White;
+            this.rbtnLoginByUser.WhetherEnable = true;
+            this.rbtnLoginByUser.ButtonClick += new System.EventHandler(this.btnLoginByUser_Click);
             // 
             // panel10
             // 
@@ -192,8 +211,8 @@
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(347, 29);
             this.txtPwd.TabIndex = 21;
+            this.txtPwd.Click += new System.EventHandler(this.txt_OskClick);
             this.txtPwd.TextChanged += new System.EventHandler(this.txtPwd_TextChanged);
-            this.txtPwd.Enter += new System.EventHandler(this.txt_Enter);
             // 
             // lblUser
             // 
@@ -217,8 +236,8 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(347, 29);
             this.txtUser.TabIndex = 18;
+            this.txtUser.Click += new System.EventHandler(this.txt_OskClick);
             this.txtUser.TextChanged += new System.EventHandler(this.txtUser_TextChanged);
-            this.txtUser.Enter += new System.EventHandler(this.txt_Enter);
             this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // chkAutoLoginUser
@@ -320,6 +339,25 @@
             this.pnlPhone.TabIndex = 24;
             this.pnlPhone.Visible = false;
             // 
+            // rbtnLoginByPhone
+            // 
+            this.rbtnLoginByPhone.AllBackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByPhone.BackColor = System.Drawing.Color.OrangeRed;
+            this.rbtnLoginByPhone.Image = null;
+            this.rbtnLoginByPhone.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnLoginByPhone.Location = new System.Drawing.Point(41, 214);
+            this.rbtnLoginByPhone.Name = "rbtnLoginByPhone";
+            this.rbtnLoginByPhone.PenColor = System.Drawing.Color.Black;
+            this.rbtnLoginByPhone.PenWidth = 1;
+            this.rbtnLoginByPhone.RoundRadius = 45;
+            this.rbtnLoginByPhone.ShowImg = false;
+            this.rbtnLoginByPhone.ShowText = "登录";
+            this.rbtnLoginByPhone.Size = new System.Drawing.Size(354, 46);
+            this.rbtnLoginByPhone.TabIndex = 34;
+            this.rbtnLoginByPhone.TextForeColor = System.Drawing.Color.White;
+            this.rbtnLoginByPhone.WhetherEnable = true;
+            this.rbtnLoginByPhone.ButtonClick += new System.EventHandler(this.btnLoginByPhone_Click);
+            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.panel7);
@@ -410,8 +448,8 @@
             this.txtPhoneCheckCode.Name = "txtPhoneCheckCode";
             this.txtPhoneCheckCode.Size = new System.Drawing.Size(249, 29);
             this.txtPhoneCheckCode.TabIndex = 24;
+            this.txtPhoneCheckCode.Click += new System.EventHandler(this.txt_OskClick);
             this.txtPhoneCheckCode.TextChanged += new System.EventHandler(this.txtPhoneCheckCode_TextChanged);
-            this.txtPhoneCheckCode.Enter += new System.EventHandler(this.txt_Enter);
             this.txtPhoneCheckCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picCheckCode
@@ -433,8 +471,8 @@
             this.txtCheckCode.Name = "txtCheckCode";
             this.txtCheckCode.Size = new System.Drawing.Size(264, 29);
             this.txtCheckCode.TabIndex = 21;
+            this.txtCheckCode.Click += new System.EventHandler(this.txt_OskClick);
             this.txtCheckCode.TextChanged += new System.EventHandler(this.txtCheckCode_TextChanged);
-            this.txtCheckCode.Enter += new System.EventHandler(this.txt_Enter);
             // 
             // lblPhone
             // 
@@ -458,8 +496,8 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(347, 29);
             this.txtPhone.TabIndex = 18;
+            this.txtPhone.Click += new System.EventHandler(this.txt_OskClick);
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
-            this.txtPhone.Enter += new System.EventHandler(this.txt_Enter);
             this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
             // picExit
@@ -543,44 +581,6 @@
             // timerTen
             // 
             this.timerTen.Tick += new System.EventHandler(this.timerTen_Tick);
-            // 
-            // rbtnLoginByUser
-            // 
-            this.rbtnLoginByUser.AllBackColor = System.Drawing.Color.OrangeRed;
-            this.rbtnLoginByUser.BackColor = System.Drawing.Color.OrangeRed;
-            this.rbtnLoginByUser.Image = null;
-            this.rbtnLoginByUser.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnLoginByUser.Location = new System.Drawing.Point(42, 171);
-            this.rbtnLoginByUser.Name = "rbtnLoginByUser";
-            this.rbtnLoginByUser.PenColor = System.Drawing.Color.Black;
-            this.rbtnLoginByUser.PenWidth = 1;
-            this.rbtnLoginByUser.RoundRadius = 45;
-            this.rbtnLoginByUser.ShowImg = false;
-            this.rbtnLoginByUser.ShowText = "登录";
-            this.rbtnLoginByUser.Size = new System.Drawing.Size(353, 46);
-            this.rbtnLoginByUser.TabIndex = 33;
-            this.rbtnLoginByUser.TextForeColor = System.Drawing.Color.White;
-            this.rbtnLoginByUser.WhetherEnable = true;
-            this.rbtnLoginByUser.ButtonClick += new System.EventHandler(this.btnLoginByUser_Click);
-            // 
-            // rbtnLoginByPhone
-            // 
-            this.rbtnLoginByPhone.AllBackColor = System.Drawing.Color.OrangeRed;
-            this.rbtnLoginByPhone.BackColor = System.Drawing.Color.OrangeRed;
-            this.rbtnLoginByPhone.Image = null;
-            this.rbtnLoginByPhone.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnLoginByPhone.Location = new System.Drawing.Point(41, 214);
-            this.rbtnLoginByPhone.Name = "rbtnLoginByPhone";
-            this.rbtnLoginByPhone.PenColor = System.Drawing.Color.Black;
-            this.rbtnLoginByPhone.PenWidth = 1;
-            this.rbtnLoginByPhone.RoundRadius = 45;
-            this.rbtnLoginByPhone.ShowImg = false;
-            this.rbtnLoginByPhone.ShowText = "登录";
-            this.rbtnLoginByPhone.Size = new System.Drawing.Size(354, 46);
-            this.rbtnLoginByPhone.TabIndex = 34;
-            this.rbtnLoginByPhone.TextForeColor = System.Drawing.Color.White;
-            this.rbtnLoginByPhone.WhetherEnable = true;
-            this.rbtnLoginByPhone.ButtonClick += new System.EventHandler(this.btnLoginByPhone_Click);
             // 
             // frmLogin
             // 

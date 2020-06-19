@@ -44,8 +44,10 @@ namespace WinSaasPOS.Common
 
                     TimeSpan elapsedSpan = new TimeSpan(endTime - beginTime);
 
-                    if ((elapsedSpan.TotalMilliseconds) > 6000 || WhetherGetOK)
+                    if ((elapsedSpan.TotalMilliseconds) > 60000 || WhetherGetOK)
                         break;
+
+                    Delay.Start(20);
                 }
 
                 return GetJson;
@@ -95,8 +97,10 @@ namespace WinSaasPOS.Common
 
                     TimeSpan elapsedSpan = new TimeSpan(endTime - beginTime);
 
-                    if ((elapsedSpan.TotalMilliseconds) > 6000 || WhetherPostOK)
+                    if ((elapsedSpan.TotalMilliseconds) > 60000 || WhetherPostOK)
                         break;
+
+                    Delay.Start(20);
                 }
 
                 return PostJson;
@@ -153,10 +157,9 @@ namespace WinSaasPOS.Common
             {
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                HttpWebRequest request;
 
-                request.Timeout = 60 * 1000;
-
+               
                 System.Net.ServicePointManager.Expect100Continue = false;
 
                 if (Url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
@@ -171,6 +174,7 @@ namespace WinSaasPOS.Common
                     request = WebRequest.Create(new Uri(Url)) as HttpWebRequest;
                 }
 
+                request.Timeout = 60 * 1000;
 
                 request.Method = "GET";
 
@@ -265,7 +269,7 @@ namespace WinSaasPOS.Common
             {
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                HttpWebRequest request;
 
                 System.Net.ServicePointManager.Expect100Continue = false;
 

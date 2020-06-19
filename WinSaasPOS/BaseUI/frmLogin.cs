@@ -397,22 +397,6 @@ namespace WinSaasPOS
            // this.picCheckCode.Image = Bitmap.FromStream(validCode.CreateCheckCodeImage());
 
             GetAuthcodeImage();
-
-        }
-
-
-        private void txt_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
-                txt.Focus();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("焦点打开键盘异常"+ex.Message);
-            }
         }
 
 
@@ -711,6 +695,11 @@ namespace WinSaasPOS
 
         private void lblUser_Click(object sender, EventArgs e)
         {
+
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtUser.Focus();
         }
 
@@ -728,6 +717,11 @@ namespace WinSaasPOS
 
         private void lblPwd_Click(object sender, EventArgs e)
         {
+
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtPwd.Focus();
         }
 
@@ -745,6 +739,10 @@ namespace WinSaasPOS
 
         private void lblPhone_Click(object sender, EventArgs e)
         {
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtPhone.Focus();
         }
 
@@ -762,6 +760,10 @@ namespace WinSaasPOS
 
         private void lblCheckCode_Click(object sender, EventArgs e)
         {
+            GlobalUtil.OpenOSK();
+
+            Delay.Start(100);
+            this.Activate();
             txtCheckCode.Focus();
         }
 
@@ -779,6 +781,10 @@ namespace WinSaasPOS
 
         private void lblPhoneCheckCode_Click(object sender, EventArgs e)
         {
+
+            GlobalUtil.OpenOSK();
+            Delay.Start(100);
+            this.Activate();
             txtPhoneCheckCode.Focus();
         }
 
@@ -1065,7 +1071,27 @@ namespace WinSaasPOS
 
         #endregion
 
-       
+
+
+
+
+          private void txt_OskClick(object sender, EventArgs e)
+          {
+              try
+              {
+                  TextBox txt = (TextBox)sender;
+                  GlobalUtil.OpenOSK();
+                  Delay.Start(100);
+                  this.Activate();
+                  txt.Focus();
+              }
+              catch (Exception ex)
+              {
+                  LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
+              }
+          }
+
+
     }
 
 

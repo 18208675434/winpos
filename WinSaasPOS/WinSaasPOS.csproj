@@ -944,6 +944,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="20200522060242172_easyicon_net_512.ico" />
+    <None Include="Resources\panelsearch.bmp" />
     <Content Include="SassPos256.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />

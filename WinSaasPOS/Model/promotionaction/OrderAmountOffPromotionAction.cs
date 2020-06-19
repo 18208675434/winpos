@@ -137,19 +137,28 @@ namespace WinSaasPOS.Model.promotionaction
 //            Product Product = distributeAmountList.get(i).getProduct();
 //            Decimal itemDiscount = distributeAmountList.get(i).getCurrentValue();
 
-            Product Product = distributeAmountList[i];
-            if (Product != null) {
-                Product.PaySubAmt = MoneyUtils.substract(Product.PaySubAmt, Product.PromoSubAmt);
+            Product productBean = distributeAmountList[i];
+            if (productBean != null) {
+                productBean.PaySubAmt = MoneyUtils.substract(productBean.PaySubAmt, productBean.PromoSubAmt);
+
+                if (promotion.CANMIXCOUPON == 1 && productBean.canmixcoupon)
+                {
+                    productBean.canmixcoupon = true;
+                }
+                else
+                {
+                    productBean.canmixcoupon = false;
+                }
 //                Product.getPrice().setTotal(Product.getpPaySubAmt().doubleValue());
 
 
-                if (Product.offlinepromos == null)
+                if (productBean.offlinepromos == null)
                 {
-                    Product.offlinepromos = new List<OffLinePromos>();
+                    productBean.offlinepromos = new List<OffLinePromos>();
                 }
                 //                Boolean evaluate = true;
                 //记录促销信息，你可以用你 写法
-                if (Product.offlinepromos != null)
+                if (productBean.offlinepromos != null)
                 {
                     OffLinePromos offlinepromos = new OffLinePromos();
 
@@ -161,7 +170,7 @@ namespace WinSaasPOS.Model.promotionaction
                     offlinepromos.promotype = promotion.PROMOTYPE;
                     offlinepromos.promoamt = distributeAmountList[i].PromoSubAmt;
 
-                    Product.offlinepromos.Add(offlinepromos);
+                    productBean.offlinepromos.Add(offlinepromos);
                 }
             }
 

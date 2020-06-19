@@ -72,7 +72,6 @@ namespace WinSaasPOS.HelperUI
 
         public static void AutoToast(string msg, int interval)
         {
-
             try
             {
                 ShowFormToast(msg);

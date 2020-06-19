@@ -1139,6 +1139,10 @@ namespace WinSaasPOS
                             btnJFUse.Text = "使用" + CurrentCart.pointinfo.availablepoints + "积分 抵用" + CurrentCart.pointinfo.availablepointsamount + "元";
                             btnJFUse.Visible = true;
                         }
+                       //有会员登录每次刷新购物车都刷一次优惠券接口
+                        Thread threadloadMember = new Thread(WinSaasPOS.Model.HalfOffLine.HalfOffLineUtil.ListMemberCouponAvailable);
+                        threadloadMember.IsBackground = true;
+                        threadloadMember.Start();
                     }
                     else
                     {
@@ -2229,8 +2233,6 @@ namespace WinSaasPOS
                         }
                         else
                         {
-                            //UploadMember();
-
                             Thread threadMember = new Thread(UploadMember);
                             threadMember.IsBackground = true;
                             threadMember.Start();

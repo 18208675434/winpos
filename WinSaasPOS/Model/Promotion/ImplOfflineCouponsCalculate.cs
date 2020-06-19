@@ -70,6 +70,10 @@ namespace WinSaasPOS.Model.Promotion
     public void calculate(Cart cartBean) {
         map.Clear();
 
+        if (cartBean != null)
+        {
+            cartBean.couponpromoamt = 0;
+        }
         if (string.IsNullOrEmpty(MainModel.CurrentCouponCode))
         {
             cartBean.selectedcoupons = null;
@@ -121,10 +125,10 @@ namespace WinSaasPOS.Model.Promotion
                 {
                     Decimal discountamt = promoActionFactory.getDiscountValue(evaluateScopePromotion, evaluateScopePromotion.getList(), tripletBean.getPromoTriplet());
                     coupon.discountamt = discountamt;
-                    if (discountamt != null)
-                    {
-                        cartBean.couponpromoamt = Convert.ToDecimal(discountamt);
-                    }
+                    //if (discountamt != null)
+                    //{
+                    //    cartBean.couponpromoamt = Convert.ToDecimal(discountamt);
+                    //}
 
                     Availablecoupon couponsBean = new Availablecoupon();
                     //set 值
@@ -153,7 +157,17 @@ namespace WinSaasPOS.Model.Promotion
         //以抵扣金额降序,如果金额相同,则以失效时间升序
         if (availablecoupons != null && availablecoupons.Count > 0) {
 
-            availablecoupons.OrderByDescending(x => x.discountamt).ThenBy(x => x.enabledto);
+           // availablecoupons.OrderByDescending(x => x.discountamt).ThenBy(x => x.enabledto);
+
+            availablecoupons.Sort((o1, o2) => {
+                    
+                        int discAmt = o2.discountamt.CompareTo(o1.discountamt);
+                        if (discAmt != 0) {
+                            return discAmt;
+                        }
+                        return o1.discountamt.CompareTo(o2.discountamt);
+                    
+            }); 
 
             //Collections.sort(availablecoupons, new Comparator<Availablecoupon>() {
             //    @Override
@@ -167,6 +181,14 @@ namespace WinSaasPOS.Model.Promotion
             //});
 
             cartBean.availablecoupons=availablecoupons;
+        }
+        else
+        {
+            if (cartBean != null && cartBean.selectedcoupons != null)
+            {
+                cartBean.selectedcoupons.Clear();
+            }
+            cartBean.couponpromoamt=0; 
         }
         return null;
     }

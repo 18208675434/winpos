@@ -389,7 +389,7 @@ namespace WinSaasPOS
                     }
                     //else if (resultcode == MainModel.DifferentMember)   //不是同一个会员 只提示不退出
                     //{
-                    //    MainModel.ShowLog("非当前登录用户的付款码，请确认后重新支付", true);
+                    //    ShowLog("非当前登录用户的付款码，请确认后重新支付", true);
                     //}
                     else
                     {
@@ -713,7 +713,7 @@ namespace WinSaasPOS
             catch (Exception ex)
             {
                 MainModel.frmtoolmain = null;
-                MainModel.ShowLog("菜单窗体显示异常"+ex.Message,true);
+                ShowLog("菜单窗体显示异常"+ex.Message,true);
             }
         }
 
@@ -816,7 +816,7 @@ namespace WinSaasPOS
                 IsEnable = true;
                 //if (receiptdetail == null)
                 //{
-                //    MainModel.ShowLog("交班失败",true);
+                //    ShowLog("交班失败",true);
                 //    return;
                 //}
 
@@ -854,7 +854,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("获取离线订单号异常" + ex.Message, true);
+                ShowLog("获取离线订单号异常" + ex.Message, true);
             }
             return "";
         }
@@ -1057,7 +1057,7 @@ namespace WinSaasPOS
                             }
                             else
                             {
-                                MainModel.ShowLog("条码不正确", false);
+                                ShowLog("条码识别错误", false);
                                 lstNotLocalCode.Add(scancode);
                             }
                         }
@@ -1117,7 +1117,7 @@ namespace WinSaasPOS
                 DBPRODUCT_BEANMODEL dbpro = productbll.GetModelByGoodsID(goodcode.PadLeft(5,'0'),MainModel.URL);
                 if (dbpro == null)
                 {
-                    MainModel.ShowLog("条码不正确", false);
+                    ShowLog("条码识别错误", false);
                 }
                 else
                 {
@@ -1172,7 +1172,17 @@ namespace WinSaasPOS
                 {
 
                     isINNERBARCODE = false;
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = null;
+                    if (!WinSaasPOS.BaseUI.MainHelper.checkEanCodeIsError(goodcode, 13) && goodcode.Length > 2 && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
+                    {
+                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode.Substring(2, 5) + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                    }
+                    else
+                    {
+                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                    }
+                    //List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         dbpro = lstdbpro[0];
@@ -1198,7 +1208,7 @@ namespace WinSaasPOS
                         }
                         else
                         {
-                            dbpro.NUM = 1;
+                            return null;
                         }
 
                     }
@@ -1220,7 +1230,28 @@ namespace WinSaasPOS
                 }
                 else
                 {
-                    dbpro.NUM = 1;
+                    if (dbpro.WEIGHTFLAG == 1)
+                    {
+                        if (!WinSaasPOS.BaseUI.MainHelper.checkEanCodeIsError(goodcode, 13))
+                        {
+                            int num = Convert.ToInt32(goodcode.Substring(goodcode.Length - 6, 5));
+                            decimal decimalnum = (decimal)num / 1000;
+
+                            dbpro.SPECNUM = decimalnum;
+                            dbpro.NUM = 1;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+
+
+                    }
+                    else
+                    {
+                        dbpro.SPECNUM = 1;
+                        dbpro.NUM = 1;
+                    }
                 }
 
                 }
@@ -1230,13 +1261,15 @@ namespace WinSaasPOS
                 {
                     dbpro = null;
                 }
+
+                dbpro.GOODSTAGID = dbpro.WEIGHTFLAG;
                 return dbpro;
 
               
             }
             catch (Exception ex)
             {
-               // MainModel.ShowLog("条码验证异常"+ex.Message ,true );
+               // ShowLog("条码验证异常"+ex.Message ,true );
                 LogManager.WriteLog("条码验证异常" + ex.Message);
                 return null;
             }
@@ -1754,7 +1787,7 @@ namespace WinSaasPOS
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("解析商品信息异常" + ex.Message, true);
+                ShowLog("解析商品信息异常" + ex.Message, true);
                 return null;
             }
         }
@@ -2246,11 +2279,10 @@ namespace WinSaasPOS
             catch (Exception ex)
             {
 
-                MainModel.ShowLog("操作购物车商品异常" + ex.Message, true);
+                ShowLog("操作购物车商品异常" + ex.Message, true);
             }
             finally
             {
-                Delay.Start(200);
                 btnScan.Select();
                 LoadPicScreen(false);
             }
@@ -2557,10 +2589,6 @@ namespace WinSaasPOS
             MainModel.ShowTask();
             this.WindowState = FormWindowState.Minimized;
         }
-
-
-
-
 
 
 
