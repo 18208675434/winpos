@@ -1125,17 +1125,6 @@
         YII=
 </value>
   </data>
-  <data name="button1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAMMAAABICAYAAABLCEGxAAAABGdBTUEAALGPC/xhBQAAAVRJREFUeF7t
-        17FxQjEURFHVYIqgHhoypZCRM3RgSqAERWRERAwyD9aRfwXoBCdBIts7f9R676MczpexOd7Gen8fX7sB
-        H612Xnuv3f818Iphe7o+Lzz+/QE+3eq5+9r/K4Yqo35YuggzqP1XB60+FUsXYCbVQfNGgPcboi0dwIzE
-        ACEGCDFAiAFCDBBigBADhBggxAAhBggxQIgBQgwQYoAQA4QYIMQAIQYIMUCIAUIMEGKAEAOEGCDEACEG
-        CDFAiAFCDBBigBADhBggxAAhBggxQIgBQgwQYoAQA4QYIMQAIQYIMUCIAUIMEGKAEAOEGCDEACEGCDFA
-        iAFCDBBigBADhBggxAAhBggxQIgBQgwQbb2/Lx7ATKqDtjneFg9hJtVBO5wvY7V7LF6AGdT+q4PWex/f
-        P1dBMKXa/fZ0HdXBK4ZSZdSnwhuCGdTOa++1+3cDffwCVCpM947ZZ44AAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="picLoading.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhMgA2APYZALu7u/7+/t3d3ezs7P39/fX19e3t7eDg4NnZ2enp6fz8/OTk5O7u7urq6v///5mZ

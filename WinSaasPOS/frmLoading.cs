@@ -15,7 +15,7 @@ namespace WinSaasPOS
     public partial class frmLoading : Form
     {
 
-
+        public string currentmsg = "加载中...";
         //<summary>
         //按比例缩放页面及控件
         //</summary>
@@ -27,19 +27,19 @@ namespace WinSaasPOS
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        public void UpInfo(string msg)
+        private void frmLoading_Activated(object sender, EventArgs e)
         {
             try
             {
-                if (msg.Contains("|"))
+                if (currentmsg.Contains("|"))
                 {
-                    string[] strs = msg.Split('|');
+                    string[] strs = currentmsg.Split('|');
                     lblMsg1.Text = strs[0];
                     lblMsg2.Text = strs[1];
                 }
                 else
                 {
-                    lblMsg1.Text = msg;
+                    lblMsg1.Text = currentmsg;
                     lblMsg2.Text = "";
                 }
                 Application.DoEvents();
@@ -53,7 +53,7 @@ namespace WinSaasPOS
                 }
                 catch { }
 
-                LogManager.WriteLog("loading UpInfo 异常"+ex.Message);
+                LogManager.WriteLog("loading UpInfo 异常" + ex.Message);
             }
         }
 

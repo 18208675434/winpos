@@ -30,17 +30,9 @@ namespace WinSaasPOS
         //间隔天数
         private int CurrentInterval = 0;
 
-
-        //<summary>
-        //按比例缩放页面及控件
-        //</summary>
-        AutoSizeFormUtil asf = new AutoSizeFormUtil();
-
         private QueryOrder CurrentQueryOrder = null;
 
-
         private string LastOrderid = "0";
-
 
         private Bitmap bmpReprint;
         private Bitmap bmpRefund;
@@ -58,6 +50,10 @@ namespace WinSaasPOS
         private DBORDER_BEANBLL orderbll = new DBORDER_BEANBLL();
 
         private bool thisisoffline = false;
+
+
+        private DateType onlinedatetype = DateType.None;
+        private DateType offlinedatetype = DateType.None;
 
         public frmOrderQuery()
         {
@@ -86,6 +82,14 @@ namespace WinSaasPOS
 
             Application.DoEvents();
 
+           
+
+        }
+        private void frmOrderQuery_Shown(object sender, EventArgs e)
+        {
+            Application.DoEvents();
+            LoadBmp();
+
             if (MainModel.IsOffLine)
             {
                 lblPhone.Visible = false;
@@ -100,14 +104,12 @@ namespace WinSaasPOS
                 dgvOrderOffLine.Height = this.Height - pnlDgvOffLineHead.Top - pnlDgvOffLineHead.Height;
                 btnQueryOffLine.PerformClick();
             }
-
-        }
-        private void frmOrderQuery_Shown(object sender, EventArgs e)
-        {
-            Application.DoEvents();
-            LoadBmp();
-
-            btnToday_Click(null, null);
+            else
+            {
+                btnQueryOnline.PerformClick();
+                //btnToday_Click(null, null);
+            }
+            
         }
 
         private void LoadBmp()
@@ -152,14 +154,7 @@ namespace WinSaasPOS
                 }
 
                 IsEnable = false;
-                btnToday.FlatAppearance.BorderColor = Color.Red;
-                btnYesterday.FlatAppearance.BorderColor = Color.Gray;
-                btnWeek.FlatAppearance.BorderColor = Color.Gray;
-                dtStart.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
-                dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-                CurrentInterval = 0;
-                LastOrderid = "0";
-                dgvOrderOnLine.Rows.Clear();
+                ChangeBtnDisplay(DateType.Today,true);
                 QueryOrder();
             }
             catch (Exception ex)
@@ -184,16 +179,7 @@ namespace WinSaasPOS
                 }
 
                 IsEnable = false;
-                btnToday.FlatAppearance.BorderColor = Color.Gray;
-                btnYesterday.FlatAppearance.BorderColor = Color.Red;
-                btnWeek.FlatAppearance.BorderColor = Color.Gray;
-
-                dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 00:00:00");
-                dtEnd.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59");
-                CurrentInterval = 1;
-                LastOrderid = "0";
-                dgvOrderOnLine.Rows.Clear();
-
+                ChangeBtnDisplay(DateType.Yestaday,true);
                 QueryOrder();
             }
             catch (Exception ex)
@@ -217,15 +203,7 @@ namespace WinSaasPOS
                 }
 
                 IsEnable = false;
-                btnToday.FlatAppearance.BorderColor = Color.Gray;
-                btnYesterday.FlatAppearance.BorderColor = Color.Gray;
-                btnWeek.FlatAppearance.BorderColor = Color.Red;
-
-                dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd") + " 00:00:00");
-                dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-                CurrentInterval = 7;
-                LastOrderid = "0";
-                dgvOrderOnLine.Rows.Clear();
+                ChangeBtnDisplay(DateType.Week,true);
                 QueryOrder();
 
             }
@@ -239,6 +217,68 @@ namespace WinSaasPOS
             }
         }
 
+        private void ChangeBtnDisplay(DateType datetype,bool clearonlinedgv)
+        {
+            try
+            {
+
+               
+                if (thisisoffline)
+                {
+                    offlinedatetype = datetype;
+                }
+                else
+                {
+                    onlinedatetype = datetype;
+                    if (clearonlinedgv)
+                    {
+                        dgvOrderOnLine.Rows.Clear();
+                    }
+                }
+
+                if (datetype == DateType.Today)
+                {
+                    btnToday.FlatAppearance.BorderColor = Color.Red;
+                    btnYesterday.FlatAppearance.BorderColor = Color.Gray;
+                    btnWeek.FlatAppearance.BorderColor = Color.Gray;
+                    dtStart.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
+                    dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
+                    CurrentInterval = 0;
+                    LastOrderid = "0";
+
+                }
+                else if (datetype == DateType.Yestaday)
+                {
+                    btnToday.FlatAppearance.BorderColor = Color.Gray;
+                    btnYesterday.FlatAppearance.BorderColor = Color.Red;
+                    btnWeek.FlatAppearance.BorderColor = Color.Gray;
+
+                    dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 00:00:00");
+                    dtEnd.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59");
+                    CurrentInterval = 1;
+                    LastOrderid = "0";
+
+
+                }
+                else if (datetype == DateType.Week)
+                {
+                    btnToday.FlatAppearance.BorderColor = Color.Gray;
+                    btnYesterday.FlatAppearance.BorderColor = Color.Gray;
+                    btnWeek.FlatAppearance.BorderColor = Color.Red;
+
+                    dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd") + " 00:00:00");
+                    dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
+                    CurrentInterval = 7;
+                    LastOrderid = "0";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("更新按钮样式异常"+ex.Message,true);
+            }
+        }
+
         private void btnQuery_Click(object sender, EventArgs e)
         {
             if (!IsEnable)
@@ -249,7 +289,15 @@ namespace WinSaasPOS
             this.Invoke(new InvokeHandler(delegate()
                {
                    LastOrderid = "0";
-                   dgvOrderOnLine.Rows.Clear();
+                   if (thisisoffline)
+                   {
+                       dgvOrderOffLine.Rows.Clear();
+                   }
+                   else
+                   {
+                       dgvOrderOnLine.Rows.Clear();
+                   }
+                   
                    QueryOrder();
                }));
         }
@@ -752,11 +800,6 @@ namespace WinSaasPOS
             }
         }
 
-        public void frmOrderQuery_SizeChanged(object sender, EventArgs e)
-        {
-            // asf.ControlAutoSize(this);
-        }
-
 
         private void LoadPicScreen(bool isShown)
         {
@@ -786,25 +829,6 @@ namespace WinSaasPOS
         private void picScreen_Click(object sender, EventArgs e)
         {
             LoadPicScreen(false);
-        }
-
-
-
-        private void btnFirst_Click(object sender, EventArgs e)
-        {
-            if (!IsEnable)
-            {
-                return;
-            }
-            LastOrderid = "0";
-            dgvOrderOnLine.Rows.Clear();
-            QueryOrder();
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            dgvOrderOnLine.Rows.Clear();
-            QueryOrder();
         }
 
 
@@ -872,7 +896,15 @@ namespace WinSaasPOS
                     pnlEmptyOrder.Visible = false;
                 }
 
-                btnToday.PerformClick();
+                if (onlinedatetype == DateType.None)
+                {
+                    btnToday.PerformClick();
+                }
+                else
+                {
+                    ChangeBtnDisplay(onlinedatetype,false);
+                }
+               
             }
             catch (Exception ex)
             {
@@ -907,7 +939,16 @@ namespace WinSaasPOS
                     pnlEmptyOrder.Visible = false;
                 }
                 Application.DoEvents();
-                btnToday.PerformClick();
+
+                if (offlinedatetype == DateType.None)
+                {
+                    btnToday.PerformClick();
+                }
+                else
+                {
+                    ChangeBtnDisplay(offlinedatetype,false);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -1165,6 +1206,13 @@ namespace WinSaasPOS
             }
             catch { }
         }
+    }
 
+    public enum DateType
+    {
+        None,
+        Today,
+        Yestaday,
+        Week
     }
 }

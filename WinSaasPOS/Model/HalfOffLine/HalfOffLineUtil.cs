@@ -59,8 +59,8 @@ namespace WinSaasPOS.Model.HalfOffLine
                 GetTenantMembergradeConfig();
                 ListMemberCouponAvailable();
                 EnjoyMemberRights();
-
                 GetTenantMemberRightsConfigUsing();
+                GetMemberTenantItem();
             }
             catch (Exception ex)
             {
@@ -308,7 +308,7 @@ namespace WinSaasPOS.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                MemberTenantItem objresult = httputil.GetmemberTenantItem(MainModel.CurrentShopInfo.tenantid, ref ErrorMsg);
+                MemberTenantItem objresult = httputil.GetmemberTenantItem(memberid, ref ErrorMsg);
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
                     membertenantitem = null;

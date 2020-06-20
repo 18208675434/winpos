@@ -27,9 +27,10 @@ namespace Maticsoft.Model
         private int _nopos;
         private string _skucode;
         private string _create_url_ip;
-        private int _syn_time;
-        private int _error_time;
+        private long _syn_time;
+        private long _error_time;
         private int _status;
+        private int _scalesrow;
         /// <summary>
         /// 
         /// </summary>
@@ -145,7 +146,7 @@ namespace Maticsoft.Model
         /// <summary>
         /// 
         /// </summary>
-        public int SYN_TIME
+        public long SYN_TIME
         {
             set { _syn_time = value; }
             get { return _syn_time; }
@@ -153,7 +154,7 @@ namespace Maticsoft.Model
         /// <summary>
         /// 
         /// </summary>
-        public int ERROR_TIME
+        public long ERROR_TIME
         {
             set { _error_time = value; }
             get { return _error_time; }
@@ -165,6 +166,16 @@ namespace Maticsoft.Model
         {
             set { _status = value; }
             get { return _status; }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int SCALESROW
+        {
+            set { _scalesrow = value; }
+            get { return _scalesrow; }
         }
         #endregion Model
 

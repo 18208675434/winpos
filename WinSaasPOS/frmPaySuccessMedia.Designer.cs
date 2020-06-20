@@ -125,6 +125,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmCashierResult";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPaySuccessMedia_FormClosed);
             this.Shown += new System.EventHandler(this.frmCashierResult_Shown);
             this.SizeChanged += new System.EventHandler(this.frmCashierResultMedia_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

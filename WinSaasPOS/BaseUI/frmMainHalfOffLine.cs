@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using WinSaasPOS.Model.Promotion;
 using WinSaasPOS.BaseUI;
+using WinSaasPOS.ScaleUI;
 
 namespace WinSaasPOS
 {
@@ -71,8 +72,6 @@ namespace WinSaasPOS
         /// </summary>
         private  bool IsEnable=true;
 
-
-
            //扫描数据处理线程
                 Thread threadScanCode;
 
@@ -106,7 +105,6 @@ namespace WinSaasPOS
         /// 积分
         /// </summary     
         private CalculateAvailablePointsCommandImpl pointcalculate = new CalculateAvailablePointsCommandImpl();
-                private ServerDataUtil serverdatautil = new ServerDataUtil();
         #endregion
 
         #region  页面加载
@@ -121,7 +119,6 @@ namespace WinSaasPOS
             MainModel.hScale = (float)Screen.AllScreens[0].Bounds.Height / this.Height;
             MainModel.midScale = (MainModel.wScale + MainModel.hScale) / 2;
 
-            ShowLoading(false);// LoadingHelper.CloseForm();
 
             CurrentFrmLogin = frmlogin;
             
@@ -155,6 +152,7 @@ namespace WinSaasPOS
         {
             try
             {
+                DateTime starttime = DateTime.Now;
                 LoadingHelper.ShowLoadingScreen("页面初始化...");
 
                 SetBtnPayStarus(false);
@@ -182,27 +180,27 @@ namespace WinSaasPOS
                 threadCheckActivate.Start();
 
                 //启动全量商品同步线程
-                 threadLoadAllProduct = new Thread(LoadAllProduct);
+                 threadLoadAllProduct = new Thread(ServerDataUtil.LoadAllProduct);
                 threadLoadAllProduct.IsBackground = true;
                 threadLoadAllProduct.Start();
 
                 //启动促销商品同步线程
-                Thread threadLoadPromotion = new Thread(serverdatautil.UpdatePromotion);
+                Thread threadLoadPromotion = new Thread(ServerDataUtil.UpdatePromotion);
                 threadLoadPromotion.IsBackground = false;
                 threadLoadPromotion.Start();
 
                 ClearHistoryData();
-                ////启动电子秤同步信息线程
-                //Thread threadLoadScale = new Thread(LoadScale);
-                //threadLoadScale.IsBackground = true;
-                //threadLoadScale.Start();
+                //启动电子秤同步信息线程
+                Thread threadLoadScale = new Thread(ScaleDataHelper.LoadScale);
+                threadLoadScale.IsBackground = true;
+                threadLoadScale.Start();
 
 
-                LoadFormIni();
-                ////弹窗初始化线程
-                //Thread threadLoadFrmIni = new Thread(LoadFormIni);
-                //threadLoadFrmIni.IsBackground = true;
-                //threadLoadFrmIni.Start();
+                //LoadFormIni();
+                //弹窗初始化线程
+                Thread threadLoadFrmIni = new Thread(LoadFormIni);
+                threadLoadFrmIni.IsBackground = true;
+                threadLoadFrmIni.Start();
 
                 //更新离线数据
                  threadUploadOffLineDate = new Thread(UploadOffLineData);
@@ -230,8 +228,7 @@ namespace WinSaasPOS
                     }
                     catch { }
                     picLoading.Size = new Size(55, 55);
-                    pnlPriceLine.Height = 1;
-               
+                    pnlPriceLine.Height = 1;              
                 }
                 catch { }
                
@@ -247,7 +244,9 @@ namespace WinSaasPOS
 
                     MainModel.frmmainmedia.Show();
                     MainModel.frmmainmedia.IniForm(null);
-                }             
+                }    
+         
+                Console.WriteLine("初始化页面时间" + (DateTime.Now - starttime).Milliseconds);
             }
             catch (Exception ex)
             {
@@ -299,8 +298,6 @@ namespace WinSaasPOS
 
             MainModel.frmmainmedia.Close();
             MainModel.frmmainmedia = null;
-            MainModel.ShowTask();
-           // CurrentFrmLogin.Show();
             this.Dispose();
         }
 
@@ -309,10 +306,12 @@ namespace WinSaasPOS
         {
             try
             {
+
+                jsonbll.Delete(ConditionType.CurrentCart);
                 if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
                    
-                    jsonbll.Delete(ConditionType.CurrentCart);
+                   
 
                     foreach (Product pro in CurrentCart.products)
                     {
@@ -744,7 +743,7 @@ namespace WinSaasPOS
             {
                 MainModel.frmtoolmain = new frmToolMain();
 
-                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
+                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
                 MainModel.frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                 MainModel.frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - MainModel.frmtoolmain.Width - 15, pnlHead.Height + 10);
                 MainModel.frmtoolmain.Show();
@@ -893,6 +892,8 @@ namespace WinSaasPOS
                     frmconfirmreceiptback.ShowDialog();
 
                     CurrentFrmLogin.Show();
+
+                    CurrentCart = null;
                     this.Close();
 
                 }
@@ -939,13 +940,13 @@ namespace WinSaasPOS
         {
             try
             {
-                ShowLog("暂未开通",false);
-                //frmScale frmscal = new frmScale();
 
-                //asf.AutoScaleControlTest(frmscal, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                //frmscal.Location = new System.Drawing.Point(0, 0);
+                frmScale frmscal = new frmScale();
 
-                //frmscal.ShowDialog();
+                asf.AutoScaleControlTest(frmscal, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmscal.Location = new System.Drawing.Point(0, 0);
+
+                frmscal.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -1005,8 +1006,8 @@ namespace WinSaasPOS
             }
             MainModel.frmloginoffline = new frmLoginOffLine();
             MainModel.frmloginoffline.Show();
-
-            this.Dispose();
+            CurrentCart = null;
+            this.Close();
                 
             }
             }
@@ -1138,6 +1139,10 @@ namespace WinSaasPOS
                             btnJFUse.Text = "使用" + CurrentCart.pointinfo.availablepoints + "积分 抵用" + CurrentCart.pointinfo.availablepointsamount + "元";
                             btnJFUse.Visible = true;
                         }
+                       //有会员登录每次刷新购物车都刷一次优惠券接口
+                        Thread threadloadMember = new Thread(WinSaasPOS.Model.HalfOffLine.HalfOffLineUtil.ListMemberCouponAvailable);
+                        threadloadMember.IsBackground = true;
+                        threadloadMember.Start();
                     }
                     else
                     {
@@ -2228,8 +2233,6 @@ namespace WinSaasPOS
                         }
                         else
                         {
-                            //UploadMember();
-
                             Thread threadMember = new Thread(UploadMember);
                             threadMember.IsBackground = true;
                             threadMember.Start();
@@ -3427,62 +3430,6 @@ namespace WinSaasPOS
 
         #region 商品全量/增量数据同步
 
-        DBPRODUCT_BEANBLL productbll = new DBPRODUCT_BEANBLL();
-
-        //当天第一次进入更新全局商品
-        private void LoadAllProduct()
-        {
-            try
-            {
-                string errormesg = "";
-
-                int i = 0;
-                lstproduct.Clear();
-
-                productbll.AddProduct(GetAllProdcut(1, 200),MainModel.URL);
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("更新全部商品异常" + ex.Message);
-            }
-
-        }
-        
-        List<DBPRODUCT_BEANMODEL> lstproduct = new List<DBPRODUCT_BEANMODEL>();
-        private List<DBPRODUCT_BEANMODEL> GetAllProdcut(int page, int size)
-        {
-            try
-            {
-                string errormesg = "";
-                AllProduct allproduct = httputil.QuerySkushopAll(MainModel.CurrentShopInfo.shopid, page, size, ref errormesg);
-
-                if (!string.IsNullOrEmpty(errormesg) || allproduct == null)
-                {
-                    LogManager.WriteLog("更新全部商品异常" + errormesg);
-                    return null;
-                }
-                else
-                {
-                    MainModel.LastQuerySkushopCrementTimeStamp = allproduct.timestamp.ToString();
-                    MainModel.LastQuerySkushopAllTimeStamp = allproduct.timestamp.ToString();
-
-                    lstproduct.AddRange(allproduct.rows);
-                    if (allproduct.rows.Count >= size)
-                    {
-                        GetAllProdcut(page + 1, size);
-                    }
-                }
-
-                return lstproduct;
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("ERROR", "获取全量商品异常" + ex.Message);
-                return null;
-            }
-        }
-
         private void timerGetIncrementProduct_Tick(object sender, EventArgs e)
         {
             ////启动促销商品同步线程
@@ -3510,96 +3457,6 @@ namespace WinSaasPOS
             //}
         }
 
-        ScaleUtil scaleutil = new ScaleUtil();
-        private void SendScale()
-        {
-            try
-            {
-                List<string> lstScaleIP = scalebll.GetDiatinctByScaleIP(" CREATE_URL_IP ='" + MainModel.URL + "'");
-                foreach (string scaleip in lstScaleIP)
-                {
-                    string errormsg = "";
-                    scaleutil.SendScaleByScaleIp(scaleip,ref errormsg);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("自动传秤异常"+ex.Message);
-            }
-        }
-
-        //每10分钟同步一个增量商品
-        private void LoadIncrementProduct()
-        {
-            try
-            {
-                string errormesg = "";
-
-                DateTime starttime = DateTime.Now;
-                int i = 0;
-                lstIncrementproduct.Clear();
-                //productbll.Add(allproduct.rows[0]);
-                List<DBPRODUCT_BEANMODEL> lstpro = GetIncrementProdcut(1, 100);
-                if (lstpro != null && lstpro.Count > 0)
-                {
-                    productbll.AddProduct(lstpro, MainModel.URL);
-                    LogManager.WriteLog("添加增量商品数量：" + lstpro.Count);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("更新增量商品异常" + ex.Message);
-            }
-
-        }
-
-        List<DBPRODUCT_BEANMODEL> lstIncrementproduct = new List<DBPRODUCT_BEANMODEL>();
-        private List<DBPRODUCT_BEANMODEL> GetIncrementProdcut(int page, int size)
-        {
-            try
-            {
-                string errormesg = "";
-                int ResultCode = -1;
-                AllProduct allproduct = httputil.QuerySkushopIncrement(MainModel.CurrentShopInfo.shopid, page, size, ref errormesg,ref ResultCode);
-
-                if (!string.IsNullOrEmpty(errormesg) || allproduct == null)
-                {
-                   
-                    //代表超过增量更新上限，需要全量更新
-                    if (ResultCode == 160046)
-                    {                        
-                        Thread threadLoadAllProduct = new Thread(LoadAllProduct);
-                        threadLoadAllProduct.IsBackground = true;
-                        threadLoadAllProduct.Start();
-                    }
-                    else
-                    {
-                        LogManager.WriteLog("更新增量商品异常： " + errormesg + ResultCode);
-
-                    }
-
-                    return null;
-                }
-                else
-                {
-                    MainModel.LastQuerySkushopCrementTimeStamp = allproduct.timestamp.ToString();
-
-                    lstIncrementproduct.AddRange(allproduct.rows);
-                    if (allproduct.rows.Count >= size)
-                    {
-                        GetIncrementProdcut(page + 1, size);
-                    }
-                }
-
-                return lstIncrementproduct;
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("ERROR", "获取全量商品异常" + ex.Message);
-                return null;
-            }
-        }
 
 
         /// <summary>
@@ -3628,86 +3485,7 @@ namespace WinSaasPOS
 
 
 
-        DBSCALE_KEY_BEANBLL scalebll = new DBSCALE_KEY_BEANBLL();
 
-        //当天第一次进入更新全局商品
-        private void LoadScale()
-        {
-            try
-            {
-                string errormesg = "";
-
-                DateTime starttime = DateTime.Now;
-                int i = 0;
-                lstScale.Clear();
-                GetScale(1, 100);
-
-                if (lstScale != null && lstScale.Count > 0)
-                {
-                    scalebll.AddScalse(lstScale, MainModel.URL,MainModel.CurrentShopInfo.shopid);
-                }
-                else
-                {
-                    LogManager.WriteLog("无传秤数据更新");
-                }
-              
-
-               // LogManager.WriteLog("添加电子秤数据时间" + (DateTime.Now - starttime).TotalMilliseconds);
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("更新电子秤数据异常" + ex.Message);
-            }
-        }
-
-        //如果某页数据访问异常  重新访问一次，（控制次数仅一次，防止网络异常 死循环）
-        int errorpage = -1;
-        int errorsize = -1;
-        List<DBSCALE_KEY_BEANMODEL> lstScale = new List<DBSCALE_KEY_BEANMODEL>();
-        private List<DBSCALE_KEY_BEANMODEL> GetScale(int page, int size)
-        {
-            try
-            {
-
-                string errormesg = "";
-                ScaleForSaas scale = httputil.GetScaleForSaas(page, size, ref errormesg);
-
-                if (!string.IsNullOrEmpty(errormesg) || scale == null)
-                {
-                    MainModel.LastScaleTimeStamp = MainModel.getStampByDateTime(DateTime.Now);
-                    if (errorpage != page && errorsize != size)
-                    {
-                        errorpage = page;
-                        errorsize = size;
-                        LogManager.WriteLog("获取电子秤分页数据失败，进行第二次访问" + errormesg);
-                        GetScale(page, size);
-                    }
-                    else
-                    {
-                        LogManager.WriteLog("获取电子秤信息异常" + errormesg);
-                        return lstScale;
-                    }
-                }
-                else
-                {
-                    MainModel.LastScaleTimeStamp = scale.requestedat;
-                    if (scale.templist != null && scale.templist.rows != null)
-                    {
-                        lstScale.AddRange(scale.templist.rows);
-                        if (scale.templist.rows.Count >= size)
-                        {
-                            GetScale(page + 1, size);
-                        }
-                    }                  
-                }
-                return lstScale;
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("ERROR", "获取电子秤信息异常" + ex.Message);
-                return null;
-            }
-        }
 
         public void btnWindows_Click(object sender, EventArgs e)
         {
@@ -3913,7 +3691,7 @@ namespace WinSaasPOS
 
                 //菜单栏窗体
                 MainModel.frmtoolmain = new frmToolMain();
-                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
+                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
                 MainModel.frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                 MainModel.frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - MainModel.frmtoolmain.Width - 15, pnlHead.Height + 10);
              
@@ -4124,26 +3902,6 @@ namespace WinSaasPOS
             {
                 ShowLog("解析商品信息异常"+ex.Message,true);
                 return null;
-            }
-        }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            if (httputil.CheckScaleUpdate())
-            {
-               // LogManager.WriteLog(z);
-                //启动电子秤同步信息线程
-                Thread threadLoadScale = new Thread(LoadScale);
-                threadLoadScale.IsBackground = true;
-                threadLoadScale.Start();
-
-                Thread threadSendScale = new Thread(SendScale);
-                threadSendScale.IsBackground = true;
-                threadSendScale.Start();
-            }
-            else
-            {
-                MainModel.LastScaleTimeStamp = MainModel.getStampByDateTime(DateTime.Now);
             }
         }
 
@@ -4376,7 +4134,11 @@ namespace WinSaasPOS
         {
             try
             {
-                MainModel.HideTask();
+                if (this.WindowState != FormWindowState.Minimized)
+                {
+                    MainModel.HideTask();
+                }
+                //MainModel.HideTask();
             }
             catch { }
         }

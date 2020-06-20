@@ -48,5 +48,14 @@ namespace WinSaasPOS
             this.DialogResult = DialogResult.Retry;
             this.Close();
         }
+
+        private void frmScaleResult_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                this.Dispose();
+            }
+            catch { }
+        }
     }
 }

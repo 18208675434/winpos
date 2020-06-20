@@ -46,12 +46,10 @@ namespace WinSaasPOS
 
         private void frmCashPayBack_Shown(object sender, EventArgs e)
         {
-
             try
             {
                 if (MainModel.frmcashpay != null)
                 {
-
                     MainModel.frmcashpay.DataReceiveHandle += FormCashPay_DataReceiveHandle;
                     MainModel.frmcashpay.Show();
                     MainModel.frmcashpay.UpInfo(ParaCart);
@@ -68,9 +66,6 @@ namespace WinSaasPOS
                     MainModel.frmcashpay.DataReceiveHandle += FormCashPay_DataReceiveHandle;
                     MainModel.frmcashpay.Show();
                 }
-
-
-
             }
             catch (Exception ex)
             {
@@ -80,9 +75,6 @@ namespace WinSaasPOS
                 this.Close();
             }
         }
-
-
-
 
         private void FormCashPay_DataReceiveHandle(int type, string orderid,Cart cart)
         {

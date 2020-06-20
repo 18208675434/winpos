@@ -279,7 +279,7 @@ namespace WinSaasPOS.Model.Promotion
     private bool canApplySpecificPromo(DBPROMOTION_CACHE_BEANMODEL promotion, Product orderItem, String shopId) {
         //校验是否仅适用于原价购买的商品
         if (promotion.ONLYUSEINORIGINAL==1 &&
-                (MoneyUtils.isFirstBiggerThanSecond(orderItem.price.originprice, orderItem.price.total) || MoneyUtils.isBiggerThanZero(orderItem.PromoSubAmt))) {
+                (MoneyUtils.isFirstBiggerThanSecond(orderItem.price.originprice, orderItem.price.saleprice) || MoneyUtils.isBiggerThanZero(orderItem.PromoSubAmt))) {
             return false;
         }
         //部分分类不参与夜间促销

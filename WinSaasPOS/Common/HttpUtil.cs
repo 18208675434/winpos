@@ -1403,7 +1403,7 @@ namespace WinSaasPOS.Common
 
 
         /// <summary>
-        /// 分页获取门店秤信息
+        /// 分页获取门店秤信息 更新
         /// </summary>
         /// <returns></returns>
         public bool CheckScaleUpdate()

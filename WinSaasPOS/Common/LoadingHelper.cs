@@ -62,11 +62,13 @@ namespace WinSaasPOS.Common
         {
             try
             {
+                
                 if (loadingForm == null)
                 {
                     IniFormToast();
                 }
-                loadingForm.UpInfo(msg);
+                //loadingForm.UpInfo(msg);
+                loadingForm.currentmsg = msg;
                 loadingForm.Show();
             }
             catch (Exception ex)
@@ -82,7 +84,6 @@ namespace WinSaasPOS.Common
             {
                 if (loadingForm != null)
                 {
-                    //loadingForm.Close();
                     loadingForm.Hide();
                 }
 

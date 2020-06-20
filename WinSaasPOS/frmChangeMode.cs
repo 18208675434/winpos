@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using WinSaasPOS.ScaleUI;
 
 namespace WinSaasPOS
 {
@@ -24,6 +25,8 @@ namespace WinSaasPOS
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
         /// </summary>
         private bool IsEnable = true;
+
+        JSON_BEANBLL jsonbll = new JSON_BEANBLL();
 
         public frmChangeMode()
         {
@@ -83,88 +86,44 @@ namespace WinSaasPOS
 
         ServerDataUtil serverutil = new ServerDataUtil();
         //当天第一次进入更新全局商品
-        private void LoadAllProduct()
+
+
+
+        private void btnLoadAllProduct_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!IsEnable)
+                {
+                    return;
+                }
                 IsEnable = false;
                 LoadingHelper.ShowLoadingScreen("请稍候...");
-                string errormesg = "";
 
-                int i = 0;
-                lstproduct.Clear();
+                ServerDataUtil.LoadAllProduct();
 
-                productbll.AddProduct(GetAllProdcut(1, 200),MainModel.URL);
+                ServerDataUtil.UpdatePromotion();
 
-                IsEnable = true;
-                
+                ScaleDataHelper.LoadScale();
+
                 LoadingHelper.CloseForm();
 
 
                 MainModel.LastQuerySkushopAllTimeStamp = MainModel.getStampByDateTime(DateTime.Now);
 
                 lblLastTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-               // serverutil.UpdatePromotion();
-
-                MainModel.ShowLog("同步成功",false);
+                // serverutil.UpdatePromotion();
+                IsEnable = true;
+                MainModel.ShowLog("同步成功", false);
             }
             catch (Exception ex)
             {
-                this.Enabled = true;
-                LoadingHelper.CloseForm();
-                LogManager.WriteLog("手动更新全部商品异常" + ex.Message);
-                MainModel.ShowLog("同步失败"+ex.Message,true);
+                MainModel.ShowLog("同步数据异常"+ex.Message,true);
             }
             finally
             {
                 IsEnable = true;
             }
-        }
-
-        List<DBPRODUCT_BEANMODEL> lstproduct = new List<DBPRODUCT_BEANMODEL>();
-        private List<DBPRODUCT_BEANMODEL> GetAllProdcut(int page, int size)
-        {
-            try
-            {
-                string errormesg = "";
-                AllProduct allproduct = httputil.QuerySkushopAll(MainModel.CurrentShopInfo.shopid, page, size, ref errormesg);
-
-                if (!string.IsNullOrEmpty(errormesg) || allproduct == null)
-                {
-                    LogManager.WriteLog("更新全部商品异常" + errormesg);
-                    return null;
-                }
-                else
-                {
-                    MainModel.LastQuerySkushopCrementTimeStamp = allproduct.timestamp.ToString();
-
-                    lstproduct.AddRange(allproduct.rows);
-                    if (allproduct.rows.Count >= size)
-                    {
-                        GetAllProdcut(page + 1, size);
-                    }
-                }
-
-                return lstproduct;
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("ERROR", "获取全量商品异常" + ex.Message);
-                return null;
-            }
-        }
-
-        private void btnLoadAllProduct_Click(object sender, EventArgs e)
-        {
-
-            if (!IsEnable)
-            {
-                return;
-            }
-            //启动全量商品同步线程
-            Thread threadLoadAllProduct = new Thread(LoadAllProduct);
-            threadLoadAllProduct.IsBackground = true;
-            threadLoadAllProduct.Start();
         }
 
 
@@ -195,6 +154,8 @@ namespace WinSaasPOS
 
                 if (frmConfirm.DialogResult == DialogResult.OK)
                 {
+                    jsonbll.Delete(ConditionType.CurrentCart);
+
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -208,8 +169,7 @@ namespace WinSaasPOS
             finally
             {
                 LoadPicScreen(false);
-            }
-           
+            }           
         }
 
 
@@ -234,6 +194,8 @@ namespace WinSaasPOS
 
                 if (frmConfirm.DialogResult == DialogResult.OK)
                 {
+
+                    jsonbll.Delete(ConditionType.CurrentCart);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

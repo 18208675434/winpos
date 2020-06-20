@@ -13,6 +13,7 @@ namespace WinSaasPOS.HelperUI
 {
     public partial class FormToast : Form
     {
+        public string currentmsg = "";
         public FormToast()
         {
             InitializeComponent();
@@ -20,14 +21,18 @@ namespace WinSaasPOS.HelperUI
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        public void UpInfo(string msg)
+        public FormToast(string msg)
         {
+            InitializeComponent();
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
+
             try
             {
                 lblMsg.Text = msg;
 
                 this.Size = new System.Drawing.Size(lblMsg.Width + 40, lblMsg.Size.Height + 20);
-                this.Location = new Point((Screen.AllScreens[0].Bounds.Width - this.Width)/2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
+                this.Location = new Point((Screen.AllScreens[0].Bounds.Width - this.Width) / 2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
                 Application.DoEvents();
             }
             catch (Exception ex)
@@ -38,11 +43,10 @@ namespace WinSaasPOS.HelperUI
                     this.Dispose();
                 }
                 catch { }
-                
-                LogManager.WriteLog("信息框更新异常"+ex.Message);
+
+                LogManager.WriteLog("信息框更新异常" + ex.Message);
             }
         }
-
 
 
         private void FormToast_Resize(object sender, EventArgs e)
@@ -101,6 +105,29 @@ namespace WinSaasPOS.HelperUI
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        private void FormToast_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                lblMsg.Text = currentmsg;
+
+                this.Size = new System.Drawing.Size(lblMsg.Width + 40, lblMsg.Size.Height + 20);
+                this.Location = new Point((Screen.AllScreens[0].Bounds.Width - this.Width) / 2, (Screen.AllScreens[0].Bounds.Height - this.Height) / 2);
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    ToastHelper.frmtoast = null;
+                    this.Dispose();
+                }
+                catch { }
+
+                LogManager.WriteLog("信息框更新异常" + ex.Message);
             }
         }
     }

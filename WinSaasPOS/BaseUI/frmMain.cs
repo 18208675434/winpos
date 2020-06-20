@@ -726,7 +726,7 @@ namespace WinSaasPOS
             {
                 MainModel.frmtoolmain = new frmToolMain();
 
-                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
+                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
                 MainModel.frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                 MainModel.frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - MainModel.frmtoolmain.Width - 15, pnlHead.Height + 10);
                 MainModel.frmtoolmain.Show();
@@ -3835,7 +3835,7 @@ namespace WinSaasPOS
 
                 //菜单栏窗体
                 MainModel.frmtoolmain = new frmToolMain();
-                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 315, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 315), true);
+                asf.AutoScaleControlTest(MainModel.frmtoolmain, 178, 370, Convert.ToInt32(MainModel.wScale * 178), Convert.ToInt32(MainModel.hScale * 370), true);
                 MainModel.frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                 MainModel.frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - MainModel.frmtoolmain.Width - 15, pnlHead.Height + 10);
              
@@ -4348,6 +4348,11 @@ namespace WinSaasPOS
             {
                 LogManager.WriteLog("启动/关闭 MQTT程序异常");
             }
+        }
+
+        private void frmMain_Activated(object sender, EventArgs e)
+        {
+            MainModel.HideTask();
         }
 
 

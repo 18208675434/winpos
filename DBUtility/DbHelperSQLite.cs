@@ -125,12 +125,15 @@ namespace Maticsoft.DBUtility
                 {
                     for (int n = 0; n < SQLStringList.Count; n++)
                     {
-                        string strsql = SQLStringList[n].ToString();
-                        if (strsql.Trim().Length > 1)
+                        try
                         {
-                            cmd.CommandText = strsql;
-                            cmd.ExecuteNonQuery();
-                        }
+                            string strsql = SQLStringList[n].ToString();
+                            if (strsql.Trim().Length > 1)
+                            {
+                                cmd.CommandText = strsql;
+                                cmd.ExecuteNonQuery();
+                            }
+                        }catch{}
                     }
                     tx.Commit();                    
                 }

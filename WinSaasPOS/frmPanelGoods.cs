@@ -1519,125 +1519,133 @@ namespace WinSaasPOS
         private Bitmap GetItemImg(Product pro)
         {
 
-            
-            lblGoodName.AutoSize = true;
-            lblGoodName.Text = pro.skuname;
-
-            if (lblGoodName.Width > pnlItem.Width - picItem.Width - 15)
+            try
             {
-                lblGoodName.AutoSize = false;
-                lblGoodName.Width = pnlItem.Width - picItem.Width - 15;
-                lblGoodName.Height = HeightLblGoodName * 2;
-                lblGoodName.Top = lblSkucode.Top - lblGoodName.Height;
+                lblGoodName.AutoSize = true;
+                lblGoodName.Text = pro.skuname;
 
-            }
-            else
-            {
-                lblGoodName.Top = TopLblGoodName;
-                
-            }
-            lblSkucode.Text = pro.skucode;
-            //lblPrice.Text = pro.SALEPRICE.ToString("f2");
-            lblPriceDetail.Text = "/" + pro.saleunit;
-
-            string imgurl = pro.mainimg;
-            string imgname = imgurl.Substring(imgurl.LastIndexOf("/") + 1) + ".bmp"; //URL 最后的值
-
-
-
-            switch (pro.pricetagid)
-            {
-                case 1: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF7D14"); break;
-                case 2: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#209FD4"); break;
-                case 3: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#D42031"); break;
-                case 4: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#250D05"); break;
-                default: lblPriceTag.Text = ""; break;
-            }
-
-            if (pro.price != null)
-            {
-                if (pro.price.saleprice == pro.price.originprice)
+                if (lblGoodName.Width > pnlItem.Width - picItem.Width - 15)
                 {
-                    lblPrice.Text = pro.price.saleprice.ToString("f2");
-                    lblMemberPrice.Visible = false;
+                    lblGoodName.AutoSize = false;
+                    lblGoodName.Width = pnlItem.Width - picItem.Width - 15;
+                    lblGoodName.Height = HeightLblGoodName * 2;
+                    lblGoodName.Top = lblSkucode.Top - lblGoodName.Height;
+
                 }
                 else
                 {
-                    lblPrice.Text = pro.price.saleprice.ToString("f2");
-                    lblMemberPrice.Visible = true;
-                    if (!string.IsNullOrEmpty(pro.price.salepricedesc))
-                    {
-                        lblPriceDetail.Text += "(" + pro.price.salepricedesc + ")";
-                    }
+                    lblGoodName.Top = TopLblGoodName;
 
-                    if (pro.price.strikeout == 1)
-                    {
+                }
+                lblSkucode.Text = pro.skucode;
+                //lblPrice.Text = pro.SALEPRICE.ToString("f2");
+                lblPriceDetail.Text = "/" + pro.saleunit;
 
-                        lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Strikeout);
-                        lblMemberPrice.Text = pro.price.originprice.ToString("f2") + "/" + pro.saleunit;
+                string imgurl = pro.mainimg;
+                string imgname = imgurl.Substring(imgurl.LastIndexOf("/") + 1) + ".bmp"; //URL 最后的值
+
+
+
+                switch (pro.pricetagid)
+                {
+                    case 1: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#FF7D14"); break;
+                    case 2: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#209FD4"); break;
+                    case 3: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#D42031"); break;
+                    case 4: lblPriceTag.Text = pro.pricetag; lblPriceTag.BackColor = ColorTranslator.FromHtml("#250D05"); break;
+                    default: lblPriceTag.Text = ""; break;
+                }
+
+                if (pro.price != null)
+                {
+                    if (pro.price.saleprice == pro.price.originprice)
+                    {
+                        lblPrice.Text = pro.price.saleprice.ToString("f2");
+                        lblMemberPrice.Visible = false;
                     }
                     else
                     {
-                        lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Regular);
-                        lblMemberPrice.Text = pro.price.originprice.ToString("f2") + "/" + pro.saleunit; 
-                    }
+                        lblPrice.Text = pro.price.saleprice.ToString("f2");
+                        lblMemberPrice.Visible = true;
+                        if (!string.IsNullOrEmpty(pro.price.salepricedesc))
+                        {
+                            lblPriceDetail.Text += "(" + pro.price.salepricedesc + ")";
+                        }
 
-                    if (!string.IsNullOrEmpty(pro.price.originpricedesc))
-                    {
-                        lblMemberPrice.Text += "(" + pro.price.originpricedesc + ")";
+                        if (pro.price.strikeout == 1)
+                        {
+
+                            lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Strikeout);
+                            lblMemberPrice.Text = pro.price.originprice.ToString("f2") + "/" + pro.saleunit;
+                        }
+                        else
+                        {
+                            lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Regular);
+                            lblMemberPrice.Text = pro.price.originprice.ToString("f2") + "/" + pro.saleunit;
+                        }
+
+                        if (!string.IsNullOrEmpty(pro.price.originpricedesc))
+                        {
+                            lblMemberPrice.Text += "(" + pro.price.originpricedesc + ")";
+                        }
                     }
                 }
-            }
-            else
-            {
-
-            }
-
-            if (pro.price != null && pro.price.saleprice == pro.price.originprice)
-            {
-                lblPrice.Text = pro.price.saleprice.ToString("f2");
-            }
-            else
-            {
-            }
-
-            lblPriceDetail.Left = lblPrice.Left + lblPrice.Width-3;
-
-            if (File.Exists(MainModel.ProductPicPath + imgname))
-            {
-                picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
-            }
-            else
-            {
-                try
+                else
                 {
-                    Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                    _image.Save(MainModel.ProductPicPath + imgname);
+
+                }
+
+                if (pro.price != null && pro.price.saleprice == pro.price.originprice)
+                {
+                    lblPrice.Text = pro.price.saleprice.ToString("f2");
+                }
+                else
+                {
+                }
+
+                lblPriceDetail.Left = lblPrice.Left + lblPrice.Width - 3;
+
+                if (File.Exists(MainModel.ProductPicPath + imgname))
+                {
                     picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
                 }
-                catch { }
+                else
+                {
+                    try
+                    {
+                        Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                        _image.Save(MainModel.ProductPicPath + imgname);
+                        picItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
+                    }
+                    catch { }
+                }
+
+
+
+
+                if (pro.panelSelectNum > 0)
+                {
+                    btnRed.Text = pro.panelSelectNum.ToString();
+                    btnRed.Visible = true;
+                }
+                else
+                {
+                    btnRed.Visible = false;
+                }
+
+                //获取单元格图片内容
+                Bitmap b = new Bitmap(pnlItem.Width, pnlItem.Height);
+
+                b.Tag = pro;
+                pnlItem.DrawToBitmap(b, new Rectangle(0, 0, pnlItem.Width, pnlItem.Height));
+
+                return b;
+
             }
-
-
-          
-
-            if (pro.panelSelectNum>0)
+            catch (Exception ex)
             {
-                btnRed.Text = pro.panelSelectNum.ToString();
-                btnRed.Visible = true;
+                LogManager.WriteLog("绘制面板商品图片异常"+ex.Message);
+                return null;
             }
-            else
-            {
-                btnRed.Visible = false;
-            }
-
-            //获取单元格图片内容
-            Bitmap b = new Bitmap(pnlItem.Width, pnlItem.Height);
-
-            b.Tag = pro;
-            pnlItem.DrawToBitmap(b, new Rectangle(0, 0, pnlItem.Width, pnlItem.Height));
-
-            return b;
         }
         /// <summary>
         /// 重绘商品容器 边框线
@@ -1646,23 +1654,28 @@ namespace WinSaasPOS
         /// <param name="e"></param>
         private void pnlItem_Paint(object sender, PaintEventArgs e)
         {
+            try
+            {
+                ControlPaint.DrawBorder(e.Graphics,
+                                    this.pnlItem.ClientRectangle,
+                                    Color.Gainsboro,//7f9db9
+                                    1,
+                                    ButtonBorderStyle.Solid,
+                                    Color.Gainsboro,
+                                    1,
+                                    ButtonBorderStyle.Solid,
+                                    Color.Gainsboro,
+                                    1,
+                                    ButtonBorderStyle.Solid,
+                                    Color.Gainsboro,
+                                    1,
+                                    ButtonBorderStyle.Solid);
 
-            ControlPaint.DrawBorder(e.Graphics,
-                                this.pnlItem.ClientRectangle,
-                                Color.Gainsboro,//7f9db9
-                                1,
-                                ButtonBorderStyle.Solid,
-                                Color.Gainsboro,
-                                1,
-                                ButtonBorderStyle.Solid,
-                                Color.Gainsboro,
-                                1,
-                                ButtonBorderStyle.Solid,
-                                Color.Gainsboro,
-                                1,
-                                ButtonBorderStyle.Solid);
-
-
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("重绘面板商品边框异常"+ex.Message);
+            }
         }
 
         #endregion
@@ -1679,7 +1692,7 @@ namespace WinSaasPOS
                 {
                     return;
                 }
-
+                Other.CrearMemory();
                 SortType thissorttype = SortType.SaleCount;
 
                 //已选择该排序，不需要再刷新
@@ -1716,6 +1729,8 @@ namespace WinSaasPOS
                 {
                     return;
                 }
+
+                Other.CrearMemory();
                 SortType thissorttype = SortType.CreateDate;
                 //已选择该排序，不需要再刷新
                 if (btnOrderByCreateDate.BackgroundImage == imgSelect)
@@ -1750,6 +1765,7 @@ namespace WinSaasPOS
             {
                 return;
             }
+            Other.CrearMemory();
             SortType thissorttype;
             if (btnOrderBySalePrice.Text == "价格↓")
             {
@@ -1781,24 +1797,31 @@ namespace WinSaasPOS
 
         private void LoadBtnSortStatus(SortType sorttype)
         {
-
-            btnOrderBySaleCount.BackgroundImage = imgNotSelect;
-            btnOrderBySaleCount.ForeColor = Color.Black;
-            btnOrderByCreateDate.BackgroundImage = imgNotSelect;
-            btnOrderByCreateDate.ForeColor = Color.Black;
-            btnOrderBySalePrice.BackgroundImage = imgNotSelect;
-            btnOrderBySalePrice.ForeColor = Color.Black;
-
-            btnOrderBySalePrice.Text = "价格";
-
-
-            switch (sorttype)
+            try
             {
-                case SortType.SaleCount: btnOrderBySaleCount.BackgroundImage = imgSelect; btnOrderBySaleCount.ForeColor = Color.DeepSkyBlue; break;
-                case SortType.CreateDate: btnOrderByCreateDate.BackgroundImage = imgSelect; btnOrderByCreateDate.ForeColor = Color.DeepSkyBlue; break;
-                case SortType.SalePriceAsc: btnOrderBySalePrice.BackgroundImage = imgSelect; btnOrderBySalePrice.ForeColor = Color.DeepSkyBlue; btnOrderBySalePrice.Text = "价格↑"; break;
-                case SortType.SalePriceDesc: btnOrderBySalePrice.BackgroundImage = imgSelect; btnOrderBySalePrice.ForeColor = Color.DeepSkyBlue; btnOrderBySalePrice.Text = "价格↓"; break;
-                //default: templstprodcut.OrderBy(r => r.salecount); break;
+                btnOrderBySaleCount.BackgroundImage = imgNotSelect;
+                btnOrderBySaleCount.ForeColor = Color.Black;
+                btnOrderByCreateDate.BackgroundImage = imgNotSelect;
+                btnOrderByCreateDate.ForeColor = Color.Black;
+                btnOrderBySalePrice.BackgroundImage = imgNotSelect;
+                btnOrderBySalePrice.ForeColor = Color.Black;
+
+                btnOrderBySalePrice.Text = "价格";
+
+
+                switch (sorttype)
+                {
+                    case SortType.SaleCount: btnOrderBySaleCount.BackgroundImage = imgSelect; btnOrderBySaleCount.ForeColor = Color.DeepSkyBlue; break;
+                    case SortType.CreateDate: btnOrderByCreateDate.BackgroundImage = imgSelect; btnOrderByCreateDate.ForeColor = Color.DeepSkyBlue; break;
+                    case SortType.SalePriceAsc: btnOrderBySalePrice.BackgroundImage = imgSelect; btnOrderBySalePrice.ForeColor = Color.DeepSkyBlue; btnOrderBySalePrice.Text = "价格↑"; break;
+                    case SortType.SalePriceDesc: btnOrderBySalePrice.BackgroundImage = imgSelect; btnOrderBySalePrice.ForeColor = Color.DeepSkyBlue; btnOrderBySalePrice.Text = "价格↓"; break;
+                    //default: templstprodcut.OrderBy(r => r.salecount); break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("更新面板排序按钮状态异常"+ex.Message);
             }
         }
 
@@ -1806,27 +1829,16 @@ namespace WinSaasPOS
         {
             try
             {
-
-                //if (isshow)
-                //{
-                //    LoadingHelper.ShowLoadingScreen();
-                //}
-                //else
-                //{
-                //    LoadingHelper.CloseForm();
-                //}
                 if (this.IsHandleCreated)
                 {
                     this.Invoke(new InvokeHandler(delegate()
                     {
                         picLoading.Visible = isshow;
-                        // lblLoading.Visible = isshow;
                     }));
                 }
                 else
                 {
                     picLoading.Visible = isshow;
-                    // lblLoading.Visible = isshow;
                 }
 
             }
@@ -1974,6 +1986,8 @@ namespace WinSaasPOS
                 }
                 if (e.RowIndex < 0)
                     return;
+
+                Other.CrearMemory();
                 IsEnable = false;
                
                 string categoryid = dgvCategory.Rows[e.RowIndex].Cells["FirstcategoryID"].Value.ToString();

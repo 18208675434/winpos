@@ -136,9 +136,9 @@ namespace Maticsoft.BLL
         #endregion  BasicMethod
         #region  ExtensionMethod
 
-        public bool AddScalse(List<Maticsoft.Model.DBSCALE_KEY_BEANMODEL> lstmodel, string createurl,string shopid)
+        public bool AddScalse(List<Maticsoft.Model.DBSCALE_KEY_BEANMODEL> lstmodel, string createurl, string shopid)
         {
-            return dal.AddScales(lstmodel, createurl,shopid);
+            return dal.AddScales(lstmodel, createurl, shopid);
 
         }
 

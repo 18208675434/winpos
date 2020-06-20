@@ -182,7 +182,6 @@ namespace WinSaasPOS
                                     //TODO  会员手机号
                                     dgvOrderOnLine.Rows.Add((i + 1).ToString(), phone, title, timestr, bmpContinue, bmpDelHang);
 
-                                    // lstCart.Add(cart);
                                 }
                             }
                             }
