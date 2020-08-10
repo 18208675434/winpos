@@ -11,3 +11,6 @@ LastOrderid = queryorder.lastorderid;
 1、登录界面打开系统键盘后 重新再次获取焦点
 
 
+2002-08-10 果叔传git
+
+
