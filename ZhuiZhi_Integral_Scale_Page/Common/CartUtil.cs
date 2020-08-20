@@ -12,6 +12,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
     {
         private static DBPRODUCT_BEANBLL productbll = new DBPRODUCT_BEANBLL();
 
+        /// <summary>
+        /// 加载本地数据库所有商品
+        /// </summary>
+        /// <param name="NeesLocalPrice"></param>
+        /// <returns></returns>
         public static List<Product> LoadAllProduct(bool NeesLocalPrice)
         {
             List<Product> LstAllProduct = new List<Product>();
@@ -81,7 +86,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
         }
 
-
+        /// <summary>
+        /// 校验条码校验位
+        /// </summary>
+        /// <param name="barCode"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
         public static bool checkEanCodeIsError(String barCode, int num)
         {
             if (barCode.Length != num)
@@ -168,6 +178,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
+        /// <summary>
+        /// 获取商品条码  打印标签用
+        /// </summary>
+        /// <param name="pro"></param>
+        /// <returns></returns>
         public static bool GetBarCode(Product pro)
         {
             try
@@ -232,7 +247,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
-
+        /// <summary>
+        /// 赋值新对象
+        /// </summary>
+        /// <param name="pro"></param>
+        /// <returns></returns>
         public static Product GetNewProduct(Product pro)
         {
             try
@@ -281,6 +300,41 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取购物车所有优惠券
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
+        public static int GetAllCouponCount(Cart cart)
+        {
+            try
+            {
+                int result =0;
+
+                if (cart == null)
+                {
+                    return 0;
+                }
+
+                if (cart.availablecoupons != null)
+                {
+                    result += cart.availablecoupons.Count;
+                }
+
+                if (cart.unavailablecoupons != null)
+                {
+                    result += cart.unavailablecoupons.Count;
+                }
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                return 0;
             }
         }
     }

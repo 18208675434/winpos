@@ -180,7 +180,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
                     bpro.saleprice = pro.price.saleprice;
                     bpro.unit = pro.price.unit;
                     //bpro.specnum = pro.price.specnum;
-
                 }
 
                 return bpro;
@@ -204,6 +203,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
                     item.skucode = pro.skucode;
 
                     item.deliveryquantity = pro.weightflag ? pro.specnum : pro.num;
+
+                    item.actiontype =Convert.ToInt16(pro.brokentypekey);
                     para.itemlist.Add(item);
                 }
 
@@ -244,6 +245,70 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
                 BackHelper.HideFormBackGround();
                 LogManager.WriteLog("数字弹窗出现异常" + ex.Message);
                 return 0;
+            }
+        }
+
+
+        private static List<BrokenType> CurrentLstBroken = null;
+        public static List<BrokenType> GetBrokenType(bool needrefresh){
+            try
+            {
+                if (needrefresh || CurrentLstBroken==null)
+                {
+                    string ErrorMsg = "";
+                    CurrentLstBroken = httputil.ListSubType(ref ErrorMsg);
+                }              
+                return CurrentLstBroken;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 根据报损类型显示名称 （报损详情页展示用）
+        /// </summary>
+        /// <param name="actioncode"></param>
+        /// <returns></returns>
+        public static string GetBrokenTypeName(int actioncode)
+        {
+            try
+            {
+                if (CurrentLstBroken != null)
+                {
+                    BrokenType tempbtoken = CurrentLstBroken.FirstOrDefault(r=> r.key==actioncode);
+                    return tempbtoken.value;
+                }
+                return "";
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+
+        public static int ShowFormBrokenBatch()
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormBrokenBatch frmbroeknbatch = new FormBrokenBatch();
+                asf.AutoScaleControlTest(frmbroeknbatch, 380, 480, 380 * MainModel.midScale, 480 * MainModel.midScale, true);
+                frmbroeknbatch.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmbroeknbatch.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmbroeknbatch.Height) / 2);
+                frmbroeknbatch.TopMost = true;
+                frmbroeknbatch.ShowDialog();
+                BackHelper.HideFormBackGround();
+                frmbroeknbatch.Dispose();
+                Application.DoEvents();
+
+                return frmbroeknbatch.SelectTypeKey;
+            }
+            catch (Exception ex)
+            {
+                return -1;
             }
         }
     }

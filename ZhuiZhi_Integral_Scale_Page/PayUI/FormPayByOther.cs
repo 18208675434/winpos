@@ -14,14 +14,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
     public partial class FormPayByOther : Form
     {
 
-        private Image imgSelect;
-        private Image imgNotSelect;
-
-        public OtherPayType SelectPayType = null;
+        public OrderPayTypeVo SelectPayType = null;
 
         public Cart thisCurrentCart = null;
 
         public OtherPayResult otherPayResult = null;
+
+        private Bitmap bmpCash;
+        private Bitmap bmpDelete;
+
+        //是否需要清空文本框，默认带入金额时 修改直接覆盖
+        private bool NeedClearTxt = true;
+
+        public List<OtherPayInfoEntity> LstOtherPayInfos = new List<OtherPayInfoEntity>();
+
+        /// <summary>
+        /// 其他支付方式 上一页
+        /// </summary>
+        private Image imgPageUpForType;
+        /// <summary>
+        /// 其他支付方式  下一页
+        /// </summary>
+        private Image imgPageDownForType;
+
         public FormPayByOther(Cart cart)
         {
             try
@@ -30,6 +45,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 otherPayResult = new OtherPayResult();
                 SelectPayType = null;
                 thisCurrentCart = cart;
+                Application.DoEvents();
             }
             catch (Exception ex)
             {
@@ -39,11 +55,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
         private void FormPayByOther_Shown(object sender, EventArgs e)
         {
-            imgSelect = MainModel.GetControlImage(cbtnSelect);
-            imgNotSelect = MainModel.GetControlImage(cbtnNotSelect);
-            txtCash.Text = (thisCurrentCart.totalpayment+thisCurrentCart.otherpayamt).ToString("f2");
-            Application.DoEvents();
-            LoadPayType();
+            try
+            {
+                txtCash.Text = (thisCurrentCart.totalpayment + thisCurrentCart.otherpayamt).ToString("f2");
+                lblTotalPayMent.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
+
+                bmpCash = new Bitmap(picCash.Image, dgvSelectType.RowTemplate.Height * 30 / 100, dgvSelectType.RowTemplate.Height * 30 / 100);
+                bmpDelete = new Bitmap(picDelete.Image, dgvSelectType.RowTemplate.Height * 30 / 100, dgvSelectType.RowTemplate.Height * 30 / 100);
+
+                imgPageUpForType = MainModel.GetControlImage(btnPageUp);
+                imgPageDownForType = MainModel.GetControlImage(btnPageDown);
+                Application.DoEvents();
+                UpdateDgvSelectType();
+                LoadPayType();
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("加载其他支付页面控件异常"+ex.Message,true);
+            }
         }
 
 
@@ -51,47 +80,96 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         {
             try
             {
-
-                if (SelectPayType == null && thisCurrentCart.otherpaytypeinfo.Count>0)
+                if (SelectPayType != null)
                 {
-                    SelectPayType=thisCurrentCart.otherpaytypeinfo[0];
-                }
-                dgvType.Rows.Clear();
-                if (thisCurrentCart != null && thisCurrentCart.otherpaytypeinfo != null)
-                {
-                    List<Image> lstimg = new List<Image>();
-
-                    dgvType.Rows.Clear();
-                    foreach (OtherPayType otherpay in thisCurrentCart.otherpaytypeinfo)
+                    if ( SelectPayType.needcouponcode)
                     {
-                        if (SelectPayType == otherpay)
-                        {
-                            cbtnSelect.ShowText = otherpay.value;
+                        lblShuiyin.Text = "请输入券码";
+                        txtCash.Text = "";
 
-                            lstimg.Add(MainModel.GetControlImage(cbtnSelect, otherpay));
+                        btn30.Text = "00";
+                        btn50.Text = "000";
+                        btn100.Text = "0000";
+                        btn200.Text = "00000";
+                    }
+                    else
+                    {
+
+                        btn30.Text = "30";
+                        btn50.Text = "50";
+                        btn100.Text = "100";
+                        btn200.Text = "200";
+
+
+                        lblShuiyin.Text = "请输入支付金额";
+
+                        if (SelectPayType.defaultamt == 0)
+                        {
+                            txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
                         }
                         else
                         {
-                            cbtnNotSelect.ShowText = otherpay.value;
-                            lstimg.Add(MainModel.GetControlImage(cbtnNotSelect, otherpay));
+                            txtCash.Text = SelectPayType.defaultamt.ToString("f2");
+                        }
+
+                        NeedClearTxt = true;
+                    }
+                }
+                
+
+
+                dgvType.Rows.Clear();
+                if (thisCurrentCart == null || thisCurrentCart.paymenttypes == null || thisCurrentCart.paymenttypes.otherpaytypeinfo == null || thisCurrentCart.paymenttypes.otherpaytypeinfo.Count == 0)
+                {
+                    return;
+                }
+
+                if (SelectPayType == null)
+                {
+                    //SelectPayType=thisCurrentCart.paymenttypes.otherpaytypeinfo[0];
+                }
+               
+                    List<Image> lstimg = new List<Image>();
+                    foreach (OrderPayTypeVo otherpay in thisCurrentCart.paymenttypes.otherpaytypeinfo)
+                    {
+                        if (SelectPayType!=null && SelectPayType.code == otherpay.code)
+                        {
+                            btnSelect.Text = otherpay.name;
+
+                            lstimg.Add(MainModel.GetControlImage(btnSelect, otherpay));
+                        }
+                        else
+                        {
+
+                            if (!otherpay.discountsoverlay && thisCurrentCart.totalpromoamt > 0)
+                            {
+                                btnNotSelect.BackColor = Color.Silver;
+                                btnNotSelect.ForeColor = Color.White;
+                            }
+                            else
+                            {
+                                btnNotSelect.BackColor = Color.White;
+                                btnNotSelect.ForeColor = Color.Black;
+                            }
+                            btnNotSelect.Text = otherpay.name;
+                            lstimg.Add(MainModel.GetControlImage(btnNotSelect, otherpay));
                         }
                     }
 
-                    int emptycount = 3 - lstimg.Count % 3;
+                    int emptycount = 4 - lstimg.Count % 4;
 
                     for (int i = 0; i < emptycount; i++)
                     {
                         lstimg.Add(Resources.ResourcePos.empty);
                     }
 
-                    int rowcount = lstimg.Count / 3;
+                    int rowcount = lstimg.Count / 4;
                     for (int i = 0; i < rowcount; i++)
                     {
-                        dgvType.Rows.Add(lstimg[i * 3 + 0], lstimg[i * 3 + 1], lstimg[i * 3 + 2]);
+                        dgvType.Rows.Add(lstimg[i * 4 + 0], lstimg[i * 4 + 1], lstimg[i * 4 + 2], lstimg[i * 4 + 3]);
                     }
 
 
-                }
                
             }
             catch (Exception ex)
@@ -100,12 +178,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             }
         }
 
-
         //退出清空 其他支付选择
         private void lbtnCancle_Click(object sender, EventArgs e)
         {
+
+            LstOtherPayInfos = null;
             this.DialogResult = DialogResult.Cancel;
-            otherPayResult = null; 
+            otherPayResult = null;
             this.Close();
         }
 
@@ -125,7 +204,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     return;
                 }
                 otherPayResult = new OtherPayResult();
-                if (SelectPayType.key == "pay.other.dfflw") //东方福利网通过券码获取金额
+                if (SelectPayType.needcouponcode) //东方福利网通过券码获取金额
                 {
                     string ErrorMsg="";
                     this.Enabled = false;
@@ -142,12 +221,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                     otherPayResult.otherpayamt = validataoutercoupon.amount;
                     otherPayResult.otherpaycouponcode = validataoutercoupon.couponcode;
-                    otherPayResult.otherpaytype = SelectPayType.key;
+                    otherPayResult.otherpaytype = SelectPayType.code;
                 }
                 else
                 {
                     otherPayResult.otherpayamt = Convert.ToDecimal(txtCash.Text);
-                    otherPayResult.otherpaytype = SelectPayType.key;
+                    otherPayResult.otherpaytype = SelectPayType.code;
                 }
                 
                 
@@ -171,27 +250,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     return;
                 }
 
-                SelectPayType =(OtherPayType) selectimg.Tag;
+                SelectPayType =(OrderPayTypeVo) selectimg.Tag;
 
-                if (SelectPayType.key == "pay.other.dfflw")
+                if (!SelectPayType.discountsoverlay && thisCurrentCart.totalpromoamt > 0)
                 {
-                    lblShuiyin.Text = "请输入使用码";
-                    btnBack.Width = btnOK.Width;
-                    lblYuan.Visible = false;
-
-                    txtCash.Text = "";
-                }
-                else
-                {
-                    lblShuiyin.Text = "请输入支付金额";
-                    btnBack.Width = lblYuan.Left - btnBack.Left;
-                    lblYuan.Visible = true;
-
-                    txtCash.Text = (thisCurrentCart.totalpayment + thisCurrentCart.otherpayamt).ToString("f2");
-                }
+                    MainModel.ShowLog("订单有优惠,无法使用该支付方式",false);
+                    return;
+                }             
 
                 LoadPayType();
-
+                UpdateDgvSelectType();
             }
             catch (Exception ex)
             {
@@ -207,6 +275,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             Button btn = (Button)sender;
             try
             {
+                if (NeedClearTxt)
+                {
+                    txtCash.Clear();
+                    NeedClearTxt = false;
+                }
+                
                 //小数点后允许一位  现金抹零后不允许再输入零
                 if (txtCash.Text.Length > 3 && txtCash.Text.Substring(txtCash.Text.Length - 3, 1) == ".")
                 {
@@ -220,13 +294,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     return;
                 }
 
-                decimal CheckDecimal = Convert.ToDecimal(txtCash.Text + btn.Name.Replace("btn", ""));
+                decimal CheckDecimal = Convert.ToDecimal(txtCash.Text + btn.Text);
 
-                //if (CheckDecimal > 100000)
-                //{
-                //    return;
-                //}
-                txtCash.Text += btn.Name.Replace("btn", "");
+
+                txtCash.Text += btn.Text;
             }
             catch
             {
@@ -293,7 +364,223 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 return false;
             }
 
+        }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtCash.Text))
+                {
+                    MainModel.ShowLog("请输入金额", false);
+                    return;
+                }
+
+                if (SelectPayType == null)
+                {
+                    MainModel.ShowLog("请选择支付方式",false);
+                    return;
+                }
+
+
+                decimal inputcash = Convert.ToDecimal(txtCash.Text);
+
+                if (thisCurrentCart.totalpayment == 0)
+                {
+                    MainModel.ShowLog("剩余应付金额为0,请先删除其他支付后再操作", false);
+                    return;
+                }
+                if (inputcash > thisCurrentCart.totalpayment)
+                {
+                    MainModel.ShowLog("支付金额之和不可大于剩余应付金额", false);
+                    return;
+                }
+                if (thisCurrentCart.otherpayinfos == null)
+                {
+                    thisCurrentCart.otherpayinfos = new List<OtherPayInfoEntity>();
+                }
+
+                
+
+                OtherPayInfoEntity otherpay = new OtherPayInfoEntity();
+
+                if (SelectPayType.needcouponcode) //东方福利网通过券码获取金额
+                {
+                    string ErrorMsg = "";
+                    this.Enabled = false;
+                    LoadingHelper.ShowLoadingScreen();
+                    ValidateOuterCoupon validataoutercoupon = httputil.GetValidateOuterCoupon(txtCash.Text, ref ErrorMsg);
+                    LoadingHelper.CloseForm();
+                    this.Enabled = true;
+                    if (!string.IsNullOrEmpty(ErrorMsg) || validataoutercoupon == null)
+                    {
+                        MainModel.ShowLog(ErrorMsg, false);
+                        return;
+                    }
+
+                    otherpay.payamt = validataoutercoupon.amount;
+                    otherpay.paycouponcode = validataoutercoupon.couponcode;
+                    otherpay.payname = SelectPayType.name;
+                    otherpay.paypromoamt = validataoutercoupon.amount;
+                    otherpay.paytype = SelectPayType.code;                    
+                }
+                else
+                {
+                    otherpay.payamt = Convert.ToDecimal(txtCash.Text);
+                    otherpay.payname = SelectPayType.name;
+                    otherpay.paypromoamt = Convert.ToDecimal(txtCash.Text);
+                    otherpay.paytype = SelectPayType.code;
+                }
+
+                //如果以存在该类型优惠 则修改金额
+                List<OtherPayInfoEntity> lsttempotherpay = thisCurrentCart.otherpayinfos.Where(r => r.paytype == SelectPayType.code).ToList();
+                if (lsttempotherpay != null && lsttempotherpay.Count > 0)
+                {
+                    lsttempotherpay[0].payamt = Convert.ToDecimal(txtCash.Text);
+                    lsttempotherpay[0].paypromoamt = Convert.ToDecimal(txtCash.Text);
+                }
+                else
+                {
+                    thisCurrentCart.otherpayinfos.Add(otherpay);
+                }
+
+                RefreshCart();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnConfirmPay_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                int count = thisCurrentCart.otherpayinfos.Count;
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        private bool RefreshCart()
+        {
+            try
+            {
+                this.Enabled = false;
+                LoadingHelper.ShowLoadingScreen("加载中...");
+
+                string ErrorMsgCart = "";
+                int ResultCode = -1;
+                Cart cart = httputil.RefreshCart(thisCurrentCart, ref ErrorMsgCart, ref ResultCode);
+
+
+                if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
+                {
+                    this.Enabled = true;
+                    LoadingHelper.CloseForm();
+
+                    MainModel.ShowLog(ErrorMsgCart, true);
+                    return false;
+                }
+                else
+                {
+                    thisCurrentCart = cart;
+
+                    UpdateDgvSelectType();
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("刷新其他支付方式购物车异常" + ex.Message, true);
+                return false;
+            }
+            finally
+            {
+                this.Enabled = true;
+                LoadingHelper.CloseForm();
+            }
+        }
+
+        private void UpdateDgvSelectType()
+        {
+            try{
+
+                dgvSelectType.Rows.Clear();
+
+                LstOtherPayInfos = thisCurrentCart.otherpayinfos;
+                if (thisCurrentCart==null || thisCurrentCart.otherpayinfos==null || thisCurrentCart.otherpayinfos.Count==0)
+                {
+                    return;
+                }
+                
+                lblTotalPayMent.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
+
+
+                int selectrowindex =-1;
+
+                for(int i=0;i<thisCurrentCart.otherpayinfos.Count;i++){
+                    dgvSelectType.Rows.Add(thisCurrentCart.otherpayinfos[i].paytype, bmpCash, thisCurrentCart.otherpayinfos[i].payname, thisCurrentCart.otherpayinfos[i].payamt.ToString(), bmpDelete);
+
+                    if (SelectPayType != null && thisCurrentCart.otherpayinfos[i].paytype == SelectPayType.code)
+                    {
+                        selectrowindex = i;
+                    }
+                }
+                dgvSelectType.ClearSelection();
+                if (selectrowindex > -1)
+                {
+                    dgvSelectType.Rows[selectrowindex].DefaultCellStyle.BackColor = Color.FromArgb(205, 232, 248);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("刷新其他支付方式列表异常" + ex.Message, true);
+            }
+        }
+
+        private void dgvSelectType_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0)
+                    return;
+
+                string operaitoncode = dgvSelectType.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                if (e.ColumnIndex == 4)
+                {
+                    thisCurrentCart.otherpayinfos.RemoveAll(r => r.paytype == operaitoncode);
+                    RefreshCart();
+                }
+                else
+                {
+                    SelectPayType = thisCurrentCart.paymenttypes.otherpaytypeinfo.FirstOrDefault(r => r.code == operaitoncode);
+                    NeedClearTxt = true;
+                    LoadPayType();
+                    UpdateDgvSelectType();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("操作选择支付方式异常"+ex.Message,true);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dgvSelectType.Rows[0].DefaultCellStyle.BackColor = Color.FromArgb(205, 232, 248);
+            dgvType.Rows[0].DefaultCellStyle.BackColor = Color.FromArgb(205, 232, 248);
         }
 
     }

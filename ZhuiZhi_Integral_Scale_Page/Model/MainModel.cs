@@ -124,7 +124,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public static string CurrentCouponCode = "";
 
-        public static Availablecoupon Currentavailabecoupno = null;
+        public static OrderCouponVo Currentavailabecoupno = null;
 
         /// <summary>
         /// 当前店铺信息

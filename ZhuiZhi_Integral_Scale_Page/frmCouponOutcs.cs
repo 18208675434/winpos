@@ -15,13 +15,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
     public partial class frmCouponOutcs : Form
     {
 
-        private Availablecoupon currentcoupon = new Availablecoupon();
+        private OrderCouponVo currentcoupon = new OrderCouponVo();
         public frmCouponOutcs()
         {
             InitializeComponent();
         }
 
-        public frmCouponOutcs(Availablecoupon coupon)
+        public frmCouponOutcs(OrderCouponVo coupon)
         {
             InitializeComponent();
             currentcoupon = coupon;
@@ -29,7 +29,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         }
 
-        private void laodCoupon(Availablecoupon couponsBean)
+        private void laodCoupon(OrderCouponVo couponsBean)
         {
             try
             {

@@ -23,7 +23,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// <summary>
         /// 选中券的促销码
         /// </summary>
-        public Availablecoupon SelectPromotionCode = null;
+        public OrderCouponVo SelectPromotionCode = null;
 
         public string StrValue = "";
 
@@ -31,6 +31,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// 当前购物车
         /// </summary>
         private Cart CurrentCart = new Cart();
+
+        private List<OrderCouponVo> CurrentCoupons = new List<OrderCouponVo>();
         public frmCoupon(Cart cart,string selectcoupon)
         {
             InitializeComponent();
@@ -42,49 +44,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void frmCoupon_Shown(object sender, EventArgs e)
         {
-           // UpdateDgvCoupon(CurrentCart, SelectCouponCode);
-            lblTitle.Text = CurrentCart.availablecoupons.Count + "张可用";
-            CurrentPage = 1;
-            LoadDgvCoupon(true);
-
-            dgvCoupon.ClearSelection();
-        }
-        private void UpdateDgvCoupon(Cart cart, string selectcoupon)
-        {
             try
             {
+                CurrentCoupons = GetOrderCoupons();
+
+                if (CurrentCoupons != null && CurrentCoupons.Count > 0)
+                {
+                    lblTitle.Text ="共"+ CurrentCoupons.Count + "张,"+GetAvailableCount()+"张可用";
+                    CurrentPage = 1;
+                    LoadDgvCoupon(true);
+                }
                
-                
-                if (!string.IsNullOrEmpty(selectcoupon))
-                {
-                    picNotUse.BackgroundImage = picNotSelect.Image;
-                }
-                else
-                {
-                    picNotUse.BackgroundImage = picSelect.Image;
-                }
-
-                dgvCoupon.Rows.Clear();
-                if (cart != null && cart.availablecoupons != null && cart.availablecoupons.Count > 0)
-                {
-                    foreach (Availablecoupon couponsBean in cart.availablecoupons)
-                    {                      
-                        dgvCoupon.Rows.Add(GetItemImg(couponsBean));
-                    }
-
-
-                    dgvCoupon.ClearSelection();
-                }
+               
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("ERROR","加载优惠券列表异常"+ex.Message);
+                MainModel.ShowLog("加载优惠券页面异常"+ex.Message,true);
             }
-        }
-
-        private void frmCoupon_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
 
 
@@ -101,7 +77,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     return;
                 }
 
-                Availablecoupon couponsBean = (Availablecoupon)selectimg.Tag;
+                OrderCouponVo couponsBean = (OrderCouponVo)selectimg.Tag;
+                //不可用优惠券不能选择
+                if (couponsBean == null || !couponsBean.IsEnable)
+                {
+                    return;
+                }
 
                 //可能选择的有优惠券，目前只支持单张优惠券  不能计算打折券
                 if (("Cash" == couponsBean.catalog || "CashReduction" == couponsBean.catalog) && (Math.Max (CurrentCart.totalpayment,CurrentCart.totalpaymentbeforefix )+ CurrentCart.couponpromoamt) <= couponsBean.amount)
@@ -161,7 +142,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        private Image GetItemImg(Availablecoupon couponsBean)
+        private Image GetItemImg(OrderCouponVo couponsBean)
         {
             try
             {
@@ -238,6 +219,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 lblDate.Text = starttime + "至" + endtime;
 
+                if (couponsBean.IsEnable)
+                {
+                    picItem.Visible = true;
+                    pnlItem.Enabled = true;
+
+                }
+                else
+                {
+                    picItem.Visible = false;
+                    pnlItem.Enabled = false;
+
+                }
+                picItem.Visible = couponsBean.IsEnable;
                 if (SelectCouponCode == couponsBean.couponcode)
                 {
                     picItem.BackgroundImage = picSelect.Image;
@@ -257,68 +251,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 return null;
             }
         }
-
-        private void frmCoupon_Resize(object sender, EventArgs e)
-        {
-            SetWindowRegion();
-        }
-        /// <summary>
-        /// 设置窗体的Region   画半径为10的圆角
-        /// </summary>
-        public void SetWindowRegion()
-        {
-            try
-            {
-                GraphicsPath FormPath;
-                Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
-                FormPath = GetRoundedRectPath(rect, 10);
-                this.Region = new Region(FormPath);
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-        }
-        /// <summary>
-        /// 绘制圆角路径
-        /// </summary>
-        /// <param name="rect"></param>
-        /// <param name="radius"></param>
-        /// <returns></returns>
-        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
-        {
-            try
-            {
-                int diameter = radius;
-                Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-                GraphicsPath path = new GraphicsPath();
-
-                // 左上角
-                path.AddArc(arcRect, 180, 90);
-
-                // 右上角
-                arcRect.X = rect.Right - diameter;
-                path.AddArc(arcRect, 270, 90);
-
-                // 右下角
-                arcRect.Y = rect.Bottom - diameter;
-                path.AddArc(arcRect, 0, 90);
-
-                // 左下角
-                arcRect.X = rect.Left;
-                path.AddArc(arcRect, 90, 90);
-                path.CloseFigure();//闭合曲线
-                return path;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-
-
 
 
         #region 分页
@@ -354,7 +286,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 dgvCoupon.Rows.Clear();
-                if (CurrentCart == null || CurrentCart.availablecoupons == null || CurrentCart.availablecoupons.Count == 0)
+                if (CurrentCoupons == null || CurrentCoupons.Count == 0)
                 {
                     return;
                 }
@@ -368,30 +300,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 int startindex = (CurrentPage - 1) * 4;
 
-                int lastindex = Math.Min(CurrentCart.availablecoupons.Count - 1, startindex + 3);
+                int lastindex = Math.Min(CurrentCoupons.Count - 1, startindex + 3);
 
-                List<Availablecoupon> LstTempcoupon = CurrentCart.availablecoupons.GetRange(startindex, lastindex - startindex + 1);
+                List<OrderCouponVo> LstTempcoupon = CurrentCoupons.GetRange(startindex, lastindex - startindex + 1);
 
-                foreach (Availablecoupon couponsBean in LstTempcoupon)
+                foreach (OrderCouponVo couponsBean in LstTempcoupon)
                 {
                     dgvCoupon.Rows.Add(GetItemImg(couponsBean));
                 }
-
-
-                //if (dgvCoupon.Rows.Count > 0)
-                //{
-                //    //pnlEmptyReceipt.Visible = false;
-                //    MainModel.ShowLog("刷新完成", false);
-                //}
-                //else
-                //{
-                //    //pnlEmptyReceipt.Visible = true;
-                //    MainModel.ShowLog("暂无数据", false);
-                //}
+                dgvCoupon.ClearSelection();
                 Application.DoEvents();
 
-                //在线接口每页20个 防止本地分页和接口分页最小积数  例 6*10 = 20*3
-                if (CurrentCart.availablecoupons.Count > CurrentPage * 4)
+                if (CurrentCoupons.Count > CurrentPage * 4)
                 {
                     rbtnPageDown.WhetherEnable = true;
                 }
@@ -399,8 +319,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     rbtnPageDown.WhetherEnable = false;
                 }
-
-
 
             }
             catch (Exception ex)
@@ -411,5 +329,53 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         #endregion
 
+        /// <summary>
+        /// 获取购物车所有优惠券
+        /// </summary>
+        /// <returns></returns>
+        private List<OrderCouponVo> GetOrderCoupons()
+        {
+            try
+            {
+                List<OrderCouponVo> coupongs = new List<OrderCouponVo>();
+
+                if (CurrentCart == null)
+                {
+                    return null;
+                }
+
+                if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Count > 0)
+                {
+                    CurrentCart.availablecoupons.ForEach(r=> r.IsEnable=true);
+                    coupongs.AddRange(CurrentCart.availablecoupons);
+                }
+
+                if (CurrentCart.unavailablecoupons != null && CurrentCart.unavailablecoupons.Count > 0)
+                {
+                    CurrentCart.unavailablecoupons.ForEach(r => r.IsEnable = false);
+                    coupongs.AddRange(CurrentCart.unavailablecoupons);
+                }
+
+                return coupongs;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("解析优惠券信息异常"+ex.Message,true);
+                return null;
+            }
+        }
+
+
+        private int GetAvailableCount()
+        {
+            if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Count > 0)
+            {
+                return CurrentCart.availablecoupons.Count;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

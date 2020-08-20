@@ -146,7 +146,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 int lastindex = Math.Min(CurrentPageSku.rows.Count - 1, startindex + 5);
 
-
                 List<BrokenSku> lstLoadingSku = CurrentPageSku.rows.GetRange(startindex, lastindex - startindex + 1);
 
                 foreach (BrokenSku sku in lstLoadingSku)
@@ -157,12 +156,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             {
                                 quantity += sku.salesunit;
                             }
-                            dgvGood.Rows.Add("    " + sku.skuname, deliveryprice, quantity);
+                            dgvGood.Rows.Add("    " + sku.skuname, deliveryprice, quantity, BrokenHelper.GetBrokenTypeName(sku.actiontype));
                         }
 
                 rbtnPageDown.WhetherEnable = CurrentPageSku.rows.Count > CurrentPage * 6;
-                
-                
+                               
             }
             catch (Exception ex)
             {

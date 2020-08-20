@@ -154,7 +154,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 case Keys.D8: btn8.PerformClick(); return !base.ProcessDialogKey(keyData); break;
                 case Keys.D9: btn9.PerformClick(); return !base.ProcessDialogKey(keyData); break;
 
-
                 case Keys.NumPad0: btn0.PerformClick(); return !base.ProcessDialogKey(keyData); break;
                 case Keys.NumPad1: btn1.PerformClick(); return !base.ProcessDialogKey(keyData); break;
                 case Keys.NumPad2: btn2.PerformClick(); return !base.ProcessDialogKey(keyData); break;
@@ -165,7 +164,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 case Keys.NumPad7: btn7.PerformClick(); return !base.ProcessDialogKey(keyData); break;
                 case Keys.NumPad8: btn8.PerformClick(); return !base.ProcessDialogKey(keyData); break;
                 case Keys.NumPad9: btn9.PerformClick(); return !base.ProcessDialogKey(keyData); break;
-
 
                 case Keys.Back: btnDel.PerformClick(); return base.ProcessDialogKey(keyData); break;
                 case Keys.Enter: btnOK.PerformClick(); return !base.ProcessDialogKey(keyData); break;

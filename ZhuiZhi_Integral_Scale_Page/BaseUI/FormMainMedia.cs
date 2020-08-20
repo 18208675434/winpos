@@ -76,7 +76,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void frmMainMedia_Shown(object sender, EventArgs e)
         {
             threadIniExedate = new Thread(IniFormExe);
-            threadIniExedate.IsBackground = true;
+            threadIniExedate.IsBackground = false;
             //threadIniExedate.Priority = ThreadPriority.BelowNormal;
             threadIniExedate.Start();
 
@@ -526,7 +526,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 string strotherpaytype = "";
                                 try
                                 {
-                                    strotherpaytype = CurrentCart.otherpaytypeinfo.Where(r => r.key == CurrentCart.otherpaytype).ToList()[0].value;
+                                    strotherpaytype = CurrentCart.paymenttypes.otherpaytypeinfo.Where(r => r.code == CurrentCart.otherpaytype).ToList()[0].name;
+                                   // strotherpaytype = CurrentCart.otherpaytypeinfo.Where(r => r.key == CurrentCart.otherpaytype).ToList()[0].value;
                                 }
                                 catch
                                 {

@@ -159,7 +159,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 
                 productbll.AddProduct(GetAllProdcut(1, 200), MainModel.URL);
 
-                productbll.ExecuteSql("delete from DBPRODUCT_BEAN set LOCALSTATUS=0");
+                productbll.ExecuteSql("delete from DBPRODUCT_BEAN where LOCALSTATUS=-1");
 
             }
             catch (Exception ex)

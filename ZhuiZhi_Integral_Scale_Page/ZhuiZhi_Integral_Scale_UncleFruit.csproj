@@ -120,6 +120,12 @@
     <Compile Include="BrokenUI\FormBroken.Designer.cs">
       <DependentUpon>FormBroken.cs</DependentUpon>
     </Compile>
+    <Compile Include="BrokenUI\FormBrokenBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenBatch.Designer.cs">
+      <DependentUpon>FormBrokenBatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="BrokenUI\FormBrokenDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,7 @@
     </Compile>
     <Compile Include="BrokenUI\Model\BrokenInfo.cs" />
     <Compile Include="BrokenUI\Model\BrokenProduct.cs" />
+    <Compile Include="BrokenUI\Model\BrokenType.cs" />
     <Compile Include="BrokenUI\Model\CreateBrokenResult.cs" />
     <Compile Include="BrokenUI\Model\PageBroken.cs" />
     <Compile Include="BrokenUI\Model\PageSku.cs" />
@@ -825,9 +832,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BaseUI\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="BrokenUI\FormBroken.resx">
       <DependentUpon>FormBroken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBrokenBatch.resx">
+      <DependentUpon>FormBrokenBatch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BrokenUI\FormBrokenDetail.resx">
       <DependentUpon>FormBrokenDetail.cs</DependentUpon>

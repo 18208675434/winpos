@@ -21,6 +21,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
         public decimal deliveryprice { get; set; }
 
         public int RowNum { get; set; }
+
+        public int brokentypekey { get; set; }
+
+        public string brokentypevalue { get; set; }
     }
 
 

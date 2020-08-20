@@ -90,6 +90,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 多方支付 OtherPayType.value
         /// </summary>
         public string otherpaytype{set;get;}
+
+        public List<OtherPayInfoEntity> otherpayinfos { set; get; }
+    }
+
+       [Serializable]
+    public class OtherPayInfoEntity
+    {
+        public decimal payamt { get; set; }
+
+        public string paycouponcode { get; set; }
+
+        public string payname { get; set; }
+
+        public decimal paypromoamt { get; set; }
+
+        public string paytype { get; set; }
     }
 
 }

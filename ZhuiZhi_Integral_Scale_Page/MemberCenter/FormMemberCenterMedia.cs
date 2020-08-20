@@ -71,9 +71,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
 
             }
-            
 
-        
         }
 
         public void ShowPayInfo()

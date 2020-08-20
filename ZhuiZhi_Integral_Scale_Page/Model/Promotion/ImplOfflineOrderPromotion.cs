@@ -33,7 +33,7 @@ public class ImplOfflineOrderPromotion {
                 {
                     try
                     {
-                        Availablecoupon couponsBean = cartBean.selectedcoupons[key];// .getSelectedcoupons().get(key);
+                        OrderCouponVo couponsBean = cartBean.selectedcoupons[key];// .getSelectedcoupons().get(key);
                         if (couponsBean != null && couponsBean.catalog.Equals("ExchangeCoupon"))
                         {
                             List<DBPROMOTION_CACHE_BEANMODEL> list = PromotionCache.getInstance().getList(5, couponsBean.promotioncode);//SQliteUtils.getInstance().QueryPromotionByCode(code, tenantId, shopId);

@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenCreate));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGood = new System.Windows.Forms.DataGridView();
             this.barcode = new System.Windows.Forms.DataGridViewImageColumn();
             this.label13 = new System.Windows.Forms.Label();
@@ -49,8 +50,10 @@
             this.btnMenu = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
             this.pnlDgvHead = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlDgvItem = new System.Windows.Forms.Panel();
             this.pnlCartItem = new System.Windows.Forms.Panel();
+            this.btnType = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblSinglePrice = new System.Windows.Forms.Label();
             this.lblSkuCode = new System.Windows.Forms.Label();
@@ -73,10 +76,14 @@
             this.lblSkuAmount = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.picLoading = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.btnOK = new System.Windows.Forms.Button();
+            this.dgvType = new System.Windows.Forms.DataGridView();
+            this.typekey = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnBatchBroken = new System.Windows.Forms.Button();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.picLoading = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -89,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.pnlMember.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvType)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvGood
@@ -101,36 +109,35 @@
             this.dgvGood.BackgroundColor = System.Drawing.Color.White;
             this.dgvGood.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvGood.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvGood.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 17F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvGood.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvGood.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 17F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvGood.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvGood.ColumnHeadersHeight = 30;
             this.dgvGood.ColumnHeadersVisible = false;
             this.dgvGood.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.barcode});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvGood.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvGood.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvGood.GridColor = System.Drawing.Color.LightGray;
             this.dgvGood.Location = new System.Drawing.Point(11, 142);
             this.dgvGood.MultiSelect = false;
             this.dgvGood.Name = "dgvGood";
-            this.dgvGood.ReadOnly = true;
             this.dgvGood.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvGood.RowHeadersVisible = false;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvGood.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvGood.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvGood.RowTemplate.Height = 90;
             this.dgvGood.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvGood.Size = new System.Drawing.Size(817, 551);
@@ -140,16 +147,15 @@
             // 
             // barcode
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle6.NullValue")));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.barcode.DefaultCellStyle = dataGridViewCellStyle6;
-            this.barcode.FillWeight = 157.4803F;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.DefaultCellStyle = dataGridViewCellStyle2;
+            this.barcode.FillWeight = 80F;
             this.barcode.HeaderText = "商品/条码";
             this.barcode.Name = "barcode";
-            this.barcode.ReadOnly = true;
             this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -171,7 +177,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label12.Location = new System.Drawing.Point(416, 23);
+            this.label12.Location = new System.Drawing.Point(359, 23);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(94, 24);
@@ -183,7 +189,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(605, 23);
+            this.label9.Location = new System.Drawing.Point(502, 23);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(46, 24);
@@ -195,7 +201,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(276, 23);
+            this.label7.Location = new System.Drawing.Point(237, 23);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 24);
@@ -226,6 +232,7 @@
             this.pnlHead.Name = "pnlHead";
             this.pnlHead.Size = new System.Drawing.Size(1180, 60);
             this.pnlHead.TabIndex = 31;
+            this.pnlHead.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlHead_MouseDown);
             // 
             // pnlMenu
             // 
@@ -314,6 +321,7 @@
             // pnlDgvHead
             // 
             this.pnlDgvHead.BackColor = System.Drawing.Color.White;
+            this.pnlDgvHead.Controls.Add(this.label1);
             this.pnlDgvHead.Controls.Add(this.label13);
             this.pnlDgvHead.Controls.Add(this.label12);
             this.pnlDgvHead.Controls.Add(this.label9);
@@ -324,18 +332,31 @@
             this.pnlDgvHead.Size = new System.Drawing.Size(817, 66);
             this.pnlDgvHead.TabIndex = 41;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.Location = new System.Drawing.Point(630, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 24);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "报损类型";
+            // 
             // pnlDgvItem
             // 
             this.pnlDgvItem.BackColor = System.Drawing.Color.PaleTurquoise;
             this.pnlDgvItem.Controls.Add(this.pnlCartItem);
-            this.pnlDgvItem.Location = new System.Drawing.Point(12, -360);
+            this.pnlDgvItem.Location = new System.Drawing.Point(12, -310);
             this.pnlDgvItem.Name = "pnlDgvItem";
-            this.pnlDgvItem.Size = new System.Drawing.Size(816, 142);
+            this.pnlDgvItem.Size = new System.Drawing.Size(821, 127);
             this.pnlDgvItem.TabIndex = 47;
             // 
             // pnlCartItem
             // 
             this.pnlCartItem.BackColor = System.Drawing.Color.White;
+            this.pnlCartItem.Controls.Add(this.btnType);
             this.pnlCartItem.Controls.Add(this.lblTotal);
             this.pnlCartItem.Controls.Add(this.lblSinglePrice);
             this.pnlCartItem.Controls.Add(this.lblSkuCode);
@@ -349,12 +370,25 @@
             this.pnlCartItem.Size = new System.Drawing.Size(808, 88);
             this.pnlCartItem.TabIndex = 71;
             // 
+            // btnType
+            // 
+            this.btnType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnType.Image = ((System.Drawing.Image)(resources.GetObject("btnType.Image")));
+            this.btnType.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnType.Location = new System.Drawing.Point(611, 27);
+            this.btnType.Name = "btnType";
+            this.btnType.Size = new System.Drawing.Size(117, 38);
+            this.btnType.TabIndex = 26;
+            this.btnType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnType.UseVisualStyleBackColor = true;
+            // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblTotal.ForeColor = System.Drawing.Color.Black;
-            this.lblTotal.Location = new System.Drawing.Point(410, 33);
+            this.lblTotal.Location = new System.Drawing.Point(354, 33);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(74, 24);
             this.lblTotal.TabIndex = 2;
@@ -364,7 +398,7 @@
             // 
             this.lblSinglePrice.AutoSize = true;
             this.lblSinglePrice.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblSinglePrice.Location = new System.Drawing.Point(270, 36);
+            this.lblSinglePrice.Location = new System.Drawing.Point(232, 35);
             this.lblSinglePrice.Name = "lblSinglePrice";
             this.lblSinglePrice.Size = new System.Drawing.Size(63, 24);
             this.lblSinglePrice.TabIndex = 2;
@@ -374,7 +408,7 @@
             // 
             this.lblSkuCode.AutoSize = true;
             this.lblSkuCode.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblSkuCode.Location = new System.Drawing.Point(13, 47);
+            this.lblSkuCode.Location = new System.Drawing.Point(9, 47);
             this.lblSkuCode.Name = "lblSkuCode";
             this.lblSkuCode.Size = new System.Drawing.Size(63, 24);
             this.lblSkuCode.TabIndex = 2;
@@ -384,7 +418,7 @@
             // 
             this.picAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picAdd.BackgroundImage")));
             this.picAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picAdd.Location = new System.Drawing.Point(668, 39);
+            this.picAdd.Location = new System.Drawing.Point(549, 35);
             this.picAdd.Name = "picAdd";
             this.picAdd.Size = new System.Drawing.Size(18, 18);
             this.picAdd.TabIndex = 7;
@@ -394,7 +428,7 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblTitle.Location = new System.Drawing.Point(13, 19);
+            this.lblTitle.Location = new System.Drawing.Point(9, 19);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(63, 24);
             this.lblTitle.TabIndex = 1;
@@ -404,7 +438,7 @@
             // 
             this.picMinus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMinus.BackgroundImage")));
             this.picMinus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picMinus.Location = new System.Drawing.Point(575, 39);
+            this.picMinus.Location = new System.Drawing.Point(456, 35);
             this.picMinus.Name = "picMinus";
             this.picMinus.Size = new System.Drawing.Size(18, 18);
             this.picMinus.TabIndex = 6;
@@ -414,7 +448,7 @@
             // 
             this.lblProNum.AutoSize = true;
             this.lblProNum.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblProNum.Location = new System.Drawing.Point(599, 36);
+            this.lblProNum.Location = new System.Drawing.Point(480, 32);
             this.lblProNum.Name = "lblProNum";
             this.lblProNum.Size = new System.Drawing.Size(63, 24);
             this.lblProNum.TabIndex = 5;
@@ -627,19 +661,80 @@
             this.label18.TabIndex = 0;
             this.label18.Text = "报损明细";
             // 
-            // picLoading
+            // btnOK
             // 
-            this.picLoading.CanMove = false;
-            this.picLoading.Image = ((System.Drawing.Image)(resources.GetObject("picLoading.Image")));
-            this.picLoading.IsFocus = false;
-            this.picLoading.Location = new System.Drawing.Point(477, 310);
-            this.picLoading.Name = "picLoading";
-            this.picLoading.Size = new System.Drawing.Size(50, 54);
-            this.picLoading.TabIndex = 53;
-            this.picLoading.Text = "transparentPic1";
-            this.picLoading.unitScale = null;
-            this.picLoading.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
-            this.picLoading.Visible = false;
+            this.btnOK.BackColor = System.Drawing.Color.Silver;
+            this.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOK.FlatAppearance.BorderSize = 0;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.btnOK.ForeColor = System.Drawing.Color.White;
+            this.btnOK.Location = new System.Drawing.Point(848, 682);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(320, 67);
+            this.btnOK.TabIndex = 58;
+            this.btnOK.Text = "确认报损";
+            this.btnOK.UseVisualStyleBackColor = false;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // dgvType
+            // 
+            this.dgvType.AllowUserToAddRows = false;
+            this.dgvType.AllowUserToDeleteRows = false;
+            this.dgvType.AllowUserToResizeColumns = false;
+            this.dgvType.AllowUserToResizeRows = false;
+            this.dgvType.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvType.BackgroundColor = System.Drawing.Color.White;
+            this.dgvType.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvType.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvType.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvType.ColumnHeadersVisible = false;
+            this.dgvType.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.typekey,
+            this.typeValue});
+            this.dgvType.Location = new System.Drawing.Point(846, 303);
+            this.dgvType.Name = "dgvType";
+            this.dgvType.RowHeadersVisible = false;
+            this.dgvType.RowTemplate.Height = 40;
+            this.dgvType.Size = new System.Drawing.Size(116, 184);
+            this.dgvType.TabIndex = 74;
+            this.dgvType.Visible = false;
+            this.dgvType.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvType_CellClick);
+            // 
+            // typekey
+            // 
+            this.typekey.HeaderText = "类型key";
+            this.typekey.Name = "typekey";
+            this.typekey.Visible = false;
+            // 
+            // typeValue
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.typeValue.DefaultCellStyle = dataGridViewCellStyle5;
+            this.typeValue.HeaderText = "类型名称";
+            this.typeValue.Name = "typeValue";
+            this.typeValue.ReadOnly = true;
+            // 
+            // btnBatchBroken
+            // 
+            this.btnBatchBroken.BackColor = System.Drawing.Color.Silver;
+            this.btnBatchBroken.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBatchBroken.FlatAppearance.BorderSize = 0;
+            this.btnBatchBroken.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBatchBroken.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.btnBatchBroken.ForeColor = System.Drawing.Color.White;
+            this.btnBatchBroken.Location = new System.Drawing.Point(848, 599);
+            this.btnBatchBroken.Name = "btnBatchBroken";
+            this.btnBatchBroken.Size = new System.Drawing.Size(320, 67);
+            this.btnBatchBroken.TabIndex = 75;
+            this.btnBatchBroken.Text = "批量设置报损原因";
+            this.btnBatchBroken.UseVisualStyleBackColor = false;
+            this.btnBatchBroken.Click += new System.EventHandler(this.btnBatchBroken_Click);
             // 
             // rbtnPageDown
             // 
@@ -679,21 +774,19 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
-            // btnOK
+            // picLoading
             // 
-            this.btnOK.BackColor = System.Drawing.Color.Silver;
-            this.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnOK.FlatAppearance.BorderSize = 0;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(848, 682);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(320, 67);
-            this.btnOK.TabIndex = 58;
-            this.btnOK.Text = "确认报损";
-            this.btnOK.UseVisualStyleBackColor = false;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.picLoading.CanMove = false;
+            this.picLoading.Image = ((System.Drawing.Image)(resources.GetObject("picLoading.Image")));
+            this.picLoading.IsFocus = false;
+            this.picLoading.Location = new System.Drawing.Point(477, 310);
+            this.picLoading.Name = "picLoading";
+            this.picLoading.Size = new System.Drawing.Size(50, 54);
+            this.picLoading.TabIndex = 53;
+            this.picLoading.Text = "transparentPic1";
+            this.picLoading.unitScale = null;
+            this.picLoading.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            this.picLoading.Visible = false;
             // 
             // FormBrokenCreate
             // 
@@ -701,6 +794,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.btnBatchBroken);
+            this.Controls.Add(this.dgvType);
+            this.Controls.Add(this.pnlDgvItem);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);
@@ -708,7 +804,6 @@
             this.Controls.Add(this.picScreen);
             this.Controls.Add(this.picLoading);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.pnlDgvItem);
             this.Controls.Add(this.pnlDgvHead);
             this.Controls.Add(this.btnScan);
             this.Controls.Add(this.pnlHead);
@@ -723,6 +818,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormBrokenCreate_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).EndInit();
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();
@@ -740,6 +836,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).EndInit();
             this.pnlMember.ResumeLayout(false);
             this.pnlMember.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvType)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -790,6 +887,12 @@
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewImageColumn barcode;
+        private System.Windows.Forms.Button btnType;
+        private System.Windows.Forms.DataGridView dgvType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typekey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeValue;
+        private System.Windows.Forms.Button btnBatchBroken;
     }
 }

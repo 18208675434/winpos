@@ -588,25 +588,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         {
             try
             {
-
                     FormPayByOther frmpaybyother = new FormPayByOther(cart);
-                    asf.AutoScaleControlTest(frmpaybyother, 750, 520, 750 * MainModel.midScale, 520 * MainModel.midScale, true);
+                    asf.AutoScaleControlTest(frmpaybyother, 800, 600, 800 * MainModel.midScale, 600 * MainModel.midScale, true);
                     frmpaybyother.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybyother.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybyother.Height) / 2);
                     frmpaybyother.TopMost = true;
-                
-              
+
                 frmpaybyother.ShowDialog();
                 frmpaybyother.Dispose();
                 Application.DoEvents();
-                
-                if (frmpaybyother.DialogResult == DialogResult.OK)
-                {
-                    return frmpaybyother.otherPayResult;
-                }
-                else
-                {
-                    return null;
-                }
+
+                cart.otherpayinfos = frmpaybyother.LstOtherPayInfos;
+                return null;
             }
             catch (Exception ex)
             {
