@@ -223,11 +223,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
 
 
 
-        public static decimal ShowBrokenNumber(string title)
+        public static decimal ShowBrokenNumber(string title,bool needback =true)
         {
             try
             {
-                BackHelper.ShowFormBackGround();
+                if (needback)
+                {
+                    BackHelper.ShowFormBackGround();
+                }
+                
 
                 FormBrokenNumber frmnumber = new FormBrokenNumber(title);
                 asf.AutoScaleControlTest(frmnumber, 380, 480, 380 * MainModel.midScale, 480 * MainModel.midScale, true);
@@ -239,6 +243,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
                 BackHelper.HideFormBackGround();
                 Application.DoEvents();
                 return frmnumber.NumberValue;
+            }
+            catch (Exception ex)
+            {
+                BackHelper.HideFormBackGround();
+                LogManager.WriteLog("数字弹窗出现异常" + ex.Message);
+                return 0;
+            }
+        }
+
+        public static decimal ShowBrokenScale(Product pro)
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormBrokenScale frmbrokenscale = new FormBrokenScale(pro);
+                asf.AutoScaleControlTest(frmbrokenscale, 380, 480, 380 * MainModel.midScale, 480 * MainModel.midScale, true);
+                frmbrokenscale.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmbrokenscale.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmbrokenscale.Height) / 2);
+                frmbrokenscale.TopMost = true;
+
+                DialogResult digresult = frmbrokenscale.ShowDialog();
+                frmbrokenscale.Dispose();
+                Application.DoEvents();
+
+                if (digresult == DialogResult.Retry)
+                {
+                    return ShowBrokenNumber(pro.skuname);
+                }
+               
+                BackHelper.HideFormBackGround();
+                
+                return frmbrokenscale.CurrentNetWeight;
             }
             catch (Exception ex)
             {

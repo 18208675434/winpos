@@ -144,6 +144,12 @@
     <Compile Include="BrokenUI\FormPanelGoodsForBroken.Designer.cs">
       <DependentUpon>FormPanelGoodsForBroken.cs</DependentUpon>
     </Compile>
+    <Compile Include="BrokenUI\FormBrokenScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenScale.Designer.cs">
+      <DependentUpon>FormBrokenScale.cs</DependentUpon>
+    </Compile>
     <Compile Include="BrokenUI\Model\BrokenInfo.cs" />
     <Compile Include="BrokenUI\Model\BrokenProduct.cs" />
     <Compile Include="BrokenUI\Model\BrokenType.cs" />
@@ -238,6 +244,12 @@
     <Compile Include="MemberCenter\model\PageBalanceDepositBill.cs" />
     <Compile Include="MemberCenter\model\TopUpPrint.cs" />
     <Compile Include="MemberCenter\model\ZtBalanceAccount.cs" />
+    <Compile Include="MenuUI\FormOrderHangItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormOrderHangItem.Designer.cs">
+      <DependentUpon>FormOrderHangItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\HalfOffLine\Coupons.cs" />
     <Compile Include="Model\HalfOffLine\Gradesettinggetgrade.cs" />
     <Compile Include="Model\HalfOffLine\HalfOffLineUtil.cs" />
@@ -849,6 +861,9 @@
     <EmbeddedResource Include="BrokenUI\FormPanelGoodsForBroken.resx">
       <DependentUpon>FormPanelGoodsForBroken.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBrokenScale.resx">
+      <DependentUpon>FormBrokenScale.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChangePriceUI\FormDiscount.resx">
       <DependentUpon>FormDiscount.cs</DependentUpon>
     </EmbeddedResource>
@@ -884,6 +899,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormAllCoupon.resx">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormOrderHangItem.resx">
+      <DependentUpon>FormOrderHangItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardNew.resx">
       <DependentUpon>KeyBoardNew.cs</DependentUpon>

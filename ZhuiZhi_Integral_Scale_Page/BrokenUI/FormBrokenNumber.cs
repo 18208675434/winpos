@@ -19,7 +19,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         private NumberType CurrentNumberType=NumberType.BarCode;
 
-
         /// <summary>
         /// 当前页面唯一标识
         /// </summary>
@@ -28,68 +27,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
         {
             InitializeComponent();
             lblInfo.Text = title;
+
+            Application.DoEvents();
         }
-
-        private void FormNumber_Resize(object sender, EventArgs e)
-        {
-            SetWindowRegion();
-        }
-        /// <summary>
-        /// 设置窗体的Region   画半径为10的圆角
-        /// </summary>
-        public void SetWindowRegion()
-        {
-            try
-            {
-                GraphicsPath FormPath;
-                Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
-                FormPath = GetRoundedRectPath(rect, 10);
-                this.Region = new Region(FormPath);
-            }
-            catch (Exception ex)
-            {
-            }
-
-        }
-        /// <summary>
-        /// 绘制圆角路径
-        /// </summary>
-        /// <param name="rect"></param>
-        /// <param name="radius"></param>
-        /// <returns></returns>
-        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
-        {
-            try
-            {
-                int diameter = radius;
-                Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-                GraphicsPath path = new GraphicsPath();
-
-                // 左上角
-                path.AddArc(arcRect, 180, 90);
-
-                // 右上角
-                arcRect.X = rect.Right - diameter;
-                path.AddArc(arcRect, 270, 90);
-
-                // 右下角
-                arcRect.Y = rect.Bottom - diameter;
-                path.AddArc(arcRect, 0, 90);
-
-                // 左下角
-                arcRect.X = rect.Left;
-                path.AddArc(arcRect, 90, 90);
-                path.CloseFigure();//闭合曲线
-                return path;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-
-
+    
         private void btnCancle_Click(object sender, EventArgs e)
         {
             Control btn = (Control)sender;
@@ -213,43 +154,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         }
 
-
-        //控制仅允许录入数字
-        private void TextNUMBER_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                TextBox txt = sender as TextBox;
-                e.Handled = true;
-                char ch = e.KeyChar;
-
-                if (ch >= '0' && ch <= '9')
-                    e.Handled = false;
-
-
-                if (ch == '.')
-                    e.Handled = false;
-
-                if (ch == (char)Keys.Back)
-                    e.Handled = false;
-
-            }
-            catch { }
-        }
-
         /// <summary>
         /// 防止死循环
         /// </summary>
         bool thisEnable = true;
         private void UpdatNumberUtil(string btnname)
         {
-
-
             if (thisEnable)
             {
                 NumberUtil.BtnName = btnname;
                 NumberUtil.FormGuid = ThisGuid;
-
                 NumberUtil.IsUpdate = true;
             }
             else

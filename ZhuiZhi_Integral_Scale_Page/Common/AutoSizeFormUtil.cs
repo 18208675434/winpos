@@ -101,18 +101,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
                         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+                        dataGridViewCellStyle1 = dgv.RowsDefaultCellStyle;
                         dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", Math.Min(dgv.RowsDefaultCellStyle.Font.Size * wScale, dgv.RowsDefaultCellStyle.Font.Size * hScale));
+                        
                         dgv.RowsDefaultCellStyle = dataGridViewCellStyle1;
 
-                        //foreach (DataGridViewColumn dr in dgv.Columns)
-                        //{
-
-
-                        //    if (dr.AutoSizeMode == System.Windows.Forms.DataGridViewAutoSizeColumnMode.None)
-                        //        dr.Width = (int)Math.Ceiling(dr.Width * wScale);
-                        //    // dr.DefaultCellStyle.Font = new Font(dr.DefaultCellStyle.Font.Name, Math.Min(hSize, wSize), dr.DefaultCellStyle.Font.Style, dr.DefaultCellStyle.Font.Unit);
-
-                        //}
                     }
                     catch (Exception ex)
                     {
@@ -206,6 +199,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                             DataGridView dgv = (DataGridView)c;
 
                             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+
 
 
                             dgv.RowTemplate.Height = Convert.ToInt16(dgv.RowTemplate.Height * hScale);

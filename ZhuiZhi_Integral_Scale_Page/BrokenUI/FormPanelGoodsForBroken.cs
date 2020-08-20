@@ -709,7 +709,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (selectpro.weightflag)
                 {
 
-                    decimal numbervalue = BrokenHelper.ShowBrokenNumber(selectpro.skuname);//broken NumberHelper.ShowFormNumber(selectpro.skuname, NumberType.ProWeight);
+                    decimal numbervalue = BrokenHelper.ShowBrokenScale(selectpro); //BrokenHelper.ShowBrokenNumber(selectpro.skuname);
                     if (numbervalue>0)
                     {
                         selectpro.specnum = numbervalue;
@@ -1089,7 +1089,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (selectpro.weightflag)
                 {
 
-                    decimal numbervalue = BrokenHelper.ShowBrokenNumber(selectpro.skuname);//broken NumberHelper.ShowFormNumber(selectpro.skuname, NumberType.ProWeight);
+                    decimal numbervalue = BrokenHelper.ShowBrokenScale(selectpro);// BrokenHelper.ShowBrokenNumber(selectpro.skuname);//broken NumberHelper.ShowFormNumber(selectpro.skuname, NumberType.ProWeight);
                     if (numbervalue > 0)
                     {
                         selectpro.specnum = numbervalue;

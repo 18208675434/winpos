@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
@@ -53,14 +54,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
         {
             try
             {
-
                 if (frmtoolmainscale == null)
                 {
                     IniFormToolMainScale();
                 }
 
                 frmtoolmainscale.Show();
-
             }
             catch (Exception ex)
             {
@@ -69,5 +68,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
         }
 
 
+        public static void ShowFormOrderHangItem(Cart cart)
+        {
+
+            try
+            {
+
+                BackHelper.ShowFormBackGround();
+                FormOrderHangItem frmitem = new FormOrderHangItem(cart);
+
+                asf.AutoScaleControlTest(frmitem, 500, 500, 500 * MainModel.midScale, 500 * MainModel.midScale, true);
+                frmitem.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmitem.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmitem.Height) / 2);
+                    frmitem.TopMost = true;
+
+                
+                    frmitem.ShowDialog();
+
+                    frmitem.Dispose();
+                    Application.DoEvents();
+                    BackHelper.HideFormBackGround();
+            }
+            catch
+            {
+
+            }
+
+        }
     }
 }
