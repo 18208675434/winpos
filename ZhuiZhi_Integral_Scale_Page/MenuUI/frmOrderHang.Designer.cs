@@ -39,6 +39,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvOrderOnLine = new System.Windows.Forms.DataGridView();
+            this.serialno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hangtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Continue = new System.Windows.Forms.DataGridViewImageColumn();
+            this.DelHang = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlDgvHeadOffLine = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -65,12 +71,6 @@
             this.pnlDetail = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.picTitle = new System.Windows.Forms.PictureBox();
-            this.serialno = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hangtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Continue = new System.Windows.Forms.DataGridViewImageColumn();
-            this.DelHang = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderOnLine)).BeginInit();
             this.pnlDgvHeadOffLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
@@ -133,6 +133,77 @@
             this.dgvOrderOnLine.Size = new System.Drawing.Size(1154, 566);
             this.dgvOrderOnLine.TabIndex = 1;
             this.dgvOrderOnLine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderOnLine_CellContentClick);
+            // 
+            // serialno
+            // 
+            this.serialno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.serialno.DefaultCellStyle = dataGridViewCellStyle11;
+            this.serialno.FillWeight = 100.195F;
+            this.serialno.HeaderText = "序号";
+            this.serialno.Name = "serialno";
+            this.serialno.Width = 85;
+            // 
+            // phone
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.phone.DefaultCellStyle = dataGridViewCellStyle12;
+            this.phone.FillWeight = 60F;
+            this.phone.HeaderText = "会员手机号";
+            this.phone.Name = "phone";
+            // 
+            // hangtime
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.hangtime.DefaultCellStyle = dataGridViewCellStyle13;
+            this.hangtime.FillWeight = 100.195F;
+            this.hangtime.HeaderText = "挂单时间";
+            this.hangtime.Name = "hangtime";
+            this.hangtime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // title
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle14.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle14.NullValue")));
+            this.title.DefaultCellStyle = dataGridViewCellStyle14;
+            this.title.FillWeight = 100.195F;
+            this.title.HeaderText = "商品明细";
+            this.title.Name = "title";
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Continue
+            // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 14F);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle15.NullValue")));
+            this.Continue.DefaultCellStyle = dataGridViewCellStyle15;
+            this.Continue.FillWeight = 30F;
+            this.Continue.HeaderText = "继续收银";
+            this.Continue.Name = "Continue";
+            this.Continue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Continue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // DelHang
+            // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("微软雅黑", 14F);
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle16.NullValue")));
+            this.DelHang.DefaultCellStyle = dataGridViewCellStyle16;
+            this.DelHang.FillWeight = 30F;
+            this.DelHang.HeaderText = "删除挂单";
+            this.DelHang.Name = "DelHang";
+            this.DelHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // pnlDgvHeadOffLine
             // 
@@ -453,77 +524,6 @@
             this.picTitle.Size = new System.Drawing.Size(35, 35);
             this.picTitle.TabIndex = 39;
             this.picTitle.TabStop = false;
-            // 
-            // serialno
-            // 
-            this.serialno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.serialno.DefaultCellStyle = dataGridViewCellStyle11;
-            this.serialno.FillWeight = 100.195F;
-            this.serialno.HeaderText = "序号";
-            this.serialno.Name = "serialno";
-            this.serialno.Width = 85;
-            // 
-            // phone
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.phone.DefaultCellStyle = dataGridViewCellStyle12;
-            this.phone.FillWeight = 60F;
-            this.phone.HeaderText = "会员手机号";
-            this.phone.Name = "phone";
-            // 
-            // hangtime
-            // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.hangtime.DefaultCellStyle = dataGridViewCellStyle13;
-            this.hangtime.FillWeight = 100.195F;
-            this.hangtime.HeaderText = "挂单时间";
-            this.hangtime.Name = "hangtime";
-            this.hangtime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // title
-            // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle14.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle14.NullValue")));
-            this.title.DefaultCellStyle = dataGridViewCellStyle14;
-            this.title.FillWeight = 100.195F;
-            this.title.HeaderText = "商品明细";
-            this.title.Name = "title";
-            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Continue
-            // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 14F);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle15.NullValue")));
-            this.Continue.DefaultCellStyle = dataGridViewCellStyle15;
-            this.Continue.FillWeight = 30F;
-            this.Continue.HeaderText = "继续收银";
-            this.Continue.Name = "Continue";
-            this.Continue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Continue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // DelHang
-            // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("微软雅黑", 14F);
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle16.NullValue")));
-            this.DelHang.DefaultCellStyle = dataGridViewCellStyle16;
-            this.DelHang.FillWeight = 30F;
-            this.DelHang.HeaderText = "删除挂单";
-            this.DelHang.Name = "DelHang";
-            this.DelHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // frmOrderHang
             // 

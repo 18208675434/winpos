@@ -250,6 +250,18 @@
     <Compile Include="MenuUI\FormOrderHangItem.Designer.cs">
       <DependentUpon>FormOrderHangItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuUI\FormRefundByAmt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundByAmt.Designer.cs">
+      <DependentUpon>FormRefundByAmt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundConfirm.Designer.cs">
+      <DependentUpon>FormRefundConfirm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\HalfOffLine\Coupons.cs" />
     <Compile Include="Model\HalfOffLine\Gradesettinggetgrade.cs" />
     <Compile Include="Model\HalfOffLine\HalfOffLineUtil.cs" />
@@ -902,6 +914,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormOrderHangItem.resx">
       <DependentUpon>FormOrderHangItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormRefundByAmt.resx">
+      <DependentUpon>FormRefundByAmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormRefundConfirm.resx">
+      <DependentUpon>FormRefundConfirm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardNew.resx">
       <DependentUpon>KeyBoardNew.cs</DependentUpon>

@@ -1106,7 +1106,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     erromessage = "";
                     return rd.data.ToString();
-
                 }
                 else
                 {

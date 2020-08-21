@@ -36,13 +36,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                 }
                 foreach (Product pro in CurrentCart.products)
                 {
+                    string name = string.IsNullOrEmpty(pro.skuname) ? pro.title : pro.skuname ;
+
                     if (pro.goodstagid == 0)
                     {
-                        dgvCart.Rows.Add(pro.skuname + "\r\n" + pro.skucode, pro.num, "￥"+pro.price.total.ToString("f2"));
+                        dgvCart.Rows.Add(name + "\r\n" + pro.skucode, pro.num, "￥"+pro.price.total.ToString("f2"));
                     }
                     else
                     {
-                        dgvCart.Rows.Add(pro.skuname + "\r\n" + pro.skucode, pro.specnum+pro.price.unit, "￥" + pro.price.total.ToString("f2"));
+                        dgvCart.Rows.Add(name + "\r\n" + pro.skucode, pro.specnum+pro.price.unit, "￥" + pro.price.total.ToString("f2"));
                     }
                     
                 }

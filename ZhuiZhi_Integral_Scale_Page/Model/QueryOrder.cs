@@ -73,6 +73,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public decimal otherpayamt { get; set; }
 
         public string otherpaytypedesc { get; set; }
+
+        /// <summary>
+        /// 是否支持指定金额退款  1：支持 0： 不支持
+        /// </summary>
+        public int supportspecifiedamountrefund { get; set; }
     }
 
     public class QuereOrderProduct
@@ -102,6 +107,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public decimal maxnum { get; set; }
 
+
+        /// <summary>
+        /// 指定退款金额
+        /// </summary>
+        public decimal refundamt { get; set; }
+
+        /// <summary>
+        /// 指定金额退款说明
+        /// </summary>
+        public string specifiedamountrefunddesc { get; set; }
+
+        /// <summary>
+        /// 订单行是否支持指定金额退款 1：支持 0：不支持
+        /// </summary>
+        public int supportspecifiedamountrefund { get; set; }
     }
 
 

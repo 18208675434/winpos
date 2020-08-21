@@ -60,10 +60,11 @@
             // 
             // lblMsg
             // 
+            this.lblMsg.AutoSize = true;
             this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblMsg.Location = new System.Drawing.Point(17, 60);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(651, 71);
+            this.lblMsg.Size = new System.Drawing.Size(74, 25);
             this.lblMsg.TabIndex = 8;
             this.lblMsg.Text = "lblMsg";
             // 

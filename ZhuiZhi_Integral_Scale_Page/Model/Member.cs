@@ -31,7 +31,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public Membertenantresponsevo membertenantresponsevo { get; set; }
 
-
         public MemberOrderResponsevo memberorderresponsevo { get; set; }
         /// <summary>
         /// 是否使用积分  主界面勾选/取消勾选积分修改状态

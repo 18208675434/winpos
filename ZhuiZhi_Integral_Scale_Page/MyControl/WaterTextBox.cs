@@ -68,7 +68,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.UserControl
         protected override void OnFontChanged(EventArgs e)
         {
             Font font = this.Font;
-            lblwaterText.Font = new Font(font.Name, font.Size *  60/ 100);
+            lblwaterText.Font = new Font(font.Name, font.Size *  80/ 100);
 
             base.OnFontChanged(e);
         }

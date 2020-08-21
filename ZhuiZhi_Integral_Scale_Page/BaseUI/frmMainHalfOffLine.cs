@@ -988,7 +988,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         LoadDgvGood(true, true);
                     }
 
-
                 }));
             }
             catch (Exception ex)
@@ -1084,7 +1083,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         {
                             LoadDgvGood(true, true);
                         }
-
 
                     }));
                 }

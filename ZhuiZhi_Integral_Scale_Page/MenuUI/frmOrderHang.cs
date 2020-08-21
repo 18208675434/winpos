@@ -379,7 +379,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                         string title = cart.products[0].title + "等共" + cart.goodscount + "件商品";
 
                                         lblTitle.Text = title;
-                                        picTitle.Left = lblTitle.Right;
+                                        picTitle.Left = Math.Min(lblTitle.Right, pnlDetail.Width - picTitle.Width);
+                                     
                                         Image imgdetitle = MainModel.GetControlImage(pnlDetail);
                                         //TODO  会员手机号
                                         dgvOrderOnLine.Rows.Add((rownum+7*(CurrentPage-1)).ToString(), phone, timestr, imgdetitle, bmpContinue, bmpDelHang);
