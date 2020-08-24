@@ -38,7 +38,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// </summary>
         BinaryFormatter formatter = new BinaryFormatter();
 
-
         //<summary>
         //按比例缩放页面及控件
         //</summary>
@@ -54,7 +53,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
         /// </summary>
         private bool IsEnable = true;
-
 
         public string CurrentPhone ="";
         public Cart CurrentCart =new Cart();

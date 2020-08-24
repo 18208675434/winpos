@@ -123,7 +123,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
 
            
-            tabControlMedia.SelectedIndex = 1;
+
+            SelectTlp(1);
+
             timerImage.Enabled = true;
 
             if (PlayerOpen)
@@ -260,9 +262,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 Image img = Image.FromFile(filePath);
                                 lstShowImg.Add(img);
 
-                                if (tabPageAdvert.BackgroundImage == null)
+                                if (pnlAdvertising.BackgroundImage == null)
                                 {
-                                    tabPageAdvert.BackgroundImage =img;
+                                    pnlAdvertising.BackgroundImage = img;
                                 }
                             }
                         }
@@ -293,7 +295,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 }
 
-                if(tabControlMedia.SelectedIndex ==1){
+                if (CurrentSelectMode == 1)
+                {
                     PlayerThread();
                 }
                
@@ -421,14 +424,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     tableLayoutPanel1.Visible = true;
 
                     pnlPayInfo.Visible = false;
-                    try
-                    {
-                        tabControlMedia.SelectedIndex = 0;
-                    }
-                    catch (Exception ex)
-                    {
-                        LogManager.WriteLog("切换窗体异常" + ex.Message);
-                    }
+
+                    SelectTlp(0);
+
                     CurrentCart = MainModel.frmMainmediaCart;
                     CurrentMember = MainModel.CurrentMember;
                     player.Visible = false;
@@ -620,7 +618,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     else if (MainModel.CurrentMember == null)
                     {
 
-                        tabPageIni.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+                        pnlCart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
                         picBirthday1.Visible = false;
 
 
@@ -686,7 +684,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             picBirthday3.Visible = false;
                             picBirthday4.Visible = false;
 
-                            tabPageIni.BackColor = Color.DarkSlateBlue;
+                            pnlCart.BackColor = Color.DarkSlateBlue;
                             Application.DoEvents();
                             picBirthday1.Visible = true;
                             picBirthday2.Visible = true;
@@ -695,7 +693,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         }
                         else
                         {
-                            tabPageIni.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+                            pnlCart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
                             picBirthday1.Visible = false;
                             picBirthday2.Visible = false;
                             picBirthday3.Visible = false;
@@ -833,7 +831,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         picBirthday3.Visible = false;
                         picBirthday4.Visible = false;
 
-                        tabPageIni.BackColor = Color.DarkSlateBlue;
+                        pnlCart.BackColor = Color.DarkSlateBlue;
                         Application.DoEvents();
                         picBirthday1.Visible = true;
                         picBirthday2.Visible = true;
@@ -844,7 +842,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     else
                     {
-                        tabPageIni.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+                        pnlCart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
                         picBirthday1.Visible = false;
                         picBirthday2.Visible = false;
                         picBirthday3.Visible = false;
@@ -862,7 +860,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblMobil.Text = "";
                     lblWechartNickName.Text = "";
 
-                    tabPageIni.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+                    pnlCart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
                     picBirthday1.Visible = false;
                     picBirthday2.Visible = false;
                     picBirthday3.Visible = false;
@@ -974,9 +972,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     player.Ctlcontrols.stop();
                     player.Visible = false;
                 }
-                
-                tabControlMedia.SelectedIndex = 0;
 
+                SelectTlp(0);
                 dgvGood.Visible = false;
                 tableLayoutPanel1.Visible = false;
 
@@ -1280,13 +1277,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 if (lstShowImg.Count > 0 )
                 {
-                    tabPageAdvert.BackgroundImage = lstShowImg[showcount];
+                    pnlAdvertising.BackgroundImage = lstShowImg[showcount];
                     showcount += 1;
 
                     if (showcount == lstShowImg.Count)  //循环展示
                     {
                         showcount = 0;
-                        if (tabControlMedia.SelectedIndex == 1 && lstPlayerUrl.Count > 0)
+                        if (CurrentSelectMode == 1 && lstPlayerUrl.Count > 0)
                         {
                             
                                 timerImage.Enabled = false;
@@ -1302,6 +1299,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 showcount = 0;
             }
         }
-   
+
+
+        private int CurrentSelectMode = 0;
+        private void SelectTlp(int index)
+        {
+            try
+            {
+                CurrentSelectMode = index;
+                for(int i=0;i<tlpMedia.ColumnCount;i++){
+                    if (i == index)
+                    {
+                        tlpMedia.ColumnStyles[i] = new ColumnStyle(SizeType.Percent, 100);
+                    }
+                    else
+                    {
+                        tlpMedia.ColumnStyles[i] = new ColumnStyle(SizeType.Percent, 0);
+                    }
+                }
+            }
+            catch { }
+        }
     }
 }
