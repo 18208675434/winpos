@@ -126,6 +126,9 @@
   <metadata name="delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="brokentype.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="picMenu.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -149,19 +152,6 @@
         SSRhEkmYRBImkYRJJGESSZhEEiaRhEkkYRJJmEQSJpGESSRhEumvMC2g4t/cRFmr+6rFUx36yr5al7YY
         grXdhLlY2VfroM+vz+aleWgWw7CWOchqrkdZzktOi7XQpLishe6em/qsfzX3BmAt1Vy1N/5+1qfhB/BJ
         mo+W93BwAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="picDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACMAAAAmCAYAAABOFCLqAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJ
-        TUUH4gwIDiY4dl7DdwAAAWtJREFUWEft2DFKA1EUheHYiJ2dIIqFG7BVFGzchbYiLsDCPliNi1FsLKwE
-        KysrWzeggopCFD0/5A7H8AYnZiYh8IqPwJn73j2QaZJOURR1nMqHfP8D5zifuveXZJjwKalFdXF+TlJ3
-        l5Jhgl/8OAQ/Ny+pu0vJMMEvTT2v4udaKbMzBD9Xq0xX3sUPjhv7u5QZ9eVsSo8yHjxJ6kVsU7l/sMyf
-        32sLcpkqlWXWZHXMKstMFGXeBsMJeaXMntzIrdxLPHzpZ+FZyO8sw4OQ8+k5c+Sc85x7Ywf7yNi/Sxm3
-        JTF43c/ChZCvWIZDIefTc+bIOec598YO9pXPfAi5TPAh5DLBh5DLBB9CLhN8CLlM8CHkMsGHkMsEH8LU
-        lDkX8iXLcCDk+5ZhWcjPLEMjZbblSGYsw6KcyIJlYO5YNi1DI2WaMv1lepL6bTwq7q1VZkNicBzWpdzv
-        RcD/blfyJanDTeH+S5mV/u6i8wPv79E0YnHBmgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="dataGridViewImageColumn1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

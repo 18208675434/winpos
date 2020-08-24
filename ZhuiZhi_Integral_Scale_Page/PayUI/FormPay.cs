@@ -46,6 +46,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             try
             {
                 UpdateDetail();
+                Application.DoEvents();
             }
             catch (Exception ex)
             {
@@ -67,25 +68,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     dgvCartDetail.Rows.Add(orderprice.title, orderprice.amount);
                 }
 
+                if (thisCurrentCart.otherpayinfos != null && thisCurrentCart.otherpayinfos.Count > 0)
+                {
+                    foreach (OtherPayInfoEntity otherpay in thisCurrentCart.otherpayinfos)
+                    {
+                        dgvCartDetail.Rows.Add(otherpay.payname+":", "￥"+otherpay.payamt.ToString("f2"));
+                    }
+                }
+
+                if (thisCurrentCart.cashpayamt != null && thisCurrentCart.cashpayamt > 0)
+                {
+                    dgvCartDetail.Rows.Add("实收现金:", "￥" + thisCurrentCart.cashpayamt.ToString("f2"));                      
+                }
 
                 if (thisCurrentCart.otherpayamt > 0)
                 {
                     lblTitle.Text = "继续支付";
                     lblTotalInfo.Text = "还需支付:";
-                    lbtnCancle.Visible = true;
                     btnCancle.Visible = false;
 
-                    string strotherpaytype = "";
-                        try{
-                            strotherpaytype= thisCurrentCart.otherpaytypeinfo.Where(r => r.key == thisCurrentCart.otherpaytype).ToList()[0].value;}catch{
-                            }
-                        dgvCartDetail.Rows.Add(strotherpaytype, "￥"+thisCurrentCart.otherpayamt.ToString("f2"));
+                  
                 }
                 else
                 {
                     lblTitle.Text = "结算";
                     lblTotalInfo.Text = "应收:";
-                    lbtnCancle.Visible = false;
                     btnCancle.Visible = true;
                 }
 
@@ -95,22 +102,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 {
                     btnMemberPromo.Visible = true;
                     btnMemberPromo.Text = "余额支付再减：￥" + thisCurrentCart.balancepaypromoamt.ToString("f2");
-
                     pnlTotalPay.Height = btnMemberPromo.Bottom;
                 }
                 else
                 {
                     btnMemberPromo.Visible = false;
-
                     pnlTotalPay.Height = lblTotalPay.Bottom;
                 }
-
+               
 
                 dgvCartDetail.Height = dgvCartDetail.Rows.Count * dgvCartDetail.RowTemplate.Height + 5;
 
                 pnlTotalPay.Top = dgvCartDetail.Bottom;
 
                 pnlPayType.Top = pnlTotalPay.Bottom;
+
+                this.Height = pnlPayType.Bottom;
+
+                this.Top = (Screen.AllScreens[0].Bounds.Height - this.Height) / 2;
                 UpdatePaymentTypes();
             }
             catch (Exception ex)
@@ -210,25 +219,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                 string orderid = "";
                 int type = PayHelper.ShowFormPayByCash(thisCurrentCart, out orderid);
-
-                if (type == 2) //需要继续支付
-                {
-
-                    if (PayHelper.ShowFormPayByOnLine(orderid, thisCurrentCart))
-                    {
-
-                        PayHelper.ShowFormPaySuccess(orderid);
-                        this.DialogResult = DialogResult.OK;
-                        PayResult = 1;
-                        this.Close();
-                        return;
-                    }
-                    else
-                    {
-                        RefreshCart();
-                    }
-                }
-                else if (type == 1) //支付完成
+               
+                 if (type == 1) //支付完成
                 {
 
                     PayHelper.ShowFormPaySuccess(orderid);
@@ -246,11 +238,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 }
                 else
                 {
-                    if (thisCurrentCart != null)
-                    {
-                        thisCurrentCart.cashpayoption = 0;
-                        thisCurrentCart.cashpayamt = 0;
-                    }
+                    //if (thisCurrentCart != null)
+                    //{
+                    //    thisCurrentCart.cashpayoption = 0;
+                    //    thisCurrentCart.cashpayamt = 0;
+                    //}
 
                     RefreshCart();
                 }
@@ -297,60 +289,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     PayResult = 1;
                     this.Close();
                     return;
-                }
-                else if (resultcode == 2) //需要继续支付  微信/支付宝
-                {
-
-
-
-                    string returnorderid = "";
-                    int returnresultcode = PayHelper.ShowFormPayBalanceToMix(thisCurrentCart, out returnorderid);
-
-                    if (returnresultcode == 2)
-                    {
-                        this.Invoke(new InvokeHandler(delegate()
-                        {
-                            if (PayHelper.ShowFormPayByOnLine(returnorderid, thisCurrentCart))
-                            {
-
-                                PayHelper.ShowFormPaySuccess(returnorderid);
-                                this.DialogResult = DialogResult.OK;
-                                PayResult = 1;
-                                this.Close();
-                                return;
-                            }
-                            else
-                            {
-                                thisCurrentCart.balancepayamt = 0;
-                                thisCurrentCart.balancepayoption = 0;
-                                RefreshCart();
-                            }
-                        }));
-                    }
-                    else if (returnresultcode == 1)
-                    {
-
-                        this.Invoke(new InvokeHandler(delegate()
-                        {
-                            PayHelper.ShowFormPaySuccess(returnorderid);
-                            this.DialogResult = DialogResult.OK;
-                            PayResult = 1;
-                            this.Close();
-                            return;
-                        }));
-                    }
-                    else
-                    {
-
-                        thisCurrentCart.balancepayamt = 0;
-                        thisCurrentCart.balancepayoption = 0;
-                        if (CheckUserAndMember(returnresultcode))
-                        {
-                            return;
-                        }
-                        RefreshCart();
-                    }
-                }
+                }               
                 else
                 {
                     RefreshCart();
@@ -362,64 +301,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             catch (Exception ex)
             {
                 //ShowLog("在线收银异常" + ex.Message, true);
-            }
-            finally
-            {
-                IsEnable = true;
-            }
-        }
-
-        private void pnlPayByCoupon_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!IsEnable || pnlPayByCoupon.Tag == null || pnlPayByCoupon.Tag.ToString() == "0")
-                {
-                    return;
-                }
-
-                IsEnable = false;
-                if (!RefreshCart())
-                {
-                    return;
-                }
-
-                string ErrorMsg = "";
-                List<string> lstCashCoupons = httputil.GetAvailableCashCoupons(ref ErrorMsg);
-
-                if (!string.IsNullOrEmpty(ErrorMsg))
-                {
-                    MainModel.ShowLog(ErrorMsg, false);
-                    return;
-                }
-                else if (lstCashCoupons == null || lstCashCoupons.Count == 0)
-                {
-                    MainModel.ShowLog("没有可用的代金券", false);
-                    return;
-                }
-
-                string successorderid = "";
-                if (PayHelper.ShowFormPayByCashCoupon(thisCurrentCart, lstCashCoupons, out successorderid))
-                {
-                    PayHelper.ShowFormPaySuccess(successorderid);
-                    this.DialogResult = DialogResult.OK;
-                    PayResult = 1;
-                    this.Close();
-                    return;
-                }
-                else
-                {
-                    thisCurrentCart.cashcouponamt = 0;
-
-                    RefreshCart();
-                }
-
-                thisCurrentCart.cashcouponamt = 0;
-
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("代金券收银异常：" + ex.Message, true);
             }
             finally
             {
@@ -549,7 +430,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     pnlPayByOnLine.BackColor = Color.Silver;
                 }
 
-                if (thisCurrentCart.paymenttypes.balancepayenabled == 1)
+                if (thisCurrentCart.balancepayamt <=0)
                 {
                     pnlPayByBalance.Tag = 1;
                     pnlPayByBalance.BackColor = Color.FromArgb(31, 178, 191);
@@ -559,18 +440,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     pnlPayByBalance.Tag = 0;
                     pnlPayByBalance.BackColor = Color.Silver;
                 }
-
-                if (thisCurrentCart.paymenttypes.cashcouponpayenabled == 1)
-                {
-                    pnlPayByCoupon.Tag = 1;
-                    pnlPayByCoupon.BackColor = Color.FromArgb(32, 191, 136);
-                }
-                else
-                {
-                    pnlPayByCoupon.Tag = 0;
-                    pnlPayByCoupon.BackColor = Color.Silver;
-                }
-
 
                 if (thisCurrentCart.otherpayamt > 0)
                 {

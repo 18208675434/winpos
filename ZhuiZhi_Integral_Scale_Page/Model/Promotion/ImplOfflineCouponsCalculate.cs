@@ -80,7 +80,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
         }
         else
         {
-            cartBean.selectedcoupons = new Dictionary<string, Availablecoupon>();
+            cartBean.selectedcoupons = new Dictionary<string, OrderCouponVo>();
             cartBean.selectedcoupons.Add(MainModel.CurrentCouponCode, MainModel.Currentavailabecoupno);
         }
 
@@ -96,7 +96,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
 
     //结算页优惠券列表排序
     public TripletBeanForCoupon evaluateCoupons(Cart cartBean, List<PromotionCoupon> listcoupon) {
-        List<Availablecoupon> availablecoupons = new List<Availablecoupon>();
+        List<OrderCouponVo> availablecoupons = new List<OrderCouponVo>();
 //        是否有券信息
         if (listcoupon==null || listcoupon.Count==0) {
             return null;
@@ -130,7 +130,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                     //    cartBean.couponpromoamt = Convert.ToDecimal(discountamt);
                     //}
 
-                    Availablecoupon couponsBean = new Availablecoupon();
+                    OrderCouponVo couponsBean = new OrderCouponVo();
                     //set 值
                     couponsBean.catalog = coupon.catalog;
                     couponsBean.enabledfrom = coupon.enabledfrom;

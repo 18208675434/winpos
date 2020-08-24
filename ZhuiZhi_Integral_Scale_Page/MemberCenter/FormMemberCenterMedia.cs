@@ -64,16 +64,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     dgvTemplate.Rows.Add(lstbmp[i * 3 + 0], lstbmp[i * 3 + 1], lstbmp[i * 3 + 2]);
                 }
-
-
             }
             catch
             {
 
             }
-            
-
-        
         }
 
         public void ShowPayInfo()
@@ -95,6 +90,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
-
     }
 }

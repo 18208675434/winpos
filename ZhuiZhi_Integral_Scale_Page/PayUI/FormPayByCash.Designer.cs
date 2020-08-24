@@ -104,14 +104,14 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 6.5F);
             this.label4.ForeColor = System.Drawing.Color.DimGray;
             this.label4.Location = new System.Drawing.Point(24, 128);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(338, 16);
+            this.label4.Size = new System.Drawing.Size(317, 14);
             this.label4.TabIndex = 62;
-            this.label4.Text = "若实收小于应收，还需支付部分可点击下一步选择微信或支付宝收银";
+            this.label4.Text = "若实收小于应收，剩余待支付部分可选择微信/支付宝或其他支付方式完成收银";
             // 
             // label3
             // 

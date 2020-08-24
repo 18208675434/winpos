@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
@@ -48,7 +49,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
 
         private void FormBroken_Shown(object sender, EventArgs e)
         {
+
             btnToday_Click(null,null);
+
+            Application.DoEvents();
+
+            //每次进报损页面刷新一次报损类型
+            BrokenHelper.GetBrokenType(true);
         }
 
         private void FormBroken_FormClosing(object sender, FormClosingEventArgs e)

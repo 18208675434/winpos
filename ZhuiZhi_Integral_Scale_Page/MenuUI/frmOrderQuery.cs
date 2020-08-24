@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MenuUI;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
@@ -46,6 +47,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private Bitmap bmpReprint;
         private Bitmap bmpRefund;
         private Bitmap bmpNotRefund;
+
+        private Bitmap bmpRefundByAmt;
         private Bitmap bmpWhite;
 
         /// <summary>
@@ -99,7 +102,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 bmpRefund = (Bitmap)MainModel.GetControlImage(btnRefundPic);
                 bmpReprint = (Bitmap)MainModel.GetControlImage(btnReprintPic);
                 bmpNotRefund = (Bitmap)MainModel.GetControlImage(btnNotRefundPic);
-
+                bmpRefundByAmt = (Bitmap)MainModel.GetControlImage(btnRefundByAmt);
 
                 //int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
                 //bmpRefund = new Bitmap(Resources.ResourcePos.Refund, dgvOrderOnLine.Columns["cancle"].Width * 80 / 100, height);
@@ -295,63 +298,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 if (e.RowIndex < 0)
                     return;
-                //if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefund)
-                //{
-                //    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                //    this.Enabled = false;
-
-
-                //    // Order SelectOrder =(Order) CurrentQueryOrder.orders.Where(r => r.orderid == selectorderid).ToList()[0];
-                //    Order SelectOrder = null;
-                //    for (int i = 0; i < CurrentQueryOrder.orders.Count; i++)
-                //    {
-                //        if (CurrentQueryOrder.orders[i].orderid == selectorderid)
-                //        {
-                //            SelectOrder = CurrentQueryOrder.orders[i];
-                //            break;
-                //        }
-                //    }
-
-                //    if (SelectOrder == null)
-                //    {
-                //         MainModel.ShowLog("订单不存在，请刷新", false);
-                //        this.Enabled = true;
-                //        return;
-                //    }
-
-                //    string orderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-
-                //    string strinfo = dgvOrderOnLine.Rows[e.RowIndex].Cells["paytype"].Value.ToString();
-                //    frmDeleteGood frmdelete = new frmDeleteGood("是否确认退款？", "应退" + strinfo, "");
-                //    if (frmdelete.ShowDialog() != DialogResult.OK)
-                //    {
-                //        this.Enabled = true;
-                //        return;
-                //    }
-
-                //    string ErrorMsg = "";
-
-                //    RefundPara refundpara = new RefundPara();
-                //    refundpara.aftersaletype = 2;
-                //    refundpara.orderid = Convert.ToInt64(orderid);
-                //    refundpara.allorder = true;
-
-
-                //    string resultorderid = httputil.Refund(refundpara, ref ErrorMsg);
-                //    if (ErrorMsg != "")
-                //    {
-                //         MainModel.ShowLog(ErrorMsg, true);
-                //    }
-                //    else
-                //    {
-
-                //         MainModel.ShowLog("退款成功", false);
-
-                //    }
-
-                //    this.Enabled = true;
-                //    btnQuery_Click(null, null);
-                //}
 
                 if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefund)
                 {
@@ -500,6 +446,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     LoadingHelper.CloseForm();
                     btnQuery_Click(null, null);
                 }
+                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefundByAmt)
+                {
+                    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
+                    IsEnable = false;
+
+                    // Order SelectOrder =(Order) CurrentQueryOrder.orders.Where(r => r.orderid == selectorderid).ToList()[0];
+                    Order SelectOrder = null;
+                    for (int i = 0; i < CurrentQueryOrder.orders.Count; i++)
+                    {
+                        if (CurrentQueryOrder.orders[i].orderid == selectorderid)
+                        {
+                            SelectOrder = CurrentQueryOrder.orders[i];
+                            break;
+                        }
+                    }
+
+                    if (SelectOrder == null)
+                    {
+                        MainModel.ShowLog("订单不存在，请刷新", false);
+
+                        return;
+                    }
+
+                    MenuHelper.ShowFormRefundByAmt(SelectOrder);
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -855,11 +828,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     if (order.orderstatusvalue == 5)
                     {
-                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite);
+                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite,bmpWhite);
                     }
                     else
                     {
-                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund);
+                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund,bmpRefundByAmt);
                     }
 
                 }

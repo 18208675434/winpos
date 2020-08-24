@@ -27,8 +27,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
     }
 
 
-
-
     public class ParaCreateBroken
     {
         public List<Item> itemlist { get; set; }
@@ -39,6 +37,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
     {
         public decimal deliveryquantity { get; set; }
         public string skucode { get; set; }
+
+        /// <summary>
+        /// 报损类型
+        /// </summary>
+        public int actiontype { get; set; }
     }
 
 

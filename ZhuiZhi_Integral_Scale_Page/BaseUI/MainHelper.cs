@@ -62,7 +62,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
                 }
                 else
                 {
-                    cart.selectedcoupons = new Dictionary<string, Availablecoupon>();
+                    cart.selectedcoupons = new Dictionary<string, OrderCouponVo>();
                     cart.selectedcoupons.Add(MainModel.CurrentCouponCode, MainModel.Currentavailabecoupno);
                 }
 

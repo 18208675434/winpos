@@ -38,7 +38,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// </summary>
         BinaryFormatter formatter = new BinaryFormatter();
 
-
         //<summary>
         //按比例缩放页面及控件
         //</summary>
@@ -48,11 +47,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private Bitmap bmpDelHang;
         private Bitmap bmpWhite;
 
+        private Bitmap bmpDetail;
+
         /// <summary>
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
         /// </summary>
         private bool IsEnable = true;
-
 
         public string CurrentPhone ="";
         public Cart CurrentCart =new Cart();
@@ -101,6 +101,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 bmpContinue = (Bitmap)MainModel.GetControlImage(btnContinue);
                 bmpDelHang = (Bitmap)MainModel.GetControlImage(btnDelHang);
                 bmpWhite = Resources.ResourcePos.White;
+
+                bmpDetail = new Bitmap(picTitle.Image, dgvOrderOnLine.RowTemplate.Height * 30 / 100, dgvOrderOnLine.RowTemplate.Height * 30 / 100);
 
             }
             catch (Exception ex)
@@ -179,12 +181,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         if (!ConfirmHelper.Confirm("确认删除该挂单？"))
                         {
                             return;
-                        }
-                       
+                        }                       
 
                         File.Delete(BasePath);
                         MainModel.ShowLog("挂单删除成功", false);
                         LoadDgvOrderHang();
+                    }
+                    else if (dgvOrderOnLine.Columns[e.ColumnIndex].Name == "title")
+                    {
+                        int serialno = Convert.ToInt16(dgvOrderOnLine.Rows[e.RowIndex].Cells["serialno"].Value.ToString());
+
+                        using (Stream input = File.OpenRead(BasePath))
+                        {
+                            if (input.Length > 0)
+                            {
+                               Cart  tempcart = (Cart)formatter.Deserialize(input);
+
+                               ZhuiZhi_Integral_Scale_UncleFruit.MenuUI.MenuHelper.ShowFormOrderHangItem(tempcart);
+                            }
+                        }                      
                     }
                 }
                 else
@@ -360,10 +375,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                         Cart cart = (Cart)formatter.Deserialize(input);
 
                                         string title = cart.products[0].title + "等共" + cart.goodscount + "件商品";
-                                        //TODO  会员手机号
-                                        dgvOrderOnLine.Rows.Add((rownum+7*(CurrentPage-1)).ToString(), phone, title, timestr, bmpContinue, bmpDelHang);
 
-                                        // lstCart.Add(cart);
+                                        lblTitle.Text = title;
+                                        picTitle.Left = Math.Min(lblTitle.Right, pnlDetail.Width - picTitle.Width);
+                                     
+                                        Image imgdetitle = MainModel.GetControlImage(pnlDetail);
+                                        //TODO  会员手机号
+                                        dgvOrderOnLine.Rows.Add((rownum+7*(CurrentPage-1)).ToString(), phone, timestr, imgdetitle, bmpContinue, bmpDelHang);
+
                                     }
                                 }
                             }

@@ -110,5 +110,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public string otherpaytype { set; get; }
 
+        public List<OtherPayInfoEntity> otherpayinfos { set; get; }
+
     }
 }

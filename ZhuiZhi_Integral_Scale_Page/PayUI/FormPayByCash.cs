@@ -65,10 +65,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 string cashpayorderid = "";
 
                 thisCurrentCart = cart;
-                txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
+                txtCash.Text = thisCurrentCart.payamtbeforecash.ToString("f2");
                 btnNext.Focus();
 
-                lblPrice.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
+                lblPrice.Text = "￥" + thisCurrentCart.payamtbeforecash.ToString("f2");
 
                 txtCash.Focus();
                 this.txtCash.Select(this.txtCash.TextLength, 0);
@@ -104,6 +104,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         {
             try
             {
+                thisCurrentCart.cashpayoption = 0;
+                thisCurrentCart.cashpayamt = 0;
                 ReturnResultCode = 0;
                 this.Close();
             }
@@ -208,85 +210,76 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 }
                 else
                 {
+                    ReturnResultCode = 2;
+                    this.Close();
 
-                    // string ErrorMsg = "";
-                    //// int ResultCode = 0;
-                    // CreateOrderResult orderresult = httputil.CreateOrder(cart, ref ErrorMsg, ref ResultCode);
-                    // if (ResultCode != 0 || orderresult == null)
-                    // {
-                    //     CheckUserAndMember(ResultCode);
-                    //     ShowLog("异常" + ErrorMsg, true);
-                    // }
-                    // else
-                    // {
-                    //通过是否有余额值判断
-                    if (thisCurrentCart.balancepayamt != null && thisCurrentCart.balancepayamt > 0)
-                    {
-                        frmBalanceOnLine frmbalanceonline = new frmBalanceOnLine(thisCurrentCart);
-                        //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
-                        asf.AutoScaleControlTest(frmbalanceonline, 380, 540, this.Width, this.Height, true);
-                        frmbalanceonline.Location = this.Location;
-                        frmbalanceonline.TopMost = true;
-                        frmbalanceonline.ShowDialog();
+                    ////通过是否有余额值判断
+                    //if (thisCurrentCart.balancepayamt != null && thisCurrentCart.balancepayamt > 0)
+                    //{
+                    //    frmBalanceOnLine frmbalanceonline = new frmBalanceOnLine(thisCurrentCart);
+                    //    //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
+                    //    asf.AutoScaleControlTest(frmbalanceonline, 380, 540, this.Width, this.Height, true);
+                    //    frmbalanceonline.Location = this.Location;
+                    //    frmbalanceonline.TopMost = true;
+                    //    frmbalanceonline.ShowDialog();
 
-                        if (frmbalanceonline.DialogResult == DialogResult.OK)
-                        {
-                            string ErrorMsg = "";
-                            int ResultCode = 0;
-                            int BalanceResultCode = 0;
-                            CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref BalanceResultCode);
-                            if (ResultCode != 0 || orderresult == null)
-                            {
-                                CheckUserAndMember(BalanceResultCode);
-                                MainModel.ShowLog("异常" + ErrorMsg, true);
-                            }
-                            else if (orderresult.continuepay == 1)
-                            {
-                                ReturnResultCode = 2;
-                                ReruntOrderId = orderresult.orderid;
-                               this.Close();
-                                Application.DoEvents();
-                            }
+                    //    if (frmbalanceonline.DialogResult == DialogResult.OK)
+                    //    {
+                    //        string ErrorMsg = "";
+                    //        int ResultCode = 0;
+                    //        int BalanceResultCode = 0;
+                    //        CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref BalanceResultCode);
+                    //        if (ResultCode != 0 || orderresult == null)
+                    //        {
+                    //            CheckUserAndMember(BalanceResultCode);
+                    //            MainModel.ShowLog("异常" + ErrorMsg, true);
+                    //        }
+                    //        else if (orderresult.continuepay == 1)
+                    //        {
+                    //            ReturnResultCode = 2;
+                    //            ReruntOrderId = orderresult.orderid;
+                    //           this.Close();
+                    //            Application.DoEvents();
+                    //        }
 
-                        }
-                        else
-                        {
-                            RefreshCart(0, true);
+                    //    }
+                    //    else
+                    //    {
+                    //        RefreshCart(0, true);
                          
-                            ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.UpdaForm(thisCurrentCart);
-                        }
-                    }
-                    else
-                    {
+                    //        ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.UpdaForm(thisCurrentCart);
+                    //    }
+                    //}
+                    //else
+                    //{
 
-                        if (PayHelper.ShowFormPayCashToOnLine(thisCurrentCart))
-                        {
-                            this.Hide();
-                            string ErrorMsg = "";
-                            int ResultCode = 0;
-                            int OnlineResultCode = 0;
-                            CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref OnlineResultCode);
-                            if (ResultCode != 0 || orderresult == null)
-                            {
-                                this.Show();
-                                CheckUserAndMember(OnlineResultCode);
-                                MainModel.ShowLog("异常" + ErrorMsg, true);
-                            }
-                            else if (orderresult.continuepay == 1)
-                            {
-                                ReturnResultCode = 2;
-                                ReruntOrderId = orderresult.orderid;
-                                this.Close();
-                            }
-                        }
-                        else
-                        {
-                            RefreshCart(0, true);
-                        }
-                    }
+                    //    if (PayHelper.ShowFormPayCashToOnLine(thisCurrentCart))
+                    //    {
+                    //        this.Hide();
+                    //        string ErrorMsg = "";
+                    //        int ResultCode = 0;
+                    //        int OnlineResultCode = 0;
+                    //        CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref OnlineResultCode);
+                    //        if (ResultCode != 0 || orderresult == null)
+                    //        {
+                    //            this.Show();
+                    //            CheckUserAndMember(OnlineResultCode);
+                    //            MainModel.ShowLog("异常" + ErrorMsg, true);
+                    //        }
+                    //        else if (orderresult.continuepay == 1)
+                    //        {
+                    //            ReturnResultCode = 2;
+                    //            ReruntOrderId = orderresult.orderid;
+                    //            this.Close();
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        RefreshCart(0, true);
+                    //    }
+                    //}
 
-                    Application.DoEvents();
-                    // }
+                    //Application.DoEvents();
 
                 }
 
@@ -330,20 +323,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     thisCurrentCart = cart;
 
                     if (updateCash)
-                    {
+                    {                       
                         lblPrice.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
                         txtCash.Text = thisCurrentCart.totalpayment.ToString("f2");
                         isfirst = true;
                     }
-
-                    //Dictionary<string, string> dicdetail = new Dictionary<string, string>();
-                    //dicdetail.Add("应付：", "￥" + thisCurrentCart.payamtbeforecash.ToString("f2"));
-                    //dicdetail.Add("已付现金：", "￥" + thisCurrentCart.cashpayamt.ToString("f2"));
-
-                    //BaseUIHelper.UpdateDgvOrderDetail(dicdetail, "还需支付：", "￥" + thisCurrentCart.totalpayment.ToString("f2"));
-
-                    //MainModel.frmMainmediaCart = thisCurrentCart;
-                    //MainModel.frmmainmedia.UpdateForm();
 
                     return true;
                 }

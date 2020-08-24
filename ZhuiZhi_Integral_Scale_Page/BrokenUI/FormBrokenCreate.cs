@@ -82,6 +82,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
            private bool IsRun = true;
 
            private DBPRODUCT_BEANBLL productbll = new DBPRODUCT_BEANBLL();
+
         #endregion
 
         #region  页面加载
@@ -91,14 +92,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
-
         }
         private void frmMain_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
+      
+            LoadDgvType();
             btnScan.Select();
            
         }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             try
@@ -208,6 +211,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+                dgvType.Visible = false;
                 if (!IsEnable)
                 {
                     return;
@@ -254,12 +258,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         lblTotalPrice.Text = "￥0.00";
                         btnOK.Tag = 0;
                         btnOK.BackColor = Color.Silver;
+                        btnBatchBroken.Tag = 0;
+                        btnBatchBroken.BackColor = Color.Silver;
+
                         return true;
                     }
                     else
                     {
                         btnOK.Tag = 1;
                         btnOK.BackColor = Color.OrangeRed;
+
+                        btnBatchBroken.Tag = 1;
+                        btnBatchBroken.BackColor = Color.FromArgb(18, 159, 255);
                     }
                     IsEnable = false;
 
@@ -640,7 +650,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         #endregion
 
 
-
+        private BrokenProduct SelectBrokenPro = null;
 
         private void dgvGood_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -669,7 +679,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
                 //减少标品 或修改非标品重量
-                if (po.X < (dgvGood.Left + picMinus.Right + 10) && po.X > (dgvGood.Left + picMinus.Left - 10) && !pro.weightflag)
+                 if (po.X < (dgvGood.Left + picMinus.Right + 10) && po.X > (dgvGood.Left + picMinus.Left - 10) && !pro.weightflag)
                 {
 
                         BrokenProduct brokenpro = CurrentProducts.Where(r => r.skucode == pro.skucode).ToList()[0];
@@ -701,6 +711,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                 }
 
+                if (po.X < (dgvGood.Left + btnType.Right + 10) && po.X > (dgvGood.Left + btnType.Left - 10))
+                {
+
+                    dgvType.Visible = true;
+
+                    if(e.RowIndex<3){
+                        dgvType.Top = dgvGood.Top + dgvGood.RowTemplate.Height * e.RowIndex + btnType.Bottom ;
+                    }
+                    else
+                    {
+                        dgvType.Top = dgvGood.Top + dgvGood.RowTemplate.Height * e.RowIndex-dgvType.Height+btnType.Top ;
+                    }
+
+                    dgvType.Left = dgvGood.Left + btnType.Left;
+                    SelectBrokenPro = pro;
+                }
+                else
+                {
+                    dgvType.Visible = false;
+                    SelectBrokenPro = null;
+                }
 
                 if (po.X < (dgvGood.Left + picDelete.Right + 10) && po.X > (dgvGood.Left + picDelete.Left - 10))
                 {
@@ -772,13 +803,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnMianban_Click(object sender, EventArgs e)
         {
-
+            
             if (!IsEnable)
             {
                 return;
             }
             try
             {
+                dgvType.Visible = false;
                 IsEnable = false;
                 FormPanelGoodsForBroken frmpanel = new FormPanelGoodsForBroken();
                 asf.AutoScaleControlTest(frmpanel,1178,760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height , true);
@@ -897,125 +929,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private int FlashIndex = 0;
         //放线程就无效了
         public bool isGoodRefresh = true;
-        private void ShowDgv()
-        {
-            try
-            {
-
-                if (dgvGood.Rows.Count >= FlashIndex && isGoodRefresh)
-                {
-                    isGoodRefresh = false;
-                    System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-                    dataGridViewCellStyle1.BackColor = Color.PeachPuff;
-                    Color color = dgvGood.Rows[FlashIndex].DefaultCellStyle.BackColor;
-
-                    dgvGood.Rows[FlashIndex].DefaultCellStyle = dataGridViewCellStyle1;
-
-                    Delay.Start(200);
-                    dataGridViewCellStyle1.BackColor = color;
-                    dgvGood.Rows[FlashIndex].DefaultCellStyle = dataGridViewCellStyle1;
-
-
-                    FlashIndex = 0;
-                    FlashSkuCode = "";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("突出新增商品异常"+ex.Message);
-            }
-        }
-
-
-        public void btnWindows_Click(object sender, EventArgs e)
-        {
-            MainModel.ShowTask();
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-
-
-        private void CheckPrint()
-        {
-            try
-            {
-                try
-                {
-                    bool PrintCheck = Convert.ToBoolean(INIManager.GetIni("Print", "PrintCheck", MainModel.IniPath));
-
-                    if (!PrintCheck)
-                    {
-                        return;
-                    }
-                }
-                catch { }
-
-                //系统自带打印机集合
-                List<string> lstprintname = new List<string>();
-                lstprintname.Add("Fax");
-                lstprintname.Add("Microsoft XPS Document Writer");
-                lstprintname.Add("OneNote");
-                lstprintname.Add("Fax");
-                lstprintname.Add("Foxit Reader PDF Printer");
-                lstprintname.Add("Microsoft Print to PDF");               
-                lstprintname.Add("发送至 OneNote 2010");
-
-                string checkPrintName = "";
-                string PrintName = INIManager.GetIni("Print", "PrintName", MainModel.IniPath);
-
-                bool ExitsPrinter = false;
-                //获取安装的打印机列表，并选中默认打印机
-                foreach (string print in PrinterSettings.InstalledPrinters)
-                {
-                    if (print == PrintName)
-                    {
-                        checkPrintName = PrintName;
-                        ExitsPrinter = true;
-                    }
-                }
-
-                //默认打印机
-                PrintDocument pd = new PrintDocument();
-                string defaultStr = pd.PrinterSettings.PrinterName;
-
-                if (!ExitsPrinter)
-                {
-                    checkPrintName = defaultStr;
-                    INIManager.SetIni("Print", "PrintName", defaultStr, MainModel.IniPath);
-                }
-
-                if (lstprintname.Contains(checkPrintName))
-                {
-                    LoadPicScreen(true);
-                    
-                    frmPrinterInfo frmprintinfo = new frmPrinterInfo();
-
-                    //asf.AutoScaleControlTest(frmprintinfo, 480, 190, 480*MainModel.wScale, 190*MainModel.hScale, true);
-                    frmprintinfo.TopMost = true;
-
-                    frmprintinfo.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmprintinfo.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmprintinfo.Height) / 2);
-                    frmprintinfo.ShowDialog();
-                    
-                    if (frmprintinfo.DialogResult == DialogResult.OK)
-                    {
-                        tsmPrintSet_Click(null, null);
-                    }
-
-                    LoadPicScreen(false);
-                }
-
-                
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("检查打印机异常"+ex.Message);
-            }
-            finally
-            {
-                LoadPicScreen(false);
-            }
-        }
 
         private void picScreen_Click(object sender, EventArgs e)
         {
@@ -1028,15 +941,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-
-                //if (isshow)
-                //{
-                //    LoadingHelper.ShowLoadingScreen();
-                //}
-                //else
-                //{
-                //    LoadingHelper.CloseForm();
-                //}
                 if (this.IsHandleCreated)
                 {
                     this.Invoke(new InvokeHandler(delegate()
@@ -1059,30 +963,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         
         }
 
-        #region 解决闪烁问题
-
-        //此方法不可重写 禁止擦除背景会极大影响页面加载速度
-        //protected override void WndProc(ref Message m)
-        //{
-        //    if (m.Msg == 0x0014) // 禁掉清除背景消息
-        //        return;
-        //    base.WndProc(ref m);
-        //}
-
-
-        ///// <summary>
-        ///// 改方法设置界面加载完成后显示  屏蔽掉了页面加载过程中的闪烁
-        ///// </summary>
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-        //}
-        #endregion
 
 
         /// <summary>
@@ -1149,6 +1029,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
 
 
+                if (!string.IsNullOrEmpty(pro.brokentypevalue))
+                {
+                    btnType.Text = pro.brokentypevalue;
+                }else{
+                    if (BrokenHelper.GetBrokenType(false) != null && BrokenHelper.GetBrokenType(false).Count > 0)
+                    {
+                        pro.brokentypekey = BrokenHelper.GetBrokenType(false)[0].key;
+                        pro.brokentypevalue = BrokenHelper.GetBrokenType(false)[0].value;
+
+                        btnType.Text = pro.brokentypevalue;
+                    }
+                }
 
 
                     lblTotal.Text =pro.deliveryprice==0? "--": pro.deliveryprice.ToString("f2");
@@ -1187,6 +1079,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+                dgvType.Visible = false;
                 if (btnOK.Tag == null || btnOK.Tag.ToString() == "0" || !IsEnable)
                 {
                     return;
@@ -1221,10 +1114,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
+        private void btnBatchBroken_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dgvType.Visible = false;
+                if (btnBatchBroken.Tag == null || btnBatchBroken.Tag.ToString() == "0" || !IsEnable)
+                {
+                    return;
+                }
+                int brokentype =BrokenHelper.ShowFormBrokenBatch();
+                
+              if(  brokentype>=0){
+                  CurrentProducts.ForEach(r => { r.brokentypekey = brokentype; r.brokentypevalue = BrokenHelper.GetBrokenTypeName(brokentype); });
+
+                  LoadDgvCart();
+              }
+
+            }
+            catch { }
+        }
+
         #region
         private int CurrentPage = 1;
         private void rbtnPageUp_ButtonClick(object sender, EventArgs e)
         {
+            dgvType.Visible = false;
             if (!rbtnPageUp.WhetherEnable)
             {
                 return;
@@ -1235,6 +1150,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void rbtnPageDown_ButtonClick(object sender, EventArgs e)
         {
+            dgvType.Visible = false;
             if (!rbtnPageDown.WhetherEnable)
             {
                 return;
@@ -1309,8 +1225,78 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
+
+        private void LoadDgvType()
+        {
+            try
+            {
+               
+
+                dgvType.Rows.Clear();
+
+                foreach (BrokenType typeitem in BrokenHelper.GetBrokenType(false))
+                {
+                    dgvType.Rows.Add(typeitem.key,typeitem.value);
+                }
+
+                if (dgvType.Rows.Count > 5)
+                {
+                    dgvType.Height = dgvType.RowTemplate.Height * 5;
+                }
+                else
+                {
+                    dgvType.Height = dgvType.RowTemplate.Height*dgvType.Rows.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void dgvType_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                 if (!IsEnable)
+                {
+                    return;
+                }
+
+                if (e.RowIndex < 0)
+                    return;
+
+                if (SelectBrokenPro == null)
+                {
+                    return;
+                }
+
+                BrokenProduct OperationPro = CurrentProducts.FirstOrDefault(r=> r.skucode==SelectBrokenPro.skucode);
+                OperationPro.brokentypekey =(int) dgvType.Rows[e.RowIndex].Cells[0].Value;
+                OperationPro.brokentypevalue = dgvType.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                dgvType.Visible = false;
+                LoadDgvCart();
+
+            }
+            catch
+            {
+                
+            }
+        }
         #endregion
 
+        private void FormBrokenCreate_MouseDown(object sender, MouseEventArgs e)
+        {
+            dgvType.Visible = false;
+        }
+
+        private void pnlHead_MouseDown(object sender, MouseEventArgs e)
+        {
+            dgvType.Visible = false;
+        }
+
       
+
     }
 }

@@ -31,6 +31,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public Membertenantresponsevo membertenantresponsevo { get; set; }
 
+        public MemberOrderResponsevo memberorderresponsevo { get; set; }
         /// <summary>
         /// 是否使用积分  主界面勾选/取消勾选积分修改状态
         /// </summary>
@@ -136,4 +137,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public bool onbirthday { get; set; }
     }
 
+    /// <summary>
+    /// 2020-08-19 add 显示最后一次消费时间  和最近一个月消费次数
+    /// </summary>
+    public class MemberOrderResponsevo
+    {
+        public string lastpayat { get; set; }
+
+        public string paycount { get; set; }
+    }
 }

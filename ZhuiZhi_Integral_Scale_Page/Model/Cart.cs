@@ -72,8 +72,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
 
         public int selfpickenabled { get; set; }
-        public List<Availablecoupon> availablecoupons { get; set; }
-        public List<Unavailablecoupon> unavailablecoupons { get; set; }
+        public List<OrderCouponVo> availablecoupons { get; set; }
+        public List<OrderCouponVo> unavailablecoupons { get; set; }
         public Pointinfo pointinfo { get; set; }
         public int selectcouponcount { get; set; }
         public string orderplaceid { get; set; }
@@ -143,7 +143,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         //使用积分
         public long pospointofuser { get; set; }
 
-        public Dictionary<String, Availablecoupon> selectedcoupons { get; set; }
+        public Dictionary<String, OrderCouponVo> selectedcoupons { get; set; }
 
         //Add 2020-05-18  
         public decimal balancepaypromoamt { get; set; }
@@ -163,6 +163,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 多方支付 OtherPayType.value
         /// </summary>
         public string otherpaytype { set; get; }
+
+
+        public List<OtherPayInfoEntity> otherpayinfos { set; get; }
     }
     [Serializable]
     public class Tenant
@@ -199,6 +202,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public int balancemixpayenabled { get; set; }
         public int swipecardpayenabled { get; set; }
+
+        public List<OrderPayTypeVo> otherpaytypeinfo { get; set; }
     }
     [Serializable]
     public class Product
@@ -341,7 +346,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
 
     [Serializable]
-    public class Availablecoupon
+    public class OrderCouponVo
     {
         public string catalog { get; set; }
         public decimal amount { get; set; }
@@ -371,35 +376,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public Exchangeconditioncontext exchangeconditioncontext { get; set; }
 
+        /// <summary>
+        /// 本地新增 区分是否可用，用于全量展示优惠券标识
+        /// </summary>
+        public bool IsEnable { get; set; }
     }
-    [Serializable]
-    public class Unavailablecoupon
-    {
-        public string catalog { get; set; }
-        public decimal amount { get; set; }
-        public string desc { get; set; }
-        public string name { get; set; }
-        public bool enabled { get; set; }
-        public int ordersubtype { get; set; }
-        public string promotionrealmtype { get; set; }
-        public string sendruletype { get; set; }
-        public string shoprealmdetail { get; set; }
-        public string districtscope { get; set; }
-        public string shopscope { get; set; }
-        public string tenantid { get; set; }
-        public decimal exchangepoints { get; set; }
-        public string invalidreason { get; set; }
-        public decimal orderminamount { get; set; }
-        public string ordersubtypedesc { get; set; }
-        public long enabledfrom { get; set; }
-        public long enabledto { get; set; }
-        public string availableskudesc { get; set; }
-        public string availableshopdesc { get; set; }
-        public string promotioncode { get; set; }
-        public string couponcode { get; set; }
 
-        public Exchangeconditioncontext exchangeconditioncontext { get; set; }
-    }
 
     [Serializable]
     public class Exchangeconditioncontext
@@ -434,6 +416,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
     {
         public string key { get; set; }
         public string value { get; set; }
+    }
+
+    [Serializable]
+    public class OrderPayTypeVo
+    {
+        public string code { get; set; }
+        public decimal defaultamt { get; set; }
+
+        public bool discountsoverlay { get; set; }
+        public string name { get; set; }
+        public bool needcouponcode { get; set; }
     }
 
 

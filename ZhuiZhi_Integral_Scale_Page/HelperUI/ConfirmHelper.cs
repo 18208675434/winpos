@@ -30,7 +30,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 asf.AutoScaleControlTest(frmconfirm, 700, 200, 700 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmconfirm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmconfirm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmconfirm.Height) / 2);
                 frmconfirm.TopMost = true;
-
             }
             catch (Exception ex)
             {
@@ -57,7 +56,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                     asf.AutoScaleControlTest(frmconfirm, 700, 200, 700 * MainModel.midScale, 200 * MainModel.midScale, true);
                     frmconfirm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmconfirm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmconfirm.Height) / 2);
                     frmconfirm.TopMost = true;
-
                 }
                 frmconfirm.UpInfo(title,msg,needcancel);
                 frmconfirm.ShowDialog();

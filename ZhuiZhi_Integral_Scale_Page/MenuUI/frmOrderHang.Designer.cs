@@ -35,14 +35,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrderHang));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvOrderOnLine = new System.Windows.Forms.DataGridView();
             this.serialno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hangtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewImageColumn();
             this.Continue = new System.Windows.Forms.DataGridViewImageColumn();
             this.DelHang = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlDgvHeadOffLine = new System.Windows.Forms.Panel();
@@ -67,6 +67,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.pnlControl = new System.Windows.Forms.Panel();
+            this.pnlDetail = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.picTitle = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderOnLine)).BeginInit();
             this.pnlDgvHeadOffLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
@@ -74,6 +78,9 @@
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.pnlDgvHead.SuspendLayout();
+            this.pnlControl.SuspendLayout();
+            this.pnlDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTitle)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvOrderOnLine
@@ -100,8 +107,8 @@
             this.dgvOrderOnLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.serialno,
             this.phone,
-            this.title,
             this.hangtime,
+            this.title,
             this.Continue,
             this.DelHang});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -118,6 +125,7 @@
             this.dgvOrderOnLine.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvOrderOnLine.RowHeadersVisible = false;
             this.dgvOrderOnLine.RowHeadersWidth = 40;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.dgvOrderOnLine.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvOrderOnLine.RowTemplate.Height = 80;
@@ -139,34 +147,39 @@
             // 
             // phone
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.phone.DefaultCellStyle = dataGridViewCellStyle3;
-            this.phone.FillWeight = 100.195F;
+            this.phone.FillWeight = 60F;
             this.phone.HeaderText = "会员手机号";
             this.phone.Name = "phone";
             // 
-            // title
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.title.DefaultCellStyle = dataGridViewCellStyle4;
-            this.title.FillWeight = 100.195F;
-            this.title.HeaderText = "商品明细";
-            this.title.Name = "title";
-            // 
             // hangtime
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.hangtime.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.hangtime.DefaultCellStyle = dataGridViewCellStyle4;
             this.hangtime.FillWeight = 100.195F;
             this.hangtime.HeaderText = "挂单时间";
             this.hangtime.Name = "hangtime";
+            this.hangtime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // title
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle5.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle5.NullValue")));
+            this.title.DefaultCellStyle = dataGridViewCellStyle5;
+            this.title.FillWeight = 100.195F;
+            this.title.HeaderText = "商品明细";
+            this.title.Name = "title";
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Continue
             // 
-            this.Continue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 14F);
@@ -178,11 +191,9 @@
             this.Continue.Name = "Continue";
             this.Continue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Continue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Continue.Width = 89;
             // 
             // DelHang
             // 
-            this.DelHang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 14F);
@@ -193,7 +204,6 @@
             this.DelHang.HeaderText = "删除挂单";
             this.DelHang.Name = "DelHang";
             this.DelHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DelHang.Width = 89;
             // 
             // pnlDgvHeadOffLine
             // 
@@ -343,7 +353,7 @@
             this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContinue.Font = new System.Drawing.Font("微软雅黑", 9.5F);
             this.btnContinue.ForeColor = System.Drawing.Color.White;
-            this.btnContinue.Location = new System.Drawing.Point(780, 190);
+            this.btnContinue.Location = new System.Drawing.Point(365, 25);
             this.btnContinue.Margin = new System.Windows.Forms.Padding(2);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(83, 35);
@@ -360,7 +370,7 @@
             this.btnDelHang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelHang.Font = new System.Drawing.Font("微软雅黑", 9.5F);
             this.btnDelHang.ForeColor = System.Drawing.Color.White;
-            this.btnDelHang.Location = new System.Drawing.Point(886, 190);
+            this.btnDelHang.Location = new System.Drawing.Point(452, 25);
             this.btnDelHang.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelHang.Name = "btnDelHang";
             this.btnDelHang.Size = new System.Drawing.Size(83, 35);
@@ -398,7 +408,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(783, 13);
+            this.label2.Location = new System.Drawing.Point(288, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 23);
             this.label2.TabIndex = 36;
@@ -409,7 +419,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(484, 13);
+            this.label3.Location = new System.Drawing.Point(623, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 23);
             this.label3.TabIndex = 35;
@@ -420,7 +430,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(183, 13);
+            this.label4.Location = new System.Drawing.Point(130, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 33;
@@ -475,6 +485,46 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
+            // pnlControl
+            // 
+            this.pnlControl.BackColor = System.Drawing.Color.White;
+            this.pnlControl.Controls.Add(this.pnlDetail);
+            this.pnlControl.Controls.Add(this.btnDelHang);
+            this.pnlControl.Controls.Add(this.btnContinue);
+            this.pnlControl.Location = new System.Drawing.Point(335, -528);
+            this.pnlControl.Name = "pnlControl";
+            this.pnlControl.Size = new System.Drawing.Size(716, 102);
+            this.pnlControl.TabIndex = 46;
+            // 
+            // pnlDetail
+            // 
+            this.pnlDetail.Controls.Add(this.lblTitle);
+            this.pnlDetail.Controls.Add(this.picTitle);
+            this.pnlDetail.Location = new System.Drawing.Point(3, 3);
+            this.pnlDetail.Name = "pnlDetail";
+            this.pnlDetail.Size = new System.Drawing.Size(283, 80);
+            this.pnlDetail.TabIndex = 40;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblTitle.Location = new System.Drawing.Point(3, 30);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(55, 21);
+            this.lblTitle.TabIndex = 40;
+            this.lblTitle.Text = "label9";
+            // 
+            // picTitle
+            // 
+            this.picTitle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picTitle.BackgroundImage")));
+            this.picTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picTitle.Location = new System.Drawing.Point(228, 22);
+            this.picTitle.Name = "picTitle";
+            this.picTitle.Size = new System.Drawing.Size(35, 35);
+            this.picTitle.TabIndex = 39;
+            this.picTitle.TabStop = false;
+            // 
             // frmOrderHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -483,14 +533,13 @@
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1178, 760);
             this.ControlBox = false;
+            this.Controls.Add(this.pnlControl);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);
             this.Controls.Add(this.picScreen);
-            this.Controls.Add(this.btnDelHang);
-            this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.pnlHead);
-            this.Controls.Add(this.pnlDgvHeadOffLine);
             this.Controls.Add(this.pnlDgvHead);
+            this.Controls.Add(this.pnlDgvHeadOffLine);
             this.Controls.Add(this.dgvOrderOnLine);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -513,6 +562,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.pnlDgvHead.ResumeLayout(false);
             this.pnlDgvHead.PerformLayout();
+            this.pnlControl.ResumeLayout(false);
+            this.pnlDetail.ResumeLayout(false);
+            this.pnlDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTitle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -537,16 +590,20 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serialno;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn title;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hangtime;
-        private System.Windows.Forms.DataGridViewImageColumn Continue;
-        private System.Windows.Forms.DataGridViewImageColumn DelHang;
         private RoundButton rbtnPageDown;
         private RoundButton rbtnPageUp;
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.Panel pnlControl;
+        private System.Windows.Forms.PictureBox picTitle;
+        private System.Windows.Forms.Panel pnlDetail;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serialno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hangtime;
+        private System.Windows.Forms.DataGridViewImageColumn title;
+        private System.Windows.Forms.DataGridViewImageColumn Continue;
+        private System.Windows.Forms.DataGridViewImageColumn DelHang;
     }
 }

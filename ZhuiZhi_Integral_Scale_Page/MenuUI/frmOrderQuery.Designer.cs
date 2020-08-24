@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrderQuery));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefundByAmt = new System.Windows.Forms.Button();
             this.lblOrderIDShuiyin = new System.Windows.Forms.Label();
             this.lblPhoneShuiyin = new System.Windows.Forms.Label();
             this.btnNotRefundPic = new System.Windows.Forms.Button();
@@ -77,7 +78,7 @@
             this.orderstatusvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reprint = new System.Windows.Forms.DataGridViewImageColumn();
             this.cancle = new System.Windows.Forms.DataGridViewImageColumn();
-            this.picScreen = new System.Windows.Forms.PictureBox();
+            this.byamt = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -93,23 +94,25 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.picScreen = new System.Windows.Forms.PictureBox();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.panel1.SuspendLayout();
             this.pnlDgvHead.SuspendLayout();
             this.pnlEmptyOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderOnLine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.pnlDgvOffLineHead.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btnRefundByAmt);
             this.panel1.Controls.Add(this.lblOrderIDShuiyin);
             this.panel1.Controls.Add(this.lblPhoneShuiyin);
             this.panel1.Controls.Add(this.btnNotRefundPic);
@@ -131,6 +134,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1154, 98);
             this.panel1.TabIndex = 0;
+            // 
+            // btnRefundByAmt
+            // 
+            this.btnRefundByAmt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(137)))), ((int)(((byte)(205)))));
+            this.btnRefundByAmt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefundByAmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefundByAmt.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnRefundByAmt.ForeColor = System.Drawing.Color.White;
+            this.btnRefundByAmt.Location = new System.Drawing.Point(946, 6);
+            this.btnRefundByAmt.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRefundByAmt.Name = "btnRefundByAmt";
+            this.btnRefundByAmt.Size = new System.Drawing.Size(65, 35);
+            this.btnRefundByAmt.TabIndex = 102;
+            this.btnRefundByAmt.Text = "退差价";
+            this.btnRefundByAmt.UseVisualStyleBackColor = false;
+            this.btnRefundByAmt.Visible = false;
             // 
             // lblOrderIDShuiyin
             // 
@@ -398,7 +417,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label12.ForeColor = System.Drawing.Color.DimGray;
-            this.label12.Location = new System.Drawing.Point(880, 13);
+            this.label12.Location = new System.Drawing.Point(829, 13);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 23);
             this.label12.TabIndex = 38;
@@ -409,7 +428,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label6.ForeColor = System.Drawing.Color.DimGray;
-            this.label6.Location = new System.Drawing.Point(1040, 13);
+            this.label6.Location = new System.Drawing.Point(1017, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 23);
             this.label6.TabIndex = 37;
@@ -420,7 +439,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(704, 13);
+            this.label5.Location = new System.Drawing.Point(666, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 23);
             this.label5.TabIndex = 36;
@@ -431,7 +450,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label7.ForeColor = System.Drawing.Color.DimGray;
-            this.label7.Location = new System.Drawing.Point(529, 13);
+            this.label7.Location = new System.Drawing.Point(498, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(78, 23);
             this.label7.TabIndex = 35;
@@ -442,7 +461,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label9.ForeColor = System.Drawing.Color.DimGray;
-            this.label9.Location = new System.Drawing.Point(351, 13);
+            this.label9.Location = new System.Drawing.Point(330, 13);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(78, 23);
             this.label9.TabIndex = 34;
@@ -453,7 +472,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label10.ForeColor = System.Drawing.Color.DimGray;
-            this.label10.Location = new System.Drawing.Point(178, 13);
+            this.label10.Location = new System.Drawing.Point(165, 13);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(61, 23);
             this.label10.TabIndex = 33;
@@ -516,14 +535,14 @@
             this.dgvOrderOnLine.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvOrderOnLine.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvOrderOnLine.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderOnLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderOnLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrderOnLine.ColumnHeadersHeight = 30;
             this.dgvOrderOnLine.ColumnHeadersVisible = false;
             this.dgvOrderOnLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -534,15 +553,16 @@
             this.paytype,
             this.orderstatusvalue,
             this.reprint,
-            this.cancle});
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrderOnLine.DefaultCellStyle = dataGridViewCellStyle20;
+            this.cancle,
+            this.byamt});
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrderOnLine.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvOrderOnLine.GridColor = System.Drawing.Color.LightGray;
             this.dgvOrderOnLine.Location = new System.Drawing.Point(12, 301);
             this.dgvOrderOnLine.Margin = new System.Windows.Forms.Padding(2);
@@ -562,10 +582,10 @@
             // 
             // orderat
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.orderat.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.orderat.DefaultCellStyle = dataGridViewCellStyle2;
             this.orderat.FillWeight = 100.195F;
             this.orderat.HeaderText = "下单时间";
             this.orderat.Name = "orderat";
@@ -573,9 +593,9 @@
             // 
             // orderid
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.orderid.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.orderid.DefaultCellStyle = dataGridViewCellStyle3;
             this.orderid.FillWeight = 100.195F;
             this.orderid.HeaderText = "订单号";
             this.orderid.Name = "orderid";
@@ -583,9 +603,9 @@
             // 
             // customerphone
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.customerphone.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.customerphone.DefaultCellStyle = dataGridViewCellStyle4;
             this.customerphone.FillWeight = 100.195F;
             this.customerphone.HeaderText = "下单用户";
             this.customerphone.Name = "customerphone";
@@ -593,9 +613,9 @@
             // 
             // title
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.title.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.title.DefaultCellStyle = dataGridViewCellStyle5;
             this.title.FillWeight = 100.195F;
             this.title.HeaderText = "商品明细";
             this.title.Name = "title";
@@ -603,9 +623,9 @@
             // 
             // paytype
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.paytype.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.paytype.DefaultCellStyle = dataGridViewCellStyle6;
             this.paytype.FillWeight = 100.195F;
             this.paytype.HeaderText = "支付方式";
             this.paytype.Name = "paytype";
@@ -613,9 +633,9 @@
             // 
             // orderstatusvalue
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.orderstatusvalue.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.orderstatusvalue.DefaultCellStyle = dataGridViewCellStyle7;
             this.orderstatusvalue.FillWeight = 70F;
             this.orderstatusvalue.HeaderText = "订单状态";
             this.orderstatusvalue.Name = "orderstatusvalue";
@@ -623,12 +643,12 @@
             // 
             // reprint
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle18.NullValue")));
-            this.reprint.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle8.NullValue")));
+            this.reprint.DefaultCellStyle = dataGridViewCellStyle8;
             this.reprint.FillWeight = 50F;
             this.reprint.HeaderText = "重打小票";
             this.reprint.Name = "reprint";
@@ -638,29 +658,24 @@
             // 
             // cancle
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle19.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle19.NullValue")));
-            this.cancle.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle9.NullValue")));
+            this.cancle.DefaultCellStyle = dataGridViewCellStyle9;
             this.cancle.FillWeight = 35F;
             this.cancle.HeaderText = "退款";
             this.cancle.Name = "cancle";
             this.cancle.ReadOnly = true;
             this.cancle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // picScreen
+            // byamt
             // 
-            this.picScreen.BackColor = System.Drawing.Color.Red;
-            this.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picScreen.Location = new System.Drawing.Point(0, 0);
-            this.picScreen.Name = "picScreen";
-            this.picScreen.Size = new System.Drawing.Size(10, 10);
-            this.picScreen.TabIndex = 25;
-            this.picScreen.TabStop = false;
-            this.picScreen.Visible = false;
-            this.picScreen.Click += new System.EventHandler(this.picScreen_Click);
+            this.byamt.FillWeight = 40F;
+            this.byamt.HeaderText = "退差价";
+            this.byamt.Name = "byamt";
+            this.byamt.ReadOnly = true;
             // 
             // pnlHead
             // 
@@ -844,24 +859,17 @@
             this.label19.TabIndex = 32;
             this.label19.Text = "下单时间";
             // 
-            // rbtnPageUp
+            // picScreen
             // 
-            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
-            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
-            this.rbtnPageUp.Image = null;
-            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnPageUp.Location = new System.Drawing.Point(876, 194);
-            this.rbtnPageUp.Name = "rbtnPageUp";
-            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
-            this.rbtnPageUp.PenWidth = 1;
-            this.rbtnPageUp.RoundRadius = 10;
-            this.rbtnPageUp.ShowImg = false;
-            this.rbtnPageUp.ShowText = "上一页";
-            this.rbtnPageUp.Size = new System.Drawing.Size(140, 50);
-            this.rbtnPageUp.TabIndex = 40;
-            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
-            this.rbtnPageUp.WhetherEnable = false;
-            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
+            this.picScreen.BackColor = System.Drawing.Color.Red;
+            this.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picScreen.Location = new System.Drawing.Point(0, 0);
+            this.picScreen.Name = "picScreen";
+            this.picScreen.Size = new System.Drawing.Size(10, 10);
+            this.picScreen.TabIndex = 25;
+            this.picScreen.TabStop = false;
+            this.picScreen.Visible = false;
+            this.picScreen.Click += new System.EventHandler(this.picScreen_Click);
             // 
             // rbtnPageDown
             // 
@@ -881,6 +889,25 @@
             this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
             this.rbtnPageDown.WhetherEnable = false;
             this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
+            // 
+            // rbtnPageUp
+            // 
+            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
+            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageUp.Image = null;
+            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageUp.Location = new System.Drawing.Point(876, 194);
+            this.rbtnPageUp.Name = "rbtnPageUp";
+            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageUp.PenWidth = 1;
+            this.rbtnPageUp.RoundRadius = 10;
+            this.rbtnPageUp.ShowImg = false;
+            this.rbtnPageUp.ShowText = "上一页";
+            this.rbtnPageUp.Size = new System.Drawing.Size(140, 50);
+            this.rbtnPageUp.TabIndex = 40;
+            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageUp.WhetherEnable = false;
+            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
             // frmOrderQuery
             // 
@@ -916,7 +943,6 @@
             this.pnlEmptyOrder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderOnLine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).EndInit();
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
@@ -924,6 +950,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.pnlDgvOffLineHead.ResumeLayout(false);
             this.pnlDgvOffLineHead.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -975,6 +1002,10 @@
         private System.Windows.Forms.Label lblPhoneShuiyin;
         private RoundButton rbtnPageUp;
         private RoundButton rbtnPageDown;
+        private System.Windows.Forms.Panel pnlMenu;
+        private System.Windows.Forms.Label lblMenu;
+        private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.Button btnRefundByAmt;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderat;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderid;
         private System.Windows.Forms.DataGridViewTextBoxColumn customerphone;
@@ -983,8 +1014,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orderstatusvalue;
         private System.Windows.Forms.DataGridViewImageColumn reprint;
         private System.Windows.Forms.DataGridViewImageColumn cancle;
-        private System.Windows.Forms.Panel pnlMenu;
-        private System.Windows.Forms.Label lblMenu;
-        private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.DataGridViewImageColumn byamt;
     }
 }

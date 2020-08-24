@@ -372,9 +372,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 cartpara.cashcouponamt = cart.cashcouponamt;
                 cartpara.fixpricetotal = cart.fixpricetotal;
-                cartpara.otherpayamt = cart.otherpayamt;
-                cartpara.otherpaycouponcode = cart.otherpaycouponcode;
-                cartpara.otherpaytype = cart.otherpaytype;
+
+                cartpara.otherpayinfos = cart.otherpayinfos;
+                //cartpara.otherpayamt = cart.otherpayamt;
+                //cartpara.otherpaycouponcode = cart.otherpaycouponcode;
+                //cartpara.otherpaytype = cart.otherpaytype;
 
                 if (MainModel.CurrentMember != null)
                 {
@@ -397,16 +399,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     cartpara.paypasswordtype = 1;
                     cartpara.paypassword = cart.paypassword;
                 }
-
-                ////TODO  如果修改价钱为0 则表示不修改  值修改为订单总价格
-                //if (cartpara.fixpricetotal == 0)
-                //{
-                //    cartpara.fixpricetotal = cart.totalpayment;
-                //}
-                //var jSetting = new JsonSerializerSettings();
-
-
-                //jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
 
                 string tempjson = JsonConvert.SerializeObject(cartpara);
 
@@ -498,9 +490,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 //order.cashcouponamt=cart.cashc
                 order.cashcouponamt = cart.cashcouponamt;
 
-                order.otherpayamt = cart.otherpayamt;
-                order.otherpaycouponcode = cart.otherpaycouponcode;
-                order.otherpaytype = cart.otherpaytype;
+
+                order.otherpayinfos = cart.otherpayinfos;
+                //order.otherpayamt = cart.otherpayamt;
+                //order.otherpaycouponcode = cart.otherpaycouponcode;
+                //order.otherpaytype = cart.otherpaytype;
 
                 //现金支付
                 if (order.cashpayoption == 1)
@@ -1112,7 +1106,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     erromessage = "";
                     return rd.data.ToString();
-
                 }
                 else
                 {
@@ -3181,6 +3174,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             {
                 LogManager.WriteLog("Error", "查询报损详情异常 ：" + ex.Message);
                 errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        public List<BrokenType> ListSubType(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/common/warehousedelivery/listsubtype";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    List<BrokenType> result = JsonConvert.DeserializeObject<List<BrokenType>>(rd.data.ToString());
+                    return result;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "listsubtype:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取listsubtype异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
                 return null;
             }
         }

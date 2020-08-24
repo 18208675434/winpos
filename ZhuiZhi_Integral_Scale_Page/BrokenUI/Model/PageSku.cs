@@ -16,6 +16,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
 
     public class BrokenSku
     {
+        public  int actiontype { get; set; }
         public string categoryid { get; set; }
         public string categoryname { get; set; }
         public string createdat { get; set; }

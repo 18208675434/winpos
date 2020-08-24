@@ -119,7 +119,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好 ∨";
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
                 lblMenu.Left = picMenu.Right;
-
+                pnlLoading.Size = new System.Drawing.Size(60, 60);
 
                 if (MainModel.URL.Contains("pos-qa"))
                 {
@@ -243,7 +243,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                
 
-                pnlLoading.Size = new System.Drawing.Size(60, 60);
+               
 
                 keyBoard.Size = new System.Drawing.Size(dgvGood.Width, dgvGood.RowTemplate.Height * 3);
                 INIManager.SetIni("System", "MainType", "Main", MainModel.IniPath);
@@ -988,7 +988,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         LoadDgvGood(true, true);
                     }
 
-
                 }));
             }
             catch (Exception ex)
@@ -1026,24 +1025,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         lblCreditStr.Text = "积分" + member.creditaccountrepvo.availablecredit.ToString();
 
+                        lblBalance.Text = "￥" + member.barcoderecognitionresponse.balance;
+
+                        if (member.memberorderresponsevo != null && !string.IsNullOrEmpty(member.memberorderresponsevo.lastpayat))
+                        {
+                            lblMemberRecord.Visible = true;
+                            lblMemberRecord.Text = "近一次消费时间:" + MainModel.GetDateTimeByStamp(member.memberorderresponsevo.lastpayat).ToString("yyyy-MM-dd") + " | 近一月消费次数:" + member.memberorderresponsevo.paycount;
+                        }
+                        else
+                        {
+                            lblMemberRecord.Visible = false;
+                        }
+
                         if (member.membertenantresponsevo.onbirthday)
                         {
                             picBirthday.Visible = true;
 
-                            lblMemberPhone.Top = picBirthday.Bottom;
-                            pbtnExitMember.Top = picBirthday.Bottom;
+                            lblMemberPhone.Top =lblMemberRecord.Top - lblMemberPhone.Height;
+                            pbtnExitMember.Top = lblMemberPhone.Top;
 
-                            pnlCoupon.Top = lblMemberPhone.Bottom+(pnlMember.Height - lblMemberPhone.Bottom - pnlCoupon.Height) / 2;
-                            pnlCredit.Top = pnlCoupon.Top;
                         }
                         else
                         {
                             picBirthday.Visible = false;
 
-                            pnlCoupon.Top = pnlMember.Height - pnlCoupon.Height - 10;
-                            pnlCredit.Top = pnlCoupon.Top;
-
-                            lblMemberPhone.Top = (pnlMember.Height - pnlCoupon.Top - lblMemberPhone.Height) / 2;
+                            lblMemberPhone.Top = (pnlMember.Height - lblMemberRecord.Top - lblMemberPhone.Height) / 2;
                             pbtnExitMember.Top = lblMemberPhone.Top;
                         }
 
@@ -1077,7 +1083,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         {
                             LoadDgvGood(true, true);
                         }
-
 
                     }));
                 }
@@ -1149,7 +1154,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-                    CurrentCart.selectedcoupons = new Dictionary<string, Availablecoupon>();
+                    CurrentCart.selectedcoupons = new Dictionary<string, OrderCouponVo>();
                     CurrentCart.selectedcoupons.Add(frmcoupon.SelectCouponCode, frmcoupon.SelectPromotionCode);
                 }
 
@@ -2640,6 +2645,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     CurrentCartPage = 1;
                     LoadDgvCart();
 
+
+                    lblCoupon.Text = "共" + CartUtil.GetAllCouponCount(CurrentCart) + "张";
                     if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Count > 0)
                     {
 
@@ -2657,13 +2664,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         else
                         {
                             MainModel.CurrentCouponCode = "";
-                            lblCoupon.Text = CurrentCart.availablecoupons.Count + "张";
                         }
                     }
                     else
                     {
                         MainModel.CurrentCouponCode = "";
-                        lblCoupon.Text = "0张";
                     }
 
                     if (cart.totalpayment == 0 && cart.products != null && cart.products.Count > 0)
@@ -3135,9 +3140,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     CurrentCartPage = 1;
                     LoadDgvCart();
 
+                    lblCoupon.Text = "共" + CartUtil.GetAllCouponCount(CurrentCart) + "张";
                     if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Count > 0)
                     {
-
 
                         if (CurrentCart.couponpromoamt > 0)
                         {
@@ -3146,13 +3151,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         else
                         {
                             MainModel.CurrentCouponCode = "";
-                            lblCoupon.Text = CurrentCart.availablecoupons.Count + "张";
                         }
                     }
                     else
                     {
                         MainModel.CurrentCouponCode = "";
-                        lblCoupon.Text = "0张";
                     }
 
                     if (MainModel.CurrentMember != null && MainModel.CurrentMember.isUsePoint)
@@ -3176,7 +3179,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         if (MainModel.CurrentMember != null && CurrentCart != null && CurrentCart.pointinfo != null)
                         {
                             lblCreditStr.Text = "积分" + CurrentCart.pointinfo.totalpoints;
-
                             lblCredit.Text = "可用" + CurrentCart.pointinfo.availablepoints;
                             picCredit.BackgroundImage = picNotSelectCredit.Image;
                             lblCredit.Visible = true;

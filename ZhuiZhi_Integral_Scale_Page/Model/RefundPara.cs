@@ -29,6 +29,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public List<OrderRefunditem> orderrefunditems { get; set; }
 
+        /// <summary>
+        /// 是否为指定金额退款 1：是  0或空为否
+        /// </summary>
+        public int specifiedamountrefund { get; set; }
+
     }
     public class OrderRefunditem
     {
@@ -36,7 +41,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 退款份数
         /// </summary>
         public decimal refundqty { get; set; }
-        
+
+        /// <summary>
+        /// 指定退款金额
+        /// </summary>
+        public decimal refundamt { get; set; }
         /// <summary>
         /// 商品明细行id
         /// </summary>

@@ -220,7 +220,7 @@
             this.pnlItem.Controls.Add(this.lblContent);
             this.pnlItem.Controls.Add(this.lblUnit);
             this.pnlItem.Controls.Add(this.lblAmount);
-            this.pnlItem.Location = new System.Drawing.Point(12, -368);
+            this.pnlItem.Location = new System.Drawing.Point(12, -306);
             this.pnlItem.Name = "pnlItem";
             this.pnlItem.Size = new System.Drawing.Size(350, 66);
             this.pnlItem.TabIndex = 49;
@@ -337,9 +337,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmCoupon";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCoupon_FormClosing);
             this.Shown += new System.EventHandler(this.frmCoupon_Shown);
-            this.Resize += new System.EventHandler(this.frmCoupon_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoupon)).EndInit();
             this.pnlCouponNone.ResumeLayout(false);
             this.pnlCouponNone.PerformLayout();

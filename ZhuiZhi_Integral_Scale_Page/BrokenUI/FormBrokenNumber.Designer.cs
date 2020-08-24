@@ -47,7 +47,6 @@
             this.btn3 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.rbtnOK = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.timerFocus = new System.Windows.Forms.Timer(this.components);
@@ -84,7 +83,7 @@
             this.txtNum.MaxLength = 7;
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(274, 25);
-            this.txtNum.TabIndex = 1;
+            this.txtNum.TabIndex = 0;
             this.txtNum.TextChanged += new System.EventHandler(this.txtNum_TextChanged);
             // 
             // btnBack
@@ -297,23 +296,6 @@
             this.btn1.UseVisualStyleBackColor = true;
             this.btn1.Click += new System.EventHandler(this.btn_Click);
             // 
-            // btnOK
-            // 
-            this.btnOK.BackColor = System.Drawing.Color.Silver;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(-1, 290);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(2);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(343, 60);
-            this.btnOK.TabIndex = 49;
-            this.btnOK.TabStop = false;
-            this.btnOK.Text = "确 定";
-            this.btnOK.UseVisualStyleBackColor = false;
-            this.btnOK.Visible = false;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
@@ -373,7 +355,6 @@
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
-            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormBrokenNumber";
@@ -381,10 +362,8 @@
             this.Text = "FormNumber";
             this.Activated += new System.EventHandler(this.FormNumber_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNumber_FormClosing);
-            this.Resize += new System.EventHandler(this.FormNumber_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -406,7 +385,6 @@
         private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn1;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label lblInfo;
         private RoundButton rbtnOK;
         private System.Windows.Forms.Timer timerFocus;
