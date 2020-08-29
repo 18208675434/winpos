@@ -83,6 +83,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+                decimal cashactualamt = ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash.PrettyCashHelper.ShowFormGetCashNum();
+
+                if (cashactualamt <= 0)
+                {
+                    return false;
+                }
+
                 ReceiptPara receiptpara = new ReceiptPara();
                 receiptpara.cancelordercount = Convert.ToInt16(INIManager.GetIni("Receipt", "CancelOrderCount", MainModel.IniPath));
                 receiptpara.cancelordertotalmoney = INIManager.GetIni("Receipt", "CancelOrderTotalMoney", MainModel.IniPath);

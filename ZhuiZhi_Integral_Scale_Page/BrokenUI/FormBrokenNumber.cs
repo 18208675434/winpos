@@ -146,11 +146,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 }
             }
             catch { }
-            finally
-            {
-                txtNum.Select();
-                this.txtNum.Select(this.txtNum.TextLength, 0);
-            }
+
 
         }
 
@@ -173,54 +169,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         }
 
-        private void lblShuiyin_Click(object sender, EventArgs e)
-        {
-            txtNum.Select();
-            this.txtNum.Select(this.txtNum.TextLength, 0);
-        }
-
-        private void txtNum_TextChanged(object sender, EventArgs e)
-        {
-            if (txtNum.Text.Length > 0)
-            {
-                lblShuiyin.Visible = false;
-            }
-            else
-            {
-                lblShuiyin.Visible = true;
-                return;
-            }
-
-            try
-            {
-                //double doublenum = Convert.ToDouble(txtNum.Text);
-                decimal doublenum = 0;
-                bool changesuccess =  decimal.TryParse(txtNum.Text,out doublenum);
-                if ( changesuccess && doublenum > 0 )
-                {
-                    rbtnOK.allbackcolor = Color.FromArgb(20,137,205);
-                    rbtnOK.WhetherEnable = true;
-                }
-                else
-                {
-                    rbtnOK.allbackcolor = Color.LightGray;
-                    rbtnOK.WhetherEnable = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                rbtnOK.BackColor = Color.LightGray;
-                rbtnOK.WhetherEnable = true;
-
-                LogManager.WriteLog("数字窗体控件数据变化检测异常"+ex.Message);
-            }
-            finally
-            {
-                txtNum.Select();
-                this.txtNum.Select(this.txtNum.TextLength, 0);
-            }
-        }
-
         protected override bool ProcessDialogKey(Keys keyData)
         {
             try{
@@ -236,15 +184,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         }
 
-        private void FormNumber_Activated(object sender, EventArgs e)
-        {
-            try
-            {
-                txtNum.Select();
-                this.txtNum.Select(this.txtNum.TextLength, 0);
-            }
-            catch { }
-        }
 
         //定时刷新文本焦点  防止客屏视频占用焦点
         private void timerFocus_Tick(object sender, EventArgs e)
@@ -262,6 +201,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
         private void FormNumber_FormClosing(object sender, FormClosingEventArgs e)
         {
             timerFocus.Enabled = false;
+        }
+
+        private void txtCash_DataChanged(string data)
+        {
+            try
+            {
+                //double doublenum = Convert.ToDouble(txtNum.Text);
+                decimal doublenum = 0;
+                bool changesuccess = decimal.TryParse(txtNum.Text, out doublenum);
+                if (changesuccess && doublenum > 0)
+                {
+                    rbtnOK.allbackcolor = Color.FromArgb(20, 137, 205);
+                    rbtnOK.WhetherEnable = true;
+                }
+                else
+                {
+                    rbtnOK.allbackcolor = Color.LightGray;
+                    rbtnOK.WhetherEnable = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                rbtnOK.BackColor = Color.LightGray;
+                rbtnOK.WhetherEnable = true;
+
+                LogManager.WriteLog("数字窗体控件数据变化检测异常" + ex.Message);
+            }
         }
 
     }

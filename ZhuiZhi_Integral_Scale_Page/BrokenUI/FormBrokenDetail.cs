@@ -154,7 +154,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             string quantity = sku.deliveryquantity.ToString();
                             if (sku.weightflag)
                             {
-                                quantity += sku.salesunit;
+                                //quantity += sku.salesunit;
+                                quantity += "KG";
                             }
                             dgvGood.Rows.Add("    " + sku.skuname, deliveryprice, quantity, BrokenHelper.GetBrokenTypeName(sku.actiontype));
                         }

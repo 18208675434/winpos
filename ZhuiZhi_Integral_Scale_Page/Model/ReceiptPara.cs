@@ -45,5 +45,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 备用金
         /// </summary>
         public decimal sparecashamt { set; get; }
+
+        /// <summary>
+        /// 现有金
+        /// </summary>
+        public decimal cashactualamt { set; get; }
     }
 }

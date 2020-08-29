@@ -401,6 +401,7 @@
             // 
             // bgwUpdate
             // 
+            this.bgwUpdate.WorkerSupportsCancellation = true;
             this.bgwUpdate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwUpdate_DoWork);
             // 
             // frmChangeMode

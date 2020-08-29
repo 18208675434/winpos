@@ -108,12 +108,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     if (ParaProduct.price.saleprice == ParaProduct.price.originprice)
                     {
-                        lblPrice.Text = ParaProduct.price.saleprice.ToString("f2");
+                        lblPrice.Text ="￥"+ ParaProduct.price.saleprice.ToString("f2");
                         lblMemberPrice.Visible = false;
                     }
                     else
                     {
-                        lblPrice.Text = ParaProduct.price.saleprice.ToString("f2");
+                        lblPrice.Text = "￥" + ParaProduct.price.saleprice.ToString("f2");
                         lblMemberPrice.Visible = true;
                         if (!string.IsNullOrEmpty(ParaProduct.price.salepricedesc))
                         {
@@ -122,7 +122,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         if (ParaProduct.price.strikeout == 1)
                         {
-
                             lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Strikeout);
                             lblMemberPrice.Text = ParaProduct.price.originprice.ToString("f2") + "/" + ParaProduct.saleunit;
                         }
@@ -131,6 +130,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Regular);
                             lblMemberPrice.Text = ParaProduct.price.originprice.ToString("f2") + "/" + ParaProduct.saleunit;
                         }
+
+                       
                     }
                 }
                 else
@@ -140,7 +141,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 lblPriceDetail.Text = "/" + ParaProduct.saleunit;
                 lblPriceDetail.Left = lblPrice.Left + lblPrice.Width;
 
-                lblMemberPrice.Left = lblPriceDetail.Right+10;
+                lblMemberPrice.Left = Math.Max(btnCancel.Right - lblMemberPrice.Width, lblPriceDetail.Right);
             }
             catch (Exception ex)
             {

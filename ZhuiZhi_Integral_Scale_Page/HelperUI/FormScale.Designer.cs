@@ -51,7 +51,6 @@
             this.btnZero = new ZhuiZhi_Integral_Scale_UncleFruit.CircleButton();
             this.btnPrint = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.timerScale = new System.Windows.Forms.Timer(this.components);
             this.lblMemberPrice = new System.Windows.Forms.Label();
             this.pic折扣 = new System.Windows.Forms.PictureBox();
@@ -118,7 +117,7 @@
             this.lblPriceDetail.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblPriceDetail.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.lblPriceDetail.ForeColor = System.Drawing.Color.Gray;
-            this.lblPriceDetail.Location = new System.Drawing.Point(215, 116);
+            this.lblPriceDetail.Location = new System.Drawing.Point(199, 117);
             this.lblPriceDetail.Margin = new System.Windows.Forms.Padding(0);
             this.lblPriceDetail.Name = "lblPriceDetail";
             this.lblPriceDetail.Size = new System.Drawing.Size(33, 20);
@@ -132,7 +131,7 @@
             this.lblPrice.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblPrice.ForeColor = System.Drawing.Color.Tomato;
-            this.lblPrice.Location = new System.Drawing.Point(168, 114);
+            this.lblPrice.Location = new System.Drawing.Point(152, 114);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(0);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(47, 24);
@@ -382,19 +381,6 @@
             this.label2.TabIndex = 60;
             this.label2.Text = "￥";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.White;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label5.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label5.Location = new System.Drawing.Point(153, 117);
-            this.label5.Margin = new System.Windows.Forms.Padding(0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 17);
-            this.label5.TabIndex = 61;
-            this.label5.Text = "￥";
-            // 
             // timerScale
             // 
             this.timerScale.Interval = 200;
@@ -535,7 +521,6 @@
             this.Controls.Add(this.pic折扣);
             this.Controls.Add(this.pic直降);
             this.Controls.Add(this.lblMemberPrice);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tplBtn);
             this.Controls.Add(this.btnOK);
@@ -597,7 +582,6 @@
         private RoundButton btnPrint;
         private System.Windows.Forms.TableLayoutPanel tplBtn;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer timerScale;
         private System.Windows.Forms.Label lblMemberPrice;
         private System.Windows.Forms.PictureBox pic折扣;

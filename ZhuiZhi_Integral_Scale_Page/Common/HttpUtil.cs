@@ -969,7 +969,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
-
         /// <summary>
         /// 查询收银机订单详情（打印小票）
         /// </summary>
@@ -980,14 +979,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
-                string url = "/pos/order/pos/detail";
+                string url = "/pos/order/pos/detail/v1";
 
                 string tempjson = JsonConvert.SerializeObject(orderid);
                 tempjson = "{\"orderid\":\"" + orderid + "\"}";
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                //Console.Write(json);
+                LogManager.WriteLog("DEBUG",json);
 
                 // return;
                 if (rd.code == 0)
@@ -1025,6 +1024,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);
 
                 string json = HttpPOST(url, tempjson);
+                LogManager.WriteLog("DEBUG", json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -1211,13 +1211,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
-                string url = "/pos/order/pos/receipt";
+                string url = "/pos/order/pos/receipt/v1";
 
                 string tempjson = JsonConvert.SerializeObject(receiptpara);
 
                 // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
-                // LogManager.WriteLog("交班结果" + json);
+                LogManager.WriteLog("DEBUG","交班结果" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -3070,6 +3070,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string testjson = JsonConvert.SerializeObject(parabroken);
 
                 string json = HttpPOST(url, testjson);
+                LogManager.WriteLog("DEBUG", "新建报损" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -3448,7 +3449,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
         /// <summary>
-        /// 取消订单
+        /// 充值详情
         /// </summary>
         /// <param name="orderid"></param>
         /// <param name="reason"></param>
@@ -3464,7 +3465,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpGET(url, sort);
 
-               // LogManager.WriteLog(json);
+               LogManager.WriteLog(json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -3490,6 +3491,99 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+        #endregion
+
+
+        #region 调价通知
+        /// <summary>
+        /// 是否有调价记录
+        /// </summary>
+        /// <param name="parapagebroken"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public AdjustPriceDynamic GetAdjustPriceDynamicForPos(string startdate, string enddate, bool nowtime, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/product/pos/getadjustpricedynamicforpos";
+
+                SortedDictionary<string, object> sort = new SortedDictionary<string, object>();
+
+                sort.Add("startdate", startdate);
+                sort.Add("enddate", enddate);
+                sort.Add("nowtime", nowtime);
+
+                string parajson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpPOST(url, parajson);
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string Token = rd.data.ToString();
+
+                    AdjustPriceDynamic objresult = JsonConvert.DeserializeObject<AdjustPriceDynamic>(Token);
+                    return objresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "getadjustpricedynamicforpos:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "查询调价异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 查询调价记录列表
+        /// </summary>
+        /// <param name="parapagebroken"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public AdjustPriceRecord GetAdjustPriceRecord(AdjustPricePara adjustpara, ref string errormsg)
+        {
+            try
+            {
+
+                string url = "/pos/product/pos/getadjustpricerecord";
+
+              
+                string parajson = JsonConvert.SerializeObject(adjustpara);
+
+                string json = HttpPOST(url, parajson);
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string Token = rd.data.ToString();
+
+                    AdjustPriceRecord objresult = JsonConvert.DeserializeObject<AdjustPriceRecord>(Token);
+                    return objresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "getadjustpricedynamicforpos:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "查询调价异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
         #endregion
 
         #region  访问服务端

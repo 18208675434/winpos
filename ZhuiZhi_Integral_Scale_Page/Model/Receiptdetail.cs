@@ -19,6 +19,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public List<OrderPriceDetail> basicinfo { get; set; }
         public List<OrderPriceDetail> incomedetails { get; set; }
         public List<OrderPriceDetail> bottomdetails { get; set; }
+
+        public List<OrderPriceDetail> payinfo { get; set; }
+        public List<OrderPriceDetail> otherinfo { get; set; }
+
+        public List<OrderPriceDetail> shopcashinfo { get; set; }
         public long starttime { get; set; }
         public long endtime { get; set; }
 
@@ -28,74 +33,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string shopid { get; set; }
         public string DeviceSN { get; set; }
         public string createurlip { get; set; }
+
+        public string shopname { get; set; }
+
+        public string startserialcode { get; set; }
+
+        public string endserialcode { get; set; }
     }
-
-
-    //public class OrderPriceDetail
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //    public string subtitle { get; set; }
-    //}
-
-    //public class Devicecode
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //}
-
-    //public class Serial
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //}
-
-    //public class Shiftcode
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //}
-
-    //public class Title
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //}
-
-    //public class Totalamount
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //}
-
-    //public class Basicinfo
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //    public string subtitle { get; set; }
-    //}
-
-    //public class Incomedetail
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //    public string subtitle { get; set; }
-    //}
-
-    //public class Bottomdetail
-    //{
-    //    public string title { get; set; }
-    //    public string amount { get; set; }
-    //    public int highlight { get; set; }
-    //    public string subtitle { get; set; }
-    //}
 
 }

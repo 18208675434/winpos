@@ -81,7 +81,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     dgvCartDetail.Rows.Add("实收现金:", "￥" + thisCurrentCart.cashpayamt.ToString("f2"));                      
                 }
 
-                if (thisCurrentCart.otherpayamt > 0)
+                if (thisCurrentCart.otherpayinfos!=null && thisCurrentCart.otherpayinfos.Count > 0)
                 {
                     lblTitle.Text = "继续支付";
                     lblTotalInfo.Text = "还需支付:";

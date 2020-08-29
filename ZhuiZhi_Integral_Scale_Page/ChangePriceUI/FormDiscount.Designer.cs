@@ -49,9 +49,7 @@
             this.picSelect = new System.Windows.Forms.PictureBox();
             this.btn9 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblShuiyin = new System.Windows.Forms.Label();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.btnBack = new System.Windows.Forms.Button();
+            this.txtPrice = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.pnlNumber.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -205,9 +203,7 @@
             this.panel3.Controls.Add(this.picSelect);
             this.panel3.Controls.Add(this.btn9);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.lblShuiyin);
             this.panel3.Controls.Add(this.txtPrice);
-            this.panel3.Controls.Add(this.btnBack);
             this.panel3.Location = new System.Drawing.Point(5, 66);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(410, 100);
@@ -347,41 +343,22 @@
             this.label2.TabIndex = 115;
             this.label2.Text = "折";
             // 
-            // lblShuiyin
-            // 
-            this.lblShuiyin.AutoSize = true;
-            this.lblShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblShuiyin.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.lblShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblShuiyin.Location = new System.Drawing.Point(22, 21);
-            this.lblShuiyin.Name = "lblShuiyin";
-            this.lblShuiyin.Size = new System.Drawing.Size(95, 23);
-            this.lblShuiyin.TabIndex = 68;
-            this.lblShuiyin.Text = "请输入折让";
-            this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
-            // 
             // txtPrice
             // 
-            this.txtPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.txtPrice.Location = new System.Drawing.Point(15, 19);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPrice.BackColor = System.Drawing.Color.White;
+            this.txtPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPrice.DecimalDigits = 3;
+            this.txtPrice.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtPrice.Location = new System.Drawing.Point(13, 11);
+            this.txtPrice.LockFocus = true;
+            this.txtPrice.MaxDeciaml = ((long)(100000));
+            this.txtPrice.MaxLength = 100;
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(276, 29);
-            this.txtPrice.TabIndex = 69;
-            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(10, 12);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(323, 43);
-            this.btnBack.TabIndex = 70;
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.txtPrice.OnlyNumber = true;
+            this.txtPrice.Size = new System.Drawing.Size(323, 45);
+            this.txtPrice.TabIndex = 0;
+            this.txtPrice.WaterText = "请输入折让";
+            this.txtPrice.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txtPrice_DataChanged);
             // 
             // FormDiscount
             // 
@@ -420,9 +397,6 @@
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblShuiyin;
-        private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label lblDiscountPrice;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn5;
@@ -433,5 +407,6 @@
         private System.Windows.Forms.PictureBox picSelect;
         private System.Windows.Forms.Button btn9;
         private System.Windows.Forms.Button btnClear;
+        private MyControl.NumberTextBox txtPrice;
     }
 }

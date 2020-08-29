@@ -100,7 +100,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
         string keyInput = "";
         private void MiniKeyboardHandler(object sender, MyControl.NumberBoard.KeyboardArgs e)
         {
-            TextBox focusing = txtPrice;
+            ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox focusing = txtPrice;
             keyInput = e.KeyCode;
 
             int startDel = 0;
@@ -133,50 +133,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
         private void lblShuiyin_Click(object sender, EventArgs e)
         {
             txtPrice.Focus();
-        }
-
-        private void txtPrice_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                lblShuiyin.Visible = string.IsNullOrEmpty(txtPrice.Text);
-                if (txtPrice.Text == "0" || txtPrice.Text == "." || txtPrice.Text == "")
-                {
-                    txtPrice.Clear();
-                    lblDiscountPrice.Text = "￥" + CurrentProduct.price.originsaleprice.ToString("f2");
-                }
-
-                if (Convert.ToDecimal(txtPrice.Text) >= 10)
-                {
-                    txtPrice.Text = txtPrice.Text.Insert(1, ".");
-                }
-
-                if (txtPrice.Text.Length > 6)
-                {
-                    txtPrice.Text = txtPrice.Text.Substring(0,txtPrice.Text.Length-1);
-                }
-                else
-                {
-                    decimal tempdiscount = Convert.ToDecimal(txtPrice.Text) / 10;
-
-                    lblDiscountPrice.Text = "￥" + (CurrentProduct.price.originsaleprice * tempdiscount).ToString("f2");
-
-                    //if (tempdiscount > 0 && tempdiscount < 1)
-                    //{
-                    //    rbtnOK.WhetherEnable = true;
-                    //}
-                    //else
-                    //{
-                    //    rbtnOK.WhetherEnable = false;
-                    //}
-                }
-               
-            }
-            catch (Exception ex)
-            {
-                                    
-            }
-
         }
 
         private void btnDiscount_Click(object sender, EventArgs e)
@@ -215,6 +171,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                 txtPrice.Text = "";
             }
             catch { }
+        }
+
+        private void txtPrice_DataChanged(string data)
+        {
+            try
+            {
+                if (txtPrice.Text == "0" || txtPrice.Text == "." || txtPrice.Text == "")
+                {
+                    txtPrice.Clear();
+                    lblDiscountPrice.Text = "￥" + CurrentProduct.price.originsaleprice.ToString("f2");
+                }
+
+                if (Convert.ToDecimal(txtPrice.Text) >= 10)
+                {
+                    txtPrice.Text = txtPrice.Text.Insert(1, ".");
+                }
+
+                if (txtPrice.Text.Length > 6)
+                {
+                    txtPrice.Text = txtPrice.Text.Substring(0, txtPrice.Text.Length - 1);
+                }
+                else
+                {
+                    decimal tempdiscount = Convert.ToDecimal(txtPrice.Text) / 10;
+
+                    lblDiscountPrice.Text = "￥" + (CurrentProduct.price.originsaleprice * tempdiscount).ToString("f2");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 

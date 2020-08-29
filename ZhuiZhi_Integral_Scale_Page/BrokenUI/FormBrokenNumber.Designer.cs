@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenNumber));
             this.lblg = new System.Windows.Forms.Label();
-            this.lblShuiyin = new System.Windows.Forms.Label();
-            this.txtNum = new System.Windows.Forms.TextBox();
-            this.btnBack = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnDot = new System.Windows.Forms.Button();
@@ -50,6 +47,7 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.rbtnOK = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.timerFocus = new System.Windows.Forms.Timer(this.components);
+            this.txtNum = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.SuspendLayout();
             // 
             // lblg
@@ -60,43 +58,6 @@
             this.lblg.Size = new System.Drawing.Size(50, 44);
             this.lblg.TabIndex = 64;
             this.lblg.Text = "kg";
-            // 
-            // lblShuiyin
-            // 
-            this.lblShuiyin.AutoSize = true;
-            this.lblShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblShuiyin.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.lblShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblShuiyin.Location = new System.Drawing.Point(31, 65);
-            this.lblShuiyin.Name = "lblShuiyin";
-            this.lblShuiyin.Size = new System.Drawing.Size(129, 23);
-            this.lblShuiyin.TabIndex = 65;
-            this.lblShuiyin.Text = "请输入实际重量";
-            this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
-            // 
-            // txtNum
-            // 
-            this.txtNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtNum.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.txtNum.Location = new System.Drawing.Point(24, 65);
-            this.txtNum.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNum.MaxLength = 7;
-            this.txtNum.Name = "txtNum";
-            this.txtNum.Size = new System.Drawing.Size(274, 25);
-            this.txtNum.TabIndex = 0;
-            this.txtNum.TextChanged += new System.EventHandler(this.txtNum_TextChanged);
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(19, 58);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(293, 43);
-            this.btnBack.TabIndex = 67;
-            this.btnBack.UseVisualStyleBackColor = true;
             // 
             // btnCancle
             // 
@@ -331,17 +292,32 @@
             this.timerFocus.Interval = 1000;
             this.timerFocus.Tick += new System.EventHandler(this.timerFocus_Tick);
             // 
+            // txtNum
+            // 
+            this.txtNum.BackColor = System.Drawing.Color.White;
+            this.txtNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNum.DecimalDigits = 3;
+            this.txtNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtNum.Location = new System.Drawing.Point(19, 57);
+            this.txtNum.LockFocus = true;
+            this.txtNum.MaxDeciaml = ((long)(10000));
+            this.txtNum.MaxLength = 100;
+            this.txtNum.Name = "txtNum";
+            this.txtNum.OnlyNumber = true;
+            this.txtNum.Size = new System.Drawing.Size(293, 50);
+            this.txtNum.TabIndex = 0;
+            this.txtNum.WaterText = "请输入实际重量";
+            this.txtNum.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txtCash_DataChanged);
+            // 
             // FormBrokenNumber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 480);
+            this.Controls.Add(this.txtNum);
             this.Controls.Add(this.rbtnOK);
             this.Controls.Add(this.lblg);
-            this.Controls.Add(this.lblShuiyin);
-            this.Controls.Add(this.txtNum);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnDot);
@@ -360,18 +336,15 @@
             this.Name = "FormBrokenNumber";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormNumber";
-            this.Activated += new System.EventHandler(this.FormNumber_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormNumber_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
 
         private System.Windows.Forms.Label lblg;
-        private System.Windows.Forms.Label lblShuiyin;
-        private System.Windows.Forms.TextBox txtNum;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.Button btnDot;
@@ -388,5 +361,6 @@
         private System.Windows.Forms.Label lblInfo;
         private RoundButton rbtnOK;
         private System.Windows.Forms.Timer timerFocus;
+        private MyControl.NumberTextBox txtNum;
     }
 }

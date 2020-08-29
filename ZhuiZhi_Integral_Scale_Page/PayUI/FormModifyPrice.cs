@@ -27,52 +27,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
 
 
-        private void lblShuiyin_Click(object sender, EventArgs e)
-        {
-            txtCash.Focus();
-            this.txtCash.Select(this.txtCash.TextLength, 0);
-        }
-
-        private void txtCash_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-
-                if (txtCash.Text.Length > 0)
-                {
-                    lblShuiyin.Visible = false;
-                }
-                else
-                {
-                    lblShuiyin.Visible = true;
-                }
-
-                double doublenum = Convert.ToDouble(txtCash.Text);
-
-                if (doublenum > 0)
-                {
-                    btnNext.BackColor = Color.OrangeRed;
-
-                }
-                else
-                {
-                    btnNext.BackColor = Color.Silver;
-
-                }
-            }
-            catch
-            {
-                btnNext.BackColor = Color.Silver;
-            }
-            finally
-            {
-                txtCash.Focus();
-                this.txtCash.Select(this.txtCash.TextLength, 0);
-            }
-
-        }
-
-
 
         private void btn_Click(object sender, EventArgs e)
         {
@@ -173,11 +127,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
                 txtCash.Text = "";
                 CurrentTotalpaymentBeforeFix = totoalpaymentbeforefix;
-               // btnDel.Focus();
                 lblPrice.Text = "￥" + totoalpaymentbeforefix.ToString("f2");
-                // fixpricetotal = 0;
-                txtCash.Focus();
-                this.txtCash.Select(this.txtCash.TextLength, 0);
+  
+                txtCash.SelectAll();
             }
             catch (Exception ex)
             {

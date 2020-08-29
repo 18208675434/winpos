@@ -35,6 +35,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public string shopservicephone { get; set; }
         public string bottommessage { get; set; }
+
+        public List<PointInfo> memberinfo { get; set; }
+
+        public List<OrderPriceDetail> orderbasicinfo { get; set; }
     }
 
     public class ProductDetail

@@ -105,7 +105,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
         string keyInput = "";
         private void MiniKeyboardHandler(object sender, MyControl.NumberBoard.KeyboardArgs e)
         {
-            TextBox focusing = txtPrice;
+            ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox focusing = txtPrice;
 
 
             keyInput = e.KeyCode;
@@ -144,29 +144,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             
         }
 
-        private void txtPrice_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(txtPrice.Text))
-                {
-                    lblShuiyin.Visible = true;
-                    //rbtnOK.WhetherEnable = false;
-                }
-                else
-                {
-                    lblShuiyin.Visible = false;
-                    //rbtnOK.WhetherEnable = true;
-                }
-
-                if (Convert.ToDecimal(txtPrice.Text) > 100000  || (txtPrice.Text.Length>4 && txtPrice.Text.Substring(txtPrice.Text.Length-4,1)=="."))
-                {
-                    txtPrice.Text = txtPrice.Text.Substring(0,txtPrice.Text.Length-1);
-                }
-
-            }catch(Exception ex){}
-
-        }
 
         private void btnClear_Click(object sender, EventArgs e)
         {

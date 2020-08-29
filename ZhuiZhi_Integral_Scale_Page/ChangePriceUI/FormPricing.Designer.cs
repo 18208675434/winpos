@@ -38,12 +38,10 @@
             this.btnCancle = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblShuiyin = new System.Windows.Forms.Label();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.txtPrice = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.pnlNumber.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -163,13 +161,23 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.btnClear);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.lblShuiyin);
             this.panel3.Controls.Add(this.txtPrice);
-            this.panel3.Controls.Add(this.btnBack);
             this.panel3.Location = new System.Drawing.Point(5, 66);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(410, 87);
             this.panel3.TabIndex = 115;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.label3.Location = new System.Drawing.Point(11, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(165, 19);
+            this.label3.TabIndex = 117;
+            this.label3.Text = "若不输入金额则视为不调价";
             // 
             // btnClear
             // 
@@ -193,60 +201,28 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.label2.Location = new System.Drawing.Point(315, 22);
+            this.label2.Location = new System.Drawing.Point(339, 22);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 23);
             this.label2.TabIndex = 115;
             this.label2.Text = "元";
             // 
-            // lblShuiyin
-            // 
-            this.lblShuiyin.AutoSize = true;
-            this.lblShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblShuiyin.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.lblShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblShuiyin.Location = new System.Drawing.Point(22, 20);
-            this.lblShuiyin.Name = "lblShuiyin";
-            this.lblShuiyin.Size = new System.Drawing.Size(95, 23);
-            this.lblShuiyin.TabIndex = 68;
-            this.lblShuiyin.Text = "请输入价格";
-            this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
-            // 
             // txtPrice
             // 
-            this.txtPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPrice.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.txtPrice.Location = new System.Drawing.Point(15, 20);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPrice.BackColor = System.Drawing.Color.White;
+            this.txtPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPrice.DecimalDigits = 3;
+            this.txtPrice.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtPrice.Location = new System.Drawing.Point(10, 10);
+            this.txtPrice.LockFocus = true;
+            this.txtPrice.MaxDeciaml = ((long)(100000));
+            this.txtPrice.MaxLength = 100;
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(237, 25);
-            this.txtPrice.TabIndex = 69;
-            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(14, 13);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(300, 43);
-            this.btnBack.TabIndex = 70;
-            this.btnBack.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.label3.Location = new System.Drawing.Point(11, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(165, 19);
-            this.label3.TabIndex = 117;
-            this.label3.Text = "若不输入金额则视为不调价";
+            this.txtPrice.OnlyNumber = true;
+            this.txtPrice.Size = new System.Drawing.Size(323, 45);
+            this.txtPrice.TabIndex = 0;
+            this.txtPrice.WaterText = "请输入价格";
             // 
             // FormPricing
             // 
@@ -282,11 +258,9 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblShuiyin;
-        private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.Button btnBack;
         private MyControl.NumberBoard numBoard;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label3;
+        private MyControl.NumberTextBox txtPrice;
     }
 }

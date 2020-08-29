@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPayByCash));
-            this.lblShuiyin = new System.Windows.Forms.Label();
-            this.txtCash = new System.Windows.Forms.TextBox();
-            this.btnBack = new System.Windows.Forms.Button();
             this.lbtnCancle = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,54 +48,18 @@
             this.btn3 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
+            this.txtCash = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.SuspendLayout();
-            // 
-            // lblShuiyin
-            // 
-            this.lblShuiyin.AutoSize = true;
-            this.lblShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblShuiyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblShuiyin.Location = new System.Drawing.Point(30, 92);
-            this.lblShuiyin.Name = "lblShuiyin";
-            this.lblShuiyin.Size = new System.Drawing.Size(122, 21);
-            this.lblShuiyin.TabIndex = 64;
-            this.lblShuiyin.Text = "请输入实收现金";
-            this.lblShuiyin.Visible = false;
-            this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
-            // 
-            // txtCash
-            // 
-            this.txtCash.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtCash.Location = new System.Drawing.Point(23, 84);
-            this.txtCash.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCash.Name = "txtCash";
-            this.txtCash.Size = new System.Drawing.Size(336, 36);
-            this.txtCash.TabIndex = 65;
-            this.txtCash.TextChanged += new System.EventHandler(this.txtNum_TextChanged);
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(18, 82);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(344, 43);
-            this.btnBack.TabIndex = 66;
-            this.btnBack.UseVisualStyleBackColor = true;
             // 
             // lbtnCancle
             // 
             this.lbtnCancle.AutoSize = true;
             this.lbtnCancle.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.lbtnCancle.Location = new System.Drawing.Point(222, 9);
+            this.lbtnCancle.Location = new System.Drawing.Point(314, 9);
             this.lbtnCancle.Name = "lbtnCancle";
-            this.lbtnCancle.Size = new System.Drawing.Size(144, 20);
+            this.lbtnCancle.Size = new System.Drawing.Size(54, 20);
             this.lbtnCancle.TabIndex = 63;
-            this.lbtnCancle.Text = "返回选择收银方式 >";
+            this.lbtnCancle.Text = "返回 >";
             this.lbtnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // label4
@@ -135,7 +96,7 @@
             this.btnNext.Location = new System.Drawing.Point(17, 440);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(345, 55);
+            this.btnNext.Size = new System.Drawing.Size(343, 55);
             this.btnNext.TabIndex = 48;
             this.btnNext.TabStop = false;
             this.btnNext.Text = "确定并打开钱箱";
@@ -357,12 +318,31 @@
             this.btn1.UseVisualStyleBackColor = true;
             this.btn1.Click += new System.EventHandler(this.btn_Click);
             // 
+            // txtCash
+            // 
+            this.txtCash.BackColor = System.Drawing.Color.White;
+            this.txtCash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCash.DecimalDigits = 2;
+            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCash.Location = new System.Drawing.Point(17, 83);
+            this.txtCash.LockFocus = true;
+            this.txtCash.MaxDeciaml = ((long)(100000));
+            this.txtCash.MaxLength = 32767;
+            this.txtCash.Name = "txtCash";
+            this.txtCash.NeedBoard = false;
+            this.txtCash.OnlyNumber = true;
+            this.txtCash.Size = new System.Drawing.Size(343, 40);
+            this.txtCash.TabIndex = 113;
+            this.txtCash.WaterText = "请输入实收现金";
+            this.txtCash.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txtCash_DataChanged);
+            // 
             // FormPayByCash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 520);
+            this.Controls.Add(this.txtCash);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnDot);
             this.Controls.Add(this.btn0);
@@ -375,9 +355,6 @@
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
-            this.Controls.Add(this.lblShuiyin);
-            this.Controls.Add(this.txtCash);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lbtnCancle);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -396,9 +373,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblShuiyin;
-        private System.Windows.Forms.TextBox txtCash;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label lbtnCancle;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -418,5 +392,6 @@
         private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn1;
+        private MyControl.NumberTextBox txtCash;
     }
 }
