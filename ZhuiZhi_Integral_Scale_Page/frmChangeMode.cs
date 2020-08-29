@@ -60,10 +60,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            if (!IsEnable)
-            {
-                return;
-            }
+            //if (!IsEnable)
+            //{
+            //    return;
+            //}
+            bgwUpdate.CancelAsync();
+            LoadingHelper.CloseForm();
             this.Close();
         }
 
@@ -108,20 +110,48 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void bgwUpdate_DoWork(object sender, DoWorkEventArgs e)
         {
+            try
+            {
 
-            IsEnable = false;
-            LoadingHelper.ShowLoadingScreen("请稍候...");
 
-            ServerDataUtil.LoadAllProduct();
+                IsEnable = false;
+                LoadingHelper.ShowLoadingScreen("请稍候...");
 
-            ServerDataUtil.UpdatePromotion();
+                ServerDataUtil.LoadAllProduct();
 
-            ScaleDataHelper.LoadScale();
 
-            IsEnable = true;
-            LoadingHelper.CloseForm();
-            MainModel.ShowLog("同步成功", false);
+                //检测是否被取消了
+                if (bgwUpdate.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
 
+                ServerDataUtil.UpdatePromotion();
+                //检测是否被取消了
+                if (bgwUpdate.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                ScaleDataHelper.LoadScale();
+                //检测是否被取消了
+                if (bgwUpdate.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                IsEnable = true;
+                LoadingHelper.CloseForm();
+
+                //检测是否被取消了
+                if (!bgwUpdate.CancellationPending)
+                {
+                    MainModel.ShowLog("同步成功", false);
+                }
+                
+            }
+            catch { }
         }
 
 

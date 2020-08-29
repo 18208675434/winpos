@@ -448,7 +448,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
                             pro.firstcategoryid = tempdbpro.FIRSTCATEGORYID;
                             pro.firstcategoryname = tempdbpro.FIRSTCATEGORYNAME;
                             pro.secondcategoryid = tempdbpro.SECONDCATEGORYID;
-
+                            pro.secondcategoryname = tempdbpro.SECONDCATEGORYNAME;
                             pro.categoryid = tempdbpro.CATEGORYID;
                             pro.memberprice = tempdbpro.MEMBERPRICE;
 

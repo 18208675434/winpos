@@ -89,5 +89,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public int flag { get; set; }
 
+        /// <summary>
+        /// 指定金额退款用
+        /// </summary>
+        public decimal payamtafterpromo { get; set; }
+
     }
 }

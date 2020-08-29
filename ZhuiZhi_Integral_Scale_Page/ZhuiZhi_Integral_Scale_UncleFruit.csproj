@@ -250,6 +250,12 @@
     <Compile Include="MenuUI\FormOrderHangItem.Designer.cs">
       <DependentUpon>FormOrderHangItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuUI\FormRefundByAmtBak.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundByAmtBak.Designer.cs">
+      <DependentUpon>FormRefundByAmtBak.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuUI\FormRefundByAmt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,14 @@
     <Compile Include="MenuUI\FormRefundConfirm.Designer.cs">
       <DependentUpon>FormRefundConfirm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuUI\FormAdjustRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormAdjustRecord.Designer.cs">
+      <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AdjustPriceDynamic.cs" />
+    <Compile Include="Model\AdjustPriceRecord.cs" />
     <Compile Include="Model\HalfOffLine\Coupons.cs" />
     <Compile Include="Model\HalfOffLine\Gradesettinggetgrade.cs" />
     <Compile Include="Model\HalfOffLine\HalfOffLineUtil.cs" />
@@ -320,11 +334,23 @@
     <Compile Include="MyControl\KeyBoardNew.Designer.cs">
       <DependentUpon>KeyBoardNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyControl\myTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\myTextBox.Designer.cs">
+      <DependentUpon>myTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyControl\NumberBoard.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MyControl\NumberBoard.Designer.cs">
       <DependentUpon>NumberBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\NumberTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\NumberTextBox.Designer.cs">
+      <DependentUpon>NumberTextBox.cs</DependentUpon>
     </Compile>
     <Compile Include="PayUI\FormPayByOther.cs">
       <SubType>Form</SubType>
@@ -344,6 +370,12 @@
     <Compile Include="PrettyCash\FormConfirmPrettyCash.Designer.cs">
       <DependentUpon>FormConfirmPrettyCash.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrettyCash\FormGetCashNum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrettyCash\FormGetCashNum.Designer.cs">
+      <DependentUpon>FormGetCashNum.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrettyCash\FormPrettyCash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,6 +383,7 @@
       <DependentUpon>FormPrettyCash.cs</DependentUpon>
     </Compile>
     <Compile Include="PrettyCash\PrettyCashHelper.cs" />
+    <Compile Include="PrintFactory\PrintHelper.cs" />
     <Compile Include="PrintFactory\SprtPrintUtil.cs" />
     <Compile Include="PrintFactory\ToledoPrintUtil.cs" />
     <Compile Include="ScaleFactory\ScaleGlobalHelper.cs" />
@@ -915,17 +948,29 @@
     <EmbeddedResource Include="MenuUI\FormOrderHangItem.resx">
       <DependentUpon>FormOrderHangItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormRefundByAmtBak.resx">
+      <DependentUpon>FormRefundByAmtBak.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormRefundByAmt.resx">
       <DependentUpon>FormRefundByAmt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormRefundConfirm.resx">
       <DependentUpon>FormRefundConfirm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormAdjustRecord.resx">
+      <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardNew.resx">
       <DependentUpon>KeyBoardNew.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\myTextBox.resx">
+      <DependentUpon>myTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyControl\NumberBoard.resx">
       <DependentUpon>NumberBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\NumberTextBox.resx">
+      <DependentUpon>NumberTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PayUI\FormPayByOther.resx">
       <DependentUpon>FormPayByOther.cs</DependentUpon>
@@ -935,6 +980,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrettyCash\FormConfirmPrettyCash.resx">
       <DependentUpon>FormConfirmPrettyCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrettyCash\FormGetCashNum.resx">
+      <DependentUpon>FormGetCashNum.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrettyCash\FormPrettyCash.resx">
       <DependentUpon>FormPrettyCash.cs</DependentUpon>

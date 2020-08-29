@@ -70,9 +70,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                 lblPrice.Text = "￥" + thisCurrentCart.payamtbeforecash.ToString("f2");
 
-                txtCash.Focus();
-                this.txtCash.Select(this.txtCash.TextLength, 0);
-
+                txtCash.SelectAll();
                 Application.DoEvents();
             }
             catch (Exception ex)
@@ -357,8 +355,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             Button btn = (Button)sender;
             try
             {
-                //小数点后允许一位  现金抹零后不允许再输入零
-                if (txtCash.Text.Length > 2 && txtCash.Text.Substring(txtCash.Text.Length - 2, 1) == ".")
+                //小数点后允许两位位  现金抹零后不允许再输入零
+                if (txtCash.Text.Length > 3 && txtCash.Text.Substring(txtCash.Text.Length - 3, 1) == ".")
                 {
                     return;
                 }
@@ -422,11 +420,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
 
             }
-            finally
-            {
-                txtCash.Focus();
-                this.txtCash.Select(this.txtCash.TextLength, 0);
-            }
+           
         }
 
 
@@ -439,47 +433,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
 
 
-        private void txtNum_TextChanged(object sender, EventArgs e)
-        {
-           
-            if (txtCash.Text.Length > 0)
-            {
-                lblShuiyin.Visible = false;
-            }
-            else
-            {
-                lblShuiyin.Visible = true;
-            }
-
-            try
-            {
-                double doublenum = Convert.ToDouble(txtCash.Text);
-
-                if (doublenum > 0)
-                {
-                    btnNext.BackColor = Color.OrangeRed;
-                }
-                else
-                {
-                    btnNext.BackColor = Color.Silver;
-                }
-            }
-            catch
-            {
-                btnNext.BackColor = Color.Silver;
-            }
-            finally
-            {
-                txtCash.Focus();
-                this.txtCash.Select(this.txtCash.TextLength, 0);
-            }
-        }
-
-        private void lblShuiyin_Click(object sender, EventArgs e)
-        {
-            txtCash.Focus();
-            this.txtCash.Select(this.txtCash.TextLength, 0);
-        }
 
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -499,6 +452,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             }
 
 
+        }
+
+        private void txtCash_DataChanged(string data)
+        {
+            try
+            {
+                double doublenum = Convert.ToDouble(txtCash.Text);
+
+                if (doublenum > 0)
+                {
+                    btnNext.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    btnNext.BackColor = Color.Silver;
+                }
+            }
+            catch
+            {
+                btnNext.BackColor = Color.Silver;
+            }
         }
     }
 }

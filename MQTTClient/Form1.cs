@@ -100,7 +100,7 @@ namespace MQTTClient
             {
                 Invoke((new Action(() =>
                 {
-                    txtReceiveMessage.AppendText("连接到MQTT服务器失败！" + Environment.NewLine + ex.Message + Environment.NewLine);
+                   // txtReceiveMessage.AppendText("连接到MQTT服务器失败！" + Environment.NewLine + ex.Message + Environment.NewLine);
                     LogManager.WriteLog("MQTT", "连接到MQTT服务器失败！" + Environment.NewLine + ex.Message);
                 })));
             }
@@ -116,10 +116,16 @@ namespace MQTTClient
             Invoke((new Action(() =>
             {
                 LogManager.WriteLog("MQTT","已连接到MQTT服务器！");
-                txtReceiveMessage.AppendText("已连接到MQTT服务器！" + Environment.NewLine);
+               // txtReceiveMessage.AppendText("已连接到MQTT服务器！" + Environment.NewLine);
 
-                string topic = "promo:change:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
-                SubScribe(topic);
+                string topicpromo = "promo:change:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
+                SubScribe(topicpromo);
+
+                string topicprice = "price:adjust:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
+                SubScribe(topicprice);
+
+                string topicsku = "sku:adjust:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
+                SubScribe(topicsku);
             })));
         }
 
@@ -132,7 +138,8 @@ namespace MQTTClient
         {
             Invoke((new Action(() =>
             {
-                txtReceiveMessage.AppendText("已断开MQTT连接！" + Environment.NewLine);
+               // txtReceiveMessage.AppendText("已断开MQTT连接！" + Environment.NewLine);
+                LogManager.WriteLog("MQTT", "已断开MQTT连接！");
             })));
         }
 
@@ -147,10 +154,10 @@ namespace MQTTClient
             {
                 try
                 {
+                    
                     string json = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
 
-
-                    //LogManager.WriteLog("MQTT", "接收到消息" + json);
+                    LogManager.WriteLog("MQTT", "接收到消息" + e.ApplicationMessage.Topic+"  " + json);
                     DBPROMOTION_CACHE_BEANMODEL promotion = JsonConvert.DeserializeObject<DBPROMOTION_CACHE_BEANMODEL>(json);
 
                     if (promotion != null)
@@ -179,13 +186,12 @@ namespace MQTTClient
                         LogManager.WriteLog("MQTT", "接收到不正确信息" + json);
                     }
                    
-
                 }
                 catch (Exception ex)
                 {
                     LogManager.WriteLog("MQTT","更新MQTT促销异常" + ex.Message + ex.StackTrace);
                 }
-                txtReceiveMessage.AppendText( Encoding.UTF8.GetString(e.ApplicationMessage.Payload)+Environment.NewLine);
+                //txtReceiveMessage.AppendText( Encoding.UTF8.GetString(e.ApplicationMessage.Payload)+Environment.NewLine);
             })));
         }
 
@@ -220,7 +226,7 @@ namespace MQTTClient
             });
 
                 LogManager.WriteLog("MQTT", "已订阅[" + topic + "]主题");
-                txtReceiveMessage.AppendText("已订阅["+topic+"]主题" + Environment.NewLine);
+                //txtReceiveMessage.AppendText("已订阅["+topic+"]主题" + Environment.NewLine);
                 txtSubTopic.Enabled = false;
                 btnSubscribe.Enabled = false;
             }

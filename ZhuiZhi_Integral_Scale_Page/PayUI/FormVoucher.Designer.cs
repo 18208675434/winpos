@@ -31,11 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVoucher));
             this.btnOK = new System.Windows.Forms.Button();
-            this.lblShuiyin = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtCode = new System.Windows.Forms.TextBox();
             this.timerFocus = new System.Windows.Forms.Timer(this.components);
+            this.txtCode = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.SuspendLayout();
             // 
             // btnOK
@@ -47,24 +46,11 @@
             this.btnOK.ForeColor = System.Drawing.Color.White;
             this.btnOK.Location = new System.Drawing.Point(27, 158);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(377, 51);
+            this.btnOK.Size = new System.Drawing.Size(377, 58);
             this.btnOK.TabIndex = 73;
             this.btnOK.Text = "确认";
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // lblShuiyin
-            // 
-            this.lblShuiyin.AutoSize = true;
-            this.lblShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblShuiyin.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.lblShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblShuiyin.Location = new System.Drawing.Point(47, 97);
-            this.lblShuiyin.Name = "lblShuiyin";
-            this.lblShuiyin.Size = new System.Drawing.Size(95, 23);
-            this.lblShuiyin.TabIndex = 72;
-            this.lblShuiyin.Text = "输入会员号";
-            this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
             // 
             // btnCancel
             // 
@@ -86,30 +72,35 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(23, 33);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(126, 25);
             this.label2.TabIndex = 69;
-            this.label2.Text = "输入会员号";
-            // 
-            // txtCode
-            // 
-            this.txtCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtCode.Location = new System.Drawing.Point(27, 85);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(377, 43);
-            this.txtCode.TabIndex = 67;
-            this.txtCode.Click += new System.EventHandler(this.txtCode_Click);
-            this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
+            this.label2.Text = "输入会员账号";
             // 
             // timerFocus
             // 
             this.timerFocus.Interval = 1000;
             this.timerFocus.Tick += new System.EventHandler(this.timerFocus_Tick);
+            // 
+            // txtCode
+            // 
+            this.txtCode.BackColor = System.Drawing.Color.White;
+            this.txtCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCode.DecimalDigits = 0;
+            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCode.Location = new System.Drawing.Point(27, 86);
+            this.txtCode.LockFocus = true;
+            this.txtCode.MaxDeciaml = ((long)(0));
+            this.txtCode.MaxLength = 100;
+            this.txtCode.Name = "txtCode";
+            this.txtCode.NeedBoard = true;
+            this.txtCode.OnlyNumber = false;
+            this.txtCode.Size = new System.Drawing.Size(377, 53);
+            this.txtCode.TabIndex = 74;
+            this.txtCode.WaterText = "输入会员账号";
             // 
             // FormVoucher
             // 
@@ -118,10 +109,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(430, 240);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.lblShuiyin);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCode);
+            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormVoucher";
@@ -136,11 +126,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Timer timerFocus;
-        private System.Windows.Forms.Label lblShuiyin;
         private System.Windows.Forms.Button btnOK;
+        private MyControl.NumberTextBox txtCode;
     }
 }

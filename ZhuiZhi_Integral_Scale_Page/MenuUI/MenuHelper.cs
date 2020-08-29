@@ -67,7 +67,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
             }
         }
 
-
+        #region 订单查询
         public static void ShowFormOrderHangItem(Cart cart)
         {
 
@@ -77,7 +77,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                 BackHelper.ShowFormBackGround();
                 FormOrderHangItem frmitem = new FormOrderHangItem(cart);
 
-                asf.AutoScaleControlTest(frmitem, 500, 500, 500 * MainModel.midScale, 500 * MainModel.midScale, true);
+                asf.AutoScaleControlTest(frmitem, 700, 500, 700 * MainModel.midScale, 500 * MainModel.midScale, true);
                 frmitem.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmitem.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmitem.Height) / 2);
                     frmitem.TopMost = true;
 
@@ -171,9 +171,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                 {
                     totalpay += "代金券：" + CashCouponAmt + " ";
                 }
-                if (OtherPayAmt > 0)
+
+                if (order.otherpaydetailinfos != null && order.otherpaydetailinfos.Count > 0)
                 {
-                    totalpay +=order.otherpaytypedesc + "：" + OtherPayAmt + " ";
+                    foreach (OtherPayDetailInfo otherpay in order.otherpaydetailinfos)
+                    {
+                        totalpay += otherpay.type + "：" + otherpay.amount + " ";
+                    }
                 }
 
                 return totalpay;
@@ -183,5 +187,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                 return "";
             }
         }
+        #endregion
+
+        #region  调价记录
+
+        public static void ShowFormAdjustPrice()
+        {
+            try
+            {
+                FormAdjustRecord frmadjust = new FormAdjustRecord();
+                asf.AutoScaleControlTest(frmadjust, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmadjust.Location = new System.Drawing.Point(0, 0);
+                frmadjust.ShowDialog();
+                frmadjust.Dispose();
+                Application.DoEvents();
+
+            }
+            catch
+            {
+
+            }
+        }
+        #endregion
     }
 }

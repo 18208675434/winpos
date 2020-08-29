@@ -32,12 +32,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenDetail));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenDetail));
             this.dgvGood = new System.Windows.Forms.DataGridView();
+            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.brokentype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -48,6 +52,7 @@
             this.btnCancle = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
             this.pnlDgvHead = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
@@ -60,11 +65,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.pnlMember = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.brokentype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -121,12 +121,59 @@
             this.dgvGood.Size = new System.Drawing.Size(817, 556);
             this.dgvGood.TabIndex = 17;
             // 
+            // barcode
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.DefaultCellStyle = dataGridViewCellStyle2;
+            this.barcode.FillWeight = 150F;
+            this.barcode.HeaderText = "商品/条码";
+            this.barcode.Name = "barcode";
+            this.barcode.ReadOnly = true;
+            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // num
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.num.DefaultCellStyle = dataGridViewCellStyle3;
+            this.num.FillWeight = 70F;
+            this.num.HeaderText = "成本价";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // delete
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.delete.DefaultCellStyle = dataGridViewCellStyle4;
+            this.delete.FillWeight = 70F;
+            this.delete.HeaderText = "数量";
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // brokentype
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.brokentype.DefaultCellStyle = dataGridViewCellStyle5;
+            this.brokentype.HeaderText = "报损类型";
+            this.brokentype.Name = "brokentype";
+            this.brokentype.ReadOnly = true;
+            this.brokentype.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label12.Location = new System.Drawing.Point(318, 23);
+            this.label12.Location = new System.Drawing.Point(314, 23);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(94, 24);
@@ -138,7 +185,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(466, 23);
+            this.label9.Location = new System.Drawing.Point(461, 23);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(46, 24);
@@ -240,6 +287,18 @@
             this.pnlDgvHead.Name = "pnlDgvHead";
             this.pnlDgvHead.Size = new System.Drawing.Size(817, 66);
             this.pnlDgvHead.TabIndex = 41;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.Location = new System.Drawing.Point(607, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 24);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "报损类型";
             // 
             // dataGridViewImageColumn1
             // 
@@ -405,65 +464,6 @@
             this.pnlMember.Name = "pnlMember";
             this.pnlMember.Size = new System.Drawing.Size(320, 165);
             this.pnlMember.TabIndex = 54;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(611, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 24);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "报损类型";
-            // 
-            // barcode
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.barcode.DefaultCellStyle = dataGridViewCellStyle2;
-            this.barcode.FillWeight = 150F;
-            this.barcode.HeaderText = "商品/条码";
-            this.barcode.Name = "barcode";
-            this.barcode.ReadOnly = true;
-            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // num
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.num.DefaultCellStyle = dataGridViewCellStyle3;
-            this.num.FillWeight = 70F;
-            this.num.HeaderText = "成本价";
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            this.num.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // delete
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.delete.DefaultCellStyle = dataGridViewCellStyle4;
-            this.delete.FillWeight = 70F;
-            this.delete.HeaderText = "数量";
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // brokentype
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.brokentype.DefaultCellStyle = dataGridViewCellStyle5;
-            this.brokentype.HeaderText = "报损类型";
-            this.brokentype.Name = "brokentype";
-            this.brokentype.ReadOnly = true;
-            this.brokentype.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // FormBrokenDetail
             // 

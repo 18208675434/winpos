@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormModifyPrice));
-            this.lblShuiyin = new System.Windows.Forms.Label();
-            this.txtCash = new System.Windows.Forms.TextBox();
-            this.btnBack = new System.Windows.Forms.Button();
             this.lbtnCancle = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.lblPrice = new System.Windows.Forms.Label();
@@ -49,43 +46,8 @@
             this.btn3 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
+            this.txtCash = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.SuspendLayout();
-            // 
-            // lblShuiyin
-            // 
-            this.lblShuiyin.AutoSize = true;
-            this.lblShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblShuiyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblShuiyin.Location = new System.Drawing.Point(40, 108);
-            this.lblShuiyin.Name = "lblShuiyin";
-            this.lblShuiyin.Size = new System.Drawing.Size(170, 21);
-            this.lblShuiyin.TabIndex = 86;
-            this.lblShuiyin.Text = "请输入最终收取的金额";
-            this.lblShuiyin.Click += new System.EventHandler(this.lblShuiyin_Click);
-            // 
-            // txtCash
-            // 
-            this.txtCash.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtCash.Location = new System.Drawing.Point(26, 101);
-            this.txtCash.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCash.Name = "txtCash";
-            this.txtCash.Size = new System.Drawing.Size(332, 36);
-            this.txtCash.TabIndex = 87;
-            this.txtCash.TextChanged += new System.EventHandler(this.txtCash_TextChanged);
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(19, 98);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(342, 43);
-            this.btnBack.TabIndex = 88;
-            this.btnBack.UseVisualStyleBackColor = true;
             // 
             // lbtnCancle
             // 
@@ -330,12 +292,29 @@
             this.btn1.UseVisualStyleBackColor = true;
             this.btn1.Click += new System.EventHandler(this.btn_Click);
             // 
+            // txtCash
+            // 
+            this.txtCash.BackColor = System.Drawing.Color.White;
+            this.txtCash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCash.DecimalDigits = 2;
+            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCash.Location = new System.Drawing.Point(21, 98);
+            this.txtCash.LockFocus = true;
+
+            this.txtCash.MaxLength = 32767;
+            this.txtCash.Name = "txtCash";
+            this.txtCash.OnlyNumber = true;
+            this.txtCash.Size = new System.Drawing.Size(340, 50);
+            this.txtCash.TabIndex = 0;
+            this.txtCash.WaterText = "请输入最终收取的金额";
+            // 
             // FormModifyPrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 520);
+            this.Controls.Add(this.txtCash);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnDot);
             this.Controls.Add(this.btn0);
@@ -348,9 +327,6 @@
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
-            this.Controls.Add(this.lblShuiyin);
-            this.Controls.Add(this.txtCash);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lbtnCancle);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.lblPrice);
@@ -368,9 +344,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblShuiyin;
-        private System.Windows.Forms.TextBox txtCash;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label lbtnCancle;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Label lblPrice;
@@ -388,5 +361,6 @@
         private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn1;
+        private MyControl.NumberTextBox txtCash;
     }
 }

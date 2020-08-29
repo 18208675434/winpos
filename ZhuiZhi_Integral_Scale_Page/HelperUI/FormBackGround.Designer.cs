@@ -42,6 +42,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormBackGround";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FormBackGround_Load);
             this.DoubleClick += new System.EventHandler(this.FormBackGround_DoubleClick);
             this.ResumeLayout(false);
 

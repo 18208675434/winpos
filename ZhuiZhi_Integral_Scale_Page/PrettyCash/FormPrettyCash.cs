@@ -23,7 +23,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
         string keyInput = "";
         private void MiniKeyboardHandler(object sender, MyControl.NumberBoard.KeyboardArgs e)
         {
-            TextBox focusing = txtCash;
+            ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox focusing = txtCash;
             keyInput = e.KeyCode;
 
             int startDel = 0;
@@ -47,9 +47,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
             //其他键直接输入
             else
             {
-
                 focusing.Text += keyInput;
-
             }
         }
 
@@ -57,15 +55,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
         {
             try
             {
-
-                if (string.IsNullOrEmpty(txtCash.Text))
+                decimal prettycash = 0;
+                if (!string.IsNullOrEmpty(txtCash.Text))
                 {
-                    MainModel.ShowLog("请输入备用金额",false);
-                    return;
+                    prettycash = Convert.ToDecimal(txtCash.Text);
                 }
-
-                decimal prettycash = Convert.ToDecimal(txtCash.Text);
-
                 this.Hide();
                 if (PrettyCashHelper.ShowFormConfirmPretty(prettycash))
                 {
@@ -94,13 +88,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
 
         private void txtCash_Leave(object sender, EventArgs e)
         {
-            txtCash.Focus();
+            txtCash.Select();
             
-        }
-
-        private void txtCash_TextChanged(object sender, EventArgs e)
-        {
-            this.txtCash.Select(this.txtCash.TextLength, 0);
         }
 
         private void FormPrettyCash_Load(object sender, EventArgs e)

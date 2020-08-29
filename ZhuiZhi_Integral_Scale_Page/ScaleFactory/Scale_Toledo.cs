@@ -38,6 +38,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         /// <returns></returns>
         public override ScaleResult GetScaleWeight()
         {
+            
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
 

@@ -13,6 +13,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
 
     private String EVALUATESCOPEPROMOTION_KEY = "EVALUATESCOPEPROMOTION_KEY";
 
+       private  String DISCOUNTAMT_KEY = "DISCOUNTAMT_KEY";
+
     public ImplOfflineCouponsCalculate(String tenantId, String shopId) {
     }
 
@@ -97,6 +99,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
     //结算页优惠券列表排序
     public TripletBeanForCoupon evaluateCoupons(Cart cartBean, List<PromotionCoupon> listcoupon) {
         List<OrderCouponVo> availablecoupons = new List<OrderCouponVo>();
+        List<OrderCouponVo> unavailablecoupons = new List<OrderCouponVo>();
 //        是否有券信息
         if (listcoupon==null || listcoupon.Count==0) {
             return null;
@@ -120,34 +123,34 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
             EvaluateScopePromotion evaluateScopePromotion = new EvaluateScopePromotion();
             if (evaluateScope(tripletBean.getPromoTriplet(), cartBean.products, evaluateScopePromotion))
             {
-                PromoActionFactory promoActionFactory = getPromoActionFactoryByThreshold(dbPromotionCacheBean, evaluateScopePromotion);
-                if (promoActionFactory != null)
+                if (map.ContainsKey(dbPromotionCacheBean.CODE + DISCOUNTAMT_KEY))
                 {
-                    Decimal discountamt = promoActionFactory.getDiscountValue(evaluateScopePromotion, evaluateScopePromotion.getList(), tripletBean.getPromoTriplet());
-                    coupon.discountamt = discountamt;
-                    //if (discountamt != null)
-                    //{
-                    //    cartBean.couponpromoamt = Convert.ToDecimal(discountamt);
-                    //}
-
-                    OrderCouponVo couponsBean = new OrderCouponVo();
-                    //set 值
-                    couponsBean.catalog = coupon.catalog;
-                    couponsBean.enabledfrom = coupon.enabledfrom;
-                    couponsBean.enabledto = coupon.enabledto;
-                    couponsBean.couponcode = coupon.couponcode;
-                    couponsBean.promotioncode = coupon.promotioncode;
-                    if (cartBean != null && cartBean.selectedcoupons != null && cartBean.selectedcoupons.ContainsKey(coupon.couponcode))
-                    {
-                        couponsBean.selectstate = 1;
-                    }
-                    couponsBean.orderminamount = coupon.orderminamount;
-                    couponsBean.discountamt = coupon.discountamt;
-                    couponsBean.amount = coupon.amount;
-                    couponsBean.availableskudesc = coupon.availableskudesc;
-                    couponsBean.exchangeconditioncontext = coupon.exchangeconditioncontext;
-                    availablecoupons.Add(couponsBean);
+                    decimal discountamt = (decimal)map[dbPromotionCacheBean.CODE + DISCOUNTAMT_KEY];
+                    setAvailableCoupons(availablecoupons, coupon, discountamt, cartBean);
                 }
+                else
+                {
+                    if (PromotionCache.getInstance().getPromotionConditionUtils() != null)
+                    {
+                        PromoActionFactory promoActionFactory = PromotionCache.getInstance().getPromotionConditionUtils().getPromoActionFactoryByThreshold(dbPromotionCacheBean, evaluateScopePromotion);
+                        if (promoActionFactory != null)
+                        {
+                            decimal discountamt = promoActionFactory.getDiscountValue(evaluateScopePromotion, evaluateScopePromotion.getList(), tripletBean.getPromoTriplet());
+                            map.Add(dbPromotionCacheBean.CODE + DISCOUNTAMT_KEY, discountamt);
+                            setAvailableCoupons(availablecoupons, coupon, discountamt, cartBean);
+                        }
+                        else
+                        {
+                            //设置不可用优惠券
+                            setUnavailablecoupons(unavailablecoupons, coupon,decimal.Zero, cartBean);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //设置不可用优惠券
+                setUnavailablecoupons(unavailablecoupons, coupon, decimal.Zero, cartBean);
             }
         }
         if (cartBean == null || cartBean.selectedcoupons == null || cartBean.selectedcoupons.Count == 0) {//没有选择优惠券
@@ -165,8 +168,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                         if (discAmt != 0) {
                             return discAmt;
                         }
-                        return o1.discountamt.CompareTo(o2.discountamt);
-                    
+                        return o1.discountamt.CompareTo(o2.discountamt);                   
             }); 
 
             //Collections.sort(availablecoupons, new Comparator<Availablecoupon>() {
@@ -181,6 +183,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
             //});
 
             cartBean.availablecoupons=availablecoupons;
+
+            
         }
         else
         {
@@ -191,7 +195,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
             cartBean.couponpromoamt=0;
 
             cartBean.availablecoupons = availablecoupons;
+           
         }
+        cartBean.unavailablecoupons = unavailablecoupons;
         return null;
     }
 
@@ -418,6 +424,53 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
             }
         }
     }
+
+
+    //设置可用优惠券
+    private void setAvailableCoupons(List<OrderCouponVo> availablecoupons, PromotionCoupon coupon, decimal discountamt, Cart cartBean)
+    {
+        OrderCouponVo couponsBean = new OrderCouponVo();
+        //set 值
+        couponsBean.catalog = coupon.catalog;
+        couponsBean.enabledfrom = coupon.enabledfrom;
+        couponsBean.enabledto = coupon.enabledto;
+        couponsBean.couponcode = coupon.couponcode;
+        couponsBean.promotioncode = coupon.promotioncode;
+        if (cartBean != null && cartBean.selectedcoupons != null && cartBean.selectedcoupons.ContainsKey(coupon.couponcode))
+        {
+            couponsBean.selectstate = 1;
+        }
+        couponsBean.orderminamount = coupon.orderminamount;
+        couponsBean.discountamt = coupon.discountamt;
+        couponsBean.amount = coupon.amount;
+        couponsBean.availableskudesc = coupon.availableskudesc;
+        couponsBean.exchangeconditioncontext = coupon.exchangeconditioncontext;
+        couponsBean.enabled = true;
+        availablecoupons.Add(couponsBean);
+    }
+
+
+    //设置不可用优惠券
+    private void setUnavailablecoupons(List<OrderCouponVo> availablecoupons, PromotionCoupon coupon, decimal discountamt, Cart cartBean)
+    {
+        coupon.discountamt=discountamt;
+        OrderCouponVo couponsBean = new OrderCouponVo();
+        //set 值
+        couponsBean.catalog = coupon.catalog;
+        couponsBean.enabledfrom = coupon.enabledfrom;
+        couponsBean.enabledto = coupon.enabledto;
+        couponsBean.couponcode = coupon.couponcode;
+        couponsBean.promotioncode = coupon.promotioncode;
+     
+        couponsBean.orderminamount = coupon.orderminamount;
+        couponsBean.discountamt = coupon.discountamt;
+        couponsBean.amount = coupon.amount;
+        couponsBean.availableskudesc = coupon.availableskudesc;
+        couponsBean.exchangeconditioncontext = coupon.exchangeconditioncontext;
+        couponsBean.enabled = false;
+        availablecoupons.Add(couponsBean);
+    }
+
 }
 
 }

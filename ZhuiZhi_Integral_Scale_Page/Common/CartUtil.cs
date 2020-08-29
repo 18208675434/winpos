@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
@@ -22,7 +23,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             List<Product> LstAllProduct = new List<Product>();
             try
             {
-                List<DBPRODUCT_BEANMODEL> lstpro = productbll.GetModelList(" STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' order by FIRSTCATEGORYID");
+               // List<DBPRODUCT_BEANMODEL> lstpro = productbll.GetModelList(" STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' order by FIRSTCATEGORYID");
+                List<DBPRODUCT_BEANMODEL> lstpro = productbll.GetModelList(" STATUS =1 and CREATE_URL_IP='" + MainModel.URL + "' and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' order by SALECOUNT");
                 foreach (DBPRODUCT_BEANMODEL pro in lstpro)
                 {                   
                     Product product = new Product();
@@ -37,6 +39,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     product.firstcategoryid = pro.FIRSTCATEGORYID;
                     product.firstcategoryname = pro.FIRSTCATEGORYNAME;
                     product.barcode = pro.SKUCODE;
+
+                    product.secondcategoryid = pro.SECONDCATEGORYID;
+                    product.secondcategoryname = pro.SECONDCATEGORYNAME;
                     //product.isQueryBarcode = 0;
                     product.weightflag = Convert.ToBoolean(pro.WEIGHTFLAG);
                     product.shopid = pro.SHOPID;
@@ -279,6 +284,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 newpro.firstcategoryid = pro.firstcategoryid;
                 newpro.secondcategoryid = pro.secondcategoryid;
+                newpro.secondcategoryname = pro.secondcategoryname;
                 newpro.categoryid = pro.categoryid;
                     Price price = null;
 
@@ -335,6 +341,143 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             catch (Exception ex)
             {
                 return 0;
+            }
+        }
+
+
+        public static Cart InsertProductToCart(Cart cart, Product pro,bool needmerge)
+        {
+
+                try
+                {
+                    if (cart == null)
+                    {
+                        cart = new Cart();
+                    }
+                    if (cart.products == null)
+                    {
+                        cart.products = new List<Product>();
+                    }
+                    if (cart.products != null && pro.goodstagid == 0)
+                    {
+                        bool newpro = true;
+                        foreach (Product exitspro in cart.products)
+                        {
+                            if (pro.skucode == exitspro.skucode)
+                            {
+                                exitspro.num += pro.num;
+                                exitspro.price.total = Math.Round(exitspro.num * exitspro.price.saleprice, 2, MidpointRounding.AwayFromZero);
+                                exitspro.price.origintotal = Math.Round(exitspro.num * exitspro.price.originprice, 2, MidpointRounding.AwayFromZero);
+                                exitspro.PaySubAmt = Math.Round(exitspro.num * exitspro.price.saleprice, 2, MidpointRounding.AwayFromZero);
+                                exitspro.RowNum = cart.products.Count + 1;
+
+                                newpro = false;
+                                break;
+                            }
+                        }
+
+                        if (newpro)
+                        {
+                            pro.price.total = Math.Round(pro.price.saleprice, 2, MidpointRounding.AwayFromZero);
+                            pro.price.origintotal = Math.Round(pro.price.originprice, 2, MidpointRounding.AwayFromZero);
+                            pro.PaySubAmt = Math.Round(pro.price.saleprice, 2, MidpointRounding.AwayFromZero);
+                            cart.products.Add(pro);
+                        }
+
+                    }
+                    else
+                    {
+
+                        if (needmerge)
+                        {
+                            bool newpro = true;
+                            foreach (Product exitspro in cart.products)
+                            {
+                                if (pro.skucode == exitspro.skucode)
+                                {
+                                    exitspro.specnum += pro.specnum;
+                                    exitspro.price.total = Math.Round(exitspro.num * exitspro.price.saleprice, 2, MidpointRounding.AwayFromZero);
+                                    exitspro.price.origintotal = Math.Round(exitspro.num * exitspro.price.originprice, 2, MidpointRounding.AwayFromZero);
+                                    exitspro.PaySubAmt = Math.Round(exitspro.num * exitspro.price.saleprice, 2, MidpointRounding.AwayFromZero);
+                                    exitspro.RowNum = cart.products.Count + 1;
+
+                                    newpro = false;
+                                    break;
+                                }
+                            }
+
+                            if (newpro)
+                            {
+                                pro.price.total = Math.Round(pro.price.saleprice * pro.price.specnum, 2, MidpointRounding.AwayFromZero);
+                                pro.price.origintotal = Math.Round(pro.price.originprice * pro.price.specnum, 2, MidpointRounding.AwayFromZero);
+                                pro.PaySubAmt = Math.Round(pro.price.saleprice * pro.price.specnum, 2, MidpointRounding.AwayFromZero);
+                                cart.products.Add(pro);
+                            }
+                        }
+                        else
+                        {
+                            pro.price.total = Math.Round(pro.price.saleprice * pro.price.specnum, 2, MidpointRounding.AwayFromZero);
+                            pro.price.origintotal = Math.Round(pro.price.originprice * pro.price.specnum, 2, MidpointRounding.AwayFromZero);
+                            pro.PaySubAmt = Math.Round(pro.price.saleprice * pro.price.specnum, 2, MidpointRounding.AwayFromZero);
+                            cart.products.Add(pro);
+                        }
+                    }
+                    return cart;
+                }
+                catch (Exception ex)
+                {
+                    MainModel.ShowLog("购物车添加商品异常" + ex.Message, true);
+                    return null ;
+                }
+          
+        }
+
+        /// <summary>
+        /// 获取所有优惠券  仅在购物车商品为空时调用
+        /// </summary>
+        /// <param name="listcoupon"></param>
+        /// <returns></returns>
+        public static List<OrderCouponVo> GetAllOrderCoupon()
+        {
+            try
+            {
+               // List<PromotionCoupon> listcoupon = ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion.PromotionCache.getInstance().getListcoupon();//查询出优惠券
+
+                if (HalfOffLineUtil.listcoupon == null)
+                {
+                    HalfOffLineUtil.ListMemberCouponAvailable();
+                }
+                List<PromotionCoupon> listcoupon = HalfOffLineUtil.listcoupon;
+                List<OrderCouponVo> availablecoupons = new List<OrderCouponVo>();
+                if (listcoupon == null || listcoupon.Count == 0)
+                {
+                    return null;
+                }
+
+                foreach (ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.PromotionCoupon coupon in listcoupon)
+                {
+                    OrderCouponVo couponsBean = new OrderCouponVo();
+                    //set 值
+                    couponsBean.catalog = coupon.catalog;
+                    couponsBean.enabledfrom = coupon.enabledfrom;
+                    couponsBean.enabledto = coupon.enabledto;
+                    couponsBean.couponcode = coupon.couponcode;
+                    couponsBean.promotioncode = coupon.promotioncode;
+
+                    couponsBean.orderminamount = coupon.orderminamount;
+                    couponsBean.discountamt = coupon.discountamt;
+                    couponsBean.amount = coupon.amount;
+                    couponsBean.availableskudesc = coupon.availableskudesc;
+                    couponsBean.exchangeconditioncontext = coupon.exchangeconditioncontext;
+                    couponsBean.enabled = false;
+                    availablecoupons.Add(couponsBean);
+                }
+
+                return availablecoupons;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

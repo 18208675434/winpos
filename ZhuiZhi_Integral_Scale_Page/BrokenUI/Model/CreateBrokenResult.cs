@@ -24,6 +24,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
         public string skuname { get; set; }
         public decimal totalamount { get; set; }
         public bool weightflag { get; set; }
+
+        /// <summary>
+        /// 报损类型
+        /// </summary>
+        public string actiontypedesc { get; set; }
     }
 
 

@@ -33,9 +33,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtCash = new System.Windows.Forms.TextBox();
-            this.btnBack = new System.Windows.Forms.Button();
             this.numBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard();
+            this.txtCash = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.SuspendLayout();
             // 
             // lblInfo
@@ -100,31 +99,6 @@
             this.label3.TabIndex = 75;
             this.label3.Text = "元";
             // 
-            // txtCash
-            // 
-            this.txtCash.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.txtCash.Location = new System.Drawing.Point(21, 81);
-            this.txtCash.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCash.Name = "txtCash";
-            this.txtCash.Size = new System.Drawing.Size(278, 36);
-            this.txtCash.TabIndex = 0;
-            this.txtCash.Text = "0";
-            this.txtCash.TextChanged += new System.EventHandler(this.txtCash_TextChanged);
-            this.txtCash.Leave += new System.EventHandler(this.txtCash_Leave);
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(16, 79);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(296, 43);
-            this.btnBack.TabIndex = 131;
-            this.btnBack.UseVisualStyleBackColor = true;
-            // 
             // numBoard
             // 
             this.numBoard.BackColor = System.Drawing.Color.White;
@@ -140,6 +114,22 @@
             this.numBoard.TabIndex = 0;
             this.numBoard.Press += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard.KeyboardHandler(this.MiniKeyboardHandler);
             // 
+            // txtCash
+            // 
+            this.txtCash.BackColor = System.Drawing.Color.White;
+            this.txtCash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCash.DecimalDigits = 2;
+            this.txtCash.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCash.Location = new System.Drawing.Point(12, 76);
+            this.txtCash.LockFocus = true;
+            this.txtCash.MaxDeciaml = ((long)(1000000));
+            this.txtCash.MaxLength = 100;
+            this.txtCash.Name = "txtCash";
+            this.txtCash.OnlyNumber = true;
+            this.txtCash.Size = new System.Drawing.Size(300, 53);
+            this.txtCash.TabIndex = 76;
+            this.txtCash.WaterText = "0";
+            // 
             // FormPrettyCash
             // 
             this.AcceptButton = this.btnOK;
@@ -148,7 +138,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 520);
             this.Controls.Add(this.txtCash);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label2);
@@ -174,8 +163,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtCash;
-        private System.Windows.Forms.Button btnBack;
+        private MyControl.NumberTextBox txtCash;
 
     }
 }

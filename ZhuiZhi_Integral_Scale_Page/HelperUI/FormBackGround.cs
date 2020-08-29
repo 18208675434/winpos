@@ -18,7 +18,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         private void FormBackGround_DoubleClick(object sender, EventArgs e)
         {
-            this.Hide();
+           // this.Hide();
+        }
+
+        private void FormBackGround_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -331,51 +331,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                      LoadPicScreen(false);
                     if (frmrefund.DialogResult == DialogResult.OK)
                     {
-
-                        decimal AliPayAmt = frmrefund.Reforder.alipayamt;
-                        decimal BalanceAmt = frmrefund.Reforder.balanceamt;
-                        decimal CashPayAmt = frmrefund.Reforder.cashpayamt;
-                        decimal WechatPayAmt = frmrefund.Reforder.wechatpayamt;
-                        decimal YLPayAmt = frmrefund.Reforder.ylpayamt;
-                        decimal PointPayAmt = frmrefund.Reforder.pointpayamt;
-                        decimal CashCouponAmt = frmrefund.Reforder.cashcouponamt;
-                        decimal OtherPayAmt = frmrefund.Reforder.otherpayamt;
-
-                        string totalpay = "";
-                        if (AliPayAmt>0)
-                        {
-                            totalpay += "支付宝：" + AliPayAmt + " ";
-                        }
-                        if (BalanceAmt>0)
-                        {
-                            totalpay += "余额：" + BalanceAmt + " ";
-                        }
-                        if (CashPayAmt>0)
-                        {
-                            totalpay += "现金：" + CashPayAmt + " ";
-                        }
-                        if (WechatPayAmt>0)
-                        {
-                            totalpay += "微信：" + WechatPayAmt + " ";
-                        }
-                        if (YLPayAmt>0)
-                        {
-                            totalpay += "银联：" + YLPayAmt + " ";
-                        }
-
-                        if (PointPayAmt>0)
-                        {
-                            totalpay += "积分：" + PointPayAmt + " ";
-                        }
-
-                        if (CashCouponAmt>0)
-                        {
-                            totalpay += "代金券：" + CashCouponAmt + " ";
-                        }
-                        if (OtherPayAmt > 0)
-                        {
-                            totalpay += frmrefund.Reforder.otherpaytypedesc + "：" + OtherPayAmt + " ";
-                        }
+                        string totalpay = MenuHelper.GetTotalPayInfo(frmrefund.Reforder);
 
                         if (!ConfirmHelper.Confirm("确认退款？", "应退 " + totalpay))
                         {
@@ -392,6 +348,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         }
                         else
                         {
+                            PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
+
+                            if (ErrorMsg != "" || printdetail == null)
+                            {
+                                LoadingHelper.CloseForm();
+                                MainModel.ShowLog(ErrorMsg, true);
+                            }
+                            else
+                            {
+                                //SEDPrint(printdetail);
+                                string PrintErrorMsg = "";
+                                bool printresult = PrintUtil.PrintOrder(printdetail, true, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
+
+                                if (PrintErrorMsg != "" || !printresult)
+                                {
+                                    MainModel.ShowLog(PrintErrorMsg, true);
+                                }
+                                else
+                                {
+                                   // MainModel.ShowLog("打印完成", false);
+                                }
+
+                            }
+
                              MainModel.ShowLog("退款成功", false);
                              try { PrintUtil.OpenCashDrawerEx(); }
                              catch { }
@@ -451,7 +431,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
                     IsEnable = false;
 
-                    // Order SelectOrder =(Order) CurrentQueryOrder.orders.Where(r => r.orderid == selectorderid).ToList()[0];
                     Order SelectOrder = null;
                     for (int i = 0; i < CurrentQueryOrder.orders.Count; i++)
                     {
@@ -470,6 +449,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
 
                     MenuHelper.ShowFormRefundByAmt(SelectOrder);
+
+                    btnQuery_Click(null, null);
                 }
 
 
@@ -557,7 +538,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.ShowLog("切换订单查询模式异常" + ex.Message, true);
             }
         }
-
   
 
         //控制仅允许录入数字
@@ -732,7 +712,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     LoadingHelper.ShowLoadingScreen();
                     IsEnable = false;
-                      QueryOrderPara queryorderpara = new QueryOrderPara();
+                QueryOrderPara queryorderpara = new QueryOrderPara();
                 queryorderpara.customerphone = txtPhone.Text;
                 queryorderpara.interval = CurrentInterval;
                 queryorderpara.shopid = MainModel.CurrentShopInfo.shopid;
@@ -780,51 +760,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 List<Order> lstOrder= CurrentQueryOrder.orders.GetRange(startindex, lastindex - startindex + 1);
                 foreach (Order order in lstOrder)
                 {
-                    decimal AliPayAmt = order.alipayamt;
-                    decimal BalanceAmt = order.balanceamt;
-                    decimal CashPayAmt = order.cashpayamt;
-                    decimal WechatPayAmt = order.wechatpayamt;
-                    decimal YLPayAmt = order.ylpayamt;
-                    decimal PointPayAmt = order.pointpayamt;
-                    decimal CashCouponAmt = order.cashcouponamt;
-                    decimal OtherPayAmt = order.otherpayamt;
-
-                    string totalpay = "";
-                    if (AliPayAmt>0)
-                    {
-                        totalpay += "支付宝：" + AliPayAmt + " ";
-                    }
-                    if (BalanceAmt>0)
-                    {
-                        totalpay += "余额：" + BalanceAmt + " ";
-                    }
-                    if (CashPayAmt>0)
-                    {
-                        totalpay += "现金：" + CashPayAmt + " ";
-                    }
-                    if (WechatPayAmt>0)
-                    {
-                        totalpay += "微信：" + WechatPayAmt + " ";
-                    }
-                    if (YLPayAmt>0)
-                    {
-                        totalpay += "银联：" + YLPayAmt + " ";
-                    }
-
-                    if (PointPayAmt>0)
-                    {
-                        totalpay += "积分：" + PointPayAmt + " ";
-                    }
-
-                    if (CashCouponAmt>0)
-                    {
-                        totalpay += "代金券：" + CashCouponAmt + " ";
-                    }
-
-                    if (OtherPayAmt> 0)
-                    {
-                        totalpay += order.otherpaytypedesc + "：" + OtherPayAmt + " ";
-                    }
+                    string totalpay = MenuHelper.GetTotalPayInfo(order);
 
                     if (order.orderstatusvalue == 5)
                     {
@@ -832,7 +768,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     else
                     {
-                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund,bmpRefundByAmt);
+
+                        Bitmap tempbmprefund = order.supportspecifiedamountrefund == 1 ? bmpRefundByAmt : bmpWhite;
+                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund,tempbmprefund);
                     }
 
                 }

@@ -85,6 +85,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private int CurrentCategoryPage = 1;
 
         /// <summary>
+        /// 当前展示二级分类页数
+        /// </summary>
+        private int CurrentSecondCategoryPage = 1;
+
+        /// <summary>
         /// 当前展示商品页数
         /// </summary>
         private int CurrentGoodPage = 1;
@@ -222,7 +227,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     BaseUIHelper.ShowFormMainMedia();
                     BaseUIHelper.IniFormMainMedia();
                 }));
-
               
                 try { MainModel.frmlogin.Hide(); LoadingHelper.CloseForm(); }
                 catch { }
@@ -240,10 +244,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 btnorderhangimage = new Bitmap(btnOrderHang.Image, 10, 10);
                 UpdateOrderHang();
-
-               
-
-               
 
                 keyBoard.Size = new System.Drawing.Size(dgvGood.Width, dgvGood.RowTemplate.Height * 3);
                 INIManager.SetIni("System", "MainType", "Main", MainModel.IniPath);
@@ -533,6 +533,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
+        private void btnAdjustPrice_Click(object sender, EventArgs e)
+        {
+            ZhuiZhi_Integral_Scale_UncleFruit.MenuUI.MenuHelper.ShowFormAdjustPrice();
+        }
+
+
         private frmToolMain frmtoolmain = null;
         private void btnMenu_Click(object sender, EventArgs e)
         {
@@ -683,8 +689,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     return;
                 }
 
-                if (!ZhuiZhi_Integral_Scale_UncleFruit.HelperUI.ConfirmHelper.Confirm("确认交班","点击确认后，收银机将自动打印交班表单"))
+                //if (!ZhuiZhi_Integral_Scale_UncleFruit.HelperUI.ConfirmHelper.Confirm("确认交班","点击确认后，收银机将自动打印交班表单"))
+                //{
+                //    return;
+                //}
+
+                decimal cashactualamt = ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash.PrettyCashHelper.ShowFormGetCashNum();
+
+                if (cashactualamt <= 0)
                 {
+                    IsEnable = true;
                     return;
                 }
 
@@ -701,14 +715,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
                 decimal PrettyCash = 0;
+
                 decimal.TryParse(INIManager.GetIni("Receipt", "PrettyCash", MainModel.IniPath), out PrettyCash);
 
                 receiptpara.sparecashamt = PrettyCash;
+                receiptpara.cashactualamt = cashactualamt;
 
                 IsEnable = false;
                 string ErrorMsg = "";
                 Receiptdetail receipt = httputil.Receipt(receiptpara, ref ErrorMsg);
 
+                
                 IsEnable = true;
                 if (ErrorMsg != "" || receipt == null) //商品不存在或异常
                 {
@@ -856,6 +873,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 this.Invoke(new InvokeHandler(delegate()
                    {
                        LstAllProduct = CartUtil.LoadAllProduct(true);
+                       dgvGood.Rows.Clear();
+                       dgvGoodQuery.Rows.Clear();
                        IniForm();
                    }));
                 ShowLoading(false,true);
@@ -1062,7 +1081,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         {
                             RefreshCart();
                         }
-
+                        else
+                        {
+                            CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
+                            lblCoupon.Text = "共" + CartUtil.GetAllCouponCount(CurrentCart) + "张";
+                        }
+                       
                         IsEnable = true;
 
                         BaseUIHelper.LoadMember();
@@ -1131,7 +1155,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     return;
                 }
 
-                if (CurrentCart.availablecoupons.Count <= 0)
+                if (CartUtil.GetAllCouponCount(CurrentCart) <= 0)
                 {
                     return;
                 }
@@ -1470,8 +1494,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-
-
         /// <summary>
         /// 当前页面购物车 根据firsecategoryid 区分
         /// </summary>
@@ -1541,7 +1563,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 int page = CurrentCategoryPage;
                 int startindex = 0;
-                int lastindex = 13;
+                int lastindex = 6;
                 int waitingcount = 0;
 
                 bool havanextpage = false;
@@ -1549,10 +1571,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if(page==1){
                     havepreviousPage = false;
                     startindex = 0;
-                    if (sortCategory.Count > 14)
-                    {
-                       
-                        lastindex = 12;
+                    if (sortCategory.Count > 7)
+                    {                       
+                        lastindex = 5;
                         havanextpage = true;
                     }
                     else
@@ -1564,12 +1585,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 else
                 {
                     havepreviousPage = true;
-                    waitingcount = sortCategory.Count - ((page - 1) * 12 + 1);  //第一页只有下一页  中间页都是上一页下一页 占用两个
-                    startindex = (page - 1) * 12 + 1;
+                    waitingcount = sortCategory.Count - ((page - 1) * 5 + 1);  //第一页只有下一页  中间页都是上一页下一页 占用两个
+                    startindex = (page - 1) * 5 + 1;
 
-                    if (waitingcount > 13)
+                    if (waitingcount > 6)
                     {
-                        lastindex =startindex+ 11;
+                        lastindex =startindex+ 4;
                         havanextpage = true;
                     }
                     else
@@ -1617,14 +1638,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lstshowimg.Add(imgPageDownForCagegory);
                 }
 
-                int emptyimgcount = 14 - loadingcount;
+                int emptyimgcount = 7 - loadingcount;
 
                 for (int i = 0; i < emptyimgcount; i++)
                 {
                     lstshowimg.Add(ResourcePos.empty);
                 }
                 dgvCategory.Rows.Clear();
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     int temp = 7 * i;
                     dgvCategory.Rows.Add(lstshowimg[temp + 0], lstshowimg[temp + 1], lstshowimg[temp + 2], lstshowimg[temp + 3], lstshowimg[temp + 4], lstshowimg[temp + 5], lstshowimg[temp + 6]);
@@ -1634,6 +1655,146 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (dgvCategory.Rows.Count > 0 && dgvGood.Rows.Count==0)
                 {
                     dgvCategory_CellClick(null, new DataGridViewCellEventArgs(0, 0));
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ShowLog("加载分类异常" + ex.StackTrace, true);
+            }
+        }
+
+
+        private void LoadSecondDgvCategory()
+        {
+            try
+            {
+
+                if (CurrentFirstCategoryid == "-1")
+                {
+                    //TODO  隐藏二级分类 显示无分类信息
+                    dgvSecondCategory.Rows.Clear();
+                    CurrentGoodPage = 1;
+                    LoadDgvGood(false,false);
+                    return;
+                }
+
+                List<Product> AllCategoryPro = sortCartByFirstCategoryid[CurrentFirstCategoryid].products;
+
+                List<string> list_name = AllCategoryPro.Select(t => t.secondcategoryid).Distinct().ToList();
+
+                Dictionary<string, string> currentsecond = new Dictionary<string, string>();
+                foreach (string str in list_name)
+                {
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        currentsecond.Add(str, AllCategoryPro.FirstOrDefault(r=> r.secondcategoryid==str).secondcategoryname);
+                    }
+                }
+
+                int page = CurrentSecondCategoryPage;
+                int startindex = 0;
+                int lastindex = 6;
+                int waitingcount = 0;
+
+                bool havanextpage = false;
+                bool havepreviousPage = false;
+                if (page == 1)
+                {
+                    havepreviousPage = false;
+                    startindex = 0;
+                    if (currentsecond.Count > 7)
+                    {
+                        lastindex = 5;
+                        havanextpage = true;
+                    }
+                    else
+                    {
+                        lastindex = currentsecond.Count - 1;
+                        havanextpage = false;
+                    }
+                }
+                else
+                {
+                    havepreviousPage = true;
+                    waitingcount = currentsecond.Count - ((page - 1) * 5 + 1);  //第一页只有下一页  中间页都是上一页下一页 占用两个
+                    startindex = (page - 1) * 5 + 1;
+
+                    if (waitingcount > 6)
+                    {
+                        lastindex = startindex + 4;
+                        havanextpage = true;
+                    }
+                    else
+                    {
+                        lastindex = currentsecond.Count - 1;
+                        havanextpage = false;
+                    }
+                }
+
+                int loadingcount = lastindex - startindex + 1;
+
+                List<Image> lstshowimg = new List<Image>();
+                if (havepreviousPage)
+                {
+                    lstshowimg.Add(imgPageUpForCategory);
+                }
+
+                int tempcount = 0;
+                foreach (KeyValuePair<string, string> kv in currentsecond)
+                {
+                    if (tempcount >= startindex && tempcount <= lastindex)
+                    {
+                        Image img;
+                        if (sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid == kv.Key)
+                        {
+                            btnSecondSelect.Text = kv.Value;
+                            img = MainModel.GetControlImage(btnSecondSelect);
+                            img.Tag = kv;
+                        }
+                        else
+                        {
+                            btnSecondNotSelect.Text = kv.Value;
+                            img = MainModel.GetControlImage(btnSecondNotSelect);
+                            img.Tag = kv;
+                        }
+
+                        lstshowimg.Add(img);
+                    }
+
+                    tempcount++;
+                }
+
+                if (havanextpage)
+                {
+                    lstshowimg.Add(imgPageDownForCagegory);
+                }
+
+                int emptyimgcount = 7 - loadingcount;
+
+                for (int i = 0; i < emptyimgcount; i++)
+                {
+                    lstshowimg.Add(ResourcePos.empty);
+                }
+
+                dgvSecondCategory.Rows.Clear();
+                for (int i = 0; i < 1; i++)
+                {
+                    int temp = 7 * i;
+                    dgvSecondCategory.Rows.Add(lstshowimg[temp + 0], lstshowimg[temp + 1], lstshowimg[temp + 2], lstshowimg[temp + 3], lstshowimg[temp + 4], lstshowimg[temp + 5], lstshowimg[temp + 6]);
+                }
+
+                IsEnable = true;
+                if (dgvSecondCategory.Rows.Count > 0 && sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid=="-1")
+                {
+                    dgvSecondCategory_CellClick(null, new DataGridViewCellEventArgs(0, 0));
+                   // dgvSecondCategory(null, new DataGridViewCellEventArgs(0, 0));
+                }
+                else
+                {
+                    CurrentGoodPage = 1;
+                    LoadDgvGood(false,false);
                 }
 
 
@@ -1708,25 +1869,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
                 CurrentFirstCategoryid = kv.Key;
-                dgvGood.Rows.Clear();
+                CurrentSecondCategoryPage = 1;
+                LoadSecondDgvCategory();
+                //dgvGood.Rows.Clear();
 
-                CurrentGoodPage = 1;
-                //说明是第一次加载
-                if (sender == null)
-                {                   
-                    LoadDgvGood(true, true);
-                }
-                else
-                {
-                    LoadDgvGood(false, false);
-                }
+                //CurrentGoodPage = 1;
+                ////说明是第一次加载
+                //if (sender == null)
+                //{                   
+                //    LoadDgvGood(true, true);
+                //}
+                //else
+                //{
+                //    LoadDgvGood(false, false);
+                //}
             }
             catch (Exception ex)
             {
                 ShowLog("选择分类异常"+ex.StackTrace,true);
             }
             finally
-            {              
+            {
                 btnScan.Select();
             }
         }
@@ -1736,9 +1899,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-
                 Other.CrearMemory();
-                List<Product> AllCategoryPro = sortCartByFirstCategoryid[CurrentFirstCategoryid].products;
+                List<Product> AllCategoryPro =new List<Product>();
+
+                if(CurrentFirstCategoryid=="-1"){
+                                      AllCategoryPro  = sortCartByFirstCategoryid[CurrentFirstCategoryid].products;
+
+                }else{
+                    AllCategoryPro = sortCartByFirstCategoryid[CurrentFirstCategoryid].products.Where(r => r.secondcategoryid == sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid).ToList();
+
+                }
 
                 if (AllCategoryPro == null || AllCategoryPro.Count == 0)
                 {
@@ -2596,6 +2766,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
+                    CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
                     ClearForm();
                     return true;
                 }
@@ -3057,7 +3228,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 lblCredit.Visible = false;
                 picCredit.Visible = false;
-                lblCoupon.Text = "0张";
+                //lblCoupon.Text = "0张";
                 Other.CrearMemory();
 
                 BaseUIHelper.IniFormMainMedia();
@@ -3139,6 +3310,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     CurrentCartPage = 1;
                     LoadDgvCart();
+
+                    if (CurrentCart.products == null || CurrentCart.products.Count == 0)
+                    {
+                        CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
+                    }
 
                     lblCoupon.Text = "共" + CartUtil.GetAllCouponCount(CurrentCart) + "张";
                     if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Count > 0)
@@ -4028,7 +4204,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnTopUp_Click(object sender, EventArgs e)
         {
-            MemberCenterHelper.ShowFormMemberCenter(MainModel.CurrentMember);
+            try
+            {
+                MemberCenterHelper.ShowFormMemberCenter(MainModel.CurrentMember);
+
+                if (MainModel.CurrentMember != null)
+                {
+                    string ErrorMsgMember = "";
+                    Member member = httputil.GetMember(MainModel.CurrentMember.memberheaderresponsevo.mobile, ref ErrorMsgMember);
+
+                    if (ErrorMsgMember != "" || member == null) //会员不存在
+                    {
+                        ClearMember();
+                        ShowLog(ErrorMsgMember, false);
+                    }
+                    else
+                    {
+                        LoadMember(member);
+                    }
+                }
+            }
+            catch { }
         }
 
 
@@ -4106,6 +4302,95 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                
             }
         }
+
+        private void dgvSecondCategory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (!IsEnable || keyBoard.Visible)
+                {
+                    return;
+                }
+                if (e.RowIndex < 0)
+                    return;
+
+                Other.CrearMemory();
+                Image selectimg = (Image)dgvSecondCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                //展开
+                if (selectimg == imgPageDownForCagegory)
+                {
+                    CurrentSecondCategoryPage++;
+                    LoadSecondDgvCategory();
+                    return;
+                }
+                //收起
+                if (selectimg == imgPageUpForCategory)
+                {
+                    CurrentSecondCategoryPage--;
+                    LoadSecondDgvCategory();
+                    return;
+                }
+                if (selectimg.Tag == null)  //空白单元格（无商品）
+                {
+                    return;
+                }
+
+                //遍历单元格清空之前的选中状态
+                for (int i = 0; i < this.dgvSecondCategory.Rows.Count; i++)
+                {
+                    for (int j = 0; j < this.dgvSecondCategory.Columns.Count; j++)
+                    {
+                        Image lastimg = (Image)dgvSecondCategory.Rows[i].Cells[j].Value;
+
+                        if (lastimg.Tag != null && ((KeyValuePair<string, string>)lastimg.Tag).Key == CurrentFirstCategoryid)
+                        {
+                            btnNotSelect.Text = ((KeyValuePair<string, string>)lastimg.Tag).Value;
+                            Image tempimg = MainModel.GetControlImage(btnNotSelect);
+                            tempimg.Tag = (KeyValuePair<string, string>)lastimg.Tag;
+
+                            dgvSecondCategory.Rows[i].Cells[j].Value = tempimg;
+                            // break;
+                        }
+                    }
+                }
+
+
+                KeyValuePair<string, string> kv = (KeyValuePair<string, string>)selectimg.Tag;
+
+                btnSecondSelect.Text = kv.Value;
+                Image img = MainModel.GetControlImage(btnSecondSelect);
+                img.Tag = kv;
+
+                dgvSecondCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = img;
+
+                sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid = kv.Key;
+
+                LoadSecondDgvCategory();
+                dgvGood.Rows.Clear();
+
+                CurrentGoodPage = 1;
+                //说明是第一次加载
+                if (sender == null)
+                {
+                    LoadDgvGood(true, true);
+                }
+                else
+                {
+                    LoadDgvGood(false, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowLog("选择分类异常" + ex.StackTrace, true);
+            }
+            finally
+            {
+                btnScan.Select();
+            }
+        }
+
+       
 
       
         

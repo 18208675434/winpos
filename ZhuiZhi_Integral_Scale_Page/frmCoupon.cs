@@ -79,7 +79,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 OrderCouponVo couponsBean = (OrderCouponVo)selectimg.Tag;
                 //不可用优惠券不能选择
-                if (couponsBean == null || !couponsBean.IsEnable)
+                if (couponsBean == null || !couponsBean.enabled)
                 {
                     return;
                 }
@@ -219,7 +219,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 lblDate.Text = starttime + "至" + endtime;
 
-                if (couponsBean.IsEnable)
+                if (couponsBean.enabled)
                 {
                     picItem.Visible = true;
                     pnlItem.Enabled = true;
@@ -231,7 +231,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     pnlItem.Enabled = false;
 
                 }
-                picItem.Visible = couponsBean.IsEnable;
+                picItem.Visible = couponsBean.enabled;
                 if (SelectCouponCode == couponsBean.couponcode)
                 {
                     picItem.BackgroundImage = picSelect.Image;
@@ -346,13 +346,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 if (CurrentCart.availablecoupons != null && CurrentCart.availablecoupons.Count > 0)
                 {
-                    CurrentCart.availablecoupons.ForEach(r=> r.IsEnable=true);
+                    CurrentCart.availablecoupons.ForEach(r => r.enabled = true);
                     coupongs.AddRange(CurrentCart.availablecoupons);
                 }
 
                 if (CurrentCart.unavailablecoupons != null && CurrentCart.unavailablecoupons.Count > 0)
                 {
-                    CurrentCart.unavailablecoupons.ForEach(r => r.IsEnable = false);
+                    CurrentCart.unavailablecoupons.ForEach(r => r.enabled = false);
                     coupongs.AddRange(CurrentCart.unavailablecoupons);
                 }
 

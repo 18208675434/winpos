@@ -30,31 +30,38 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPanelGoodsForBroken));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnOK = new System.Windows.Forms.Button();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -71,6 +78,8 @@
             this.lblSelectPrice = new System.Windows.Forms.Label();
             this.lblNmae = new System.Windows.Forms.Label();
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.btnSecondSelect = new System.Windows.Forms.Button();
+            this.btnSecondNotSelect = new System.Windows.Forms.Button();
             this.picGoodNotSelect = new System.Windows.Forms.PictureBox();
             this.picGoodSelect = new System.Windows.Forms.PictureBox();
             this.btnPageDownForGood = new System.Windows.Forms.Button();
@@ -104,6 +113,14 @@
             this.six = new System.Windows.Forms.DataGridViewImageColumn();
             this.seven = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlCategory = new System.Windows.Forms.Panel();
+            this.dgvSecondCategory = new System.Windows.Forms.DataGridView();
+            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn13 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn14 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn15 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn16 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn17 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn18 = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnKboard = new System.Windows.Forms.Button();
             this.lblSearchShuiyin = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -143,6 +160,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
             this.pnlCategory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSecondCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGoodQuery)).BeginInit();
             this.panel1.SuspendLayout();
             this.pnlCartItem.SuspendLayout();
@@ -280,26 +298,26 @@
             this.dgvCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCart.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 8F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("微软雅黑", 8F);
+            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle33;
             this.dgvCart.ColumnHeadersHeight = 30;
             this.dgvCart.ColumnHeadersVisible = false;
             this.dgvCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewImageColumn1});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle35;
             this.dgvCart.GridColor = System.Drawing.Color.Gainsboro;
             this.dgvCart.Location = new System.Drawing.Point(800, 184);
             this.dgvCart.MultiSelect = false;
@@ -307,8 +325,8 @@
             this.dgvCart.ReadOnly = true;
             this.dgvCart.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvCart.RowHeadersVisible = false;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle36;
             this.dgvCart.RowTemplate.Height = 70;
             this.dgvCart.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvCart.Size = new System.Drawing.Size(360, 490);
@@ -317,12 +335,12 @@
             // 
             // dataGridViewImageColumn1
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle34.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle34.NullValue")));
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridViewImageColumn1.FillWeight = 55F;
             this.dataGridViewImageColumn1.HeaderText = "商品/条码";
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
@@ -366,6 +384,8 @@
             // pnlControl
             // 
             this.pnlControl.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlControl.Controls.Add(this.btnSecondSelect);
+            this.pnlControl.Controls.Add(this.btnSecondNotSelect);
             this.pnlControl.Controls.Add(this.picGoodNotSelect);
             this.pnlControl.Controls.Add(this.picGoodSelect);
             this.pnlControl.Controls.Add(this.btnPageDownForGood);
@@ -382,6 +402,38 @@
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(754, 264);
             this.pnlControl.TabIndex = 52;
+            // 
+            // btnSecondSelect
+            // 
+            this.btnSecondSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
+            this.btnSecondSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSecondSelect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(160)))), ((int)(((byte)(213)))));
+            this.btnSecondSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSecondSelect.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnSecondSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(160)))), ((int)(((byte)(213)))));
+            this.btnSecondSelect.Location = new System.Drawing.Point(179, 124);
+            this.btnSecondSelect.Name = "btnSecondSelect";
+            this.btnSecondSelect.Size = new System.Drawing.Size(104, 60);
+            this.btnSecondSelect.TabIndex = 89;
+            this.btnSecondSelect.Text = "button6";
+            this.btnSecondSelect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSecondSelect.UseVisualStyleBackColor = false;
+            // 
+            // btnSecondNotSelect
+            // 
+            this.btnSecondNotSelect.BackColor = System.Drawing.Color.White;
+            this.btnSecondNotSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSecondNotSelect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(160)))), ((int)(((byte)(213)))));
+            this.btnSecondNotSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSecondNotSelect.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnSecondNotSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(160)))), ((int)(((byte)(213)))));
+            this.btnSecondNotSelect.Location = new System.Drawing.Point(179, 70);
+            this.btnSecondNotSelect.Name = "btnSecondNotSelect";
+            this.btnSecondNotSelect.Size = new System.Drawing.Size(104, 60);
+            this.btnSecondNotSelect.TabIndex = 88;
+            this.btnSecondNotSelect.Text = "button6";
+            this.btnSecondNotSelect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSecondNotSelect.UseVisualStyleBackColor = false;
             // 
             // picGoodNotSelect
             // 
@@ -411,7 +463,7 @@
             this.btnPageDownForGood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPageDownForGood.Font = new System.Drawing.Font("微软雅黑", 13.5F);
             this.btnPageDownForGood.ForeColor = System.Drawing.Color.White;
-            this.btnPageDownForGood.Location = new System.Drawing.Point(197, 167);
+            this.btnPageDownForGood.Location = new System.Drawing.Point(361, 168);
             this.btnPageDownForGood.Name = "btnPageDownForGood";
             this.btnPageDownForGood.Size = new System.Drawing.Size(153, 83);
             this.btnPageDownForGood.TabIndex = 85;
@@ -426,7 +478,7 @@
             this.btnPageUpForGood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPageUpForGood.Font = new System.Drawing.Font("微软雅黑", 13.5F);
             this.btnPageUpForGood.ForeColor = System.Drawing.Color.White;
-            this.btnPageUpForGood.Location = new System.Drawing.Point(197, 79);
+            this.btnPageUpForGood.Location = new System.Drawing.Point(361, 80);
             this.btnPageUpForGood.Name = "btnPageUpForGood";
             this.btnPageUpForGood.Size = new System.Drawing.Size(153, 83);
             this.btnPageUpForGood.TabIndex = 84;
@@ -591,9 +643,9 @@
             // dataGridViewImageColumn2
             // 
             this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle5.NullValue")));
-            this.dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle37.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle37.NullValue")));
+            this.dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle37;
             this.dataGridViewImageColumn2.FillWeight = 10F;
             this.dataGridViewImageColumn2.HeaderText = "操作";
             this.dataGridViewImageColumn2.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn2.Image")));
@@ -633,14 +685,14 @@
             this.three,
             this.four,
             this.Column3});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvGood.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle43.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvGood.DefaultCellStyle = dataGridViewCellStyle43;
             this.dgvGood.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.dgvGood.Location = new System.Drawing.Point(1, 232);
             this.dgvGood.MultiSelect = false;
@@ -655,49 +707,49 @@
             // 
             // one
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle6.NullValue = null;
-            this.one.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle38.NullValue = null;
+            this.one.DefaultCellStyle = dataGridViewCellStyle38;
             this.one.HeaderText = "第一列";
             this.one.Name = "one";
             this.one.ReadOnly = true;
             // 
             // two
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle7.NullValue = null;
-            this.two.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle39.NullValue = null;
+            this.two.DefaultCellStyle = dataGridViewCellStyle39;
             this.two.HeaderText = "第二列";
             this.two.Name = "two";
             this.two.ReadOnly = true;
             // 
             // three
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle8.NullValue = null;
-            this.three.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle40.NullValue = null;
+            this.three.DefaultCellStyle = dataGridViewCellStyle40;
             this.three.HeaderText = "第三列";
             this.three.Name = "three";
             this.three.ReadOnly = true;
             // 
             // four
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.four.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.four.DefaultCellStyle = dataGridViewCellStyle41;
             this.four.HeaderText = "第四列";
             this.four.Name = "four";
             this.four.ReadOnly = true;
             // 
             // Column3
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle10.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle10.NullValue")));
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle42.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle42.NullValue")));
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle42;
             this.Column3.HeaderText = "第五列";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -724,26 +776,26 @@
             this.six,
             this.seven});
             this.dgvCategory.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.dgvCategory.Location = new System.Drawing.Point(8, 56);
+            this.dgvCategory.Location = new System.Drawing.Point(9, 57);
             this.dgvCategory.MultiSelect = false;
             this.dgvCategory.Name = "dgvCategory";
             this.dgvCategory.ReadOnly = true;
             this.dgvCategory.RowHeadersVisible = false;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dgvCategory.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dgvCategory.RowsDefaultCellStyle = dataGridViewCellStyle51;
             this.dgvCategory.RowTemplate.Height = 55;
             this.dgvCategory.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCategory.Size = new System.Drawing.Size(764, 110);
+            this.dgvCategory.Size = new System.Drawing.Size(764, 55);
             this.dgvCategory.TabIndex = 42;
             this.dgvCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellClick);
             // 
             // dataGridViewImageColumn3
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            dataGridViewCellStyle12.NullValue = null;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.dataGridViewImageColumn3.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle44.NullValue = null;
+            dataGridViewCellStyle44.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn3.DefaultCellStyle = dataGridViewCellStyle44;
             this.dataGridViewImageColumn3.FillWeight = 100.3947F;
             this.dataGridViewImageColumn3.HeaderText = "第一列";
             this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
@@ -751,11 +803,11 @@
             // 
             // dataGridViewImageColumn5
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            dataGridViewCellStyle13.NullValue = null;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.dataGridViewImageColumn5.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle45.NullValue = null;
+            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn5.DefaultCellStyle = dataGridViewCellStyle45;
             this.dataGridViewImageColumn5.FillWeight = 99.41586F;
             this.dataGridViewImageColumn5.HeaderText = "第二列";
             this.dataGridViewImageColumn5.Name = "dataGridViewImageColumn5";
@@ -763,11 +815,11 @@
             // 
             // dataGridViewImageColumn6
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            dataGridViewCellStyle14.NullValue = null;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle46.NullValue = null;
+            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle46;
             this.dataGridViewImageColumn6.FillWeight = 100.4184F;
             this.dataGridViewImageColumn6.HeaderText = "第三列";
             this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
@@ -775,11 +827,11 @@
             // 
             // dataGridViewImageColumn7
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            dataGridViewCellStyle15.NullValue = null;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle47.NullValue = null;
+            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle47;
             this.dataGridViewImageColumn7.FillWeight = 99.43595F;
             this.dataGridViewImageColumn7.HeaderText = "第四列";
             this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
@@ -787,11 +839,11 @@
             // 
             // five
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            dataGridViewCellStyle16.NullValue = null;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.five.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle48.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle48.NullValue = null;
+            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.five.DefaultCellStyle = dataGridViewCellStyle48;
             this.five.FillWeight = 100.4358F;
             this.five.HeaderText = "第五列";
             this.five.Name = "five";
@@ -799,11 +851,11 @@
             // 
             // six
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            dataGridViewCellStyle17.NullValue = null;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.six.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle49.NullValue = null;
+            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.six.DefaultCellStyle = dataGridViewCellStyle49;
             this.six.FillWeight = 99.4507F;
             this.six.HeaderText = "第六列";
             this.six.Name = "six";
@@ -811,11 +863,11 @@
             // 
             // seven
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            dataGridViewCellStyle18.NullValue = null;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
-            this.seven.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle50.NullValue = null;
+            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.seven.DefaultCellStyle = dataGridViewCellStyle50;
             this.seven.FillWeight = 100.4486F;
             this.seven.HeaderText = "第七咧";
             this.seven.Name = "seven";
@@ -824,6 +876,7 @@
             // pnlCategory
             // 
             this.pnlCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.pnlCategory.Controls.Add(this.dgvSecondCategory);
             this.pnlCategory.Controls.Add(this.dgvCategory);
             this.pnlCategory.Controls.Add(this.btnKboard);
             this.pnlCategory.Controls.Add(this.lblSearchShuiyin);
@@ -832,6 +885,122 @@
             this.pnlCategory.Name = "pnlCategory";
             this.pnlCategory.Size = new System.Drawing.Size(782, 172);
             this.pnlCategory.TabIndex = 68;
+            // 
+            // dgvSecondCategory
+            // 
+            this.dgvSecondCategory.AllowUserToAddRows = false;
+            this.dgvSecondCategory.AllowUserToDeleteRows = false;
+            this.dgvSecondCategory.AllowUserToResizeColumns = false;
+            this.dgvSecondCategory.AllowUserToResizeRows = false;
+            this.dgvSecondCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSecondCategory.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dgvSecondCategory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvSecondCategory.CausesValidation = false;
+            this.dgvSecondCategory.ColumnHeadersVisible = false;
+            this.dgvSecondCategory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewImageColumn4,
+            this.dataGridViewImageColumn13,
+            this.dataGridViewImageColumn14,
+            this.dataGridViewImageColumn15,
+            this.dataGridViewImageColumn16,
+            this.dataGridViewImageColumn17,
+            this.dataGridViewImageColumn18});
+            this.dgvSecondCategory.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dgvSecondCategory.Location = new System.Drawing.Point(9, 112);
+            this.dgvSecondCategory.MultiSelect = false;
+            this.dgvSecondCategory.Name = "dgvSecondCategory";
+            this.dgvSecondCategory.ReadOnly = true;
+            this.dgvSecondCategory.RowHeadersVisible = false;
+            this.dgvSecondCategory.RowTemplate.DividerHeight = 3;
+            this.dgvSecondCategory.RowTemplate.Height = 55;
+            this.dgvSecondCategory.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvSecondCategory.Size = new System.Drawing.Size(763, 55);
+            this.dgvSecondCategory.TabIndex = 44;
+            this.dgvSecondCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSecondCategory_CellClick);
+            // 
+            // dataGridViewImageColumn4
+            // 
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle52.NullValue = null;
+            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn4.DefaultCellStyle = dataGridViewCellStyle52;
+            this.dataGridViewImageColumn4.DividerWidth = 3;
+            this.dataGridViewImageColumn4.HeaderText = "第一列";
+            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
+            this.dataGridViewImageColumn4.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn13
+            // 
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle53.NullValue = null;
+            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn13.DefaultCellStyle = dataGridViewCellStyle53;
+            this.dataGridViewImageColumn13.DividerWidth = 3;
+            this.dataGridViewImageColumn13.HeaderText = "第二列";
+            this.dataGridViewImageColumn13.Name = "dataGridViewImageColumn13";
+            this.dataGridViewImageColumn13.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn14
+            // 
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle54.NullValue = null;
+            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn14.DefaultCellStyle = dataGridViewCellStyle54;
+            this.dataGridViewImageColumn14.DividerWidth = 3;
+            this.dataGridViewImageColumn14.HeaderText = "第三列";
+            this.dataGridViewImageColumn14.Name = "dataGridViewImageColumn14";
+            this.dataGridViewImageColumn14.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn15
+            // 
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle55.NullValue = null;
+            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn15.DefaultCellStyle = dataGridViewCellStyle55;
+            this.dataGridViewImageColumn15.DividerWidth = 3;
+            this.dataGridViewImageColumn15.HeaderText = "第四列";
+            this.dataGridViewImageColumn15.Name = "dataGridViewImageColumn15";
+            this.dataGridViewImageColumn15.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn16
+            // 
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle56.NullValue = null;
+            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn16.DefaultCellStyle = dataGridViewCellStyle56;
+            this.dataGridViewImageColumn16.DividerWidth = 3;
+            this.dataGridViewImageColumn16.HeaderText = "第五列";
+            this.dataGridViewImageColumn16.Name = "dataGridViewImageColumn16";
+            this.dataGridViewImageColumn16.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn17
+            // 
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle57.NullValue = null;
+            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn17.DefaultCellStyle = dataGridViewCellStyle57;
+            this.dataGridViewImageColumn17.DividerWidth = 3;
+            this.dataGridViewImageColumn17.HeaderText = "第六列";
+            this.dataGridViewImageColumn17.Name = "dataGridViewImageColumn17";
+            this.dataGridViewImageColumn17.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn18
+            // 
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            dataGridViewCellStyle58.NullValue = null;
+            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(114)))), ((int)(((byte)(147)))));
+            this.dataGridViewImageColumn18.DefaultCellStyle = dataGridViewCellStyle58;
+            this.dataGridViewImageColumn18.DividerWidth = 3;
+            this.dataGridViewImageColumn18.HeaderText = "第七列";
+            this.dataGridViewImageColumn18.Name = "dataGridViewImageColumn18";
+            this.dataGridViewImageColumn18.ReadOnly = true;
             // 
             // btnKboard
             // 
@@ -894,14 +1063,14 @@
             this.dataGridViewImageColumn10,
             this.dataGridViewImageColumn11,
             this.dataGridViewImageColumn12});
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvGoodQuery.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle64.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle64.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle64.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle64.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvGoodQuery.DefaultCellStyle = dataGridViewCellStyle64;
             this.dgvGoodQuery.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.dgvGoodQuery.Location = new System.Drawing.Point(1, 234);
             this.dgvGoodQuery.MultiSelect = false;
@@ -917,49 +1086,49 @@
             // 
             // dataGridViewImageColumn8
             // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle20.NullValue = null;
-            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle59.NullValue = null;
+            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle59;
             this.dataGridViewImageColumn8.HeaderText = "第一列";
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.ReadOnly = true;
             // 
             // dataGridViewImageColumn9
             // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle21.NullValue = null;
-            this.dataGridViewImageColumn9.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle60.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle60.NullValue = null;
+            this.dataGridViewImageColumn9.DefaultCellStyle = dataGridViewCellStyle60;
             this.dataGridViewImageColumn9.HeaderText = "第二列";
             this.dataGridViewImageColumn9.Name = "dataGridViewImageColumn9";
             this.dataGridViewImageColumn9.ReadOnly = true;
             // 
             // dataGridViewImageColumn10
             // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle22.NullValue = null;
-            this.dataGridViewImageColumn10.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle61.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle61.NullValue = null;
+            this.dataGridViewImageColumn10.DefaultCellStyle = dataGridViewCellStyle61;
             this.dataGridViewImageColumn10.HeaderText = "第三列";
             this.dataGridViewImageColumn10.Name = "dataGridViewImageColumn10";
             this.dataGridViewImageColumn10.ReadOnly = true;
             // 
             // dataGridViewImageColumn11
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.dataGridViewImageColumn11.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.dataGridViewImageColumn11.DefaultCellStyle = dataGridViewCellStyle62;
             this.dataGridViewImageColumn11.HeaderText = "第四列";
             this.dataGridViewImageColumn11.Name = "dataGridViewImageColumn11";
             this.dataGridViewImageColumn11.ReadOnly = true;
             // 
             // dataGridViewImageColumn12
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle24.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle24.NullValue")));
-            this.dataGridViewImageColumn12.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle63.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle63.NullValue")));
+            this.dataGridViewImageColumn12.DefaultCellStyle = dataGridViewCellStyle63;
             this.dataGridViewImageColumn12.HeaderText = "第五列";
             this.dataGridViewImageColumn12.Name = "dataGridViewImageColumn12";
             this.dataGridViewImageColumn12.ReadOnly = true;
@@ -1167,6 +1336,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).EndInit();
             this.pnlCategory.ResumeLayout(false);
             this.pnlCategory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSecondCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGoodQuery)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1250,5 +1420,15 @@
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.DataGridView dgvSecondCategory;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn4;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn13;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn14;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn15;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn16;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn17;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn18;
+        private System.Windows.Forms.Button btnSecondSelect;
+        private System.Windows.Forms.Button btnSecondNotSelect;
     }
 }

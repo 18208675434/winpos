@@ -454,12 +454,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                 }
 
-                if (dbpro == null)
-                {
-                    return null;
-
-                }
-                else
+               
+                if(dbpro!=null && dbpro.STATUS==1)
                 {
                     scancodememberModel scancodemember = new scancodememberModel();
                     scancodemember.scancodedto = new Scancodedto();
@@ -508,6 +504,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         scancodemember.scancodedto.specnum = 1;
                     }
                     return scancodemember;
+                }
+                else
+                {
+                    return null;
                 }
 
             }
@@ -579,23 +579,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         bpro.saleprice = 0;
 
 
+                        List<BrokenProduct> lstbrokenpro = CurrentProducts.Where(r => r.skucode == bpro.skucode).ToList();
 
-                        if (!bpro.weightflag)
-                    {
-                        List<BrokenProduct> lstbroken = CurrentProducts.Where(r => r.skucode == bpro.skucode).ToList();
-
-                        if (lstbroken != null && lstbroken.Count > 0)
-                        {
-                            lstbroken[0].num += 1;
-                        }
-                        else
+                        if (lstbrokenpro == null || lstbrokenpro.Count == 0)
                         {
                             CurrentProducts.Add(bpro);
                         }
-                        
-                    }else{
-                        CurrentProducts.Add(bpro);
-                    }
+                        else
+                        {
+                            if (!bpro.weightflag)
+                            {
+                                lstbrokenpro[0].num += bpro.num;
+                            }
+                            else
+                            {
+                                lstbrokenpro[0].specnum += bpro.specnum;
+                            }
+
+
+                        }        
 
                 }
                     RefreshCart();
@@ -1024,7 +1026,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     picAdd.Visible = false;
                     picMinus.Visible = false;
 
-                    lblProNum.Text = pro.specnum + pro.unit;
+                    //lblProNum.Text = pro.specnum + pro.unit;
+                    lblProNum.Text = pro.specnum + "KG";
                     lblProNum.Left = picMinus.Right; 
                 }
 
@@ -1188,7 +1191,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 foreach (BrokenProduct pro in lstLoadingPro)
                 {
                     
-                        dgvGood.Rows.Insert(0, GetDgvRow(pro));
+                       // dgvGood.Rows.Insert(0, GetDgvRow(pro));
+
+                        dgvGood.Rows.Add(GetDgvRow(pro));
  
                     
                 }
@@ -1241,11 +1246,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 if (dgvType.Rows.Count > 5)
                 {
-                    dgvType.Height = dgvType.RowTemplate.Height * 5;
+                    dgvType.Height = dgvType.RowTemplate.Height * 5+5;
                 }
                 else
                 {
-                    dgvType.Height = dgvType.RowTemplate.Height*dgvType.Rows.Count;
+                    dgvType.Height = dgvType.RowTemplate.Height*dgvType.Rows.Count+5;
                 }
             }
             catch (Exception ex)

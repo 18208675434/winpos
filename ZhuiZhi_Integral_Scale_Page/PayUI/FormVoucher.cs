@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.MyControl;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
@@ -37,7 +38,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                 timerFocus.Enabled = true;
 
-                GlobalUtil.OpenOSK();
+                //GlobalUtil.OpenOSK();
 
                 Delay.Start(100);
                 this.Activate();
@@ -99,45 +100,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             catch { }
         }
 
-        private void lblShuiyin_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                txtCode.Select();
-
-                GlobalUtil.OpenOSK();
-
-                Delay.Start(100);
-                this.Activate();
-                txtCode.Focus();
-            }
-            catch { }
-        }
-
-        private void txtCode_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                lblShuiyin.Visible = string.IsNullOrEmpty(txtCode.Text);
-            }
-            catch { }
-        }
-
-        private void txtCode_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                GlobalUtil.OpenOSK();
-
-                Delay.Start(100);
-                this.Activate();
-                txtCode.Focus();
-            }
-            catch { }
-        }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrEmpty(txtCode.Text))
+            {
+                MainModel.ShowLog("不能为空",false);
+                return;
+            }
+            //判断是否有特殊字符（数字和字母外）
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtCode.Text, "^[0-9a-zA-Z]+$"))
+            {
+                //System.Diagnostics.Debug.WriteLine("是符合要求字符");
+                MainModel.ShowLog("不能输入特殊字符", false);
+                return;
+            }
             CurrentPhone = txtCode.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();

@@ -66,5 +66,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
                 return false;
             }
         }
+
+
+         public static decimal ShowFormGetCashNum()
+        {
+            try
+            {
+
+                BackHelper.ShowFormBackGround();
+
+                FormGetCashNum frmprettycash = new FormGetCashNum();
+                
+                asf.AutoScaleControlTest(frmprettycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
+                frmprettycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmprettycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmprettycash.Height) / 2);
+                frmprettycash.TopMost = true;
+                frmprettycash.ShowDialog();
+                frmprettycash.Dispose();
+
+                BackHelper.HideFormBackGround();
+                Application.DoEvents();
+
+                if (frmprettycash.DialogResult == DialogResult.OK)
+                {
+                    return frmprettycash.ResultNum;
+                }
+                else
+                {
+                    return 0;
+                }
+                               
+            }
+            catch (Exception ex)
+            {
+                ZhuiZhi_Integral_Scale_UncleFruit.Common.LogManager.WriteLog("设置备用金异常" + ex.Message);
+                return 0;
+            }
+        }
+
+
+
+
     }
 }

@@ -98,17 +98,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 CurrentNumberType = numbertype;
                 switch (CurrentNumberType)
                 {
-                    case NumberType.BarCode: lblShuiyin.Text = "输入商品条码"; lblg.Visible = false; btnBack.Width = rbtnOK.Width; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
-                    case NumberType.MemberCode: lblShuiyin.Text = "输入会员手机号"; lblg.Visible = false; btnBack.Width = rbtnOK.Width; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
-                    case NumberType.ProWeight: lblShuiyin.Text = "请输入实际重量"; lblg.Visible = true; btnBack.Width = lblg.Left - btnBack.Left - 2; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
-                    case NumberType.TareWeight: lblShuiyin.Text = "请输入皮重"; lblg.Visible = true; btnBack.Width = lblg.Left - btnBack.Left - 2; txtNum.Width = btnBack.Width - (txtNum.Left - btnBack.Left) - 4; break;
+
+                    case NumberType.BarCode: txtNum.WaterText = "输入商品条码"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.MemberCode: txtNum.WaterText = "输入会员手机号"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.ProWeight: txtNum.WaterText = "请输入实际重量"; lblg.Visible = true; txtNum.Width = lblg.Left - txtNum.Left - 2; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.TareWeight: txtNum.WaterText = "请输入皮重"; lblg.Visible = true; txtNum.Width = lblg.Left - txtNum.Left - 2; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
                 }
 
                 rbtnOK.allbackcolor = Color.LightGray;
                 rbtnOK.WhetherEnable = false;
 
-
-                timerFocus.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -140,16 +139,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                     if (txtNum.Text.Length != 11)
                     {
                         MainModel.ShowLog("手机号格式不正确！",false);
-                        txtNum.Select();
-                        this.txtNum.Select(this.txtNum.TextLength, 0);
+
                         return;
                     }
 
                     if (txtNum.Text.Length > 0 && txtNum.Text.Substring(0, 1) != "1")
                     {
                         MainModel.ShowLog("手机号格式不正确！", false);
-                        txtNum.Select();
-                        this.txtNum.Select(this.txtNum.TextLength, 0);
+
                         return;
                     }
                 }
@@ -246,11 +243,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 }
             }
             catch { }
-            finally
-            {
-                txtNum.Select();
-                this.txtNum.Select(this.txtNum.TextLength, 0);
-            }
+
 
         }
 
@@ -300,53 +293,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         }
 
-        private void lblShuiyin_Click(object sender, EventArgs e)
-        {
-            txtNum.Select();
-            this.txtNum.Select(this.txtNum.TextLength, 0);
-        }
-
-        private void txtNum_TextChanged(object sender, EventArgs e)
-        {
-            if (txtNum.Text.Length > 0)
-            {
-                lblShuiyin.Visible = false;
-            }
-            else
-            {
-                lblShuiyin.Visible = true;
-                return;
-            }
-
-            try
-            {
-                //double doublenum = Convert.ToDouble(txtNum.Text);
-                decimal doublenum = 0;
-                bool changesuccess =  decimal.TryParse(txtNum.Text,out doublenum);
-                if ( changesuccess && doublenum > 0 )
-                {
-                    rbtnOK.allbackcolor = Color.FromArgb(20,137,205);
-                    rbtnOK.WhetherEnable = true;
-                }
-                else
-                {
-                    rbtnOK.allbackcolor = Color.LightGray;
-                    rbtnOK.WhetherEnable = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                rbtnOK.BackColor = Color.LightGray;
-                rbtnOK.WhetherEnable = true;
-
-                LogManager.WriteLog("数字窗体控件数据变化检测异常"+ex.Message);
-            }
-            finally
-            {
-                txtNum.Select();
-                this.txtNum.Select(this.txtNum.TextLength, 0);
-            }
-        }
 
         protected override bool ProcessDialogKey(Keys keyData)
         {
@@ -363,32 +309,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         }
 
-        private void FormNumber_Activated(object sender, EventArgs e)
+        private void txtNum_DataChanged(string data)
         {
             try
             {
-                txtNum.Select();
-                this.txtNum.Select(this.txtNum.TextLength, 0);
-            }
-            catch { }
-        }
-
-        //定时刷新文本焦点  防止客屏视频占用焦点
-        private void timerFocus_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtNum.Focused) {
-                    txtNum.Select();
+                //double doublenum = Convert.ToDouble(txtNum.Text);
+                decimal doublenum = 0;
+                bool changesuccess = decimal.TryParse(txtNum.Text, out doublenum);
+                if (changesuccess && doublenum > 0)
+                {
+                    rbtnOK.allbackcolor = Color.FromArgb(20, 137, 205);
+                    rbtnOK.WhetherEnable = true;
                 }
-                
+                else
+                {
+                    rbtnOK.allbackcolor = Color.LightGray;
+                    rbtnOK.WhetherEnable = false;
+                }
             }
-            catch { }
-        }
+            catch (Exception ex)
+            {
+                rbtnOK.BackColor = Color.LightGray;
+                rbtnOK.WhetherEnable = true;
 
-        private void FormNumber_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            timerFocus.Enabled = false;
+                LogManager.WriteLog("数字窗体控件数据变化检测异常" + ex.Message);
+            }
+           
         }
 
     }

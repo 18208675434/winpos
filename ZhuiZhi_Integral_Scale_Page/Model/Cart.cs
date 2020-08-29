@@ -114,6 +114,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         ////面板商品排序
         public SortType sorttype { get; set; }
 
+        public string SelectSecondCategoryid = "-1";
+
         /// <summary>
         /// 购物车商品数量
         /// </summary>
@@ -249,6 +251,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string secondcategoryid { get; set; }
 
         /// <summary>
+        /// 二级分类ID
+        /// </summary>
+        public string secondcategoryname { get; set; }
+
+        /// <summary>
         /// 级分类ID
         /// </summary>
         public string categoryid { get; set; }
@@ -376,10 +383,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public Exchangeconditioncontext exchangeconditioncontext { get; set; }
 
-        /// <summary>
-        /// 本地新增 区分是否可用，用于全量展示优惠券标识
-        /// </summary>
-        public bool IsEnable { get; set; }
+        ///// <summary>
+        ///// 本地新增 区分是否可用，用于全量展示优惠券标识
+        ///// </summary>
+        //public bool IsEnable { get; set; }
     }
 
 

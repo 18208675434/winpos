@@ -7,6 +7,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
 {
     public class TopUpPrint
     {
+
        public string id { get; set; }
        public string tenantid { get; set; }
 
@@ -17,5 +18,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
        public decimal amount { get; set; }
 
        public string createdat { get; set; }
+
+        /// <summary>
+        /// 账户余额
+        /// </summary>
+       public decimal balance { get; set; }
+
+        /// <summary>
+        /// 充值方式
+        /// </summary>
+       public string paymodeforapi { get; set; }
     }
 }

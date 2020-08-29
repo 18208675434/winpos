@@ -165,7 +165,7 @@
             this.label13.BackColor = System.Drawing.Color.White;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label13.Location = new System.Drawing.Point(749, 23);
+            this.label13.Location = new System.Drawing.Point(748, 23);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(46, 24);
@@ -177,7 +177,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label12.Location = new System.Drawing.Point(359, 23);
+            this.label12.Location = new System.Drawing.Point(354, 23);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(94, 24);
@@ -189,7 +189,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(502, 23);
+            this.label9.Location = new System.Drawing.Point(496, 23);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(46, 24);
@@ -201,7 +201,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(237, 23);
+            this.label7.Location = new System.Drawing.Point(232, 23);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 24);
@@ -337,7 +337,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(630, 23);
+            this.label1.Location = new System.Drawing.Point(607, 23);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 24);
@@ -348,7 +348,7 @@
             // 
             this.pnlDgvItem.BackColor = System.Drawing.Color.PaleTurquoise;
             this.pnlDgvItem.Controls.Add(this.pnlCartItem);
-            this.pnlDgvItem.Location = new System.Drawing.Point(12, -310);
+            this.pnlDgvItem.Location = new System.Drawing.Point(0, -287);
             this.pnlDgvItem.Name = "pnlDgvItem";
             this.pnlDgvItem.Size = new System.Drawing.Size(821, 127);
             this.pnlDgvItem.TabIndex = 47;
@@ -365,7 +365,7 @@
             this.pnlCartItem.Controls.Add(this.picMinus);
             this.pnlCartItem.Controls.Add(this.lblProNum);
             this.pnlCartItem.Controls.Add(this.picDelete);
-            this.pnlCartItem.Location = new System.Drawing.Point(5, 15);
+            this.pnlCartItem.Location = new System.Drawing.Point(11, 16);
             this.pnlCartItem.Name = "pnlCartItem";
             this.pnlCartItem.Size = new System.Drawing.Size(808, 88);
             this.pnlCartItem.TabIndex = 71;
@@ -687,7 +687,7 @@
             this.dgvType.BackgroundColor = System.Drawing.Color.White;
             this.dgvType.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvType.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvType.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvType.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvType.ColumnHeadersVisible = false;
             this.dgvType.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.typekey,
