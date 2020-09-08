@@ -248,6 +248,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     else
                     {
                         LoadMember(member);
+
+                        CurrentCart.memberid = member.memberinformationresponsevo.memberid;
                     }
                 }
                 ShowLoading(false, true);
@@ -288,6 +290,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     else
                     {
                         LoadBindingMember(member);
+
+                        
                     }
                 }
                 ShowLoading(false, true);
@@ -329,6 +333,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             try
             {
                 CurrentMember = null;
+                CurrentCart.memberid = "";
                 this.Invoke(new InvokeHandler(delegate()
                 {
                     pnlMemberInfo.Visible = false;
@@ -356,6 +361,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                         btnLoadBindingPhone.Visible = false;
                         pbtnExitBindingMember.Visible = true;
                         lblBindingPhone.Text = "会员手机号：" + member.memberheaderresponsevo.mobile;
+
+                        if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count>0)
+                        {
+                            UploadDgvCart();
+                        }
                        
                     }));
                 }
@@ -370,12 +380,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         {
             try
             {
-                CurrentMember = null;
+                CurretnBindingMember = null;
                 this.Invoke(new InvokeHandler(delegate()
                 {
                     lblBindingPhone.Visible = false;
                     btnLoadBindingPhone.Visible = true;
                     pbtnExitBindingMember.Visible = false;
+
+                    if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
+                    {
+                        UploadDgvCart();
+                    }
                 }));
             }
             catch (Exception ex)
@@ -386,6 +401,62 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         #endregion
 
         #region 购物车
+
+
+        StringBuilder scancode = new StringBuilder();
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            try
+            {
+
+               
+                switch (keyData)
+                {
+                    //不同键盘数字键值不同
+                    case Keys.D0: scancode.Append("0"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D1: scancode.Append("1"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D2: scancode.Append("2"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D3: scancode.Append("3"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D4: scancode.Append("4"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D5: scancode.Append("5"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D6: scancode.Append("6"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D7: scancode.Append("7"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D8: scancode.Append("8"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.D9: scancode.Append("9"); return !base.ProcessDialogKey(keyData); break;
+
+                    case Keys.NumPad0: scancode.Append("0"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad1: scancode.Append("1"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad2: scancode.Append("2"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad3: scancode.Append("3"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad4: scancode.Append("4"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad5: scancode.Append("5"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad6: scancode.Append("6"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad7: scancode.Append("7"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad8: scancode.Append("8"); return !base.ProcessDialogKey(keyData); break;
+                    case Keys.NumPad9: scancode.Append("9"); return !base.ProcessDialogKey(keyData); break;
+
+                    //case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData); break;
+                    //case Keys.Enter: QueueScanCode.Enqueue(scancode.ToString()); scancode = new StringBuilder(); return !base.ProcessDialogKey(keyData); break;
+                }
+                if (keyData == Keys.Enter)
+                {
+                    QueueScanCode.Enqueue(scancode.ToString().Trim());
+                    scancode = new StringBuilder();
+                    return false;
+                }
+                if (keyData == Keys.Space)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("监听键盘事件异常" + ex.Message);
+                return false;
+            }
+
+        }
 
         private void ScanCodeThread(object obj)
         {
@@ -511,19 +582,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 }
 
                 CurrentCart = tempcart;
-                Invoke((new Action(() =>
-                {
-                    dgvCart.Rows.Clear();
-                    foreach (CardProduct pro in CurrentCart.products)
-                    {
-                        dgvCart.Rows.Add(GetDgvRow(pro, 0));
-                    }
 
-                    lblProCount.Text="("+CurrentCart.products.Count+"件商品)";
-
-                    lblCartTotal.Text = "￥" + CurrentCart.pspamt.ToString("f2");
-                })));
-               
+                UploadDgvCart();
                 //lbl
                 return true;
                            
@@ -534,6 +594,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 ShowLog("刷新购物车异常：" + ex.Message, true);
                 return false;
             }
+        }
+
+        private void UploadDgvCart()
+        {
+            Invoke((new Action(() =>
+            {
+                dgvCart.Rows.Clear();
+                foreach (CardProduct pro in CurrentCart.products)
+                {
+                    dgvCart.Rows.Add(GetDgvRow(pro, 0));
+                }
+
+                lblProCount.Text = "(" + CurrentCart.products.Count + "件商品)";
+
+                lblCartTotal.Text = "￥" + CurrentCart.pspamt.ToString("f2");
+            })));
         }
 
 
@@ -555,7 +631,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 lblSaleprice.Text = "￥" + pro.saleprice.ToString("f2");
                 lblTotalPrice.Text = "￥" + pro.saleprice.ToString("f2");
 
-                bmpPro = new Bitmap(pnlCartItem.Width, pnlCartItem.Height);
+              ;
+
+                if (CurretnBindingMember == null)
+                {
+                    lblBindingInfo.Visible = false;
+                    btnBindingPwd.Visible = false;
+                }
+                else if (pro.bindcardsecret == 0)
+                {
+                    lblBindingInfo.Visible = false;
+                    btnBindingPwd.Visible = true;
+                }
+                else if (pro.bindcardsecret == 1)
+                {
+                    lblBindingInfo.Visible = true;
+                    btnBindingPwd.Visible = false;
+                }
+
+                  bmpPro = new Bitmap(pnlCartItem.Width, pnlCartItem.Height);
                 bmpPro.Tag = pro;
                 pnlCartItem.DrawToBitmap(bmpPro, new Rectangle(0, 0, pnlCartItem.Width, pnlCartItem.Height));
 

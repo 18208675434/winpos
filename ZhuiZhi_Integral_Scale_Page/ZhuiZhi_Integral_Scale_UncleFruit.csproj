@@ -214,6 +214,60 @@
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </Compile>
     <Compile Include="HelperUI\PurchaseLimitHelper.cs" />
+    <Compile Include="MemberCenter\FormChangePhoneConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneConfirm.Designer.cs">
+      <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewCard.Designer.cs">
+      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewPhoneSms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewPhoneSms.Designer.cs">
+      <DependentUpon>FormChangePhoneNewPhoneSms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNumber.Designer.cs">
+      <DependentUpon>FormChangePhoneNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePayPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePayPwd.Designer.cs">
+      <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.Designer.cs">
+      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneSmsCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneSmsCode.Designer.cs">
+      <DependentUpon>FormChengPhoneSmsCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneVerifyNewPhone.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneVerifyNewPhone.Designer.cs">
+      <DependentUpon>FormChengPhoneVerifyNewPhone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormForgetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormForgetPassword.Designer.cs">
+      <DependentUpon>FormForgetPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormMemberCenterMedia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,6 +285,18 @@
     </Compile>
     <Compile Include="MemberCenter\FormNoPayPwd.Designer.cs">
       <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormSeavePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormSeavePassword.Designer.cs">
+      <DependentUpon>FormSeavePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormSevePassWoedOK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormSevePassWoedOK.Designer.cs">
+      <DependentUpon>FormSevePassWoedOK.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormTopUpByOnLine.cs">
       <SubType>Form</SubType>
@@ -269,6 +335,7 @@
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\MemberCenterHelper.cs" />
+    <Compile Include="MemberCenter\MemberCenterHttpUtil.cs" />
     <Compile Include="MemberCenter\MemberCenterMediaHelper.cs" />
     <Compile Include="MemberCenter\model\BalanceConfigDetail.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
@@ -967,6 +1034,33 @@
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
+      <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneNewCard.resx">
+      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneNewPhoneSms.resx">
+      <DependentUpon>FormChangePhoneNewPhoneSms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneNumber.resx">
+      <DependentUpon>FormChangePhoneNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhonePayPwd.resx">
+      <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhonePhysicalCard.resx">
+      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChengPhoneSmsCode.resx">
+      <DependentUpon>FormChengPhoneSmsCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChengPhoneVerifyNewPhone.resx">
+      <DependentUpon>FormChengPhoneVerifyNewPhone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormForgetPassword.resx">
+      <DependentUpon>FormForgetPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormMemberCenterMedia.resx">
       <DependentUpon>FormMemberCenterMedia.cs</DependentUpon>
     </EmbeddedResource>
@@ -975,6 +1069,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormNoPayPwd.resx">
       <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormSeavePassword.resx">
+      <DependentUpon>FormSeavePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormSevePassWoedOK.resx">
+      <DependentUpon>FormSevePassWoedOK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormTopUpByOnLine.resx">
       <DependentUpon>FormTopUpByOnLine.cs</DependentUpon>

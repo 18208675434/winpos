@@ -21,9 +21,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private ListAllTemplate CurrentTemplate =null;
 
+        private string PassWord = "";
+
         private List<ListAllTemplate> LstTemplates =new List<ListAllTemplate>();
 
+        private MemberCenterHttpUtil membercenterutil = new MemberCenterHttpUtil();
+
         bool IsEnable=true;
+
         public FormMemberCenter(Member member)
         {
             InitializeComponent();
@@ -488,6 +493,35 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
             }
             catch (Exception ex) { }
+        }
+
+        private void btnChangePwd_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                MemberCenterHelper.ShowFormSeavePassword();
+            }
+            catch (Exception ex)
+            { }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MemberCenterHelper.ShowFormForgetPassword();
+                string err = "";
+                string smsCodeResult = membercenterutil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);
+            }
+            catch (Exception ex)
+            { }
+        }
+
+        private void btnChangePhone_Click(object sender, EventArgs e)
+        {
+            MemberCenterHelper.ShowFormChangePhoneNumber();
         }
     }
 }

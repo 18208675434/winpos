@@ -19,6 +19,63 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 {
     public class MainModel
     {
+
+        #region  会员中心   变量 （待优化）
+
+        /// <summary>
+        /// 修改手机号码时输入的新手机号
+        /// </summary>
+        public static string NewPhone = "";
+        /// <summary>
+        /// 获取发送的验证码
+        /// </summary>
+        public static string GetSmsCode = "";
+        /// <summary>
+        /// 用户修改密码成功了码
+        /// </summary>
+        public static bool SeavePwdok = false;
+        /// <summary>
+        /// 客屏同步忘记密码时第几次输入
+        /// </summary>
+        public static int inputimes = 0;
+
+
+        /// <summary>
+        /// 功能-修改密码同步
+        /// </summary>
+        public static string SevaePwd = "";
+        /// <summary>
+        /// 功能-忘记密码同步
+        /// </summary>
+        public static string SmsCode = "";
+        /// <summary>
+        /// 修改手机号码验证码同步
+        /// </summary>
+        public static string ChangeScd = "";
+        /// <summary>
+        /// 修改手机号码输入密码同步
+        /// </summary>
+        public static string ChangePwd = "";
+        /// <summary>
+        /// 全局验证是否是会员切换界面变量
+        /// </summary>
+        public static bool IsMemberCenter = true;
+        /// <summary>
+        /// 修改手机页面 显示隐藏控件变量
+        /// </summary>
+        public static int ShowChangePhonePage = 0;
+        /// <summary>
+        /// 修改手机页面 显示隐藏控件变量 客屏
+        /// </summary>
+        public static int ShowChangePhoneMedia = 0;
+        /// <summary>
+        /// 旧会员手机号码的token
+        /// </summary>
+        public static string Sourcetoken = "";
+
+
+
+        #endregion
         //判断客屏是否播放视屏  是的话把焦点还给主界面
         public static bool IsPlayer = false;
 
