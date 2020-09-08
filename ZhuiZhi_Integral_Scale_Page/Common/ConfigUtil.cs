@@ -51,7 +51,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 INIManager.SetIni("MQTT", "ChangeType", "0",MainModel.IniPath);
                 return result;
-
         }
 
         /// <summary>
