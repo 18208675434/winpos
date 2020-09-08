@@ -22,6 +22,7 @@ using Newtonsoft.Json;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.BaseUI;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
@@ -310,13 +311,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void ScanCodeThread(object obj)
         {
             while (IsRun)
-            {             
+            {
                 if (QueueScanCode.Count > 0 && IsEnable)
                 {
                     try
-                    {                       
-                        IsEnable = false;
-                        ShowLoading(true);// LoadingHelper.ShowLoadingScreen();//显示
+                    {
+                        string logCode = "";
+                        ShowLoading(true, false);
 
                         List<string> LstScanCode = new List<string>();
 
@@ -324,28 +325,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         while (QueueScanCode.Count > 0)
                         {
                             string tempcode = QueueScanCode.Dequeue();
+                            logCode += tempcode + " ";
                             if (!string.IsNullOrEmpty(tempcode))
                             {
                                 LstScanCode.Add(tempcode);
-                            }                          
+                            }
                         }
-
-                        List<scancodememberModel> LstScancodemember = new List<scancodememberModel>();
+                        List<ScanModelAndDbpro> LstScancodemember = new List<ScanModelAndDbpro>();
                         foreach (string scancode in LstScanCode)
                         {
-                            scancodememberModel scancodemember = GetLocalPro(scancode);
-                            if (scancodemember != null)
+                            DBPRODUCT_BEANMODEL tempdbpro = MainHelper.GetLocalPro(scancode);
+                            if (tempdbpro != null)
                             {
-                                LstScancodemember.Add(scancodemember);
-                                //LstScanCode.Remove(scancode);
+
+                                if (tempdbpro.STATUS != 1 && (tempdbpro.SKUTYPE != 1 || tempdbpro.SKUTYPE != 4))
+                                {
+                                    //ShowLog("条码不正确",false);
+                                }
+                                else
+                                {
+                                    ScanModelAndDbpro tempsd = new ScanModelAndDbpro();
+                                    tempsd.dbproduct = tempdbpro;
+                                    tempsd.ScanModel = MainHelper.GetScancodeMemberByDbpro(tempdbpro);
+                                    LstScancodemember.Add(tempsd);
+                                }
+
                             }
                             else
                             {
-                                MainModel.ShowLog("条码不正确",false);
-                                //lstNotLocalCode.Add(scancode);
+                                lstNotLocalCode.Add(scancode);
                             }
                         }
 
+                        bool ismember = false;
+                        lstNotLocalCode = lstNotLocalCode.Distinct().ToList(); //去重复，防止一直扫描会员码
                         foreach (string goodcode in lstNotLocalCode)
                         {
                             //IsScan = false;
@@ -353,54 +366,58 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             int ResultCode = 0;
                             scancodememberModel scancodemember = httputil.GetSkuInfoMember(goodcode, ref ErrorMsg, ref ResultCode);
 
-
                             if (ErrorMsg != "" || scancodemember == null) //商品不存在或异常
                             {
-                                CheckUserAndMember(ResultCode, ErrorMsg);
-
-                                MainModel.ShowLog(ErrorMsg,false);
+                                //CheckUserAndMember(ResultCode, ErrorMsg);
                             }
                             else
                             {
-                                if (scancodemember.type == "MEMBER")
-                                {
-                                }
-                                else
-                                {
-                                    LstScancodemember.Add(scancodemember);
-                                }
+                                //if (scancodemember.type == "MEMBER")
+                                //{
+                                //    ismember = true;
+                                //    LoadMember(scancodemember.memberresponsevo);
+                                //}
+                               
                             }
                         }
-                        //ShowLoading(false);// LoadingHelper.CloseForm();
-
+                        ShowLoading(false, true);// LoadingHelper.CloseForm();
+                        DateTime starttime = DateTime.Now;
                         if (LstScancodemember.Count > 0)
                         {
-                            isGoodRefresh = true;
-                            FlashSkuCode = LstScancodemember[0].scancodedto.skucode;
-                        
-                        if (this.IsHandleCreated)
-                        {
-                            this.Invoke(new InvokeHandler(delegate()
+                            FlashSkuCode = LstScancodemember[0].ScanModel.scancodedto.skucode;
+
+                            if (this.IsHandleCreated)
+                            {
+                                this.Invoke(new InvokeHandler(delegate()
+                                {
+                                    addcart(LstScancodemember);
+                                }));
+                            }
+                            else
                             {
                                 addcart(LstScancodemember);
-                            }));
+                            }
                         }
                         else
                         {
-                            addcart(LstScancodemember);
+                            if (!ismember)
+                            {
+                                ShowLog("条码识别错误", false);
+                                LogManager.WriteLog("SCAN", logCode);
+                            }
                         }
-                        }
+
+                        Console.WriteLine("离线扫描计算时间" + (DateTime.Now - starttime).TotalMilliseconds);
                         Thread.Sleep(1);
                     }
                     catch (Exception ex)
                     {
-                        ShowLoading(false);// LoadingHelper.CloseForm();//关闭
+                        ShowLoading(false, true);// LoadingHelper.CloseForm();//关闭
                         LogManager.WriteLog("ERROR", "扫描数据处理异常：" + ex.Message);
                     }
                     finally
                     {
-                        IsEnable = true;
-                        ShowLoading(false);// LoadingHelper.CloseForm();
+                        ShowLoading(false, true);// LoadingHelper.CloseForm();
                     }
                 }
 
@@ -559,59 +576,55 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        private void addcart( List<scancodememberModel> lstscancodemember)
+        private void addcart(List<ScanModelAndDbpro> lstscanmodelandpro)
         {
-                try
+
+            try
+            {
+
+                DateTime starttime = DateTime.Now;
+                foreach (ScanModelAndDbpro scancodemember in lstscanmodelandpro)
                 {
-                    foreach (scancodememberModel scancodemember in lstscancodemember)
+
+                    BrokenProduct bpro = new BrokenProduct();
+                    bpro.skucode = scancodemember.dbproduct.SKUCODE;
+                    bpro.skuname = scancodemember.dbproduct.SKUNAME;
+                    bpro.title = scancodemember.dbproduct.SKUNAME;
+                    bpro.weightflag = scancodemember.dbproduct.WEIGHTFLAG == 1;
+                    bpro.num = scancodemember.dbproduct.NUM;
+                    bpro.specnum = scancodemember.dbproduct.SPECNUM;
+                    bpro.unit = scancodemember.dbproduct.SALESUNIT;
+                    bpro.saleprice = scancodemember.dbproduct.SALEPRICE;
+
+                    List<BrokenProduct> lstbrokenpro = CurrentProducts.Where(r => r.skucode == bpro.skucode).ToList();
+
+                    if (lstbrokenpro == null || lstbrokenpro.Count == 0)
                     {
-
-
-
-                        BrokenProduct bpro = new BrokenProduct();
-                        bpro.skucode = scancodemember.scancodedto.skucode;
-                        bpro.skuname = scancodemember.scancodedto.skuname;
-                        bpro.title = scancodemember.scancodedto.skuname;
-                        bpro.weightflag = scancodemember.scancodedto.weightflag;
-                        bpro.num = scancodemember.scancodedto.num;
-                        bpro.specnum = scancodemember.scancodedto.specnum;
-                        bpro.unit = scancodemember.scancodedto.salesunit;
-                        bpro.saleprice = 0;
-
-
-                        List<BrokenProduct> lstbrokenpro = CurrentProducts.Where(r => r.skucode == bpro.skucode).ToList();
-
-                        if (lstbrokenpro == null || lstbrokenpro.Count == 0)
+                        CurrentProducts.Add(bpro);
+                    }
+                    else
+                    {
+                        if (!bpro.weightflag)
                         {
-                            CurrentProducts.Add(bpro);
+                            lstbrokenpro[0].num += bpro.num;
                         }
                         else
                         {
-                            if (!bpro.weightflag)
-                            {
-                                lstbrokenpro[0].num += bpro.num;
-                            }
-                            else
-                            {
-                                lstbrokenpro[0].specnum += bpro.specnum;
-                            }
-
-
-                        }        
-
+                            lstbrokenpro[0].specnum += bpro.specnum;
+                        }
+                    }      
                 }
-                    RefreshCart();
-                }
-                catch (Exception ex)
-                {
-                    LogManager.WriteLog("ERROR", "添加购物车商品异常:" + ex.Message);
-                }
-                finally
-                {
-                    LoadPicScreen(false);                    
-                    ShowLoading(false);// LoadingHelper.CloseForm();
+                RefreshCart();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("ERROR", "添加购物车商品异常:" + ex.Message);
+            }
+            finally
+            {
+                ShowLoading(false, true);// LoadingHelper.CloseForm();
 
-                }
+            }
 
         }
 
@@ -965,7 +978,35 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="showloading">显示等待框</param>
+        /// <param name="isenable">页面是否可操作</param>
+        private void ShowLoading(bool showloading, bool isenable)
+        {
+            try
+            {
+                IsEnable = isenable;
+                if (this.IsHandleCreated)
+                {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
+                        picLoading.Visible = showloading;
 
+                    }));
+                }
+                else
+                {
+                    picLoading.Visible = showloading;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("显示等待异常" + ex.Message);
+            }
+
+        }
 
         /// <summary>
         /// 客屏播放视频会占用焦点，此时主界面按键监听（扫描枪）无效，需要刷新焦点

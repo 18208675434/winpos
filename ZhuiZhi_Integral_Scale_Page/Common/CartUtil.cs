@@ -480,5 +480,109 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+
+
+        /// <summary>
+        /// 获取分页参数  (仅适用于表格形式 且 左上角单元格和右下角单元格作为 翻页按钮)
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="size"></param>
+        /// <param name="total"></param>
+        /// <param name="rowcount"></param>
+        public static Paging GetPaging(int page,int pagesize,int total,int rowcount )
+        {
+            Paging paging = new Paging();
+            paging.success = false;
+            try
+            {
+
+                int startindex = 0;
+                int lastindex = pagesize-1;
+                int waitingcount = 0;
+
+                bool havanextpage = false;
+                bool havepreviousPage = false;
+                if (page == 1)
+                {
+                    havepreviousPage = false;
+                    startindex = 0;
+                    if (total > pagesize)
+                    {
+
+                        lastindex = pagesize-2;
+                        havanextpage = true;
+                    }
+                    else
+                    {
+                        lastindex = total - 1;
+                        havanextpage = false;
+                    }
+                }
+                else
+                {
+                    havepreviousPage = true;
+                    waitingcount = total - ((page - 1) * (pagesize-2) + 1);  //第一页只有下一页  中间页都是上一页下一页 占用两个
+                    startindex = (page - 1) * (pagesize - 2) + 1;
+
+                    if (waitingcount > (pagesize-1))
+                    {
+                        lastindex = startindex + (pagesize-3);
+                        havanextpage = true;
+                    }
+                    else
+                    {
+                        lastindex = total - 1;
+                        havanextpage = false;
+                    }
+                }
+
+                paging.success = true;
+                paging.startindex = startindex;
+                paging.endindex = lastindex;
+                paging.haveuppage = havepreviousPage;
+                paging.havedownpage = havanextpage;
+                paging.makeupcount = rowcount- (lastindex - startindex + 1) % rowcount;
+
+                return paging;
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("分页异常"+ex.Message);
+                return paging;
+            }
+        }
+    }
+
+    public class Paging
+    {
+        /// <summary>
+        /// 分页成功标识
+        /// </summary>
+        public bool success { get; set; }
+        /// <summary>
+        /// 页数
+        /// </summary>
+        public int page { get; set; }
+        /// <summary>
+        /// 开始位置
+        /// </summary>
+        public int startindex { get; set; }
+        /// <summary>
+        /// 结束位置
+        /// </summary>
+        public int endindex { get; set; }
+        /// <summary>
+        /// 是否有上一页
+        /// </summary>
+        public bool haveuppage { get; set; }
+        /// <summary>
+        /// 是否有下一页
+        /// </summary>
+        public bool havedownpage { get; set; }
+        /// <summary>
+        /// 需要补充的空白数量 （不足一行需要补充）
+        /// </summary>
+        public int makeupcount { get; set; }
     }
 }

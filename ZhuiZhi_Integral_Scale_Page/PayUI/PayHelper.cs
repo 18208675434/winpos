@@ -607,6 +607,44 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             }
         }
 
+
+        public static bool ShowFormCouponPwd(string couponcode)
+        {
+            FormBackGround Tempfrmback = new FormBackGround();
+            try
+            {
+
+               
+                Tempfrmback.TopMost = true;
+                Tempfrmback.Location = new System.Drawing.Point(0, 0);
+
+                Tempfrmback.Show();
+
+                FormCouponPwd frmnumber = new FormCouponPwd(couponcode);
+                asf.AutoScaleControlTest(frmnumber, 380, 480, 380 * MainModel.midScale, 480 * MainModel.midScale, true);
+                frmnumber.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmnumber.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmnumber.Height) / 2);
+                frmnumber.TopMost = true;
+
+                frmnumber.ShowDialog();
+
+                Tempfrmback.Close();
+                frmnumber.Dispose();
+                Application.DoEvents();
+
+                return frmnumber.DialogResult == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    Tempfrmback.Close();
+                }
+                catch { }
+                LogManager.WriteLog("验证优惠券异常" + ex.Message);
+                return false;
+            }
+        }
+
         #endregion
     }
 }

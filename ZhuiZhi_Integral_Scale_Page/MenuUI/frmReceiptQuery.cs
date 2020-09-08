@@ -278,7 +278,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         ReceiptQuery receiptquery = CurrentLisstReceipt[e.RowIndex];
 
                         string ErrorMsgReceipt = "";
-                        bool receiptresult = PrintUtil.ReceiptPrint(receiptquery.receiptdetail, ref ErrorMsgReceipt);
+                        bool receiptresult = PrintUtil.ReceiptPrint(receiptquery.receiptinfo, ref ErrorMsgReceipt);
 
                         LoadingHelper.CloseForm();
 

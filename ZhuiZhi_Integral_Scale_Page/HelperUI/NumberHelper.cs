@@ -29,7 +29,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                     }
                     catch (Exception ex)
                     {
-
                     }                   
                 }
 
@@ -37,7 +36,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 asf.AutoScaleControlTest(frmnumber, 380, 480, 380 * MainModel.midScale, 480 * MainModel.midScale, true);
                 frmnumber.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmnumber.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmnumber.Height) / 2);
                 frmnumber.TopMost = true;
-
             }
             catch (Exception ex)
             {
@@ -45,8 +43,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
             }
         }
 
-
-        public static string ShowFormNumber(string title,NumberType numbertype)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="numbertype">数字类型</param>
+        /// <param name="Right">是否居右  默认居中</param>
+        /// <returns></returns>
+        public static string ShowFormNumber(string title,NumberType numbertype,bool Right = false)
         {
               try
             {
@@ -55,6 +59,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 {
                     IniFormNumber();
                 }
+                if (Right)
+                {
+                    frmnumber.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmnumber.Width)*95 / 100, (Screen.AllScreens[0].Bounds.Height - frmnumber.Height) / 2);
+                }
+                else
+                {
+                    frmnumber.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmnumber.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmnumber.Height) / 2);
+                }
+
                 frmnumber.UpInfo(title,numbertype);
                 frmnumber.ShowDialog();
 
@@ -76,9 +89,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
     public enum NumberType
     {
         None,
+        /// <summary>
+        /// 条码
+        /// </summary>
         BarCode,
+        /// <summary>
+        /// 会员号
+        /// </summary>
         MemberCode,
+        /// <summary>
+        /// 商品重量
+        /// </summary>
         ProWeight,
-        TareWeight
+        /// <summary>
+        /// 称重
+        /// </summary>
+        TareWeight,
+        /// <summary>
+        /// 商品数量 
+        /// </summary>
+        ProNum,
+        /// <summary>
+        /// 礼品卡卡号
+        /// </summary>
+        GiftCardNo,
+        /// <summary>
+        /// 绑定会员
+        /// </summary>
+        BindingMember,
+        /// <summary>
+        /// 礼品卡秘钥
+        /// </summary>
+        GiftCardPwd
     }
 }

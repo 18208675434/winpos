@@ -295,7 +295,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     RefreshCart();
                 }
 
-
                 Application.DoEvents();
             }
             catch (Exception ex)

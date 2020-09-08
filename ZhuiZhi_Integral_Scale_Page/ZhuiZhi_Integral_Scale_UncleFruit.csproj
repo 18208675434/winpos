@@ -170,10 +170,43 @@
     <Compile Include="ChangePriceUI\FormPricing.Designer.cs">
       <DependentUpon>FormPricing.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ConfigUtil.cs" />
     <Compile Include="Common\HttpRequestbak.cs" />
     <Compile Include="Common\HttpRequest.cs" />
     <Compile Include="Common\BunnyPrintUtil.cs" />
     <Compile Include="Common\MyHttpUtil.cs" />
+    <Compile Include="GiftCard\FormGiftCardNum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardNum.Designer.cs">
+      <DependentUpon>FormGiftCardNum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCard.Designer.cs">
+      <DependentUpon>FormGiftCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardRecord.Designer.cs">
+      <DependentUpon>FormGiftCardRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\GiftCardHelper.cs" />
+    <Compile Include="GiftCard\GiftCardHttp.cs" />
+    <Compile Include="GiftCard\Model\BindingResult.cs" />
+    <Compile Include="GiftCard\Model\GifrCardRecord.cs" />
+    <Compile Include="GiftCard\Model\GiftCardPaySuccess.cs" />
+    <Compile Include="GiftCard\Model\CartAloneUpdate.cs" />
+    <Compile Include="GiftCard\Model\CartAloneUpdatePara.cs" />
+    <Compile Include="GiftCard\Model\CreateCardOrder.cs" />
+    <Compile Include="GiftCard\Model\CreateCardOrderPara.cs" />
+    <Compile Include="GiftCard\Model\GiftCardDetail.cs" />
+    <Compile Include="GiftCard\Model\CardProduct.cs" />
+    <Compile Include="GiftCard\Model\BindingMemberPara.cs" />
+    <Compile Include="GiftCard\Model\GiftCardRecordPara.cs" />
+    <Compile Include="GiftCard\Model\ValidateGiftCard.cs" />
     <Compile Include="HelperUI\FormPurchaseLimit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +277,12 @@
     <Compile Include="MemberCenter\model\PageBalanceDepositBill.cs" />
     <Compile Include="MemberCenter\model\TopUpPrint.cs" />
     <Compile Include="MemberCenter\model\ZtBalanceAccount.cs" />
+    <Compile Include="MenuUI\FormCouponPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormCouponPwd.Designer.cs">
+      <DependentUpon>FormCouponPwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuUI\FormOrderHangItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +326,7 @@
     <Compile Include="Model\HalfOffLine\PromotionCoupon.cs" />
     <Compile Include="Model\HalfOffLine\TenantCreditConfig.cs" />
     <Compile Include="Model\HalfOffLine\Tenantmemberrightsdiscountconfig.cs" />
+    <Compile Include="Model\PaymentCouponDetail.cs" />
     <Compile Include="Model\promotionaction\AbstractPromoAction.cs" />
     <Compile Include="Model\promotionaction\CombinedSellingPromotionAction.cs" />
     <Compile Include="Model\promotionaction\CycleDesignatedDiscountPromotionAction.cs" />
@@ -915,6 +955,15 @@
     <EmbeddedResource Include="ChangePriceUI\FormPricing.resx">
       <DependentUpon>FormPricing.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardNum.resx">
+      <DependentUpon>FormGiftCardNum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCard.resx">
+      <DependentUpon>FormGiftCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardRecord.resx">
+      <DependentUpon>FormGiftCardRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </EmbeddedResource>
@@ -944,6 +993,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormAllCoupon.resx">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormCouponPwd.resx">
+      <DependentUpon>FormCouponPwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormOrderHangItem.resx">
       <DependentUpon>FormOrderHangItem.cs</DependentUpon>

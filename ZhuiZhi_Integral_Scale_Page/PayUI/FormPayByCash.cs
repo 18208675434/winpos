@@ -178,6 +178,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                             string ErrorMsg = "";
                             int ResultCode = 0;
+                            thisCurrentCart.cashpayamt = Convert.ToDecimal(txtCash.Text);
                             CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
                             if (ResultCode != 0 || orderresult == null)
                             {
@@ -210,75 +211,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 {
                     ReturnResultCode = 2;
                     this.Close();
-
-                    ////通过是否有余额值判断
-                    //if (thisCurrentCart.balancepayamt != null && thisCurrentCart.balancepayamt > 0)
-                    //{
-                    //    frmBalanceOnLine frmbalanceonline = new frmBalanceOnLine(thisCurrentCart);
-                    //    //frmonline.Size = new System.Drawing.Size(this.Width, this.Height);
-                    //    asf.AutoScaleControlTest(frmbalanceonline, 380, 540, this.Width, this.Height, true);
-                    //    frmbalanceonline.Location = this.Location;
-                    //    frmbalanceonline.TopMost = true;
-                    //    frmbalanceonline.ShowDialog();
-
-                    //    if (frmbalanceonline.DialogResult == DialogResult.OK)
-                    //    {
-                    //        string ErrorMsg = "";
-                    //        int ResultCode = 0;
-                    //        int BalanceResultCode = 0;
-                    //        CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref BalanceResultCode);
-                    //        if (ResultCode != 0 || orderresult == null)
-                    //        {
-                    //            CheckUserAndMember(BalanceResultCode);
-                    //            MainModel.ShowLog("异常" + ErrorMsg, true);
-                    //        }
-                    //        else if (orderresult.continuepay == 1)
-                    //        {
-                    //            ReturnResultCode = 2;
-                    //            ReruntOrderId = orderresult.orderid;
-                    //           this.Close();
-                    //            Application.DoEvents();
-                    //        }
-
-                    //    }
-                    //    else
-                    //    {
-                    //        RefreshCart(0, true);
-                         
-                    //        ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.UpdaForm(thisCurrentCart);
-                    //    }
-                    //}
-                    //else
-                    //{
-
-                    //    if (PayHelper.ShowFormPayCashToOnLine(thisCurrentCart))
-                    //    {
-                    //        this.Hide();
-                    //        string ErrorMsg = "";
-                    //        int ResultCode = 0;
-                    //        int OnlineResultCode = 0;
-                    //        CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref OnlineResultCode);
-                    //        if (ResultCode != 0 || orderresult == null)
-                    //        {
-                    //            this.Show();
-                    //            CheckUserAndMember(OnlineResultCode);
-                    //            MainModel.ShowLog("异常" + ErrorMsg, true);
-                    //        }
-                    //        else if (orderresult.continuepay == 1)
-                    //        {
-                    //            ReturnResultCode = 2;
-                    //            ReruntOrderId = orderresult.orderid;
-                    //            this.Close();
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        RefreshCart(0, true);
-                    //    }
-                    //}
-
-                    //Application.DoEvents();
-
                 }
 
 

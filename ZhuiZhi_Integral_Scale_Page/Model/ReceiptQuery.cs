@@ -19,6 +19,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public decimal totalpayment { get; set; }
         public decimal cashtotalamt { get; set; }
         public Receiptdetail receiptdetail { get; set; }
+
+        public Receiptdetail receiptinfo { get; set; }
         public int hasprint { get; set; }
         public int onlinemode { get; set; }
     }

@@ -85,7 +85,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private int CurrentCategoryPage = 1;
 
         /// <summary>
-        /// 当前展示二级分类页数
+        /// 当前展示二级分类页数 
         /// </summary>
         private int CurrentSecondCategoryPage = 1;
 
@@ -94,9 +94,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// </summary>
         private int CurrentGoodPage = 1;
         /// <summary>
-        /// 当前查询商品页数
+        /// 软键盘弹出时15个  没有键盘这段30
         /// </summary>
-        private int CurrentGoodQueryPage = 1;
+        private int CurrentGoodPageSize = 15;
 
         /// <summary>
         /// 当前展示购物车页数
@@ -121,6 +121,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
 
+                pnlAdjustInfo.Left = lblShopName.Right;
+                lblUrl.Left = pnlAdjustInfo.Right;
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好 ∨";
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
                 lblMenu.Left = picMenu.Right;
@@ -129,12 +131,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (MainModel.URL.Contains("pos-qa"))
                 {
                     lblUrl.Visible = true;
-                    lblUrl.Text = "测试环境（QA）";
+                    lblUrl.Text = "QA";
                 }
                 else if (MainModel.URL.Contains("pos-stage"))
                 {
                     lblUrl.Visible = true;
-                    lblUrl.Text = "测试环境（stage）";
+                    lblUrl.Text = "stage";
                 }
                 else
                 {
@@ -166,8 +168,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 threadScanCode.IsBackground = true;
                 threadScanCode.Start();
 
-
-               
 
                 //刷新焦点线程  防止客屏播放视频抢走焦点
                 threadCheckActivate = new Thread(CheckActivate);
@@ -210,6 +210,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LoadPnlScale();
                 ShowLoading(false, true);
                 timerScale.Enabled = true;
+
+                timerTask.Enabled = true;
 
                 try
                 {
@@ -533,9 +535,39 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
+        private void btnGiftCard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsEnable)
+                {
+                    return;
+                }
+                IsEnable = false;
+                ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.FormGiftCard frmgiftcard = new ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.FormGiftCard();
+                asf.AutoScaleControlTest(frmgiftcard, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmgiftcard.Location = new System.Drawing.Point(0, 0);
+                frmgiftcard.ShowDialog();
+                frmgiftcard.Dispose();
+                Application.DoEvents();
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("开启订单查询页面异常" + ex.Message);
+            }
+            finally
+            {
+                IsEnable = true;
+            }
+        }
+ 
+
         private void btnAdjustPrice_Click(object sender, EventArgs e)
         {
             ZhuiZhi_Integral_Scale_UncleFruit.MenuUI.MenuHelper.ShowFormAdjustPrice();
+            pnlAdjustInfo.Visible = false;
+            btnAdjustPrice.Image = null;
         }
 
 
@@ -696,7 +728,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 decimal cashactualamt = ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash.PrettyCashHelper.ShowFormGetCashNum();
 
-                if (cashactualamt <= 0)
+                if (cashactualamt < 0)
                 {
                     IsEnable = true;
                     return;
@@ -874,7 +906,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                    {
                        LstAllProduct = CartUtil.LoadAllProduct(true);
                        dgvGood.Rows.Clear();
-                       dgvGoodQuery.Rows.Clear();
                        IniForm();
                    }));
                 ShowLoading(false,true);
@@ -923,6 +954,113 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ShowLog("切换秤模式异常" + ex.Message, true);
             }
         }
+
+        private void pnlAdjustInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        int Seconds = 0;   //执行秒数  没半分钟轮询一次接口  每秒都检查mqtt是否接收到新数据
+        public delegate void deleteTimer();
+        private void timerTask_Tick(object sender, EventArgs e)
+        {
+
+            Seconds++;
+
+
+            MqttChangeType mqtttype = ConfigUtil.GetAdjustPriceChanged();
+            bool needAdjustPrice = Seconds >= 30 || mqtttype != MqttChangeType.None;
+            bool needLoadIncrementProduct = mqtttype == MqttChangeType.AdjustPrice || mqtttype == MqttChangeType.SkuInsert; ;
+
+            if (needAdjustPrice || needLoadIncrementProduct)
+            {
+                Seconds = 0;
+                UpdateProduct(needAdjustPrice,needLoadIncrementProduct);
+            }           
+        }
+
+        private void UpdateProduct(bool needAdjustPrice, bool needLoadIncrementProduct)
+        {
+
+            Thread t = new Thread(new ThreadStart(delegate
+            {
+                try
+                {
+                    timerTask.Enabled = false;
+                    if (needAdjustPrice)
+                    {
+                        string errormsg = "";
+                        AdjustPriceDynamic result = httputil.GetAdjustPriceDynamicForPos("", "", true, ref errormsg);
+
+                        if (result != null && result.dynamiccount > 0)
+                        {
+                            lblAdjustCount.Text = result.dynamiccount.ToString();
+                            pnlAdjustInfo.Visible = true;
+                            btnAdjustPrice.Image = btnorderhangimage;
+                            needAdjustPrice = true;  //有调价商品时需要更新增量商品
+
+                            INIManager.SetIni("MQTT", "AdjustStartTime", result.querydate, MainModel.IniPath); //记录登录时间作为调价查询的起始时间
+
+                        }
+                    }
+
+                    if (needLoadIncrementProduct)
+                    {
+                        ServerDataUtil.LoadIncrementProduct();
+
+                        
+                        IniAllProduct();
+                        
+                    }
+
+                   // timerTask.Enabled = true;
+                }
+                catch { }
+                finally
+                {
+                    Invoke((new Action(() =>
+                    {
+                        timerTask.Enabled = true;
+                    })));
+                   
+                }
+              
+            }));
+            t.Start();
+
+        }
+
+        private void IniAllProduct()
+        {
+            try {
+                IsEnable = false;
+                 LstAllProduct = CartUtil.LoadAllProduct(true);
+
+                 string currentsecondcategoryid = sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid;
+                Product pro = LstAllProduct.FirstOrDefault(r=> r.secondcategoryid==currentsecondcategoryid);
+                
+                //如果之前二级分类不存在
+                if(pro==null){
+                    dgvGood.Rows.Clear();
+                    IniForm();
+                }
+                else
+                {
+                    IniForm();
+
+                    sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid = currentsecondcategoryid;  //初始化数据后 赋值刷新前的二级分类名称
+                    LoadDgvGood(false,false);
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+                IsEnable = true;
+            }
+        }
+
+
         #endregion
 
         #region 会员积分优惠券
@@ -998,14 +1136,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     LstAllProduct.ForEach(r => r.panelbmp = null);
 
-                    if (keyBoard.Visible)
-                    {
-                        LoadDgvQuery();
-                    }
-                    else
-                    {
                         LoadDgvGood(true, true);
-                    }
 
                 }));
             }
@@ -1099,14 +1230,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         sortCartByFirstCategoryid[CurrentFirstCategoryid].products.ForEach(r => r.panelbmp = null);
 
 
-                        if (keyBoard.Visible)
-                        {
-                            LoadDgvQuery();
-                        }
-                        else
-                        {
-                            LoadDgvGood(true, true);
-                        }
+                        LoadDgvGood(true, true);
 
                     }));
                 }
@@ -1292,27 +1416,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             txtSearch.Focus();
         }
 
-        private void txtSearch_Enter(object sender, EventArgs e)
-        {
-            keyBoard.Visible = true;
-
-            dgvGoodQuery.Visible = true;
-
-            if (keyBoard.Visible)
-            {
-
-                keyBoard.Size = new System.Drawing.Size(dgvGood.Width, dgvGood.RowTemplate.Height * 3);
-                txtSearch.Focus();
-
-                LoadDgvQuery();
-            }
-            else
-            {
-                txtSearch.Clear();
-            }
-
-            UpdateQueryStatus();
-        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -1330,168 +1433,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 return;
             }
-
-            if (string.IsNullOrEmpty(txtSearch.Text))
-            {
-                //btnScan.Select();
-            }
-            else
-            {
+           
                 Application.DoEvents();
 
-                CurrentGoodQueryPage = 1;
-                UpdateDgvGoodByQuery();
+                CurrentGoodPage = 1;
+                LoadDgvGood(false, false);
 
-                
-            }
+          
             }catch(Exception ex){
                 ShowLog("查询面板商品异常"+ex.Message,true);
             }
 
         }
 
-
-        private void UpdateDgvGoodByQuery()
-        {
-            try
-            {
-                LoadDgvQuery();
-            }
-            catch (Exception ex)
-            {
-
-                LogManager.WriteLog("ERROR", "加载面板商品异常" + ex.Message);
-            }
-            finally
-            {
-                ShowLoading(false,true);
-            }
-        }
-
-        private void LoadDgvQuery()
-        {
-            try
-            {
-                Other.CrearMemory();
-
-                string strquery = txtSearch.Text.ToUpper();
-                List<Product> AllQueryPro = LstAllProduct.Where(r => r.AllFirstLetter.Contains(strquery) || r.skucode.Contains(strquery)).ToList();
-
-                if (AllQueryPro == null || AllQueryPro.Count == 0)
-                {
-                    dgvGoodQuery.Rows.Clear();
-                    return;
-                }
-
-                int page = CurrentGoodQueryPage;
-                int startindex = 0;
-                int lastindex = 14;
-                int waitingcount = 0;
-
-                bool havanextpage = false;
-                bool havepreviousPage = false;
-                if (page == 1)
-                {
-                    havepreviousPage = false;
-                    startindex = 0;
-                    if (AllQueryPro.Count > 15)
-                    {
-
-                        lastindex = 13;
-                        havanextpage = true;
-                    }
-                    else
-                    {
-                        lastindex = AllQueryPro.Count - 1;
-                        havanextpage = false;
-                    }
-                }
-                else
-                {
-                    havepreviousPage = true;
-                    waitingcount = AllQueryPro.Count - ((page - 1) * 13 + 1);  //第一页只有下一页  中间页都是上一页下一页 占用两个
-                    startindex = (page - 1) * 13 + 1;
-
-                    if (waitingcount > 14)
-                    {
-                        lastindex = startindex + 12;
-                        havanextpage = true;
-                    }
-                    else
-                    {
-                        lastindex = AllQueryPro.Count - 1;
-                        havanextpage = false;
-                    }
-                }
-
-                int loadingcount = lastindex - startindex + 1;
-
-
-                DateTime starttime = DateTime.Now;
-                List<Image> lstshowimg = new List<Image>();
-                if (havepreviousPage)
-                {
-                    lstshowimg.Add(imgPageUpForGood);
-                }
-
-                List<Product> lstLaodingPro = AllQueryPro.GetRange(startindex, lastindex - startindex + 1);
-
-
-
-                List<Product> lstNotHaveprice = lstLaodingPro.Where(r => r.panelbmp == null).ToList();
-                //防止转换json  死循环   bmp.tag 是product
-                lstNotHaveprice.ForEach(r => r.panelbmp = null);
-                if (lstNotHaveprice != null && lstNotHaveprice.Count > 0)
-                {
-                    MainHelper.SingleCalculate(lstNotHaveprice);
-
-                }
-
-
-                dgvGoodQuery.Rows.Clear();
-
-                for (int i = 0; i < lstLaodingPro.Count; i++)
-                {
-
-                    if (lstLaodingPro[i].panelbmp == null)
-                    {
-                        lstLaodingPro[i].panelbmp = GetItemImg(lstLaodingPro[i]);
-                    }
-                    lstshowimg.Add(lstLaodingPro[i].panelbmp);
-
-                }
-
-                if (havanextpage)
-                {
-                    lstshowimg.Add(imgPageDownForGood);
-                }
-
-
-               
-                int emptycount = 5- lstshowimg.Count % 5;
-
-
-                for (int i = 0; i < emptycount; i++)
-                {
-                    lstshowimg.Add(ResourcePos.empty);
-                }
-
-                int rowcount = lstshowimg.Count / 5;
-
-                for (int i = 0; i < rowcount; i++)
-                {
-                    dgvGoodQuery.Rows.Add(lstshowimg[i * 5 + 0], lstshowimg[i * 5 + 1], lstshowimg[i * 5 + 2], lstshowimg[i * 5 + 3], lstshowimg[i * 5 + 4]);
-                }
-
-                Console.WriteLine("Good画图时间" + (DateTime.Now - starttime).TotalMilliseconds);
-                IsEnable = true;
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("ERROR", "加载面板商品异常" + ex.Message);
-            }
-        }
 
 
         /// <summary>
@@ -1810,7 +1764,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-                if (!IsEnable || keyBoard.Visible)
+                if (!IsEnable)
                 {
                     return;
                 }
@@ -1910,64 +1864,46 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 }
 
+
+                if (!string.IsNullOrEmpty(txtSearch.Text))
+                {
+                    string strquery = txtSearch.Text.ToUpper();
+                    AllCategoryPro = AllCategoryPro.Where(r => r.AllFirstLetter.Contains(strquery) || r.skucode.Contains(strquery)).ToList();
+
+                }
+
                 if (AllCategoryPro == null || AllCategoryPro.Count == 0)
                 {
                     dgvGood.Rows.Clear();
                     return;
                 }
 
-                int page = CurrentGoodPage;
-                int startindex = 0;
-                int lastindex = 29;
-                int waitingcount = 0;
 
-                bool havanextpage = false;
-                bool havepreviousPage = false;
-                if (page == 1)
+                Paging paging ;
+                if (keyBoard.Visible)
                 {
-                    havepreviousPage = false;
-                    startindex = 0;
-                    if (AllCategoryPro.Count > 30)
-                    {
-
-                        lastindex = 28;
-                        havanextpage = true;
-                    }
-                    else
-                    {
-                        lastindex = AllCategoryPro.Count - 1;
-                        havanextpage = false;
-                    }
+                   paging = CartUtil.GetPaging(CurrentGoodPage, 15, AllCategoryPro.Count, 5);
                 }
                 else
                 {
-                    havepreviousPage = true;
-                    waitingcount = AllCategoryPro.Count - ((page - 1) * 28 + 1);  //第一页只有下一页  中间页都是上一页下一页 占用两个
-                    startindex = (page - 1) * 28+1;
-
-                    if (waitingcount > 29)
-                    {
-                        lastindex = startindex + 27;
-                        havanextpage = true;
-                    }
-                    else
-                    {
-                        lastindex = AllCategoryPro.Count - 1;
-                        havanextpage = false;
-                    }
+                   paging = CartUtil.GetPaging(CurrentGoodPage, 30, AllCategoryPro.Count, 5);
+                }
+                
+                if (!paging.success)
+                {
+                    MainModel.ShowLog("分页出现异常，请重试",true);
+                    dgvGood.Rows.Clear();
+                    CurrentGoodPage = 1;
+                    return;
                 }
 
-                int loadingcount = lastindex - startindex + 1;
-
-
-                DateTime starttime = DateTime.Now;
-                List<Image> lstshowimg = new List<Image>();
-                if (havepreviousPage)
+                  List<Image> lstshowimg = new List<Image>();
+                if (paging.haveuppage)
                 {
                     lstshowimg.Add(imgPageUpForGood);
                 }
 
-                List<Product> lstLaodingPro = AllCategoryPro.GetRange(startindex ,lastindex-startindex+1);
+                List<Product> lstLaodingPro = AllCategoryPro.GetRange(paging.startindex ,paging.endindex-paging.startindex+1);
 
 
                 List<Product> lstNotHaveprice = lstLaodingPro.Where(r => r.panelbmp == null).ToList();
@@ -1994,16 +1930,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     
                 }
                 
-                if (havanextpage)
+                if (paging.havedownpage)
                 {
                     lstshowimg.Add(imgPageDownForGood);
                 }
 
 
-                int emptycount =5- lstshowimg.Count % 5;
-
-
-                for (int i = 0; i < emptycount; i++)
+              
+                for (int i = 0; i < paging.makeupcount; i++)
                 {
                     lstshowimg.Add(ResourcePos.empty);
                 }
@@ -2015,7 +1949,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     dgvGood.Rows.Add(lstshowimg[i * 5 + 0], lstshowimg[i * 5 + 1], lstshowimg[i * 5 + 2], lstshowimg[i * 5 + 3], lstshowimg[i * 5 + 4]);
                 }
 
-                Console.WriteLine("Good画图时间" + (DateTime.Now - starttime).TotalMilliseconds);
                     IsEnable = true;
              
             }
@@ -2760,9 +2693,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             picCredit.Visible = false;
                         }
                     }
-
                     return true;
-
                 }
                 else
                 {
@@ -2776,9 +2707,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                ShowLog("刷新购物车异常：" + ex.Message, true);
                 return false;
-            }
-            finally
-            {
             }
         }
 
@@ -3898,7 +3826,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             keyBoard.Visible = !keyBoard.Visible;
 
-            dgvGoodQuery.Visible = keyBoard.Visible;
+            CurrentGoodPage = 1;
 
             if (keyBoard.Visible)
             {
@@ -3906,55 +3834,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 keyBoard.Size = new System.Drawing.Size(dgvGood.Width, dgvGood.RowTemplate.Height * 3);
                 txtSearch.Focus();
 
-                LoadDgvQuery();
+               
             }
             else
             {
-                txtSearch.Clear();
                 btnScan.Select();
             }
 
-            UpdateQueryStatus();
+            LoadDgvGood(false,false);
         }
 
-
-        private void UpdateQueryStatus()
-        {
-            if (keyBoard.Visible)
-            {
-                //遍历单元格清空之前的选中状态
-                for (int i = 0; i < this.dgvCategory.Rows.Count; i++)
-                {
-                    for (int j = 0; j < this.dgvCategory.Columns.Count; j++)
-                    {
-                        Image lastimg = (Image)dgvCategory.Rows[i].Cells[j].Value;
-
-                        if (lastimg.Tag != null && ((KeyValuePair<string, string>)lastimg.Tag).Key == CurrentFirstCategoryid)
-                        {
-                            btnNotSelect.Text = ((KeyValuePair<string, string>)lastimg.Tag).Value;
-                            Image tempimg = MainModel.GetControlImage(btnNotSelect);
-                            tempimg.Tag = (KeyValuePair<string, string>)lastimg.Tag;
-
-                            dgvCategory.Rows[i].Cells[j].Value = tempimg;
-                            // break;
-                        }
-                    }
-                }
-
-                KeyValuePair<string, string> kv = new KeyValuePair<string, string>("-1", "全部");
-
-                btnSelect.Text = kv.Value;
-                Image img = MainModel.GetControlImage(btnSelect);
-                img.Tag = kv;
-
-                dgvCategory.Rows[0].Cells[0].Value = img;
-
-            }
-            else
-            {
-                LoadDgvCategory();
-            }
-        }
 
         string keyInput = "";
         private void keyBoardNew1_Press(object sender, KeyBoardNew.KeyboardArgs e)
@@ -3989,10 +3878,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             else if (keyInput == keyBoard.KeyHide)
             {
                 keyBoard.Visible = false;
-                dgvGoodQuery.Visible = false;
-                txtSearch.Clear();
-
-                UpdateQueryStatus();
+                CurrentGoodPage = 1;
+                LoadDgvGood(false,false);
                 return;
             }
 
@@ -4007,132 +3894,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             txtSearch.Focus();
         }
-
-        private void dgvGoodQuery_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                DateTime starttime = DateTime.Now;
-                if (!IsEnable)
-                {
-                    return;
-                }
-
-                //IsEnable = false;
-                if (e.RowIndex < 0)
-                    return;
-
-                Image selectimg = (Image)dgvGoodQuery.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
-
-
-
-                if (LastSkuCode != "")
-                {
-                    //遍历单元格清空之前的选中状态
-                    for (int i = 0; i < this.dgvGoodQuery.Rows.Count; i++)
-                    {
-                        for (int j = 0; j < this.dgvGoodQuery.Columns.Count; j++)
-                        {
-                            Image lastimg = (Image)dgvGoodQuery.Rows[i].Cells[j].Value;
-
-                            if (lastimg.Tag != null && ((Product)lastimg.Tag).skucode == LastSkuCode)
-                            {
-                                dgvGoodQuery.Rows[i].Cells[j].Value = GetItemImg((Product)lastimg.Tag);
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                if (selectimg == imgPageDownForGood) //下一页
-                {
-                    CurrentGoodQueryPage++;
-                    UpdateDgvGoodByQuery();
-                    return;
-                }
-
-                if (selectimg == imgPageUpForGood)//上一页
-                {
-                    CurrentGoodQueryPage--;
-                    UpdateDgvGoodByQuery();
-                    return;
-                }
-
-                if (selectimg.Tag == null)  //空白单元格（无商品）
-                {
-                    ShowLoading(false, true);
-                    return;
-                }
-
-
-                Product pro = CartUtil.GetNewProduct((Product)selectimg.Tag);
-                pro.RowNum = 1;
-                pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
-
-                dgvGoodQuery.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = GetItemImg(pro);
-                pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
-
-                if (CurrentCart == null)
-                {
-                    CurrentCart = new Cart();
-                }
-                if (CurrentCart.products == null)
-                {
-                    List<Product> products = new List<Product>();
-                    CurrentCart.products = products;
-                }
-
-                LastLstPro = new List<Product>();
-                foreach (Product ppro in CurrentCart.products)
-                {
-                    LastLstPro.Add((Product)MainModel.Clone(ppro));
-                }
-
-                SelectProduct = pro;
-                LastSkuCode = pro.skucode;
-                isCartRefresh = true;
-                FlashSkuCode = pro.skucode;
-                if (pro.goodstagid == 0) //标品
-                {
-                    InsertProductToCart(pro);
-                    UploadOffLineDgvCart();
-
-                    if (MainModel.WhetherPrint)
-                    {
-                        LabelPrintHelper.LabelPrint(pro);
-                    }
-
-                    SelectProduct = null;
-                }
-                else
-                {
-                    if (!MainModel.WhetherAutoCart)
-                    {
-                        timerScale.Enabled = false;
-                        if (ScaleHelper.ShowFormScale(pro))
-                        {
-                            CurrentCart.products.Add(pro);
-                            UploadOffLineDgvCart();
-                            SelectProduct = null;
-                        }
-                        timerScale.Enabled = true;
-                    }
-
-                }
-                Console.WriteLine("刷新购物车时间" + (DateTime.Now - starttime).TotalMilliseconds);
-
-            }
-            catch (Exception ex)
-            {
-                ShowLog("选择商品异常" + ex.StackTrace, true);
-            }
-            finally
-            {
-                btnScan.Select();
-            }
-        }
-
 
 
         private void ChangeMQTT(object obj)
@@ -4307,7 +4068,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-                if (!IsEnable || keyBoard.Visible)
+                if (!IsEnable)
                 {
                     return;
                 }
@@ -4390,9 +4151,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-       
+        private void lblUrl_Click(object sender, EventArgs e)
+        {
+            string errormsg = "";
+            httputil.GetPaymentCouponDetail("1000042967478",ref errormsg);
+        }
 
-      
         
     }
 }

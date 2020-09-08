@@ -974,7 +974,6 @@ namespace Maticsoft.DAL
         }
 
 
-
         public bool AddProduct(System.Collections.Generic.List<Maticsoft.Model.DBPRODUCT_BEANMODEL> lstmodel,string URL)
         {
 
@@ -1030,8 +1029,7 @@ namespace Maticsoft.DAL
                     if (!sort.ContainsKey(dr["firstcategoryid"].ToString()))
                     {
                         sort.Add(dr["firstcategoryid"].ToString(), dr["firstcategoryname"].ToString());
-                    }
-                    
+                    }                    
                 }
             }
             return sort;

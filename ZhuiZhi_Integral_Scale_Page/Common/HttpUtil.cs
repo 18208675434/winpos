@@ -356,7 +356,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                         pro.spectype = cart.products[i].spectype;
                         pro.goodstagid = cart.products[i].goodstagid;
                         pro.barcode = cart.products[i].barcode;
-
+                         
                         pro.adjustpriceinfo = cart.products[i].adjustpriceinfo;
                         lstpro[i] = pro;
                     }
@@ -669,7 +669,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     AuthcodeTrade codetrade = JsonConvert.DeserializeObject<AuthcodeTrade>(rd.data.ToString());
 
                     return codetrade;
-
                 }
                 else
                 {
@@ -1227,7 +1226,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     erromessage = "";
                     Receiptdetail receipt = JsonConvert.DeserializeObject<Receiptdetail>(rd.data.ToString());
                     return receipt;
-
                 }
                 else
                 {
@@ -1320,7 +1318,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
-
 
         /// <summary>
         /// 分页获取门店秤信息
@@ -1837,6 +1834,86 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+
+        /// <summary>
+        /// 外部优惠券
+        /// </summary>
+        /// <returns></returns>
+        public PaymentCouponDetail GetPaymentCouponDetail(string couponcode, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/activity/payment/coupon/getpaymentcoupondetailbyquery";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("couponcode", couponcode);
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+                string parajson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpPOST(url,parajson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    PaymentCouponDetail result = JsonConvert.DeserializeObject<PaymentCouponDetail>(rd.data.ToString());
+                    return result;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "getpaymentcoupondetailbyquery:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取getpaymentcoupondetailbyquery异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 验证外部券 密码
+        /// </summary>
+        /// <returns></returns>
+        public bool ValidateOuterCoupon(string couponcode,string password, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/activity/payment/coupon/validatepassword";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("couponcode", couponcode);
+                sort.Add("password", password);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+                    return Convert.ToBoolean(rd.data);
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "validateoutercoupon:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取validateoutercoupon异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return false ;
+            }
+        }
 
         /// <summary>
         /// 东方福利网外部优惠券

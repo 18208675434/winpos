@@ -344,8 +344,7 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.BackColor = System.Drawing.Color.Transparent;
-            this.btnContinue.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnContinue.BackgroundImage")));
+            this.btnContinue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(159)))), ((int)(((byte)(255)))));
             this.btnContinue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContinue.Font = new System.Drawing.Font("微软雅黑", 9.5F);
@@ -361,8 +360,7 @@
             // 
             // btnDelHang
             // 
-            this.btnDelHang.BackColor = System.Drawing.Color.Transparent;
-            this.btnDelHang.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDelHang.BackgroundImage")));
+            this.btnDelHang.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(67)))), ((int)(((byte)(57)))));
             this.btnDelHang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDelHang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelHang.Font = new System.Drawing.Font("微软雅黑", 9.5F);
@@ -427,7 +425,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(130, 13);
+            this.label4.Location = new System.Drawing.Point(83, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 23);
             this.label4.TabIndex = 33;

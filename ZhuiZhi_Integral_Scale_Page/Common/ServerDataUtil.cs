@@ -227,7 +227,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                    // scaletoledo.SendIncrementPLU(lstpro);
                 }
 
-
             }
             catch (Exception ex)
             {

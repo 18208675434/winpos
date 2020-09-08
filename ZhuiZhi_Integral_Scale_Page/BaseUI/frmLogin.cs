@@ -44,6 +44,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             Control.CheckForIllegalCrossThreadCalls = false;
             MainModel.IsOffLine = false;
             INIManager.SetIni("System", "IsOffLine", "0", MainModel.IniPath);
+            INIManager.SetIni("MQTT", "AdjustStartTime", MainModel.getStampByDateTime(DateTime.Now), MainModel.IniPath); //记录登录时间作为调价查询的起始时间
         }
 
         private void frmLogin_Shown(object sender, EventArgs e)

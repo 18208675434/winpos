@@ -98,11 +98,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 CurrentNumberType = numbertype;
                 switch (CurrentNumberType)
                 {
-
                     case NumberType.BarCode: txtNum.WaterText = "输入商品条码"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
                     case NumberType.MemberCode: txtNum.WaterText = "输入会员手机号"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
                     case NumberType.ProWeight: txtNum.WaterText = "请输入实际重量"; lblg.Visible = true; txtNum.Width = lblg.Left - txtNum.Left - 2; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
                     case NumberType.TareWeight: txtNum.WaterText = "请输入皮重"; lblg.Visible = true; txtNum.Width = lblg.Left - txtNum.Left - 2; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.ProNum: txtNum.WaterText = "请输入实际数量"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.BindingMember: txtNum.WaterText = "请输入需绑定的会员手机号"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.GiftCardNo: txtNum.WaterText = "请输入礼品卡卡号"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.GiftCardPwd: txtNum.WaterText = "请输入礼品卡秘钥"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
                 }
 
                 rbtnOK.allbackcolor = Color.LightGray;
@@ -225,10 +228,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
             }
         }
 
-        private void btnDot_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnDel_Click(object sender, EventArgs e)
         {
@@ -292,7 +291,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
             }
 
         }
-
 
         protected override bool ProcessDialogKey(Keys keyData)
         {

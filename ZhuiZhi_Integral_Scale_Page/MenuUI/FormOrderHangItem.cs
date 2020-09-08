@@ -45,7 +45,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                     else
                     {
                         string specdesc = string.IsNullOrEmpty(pro.specdesc) ? pro.specnum + pro.price.unit : pro.specdesc;
-                        dgvCart.Rows.Add(name + "\r\n" + specdesc, pro.specnum+pro.price.unit, "￥" + pro.price.total.ToString("f2"));
+                        dgvCart.Rows.Add(name + "\r\n" + pro.skucode, specdesc, pro.specnum + pro.price.unit, "￥" + pro.price.total.ToString("f2"));
                     }
                     
                 }
