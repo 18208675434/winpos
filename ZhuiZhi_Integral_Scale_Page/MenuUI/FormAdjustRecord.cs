@@ -31,18 +31,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         List<DBRECEIPT_BEANMODEL> CurrentListReceiptOffLine = new List<DBRECEIPT_BEANMODEL>();
 
 
-        //<summary>
-        //按比例缩放页面及控件
-        //</summary>
-        AutoSizeFormUtil asf = new AutoSizeFormUtil();
+        private long MaxAdjustID = 0;
+
+
 
         /// <summary>
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
         /// </summary>
         private bool IsEnable = true;
 
-        private Bitmap bmpReprint;
-        private Bitmap bmpWhite;
+        private Image bmpNEW;
+        private Image bmpWhite;
 
         private int datetype = 3;
 
@@ -63,9 +62,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             btnToday.ForeColor = Color.Blue;
             btnYesterday.FlatAppearance.BorderColor = Color.Black;
             btnYesterday.ForeColor = Color.Black;
-
-           // QueryReceipt();
-            LoadDgvReceipt(true);
+            datetype = 0;
+            CurrentPage = 1;
+            QueryReceipt();
 
              }
             catch (Exception ex)
@@ -87,10 +86,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     return;
                 }
                 IsEnable = false;
-                btnToday.FlatAppearance.BorderColor = Color.Gray;
-                btnYesterday.FlatAppearance.BorderColor = Color.Red;
 
-                LoadDgvReceipt(true);
+                btnToday.FlatAppearance.BorderColor = Color.Black;
+                btnToday.ForeColor = Color.Black;
+                btnYesterday.FlatAppearance.BorderColor = Color.Blue;
+                btnYesterday.ForeColor = Color.Blue;
+                datetype = 1;
+                CurrentPage = 1;
+                QueryReceipt();
+
             }
             catch (Exception ex)
             {
@@ -122,7 +126,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-               
+
+                IsEnable = false;
+                LoadingHelper.ShowLoadingScreen();
+
                 string shopid = MainModel.CurrentShopInfo.shopid;
                 string deviceid = MainModel.CurrentShopInfo.deviceid.ToString();
 
@@ -145,14 +152,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (ErrorMsg != "" || CurrentAdjustPriceRecord == null)
                 {
                     MainModel.ShowLog(ErrorMsg, false);
+
+                    IsEnable = true;
+                    LoadingHelper.CloseForm();
                     return;
                 }
                 else
                 {
+                    long LastAdjustID = ConfigUtil.GetLastAdjustPriceID();
                     dgvReceipt.Rows.Clear();
                     foreach (AdjustPriceRecordItem item in CurrentAdjustPriceRecord.rows)
                     {
-                        dgvReceipt.Rows.Add("NEW",MainModel.GetDateTimeByStamp(item.adjustpricedate).ToString("yyyy-MM-dd \r\n HH:mm:ss"), item.skuname+"\r\n"+item.skucode, item.beforesalesprice.ToString(), item.aftersalesprice.ToString(), item.beforememberprice.ToString(), item.aftermemberprice.ToString());
+
+                        MaxAdjustID = Math.Max(MaxAdjustID ,item.id);
+
+                        Bitmap tempbmp;
+                        if (item.id > LastAdjustID)
+                        {
+                            tempbmp = (Bitmap)bmpNEW;
+                        }
+                        else
+                        {
+                            tempbmp = Resources.ResourcePos.empty;
+                        }
+
+                        dgvReceipt.Rows.Add(tempbmp, MainModel.GetDateTimeByStamp(item.adjustpricedate).ToString("yyyy-MM-dd \r\n HH:mm:ss"), item.skuname + "\r\n" + item.skucode, item.beforesalesprice.ToString(), item.aftersalesprice.ToString(), item.beforememberprice.ToString(), item.aftermemberprice.ToString());
                     }
 
                     if (dgvReceipt.Rows.Count > 0)
@@ -169,94 +193,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 rbtnPageDown.WhetherEnable = CurrentAdjustPriceRecord.total > (CurrentAdjustPriceRecord.page * CurrentAdjustPriceRecord.size);
                 rbtnPageUp.WhetherEnable = CurrentAdjustPriceRecord.page > 1;
+
+                IsEnable = true;
+                LoadingHelper.CloseForm();
             }
             catch (Exception ex)
             {
                 MainModel.ShowLog("查询交班异常：" + ex.Message, true);
-            }
-            finally
-            {
-                LoadingHelper.CloseForm();
-            }
-        }
 
-
-
-        private void dgvReceipt_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (!IsEnable)
-                {
-                    return;
-                }
-                if (e.RowIndex < 0)
-                    return;
-                if (dgvReceipt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
-                {
-
-                    if (MainModel.IsOffLine)
-                    {
-                        IsEnable = false;
-                        //LoadingHelper.ShowLoadingScreen("加载中...");
-                        DBRECEIPT_BEANMODEL receipt = CurrentListReceiptOffLine[e.RowIndex];
-
-                        Receiptdetail receiptdetail = JsonConvert.DeserializeObject<Receiptdetail>(receipt.RECEIPTDETAIL);
-                        string ErrorMsgReceipt = "";
-                        bool receiptresult = PrintUtil.ReceiptPrint(receiptdetail, ref ErrorMsgReceipt);
-
-                       // LoadingHelper.CloseForm();
-
-                        if (receiptresult)
-                        {
-                            MainModel.ShowLog("打印完成", false);
-                        }
-                        else
-                        {
-                            MainModel.ShowLog(ErrorMsgReceipt, true);
-                        }
-                    }
-                    else
-                    {
-                        IsEnable = false;
-                        LoadingHelper.ShowLoadingScreen("加载中...");
-                        ReceiptQuery receiptquery = CurrentLisstReceipt[e.RowIndex];
-
-                        string ErrorMsgReceipt = "";
-                        bool receiptresult = PrintUtil.ReceiptPrint(receiptquery.receiptdetail, ref ErrorMsgReceipt);
-
-                        LoadingHelper.CloseForm();
-
-                        if (receiptresult)
-                        {
-                            MainModel.ShowLog("打印完成", false);
-                        }
-                        else
-                        {
-                            MainModel.ShowLog(ErrorMsgReceipt, true);
-                        }
-                    }
-
-                }
-                dgvReceipt.ClearSelection();
-              
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("重打交班单异常"+ex.Message,true);
-            }
-            finally
-            {
-                LoadingHelper.CloseForm();
                 IsEnable = true;
-            }
+                LoadingHelper.CloseForm();
+            }         
         }
-
-        public void frmReceiptQuery_SizeChanged(object sender, EventArgs e)
-        {
-            //asf.ControlAutoSize(this);
-        }
-
 
         private void frmReceiptQuery_Shown(object sender, EventArgs e)
         {
@@ -265,52 +213,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
             picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
             lblMenu.Left = picMenu.Right;
-          
-
-            LoadBmp();
+            bmpNEW = MainModel.GetControlImage(lblNEW);
+            bmpWhite = Resources.ResourcePos.White;
             Application.DoEvents();
             btnToday_Click(null,null);
         }
-
-        private void LoadBmp()
-        {
-            try
-            {
-
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("加载页面图片异常" + ex.Message);
-            }
-        }
-
-        private void btnWindows_Click(object sender, EventArgs e)
-        {
-            MainModel.ShowWindows();
-        }
-
-        private void dtReceiptData_CloseUp(object sender, EventArgs e)
-        {
-            if (!IsEnable)
-            {
-                return;
-            }
-            IsEnable = false;
-
-
-           // QueryReceipt();
-
-            LoadDgvReceipt(true);
-            IsEnable = true;
-        }
-
 
 
 
         #region  分页
         private int CurrentPage = 1;
-        private int CurrentSize = 6;
+        private int CurrentSize = 8;
         private void rbtnPageUp_ButtonClick(object sender, EventArgs e)
         {
 
@@ -333,115 +246,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        private void LoadDgvReceipt(bool needRefresh)
-        {
-            try
-            {
-                if (needRefresh)
-                {
-
-               
-                
-                string shopid = MainModel.CurrentShopInfo.shopid;
-                string deviceid = MainModel.CurrentShopInfo.deviceid.ToString();
-
-                QueryReceiptPara queryreceiptpara = new QueryReceiptPara();
-                queryreceiptpara.operatetimestr = "";
-                queryreceiptpara.shopid = shopid;
-                queryreceiptpara.deviceid = deviceid;
-                //queryreceiptpara.interval=
-
-                string ErrorMsg = "";
-                List<ReceiptQuery> LstReceiptQuery = httputil.QueryReceipt(queryreceiptpara,ref ErrorMsg);
-
-
-                LoadingHelper.CloseForm();
-                CurrentLisstReceipt = LstReceiptQuery;
-
-                if (ErrorMsg != "" || LstReceiptQuery == null)
-                {
-                    MainModel.ShowLog(ErrorMsg, false);
-                    return;
-                }
-                }
-
-                if (CurrentLisstReceipt == null)
-                {
-                    return;
-                }
-
-                if (CurrentPage > 1)
-                {
-                    rbtnPageUp.WhetherEnable = true;
-                }
-                else
-                {
-                    rbtnPageUp.WhetherEnable = false;
-                }
-                int startindex = (CurrentPage - 1) * 6;
-
-                int lastindex = Math.Min(CurrentLisstReceipt.Count - 1, startindex + 5);
-
-
-                dgvReceipt.Rows.Clear();
-
-                List<ReceiptQuery> LstLoadingReceipt = CurrentLisstReceipt.GetRange(startindex, lastindex - startindex + 1);
-                foreach (ReceiptQuery receiptquery in LstLoadingReceipt)
-                {
-
-                    string ReceiptTime = MainModel.GetDateTimeByStamp(receiptquery.starttime.ToString()).ToString("yyyy-MM-dd HH:mm:ss") + "\r\n" + "至" + "\r\n" + MainModel.GetDateTimeByStamp(receiptquery.endtime.ToString()).ToString("yyyy-MM-dd HH:mm:ss");
-                    string Cashier = receiptquery.cashier;
-                    string NetOperat = receiptquery.netsaleamt.ToString("f2");
-
-                    string TotalPay = receiptquery.totalpayment.ToString("f2");
-
-                    string TotalCash = receiptquery.cashtotalamt.ToString("f2");
-
-                    string PrintStatus = receiptquery.hasprint == 1 ? "已打印" : "未打印";
-                    string PosType = receiptquery.hasprint == 1 ? "在线模式" : "离线模式";
-
-                    dgvReceipt.Rows.Add(ReceiptData, ReceiptTime, Cashier, NetOperat, TotalPay, TotalCash, PrintStatus, PosType, bmpReprint);
-                }
-
-                if (dgvReceipt.Rows.Count > 0)
-                {
-                    pnlEmptyReceipt.Visible = false;
-                    MainModel.ShowLog("刷新完成", false);
-                }
-                else
-                {
-                    pnlEmptyReceipt.Visible = true;
-                    MainModel.ShowLog("暂无数据", false);
-                }     
-                Application.DoEvents();
-
-                //在线接口每页20个 防止本地分页和接口分页最小积数  例 6*10 = 20*3
-                if (CurrentLisstReceipt.Count > CurrentPage * 6)
-                {
-                    rbtnPageDown.WhetherEnable = true;
-                }
-                else
-                {
-                    rbtnPageDown.WhetherEnable = false;
-                }
-
-
-                pnlEmptyReceipt.Visible = dgvReceipt.Rows.Count == 0;
-
-                //rbtnPageDown.Enabled = CurrentQueryOrder.orders.Count > CurrentCartPage * 6;
-
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("加载交班列表异常" + ex.Message, true);
-            }
-        }
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
             string errormsg = "";
-            AdjustPriceDynamic result =  httputil.GetAdjustPriceDynamicForPos("","",true,ref errormsg);
+            AdjustPriceDynamic result = httputil.GetAdjustPriceDynamicForPos(MainModel.getStampByDateTime(DateTime.Now.AddDays(-1)), MainModel.getStampByDateTime(DateTime.Now), true, ref errormsg);
 
             if (!string.IsNullOrEmpty(errormsg) || result == null)
             {
@@ -452,7 +262,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
+            CurrentPage = 1;
             QueryReceipt();
+        }
+
+        private void FormAdjustRecord_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            INIManager.SetIni("MQTT", "LastAdjustPriceID",MaxAdjustID.ToString(), MainModel.IniPath);
         }
     }
 }

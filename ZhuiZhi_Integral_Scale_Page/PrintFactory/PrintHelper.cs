@@ -75,23 +75,34 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 {
                     //汉字占两位 TODO 判断前面汉字和英文数字
                     foreach (OrderPriceDetail pricedetail in printdetail.orderbasicinfo)
-                    {                       
-                            lstPrintStr.Add(MergeStr(pricedetail.title, pricedetail.amount, BodyCharCountOfLine, PageSize));                     
+                    {
+                        string stramount = pricedetail.amount;
+                        if (isRefound && pricedetail.title != "件数合计" && !pricedetail.amount.Contains("-"))
+                        {
+                            stramount = "-" + stramount;
+                        }
+
+                        if (string.IsNullOrEmpty(stramount))
+                        {
+                            stramount = "0.00";
+                        }
+
+                            lstPrintStr.Add(MergeStr(pricedetail.title, stramount, BodyCharCountOfLine, PageSize));                     
                     }
 
                     lstPrintStr.Add(getStrLine());
                 }
                
-                foreach (Payinfo payinfo in printdetail.payinfo)
+                foreach (Paydetail paydetail in printdetail.paydetail)
                 {
 
-                    string stramount = payinfo.amount.ToString("f2");
-                    if (isRefound && payinfo.type != "件数合计" && !stramount.Contains("-"))
+                    string stramount = paydetail.amount;
+                    if (isRefound && paydetail.title != "件数合计" && !stramount.Contains("-"))
                     {
                         stramount = "-" + stramount;
                     }
 
-                        lstPrintStr.Add(MergeStr(payinfo.type, stramount, BodyCharCountOfLine, PageSize));
+                    lstPrintStr.Add(MergeStr(paydetail.title, stramount, BodyCharCountOfLine, PageSize));
                    
                 }
 
@@ -175,7 +186,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                             tempamount = Convert.ToDecimal(paoinfo.amount);
                         }
                         catch { }
-                        if (tempamount > 0)
+                        if (tempamount != 0)  //不能用大于0判断 退款时会出现负数
                         {
                             lstPrintStr.Add(MergeStr(paoinfo.title, paoinfo.amount, BodyCharCountOfLine, PageSize));
 
@@ -207,20 +218,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     }
                     catch (Exception ex) { }
                 }
-                lstPrintStr.Add(getStrLine());
-                foreach (OrderPriceDetail otherinfo in receipt.otherinfo)
-                {
-                    try
-                    {
-                        lstPrintStr.Add(MergeStr(otherinfo.title, otherinfo.amount, BodyCharCountOfLine, PageSize));
 
-                        if (!string.IsNullOrEmpty(otherinfo.subtitle))
-                        {
-                            lstPrintStr.Add(MergeStr("", otherinfo.subtitle.Trim(), BodyCharCountOfLine, PageSize));
-                        }
-                    }
-                    catch (Exception ex) { }
-                }
                 lstPrintStr.Add(getStrLine());
                 foreach (OrderPriceDetail shopcashinfo in receipt.shopcashinfo)
                 {

@@ -92,14 +92,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
                 }
                 else
                 {
-                    return 0;
+                    return -1;
                 }
                                
             }
             catch (Exception ex)
             {
                 ZhuiZhi_Integral_Scale_UncleFruit.Common.LogManager.WriteLog("设置备用金异常" + ex.Message);
-                return 0;
+                return -1;
             }
         }
 

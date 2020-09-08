@@ -10,7 +10,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
         public string skucode { get; set; }
         public string skuname { get; set; }
         public string title { get; set; }
-        public int num { get; set; }
+        public decimal num { get; set; }
         public decimal specnum { get; set; }
         public bool weightflag { get; set; }
 

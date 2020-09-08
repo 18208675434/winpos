@@ -402,26 +402,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     string ErrorMsg = "";
                     this.Enabled = false;
                     LoadingHelper.ShowLoadingScreen();
-                    ValidateOuterCoupon validataoutercoupon = httputil.GetValidateOuterCoupon(txtCash.Text, ref ErrorMsg);
+                    PaymentCouponDetail paymentcoupondetail = httputil.GetPaymentCouponDetail(txtCash.Text, ref ErrorMsg);
                     LoadingHelper.CloseForm();
                     this.Enabled = true;
-                    if (!string.IsNullOrEmpty(ErrorMsg) || validataoutercoupon == null)
+                    if (!string.IsNullOrEmpty(ErrorMsg) || paymentcoupondetail == null)
                     {
                         MainModel.ShowLog(ErrorMsg, false);
                         return;
                     }
 
-                    tempcash = validataoutercoupon.amount;
-                    otherpay.payamt = validataoutercoupon.amount;
-                    otherpay.paycouponcode = validataoutercoupon.couponcode;
+                    if (!paymentcoupondetail.availablecustomerpaycode.Contains(SelectPayType.code))
+                    {
+                        MainModel.ShowLog("券码不适用于当前支付方式",false);
+                        return;
+                    }
+
+                    if (paymentcoupondetail.needpassword && !PayHelper.ShowFormCouponPwd(txtCash.Text))
+                    {
+                        this.Activate();
+                        return;
+                    }
+                    this.Activate();
+
+
+                    tempcash = paymentcoupondetail.amount;
+                    otherpay.payamt = paymentcoupondetail.amount;
+                    otherpay.paycouponcode = paymentcoupondetail.couponcode;
                     otherpay.payname = SelectPayType.name;
-                    otherpay.paypromoamt = validataoutercoupon.amount;
-                    otherpay.paytype = SelectPayType.code;                    
+                    otherpay.paypromoamt = paymentcoupondetail.amount;
+                    otherpay.paytype = paymentcoupondetail.id;                    
                 }
                 else
                 {
                     tempcash = Convert.ToDecimal(txtCash.Text);
-                    if (tempcash > thisCurrentCart.totalpayment)
+                    if (tempcash > thisCurrentCart.totalpayment && SelectPayType.defaultamt==0)
                     {
                         MainModel.ShowLog("支付金额之和不可大于剩余应付金额", false);
                         return;
@@ -534,12 +548,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     if (SelectPayType != null && otherpayinfo.paytype == SelectPayType.code)
                     {
                         btnAmtSelect.Text = otherpayinfo.payamt.ToString();
-                        imgeamt = MainModel.GetControlImage(btnAmtNotSelect);
+                        imgeamt = MainModel.GetControlImage(btnAmtSelect);
                     }
                     else
                     {
                         btnAmtNotSelect.Text = otherpayinfo.payamt.ToString();
-                        imgeamt = MainModel.GetControlImage(btnAmtSelect);
+                        imgeamt = MainModel.GetControlImage(btnAmtNotSelect);
                     }
 
                     dgvSelectType.Rows.Add(otherpayinfo.paytype, bmpCash, otherpayinfo.payname, imgeamt, bmpDelete);

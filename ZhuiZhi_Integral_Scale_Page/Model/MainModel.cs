@@ -41,9 +41,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 私钥
         /// </summary>
         public static string PrivateKey = INIManager.GetIni("System", "PrivateKey", MainModel.IniPath);
-
       
-
         /// <summary>
         /// 环境
         /// </summary>
@@ -737,7 +735,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
                 keybd_event(68, 0, 0, 0);
                 keybd_event(0x5b, 0, 0x2, 0);
                 keybd_event(68, 0, 0x2, 0);
-                //this.WindowState = FormWindowState.Minimized;
             }
             catch (Exception ex)
             {
