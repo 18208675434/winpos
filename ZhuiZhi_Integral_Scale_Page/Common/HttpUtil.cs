@@ -654,7 +654,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             {
                 string url = "/pos/pay/trade/authcodetrade";
 
-
                 SortedDictionary<string, object> sort = new SortedDictionary<string, object>();
                 sort.Add("orderid", orderid);
                 sort.Add("authcode", authcode);

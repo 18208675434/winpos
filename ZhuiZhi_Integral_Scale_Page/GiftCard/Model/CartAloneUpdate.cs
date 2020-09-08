@@ -19,7 +19,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model
         /// <summary>
         /// 
         /// </summary>
-        public long memberid { get; set; }
+        public string memberid { get; set; }
         /// <summary>
         /// 
         /// </summary>

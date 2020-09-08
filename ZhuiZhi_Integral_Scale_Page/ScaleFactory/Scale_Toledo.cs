@@ -49,7 +49,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             {
                 li_ret = read_standard_stdcall(p);
 
-
                 result.ResultCode = li_ret;
 
                 /*
