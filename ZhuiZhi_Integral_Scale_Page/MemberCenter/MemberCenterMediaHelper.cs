@@ -223,14 +223,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
-
+         
         public static void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon)
         {
             try
             {
                 if (frmmembermedia != null && HaveMedia)
                 {
-                    frmmembermedia.UpdatememberInfo(phone,memberinfo,balance,credit,creditspec,coupon);
+                    frmmembermedia.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
                 }
 
             }

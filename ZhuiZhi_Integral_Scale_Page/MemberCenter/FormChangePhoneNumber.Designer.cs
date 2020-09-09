@@ -167,7 +167,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(19, 76);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1140, 665);
             this.panel1.TabIndex = 39;
@@ -199,19 +199,20 @@
             this.picChangePhoneOK.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picChangePhoneOK.BackgroundImage")));
             this.picChangePhoneOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picChangePhoneOK.Location = new System.Drawing.Point(151, 453);
-            this.picChangePhoneOK.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picChangePhoneOK.Margin = new System.Windows.Forms.Padding(2);
             this.picChangePhoneOK.Name = "picChangePhoneOK";
             this.picChangePhoneOK.Size = new System.Drawing.Size(37, 33);
             this.picChangePhoneOK.TabIndex = 19;
             this.picChangePhoneOK.TabStop = false;
             this.picChangePhoneOK.Visible = false;
+            this.picChangePhoneOK.Click += new System.EventHandler(this.picChangePhoneOK_Click);
             // 
             // picVerifyPhoneOK
             // 
             this.picVerifyPhoneOK.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picVerifyPhoneOK.BackgroundImage")));
             this.picVerifyPhoneOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picVerifyPhoneOK.Location = new System.Drawing.Point(151, 329);
-            this.picVerifyPhoneOK.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picVerifyPhoneOK.Margin = new System.Windows.Forms.Padding(2);
             this.picVerifyPhoneOK.Name = "picVerifyPhoneOK";
             this.picVerifyPhoneOK.Size = new System.Drawing.Size(37, 33);
             this.picVerifyPhoneOK.TabIndex = 18;
@@ -223,7 +224,7 @@
             this.picVerifyMemberOK.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picVerifyMemberOK.BackgroundImage")));
             this.picVerifyMemberOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picVerifyMemberOK.Location = new System.Drawing.Point(151, 183);
-            this.picVerifyMemberOK.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picVerifyMemberOK.Margin = new System.Windows.Forms.Padding(2);
             this.picVerifyMemberOK.Name = "picVerifyMemberOK";
             this.picVerifyMemberOK.Size = new System.Drawing.Size(37, 33);
             this.picVerifyMemberOK.TabIndex = 17;
@@ -274,7 +275,7 @@
             this.picStepThree.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepThree.BackgroundImage")));
             this.picStepThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picStepThree.Location = new System.Drawing.Point(53, 399);
-            this.picStepThree.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picStepThree.Margin = new System.Windows.Forms.Padding(2);
             this.picStepThree.Name = "picStepThree";
             this.picStepThree.Size = new System.Drawing.Size(37, 33);
             this.picStepThree.TabIndex = 13;
@@ -285,7 +286,7 @@
             this.picStepTwo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepTwo.BackgroundImage")));
             this.picStepTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picStepTwo.Location = new System.Drawing.Point(53, 265);
-            this.picStepTwo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picStepTwo.Margin = new System.Windows.Forms.Padding(2);
             this.picStepTwo.Name = "picStepTwo";
             this.picStepTwo.Size = new System.Drawing.Size(37, 33);
             this.picStepTwo.TabIndex = 12;
@@ -296,7 +297,7 @@
             this.picTheFirstStep.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picTheFirstStep.BackgroundImage")));
             this.picTheFirstStep.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picTheFirstStep.Location = new System.Drawing.Point(53, 123);
-            this.picTheFirstStep.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTheFirstStep.Margin = new System.Windows.Forms.Padding(2);
             this.picTheFirstStep.Name = "picTheFirstStep";
             this.picTheFirstStep.Size = new System.Drawing.Size(37, 33);
             this.picTheFirstStep.TabIndex = 11;
@@ -310,7 +311,7 @@
             this.btnOkChange.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOkChange.ForeColor = System.Drawing.Color.White;
             this.btnOkChange.Location = new System.Drawing.Point(134, 453);
-            this.btnOkChange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnOkChange.Margin = new System.Windows.Forms.Padding(2);
             this.btnOkChange.Name = "btnOkChange";
             this.btnOkChange.Size = new System.Drawing.Size(155, 44);
             this.btnOkChange.TabIndex = 10;
@@ -327,7 +328,7 @@
             this.btnVerifyNewPhone.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnVerifyNewPhone.ForeColor = System.Drawing.Color.White;
             this.btnVerifyNewPhone.Location = new System.Drawing.Point(133, 318);
-            this.btnVerifyNewPhone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnVerifyNewPhone.Margin = new System.Windows.Forms.Padding(2);
             this.btnVerifyNewPhone.Name = "btnVerifyNewPhone";
             this.btnVerifyNewPhone.Size = new System.Drawing.Size(155, 44);
             this.btnVerifyNewPhone.TabIndex = 9;
@@ -366,7 +367,7 @@
             this.btnNewCardVerify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNewCardVerify.ForeColor = System.Drawing.Color.White;
             this.btnNewCardVerify.Location = new System.Drawing.Point(686, 183);
-            this.btnNewCardVerify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNewCardVerify.Margin = new System.Windows.Forms.Padding(2);
             this.btnNewCardVerify.Name = "btnNewCardVerify";
             this.btnNewCardVerify.Size = new System.Drawing.Size(155, 44);
             this.btnNewCardVerify.TabIndex = 6;
@@ -382,7 +383,7 @@
             this.btnOldCardVerify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOldCardVerify.ForeColor = System.Drawing.Color.White;
             this.btnOldCardVerify.Location = new System.Drawing.Point(498, 183);
-            this.btnOldCardVerify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnOldCardVerify.Margin = new System.Windows.Forms.Padding(2);
             this.btnOldCardVerify.Name = "btnOldCardVerify";
             this.btnOldCardVerify.Size = new System.Drawing.Size(155, 44);
             this.btnOldCardVerify.TabIndex = 5;
@@ -398,7 +399,7 @@
             this.btnUserPassWordVerify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnUserPassWordVerify.ForeColor = System.Drawing.Color.White;
             this.btnUserPassWordVerify.Location = new System.Drawing.Point(317, 183);
-            this.btnUserPassWordVerify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUserPassWordVerify.Margin = new System.Windows.Forms.Padding(2);
             this.btnUserPassWordVerify.Name = "btnUserPassWordVerify";
             this.btnUserPassWordVerify.Size = new System.Drawing.Size(155, 44);
             this.btnUserPassWordVerify.TabIndex = 4;
@@ -414,7 +415,7 @@
             this.btnSmsCodeVerify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSmsCodeVerify.ForeColor = System.Drawing.Color.White;
             this.btnSmsCodeVerify.Location = new System.Drawing.Point(133, 183);
-            this.btnSmsCodeVerify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSmsCodeVerify.Margin = new System.Windows.Forms.Padding(2);
             this.btnSmsCodeVerify.Name = "btnSmsCodeVerify";
             this.btnSmsCodeVerify.Size = new System.Drawing.Size(155, 44);
             this.btnSmsCodeVerify.TabIndex = 3;
@@ -464,7 +465,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlHead);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormChangePhoneNumber";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormChangePhoneNumber";

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenterMedia));
             this.pnlItem = new System.Windows.Forms.Panel();
             this.lblAmountStr = new System.Windows.Forms.Label();
@@ -389,44 +389,44 @@
             this.dgvTemplate.CausesValidation = false;
             this.dgvTemplate.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvTemplate.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTemplate.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTemplate.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTemplate.ColumnHeadersVisible = false;
             this.dgvTemplate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewImageColumn6,
             this.dataGridViewImageColumn7,
             this.dataGridViewImageColumn8});
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTemplate.GridColor = System.Drawing.Color.White;
             this.dgvTemplate.Location = new System.Drawing.Point(512, 91);
             this.dgvTemplate.MultiSelect = false;
             this.dgvTemplate.Name = "dgvTemplate";
             this.dgvTemplate.ReadOnly = true;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTemplate.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTemplate.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvTemplate.RowHeadersVisible = false;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvTemplate.RowTemplate.Height = 110;
             this.dgvTemplate.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvTemplate.Size = new System.Drawing.Size(615, 582);
@@ -434,30 +434,30 @@
             // 
             // dataGridViewImageColumn6
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.NullValue = null;
-            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewImageColumn6.HeaderText = "第一列";
             this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
             this.dataGridViewImageColumn6.ReadOnly = true;
             // 
             // dataGridViewImageColumn7
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.NullValue = null;
-            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.NullValue = null;
+            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewImageColumn7.HeaderText = "第二列";
             this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
             this.dataGridViewImageColumn7.ReadOnly = true;
             // 
             // dataGridViewImageColumn8
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.NullValue = null;
-            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.NullValue = null;
+            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewImageColumn8.HeaderText = "第三列";
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.ReadOnly = true;
@@ -469,7 +469,7 @@
             this.pnlPayInfo.Controls.Add(this.picPayInfo);
             this.pnlPayInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPayInfo.Location = new System.Drawing.Point(1165, 2);
-            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPayInfo.Name = "pnlPayInfo";
             this.pnlPayInfo.Size = new System.Drawing.Size(1, 739);
             this.pnlPayInfo.TabIndex = 301;
@@ -491,7 +491,7 @@
             this.picPayInfo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayInfo.BackgroundImage")));
             this.picPayInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picPayInfo.Location = new System.Drawing.Point(291, 14);
-            this.picPayInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picPayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.picPayInfo.Name = "picPayInfo";
             this.picPayInfo.Size = new System.Drawing.Size(500, 500);
             this.picPayInfo.TabIndex = 8;
@@ -553,7 +553,7 @@
             this.panel3.Controls.Add(this.btnpw1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(1165, 2);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1, 739);
             this.panel3.TabIndex = 305;
@@ -564,7 +564,7 @@
             this.pictureBox7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox7.BackgroundImage")));
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox7.Location = new System.Drawing.Point(689, 415);
-            this.pictureBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(453, 308);
             this.pictureBox7.TabIndex = 42;
@@ -576,7 +576,7 @@
             this.btnPassWord6.FlatAppearance.BorderSize = 0;
             this.btnPassWord6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord6.Location = new System.Drawing.Point(359, 135);
-            this.btnPassWord6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassWord6.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassWord6.Name = "btnPassWord6";
             this.btnPassWord6.Size = new System.Drawing.Size(50, 50);
             this.btnPassWord6.TabIndex = 41;
@@ -588,7 +588,7 @@
             this.btnPassWord5.FlatAppearance.BorderSize = 0;
             this.btnPassWord5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord5.Location = new System.Drawing.Point(297, 135);
-            this.btnPassWord5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassWord5.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassWord5.Name = "btnPassWord5";
             this.btnPassWord5.Size = new System.Drawing.Size(50, 50);
             this.btnPassWord5.TabIndex = 40;
@@ -600,7 +600,7 @@
             this.btnPassWord4.FlatAppearance.BorderSize = 0;
             this.btnPassWord4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord4.Location = new System.Drawing.Point(233, 135);
-            this.btnPassWord4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassWord4.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassWord4.Name = "btnPassWord4";
             this.btnPassWord4.Size = new System.Drawing.Size(50, 50);
             this.btnPassWord4.TabIndex = 39;
@@ -612,7 +612,7 @@
             this.btnPassWord3.FlatAppearance.BorderSize = 0;
             this.btnPassWord3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord3.Location = new System.Drawing.Point(163, 135);
-            this.btnPassWord3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassWord3.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassWord3.Name = "btnPassWord3";
             this.btnPassWord3.Size = new System.Drawing.Size(50, 50);
             this.btnPassWord3.TabIndex = 38;
@@ -624,7 +624,7 @@
             this.btnPassWord2.FlatAppearance.BorderSize = 0;
             this.btnPassWord2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord2.Location = new System.Drawing.Point(97, 135);
-            this.btnPassWord2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassWord2.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassWord2.Name = "btnPassWord2";
             this.btnPassWord2.Size = new System.Drawing.Size(50, 50);
             this.btnPassWord2.TabIndex = 37;
@@ -636,7 +636,7 @@
             this.btnPassWord1.FlatAppearance.BorderSize = 0;
             this.btnPassWord1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord1.Location = new System.Drawing.Point(28, 135);
-            this.btnPassWord1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassWord1.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassWord1.Name = "btnPassWord1";
             this.btnPassWord1.Size = new System.Drawing.Size(50, 50);
             this.btnPassWord1.TabIndex = 36;
@@ -647,7 +647,7 @@
             this.pictureBox8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.BackgroundImage")));
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox8.Location = new System.Drawing.Point(17, 17);
-            this.pictureBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox8.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(65, 54);
             this.pictureBox8.TabIndex = 35;
@@ -682,7 +682,7 @@
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button7.Location = new System.Drawing.Point(281, 399);
-            this.button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(129, 63);
             this.button7.TabIndex = 32;
@@ -693,7 +693,7 @@
             this.btnpw0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw0.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw0.Location = new System.Drawing.Point(155, 399);
-            this.btnpw0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw0.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw0.Name = "btnpw0";
             this.btnpw0.Size = new System.Drawing.Size(129, 63);
             this.btnpw0.TabIndex = 31;
@@ -705,7 +705,7 @@
             this.btnpwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpwd.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpwd.Location = new System.Drawing.Point(28, 399);
-            this.btnpwd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpwd.Margin = new System.Windows.Forms.Padding(2);
             this.btnpwd.Name = "btnpwd";
             this.btnpwd.Size = new System.Drawing.Size(129, 63);
             this.btnpwd.TabIndex = 30;
@@ -717,7 +717,7 @@
             this.btnpw9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw9.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw9.Location = new System.Drawing.Point(281, 337);
-            this.btnpw9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw9.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw9.Name = "btnpw9";
             this.btnpw9.Size = new System.Drawing.Size(129, 63);
             this.btnpw9.TabIndex = 29;
@@ -729,7 +729,7 @@
             this.btnpw8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw8.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw8.Location = new System.Drawing.Point(155, 337);
-            this.btnpw8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw8.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw8.Name = "btnpw8";
             this.btnpw8.Size = new System.Drawing.Size(129, 63);
             this.btnpw8.TabIndex = 28;
@@ -741,7 +741,7 @@
             this.btnpw7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw7.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw7.Location = new System.Drawing.Point(28, 337);
-            this.btnpw7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw7.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw7.Name = "btnpw7";
             this.btnpw7.Size = new System.Drawing.Size(129, 63);
             this.btnpw7.TabIndex = 27;
@@ -753,7 +753,7 @@
             this.btnpw6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw6.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw6.Location = new System.Drawing.Point(281, 277);
-            this.btnpw6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw6.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw6.Name = "btnpw6";
             this.btnpw6.Size = new System.Drawing.Size(129, 63);
             this.btnpw6.TabIndex = 26;
@@ -765,7 +765,7 @@
             this.btnpw5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw5.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw5.Location = new System.Drawing.Point(155, 277);
-            this.btnpw5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw5.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw5.Name = "btnpw5";
             this.btnpw5.Size = new System.Drawing.Size(129, 63);
             this.btnpw5.TabIndex = 25;
@@ -777,7 +777,7 @@
             this.btnpw4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw4.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw4.Location = new System.Drawing.Point(28, 277);
-            this.btnpw4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw4.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw4.Name = "btnpw4";
             this.btnpw4.Size = new System.Drawing.Size(129, 63);
             this.btnpw4.TabIndex = 24;
@@ -789,7 +789,7 @@
             this.btnpw3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw3.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw3.Location = new System.Drawing.Point(281, 216);
-            this.btnpw3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw3.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw3.Name = "btnpw3";
             this.btnpw3.Size = new System.Drawing.Size(129, 63);
             this.btnpw3.TabIndex = 23;
@@ -801,7 +801,7 @@
             this.btnpw2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw2.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw2.Location = new System.Drawing.Point(155, 216);
-            this.btnpw2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw2.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw2.Name = "btnpw2";
             this.btnpw2.Size = new System.Drawing.Size(129, 63);
             this.btnpw2.TabIndex = 22;
@@ -813,7 +813,7 @@
             this.btnpw1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw1.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw1.Location = new System.Drawing.Point(28, 216);
-            this.btnpw1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnpw1.Margin = new System.Windows.Forms.Padding(2);
             this.btnpw1.Name = "btnpw1";
             this.btnpw1.Size = new System.Drawing.Size(129, 63);
             this.btnpw1.TabIndex = 21;
@@ -1046,6 +1046,7 @@
             this.lblPhone.Size = new System.Drawing.Size(264, 50);
             this.lblPhone.TabIndex = 51;
             this.lblPhone.Text = "15200000000";
+            this.lblPhone.Click += new System.EventHandler(this.lblPhone_Click);
             // 
             // label1
             // 
@@ -1085,7 +1086,7 @@
             this.panel2.Controls.Add(this.btn1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(1165, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1, 739);
             this.panel2.TabIndex = 304;
@@ -1096,7 +1097,7 @@
             this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox6.Location = new System.Drawing.Point(689, 415);
-            this.pictureBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(453, 308);
             this.pictureBox6.TabIndex = 42;
@@ -1108,7 +1109,7 @@
             this.btnPassY6.FlatAppearance.BorderSize = 0;
             this.btnPassY6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassY6.Location = new System.Drawing.Point(359, 135);
-            this.btnPassY6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassY6.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassY6.Name = "btnPassY6";
             this.btnPassY6.Size = new System.Drawing.Size(50, 50);
             this.btnPassY6.TabIndex = 41;
@@ -1120,7 +1121,7 @@
             this.btnPassY5.FlatAppearance.BorderSize = 0;
             this.btnPassY5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassY5.Location = new System.Drawing.Point(297, 135);
-            this.btnPassY5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassY5.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassY5.Name = "btnPassY5";
             this.btnPassY5.Size = new System.Drawing.Size(50, 50);
             this.btnPassY5.TabIndex = 40;
@@ -1132,7 +1133,7 @@
             this.btnPassY4.FlatAppearance.BorderSize = 0;
             this.btnPassY4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassY4.Location = new System.Drawing.Point(233, 135);
-            this.btnPassY4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassY4.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassY4.Name = "btnPassY4";
             this.btnPassY4.Size = new System.Drawing.Size(50, 50);
             this.btnPassY4.TabIndex = 39;
@@ -1144,7 +1145,7 @@
             this.btnPassY3.FlatAppearance.BorderSize = 0;
             this.btnPassY3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassY3.Location = new System.Drawing.Point(163, 135);
-            this.btnPassY3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassY3.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassY3.Name = "btnPassY3";
             this.btnPassY3.Size = new System.Drawing.Size(50, 50);
             this.btnPassY3.TabIndex = 38;
@@ -1156,7 +1157,7 @@
             this.btnPassY2.FlatAppearance.BorderSize = 0;
             this.btnPassY2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassY2.Location = new System.Drawing.Point(97, 135);
-            this.btnPassY2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassY2.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassY2.Name = "btnPassY2";
             this.btnPassY2.Size = new System.Drawing.Size(50, 50);
             this.btnPassY2.TabIndex = 37;
@@ -1168,7 +1169,7 @@
             this.btnPassY1.FlatAppearance.BorderSize = 0;
             this.btnPassY1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassY1.Location = new System.Drawing.Point(28, 135);
-            this.btnPassY1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassY1.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassY1.Name = "btnPassY1";
             this.btnPassY1.Size = new System.Drawing.Size(50, 50);
             this.btnPassY1.TabIndex = 36;
@@ -1179,7 +1180,7 @@
             this.picBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBox1.BackgroundImage")));
             this.picBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picBox1.Location = new System.Drawing.Point(17, 17);
-            this.picBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBox1.Margin = new System.Windows.Forms.Padding(2);
             this.picBox1.Name = "picBox1";
             this.picBox1.Size = new System.Drawing.Size(65, 54);
             this.picBox1.TabIndex = 35;
@@ -1214,7 +1215,7 @@
             this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDel.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDel.Location = new System.Drawing.Point(281, 399);
-            this.btnDel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(2);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(129, 63);
             this.btnDel.TabIndex = 32;
@@ -1225,7 +1226,7 @@
             this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn0.Location = new System.Drawing.Point(155, 399);
-            this.btn0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn0.Margin = new System.Windows.Forms.Padding(2);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(129, 63);
             this.btn0.TabIndex = 31;
@@ -1237,7 +1238,7 @@
             this.btnDot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDot.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDot.Location = new System.Drawing.Point(28, 399);
-            this.btnDot.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDot.Margin = new System.Windows.Forms.Padding(2);
             this.btnDot.Name = "btnDot";
             this.btnDot.Size = new System.Drawing.Size(129, 63);
             this.btnDot.TabIndex = 30;
@@ -1249,7 +1250,7 @@
             this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn9.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn9.Location = new System.Drawing.Point(281, 337);
-            this.btn9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn9.Margin = new System.Windows.Forms.Padding(2);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(129, 63);
             this.btn9.TabIndex = 29;
@@ -1261,7 +1262,7 @@
             this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn8.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn8.Location = new System.Drawing.Point(155, 337);
-            this.btn8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn8.Margin = new System.Windows.Forms.Padding(2);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(129, 63);
             this.btn8.TabIndex = 28;
@@ -1273,7 +1274,7 @@
             this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn7.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn7.Location = new System.Drawing.Point(28, 337);
-            this.btn7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn7.Margin = new System.Windows.Forms.Padding(2);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(129, 63);
             this.btn7.TabIndex = 27;
@@ -1285,7 +1286,7 @@
             this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn6.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn6.Location = new System.Drawing.Point(281, 277);
-            this.btn6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn6.Margin = new System.Windows.Forms.Padding(2);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(129, 63);
             this.btn6.TabIndex = 26;
@@ -1297,7 +1298,7 @@
             this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn5.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn5.Location = new System.Drawing.Point(155, 277);
-            this.btn5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn5.Margin = new System.Windows.Forms.Padding(2);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(129, 63);
             this.btn5.TabIndex = 25;
@@ -1309,7 +1310,7 @@
             this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn4.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn4.Location = new System.Drawing.Point(28, 277);
-            this.btn4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn4.Margin = new System.Windows.Forms.Padding(2);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(129, 63);
             this.btn4.TabIndex = 24;
@@ -1321,7 +1322,7 @@
             this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn3.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn3.Location = new System.Drawing.Point(281, 216);
-            this.btn3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn3.Margin = new System.Windows.Forms.Padding(2);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(129, 63);
             this.btn3.TabIndex = 23;
@@ -1333,7 +1334,7 @@
             this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn2.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2.Location = new System.Drawing.Point(155, 216);
-            this.btn2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn2.Margin = new System.Windows.Forms.Padding(2);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(129, 63);
             this.btn2.TabIndex = 22;
@@ -1345,7 +1346,7 @@
             this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn1.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn1.Location = new System.Drawing.Point(28, 216);
-            this.btn1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn1.Margin = new System.Windows.Forms.Padding(2);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(129, 63);
             this.btn1.TabIndex = 21;
@@ -1360,7 +1361,7 @@
             this.panel4.Controls.Add(this.pictureBox9);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(1165, 2);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1, 739);
             this.panel4.TabIndex = 306;
@@ -1403,7 +1404,7 @@
             this.pictureBox9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox9.BackgroundImage")));
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox9.Location = new System.Drawing.Point(359, 237);
-            this.pictureBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox9.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(111, 97);
             this.pictureBox9.TabIndex = 0;
@@ -1433,7 +1434,7 @@
             this.panel5.Controls.Add(this.pictureBox10);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(1165, 2);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1, 739);
             this.panel5.TabIndex = 307;
@@ -1443,7 +1444,7 @@
             this.picFirstStepSuccess.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picFirstStepSuccess.BackgroundImage")));
             this.picFirstStepSuccess.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picFirstStepSuccess.Location = new System.Drawing.Point(88, 166);
-            this.picFirstStepSuccess.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFirstStepSuccess.Margin = new System.Windows.Forms.Padding(2);
             this.picFirstStepSuccess.Name = "picFirstStepSuccess";
             this.picFirstStepSuccess.Size = new System.Drawing.Size(37, 33);
             this.picFirstStepSuccess.TabIndex = 32;
@@ -1570,7 +1571,7 @@
             this.pictureBox11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox11.BackgroundImage")));
             this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox11.Location = new System.Drawing.Point(871, 458);
-            this.pictureBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox11.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(271, 279);
             this.pictureBox11.TabIndex = 21;
@@ -1594,7 +1595,7 @@
             this.picStepThreeOk.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepThreeOk.BackgroundImage")));
             this.picStepThreeOk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picStepThreeOk.Location = new System.Drawing.Point(83, 481);
-            this.picStepThreeOk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picStepThreeOk.Margin = new System.Windows.Forms.Padding(2);
             this.picStepThreeOk.Name = "picStepThreeOk";
             this.picStepThreeOk.Size = new System.Drawing.Size(37, 33);
             this.picStepThreeOk.TabIndex = 19;
@@ -1618,7 +1619,7 @@
             this.picStepTwoOk.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepTwoOk.BackgroundImage")));
             this.picStepTwoOk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picStepTwoOk.Location = new System.Drawing.Point(83, 314);
-            this.picStepTwoOk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picStepTwoOk.Margin = new System.Windows.Forms.Padding(2);
             this.picStepTwoOk.Name = "picStepTwoOk";
             this.picStepTwoOk.Size = new System.Drawing.Size(37, 33);
             this.picStepTwoOk.TabIndex = 17;
@@ -1642,7 +1643,7 @@
             this.picTheFirstStep.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picTheFirstStep.BackgroundImage")));
             this.picTheFirstStep.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picTheFirstStep.Location = new System.Drawing.Point(88, 166);
-            this.picTheFirstStep.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTheFirstStep.Margin = new System.Windows.Forms.Padding(2);
             this.picTheFirstStep.Name = "picTheFirstStep";
             this.picTheFirstStep.Size = new System.Drawing.Size(37, 33);
             this.picTheFirstStep.TabIndex = 15;
@@ -1664,7 +1665,7 @@
             this.pictureBox10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox10.BackgroundImage")));
             this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox10.Location = new System.Drawing.Point(45, 27);
-            this.pictureBox10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox10.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(81, 79);
             this.pictureBox10.TabIndex = 0;
@@ -1712,7 +1713,7 @@
             this.panel6.Controls.Add(this.pictureBox16);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(1165, 2);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1, 739);
             this.panel6.TabIndex = 308;
@@ -1723,7 +1724,7 @@
             this.btnChangePwd6.FlatAppearance.BorderSize = 0;
             this.btnChangePwd6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePwd6.Location = new System.Drawing.Point(1059, 121);
-            this.btnChangePwd6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangePwd6.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd6.Name = "btnChangePwd6";
             this.btnChangePwd6.Size = new System.Drawing.Size(50, 50);
             this.btnChangePwd6.TabIndex = 69;
@@ -1735,7 +1736,7 @@
             this.btnChangePwd5.FlatAppearance.BorderSize = 0;
             this.btnChangePwd5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePwd5.Location = new System.Drawing.Point(996, 121);
-            this.btnChangePwd5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangePwd5.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd5.Name = "btnChangePwd5";
             this.btnChangePwd5.Size = new System.Drawing.Size(50, 50);
             this.btnChangePwd5.TabIndex = 68;
@@ -1747,7 +1748,7 @@
             this.btnChangePwd4.FlatAppearance.BorderSize = 0;
             this.btnChangePwd4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePwd4.Location = new System.Drawing.Point(933, 121);
-            this.btnChangePwd4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangePwd4.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd4.Name = "btnChangePwd4";
             this.btnChangePwd4.Size = new System.Drawing.Size(50, 50);
             this.btnChangePwd4.TabIndex = 67;
@@ -1759,7 +1760,7 @@
             this.btnChangePwd3.FlatAppearance.BorderSize = 0;
             this.btnChangePwd3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePwd3.Location = new System.Drawing.Point(862, 121);
-            this.btnChangePwd3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangePwd3.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd3.Name = "btnChangePwd3";
             this.btnChangePwd3.Size = new System.Drawing.Size(50, 50);
             this.btnChangePwd3.TabIndex = 66;
@@ -1771,7 +1772,7 @@
             this.btnChangePwd2.FlatAppearance.BorderSize = 0;
             this.btnChangePwd2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePwd2.Location = new System.Drawing.Point(796, 121);
-            this.btnChangePwd2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangePwd2.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd2.Name = "btnChangePwd2";
             this.btnChangePwd2.Size = new System.Drawing.Size(50, 50);
             this.btnChangePwd2.TabIndex = 65;
@@ -1783,7 +1784,7 @@
             this.btnChangePwd1.FlatAppearance.BorderSize = 0;
             this.btnChangePwd1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePwd1.Location = new System.Drawing.Point(727, 121);
-            this.btnChangePwd1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangePwd1.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd1.Name = "btnChangePwd1";
             this.btnChangePwd1.Size = new System.Drawing.Size(50, 50);
             this.btnChangePwd1.TabIndex = 64;
@@ -1807,7 +1808,7 @@
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button8.Location = new System.Drawing.Point(980, 385);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button8.Margin = new System.Windows.Forms.Padding(2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(129, 63);
             this.button8.TabIndex = 62;
@@ -1818,7 +1819,7 @@
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button9.Location = new System.Drawing.Point(854, 385);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(129, 63);
             this.button9.TabIndex = 61;
@@ -1830,7 +1831,7 @@
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button10.Location = new System.Drawing.Point(727, 385);
-            this.button10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button10.Margin = new System.Windows.Forms.Padding(2);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(129, 63);
             this.button10.TabIndex = 60;
@@ -1842,7 +1843,7 @@
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button11.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button11.Location = new System.Drawing.Point(980, 323);
-            this.button11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button11.Margin = new System.Windows.Forms.Padding(2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(129, 63);
             this.button11.TabIndex = 59;
@@ -1854,7 +1855,7 @@
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button12.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button12.Location = new System.Drawing.Point(854, 323);
-            this.button12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button12.Margin = new System.Windows.Forms.Padding(2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(129, 63);
             this.button12.TabIndex = 58;
@@ -1866,7 +1867,7 @@
             this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button13.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button13.Location = new System.Drawing.Point(727, 323);
-            this.button13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button13.Margin = new System.Windows.Forms.Padding(2);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(129, 63);
             this.button13.TabIndex = 57;
@@ -1878,7 +1879,7 @@
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button14.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button14.Location = new System.Drawing.Point(980, 263);
-            this.button14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button14.Margin = new System.Windows.Forms.Padding(2);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(129, 63);
             this.button14.TabIndex = 56;
@@ -1890,7 +1891,7 @@
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button15.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button15.Location = new System.Drawing.Point(854, 263);
-            this.button15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button15.Margin = new System.Windows.Forms.Padding(2);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(129, 63);
             this.button15.TabIndex = 55;
@@ -1902,7 +1903,7 @@
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button16.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button16.Location = new System.Drawing.Point(727, 263);
-            this.button16.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button16.Margin = new System.Windows.Forms.Padding(2);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(129, 63);
             this.button16.TabIndex = 54;
@@ -1914,7 +1915,7 @@
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button17.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button17.Location = new System.Drawing.Point(980, 202);
-            this.button17.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button17.Margin = new System.Windows.Forms.Padding(2);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(129, 63);
             this.button17.TabIndex = 53;
@@ -1926,7 +1927,7 @@
             this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button18.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button18.Location = new System.Drawing.Point(854, 202);
-            this.button18.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button18.Margin = new System.Windows.Forms.Padding(2);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(129, 63);
             this.button18.TabIndex = 52;
@@ -1938,7 +1939,7 @@
             this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button19.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button19.Location = new System.Drawing.Point(727, 202);
-            this.button19.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button19.Margin = new System.Windows.Forms.Padding(2);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(129, 63);
             this.button19.TabIndex = 51;
@@ -2065,7 +2066,7 @@
             this.pictureBox12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox12.BackgroundImage")));
             this.pictureBox12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox12.Location = new System.Drawing.Point(433, 448);
-            this.pictureBox12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox12.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(271, 279);
             this.pictureBox12.TabIndex = 40;
@@ -2089,7 +2090,7 @@
             this.pictureBox13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox13.BackgroundImage")));
             this.pictureBox13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox13.Location = new System.Drawing.Point(70, 469);
-            this.pictureBox13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox13.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(37, 33);
             this.pictureBox13.TabIndex = 38;
@@ -2113,7 +2114,7 @@
             this.pictureBox14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox14.BackgroundImage")));
             this.pictureBox14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox14.Location = new System.Drawing.Point(70, 302);
-            this.pictureBox14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox14.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(37, 33);
             this.pictureBox14.TabIndex = 36;
@@ -2137,7 +2138,7 @@
             this.pictureBox15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox15.BackgroundImage")));
             this.pictureBox15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox15.Location = new System.Drawing.Point(75, 154);
-            this.pictureBox15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox15.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(37, 33);
             this.pictureBox15.TabIndex = 34;
@@ -2159,7 +2160,7 @@
             this.pictureBox16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox16.BackgroundImage")));
             this.pictureBox16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox16.Location = new System.Drawing.Point(31, 17);
-            this.pictureBox16.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox16.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox16.Name = "pictureBox16";
             this.pictureBox16.Size = new System.Drawing.Size(81, 77);
             this.pictureBox16.TabIndex = 32;
@@ -2190,7 +2191,7 @@
             this.panel7.Controls.Add(this.pictureBox21);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(1165, 2);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1, 739);
             this.panel7.TabIndex = 309;
@@ -2201,7 +2202,7 @@
             this.txtCash.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCash.Font = new System.Drawing.Font("微软雅黑", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCash.Location = new System.Drawing.Point(744, 148);
-            this.txtCash.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCash.Margin = new System.Windows.Forms.Padding(2);
             this.txtCash.Name = "txtCash";
             this.txtCash.Size = new System.Drawing.Size(342, 44);
             this.txtCash.TabIndex = 96;
@@ -2337,7 +2338,7 @@
             this.pictureBox17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox17.BackgroundImage")));
             this.pictureBox17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox17.Location = new System.Drawing.Point(443, 445);
-            this.pictureBox17.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox17.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox17.Name = "pictureBox17";
             this.pictureBox17.Size = new System.Drawing.Size(271, 279);
             this.pictureBox17.TabIndex = 72;
@@ -2361,7 +2362,7 @@
             this.pictureBox18.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox18.BackgroundImage")));
             this.pictureBox18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox18.Location = new System.Drawing.Point(79, 466);
-            this.pictureBox18.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox18.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox18.Name = "pictureBox18";
             this.pictureBox18.Size = new System.Drawing.Size(37, 33);
             this.pictureBox18.TabIndex = 70;
@@ -2385,7 +2386,7 @@
             this.pictureBox19.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox19.BackgroundImage")));
             this.pictureBox19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox19.Location = new System.Drawing.Point(79, 299);
-            this.pictureBox19.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox19.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox19.Name = "pictureBox19";
             this.pictureBox19.Size = new System.Drawing.Size(37, 33);
             this.pictureBox19.TabIndex = 68;
@@ -2409,7 +2410,7 @@
             this.pictureBox20.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox20.BackgroundImage")));
             this.pictureBox20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox20.Location = new System.Drawing.Point(84, 151);
-            this.pictureBox20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox20.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox20.Name = "pictureBox20";
             this.pictureBox20.Size = new System.Drawing.Size(37, 33);
             this.pictureBox20.TabIndex = 66;
@@ -2431,7 +2432,7 @@
             this.pictureBox21.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox21.BackgroundImage")));
             this.pictureBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox21.Location = new System.Drawing.Point(41, 15);
-            this.pictureBox21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox21.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox21.Name = "pictureBox21";
             this.pictureBox21.Size = new System.Drawing.Size(81, 77);
             this.pictureBox21.TabIndex = 64;
@@ -2479,7 +2480,7 @@
             this.panel8.Controls.Add(this.pictureBox26);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(1165, 2);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1, 739);
             this.panel8.TabIndex = 310;
@@ -2490,7 +2491,7 @@
             this.btnChangesms6.FlatAppearance.BorderSize = 0;
             this.btnChangesms6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangesms6.Location = new System.Drawing.Point(1068, 118);
-            this.btnChangesms6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangesms6.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms6.Name = "btnChangesms6";
             this.btnChangesms6.Size = new System.Drawing.Size(50, 50);
             this.btnChangesms6.TabIndex = 107;
@@ -2502,7 +2503,7 @@
             this.btnChangesms5.FlatAppearance.BorderSize = 0;
             this.btnChangesms5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangesms5.Location = new System.Drawing.Point(1005, 118);
-            this.btnChangesms5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangesms5.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms5.Name = "btnChangesms5";
             this.btnChangesms5.Size = new System.Drawing.Size(50, 50);
             this.btnChangesms5.TabIndex = 106;
@@ -2514,7 +2515,7 @@
             this.btnChangesms4.FlatAppearance.BorderSize = 0;
             this.btnChangesms4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangesms4.Location = new System.Drawing.Point(942, 118);
-            this.btnChangesms4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangesms4.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms4.Name = "btnChangesms4";
             this.btnChangesms4.Size = new System.Drawing.Size(50, 50);
             this.btnChangesms4.TabIndex = 105;
@@ -2526,7 +2527,7 @@
             this.btnChangesms3.FlatAppearance.BorderSize = 0;
             this.btnChangesms3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangesms3.Location = new System.Drawing.Point(871, 118);
-            this.btnChangesms3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangesms3.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms3.Name = "btnChangesms3";
             this.btnChangesms3.Size = new System.Drawing.Size(50, 50);
             this.btnChangesms3.TabIndex = 104;
@@ -2538,7 +2539,7 @@
             this.btnChangesms2.FlatAppearance.BorderSize = 0;
             this.btnChangesms2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangesms2.Location = new System.Drawing.Point(805, 118);
-            this.btnChangesms2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangesms2.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms2.Name = "btnChangesms2";
             this.btnChangesms2.Size = new System.Drawing.Size(50, 50);
             this.btnChangesms2.TabIndex = 103;
@@ -2550,7 +2551,7 @@
             this.btnChangesms1.FlatAppearance.BorderSize = 0;
             this.btnChangesms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangesms1.Location = new System.Drawing.Point(737, 118);
-            this.btnChangesms1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangesms1.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms1.Name = "btnChangesms1";
             this.btnChangesms1.Size = new System.Drawing.Size(50, 50);
             this.btnChangesms1.TabIndex = 102;
@@ -2574,7 +2575,7 @@
             this.button26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button26.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button26.Location = new System.Drawing.Point(989, 382);
-            this.button26.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button26.Margin = new System.Windows.Forms.Padding(2);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(129, 63);
             this.button26.TabIndex = 100;
@@ -2585,7 +2586,7 @@
             this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button27.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button27.Location = new System.Drawing.Point(863, 382);
-            this.button27.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button27.Margin = new System.Windows.Forms.Padding(2);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(129, 63);
             this.button27.TabIndex = 99;
@@ -2597,7 +2598,7 @@
             this.button28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button28.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button28.Location = new System.Drawing.Point(737, 382);
-            this.button28.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button28.Margin = new System.Windows.Forms.Padding(2);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(129, 63);
             this.button28.TabIndex = 98;
@@ -2609,7 +2610,7 @@
             this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button29.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button29.Location = new System.Drawing.Point(989, 321);
-            this.button29.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button29.Margin = new System.Windows.Forms.Padding(2);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(129, 63);
             this.button29.TabIndex = 97;
@@ -2621,7 +2622,7 @@
             this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button30.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button30.Location = new System.Drawing.Point(863, 321);
-            this.button30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button30.Margin = new System.Windows.Forms.Padding(2);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(129, 63);
             this.button30.TabIndex = 96;
@@ -2633,7 +2634,7 @@
             this.button31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button31.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button31.Location = new System.Drawing.Point(737, 321);
-            this.button31.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button31.Margin = new System.Windows.Forms.Padding(2);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(129, 63);
             this.button31.TabIndex = 95;
@@ -2645,7 +2646,7 @@
             this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button32.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button32.Location = new System.Drawing.Point(989, 260);
-            this.button32.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button32.Margin = new System.Windows.Forms.Padding(2);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(129, 63);
             this.button32.TabIndex = 94;
@@ -2657,7 +2658,7 @@
             this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button33.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button33.Location = new System.Drawing.Point(863, 260);
-            this.button33.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button33.Margin = new System.Windows.Forms.Padding(2);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(129, 63);
             this.button33.TabIndex = 93;
@@ -2669,7 +2670,7 @@
             this.button34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button34.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button34.Location = new System.Drawing.Point(737, 260);
-            this.button34.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button34.Margin = new System.Windows.Forms.Padding(2);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(129, 63);
             this.button34.TabIndex = 92;
@@ -2681,7 +2682,7 @@
             this.button35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button35.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button35.Location = new System.Drawing.Point(989, 199);
-            this.button35.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button35.Margin = new System.Windows.Forms.Padding(2);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(129, 63);
             this.button35.TabIndex = 91;
@@ -2693,7 +2694,7 @@
             this.button36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button36.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button36.Location = new System.Drawing.Point(863, 199);
-            this.button36.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button36.Margin = new System.Windows.Forms.Padding(2);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(129, 63);
             this.button36.TabIndex = 90;
@@ -2705,7 +2706,7 @@
             this.button37.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button37.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button37.Location = new System.Drawing.Point(737, 199);
-            this.button37.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button37.Margin = new System.Windows.Forms.Padding(2);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(129, 63);
             this.button37.TabIndex = 89;
@@ -2832,7 +2833,7 @@
             this.pictureBox22.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox22.BackgroundImage")));
             this.pictureBox22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox22.Location = new System.Drawing.Point(443, 445);
-            this.pictureBox22.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox22.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox22.Name = "pictureBox22";
             this.pictureBox22.Size = new System.Drawing.Size(271, 279);
             this.pictureBox22.TabIndex = 78;
@@ -2856,7 +2857,7 @@
             this.pictureBox23.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox23.BackgroundImage")));
             this.pictureBox23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox23.Location = new System.Drawing.Point(79, 466);
-            this.pictureBox23.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox23.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox23.Name = "pictureBox23";
             this.pictureBox23.Size = new System.Drawing.Size(37, 33);
             this.pictureBox23.TabIndex = 76;
@@ -2880,7 +2881,7 @@
             this.pictureBox24.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox24.BackgroundImage")));
             this.pictureBox24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox24.Location = new System.Drawing.Point(79, 299);
-            this.pictureBox24.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox24.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox24.Name = "pictureBox24";
             this.pictureBox24.Size = new System.Drawing.Size(37, 33);
             this.pictureBox24.TabIndex = 74;
@@ -2904,7 +2905,7 @@
             this.pictureBox25.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox25.BackgroundImage")));
             this.pictureBox25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox25.Location = new System.Drawing.Point(84, 151);
-            this.pictureBox25.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox25.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox25.Name = "pictureBox25";
             this.pictureBox25.Size = new System.Drawing.Size(37, 33);
             this.pictureBox25.TabIndex = 72;
@@ -2926,7 +2927,7 @@
             this.pictureBox26.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox26.BackgroundImage")));
             this.pictureBox26.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox26.Location = new System.Drawing.Point(41, 15);
-            this.pictureBox26.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox26.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox26.Name = "pictureBox26";
             this.pictureBox26.Size = new System.Drawing.Size(81, 77);
             this.pictureBox26.TabIndex = 70;
@@ -2968,7 +2969,7 @@
             this.panel9.Controls.Add(this.pictureBox31);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(1165, 2);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(1, 739);
             this.panel9.TabIndex = 311;
@@ -2979,7 +2980,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("微软雅黑", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(735, 133);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(383, 44);
             this.textBox1.TabIndex = 134;
@@ -3002,7 +3003,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.Location = new System.Drawing.Point(989, 382);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 63);
             this.button1.TabIndex = 132;
@@ -3013,7 +3014,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.Location = new System.Drawing.Point(863, 382);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(129, 63);
             this.button2.TabIndex = 131;
@@ -3025,7 +3026,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.Location = new System.Drawing.Point(737, 382);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(129, 63);
             this.button3.TabIndex = 130;
@@ -3037,7 +3038,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.Location = new System.Drawing.Point(989, 321);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(129, 63);
             this.button4.TabIndex = 129;
@@ -3049,7 +3050,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.Location = new System.Drawing.Point(863, 321);
-            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(129, 63);
             this.button5.TabIndex = 128;
@@ -3061,7 +3062,7 @@
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button6.Location = new System.Drawing.Point(737, 321);
-            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(129, 63);
             this.button6.TabIndex = 127;
@@ -3073,7 +3074,7 @@
             this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button20.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button20.Location = new System.Drawing.Point(989, 260);
-            this.button20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button20.Margin = new System.Windows.Forms.Padding(2);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(129, 63);
             this.button20.TabIndex = 126;
@@ -3085,7 +3086,7 @@
             this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button21.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button21.Location = new System.Drawing.Point(863, 260);
-            this.button21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button21.Margin = new System.Windows.Forms.Padding(2);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(129, 63);
             this.button21.TabIndex = 125;
@@ -3097,7 +3098,7 @@
             this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button22.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button22.Location = new System.Drawing.Point(737, 260);
-            this.button22.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button22.Margin = new System.Windows.Forms.Padding(2);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(129, 63);
             this.button22.TabIndex = 124;
@@ -3109,7 +3110,7 @@
             this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button23.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button23.Location = new System.Drawing.Point(989, 199);
-            this.button23.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button23.Margin = new System.Windows.Forms.Padding(2);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(129, 63);
             this.button23.TabIndex = 123;
@@ -3121,7 +3122,7 @@
             this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button24.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button24.Location = new System.Drawing.Point(863, 199);
-            this.button24.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button24.Margin = new System.Windows.Forms.Padding(2);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(129, 63);
             this.button24.TabIndex = 122;
@@ -3133,7 +3134,7 @@
             this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button25.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button25.Location = new System.Drawing.Point(737, 199);
-            this.button25.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button25.Margin = new System.Windows.Forms.Padding(2);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(129, 63);
             this.button25.TabIndex = 121;
@@ -3260,7 +3261,7 @@
             this.pictureBox27.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox27.BackgroundImage")));
             this.pictureBox27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox27.Location = new System.Drawing.Point(443, 445);
-            this.pictureBox27.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox27.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox27.Name = "pictureBox27";
             this.pictureBox27.Size = new System.Drawing.Size(271, 279);
             this.pictureBox27.TabIndex = 110;
@@ -3284,7 +3285,7 @@
             this.pictureBox28.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox28.BackgroundImage")));
             this.pictureBox28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox28.Location = new System.Drawing.Point(79, 466);
-            this.pictureBox28.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox28.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox28.Name = "pictureBox28";
             this.pictureBox28.Size = new System.Drawing.Size(37, 33);
             this.pictureBox28.TabIndex = 108;
@@ -3308,7 +3309,7 @@
             this.pictureBox29.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox29.BackgroundImage")));
             this.pictureBox29.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox29.Location = new System.Drawing.Point(79, 299);
-            this.pictureBox29.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox29.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox29.Name = "pictureBox29";
             this.pictureBox29.Size = new System.Drawing.Size(37, 33);
             this.pictureBox29.TabIndex = 106;
@@ -3319,7 +3320,7 @@
             this.pictureBox30.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox30.BackgroundImage")));
             this.pictureBox30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox30.Location = new System.Drawing.Point(84, 151);
-            this.pictureBox30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox30.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox30.Name = "pictureBox30";
             this.pictureBox30.Size = new System.Drawing.Size(37, 33);
             this.pictureBox30.TabIndex = 104;
@@ -3341,7 +3342,7 @@
             this.pictureBox31.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox31.BackgroundImage")));
             this.pictureBox31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox31.Location = new System.Drawing.Point(41, 15);
-            this.pictureBox31.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox31.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox31.Name = "pictureBox31";
             this.pictureBox31.Size = new System.Drawing.Size(81, 77);
             this.pictureBox31.TabIndex = 102;

@@ -48,7 +48,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好 ";
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
                 lblMenu.Left = picMenu.Right;
-
+                //if (MainModel.NewPhone != "")
+                //{
+                //    CurrentMember.memberheaderresponsevo.mobile = MainModel.NewPhone;
+                //}
                 string phone = CurrentMember.memberheaderresponsevo.mobile;
 
                 if (phone.Length == 11)

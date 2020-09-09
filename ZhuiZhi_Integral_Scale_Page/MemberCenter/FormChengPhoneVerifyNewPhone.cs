@@ -16,6 +16,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public FormChengPhoneVerifyNewPhone()
         {
             InitializeComponent();
+            
+
         }
 
         private void FormChengPhoneVerifyNewPhone_Shown(object sender, EventArgs e)
@@ -36,9 +38,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+
             try
-            {
-                Regex regex = new Regex(@"^0{0,1}(13[4-9]|15[7-9]|15[0-2]|18[7-8])[0-9]{8}$");
+            {   //^0{0,1}(13[4-9]|15[7-9]|15[0-2]|18[7-8])[0-9]{8}$
+                Regex regex = new Regex("");
                 string PhoneNumber = txtNewPhoneNumber.Text;
                 if (txtNewPhoneNumber.Text == "")
                 {
@@ -67,5 +70,87 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.Close();
             this.DialogResult = DialogResult.Cancel;
         }
+
+        private void btnpw1_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "1";
+        }
+
+        private void btnpw2_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "2";
+            
+
+        }
+
+        private void btnpw3_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "3";
+           
+
+        }
+
+        private void btnpw4_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "4";      
+
+        }
+
+        private void btnpw5_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "5";
+
+        }
+
+        private void btnpw6_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "6";
+
+        }
+
+        private void btnpw7_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "7";
+
+        }
+
+        private void btnpw8_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "8";
+
+        }
+
+        private void btnpw9_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "9";
+
+        }
+
+        private void btnpwd_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "0";
+
+        }
+
+        private void btnpw0_Click(object sender, EventArgs e)
+        {
+            txtNewPhoneNumber.Text += "00";
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+
+                if (txtNewPhoneNumber.Text.Length > 0)
+                {
+                    txtNewPhoneNumber.Text = txtNewPhoneNumber.Text.Substring(0, txtNewPhoneNumber.Text.Length - 1);
+                }
+            }
+            catch { }
+        }
+
     }
 }

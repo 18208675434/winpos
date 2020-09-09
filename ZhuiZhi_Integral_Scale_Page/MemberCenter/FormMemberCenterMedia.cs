@@ -24,7 +24,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private List<ListAllTemplate> LstTemplates = new List<ListAllTemplate>();
 
         bool IsEnable = true;
-
+        
+        
+        
 
         //使用密码支付  RSA公钥加密后的值
         public string PayPassWord = "";
@@ -33,7 +35,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public FormMemberCenterMedia()
         {
             InitializeComponent();
-
+            
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
         }
@@ -42,7 +44,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                lblPhone.Text = phone;
+                lblPhone.Text = phone; 
                 lblMemberInfo.Text = memberinfo;
                 lblBalance.Text = balance;
                 lblCredit.Text = credit;
@@ -415,6 +417,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 default: btnChangePwd1.Text = ""; btnChangePwd2.Text = ""; btnPassWord3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
             }
+        }
+
+        private void lblPhone_Click(object sender, EventArgs e)
+        {
+
         }
 
 
