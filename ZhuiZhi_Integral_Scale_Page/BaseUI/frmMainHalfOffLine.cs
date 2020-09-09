@@ -128,6 +128,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 lblMenu.Left = picMenu.Right;
                 pnlLoading.Size = new System.Drawing.Size(60, 60);
 
+
+                pnlAdjustInfo.Visible = false;
                 if (MainModel.URL.Contains("pos-qa"))
                 {
                     lblUrl.Visible = true;
@@ -668,8 +670,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     this.Invoke(new InvokeHandler(delegate()
                     {
                         ChangeScaleModel();
-                    }));
-                        
+                    }));                       
                 }
 
                 if (tooltype == ToolType.Broken)
@@ -955,10 +956,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        private void pnlAdjustInfo_Click(object sender, EventArgs e)
-        {
-
-        }
 
         int Seconds = 0;   //执行秒数  没半分钟轮询一次接口  每秒都检查mqtt是否接收到新数据
         public delegate void deleteTimer();
@@ -970,7 +967,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             MqttChangeType mqtttype = ConfigUtil.GetAdjustPriceChanged();
             bool needAdjustPrice = Seconds >= 30 || mqtttype != MqttChangeType.None;
-            bool needLoadIncrementProduct = mqtttype == MqttChangeType.AdjustPrice || mqtttype == MqttChangeType.SkuInsert; ;
+            bool needLoadIncrementProduct = mqtttype == MqttChangeType.AdjustPrice || mqtttype == MqttChangeType.SkuInsert || mqtttype == MqttChangeType.SkuUpOrDown;
 
             if (needAdjustPrice || needLoadIncrementProduct)
             {
@@ -990,12 +987,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     if (needAdjustPrice)
                     {
                         string errormsg = "";
-                        AdjustPriceDynamic result = httputil.GetAdjustPriceDynamicForPos("", "", true, ref errormsg);
+                        AdjustPriceDynamic result = httputil.GetAdjustPriceDynamicForPos(ConfigUtil.GetAdjustStartTime(), MainModel.getStampByDateTime(DateTime.Now), true, ref errormsg);
 
                         if (result != null && result.dynamiccount > 0)
                         {
                             lblAdjustCount.Text = result.dynamiccount.ToString();
                             pnlAdjustInfo.Visible = true;
+                            pnlAdjustInfo.BringToFront();
                             btnAdjustPrice.Image = btnorderhangimage;
                             needAdjustPrice = true;  //有调价商品时需要更新增量商品
 
@@ -1021,8 +1019,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     Invoke((new Action(() =>
                     {
                         timerTask.Enabled = true;
-                    })));
-                   
+                    })));                   
                 }
               
             }));
@@ -1051,8 +1048,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid = currentsecondcategoryid;  //初始化数据后 赋值刷新前的二级分类名称
                     LoadDgvGood(false,false);
                 }
-
-               
+            
             }
             catch (Exception ex)
             {
@@ -4153,8 +4149,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void lblUrl_Click(object sender, EventArgs e)
         {
-            string errormsg = "";
-            httputil.GetPaymentCouponDetail("1000042967478",ref errormsg);
         }
 
         

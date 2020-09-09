@@ -14,7 +14,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model
         /// <summary>
         /// 
         /// </summary>
-        public List<long> cardnoes { get; set; }
+        public List<string> cardnoes { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -24,15 +24,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model
         /// </summary>
         public bool fromb2b { get; set; }
         /// <summary>
-        /// 
+        /// 购买人会员id
         /// </summary>
-        public long memberid { get; set; }
+        public string memberid { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public string @operator { get; set; }
         /// <summary>
-        /// 
+        /// 充值手机号
         /// </summary>
         public string phone { get; set; }
         /// <summary>

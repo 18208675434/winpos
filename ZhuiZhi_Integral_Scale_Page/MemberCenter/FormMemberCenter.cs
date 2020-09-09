@@ -58,6 +58,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 lblPhone.Text =phone;
 
+                btnChangePhone.Left = lblPhone.Right;
+
                 string gender = CurrentMember.memberinformationresponsevo.gender==0 ? "男":"女";
                 string birthday = CurrentMember.memberinformationresponsevo.birthdaystr;
 

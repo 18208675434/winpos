@@ -126,7 +126,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-
                 IsEnable = false;
                 LoadingHelper.ShowLoadingScreen();
 
@@ -262,6 +261,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
+
+            if (!IsEnable)
+            {
+                return;
+            }
             CurrentPage = 1;
             QueryReceipt();
         }

@@ -57,7 +57,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// 获取最后一次调价时间  没有的话获取当天最早时间
         /// </summary>
         /// <returns></returns>
-        public string GetAdjustStartTime()
+        public static string GetAdjustStartTime()
         {
 
             string starttime = INIManager.GetIni("MQTT", "AdjustStartTime",MainModel.IniPath);

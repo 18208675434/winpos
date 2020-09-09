@@ -55,6 +55,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             }
         }
 
+        /// <summary>
+        /// 校验卡密
+        /// </summary>
+        /// <param name="cardno"></param>
+        /// <param name="secret"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
         public bool ValidatePrepaidCard(string cardno, string secret, ref string erromessage)
         {
             try
@@ -72,11 +79,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 if (rd.code == 0)
                 {
                     ValidateGiftCard valid = JsonConvert.DeserializeObject<ValidateGiftCard>(rd.data.ToString());
+                    if (!valid.success)
+                    {
+                        erromessage = rd.message;
+                    }
                     return valid.success;
                 }
                 else
                 {
-                    try { LogManager.WriteLog("Error", "cancel:" + json); }
+                    try { LogManager.WriteLog("Error", "validateprepaidcard:" + json); }
                     catch { }
                     erromessage = rd.message;
                     return false;
@@ -101,6 +112,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         {
             try
             {
+
+                cartpara.carttype = "gift.card";
                 string url = "/pos/order/common/cart/alone/update";
 
                 string parajson = JsonConvert.SerializeObject(cartpara);

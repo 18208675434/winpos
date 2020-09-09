@@ -68,7 +68,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         private void FormGiftCard_Shown(object sender, EventArgs e)
         {
-
+            pnlLoading.Visible = false;
+            lblToast.Visible = false;
+            Application.DoEvents();
             Thread threadScanCode = new Thread(ScanCodeThread);
             threadScanCode.IsBackground = false;
             threadScanCode.Start();
@@ -365,8 +367,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                         if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count>0)
                         {
                             UploadDgvCart();
-                        }
-                       
+                        }                       
                     }));
                 }
             }
@@ -401,15 +402,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         #endregion
 
         #region 购物车
-
-
         StringBuilder scancode = new StringBuilder();
         protected override bool ProcessDialogKey(Keys keyData)
         {
             try
-            {
-
-               
+            {              
                 switch (keyData)
                 {
                     //不同键盘数字键值不同
@@ -455,7 +452,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 LogManager.WriteLog("监听键盘事件异常" + ex.Message);
                 return false;
             }
-
         }
 
         private void ScanCodeThread(object obj)
@@ -573,15 +569,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 string ErrorMsgCart = "";
                 int ResultCode = -1;
 
-                CartAloneUpdate tempcart = gifthttputil.CartAloneUpdate(CurrentCart,ref ErrorMsgCart,ref ResultCode);
-
-                if (!string.IsNullOrEmpty(ErrorMsgCart) || tempcart == null)
+                if (CurrentCart.requestproducts != null && CurrentCart.requestproducts.Count > 0)
                 {
-                    MainModel.ShowLog(ErrorMsgCart,false);
-                    return false;
-                }
+                    CartAloneUpdate tempcart = gifthttputil.CartAloneUpdate(CurrentCart, ref ErrorMsgCart, ref ResultCode);
 
-                CurrentCart = tempcart;
+                    if (!string.IsNullOrEmpty(ErrorMsgCart) || tempcart == null)
+                    {
+                        MainModel.ShowLog(ErrorMsgCart, false);
+                       // return false;
+                    }
+                    CurrentCart = tempcart;
+                }
+              
+
+               
 
                 UploadDgvCart();
                 //lbl
@@ -601,21 +602,133 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             Invoke((new Action(() =>
             {
                 dgvCart.Rows.Clear();
-                foreach (CardProduct pro in CurrentCart.products)
+
+                if (CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
-                    dgvCart.Rows.Add(GetDgvRow(pro, 0));
+                    foreach (CardProduct pro in CurrentCart.products)
+                    {
+                        dgvCart.Rows.Add(GetDgvRow(pro, 0));
+                    }
+
+                    lblProCount.Text = "(" + CurrentCart.products.Count + "件商品)";
+
+                    lblCartTotal.Text = "￥" + CurrentCart.pspamt.ToString("f2");
+
+                    pnlPayByCash.Tag = 1;
+                    pnlPayByCash.BackColor = Color.FromArgb(255, 146, 27);
+
+                    pnlPayByOnLine.Tag = 1;
+                    pnlPayByOnLine.BackColor = Color.FromArgb(255, 70, 21);
                 }
+                else
+                {
+                    lblProCount.Text = "(" + 0 + "件商品)";
 
-                lblProCount.Text = "(" + CurrentCart.products.Count + "件商品)";
+                    lblCartTotal.Text = "￥0.00";
 
-                lblCartTotal.Text = "￥" + CurrentCart.pspamt.ToString("f2");
+                        pnlPayByCash.Tag = 0;
+                        pnlPayByCash.BackColor = Color.Silver;
+                      
+                        pnlPayByOnLine.Tag = 0;
+                        pnlPayByOnLine.BackColor = Color.Silver;
+                }
+              
             })));
         }
 
 
         private void dgvCart_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                if (!IsEnable)
+                {
+                    return;
+                }
 
+                if (e.RowIndex < 0)
+                    return;
+
+                Bitmap bmp = (Bitmap)dgvCart.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                CardProduct pro = (CardProduct)bmp.Tag;
+
+
+                Point po = GlobalUtil.GetCursorPos();
+                //删除礼品卡
+                if (po.X < (dgvCart.Left + picDelete.Right + 10) && po.X > (dgvCart.Left + picDelete.Left - 10))
+                {
+                    if (ZhuiZhi_Integral_Scale_UncleFruit.HelperUI.ConfirmHelper.Confirm("确认删除？", pro.title +"\r\n"+ pro.cardnumber))
+                    {
+                        CurrentCart.products.ForEach(r => {
+                            if (r.cardnumber == pro.cardnumber)
+                            {
+                                CurrentCart.products.Remove(r);
+                            }
+                        });
+                    }
+
+                    CurrentCart.requestproducts = CurrentCart.products;
+                    RefreshCart();
+                }
+                    //绑定秘钥
+                else if (CurretnBindingMember != null && pro.bindcardsecret == 0 && po.X < (dgvCart.Left + btnBindingPwd.Right + 10) && po.X > (dgvCart.Left + btnBindingPwd.Left - 10))
+                {
+
+                    if (GiftCardHelper.BindingMember(pro, CurrentMember == null ? "" : CurrentMember.memberid, CurretnBindingMember.memberheaderresponsevo.mobile))
+                    {
+                        CurrentCart.products.ForEach(r =>
+                        {
+                            if (r.cardnumber == pro.cardnumber)
+                            {
+                                r.bindcardsecret = 1;
+                            }
+                        });
+                        CurrentCart.requestproducts = CurrentCart.products;
+                        RefreshCart();
+                    }
+
+                    
+                    
+                }
+                //else if (pro.goodstagid != 0 && po.X < (dgvCart.Left + lblProNum.Right + 10) && po.X > (dgvCart.Left + lblProNum.Left - 10))
+                //{
+                //    decimal newweight = BrokenHelper.ShowBrokenNumber(pro.skuname);
+
+                //    if (newweight > 0)
+                //    {
+                //        for (int i = 0; i < CurrentCart.products.Count; i++)
+                //        {
+                //            if (CurrentCart.products[i].skucode == pro.skucode && CurrentCart.products[i].specnum == pro.specnum)
+                //            {
+                //                CurrentCart.products[i].specnum = newweight;
+                //                CurrentCart.products[i].price.specnum = newweight;
+                //                CurrentCart.products[i].num = 1;
+                //                break;
+                //            }
+                //        }
+                //    }
+
+                //    UploadOffLineDgvCart();
+
+                //}
+                //else
+                //{
+                //    OperationProduct = pro;
+                //    btnDeletePro.BackColor = Color.FromArgb(22, 135, 206);
+                //    btnChangePrice.BackColor = Color.FromArgb(22, 135, 206);
+                //    btnDiscount.BackColor = Color.FromArgb(22, 135, 206);
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                ShowLog("操作购物车商品异常" + ex.Message, true);
+            }
+            finally
+            {
+                btnScan.Select();
+            }
         }
 
 
@@ -676,7 +789,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         #endregion
 
-     
+        #region 支付
+        private void pnlPayByOnLine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlPayByCash_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
 
     }
 }
