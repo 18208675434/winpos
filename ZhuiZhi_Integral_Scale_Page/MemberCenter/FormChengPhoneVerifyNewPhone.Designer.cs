@@ -42,11 +42,10 @@
             this.btnpw1 = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtNewPhoneNumber = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblShuiyin = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.txtNewPhoneNumber = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -61,8 +60,9 @@
             this.btnpw0.Name = "btnpw0";
             this.btnpw0.Size = new System.Drawing.Size(138, 60);
             this.btnpw0.TabIndex = 96;
-            this.btnpw0.Text = "0";
+            this.btnpw0.Text = "00";
             this.btnpw0.UseVisualStyleBackColor = true;
+            this.btnpw0.Click += new System.EventHandler(this.btnpw0_Click);
             // 
             // btnpwd
             // 
@@ -74,8 +74,9 @@
             this.btnpwd.Name = "btnpwd";
             this.btnpwd.Size = new System.Drawing.Size(131, 60);
             this.btnpwd.TabIndex = 95;
-            this.btnpwd.Text = ".";
+            this.btnpwd.Text = "0";
             this.btnpwd.UseVisualStyleBackColor = true;
+            this.btnpwd.Click += new System.EventHandler(this.btnpwd_Click);
             // 
             // btnpw9
             // 
@@ -89,6 +90,7 @@
             this.btnpw9.TabIndex = 94;
             this.btnpw9.Text = "9";
             this.btnpw9.UseVisualStyleBackColor = true;
+            this.btnpw9.Click += new System.EventHandler(this.btnpw9_Click);
             // 
             // btnpw8
             // 
@@ -102,6 +104,7 @@
             this.btnpw8.TabIndex = 93;
             this.btnpw8.Text = "8";
             this.btnpw8.UseVisualStyleBackColor = true;
+            this.btnpw8.Click += new System.EventHandler(this.btnpw8_Click);
             // 
             // btnpw7
             // 
@@ -115,6 +118,7 @@
             this.btnpw7.TabIndex = 92;
             this.btnpw7.Text = "7";
             this.btnpw7.UseVisualStyleBackColor = true;
+            this.btnpw7.Click += new System.EventHandler(this.btnpw7_Click);
             // 
             // btnpw6
             // 
@@ -128,6 +132,7 @@
             this.btnpw6.TabIndex = 91;
             this.btnpw6.Text = "6";
             this.btnpw6.UseVisualStyleBackColor = true;
+            this.btnpw6.Click += new System.EventHandler(this.btnpw6_Click);
             // 
             // btnpw5
             // 
@@ -141,6 +146,7 @@
             this.btnpw5.TabIndex = 90;
             this.btnpw5.Text = "5";
             this.btnpw5.UseVisualStyleBackColor = true;
+            this.btnpw5.Click += new System.EventHandler(this.btnpw5_Click);
             // 
             // btnpw4
             // 
@@ -154,6 +160,7 @@
             this.btnpw4.TabIndex = 89;
             this.btnpw4.Text = "4";
             this.btnpw4.UseVisualStyleBackColor = true;
+            this.btnpw4.Click += new System.EventHandler(this.btnpw4_Click);
             // 
             // btnpw3
             // 
@@ -167,6 +174,7 @@
             this.btnpw3.TabIndex = 88;
             this.btnpw3.Text = "3";
             this.btnpw3.UseVisualStyleBackColor = true;
+            this.btnpw3.Click += new System.EventHandler(this.btnpw3_Click);
             // 
             // btnpw2
             // 
@@ -180,6 +188,7 @@
             this.btnpw2.TabIndex = 87;
             this.btnpw2.Text = "2";
             this.btnpw2.UseVisualStyleBackColor = true;
+            this.btnpw2.Click += new System.EventHandler(this.btnpw2_Click);
             // 
             // btnpw1
             // 
@@ -193,6 +202,7 @@
             this.btnpw1.TabIndex = 86;
             this.btnpw1.Text = "1";
             this.btnpw1.UseVisualStyleBackColor = true;
+            this.btnpw1.Click += new System.EventHandler(this.btnpw1_Click);
             // 
             // btnCancel
             // 
@@ -221,16 +231,6 @@
             this.label1.TabIndex = 83;
             this.label1.Text = "验证新手机号";
             // 
-            // txtNewPhoneNumber
-            // 
-            this.txtNewPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNewPhoneNumber.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtNewPhoneNumber.Location = new System.Drawing.Point(2, 58);
-            this.txtNewPhoneNumber.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNewPhoneNumber.Name = "txtNewPhoneNumber";
-            this.txtNewPhoneNumber.Size = new System.Drawing.Size(367, 46);
-            this.txtNewPhoneNumber.TabIndex = 82;
-            // 
             // button7
             // 
             this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
@@ -244,6 +244,7 @@
             this.button7.Size = new System.Drawing.Size(127, 60);
             this.button7.TabIndex = 97;
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // pictureBox1
             // 
@@ -257,19 +258,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // lblShuiyin
-            // 
-            this.lblShuiyin.AutoSize = true;
-            this.lblShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblShuiyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblShuiyin.Location = new System.Drawing.Point(12, 73);
-            this.lblShuiyin.Name = "lblShuiyin";
-            this.lblShuiyin.Size = new System.Drawing.Size(122, 21);
-            this.lblShuiyin.TabIndex = 99;
-            this.lblShuiyin.Text = "请输入新手机号";
-            this.lblShuiyin.Visible = false;
-            // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
@@ -282,14 +270,31 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
+            // txtNewPhoneNumber
+            // 
+            this.txtNewPhoneNumber.BackColor = System.Drawing.Color.White;
+            this.txtNewPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNewPhoneNumber.DecimalDigits = 3;
+            this.txtNewPhoneNumber.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtNewPhoneNumber.Location = new System.Drawing.Point(16, 56);
+            this.txtNewPhoneNumber.LockFocus = true;
+            this.txtNewPhoneNumber.MaxDeciaml = ((long)(0));
+            this.txtNewPhoneNumber.MaxLength = 100;
+            this.txtNewPhoneNumber.Name = "txtNewPhoneNumber";
+            this.txtNewPhoneNumber.NeedBoard = false;
+            this.txtNewPhoneNumber.OnlyNumber = true;
+            this.txtNewPhoneNumber.Size = new System.Drawing.Size(352, 50);
+            this.txtNewPhoneNumber.TabIndex = 101;
+            this.txtNewPhoneNumber.WaterText = "请输入新手机号";
+            // 
             // FormChengPhoneVerifyNewPhone
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 450);
+            this.Controls.Add(this.txtNewPhoneNumber);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.lblShuiyin);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.btnpw0);
@@ -305,7 +310,6 @@
             this.Controls.Add(this.btnpw1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtNewPhoneNumber);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormChengPhoneVerifyNewPhone";
@@ -336,9 +340,8 @@
         private System.Windows.Forms.Button btnpw1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNewPhoneNumber;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lblShuiyin;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private MyControl.NumberTextBox txtNewPhoneNumber;
     }
 }

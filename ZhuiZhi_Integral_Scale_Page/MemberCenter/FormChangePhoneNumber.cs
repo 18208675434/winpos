@@ -165,5 +165,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     break;
             }
         }
+
+        private void picChangePhoneOK_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
