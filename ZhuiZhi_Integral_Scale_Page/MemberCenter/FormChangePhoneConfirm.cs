@@ -32,26 +32,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.Sourcetoken = MainModel.CurrentMember.memberheaderresponsevo.token;
                 string err = "";
                 bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
+                string errrormsg = "";
                 if (resule)
                 {
-                    string errrormsg = "";
+                    
                     bool mergeresult = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
                     if (mergeresult)
                     {
-                        MainModel.ShowLog("合并会员修改手机号码成功", false);
+                        MainModel.ShowLog(errrormsg, false);
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else
                     {
-                        MainModel.ShowLog("合并会员修改手机号码错误请重试", false);
+                        MainModel.ShowLog(errrormsg, false);
                         this.DialogResult = DialogResult.Cancel;
                         this.Close();
                     }
                 }
                 else
                 {
-                    MainModel.ShowLog("修改手机号码错误请重试", false);
+                    MainModel.ShowLog(errrormsg, false);
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
                 }
@@ -62,13 +63,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
                 if (resule)
                 {
-                    MainModel.ShowLog("修改手机号码成功", false);
+                    MainModel.ShowLog(err, false);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MainModel.ShowLog("修改手机号码错误请重试", false);
+                    MainModel.ShowLog(err, false);
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
                 }

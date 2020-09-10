@@ -46,11 +46,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnSmsCodeVerify_Click(object sender, EventArgs e)
         {
+
+            
+            
             string errormsg = "";
             membercenterhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref errormsg);
             if (MemberCenterHelper.ShowFormChengPhoneSmsCode())
             {
                 ShowChangePhonePage();
+                label17.ForeColor = Color.DodgerBlue;
+                picStepTwo.BackgroundImage = pictureBox1.BackgroundImage;
+                label6.BackColor = Color.DodgerBlue;
+                label9.Visible = true;
+
             }
         }
 
@@ -64,12 +72,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnOldCardVerify_Click(object sender, EventArgs e)
         {
-            if (MemberCenterHelper.ShowFormChangePhonePhysicalCard())
-            {
-                ShowChangePhonePage();
-            }
+           
+                if (MemberCenterHelper.ShowFormChangePhonePhysicalCard())
+                {
+                    ShowChangePhonePage();
+                }
+           
+            
         }
-
+        
         private void btnNewCardVerify_Click(object sender, EventArgs e)
         {
             if (MemberCenterHelper.ShowFormChangePhoneNewCard())
@@ -90,9 +101,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnVerifyNewPhone_Click(object sender, EventArgs e)
         {
+            
             if (MemberCenterHelper.ShowFormChengPhoneVerifyNewPhone())
             {
+                
                 ShowChangePhonePage();
+                label8.ForeColor = Color.DodgerBlue;
+                picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
+                label7.BackColor = Color.DodgerBlue;
+
             }
         }
 
@@ -169,6 +186,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void picChangePhoneOK_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblVerifySuccess_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picVerifyMemberOK_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            FormMemberRecevice m = new FormMemberRecevice();
+            asf.AutoScaleControlTest(m, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
+            m.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - m.Width) / 2, (Screen.AllScreens[0].Bounds.Height - m.Height) / 2);
+            m.TopMost = true;
+            m.ShowDialog();
         }
     }
 }

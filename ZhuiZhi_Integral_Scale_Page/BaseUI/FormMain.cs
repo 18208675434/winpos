@@ -858,7 +858,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     return;
                 }
-
+                
                 ShowLoading(true,false);
                 string numbervalue = NumberHelper.ShowFormNumber("输入会员手机号", NumberType.MemberCode);
                  if (!string.IsNullOrEmpty(numbervalue))
@@ -2145,6 +2145,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+                //if (Model.MainModel.NewPhone != "")
+                //{
+                //    cbtnLoadPhone.ShowText = Model.MainModel.NewPhone;
+                //}
                 IsEnable = isenable;
                 if (this.IsHandleCreated)
                 {

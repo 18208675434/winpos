@@ -202,7 +202,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 BackHelper.ShowFormBackGround();
 
-                FormForgetPassword frmforgetpassword = new FormForgetPassword();
+                FormChangePhoneNewPhoneSms frmforgetpassword = new FormChangePhoneNewPhoneSms();
                 asf.AutoScaleControlTest(frmforgetpassword, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmforgetpassword.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmforgetpassword.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmforgetpassword.Height) / 2);
                 frmforgetpassword.TopMost = true;
@@ -334,6 +334,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+               
                 BackHelper.ShowFormBackGround();
 
                 FormChangePhonePhysicalCard frmchangephoneoldcard = new FormChangePhonePhysicalCard();

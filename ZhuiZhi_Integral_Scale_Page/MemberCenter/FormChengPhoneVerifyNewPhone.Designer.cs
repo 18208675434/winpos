@@ -286,6 +286,7 @@
             this.txtNewPhoneNumber.Size = new System.Drawing.Size(352, 50);
             this.txtNewPhoneNumber.TabIndex = 101;
             this.txtNewPhoneNumber.WaterText = "请输入新手机号";
+            this.txtNewPhoneNumber.Load += new System.EventHandler(this.txtNewPhoneNumber_Load);
             // 
             // FormChengPhoneVerifyNewPhone
             // 

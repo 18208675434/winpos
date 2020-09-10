@@ -107,12 +107,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     string err = "";
                     string result = memberhttputil.GetVerifysmscode(smscode, ref err);
+                    
                     if (result == "success")
                     {
+                        
                         MainModel.ShowChangePhonePage = 1;
                         MainModel.ShowChangePhoneMedia = 1;
                         this.DialogResult = DialogResult.OK;
+                        
                         this.Close();
+                        
                     }
                     else
                     {

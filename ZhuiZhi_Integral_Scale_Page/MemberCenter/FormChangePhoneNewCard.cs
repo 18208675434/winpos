@@ -47,10 +47,79 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             else
             {
-                MainModel.ShowLog("卡号输入错误请重试", false);
+                MainModel.ShowLog( errormsg , false);
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
+        }
+
+        private void btnpw1_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "1";
+        }
+
+        private void btnpw2_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "2";
+        }
+
+        private void btnpw3_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "3";
+        }
+
+        private void btnpw4_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "4";
+        }
+
+        private void btnpw5_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "5";
+        }
+
+        private void btnpw6_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "6";
+        }
+
+        private void btnpw7_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "7";
+        }
+
+        private void btnpw8_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "8";
+        }
+
+        private void btnpw9_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "9";
+        }
+
+        private void btnpwd_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += ".";
+        }
+
+        private void btnpw0_Click(object sender, EventArgs e)
+        {
+            txtNewCard.Text += "0";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+
+                if (txtNewCard.Text.Length > 0)
+                {
+                    txtNewCard.Text = txtNewCard.Text.Substring(0, txtNewCard.Text.Length - 1);
+                }
+            }
+            catch { }
         }
     }
 }
