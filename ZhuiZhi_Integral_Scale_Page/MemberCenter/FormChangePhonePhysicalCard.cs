@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
@@ -13,14 +14,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormChangePhonePhysicalCard : Form
     {
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
+        
         public FormChangePhonePhysicalCard()
         {
+            
             InitializeComponent();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+            GlobalUtil.CloseOSK();
             this.Close();
         }
 
@@ -48,10 +52,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             else
             {
-                MainModel.ShowLog("卡号输入错误请重试", false);
+                MainModel.ShowLog(errormsg, false);
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
+        }
+
+        private void txtOldCardNumber_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

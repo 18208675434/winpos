@@ -38,16 +38,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+           
             try
             {   //^0{0,1}(13[4-9]|15[7-9]|15[0-2]|18[7-8])[0-9]{8}$
-                Regex regex = new Regex("");
+                string s = @"^(1[0-9]|15[0|3|6|8|9])\d{9}$";
+                
                 string PhoneNumber = txtNewPhoneNumber.Text;
                 if (txtNewPhoneNumber.Text == "")
                 {
                     MainModel.ShowLog("手机号码不能为空", false);
                 }
-                else if (!regex.IsMatch(txtNewPhoneNumber.Text))
+                else if (!Regex.IsMatch(txtNewPhoneNumber.Text, s))
                 {
                     MainModel.ShowLog("手机号码格式不正确", false);
                 }
@@ -150,6 +151,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
             }
             catch { }
+        }
+
+        private void txtNewPhoneNumber_Load(object sender, EventArgs e)
+        {
+            
         }
 
     }
