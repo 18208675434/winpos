@@ -16,6 +16,7 @@ using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MenuUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 {
@@ -63,6 +64,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         private bool thisisoffline = false;
 
+        private GiftCardHttp giftcardhttp = new GiftCardHttp();
+
         #endregion
 
 
@@ -73,16 +76,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             // Application.EnableVisualStyles();
         }
         private void frmOrderQuery_Load(object sender, EventArgs e)
-        {
-         
+        {        
             lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
             picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
             lblMenu.Left = picMenu.Right;
-            
             //Application.DoEvents();
-
-           
 
         }
         private void frmOrderQuery_Shown(object sender, EventArgs e)
@@ -104,10 +103,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 bmpNotRefund = (Bitmap)MainModel.GetControlImage(btnNotRefundPic);
                 bmpRefundByAmt = (Bitmap)MainModel.GetControlImage(btnRefundByAmt);
 
-                //int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
-                //bmpRefund = new Bitmap(Resources.ResourcePos.Refund, dgvOrderOnLine.Columns["cancle"].Width * 80 / 100, height);
-
-                //bmpReprint = new Bitmap(Resources.ResourcePos.Reprint, dgvOrderOnLine.Columns["reprint"].Width * 80 / 100, height);
                 bmpWhite = Resources.ResourcePos.White;
 
             }
@@ -145,7 +140,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
                 CurrentInterval = 0;
                 LastOrderid = "0";
-                dgvOrderOnLine.Rows.Clear();
+                dgvRecord.Rows.Clear();
 
                 CurrentQueryOrder = null;
                 CurrentPage = 1;
@@ -181,7 +176,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 dtEnd.Value = Convert.ToDateTime(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 23:59:59");
                 CurrentInterval = 1;
                 LastOrderid = "0";
-                dgvOrderOnLine.Rows.Clear();
+                dgvRecord.Rows.Clear();
 
                // QueryOrder();
                 CurrentPage = 1;
@@ -217,7 +212,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
                 CurrentInterval = 7;
                 LastOrderid = "0";
-                dgvOrderOnLine.Rows.Clear();
+                dgvRecord.Rows.Clear();
                // QueryOrder();
                 CurrentQueryOrder = null;
                 CurrentPage = 1;
@@ -244,7 +239,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                {
                    CurrentInterval = 30;
                    LastOrderid = "0";
-                   dgvOrderOnLine.Rows.Clear();
+                   dgvRecord.Rows.Clear();
                    //QueryOrder();
                    CurrentQueryOrder = null;
                    CurrentPage = 1;
@@ -299,92 +294,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 if (e.RowIndex < 0)
                     return;
 
-                if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefund)
-                {
-                    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                    IsEnable = false;
-
-                    // Order SelectOrder =(Order) CurrentQueryOrder.orders.Where(r => r.orderid == selectorderid).ToList()[0];
-                    Order SelectOrder = null;
-                    for (int i = 0; i < CurrentQueryOrder.orders.Count; i++)
-                    {
-                        if (CurrentQueryOrder.orders[i].orderid == selectorderid)
-                        {
-                            SelectOrder = CurrentQueryOrder.orders[i];
-                            break;
-                        }
-                    }
-
-                    if (SelectOrder == null)
-                    {
-                         MainModel.ShowLog("订单不存在，请刷新", false);
-                        
-                        return;
-                    }
-                    LoadPicScreen(true);
-
-                    frmRefundSelect frmrefund = new frmRefundSelect(SelectOrder);
-                    this.Invoke(new InvokeHandler(delegate()
-                     {
-                         frmrefund.ShowDialog();
-                     }));
-                     LoadPicScreen(false);
-                    if (frmrefund.DialogResult == DialogResult.OK)
-                    {
-                        string totalpay = MenuHelper.GetTotalPayInfo(frmrefund.Reforder);
-
-                        if (!ConfirmHelper.Confirm("确认退款？", "应退 " + totalpay))
-                        {
-                            return;
-                        }
-
-                       
-                        string orderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                        string ErrorMsg = "";
-                        string resultorderid = httputil.Refund(frmrefund.Refrefundpara, ref ErrorMsg);
-                        if (ErrorMsg != "")
-                        {
-                             MainModel.ShowLog(ErrorMsg, true);
-                        }
-                        else
-                        {
-                            PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
-
-                            if (ErrorMsg != "" || printdetail == null)
-                            {
-                                LoadingHelper.CloseForm();
-                                MainModel.ShowLog(ErrorMsg, true);
-                            }
-                            else
-                            {
-                                //SEDPrint(printdetail);
-                                string PrintErrorMsg = "";
-                                bool printresult = PrintUtil.PrintOrder(printdetail, true, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
-
-                                if (PrintErrorMsg != "" || !printresult)
-                                {
-                                    MainModel.ShowLog(PrintErrorMsg, true);
-                                }
-                                else
-                                {
-                                   // MainModel.ShowLog("打印完成", false);
-                                }
-
-                            }
-
-                             MainModel.ShowLog("退款成功", false);
-                             try { PrintUtil.OpenCashDrawerEx(); }
-                             catch { }
-                        }
-                        IsEnable = true;
-                        //后端订单信息更新需要时间，延时刷新
-                        Delay.Start(300);
-                        btnQuery_Click(null, null);
-                    }
-
-
-                }
-                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
+               if (dgvRecord.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
                 {
                     IsEnable = false;
 
@@ -396,7 +306,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     LoadingHelper.ShowLoadingScreen("加载中...");
                     ReceiptUtil.EditReprintCount(1);
 
-                    string orderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
+                    string orderid = dgvRecord.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
                     string ErrorMsg = "";
                     PrintDetail printdetail = httputil.GetPrintDetail(orderid, ref ErrorMsg);
 
@@ -426,33 +336,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     LoadingHelper.CloseForm();
                     btnQuery_Click(null, null);
                 }
-                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefundByAmt)
-                {
-                    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                    IsEnable = false;
-
-                    Order SelectOrder = null;
-                    for (int i = 0; i < CurrentQueryOrder.orders.Count; i++)
-                    {
-                        if (CurrentQueryOrder.orders[i].orderid == selectorderid)
-                        {
-                            SelectOrder = CurrentQueryOrder.orders[i];
-                            break;
-                        }
-                    }
-
-                    if (SelectOrder == null)
-                    {
-                        MainModel.ShowLog("订单不存在，请刷新", false);
-
-                        return;
-                    }
-
-                    MenuHelper.ShowFormRefundByAmt(SelectOrder);
-
-                    btnQuery_Click(null, null);
-                }
-
+               
 
             }
             catch (Exception ex)
@@ -475,7 +359,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         {
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
             {
-                if (e.NewValue + dgvOrderOnLine.DisplayedRowCount(false) == dgvOrderOnLine.Rows.Count)
+                if (e.NewValue + dgvRecord.DisplayedRowCount(false) == dgvRecord.Rows.Count)
                 {
 
                     if (HaveNextPage)
@@ -516,13 +400,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                 thisisoffline = false;
 
-                btnQueryOnline.BackColor = Color.White;
-
-                dgvOrderOnLine.Visible = true;
+                dgvRecord.Visible = true;
                 pnlDgvHead.Visible = true;
                 pnlDgvOffLineHead.Visible = false;
 
-                if (dgvOrderOnLine.Rows.Count > 0)
+                if (dgvRecord.Rows.Count > 0)
                 {
                     pnlEmptyOrder.Visible = false;
                 }
@@ -538,7 +420,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 MainModel.ShowLog("切换订单查询模式异常" + ex.Message, true);
             }
         }
-  
 
         //控制仅允许录入数字
         private void TextNUMBER_KeyPress(object sender, KeyPressEventArgs e)
@@ -632,89 +513,47 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         private void LoadDgvOrder()
         {
             try
-            {
-                if (CurrentQueryOrder == null || (CurrentQueryOrder.orders.Count <= CurrentPage * PageSize && HaveNextPage))
-                {
-
-                    LoadingHelper.ShowLoadingScreen();
-                    IsEnable = false;
-                QueryOrderPara queryorderpara = new QueryOrderPara();
-                queryorderpara.customerphone = txtPhone.Text;
-                queryorderpara.interval = CurrentInterval;
-                queryorderpara.shopid = MainModel.CurrentShopInfo.shopid;
-                queryorderpara.orderatend = getStampByDateTime(dtEnd.Value);
-                queryorderpara.orderatstart = getStampByDateTime(dtStart.Value);
-                queryorderpara.lastorderid = LastOrderid;
-
-                string ErrorMsg = "";
-                QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
-
-
-                if (ErrorMsg != "" || queryorder == null)
-                {
-                    MainModel.ShowLog(ErrorMsg, false);
-                }
-                else
-                {
-
-                    if (LastOrderid == "0")
-                    {
-                        CurrentQueryOrder = queryorder;
-                    }
-                    else
-                    {
-                        foreach (Order order in queryorder.orders)
-                        {
-                            CurrentQueryOrder.orders.Add(order);
-                        }
-                    }
-                    LastOrderid = queryorder.lastorderid;
-                    HaveNextPage = queryorder.hasnextpage == 1 ? true : false;
-                }
-
-                }
-
-
+            {               
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
-               
-                int startindex = (CurrentPage - 1) * 6;
 
-                int lastindex = Math.Min(CurrentQueryOrder.orders.Count - 1, startindex + 5);
+                GiftCardRecordPara para = new GiftCardRecordPara();
 
-                dgvOrderOnLine.Rows.Clear();
-                List<Order> lstOrder= CurrentQueryOrder.orders.GetRange(startindex, lastindex - startindex + 1);
-                foreach (Order order in lstOrder)
+                if (!string.IsNullOrEmpty(txtPhone.Text))
                 {
-                    string totalpay = MenuHelper.GetTotalPayInfo(order);
-
-                    if (order.orderstatusvalue == 5)
-                    {
-                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite,bmpWhite);
-                    }
-                    else
-                    {
-
-                        Bitmap tempbmprefund = order.supportspecifiedamountrefund == 1 ? bmpRefundByAmt : bmpWhite;
-                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund,tempbmprefund);
-                    }
-
+                    para.customerphone = txtPhone.Text;
                 }
-                dgvOrderOnLine.ClearSelection();
+             
+               // para.needdetail = true;
+                para.orderatstart =Convert.ToInt64( MainModel.getStampByDateTime(dtStart.Value));
+                para.orderatend = Convert.ToInt64(MainModel.getStampByDateTime(dtEnd.Value));
+                para.page = CurrentPage;
+                para.size = PageSize;
+                para.pagination = true;                
+                para.shopid = MainModel.CurrentShopInfo.shopid;
+                para.tenantid = MainModel.CurrentShopInfo.tenantid;
+
+                string errormsg = "";
+                GiftCardRecord record = giftcardhttp.GiftCardQuery(para, ref errormsg);
+
+                
+                if (!string.IsNullOrEmpty(errormsg) || record == null)
+                {
+                    MainModel.ShowLog(errormsg,false);
+                    dgvRecord.Rows.Clear();
+                    return;
+                }
+                dgvRecord.Rows.Clear();
+                foreach (RowsItem item in record.rows)
+                {
+                    dgvRecord.Rows.Add(GetDateTimeByStamp(item.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), item.id, item.customerphone, item.title, item.pspamt.ToString("f2"), bmpReprint);
+                }
+                                
+                dgvRecord.ClearSelection();
                 Application.DoEvents();
 
-                //在线接口每页20个 防止本地分页和接口分页最小积数  例 6*10 = 20*3
-                if (CurrentQueryOrder.orders.Count > CurrentPage * 6 || HaveNextPage)
-                {
-                    rbtnPageDown.WhetherEnable = true;
-                }
-                else
-                {
-                    rbtnPageDown.WhetherEnable = false;
-                }
-
-
-                    pnlEmptyOrder.Visible = dgvOrderOnLine.Rows.Count == 0;
-             
+                rbtnPageDown.WhetherEnable = record.total > CurrentPage * PageSize;
+              
+                pnlEmptyOrder.Visible = dgvRecord.Rows.Count == 0;            
 
             }
             catch (Exception ex)
@@ -750,24 +589,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             LoadDgvOrder();
         }
 
-
-
-        private void txt_OskClick(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
-
-
-                Delay.Start(100);
-                this.Activate();
-                txt.Focus();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
-            }
-        }
     }
 }

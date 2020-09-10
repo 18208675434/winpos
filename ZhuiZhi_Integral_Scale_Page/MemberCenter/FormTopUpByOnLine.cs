@@ -64,7 +64,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             CurrentOrderID = orderid;
 
             CurrentMobile = mobile;
-
         }
 
         private void lblExit_Click(object sender, EventArgs e)

@@ -1725,6 +1725,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             catch { }
         }
 
+        private void lblSearchShuiyin_Click_1(object sender, EventArgs e)
+        {
+            txtSearch.Focus();
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            txtSearch.Focus();
+        }
+
     
 
 

@@ -284,7 +284,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         /// <param name="createpara"></param>
         /// <param name="erromessage"></param>
         /// <returns></returns>
-        public GifrCardRecord GiftCardQuery(GiftCardRecordPara createpara, ref string erromessage)
+        public GiftCardRecord GiftCardQuery(GiftCardRecordPara createpara, ref string erromessage)
         {
             try
             {
@@ -296,7 +296,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                 if (rd.code == 0)
                 {
-                    GifrCardRecord objresult = JsonConvert.DeserializeObject<GifrCardRecord>(rd.data.ToString());
+                    GiftCardRecord objresult = JsonConvert.DeserializeObject<GiftCardRecord>(rd.data.ToString());
                     return objresult;
                 }
                 else

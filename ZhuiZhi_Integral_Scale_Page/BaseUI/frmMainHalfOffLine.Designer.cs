@@ -59,10 +59,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
-            this.btnGiftCard = new System.Windows.Forms.Button();
             this.pnlAdjustInfo = new System.Windows.Forms.Panel();
             this.lblAdjustCount = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.btnGiftCard = new System.Windows.Forms.Button();
             this.btnAdjustPrice = new System.Windows.Forms.Button();
             this.lblUrl = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -114,6 +114,8 @@
             this.lblCredit = new System.Windows.Forms.Label();
             this.lblCreditStr = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.btnSortNortSelect = new ZhuiZhi_Integral_Scale_UncleFruit.CircleButton();
+            this.btnSortSelect = new ZhuiZhi_Integral_Scale_UncleFruit.CircleButton();
             this.picGoodNotSelect = new System.Windows.Forms.PictureBox();
             this.picGoodSelect = new System.Windows.Forms.PictureBox();
             this.btnSelect = new System.Windows.Forms.Button();
@@ -190,8 +192,6 @@
             this.rbtnPageDownForCart = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUpForCart = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.keyBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardNew();
-            this.btnSortNortSelect = new ZhuiZhi_Integral_Scale_UncleFruit.CircleButton();
-            this.btnSortSelect = new ZhuiZhi_Integral_Scale_UncleFruit.CircleButton();
             this.rbtnPay = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.pnlHead.SuspendLayout();
             this.pnlAdjustInfo.SuspendLayout();
@@ -253,25 +253,6 @@
             this.pnlHead.Size = new System.Drawing.Size(1180, 61);
             this.pnlHead.TabIndex = 32;
             // 
-            // btnGiftCard
-            // 
-            this.btnGiftCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.btnGiftCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGiftCard.BackgroundImage")));
-            this.btnGiftCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnGiftCard.FlatAppearance.BorderSize = 0;
-            this.btnGiftCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGiftCard.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnGiftCard.ForeColor = System.Drawing.Color.White;
-            this.btnGiftCard.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnGiftCard.Location = new System.Drawing.Point(433, 14);
-            this.btnGiftCard.Name = "btnGiftCard";
-            this.btnGiftCard.Size = new System.Drawing.Size(115, 35);
-            this.btnGiftCard.TabIndex = 51;
-            this.btnGiftCard.Text = "礼品卡购买";
-            this.btnGiftCard.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnGiftCard.UseVisualStyleBackColor = false;
-            this.btnGiftCard.Click += new System.EventHandler(this.btnGiftCard_Click);
-            // 
             // pnlAdjustInfo
             // 
             this.pnlAdjustInfo.Controls.Add(this.lblAdjustCount);
@@ -306,6 +287,26 @@
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "您有新的调价通知";
             this.linkLabel1.Click += new System.EventHandler(this.btnAdjustPrice_Click);
+            // 
+            // btnGiftCard
+            // 
+            this.btnGiftCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnGiftCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGiftCard.BackgroundImage")));
+            this.btnGiftCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnGiftCard.FlatAppearance.BorderSize = 0;
+            this.btnGiftCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGiftCard.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnGiftCard.ForeColor = System.Drawing.Color.White;
+            this.btnGiftCard.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnGiftCard.Location = new System.Drawing.Point(433, 14);
+            this.btnGiftCard.Name = "btnGiftCard";
+            this.btnGiftCard.Size = new System.Drawing.Size(115, 35);
+            this.btnGiftCard.TabIndex = 51;
+            this.btnGiftCard.Text = "礼品卡购买";
+            this.btnGiftCard.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnGiftCard.UseVisualStyleBackColor = false;
+            this.btnGiftCard.Visible = false;
+            this.btnGiftCard.Click += new System.EventHandler(this.btnGiftCard_Click);
             // 
             // btnAdjustPrice
             // 
@@ -1036,6 +1037,38 @@
             this.pictureBox3.Size = new System.Drawing.Size(22, 22);
             this.pictureBox3.TabIndex = 49;
             this.pictureBox3.TabStop = false;
+            // 
+            // btnSortNortSelect
+            // 
+            this.btnSortNortSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnSortNortSelect.FillColor = System.Drawing.Color.White;
+            this.btnSortNortSelect.Location = new System.Drawing.Point(570, 233);
+            this.btnSortNortSelect.Name = "btnSortNortSelect";
+            this.btnSortNortSelect.PenColor = System.Drawing.Color.White;
+            this.btnSortNortSelect.PenWidth = 1;
+            this.btnSortNortSelect.RoundRadius = 35;
+            this.btnSortNortSelect.ShowFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSortNortSelect.ShowText = "";
+            this.btnSortNortSelect.Size = new System.Drawing.Size(75, 35);
+            this.btnSortNortSelect.TabIndex = 55;
+            this.btnSortNortSelect.TextBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
+            this.btnSortNortSelect.TextForeColor = System.Drawing.Color.White;
+            // 
+            // btnSortSelect
+            // 
+            this.btnSortSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnSortSelect.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
+            this.btnSortSelect.Location = new System.Drawing.Point(658, 233);
+            this.btnSortSelect.Name = "btnSortSelect";
+            this.btnSortSelect.PenColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(180)))), ((int)(((byte)(223)))));
+            this.btnSortSelect.PenWidth = 1;
+            this.btnSortSelect.RoundRadius = 35;
+            this.btnSortSelect.ShowFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSortSelect.ShowText = "";
+            this.btnSortSelect.Size = new System.Drawing.Size(75, 35);
+            this.btnSortSelect.TabIndex = 54;
+            this.btnSortSelect.TextBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
+            this.btnSortSelect.TextForeColor = System.Drawing.Color.White;
             // 
             // picGoodNotSelect
             // 
@@ -2018,38 +2051,6 @@
             this.keyBoard.TabIndex = 66;
             this.keyBoard.Visible = false;
             this.keyBoard.Press += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardNew.KeyboardHandler(this.keyBoardNew1_Press);
-            // 
-            // btnSortNortSelect
-            // 
-            this.btnSortNortSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnSortNortSelect.FillColor = System.Drawing.Color.White;
-            this.btnSortNortSelect.Location = new System.Drawing.Point(570, 233);
-            this.btnSortNortSelect.Name = "btnSortNortSelect";
-            this.btnSortNortSelect.PenColor = System.Drawing.Color.White;
-            this.btnSortNortSelect.PenWidth = 1;
-            this.btnSortNortSelect.RoundRadius = 35;
-            this.btnSortNortSelect.ShowFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSortNortSelect.ShowText = "";
-            this.btnSortNortSelect.Size = new System.Drawing.Size(75, 35);
-            this.btnSortNortSelect.TabIndex = 55;
-            this.btnSortNortSelect.TextBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
-            this.btnSortNortSelect.TextForeColor = System.Drawing.Color.White;
-            // 
-            // btnSortSelect
-            // 
-            this.btnSortSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnSortSelect.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
-            this.btnSortSelect.Location = new System.Drawing.Point(658, 233);
-            this.btnSortSelect.Name = "btnSortSelect";
-            this.btnSortSelect.PenColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(180)))), ((int)(((byte)(223)))));
-            this.btnSortSelect.PenWidth = 1;
-            this.btnSortSelect.RoundRadius = 35;
-            this.btnSortSelect.ShowFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSortSelect.ShowText = "";
-            this.btnSortSelect.Size = new System.Drawing.Size(75, 35);
-            this.btnSortSelect.TabIndex = 54;
-            this.btnSortSelect.TextBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
-            this.btnSortSelect.TextForeColor = System.Drawing.Color.White;
             // 
             // rbtnPay
             // 

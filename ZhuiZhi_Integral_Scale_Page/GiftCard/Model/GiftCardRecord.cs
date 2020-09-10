@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model
 {
-    public class GifrCardRecord
+    public class GiftCardRecord
     {
         /// <summary>
         /// 

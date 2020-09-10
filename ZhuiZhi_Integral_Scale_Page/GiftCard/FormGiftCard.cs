@@ -75,11 +75,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             threadScanCode.IsBackground = false;
             threadScanCode.Start();
 
+            GiftCardMediaHelper.ShowFormGiftCardMedia();
         }
 
         private void FormGiftCard_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            GiftCardMediaHelper.CloseFormGiftCartMedia();
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
@@ -97,7 +98,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         /// <param name="e"></param>
         private void btnGiftCardRecord_Click(object sender, EventArgs e)
         {
-
+            GiftCardHelper.ShowFormGiftCardRecord();
         }
 
         /// <summary>
@@ -218,6 +219,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         }
 
+
+        private void ClearForm()
+        {
+            try
+            {
+                CurrentCart = new CartAloneUpdate();
+                CurrentMember = null;
+                CurretnBindingMember = null;
+                ClearMember();
+                ClearBindingMember();
+                dgvCart.Rows.Clear();
+
+                lblProCount.Text = "(" + 0 + "件商品)";
+
+                lblCartTotal.Text = "￥0.00";
+
+                pnlPayByCash.Tag = 0;
+                pnlPayByCash.BackColor = Color.Silver;
+
+                pnlPayByOnLine.Tag = 0;
+                pnlPayByOnLine.BackColor = Color.Silver;
+            }
+            catch { }
+        }
         #endregion
 
         #region  会员信息
@@ -367,7 +392,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                         if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count>0)
                         {
                             UploadDgvCart();
-                        }                       
+                        }
+
+                        GiftCardMediaHelper.LoadMember(CurretnBindingMember);
                     }));
                 }
             }
@@ -392,6 +419,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     {
                         UploadDgvCart();
                     }
+
+                    GiftCardMediaHelper.ClearMember();
                 }));
             }
             catch (Exception ex)
@@ -486,7 +515,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                             if (!string.IsNullOrEmpty(errormsg) || giftcarddetail == null)
                             {
                                 ShowLoading(false, true);
-                                MainModel.ShowLog(errormsg, false);
+                                ShowLog(errormsg, false);
                             }
                             else
                             {
@@ -575,10 +604,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                     if (!string.IsNullOrEmpty(ErrorMsgCart) || tempcart == null)
                     {
-                        MainModel.ShowLog(ErrorMsgCart, false);
+                        ShowLog(ErrorMsgCart, false);
                        // return false;
                     }
-                    CurrentCart = tempcart;
+                    else
+                    {
+                        CurrentCart = tempcart;
+                    }
+                    
                 }
               
 
@@ -632,7 +665,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                         pnlPayByOnLine.Tag = 0;
                         pnlPayByOnLine.BackColor = Color.Silver;
                 }
-              
+
+
+                GiftCardMediaHelper.UpdateCartInfo(CurrentCart);
             })));
         }
 
@@ -797,8 +832,82 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         private void pnlPayByCash_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (!IsEnable || pnlPayByCash.Tag == null || pnlPayByCash.Tag.ToString() == "0")
+                {
+                    return;
+                }
+
+                IsEnable = false;
+                decimal cash = 0;
+                if (GiftCardHelper.ShowFormGiftCardByCash(CurrentCart, out cash))
+                {
+                    CreateGiftCardOrder(CurrentCart,cash);
+                }
+
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("现金支付异常"+ex.Message,true);
+            }
+        }
+
+
+        private void CreateGiftCardOrder(CartAloneUpdate cart,decimal cash)
+        {
+            try
+            {
+                CreateCardOrderPara para = new CreateCardOrderPara();
+                para.carttype = "gift.card";
+                para.cashier = MainModel.CurrentUser.nickname;
+                para.devicesn = MainModel.DeviceSN;
+                para.fromwinpos = true;
+                para.memberid = cart.memberid;
+                para.pcashpayamt = cash;
+                if (CurretnBindingMember != null)
+                {
+                    para.phone = CurretnBindingMember.memberheaderresponsevo.mobile;
+                }
+                //para.phone=currentcart.
+                para.products = cart.products;
+                para.shopid = MainModel.CurrentShopInfo.shopid;
+                para.tenantid = MainModel.CurrentShopInfo.tenantid;
+
+
+                string errormsg = "";
+
+                CreateCardOrder result = gifthttputil.CreateCardOrder(para, ref errormsg);
+
+                LogManager.WriteLog("DEBUG","礼品卡订单号"+result.orderid.ToString());
+                if (!string.IsNullOrEmpty(errormsg) || result == null)
+                {
+                    MainModel.ShowLog(errormsg, false);
+                    return;
+                }
+
+                string errorsuccess = "";
+                GiftCardPaySuccess paysuccess = gifthttputil.CardPaySuccess(result.orderid.ToString(),ref errorsuccess);
+
+                if (!string.IsNullOrEmpty(errormsg) || result == null)
+                {
+                    MainModel.ShowLog(errorsuccess, false);
+                    return;
+                }
+
+               // PayHelper.ShowFormPaySuccess(result.orderid.ToString());
+
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("创建礼品卡订单异常"+ex.Message);
+            }
 
         }
+
+        
         #endregion
 
 

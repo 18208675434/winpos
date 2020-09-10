@@ -12,10 +12,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model
         /// 
         /// </summary>
         public string customerphone { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool needdetail { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public bool needdetail { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -40,18 +40,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model
         /// 
         /// </summary>
         public int size { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string sortdirection { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string sorttype { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int startIndex { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string sortdirection { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string sorttype { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public int startIndex { get; set; }
         /// <summary>
         /// 
         /// </summary>

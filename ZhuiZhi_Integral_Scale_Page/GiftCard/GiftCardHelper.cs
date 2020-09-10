@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
@@ -11,6 +12,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 {
     public class GiftCardHelper
     {
+        //<summary>
+        //按比例缩放页面及控件
+        //</summary>
+        private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
+
         public static GiftCardHttp gifthttputil = new GiftCardHttp();
         public static bool BindingMember(CardProduct pro,string buyermemberid,string bindingphone)
         {
@@ -56,6 +62,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 return false;
             }
 
+        }
+
+        public static bool ShowFormGiftCardByCash(CartAloneUpdate cart,out decimal cash)
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormGiftCardByCash frmpaybycash = new FormGiftCardByCash(cart);
+                asf.AutoScaleControlTest(frmpaybycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
+                frmpaybycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybycash.Height) / 2);
+                frmpaybycash.TopMost = true;
+                frmpaybycash.ShowDialog();
+                frmpaybycash.Dispose();
+
+
+                BackHelper.HideFormBackGround();
+                Application.DoEvents();
+                cash=frmpaybycash.RealCash;
+                return frmpaybycash.DialogResult == DialogResult.OK;
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("礼品卡现金支付窗体异常：" + ex.Message);
+                cash=0;
+                return false;
+            }
+        }
+
+
+        public static void ShowFormGiftCardRecord()
+        {
+            FormGiftCardRecord frmgiftcard = new FormGiftCardRecord();
+            asf.AutoScaleControlTest(frmgiftcard, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+            frmgiftcard.Location = new System.Drawing.Point(0, 0);
+            frmgiftcard.ShowDialog();
+            frmgiftcard.Dispose();
+            Application.DoEvents();
         }
 
     }

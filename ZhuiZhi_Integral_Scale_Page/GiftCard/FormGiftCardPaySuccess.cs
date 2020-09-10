@@ -10,9 +10,9 @@ using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
-namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
+namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 {
-    public partial class FormPaySuccess : Form
+    public partial class FormGiftCardPaySuccess : Form
     {
 
 
@@ -53,8 +53,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         //按比例缩放页面及控件
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
-      
-        public FormPaySuccess(string orderid)
+
+        public FormGiftCardPaySuccess(string orderid)
         {
             InitializeComponent();
             CurrentOrderID = orderid;
@@ -83,8 +83,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
                 if (isrun)
                 {
-
-
                         string ErrorMsg = "";
                         PrintDetail printdetail = httputil.GetPrintDetail(CurrentOrderID, ref ErrorMsg);
                         if (ErrorMsg != "" || printdetail == null)
@@ -170,7 +168,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     }
                     else
                     {
-                        Delay.Start(100);
                         GetResult();
                     }
                 }

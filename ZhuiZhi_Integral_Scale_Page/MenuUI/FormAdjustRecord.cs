@@ -216,6 +216,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             bmpWhite = Resources.ResourcePos.White;
             Application.DoEvents();
             btnToday_Click(null,null);
+            txtSkuCode.Focus();
         }
 
 

@@ -47,6 +47,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
             numTxt2.BorderStyle = BorderStyle.None;
             numTxt3.BorderStyle = BorderStyle.None;
             numTxt4.BorderStyle = BorderStyle.None;
+
+            Application.DoEvents();
+            numTxt1.Focus();
         }
 
 

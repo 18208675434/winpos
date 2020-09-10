@@ -962,6 +962,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void timerTask_Tick(object sender, EventArgs e)
         {
 
+
+            //防止异步加载窗体控件 出现红叉
+            if (this.IsHandleCreated && IsEnable) {
             Seconds++;
 
 
@@ -973,7 +976,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 Seconds = 0;
                 UpdateProduct(needAdjustPrice,needLoadIncrementProduct);
-            }           
+            }
+            }
         }
 
         private void UpdateProduct(bool needAdjustPrice, bool needLoadIncrementProduct)

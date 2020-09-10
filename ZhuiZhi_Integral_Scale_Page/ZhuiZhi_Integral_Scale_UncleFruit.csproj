@@ -175,6 +175,12 @@
     <Compile Include="Common\HttpRequest.cs" />
     <Compile Include="Common\BunnyPrintUtil.cs" />
     <Compile Include="Common\MyHttpUtil.cs" />
+    <Compile Include="GiftCard\FormGiftCardMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardMedia.Designer.cs">
+      <DependentUpon>FormGiftCardMedia.cs</DependentUpon>
+    </Compile>
     <Compile Include="GiftCard\FormGiftCardNum.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,10 +199,29 @@
     <Compile Include="GiftCard\FormGiftCardRecord.Designer.cs">
       <DependentUpon>FormGiftCardRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="GiftCard\FormGiftCardByCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardByCash.Designer.cs">
+      <DependentUpon>FormGiftCardByCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPayFail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPayFail.Designer.cs">
+      <DependentUpon>FormGiftCardPayFail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPaySuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPaySuccess.Designer.cs">
+      <DependentUpon>FormGiftCardPaySuccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="GiftCard\GiftCardHelper.cs" />
     <Compile Include="GiftCard\GiftCardHttp.cs" />
+    <Compile Include="GiftCard\GiftCardMediaHelper.cs" />
     <Compile Include="GiftCard\Model\BindingResult.cs" />
-    <Compile Include="GiftCard\Model\GifrCardRecord.cs" />
+    <Compile Include="GiftCard\Model\GiftCardRecord.cs" />
     <Compile Include="GiftCard\Model\GiftCardPaySuccess.cs" />
     <Compile Include="GiftCard\Model\CartAloneUpdate.cs" />
     <Compile Include="GiftCard\Model\CartAloneUpdatePara.cs" />
@@ -1022,6 +1047,9 @@
     <EmbeddedResource Include="ChangePriceUI\FormPricing.resx">
       <DependentUpon>FormPricing.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardMedia.resx">
+      <DependentUpon>FormGiftCardMedia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GiftCard\FormGiftCardNum.resx">
       <DependentUpon>FormGiftCardNum.cs</DependentUpon>
     </EmbeddedResource>
@@ -1030,6 +1058,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GiftCard\FormGiftCardRecord.resx">
       <DependentUpon>FormGiftCardRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardByCash.resx">
+      <DependentUpon>FormGiftCardByCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardPayFail.resx">
+      <DependentUpon>FormGiftCardPayFail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardPaySuccess.resx">
+      <DependentUpon>FormGiftCardPaySuccess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>

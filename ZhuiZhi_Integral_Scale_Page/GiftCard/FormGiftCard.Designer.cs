@@ -131,7 +131,7 @@
             this.pnlHead.Controls.Add(this.btnCancle);
             this.pnlHead.Location = new System.Drawing.Point(0, 0);
             this.pnlHead.Name = "pnlHead";
-            this.pnlHead.Size = new System.Drawing.Size(1178, 60);
+            this.pnlHead.Size = new System.Drawing.Size(1180, 60);
             this.pnlHead.TabIndex = 37;
             // 
             // btnScan
@@ -220,7 +220,7 @@
             this.pnlMember.Controls.Add(this.pnlMemberInfo);
             this.pnlMember.Controls.Add(this.btnLoadPhone);
             this.pnlMember.Controls.Add(this.label8);
-            this.pnlMember.Location = new System.Drawing.Point(756, 90);
+            this.pnlMember.Location = new System.Drawing.Point(756, 73);
             this.pnlMember.Name = "pnlMember";
             this.pnlMember.Size = new System.Drawing.Size(409, 158);
             this.pnlMember.TabIndex = 38;
@@ -347,9 +347,9 @@
             this.panel2.Controls.Add(this.btnInputCardNo);
             this.panel2.Controls.Add(this.btnGiftCardRecord);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(12, 90);
+            this.panel2.Location = new System.Drawing.Point(12, 73);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(738, 658);
+            this.panel2.Size = new System.Drawing.Size(738, 671);
             this.panel2.TabIndex = 39;
             // 
             // pnlCartItem
@@ -362,7 +362,7 @@
             this.pnlCartItem.Controls.Add(this.lblBindingInfo);
             this.pnlCartItem.Controls.Add(this.lblSkuCode);
             this.pnlCartItem.Controls.Add(this.lblSkuName);
-            this.pnlCartItem.Location = new System.Drawing.Point(16, 469);
+            this.pnlCartItem.Location = new System.Drawing.Point(16, -469);
             this.pnlCartItem.Name = "pnlCartItem";
             this.pnlCartItem.Size = new System.Drawing.Size(694, 90);
             this.pnlCartItem.TabIndex = 59;
@@ -458,21 +458,22 @@
             this.panel4.Controls.Add(this.lblCartTotal);
             this.panel4.Controls.Add(this.lblProCount);
             this.panel4.Controls.Add(this.label11);
-            this.panel4.Location = new System.Drawing.Point(23, 589);
+            this.panel4.Location = new System.Drawing.Point(23, 606);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(694, 55);
             this.panel4.TabIndex = 58;
             // 
             // lblCartTotal
             // 
-            this.lblCartTotal.AutoSize = true;
             this.lblCartTotal.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.lblCartTotal.ForeColor = System.Drawing.Color.Black;
-            this.lblCartTotal.Location = new System.Drawing.Point(573, 12);
+            this.lblCartTotal.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCartTotal.Location = new System.Drawing.Point(469, 12);
             this.lblCartTotal.Name = "lblCartTotal";
-            this.lblCartTotal.Size = new System.Drawing.Size(114, 31);
+            this.lblCartTotal.Size = new System.Drawing.Size(218, 31);
             this.lblCartTotal.TabIndex = 8;
-            this.lblCartTotal.Text = "￥200.00";
+            this.lblCartTotal.Text = "￥0.00";
+            this.lblCartTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblProCount
             // 
@@ -542,7 +543,7 @@
             this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCart.RowTemplate.Height = 90;
             this.dgvCart.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCart.Size = new System.Drawing.Size(694, 443);
+            this.dgvCart.Size = new System.Drawing.Size(694, 470);
             this.dgvCart.TabIndex = 57;
             this.dgvCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellClick);
             // 
@@ -665,7 +666,7 @@
             // 
             // pnlPayByCash
             // 
-            this.pnlPayByCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(146)))), ((int)(((byte)(27)))));
+            this.pnlPayByCash.BackColor = System.Drawing.Color.Silver;
             this.pnlPayByCash.Controls.Add(this.lblPayByCash);
             this.pnlPayByCash.Controls.Add(this.picPayByCash);
             this.pnlPayByCash.Location = new System.Drawing.Point(975, 679);
@@ -699,7 +700,7 @@
             // 
             // pnlPayByOnLine
             // 
-            this.pnlPayByOnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
+            this.pnlPayByOnLine.BackColor = System.Drawing.Color.Silver;
             this.pnlPayByOnLine.Controls.Add(this.lblPayByOnLine);
             this.pnlPayByOnLine.Controls.Add(this.picPayByOnLine);
             this.pnlPayByOnLine.Location = new System.Drawing.Point(765, 679);
@@ -763,7 +764,7 @@
             this.panel5.Controls.Add(this.lblBindingPhone);
             this.panel5.Controls.Add(this.btnLoadBindingPhone);
             this.panel5.Controls.Add(this.label10);
-            this.panel5.Location = new System.Drawing.Point(756, 254);
+            this.panel5.Location = new System.Drawing.Point(756, 241);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(409, 132);
             this.panel5.TabIndex = 39;
@@ -832,7 +833,7 @@
             this.panel6.Controls.Add(this.label14);
             this.panel6.Controls.Add(this.label13);
             this.panel6.Controls.Add(this.label12);
-            this.panel6.Location = new System.Drawing.Point(756, 392);
+            this.panel6.Location = new System.Drawing.Point(756, 383);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(409, 271);
             this.panel6.TabIndex = 65;
@@ -903,7 +904,7 @@
             this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.label17.Location = new System.Drawing.Point(32, 31);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(18, 215);
+            this.label17.Size = new System.Drawing.Size(18, 205);
             this.label17.TabIndex = 7;
             this.label17.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
             // 
@@ -974,10 +975,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.lblToast);
+            this.Controls.Add(this.pnlLoading);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.pnlLoading);
-            this.Controls.Add(this.lblToast);
             this.Controls.Add(this.pnlPayByCash);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlPayByOnLine);
