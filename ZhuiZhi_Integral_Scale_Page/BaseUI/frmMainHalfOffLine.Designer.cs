@@ -298,7 +298,7 @@
             this.btnGiftCard.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnGiftCard.ForeColor = System.Drawing.Color.White;
             this.btnGiftCard.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnGiftCard.Location = new System.Drawing.Point(433, 14);
+            this.btnGiftCard.Location = new System.Drawing.Point(779, 15);
             this.btnGiftCard.Name = "btnGiftCard";
             this.btnGiftCard.Size = new System.Drawing.Size(115, 35);
             this.btnGiftCard.TabIndex = 51;
@@ -410,7 +410,7 @@
             this.btnOrderQuery.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnOrderQuery.ForeColor = System.Drawing.Color.White;
             this.btnOrderQuery.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnOrderQuery.Location = new System.Drawing.Point(789, 15);
+            this.btnOrderQuery.Location = new System.Drawing.Point(668, 15);
             this.btnOrderQuery.Name = "btnOrderQuery";
             this.btnOrderQuery.Size = new System.Drawing.Size(105, 35);
             this.btnOrderQuery.TabIndex = 35;
@@ -430,7 +430,7 @@
             this.btnOrderHang.ForeColor = System.Drawing.Color.White;
             this.btnOrderHang.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderHang.Image")));
             this.btnOrderHang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnOrderHang.Location = new System.Drawing.Point(668, 15);
+            this.btnOrderHang.Location = new System.Drawing.Point(547, 15);
             this.btnOrderHang.Name = "btnOrderHang";
             this.btnOrderHang.Size = new System.Drawing.Size(115, 35);
             this.btnOrderHang.TabIndex = 34;
@@ -449,7 +449,7 @@
             this.btnOrderCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnOrderCancle.ForeColor = System.Drawing.Color.White;
             this.btnOrderCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnOrderCancle.Location = new System.Drawing.Point(557, 15);
+            this.btnOrderCancle.Location = new System.Drawing.Point(436, 15);
             this.btnOrderCancle.Name = "btnOrderCancle";
             this.btnOrderCancle.Size = new System.Drawing.Size(105, 35);
             this.btnOrderCancle.TabIndex = 32;

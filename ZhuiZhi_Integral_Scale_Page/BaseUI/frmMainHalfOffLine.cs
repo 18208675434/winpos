@@ -962,9 +962,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void timerTask_Tick(object sender, EventArgs e)
         {
 
-
+            
             //防止异步加载窗体控件 出现红叉
-            if (this.IsHandleCreated && IsEnable) {
+            if (this.ContainsFocus && IsEnable) {
             Seconds++;
 
 
@@ -1510,9 +1510,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-
+        private object thislockDgvCategory = new object();
         private void LoadDgvCategory()
         {
+            lock (thislockDgvCategory)
+            {
+
             try
             {
                 int page = CurrentCategoryPage;
@@ -1611,11 +1614,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     dgvCategory_CellClick(null, new DataGridViewCellEventArgs(0, 0));
                 }
 
-
             }
             catch (Exception ex)
             {
                 ShowLog("加载分类异常" + ex.StackTrace, true);
+            }
+
             }
         }
 
@@ -1849,8 +1853,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
         bool isnewType = false;
+
+        private object thislockDgvGood = new object();
         private void LoadDgvGood(bool isnew, bool isnewType)
         {
+            lock (thislockDgvGood)
+            {
+
+            
             try
             {
                 Other.CrearMemory();
@@ -1956,7 +1966,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 LogManager.WriteLog("ERROR", "加载面板商品异常" + ex.Message);
             }
-           
+            }
         }
 
         private Bitmap GetItemImg(Product pro)
@@ -2711,10 +2721,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        private object thislockDgvGood = new object();
+        private object thislockDgvCart = new object();
         private void UploadDgvCart(Cart cart)
         {
-            lock (thislockDgvGood)
+            lock (thislockDgvCart)
             {
                 try
                 {

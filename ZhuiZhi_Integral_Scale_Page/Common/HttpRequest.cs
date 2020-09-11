@@ -305,7 +305,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             Stream requestStream = null;
             try
             {
-
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
 
                 HttpWebRequest request;

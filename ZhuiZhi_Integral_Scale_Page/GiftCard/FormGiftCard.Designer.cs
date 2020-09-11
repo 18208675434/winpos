@@ -323,7 +323,7 @@
             this.btnLoadPhone.Name = "btnLoadPhone";
             this.btnLoadPhone.Size = new System.Drawing.Size(386, 55);
             this.btnLoadPhone.TabIndex = 30;
-            this.btnLoadPhone.Text = "请输入购卡人的会员手机号或扫描会员码";
+            this.btnLoadPhone.Text = "请输入购卡人的会员手机号";
             this.btnLoadPhone.UseVisualStyleBackColor = false;
             this.btnLoadPhone.Click += new System.EventHandler(this.btnLoadPhone_Click);
             // 

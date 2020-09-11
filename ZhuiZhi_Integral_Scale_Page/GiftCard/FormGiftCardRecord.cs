@@ -515,9 +515,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         private void LoadDgvOrder()
         {
             try
-            {               
-                rbtnPageUp.WhetherEnable = CurrentPage > 1;
+            {
 
+
+                LoadingHelper.ShowLoadingScreen();
+                IsEnable = false;
                 GiftCardRecordPara para = new GiftCardRecordPara();
 
                 if (!string.IsNullOrEmpty(txtPhone.Text))
@@ -540,6 +542,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 
                 if (!string.IsNullOrEmpty(errormsg) || record == null)
                 {
+
+                    LoadingHelper.CloseForm();
+                    IsEnable = true;
+
                     MainModel.ShowLog(errormsg,false);
                     dgvRecord.Rows.Clear();
                     return;
@@ -553,13 +559,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 dgvRecord.ClearSelection();
                 Application.DoEvents();
 
+                rbtnPageUp.WhetherEnable = CurrentPage > 1;
                 rbtnPageDown.WhetherEnable = record.total > CurrentPage * PageSize;
               
-                pnlEmptyOrder.Visible = dgvRecord.Rows.Count == 0;            
-
+                pnlEmptyOrder.Visible = dgvRecord.Rows.Count == 0;
+                LoadingHelper.CloseForm();
+                IsEnable = true;
             }
             catch (Exception ex)
             {
+                LoadingHelper.CloseForm();
+                IsEnable = true;
                 MainModel.ShowLog("加载订单列表异常"+ex.Message,true);
             }
             finally

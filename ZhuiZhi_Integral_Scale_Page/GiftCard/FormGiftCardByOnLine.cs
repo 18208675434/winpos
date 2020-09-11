@@ -109,7 +109,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 tradePara trade = new tradePara();
                 trade.orderid = CurrentOrderID;
                 trade.authcode = CurrentAuthCode;
-                trade.ordertype = 2;
+                trade.ordertype = 32;
 
                 AuthcodeTrade codetrade = httputil.AuthCodeTrade(trade, ref ErrorMsg);
                 Console.WriteLine("authcodetrade"+CurrentOrderID+"    "+CurrentAuthCode);
@@ -270,7 +270,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
             timerAuthCodeTrade.Enabled = false;
             timerSyncTrade.Enabled = false;
-            MemberCenterMediaHelper.HidePayInfo();
+
+            GiftCardMediaHelper.ShowPayInfo(false);
+            //MemberCenterMediaHelper.HidePayInfo();
             }
             catch (Exception ex)
             {
@@ -280,8 +282,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         private void frmOnLinePayResult_Shown(object sender, EventArgs e)
         {
-
-            MemberCenterMediaHelper.ShowPayInfo();
+            GiftCardMediaHelper.ShowPayInfo(true);
+            //MemberCenterMediaHelper.ShowPayInfo();
         }
 
 

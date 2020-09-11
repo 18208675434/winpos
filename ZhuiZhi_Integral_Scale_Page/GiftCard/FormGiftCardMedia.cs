@@ -46,7 +46,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 {
                     dgvCart.Rows.Clear();
 
-                    if (cart.products != null && cart.products.Count > 0)
+                    if (cart!=null && cart.products != null && cart.products.Count > 0)
                     {
                         foreach (CardProduct pro in cart.products)
                         {
@@ -55,13 +55,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                         lblProCount.Text = "(" + cart.products.Count + "件商品)";
 
-                        lblCartTotal.Text = "￥" + cart.pspamt.ToString("f2");                    
+                        lblCartTotal.Text = "￥" + cart.pspamt.ToString("f2");
+
+                        lblTotal.Text =cart.pspamt.ToString("f2");
+                        lblNeedPay.Text = "￥" + cart.pspamt.ToString("f2"); 
                     }
                     else
                     {
                         lblProCount.Text = "(" + 0 + "件商品)";
 
                         lblCartTotal.Text = "￥0.00";
+
+                        lblTotal.Text = "0.00";
+                        lblNeedPay.Text = "￥0.00";
                     }
 
                 })));
@@ -147,6 +153,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             }
         }
 
+
+        public void ShowPayInfo(bool whethershow)
+        {
+            pnlPayInfo.Visible = whethershow;
+        }
         #endregion
 
     }

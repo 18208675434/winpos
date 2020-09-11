@@ -67,6 +67,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             frmmedia.ClearMember();
         }
 
+        public static void ShowPayInfo(bool whethershow ){
+            frmmedia.ShowPayInfo(whethershow);
+        }
 
     }
 }

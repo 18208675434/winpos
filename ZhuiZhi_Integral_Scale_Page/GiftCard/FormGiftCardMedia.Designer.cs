@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGiftCardMedia));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.btnScan = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -39,6 +39,13 @@
             this.picMenu = new System.Windows.Forms.PictureBox();
             this.lblShopName = new System.Windows.Forms.Label();
             this.pnlMember = new System.Windows.Forms.Panel();
+            this.pnlMemberInfo = new System.Windows.Forms.Panel();
+            this.lblMemberCredit = new System.Windows.Forms.Label();
+            this.lblMemberBalance = new System.Windows.Forms.Label();
+            this.lblMemberPhone = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblMember = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -67,23 +74,23 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblNeedPay = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.lblT = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lblBindingPhone = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.pnlMemberInfo = new System.Windows.Forms.Panel();
-            this.lblMemberCredit = new System.Windows.Forms.Label();
-            this.lblMemberBalance = new System.Windows.Forms.Label();
-            this.lblMemberPhone = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
+            this.pnlPayInfo = new System.Windows.Forms.Panel();
+            this.picPayError = new System.Windows.Forms.PictureBox();
+            this.picShowPay = new System.Windows.Forms.PictureBox();
+            this.lblPayInfo2 = new System.Windows.Forms.Label();
+            this.lblPayInfo1 = new System.Windows.Forms.Label();
+            this.picPayInfo = new System.Windows.Forms.PictureBox();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.pnlMember.SuspendLayout();
+            this.pnlMemberInfo.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlCartItem.SuspendLayout();
@@ -92,7 +99,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.pnlMemberInfo.SuspendLayout();
+            this.pnlPayInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picShowPay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHead
@@ -177,6 +187,80 @@
             this.pnlMember.Size = new System.Drawing.Size(409, 171);
             this.pnlMember.TabIndex = 38;
             // 
+            // pnlMemberInfo
+            // 
+            this.pnlMemberInfo.Controls.Add(this.lblMemberCredit);
+            this.pnlMemberInfo.Controls.Add(this.lblMemberBalance);
+            this.pnlMemberInfo.Controls.Add(this.lblMemberPhone);
+            this.pnlMemberInfo.Controls.Add(this.label26);
+            this.pnlMemberInfo.Controls.Add(this.label25);
+            this.pnlMemberInfo.Controls.Add(this.label24);
+            this.pnlMemberInfo.Location = new System.Drawing.Point(13, 44);
+            this.pnlMemberInfo.Name = "pnlMemberInfo";
+            this.pnlMemberInfo.Size = new System.Drawing.Size(350, 119);
+            this.pnlMemberInfo.TabIndex = 32;
+            this.pnlMemberInfo.Visible = false;
+            // 
+            // lblMemberCredit
+            // 
+            this.lblMemberCredit.AutoSize = true;
+            this.lblMemberCredit.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblMemberCredit.Location = new System.Drawing.Point(55, 80);
+            this.lblMemberCredit.Name = "lblMemberCredit";
+            this.lblMemberCredit.Size = new System.Drawing.Size(46, 21);
+            this.lblMemberCredit.TabIndex = 7;
+            this.lblMemberCredit.Text = "1234";
+            // 
+            // lblMemberBalance
+            // 
+            this.lblMemberBalance.AutoSize = true;
+            this.lblMemberBalance.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblMemberBalance.Location = new System.Drawing.Point(55, 41);
+            this.lblMemberBalance.Name = "lblMemberBalance";
+            this.lblMemberBalance.Size = new System.Drawing.Size(105, 30);
+            this.lblMemberBalance.TabIndex = 6;
+            this.lblMemberBalance.Text = "￥100.00";
+            // 
+            // lblMemberPhone
+            // 
+            this.lblMemberPhone.AutoSize = true;
+            this.lblMemberPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblMemberPhone.Location = new System.Drawing.Point(103, 9);
+            this.lblMemberPhone.Name = "lblMemberPhone";
+            this.lblMemberPhone.Size = new System.Drawing.Size(100, 21);
+            this.lblMemberPhone.TabIndex = 5;
+            this.lblMemberPhone.Text = "1234567890";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label26.Location = new System.Drawing.Point(3, 80);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(46, 21);
+            this.label26.TabIndex = 4;
+            this.label26.Text = "积分:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label25.Location = new System.Drawing.Point(3, 46);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(46, 21);
+            this.label25.TabIndex = 3;
+            this.label25.Text = "余额:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label24.Location = new System.Drawing.Point(3, 9);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(94, 21);
+            this.label24.TabIndex = 2;
+            this.label24.Text = "会员手机号:";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -201,6 +285,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.pnlPayInfo);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.pnlCartItem);
             this.panel2.Controls.Add(this.panel4);
@@ -378,26 +463,26 @@
             this.dgvCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCart.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCart.ColumnHeadersHeight = 30;
             this.dgvCart.ColumnHeadersVisible = false;
             this.dgvCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProName});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCart.GridColor = System.Drawing.Color.LightGray;
             this.dgvCart.Location = new System.Drawing.Point(23, 130);
             this.dgvCart.MultiSelect = false;
@@ -405,12 +490,12 @@
             this.dgvCart.ReadOnly = true;
             this.dgvCart.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvCart.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCart.RowTemplate.Height = 90;
             this.dgvCart.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvCart.Size = new System.Drawing.Size(694, 470);
@@ -507,9 +592,9 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.Controls.Add(this.label15);
-            this.panel5.Controls.Add(this.label14);
+            this.panel5.Controls.Add(this.lblNeedPay);
             this.panel5.Controls.Add(this.label13);
-            this.panel5.Controls.Add(this.lblT);
+            this.panel5.Controls.Add(this.lblTotal);
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.lblBindingPhone);
             this.panel5.Controls.Add(this.label10);
@@ -528,17 +613,17 @@
             this.label15.TabIndex = 13;
             this.label15.Text = "————————————————————————————————————————————————————————";
             // 
-            // label14
+            // lblNeedPay
             // 
-            this.label14.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(67)))), ((int)(((byte)(4)))));
-            this.label14.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label14.Location = new System.Drawing.Point(164, 147);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(218, 31);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "￥0.00";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblNeedPay.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblNeedPay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(67)))), ((int)(((byte)(4)))));
+            this.lblNeedPay.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblNeedPay.Location = new System.Drawing.Point(164, 147);
+            this.lblNeedPay.Name = "lblNeedPay";
+            this.lblNeedPay.Size = new System.Drawing.Size(218, 31);
+            this.lblNeedPay.TabIndex = 12;
+            this.lblNeedPay.Text = "￥0.00";
+            this.lblNeedPay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label13
             // 
@@ -550,17 +635,17 @@
             this.label13.TabIndex = 11;
             this.label13.Text = "应付：";
             // 
-            // lblT
+            // lblTotal
             // 
-            this.lblT.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblT.ForeColor = System.Drawing.Color.Black;
-            this.lblT.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblT.Location = new System.Drawing.Point(165, 64);
-            this.lblT.Name = "lblT";
-            this.lblT.Size = new System.Drawing.Size(218, 31);
-            this.lblT.TabIndex = 10;
-            this.lblT.Text = "￥0.00";
-            this.lblT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotal.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblTotal.ForeColor = System.Drawing.Color.Black;
+            this.lblTotal.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotal.Location = new System.Drawing.Point(165, 64);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(218, 31);
+            this.lblTotal.TabIndex = 10;
+            this.lblTotal.Text = "￥0.00";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -592,79 +677,78 @@
             this.label10.TabIndex = 1;
             this.label10.Text = "费用明细";
             // 
-            // pnlMemberInfo
+            // pnlPayInfo
             // 
-            this.pnlMemberInfo.Controls.Add(this.lblMemberCredit);
-            this.pnlMemberInfo.Controls.Add(this.lblMemberBalance);
-            this.pnlMemberInfo.Controls.Add(this.lblMemberPhone);
-            this.pnlMemberInfo.Controls.Add(this.label26);
-            this.pnlMemberInfo.Controls.Add(this.label25);
-            this.pnlMemberInfo.Controls.Add(this.label24);
-            this.pnlMemberInfo.Location = new System.Drawing.Point(13, 44);
-            this.pnlMemberInfo.Name = "pnlMemberInfo";
-            this.pnlMemberInfo.Size = new System.Drawing.Size(350, 119);
-            this.pnlMemberInfo.TabIndex = 32;
-            this.pnlMemberInfo.Visible = false;
+            this.pnlPayInfo.BackColor = System.Drawing.Color.White;
+            this.pnlPayInfo.Controls.Add(this.picPayError);
+            this.pnlPayInfo.Controls.Add(this.picShowPay);
+            this.pnlPayInfo.Controls.Add(this.lblPayInfo2);
+            this.pnlPayInfo.Controls.Add(this.lblPayInfo1);
+            this.pnlPayInfo.Controls.Add(this.picPayInfo);
+            this.pnlPayInfo.Location = new System.Drawing.Point(2, 6);
+            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlPayInfo.Name = "pnlPayInfo";
+            this.pnlPayInfo.Size = new System.Drawing.Size(734, 663);
+            this.pnlPayInfo.TabIndex = 312;
+            this.pnlPayInfo.Visible = false;
             // 
-            // lblMemberCredit
+            // picPayError
             // 
-            this.lblMemberCredit.AutoSize = true;
-            this.lblMemberCredit.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblMemberCredit.Location = new System.Drawing.Point(55, 80);
-            this.lblMemberCredit.Name = "lblMemberCredit";
-            this.lblMemberCredit.Size = new System.Drawing.Size(46, 21);
-            this.lblMemberCredit.TabIndex = 7;
-            this.lblMemberCredit.Text = "1234";
+            this.picPayError.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayError.BackgroundImage")));
+            this.picPayError.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picPayError.Location = new System.Drawing.Point(30, 215);
+            this.picPayError.Name = "picPayError";
+            this.picPayError.Size = new System.Drawing.Size(100, 50);
+            this.picPayError.TabIndex = 12;
+            this.picPayError.TabStop = false;
+            this.picPayError.Visible = false;
             // 
-            // lblMemberBalance
+            // picShowPay
             // 
-            this.lblMemberBalance.AutoSize = true;
-            this.lblMemberBalance.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.lblMemberBalance.Location = new System.Drawing.Point(55, 41);
-            this.lblMemberBalance.Name = "lblMemberBalance";
-            this.lblMemberBalance.Size = new System.Drawing.Size(105, 30);
-            this.lblMemberBalance.TabIndex = 6;
-            this.lblMemberBalance.Text = "￥100.00";
+            this.picShowPay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picShowPay.BackgroundImage")));
+            this.picShowPay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picShowPay.Location = new System.Drawing.Point(30, 124);
+            this.picShowPay.Name = "picShowPay";
+            this.picShowPay.Size = new System.Drawing.Size(100, 58);
+            this.picShowPay.TabIndex = 11;
+            this.picShowPay.TabStop = false;
+            this.picShowPay.Visible = false;
             // 
-            // lblMemberPhone
+            // lblPayInfo2
             // 
-            this.lblMemberPhone.AutoSize = true;
-            this.lblMemberPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblMemberPhone.Location = new System.Drawing.Point(103, 9);
-            this.lblMemberPhone.Name = "lblMemberPhone";
-            this.lblMemberPhone.Size = new System.Drawing.Size(100, 21);
-            this.lblMemberPhone.TabIndex = 5;
-            this.lblMemberPhone.Text = "1234567890";
+            this.lblPayInfo2.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblPayInfo2.ForeColor = System.Drawing.Color.Black;
+            this.lblPayInfo2.Location = new System.Drawing.Point(78, 495);
+            this.lblPayInfo2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPayInfo2.Name = "lblPayInfo2";
+            this.lblPayInfo2.Size = new System.Drawing.Size(534, 31);
+            this.lblPayInfo2.TabIndex = 10;
+            this.lblPayInfo2.Text = "请出示付款码";
+            this.lblPayInfo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPayInfo2.Visible = false;
             // 
-            // label26
+            // lblPayInfo1
             // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label26.Location = new System.Drawing.Point(3, 80);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(46, 21);
-            this.label26.TabIndex = 4;
-            this.label26.Text = "积分:";
+            this.lblPayInfo1.Font = new System.Drawing.Font("微软雅黑", 22F);
+            this.lblPayInfo1.ForeColor = System.Drawing.Color.Black;
+            this.lblPayInfo1.Location = new System.Drawing.Point(78, 430);
+            this.lblPayInfo1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPayInfo1.Name = "lblPayInfo1";
+            this.lblPayInfo1.Size = new System.Drawing.Size(534, 55);
+            this.lblPayInfo1.TabIndex = 9;
+            this.lblPayInfo1.Text = "请出示微信或支付宝付款码";
+            this.lblPayInfo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label25
+            // picPayInfo
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label25.Location = new System.Drawing.Point(3, 46);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(46, 21);
-            this.label25.TabIndex = 3;
-            this.label25.Text = "余额:";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label24.Location = new System.Drawing.Point(3, 9);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(94, 21);
-            this.label24.TabIndex = 2;
-            this.label24.Text = "会员手机号:";
+            this.picPayInfo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayInfo.BackgroundImage")));
+            this.picPayInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPayInfo.Location = new System.Drawing.Point(206, 120);
+            this.picPayInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.picPayInfo.Name = "picPayInfo";
+            this.picPayInfo.Size = new System.Drawing.Size(300, 300);
+            this.picPayInfo.TabIndex = 8;
+            this.picPayInfo.TabStop = false;
             // 
             // FormGiftCardMedia
             // 
@@ -688,6 +772,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.pnlMember.ResumeLayout(false);
             this.pnlMember.PerformLayout();
+            this.pnlMemberInfo.ResumeLayout(false);
+            this.pnlMemberInfo.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -701,8 +787,10 @@
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.pnlMemberInfo.ResumeLayout(false);
-            this.pnlMemberInfo.PerformLayout();
+            this.pnlPayInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picPayError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picShowPay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -746,9 +834,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lblT;
+        private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblNeedPay;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel pnlMemberInfo;
         private System.Windows.Forms.Label lblMemberCredit;
@@ -757,5 +845,11 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Panel pnlPayInfo;
+        private System.Windows.Forms.PictureBox picPayError;
+        private System.Windows.Forms.PictureBox picShowPay;
+        private System.Windows.Forms.Label lblPayInfo2;
+        private System.Windows.Forms.Label lblPayInfo1;
+        private System.Windows.Forms.PictureBox picPayInfo;
     }
 }

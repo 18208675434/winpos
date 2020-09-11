@@ -76,6 +76,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             threadScanCode.Start();
 
             GiftCardMediaHelper.ShowFormGiftCardMedia();
+
+            this.Activate();
         }
 
         private void FormGiftCard_FormClosing(object sender, FormClosingEventArgs e)
@@ -240,6 +242,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                 pnlPayByOnLine.Tag = 0;
                 pnlPayByOnLine.BackColor = Color.Silver;
+
+                GiftCardMediaHelper.UpdateCartInfo(null); //清空客屏
             }
             catch { }
         }
@@ -559,13 +563,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 CurrentCart = new CartAloneUpdate();
             }
 
-            if (CurrentCart.requestproducts == null)
-            {
+            
                 CurrentCart.requestproducts = new List<CardProduct>();
-            }
+            
 
             if (CurrentCart.products != null && CurrentCart.products.Count > 0)
             {
+               
                 CurrentCart.requestproducts.AddRange(CurrentCart.products);
             }
 
