@@ -390,7 +390,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
         private ZtBalanceAccount CurrentBalanceAccount = null;
-        private void LoadBalanceAccount()
+        public void LoadBalanceAccount()
         {
             try
             {
@@ -505,7 +505,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             try
             {
-                MemberCenterHelper.ShowFormSeavePassword();
+                MemberCenterHelper.ShowFormSeavePassword(CurrentMember);
             }
             catch (Exception ex)
             { }
@@ -526,7 +526,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnChangePhone_Click(object sender, EventArgs e)
         {
-            MemberCenterHelper.ShowFormChangePhoneNumber();
+            MemberCenterHelper.ShowFormChangePhoneNumber(CurrentMember);
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

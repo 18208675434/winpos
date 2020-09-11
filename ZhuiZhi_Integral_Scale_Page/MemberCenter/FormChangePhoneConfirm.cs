@@ -6,13 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormChangePhoneConfirm : Form
     {
         MemberCenterHttpUtil memberchttputil = new MemberCenterHttpUtil();
+        
         public FormChangePhoneConfirm()
         {
             InitializeComponent();
@@ -23,6 +26,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+        private Member CurrentMember = null;
+        MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
+        private List<PromotionCoupon> CurrentLstCoupon = null;
 
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -39,9 +45,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     bool mergeresult = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
                     if (mergeresult)
                     {
+
                         MainModel.ShowLog(errrormsg, false);
                         this.DialogResult = DialogResult.OK;
                         this.Close();
+                        FormMemberRecevice r = new FormMemberRecevice();
+                        string ErrorMsgMember = "";
+                        HttpUtil httputil = new HttpUtil();
+                        string phone = MainModel.NewPhone;
+                        Member member = httputil.GetMember(phone, ref ErrorMsgMember);
+                        string gender = CurrentMember.memberinformationresponsevo.gender==0 ? "男":"女";
+                        string birth = CurrentMember.memberinformationresponsevo.birthdaystr;
+                        string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
+                        string balance = "￥" + CurrentMember.barcoderecognitionresponse.balance;
+                        string credit = CurrentMember.creditaccountrepvo.availablecredit.ToString();
+                        string ErrorMsg = "";
+                        CurrentLstCoupon = httputil.ListMemberCouponAvailable(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
+                        string coupon = CurrentLstCoupon.Count + "张";
+                        string creditspec = "";
+                        FormMemberCenterMedia f = new FormMemberCenterMedia();
+                        f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
+                        
                     }
                     else
                     {

@@ -23,9 +23,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 调用接口
         /// </summary>
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
-        public FormChangePhoneNumber()
+        Member member;
+        public FormChangePhoneNumber(Member m)
         {
             InitializeComponent();
+            member = m;
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
@@ -64,7 +66,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnUserPassWordVerify_Click(object sender, EventArgs e)
         {
-            if (MemberCenterHelper.ShowFormChangePhonePayPwd())
+            if (MemberCenterHelper.ShowFormChangePhonePayPwd(member))
             {
                 ShowChangePhonePage();
             }
@@ -101,10 +103,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnVerifyNewPhone_Click(object sender, EventArgs e)
         {
-            
+
+            yanzheng();
+        }
+        public void yanzheng()
+        {
             if (MemberCenterHelper.ShowFormChengPhoneVerifyNewPhone())
             {
-                
+
                 ShowChangePhonePage();
                 label8.ForeColor = Color.DodgerBlue;
                 picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
@@ -112,8 +118,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             }
         }
+        public void yanse()
+        {
+            label8.ForeColor = Color.DodgerBlue;
+            picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
+            label7.BackColor = Color.DodgerBlue;
+            btnOkChange.Visible = true;
+
+        }
 
         private void btnOkChange_Click(object sender, EventArgs e)
+        {
+            queren();
+        }
+        public void queren()
         {
             string errormsg = "";
             bool resule = membercenterhttputil.GetCheckmember(MainModel.NewPhone, ref errormsg);

@@ -20,11 +20,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public string password = "";
         //使用密码支付  RSA公钥加密后的值
         public string PayPassWord = "";
-
+        Member member1;
         MemberCenterHttpUtil memberhttputil = new MemberCenterHttpUtil();
-        public FormChangePhonePayPwd()
+        
+        public FormChangePhonePayPwd(Member member)
         {
+            
             InitializeComponent();
+            member1 = member;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -88,7 +91,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             return base.ProcessDialogKey(keyData);
 
         }
-
+        private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
         private void AddNum(int num, bool isDel)
         {
 
@@ -97,6 +100,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (password.Length > 0)
                 {
                     password = password.Substring(0, password.Length - 1);
+                    
                 }
             }
             else
@@ -115,10 +119,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     //RSA加密
                     PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
-                    VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode);
+                    VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode,member1);
                     if (ErrorMsg != "" || verifyresult == null)
                     {
-
+                        
                         this.Enabled = true;
                         LoadingHelper.CloseForm();
                         CheckUserAndMember(ResultCode, ErrorMsg);
@@ -128,6 +132,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         MainModel.BalancePwdErrorCode = -1;
                         if (verifyresult.success == 1)
                         {
+                            
                             //校验成功
                             password = "";
                             MainModel.ChangePwd = "";
@@ -136,9 +141,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             LoadingHelper.CloseForm();
                             this.DialogResult = DialogResult.OK;
                             this.Close();
+                            FormHeBing m = new FormHeBing();
+                            asf.AutoScaleControlTest(m, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
+                            m.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - m.Width) / 2, (Screen.AllScreens[0].Bounds.Height - m.Height) / 2);
+                            m.TopMost = true;
+                            
                         }
                         else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
                         {
+                            
                             MainModel.ChangePwd = "";
                             password = "";
                             UpdatePassWord();
@@ -237,6 +248,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 LogManager.WriteLog(ex.Message);
             }
+
+        }
+
+        private void FormChangePhonePayPwd_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPassW6_Click(object sender, EventArgs e)
+        {
 
         }
 
