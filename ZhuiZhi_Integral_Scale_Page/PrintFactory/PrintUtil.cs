@@ -128,6 +128,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return false;
             }
         }
+
+
+        public static bool PrintGiftCardOrder(ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model.GiftCardPrintDetail printdetail, bool isRefound, ref string errormsg)
+        {
+            try
+            {
+                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                if (ScaleName == ScaleType.托利多.ToString())
+                {
+                    return ToledoPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
+                }
+                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                {
+                    return SprtPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
        
     }
 }

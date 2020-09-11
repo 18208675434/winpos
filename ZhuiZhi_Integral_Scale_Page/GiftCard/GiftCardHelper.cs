@@ -92,6 +92,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             }
         }
 
+        public static bool ShowFormGiftCardByOnline(string orderid)
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormGiftCardByOnLine frmpaybycash = new FormGiftCardByOnLine(orderid);
+                asf.AutoScaleControlTest(frmpaybycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
+                frmpaybycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybycash.Height) / 2);
+                frmpaybycash.TopMost = true;
+                frmpaybycash.ShowDialog();
+                frmpaybycash.Dispose();
+
+                BackHelper.HideFormBackGround();
+                Application.DoEvents();
+                return frmpaybycash.DialogResult == DialogResult.OK;
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("礼品卡现金支付窗体异常：" + ex.Message);
+                return false;
+            }
+        }
+
 
         public static void ShowFormGiftCardRecord()
         {
@@ -101,6 +126,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             frmgiftcard.ShowDialog();
             frmgiftcard.Dispose();
             Application.DoEvents();
+        }
+
+
+        public static bool ShowFormGiftCardPaySuccess(string orderid)
+        {
+            try
+            {
+
+                FormGiftCardPaySuccess frmpaysuccess = new FormGiftCardPaySuccess(orderid);
+                asf.AutoScaleControlTest(frmpaysuccess, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmpaysuccess.Location = new System.Drawing.Point(0, 0);
+                frmpaysuccess.TopMost = true;
+
+
+                frmpaysuccess.ShowDialog();
+
+                frmpaysuccess.Dispose();
+                Application.DoEvents();
+                return frmpaysuccess.DialogResult == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("现金支付弹窗出现异常" + ex.Message);
+                return false;
+            }
         }
 
     }

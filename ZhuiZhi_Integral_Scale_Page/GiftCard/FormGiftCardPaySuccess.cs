@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
@@ -54,6 +55,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
+        private GiftCardHttp gifthttputil = new GiftCardHttp();
         public FormGiftCardPaySuccess(string orderid)
         {
             InitializeComponent();
@@ -83,19 +85,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             {
                 if (isrun)
                 {
-                        string ErrorMsg = "";
-                        PrintDetail printdetail = httputil.GetPrintDetail(CurrentOrderID, ref ErrorMsg);
-                        if (ErrorMsg != "" || printdetail == null)
+                    string errorsuccess = "";
+                    GiftCardPrintDetail printdetail = gifthttputil.CardPaySuccess(CurrentOrderID, ref errorsuccess);
+
+
+                    if (errorsuccess != "" || printdetail == null)
                         {
-                            LogManager.WriteLog("获取打印小票信息异常：" + ErrorMsg);
+                            LogManager.WriteLog("获取礼品卡打印小票信息异常：" + errorsuccess);
                             Delay.Start(100);
                             SEDPrint();
                         }
                         else
                         {
 
+                            lblPayDetails.Text = printdetail.paydetails;
+
                             //显示收银详情
-                            foreach (Payinfo pay in printdetail.payinfo)
+                            foreach (PayinfoItem pay in printdetail.payinfo)
                             {
                                 lblCashierInfo.Text += pay.type + " ￥" + pay.amount + "|";
                             }
@@ -107,7 +113,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                             Application.DoEvents();
                             string PrintErrorMsg = "";
-                            bool printresult = PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
+                            bool printresult = PrintUtil.PrintGiftCardOrder(printdetail, false, ref PrintErrorMsg);
+                                //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
 
 
                             if (PrintErrorMsg != "" || !printresult)
@@ -117,11 +124,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                             else
                             {
                                 LogManager.WriteLog(DateTime.Now.ToString() + printresult.ToString() + OrderResult.ToString());
-                                printresult = true;
-                                if (OrderResult)
-                                {
-                                    this.Close();
-                                }
+
+                                this.Close();
+
                             }
 
                         }

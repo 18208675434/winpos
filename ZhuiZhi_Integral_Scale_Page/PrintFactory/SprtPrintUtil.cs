@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
@@ -120,6 +121,57 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
 
                        PrintTextByPaperWidth(PrintHelper.GetOrderPrintInfo(printdetail,isRefound));
+
+                       Application.DoEvents();
+                       return true;
+
+                   }
+                   catch (Exception ex)
+                   {
+                       LogManager.WriteLog("ERROR", "打印订单小票出现异常" + ex.Message + ex.StackTrace);
+                       errormsg = "打印订单小票出现异常" + ex.Message;
+                       return false;
+                   }
+               }
+           }
+
+           #endregion
+
+
+           #region  打印礼品卡订单
+           public static object lockgiftcardprinting = new object();
+           public static bool PrintGiftCardOrder(GiftCardPrintDetail printdetail, bool isRefound, ref string errormsg)
+           {
+               lock (lockgiftcardprinting)
+               {
+                   try
+                   {
+                       try { LogManager.WriteLog("打印订单:" + printdetail.orderid); }
+                       catch { }
+
+
+                       IniPrintSize();
+
+                       //每次打印先清空之前内容
+                       lstPrintStr = new List<string>();
+
+
+                       m_hPrinter = POS_Port_OpenA("LPT1:", POS_PT_LPT, false, "");
+                       POS_Control_AlignType(m_hPrinter, 1);  //设置右面对齐
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, "欢迎光临" + "\r\n");
+
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, MainModel.CurrentShopInfo.tenantname + "\r\n");
+
+                       POS_Control_ReSet(m_hPrinter);
+
+                       POS_Port_Close(m_hPrinter);  //打印之后必须关闭 否则打印内容多会打印不全
+
+                       lstPrintStr.Add(" ");
+
+
+
+
+                       PrintTextByPaperWidth(PrintHelper.GetGiftCardOrderPrintInfo(printdetail, isRefound));
 
                        Application.DoEvents();
                        return true;

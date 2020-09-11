@@ -244,7 +244,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         }
 
 
-        public GiftCardPaySuccess CardPaySuccess(string orderid, ref string errormsg)
+        public GiftCardPrintDetail CardPaySuccess(string orderid, ref string errormsg)
         {
             try
             {
@@ -255,10 +255,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
 
                 string json = HttpGET(url, sort);
+
+                LogManager.WriteLog("DEBUG", json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
-                    GiftCardPaySuccess objresult = JsonConvert.DeserializeObject<GiftCardPaySuccess>(rd.data.ToString());
+                    GiftCardPrintDetail objresult = JsonConvert.DeserializeObject<GiftCardPrintDetail>(rd.data.ToString());
                     return objresult;
                 }
                 else

@@ -26,6 +26,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         #region 成员变量
         HttpUtil httputil = new HttpUtil();
 
+        GiftCardHttp gifthttp = new GiftCardHttp();
+
         /// <summary>
         /// 委托解决跨线程调用
         /// </summary>
@@ -308,7 +310,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                     string orderid = dgvRecord.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
                     string ErrorMsg = "";
-                    PrintDetail printdetail = httputil.GetPrintDetail(orderid, ref ErrorMsg);
+                    GiftCardPrintDetail printdetail = gifthttp.CardPaySuccess(orderid, ref ErrorMsg);
 
                     if (ErrorMsg != "" || printdetail == null)
                     {
@@ -319,7 +321,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     {
                         //SEDPrint(printdetail);
                         string PrintErrorMsg = "";
-                        bool printresult = PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
+                        bool printresult = PrintUtil.PrintGiftCardOrder(printdetail, false, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
 
                         if (PrintErrorMsg != "" || !printresult)
                         {

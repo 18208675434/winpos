@@ -305,7 +305,6 @@
             this.btnGiftCard.Text = "礼品卡购买";
             this.btnGiftCard.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnGiftCard.UseVisualStyleBackColor = false;
-            this.btnGiftCard.Visible = false;
             this.btnGiftCard.Click += new System.EventHandler(this.btnGiftCard_Click);
             // 
             // btnAdjustPrice

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
@@ -121,6 +122,66 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                         lstPrintStr.Add(MergeStr(memberinfo.title, stramount, BodyCharCountOfLine, PageSize));
                     }
                 }
+
+                lstPrintStr.Add(getStrLine());
+
+                lstPrintStr.Add("多谢惠顾，欢迎下次光临！");
+
+                return lstPrintStr;
+            }
+            catch
+            {
+                return lstPrintStr;
+            }
+        }
+
+
+        /// <summary>
+        /// 获取礼品卡订单
+        /// </summary>
+        /// <param name="receipt"></param>
+        /// <returns></returns>
+        public static List<string> GetGiftCardOrderPrintInfo(GiftCardPrintDetail printdetail, bool isRefound)
+        {
+            List<string> lstPrintStr = new List<string>();
+            try
+            {
+
+                lstPrintStr.Add("订单号：" + printdetail.orderid);
+                lstPrintStr.Add("门店：" + MainModel.CurrentShopInfo.shopname);
+                lstPrintStr.Add("地址：" + MainModel.CurrentShopInfo.address);
+                lstPrintStr.Add("电话：" + MainModel.CurrentShopInfo.tel);
+                //lstPrintStr.Add(MergeStr("收银员：" + MainModel.CurrentUser.nickname, "机：" + MainModel.CurrentShopInfo.deviceid, BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MainModel.GetDateTimeByStamp(printdetail.orderat).ToString("yyyy-MM-dd HH:mm:ss"));
+                lstPrintStr.Add(getStrLine());
+
+
+                //lstPrintStr.AddRange(PrintHelper.MergeStr("商品", "单价", "重量(kg)", "金额", BodyCharCountOfLine));
+
+                foreach (PrintProduct pro in printdetail.products)
+                {
+                    lstPrintStr.Add(pro.cardno + "  " + pro.title);
+
+                        string priceandnum = "   " + pro.pspamt.ToString("f2") + "  X  " + pro.num;
+
+                        lstPrintStr.Add(MergeStr(priceandnum, pro.pspamt.ToString("f2"), BodyCharCountOfLine, PageSize - 8));
+                    
+                }
+                lstPrintStr.Add(getStrLine());
+
+                lstPrintStr.Add(MergeStr("件数合计:", printdetail.productcount.ToString(), BodyCharCountOfLine, PageSize));
+
+                lstPrintStr.Add(MergeStr("应收金额:", printdetail.pspamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(getStrLine());
+                foreach (PaydetailItem paydetail in printdetail.paydetail)
+                {
+
+                    string stramount = paydetail.amount;
+
+                    lstPrintStr.Add(MergeStr(paydetail.title, stramount, BodyCharCountOfLine, PageSize));
+
+                }
+
 
                 lstPrintStr.Add(getStrLine());
 

@@ -827,7 +827,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         #region 支付
         private void pnlPayByOnLine_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (!IsEnable || pnlPayByOnLine.Tag == null || pnlPayByOnLine.Tag.ToString() == "0")
+                {
+                    return;
+                }
 
+                IsEnable = false;
+                decimal cash = 0;
+                CreateCardOrder result = CreateGiftCardOrder(CurrentCart, cash);
+                if (result != null)
+                {
+                    if (GiftCardHelper.ShowFormGiftCardByOnline(result.orderid.ToString()))
+                    {
+                        GiftCardHelper.ShowFormGiftCardPaySuccess(result.orderid.ToString());
+
+                        // PayHelper.ShowFormPaySuccess(result.orderid.ToString());
+
+                        ClearForm();
+                    }
+
+                  
+                }
+               
+
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("现金支付异常" + ex.Message, true);
+            }
         }
 
         private void pnlPayByCash_Click(object sender, EventArgs e)
@@ -843,7 +873,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 decimal cash = 0;
                 if (GiftCardHelper.ShowFormGiftCardByCash(CurrentCart, out cash))
                 {
-                    CreateGiftCardOrder(CurrentCart,cash);
+                  CreateCardOrder result =  CreateGiftCardOrder(CurrentCart,cash);
+                  if (result != null)
+                  {
+                      GiftCardHelper.ShowFormGiftCardPaySuccess(result.orderid.ToString());
+
+                      // PayHelper.ShowFormPaySuccess(result.orderid.ToString());
+
+                      ClearForm();
+                  }
+
+                  
                 }
 
                 IsEnable = true;
@@ -855,7 +895,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
         }
 
 
-        private void CreateGiftCardOrder(CartAloneUpdate cart,decimal cash)
+        private CreateCardOrder CreateGiftCardOrder(CartAloneUpdate cart,decimal cash)
         {
             try
             {
@@ -884,25 +924,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 if (!string.IsNullOrEmpty(errormsg) || result == null)
                 {
                     MainModel.ShowLog(errormsg, false);
-                    return;
+                    return null;
                 }
 
-                string errorsuccess = "";
-                GiftCardPaySuccess paysuccess = gifthttputil.CardPaySuccess(result.orderid.ToString(),ref errorsuccess);
-
-                if (!string.IsNullOrEmpty(errormsg) || result == null)
-                {
-                    MainModel.ShowLog(errorsuccess, false);
-                    return;
-                }
-
-               // PayHelper.ShowFormPaySuccess(result.orderid.ToString());
-
-                ClearForm();
+                return result;
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("创建礼品卡订单异常"+ex.Message);
+                return null;
             }
 
         }

@@ -39,6 +39,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timerClose = new System.Windows.Forms.Timer(this.components);
+            this.lblPayDetails = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,12 +135,23 @@
             this.timerClose.Interval = 1000;
             this.timerClose.Tick += new System.EventHandler(this.timerClose_Tick);
             // 
-            // FormPaySuccess
+            // lblPayDetails
+            // 
+            this.lblPayDetails.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblPayDetails.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblPayDetails.Location = new System.Drawing.Point(147, 236);
+            this.lblPayDetails.Name = "lblPayDetails";
+            this.lblPayDetails.Size = new System.Drawing.Size(892, 31);
+            this.lblPayDetails.TabIndex = 16;
+            this.lblPayDetails.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // FormGiftCardPaySuccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.lblPayDetails);
             this.Controls.Add(this.lblSecond);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblTime);
@@ -149,7 +161,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormPaySuccess";
+            this.Name = "FormGiftCardPaySuccess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormPaySuccess";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPaySuccess_FormClosing);
@@ -171,5 +183,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timerClose;
+        private System.Windows.Forms.Label lblPayDetails;
     }
 }

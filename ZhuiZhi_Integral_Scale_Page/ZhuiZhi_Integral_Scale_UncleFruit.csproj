@@ -217,10 +217,17 @@
     <Compile Include="GiftCard\FormGiftCardPaySuccess.Designer.cs">
       <DependentUpon>FormGiftCardPaySuccess.cs</DependentUpon>
     </Compile>
+    <Compile Include="GiftCard\FormGiftCardByOnLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardByOnLine.Designer.cs">
+      <DependentUpon>FormGiftCardByOnLine.cs</DependentUpon>
+    </Compile>
     <Compile Include="GiftCard\GiftCardHelper.cs" />
     <Compile Include="GiftCard\GiftCardHttp.cs" />
     <Compile Include="GiftCard\GiftCardMediaHelper.cs" />
     <Compile Include="GiftCard\Model\BindingResult.cs" />
+    <Compile Include="GiftCard\Model\GiftCardPrintDetail.cs" />
     <Compile Include="GiftCard\Model\GiftCardRecord.cs" />
     <Compile Include="GiftCard\Model\GiftCardPaySuccess.cs" />
     <Compile Include="GiftCard\Model\CartAloneUpdate.cs" />
@@ -1073,6 +1080,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GiftCard\FormGiftCardPaySuccess.resx">
       <DependentUpon>FormGiftCardPaySuccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardByOnLine.resx">
+      <DependentUpon>FormGiftCardByOnLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>

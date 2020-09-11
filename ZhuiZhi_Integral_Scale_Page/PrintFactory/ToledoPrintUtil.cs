@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
@@ -68,6 +69,51 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                        lstPrintStr.Add(" ");
 
                        lstPrintStr.AddRange(PrintHelper.GetOrderPrintInfo(printdetail, isRefound));
+
+                       PrintTextByPaperWidth(lstPrintStr);
+
+                       Application.DoEvents();
+                       return true;
+
+                   }
+                   catch (Exception ex)
+                   {
+                       LogManager.WriteLog("ERROR", "打印订单小票出现异常" + ex.Message + ex.StackTrace);
+                       errormsg = "打印订单小票出现异常" + ex.Message;
+                       return false;
+                   }
+               }
+           }
+
+           #endregion
+
+           #region  打印礼品卡订单
+           public static object lockGIftCardprinting = new object();
+           public static bool PrintGiftCardOrder(GiftCardPrintDetail printdetail, bool isRefound, ref string errormsg)
+           {
+               lock (lockGIftCardprinting)
+               {
+                   try
+                   {
+                       try { LogManager.WriteLog("打印订单:" + printdetail.orderid); }
+                       catch { }
+
+
+                       IniPrintSize();
+
+                       //每次打印先清空之前内容
+                       lstPrintStr = new List<string>();
+
+
+
+                       // lstPrintStr.Add(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+
+                       PrintText(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+                       PrintText(MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize));
+                       //lstPrintStr.Add(MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
+                       lstPrintStr.Add(" ");
+
+                       lstPrintStr.AddRange(PrintHelper.GetGiftCardOrderPrintInfo(printdetail, isRefound));
 
                        PrintTextByPaperWidth(lstPrintStr);
 
@@ -359,7 +405,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                    foreach (string str in lstprints)
                    {
 
-                       strprint += " " + str + "\r\n"; //每行前面加两个空格 防止纸张偏打印不全 两边都留间距
+                       strprint +=  str + "\r\n"; //每行前面加两个空格 防止纸张偏打印不全 两边都留间距
 
                    }
 
