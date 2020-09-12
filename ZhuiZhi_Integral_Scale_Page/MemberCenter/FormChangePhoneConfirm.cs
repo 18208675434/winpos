@@ -32,6 +32,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            sure();
+
+        }
+        public void sure()
+        {
             if (MainModel.IsMemberCenter)
             {
                 btnOK.Text = "确认合并";
@@ -41,7 +46,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 string errrormsg = "";
                 if (resule)
                 {
-                    
+
                     bool mergeresult = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
                     if (mergeresult)
                     {
@@ -54,7 +59,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         HttpUtil httputil = new HttpUtil();
                         string phone = MainModel.NewPhone;
                         Member member = httputil.GetMember(phone, ref ErrorMsgMember);
-                        string gender = CurrentMember.memberinformationresponsevo.gender==0 ? "男":"女";
+                        string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
                         string birth = CurrentMember.memberinformationresponsevo.birthdaystr;
                         string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
                         string balance = "￥" + CurrentMember.barcoderecognitionresponse.balance;
@@ -65,7 +70,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         string creditspec = "";
                         FormMemberCenterMedia f = new FormMemberCenterMedia();
                         f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
-                        
+
                     }
                     else
                     {
@@ -98,9 +103,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     this.Close();
                 }
             }
-
         }
-
         private void FormChangePhoneConfirm_Load(object sender, EventArgs e)
         {
             if (MainModel.IsMemberCenter)

@@ -28,6 +28,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             InitializeComponent();
             member = m;
+            
+
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
@@ -110,8 +112,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             if (MemberCenterHelper.ShowFormChengPhoneVerifyNewPhone())
             {
+                string name = "验证新手机号";
 
-                ShowChangePhonePage();
+                if (name == btnVerifyNewPhone.Text)
+                {
+                    ShowChangePhonePage();
+                }
+                
                 label8.ForeColor = Color.DodgerBlue;
                 picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
                 label7.BackColor = Color.DodgerBlue;
@@ -130,6 +137,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnOkChange_Click(object sender, EventArgs e)
         {
             queren();
+            
         }
         public void queren()
         {
@@ -152,6 +160,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
             }
         }
+        
         private void ShowChangePhonePage()
         {
             switch (MainModel.ShowChangePhonePage)
@@ -221,8 +230,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         }
 
-        
 
+        
         private void label9_Click(object sender, EventArgs e)
         {
             FormMemberRecevice m = new FormMemberRecevice();
@@ -230,6 +239,59 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             m.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - m.Width) / 2, (Screen.AllScreens[0].Bounds.Height - m.Height) / 2);
             m.TopMost = true;
             m.ShowDialog();
+            label8.ForeColor = Color.DodgerBlue;
+            picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
+            label7.BackColor = Color.DodgerBlue;
+            button1.Visible = true;
+            btnVerifyNewPhone.Visible = false;
+            label9.Visible = false;
+            label10.Visible = true;
+            label11.Visible = true;
+            GetPhone(MainModel.NewPhone);
+            this.Refresh();
+            
+
         }
+        public void GetPhone(string phone)
+        {
+            label10.Text = phone;
+            label10.Font = new System.Drawing.Font("微软雅黑", 18, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            MainModel.NewPhone = label10.Text;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormHeBing f = new FormHeBing();
+            asf.AutoScaleControlTest(f, 550, 200, 380 * MainModel.midScale, 200 * MainModel.midScale, true);
+            f.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - f.Width) / 2, (Screen.AllScreens[0].Bounds.Height - f.Height) / 2);
+            f.TopMost = true;
+
+            f.ShowDialog();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+            FormMemberRecevice menre = new FormMemberRecevice();
+            asf.AutoScaleControlTest(menre, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
+            menre.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - menre.Width) / 2, (Screen.AllScreens[0].Bounds.Height - menre.Height) / 2);
+            menre.TopMost = true;
+            menre.GetNewPhone();
+            menre.ShowDialog();
+        }
+        //public void empty()
+        //{
+        //    btnVerifyNewPhone.Visible = true;
+        //    label9.Visible = true;
+        //    label10.Visible = true;
+        //    label11.Visible = true;
+        //    picStepThree.Visible = false; ;
+        //    label8.Visible = false;
+        //    button1.Visible = false;
+        //}
     }
 }

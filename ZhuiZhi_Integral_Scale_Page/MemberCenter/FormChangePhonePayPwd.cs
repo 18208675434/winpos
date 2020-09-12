@@ -141,10 +141,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             LoadingHelper.CloseForm();
                             this.DialogResult = DialogResult.OK;
                             this.Close();
-                            FormHeBing m = new FormHeBing();
-                            asf.AutoScaleControlTest(m, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
-                            m.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - m.Width) / 2, (Screen.AllScreens[0].Bounds.Height - m.Height) / 2);
-                            m.TopMost = true;
+                            
                             
                         }
                         else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)

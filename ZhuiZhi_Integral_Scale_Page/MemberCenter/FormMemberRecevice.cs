@@ -17,13 +17,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public FormMemberRecevice()
         {
             InitializeComponent();
+
         }
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        
+        public void GetNewPhone()
+        {
+            txtOldCardNumber.Text = MainModel.NewPhone;
+        }
         private void btOldCardOK_Click(object sender, EventArgs e)
         {
             string ErrorMsgMember= "";
@@ -32,22 +36,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             Member member = httputil.GetMember(phone , ref ErrorMsgMember);
             if (member == null)
             {
+           
                 MainModel.ShowLog(ErrorMsgMember, false);
+                
                 this.Close();
             }
             else
             {
 
                 FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(member);
-                
+
                 asf.AutoScaleControlTest(pwd, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
                 pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
                 pwd.TopMost = true;
                 pwd.ShowDialog();
+                FormChangePhoneNumber con = new FormChangePhoneNumber(member);
+                string number = txtOldCardNumber.Text;
+                con.GetPhone(number);
                 this.Close();
-                
+
+
             }
         }
+       
 
         private void FormMemberRecevice_Load(object sender, EventArgs e)
         {
