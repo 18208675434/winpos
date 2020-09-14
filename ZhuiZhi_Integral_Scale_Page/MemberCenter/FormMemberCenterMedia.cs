@@ -45,6 +45,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 lblPhone.Text = phone; 
+                
                 lblMemberInfo.Text = memberinfo;
                 lblBalance.Text = balance;
                 lblCredit.Text = credit;
@@ -84,7 +85,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
         }
-
+        public void refresh()
+        {
+            this.Refresh();
+        }
         public void ShowPayInfo()
         {
             try
@@ -420,6 +424,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
         private void lblPhone_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlMemberInfo_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -27,12 +27,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public string oldpassword = "";
         //存储新密码
         public string NowNewPassWord = "";
+        Member member;
 
         MemberCenterHttpUtil McHttpUtil = new MemberCenterHttpUtil();
 
-        public FormSeavePassword()
+        public FormSeavePassword(Member m)
         {
             InitializeComponent();
+            member = m;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -132,7 +134,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                         string ErrorMsg = "";
                         int ResultCode = 0;
-                        VerifyBalancePwd verifyresult = McHttpUtil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode);
+                        VerifyBalancePwd verifyresult = McHttpUtil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode,member);
 
                         if (ErrorMsg != "" || verifyresult == null)
                         {

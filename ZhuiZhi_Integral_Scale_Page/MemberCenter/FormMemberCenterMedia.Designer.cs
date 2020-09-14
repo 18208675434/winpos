@@ -867,6 +867,7 @@
             this.pnlMemberInfo.Name = "pnlMemberInfo";
             this.pnlMemberInfo.Size = new System.Drawing.Size(460, 582);
             this.pnlMemberInfo.TabIndex = 38;
+            this.pnlMemberInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMemberInfo_Paint);
             // 
             // lblCreditAmount
             // 

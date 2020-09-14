@@ -29,33 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberRecevice));
-            this.txtOldCardNumber = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.btOldCardOK = new System.Windows.Forms.Button();
             this.labform = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtOldCardNumber = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtOldCardNumber
-            // 
-            this.txtOldCardNumber.BackColor = System.Drawing.Color.White;
-            this.txtOldCardNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtOldCardNumber.DecimalDigits = 3;
-            this.txtOldCardNumber.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtOldCardNumber.Location = new System.Drawing.Point(17, 61);
-            this.txtOldCardNumber.LockFocus = true;
-            this.txtOldCardNumber.MaxDeciaml = ((long)(0));
-            this.txtOldCardNumber.MaxLength = 100;
-            this.txtOldCardNumber.Name = "txtOldCardNumber";
-            this.txtOldCardNumber.NeedBoard = true;
-            this.txtOldCardNumber.OnlyNumber = true;
-            this.txtOldCardNumber.Size = new System.Drawing.Size(347, 50);
-            this.txtOldCardNumber.TabIndex = 106;
-            this.txtOldCardNumber.WaterText = "输入会员账号";
-            // 
             // btOldCardOK
             // 
-            this.btOldCardOK.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btOldCardOK.BackColor = System.Drawing.Color.OrangeRed;
             this.btOldCardOK.FlatAppearance.BorderSize = 0;
             this.btOldCardOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btOldCardOK.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -67,6 +50,7 @@
             this.btOldCardOK.TabIndex = 104;
             this.btOldCardOK.Text = "确定";
             this.btOldCardOK.UseVisualStyleBackColor = false;
+            this.btOldCardOK.Click += new System.EventHandler(this.btOldCardOK_Click);
             // 
             // labform
             // 
@@ -91,6 +75,23 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // txtOldCardNumber
+            // 
+            this.txtOldCardNumber.BackColor = System.Drawing.Color.White;
+            this.txtOldCardNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOldCardNumber.DecimalDigits = 3;
+            this.txtOldCardNumber.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtOldCardNumber.Location = new System.Drawing.Point(17, 61);
+            this.txtOldCardNumber.LockFocus = true;
+            this.txtOldCardNumber.MaxDeciaml = ((long)(0));
+            this.txtOldCardNumber.MaxLength = 100;
+            this.txtOldCardNumber.Name = "txtOldCardNumber";
+            this.txtOldCardNumber.NeedBoard = true;
+            this.txtOldCardNumber.OnlyNumber = true;
+            this.txtOldCardNumber.Size = new System.Drawing.Size(347, 50);
+            this.txtOldCardNumber.TabIndex = 0;
+            this.txtOldCardNumber.WaterText = "输入会员账号";
+            // 
             // FormMemberRecevice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -104,6 +105,7 @@
             this.Name = "FormMemberRecevice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormMemberRecevice";
+            this.Load += new System.EventHandler(this.FormMemberRecevice_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
