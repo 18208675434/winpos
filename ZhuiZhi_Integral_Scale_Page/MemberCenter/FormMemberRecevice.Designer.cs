@@ -89,7 +89,7 @@
             this.txtOldCardNumber.NeedBoard = true;
             this.txtOldCardNumber.OnlyNumber = true;
             this.txtOldCardNumber.Size = new System.Drawing.Size(347, 50);
-            this.txtOldCardNumber.TabIndex = 106;
+            this.txtOldCardNumber.TabIndex = 0;
             this.txtOldCardNumber.WaterText = "输入会员账号";
             // 
             // FormMemberRecevice

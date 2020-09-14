@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
@@ -67,7 +69,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LogManager.WriteLog("关闭客屏异常" + ex.Message);
             }
         }
-
+        
         public static void UpdateDgvTemplate(List<Bitmap> lstbmp)
         {
             try

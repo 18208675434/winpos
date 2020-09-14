@@ -81,6 +81,8 @@
             this.lblMemberInfo = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnbang = new System.Windows.Forms.Button();
+            this.btnguan = new System.Windows.Forms.Button();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -366,6 +368,8 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.btnguan);
+            this.panel1.Controls.Add(this.btnbang);
             this.panel1.Controls.Add(this.btnChangePhone);
             this.panel1.Controls.Add(this.pnlCoupon);
             this.panel1.Controls.Add(this.lblCreditAmount);
@@ -541,7 +545,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(170, 521);
+            this.label10.Location = new System.Drawing.Point(45, 572);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(28, 25);
             this.label10.TabIndex = 67;
@@ -725,6 +729,42 @@
             this.label1.TabIndex = 50;
             this.label1.Text = "会员中心";
             // 
+            // btnbang
+            // 
+            this.btnbang.BackColor = System.Drawing.Color.Transparent;
+            this.btnbang.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnbang.BackgroundImage")));
+            this.btnbang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnbang.FlatAppearance.BorderSize = 0;
+            this.btnbang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnbang.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnbang.ForeColor = System.Drawing.Color.White;
+            this.btnbang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnbang.Location = new System.Drawing.Point(175, 515);
+            this.btnbang.Name = "btnbang";
+            this.btnbang.Size = new System.Drawing.Size(100, 40);
+            this.btnbang.TabIndex = 76;
+            this.btnbang.Text = "绑定";
+            this.btnbang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnbang.UseVisualStyleBackColor = false;
+            // 
+            // btnguan
+            // 
+            this.btnguan.BackColor = System.Drawing.Color.Transparent;
+            this.btnguan.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnguan.BackgroundImage")));
+            this.btnguan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnguan.FlatAppearance.BorderSize = 0;
+            this.btnguan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnguan.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnguan.ForeColor = System.Drawing.Color.White;
+            this.btnguan.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnguan.Location = new System.Drawing.Point(175, 585);
+            this.btnguan.Name = "btnguan";
+            this.btnguan.Size = new System.Drawing.Size(100, 40);
+            this.btnguan.TabIndex = 77;
+            this.btnguan.Text = "关联旧卡";
+            this.btnguan.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnguan.UseVisualStyleBackColor = false;
+            // 
             // FormMemberCenter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -819,5 +859,7 @@
         private System.Windows.Forms.Label lblCreditAmount;
         private System.Windows.Forms.Panel pnlCoupon;
         private System.Windows.Forms.Button btnChangePhone;
+        private System.Windows.Forms.Button btnbang;
+        private System.Windows.Forms.Button btnguan;
     }
 }

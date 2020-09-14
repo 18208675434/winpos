@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
@@ -19,10 +20,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             InitializeComponent();
 
         }
+        Member member = new Member();
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            //BackHelper.ShowFormBackGround();
+            BackHelper.HideFormBackGround();
+            GlobalUtil.CloseOSK();
             this.Close();
+            
         }
         public void GetNewPhone()
         {
@@ -30,16 +36,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         private void btOldCardOK_Click(object sender, EventArgs e)
         {
+            
+
+
             string ErrorMsgMember= "";
             string phone =  txtOldCardNumber.Text;
             HttpUtil httputil = new HttpUtil();
-            Member member = httputil.GetMember(phone , ref ErrorMsgMember);
+            member = httputil.GetMember(phone, ref ErrorMsgMember);
+            FormChangePhoneNumber con = new FormChangePhoneNumber(member);
+            
             if (member == null)
             {
-           
-                MainModel.ShowLog(ErrorMsgMember, false);
-                
-                this.Close();
+
+                MainModel.ShowLog("不能为空", false);
             }
             else
             {
@@ -50,15 +59,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
                 pwd.TopMost = true;
                 pwd.ShowDialog();
-                FormChangePhoneNumber con = new FormChangePhoneNumber(member);
-                string number = txtOldCardNumber.Text;
-                con.GetPhone(number);
-                this.Close();
+
+                if (pwd.DialogResult == DialogResult.OK)
+                {
+
+                    
+
+                    string number = txtOldCardNumber.Text;
+
+                    con.GetPhone(number);
+                    this.Close();
+
+                }
+                else if (pwd.DialogResult == DialogResult.Cancel)
+                {
+                    GlobalUtil.CloseOSK();
+                    this.Close();
+                    return;
+                }
+                else
+                {
+                    this.Close();
+                    return;
+                }
+                
+             
 
 
             }
         }
-       
+        
+        
 
         private void FormMemberRecevice_Load(object sender, EventArgs e)
         {

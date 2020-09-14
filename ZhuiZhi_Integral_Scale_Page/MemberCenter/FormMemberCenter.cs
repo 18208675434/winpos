@@ -166,7 +166,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("在线充值异常"+ex.Message,true);
             }
         }
-
+        public void refresh()
+        {
+            this.Refresh();
+        }
         private void pnlPayByCash_Click(object sender, EventArgs e)
         {
             try
@@ -355,7 +358,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("加载优惠券异常"+ex.Message,true);
             }
         }
-
+        public void count()
+        {
+            this.Refresh();
+        }
         private void dgvTemplate_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try

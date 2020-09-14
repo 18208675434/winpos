@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
@@ -92,7 +93,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         }
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
-        private void AddNum(int num, bool isDel)
+        
+        public void AddNum(int num, bool isDel)
         {
 
             if (isDel)
@@ -132,6 +134,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         MainModel.BalancePwdErrorCode = -1;
                         if (verifyresult.success == 1)
                         {
+                            //BackHelper.ShowFormBackGround();
                             
                             //校验成功
                             password = "";
@@ -141,8 +144,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             LoadingHelper.CloseForm();
                             this.DialogResult = DialogResult.OK;
                             this.Close();
-                            
-                            
+                            BackHelper.HideFormBackGround();
                         }
                         else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
                         {
@@ -151,12 +153,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             password = "";
                             UpdatePassWord();
                             string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
+                            
                             MainModel.ShowLog(showerrormsg, false);
                             ShowLog(showerrormsg, false);
 
                             LoadingHelper.CloseForm();
                             this.Close();
                             this.DialogResult = DialogResult.Cancel;
+                            return;
+                            
                         }
                         else
                         {
@@ -164,6 +169,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             password = "";
                             MainModel.ShowLog(verifyresult.hint, true);
                             ShowLog(verifyresult.hint, true);
+                            
                         }
                     }
                     this.Enabled = true;
@@ -171,6 +177,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             MainModel.ChangePwd = password;
             UpdatePassWord();
+        }
+        public void re()
+        {
+            return;
         }
         private void UpdatePassWord()
         {

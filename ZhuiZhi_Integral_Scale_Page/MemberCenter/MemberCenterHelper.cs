@@ -281,7 +281,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 BackHelper.ShowFormBackGround();
-
                 FormChengPhoneSmsCode frmchangephonesmscode = new FormChengPhoneSmsCode();
                 asf.AutoScaleControlTest(frmchangephonesmscode, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmchangephonesmscode.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonesmscode.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonesmscode.Height) / 2);

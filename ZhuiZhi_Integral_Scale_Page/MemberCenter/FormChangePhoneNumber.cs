@@ -28,7 +28,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             InitializeComponent();
             member = m;
-            
+
 
         }
 
@@ -50,9 +50,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnSmsCodeVerify_Click(object sender, EventArgs e)
         {
+            BackHelper.ShowFormBackGround();
 
-            
-            
+
             string errormsg = "";
             membercenterhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref errormsg);
             if (MemberCenterHelper.ShowFormChengPhoneSmsCode())
@@ -76,15 +76,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnOldCardVerify_Click(object sender, EventArgs e)
         {
-           
-                if (MemberCenterHelper.ShowFormChangePhonePhysicalCard())
-                {
-                    ShowChangePhonePage();
-                }
-           
-            
+
+            if (MemberCenterHelper.ShowFormChangePhonePhysicalCard())
+            {
+                ShowChangePhonePage();
+            }
+
+
         }
-        
+
         private void btnNewCardVerify_Click(object sender, EventArgs e)
         {
             if (MemberCenterHelper.ShowFormChangePhoneNewCard())
@@ -118,7 +118,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     ShowChangePhonePage();
                 }
-                
+
                 label8.ForeColor = Color.DodgerBlue;
                 picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
                 label7.BackColor = Color.DodgerBlue;
@@ -137,7 +137,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnOkChange_Click(object sender, EventArgs e)
         {
             queren();
-            
+
         }
         public void queren()
         {
@@ -160,7 +160,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
             }
         }
-        
+
         private void ShowChangePhonePage()
         {
             switch (MainModel.ShowChangePhonePage)
@@ -231,14 +231,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
 
-        
+
         private void label9_Click(object sender, EventArgs e)
         {
+            BackHelper.ShowFormBackGround();
+            //BackHelper.HideFormBackGround();
             FormMemberRecevice m = new FormMemberRecevice();
             asf.AutoScaleControlTest(m, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
             m.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - m.Width) / 2, (Screen.AllScreens[0].Bounds.Height - m.Height) / 2);
             m.TopMost = true;
             m.ShowDialog();
+            //this.Enabled = true;
             label8.ForeColor = Color.DodgerBlue;
             picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
             label7.BackColor = Color.DodgerBlue;
@@ -248,26 +251,48 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             label10.Visible = true;
             label11.Visible = true;
             GetPhone(MainModel.NewPhone);
+
+
+
+
+
+
+
+
             this.Refresh();
-            
+
 
         }
+        
         public void GetPhone(string phone)
         {
             label10.Text = phone;
             label10.Font = new System.Drawing.Font("微软雅黑", 18, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             MainModel.NewPhone = label10.Text;
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            BackHelper.ShowFormBackGround();
+            //BackHelper.HideFormBackGround();
             FormHeBing f = new FormHeBing();
             asf.AutoScaleControlTest(f, 550, 200, 380 * MainModel.midScale, 200 * MainModel.midScale, true);
             f.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - f.Width) / 2, (Screen.AllScreens[0].Bounds.Height - f.Height) / 2);
             f.TopMost = true;
 
             f.ShowDialog();
+            f.Dispose();
+
+            if (f.DialogResult == DialogResult.OK)
+            {
+                this.Close();
+            }
+
         }
+
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
