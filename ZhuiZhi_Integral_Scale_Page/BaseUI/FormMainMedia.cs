@@ -336,6 +336,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         if (player.currentPlaylist.count > 0)
                         {
+
+                            //player.Visible = true;
                             player.settings.setMode("loop", false);
                             player.Ctlcontrols.play();
                         }
@@ -344,6 +346,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
+                Invoke((new Action(() =>
+                {
+                    timerImage.Enabled = true;
+                })));  
                 LogManager.WriteLog("客屏广告异常" + ex.Message + ex.StackTrace);
             }
         }
@@ -368,7 +374,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         PlayerOpen = false;
                     }
                     catch { }
-                    timerImage.Enabled = true;
+
+                    Invoke((new Action(() =>
+                    {
+                        timerImage.Enabled = true;
+                    }))); 
+                    
                 }
             }
             catch { }
@@ -1297,6 +1308,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             catch (Exception ex)
             {
                 showcount = 0;
+
+                LogManager.WriteLog("客屏广告定时刷新异常"+ex.StackTrace);
             }
         }
 

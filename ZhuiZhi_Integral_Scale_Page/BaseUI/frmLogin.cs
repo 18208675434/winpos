@@ -144,7 +144,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 txtSN.Text = devicesn;
 
                 Application.DoEvents();
-                if (!LoadUser() || !LoadShopInfo())
+                if (!LoadUser() || !LoadShopInfo() || !LoadTenantInfo())
                 {
                     this.Enabled = true;
                     Application.DoEvents();
@@ -246,7 +246,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     INIManager.SetIni("System", "POS-Authorization", Token, MainModel.IniPath);
                     INIManager.SetIni("OffLine", "POS-Authorization", Token, MainModel.IniPath);
                     MainModel.Authorization = Token;
-                    if (!LoadUser() || !LoadShopInfo())
+                    if (!LoadUser() || !LoadShopInfo() || !LoadTenantInfo())
                     {
                         return;
                     }
@@ -376,7 +376,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     INIManager.SetIni("System", "POS-Authorization", Token, MainModel.IniPath);
                     INIManager.SetIni("OffLine", "POS-Authorization", Token, MainModel.IniPath);
                     MainModel.Authorization = Token;
-                    if (!LoadUser() || !LoadShopInfo())
+                    if (!LoadUser() || !LoadShopInfo() || !LoadTenantInfo())
                     {
                         return;
                     }
@@ -475,7 +475,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private JSON_BEANBLL jsonbll = new JSON_BEANBLL();
         private bool LoadShopInfo()
         {
-
             try
             {
                 string ErrorMsg = "";
@@ -492,7 +491,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     MainModel.CurrentShopInfo = shopinfo;
                     MainModel.ShopName = shopinfo.shopname;
 
-
                     jsonbll.Delete("SHOPINFO");
                     JSON_BEANMODEL jsonmodel = new JSON_BEANMODEL();
                     jsonmodel.CONDITION = "SHOPINFO";
@@ -501,6 +499,36 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     jsonmodel.CREATE_URL_IP = MainModel.URL;
                     jsonmodel.JSON = JsonConvert.SerializeObject(shopinfo);
                     jsonbll.Add(jsonmodel);
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("获取门店信息异常：" + ex.Message, false);
+                LogManager.WriteLog("获取门店信息异常：" + ex.Message);
+                return false;
+            }
+        }
+
+        private bool LoadTenantInfo()
+        {
+
+            try
+            {
+                string ErrorMsg = "";
+                TenantInfo tenantinfo = httputil.GetTenantInfo(ref ErrorMsg);
+
+                if (ErrorMsg != "" || tenantinfo == null)
+                {
+                    MainModel.ShowLog(ErrorMsg, false);
+                    LogManager.WriteLog("ERROR", ErrorMsg);
+                    return false;
+                }
+                else
+                {
+                    MainModel.CurrentTenatnIfno = tenantinfo;
+
 
                     return true;
                 }
@@ -829,7 +857,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             LoadingHelper.ShowLoadingScreen();
 
             Delay.Start(2000);
-
             LoadingHelper.CloseForm();
         }
 

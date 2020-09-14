@@ -85,15 +85,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 {
                     lblTitle.Text = "继续支付";
                     lblTotalInfo.Text = "还需支付:";
-                    btnCancle.Visible = false;
-
                   
                 }
                 else
                 {
                     lblTitle.Text = "结算";
                     lblTotalInfo.Text = "应收:";
-                    btnCancle.Visible = true;
                 }
 
                 lblTotalPay.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");

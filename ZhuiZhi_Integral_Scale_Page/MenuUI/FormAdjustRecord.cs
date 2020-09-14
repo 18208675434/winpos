@@ -217,6 +217,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             Application.DoEvents();
             btnToday_Click(null,null);
             txtSkuCode.Focus();
+
+
+            INIManager.SetIni("MQTT", "AdjustStartTime", MainModel.getStampByDateTime(DateTime.Now), MainModel.IniPath); //记录登录时间作为调价查询的起始时间
         }
 
 

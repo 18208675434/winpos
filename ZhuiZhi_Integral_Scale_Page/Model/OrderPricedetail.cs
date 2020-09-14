@@ -14,5 +14,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string amount { get; set; }
         public int highlight { get; set; }
         public string subtitle { get; set; }
+
+        public List<OrderPriceDetail> childdetail { get; set; }
     }
 }

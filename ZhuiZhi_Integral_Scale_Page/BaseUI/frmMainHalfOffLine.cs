@@ -144,6 +144,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     lblUrl.Visible = false;
                 }
+
+
+                if (!MainModel.CurrentTenatnIfno.membersimpleregister)
+                {
+
+                    tlpMemberType.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
+                    tlpMemberType.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
+                }
+                else
+                {
+                    tlpMemberType.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100);
+                    tlpMemberType.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
+                }
             }
             catch (Exception ex)
             {
@@ -312,7 +325,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
         #endregion
-
 
         #region 顶部工具栏事件
 
@@ -995,13 +1007,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         if (result != null && result.dynamiccount > 0)
                         {
-                            lblAdjustCount.Text = result.dynamiccount.ToString();
+                            if (result.dynamiccount > 99)
+                            {
+                                lblAdjustCount.Text = "99+";
+                            }
+                            else
+                            {
+                                lblAdjustCount.Text = result.dynamiccount.ToString();
+                            }
                             pnlAdjustInfo.Visible = true;
                             pnlAdjustInfo.BringToFront();
                             btnAdjustPrice.Image = btnorderhangimage;
                             needAdjustPrice = true;  //有调价商品时需要更新增量商品
 
-                            INIManager.SetIni("MQTT", "AdjustStartTime", result.querydate, MainModel.IniPath); //记录登录时间作为调价查询的起始时间
+                            //INIManager.SetIni("MQTT", "AdjustStartTime", result.querydate, MainModel.IniPath); //记录登录时间作为调价查询的起始时间
 
                         }
                     }
@@ -1012,6 +1031,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         
                         IniAllProduct();
+
+                        Application.DoEvents();
                         
                     }
 
@@ -1044,6 +1065,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if(pro==null){
                     dgvGood.Rows.Clear();
                     IniForm();
+                    LoadSecondDgvCategory();
                 }
                 else
                 {
@@ -1052,7 +1074,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid = currentsecondcategoryid;  //初始化数据后 赋值刷新前的二级分类名称
                     LoadDgvGood(false,false);
                 }
-            
+                IsEnable = true;
             }
             catch (Exception ex)
             {
@@ -1107,6 +1129,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
            
         }
+
+        private void btnCreateMember_Click(object sender, EventArgs e)
+        {
+            if (!IsEnable)
+            {
+                return;
+            }
+
+            ShowLoading(true, false);
+
+            Member member = MainHelper.CreateMember();
+
+            if (member != null)
+            {
+                LoadMember(member);
+            }
+
+            ShowLoading(false, true);
+        }
+
 
         private void ClearMember()
         {
@@ -2025,7 +2067,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         #endregion
 
-
         #region 公用
 
         //TODO  修改样式
@@ -2072,15 +2113,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 else
                 {
                     lblToast.Visible = false;
-
                 }
             }
             catch (Exception ex)
             {
-
             }
         }
-
 
         /// <summary>
         /// 
@@ -2383,7 +2421,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
         #endregion
-
 
         #region 购物车
         private Product SelectProduct = null;
@@ -3384,7 +3421,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         #endregion
 
 
-
         Product OperationProduct = null;
         private void dgvCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -4163,8 +4199,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void lblUrl_Click(object sender, EventArgs e)
         {
+            //string errormsg = "";
+
+            //httputil.GetTenantInfo(ref errormsg);
         }
 
+      
         
     }
 }

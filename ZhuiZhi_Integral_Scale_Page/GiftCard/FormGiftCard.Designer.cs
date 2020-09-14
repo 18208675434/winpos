@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGiftCard));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.btnScan = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -101,6 +101,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.rbtnPageDownForCart = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUpForCart = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -144,7 +146,7 @@
             this.btnScan.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.btnScan.ForeColor = System.Drawing.Color.White;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnScan.Location = new System.Drawing.Point(411, 8);
+            this.btnScan.Location = new System.Drawing.Point(204, 13);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(95, 36);
             this.btnScan.TabIndex = 50;
@@ -321,7 +323,7 @@
             this.btnLoadPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnLoadPhone.Location = new System.Drawing.Point(11, 54);
             this.btnLoadPhone.Name = "btnLoadPhone";
-            this.btnLoadPhone.Size = new System.Drawing.Size(386, 55);
+            this.btnLoadPhone.Size = new System.Drawing.Size(386, 50);
             this.btnLoadPhone.TabIndex = 30;
             this.btnLoadPhone.Text = "请输入购卡人的会员手机号";
             this.btnLoadPhone.UseVisualStyleBackColor = false;
@@ -340,6 +342,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.rbtnPageDownForCart);
+            this.panel2.Controls.Add(this.rbtnPageUpForCart);
             this.panel2.Controls.Add(this.pnlCartItem);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.dgvCart);
@@ -508,26 +512,26 @@
             this.dgvCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCart.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCart.ColumnHeadersHeight = 30;
             this.dgvCart.ColumnHeadersVisible = false;
             this.dgvCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProName});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCart.GridColor = System.Drawing.Color.LightGray;
             this.dgvCart.Location = new System.Drawing.Point(23, 130);
             this.dgvCart.MultiSelect = false;
@@ -535,17 +539,18 @@
             this.dgvCart.ReadOnly = true;
             this.dgvCart.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvCart.RowHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCart.RowTemplate.Height = 90;
             this.dgvCart.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvCart.Size = new System.Drawing.Size(694, 470);
             this.dgvCart.TabIndex = 57;
             this.dgvCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellClick);
+            this.dgvCart.Click += new System.EventHandler(this.dgvCart_Click);
             // 
             // ProName
             // 
@@ -632,7 +637,7 @@
             this.btnInputCardNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInputCardNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnInputCardNo.ForeColor = System.Drawing.Color.White;
-            this.btnInputCardNo.Location = new System.Drawing.Point(568, 24);
+            this.btnInputCardNo.Location = new System.Drawing.Point(345, 24);
             this.btnInputCardNo.Name = "btnInputCardNo";
             this.btnInputCardNo.Size = new System.Drawing.Size(150, 45);
             this.btnInputCardNo.TabIndex = 2;
@@ -646,7 +651,7 @@
             this.btnGiftCardRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGiftCardRecord.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnGiftCardRecord.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
-            this.btnGiftCardRecord.Location = new System.Drawing.Point(399, 24);
+            this.btnGiftCardRecord.Location = new System.Drawing.Point(176, 24);
             this.btnGiftCardRecord.Name = "btnGiftCardRecord";
             this.btnGiftCardRecord.Size = new System.Drawing.Size(150, 45);
             this.btnGiftCardRecord.TabIndex = 1;
@@ -802,7 +807,7 @@
             this.btnLoadBindingPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnLoadBindingPhone.Location = new System.Drawing.Point(11, 54);
             this.btnLoadBindingPhone.Name = "btnLoadBindingPhone";
-            this.btnLoadBindingPhone.Size = new System.Drawing.Size(386, 55);
+            this.btnLoadBindingPhone.Size = new System.Drawing.Size(386, 50);
             this.btnLoadBindingPhone.TabIndex = 30;
             this.btnLoadBindingPhone.Text = "请输入要绑定的会员手机号";
             this.btnLoadBindingPhone.UseVisualStyleBackColor = false;
@@ -969,6 +974,44 @@
             this.label12.TabIndex = 1;
             this.label12.Text = "读取礼品卡或输入礼品卡卡号";
             // 
+            // rbtnPageDownForCart
+            // 
+            this.rbtnPageDownForCart.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
+            this.rbtnPageDownForCart.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageDownForCart.Image = null;
+            this.rbtnPageDownForCart.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageDownForCart.Location = new System.Drawing.Point(622, 24);
+            this.rbtnPageDownForCart.Name = "rbtnPageDownForCart";
+            this.rbtnPageDownForCart.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageDownForCart.PenWidth = 1;
+            this.rbtnPageDownForCart.RoundRadius = 1;
+            this.rbtnPageDownForCart.ShowImg = false;
+            this.rbtnPageDownForCart.ShowText = "下一页";
+            this.rbtnPageDownForCart.Size = new System.Drawing.Size(95, 45);
+            this.rbtnPageDownForCart.TabIndex = 71;
+            this.rbtnPageDownForCart.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageDownForCart.WhetherEnable = false;
+            this.rbtnPageDownForCart.ButtonClick += new System.EventHandler(this.btnPageDownForCart_Click);
+            // 
+            // rbtnPageUpForCart
+            // 
+            this.rbtnPageUpForCart.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
+            this.rbtnPageUpForCart.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageUpForCart.Image = null;
+            this.rbtnPageUpForCart.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageUpForCart.Location = new System.Drawing.Point(516, 24);
+            this.rbtnPageUpForCart.Name = "rbtnPageUpForCart";
+            this.rbtnPageUpForCart.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageUpForCart.PenWidth = 1;
+            this.rbtnPageUpForCart.RoundRadius = 1;
+            this.rbtnPageUpForCart.ShowImg = false;
+            this.rbtnPageUpForCart.ShowText = "上一页";
+            this.rbtnPageUpForCart.Size = new System.Drawing.Size(95, 45);
+            this.rbtnPageUpForCart.TabIndex = 70;
+            this.rbtnPageUpForCart.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageUpForCart.WhetherEnable = false;
+            this.rbtnPageUpForCart.ButtonClick += new System.EventHandler(this.btnPageUpForCart_Click);
+            // 
             // FormGiftCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1096,5 +1139,7 @@
         private System.Windows.Forms.PictureBox pbtnExitMember;
         private System.Windows.Forms.PictureBox pbtnExitBindingMember;
         private System.Windows.Forms.Button btnScan;
+        private RoundButton rbtnPageDownForCart;
+        private RoundButton rbtnPageUpForCart;
     }
 }

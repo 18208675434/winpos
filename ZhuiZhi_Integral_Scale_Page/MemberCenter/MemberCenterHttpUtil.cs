@@ -22,8 +22,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public class MemberCenterHttpUtil
     {
-
-
         #region 修改密码&忘记密码接口
         /// <summary>
         /// 修改数字密码
@@ -500,6 +498,36 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 throw;
             }
         }
+
+        public bool CreateMember(CreateMemberPara para, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/memberheader/create/inactivemember";
+               
+                string parajson = JsonConvert.SerializeObject(para);
+                string json = HttpPOST(url, parajson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "inactivemember:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "创建会员异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
+
 
         #region  访问服务端
         private HttpRequest httprequest = new HttpRequest();

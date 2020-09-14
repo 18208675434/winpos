@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion;
@@ -472,7 +475,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
         }
         #endregion
 
-
         #region  查询本地数据
 
         // private static string strfilter = " and 1=1 and STATUS =1 and SKUTYPE in (1,4)";
@@ -720,6 +722,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
             return (char)(d + 48);
 
         }
+
+        #endregion
+
+        #region  会员登录  会员注册
+        //<summary>
+        //按比例缩放页面及控件
+        //</summary>
+        private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
+        public static Member CreateMember()
+        {
+            try
+            {
+
+                BackHelper.ShowFormBackGround();
+                FormCreateMember frmmember = new FormCreateMember();
+                asf.AutoScaleControlTest(frmmember, 430, 540, 430 * MainModel.midScale, 540 * MainModel.midScale, true);
+                frmmember.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmmember.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmmember.Height) / 3);
+                frmmember.TopMost = true;
+                frmmember.ShowDialog();
+
+                BackHelper.HideFormBackGround();
+                frmmember.Dispose();
+
+                Application.DoEvents();
+                return frmmember.CurrentMember;
+
+            }
+            catch(Exception ex) {
+                MainModel.ShowLog("会员注册出现异常"+ex.StackTrace,true);
+                return null;
+            }
+        }
+
+        #endregion
     }
 
 
@@ -730,5 +766,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
         public scancodememberModel ScanModel { get; set; }
     }
 
-        #endregion
+      
+
+
+
 }

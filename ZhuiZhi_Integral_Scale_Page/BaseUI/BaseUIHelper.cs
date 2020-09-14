@@ -23,14 +23,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
         private static bool HaveMedia = false;
         private static FormMainMedia frmmainmedia = null;
         public static void IniFormMainMedia()
-        {
-             
+        {            
             try
             {
                 if (frmmainmedia != null || frmmainmedia.IsDisposed)
                 {
                     frmmainmedia.IniForm(null);
-
                 }
             }
             catch (Exception ex)
@@ -278,7 +276,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
         {
             try
             {
-
                 if (formmainscale != null)
                 {
                     try

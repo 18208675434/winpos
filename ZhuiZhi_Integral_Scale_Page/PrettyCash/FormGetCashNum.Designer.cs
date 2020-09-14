@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGetCashNum));
             this.lblInfo = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.txtCash = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.numBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard();
-            this.lblCancel = new System.Windows.Forms.Label();
+            this.btnCancle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblInfo
@@ -42,9 +43,9 @@
             this.lblInfo.Location = new System.Drawing.Point(11, 44);
             this.lblInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(112, 27);
+            this.lblInfo.Size = new System.Drawing.Size(172, 27);
             this.lblInfo.TabIndex = 49;
-            this.lblInfo.Text = "礼品卡卡号";
+            this.lblInfo.Text = "当日现金缴款金额";
             // 
             // btnOK
             // 
@@ -76,7 +77,7 @@
             this.txtCash.OnlyNumber = true;
             this.txtCash.Size = new System.Drawing.Size(356, 52);
             this.txtCash.TabIndex = 0;
-            this.txtCash.WaterText = "请输入礼品卡卡号";
+            this.txtCash.WaterText = "请输入钱箱内实际总金额";
             // 
             // numBoard
             // 
@@ -93,17 +94,22 @@
             this.numBoard.TabIndex = 0;
             this.numBoard.Press += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard.KeyboardHandler(this.MiniKeyboardHandler);
             // 
-            // lblCancel
+            // btnCancle
             // 
-            this.lblCancel.AutoSize = true;
-            this.lblCancel.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblCancel.Location = new System.Drawing.Point(310, 9);
-            this.lblCancel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblCancel.Name = "lblCancel";
-            this.lblCancel.Size = new System.Drawing.Size(59, 21);
-            this.lblCancel.TabIndex = 134;
-            this.lblCancel.Text = "返回 >";
-            this.lblCancel.Click += new System.EventHandler(this.btnCancle_Click);
+            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
+            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCancle.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCancle.FlatAppearance.BorderSize = 0;
+            this.btnCancle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnCancle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.btnCancle.Location = new System.Drawing.Point(340, 12);
+            this.btnCancle.Name = "btnCancle";
+            this.btnCancle.Size = new System.Drawing.Size(28, 28);
+            this.btnCancle.TabIndex = 135;
+            this.btnCancle.UseVisualStyleBackColor = true;
+            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // FormGetCashNum
             // 
@@ -112,7 +118,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 520);
-            this.Controls.Add(this.lblCancel);
+            this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.txtCash);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblInfo);
@@ -134,7 +140,7 @@
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnOK;
         private MyControl.NumberTextBox txtCash;
-        private System.Windows.Forms.Label lblCancel;
+        private System.Windows.Forms.Button btnCancle;
 
     }
 }

@@ -731,7 +731,7 @@
             this.txtCash.Location = new System.Drawing.Point(24, 262);
             this.txtCash.LockFocus = true;
             this.txtCash.MaxDeciaml = ((long)(100000));
-            this.txtCash.MaxLength = 100;
+            this.txtCash.MaxLength = 37;
             this.txtCash.Name = "txtCash";
             this.txtCash.NeedBoard = false;
             this.txtCash.OnlyNumber = true;

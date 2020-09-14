@@ -193,6 +193,11 @@
             this.rbtnPageUpForCart = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.keyBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardNew();
             this.rbtnPay = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.tlpMemberType = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnLoadPhoneCopy = new System.Windows.Forms.Button();
+            this.btnCreateMember = new System.Windows.Forms.Button();
             this.pnlHead.SuspendLayout();
             this.pnlAdjustInfo.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -232,6 +237,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMinus)).BeginInit();
             this.pnlAdjust.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tlpMemberType.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHead
@@ -298,9 +306,9 @@
             this.btnGiftCard.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnGiftCard.ForeColor = System.Drawing.Color.White;
             this.btnGiftCard.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnGiftCard.Location = new System.Drawing.Point(779, 15);
+            this.btnGiftCard.Location = new System.Drawing.Point(806, 15);
             this.btnGiftCard.Name = "btnGiftCard";
-            this.btnGiftCard.Size = new System.Drawing.Size(115, 35);
+            this.btnGiftCard.Size = new System.Drawing.Size(100, 35);
             this.btnGiftCard.TabIndex = 51;
             this.btnGiftCard.Text = "礼品卡购买";
             this.btnGiftCard.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -317,9 +325,9 @@
             this.btnAdjustPrice.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnAdjustPrice.ForeColor = System.Drawing.Color.White;
             this.btnAdjustPrice.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnAdjustPrice.Location = new System.Drawing.Point(900, 15);
+            this.btnAdjustPrice.Location = new System.Drawing.Point(912, 15);
             this.btnAdjustPrice.Name = "btnAdjustPrice";
-            this.btnAdjustPrice.Size = new System.Drawing.Size(115, 35);
+            this.btnAdjustPrice.Size = new System.Drawing.Size(100, 35);
             this.btnAdjustPrice.TabIndex = 49;
             this.btnAdjustPrice.Text = "调价记录";
             this.btnAdjustPrice.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -410,9 +418,9 @@
             this.btnOrderQuery.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnOrderQuery.ForeColor = System.Drawing.Color.White;
             this.btnOrderQuery.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnOrderQuery.Location = new System.Drawing.Point(668, 15);
+            this.btnOrderQuery.Location = new System.Drawing.Point(700, 15);
             this.btnOrderQuery.Name = "btnOrderQuery";
-            this.btnOrderQuery.Size = new System.Drawing.Size(105, 35);
+            this.btnOrderQuery.Size = new System.Drawing.Size(100, 35);
             this.btnOrderQuery.TabIndex = 35;
             this.btnOrderQuery.Text = "订单查询";
             this.btnOrderQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -430,9 +438,9 @@
             this.btnOrderHang.ForeColor = System.Drawing.Color.White;
             this.btnOrderHang.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderHang.Image")));
             this.btnOrderHang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnOrderHang.Location = new System.Drawing.Point(547, 15);
+            this.btnOrderHang.Location = new System.Drawing.Point(594, 15);
             this.btnOrderHang.Name = "btnOrderHang";
-            this.btnOrderHang.Size = new System.Drawing.Size(115, 35);
+            this.btnOrderHang.Size = new System.Drawing.Size(100, 35);
             this.btnOrderHang.TabIndex = 34;
             this.btnOrderHang.Text = "挂单";
             this.btnOrderHang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -449,9 +457,9 @@
             this.btnOrderCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnOrderCancle.ForeColor = System.Drawing.Color.White;
             this.btnOrderCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnOrderCancle.Location = new System.Drawing.Point(436, 15);
+            this.btnOrderCancle.Location = new System.Drawing.Point(488, 15);
             this.btnOrderCancle.Name = "btnOrderCancle";
-            this.btnOrderCancle.Size = new System.Drawing.Size(105, 35);
+            this.btnOrderCancle.Size = new System.Drawing.Size(100, 35);
             this.btnOrderCancle.TabIndex = 32;
             this.btnOrderCancle.Text = "取消交易";
             this.btnOrderCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -1387,8 +1395,7 @@
             // 
             this.pnlWaitingMember.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlWaitingMember.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlWaitingMember.Controls.Add(this.btnLoadPhone);
-            this.pnlWaitingMember.Controls.Add(this.label2);
+            this.pnlWaitingMember.Controls.Add(this.tlpMemberType);
             this.pnlWaitingMember.Controls.Add(this.label1);
             this.pnlWaitingMember.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlWaitingMember.Location = new System.Drawing.Point(0, 0);
@@ -1405,7 +1412,7 @@
             this.btnLoadPhone.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnLoadPhone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoadPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btnLoadPhone.Location = new System.Drawing.Point(176, 42);
+            this.btnLoadPhone.Location = new System.Drawing.Point(170, 5);
             this.btnLoadPhone.Name = "btnLoadPhone";
             this.btnLoadPhone.Size = new System.Drawing.Size(163, 40);
             this.btnLoadPhone.TabIndex = 29;
@@ -1418,7 +1425,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label2.Location = new System.Drawing.Point(17, 51);
+            this.label2.Location = new System.Drawing.Point(11, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(154, 21);
@@ -2071,6 +2078,72 @@
             this.rbtnPay.WhetherEnable = false;
             this.rbtnPay.ButtonClick += new System.EventHandler(this.rbtnPay_ButtonClick);
             // 
+            // tlpMemberType
+            // 
+            this.tlpMemberType.ColumnCount = 2;
+            this.tlpMemberType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
+            this.tlpMemberType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMemberType.Controls.Add(this.panel2, 0, 0);
+            this.tlpMemberType.Controls.Add(this.panel3, 1, 0);
+            this.tlpMemberType.Location = new System.Drawing.Point(3, 43);
+            this.tlpMemberType.Name = "tlpMemberType";
+            this.tlpMemberType.RowCount = 1;
+            this.tlpMemberType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMemberType.Size = new System.Drawing.Size(380, 60);
+            this.tlpMemberType.TabIndex = 75;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnLoadPhone);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1, 54);
+            this.panel2.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnCreateMember);
+            this.panel3.Controls.Add(this.btnLoadPhoneCopy);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(374, 54);
+            this.panel3.TabIndex = 1;
+            // 
+            // btnLoadPhoneCopy
+            // 
+            this.btnLoadPhoneCopy.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLoadPhoneCopy.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnLoadPhoneCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLoadPhoneCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLoadPhoneCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadPhoneCopy.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnLoadPhoneCopy.Location = new System.Drawing.Point(15, 5);
+            this.btnLoadPhoneCopy.Name = "btnLoadPhoneCopy";
+            this.btnLoadPhoneCopy.Size = new System.Drawing.Size(163, 40);
+            this.btnLoadPhoneCopy.TabIndex = 30;
+            this.btnLoadPhoneCopy.Text = "点击输入会员账号";
+            this.btnLoadPhoneCopy.UseVisualStyleBackColor = false;
+            this.btnLoadPhoneCopy.Click += new System.EventHandler(this.cbtnLoadPhone_ButtonClick);
+            // 
+            // btnCreateMember
+            // 
+            this.btnCreateMember.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCreateMember.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCreateMember.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCreateMember.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCreateMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateMember.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnCreateMember.Location = new System.Drawing.Point(184, 5);
+            this.btnCreateMember.Name = "btnCreateMember";
+            this.btnCreateMember.Size = new System.Drawing.Size(163, 40);
+            this.btnCreateMember.TabIndex = 31;
+            this.btnCreateMember.Text = "点击注册新会员";
+            this.btnCreateMember.UseVisualStyleBackColor = false;
+            this.btnCreateMember.Click += new System.EventHandler(this.btnCreateMember_Click);
+            // 
             // frmMainHalfOffLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2161,6 +2234,10 @@
             this.pnlAdjust.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tlpMemberType.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2303,5 +2380,10 @@
         private System.Windows.Forms.Timer timerTask;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnGiftCard;
+        private System.Windows.Forms.TableLayoutPanel tlpMemberType;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnCreateMember;
+        private System.Windows.Forms.Button btnLoadPhoneCopy;
     }
 }

@@ -186,6 +186,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public static DeviceShopInfo CurrentShopInfo;
 
+        public static TenantInfo CurrentTenatnIfno;
+
 
         public static string Titledata = DateTime.Now.ToString("yyyy-MM-dd ")+ GlobalUtil.GetWeek();
 

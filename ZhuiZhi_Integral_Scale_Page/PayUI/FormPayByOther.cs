@@ -297,7 +297,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     return;
                 }
 
-                decimal CheckDecimal = Convert.ToDecimal(txtCash.Text + btn.Text);
+                //decimal CheckDecimal = Convert.ToDecimal(txtCash.Text + btn.Text);
 
 
                 txtCash.Text += btn.Text;

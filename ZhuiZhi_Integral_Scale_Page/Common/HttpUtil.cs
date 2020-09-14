@@ -135,6 +135,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+        /// <summary>
+        /// 获取商户设置信息
+        /// </summary>
+        /// <param name="errormsg">返回信息</param>
+        /// <returns></returns>
+        public TenantInfo GetTenantInfo( ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/account/systenant/item/systenantforpos";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    TenantInfo deviceshop = JsonConvert.DeserializeObject<TenantInfo>(rd.data.ToString());
+                    return deviceshop;
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "getdeviceshopinfovo:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取商户信息异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
 
 
         public scancodememberModel GetSkuInfoMember(string scancode, ref string errormsg, ref int resultcode)

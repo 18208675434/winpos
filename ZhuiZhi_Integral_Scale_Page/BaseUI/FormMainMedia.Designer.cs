@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMedia));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,14 +42,37 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMedia));
             this.timerMedia = new System.Windows.Forms.Timer(this.components);
             this.timerImage = new System.Windows.Forms.Timer(this.components);
             this.tlpMedia = new System.Windows.Forms.TableLayoutPanel();
             this.pnlCart = new System.Windows.Forms.Panel();
+            this.pnlDgvItem = new System.Windows.Forms.Panel();
+            this.pnlTotal = new System.Windows.Forms.Panel();
+            this.lblAdjust = new System.Windows.Forms.Label();
+            this.lblOriginTotal = new System.Windows.Forms.Label();
+            this.lblTotalDesc = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.pnlAdd = new System.Windows.Forms.Panel();
+            this.btnIncrease = new System.Windows.Forms.Button();
+            this.pnlNum = new System.Windows.Forms.Panel();
+            this.btnNum = new System.Windows.Forms.Button();
+            this.pnlSinglePrice = new System.Windows.Forms.Panel();
+            this.lblOriginPrice = new System.Windows.Forms.Label();
+            this.lblPriceDesc = new System.Windows.Forms.Label();
+            this.lblSinglePrice = new System.Windows.Forms.Label();
+            this.pnlBarCode = new System.Windows.Forms.Panel();
+            this.btnPurchaseLimit = new System.Windows.Forms.Button();
+            this.lblSkuCode = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblPriceTag = new System.Windows.Forms.Label();
+            this.picDelete = new System.Windows.Forms.PictureBox();
             this.pnlMemberCard = new System.Windows.Forms.Panel();
             this.lblmemberCard = new System.Windows.Forms.Label();
             this.picMemberCard = new System.Windows.Forms.PictureBox();
+            this.picBirthday4 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.picBirthday3 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.picBirthday2 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.picBirthday1 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
             this.pnlHead = new System.Windows.Forms.Panel();
             this.lblShopName = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
@@ -90,32 +114,15 @@
             this.lblMobil = new System.Windows.Forms.Label();
             this.pnlAdvertising = new System.Windows.Forms.Panel();
             this.player = new AxWMPLib.AxWindowsMediaPlayer();
-            this.pnlDgvItem = new System.Windows.Forms.Panel();
-            this.pnlTotal = new System.Windows.Forms.Panel();
-            this.lblAdjust = new System.Windows.Forms.Label();
-            this.lblOriginTotal = new System.Windows.Forms.Label();
-            this.lblTotalDesc = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
-            this.pnlAdd = new System.Windows.Forms.Panel();
-            this.btnIncrease = new System.Windows.Forms.Button();
-            this.pnlNum = new System.Windows.Forms.Panel();
-            this.btnNum = new System.Windows.Forms.Button();
-            this.pnlSinglePrice = new System.Windows.Forms.Panel();
-            this.lblOriginPrice = new System.Windows.Forms.Label();
-            this.lblPriceDesc = new System.Windows.Forms.Label();
-            this.lblSinglePrice = new System.Windows.Forms.Label();
-            this.pnlBarCode = new System.Windows.Forms.Panel();
-            this.btnPurchaseLimit = new System.Windows.Forms.Button();
-            this.lblSkuCode = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblPriceTag = new System.Windows.Forms.Label();
-            this.picDelete = new System.Windows.Forms.PictureBox();
-            this.picBirthday4 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
-            this.picBirthday3 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
-            this.picBirthday2 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
-            this.picBirthday1 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
             this.tlpMedia.SuspendLayout();
             this.pnlCart.SuspendLayout();
+            this.pnlDgvItem.SuspendLayout();
+            this.pnlTotal.SuspendLayout();
+            this.pnlAdd.SuspendLayout();
+            this.pnlNum.SuspendLayout();
+            this.pnlSinglePrice.SuspendLayout();
+            this.pnlBarCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
             this.pnlMemberCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).BeginInit();
             this.pnlHead.SuspendLayout();
@@ -135,13 +142,6 @@
             this.pnlMember.SuspendLayout();
             this.pnlAdvertising.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
-            this.pnlDgvItem.SuspendLayout();
-            this.pnlTotal.SuspendLayout();
-            this.pnlAdd.SuspendLayout();
-            this.pnlNum.SuspendLayout();
-            this.pnlSinglePrice.SuspendLayout();
-            this.pnlBarCode.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
             this.SuspendLayout();
             // 
             // timerMedia
@@ -188,6 +188,235 @@
             this.pnlCart.Size = new System.Drawing.Size(1020, 760);
             this.pnlCart.TabIndex = 0;
             // 
+            // pnlDgvItem
+            // 
+            this.pnlDgvItem.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.pnlDgvItem.Controls.Add(this.pnlTotal);
+            this.pnlDgvItem.Controls.Add(this.pnlAdd);
+            this.pnlDgvItem.Controls.Add(this.pnlNum);
+            this.pnlDgvItem.Controls.Add(this.pnlSinglePrice);
+            this.pnlDgvItem.Controls.Add(this.pnlBarCode);
+            this.pnlDgvItem.Controls.Add(this.picDelete);
+            this.pnlDgvItem.Location = new System.Drawing.Point(7, -264);
+            this.pnlDgvItem.Name = "pnlDgvItem";
+            this.pnlDgvItem.Size = new System.Drawing.Size(816, 106);
+            this.pnlDgvItem.TabIndex = 314;
+            // 
+            // pnlTotal
+            // 
+            this.pnlTotal.BackColor = System.Drawing.Color.White;
+            this.pnlTotal.Controls.Add(this.lblAdjust);
+            this.pnlTotal.Controls.Add(this.lblOriginTotal);
+            this.pnlTotal.Controls.Add(this.lblTotalDesc);
+            this.pnlTotal.Controls.Add(this.lblTotal);
+            this.pnlTotal.Location = new System.Drawing.Point(577, 7);
+            this.pnlTotal.Name = "pnlTotal";
+            this.pnlTotal.Size = new System.Drawing.Size(124, 88);
+            this.pnlTotal.TabIndex = 42;
+            // 
+            // lblAdjust
+            // 
+            this.lblAdjust.AutoSize = true;
+            this.lblAdjust.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.lblAdjust.ForeColor = System.Drawing.Color.Coral;
+            this.lblAdjust.Location = new System.Drawing.Point(33, 66);
+            this.lblAdjust.Name = "lblAdjust";
+            this.lblAdjust.Size = new System.Drawing.Size(39, 16);
+            this.lblAdjust.TabIndex = 5;
+            this.lblAdjust.Text = "label8";
+            // 
+            // lblOriginTotal
+            // 
+            this.lblOriginTotal.AutoSize = true;
+            this.lblOriginTotal.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.lblOriginTotal.ForeColor = System.Drawing.Color.Gray;
+            this.lblOriginTotal.Location = new System.Drawing.Point(33, 48);
+            this.lblOriginTotal.Name = "lblOriginTotal";
+            this.lblOriginTotal.Size = new System.Drawing.Size(43, 17);
+            this.lblOriginTotal.TabIndex = 4;
+            this.lblOriginTotal.Text = "label8";
+            // 
+            // lblTotalDesc
+            // 
+            this.lblTotalDesc.AutoSize = true;
+            this.lblTotalDesc.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.lblTotalDesc.ForeColor = System.Drawing.Color.Gray;
+            this.lblTotalDesc.Location = new System.Drawing.Point(82, 28);
+            this.lblTotalDesc.Name = "lblTotalDesc";
+            this.lblTotalDesc.Size = new System.Drawing.Size(43, 17);
+            this.lblTotalDesc.TabIndex = 3;
+            this.lblTotalDesc.Text = "label9";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblTotal.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lblTotal.Location = new System.Drawing.Point(32, 24);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(64, 21);
+            this.lblTotal.TabIndex = 2;
+            this.lblTotal.Text = "label10";
+            // 
+            // pnlAdd
+            // 
+            this.pnlAdd.BackColor = System.Drawing.Color.White;
+            this.pnlAdd.Controls.Add(this.btnIncrease);
+            this.pnlAdd.Location = new System.Drawing.Point(525, 7);
+            this.pnlAdd.Name = "pnlAdd";
+            this.pnlAdd.Size = new System.Drawing.Size(46, 88);
+            this.pnlAdd.TabIndex = 43;
+            // 
+            // btnIncrease
+            // 
+            this.btnIncrease.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnIncrease.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnIncrease.FlatAppearance.BorderSize = 0;
+            this.btnIncrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIncrease.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnIncrease.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnIncrease.Location = new System.Drawing.Point(0, 20);
+            this.btnIncrease.Margin = new System.Windows.Forms.Padding(0);
+            this.btnIncrease.Name = "btnIncrease";
+            this.btnIncrease.Size = new System.Drawing.Size(35, 35);
+            this.btnIncrease.TabIndex = 0;
+            this.btnIncrease.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIncrease.UseVisualStyleBackColor = false;
+            // 
+            // pnlNum
+            // 
+            this.pnlNum.BackColor = System.Drawing.Color.White;
+            this.pnlNum.Controls.Add(this.btnNum);
+            this.pnlNum.Location = new System.Drawing.Point(395, 7);
+            this.pnlNum.Name = "pnlNum";
+            this.pnlNum.Size = new System.Drawing.Size(124, 88);
+            this.pnlNum.TabIndex = 42;
+            // 
+            // btnNum
+            // 
+            this.btnNum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnNum.FlatAppearance.BorderSize = 0;
+            this.btnNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNum.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnNum.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNum.Location = new System.Drawing.Point(33, 20);
+            this.btnNum.Name = "btnNum";
+            this.btnNum.Size = new System.Drawing.Size(91, 35);
+            this.btnNum.TabIndex = 0;
+            this.btnNum.Text = "123456kg";
+            this.btnNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNum.UseVisualStyleBackColor = true;
+            // 
+            // pnlSinglePrice
+            // 
+            this.pnlSinglePrice.BackColor = System.Drawing.Color.White;
+            this.pnlSinglePrice.Controls.Add(this.lblOriginPrice);
+            this.pnlSinglePrice.Controls.Add(this.lblPriceDesc);
+            this.pnlSinglePrice.Controls.Add(this.lblSinglePrice);
+            this.pnlSinglePrice.Location = new System.Drawing.Point(219, 7);
+            this.pnlSinglePrice.Name = "pnlSinglePrice";
+            this.pnlSinglePrice.Size = new System.Drawing.Size(145, 88);
+            this.pnlSinglePrice.TabIndex = 41;
+            // 
+            // lblOriginPrice
+            // 
+            this.lblOriginPrice.AutoSize = true;
+            this.lblOriginPrice.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.lblOriginPrice.ForeColor = System.Drawing.Color.Gray;
+            this.lblOriginPrice.Location = new System.Drawing.Point(47, 48);
+            this.lblOriginPrice.Name = "lblOriginPrice";
+            this.lblOriginPrice.Size = new System.Drawing.Size(43, 17);
+            this.lblOriginPrice.TabIndex = 4;
+            this.lblOriginPrice.Text = "label7";
+            // 
+            // lblPriceDesc
+            // 
+            this.lblPriceDesc.AutoSize = true;
+            this.lblPriceDesc.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.lblPriceDesc.ForeColor = System.Drawing.Color.Gray;
+            this.lblPriceDesc.Location = new System.Drawing.Point(96, 28);
+            this.lblPriceDesc.Name = "lblPriceDesc";
+            this.lblPriceDesc.Size = new System.Drawing.Size(43, 17);
+            this.lblPriceDesc.TabIndex = 3;
+            this.lblPriceDesc.Text = "label6";
+            // 
+            // lblSinglePrice
+            // 
+            this.lblSinglePrice.AutoSize = true;
+            this.lblSinglePrice.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblSinglePrice.Location = new System.Drawing.Point(46, 24);
+            this.lblSinglePrice.Name = "lblSinglePrice";
+            this.lblSinglePrice.Size = new System.Drawing.Size(55, 21);
+            this.lblSinglePrice.TabIndex = 2;
+            this.lblSinglePrice.Text = "label5";
+            // 
+            // pnlBarCode
+            // 
+            this.pnlBarCode.BackColor = System.Drawing.Color.White;
+            this.pnlBarCode.Controls.Add(this.btnPurchaseLimit);
+            this.pnlBarCode.Controls.Add(this.lblSkuCode);
+            this.pnlBarCode.Controls.Add(this.lblTitle);
+            this.pnlBarCode.Controls.Add(this.lblPriceTag);
+            this.pnlBarCode.Location = new System.Drawing.Point(5, 7);
+            this.pnlBarCode.Name = "pnlBarCode";
+            this.pnlBarCode.Size = new System.Drawing.Size(208, 88);
+            this.pnlBarCode.TabIndex = 40;
+            // 
+            // btnPurchaseLimit
+            // 
+            this.btnPurchaseLimit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnPurchaseLimit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPurchaseLimit.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPurchaseLimit.Location = new System.Drawing.Point(16, 64);
+            this.btnPurchaseLimit.Name = "btnPurchaseLimit";
+            this.btnPurchaseLimit.Size = new System.Drawing.Size(142, 20);
+            this.btnPurchaseLimit.TabIndex = 4;
+            this.btnPurchaseLimit.Text = "button2";
+            this.btnPurchaseLimit.UseVisualStyleBackColor = true;
+            // 
+            // lblSkuCode
+            // 
+            this.lblSkuCode.AutoSize = true;
+            this.lblSkuCode.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblSkuCode.Location = new System.Drawing.Point(16, 43);
+            this.lblSkuCode.Name = "lblSkuCode";
+            this.lblSkuCode.Size = new System.Drawing.Size(55, 21);
+            this.lblSkuCode.TabIndex = 2;
+            this.lblSkuCode.Text = "label3";
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblTitle.Location = new System.Drawing.Point(16, 22);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(55, 21);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "label2";
+            // 
+            // lblPriceTag
+            // 
+            this.lblPriceTag.AutoSize = true;
+            this.lblPriceTag.BackColor = System.Drawing.Color.Coral;
+            this.lblPriceTag.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.lblPriceTag.ForeColor = System.Drawing.Color.White;
+            this.lblPriceTag.Location = new System.Drawing.Point(16, 3);
+            this.lblPriceTag.Name = "lblPriceTag";
+            this.lblPriceTag.Size = new System.Drawing.Size(50, 20);
+            this.lblPriceTag.TabIndex = 0;
+            this.lblPriceTag.Text = "label1";
+            // 
+            // picDelete
+            // 
+            this.picDelete.BackColor = System.Drawing.Color.White;
+            this.picDelete.Image = ((System.Drawing.Image)(resources.GetObject("picDelete.Image")));
+            this.picDelete.Location = new System.Drawing.Point(730, 33);
+            this.picDelete.Name = "picDelete";
+            this.picDelete.Size = new System.Drawing.Size(36, 43);
+            this.picDelete.TabIndex = 25;
+            this.picDelete.TabStop = false;
+            this.picDelete.Visible = false;
+            // 
             // pnlMemberCard
             // 
             this.pnlMemberCard.BackColor = System.Drawing.Color.Transparent;
@@ -218,6 +447,58 @@
             this.picMemberCard.Size = new System.Drawing.Size(220, 220);
             this.picMemberCard.TabIndex = 0;
             this.picMemberCard.TabStop = false;
+            // 
+            // picBirthday4
+            // 
+            this.picBirthday4.CanMove = false;
+            this.picBirthday4.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday4.Image")));
+            this.picBirthday4.IsFocus = false;
+            this.picBirthday4.Location = new System.Drawing.Point(752, 461);
+            this.picBirthday4.Name = "picBirthday4";
+            this.picBirthday4.Size = new System.Drawing.Size(251, 272);
+            this.picBirthday4.TabIndex = 309;
+            this.picBirthday4.Text = "transparentPic2";
+            this.picBirthday4.unitScale = null;
+            this.picBirthday4.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            // 
+            // picBirthday3
+            // 
+            this.picBirthday3.CanMove = false;
+            this.picBirthday3.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday3.Image")));
+            this.picBirthday3.IsFocus = false;
+            this.picBirthday3.Location = new System.Drawing.Point(7, 583);
+            this.picBirthday3.Name = "picBirthday3";
+            this.picBirthday3.Size = new System.Drawing.Size(77, 151);
+            this.picBirthday3.TabIndex = 308;
+            this.picBirthday3.Text = "transparentPic1";
+            this.picBirthday3.unitScale = null;
+            this.picBirthday3.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            // 
+            // picBirthday2
+            // 
+            this.picBirthday2.CanMove = false;
+            this.picBirthday2.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday2.Image")));
+            this.picBirthday2.IsFocus = false;
+            this.picBirthday2.Location = new System.Drawing.Point(627, 5);
+            this.picBirthday2.Name = "picBirthday2";
+            this.picBirthday2.Size = new System.Drawing.Size(387, 84);
+            this.picBirthday2.TabIndex = 307;
+            this.picBirthday2.Text = "transparentPic1";
+            this.picBirthday2.unitScale = null;
+            this.picBirthday2.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            // 
+            // picBirthday1
+            // 
+            this.picBirthday1.CanMove = false;
+            this.picBirthday1.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday1.Image")));
+            this.picBirthday1.IsFocus = false;
+            this.picBirthday1.Location = new System.Drawing.Point(3, 4);
+            this.picBirthday1.Name = "picBirthday1";
+            this.picBirthday1.Size = new System.Drawing.Size(513, 85);
+            this.picBirthday1.TabIndex = 306;
+            this.picBirthday1.Text = "transparentPic1";
+            this.picBirthday1.unitScale = null;
+            this.picBirthday1.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
             // 
             // pnlHead
             // 
@@ -786,287 +1067,7 @@
             this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
             this.player.Size = new System.Drawing.Size(1010, 718);
             this.player.TabIndex = 17;
-            // 
-            // pnlDgvItem
-            // 
-            this.pnlDgvItem.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.pnlDgvItem.Controls.Add(this.pnlTotal);
-            this.pnlDgvItem.Controls.Add(this.pnlAdd);
-            this.pnlDgvItem.Controls.Add(this.pnlNum);
-            this.pnlDgvItem.Controls.Add(this.pnlSinglePrice);
-            this.pnlDgvItem.Controls.Add(this.pnlBarCode);
-            this.pnlDgvItem.Controls.Add(this.picDelete);
-            this.pnlDgvItem.Location = new System.Drawing.Point(7, -264);
-            this.pnlDgvItem.Name = "pnlDgvItem";
-            this.pnlDgvItem.Size = new System.Drawing.Size(816, 106);
-            this.pnlDgvItem.TabIndex = 314;
-            // 
-            // pnlTotal
-            // 
-            this.pnlTotal.BackColor = System.Drawing.Color.White;
-            this.pnlTotal.Controls.Add(this.lblAdjust);
-            this.pnlTotal.Controls.Add(this.lblOriginTotal);
-            this.pnlTotal.Controls.Add(this.lblTotalDesc);
-            this.pnlTotal.Controls.Add(this.lblTotal);
-            this.pnlTotal.Location = new System.Drawing.Point(577, 7);
-            this.pnlTotal.Name = "pnlTotal";
-            this.pnlTotal.Size = new System.Drawing.Size(124, 88);
-            this.pnlTotal.TabIndex = 42;
-            // 
-            // lblAdjust
-            // 
-            this.lblAdjust.AutoSize = true;
-            this.lblAdjust.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.lblAdjust.ForeColor = System.Drawing.Color.Coral;
-            this.lblAdjust.Location = new System.Drawing.Point(33, 66);
-            this.lblAdjust.Name = "lblAdjust";
-            this.lblAdjust.Size = new System.Drawing.Size(39, 16);
-            this.lblAdjust.TabIndex = 5;
-            this.lblAdjust.Text = "label8";
-            // 
-            // lblOriginTotal
-            // 
-            this.lblOriginTotal.AutoSize = true;
-            this.lblOriginTotal.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.lblOriginTotal.ForeColor = System.Drawing.Color.Gray;
-            this.lblOriginTotal.Location = new System.Drawing.Point(33, 48);
-            this.lblOriginTotal.Name = "lblOriginTotal";
-            this.lblOriginTotal.Size = new System.Drawing.Size(43, 17);
-            this.lblOriginTotal.TabIndex = 4;
-            this.lblOriginTotal.Text = "label8";
-            // 
-            // lblTotalDesc
-            // 
-            this.lblTotalDesc.AutoSize = true;
-            this.lblTotalDesc.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.lblTotalDesc.ForeColor = System.Drawing.Color.Gray;
-            this.lblTotalDesc.Location = new System.Drawing.Point(82, 28);
-            this.lblTotalDesc.Name = "lblTotalDesc";
-            this.lblTotalDesc.Size = new System.Drawing.Size(43, 17);
-            this.lblTotalDesc.TabIndex = 3;
-            this.lblTotalDesc.Text = "label9";
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblTotal.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTotal.Location = new System.Drawing.Point(32, 24);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(64, 21);
-            this.lblTotal.TabIndex = 2;
-            this.lblTotal.Text = "label10";
-            // 
-            // pnlAdd
-            // 
-            this.pnlAdd.BackColor = System.Drawing.Color.White;
-            this.pnlAdd.Controls.Add(this.btnIncrease);
-            this.pnlAdd.Location = new System.Drawing.Point(525, 7);
-            this.pnlAdd.Name = "pnlAdd";
-            this.pnlAdd.Size = new System.Drawing.Size(46, 88);
-            this.pnlAdd.TabIndex = 43;
-            // 
-            // btnIncrease
-            // 
-            this.btnIncrease.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnIncrease.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnIncrease.FlatAppearance.BorderSize = 0;
-            this.btnIncrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIncrease.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btnIncrease.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIncrease.Location = new System.Drawing.Point(0, 20);
-            this.btnIncrease.Margin = new System.Windows.Forms.Padding(0);
-            this.btnIncrease.Name = "btnIncrease";
-            this.btnIncrease.Size = new System.Drawing.Size(35, 35);
-            this.btnIncrease.TabIndex = 0;
-            this.btnIncrease.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnIncrease.UseVisualStyleBackColor = false;
-            // 
-            // pnlNum
-            // 
-            this.pnlNum.BackColor = System.Drawing.Color.White;
-            this.pnlNum.Controls.Add(this.btnNum);
-            this.pnlNum.Location = new System.Drawing.Point(395, 7);
-            this.pnlNum.Name = "pnlNum";
-            this.pnlNum.Size = new System.Drawing.Size(124, 88);
-            this.pnlNum.TabIndex = 42;
-            // 
-            // btnNum
-            // 
-            this.btnNum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnNum.FlatAppearance.BorderSize = 0;
-            this.btnNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNum.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btnNum.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNum.Location = new System.Drawing.Point(33, 20);
-            this.btnNum.Name = "btnNum";
-            this.btnNum.Size = new System.Drawing.Size(91, 35);
-            this.btnNum.TabIndex = 0;
-            this.btnNum.Text = "123456kg";
-            this.btnNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNum.UseVisualStyleBackColor = true;
-            // 
-            // pnlSinglePrice
-            // 
-            this.pnlSinglePrice.BackColor = System.Drawing.Color.White;
-            this.pnlSinglePrice.Controls.Add(this.lblOriginPrice);
-            this.pnlSinglePrice.Controls.Add(this.lblPriceDesc);
-            this.pnlSinglePrice.Controls.Add(this.lblSinglePrice);
-            this.pnlSinglePrice.Location = new System.Drawing.Point(219, 7);
-            this.pnlSinglePrice.Name = "pnlSinglePrice";
-            this.pnlSinglePrice.Size = new System.Drawing.Size(145, 88);
-            this.pnlSinglePrice.TabIndex = 41;
-            // 
-            // lblOriginPrice
-            // 
-            this.lblOriginPrice.AutoSize = true;
-            this.lblOriginPrice.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.lblOriginPrice.ForeColor = System.Drawing.Color.Gray;
-            this.lblOriginPrice.Location = new System.Drawing.Point(47, 48);
-            this.lblOriginPrice.Name = "lblOriginPrice";
-            this.lblOriginPrice.Size = new System.Drawing.Size(43, 17);
-            this.lblOriginPrice.TabIndex = 4;
-            this.lblOriginPrice.Text = "label7";
-            // 
-            // lblPriceDesc
-            // 
-            this.lblPriceDesc.AutoSize = true;
-            this.lblPriceDesc.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.lblPriceDesc.ForeColor = System.Drawing.Color.Gray;
-            this.lblPriceDesc.Location = new System.Drawing.Point(96, 28);
-            this.lblPriceDesc.Name = "lblPriceDesc";
-            this.lblPriceDesc.Size = new System.Drawing.Size(43, 17);
-            this.lblPriceDesc.TabIndex = 3;
-            this.lblPriceDesc.Text = "label6";
-            // 
-            // lblSinglePrice
-            // 
-            this.lblSinglePrice.AutoSize = true;
-            this.lblSinglePrice.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblSinglePrice.Location = new System.Drawing.Point(46, 24);
-            this.lblSinglePrice.Name = "lblSinglePrice";
-            this.lblSinglePrice.Size = new System.Drawing.Size(55, 21);
-            this.lblSinglePrice.TabIndex = 2;
-            this.lblSinglePrice.Text = "label5";
-            // 
-            // pnlBarCode
-            // 
-            this.pnlBarCode.BackColor = System.Drawing.Color.White;
-            this.pnlBarCode.Controls.Add(this.btnPurchaseLimit);
-            this.pnlBarCode.Controls.Add(this.lblSkuCode);
-            this.pnlBarCode.Controls.Add(this.lblTitle);
-            this.pnlBarCode.Controls.Add(this.lblPriceTag);
-            this.pnlBarCode.Location = new System.Drawing.Point(5, 7);
-            this.pnlBarCode.Name = "pnlBarCode";
-            this.pnlBarCode.Size = new System.Drawing.Size(208, 88);
-            this.pnlBarCode.TabIndex = 40;
-            // 
-            // btnPurchaseLimit
-            // 
-            this.btnPurchaseLimit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.btnPurchaseLimit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPurchaseLimit.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPurchaseLimit.Location = new System.Drawing.Point(16, 64);
-            this.btnPurchaseLimit.Name = "btnPurchaseLimit";
-            this.btnPurchaseLimit.Size = new System.Drawing.Size(142, 20);
-            this.btnPurchaseLimit.TabIndex = 4;
-            this.btnPurchaseLimit.Text = "button2";
-            this.btnPurchaseLimit.UseVisualStyleBackColor = true;
-            // 
-            // lblSkuCode
-            // 
-            this.lblSkuCode.AutoSize = true;
-            this.lblSkuCode.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblSkuCode.Location = new System.Drawing.Point(16, 43);
-            this.lblSkuCode.Name = "lblSkuCode";
-            this.lblSkuCode.Size = new System.Drawing.Size(55, 21);
-            this.lblSkuCode.TabIndex = 2;
-            this.lblSkuCode.Text = "label3";
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblTitle.Location = new System.Drawing.Point(16, 22);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(55, 21);
-            this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "label2";
-            // 
-            // lblPriceTag
-            // 
-            this.lblPriceTag.AutoSize = true;
-            this.lblPriceTag.BackColor = System.Drawing.Color.Coral;
-            this.lblPriceTag.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lblPriceTag.ForeColor = System.Drawing.Color.White;
-            this.lblPriceTag.Location = new System.Drawing.Point(16, 3);
-            this.lblPriceTag.Name = "lblPriceTag";
-            this.lblPriceTag.Size = new System.Drawing.Size(50, 20);
-            this.lblPriceTag.TabIndex = 0;
-            this.lblPriceTag.Text = "label1";
-            // 
-            // picDelete
-            // 
-            this.picDelete.BackColor = System.Drawing.Color.White;
-            this.picDelete.Image = ((System.Drawing.Image)(resources.GetObject("picDelete.Image")));
-            this.picDelete.Location = new System.Drawing.Point(730, 33);
-            this.picDelete.Name = "picDelete";
-            this.picDelete.Size = new System.Drawing.Size(36, 43);
-            this.picDelete.TabIndex = 25;
-            this.picDelete.TabStop = false;
-            this.picDelete.Visible = false;
-            // 
-            // picBirthday4
-            // 
-            this.picBirthday4.CanMove = false;
-            this.picBirthday4.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday4.Image")));
-            this.picBirthday4.IsFocus = false;
-            this.picBirthday4.Location = new System.Drawing.Point(752, 461);
-            this.picBirthday4.Name = "picBirthday4";
-            this.picBirthday4.Size = new System.Drawing.Size(251, 272);
-            this.picBirthday4.TabIndex = 309;
-            this.picBirthday4.Text = "transparentPic2";
-            this.picBirthday4.unitScale = null;
-            this.picBirthday4.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
-            // 
-            // picBirthday3
-            // 
-            this.picBirthday3.CanMove = false;
-            this.picBirthday3.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday3.Image")));
-            this.picBirthday3.IsFocus = false;
-            this.picBirthday3.Location = new System.Drawing.Point(7, 583);
-            this.picBirthday3.Name = "picBirthday3";
-            this.picBirthday3.Size = new System.Drawing.Size(77, 151);
-            this.picBirthday3.TabIndex = 308;
-            this.picBirthday3.Text = "transparentPic1";
-            this.picBirthday3.unitScale = null;
-            this.picBirthday3.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
-            // 
-            // picBirthday2
-            // 
-            this.picBirthday2.CanMove = false;
-            this.picBirthday2.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday2.Image")));
-            this.picBirthday2.IsFocus = false;
-            this.picBirthday2.Location = new System.Drawing.Point(627, 5);
-            this.picBirthday2.Name = "picBirthday2";
-            this.picBirthday2.Size = new System.Drawing.Size(387, 84);
-            this.picBirthday2.TabIndex = 307;
-            this.picBirthday2.Text = "transparentPic1";
-            this.picBirthday2.unitScale = null;
-            this.picBirthday2.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
-            // 
-            // picBirthday1
-            // 
-            this.picBirthday1.CanMove = false;
-            this.picBirthday1.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday1.Image")));
-            this.picBirthday1.IsFocus = false;
-            this.picBirthday1.Location = new System.Drawing.Point(3, 4);
-            this.picBirthday1.Name = "picBirthday1";
-            this.picBirthday1.Size = new System.Drawing.Size(513, 85);
-            this.picBirthday1.TabIndex = 306;
-            this.picBirthday1.Text = "transparentPic1";
-            this.picBirthday1.unitScale = null;
-            this.picBirthday1.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            this.player.StatusChange += new System.EventHandler(this.player_StatusChange);
             // 
             // FormMainMedia
             // 
@@ -1089,6 +1090,16 @@
             this.Shown += new System.EventHandler(this.frmMainMedia_Shown);
             this.tlpMedia.ResumeLayout(false);
             this.pnlCart.ResumeLayout(false);
+            this.pnlDgvItem.ResumeLayout(false);
+            this.pnlTotal.ResumeLayout(false);
+            this.pnlTotal.PerformLayout();
+            this.pnlAdd.ResumeLayout(false);
+            this.pnlNum.ResumeLayout(false);
+            this.pnlSinglePrice.ResumeLayout(false);
+            this.pnlSinglePrice.PerformLayout();
+            this.pnlBarCode.ResumeLayout(false);
+            this.pnlBarCode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
             this.pnlMemberCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picMemberCard)).EndInit();
             this.pnlHead.ResumeLayout(false);
@@ -1114,16 +1125,6 @@
             this.pnlMember.ResumeLayout(false);
             this.pnlAdvertising.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
-            this.pnlDgvItem.ResumeLayout(false);
-            this.pnlTotal.ResumeLayout(false);
-            this.pnlTotal.PerformLayout();
-            this.pnlAdd.ResumeLayout(false);
-            this.pnlNum.ResumeLayout(false);
-            this.pnlSinglePrice.ResumeLayout(false);
-            this.pnlSinglePrice.PerformLayout();
-            this.pnlBarCode.ResumeLayout(false);
-            this.pnlBarCode.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
             this.ResumeLayout(false);
 
         }

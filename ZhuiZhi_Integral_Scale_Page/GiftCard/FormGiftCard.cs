@@ -68,6 +68,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         private void FormGiftCard_Shown(object sender, EventArgs e)
         {
+            lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
+            lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
+            picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
+            lblMenu.Left = picMenu.Right;
+
             pnlLoading.Visible = false;
             lblToast.Visible = false;
             Application.DoEvents();
@@ -134,7 +139,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                 LogManager.WriteLog("会员登录异常" + ex.Message);
             }
-
+            finally
+            {
+                this.Activate();
+                btnScan.Select();
+            }
+            
         }
 
 
@@ -218,6 +228,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             {
                 LogManager.WriteLog("显示等待异常" + ex.Message);
             }
+            finally
+            {
+                btnScan.Select();
+            }
 
         }
 
@@ -260,8 +274,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 }
 
                 ShowLoading(true, false);
-                string numbervalue = NumberHelper.ShowFormNumber("输入会员手机号", NumberType.MemberCode,true);
-
+                //string numbervalue = NumberHelper.ShowFormNumber("输入会员手机号", NumberType.MemberCode,true);
+                string numbervalue = PayHelper.ShowFormVoucher();
                 if (!string.IsNullOrEmpty(numbervalue))
                 {
                     string ErrorMsgMember = "";
@@ -291,6 +305,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                 LogManager.WriteLog("会员登录异常" + ex.Message);
             }
+            finally
+            {
+                btnScan.Select();
+                this.Activate();
+            }
         }
 
         private void btnLoadBindingPhone_Click(object sender, EventArgs e)
@@ -303,7 +322,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 }
 
                 ShowLoading(true, false);
-                string numbervalue = NumberHelper.ShowFormNumber("输入会员手机号", NumberType.MemberCode,true);
+                //string numbervalue = NumberHelper.ShowFormNumber("输入会员手机号", NumberType.MemberCode,true);
+                string numbervalue = PayHelper.ShowFormVoucher();
                 if (!string.IsNullOrEmpty(numbervalue))
                 {
                     string ErrorMsgMember = "";
@@ -332,6 +352,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 ShowLoading(false, true);
 
                 LogManager.WriteLog("会员登录异常" + ex.Message);
+            }
+            finally
+            {
+                btnScan.Select();
+                this.Activate();
             }
         }
         private void LoadMember(Member member)
@@ -634,6 +659,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             }
         }
 
+
+        private void btnPageUpForCart_Click(object sender, EventArgs e)
+        {
+
+            if (!rbtnPageUpForCart.WhetherEnable || !IsEnable)
+            {
+                return;
+            }
+            if (CurrentCartPage > 1)
+            {
+                CurrentCartPage--;
+                UploadDgvCart();
+            }
+        }
+
+        private void btnPageDownForCart_Click(object sender, EventArgs e)
+        {
+
+            if (!rbtnPageDownForCart.WhetherEnable || !IsEnable)
+            {
+                return;
+            }
+            CurrentCartPage++;
+            UploadDgvCart();
+        }
+
+
+
+        /// <summary>
+        /// 当前展示购物车页数
+        /// </summary>
+        private int CurrentCartPage = 1;
         private void UploadDgvCart()
         {
             Invoke((new Action(() =>
@@ -642,10 +699,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                 if (CurrentCart.products != null && CurrentCart.products.Count > 0)
                 {
-                    foreach (CardProduct pro in CurrentCart.products)
+
+                    rbtnPageUpForCart.WhetherEnable = CurrentCartPage > 1;
+
+
+                    int startindex = (CurrentCartPage - 1) * 5;
+
+                    int lastindex = Math.Min(CurrentCart.products.Count - 1, startindex + 4);
+
+                    List<CardProduct> lstLoadingPro = CurrentCart.products.GetRange(startindex, lastindex - startindex + 1);
+
+
+                    foreach (CardProduct pro in lstLoadingPro)
                     {
                         dgvCart.Rows.Add(GetDgvRow(pro, 0));
                     }
+
+                    rbtnPageDownForCart.WhetherEnable = CurrentCart.products.Count > CurrentCartPage * 5;
 
                     lblProCount.Text = "(" + CurrentCart.products.Count + "件商品)";
 
@@ -943,6 +1013,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
         
         #endregion
+
+        private void dgvCart_Click(object sender, EventArgs e)
+        {
+            btnScan.Select();
+        }
 
 
     }

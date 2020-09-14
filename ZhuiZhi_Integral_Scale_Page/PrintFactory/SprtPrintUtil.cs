@@ -357,7 +357,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                    //}
 
 
-                   lstPrintStr.Add(MergeStr(printdetail.paymode, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
+                   lstPrintStr.Add(MergeStr(printdetail.paymodeforapi, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
 
                    lstPrintStr.Add(getStrLine());
 

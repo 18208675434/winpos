@@ -78,7 +78,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     foreach (OrderPriceDetail pricedetail in printdetail.orderbasicinfo)
                     {
                         string stramount = pricedetail.amount;
-                        if (isRefound && pricedetail.title != "件数合计" && !pricedetail.amount.Contains("-"))
+                        if (isRefound && pricedetail.title !=null && pricedetail.title != "件数合计" && pricedetail.amount!=null && !pricedetail.amount.Contains("-"))
                         {
                             stramount = "-" + stramount;
                         }
@@ -88,7 +88,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                             stramount = "0.00";
                         }
 
-                            lstPrintStr.Add(MergeStr(pricedetail.title, stramount, BodyCharCountOfLine, PageSize));                     
+                            lstPrintStr.Add(MergeStr(pricedetail.title, stramount, BodyCharCountOfLine, PageSize));
+
+
+
+                            if (pricedetail.childdetail != null && pricedetail.childdetail.Count > 0)
+                            {
+                                foreach (OrderPriceDetail child in pricedetail.childdetail)
+                                {
+                                    string childamount = "";
+                                    if (child.amount != null)
+                                    {
+                                        childamount = child.amount.Contains("-") ? child.amount : "-" + child.amount;
+                                    }
+                                    lstPrintStr.Add(MergeStr("    "+child.title, childamount, BodyCharCountOfLine, PageSize));
+                                }
+                             
+                            }
                     }
 
                     lstPrintStr.Add(getStrLine());
