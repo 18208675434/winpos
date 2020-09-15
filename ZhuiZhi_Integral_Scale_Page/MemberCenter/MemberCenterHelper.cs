@@ -19,7 +19,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         //按比例缩放页面及控件
         //</summary>
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
-
+        /// <summary>
+        /// 手机号新值
+        /// </summary>
+        public static Member member = new Member();
         public static void ShowFormMemberCenter(Member member)
         {
             try

@@ -366,7 +366,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("token", MainModel.CurrentMember.memberheaderresponsevo.token);
-                sort.Add("mobile", mobile);
+                sort.Add("mobile", MainModel.NewPhone);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -403,7 +403,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("sourcetoken",MainModel.Sourcetoken );
-                sort.Add("targettoken",MainModel.CurrentMember.memberheaderresponsevo.token );
+                sort.Add("targettoken",MemberCenterHelper.member.memberheaderresponsevo.token);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);

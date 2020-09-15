@@ -37,12 +37,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             Control.CheckForIllegalCrossThreadCalls = false;
             CurrentMember = member;
         }
-
+        
         private void FormMemberCenter_Shown(object sender, EventArgs e)
         {
             try
             {
-
+                if (MainModel.NewPhone != "")
+                {
+                    label4.Visible = true;
+                    newphone.Visible = true;
+                    newphone.Text = MainModel.NewPhone;
+                }
+                
                 lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
 
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好 ";
@@ -166,10 +172,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("在线充值异常"+ex.Message,true);
             }
         }
-        public void refresh()
-        {
-            this.Refresh();
-        }
+        
         private void pnlPayByCash_Click(object sender, EventArgs e)
         {
             try
@@ -358,10 +361,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("加载优惠券异常"+ex.Message,true);
             }
         }
-        public void count()
-        {
-            this.Refresh();
-        }
+        
         private void dgvTemplate_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try

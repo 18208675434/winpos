@@ -122,7 +122,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 label8.ForeColor = Color.DodgerBlue;
                 picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
                 label7.BackColor = Color.DodgerBlue;
-
+                label9.Visible = false;
+                label11.Visible = true;
             }
         }
         public void yanse()
@@ -241,17 +242,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             m.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - m.Width) / 2, (Screen.AllScreens[0].Bounds.Height - m.Height) / 2);
             m.TopMost = true;
             m.ShowDialog();
+            m.Dispose();
             //this.Enabled = true;
-            label8.ForeColor = Color.DodgerBlue;
-            picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
-            label7.BackColor = Color.DodgerBlue;
-            button1.Visible = true;
-            btnVerifyNewPhone.Visible = false;
-            label9.Visible = false;
-            label10.Visible = true;
-            label11.Visible = true;
-            GetPhone(MainModel.NewPhone);
-
+            
+            if (m.DialogResult == DialogResult.OK)
+            {
+                label8.ForeColor = Color.DodgerBlue;
+                picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
+                label7.BackColor = Color.DodgerBlue;
+                button1.Visible = true;
+                btnVerifyNewPhone.Visible = false;
+                label9.Visible = false;
+                label10.Visible = true;
+                label11.Visible = true;
+                GetPhone(MainModel.NewPhone);
+            }
+            else
+            {
+                m.Close();
+                return;
+            }
+            
+            
 
 
 
@@ -263,6 +275,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
         }
+       
         
         public void GetPhone(string phone)
         {
@@ -284,10 +297,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             f.TopMost = true;
 
             f.ShowDialog();
-            f.Dispose();
 
             if (f.DialogResult == DialogResult.OK)
             {
+                BackHelper.HideFormBackGround();
                 this.Close();
             }
 
