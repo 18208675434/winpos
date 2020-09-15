@@ -119,7 +119,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="orderid"></param>
         /// <param name="authcode"></param>
         /// <param name="erromessage"></param>
-        public VerifyBalancePwd VerifyBalancePwd(string paypassword, ref string erromessage, ref int resultcode)
+        public VerifyBalancePwd VerifyBalancePwd(string paypassword, ref string erromessage, ref int resultcode,Member m)
         {
             try
             {
@@ -131,8 +131,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 sort.Add("paypasswordtype", 1);
                 sort.Add("paypassword", paypassword);
                 sort.Add("deviceid", MainModel.DeviceSN);
-                sort.Add("authtoken", MainModel.CurrentMember.memberheaderresponsevo.token);
-                sort.Add("memberid", MainModel.CurrentMember.memberid);
+                sort.Add("authtoken", m.memberheaderresponsevo.token);
+                sort.Add("memberid", m.memberid);
                 string tempjson = JsonConvert.SerializeObject(sort);
 
 

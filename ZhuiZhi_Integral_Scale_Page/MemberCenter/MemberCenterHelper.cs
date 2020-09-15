@@ -166,13 +166,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 显示用户修改密码输入窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormSeavePassword()
+        public static bool ShowFormSeavePassword(Member mm)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
 
-                FormSeavePassword frmseavepassword = new FormSeavePassword();
+                FormSeavePassword frmseavepassword = new FormSeavePassword(mm);
                 asf.AutoScaleControlTest(frmseavepassword, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmseavepassword.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmseavepassword.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmseavepassword.Height) / 2);
                 frmseavepassword.TopMost = true;
@@ -202,7 +202,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 BackHelper.ShowFormBackGround();
 
-                FormChangePhoneNewPhoneSms frmforgetpassword = new FormChangePhoneNewPhoneSms();
+                FormForgetPassword frmforgetpassword = new FormForgetPassword();
                 asf.AutoScaleControlTest(frmforgetpassword, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmforgetpassword.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmforgetpassword.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmforgetpassword.Height) / 2);
                 frmforgetpassword.TopMost = true;
@@ -252,12 +252,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 显示修改手机号码界面
         /// </summary>
-        public static void ShowFormChangePhoneNumber()
+        public static void ShowFormChangePhoneNumber(Member member)
         {
             try
             {
 
-                FormChangePhoneNumber frmchangephonenumber = new FormChangePhoneNumber();
+                FormChangePhoneNumber frmchangephonenumber = new FormChangePhoneNumber(member);
                 asf.AutoScaleControlTest(frmchangephonenumber, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmchangephonenumber.Location = new System.Drawing.Point(0, 0);
                 frmchangephonenumber.TopMost = true;
@@ -281,7 +281,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 BackHelper.ShowFormBackGround();
-
                 FormChengPhoneSmsCode frmchangephonesmscode = new FormChengPhoneSmsCode();
                 asf.AutoScaleControlTest(frmchangephonesmscode, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmchangephonesmscode.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonesmscode.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonesmscode.Height) / 2);
@@ -303,13 +302,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 显示修改手机号码-支付密码验证窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhonePayPwd()
+        public static bool ShowFormChangePhonePayPwd(Member m )
         {
             try
             {
                 BackHelper.ShowFormBackGround();
-
-                FormChangePhonePayPwd frmchangephonepaypwd = new FormChangePhonePayPwd();
+                FormChangePhonePayPwd frmchangephonepaypwd = new FormChangePhonePayPwd(m);
                 asf.AutoScaleControlTest(frmchangephonepaypwd, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmchangephonepaypwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonepaypwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonepaypwd.Height) / 2);
                 frmchangephonepaypwd.TopMost = true;

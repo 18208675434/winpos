@@ -313,6 +313,12 @@
     <Compile Include="MemberCenter\FormForgetPassword.Designer.cs">
       <DependentUpon>FormForgetPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormHeBing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormHeBing.Designer.cs">
+      <DependentUpon>FormHeBing.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormMemberCenterMedia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1135,6 +1141,9 @@
     <EmbeddedResource Include="MemberCenter\FormForgetPassword.resx">
       <DependentUpon>FormForgetPassword.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormHeBing.resx">
+      <DependentUpon>FormHeBing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormMemberCenterMedia.resx">
       <DependentUpon>FormMemberCenterMedia.cs</DependentUpon>
     </EmbeddedResource>
@@ -1509,16 +1518,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -1530,7 +1529,24 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{9fe00521-3a8b-42b1-814e-585e99407b2e}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
