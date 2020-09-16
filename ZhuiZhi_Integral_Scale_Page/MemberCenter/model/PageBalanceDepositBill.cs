@@ -99,6 +99,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
     /// 
     /// </summary>
     public string tradedate { get; set; }
+    public byte Refound { get; set; }
 }
 
 

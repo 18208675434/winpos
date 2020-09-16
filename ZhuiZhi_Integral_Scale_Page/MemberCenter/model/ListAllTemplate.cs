@@ -11,6 +11,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
 public class ListAllTemplate
 {
     /// <summary>
+    /// 自定义金额传值
+    /// </summary>
+    public static string CustomMoney;
+    /// <summary>
+    /// 自定义赠送金额
+    /// </summary>
+    public static string ZengCustomMoney;
+    /// <summary>
+    /// 是否自定义金额
+    /// </summary>
+    public bool iszidingyi { get; set; }
+
+    /// <summary>
     /// 
     /// </summary>
     public decimal amount { get; set; }

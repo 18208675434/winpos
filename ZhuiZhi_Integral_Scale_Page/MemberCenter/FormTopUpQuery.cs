@@ -16,6 +16,7 @@ using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
+using System.IO;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
@@ -406,11 +407,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 dgvOrderOnLine.Rows.Clear();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
-
-
+                
+                
                 foreach (RowsItem order in CurrentBalanceDepos.rows)
                 {
-                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.amount.ToString("f2")+"元");
+                    
+                    
+                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.amount.ToString("f2")+"元",order.Refound);
                 }
                 dgvOrderOnLine.ClearSelection();
                 Application.DoEvents();
@@ -473,6 +476,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
             }
+        }
+
+        private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

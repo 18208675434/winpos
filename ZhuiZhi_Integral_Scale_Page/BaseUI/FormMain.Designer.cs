@@ -2057,6 +2057,7 @@
             this.rbtnPay.TextForeColor = System.Drawing.Color.White;
             this.rbtnPay.WhetherEnable = false;
             this.rbtnPay.ButtonClick += new System.EventHandler(this.rbtnPay_ButtonClick);
+            this.rbtnPay.Load += new System.EventHandler(this.rbtnPay_Load);
             // 
             // FormMain
             // 

@@ -247,6 +247,12 @@
     </Compile>
     <Compile Include="HelperUI\PurchaseLimitHelper.cs" />
     <Compile Include="MemberCenter\CreateMemberMediaHelper.cs" />
+    <Compile Include="MemberCenter\Form1ZengMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\Form1ZengMoney.Designer.cs">
+      <DependentUpon>Form1ZengMoney.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormChangePhoneConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +313,18 @@
     <Compile Include="MemberCenter\FormCreateMemberMedia.Designer.cs">
       <DependentUpon>FormCreateMemberMedia.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormCustomMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomMoney.Designer.cs">
+      <DependentUpon>FormCustomMoney.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomreCharge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomreCharge.Designer.cs">
+      <DependentUpon>FormCustomreCharge.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormForgetPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -342,6 +360,12 @@
     </Compile>
     <Compile Include="MemberCenter\FormNoPayPwd.Designer.cs">
       <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormOtherMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormOtherMethod.Designer.cs">
+      <DependentUpon>FormOtherMethod.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormSeavePassword.cs">
       <SubType>Form</SubType>
@@ -1108,6 +1132,9 @@
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\Form1ZengMoney.resx">
+      <DependentUpon>Form1ZengMoney.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1138,6 +1165,12 @@
     <EmbeddedResource Include="MemberCenter\FormCreateMemberMedia.resx">
       <DependentUpon>FormCreateMemberMedia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCustomMoney.resx">
+      <DependentUpon>FormCustomMoney.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCustomreCharge.resx">
+      <DependentUpon>FormCustomreCharge.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormForgetPassword.resx">
       <DependentUpon>FormForgetPassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -1155,6 +1188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormNoPayPwd.resx">
       <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormOtherMethod.resx">
+      <DependentUpon>FormOtherMethod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormSeavePassword.resx">
       <DependentUpon>FormSeavePassword.cs</DependentUpon>
@@ -1463,6 +1499,7 @@
     <None Include="Resources\border_add1.bmp" />
     <Content Include="FruitLogo.ico" />
     <Content Include="Picture\rounblue.png" />
+    <Content Include="Picture\关闭.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />
