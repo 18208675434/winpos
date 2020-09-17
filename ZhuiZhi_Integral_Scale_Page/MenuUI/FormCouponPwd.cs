@@ -17,6 +17,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
 
         private string CouponCode = "";
         private HttpUtil httputil = new HttpUtil();
+
+        public string Pasword = null;
         public FormCouponPwd( string couponcode)
         {
             InitializeComponent();
@@ -57,7 +59,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                     MainModel.ShowLog("密码不正确",false);
                     return;
                 }
-
+                Pasword = txtNum.Text;
                 this.DialogResult = DialogResult.OK;
 
                 this.Close();

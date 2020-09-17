@@ -417,7 +417,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                         return;
                     }
 
-                    if (paymentcoupondetail.needpassword && !PayHelper.ShowFormCouponPwd(txtCash.Text))
+                    string couponpassword=null;
+                    if (paymentcoupondetail.needpassword && !PayHelper.ShowFormCouponPwd(txtCash.Text,out couponpassword))
                     {
                         this.Activate();
                         return;
@@ -430,7 +431,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     otherpay.paycouponcode = paymentcoupondetail.couponcode;
                     otherpay.payname = SelectPayType.name;
                     otherpay.paypromoamt = paymentcoupondetail.amount;
-                    otherpay.paytype = paymentcoupondetail.id;                    
+                    otherpay.paytype = SelectPayType.code;
+
+                    otherpay.paypassword = couponpassword;
                 }
                 else
                 {

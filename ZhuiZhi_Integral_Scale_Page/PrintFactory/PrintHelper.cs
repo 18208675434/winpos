@@ -296,6 +296,34 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     catch (Exception ex) { }
                 }
 
+
+                if (receipt.balancedepositinfo != null && receipt.balancedepositinfo.Count > 0)
+                {
+                    lstPrintStr.Add(getStrLine());
+
+
+                    lstPrintStr.Add("充值明细:");
+
+                    decimal totalamount = 0;
+                    foreach (OrderPriceDetail balancedetail in receipt.balancedepositinfo)
+                    {
+                        try
+                        {
+
+                            totalamount += Convert.ToDecimal(balancedetail.amount);
+                            lstPrintStr.Add(MergeStr(balancedetail.title, balancedetail.amount, BodyCharCountOfLine, PageSize));
+
+                            if (!string.IsNullOrEmpty(balancedetail.subtitle))
+                            {
+                                lstPrintStr.Add(MergeStr("", balancedetail.subtitle.Trim(), BodyCharCountOfLine, PageSize));
+                            }
+                        }
+                        catch (Exception ex) { }
+
+                        lstPrintStr.Add(MergeStr("总计", totalamount.ToString("f2"), BodyCharCountOfLine, PageSize));
+                    }
+                }
+
                 lstPrintStr.Add(getStrLine());
                 foreach (OrderPriceDetail shopcashinfo in receipt.shopcashinfo)
                 {

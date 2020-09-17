@@ -169,7 +169,6 @@ namespace Maticsoft.BLL
         /// </summary>
         public bool Delete(string condition)
         {
-
             return dal.Delete(condition);
         }
 

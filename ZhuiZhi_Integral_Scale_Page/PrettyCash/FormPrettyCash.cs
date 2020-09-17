@@ -79,11 +79,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
 
         private void FormPrettyCash_Shown(object sender, EventArgs e)
         {
-            Application.DoEvents();
-
+         
             txtCash.Focus();
             txtCash.SelectAll();
             numBoard.Size = new Size(this.Width, btnOK.Top - numBoard.Top - 10);
+
+            Application.DoEvents();
         }
 
         private void txtCash_Leave(object sender, EventArgs e)

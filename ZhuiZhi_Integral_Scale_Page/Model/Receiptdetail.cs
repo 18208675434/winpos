@@ -24,6 +24,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public List<OrderPriceDetail> otherinfo { get; set; }
 
         public List<OrderPriceDetail> shopcashinfo { get; set; }
+
+        public List<OrderPriceDetail> balancedepositinfo { get; set; }
         public long starttime { get; set; }
         public long endtime { get; set; }
 

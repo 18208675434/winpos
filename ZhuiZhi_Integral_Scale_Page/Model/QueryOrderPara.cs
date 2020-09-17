@@ -40,5 +40,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 门店ID
         /// </summary>
         public string shopid { set; get; }
+
+        /// <summary>
+        ///  订单渠道:1(小程序) 2(美团) 3(饿百)
+        /// </summary>
+        public int source { set; get; }
     }
 }

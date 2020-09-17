@@ -28,7 +28,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// </summary>
         public string oldentitycardnumber { get; set; }
         /// <summary>
-        /// 
+        /// 支付方式  0现金 1其他支付 2微信 3支付宝 
         /// </summary>
         public string paymode { get; set; }
         /// <summary>

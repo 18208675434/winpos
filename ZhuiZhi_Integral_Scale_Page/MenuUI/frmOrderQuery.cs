@@ -79,10 +79,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
             picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
             lblMenu.Left = picMenu.Right;
-            
-            //Application.DoEvents();
-
-           
 
         }
         private void frmOrderQuery_Shown(object sender, EventArgs e)
@@ -104,10 +100,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 bmpNotRefund = (Bitmap)MainModel.GetControlImage(btnNotRefundPic);
                 bmpRefundByAmt = (Bitmap)MainModel.GetControlImage(btnRefundByAmt);
 
-                //int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
-                //bmpRefund = new Bitmap(Resources.ResourcePos.Refund, dgvOrderOnLine.Columns["cancle"].Width * 80 / 100, height);
-
-                //bmpReprint = new Bitmap(Resources.ResourcePos.Reprint, dgvOrderOnLine.Columns["reprint"].Width * 80 / 100, height);
                 bmpWhite = Resources.ResourcePos.White;
 
             }
@@ -500,10 +492,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        public void btnWindows_Click(object sender, EventArgs e)
-        {
-            MainModel.ShowWindows();
-        }
 
         private void btnQueryOnline_Click(object sender, EventArgs e)
         {
@@ -616,36 +604,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
 
-        private void txt_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
-                Delay.Start(100);
-                txt.Focus();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
-            }
-        }
-
-        private void txt_Leave(object sender, EventArgs e)
-        {
-           try
-            {
-                if (!txtPhone.Focused && !txtOrderID.Focused)
-                {
-                    GlobalUtil.CloseOSK();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("失去焦点关闭键盘异常" + ex.Message);
-            }
-        }
-
         private void frmOrderQuery_FormClosed(object sender, FormClosedEventArgs e)
         {
             GlobalUtil.CloseOSK();
@@ -720,10 +678,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 queryorderpara.orderatstart = getStampByDateTime(dtStart.Value);
                 queryorderpara.orderid = txtOrderID.Text;
                 queryorderpara.lastorderid = LastOrderid;
-
+                //queryorderpara.source = 1;
                 string ErrorMsg = "";
                 QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
-
 
                 if (ErrorMsg != "" || queryorder == null)
                 {
@@ -826,14 +783,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-
         private void txt_OskClick(object sender, EventArgs e)
         {
             try
             {
                 TextBox txt = (TextBox)sender;
                 GlobalUtil.OpenOSK();
-
 
                 Delay.Start(100);
                 this.Activate();

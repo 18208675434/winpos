@@ -121,22 +121,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 {
                     return;
                 }
-
-                ShowLoading(true, false);
-
+                IsEnable = false;
                 string number = NumberHelper.ShowFormNumber("礼品卡卡号",NumberType.GiftCardNo,true);
                 if (!string.IsNullOrEmpty(number))
                 {
                     QueueScanCode.Enqueue(number);
                 }
-                
 
-                ShowLoading(false, true);
+                IsEnable = true;
             }
             catch (Exception ex)
             {
-                ShowLoading(false, true);
-
+                IsEnable = true;
                 LogManager.WriteLog("会员登录异常" + ex.Message);
             }
             finally
@@ -537,27 +533,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                         List<GiftCardDetail> LstGiftCardDetail = new List<GiftCardDetail>();
                         foreach (string scancode in LstScanCode)
                         {
-                            string errormsg = "";
-                            int errorcode=-1;
-                            GiftCardDetail giftcarddetail = gifthttputil.GetPrepaiidCardDetail(scancode, ref errormsg,ref errorcode);
 
-                            if (!string.IsNullOrEmpty(errormsg) || giftcarddetail == null)
+                            if (IsExitsCardNumber(scancode))
                             {
-                                ShowLoading(false, true);
-                                ShowLog(errormsg, false);
+                                MainModel.ShowLog("当前卡号已添加至收银台，请勿重复添加",false);
                             }
                             else
                             {
-                                LstGiftCardDetail.Add(giftcarddetail);
+                                string errormsg = "";
+                                int errorcode = -1;
+                                GiftCardDetail giftcarddetail = gifthttputil.GetPrepaiidCardDetail(scancode, ref errormsg, ref errorcode);
+
+                                if (!string.IsNullOrEmpty(errormsg) || giftcarddetail == null)
+                                {
+                                    ShowLoading(false, true);
+                                    ShowLog(errormsg, false);
+                                }
+                                else
+                                {
+                                    LstGiftCardDetail.Add(giftcarddetail);
+                                }
                             }
                         }
 
                         if (LstGiftCardDetail != null && LstGiftCardDetail.Count > 0)
                         {
                             InsertToCart(LstGiftCardDetail);
+
+                            RefreshCart();
                         }
 
-                        RefreshCart();
+                        
                         Thread.Sleep(10);
                     }
                     catch (Exception ex)
@@ -575,6 +581,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             }
         }
 
+        private bool IsExitsCardNumber(string scancode)
+        {
+            try { 
+
+            if(CurrentCart == null || CurrentCart.products ==null || CurrentCart.products.Count==0)
+            {
+                return false;
+            }
+
+            CardProduct pro = CurrentCart.products.FirstOrDefault(r=> r.cardnumber==scancode);
+
+            if (pro != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+
+            }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         private void InsertToCart(List<GiftCardDetail> LstGiftCardDetail)
         {

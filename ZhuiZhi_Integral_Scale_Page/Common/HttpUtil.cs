@@ -1055,6 +1055,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             try
             {
                 string url = "/pos/order/pos/query";
+
+                if (queryorderpara.source > 0)
+                {
+                    url = "/pos/order/pos/queryonlineorderforpos";
+                }
+                
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);
 
                 string json = HttpPOST(url, tempjson);

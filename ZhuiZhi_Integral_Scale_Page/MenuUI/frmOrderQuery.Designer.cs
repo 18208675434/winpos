@@ -70,6 +70,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dgvOrderOnLine = new System.Windows.Forms.DataGridView();
+            this.orderat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paytype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderstatusvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reprint = new System.Windows.Forms.DataGridViewImageColumn();
+            this.cancle = new System.Windows.Forms.DataGridViewImageColumn();
+            this.byamt = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -88,15 +97,6 @@
             this.picScreen = new System.Windows.Forms.PictureBox();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.orderat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paytype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderstatusvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reprint = new System.Windows.Forms.DataGridViewImageColumn();
-            this.cancle = new System.Windows.Forms.DataGridViewImageColumn();
-            this.byamt = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             this.pnlDgvHead.SuspendLayout();
             this.pnlEmptyOrder.SuspendLayout();
@@ -393,9 +393,9 @@
             this.lblPhone.Location = new System.Drawing.Point(14, 14);
             this.lblPhone.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(62, 21);
+            this.lblPhone.Size = new System.Drawing.Size(78, 21);
             this.lblPhone.TabIndex = 0;
-            this.lblPhone.Text = "手机号:";
+            this.lblPhone.Text = "下单用户:";
             // 
             // pnlDgvHead
             // 
@@ -579,6 +579,115 @@
             this.dgvOrderOnLine.TabIndex = 0;
             this.dgvOrderOnLine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderOnLine_CellContentClick);
             this.dgvOrderOnLine.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvOrderOnLine_Scroll);
+            // 
+            // orderat
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.orderat.DefaultCellStyle = dataGridViewCellStyle2;
+            this.orderat.FillWeight = 100.195F;
+            this.orderat.HeaderText = "下单时间";
+            this.orderat.Name = "orderat";
+            this.orderat.ReadOnly = true;
+            this.orderat.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // orderid
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.orderid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.orderid.FillWeight = 100.195F;
+            this.orderid.HeaderText = "订单号";
+            this.orderid.Name = "orderid";
+            this.orderid.ReadOnly = true;
+            this.orderid.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // customerphone
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.customerphone.DefaultCellStyle = dataGridViewCellStyle4;
+            this.customerphone.FillWeight = 100.195F;
+            this.customerphone.HeaderText = "下单用户";
+            this.customerphone.Name = "customerphone";
+            this.customerphone.ReadOnly = true;
+            this.customerphone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // title
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.title.DefaultCellStyle = dataGridViewCellStyle5;
+            this.title.FillWeight = 100.195F;
+            this.title.HeaderText = "商品明细";
+            this.title.Name = "title";
+            this.title.ReadOnly = true;
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // paytype
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paytype.DefaultCellStyle = dataGridViewCellStyle6;
+            this.paytype.FillWeight = 100.195F;
+            this.paytype.HeaderText = "支付方式";
+            this.paytype.Name = "paytype";
+            this.paytype.ReadOnly = true;
+            this.paytype.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // orderstatusvalue
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.orderstatusvalue.DefaultCellStyle = dataGridViewCellStyle7;
+            this.orderstatusvalue.FillWeight = 50F;
+            this.orderstatusvalue.HeaderText = "订单状态";
+            this.orderstatusvalue.Name = "orderstatusvalue";
+            this.orderstatusvalue.ReadOnly = true;
+            this.orderstatusvalue.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // reprint
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle8.NullValue")));
+            this.reprint.DefaultCellStyle = dataGridViewCellStyle8;
+            this.reprint.FillWeight = 60F;
+            this.reprint.HeaderText = "重打小票";
+            this.reprint.Name = "reprint";
+            this.reprint.ReadOnly = true;
+            this.reprint.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.reprint.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // cancle
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle9.NullValue")));
+            this.cancle.DefaultCellStyle = dataGridViewCellStyle9;
+            this.cancle.FillWeight = 40F;
+            this.cancle.HeaderText = "退款";
+            this.cancle.Name = "cancle";
+            this.cancle.ReadOnly = true;
+            this.cancle.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // byamt
+            // 
+            this.byamt.FillWeight = 50F;
+            this.byamt.HeaderText = "退差价";
+            this.byamt.Name = "byamt";
+            this.byamt.ReadOnly = true;
+            this.byamt.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // pnlHead
             // 
@@ -811,115 +920,6 @@
             this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
-            // 
-            // orderat
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.orderat.DefaultCellStyle = dataGridViewCellStyle2;
-            this.orderat.FillWeight = 100.195F;
-            this.orderat.HeaderText = "下单时间";
-            this.orderat.Name = "orderat";
-            this.orderat.ReadOnly = true;
-            this.orderat.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // orderid
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.orderid.DefaultCellStyle = dataGridViewCellStyle3;
-            this.orderid.FillWeight = 100.195F;
-            this.orderid.HeaderText = "订单号";
-            this.orderid.Name = "orderid";
-            this.orderid.ReadOnly = true;
-            this.orderid.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // customerphone
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.customerphone.DefaultCellStyle = dataGridViewCellStyle4;
-            this.customerphone.FillWeight = 100.195F;
-            this.customerphone.HeaderText = "下单用户";
-            this.customerphone.Name = "customerphone";
-            this.customerphone.ReadOnly = true;
-            this.customerphone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // title
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.title.DefaultCellStyle = dataGridViewCellStyle5;
-            this.title.FillWeight = 100.195F;
-            this.title.HeaderText = "商品明细";
-            this.title.Name = "title";
-            this.title.ReadOnly = true;
-            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // paytype
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paytype.DefaultCellStyle = dataGridViewCellStyle6;
-            this.paytype.FillWeight = 100.195F;
-            this.paytype.HeaderText = "支付方式";
-            this.paytype.Name = "paytype";
-            this.paytype.ReadOnly = true;
-            this.paytype.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // orderstatusvalue
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.orderstatusvalue.DefaultCellStyle = dataGridViewCellStyle7;
-            this.orderstatusvalue.FillWeight = 50F;
-            this.orderstatusvalue.HeaderText = "订单状态";
-            this.orderstatusvalue.Name = "orderstatusvalue";
-            this.orderstatusvalue.ReadOnly = true;
-            this.orderstatusvalue.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // reprint
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle8.NullValue")));
-            this.reprint.DefaultCellStyle = dataGridViewCellStyle8;
-            this.reprint.FillWeight = 60F;
-            this.reprint.HeaderText = "重打小票";
-            this.reprint.Name = "reprint";
-            this.reprint.ReadOnly = true;
-            this.reprint.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.reprint.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // cancle
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle9.NullValue")));
-            this.cancle.DefaultCellStyle = dataGridViewCellStyle9;
-            this.cancle.FillWeight = 40F;
-            this.cancle.HeaderText = "退款";
-            this.cancle.Name = "cancle";
-            this.cancle.ReadOnly = true;
-            this.cancle.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // byamt
-            // 
-            this.byamt.FillWeight = 50F;
-            this.byamt.HeaderText = "退差价";
-            this.byamt.Name = "byamt";
-            this.byamt.ReadOnly = true;
-            this.byamt.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // frmOrderQuery
             // 

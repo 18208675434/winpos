@@ -106,6 +106,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public decimal paypromoamt { get; set; }
 
         public string paytype { get; set; }
+           /// <summary>
+        /// 其他支付方式支付密码 线下券 ,
+           /// </summary>
+        public string paypassword { get; set; }
     }
 
 }

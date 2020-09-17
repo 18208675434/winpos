@@ -49,6 +49,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lblMember = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlPayInfo = new System.Windows.Forms.Panel();
+            this.picPayError = new System.Windows.Forms.PictureBox();
+            this.picShowPay = new System.Windows.Forms.PictureBox();
+            this.lblPayInfo2 = new System.Windows.Forms.Label();
+            this.lblPayInfo1 = new System.Windows.Forms.Label();
+            this.picPayInfo = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlCartItem = new System.Windows.Forms.Panel();
             this.picDelete = new System.Windows.Forms.PictureBox();
@@ -59,10 +65,6 @@
             this.lblBindingInfo = new System.Windows.Forms.Label();
             this.lblSkuCode = new System.Windows.Forms.Label();
             this.lblSkuName = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.lblCartTotal = new System.Windows.Forms.Label();
-            this.lblProCount = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.dgvCart = new System.Windows.Forms.DataGridView();
             this.ProName = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -77,32 +79,25 @@
             this.lblNeedPay = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblProCount = new System.Windows.Forms.Label();
             this.lblBindingPhone = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.pnlPayInfo = new System.Windows.Forms.Panel();
-            this.picPayError = new System.Windows.Forms.PictureBox();
-            this.picShowPay = new System.Windows.Forms.PictureBox();
-            this.lblPayInfo2 = new System.Windows.Forms.Label();
-            this.lblPayInfo1 = new System.Windows.Forms.Label();
-            this.picPayInfo = new System.Windows.Forms.PictureBox();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.pnlMember.SuspendLayout();
             this.pnlMemberInfo.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.pnlCartItem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.pnlPayInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picShowPay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPayInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlCartItem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHead
@@ -285,10 +280,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.pnlPayInfo);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.pnlCartItem);
-            this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.dgvCart);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.label1);
@@ -296,6 +289,79 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(738, 671);
             this.panel2.TabIndex = 39;
+            // 
+            // pnlPayInfo
+            // 
+            this.pnlPayInfo.BackColor = System.Drawing.Color.White;
+            this.pnlPayInfo.Controls.Add(this.picPayError);
+            this.pnlPayInfo.Controls.Add(this.picShowPay);
+            this.pnlPayInfo.Controls.Add(this.lblPayInfo2);
+            this.pnlPayInfo.Controls.Add(this.lblPayInfo1);
+            this.pnlPayInfo.Controls.Add(this.picPayInfo);
+            this.pnlPayInfo.Location = new System.Drawing.Point(14, 73);
+            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlPayInfo.Name = "pnlPayInfo";
+            this.pnlPayInfo.Size = new System.Drawing.Size(734, 670);
+            this.pnlPayInfo.TabIndex = 312;
+            this.pnlPayInfo.Visible = false;
+            // 
+            // picPayError
+            // 
+            this.picPayError.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayError.BackgroundImage")));
+            this.picPayError.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picPayError.Location = new System.Drawing.Point(30, 215);
+            this.picPayError.Name = "picPayError";
+            this.picPayError.Size = new System.Drawing.Size(100, 50);
+            this.picPayError.TabIndex = 12;
+            this.picPayError.TabStop = false;
+            this.picPayError.Visible = false;
+            // 
+            // picShowPay
+            // 
+            this.picShowPay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picShowPay.BackgroundImage")));
+            this.picShowPay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picShowPay.Location = new System.Drawing.Point(30, 124);
+            this.picShowPay.Name = "picShowPay";
+            this.picShowPay.Size = new System.Drawing.Size(100, 58);
+            this.picShowPay.TabIndex = 11;
+            this.picShowPay.TabStop = false;
+            this.picShowPay.Visible = false;
+            // 
+            // lblPayInfo2
+            // 
+            this.lblPayInfo2.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblPayInfo2.ForeColor = System.Drawing.Color.Black;
+            this.lblPayInfo2.Location = new System.Drawing.Point(78, 495);
+            this.lblPayInfo2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPayInfo2.Name = "lblPayInfo2";
+            this.lblPayInfo2.Size = new System.Drawing.Size(534, 31);
+            this.lblPayInfo2.TabIndex = 10;
+            this.lblPayInfo2.Text = "请出示付款码";
+            this.lblPayInfo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPayInfo2.Visible = false;
+            // 
+            // lblPayInfo1
+            // 
+            this.lblPayInfo1.Font = new System.Drawing.Font("微软雅黑", 22F);
+            this.lblPayInfo1.ForeColor = System.Drawing.Color.Black;
+            this.lblPayInfo1.Location = new System.Drawing.Point(78, 430);
+            this.lblPayInfo1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPayInfo1.Name = "lblPayInfo1";
+            this.lblPayInfo1.Size = new System.Drawing.Size(534, 55);
+            this.lblPayInfo1.TabIndex = 9;
+            this.lblPayInfo1.Text = "请出示微信或支付宝付款码";
+            this.lblPayInfo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picPayInfo
+            // 
+            this.picPayInfo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayInfo.BackgroundImage")));
+            this.picPayInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPayInfo.Location = new System.Drawing.Point(206, 120);
+            this.picPayInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.picPayInfo.Name = "picPayInfo";
+            this.picPayInfo.Size = new System.Drawing.Size(300, 300);
+            this.picPayInfo.TabIndex = 8;
+            this.picPayInfo.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -406,51 +472,6 @@
             this.lblSkuName.Size = new System.Drawing.Size(244, 24);
             this.lblSkuName.TabIndex = 2;
             this.lblSkuName.Text = "读取礼品卡或输入礼品卡卡号";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panel4.Controls.Add(this.lblCartTotal);
-            this.panel4.Controls.Add(this.lblProCount);
-            this.panel4.Controls.Add(this.label11);
-            this.panel4.Location = new System.Drawing.Point(23, 606);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(694, 55);
-            this.panel4.TabIndex = 58;
-            // 
-            // lblCartTotal
-            // 
-            this.lblCartTotal.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblCartTotal.ForeColor = System.Drawing.Color.Black;
-            this.lblCartTotal.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblCartTotal.Location = new System.Drawing.Point(469, 12);
-            this.lblCartTotal.Name = "lblCartTotal";
-            this.lblCartTotal.Size = new System.Drawing.Size(218, 31);
-            this.lblCartTotal.TabIndex = 8;
-            this.lblCartTotal.Text = "￥0.00";
-            this.lblCartTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblProCount
-            // 
-            this.lblProCount.AutoSize = true;
-            this.lblProCount.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.lblProCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblProCount.Location = new System.Drawing.Point(102, 16);
-            this.lblProCount.Name = "lblProCount";
-            this.lblProCount.Size = new System.Drawing.Size(93, 20);
-            this.lblProCount.TabIndex = 6;
-            this.lblProCount.Text = "（0件商品）";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.label11.Location = new System.Drawing.Point(14, 12);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(82, 24);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "应收合计";
             // 
             // dgvCart
             // 
@@ -595,7 +616,7 @@
             this.panel5.Controls.Add(this.lblNeedPay);
             this.panel5.Controls.Add(this.label13);
             this.panel5.Controls.Add(this.lblTotal);
-            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.lblProCount);
             this.panel5.Controls.Add(this.lblBindingPhone);
             this.panel5.Controls.Add(this.label10);
             this.panel5.Location = new System.Drawing.Point(756, 260);
@@ -647,15 +668,15 @@
             this.lblTotal.Text = "￥0.00";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label9
+            // lblProCount
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label9.Location = new System.Drawing.Point(109, 18);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 21);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "(0件商品)";
+            this.lblProCount.AutoSize = true;
+            this.lblProCount.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblProCount.Location = new System.Drawing.Point(109, 18);
+            this.lblProCount.Name = "lblProCount";
+            this.lblProCount.Size = new System.Drawing.Size(77, 21);
+            this.lblProCount.TabIndex = 9;
+            this.lblProCount.Text = "(0件商品)";
             // 
             // lblBindingPhone
             // 
@@ -677,85 +698,13 @@
             this.label10.TabIndex = 1;
             this.label10.Text = "费用明细";
             // 
-            // pnlPayInfo
-            // 
-            this.pnlPayInfo.BackColor = System.Drawing.Color.White;
-            this.pnlPayInfo.Controls.Add(this.picPayError);
-            this.pnlPayInfo.Controls.Add(this.picShowPay);
-            this.pnlPayInfo.Controls.Add(this.lblPayInfo2);
-            this.pnlPayInfo.Controls.Add(this.lblPayInfo1);
-            this.pnlPayInfo.Controls.Add(this.picPayInfo);
-            this.pnlPayInfo.Location = new System.Drawing.Point(2, 6);
-            this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlPayInfo.Name = "pnlPayInfo";
-            this.pnlPayInfo.Size = new System.Drawing.Size(734, 663);
-            this.pnlPayInfo.TabIndex = 312;
-            this.pnlPayInfo.Visible = false;
-            // 
-            // picPayError
-            // 
-            this.picPayError.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayError.BackgroundImage")));
-            this.picPayError.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picPayError.Location = new System.Drawing.Point(30, 215);
-            this.picPayError.Name = "picPayError";
-            this.picPayError.Size = new System.Drawing.Size(100, 50);
-            this.picPayError.TabIndex = 12;
-            this.picPayError.TabStop = false;
-            this.picPayError.Visible = false;
-            // 
-            // picShowPay
-            // 
-            this.picShowPay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picShowPay.BackgroundImage")));
-            this.picShowPay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picShowPay.Location = new System.Drawing.Point(30, 124);
-            this.picShowPay.Name = "picShowPay";
-            this.picShowPay.Size = new System.Drawing.Size(100, 58);
-            this.picShowPay.TabIndex = 11;
-            this.picShowPay.TabStop = false;
-            this.picShowPay.Visible = false;
-            // 
-            // lblPayInfo2
-            // 
-            this.lblPayInfo2.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblPayInfo2.ForeColor = System.Drawing.Color.Black;
-            this.lblPayInfo2.Location = new System.Drawing.Point(78, 495);
-            this.lblPayInfo2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPayInfo2.Name = "lblPayInfo2";
-            this.lblPayInfo2.Size = new System.Drawing.Size(534, 31);
-            this.lblPayInfo2.TabIndex = 10;
-            this.lblPayInfo2.Text = "请出示付款码";
-            this.lblPayInfo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblPayInfo2.Visible = false;
-            // 
-            // lblPayInfo1
-            // 
-            this.lblPayInfo1.Font = new System.Drawing.Font("微软雅黑", 22F);
-            this.lblPayInfo1.ForeColor = System.Drawing.Color.Black;
-            this.lblPayInfo1.Location = new System.Drawing.Point(78, 430);
-            this.lblPayInfo1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPayInfo1.Name = "lblPayInfo1";
-            this.lblPayInfo1.Size = new System.Drawing.Size(534, 55);
-            this.lblPayInfo1.TabIndex = 9;
-            this.lblPayInfo1.Text = "请出示微信或支付宝付款码";
-            this.lblPayInfo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // picPayInfo
-            // 
-            this.picPayInfo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayInfo.BackgroundImage")));
-            this.picPayInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPayInfo.Location = new System.Drawing.Point(206, 120);
-            this.picPayInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.picPayInfo.Name = "picPayInfo";
-            this.picPayInfo.Size = new System.Drawing.Size(300, 300);
-            this.picPayInfo.TabIndex = 8;
-            this.picPayInfo.TabStop = false;
-            // 
             // FormGiftCardMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.pnlPayInfo);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlMember);
@@ -776,21 +725,19 @@
             this.pnlMemberInfo.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.pnlPayInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picPayError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picShowPay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlCartItem.ResumeLayout(false);
             this.pnlCartItem.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.pnlPayInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picPayError)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picShowPay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPayInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -811,10 +758,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lblCartTotal;
-        private System.Windows.Forms.Label lblProCount;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridView dgvCart;
         private System.Windows.Forms.Label lblMember;
         private System.Windows.Forms.Panel panel5;
@@ -833,7 +776,7 @@
         private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblProCount;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblNeedPay;

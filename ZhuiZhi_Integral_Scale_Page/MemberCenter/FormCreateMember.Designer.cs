@@ -52,11 +52,11 @@
             this.pnlMan = new System.Windows.Forms.Panel();
             this.lblMan = new System.Windows.Forms.Label();
             this.picMan = new System.Windows.Forms.PictureBox();
-            this.picNotSelect = new System.Windows.Forms.PictureBox();
-            this.picSelect = new System.Windows.Forms.PictureBox();
             this.txtPhone = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.txtBirthday = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.txtName = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.picNotSelect = new System.Windows.Forms.PictureBox();
+            this.picSelect = new System.Windows.Forms.PictureBox();
             this.tlpType.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -190,8 +190,8 @@
             // tlpType
             // 
             this.tlpType.ColumnCount = 2;
-            this.tlpType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpType.Controls.Add(this.panel2, 0, 0);
             this.tlpType.Controls.Add(this.panel1, 1, 0);
             this.tlpType.Location = new System.Drawing.Point(6, 149);
@@ -209,7 +209,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1, 385);
+            this.panel2.Size = new System.Drawing.Size(405, 385);
             this.panel2.TabIndex = 1;
             // 
             // pictureBox1
@@ -256,9 +256,9 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtName);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(414, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(405, 385);
+            this.panel1.Size = new System.Drawing.Size(1, 385);
             this.panel1.TabIndex = 0;
             // 
             // mcBirthday
@@ -346,26 +346,6 @@
             this.picMan.TabStop = false;
             this.picMan.Click += new System.EventHandler(this.pnlMan_Click);
             // 
-            // picNotSelect
-            // 
-            this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
-            this.picNotSelect.Location = new System.Drawing.Point(150, 16);
-            this.picNotSelect.Name = "picNotSelect";
-            this.picNotSelect.Size = new System.Drawing.Size(36, 28);
-            this.picNotSelect.TabIndex = 51;
-            this.picNotSelect.TabStop = false;
-            this.picNotSelect.Visible = false;
-            // 
-            // picSelect
-            // 
-            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
-            this.picSelect.Location = new System.Drawing.Point(203, 16);
-            this.picSelect.Name = "picSelect";
-            this.picSelect.Size = new System.Drawing.Size(36, 28);
-            this.picSelect.TabIndex = 88;
-            this.picSelect.TabStop = false;
-            this.picSelect.Visible = false;
-            // 
             // txtPhone
             // 
             this.txtPhone.BackColor = System.Drawing.Color.White;
@@ -421,6 +401,26 @@
             this.txtName.TabIndex = 81;
             this.txtName.WaterText = "请输入会员姓名，可不填";
             this.txtName.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txt_DataChanged);
+            // 
+            // picNotSelect
+            // 
+            this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
+            this.picNotSelect.Location = new System.Drawing.Point(150, 16);
+            this.picNotSelect.Name = "picNotSelect";
+            this.picNotSelect.Size = new System.Drawing.Size(36, 28);
+            this.picNotSelect.TabIndex = 51;
+            this.picNotSelect.TabStop = false;
+            this.picNotSelect.Visible = false;
+            // 
+            // picSelect
+            // 
+            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
+            this.picSelect.Location = new System.Drawing.Point(203, 16);
+            this.picSelect.Name = "picSelect";
+            this.picSelect.Size = new System.Drawing.Size(36, 28);
+            this.picSelect.TabIndex = 88;
+            this.picSelect.TabStop = false;
+            this.picSelect.Visible = false;
             // 
             // FormCreateMember
             // 

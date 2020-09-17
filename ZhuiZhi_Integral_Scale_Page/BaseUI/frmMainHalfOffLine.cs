@@ -766,6 +766,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 receiptpara.sparecashamt = PrettyCash;
                 receiptpara.cashactualamt = cashactualamt;
 
+                receiptpara.balancedepositinfo = DbJsonUtil.GetBalanceInfo();
+
                 IsEnable = false;
                 string ErrorMsg = "";
                 Receiptdetail receipt = httputil.Receipt(receiptpara, ref ErrorMsg);
@@ -789,7 +791,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     ReceiptUtil.ClearReceipt();
 
-
+                    DbJsonUtil.DeleteBalanceInfo();
                     INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
                     MainModel.Authorization = "";
 
@@ -979,7 +981,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             if (this.ContainsFocus && IsEnable) {
             Seconds++;
 
-
             MqttChangeType mqtttype = ConfigUtil.GetAdjustPriceChanged();
             bool needAdjustPrice = Seconds >= 30 || mqtttype != MqttChangeType.None;
             bool needLoadIncrementProduct = mqtttype == MqttChangeType.AdjustPrice || mqtttype == MqttChangeType.SkuInsert || mqtttype == MqttChangeType.SkuUpOrDown;
@@ -994,7 +995,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void UpdateProduct(bool needAdjustPrice, bool needLoadIncrementProduct)
         {
-
             Thread t = new Thread(new ThreadStart(delegate
             {
                 try
@@ -1021,19 +1021,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             needAdjustPrice = true;  //有调价商品时需要更新增量商品
 
                             //INIManager.SetIni("MQTT", "AdjustStartTime", result.querydate, MainModel.IniPath); //记录登录时间作为调价查询的起始时间
-
                         }
                     }
 
                     if (needLoadIncrementProduct)
                     {
                         ServerDataUtil.LoadIncrementProduct();
-
                         
                         IniAllProduct();
-
-                        Application.DoEvents();
-                        
+                        Application.DoEvents();                        
                     }
 
                    // timerTask.Enabled = true;

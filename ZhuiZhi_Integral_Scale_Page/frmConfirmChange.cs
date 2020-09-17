@@ -105,7 +105,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 decimal.TryParse(INIManager.GetIni("Receipt", "PrettyCash", MainModel.IniPath), out PrettyCash);
 
                 receiptpara.sparecashamt = PrettyCash;
-
+                receiptpara.balancedepositinfo = DbJsonUtil.GetBalanceInfo();
                 string ErrorMsg = "";
                 Receiptdetail receipt = httputil.Receipt(receiptpara, ref ErrorMsg);
 
@@ -129,6 +129,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     ReceiptUtil.ClearReceipt();
 
+
+                    DbJsonUtil.DeleteBalanceInfo();
                     INIManager.SetIni("System", "POS-Authorization", "", MainModel.IniPath);
                     MainModel.Authorization = "";
 

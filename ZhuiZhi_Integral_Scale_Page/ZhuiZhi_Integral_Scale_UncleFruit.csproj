@@ -171,6 +171,7 @@
       <DependentUpon>FormPricing.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\ConfigUtil.cs" />
+    <Compile Include="Common\DbJsonUtil.cs" />
     <Compile Include="Common\HttpRequestbak.cs" />
     <Compile Include="Common\HttpRequest.cs" />
     <Compile Include="Common\BunnyPrintUtil.cs" />

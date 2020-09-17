@@ -608,7 +608,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         }
 
 
-        public static bool ShowFormCouponPwd(string couponcode)
+        public static bool ShowFormCouponPwd(string couponcode,out string password)
         {
             FormBackGround Tempfrmback = new FormBackGround();
             try
@@ -631,10 +631,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 frmnumber.Dispose();
                 Application.DoEvents();
 
-                return frmnumber.DialogResult == DialogResult.OK;
+                if (frmnumber.DialogResult == DialogResult.OK)
+                {
+                    password = frmnumber.Pasword;
+                    return true;
+                }
+                else
+                {
+                    password = null;
+                    return false;
+                }
             }
             catch (Exception ex)
             {
+                password = null;
                 try
                 {
                     Tempfrmback.Close();

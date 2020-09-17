@@ -50,5 +50,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 现有金
         /// </summary>
         public decimal cashactualamt { set; get; }
+
+        public List<OrderPriceDetail> balancedepositinfo { set; get; }
     }
 }

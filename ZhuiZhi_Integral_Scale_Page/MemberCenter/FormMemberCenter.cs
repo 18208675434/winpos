@@ -152,6 +152,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     if (MemberCenterHelper.ShowFormTopUpByOnline(result, CurrentMember.memberheaderresponsevo.mobile))
                     {
+
+                        DbJsonUtil.AddBalanceInfo("微信支付宝:", CurrentTemplate.amount,false);
                         PrintUtil.PrintTopUp(result.ToString());
                         TopUpOK();
                       
@@ -208,6 +210,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                    }
                    else
                    {
+                       DbJsonUtil.AddBalanceInfo("现金:", CurrentTemplate.amount, false);
                        PrintUtil.PrintTopUp(result.ToString());
                        TopUpOK();
                    }
