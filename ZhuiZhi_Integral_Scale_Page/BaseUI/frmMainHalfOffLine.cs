@@ -3750,6 +3750,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// <param name="e"></param>
         private void timerScale_Tick(object sender, EventArgs e)
         {
+            
+
             //try
             //{
             //    timerScale.Enabled = false;

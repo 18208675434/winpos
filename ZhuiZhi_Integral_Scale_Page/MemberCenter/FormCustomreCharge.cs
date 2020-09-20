@@ -524,7 +524,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             BackHelper.HideFormBackGround();
             this.Close();
         }
-
+        
         private void btnOk_Click(object sender, EventArgs e)
         {
             BackHelper.HideFormBackGround();

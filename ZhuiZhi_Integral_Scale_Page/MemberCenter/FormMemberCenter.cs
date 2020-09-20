@@ -25,7 +25,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private List<ListAllTemplate> LstTemplates = new List<ListAllTemplate>();
 
-        private MemberCenterHttpUtil membercenterutil = new MemberCenterHttpUtil();
+        public MemberCenterHttpUtil membercenterutil = new MemberCenterHttpUtil();
 
         bool IsEnable = true;
 
@@ -280,7 +280,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 ListAllTemplate zidingyi = new ListAllTemplate();
 
                 zidingyi.iszidingyi = true;
-
+                
                 lstbmp.Add(GetCustomImg(zidingyi));
 
                 
@@ -306,7 +306,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        
+        /// <summary>
+        /// 自定义图片截图
+        /// </summary>
+        /// <param name="temp"></param>
+        /// <returns></returns>
         public Bitmap GetCustomImg(ListAllTemplate temp)
         {
             try
@@ -316,20 +320,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     if (CurrentTemplate != null && temp.id == CurrentTemplate.id)
                     {
-                        custom.ForeColor = Color.White;
-                        custom.BackColor = Color.White;
+                        custommoney.ForeColor = Color.White;
+                        customdiscount.ForeColor = Color.White;
+                        custom.BackColor = Color.Blue;
                     }
                     else
                     {
-                        custom.ForeColor = Color.White;
+                        custommoney.ForeColor = Color.Blue;
+                        customdiscount.ForeColor = Color.Blue;
                         custom.BackColor = Color.White;
                     }
 
                 }
                 else
                 {
-                    custom.ForeColor = Color.White;
-                    custom.BackColor = Color.White;
+                    custommoney.ForeColor = Color.White;
+                    customdiscount.ForeColor = Color.White;
+                    custom.BackColor = Color.FromArgb(200, 200, 200);
                 }
                 Bitmap b = (Bitmap)MainModel.GetControlImage(custom);
                 b.Tag = temp;
@@ -451,10 +458,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     else
                     {
-                        LoadTemplate(true);
+                        
                         custom.BackColor = Color.Blue;
                         custommoney.Text = ListAllTemplate.CustomMoney;
                         customdiscount.Text = ListAllTemplate.ZengCustomMoney;
+                        LoadTemplate(true);
                         
                     }
                     
@@ -640,6 +648,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
         private void pnlPayByOther_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlPayByOnLine_Paint(object sender, PaintEventArgs e)
         {
 
         }

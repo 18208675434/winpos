@@ -30,7 +30,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// 委托解决跨线程调用
         /// </summary>
         private delegate void InvokeHandler();
-        
+
         //间隔天数
         private int CurrentInterval = 0;
 
@@ -45,6 +45,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private Bitmap bmpRefund;
         private Bitmap bmpNotRefund;
         private Bitmap bmpWhite;
+        private Bitmap caozuo;
 
         /// <summary>
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
@@ -69,15 +70,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         private void frmOrderQuery_Load(object sender, EventArgs e)
         {
-         
+
             lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
             picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
             lblMenu.Left = picMenu.Right;
-            
+
             //Application.DoEvents();
 
-           
+
 
         }
         private void frmOrderQuery_Shown(object sender, EventArgs e)
@@ -156,7 +157,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LastOrderid = "0";
                 dgvOrderOnLine.Rows.Clear();
 
-               // QueryOrder();
+                // QueryOrder();
                 CurrentPage = 1;
                 CurrentBalanceDepos = null;
                 LoadDgvOrder();
@@ -191,7 +192,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 CurrentInterval = 7;
                 LastOrderid = "0";
                 dgvOrderOnLine.Rows.Clear();
-               // QueryOrder();
+                // QueryOrder();
                 CurrentBalanceDepos = null;
                 CurrentPage = 1;
                 LoadDgvOrder();
@@ -232,7 +233,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         #region 公用
 
-      
+
 
         //当前时间戳
         private string getStampByDateTime(DateTime datetime)
@@ -373,32 +374,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private int PageSize = 6;
 
+        public void load()
+        {
+            try
+            {
+
+                //int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
+                //bmpContinue = new Bitmap(Resources.ResourcePos.Continue, dgvOrderOnLine.Columns["Continue"].Width * 80 / 100, height);
+
+                //bmpDelHang = new Bitmap(Resources.ResourcePos.DelHang, dgvOrderOnLine.Columns["DelHang"].Width * 80 / 100, height);
+
+                caozuo = (Bitmap)MainModel.GetControlImage(btnOperation);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("加载页面图片异常" + ex.Message);
+            }
+        }
         private void LoadDgvOrder()
         {
             try
             {
-               
-
-                    LoadingHelper.ShowLoadingScreen();
-                    IsEnable = false;
-
-
-                    DepositListRequest para = new DepositListRequest();
-
-                    para.phone = txtPhone.Text;
-                    para.starttime = getStampByDateTime(dtStart.Value);
-                    para.endtime = getStampByDateTime(dtEnd.Value);
-
-                    para.page = CurrentPage;
-                    para.size = 6;
-
-                    string ErrorMsg = "";
-                    CurrentBalanceDepos = httputil.ListDepositbill(para, ref ErrorMsg);
 
 
 
+                LoadingHelper.ShowLoadingScreen();
+                IsEnable = false;
 
-                    if (ErrorMsg != "" || CurrentBalanceDepos == null)
+
+                DepositListRequest para = new DepositListRequest();
+
+                para.phone = txtPhone.Text;
+                para.starttime = getStampByDateTime(dtStart.Value);
+                para.endtime = getStampByDateTime(dtEnd.Value);
+
+                para.page = CurrentPage;
+                para.size = 6;
+
+                string ErrorMsg = "";
+                CurrentBalanceDepos = httputil.ListDepositbill(para, ref ErrorMsg);
+
+
+
+
+                if (ErrorMsg != "" || CurrentBalanceDepos == null)
                 {
                     MainModel.ShowLog(ErrorMsg, false);
                     return;
@@ -407,27 +430,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 dgvOrderOnLine.Rows.Clear();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
+
+                DataGridViewRow dr = new DataGridViewRow();
+
+
                 
-                
+
                 foreach (RowsItem order in CurrentBalanceDepos.rows)
                 {
-                    
-                    
-                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.amount.ToString("f2")+"元",order.Refound);
+
+
+                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.amount.ToString("f2") + "元",caozuo);
                 }
+
                 dgvOrderOnLine.ClearSelection();
                 Application.DoEvents();
-            
-                    pnlEmptyOrder.Visible = dgvOrderOnLine.Rows.Count == 0;
 
-                    rbtnPageUp.WhetherEnable = CurrentPage > 1;
+                pnlEmptyOrder.Visible = dgvOrderOnLine.Rows.Count == 0;
 
-                    rbtnPageDown.WhetherEnable = CurrentBalanceDepos.page * CurrentBalanceDepos.size < CurrentBalanceDepos.total;
+                rbtnPageUp.WhetherEnable = CurrentPage > 1;
+
+                rbtnPageDown.WhetherEnable = CurrentBalanceDepos.page * CurrentBalanceDepos.size < CurrentBalanceDepos.total;
 
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("加载订单列表异常"+ex.Message,true);
+                MainModel.ShowLog("加载订单列表异常" + ex.Message, true);
             }
             finally
             {
@@ -480,7 +508,60 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                if (!IsEnable)
+                {
+                    return;
+                }
+                if (e.RowIndex < 0)
+                    return;
 
+
+                IsEnable = false;
+
+                string numbers = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
+                string orderate = Convert.ToDateTime(dgvOrderOnLine.Rows[e.RowIndex].Cells["orderat"].Value.ToString()).ToString("yyyyMMddHHmmss") + "-" + numbers + ".order";
+                string BasePath = "";
+                if (MainModel.IsOffLine)
+                {
+                    BasePath = MainModel.OffLineOrderPath + "\\" + orderate;
+                }
+                else
+                {
+                    BasePath = MainModel.OrderPath + "\\" + orderate;
+                }
+
+                if (File.Exists(BasePath))
+                {
+
+                    if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == caozuo)
+                    {
+
+                        IsEnable = false;
+                        formTui
+                       
+
+                        File.Delete(BasePath);
+                        MainModel.ShowLog("退款成功", false);
+                        LoadDgvOrder();
+                    }
+                    
+                }
+                else
+                {
+                    MainModel.ShowLog("退款失败" + BasePath, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("退款操作异常！" + ex.Message, true);
+            }
+            finally
+            {
+                IsEnable = true;
+                LoadPicScreen(false);
+            }
         }
     }
 }

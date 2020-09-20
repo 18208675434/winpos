@@ -498,7 +498,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 throw;
             }
         }
-
+        /// <summary>
+        /// 自定义充值
+        /// </summary>
+        /// <returns></returns>
+        
         public bool CreateMember(CreateMemberPara para, ref string errormsg)
         {
             try
