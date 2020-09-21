@@ -85,6 +85,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             tlpType.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
 
+            txtPhone.Focus();
+
             btnCreateByScan.BackColor = NotSelectColor;
             btnCreateByScan.ForeColor = Color.Black;
             btnCreateByWrite.BackColor = SelectColor;
@@ -101,7 +103,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void txtBirthday_Enter(object sender, EventArgs e)
         {
-            mcBirthday.Top = this.Height - mcBirthday.Height;
+            mcBirthday.Top =Math.Min(panel1.Height - mcBirthday.Height,txtBirthday.Top);
             mcBirthday.Visible = true;
         }
 

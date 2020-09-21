@@ -744,7 +744,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                     foreach (CardProduct pro in lstLoadingPro)
                     {
-                        dgvCart.Rows.Add(GetDgvRow(pro, 0));
+                        dgvCart.Rows.Insert(0,GetDgvRow(pro, 0));
                     }
 
                     rbtnPageDownForCart.WhetherEnable = CurrentCart.products.Count > CurrentCartPage * 5;
@@ -758,6 +758,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                     pnlPayByOnLine.Tag = 1;
                     pnlPayByOnLine.BackColor = Color.FromArgb(255, 70, 21);
+                    pnlLoading.Visible = true;
                 }
                 else
                 {
@@ -770,6 +771,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                       
                         pnlPayByOnLine.Tag = 0;
                         pnlPayByOnLine.BackColor = Color.Silver;
+
+                        pnlLoading.Visible = false;
                 }
 
 
@@ -832,35 +835,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     
                     
                 }
-                //else if (pro.goodstagid != 0 && po.X < (dgvCart.Left + lblProNum.Right + 10) && po.X > (dgvCart.Left + lblProNum.Left - 10))
-                //{
-                //    decimal newweight = BrokenHelper.ShowBrokenNumber(pro.skuname);
-
-                //    if (newweight > 0)
-                //    {
-                //        for (int i = 0; i < CurrentCart.products.Count; i++)
-                //        {
-                //            if (CurrentCart.products[i].skucode == pro.skucode && CurrentCart.products[i].specnum == pro.specnum)
-                //            {
-                //                CurrentCart.products[i].specnum = newweight;
-                //                CurrentCart.products[i].price.specnum = newweight;
-                //                CurrentCart.products[i].num = 1;
-                //                break;
-                //            }
-                //        }
-                //    }
-
-                //    UploadOffLineDgvCart();
-
-                //}
-                //else
-                //{
-                //    OperationProduct = pro;
-                //    btnDeletePro.BackColor = Color.FromArgb(22, 135, 206);
-                //    btnChangePrice.BackColor = Color.FromArgb(22, 135, 206);
-                //    btnDiscount.BackColor = Color.FromArgb(22, 135, 206);
-                //}
-
+             
             }
             catch (Exception ex)
             {
@@ -868,6 +843,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
             }
             finally
             {
+                Delay.Start(100);
+                this.Activate();
                 btnScan.Select();
             }
         }

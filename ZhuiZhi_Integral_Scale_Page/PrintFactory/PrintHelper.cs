@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using ThoughtWorks.QRCode.Codec;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model;
@@ -399,6 +403,66 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         }
 
 
+
+
+
+        /// <summary>
+        /// 获取交班打印信息
+        /// </summary>
+        /// <param name="receipt"></param>
+        /// <returns></returns>
+        public static List<string> GetThirdOrderPrintInfo(PrinterPickOrderInfo printdetail)
+        {
+            List<string> lstPrintStr = new List<string>();
+            try
+            {
+
+
+
+                lstPrintStr.Add("订单号：" + printdetail.orderid);
+                lstPrintStr.Add("下单时间：" + printdetail.date);
+                lstPrintStr.Add("顾客姓名：" + printdetail.username);
+                lstPrintStr.Add("顾客电话：" + printdetail.tel);
+                lstPrintStr.Add("配送地址：" + printdetail.address);
+                lstPrintStr.Add("备注：");
+
+                lstPrintStr.Add("期望送达时间："+printdetail.expecttimedesc);
+
+
+                if (!string.IsNullOrEmpty(printdetail.remark))
+                {
+                    lstPrintStr.Add(printdetail.remark);
+                }
+                lstPrintStr.Add(getStrLine());
+
+                //lstPrintStr.AddRange(PrintHelper.MergeStr("商品", "单价", "重量(kg)", "金额", BodyCharCountOfLine));
+
+                lstPrintStr.Add("商品    单价   数量    金额");
+                foreach (PickProduct pro in printdetail.productdetaillist)
+                {
+
+                    lstPrintStr.AddRange(PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, BodyCharCountOfLine));
+                }
+                lstPrintStr.Add(getStrLine());
+
+                lstPrintStr.Add(MergeStr("商品金额：", printdetail.productamt,  BodyCharCountOfLine,PageSize));
+                lstPrintStr.Add(MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize));
+               
+
+                lstPrintStr.Add(getStrLine());
+
+                lstPrintStr.Add("多谢惠顾，欢迎下次光临！");
+
+                return lstPrintStr;
+            }
+            catch
+            {
+                return lstPrintStr;
+            }
+        }
+
+
         public static string getStrLine()
         {
             try
@@ -557,6 +621,77 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 return new List<string>() { str };
             }
         }
+
+
+        //二维码
+        private static  QRCodeEncoder qrCode = new QRCodeEncoder();
+
+        public static Bitmap GetQrBmp(string qrcode)
+        {
+            try
+            {
+                qrCode.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;        //二维码编码(Byte、AlphaNumeric、Numeric)
+                qrCode.QRCodeScale = 3;                                          //二维码尺寸
+                qrCode.QRCodeVersion = 0;                                        //二维码密集度0-40
+                qrCode.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.L;    //二维码纠错能力(L：7% M：15% Q：25% H：30%)
+            }
+            catch (Exception ex)
+            {
+            }
+
+            Bitmap bmp = KiResizeImage(qrCode.Encode(qrcode, System.Text.Encoding.Default), 100, 100);
+
+              
+                using (Bitmap bmp24 = new Bitmap(bmp.Width, bmp.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb))
+                using (Graphics g = Graphics.FromImage(bmp24))
+                {
+                    g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+                    bmp24.Save(MainModel.ServerPath + "qrcoe.bmp");
+                }
+
+            bmp.Save(MainModel.ServerPath+"qrcoe.bmp");
+
+            
+           
+            return bmp;
+
+        }
+
+
+        public static Bitmap KiResizeImage(Bitmap bmp, int newW, int newH)
+        {
+
+            try
+            {
+
+                Bitmap b = new Bitmap(newW, newH);
+
+                Graphics g = Graphics.FromImage(b);
+
+
+
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+
+
+                g.DrawImage(bmp, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
+
+                g.Dispose();
+
+
+
+                return b;
+
+            }
+
+            catch
+            {
+
+                return null;
+
+            }
+
+        } 
 
     }
 }

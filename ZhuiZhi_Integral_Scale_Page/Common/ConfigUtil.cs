@@ -33,7 +33,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
         //{"adjustTypes":2,"shopId":"110001","tenantId":"0210000114"}//adjustTypes 2:调价
         //{"adjustTypes":1,"shopId":"110001","tenantId":"0210000114"}//adjustTypes 1：上下架
-
+        /// <summary>
+        /// 判断是否有调价 上下架 及商品修改
+        /// </summary>
+        /// <returns></returns>
         public static MqttChangeType GetAdjustPriceChanged()
         {
             
@@ -74,6 +77,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 
               
            
+        }
+
+
+        public static bool HaveNewOrder()
+        {
+            
+            string neworder = INIManager.GetIni("MQTT", "NewOrder", MainModel.IniPath);
+
+            if (!string.IsNullOrEmpty(neworder) && neworder == "1")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         #endregion

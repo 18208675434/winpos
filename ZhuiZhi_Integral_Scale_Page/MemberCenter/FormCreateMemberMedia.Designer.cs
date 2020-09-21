@@ -330,9 +330,9 @@
             this.label5.Font = new System.Drawing.Font("微软雅黑", 17F);
             this.label5.Location = new System.Drawing.Point(79, 112);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 30);
+            this.label5.Size = new System.Drawing.Size(65, 30);
             this.label5.TabIndex = 10;
-            this.label5.Text = "手机号:";
+            this.label5.Text = "账号:";
             // 
             // pictureBox6
             // 

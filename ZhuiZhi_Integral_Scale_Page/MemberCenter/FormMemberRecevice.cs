@@ -20,32 +20,36 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             InitializeComponent();
 
         }
-        Member member = new Member();
+        
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
+        
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             //BackHelper.ShowFormBackGround();
             BackHelper.HideFormBackGround();
             GlobalUtil.CloseOSK();
             this.Close();
             
         }
+        
         public void GetNewPhone()
         {
             txtOldCardNumber.Text = MainModel.NewPhone;
         }
+       
         private void btOldCardOK_Click(object sender, EventArgs e)
         {
             
 
 
             string ErrorMsgMember= "";
-            string phone =  txtOldCardNumber.Text;
+            MainModel.NewPhone =  txtOldCardNumber.Text;
             HttpUtil httputil = new HttpUtil();
-            member = httputil.GetMember(phone, ref ErrorMsgMember);
-            FormChangePhoneNumber con = new FormChangePhoneNumber(member);
-            
-            if (member == null)
+            MemberCenterHelper.member = httputil.GetMember(MainModel.NewPhone, ref ErrorMsgMember);
+            FormChangePhoneNumber con = new FormChangePhoneNumber(MemberCenterHelper.member);
+
+            if (MemberCenterHelper.member == null)
             {
 
                 MainModel.ShowLog("不能为空", false);
@@ -53,17 +57,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             else
             {
 
-                FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(member);
+                FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(MemberCenterHelper.member);
 
                 asf.AutoScaleControlTest(pwd, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
                 pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
                 pwd.TopMost = true;
                 pwd.ShowDialog();
+                
 
                 if (pwd.DialogResult == DialogResult.OK)
                 {
 
-                    
+
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
 
                     string number = txtOldCardNumber.Text;
 
@@ -82,7 +88,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     this.Close();
                     return;
                 }
-                
              
 
 

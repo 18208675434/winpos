@@ -54,9 +54,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string title { get; set; }
         public decimal orderamt { get; set; }
         public string orderstatus { get; set; }
-
         /// <summary>
-        /// 订单状态文案  5已退款不显示退款和补打   ！=5 显示退款和补打
+        /// 
+        /// </summary>
+        public string ordersubtype { get; set; }
+        /// <summary>
+        /// 订单状态文案  5已退款  1:待支付
         /// </summary>
         public int orderstatusvalue { get; set; }
         public int showprint { get; set; }
@@ -80,6 +83,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public int supportspecifiedamountrefund { get; set; }
 
         public List<OtherPayDetailInfo> otherpaydetailinfos { get; set; }
+
+        public string receiverphone { set; get; }
+
+        public string sourceflag { set; get; }
     }
 
     public class QuereOrderProduct

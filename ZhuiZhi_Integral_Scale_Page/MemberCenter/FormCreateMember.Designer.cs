@@ -52,11 +52,11 @@
             this.pnlMan = new System.Windows.Forms.Panel();
             this.lblMan = new System.Windows.Forms.Label();
             this.picMan = new System.Windows.Forms.PictureBox();
+            this.picNotSelect = new System.Windows.Forms.PictureBox();
+            this.picSelect = new System.Windows.Forms.PictureBox();
             this.txtPhone = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.txtBirthday = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.txtName = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
-            this.picNotSelect = new System.Windows.Forms.PictureBox();
-            this.picSelect = new System.Windows.Forms.PictureBox();
             this.tlpType.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -135,9 +135,9 @@
             this.label1.Location = new System.Drawing.Point(3, 21);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 24);
+            this.label1.Size = new System.Drawing.Size(46, 24);
             this.label1.TabIndex = 78;
-            this.label1.Text = "手机号";
+            this.label1.Text = "账号";
             // 
             // label2
             // 
@@ -264,7 +264,7 @@
             // mcBirthday
             // 
             this.mcBirthday.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.mcBirthday.Location = new System.Drawing.Point(89, 134);
+            this.mcBirthday.Location = new System.Drawing.Point(101, 134);
             this.mcBirthday.Name = "mcBirthday";
             this.mcBirthday.TabIndex = 90;
             this.mcBirthday.Visible = false;
@@ -346,6 +346,26 @@
             this.picMan.TabStop = false;
             this.picMan.Click += new System.EventHandler(this.pnlMan_Click);
             // 
+            // picNotSelect
+            // 
+            this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
+            this.picNotSelect.Location = new System.Drawing.Point(150, 16);
+            this.picNotSelect.Name = "picNotSelect";
+            this.picNotSelect.Size = new System.Drawing.Size(36, 28);
+            this.picNotSelect.TabIndex = 51;
+            this.picNotSelect.TabStop = false;
+            this.picNotSelect.Visible = false;
+            // 
+            // picSelect
+            // 
+            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
+            this.picSelect.Location = new System.Drawing.Point(203, 16);
+            this.picSelect.Name = "picSelect";
+            this.picSelect.Size = new System.Drawing.Size(36, 28);
+            this.picSelect.TabIndex = 88;
+            this.picSelect.TabStop = false;
+            this.picSelect.Visible = false;
+            // 
             // txtPhone
             // 
             this.txtPhone.BackColor = System.Drawing.Color.White;
@@ -361,7 +381,7 @@
             this.txtPhone.OnlyNumber = false;
             this.txtPhone.Size = new System.Drawing.Size(298, 50);
             this.txtPhone.TabIndex = 79;
-            this.txtPhone.WaterText = "请输入会员手机号";
+            this.txtPhone.WaterText = "请输入账号";
             this.txtPhone.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txt_DataChanged);
             // 
             // txtBirthday
@@ -401,26 +421,6 @@
             this.txtName.TabIndex = 81;
             this.txtName.WaterText = "请输入会员姓名，可不填";
             this.txtName.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txt_DataChanged);
-            // 
-            // picNotSelect
-            // 
-            this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
-            this.picNotSelect.Location = new System.Drawing.Point(150, 16);
-            this.picNotSelect.Name = "picNotSelect";
-            this.picNotSelect.Size = new System.Drawing.Size(36, 28);
-            this.picNotSelect.TabIndex = 51;
-            this.picNotSelect.TabStop = false;
-            this.picNotSelect.Visible = false;
-            // 
-            // picSelect
-            // 
-            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
-            this.picSelect.Location = new System.Drawing.Point(203, 16);
-            this.picSelect.Name = "picSelect";
-            this.picSelect.Size = new System.Drawing.Size(36, 28);
-            this.picSelect.TabIndex = 88;
-            this.picSelect.TabStop = false;
-            this.picSelect.Visible = false;
             // 
             // FormCreateMember
             // 

@@ -194,7 +194,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label11.Location = new System.Drawing.Point(243, 336);
+            this.label11.Location = new System.Drawing.Point(330, 337);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(46, 24);
             this.label11.TabIndex = 29;
@@ -205,7 +205,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(134, 336);
+            this.label10.Location = new System.Drawing.Point(145, 336);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 12);
             this.label10.TabIndex = 28;
@@ -234,7 +234,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label9.Location = new System.Drawing.Point(311, 329);
+            this.label9.Location = new System.Drawing.Point(323, 330);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(154, 25);
             this.label9.TabIndex = 26;
@@ -628,10 +628,10 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnVerifyNewPhone;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }

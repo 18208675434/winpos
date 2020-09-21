@@ -67,6 +67,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Release\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\ChnCharInfo.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Release\Newtonsoft.Json.Compact.dll</HintPath>
@@ -74,6 +78,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -82,6 +87,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="WzLib">
       <HintPath>C:\Users\15216\Desktop\好例子网_TransparentPicture\TransparentPicture\Backup\TransparentPicture\bin\Debug\WzLib.dll</HintPath>
     </Reference>
@@ -453,6 +462,7 @@
     <Compile Include="Model\HalfOffLine\TenantCreditConfig.cs" />
     <Compile Include="Model\HalfOffLine\Tenantmemberrightsdiscountconfig.cs" />
     <Compile Include="Model\PaymentCouponDetail.cs" />
+    <Compile Include="Model\PrinterPickOrderInfo.cs" />
     <Compile Include="Model\promotionaction\AbstractPromoAction.cs" />
     <Compile Include="Model\promotionaction\CombinedSellingPromotionAction.cs" />
     <Compile Include="Model\promotionaction\CycleDesignatedDiscountPromotionAction.cs" />

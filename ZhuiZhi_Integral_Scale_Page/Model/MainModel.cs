@@ -21,7 +21,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
     {
 
         #region  会员中心   变量 （待优化）
-
         /// <summary>
         /// 修改手机号码时输入的新手机号
         /// </summary>

@@ -21,7 +21,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         private void label1_Click(object sender, EventArgs e)
         {
-             
+
         }
 
         private void FormHeBing_Load(object sender, EventArgs e)
@@ -37,18 +37,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-        
+
+
+        MemberCenterHttpUtil memberchttputil = new MemberCenterHttpUtil();
+        HttpUtil httputil = new HttpUtil();
         private void button3_Click(object sender, EventArgs e)
         {
+            string errrormsg = "";
+            MainModel.Sourcetoken = MainModel.CurrentMember.memberheaderresponsevo.token;
             
+            bool resule = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
+            
+            if (resule)
+            {
+                
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                
+                 
+            }
+            else
+            {
+                MainModel.ShowLog(errrormsg, false);
 
-            FormChangePhoneConfirm con = new FormChangePhoneConfirm();
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
 
-            con.Hebing();
+            //FormChangePhoneConfirm con = new FormChangePhoneConfirm();
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-            BackHelper.HideFormBackGround();
+            //con.Hebing();
+            //con.Dispose();
+
+
+            //this.DialogResult = DialogResult.OK;
+            //this.Close();
+            //BackHelper.HideFormBackGround();
 
         }
     }

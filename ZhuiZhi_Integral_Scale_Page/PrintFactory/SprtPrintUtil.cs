@@ -375,6 +375,58 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
            }
 
 
+
+           #region  打印第三方订单
+           public static object lockthirdprinting = new object();
+           public static bool PrintThirdOrder(PrinterPickOrderInfo printdetail, ref string errormsg)
+           {
+               lock (lockthirdprinting)
+               {
+                   try
+                   {
+                       try { LogManager.WriteLog("打印第三那方订单:" + printdetail.orderid); }
+                       catch { }
+
+
+                       IniPrintSize();
+
+                       //每次打印先清空之前内容
+                       lstPrintStr = new List<string>();
+
+
+
+                       // lstPrintStr.Add(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, "欢迎光临" + "\r\n");
+
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, MainModel.CurrentShopInfo.tenantname + "\r\n");
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, printdetail.serialcode+ "\r\n");
+
+
+                       //lstPrintStr.Add(MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
+                       lstPrintStr.Add(" ");
+
+                       lstPrintStr.AddRange(PrintHelper.GetThirdOrderPrintInfo(printdetail));
+
+                       PrintTextByPaperWidth(lstPrintStr);
+
+                       Application.DoEvents();
+                       return true;
+
+                   }
+                   catch (Exception ex)
+                   {
+                       LogManager.WriteLog("ERROR", "打印订单小票出现异常" + ex.Message + ex.StackTrace);
+                       errormsg = "打印订单小票出现异常" + ex.Message;
+                       return false;
+                   }
+               }
+           }
+
+           #endregion
+
+
+
            public static string getStrLine()
            {
                try

@@ -37,6 +37,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         /// </summary>
         private Image imgPageDownForType;
 
+        private int CurrentCartPage = 1;
+
         public FormPayByOther(Cart cart)
         {
             try
@@ -127,13 +129,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     return;
                 }
 
-                if (SelectPayType == null)
+
+
+
+                Paging paging = CartUtil.GetPaging(CurrentCartPage, 12, thisCurrentCart.paymenttypes.otherpaytypeinfo.Count, 4);
+                
+
+                if (!paging.success)
                 {
-                    //SelectPayType=thisCurrentCart.paymenttypes.otherpaytypeinfo[0];
+                    MainModel.ShowLog("分页出现异常，请重试", true);
+                    CurrentCartPage = 1;
+                    return;
                 }
-               
-                    List<Image> lstimg = new List<Image>();
-                    foreach (OrderPayTypeVo otherpay in thisCurrentCart.paymenttypes.otherpaytypeinfo)
+
+                List<Image> lstimg = new List<Image>();
+                if (paging.haveuppage)
+                {
+                    lstimg.Add(imgPageUpForType);
+                }
+
+                List<OrderPayTypeVo> lstaloading = thisCurrentCart.paymenttypes.otherpaytypeinfo.GetRange(paging.startindex, paging.endindex - paging.startindex + 1);
+                   
+                    foreach (OrderPayTypeVo otherpay in lstaloading)
                     {
                         if (SelectPayType!=null && SelectPayType.code == otherpay.code)
                         {
@@ -159,11 +176,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                         }
                     }
 
-                    int emptycount = 4 - lstimg.Count % 4;
-
-                    for (int i = 0; i < emptycount; i++)
+                    if (paging.havedownpage)
                     {
-                        lstimg.Add(Resources.ResourcePos.empty);
+                        lstimg.Add(imgPageDownForType);
+                    }
+
+
+
+                    for (int i = 0; i < paging.makeupcount; i++)
+                    {
+                        lstimg.Add(ZhuiZhi_Integral_Scale_UncleFruit.Resources.ResourcePos.empty);
                     }
 
                     int rowcount = lstimg.Count / 4;
@@ -248,10 +270,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             try
             {
                 Image selectimg = (Image)dgvType.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+
+                if (selectimg == imgPageDownForType)
+                {
+                    CurrentCartPage++;
+                    LoadPayType();
+                    return;
+                }
+
+                if (selectimg == imgPageUpForType)
+                {
+                    CurrentCartPage--;
+                    LoadPayType();
+                    return;
+                }
                 if (selectimg == null || selectimg == Resources.ResourcePos.empty || selectimg.Tag == null)
                 {
                     return;
                 }
+                
 
                 SelectPayType =(OrderPayTypeVo) selectimg.Tag;
 

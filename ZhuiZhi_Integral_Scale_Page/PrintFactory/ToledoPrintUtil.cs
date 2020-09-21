@@ -195,6 +195,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
            #endregion
 
+
+
+           #region  打印第三方订单
+           public static object lockthirdprinting = new object();
+           public static bool PrintThirdOrder(PrinterPickOrderInfo printdetail, ref string errormsg)
+           {
+               lock (lockthirdprinting)
+               {
+                   try
+                   {
+                       try { LogManager.WriteLog("打印第三那方订单:" + printdetail.orderid); }
+                       catch { }
+
+
+                       IniPrintSize();
+
+                       //每次打印先清空之前内容
+                       lstPrintStr = new List<string>();
+
+
+
+                       // lstPrintStr.Add(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+
+                       PrintText(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+                       PrintText(MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize));
+                       PrintText(printdetail.serialcode);
+                       //lstPrintStr.Add(MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
+                       lstPrintStr.Add(" ");
+
+                       lstPrintStr.AddRange(PrintHelper.GetThirdOrderPrintInfo(printdetail));
+
+                       PrintTextByPaperWidth(lstPrintStr);
+
+                       Application.DoEvents();
+                       return true;
+
+                   }
+                   catch (Exception ex)
+                   {
+                       LogManager.WriteLog("ERROR", "打印订单小票出现异常" + ex.Message + ex.StackTrace);
+                       errormsg = "打印订单小票出现异常" + ex.Message;
+                       return false;
+                   }
+               }
+           }
+
+           #endregion
+
            //合并字符串使 用空格填补 以左右对齐
            public static string MergeStr(string str1, string str2, int charlength, int pagesize)
            {
@@ -271,7 +319,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                            //每次打印先清空之前内容
                            lstPrintStr = new List<string>();
 
-
                            // lstPrintStr.Add(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
 
                            PrintText(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
@@ -292,17 +339,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                            lstPrintStr.Add(getStrLine());
 
                            lstPrintStr.Add("充值方式："+ "\n");
-                   //string type ="";
-                   //if(printdetail.paymode=="0"){
-                   //    type="现金";
-                   //}
-                   //else if (printdetail.paymode == "2")
-                   //{
-                   //    type="微信";
-                   //}else{
-                   //    type="支付宝";
-                   //}
-
 
 
                    lstPrintStr.Add(MergeStr(printdetail.paymodeforapi, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
@@ -324,7 +360,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                    return false;
                }
            }
-
 
            public static void IniPrintSize()
            {
@@ -349,10 +384,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                    LogManager.WriteLog("初始化打印尺寸异常" + ex.Message);
                }
            }
-
-
-
-
 
            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
            public static extern int BeginPrint(int PrintType);
@@ -390,7 +421,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
            public static bool PrintText(string printtext)
            {
                int result = PrintText(System.Text.Encoding.Default.GetBytes(printtext), 32);
-               //MessageBox.Show(result.ToString());
                return true;
            }
 
@@ -414,9 +444,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                    int result = PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes(strprint), 22, 60);
 
-                   return BeginPrint();
 
+                 
 
+                   BeginPrint();
+
+                   PrintBitmapFile("PrintTest.bmp");
+
+                   BeginPrint(7);
+
+                   PrintHelper.GetQrBmp("1245789");
+                   PrintBitmapFile("qrcoe.bmp");
+
+                   BeginPrint(7);
+
+                   return true;
                }
                catch (Exception ex)
                {
@@ -428,6 +470,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
            public static extern int OpenCashDrawerEx();
 
-       
+
+
+           [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+           public static extern int PrintBitmapFile(string BmpFileName, int LabelAngle);
+           public static bool PrintBitmapFile(string BmpFileName)
+           {
+               //LabelAngle  0不旋转
+               int result = PrintBitmapFile(BmpFileName, 0);
+               return true;
+           }
     }
 }

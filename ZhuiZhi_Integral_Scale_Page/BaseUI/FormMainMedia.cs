@@ -128,11 +128,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             timerImage.Enabled = true;
 
-            if (PlayerOpen)
-            {
-                player.uiMode = "none";
-                player.Ctlcontrols.play();
-            }
+            //if (PlayerOpen)
+            //{
+            //    player.uiMode = "none";
+            //    player.Ctlcontrols.play();
+            //}
 
         }
         private JSON_BEANBLL jsonbll = new JSON_BEANBLL();
@@ -295,10 +295,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 }
 
-                if (CurrentSelectMode == 1)
-                {
-                    PlayerThread();
-                }
+                //if (CurrentSelectMode == 1)
+                //{
+                //    PlayerThread();
+                //}
                
             }
             catch (Exception ex)
@@ -365,7 +365,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     if (!player.fullScreen)
                         player.fullScreen = true;
                 }
-                else if (player.status=="停止")
+                else if (player.status == "停止" || player.status == "已完成")
                 {
                     try
                     {
@@ -375,10 +375,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     catch { }
 
-                    Invoke((new Action(() =>
-                    {
-                        timerImage.Enabled = true;
-                    }))); 
+                    //Invoke((new Action(() =>
+                    //{
+                    //    timerImage.Enabled = true;
+                    //}))); 
                     
                 }
             }
@@ -815,14 +815,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     lblMobil.Text = mobil;
 
-                    if (!string.IsNullOrEmpty(CurrentMember.memberinformationresponsevo.nickname))
-                    {
-                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.nickname + "  你好！";
-                    }
-                    else
-                    {
-                        lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
-                    }
+                    lblWechartNickName.Text =  "  你好！";
+                    //if (!string.IsNullOrEmpty(CurrentMember.memberinformationresponsevo.nickname))
+                    //{
+                    //    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.nickname + "  你好！";
+                    //}
+                    //else
+                    //{
+                    //    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
+                    //}
 
                     pnlMemberCard.Visible = false;
 
@@ -1286,21 +1287,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-                if (lstShowImg.Count > 0 )
+                if (lstShowImg.Count > 0 && !player.status.Contains("正在播放"))
                 {
-                    pnlAdvertising.BackgroundImage = lstShowImg[showcount];
+                   
+                    if (showcount < lstShowImg.Count)
+                    {
+                        player.Visible = false;
+                        pnlAdvertising.BackgroundImage = lstShowImg[showcount];
+                    }
+                    else
+                    {                      
+                            showcount = 0;
+                            if (CurrentSelectMode == 1 && lstPlayerUrl.Count > 0)
+                            {
+                                player.Visible = true;
+                                PlayerThread();
+
+                            }
+                    }
+
                     showcount += 1;
 
-                    if (showcount == lstShowImg.Count)  //循环展示
-                    {
-                        showcount = 0;
-                        if (CurrentSelectMode == 1 && lstPlayerUrl.Count > 0)
-                        {
-                            
-                                timerImage.Enabled = false;
-                                PlayerThread();
-                        }
-                    }
+                   
                 }
 
 

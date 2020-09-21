@@ -157,7 +157,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 productbll.ExecuteSql("update DBPRODUCT_BEAN set LOCALSTATUS=-1");
                 
-                productbll.AddProduct(GetAllProdcut(1, 200), MainModel.URL);
+               // productbll.AddProduct(GetAllProdcut(1, 200), MainModel.URL);
+
+                List<DBPRODUCT_BEANMODEL> lstpro = GetAllProdcut(1, 200);
+                if (lstpro != null && lstpro.Count > 0)
+                {
+
+                    foreach (DBPRODUCT_BEANMODEL pro in lstpro)
+                    {
+                        string allpinyin = GlobalUtil.GetAllPinyin(pro.SKUNAME);
+                        pro.ALL_FIRST_LETTER = allpinyin;
+                        if (!string.IsNullOrEmpty(allpinyin))
+                        {
+                            pro.FIRST_LETTER = allpinyin.Substring(0, 1);
+                        }
+
+                    }
+                    productbll.AddProduct(lstpro, MainModel.URL);
+                    LogManager.WriteLog("添加全量商品数量：" + lstpro.Count);
+                    // scaletoledo.SendIncrementPLU(lstpro);
+                }
+
+
 
                 productbll.ExecuteSql("delete from DBPRODUCT_BEAN where LOCALSTATUS=-1");
 
@@ -222,6 +243,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 List<DBPRODUCT_BEANMODEL> lstpro = GetIncrementProdcut(1, 100);
                 if (lstpro != null && lstpro.Count > 0)
                 {
+
+                    foreach (DBPRODUCT_BEANMODEL pro in lstpro)
+                    {
+                        string allpinyin =GlobalUtil.GetAllPinyin(pro.SKUNAME);
+                        pro.ALL_FIRST_LETTER=allpinyin;
+                        if(!string.IsNullOrEmpty(allpinyin)){
+                            pro.FIRST_LETTER = allpinyin.Substring(0,1);
+                        }
+                       
+                    }
                     productbll.AddProduct(lstpro, MainModel.URL);
                     LogManager.WriteLog("添加增量商品数量：" + lstpro.Count);
                    // scaletoledo.SendIncrementPLU(lstpro);

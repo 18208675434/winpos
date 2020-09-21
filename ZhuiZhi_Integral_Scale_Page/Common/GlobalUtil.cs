@@ -15,6 +15,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
     public  class GlobalUtil
     {
+        #region  获取设备号
         //获取CPU序号
         public static string GetPCSN()
         {
@@ -159,7 +160,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-
+        #endregion
         /// <summary>
         /// 获取当前星期几
         /// </summary>
@@ -202,7 +203,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
-
+        #region  软键盘打开与关闭
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
@@ -270,7 +271,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-
+        #endregion
 
         /// <summary>
         /// 判断是否有交集  有交集返回false  没有交集返回true  2020 06-29  类似Collections.disjoint
@@ -357,6 +358,204 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
+        #region  获取汉字首字母
+
+        /// <summary>
+        /// 微软官方类库， 通过ascii码会出现有些字查不到
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string ConvertToPinYin(string str)
+        {
+            try
+            {
+                string PYstr = "";
+                foreach (char item in str.ToCharArray())
+                {
+                    if (Microsoft.International.Converters.PinYinConverter.ChineseChar.IsValidChar(item))
+                    {
+                        Microsoft.International.Converters.PinYinConverter.ChineseChar cc = new Microsoft.International.Converters.PinYinConverter.ChineseChar(item);
+                        PYstr += cc.Pinyins[0].Substring(0, 1).ToUpper();
+                    }
+                    else
+                    {
+                        PYstr += item.ToString().ToUpper();
+                    }
+                }
+                return PYstr;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+
+        public static string ConvertToFirstPinYin(string str)
+        {
+            try
+            {
+                string PYstr = "";
+                foreach (char item in str.ToCharArray())
+                {
+                    if (Microsoft.International.Converters.PinYinConverter.ChineseChar.IsValidChar(item))
+                    {
+                        Microsoft.International.Converters.PinYinConverter.ChineseChar cc = new Microsoft.International.Converters.PinYinConverter.ChineseChar(item);
+
+                        PYstr += cc.Pinyins[0].Substring(0, 1).ToUpper();
+                        break;
+                    }
+                    else
+                    {
+                        PYstr += item.ToString().ToUpper();
+                        break;
+                    }
+                }
+                return PYstr;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+
+
+        public static string GetAllPinyin(string str)
+        {
+            try
+            {
+                string PYstr = "";
+                List<List<string>> lstpara = new List<List<string>>();
+
+                foreach (char item in str.ToCharArray())
+                {
+                    List<string> lst = new List<string>();
+                    if (Microsoft.International.Converters.PinYinConverter.ChineseChar.IsValidChar(item))
+                    {
+                        Microsoft.International.Converters.PinYinConverter.ChineseChar cc = new Microsoft.International.Converters.PinYinConverter.ChineseChar(item);
+                        foreach (string strpin in cc.Pinyins)
+                        {
+                            if (!string.IsNullOrEmpty(strpin))
+                            {
+                                string first = strpin.Substring(0, 1).ToUpper();
+                                if (!lst.Contains(first))
+                                {
+                                    lst.Add(first);
+                                }
+                            }
+
+                        }
+
+                        //PYstr += cc.Pinyins[0].Substring(0, 1).ToUpper();
+                    }
+                    else
+                    {
+                        lst.Add(item.ToString().ToUpper());
+                        // PYstr += item.ToString();
+                    }
+
+                    lstpara.Add(lst);
+                }
+
+                return getlistpinyin(lstpara);
+
+            }
+            catch (Exception ex)
+            {
+                return str;
+            }
+            // return PYstr;
+        }
+
+
+        public static string getlistpinyin(List<List<string>> listArray)
+        {
+            //List<List<string>> listArray = new List<List<string>>()
+
+            //{
+
+            //    new List<string>() { "a","b" },
+
+            //    new List<string>() { "1","2" },
+
+            //   // new List<string>() { 0, 1, 2 },
+
+            //};
+
+
+
+            var allCombinations = AllCombinationsOf(listArray);
+            string result = "";
+            foreach (var combination in allCombinations)
+            {
+
+                string str = string.Join("", combination.ToArray());
+                result += str + ",";
+                // Console.WriteLine(string.Join(", ", combination));
+
+            }
+
+            return result;
+        }
+
+
+        public static List<List<T>> AllCombinationsOf<T>(List<List<T>> sets)
+        {
+
+            var combinations = new List<List<T>>();
+
+
+
+            foreach (var value in sets[0])
+
+                combinations.Add(new List<T> { value });
+
+
+
+            foreach (var set in sets.Skip(1))
+
+                combinations = AddExtraSet(combinations, set);
+
+            return combinations;
+        }
+
+
+        private static List<List<T>> AddExtraSet<T>
+
+             (List<List<T>> combinations, List<T> set)
+        {
+
+            var newCombinations = from value in set
+
+                                  from combination in combinations
+
+                                  select new List<T>(combination) { value };
+
+
+            return newCombinations.ToList();
+
+        }
+        # endregion
+
+        public static void Speech(string str)
+        {
+            System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+
+            bk.DoWork += bk_DoWork;
+            bk.RunWorkerAsync(str);
+        }
+        private static void bk_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            string speechstr = e.Argument as string;
+            using (System.Speech.Synthesis.SpeechSynthesizer speech = new System.Speech.Synthesis.SpeechSynthesizer())
+            {
+                //speech.Rate = 0;  //语速
+                speech.Volume = 80;  //音量
+                speech.Speak(speechstr);
+            }
+
+        }
     }
 
 
@@ -386,77 +585,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
 
-#region  获取汉字首字母
-
-    /// <summary>
-        /// 这个办法是用来获得一个字符串的每个字的拼音首字母构成所需的字符串
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public static string GetChineseSpell(string strText)
-        {
-            try
-            {
-                int len = strText.Length;
-                string myStr = "";
-                for (int i = 0; i < len; i++)
-                {
-                    myStr += getSpell(strText.Substring(i, 1));
-                }
-                return myStr;
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("获取字符串首字母异常"+ex.Message);
-                return "";
-            }
-        }
-
-
-        /// <summary>
-        /// 用来获得一个字的拼音首字母
-        /// </summary>
-        /// <param name="cnChar"></param>
-        /// <returns></returns>
-        public static string getSpell(string cnChar)
-        {
-            try
-            {
-                //将汉字转化为ASNI码,二进制序列
-                byte[] arrCN = Encoding.Default.GetBytes(cnChar);
-                if (arrCN.Length > 1)
-                {
-                    int area = (short)arrCN[0];
-                    int pos = (short)arrCN[1];
-                    int code = (area << 8) + pos;
-                    int[] areacode = {45217,45253,45761,46318,46826,47010,47297,47614,48119,48119,49062,
-                49324,49896,50371,50614,50622,50906,51387,51446,52218,52698,52698,52698,52980,53689,54481};
-                    for (int i = 0; i < 26; i++)
-                    {
-                        int max = 55290;
-                        if (i != 25)
-                        {
-                            max = areacode[i + 1];
-                        }
-                        if (areacode[i] <= code && code < max)
-                        {
-                            return Encoding.Default.GetString(new byte[] { (byte)(65 + i) });
-                        }
-                    }
-                    return "*";
-                }
-                else
-                {
-                    return cnChar;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("获取汉字首字母异常"+ex.Message);
-                return "";
-            }
-        }
-# endregion
 
 
 

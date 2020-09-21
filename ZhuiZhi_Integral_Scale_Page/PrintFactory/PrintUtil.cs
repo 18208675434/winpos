@@ -152,6 +152,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return false;
             }
         }
+
+
+
+        public static bool PrintThirdOrder(PrinterPickOrderInfo printdetail, ref string errormsg)
+        {
+            try
+            {
+                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                if (ScaleName == ScaleType.托利多.ToString())
+                {
+                    return ToledoPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
+                }
+                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                {
+                    return SprtPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
        
     }
 }

@@ -35,77 +35,79 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             sure();
 
         }
-        public void Hebing()
-        {
-            if (MainModel.IsMemberCenter)
-            {
-                btnOK.Text = "确认合并";
-                MainModel.Sourcetoken = MainModel.CurrentMember.memberheaderresponsevo.token;
-                string err = "";
-                bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
-                string errrormsg = "";
-                if (resule)
-                {
+        //public void Hebing()
+        //{
+        //    if (MainModel.IsMemberCenter)
+        //    {
+        //        btnOK.Text = "确认合并";
+        //        MainModel.Sourcetoken = MainModel.CurrentMember.memberheaderresponsevo.token;
+        //        string err = "";
+        //        bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
+        //        string errrormsg = "";
+        //        if (resule)
+        //        {
 
-                    bool mergeresult = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
-                    if (mergeresult)
-                    {
+        //            bool mergeresult = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
+        //            if (mergeresult)
+        //            {
 
-                        MainModel.ShowLog(errrormsg, false);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                        string ErrorMsgMember = "";
-                        HttpUtil httputil = new HttpUtil();
-                        string phone = MainModel.NewPhone;
-                        Member member = httputil.GetMember(phone, ref ErrorMsgMember);
-                        string gender = member.memberinformationresponsevo.gender == 0 ? "男" : "女";
-                        string birth = member.memberinformationresponsevo.birthdaystr;
-                        string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
-                        string balance = "￥" + member.barcoderecognitionresponse.balance;
-                        string credit = member.creditaccountrepvo.availablecredit.ToString();
-                        string ErrorMsg = "";
-                        CurrentLstCoupon = httputil.ListMemberCouponAvailable(member.memberinformationresponsevo.memberid, ref ErrorMsg);
-                        string coupon = CurrentLstCoupon.Count + "张";
-                        string creditspec = "";
+        //                MainModel.ShowLog(errrormsg, false);
+        //                this.DialogResult = DialogResult.OK;
+        //                this.Close();
+        //                string ErrorMsgMember = "";
+        //                HttpUtil httputil = new HttpUtil();
+        //                string phone = MainModel.NewPhone;
+        //                Member member = httputil.GetMember(phone, ref ErrorMsgMember);
+                        
+        //                string gender = member.memberinformationresponsevo.gender == 0 ? "男" : "女";
+        //                string birth = member.memberinformationresponsevo.birthdaystr;
+        //                string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
+        //                string balance = "￥" + member.barcoderecognitionresponse.balance;
+        //                MessageBox.Show(balance);
+        //                string credit = member.creditaccountrepvo.availablecredit.ToString();
+        //                string ErrorMsg = "";
+        //                CurrentLstCoupon = httputil.ListMemberCouponAvailable(member.memberinformationresponsevo.memberid, ref ErrorMsg);
+        //                string coupon = CurrentLstCoupon.Count + "张";
+        //                string creditspec = "";
                       
-                        FormMemberCenterMedia f = new FormMemberCenterMedia();
-                        f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
-                        FormMemberCenter center = new FormMemberCenter(member);
-                        center.refresh();
+        //                FormMemberCenterMedia f = new FormMemberCenterMedia();
+        //                f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
+        //                FormMemberCenter center = new FormMemberCenter(member);
+        //                center.refresh();
 
-                    }
-                    else
-                    {
-                        MainModel.ShowLog(errrormsg, false);
-                        this.DialogResult = DialogResult.Cancel;
-                        this.Close();
-                    }
-                }
-                else
-                {
-                    MainModel.ShowLog(errrormsg, false);
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
-                }
-            }
-            else
-            {
-                string err = "";
-                bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
-                if (resule)
-                {
-                    MainModel.ShowLog(err, false);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MainModel.ShowLog(err, false);
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
-                }
-            }
-        }
+        //            }
+        //            else
+        //            {
+        //                MainModel.ShowLog(errrormsg, false);
+        //                this.DialogResult = DialogResult.Cancel;
+        //                this.Close();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MainModel.ShowLog(errrormsg, false);
+        //            this.DialogResult = DialogResult.Cancel;
+        //            this.Close();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        string err = "";
+        //        bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
+        //        if (resule)
+        //        {
+        //            MainModel.ShowLog(err, false);
+        //            this.DialogResult = DialogResult.OK;
+        //            this.Close();
+        //        }
+        //        else
+        //        {
+        //            MainModel.ShowLog(err, false);
+        //            this.DialogResult = DialogResult.Cancel;
+        //            this.Close();
+        //        }
+        //    }
+        //}
         public void sure()
         {
             if (MainModel.IsMemberCenter)
@@ -118,37 +120,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (resule)
                 {
 
-                    bool mergeresult = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
-                    if (mergeresult)
-                    {
 
-                        MainModel.ShowLog(errrormsg, false);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                        FormMemberRecevice r = new FormMemberRecevice();
-                        string ErrorMsgMember = "";
-                        HttpUtil httputil = new HttpUtil();
-                        string phone = MainModel.NewPhone;
-                        Member member = httputil.GetMember(phone, ref ErrorMsgMember);
-                        string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
-                        string birth = CurrentMember.memberinformationresponsevo.birthdaystr;
-                        string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
-                        string balance = "￥" + CurrentMember.barcoderecognitionresponse.balance;
-                        string credit = CurrentMember.creditaccountrepvo.availablecredit.ToString();
-                        string ErrorMsg = "";
-                        CurrentLstCoupon = httputil.ListMemberCouponAvailable(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
-                        string coupon = CurrentLstCoupon.Count + "张";
-                        string creditspec = "";
-                        FormMemberCenterMedia f = new FormMemberCenterMedia();
-                        f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
 
-                    }
-                    else
-                    {
-                        MainModel.ShowLog(errrormsg, false);
-                        this.DialogResult = DialogResult.Cancel;
-                        this.Close();
-                    }
+                    MainModel.ShowLog(errrormsg, false);
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    FormMemberRecevice r = new FormMemberRecevice();
+                    string ErrorMsgMember = "";
+                    HttpUtil httputil = new HttpUtil();
+                    string phone = MainModel.NewPhone;
+                    Member member = httputil.GetMember(phone, ref ErrorMsgMember);
+                    string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
+                    string birth = CurrentMember.memberinformationresponsevo.birthdaystr;
+                    string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
+                    string balance = "￥" + CurrentMember.barcoderecognitionresponse.balance;
+                    string credit = CurrentMember.creditaccountrepvo.availablecredit.ToString();
+                    string ErrorMsg = "";
+                    CurrentLstCoupon = httputil.ListMemberCouponAvailable(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
+                    string coupon = CurrentLstCoupon.Count + "张";
+                    string creditspec = "";
+                    FormMemberCenterMedia f = new FormMemberCenterMedia();
+                    f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
+
+
+
                 }
                 else
                 {

@@ -187,7 +187,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
                 string json = HttpGET(url, sort);
-                //Console.Write("getskuInfobyshortcode:"+ json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
                 if (rd.code == 0)
@@ -228,7 +227,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 sort.Add("shortcode", scancode.PadLeft(5, '0'));
 
                 string json = HttpGET(url, sort);
-                //Console.Write("getskuInfobyshortcode:"+ json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 resultcode = rd.code;
@@ -572,8 +570,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                         tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
                     
                 }
-
-                ////Console.Write(tempjson);
 
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -1020,8 +1016,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
-                LogManager.WriteLog("DEBUG",json);
-
                 // return;
                 if (rd.code == 0)
                 {
@@ -1054,17 +1048,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
-                string url = "/pos/order/pos/query";
-
-                if (queryorderpara.source > 0)
+                string url = "";
+                if (queryorderpara.source == 0)
+                {
+                    url = "/pos/order/pos/query";
+                }
+                if (queryorderpara.source == 1 || queryorderpara.source == 2 || queryorderpara.source == 3)
                 {
                     url = "/pos/order/pos/queryonlineorderforpos";
+                }
+                else if (queryorderpara.source == 4)
+                {
+                    url = "/pos/thirdpartyplatform/thirdpartyabnormalorder/page";
                 }
                 
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);
 
                 string json = HttpPOST(url, tempjson);
-                LogManager.WriteLog("DEBUG", json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -1257,7 +1257,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
-                LogManager.WriteLog("DEBUG","交班结果" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -3188,7 +3187,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string testjson = JsonConvert.SerializeObject(parabroken);
 
                 string json = HttpPOST(url, testjson);
-                LogManager.WriteLog("DEBUG", "新建报损" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -3499,7 +3497,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 sort.Add("mobile", mobile);
                 string json = HttpGET(url, sort);
 
-                Console.WriteLine(json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -3698,6 +3695,94 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             {
                 LogManager.WriteLog("Error", "查询调价异常 ：" + ex.Message);
                 errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        #endregion
+
+
+        #region  线上订单
+
+        public PrinterPickOrderInfo QueryPickPrintInfo(ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/queryprint";
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+               
+                string json = HttpGET(url, sort);
+
+                LogManager.WriteLog(json);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                //TODO
+
+                if (rd.code == 0)
+                {
+
+                    PrinterPickOrderInfo resultobj = JsonConvert.DeserializeObject<PrinterPickOrderInfo>(rd.data.ToString());
+                    return resultobj;
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "queryprint:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "轮询打印拣货单异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 补打打印拣货单
+        /// </summary>
+        /// <param name="type">正常单传0  异常单传1</param>
+        /// <param name="orderid"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public PrinterPickOrderInfo QueryPrintMarUP(int type,string orderid, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/queryprintmarkup";
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("type", type.ToString());
+                sort.Add("orderid",orderid);
+                string json = HttpGET(url, sort);
+
+                LogManager.WriteLog("DEBUG","补打拣货单"+json);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                //TODO
+
+                if (rd.code == 0)
+                {
+
+                    PrinterPickOrderInfo resultobj = JsonConvert.DeserializeObject<PrinterPickOrderInfo>(rd.data.ToString());
+                    return resultobj;
+                    
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "queryprintmarkup:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", orderid + "补打打印拣货单数据异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
                 return null;
             }
         }

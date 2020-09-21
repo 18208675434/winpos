@@ -44,11 +44,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private string LastOrderid = "0";
 
 
-        private Bitmap bmpReprint;
-        private Bitmap bmpRefund;
-        private Bitmap bmpNotRefund;
-
-        private Bitmap bmpRefundByAmt;
+        private Bitmap bmpReprint;//重打小票
+        private Bitmap bmpRefund;//退款
+        private Bitmap bmpNotRefund;//不允许退款
+        private Bitmap bmpSync;//同步
+        private Bitmap bmpRefundByAmt;//退差价
+        private Bitmap bmpCancelOrder;//取消订单
         private Bitmap bmpWhite;
 
         /// <summary>
@@ -64,7 +65,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private bool thisisoffline = false;
 
         #endregion
-
 
         #region  页面加载与退出
         public frmOrderQuery()
@@ -99,9 +99,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 bmpReprint = (Bitmap)MainModel.GetControlImage(btnReprintPic);
                 bmpNotRefund = (Bitmap)MainModel.GetControlImage(btnNotRefundPic);
                 bmpRefundByAmt = (Bitmap)MainModel.GetControlImage(btnRefundByAmt);
-
+                bmpSync = (Bitmap)MainModel.GetControlImage(btnSync);
+                bmpCancelOrder = (Bitmap)MainModel.GetControlImage(btnCancelOrder);
                 bmpWhite = Resources.ResourcePos.White;
-
             }
             catch (Exception ex)
             {
@@ -117,8 +117,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             this.Close();
         }
+
+
+        private void frmOrderQuery_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GlobalUtil.CloseOSK();
+        }
         #endregion
 
+        #region  查询条件
         private void btnToday_Click(object sender, EventArgs e)
         {
             try
@@ -245,40 +252,290 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        private bool HaveNextPage = true;
+        private void rbtnPageUp_ButtonClick(object sender, EventArgs e)
+        {
 
-
-
-        #region 公用
-
-      
-
-        //当前时间戳
-        private string getStampByDateTime(DateTime datetime)
-        {            //DateTime datetime = DateTime.Now;
-            var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-            var result = (long)(datetime - startTime).TotalMilliseconds;
-
-            return result.ToString();
+            if (!rbtnPageUp.WhetherEnable || !IsEnable)
+            {
+                return;
+            }
+            CurrentPage--;
+            LoadDgvOrder();
         }
 
-        private DateTime GetDateTimeByStamp(string stamp)
+        private void rbtnPageDown_ButtonClick(object sender, EventArgs e)
+        {
+            if (!IsEnable || !rbtnPageDown.WhetherEnable)
+            {
+                return;
+            }
+            CurrentPage++;
+            LoadDgvOrder();
+        }
+
+        private bool HaveNextPage = true;
+
+        //控制仅允许录入数字
+        private void TextNUMBER_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
-                long result = Convert.ToInt64(stamp);
-                DateTime datetime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-                datetime = datetime.AddMilliseconds(result);
-                return datetime;
+                TextBox txt = sender as TextBox;
+                e.Handled = true;
+                char ch = e.KeyChar;
+
+                if (ch >= '0' && ch <= '9')
+                    e.Handled = false;
+
+                if (ch == (char)Keys.Back)
+                    e.Handled = false;
+
             }
-            catch (Exception ex)
+            catch { }
+        }
+
+        private void dtEnd_MouseDown(object sender, MouseEventArgs e)
+        {
+            dtEnd.Focus();
+            SendKeys.Send("{F4}");
+        }
+
+        private void dtStart_MouseDown(object sender, MouseEventArgs e)
+        {
+            dtStart.Focus();
+            SendKeys.Send("{F4}");
+        }
+
+        private void txtPhone_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPhone.Text.Length > 0)
             {
-                return DateTime.Now;
+                lblPhoneShuiyin.Visible = false;
+            }
+            else
+            {
+                lblPhoneShuiyin.Visible = true;
             }
         }
 
+        private void lblPhoneShuiyin_Click(object sender, EventArgs e)
+        {
+
+            GlobalUtil.OpenOSK();
+            Delay.Start(100);
+            this.Activate();
+            lblPhoneShuiyin.Focus();
+        }
+
+        private void txtOrderID_TextChanged(object sender, EventArgs e)
+        {
+            if (txtOrderID.Text.Length > 0)
+            {
+
+                lblOrderIDShuiyin.Visible = false;
+            }
+            else
+            {
+                lblOrderIDShuiyin.Visible = true;
+            }
+        }
+
+        private void lblOrderIDShuiyin_Click(object sender, EventArgs e)
+        {
+
+            GlobalUtil.OpenOSK();
+            Delay.Start(100);
+            this.Activate();
+            txtOrderID.Focus();
+        }
+
+
+
+        private void txt_OskClick(object sender, EventArgs e)
+        {
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                GlobalUtil.OpenOSK();
+
+                Delay.Start(100);
+                this.Activate();
+                txt.Focus();
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
+            }
+        }
 
         #endregion
+
+
+        #region  
+
+        private int CurrentPage = 1;
+
+        private int PageSize = 6;
+
+        private int CurrentSource = 0;
+
+        private OrderType CurrentOrderType =OrderType.online;
+        private void btnQueryOnline_Click(object sender, EventArgs e)
+        {
+            SelectOrder(OrderType.online);
+            //try
+            //{
+            //    if (!IsEnable)
+            //    {
+            //        return;
+            //    }
+
+            //    thisisoffline = false;
+
+            //    btnOnline.BackColor = Color.White;
+
+            //    dgvOrderOnLine.Visible = true;
+            //    pnlDgvHead.Visible = true;
+            //    pnlDgvOffLineHead.Visible = false;
+
+            //    if (dgvOrderOnLine.Rows.Count > 0)
+            //    {
+            //        pnlEmptyOrder.Visible = false;
+            //    }
+            //    else
+            //    {
+            //        pnlEmptyOrder.Visible = false;
+            //    }
+
+            //    btnToday.PerformClick();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MainModel.ShowLog("切换订单查询模式异常" + ex.Message, true);
+            //}
+        }
+
+        private void btnApp_Click(object sender, EventArgs e)
+        {
+            SelectOrder(OrderType.app);
+        }
+
+        private void btnError_Click(object sender, EventArgs e)
+        {
+            SelectOrder(OrderType.error);
+        }
+
+        private void btnErbai_Click(object sender, EventArgs e)
+        {
+            SelectOrder(OrderType.erbai);
+        }
+
+        private void btnMeituan_Click(object sender, EventArgs e)
+        {
+            SelectOrder(OrderType.meitaun);
+        }
+
+        private void btnOffLine_Click(object sender, EventArgs e)
+        {
+            SelectOrder(OrderType.offline);
+        }
+
+
+        private void SelectOrder(OrderType ordertype)
+        {
+
+            CurrentOrderType = ordertype;
+            CurrentPage = 1;
+            CurrentSource = 0;
+            LastOrderid = "0";
+            btnOnline.BackColor = Color.FromArgb(230,230,230);
+            btnOffLine.BackColor = Color.FromArgb(230,230,230);
+            btnMeituan.BackColor = Color.FromArgb(230,230,230);
+            btnErbai.BackColor = Color.FromArgb(230,230,230);
+            btnApp.BackColor = Color.FromArgb(230,230,230);
+            btnError.BackColor = Color.FromArgb(230,230,230);
+
+
+            tlpDgv.ColumnStyles[0] = new ColumnStyle(SizeType.Percent,0);
+            tlpDgv.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
+            tlpDgv.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
+            tlpDgv.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
+
+            switch (ordertype)
+            {
+                case OrderType.online: btnOnline.BackColor = Color.White; tlpDgv.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100); break;
+                case OrderType.offline: btnOffLine.BackColor = Color.White; tlpDgv.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100); break;
+                case OrderType.meitaun: btnMeituan.BackColor = Color.White; CurrentSource = 2; tlpDgv.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 100); break;
+                case OrderType.erbai: btnErbai.BackColor = Color.White; CurrentSource = 3; tlpDgv.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 100); break;
+                case OrderType.app: btnApp.BackColor = Color.White; CurrentSource = 1; tlpDgv.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 100); break;
+                case OrderType.error: btnError.BackColor = Color.White; CurrentSource = 4; tlpDgv.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 100); break;
+            }
+
+
+            Application.DoEvents();
+            btnQuery.PerformClick();
+
+            LoadDgvOrder();
+        }
+
+
+        private void LoadDgvOrder()
+        {
+
+            if (CurrentQueryOrder == null || (CurrentQueryOrder.orders.Count <= CurrentPage * PageSize && HaveNextPage))
+            {
+
+            LoadingHelper.ShowLoadingScreen();
+            IsEnable = false;
+            QueryOrderPara queryorderpara = new QueryOrderPara();
+            queryorderpara.customerphone = txtPhone.Text;
+            queryorderpara.interval = CurrentInterval;
+            queryorderpara.shopid = MainModel.CurrentShopInfo.shopid;
+            queryorderpara.orderatend = MainModel.getStampByDateTime(dtEnd.Value);
+            queryorderpara.orderatstart = MainModel.getStampByDateTime(dtStart.Value);
+            queryorderpara.orderid = txtOrderID.Text;
+            queryorderpara.lastorderid = LastOrderid;
+            queryorderpara.source = CurrentSource;
+            string ErrorMsg = "";
+            QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
+
+            if (ErrorMsg != "" || queryorder == null)
+            {
+                MainModel.ShowLog(ErrorMsg, false);
+            }
+            else
+            {
+
+                if (LastOrderid == "0")
+                {
+                    CurrentQueryOrder = queryorder;
+                }
+                else
+                {
+                    foreach (Order order in queryorder.orders)
+                    {
+                        CurrentQueryOrder.orders.Add(order);
+                    }
+                }
+                LastOrderid = queryorder.lastorderid;
+                HaveNextPage = queryorder.hasnextpage == 1 ? true : false;
+            }
+            LoadingHelper.CloseForm();
+            IsEnable = true;
+            }
+
+            switch (CurrentOrderType)
+            {
+                case OrderType.online: LoadOnLine(); break;
+                case OrderType.offline: ; break;
+                case OrderType.meitaun: LoadOtherOnline(); break;
+                case OrderType.erbai: LoadOtherOnline(); break;
+                case OrderType.app: LoadOtherOnline(); break;
+                case OrderType.error: LoadErrorOrder() ; break;
+            }           
+        }
+        #region  在线模式订单
+
         private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -444,8 +701,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     btnQuery_Click(null, null);
                 }
+                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpCancelOrder)
+                {
+                    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
 
+                    if (!ConfirmHelper.Confirm("确认取消订单？"))
+                    {
+                        return;
+                    }
+                    IsEnable = false;
+                    LoadingHelper.ShowLoadingScreen();
+                    string errormsg="";
+                    if (httputil.CancleOrder(selectorderid, "", ref errormsg))
+                    {
+                        Delay.Start(300);
+                        IsEnable = true;
+                        LoadingHelper.CloseForm();
+                        MainModel.ShowLog("订单取消成功",false);
+                        btnQuery_Click(null, null);
+                    }
+                    else
+                    {
+                        IsEnable = true;
+                        LoadingHelper.CloseForm();
+                        MainModel.ShowLog("订单取消失败", false);
+                    }
 
+                }
             }
             catch (Exception ex)
             {
@@ -460,8 +742,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             }
         }
-
-
 
         private void dgvOrderOnLine_Scroll(object sender, ScrollEventArgs e)
         {
@@ -491,132 +771,261 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
+      
 
-
-        private void btnQueryOnline_Click(object sender, EventArgs e)
+        private void LoadOnLine()
         {
             try
             {
-                if (!IsEnable)
+
+                rbtnPageUp.WhetherEnable = CurrentPage > 1;
+
+                int startindex = (CurrentPage - 1) * 6;
+
+                int lastindex = Math.Min(CurrentQueryOrder.orders.Count - 1, startindex + 5);
+
+                dgvOrderOnLine.Rows.Clear();
+                List<Order> lstOrder = CurrentQueryOrder.orders.GetRange(startindex, lastindex - startindex + 1);
+                foreach (Order order in lstOrder)
+                {
+                    string totalpay = MenuHelper.GetTotalPayInfo(order);
+                    if (order.orderstatusvalue == 1)
+                    {
+                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpCancelOrder, bmpWhite);
+
+                    }
+                     else if (order.orderstatusvalue == 5)
+                    {
+                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite, bmpWhite);
+                    }
+                    else
+                    {
+
+                        Bitmap tempbmprefund = order.supportspecifiedamountrefund == 1 ? bmpRefundByAmt : bmpWhite;
+                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund, tempbmprefund);
+                    }
+
+                }
+                dgvOrderOnLine.ClearSelection();
+                Application.DoEvents();
+
+                //在线接口每页20个 防止本地分页和接口分页最小积数  例 6*10 = 20*3
+                if (CurrentQueryOrder.orders.Count > CurrentPage * 6 || HaveNextPage)
+                {
+                    rbtnPageDown.WhetherEnable = true;
+                }
+                else
+                {
+                    rbtnPageDown.WhetherEnable = false;
+                }
+
+
+                pnlEmptyOrder.Visible = dgvOrderOnLine.Rows.Count == 0;
+
+
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("加载订单列表异常" + ex.Message, true);
+            }
+            finally
+            {
+                IsEnable = true;
+                LoadingHelper.CloseForm();
+            }
+        }
+
+
+        #endregion
+
+        #region 第三方订单 （美团、饿白、小程序）
+
+
+        private void LoadOtherOnline()
+        {
+            try
+            {
+
+                rbtnPageUp.WhetherEnable = CurrentPage > 1;
+
+                int startindex = (CurrentPage - 1) * 6;
+
+                int lastindex = Math.Min(CurrentQueryOrder.orders.Count - 1, startindex + 5);
+
+                dgvOnLine.Rows.Clear();
+                List<Order> lstOrder = CurrentQueryOrder.orders.GetRange(startindex, lastindex - startindex + 1);
+                foreach (Order order in lstOrder)
+                {
+
+                        dgvOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, order.ordersubtype, order.orderstatus,order.receiverphone, bmpReprint );
+                }
+                dgvOnLine.ClearSelection();
+                Application.DoEvents();
+
+                //在线接口每页20个 防止本地分页和接口分页最小积数  例 6*10 = 20*3
+                if (CurrentQueryOrder.orders.Count > CurrentPage * 6 || HaveNextPage)
+                {
+                    rbtnPageDown.WhetherEnable = true;
+                }
+                else
+                {
+                    rbtnPageDown.WhetherEnable = false;
+                }
+
+
+                pnlEmptyOrder.Visible = dgvOnLine.Rows.Count == 0;
+
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("加载订单列表异常" + ex.Message, true);
+            }
+            finally
+            {
+                IsEnable = true;
+                LoadingHelper.CloseForm();
+            }
+        }
+
+        private void dgvOnLine_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!IsEnable)
+            {
+                return;
+            }
+
+            if (e.RowIndex < 0)
+                return;
+
+           
+            if (dgvOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
+            {
+                IsEnable = false;
+
+                if (!ConfirmHelper.Confirm("确认重打小票？"))
                 {
                     return;
                 }
 
-                thisisoffline = false;
+                LoadingHelper.ShowLoadingScreen("加载中...");
+                ReceiptUtil.EditReprintCount(1);
 
-                btnQueryOnline.BackColor = Color.White;
+                string orderid = dgvOnLine.Rows[e.RowIndex].Cells["onlineorderid"].Value.ToString();;
+               
+                string ErrorMsg = "";
 
-                dgvOrderOnLine.Visible = true;
-                pnlDgvHead.Visible = true;
-                pnlDgvOffLineHead.Visible = false;
+                PrinterPickOrderInfo printerinfo = httputil.QueryPrintMarUP(0, orderid, ref ErrorMsg);
 
-                if (dgvOrderOnLine.Rows.Count > 0)
-                {
-                    pnlEmptyOrder.Visible = false;
-                }
-                else
-                {
-                    pnlEmptyOrder.Visible = false;
-                }
+                    if(printerinfo==null){
+                        MainModel.ShowLog(ErrorMsg,false);
+                    }
+                    else
+                    {
+                        string PrintErrorMsg = "";
+                        bool printresult = PrintUtil.PrintThirdOrder(printerinfo, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
 
-                btnToday.PerformClick();
+                        if (PrintErrorMsg != "" || !printresult)
+                        {
+                            MainModel.ShowLog(PrintErrorMsg, true);
+                        }
+                        else
+                        {
+                            MainModel.ShowLog("打印完成", false);
+                        }
+                    }
+                           
+                
+                IsEnable = true;
+                LoadingHelper.CloseForm();
             }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("切换订单查询模式异常" + ex.Message, true);
-            }
+
         }
-  
+        #endregion
 
-        //控制仅允许录入数字
-        private void TextNUMBER_KeyPress(object sender, KeyPressEventArgs e)
+        #region 异常订单
+
+        private void LoadErrorOrder()
         {
             try
             {
-                TextBox txt = sender as TextBox;
-                e.Handled = true;
-                char ch = e.KeyChar;
+                rbtnPageUp.WhetherEnable = CurrentPage > 1;
 
-                if (ch >= '0' && ch <= '9')
-                    e.Handled = false;
+                int startindex = (CurrentPage - 1) * 6;
 
-                if (ch == (char)Keys.Back)
-                    e.Handled = false;
+                int lastindex = Math.Min(CurrentQueryOrder.orders.Count - 1, startindex + 5);
+
+                dgvError.Rows.Clear();
+                List<Order> lstOrder = CurrentQueryOrder.orders.GetRange(startindex, lastindex - startindex + 1);
+                foreach (Order order in lstOrder)
+                {
+
+                    dgvError.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, order.ordersubtype, order.orderstatus, order.receiverphone,order.sourceflag, bmpReprint,bmpSync);
+
+                }
+                dgvError.ClearSelection();
+                Application.DoEvents();
+
+                //在线接口每页20个 防止本地分页和接口分页最小积数  例 6*10 = 20*3
+                if (CurrentQueryOrder.orders.Count > CurrentPage * 6 || HaveNextPage)
+                {
+                    rbtnPageDown.WhetherEnable = true;
+                }
+                else
+                {
+                    rbtnPageDown.WhetherEnable = false;
+                }
+
+
+                pnlEmptyOrder.Visible = dgvError.Rows.Count == 0;
 
             }
-            catch { }
-        }
-
-        private void dtEnd_MouseDown(object sender, MouseEventArgs e)
-        {
-            dtEnd.Focus();
-            SendKeys.Send("{F4}");
-        }
-
-        private void dtStart_MouseDown(object sender, MouseEventArgs e)
-        {
-            dtStart.Focus();
-            SendKeys.Send("{F4}");
-        }
-
-        private void txtPhone_TextChanged(object sender, EventArgs e)
-        {
-            if (txtPhone.Text.Length > 0)
+            catch (Exception ex)
             {
-                lblPhoneShuiyin.Visible = false;
+                MainModel.ShowLog("加载订单列表异常" + ex.Message, true);
             }
-            else
+            finally
             {
-                lblPhoneShuiyin.Visible = true;
+                IsEnable = true;
+                LoadingHelper.CloseForm();
             }
         }
 
-        private void lblPhoneShuiyin_Click(object sender, EventArgs e)
+        private void dgvError_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            GlobalUtil.OpenOSK();
-            Delay.Start(100);
-            this.Activate();
-            lblPhoneShuiyin.Focus();
-        }
-
-        private void txtOrderID_TextChanged(object sender, EventArgs e)
-        {
-            if (txtOrderID.Text.Length > 0)
+            if (!IsEnable)
             {
-                
-                lblOrderIDShuiyin.Visible = false;
+                return;
             }
-            else
+
+            if (e.RowIndex < 0)
+                return;
+
+
+            if (dgvOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
             {
-                lblOrderIDShuiyin.Visible = true;
+                IsEnable = false;
+
+                if (!ConfirmHelper.Confirm("确认重打小票？"))
+                {
+                    return;
+                }
+
+                LoadingHelper.ShowLoadingScreen("加载中...");
+                ReceiptUtil.EditReprintCount(1);
+
+                string orderid = dgvOnLine.Rows[e.RowIndex].Cells["onlineorderid"].Value.ToString();
+                string ErrorMsg = "";
+
+                IsEnable = true;
+                LoadingHelper.CloseForm();
             }
+
         }
-
-        private void lblOrderIDShuiyin_Click(object sender, EventArgs e)
-        {
-
-            GlobalUtil.OpenOSK();
-            Delay.Start(100);
-            this.Activate();
-            txtOrderID.Focus();
-        }
-
-
-
-        private void frmOrderQuery_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            GlobalUtil.CloseOSK();
-        }
+        #endregion
+        #endregion
 
 
         #region  公用
-
-        public void frmOrderQuery_SizeChanged(object sender, EventArgs e)
-        {
-            // asf.ControlAutoSize(this);
-        }
-
 
         private void LoadPicScreen(bool isShown)
         {
@@ -652,152 +1061,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         #endregion
 
+       
 
+      
 
+    }
 
-        #region 分页
-
-        private int CurrentPage = 1;
-
-        private int PageSize = 6;
-
-        private void LoadDgvOrder()
-        {
-            try
-            {
-                if (CurrentQueryOrder == null || (CurrentQueryOrder.orders.Count <= CurrentPage * PageSize && HaveNextPage))
-                {
-
-                    LoadingHelper.ShowLoadingScreen();
-                    IsEnable = false;
-                QueryOrderPara queryorderpara = new QueryOrderPara();
-                queryorderpara.customerphone = txtPhone.Text;
-                queryorderpara.interval = CurrentInterval;
-                queryorderpara.shopid = MainModel.CurrentShopInfo.shopid;
-                queryorderpara.orderatend = getStampByDateTime(dtEnd.Value);
-                queryorderpara.orderatstart = getStampByDateTime(dtStart.Value);
-                queryorderpara.orderid = txtOrderID.Text;
-                queryorderpara.lastorderid = LastOrderid;
-                //queryorderpara.source = 1;
-                string ErrorMsg = "";
-                QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
-
-                if (ErrorMsg != "" || queryorder == null)
-                {
-                    MainModel.ShowLog(ErrorMsg, false);
-                }
-                else
-                {
-
-                    if (LastOrderid == "0")
-                    {
-                        CurrentQueryOrder = queryorder;
-                    }
-                    else
-                    {
-                        foreach (Order order in queryorder.orders)
-                        {
-                            CurrentQueryOrder.orders.Add(order);
-                        }
-                    }
-                    LastOrderid = queryorder.lastorderid;
-                    HaveNextPage = queryorder.hasnextpage == 1 ? true : false;
-                }
-
-                }
-
-
-                rbtnPageUp.WhetherEnable = CurrentPage > 1;
-               
-                int startindex = (CurrentPage - 1) * 6;
-
-                int lastindex = Math.Min(CurrentQueryOrder.orders.Count - 1, startindex + 5);
-
-                dgvOrderOnLine.Rows.Clear();
-                List<Order> lstOrder= CurrentQueryOrder.orders.GetRange(startindex, lastindex - startindex + 1);
-                foreach (Order order in lstOrder)
-                {
-                    string totalpay = MenuHelper.GetTotalPayInfo(order);
-
-                    if (order.orderstatusvalue == 5)
-                    {
-                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite,bmpWhite);
-                    }
-                    else
-                    {
-
-                        Bitmap tempbmprefund = order.supportspecifiedamountrefund == 1 ? bmpRefundByAmt : bmpWhite;
-                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund,tempbmprefund);
-                    }
-
-                }
-                dgvOrderOnLine.ClearSelection();
-                Application.DoEvents();
-
-                //在线接口每页20个 防止本地分页和接口分页最小积数  例 6*10 = 20*3
-                if (CurrentQueryOrder.orders.Count > CurrentPage * 6 || HaveNextPage)
-                {
-                    rbtnPageDown.WhetherEnable = true;
-                }
-                else
-                {
-                    rbtnPageDown.WhetherEnable = false;
-                }
-
-
-                    pnlEmptyOrder.Visible = dgvOrderOnLine.Rows.Count == 0;
-             
-
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("加载订单列表异常"+ex.Message,true);
-            }
-            finally
-            {
-                IsEnable = true;
-                LoadingHelper.CloseForm();
-            }
-        }
-        #endregion
-
-        private void rbtnPageUp_ButtonClick(object sender, EventArgs e)
-        {
-
-            if (!rbtnPageUp.WhetherEnable || !IsEnable)
-            {
-                return;
-            }
-            CurrentPage--;
-            LoadDgvOrder();
-        }
-
-        private void rbtnPageDown_ButtonClick(object sender, EventArgs e)
-        {
-            if (!IsEnable || !rbtnPageDown.WhetherEnable)
-            {
-                return;
-            }
-            CurrentPage++;
-            LoadDgvOrder();
-        }
-
-
-        private void txt_OskClick(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
-
-                Delay.Start(100);
-                this.Activate();
-                txt.Focus();
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
-            }
-        }
+    public enum OrderType
+    {
+        none,
+        online,
+        offline,
+        meitaun,
+        erbai,
+        app,
+        error
     }
 }

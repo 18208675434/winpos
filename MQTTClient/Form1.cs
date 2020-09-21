@@ -122,6 +122,10 @@ namespace MQTTClient
 
                 string topicprice = "sku:adjust:increment:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
                 SubScribe(topicprice);
+
+                //线上订单
+                string topicorder = "order:print:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
+                SubScribe(topicorder);
             })));
         }
 
@@ -166,6 +170,11 @@ namespace MQTTClient
                         {
                             INIManager.SetIni("MQTT", "ChangeType", type.adjustTypes.ToString(), MainModel.IniPath);
                         }
+                    }
+                    else if (e.ApplicationMessage.Topic == "order:print:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid)
+                    {
+                        INIManager.SetIni("MQTT", "NewOrder", "1", MainModel.IniPath);
+                        //TODO 线上订单
                     }
 
                     //DBPROMOTION_CACHE_BEANMODEL promotion = JsonConvert.DeserializeObject<DBPROMOTION_CACHE_BEANMODEL>(json);

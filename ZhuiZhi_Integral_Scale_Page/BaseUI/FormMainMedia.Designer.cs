@@ -1061,11 +1061,11 @@
             // player
             // 
             this.player.Enabled = true;
-            this.player.Location = new System.Drawing.Point(0, 0);
+            this.player.Location = new System.Drawing.Point(2, 2);
             this.player.Margin = new System.Windows.Forms.Padding(2);
             this.player.Name = "player";
             this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
-            this.player.Size = new System.Drawing.Size(1010, 718);
+            this.player.Size = new System.Drawing.Size(1018, 758);
             this.player.TabIndex = 17;
             this.player.StatusChange += new System.EventHandler(this.player_StatusChange);
             // 
