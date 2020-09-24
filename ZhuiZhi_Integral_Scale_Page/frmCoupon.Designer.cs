@@ -240,7 +240,7 @@
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDate.ForeColor = System.Drawing.Color.Gray;
-            this.lblDate.Location = new System.Drawing.Point(103, 36);
+            this.lblDate.Location = new System.Drawing.Point(112, 36);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(175, 20);
             this.lblDate.TabIndex = 4;
@@ -250,7 +250,7 @@
             // 
             this.lblContent.AutoSize = true;
             this.lblContent.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblContent.Location = new System.Drawing.Point(103, 15);
+            this.lblContent.Location = new System.Drawing.Point(112, 15);
             this.lblContent.Name = "lblContent";
             this.lblContent.Size = new System.Drawing.Size(92, 21);
             this.lblContent.TabIndex = 3;
@@ -261,7 +261,7 @@
             this.lblUnit.AutoSize = true;
             this.lblUnit.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.lblUnit.ForeColor = System.Drawing.Color.Red;
-            this.lblUnit.Location = new System.Drawing.Point(70, 28);
+            this.lblUnit.Location = new System.Drawing.Point(71, 25);
             this.lblUnit.Name = "lblUnit";
             this.lblUnit.Size = new System.Drawing.Size(26, 21);
             this.lblUnit.TabIndex = 2;
@@ -270,11 +270,11 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.lblAmount.ForeColor = System.Drawing.Color.Red;
             this.lblAmount.Location = new System.Drawing.Point(32, 17);
             this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(47, 35);
+            this.lblAmount.Size = new System.Drawing.Size(42, 31);
             this.lblAmount.TabIndex = 1;
             this.lblAmount.Text = "20";
             // 

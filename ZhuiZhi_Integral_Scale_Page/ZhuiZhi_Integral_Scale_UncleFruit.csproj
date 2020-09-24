@@ -173,6 +173,12 @@
     <Compile Include="ChangePriceUI\FormDiscount.Designer.cs">
       <DependentUpon>FormDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChangePriceUI\FormOrderPricing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePriceUI\FormOrderPricing.Designer.cs">
+      <DependentUpon>FormOrderPricing.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChangePriceUI\FormPricing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -529,6 +535,12 @@
     <Compile Include="MyControl\NumberTextBox.Designer.cs">
       <DependentUpon>NumberTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="PayUI\FormChangeAndTopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormChangeAndTopUp.Designer.cs">
+      <DependentUpon>FormChangeAndTopUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="PayUI\FormPayByOther.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -563,6 +575,12 @@
     <Compile Include="PrintFactory\PrintHelper.cs" />
     <Compile Include="PrintFactory\SprtPrintUtil.cs" />
     <Compile Include="PrintFactory\ToledoPrintUtil.cs" />
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.Designer.cs">
+      <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScaleFactory\ScaleGlobalHelper.cs" />
     <Compile Include="ScaleFactory\ScaleResult.cs" />
     <Compile Include="ScaleFactory\Scale_Aclas.cs" />
@@ -1089,6 +1107,9 @@
     <EmbeddedResource Include="ChangePriceUI\FormDiscount.resx">
       <DependentUpon>FormDiscount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChangePriceUI\FormOrderPricing.resx">
+      <DependentUpon>FormOrderPricing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChangePriceUI\FormPricing.resx">
       <DependentUpon>FormPricing.cs</DependentUpon>
     </EmbeddedResource>
@@ -1221,6 +1242,9 @@
     <EmbeddedResource Include="MyControl\NumberTextBox.resx">
       <DependentUpon>NumberTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormChangeAndTopUp.resx">
+      <DependentUpon>FormChangeAndTopUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PayUI\FormPayByOther.resx">
       <DependentUpon>FormPayByOther.cs</DependentUpon>
     </EmbeddedResource>
@@ -1235,6 +1259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrettyCash\FormPrettyCash.resx">
       <DependentUpon>FormPrettyCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrder.resx">
+      <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScaleUI\FormSending.resx">
       <DependentUpon>FormSending.cs</DependentUpon>

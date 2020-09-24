@@ -220,7 +220,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
-               
+                if (IsOskOpen())
+                {
+                    return;
+                }
                 IntPtr ptr = new IntPtr();
                 bool isWow64FsRedirectionDisabled = Wow64DisableWow64FsRedirection(ref ptr);
                 if (isWow64FsRedirectionDisabled)
@@ -271,6 +274,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+
+        public static bool IsOskOpen()
+        {
+            try
+            {
+                System.Diagnostics.Process[] pro = System.Diagnostics.Process.GetProcesses();
+
+               Process oskpro =  pro.FirstOrDefault(r=> r.ProcessName.Contains("osk"));
+
+              
+               return oskpro != null;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         #endregion
 
         /// <summary>

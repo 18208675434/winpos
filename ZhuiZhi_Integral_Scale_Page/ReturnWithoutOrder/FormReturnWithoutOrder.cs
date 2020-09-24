@@ -27,7 +27,7 @@ using ZhuiZhi_Integral_Scale_UncleFruit.ScaleUI;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
-    public partial class frmMainHalfOffLine : Form
+    public partial class FormReturnWithoutOrder : Form
     {
         #region 成员变量
         /// <summary>
@@ -105,7 +105,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         #endregion
 
         #region 页面加载与退出
-        public frmMainHalfOffLine() 
+        public FormReturnWithoutOrder() 
         {
             InitializeComponent();
             //使用委托的话frmmain界面会卡死

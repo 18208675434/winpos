@@ -18,8 +18,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 {
    public class SprtPrintUtil
     {
-
-
            /// <summary>
            /// 打印机宽度
            /// </summary>
@@ -63,6 +61,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
            private const Int32 POS_ES_SUCCESS = 0; //成功/发送成功/状态正常/打印完成
 
+           // 2D barcode type
+           private const Int32 POS_BT_PDF417 = 4100;
+           private const Int32 POS_BT_DATAMATRIX = 4101;
+           private const Int32 POS_BT_QRCODE = 4102;
+
 
            [DllImport("POS_SDK.dll", CharSet = CharSet.Ansi, EntryPoint = "POS_Port_OpenA")]
            static extern Int32 POS_Port_OpenA(String lpName, Int32 iPort, bool bFile, String path);
@@ -86,6 +89,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
            [DllImport("POS_SDK.dll", CharSet = CharSet.Ansi, EntryPoint = "POS_Control_AlignType")]
            static extern Int32 POS_Control_AlignType(Int32 printID, Int32 iAlignType);
+
+           [DllImport("POS_SDK.dll", CharSet = CharSet.Ansi, EntryPoint = "POS_Output_PrintTwoDimensionalBarcodeA")]
+           static extern Int32 POS_Output_PrintTwoDimensionalBarcodeA(Int32 printID, Int32 iType, Int32 parameter1, Int32 parameter2, Int32 parameter3, String lpString);
+
 
            #region  打印订单
            public static object lockprinting = new object();
@@ -243,7 +250,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                        PrintTextByPaperWidth(PrintHelper.GetBrokenPrintInfo(brokenresult));
 
-
                        Application.DoEvents();
                        return true;
                    }
@@ -345,17 +351,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                    lstPrintStr.Add(getStrLine());
 
                    lstPrintStr.Add("充值方式：" + "\n");
-                   //string type ="";
-                   //if(printdetail.paymode=="0"){
-                   //    type="现金";
-                   //}
-                   //else if (printdetail.paymode == "2")
-                   //{
-                   //    type="微信";
-                   //}else{
-                   //    type="支付宝";
-                   //}
-
 
                    lstPrintStr.Add(MergeStr(printdetail.paymodeforapi, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
 
@@ -390,26 +385,81 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                        IniPrintSize();
 
-                       //每次打印先清空之前内容
-                       lstPrintStr = new List<string>();
 
-
-
-                       // lstPrintStr.Add(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
-
-                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, "欢迎光临" + "\r\n");
+                       m_hPrinter = POS_Port_OpenA("LPT1:", POS_PT_LPT, false, "");
+                       POS_Control_AlignType(m_hPrinter, 1);  //设置居中
 
                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, MainModel.CurrentShopInfo.tenantname + "\r\n");
-                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, printdetail.serialcode+ "\r\n");
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, MainModel.CurrentShopInfo.shopname + "\r\n");
+                       
+                       POS_Control_AlignType(m_hPrinter, 0);  //设置右面对齐
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, printdetail.serialcode + "\r\n");
+                      POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0,"订单号：" + printdetail.orderid+"\r\n");
+                      POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "下单时间：" + printdetail.date +"\r\n");
+                      POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "顾客姓名：" + printdetail.username +"\r\n");
+                      POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "顾客电话：" + printdetail.tel +"\r\n");
+                      POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "配送地址：" + printdetail.address +"\r\n");
+                      POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "备注：" + "\r\n");
+                       if (!string.IsNullOrEmpty(printdetail.remark))
+                       {
+                           POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, printdetail.remark + "\r\n");
+                       }
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, "期望送达时间：" + printdetail.expecttimedesc + "\r\n");
 
 
-                       //lstPrintStr.Add(MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
-                       lstPrintStr.Add(" ");
 
-                       lstPrintStr.AddRange(PrintHelper.GetThirdOrderPrintInfo(printdetail));
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, getStrLine() + "\r\n");
 
-                       PrintTextByPaperWidth(lstPrintStr);
+                       //PrintTextRange(PrintHelper.MergeStr("商品", "单价", "重量(kg)", "金额", BodyCharCountOfLine));
 
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "商品    单价   数量    金额" + "\r\n");
+                       foreach (PickProduct pro in printdetail.productdetaillist)
+                       {
+                           List<string> lstpro = PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, BodyCharCountOfLine);
+
+                           foreach (string str in lstpro)
+                           {
+                               POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, str + "\r\n");
+                           }
+
+                       }
+
+                       foreach (PickProduct pro in printdetail.productdetaillist)
+                       {
+                           List<string> lstpro = PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, BodyCharCountOfLine);
+
+                           foreach (string str in lstpro)
+                           {
+                               POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, str + "\r\n");
+                           }
+
+                       }
+
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, getStrLine() + "\r\n");
+
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize) + "\r\n");
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize) + "\r\n");
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize) + "\r\n");
+
+                       if (!string.IsNullOrEmpty(printdetail.pickcode))
+                       {
+                           POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, getStrLine() + "\r\n");
+                           POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "请扫描下方二维码取货配送" + "\r\n");
+                           POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "  " + "\r\n");
+                           POS_Control_AlignType(m_hPrinter, 1);
+                           PrintQrCode(printdetail.pickcode);
+
+                           POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0,printdetail.pickcode + "\r\n");
+                       }
+
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, getStrLine() + "\r\n");
+
+
+                       POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "多谢惠顾，欢迎下次光临！                         " + " \r\n \r\n \r\n \r\n \r\n \r\n");
+
+                       POS_Control_ReSet(m_hPrinter);
+
+                       POS_Port_Close(m_hPrinter);  //打印之后必须关闭 否则打印内容多会打印不全
                        Application.DoEvents();
                        return true;
 
@@ -522,5 +572,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                    LogManager.WriteLog("sprt打开钱箱异常"+ex.Message);
                }
            }
+
+
+           public static void PrintQrCode(string qrcode)
+           {
+               try
+               {
+                   Int32 ret = POS_Output_PrintTwoDimensionalBarcodeA(m_hPrinter, POS_BT_QRCODE, 2, 77, 6, qrcode);
+               }
+               catch (Exception ex)
+               {
+                   LogManager.WriteLog("qr" + ex.Message);
+               }
+           } 
     }
 }

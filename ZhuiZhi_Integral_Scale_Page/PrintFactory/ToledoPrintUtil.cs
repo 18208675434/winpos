@@ -15,7 +15,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
    public  class ToledoPrintUtil
     {
 
-           #region Windows 驱动打印
+           #region Windows打印
 
            /// <summary>
            /// 打印机宽度
@@ -214,20 +214,65 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                        //每次打印先清空之前内容
                        lstPrintStr = new List<string>();
 
+                      
+                       PrintText(MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize),32);
+                       PrintText(" ",32);
+                       PrintText(MergeStr(MainModel.CurrentShopInfo.shopname, "", HeadCharCountOfLine, PageSize),32);
+                       PrintText(printdetail.serialcode,40);
+
+                       PrintText("订单号：" + printdetail.orderid,22);
+                       PrintText("下单时间：" + printdetail.date, 22);
+                       PrintText("顾客姓名：" + printdetail.username, 22);
+                       PrintText("顾客电话：" + printdetail.tel, 22);
+                       PrintText("配送地址：" + printdetail.address, 22);
+                       PrintText("备注：");
+                       if(!string.IsNullOrEmpty( printdetail.remark)){
+                           PrintText(printdetail.remark,32);
+                       }
+                       PrintText("期望送达时间：" + printdetail.expecttimedesc,32);
 
 
-                       // lstPrintStr.Add(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+                     
+                       PrintText(getStrLine(),22);
 
-                       PrintText(MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
-                       PrintText(MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize));
-                       PrintText(printdetail.serialcode);
-                       //lstPrintStr.Add(MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
-                       lstPrintStr.Add(" ");
+                       //PrintTextRange(PrintHelper.MergeStr("商品", "单价", "重量(kg)", "金额", BodyCharCountOfLine));
 
-                       lstPrintStr.AddRange(PrintHelper.GetThirdOrderPrintInfo(printdetail));
+                       PrintText("商品    单价   数量    金额",22);
+                       foreach (PickProduct pro in printdetail.productdetaillist)
+                       {
+                           List<string> lstpro = PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, BodyCharCountOfLine);
 
-                       PrintTextByPaperWidth(lstPrintStr);
+                           foreach (string str in lstpro)
+                           {
+                               PrintText(str, 22);
+                           }
+                           
+                       }
+                       PrintText(getStrLine(),22);
 
+                       PrintText(MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize),22);
+                       PrintText(MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize),22);
+                       PrintText(MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize),22);
+
+                       if (!string.IsNullOrEmpty(printdetail.pickcode))
+                       {
+                           PrintText(getStrLine(), 22);
+                           PrintText("请扫描下方二维码取货配送", 22);
+                           PrintText("  ", 22);
+                           BeginPrint(0);
+                           PrintHelper.GetQrBmp(printdetail.pickcode);
+                           PrintBitmapFile("orderqrcoe.bmp");
+                           
+                           BeginPrint(7);
+                           PrintText(MergeStr(printdetail.pickcode, "", BodyCharCountOfLine, PageSize), 22);
+                       }
+
+                       PrintText(getStrLine(),22);
+
+
+                       PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes("多谢惠顾，欢迎下次光临！" + " \r\n \r\n \r\n \r\n \r\n \r\n"), 22, 60);
+                       BeginPrint(0);
+                       BeginPrint(8); //切纸
                        Application.DoEvents();
                        return true;
 
@@ -249,7 +294,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                try
                {
                    string result = "";
-
 
                    int spacenum = 0;
 
@@ -418,9 +462,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
            public static extern int PrintText(byte[] str, int FontSize);
-           public static bool PrintText(string printtext)
+           public static bool PrintText(string printtext,int fontsize =32)
            {
-               int result = PrintText(System.Text.Encoding.Default.GetBytes(printtext), 32);
+               int result = PrintText(System.Text.Encoding.Default.GetBytes(printtext), fontsize);
                return true;
            }
 
@@ -444,19 +488,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                    int result = PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes(strprint), 22, 60);
 
-
-                 
-
                    BeginPrint();
 
-                   PrintBitmapFile("PrintTest.bmp");
-
-                   BeginPrint(7);
-
-                   PrintHelper.GetQrBmp("1245789");
-                   PrintBitmapFile("qrcoe.bmp");
-
-                   BeginPrint(7);
+                 
 
                    return true;
                }

@@ -52,7 +52,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             return adjustresult;
         }
 
-
         public static AdjustPriceResult ShowFormDiscount(Product pro)
         {
             AdjustPriceResult adjustresult = new AdjustPriceResult();
@@ -91,6 +90,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             return adjustresult;
         }
 
+
+        public static decimal ShowFormOrderPricing(decimal beforefixtotal)
+        {
+            try
+            {
+               
+                FormOrderPricing frmorderpricing = new FormOrderPricing(beforefixtotal);
+                asf.AutoScaleControlTest(frmorderpricing, 500, 600, 500 * MainModel.midScale, 600 * MainModel.midScale, true);
+                frmorderpricing.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmorderpricing.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmorderpricing.Height) / 2);
+                frmorderpricing.TopMost = true;
+                 BackHelper.ShowFormBackGround();
+                frmorderpricing.ShowDialog();
+                frmorderpricing.Dispose();
+
+                Application.DoEvents();
+                BackHelper.HideFormBackGround();
+                return frmorderpricing.fixpricetotal;
+            }
+            catch (Exception ex)
+            {
+                BackHelper.HideFormBackGround();
+                LogManager.WriteLog("整单改价页面出现异常" + ex.Message);
+                return 0;
+            }
+        }
     }
 
     public class AdjustPriceResult
@@ -98,5 +122,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
         public bool WhetherAdjust { get; set; }
 
         public AdjustPriceInfo adjustpriceinfo { get; set; }
+    }
+
+    public enum ChangeType
+    {
+        unitprice,
+        totalprice,
+        totaldiscount
     }
 }

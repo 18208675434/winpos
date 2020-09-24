@@ -166,8 +166,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public string otherpaytype { set; get; }
 
+        /// <summary>
+        /// 余额支付前是否有现金支付 （）
+        /// </summary>
+        public int cashprepriority { set; get; }
+
+        /// <summary>
+        /// 找零转存余额金额
+        /// </summary>
+        public decimal balancedepositamt { set; get; }
 
         public List<OtherPayInfoEntity> otherpayinfos { set; get; }
+
     }
     [Serializable]
     public class Tenant
@@ -449,7 +459,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public decimal beforeamt { get; set; }
         /// <summary>
-        /// 类型(1:调价 2:折扣)
+        /// 类型(1:调价 2:折扣  3:总价调价 4：总价折扣)
         /// </summary>
         public int type { get; set; }
     }

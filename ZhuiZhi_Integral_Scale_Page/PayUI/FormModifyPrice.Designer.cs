@@ -300,9 +300,10 @@
             this.txtCash.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCash.Location = new System.Drawing.Point(21, 98);
             this.txtCash.LockFocus = true;
-
+            this.txtCash.MaxDeciaml = ((long)(100000000));
             this.txtCash.MaxLength = 32767;
             this.txtCash.Name = "txtCash";
+            this.txtCash.NeedBoard = false;
             this.txtCash.OnlyNumber = true;
             this.txtCash.Size = new System.Drawing.Size(340, 50);
             this.txtCash.TabIndex = 0;

@@ -630,8 +630,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         Delay.Start(300);
                         btnQuery_Click(null, null);
                     }
-
-
                 }
                 else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
                 {
@@ -916,13 +914,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 PrinterPickOrderInfo printerinfo = httputil.QueryPrintMarUP(0, orderid, ref ErrorMsg);
 
+
+                //foreach (PickProduct pro in printerinfo.productdetaillist)
+                //{
+                //    List<string> lstpro = ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory.PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, 32);
+
+                //    foreach (string str in lstpro)
+                //    {
+
+
+                //        MessageBox.Show(str);
+                //        //POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, str + "\r\n");
+                //    }
+
+                //}
+
+
                     if(printerinfo==null){
                         MainModel.ShowLog(ErrorMsg,false);
                     }
                     else
                     {
                         string PrintErrorMsg = "";
+                       
                         bool printresult = PrintUtil.PrintThirdOrder(printerinfo, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
+
+
 
                         if (PrintErrorMsg != "" || !printresult)
                         {

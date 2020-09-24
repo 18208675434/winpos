@@ -738,6 +738,7 @@
             this.txtCash.Size = new System.Drawing.Size(336, 53);
             this.txtCash.TabIndex = 0;
             this.txtCash.WaterText = "请输入支付金额";
+            this.txtCash.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txtCash_DataChanged);
             // 
             // FormPayByOther
             // 

@@ -19,13 +19,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
         public decimal fixpricetotal = 0;
 
-
         public FormModifyPrice()
         {
             InitializeComponent();
         }
-
-
 
 
         private void btn_Click(object sender, EventArgs e)
@@ -41,7 +38,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                 decimal CheckDecimal = Convert.ToDecimal(txtCash.Text + btn.Name.Replace("btn", ""));
 
-                if (CheckDecimal > 100000 || txtCash.Text == "00")
+                if (CheckDecimal > 100000000 || txtCash.Text == "00")
                 {
                     return;
                 }

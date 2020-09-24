@@ -515,6 +515,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         #endregion
 
 
+        public static bool ShowFormChangeAndTopup(Cart cart,out string orderid)
+        {
+            try
+            {
+                FormChangeAndTopUp frmpaycashtochange = new FormChangeAndTopUp(cart);
+                asf.AutoScaleControlTest(frmpaycashtochange, 600, 360, 600 * MainModel.midScale, 360 * MainModel.midScale, true);
+                frmpaycashtochange.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaycashtochange.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaycashtochange.Height) / 2);
+
+                frmpaycashtochange.TopMost = true;
+                frmpaycashtochange.ShowDialog();
+
+                frmpaycashtochange.Dispose();
+                orderid = frmpaycashtochange.SuccessOrderid;
+                return frmpaycashtochange.DialogResult == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                orderid = "";
+                frmpaycashtochange = null;
+                LogManager.WriteLog("找零转存余额页面出现异常" + ex.Message);
+                return false;
+            }
+        }
+
+
+
         #region 兑换券
 
         private static FormVoucher frmvoucher = null;

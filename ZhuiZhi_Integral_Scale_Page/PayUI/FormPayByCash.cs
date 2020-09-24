@@ -172,6 +172,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     }
                     else//进入找零界面
                     {
+                        if (MainModel.CurrentMember != null)
+                        {
+                            this.Hide();
+                            string orderid = "";
+                            if (PayHelper.ShowFormChangeAndTopup(thisCurrentCart,out orderid))
+                            {
+                                ReturnResultCode = 1;
+                                ReruntOrderId = orderid;
+                                this.Close();
+                            }
+                            else
+                            {
+                                this.Show();
+                                RefreshCart(0, true);
+                                //找零页面返回  不做处理 
+                                ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.UpdaForm(thisCurrentCart);
+                            }
+
+                            return;
+                        }
+
 
                         if (PayHelper.ShowFormPayCashToChange(thisCurrentCart))
                         {
@@ -202,9 +223,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                             RefreshCart(0, true);
                             //找零页面返回  不做处理 
                             ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.UpdaForm(thisCurrentCart);
-
-                        }
-                       
+                        }                       
                     }
                 }
                 else
@@ -212,9 +231,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     ReturnResultCode = 2;
                     this.Close();
                 }
-
-
-
 
             }
             catch (Exception ex)
@@ -302,7 +318,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                 decimal CheckDecimal = Convert.ToDecimal(txtCash.Text + btn.Name.Replace("btn", ""));
 
-                if (CheckDecimal > 100000)
+                if (CheckDecimal > 100000000)
                 {
                     return;
                 }

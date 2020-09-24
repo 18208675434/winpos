@@ -44,7 +44,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.mcBirthday = new System.Windows.Forms.MonthCalendar();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlWoman = new System.Windows.Forms.Panel();
             this.lblWoman = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@
             this.pnlMan = new System.Windows.Forms.Panel();
             this.lblMan = new System.Windows.Forms.Label();
             this.picMan = new System.Windows.Forms.PictureBox();
+            this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.picNotSelect = new System.Windows.Forms.PictureBox();
             this.picSelect = new System.Windows.Forms.PictureBox();
             this.txtPhone = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
@@ -243,7 +243,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.mcBirthday);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.pnlWoman);
             this.panel1.Controls.Add(this.pnlMan);
@@ -252,6 +251,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.txtPhone);
             this.panel1.Controls.Add(this.txtBirthday);
+            this.panel1.Controls.Add(this.dtStart);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtName);
@@ -260,15 +260,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1, 385);
             this.panel1.TabIndex = 0;
-            // 
-            // mcBirthday
-            // 
-            this.mcBirthday.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.mcBirthday.Location = new System.Drawing.Point(101, 134);
-            this.mcBirthday.Name = "mcBirthday";
-            this.mcBirthday.TabIndex = 90;
-            this.mcBirthday.Visible = false;
-            this.mcBirthday.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mcBirthday_DateSelected);
             // 
             // label8
             // 
@@ -345,6 +336,21 @@
             this.picMan.TabIndex = 0;
             this.picMan.TabStop = false;
             this.picMan.Click += new System.EventHandler(this.pnlMan_Click);
+            // 
+            // dtStart
+            // 
+            this.dtStart.CalendarFont = new System.Drawing.Font("微软雅黑", 18F);
+            this.dtStart.CustomFormat = "yyyy-MM-dd";
+            this.dtStart.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtStart.Location = new System.Drawing.Point(101, 134);
+            this.dtStart.Margin = new System.Windows.Forms.Padding(2);
+            this.dtStart.Name = "dtStart";
+            this.dtStart.Size = new System.Drawing.Size(210, 30);
+            this.dtStart.TabIndex = 93;
+            this.dtStart.Value = new System.DateTime(2020, 9, 23, 0, 0, 0, 0);
+            this.dtStart.CloseUp += new System.EventHandler(this.dtStart_CloseUp);
+            this.dtStart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dtStart_MouseDown);
             // 
             // picNotSelect
             // 
@@ -489,7 +495,7 @@
         private System.Windows.Forms.PictureBox picMan;
         private System.Windows.Forms.PictureBox picNotSelect;
         private System.Windows.Forms.PictureBox picSelect;
-        private System.Windows.Forms.MonthCalendar mcBirthday;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dtStart;
     }
 }

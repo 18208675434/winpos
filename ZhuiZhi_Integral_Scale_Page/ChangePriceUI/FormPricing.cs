@@ -17,6 +17,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
 
         public Product CurrentProduct = null;
 
+        public ChangeType CurrentChangeType = ChangeType.unitprice;
+
         #region 页面加载与退出
         public FormPricing(Product pro)
         {
@@ -32,7 +34,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             {
               
                 lblPrice.Text = "￥" + CurrentProduct.price.originsaleprice.ToString("f2");
-                numBoard.Size = new Size(pnlNumber.Width - 8, rbtnOK.Top - numBoard.Top - 30);
+                numBoard.Size = new Size(this.Width - 8, rbtnOK.Top - numBoard.Top - 20);
 
                 if (CurrentProduct.adjustpriceinfo != null && CurrentProduct.adjustpriceinfo.type==1)
                 {
@@ -55,11 +57,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
         private void rbtnOK_ButtonClick(object sender, EventArgs e)
         {
             try
-            {
-                
+            {                
                 try
                 {
-
                     if (string.IsNullOrEmpty(txtPrice.Text))
                     {
                         adjustpriceinfo = null;
@@ -74,7 +74,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                     }
                     decimal doublenum = Convert.ToDecimal(txtPrice.Text);
 
-                    if (doublenum <= 0 || doublenum>=CurrentProduct.price.originsaleprice)
+                    if (doublenum <= 0 || (CurrentChangeType == ChangeType.unitprice && doublenum >= CurrentProduct.price.originsaleprice) || (CurrentChangeType == ChangeType.totalprice && doublenum >= CurrentProduct.price.total))
                     {
                         MainModel.ShowLog("价格只能小于当前商品价格",false);
                         return;
@@ -83,7 +83,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                    
                     adjustpriceinfo.amt = doublenum;
                     adjustpriceinfo.beforeamt = CurrentProduct.price.originsaleprice;
-                    adjustpriceinfo.type = 1;
+
+                    if (CurrentChangeType == ChangeType.unitprice)
+                    {
+                        adjustpriceinfo.type = 1;
+                    }
+                    else
+                    {
+                        adjustpriceinfo.type = 3;
+                    }
+                    
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -91,8 +100,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                 {
                     return;
                 }
-             
-               
 
             }
             catch (Exception ex)
@@ -157,7 +164,44 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             }
         }
 
+        private void btnUnitPrice_Click(object sender, EventArgs e)
+        {
+
+            
+            if (CurrentChangeType == ChangeType.unitprice)
+            {
+                return;
+            }
+
+            btnUnitPrice.BackColor = Color.FromArgb(20, 137, 205);
+            btnUnitPrice.ForeColor = Color.White;
+            btnTotalPrice.BackColor = Color.White;
+            btnTotalPrice.ForeColor = Color.FromArgb(20, 137, 205);
+            lblStrPrice.Text = "当前单价";
+            lblPrice.Text = "￥" + CurrentProduct.price.originsaleprice.ToString("f2");
+            CurrentChangeType = ChangeType.unitprice;
+            
+        }
+
+        private void btnTotalPrice_Click(object sender, EventArgs e)
+        {
+            if (CurrentChangeType == ChangeType.totalprice)
+            {
+                return;
+            }
+
+            btnUnitPrice.BackColor = Color.White;
+            btnUnitPrice.ForeColor = Color.FromArgb(20, 137, 205);
+            btnTotalPrice.BackColor = Color.FromArgb(20, 137, 205);
+            btnTotalPrice.ForeColor = Color.White;
+            lblStrPrice.Text = "当前总价";
+            lblPrice.Text = "￥" + CurrentProduct.price.total.ToString("f2");
+            CurrentChangeType = ChangeType.totalprice;
+        }
+
      
 
     }
+
+   
 }

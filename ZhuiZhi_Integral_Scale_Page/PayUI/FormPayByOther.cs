@@ -59,7 +59,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         {
             try
             {
-                txtCash.Text = (thisCurrentCart.totalpayment + thisCurrentCart.otherpayamt).ToString("f2");
+               // txtCash.Text = (thisCurrentCart.totalpayment + thisCurrentCart.otherpayamt).ToString("f2");
                 lblTotalPayMent.Text = "￥" + thisCurrentCart.totalpayment.ToString("f2");
 
                 bmpCash = new Bitmap(picCash.Image, dgvSelectType.RowTemplate.Height * 40 / 100, dgvSelectType.RowTemplate.Height * 40 / 100);
@@ -437,6 +437,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                         return;
                     }
 
+                    //判断券码是否已添加到购物车
+                    OtherPayInfoEntity exitpay = thisCurrentCart.otherpayinfos.FirstOrDefault(r => r.paycouponcode == txtCash.Text);
+
+                    if (exitpay != null)
+                    {
+                        MainModel.ShowLog("券码已存在", false);
+                        return;
+                    }
+
                     string ErrorMsg = "";
                     this.Enabled = false;
                     LoadingHelper.ShowLoadingScreen();
@@ -490,7 +499,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                 //如果以存在该类型优惠 则修改金额
                 List<OtherPayInfoEntity> lsttempotherpay = thisCurrentCart.otherpayinfos.Where(r => r.paytype == SelectPayType.code).ToList();
-                if (lsttempotherpay != null && lsttempotherpay.Count > 0)
+                if (lsttempotherpay != null && lsttempotherpay.Count > 0 && !SelectPayType.needcouponcode)
                 {
                     lsttempotherpay[0].payamt = tempcash;
                     lsttempotherpay[0].paypromoamt = tempcash;
@@ -658,6 +667,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         {
             dgvSelectType.Rows[0].DefaultCellStyle.BackColor = Color.FromArgb(205, 232, 248);
             dgvType.Rows[0].DefaultCellStyle.BackColor = Color.FromArgb(205, 232, 248);
+        }
+
+        //有默认金额不允许修改
+        private void txtCash_DataChanged(string data)
+        {
+            if (SelectPayType!=null && SelectPayType.defaultamt>0)
+            {
+                txtCash.Text = SelectPayType.defaultamt.ToString("f2");
+            }
         }
 
     }

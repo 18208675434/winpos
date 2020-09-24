@@ -408,6 +408,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 cartpara.fixpricetotal = cart.fixpricetotal;
 
                 cartpara.otherpayinfos = cart.otherpayinfos;
+                cartpara.cashprepriority = cart.cashprepriority;
+
+                cartpara.balancedepositamt = cart.balancedepositamt;
                 //cartpara.otherpayamt = cart.otherpayamt;
                 //cartpara.otherpaycouponcode = cart.otherpaycouponcode;
                 //cartpara.otherpaytype = cart.otherpaytype;
@@ -526,6 +529,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
                 order.otherpayinfos = cart.otherpayinfos;
+                order.cashprepriority = cart.cashprepriority;
+
+                order.balancedepositamt = cart.balancedepositamt;
                 //order.otherpayamt = cart.otherpayamt;
                 //order.otherpaycouponcode = cart.otherpaycouponcode;
                 //order.otherpaytype = cart.otherpaytype;

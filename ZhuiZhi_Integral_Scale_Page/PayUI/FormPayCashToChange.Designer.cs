@@ -70,10 +70,10 @@
             // 
             this.lblChange.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblChange.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblChange.Location = new System.Drawing.Point(207, 228);
+            this.lblChange.Location = new System.Drawing.Point(158, 228);
             this.lblChange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChange.Name = "lblChange";
-            this.lblChange.Size = new System.Drawing.Size(162, 31);
+            this.lblChange.Size = new System.Drawing.Size(211, 31);
             this.lblChange.TabIndex = 42;
             this.lblChange.Text = "￥0.00";
             this.lblChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -82,10 +82,10 @@
             // 
             this.lblCash.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblCash.Location = new System.Drawing.Point(207, 176);
+            this.lblCash.Location = new System.Drawing.Point(148, 176);
             this.lblCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCash.Name = "lblCash";
-            this.lblCash.Size = new System.Drawing.Size(162, 31);
+            this.lblCash.Size = new System.Drawing.Size(221, 31);
             this.lblCash.TabIndex = 41;
             this.lblCash.Text = "￥0.00";
             this.lblCash.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -94,10 +94,10 @@
             // 
             this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(201, 121);
+            this.lblPrice.Location = new System.Drawing.Point(153, 121);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(168, 31);
+            this.lblPrice.Size = new System.Drawing.Size(216, 31);
             this.lblPrice.TabIndex = 40;
             this.lblPrice.Text = "￥0.00";
             this.lblPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

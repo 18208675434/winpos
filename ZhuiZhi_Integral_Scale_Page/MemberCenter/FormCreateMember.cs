@@ -32,8 +32,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormCreateMember_Shown(object sender, EventArgs e)
         {
-            Application.DoEvents();
-            CreateMemberMediaHelper.ShowFormCreateMedia();
+            Application.DoEvents();          
+                CreateMemberMediaHelper.ShowFormCreateMedia();
+            
         }
 
         private void FormCreateMember_FormClosing(object sender, FormClosingEventArgs e)
@@ -95,21 +96,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             btnCreateByWrite.Tag = 0;
         }
 
-        private void mcBirthday_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            txtBirthday.Text = mcBirthday.SelectionStart.ToString("yyyy-MM-dd");
-            mcBirthday.Visible = false;
-        }
 
         private void txtBirthday_Enter(object sender, EventArgs e)
         {
-            mcBirthday.Top =Math.Min(panel1.Height - mcBirthday.Height,txtBirthday.Top);
-            mcBirthday.Visible = true;
+
+            dtStart.Focus();
+            SendKeys.Send("{F4}");
+            //mcBirthday.Top =Math.Min(panel1.Height - mcBirthday.Height,txtBirthday.Top);
+            //mcBirthday.Visible = true;
         }
 
         private void txtBirthday_Leave(object sender, EventArgs e)
         {
-            mcBirthday.Visible = false;
+            
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -131,7 +130,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             para.mobile = txtPhone.Text;
             if (string.IsNullOrEmpty(txtBirthday.Text))
             {
-                para.birthday = MainModel.getStampByDateTime(mcBirthday.SelectionStart);
+                para.birthday = MainModel.getStampByDateTime(dtStart.Value);
             }
 
             if (picMan.BackgroundImage == picSelect.Image)
@@ -201,6 +200,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             CreateMemberMediaHelper.UpdateMemberInfo(phone,name,birthday,gender);
         }
+
+        private void dtStart_MouseDown(object sender, MouseEventArgs e)
+        {
+            dtStart.Focus();
+            SendKeys.Send("{F4}");
+        }
+
+        private void dtStart_CloseUp(object sender, EventArgs e)
+        {
+            txtBirthday.Text = dtStart.Value.ToString("yyyy-MM-dd");
+        }
+
+
+        private void txtName_Click(object sender, EventArgs e)
+        {
+            Delay.Start(150);
+            this.Activate();
+            txtName.Focus();
+        }
+
 
 
 

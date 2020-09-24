@@ -23,7 +23,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
            /// 
            /// </summary>
            public string operatorid { get; set; }
-           /// <summary>
+           /// <summary>           
            /// 
            /// </summary>
            public string operatorphone { get; set; }

@@ -60,6 +60,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
          /// <summary>
          /// 整单改价  0不支持 1支持
          /// </summary>
-         public int posalterorderpriceflag { set; get; } 
+         public int posalterorderpriceflag { set; get; }
+
+        /// <summary>
+        /// 最高支持改价金额（整单）
+        /// </summary>
+         public decimal posalterorderpricerange { set; get; }
+
+        /// <summary>
+        /// 是否支持整的那折扣  0不支持 1支持
+        /// </summary>
+         public int posalterorderdiscountflag { set; get; }
+
+        /// <summary>
+        /// 最高支持折扣 （
+        /// </summary>
+         public decimal posalterorderdiscountrange { set; get; }
+
     }
 }

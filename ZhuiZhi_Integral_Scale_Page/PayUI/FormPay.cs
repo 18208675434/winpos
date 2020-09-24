@@ -54,32 +54,55 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             }
         }
 
-        private void UpdateDetail()
+        private void UpdateDetail(bool needRefresh =false)
         {
 
             try
             {
                 dgvCartDetail.Rows.Clear();
-              
 
+                if (needRefresh)
+                {
+
+
+                    if (thisCurrentCart.otherpayinfos != null && thisCurrentCart.otherpayinfos.Count > 0)
+                    {
+                        foreach (OtherPayInfoEntity otherpay in thisCurrentCart.otherpayinfos)
+                        {
+                            OrderPriceDetail detail = new OrderPriceDetail();
+                            detail.title = otherpay.payname;
+                            detail.amount = "￥" + otherpay.payamt.ToString("f2");
+                            thisCurrentCart.orderpricedetails.Add(detail);
+                        }
+                    }
+
+                    if (thisCurrentCart.cashpayamt != null && thisCurrentCart.cashpayamt > 0)
+                    {
+                        OrderPriceDetail detail = new OrderPriceDetail();
+                        detail.title = "实收现金";
+                        detail.amount = "￥" + thisCurrentCart.cashpayamt.ToString("f2");
+                        thisCurrentCart.orderpricedetails.Add(detail);
+                       // dgvCartDetail.Rows.Add("实收现金:", "￥" + thisCurrentCart.cashpayamt.ToString("f2"));
+                    }
+                }
 
                 foreach (OrderPriceDetail orderprice in thisCurrentCart.orderpricedetails)
                 {
                     dgvCartDetail.Rows.Add(orderprice.title, orderprice.amount);
                 }
 
-                if (thisCurrentCart.otherpayinfos != null && thisCurrentCart.otherpayinfos.Count > 0)
-                {
-                    foreach (OtherPayInfoEntity otherpay in thisCurrentCart.otherpayinfos)
-                    {
-                        dgvCartDetail.Rows.Add(otherpay.payname+":", "￥"+otherpay.payamt.ToString("f2"));
-                    }
-                }
+                //if (thisCurrentCart.otherpayinfos != null && thisCurrentCart.otherpayinfos.Count > 0)
+                //{
+                //    foreach (OtherPayInfoEntity otherpay in thisCurrentCart.otherpayinfos)
+                //    {
+                //        dgvCartDetail.Rows.Add(otherpay.payname + ":", "￥" + otherpay.payamt.ToString("f2"));
+                //    }
+                //}
 
-                if (thisCurrentCart.cashpayamt != null && thisCurrentCart.cashpayamt > 0)
-                {
-                    dgvCartDetail.Rows.Add("实收现金:", "￥" + thisCurrentCart.cashpayamt.ToString("f2"));                      
-                }
+                //if (thisCurrentCart.cashpayamt != null && thisCurrentCart.cashpayamt > 0)
+                //{
+                //    dgvCartDetail.Rows.Add("实收现金:", "￥" + thisCurrentCart.cashpayamt.ToString("f2"));                      
+                //}
 
                 if (thisCurrentCart.otherpayinfos!=null && thisCurrentCart.otherpayinfos.Count > 0)
                 {
@@ -267,6 +290,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 IsEnable = false;
 
                 Cart outcart = new Cart();
+
+                thisCurrentCart.cashprepriority = thisCurrentCart.cashpayamt > 0 ? 1 : 0;
                 string successorderid = "";
                 int resultcode = PayHelper.ShowFormPayByBalance(thisCurrentCart, out successorderid, out outcart);
                 if (outcart != null)
@@ -352,7 +377,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 else
                 {
                     thisCurrentCart = cart;
-                    UpdateDetail();
+                    UpdateDetail(true);
                     UpdatePaymentTypes();
                     BaseUIHelper.UpdaForm(thisCurrentCart);
                     return true;

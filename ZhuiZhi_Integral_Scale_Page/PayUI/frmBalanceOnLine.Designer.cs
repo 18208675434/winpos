@@ -69,10 +69,10 @@
             // 
             this.lblTotalPay.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblTotalPay.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTotalPay.Location = new System.Drawing.Point(181, 149);
+            this.lblTotalPay.Location = new System.Drawing.Point(165, 149);
             this.lblTotalPay.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalPay.Name = "lblTotalPay";
-            this.lblTotalPay.Size = new System.Drawing.Size(188, 35);
+            this.lblTotalPay.Size = new System.Drawing.Size(204, 35);
             this.lblTotalPay.TabIndex = 40;
             this.lblTotalPay.Text = "￥100.00";
             this.lblTotalPay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -81,10 +81,10 @@
             // 
             this.lblCash.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblCash.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblCash.Location = new System.Drawing.Point(181, 112);
+            this.lblCash.Location = new System.Drawing.Point(165, 112);
             this.lblCash.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCash.Name = "lblCash";
-            this.lblCash.Size = new System.Drawing.Size(188, 35);
+            this.lblCash.Size = new System.Drawing.Size(204, 35);
             this.lblCash.TabIndex = 39;
             this.lblCash.Text = "￥100.00";
             this.lblCash.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -93,10 +93,10 @@
             // 
             this.lblPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblPrice.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPrice.Location = new System.Drawing.Point(181, 80);
+            this.lblPrice.Location = new System.Drawing.Point(165, 80);
             this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(188, 35);
+            this.lblPrice.Size = new System.Drawing.Size(204, 35);
             this.lblPrice.TabIndex = 38;
             this.lblPrice.Text = "￥100.00";
             this.lblPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -138,10 +138,10 @@
             // 
             this.lblBalance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.lblBalance.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblBalance.Location = new System.Drawing.Point(186, 36);
+            this.lblBalance.Location = new System.Drawing.Point(165, 36);
             this.lblBalance.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBalance.Name = "lblBalance";
-            this.lblBalance.Size = new System.Drawing.Size(188, 35);
+            this.lblBalance.Size = new System.Drawing.Size(204, 35);
             this.lblBalance.TabIndex = 45;
             this.lblBalance.Text = "￥100.00";
             this.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

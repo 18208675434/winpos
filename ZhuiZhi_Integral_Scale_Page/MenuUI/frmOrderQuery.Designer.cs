@@ -70,6 +70,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCancelOrder = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
             this.btnRefundByAmt = new System.Windows.Forms.Button();
             this.lblOrderIDShuiyin = new System.Windows.Forms.Label();
@@ -183,7 +184,6 @@
             this.btnError = new System.Windows.Forms.Button();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.btnCancelOrder = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlDgvHead.SuspendLayout();
             this.pnlEmptyOrder.SuspendLayout();
@@ -229,6 +229,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1154, 98);
             this.panel1.TabIndex = 0;
+            // 
+            // btnCancelOrder
+            // 
+            this.btnCancelOrder.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnCancelOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCancelOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelOrder.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnCancelOrder.ForeColor = System.Drawing.Color.White;
+            this.btnCancelOrder.Location = new System.Drawing.Point(579, 6);
+            this.btnCancelOrder.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancelOrder.Name = "btnCancelOrder";
+            this.btnCancelOrder.Size = new System.Drawing.Size(62, 35);
+            this.btnCancelOrder.TabIndex = 104;
+            this.btnCancelOrder.Text = "取消";
+            this.btnCancelOrder.UseVisualStyleBackColor = false;
+            this.btnCancelOrder.Visible = false;
             // 
             // btnSync
             // 
@@ -1482,7 +1498,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label25.ForeColor = System.Drawing.Color.DimGray;
-            this.label25.Location = new System.Drawing.Point(857, 13);
+            this.label25.Location = new System.Drawing.Point(872, 13);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(112, 23);
             this.label25.TabIndex = 39;
@@ -1493,7 +1509,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(771, 13);
+            this.label1.Location = new System.Drawing.Point(782, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 23);
             this.label1.TabIndex = 38;
@@ -1504,7 +1520,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(1017, 13);
+            this.label2.Location = new System.Drawing.Point(1048, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 23);
             this.label2.TabIndex = 37;
@@ -1515,7 +1531,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label17.ForeColor = System.Drawing.Color.DimGray;
-            this.label17.Location = new System.Drawing.Point(685, 13);
+            this.label17.Location = new System.Drawing.Point(694, 13);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(78, 23);
             this.label17.TabIndex = 36;
@@ -1526,7 +1542,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label21.ForeColor = System.Drawing.Color.DimGray;
-            this.label21.Location = new System.Drawing.Point(512, 13);
+            this.label21.Location = new System.Drawing.Point(520, 13);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(78, 23);
             this.label21.TabIndex = 35;
@@ -1537,7 +1553,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label22.ForeColor = System.Drawing.Color.DimGray;
-            this.label22.Location = new System.Drawing.Point(338, 13);
+            this.label22.Location = new System.Drawing.Point(343, 13);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(78, 23);
             this.label22.TabIndex = 34;
@@ -1548,7 +1564,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label23.ForeColor = System.Drawing.Color.DimGray;
-            this.label23.Location = new System.Drawing.Point(165, 13);
+            this.label23.Location = new System.Drawing.Point(171, 13);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(158, 23);
             this.label23.TabIndex = 33;
@@ -1863,22 +1879,6 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
-            // btnCancelOrder
-            // 
-            this.btnCancelOrder.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnCancelOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancelOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelOrder.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnCancelOrder.ForeColor = System.Drawing.Color.White;
-            this.btnCancelOrder.Location = new System.Drawing.Point(579, 6);
-            this.btnCancelOrder.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancelOrder.Name = "btnCancelOrder";
-            this.btnCancelOrder.Size = new System.Drawing.Size(62, 35);
-            this.btnCancelOrder.TabIndex = 104;
-            this.btnCancelOrder.Text = "取消";
-            this.btnCancelOrder.UseVisualStyleBackColor = false;
-            this.btnCancelOrder.Visible = false;
-            // 
             // frmOrderQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1886,6 +1886,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.ClientSize = new System.Drawing.Size(1178, 760);
             this.ControlBox = false;
+            this.Controls.Add(this.picScreen);
             this.Controls.Add(this.btnError);
             this.Controls.Add(this.btnApp);
             this.Controls.Add(this.btnErbai);
@@ -1893,7 +1894,6 @@
             this.Controls.Add(this.btnOffLine);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);
-            this.Controls.Add(this.picScreen);
             this.Controls.Add(this.pnlEmptyOrder);
             this.Controls.Add(this.tlpDgv);
             this.Controls.Add(this.pnlHead);

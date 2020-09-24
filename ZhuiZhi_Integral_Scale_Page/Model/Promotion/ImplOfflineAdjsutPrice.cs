@@ -75,7 +75,39 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                             productBean.price.total = newTotal;
                         }
                         productBean.adjustpricedesc = adjustPriceDesc;
-                    } else {
+                    }else if (type == 3)
+                   {
+                       //整单调价
+                       if (productBean.price.total > amt)
+                       {
+                           adjustPriceDesc.amt = amt;
+
+                           decimal tempdecimal = MoneyUtils.substract(productBean.price.total, amt);
+                           adjustPriceDesc.amtdesc = "已调价优惠：- ¥ " + tempdecimal.ToString("f2");
+                           adjustPriceDesc.bannerdesc = "¥" + productBean.adjustpriceinfo.amt.ToString("f2");
+
+                           
+                           if (productBean.price != null)
+                           {
+                               if (productBean.goodstagid == 0)
+                           {
+                               productBean.price.saleprice = Math.Round(amt/productBean.num, 2, MidpointRounding.AwayFromZero) ;
+                           }else{
+                               productBean.price.saleprice = Math.Round(amt / productBean.price.specnum, 2, MidpointRounding.AwayFromZero);
+                               }
+
+                             
+                           }
+
+                           productBean.adjustpricedesc = adjustPriceDesc;
+                       }
+                       else
+                       {
+                           productBean.adjustpricedesc = null;
+                       }
+                   } 
+                   
+                   else {
                         productBean.adjustpricedesc = null;
                     }
                 }

@@ -77,7 +77,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             InitializeComponent();
             CurrentOrderID = orderid;
             CurrentCart =(Cart) cart.qianClone();
-
         }
 
         private void lblExit_Click(object sender, EventArgs e)

@@ -639,22 +639,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             {
             }
 
-            Bitmap bmp = KiResizeImage(qrCode.Encode(qrcode, System.Text.Encoding.Default), 100, 100);
+            Bitmap bmp = new Bitmap(qrCode.Encode(qrcode, System.Text.Encoding.Default), 130, 130);
 
-              
-                using (Bitmap bmp24 = new Bitmap(bmp.Width, bmp.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb))
-                using (Graphics g = Graphics.FromImage(bmp24))
-                {
-                    g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
-                    bmp24.Save(MainModel.ServerPath + "qrcoe.bmp");
-                }
+            bmp.Save(MainModel.ServerPath + "orderqrcoe.bmp",System.Drawing.Imaging.ImageFormat.Bmp);
+            //    using (Bitmap bmp24 = new Bitmap(bmp.Width, bmp.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb))
+            //    using (Graphics g = Graphics.FromImage(bmp24))
+            //    {
+            //        g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+            //        bmp24.Save(MainModel.ServerPath + "qrcoe.bmp");
+            //    }
 
-            bmp.Save(MainModel.ServerPath+"qrcoe.bmp");
+            //bmp.Save(MainModel.ServerPath+"qrcoe.bmp");
 
-            
-           
             return bmp;
-
         }
 
 
