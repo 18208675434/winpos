@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
@@ -21,48 +23,59 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnpw1_Click(object sender, EventArgs e)
         {
-            if (outputmoney.Text.Length == 3)
+            try
             {
-                outputmoney.Text += "1";
-                int zeng = int.Parse(outputmoney.Text);
-                int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
-                label3.Visible = true;
+                if (outputmoney.Text.Length == 3)
+                {
+                    outputmoney.Text += "1";
+                    int zeng = int.Parse(outputmoney.Text);
+                    int name = zeng / 10;
+                    label3.Text = "赠送" + name + ".00元";
+                    label3.Visible = true;
 
-            }
-            else if (outputmoney.Text.Length == 2)
-            {
-                outputmoney.Text += "1";
-                int zeng = int.Parse(outputmoney.Text);
-                int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
-                label3.Visible = true;
-
-
-            }
-            else if (outputmoney.Text.Length == 1)
-            {
-                outputmoney.Text += "1";
-                int zeng = int.Parse(outputmoney.Text);
-                int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
-                label3.Visible = true;
+                }
+                else if (outputmoney.Text.Length == 2)
+                {
+                    outputmoney.Text += "1";
+                    int zeng = int.Parse(outputmoney.Text);
+                    int name = zeng / 10;
+                    label3.Text = "赠送" + name + ".00元";
+                    label3.Visible = true;
 
 
+                }
+                else if (outputmoney.Text.Length == 1)
+                {
+                    outputmoney.Text += "1";
+                    int zeng = int.Parse(outputmoney.Text);
+                    int name = zeng / 10;
+                    label3.Text = "赠送" + name + ".00元";
+                    label3.Visible = true;
+
+
+                }
+                else if (outputmoney.Text == "")
+                {
+                    outputmoney.Text += "1";
+                }
+                else if (outputmoney.Text.Length > 3)
+                {
+                    return;
+                }
             }
-            else if (outputmoney.Text =="" )
+            catch (Exception ex)
             {
-                outputmoney.Text += "1";
+                MainModel.ShowLog("格式输入错误"+ex.Message,true);
+                throw;
             }
-            else if (outputmoney.Text.Length > 3)
-            {
-                return;
-            }
+            
         }
 
         private void btnpw2_Click(object sender, EventArgs e)
         {
-            if (outputmoney.Text.Length == 3)
+            try
+            {
+                if (outputmoney.Text.Length == 3)
             {
                 outputmoney.Text += "2";
                 
@@ -101,6 +114,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 return;
             }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("输入格式错误" + ex.Message, true);
+                throw;
+            }
+            
         }
 
         private void btnpw3_Click(object sender, EventArgs e)
@@ -524,13 +544,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             BackHelper.HideFormBackGround();
             this.Close();
         }
-        
+        private HttpUtil util = new HttpUtil();
         private void btnOk_Click(object sender, EventArgs e)
         {
-            BackHelper.HideFormBackGround();
-            this.Close();
-            ListAllTemplate.CustomMoney = outputmoney.Text;
-            ListAllTemplate.ZengCustomMoney = label3.Text;
+            try
+            {
+                string err = "";
+                BackHelper.HideFormBackGround();
+                this.Close();
+
+                
+                if (outputmoney.Text != "" && label3.Text != "")
+                {
+                    ListAllTemplate.CustomMoney = int.Parse(outputmoney.Text);
+                    ListAllTemplate.ZengCustomMoney = label3.Text;
+                    util.Custompaycon(ref err);
+                    
+                }
+                else
+                {
+                    MainModel.ShowLog("自定义充值失败", true);
+
+                }
+
+            
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("自定义充值异常" + ex.Message, true);
+                throw;
+            }
+            
+            //
         }
     }
 }

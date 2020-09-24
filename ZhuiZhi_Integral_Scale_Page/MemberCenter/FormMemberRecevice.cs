@@ -25,11 +25,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            //BackHelper.ShowFormBackGround();
-            BackHelper.HideFormBackGround();
-            GlobalUtil.CloseOSK();
-            this.Close();
+            
             
         }
         
@@ -74,6 +70,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     string number = txtOldCardNumber.Text;
 
                     con.GetPhone(number);
+                    BackHelper.HideFormBackGround();
                     this.Close();
 
                 }
@@ -99,6 +96,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormMemberRecevice_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            //BackHelper.ShowFormBackGround();
+            BackHelper.HideFormBackGround();
+            GlobalUtil.CloseOSK();
+            this.Close();
         }
     }
 }

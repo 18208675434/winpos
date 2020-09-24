@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTuikuan));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txttuikuan = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -51,6 +50,9 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.Kouchu = new System.Windows.Forms.Label();
+            this.txttuikuan = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.btncash = new System.Windows.Forms.Button();
+            this.btnOriginal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -74,23 +76,7 @@
             this.label2.Size = new System.Drawing.Size(266, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "本次充值未现金充值，只可现金退款";
-            // 
-            // txttuikuan
-            // 
-            this.txttuikuan.BackColor = System.Drawing.Color.White;
-            this.txttuikuan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txttuikuan.DecimalDigits = 2;
-            this.txttuikuan.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txttuikuan.Location = new System.Drawing.Point(18, 116);
-            this.txttuikuan.LockFocus = true;
-            this.txttuikuan.MaxDeciaml = ((long)(0));
-            this.txttuikuan.MaxLength = 100;
-            this.txttuikuan.Name = "txttuikuan";
-            this.txttuikuan.NeedBoard = true;
-            this.txttuikuan.OnlyNumber = true;
-            this.txttuikuan.Size = new System.Drawing.Size(207, 50);
-            this.txttuikuan.TabIndex = 2;
-            this.txttuikuan.WaterText = "请输入退款金额";
+            this.label2.Visible = false;
             // 
             // label3
             // 
@@ -106,11 +92,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(40, 186);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(373, 20);
+            this.label4.Size = new System.Drawing.Size(268, 16);
             this.label4.TabIndex = 4;
             this.label4.Text = "提示：若发生退款，赠送金额及优惠券将从会员账户中扣除";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -318,6 +304,7 @@
             this.btnOk.TabIndex = 82;
             this.btnOk.Text = "确定";
             this.btnOk.UseVisualStyleBackColor = false;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // pictureBox2
             // 
@@ -329,6 +316,7 @@
             this.pictureBox2.Size = new System.Drawing.Size(27, 27);
             this.pictureBox2.TabIndex = 95;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // Kouchu
             // 
@@ -340,11 +328,56 @@
             this.Kouchu.Text = "label5";
             this.Kouchu.Visible = false;
             // 
+            // txttuikuan
+            // 
+            this.txttuikuan.BackColor = System.Drawing.Color.White;
+            this.txttuikuan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txttuikuan.DecimalDigits = 2;
+            this.txttuikuan.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txttuikuan.Location = new System.Drawing.Point(18, 116);
+            this.txttuikuan.LockFocus = true;
+            this.txttuikuan.MaxDeciaml = ((long)(0));
+            this.txttuikuan.MaxLength = 100;
+            this.txttuikuan.Name = "txttuikuan";
+            this.txttuikuan.NeedBoard = true;
+            this.txttuikuan.OnlyNumber = true;
+            this.txttuikuan.Size = new System.Drawing.Size(207, 50);
+            this.txttuikuan.TabIndex = 2;
+            this.txttuikuan.WaterText = "请输入退款金额";
+            // 
+            // btncash
+            // 
+            this.btncash.BackColor = System.Drawing.Color.White;
+            this.btncash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btncash.Location = new System.Drawing.Point(20, 62);
+            this.btncash.Name = "btncash";
+            this.btncash.Size = new System.Drawing.Size(172, 41);
+            this.btncash.TabIndex = 97;
+            this.btncash.Text = "现金退款";
+            this.btncash.UseVisualStyleBackColor = false;
+            this.btncash.Visible = false;
+            this.btncash.Click += new System.EventHandler(this.btncash_Click);
+            // 
+            // btnOriginal
+            // 
+            this.btnOriginal.BackColor = System.Drawing.Color.White;
+            this.btnOriginal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOriginal.Location = new System.Drawing.Point(231, 62);
+            this.btnOriginal.Name = "btnOriginal";
+            this.btnOriginal.Size = new System.Drawing.Size(172, 41);
+            this.btnOriginal.TabIndex = 98;
+            this.btnOriginal.Text = "原路返回";
+            this.btnOriginal.UseVisualStyleBackColor = false;
+            this.btnOriginal.Visible = false;
+            this.btnOriginal.Click += new System.EventHandler(this.btnOriginal_Click);
+            // 
             // FormTuikuan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 565);
+            this.Controls.Add(this.btnOriginal);
+            this.Controls.Add(this.btncash);
             this.Controls.Add(this.Kouchu);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button7);
@@ -369,7 +402,9 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormTuikuan";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormTuikuan";
+            this.Load += new System.EventHandler(this.FormTuikuan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -401,5 +436,7 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label Kouchu;
+        private System.Windows.Forms.Button btncash;
+        private System.Windows.Forms.Button btnOriginal;
     }
 }

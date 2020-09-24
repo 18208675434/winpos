@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using System.IO;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
@@ -36,7 +37,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
         private PageBalanceDepositBill CurrentBalanceDepos = null;
-
+        private PageGetRefund CurrentRefund = null;
 
         private string LastOrderid = "0";
 
@@ -46,6 +47,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private Bitmap bmpNotRefund;
         private Bitmap bmpWhite;
         private Bitmap caozuo;
+        private Bitmap btncancle;
 
         /// <summary>
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
@@ -395,6 +397,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LogManager.WriteLog("加载页面图片异常" + ex.Message);
             }
         }
+        public void btn()
+        {
+            try
+            {
+
+                //int height = dgvOrderOnLine.RowTemplate.Height * 55 / 100;
+                //bmpContinue = new Bitmap(Resources.ResourcePos.Continue, dgvOrderOnLine.Columns["Continue"].Width * 80 / 100, height);
+
+                //bmpDelHang = new Bitmap(Resources.ResourcePos.DelHang, dgvOrderOnLine.Columns["DelHang"].Width * 80 / 100, height);
+                btncan.ForeColor = Color.White;
+                btncancle = (Bitmap)MainModel.GetControlImage(btncan);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("加载页面图片异常" + ex.Message);
+            }
+        }
         private void LoadDgvOrder()
         {
             try
@@ -404,8 +427,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 LoadingHelper.ShowLoadingScreen();
                 IsEnable = false;
+                xiadanshijian.Visible = true;
+                dingdanhao.Visible = true;
+                chongzhijine.Visible = true;
+                zengsongjine.Visible = true;
+                chongzhifangshi.Visible = true;
+                Operation.Visible = true;
 
-
+                //tuikuanriqi.Visible = false;
+                //tuikuandanhao.Visible = false;
+                //guanliandanhao.Visible = false;
+                //tuikuanjine.Visible = false;
+                //tuikuansongjine.Visible = false;
+                //tuikuanfangshi.Visible = false;
                 DepositListRequest para = new DepositListRequest();
 
                 para.phone = txtPhone.Text;
@@ -431,16 +465,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 dgvOrderOnLine.Rows.Clear();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
 
-                DataGridViewRow dr = new DataGridViewRow();
 
 
-                
+
+
 
                 foreach (RowsItem order in CurrentBalanceDepos.rows)
                 {
+                    MainModel.refundquest = order.refundable;
+                    if (MainModel.refundquest == false)
+                    {
+                        btn();
+                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, btncancle);
+                    }
+                    else if (MainModel.refundquest == true)
+                    {
+                        load();
+                        dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, caozuo);
+                    }
 
 
-                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.amount.ToString("f2") + "元",caozuo);
+
+
+                    MainModel.MemberId = order.memberid;
+                    MainModel.ShopId = order.shopid;
+                    MainModel.Tenantid = order.tenantid;
+                    MainModel.Id = order.id;
                 }
 
                 dgvOrderOnLine.ClearSelection();
@@ -505,11 +555,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LogManager.WriteLog("焦点打开键盘异常" + ex.Message);
             }
         }
+        private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
+
 
         private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
+
+                if (MainModel.refundquest == false)
+                {
+                    return;
+                }
                 if (!IsEnable)
                 {
                     return;
@@ -522,6 +579,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 string numbers = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
                 string orderate = Convert.ToDateTime(dgvOrderOnLine.Rows[e.RowIndex].Cells["orderat"].Value.ToString()).ToString("yyyyMMddHHmmss") + "-" + numbers + ".order";
+                string money = dgvOrderOnLine.Rows[e.RowIndex].Cells["title"].Value.ToString();
+                string fang = dgvOrderOnLine.Rows[e.RowIndex].Cells["fangshi"].Value.ToString();
+                string give = dgvOrderOnLine.Rows[e.RowIndex].Cells["give"].Value.ToString();
+                MainModel.fangshi = fang;
+                MainModel.Depostid = numbers;
+                MainModel.RechargeAmount = money;
+                MainModel.give = give;
+                string fangshi = dgvOrderOnLine.Rows[e.RowIndex].Cells["fangshi"].Value.ToString();
                 string BasePath = "";
                 if (MainModel.IsOffLine)
                 {
@@ -532,26 +597,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     BasePath = MainModel.OrderPath + "\\" + orderate;
                 }
 
-                if (File.Exists(BasePath))
-                {
 
-                    if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == caozuo)
-                    {
+                BackHelper.ShowFormBackGround();
+                //BackHelper.HideFormBackGround();
+                FormTuikuan tuikuan = new FormTuikuan();
+                asf.AutoScaleControlTest(tuikuan, 420, 560, 420 * MainModel.midScale, 560 * MainModel.midScale, true);
+                tuikuan.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - tuikuan.Width) / 2, (Screen.AllScreens[0].Bounds.Height - tuikuan.Height) / 2);
+                tuikuan.TopMost = true;
+                tuikuan.ShowDialog();
+                tuikuan.Dispose();
+                tuikuan.Close();
 
-                        IsEnable = false;
-                        formTui
-                       
 
-                        File.Delete(BasePath);
-                        MainModel.ShowLog("退款成功", false);
-                        LoadDgvOrder();
-                    }
-                    
-                }
-                else
-                {
-                    MainModel.ShowLog("退款失败" + BasePath, false);
-                }
+
+                LoadDgvOrder();
+
+
+
             }
             catch (Exception ex)
             {
@@ -562,6 +624,87 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 IsEnable = true;
                 LoadPicScreen(false);
             }
+        }
+
+        private void czmx_Click(object sender, EventArgs e)
+        {
+            this.Refresh();
+        }
+
+        private void cztkmx_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                //tuikuanriqi.Visible = true;
+                //tuikuandanhao.Visible = true;
+                //guanliandanhao.Visible = true;
+                //tuikuanjine.Visible = true;
+                //tuikuansongjine.Visible = true;
+                //tuikuanfangshi.Visible = true;
+
+                //xiadanshijian.Visible = false;
+                //dingdanhao.Visible = false;
+                //chongzhijine.Visible = false;
+                //zengsongjine.Visible = false;
+                //chongzhifangshi.Visible = false;
+                //Operation.Visible = false;
+                LoadingHelper.ShowLoadingScreen();
+                IsEnable = false;
+                GetBalanceDepositRefund para = new GetBalanceDepositRefund();
+                string Id = para.id;
+                string ErrorMsg = "";
+                httputil.GetBalancecodepositrefoundbill(Id, ref ErrorMsg);
+
+
+
+
+                if (ErrorMsg != "" || CurrentBalanceDepos == null)
+                {
+                    MainModel.ShowLog(ErrorMsg, false);
+                    return;
+                }
+
+
+                dgvOrderOnLine.Rows.Clear();
+                rbtnPageUp.WhetherEnable = CurrentPage > 1;
+
+
+
+
+
+
+                foreach (RowsItem order in CurrentRefund.rows)
+                {
+                    btn();
+                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi);
+
+                }
+
+                dgvOrderOnLine.ClearSelection();
+                Application.DoEvents();
+
+                pnlEmptyOrder.Visible = dgvOrderOnLine.Rows.Count == 0;
+
+                rbtnPageUp.WhetherEnable = CurrentPage > 1;
+
+                rbtnPageDown.WhetherEnable = CurrentRefund.page * CurrentRefund.size < CurrentRefund.total;
+
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("加载订单列表异常" + ex.Message, true);
+            }
+            finally
+            {
+                IsEnable = true;
+                LoadingHelper.CloseForm();
+            }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

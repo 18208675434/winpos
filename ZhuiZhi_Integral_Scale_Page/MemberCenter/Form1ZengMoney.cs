@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
@@ -167,6 +168,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 inputc.Text = inputc.Text.Substring(0, inputc.Text.Length - 1);
                 inputz.Text = inputz.Text.Substring(0, inputz.Text.Length - 1);
             }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            ListAllTemplate.Money = inputc.Text;
         }
     }
 }

@@ -36,7 +36,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void pictureCancle_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             BackHelper.HideFormBackGround();
+            MainModel.CoustomMoney = "+";
+            MainModel.ZMoney = "自定义金额";
             this.Close();
         }
 

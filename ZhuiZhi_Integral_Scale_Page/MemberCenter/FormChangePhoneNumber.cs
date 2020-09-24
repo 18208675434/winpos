@@ -314,6 +314,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void label11_Click(object sender, EventArgs e)
         {
+            BackHelper.ShowFormBackGround();
             FormMemberRecevice menre = new FormMemberRecevice();
             asf.AutoScaleControlTest(menre, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
             menre.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - menre.Width) / 2, (Screen.AllScreens[0].Bounds.Height - menre.Height) / 2);

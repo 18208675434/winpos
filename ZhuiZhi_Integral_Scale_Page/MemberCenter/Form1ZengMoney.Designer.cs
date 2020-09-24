@@ -221,6 +221,7 @@
             this.btnOk.TabIndex = 123;
             this.btnOk.Text = "确定";
             this.btnOk.UseVisualStyleBackColor = false;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // label2
             // 

@@ -5,23 +5,32 @@ using System.Text;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
 {
- 
+    public class CustomTemplateModel
+    {
+        
+        
+    }
 
-    
 public class ListAllTemplate
 {
     /// <summary>
     /// 自定义金额传值
     /// </summary>
-    public static string CustomMoney;
+    public static bool iszidingyi;
     /// <summary>
     /// 自定义赠送金额
     /// </summary>
+    public int CustomId { get; set; }
+    public bool able { get; set; }
+
+    public static bool enable = false;
+    public static decimal mount = 0;
+    public static decimal CustomMoney = 0;
+    public static string Money;
     public static string ZengCustomMoney;
     /// <summary>
     /// 是否自定义金额
     /// </summary>
-    public bool iszidingyi { get; set; }
 
     /// <summary>
     /// 
@@ -64,7 +73,7 @@ public class ListAllTemplate
     /// </summary>
   //  public string operator{ get; set; }  //TODO 关键字不能用
     /// <summary>
-    /// 
+    /// 赠送金额
     /// </summary>
     public decimal rewardamount { get; set; }
     /// <summary>
@@ -79,6 +88,8 @@ public class ListAllTemplate
     /// 
     /// </summary>
     public string updatedby { get; set; }
+
+
 }
 
 public class RewardcoupondetaillistItem

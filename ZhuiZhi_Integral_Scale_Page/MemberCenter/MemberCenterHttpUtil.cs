@@ -312,6 +312,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return 0;
             }
         }
+        
         /// <summary>
         /// 修改手机号码 全局验证是否是会员
         /// </summary>
