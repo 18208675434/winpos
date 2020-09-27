@@ -59,6 +59,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
+            this.btnWithoutOrder = new System.Windows.Forms.Button();
             this.pnlAdjustInfo = new System.Windows.Forms.Panel();
             this.lblAdjustCount = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -245,6 +246,7 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.pnlHead.Controls.Add(this.btnWithoutOrder);
             this.pnlHead.Controls.Add(this.pnlAdjustInfo);
             this.pnlHead.Controls.Add(this.btnGiftCard);
             this.pnlHead.Controls.Add(this.btnAdjustPrice);
@@ -260,6 +262,17 @@
             this.pnlHead.Name = "pnlHead";
             this.pnlHead.Size = new System.Drawing.Size(1180, 61);
             this.pnlHead.TabIndex = 32;
+            // 
+            // btnWithoutOrder
+            // 
+            this.btnWithoutOrder.Location = new System.Drawing.Point(359, 9);
+            this.btnWithoutOrder.Name = "btnWithoutOrder";
+            this.btnWithoutOrder.Size = new System.Drawing.Size(93, 43);
+            this.btnWithoutOrder.TabIndex = 52;
+            this.btnWithoutOrder.Text = "无单退款";
+            this.btnWithoutOrder.UseVisualStyleBackColor = true;
+            this.btnWithoutOrder.Visible = false;
+            this.btnWithoutOrder.Click += new System.EventHandler(this.btnWithoutOrder_Click);
             // 
             // pnlAdjustInfo
             // 
@@ -1273,7 +1286,6 @@
             this.pnlCoupon.Name = "pnlCoupon";
             this.pnlCoupon.Size = new System.Drawing.Size(391, 35);
             this.pnlCoupon.TabIndex = 44;
-            this.pnlCoupon.Click += new System.EventHandler(this.btnCoupon_Click);
             // 
             // picBalance
             // 
@@ -2384,5 +2396,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnCreateMember;
         private System.Windows.Forms.Button btnLoadPhoneCopy;
+        private System.Windows.Forms.Button btnWithoutOrder;
     }
 }

@@ -92,6 +92,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
+                ReceiptUtil.EditOpenMoneyPacketCount(1);
+
+
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.托利多.ToString())

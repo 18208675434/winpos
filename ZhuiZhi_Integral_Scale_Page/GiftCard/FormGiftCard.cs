@@ -242,7 +242,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 ClearMember();
                 ClearBindingMember();
                 dgvCart.Rows.Clear();
-
+                pnlWaiting.Visible = true;
                 lblProCount.Text = "(" + 0 + "件商品)";
 
                 lblCartTotal.Text = "￥0.00";
@@ -759,6 +759,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                     pnlPayByOnLine.Tag = 1;
                     pnlPayByOnLine.BackColor = Color.FromArgb(255, 70, 21);
                     pnlLoading.Visible = true;
+
+                    pnlWaiting.Visible = false;
                 }
                 else
                 {
@@ -773,6 +775,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                         pnlPayByOnLine.BackColor = Color.Silver;
 
                         pnlLoading.Visible = false;
+
+                        pnlWaiting.Visible = true;
                 }
 
 
@@ -998,12 +1002,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 para.shopid = MainModel.CurrentShopInfo.shopid;
                 para.tenantid = MainModel.CurrentShopInfo.tenantid;
 
-
                 string errormsg = "";
 
                 CreateCardOrder result = gifthttputil.CreateCardOrder(para, ref errormsg);
 
-                LogManager.WriteLog("DEBUG","礼品卡订单号"+result.orderid.ToString());
+                //LogManager.WriteLog("DEBUG","礼品卡订单号"+result.orderid.ToString());
                 if (!string.IsNullOrEmpty(errormsg) || result == null)
                 {
                     MainModel.ShowLog(errormsg, false);

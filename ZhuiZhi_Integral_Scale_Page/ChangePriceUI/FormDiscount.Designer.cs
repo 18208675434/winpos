@@ -354,6 +354,7 @@
             this.txtPrice.MaxDeciaml = ((long)(100000));
             this.txtPrice.MaxLength = 100;
             this.txtPrice.Name = "txtPrice";
+            this.txtPrice.NeedBoard = false;
             this.txtPrice.OnlyNumber = true;
             this.txtPrice.Size = new System.Drawing.Size(323, 45);
             this.txtPrice.TabIndex = 0;

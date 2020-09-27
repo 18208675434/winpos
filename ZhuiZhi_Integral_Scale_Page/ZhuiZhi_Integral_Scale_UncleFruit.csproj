@@ -575,12 +575,31 @@
     <Compile Include="PrintFactory\PrintHelper.cs" />
     <Compile Include="PrintFactory\SprtPrintUtil.cs" />
     <Compile Include="PrintFactory\ToledoPrintUtil.cs" />
+    <Compile Include="ReturnWithoutOrder\FormCheckSmCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormCheckSmCode.Designer.cs">
+      <DependentUpon>FormCheckSmCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCashOrBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCashOrBalance.Designer.cs">
+      <DependentUpon>FormReturnCashOrBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCash.Designer.cs">
+      <DependentUpon>FormReturnCash.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.Designer.cs">
       <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReturnWithoutOrder\ReturnWithoutOrderHelper.cs" />
     <Compile Include="ScaleFactory\ScaleGlobalHelper.cs" />
     <Compile Include="ScaleFactory\ScaleResult.cs" />
     <Compile Include="ScaleFactory\Scale_Aclas.cs" />
@@ -1259,6 +1278,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrettyCash\FormPrettyCash.resx">
       <DependentUpon>FormPrettyCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormCheckSmCode.resx">
+      <DependentUpon>FormCheckSmCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnCashOrBalance.resx">
+      <DependentUpon>FormReturnCashOrBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnCash.resx">
+      <DependentUpon>FormReturnCash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrder.resx">
       <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>

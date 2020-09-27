@@ -38,22 +38,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                 txtPrice.Focus();
 
 
-                if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 1 && MainModel.CurrentShopInfo.posalterorderdiscountflag == 1)
+                if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 1 && MainModel.CurrentShopInfo.posalterorderpriceflag == 1)
                 {
                     txtPrice.WaterText = "最高可折扣" + MainModel.CurrentShopInfo.posalterorderdiscountrange;
                     // btnUnitPrice.PerformClick();
                 }
-                else if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 0 && MainModel.CurrentShopInfo.posalterorderdiscountflag == 1)
+                else if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 0 && MainModel.CurrentShopInfo.posalterorderpriceflag == 1)
                 {
                     btnTotalPrice.Visible = false;
                     btnUnitPrice.Visible = false;
-                    btnTotalPrice.PerformClick();
+                  //  btnTotalPrice.PerformClick();
+
+                    btnTotalPrice_Click(null,null);
                 }
-                else if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 1 && MainModel.CurrentShopInfo.posalterorderdiscountflag == 0)
+                else if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 1 && MainModel.CurrentShopInfo.posalterorderpriceflag == 0)
                 {
                     btnTotalPrice.Visible = false;
                     btnUnitPrice.Visible = false;
-                    btnUnitPrice.PerformClick();
+                  //  btnUnitPrice.PerformClick();
+
+                    btnUnitPrice_Click(null,null);
                 }
 
                 Application.DoEvents();
@@ -158,7 +162,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             //其他键直接输入
             else
             {
-
                 focusing.Text += keyInput;
 
             }

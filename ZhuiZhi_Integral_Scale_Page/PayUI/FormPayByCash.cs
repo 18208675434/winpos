@@ -135,7 +135,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     return;
                 }
 
-                ReceiptUtil.EditOpenMoneyPacketCount(1);
+                //ReceiptUtil.EditOpenMoneyPacketCount(1);
 
                 decimal cash = Convert.ToDecimal(txtCash.Text);
 

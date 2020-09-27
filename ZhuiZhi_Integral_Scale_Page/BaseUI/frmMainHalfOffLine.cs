@@ -285,7 +285,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 #endregion
 
                 //判断是否支持整单改价
-                btnModifyPrice.Visible = MainModel.CurrentShopInfo.posalterorderpriceflag == 1;
+                btnModifyPrice.Visible = MainModel.CurrentShopInfo.posalterorderpriceflag == 1 || MainModel.CurrentShopInfo.posalterorderdiscountflag==1;
 
                 //判断是否支持单品改价
                 btnChangePrice.Visible = MainModel.CurrentShopInfo.posalterskupriceflag == 1;
@@ -3681,12 +3681,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-                 
+
                 if (!IsEnable || !rbtnPay.WhetherEnable)
                 {
                     return;
                 }
-                ShowLoading(true,false);
+                ShowLoading(true, false);
 
 
                 if (MainModel.WhetherHalfOffLine)
@@ -3696,7 +3696,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         ShowLoading(false, true);
                         return;
                     }
-                }                           
+                }
 
                 if (rbtnPay.ShowText == "完成")
                 {
@@ -3710,9 +3710,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     Application.DoEvents();
                     if (resultcode == 1)
                     {
-                        ClearForm();     
+                        ClearForm();
                         ClearMember();
-                                          
+
                     }
                     else if (resultcode == 0)
                     {
@@ -3729,13 +3729,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         ClearMember();
                         UploadOffLineDgvCart();
                     }
-                }               
+                }
             }
             catch (Exception ex)
             {
-                ShowLog("结算异常"+ex.Message,true);
+                ShowLog("结算异常" + ex.Message, true);
             }
         }
+
 
         private void PayOK()
         {
@@ -4280,6 +4281,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 btnScan.Select();
             }
+        }
+
+        private void btnWithoutOrder_Click(object sender, EventArgs e)
+        {
+            ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
         }
       
         

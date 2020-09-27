@@ -118,6 +118,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 找零转存余额金额
         /// </summary>
         public decimal balancedepositamt { set; get; }
+
+        /// <summary>
+        /// 是否无单退款  1为是 0或空为正常流程
+        /// </summary>
+        public int returnwithoutorder { set; get; }
+        /// <summary>
+        /// 无单退款时门店负责人 短信验证码
+        /// </summary>
+        public string smscode { set; get; }
         public List<OtherPayInfoEntity> otherpayinfos { set; get; }
 
     }

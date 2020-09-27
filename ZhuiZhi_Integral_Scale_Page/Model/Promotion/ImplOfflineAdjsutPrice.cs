@@ -98,7 +98,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
 
                              
                            }
-
+                           productBean.price.total = amt;
                            productBean.adjustpricedesc = adjustPriceDesc;
                        }
                        else

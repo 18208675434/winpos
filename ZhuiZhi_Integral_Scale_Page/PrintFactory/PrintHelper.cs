@@ -62,7 +62,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                 //lstPrintStr.AddRange(PrintHelper.MergeStr("商品", "单价", "重量(kg)", "金额", BodyCharCountOfLine));
 
-                lstPrintStr.Add("商品    单价   重量(kg)   金额");
+                lstPrintStr.Add("商品    单价   重量(kg) 金额");
                 foreach (ProductDetail pro in printdetail.products)
                 {
                     string num = pro.goodstagid == 0 ? pro.num.ToString() : pro.specnum.ToString("f3");
@@ -522,7 +522,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 //每行分成五份  商品2/5  数量、单价、总额各站1/5    四行数据中间三段空白
                 int itemLength = Convert.ToInt16(Math.Round((decimal)charlength / 9));
                 int NameWidth = charlength - itemLength * 6;
-                List<string> lstname = substr(str1, NameWidth - 3);
+                List<string> lstname = substr(str1, NameWidth -1);
 
                 str1 = lstname[lstname.Count - 1];
                 str2 = GetItemString(str2, itemLength*2);

@@ -85,7 +85,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
 
             txtCash.Focus();
             numBoard.Size = new Size(this.Width, btnOK.Top - numBoard.Top - 10);
-
             Application.DoEvents();
             //txtCash.Width += 1;
         }

@@ -745,7 +745,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
            
             GlobalUtil.OpenOSK();
-
             Delay.Start(100);
             this.Activate();
             txtUser.Focus();

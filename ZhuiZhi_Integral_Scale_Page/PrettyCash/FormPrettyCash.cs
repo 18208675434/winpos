@@ -55,6 +55,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrettyCash
         {
             try
             {
+
+                try
+                {
+                    ZhuiZhi_Integral_Scale_UncleFruit.Common.PrintUtil.OpenCashDrawerEx();
+                }
+                catch
+                {
+                }
+
+
                 decimal prettycash = 0;
                 if (!string.IsNullOrEmpty(txtCash.Text))
                 {

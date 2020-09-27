@@ -32,7 +32,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
 
              
                 lblPrice.Text = "￥" + CurrentProduct.price.originsaleprice.ToString("f2");
-
+                lblDiscountPrice.Text = "￥" + CurrentProduct.price.originsaleprice.ToString("f2");
                 numBoard.Size = new Size(pnlNumber.Width - 8, rbtnOK.Top - numBoard.Top - 30);
 
                 if (CurrentProduct.adjustpriceinfo != null && CurrentProduct.adjustpriceinfo.type==2)

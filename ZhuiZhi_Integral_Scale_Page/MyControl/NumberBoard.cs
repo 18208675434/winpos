@@ -70,8 +70,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MyControl
         {
             try
             {
+
                 wScale = (float)this.Width / 340;
-                hScale = (float)this.Height / 270;
+                hScale = (float )this.Height / 270;
                 ControlAutoSize(this);
             }
             catch (Exception ex)
@@ -135,7 +136,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MyControl
 
             _ctrlNo = 1;
           
-            AutoScaleControl(mForm, wScale, hScale);
+            AutoScaleControl(mForm,wScale,hScale);
         }
 
         private void AutoScaleControl(Control mForm, float wScale, float hScale)

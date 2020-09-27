@@ -121,7 +121,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
 
             return base.ProcessDialogKey(keyData);
-
         }
 
         private void AddNum(int num, bool isDel)

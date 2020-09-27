@@ -31,7 +31,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 }
 
                 frmmedia.TopMost = true;
-                frmmedia.Show();
+               frmmedia.Show();
             }
             catch (Exception ex)
             {

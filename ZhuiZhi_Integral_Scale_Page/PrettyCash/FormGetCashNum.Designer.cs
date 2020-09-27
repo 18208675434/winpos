@@ -32,8 +32,8 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.txtCash = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
-            this.numBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard();
             this.btnCancle = new System.Windows.Forms.Button();
+            this.numBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard();
             this.SuspendLayout();
             // 
             // lblInfo
@@ -79,21 +79,6 @@
             this.txtCash.TabIndex = 0;
             this.txtCash.WaterText = "请输入钱箱内实际总金额";
             // 
-            // numBoard
-            // 
-            this.numBoard.BackColor = System.Drawing.Color.White;
-            this.numBoard.KeyClear = null;
-            this.numBoard.KeyDelete = "";
-            this.numBoard.KeyDot = "·";
-            this.numBoard.KeyEnter = null;
-            this.numBoard.KeyHide = null;
-            this.numBoard.Location = new System.Drawing.Point(0, 143);
-            this.numBoard.Margin = new System.Windows.Forms.Padding(0);
-            this.numBoard.Name = "numBoard";
-            this.numBoard.Size = new System.Drawing.Size(380, 293);
-            this.numBoard.TabIndex = 0;
-            this.numBoard.Press += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard.KeyboardHandler(this.MiniKeyboardHandler);
-            // 
             // btnCancle
             // 
             this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
@@ -111,6 +96,21 @@
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
+            // numBoard
+            // 
+            this.numBoard.BackColor = System.Drawing.Color.White;
+            this.numBoard.KeyClear = null;
+            this.numBoard.KeyDelete = "";
+            this.numBoard.KeyDot = "·";
+            this.numBoard.KeyEnter = null;
+            this.numBoard.KeyHide = null;
+            this.numBoard.Location = new System.Drawing.Point(0, 141);
+            this.numBoard.Margin = new System.Windows.Forms.Padding(0);
+            this.numBoard.Name = "numBoard";
+            this.numBoard.Size = new System.Drawing.Size(380, 305);
+            this.numBoard.TabIndex = 136;
+            this.numBoard.Press += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard.KeyboardHandler(this.MiniKeyboardHandler);
+            // 
             // FormGetCashNum
             // 
             this.AcceptButton = this.btnOK;
@@ -118,11 +118,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 520);
+            this.Controls.Add(this.numBoard);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.txtCash);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblInfo);
-            this.Controls.Add(this.numBoard);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormGetCashNum";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -136,11 +136,11 @@
 
         #endregion
 
-        private MyControl.NumberBoard numBoard;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnOK;
         private MyControl.NumberTextBox txtCash;
         private System.Windows.Forms.Button btnCancle;
+        private MyControl.NumberBoard numBoard;
 
     }
 }

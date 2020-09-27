@@ -107,10 +107,10 @@
             this.numBoard.KeyDot = "·";
             this.numBoard.KeyEnter = null;
             this.numBoard.KeyHide = null;
-            this.numBoard.Location = new System.Drawing.Point(0, 143);
+            this.numBoard.Location = new System.Drawing.Point(1, 143);
             this.numBoard.Margin = new System.Windows.Forms.Padding(0);
             this.numBoard.Name = "numBoard";
-            this.numBoard.Size = new System.Drawing.Size(380, 293);
+            this.numBoard.Size = new System.Drawing.Size(382, 303);
             this.numBoard.TabIndex = 0;
             this.numBoard.Press += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberBoard.KeyboardHandler(this.MiniKeyboardHandler);
             // 
@@ -125,6 +125,7 @@
             this.txtCash.MaxDeciaml = ((long)(1000000));
             this.txtCash.MaxLength = 100;
             this.txtCash.Name = "txtCash";
+            this.txtCash.NeedBoard = false;
             this.txtCash.OnlyNumber = true;
             this.txtCash.Size = new System.Drawing.Size(300, 53);
             this.txtCash.TabIndex = 76;

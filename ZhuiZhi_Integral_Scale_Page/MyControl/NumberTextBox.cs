@@ -182,7 +182,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MyControl
                     {
                         str = Regex.Replace(str, @"[^\d.\d]", "");
 
-                        if (maxdecimal>0 && Convert.ToDecimal(str) >= maxdecimal)
+                        if (!string.IsNullOrEmpty(str) && maxdecimal>0 && Convert.ToDecimal(str) >= maxdecimal)
                         {
                             str = str.Substring(0, str.Length - 1);
                             refreshSelectionStart = true;

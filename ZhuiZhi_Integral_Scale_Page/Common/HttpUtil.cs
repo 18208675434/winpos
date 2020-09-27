@@ -256,112 +256,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-        /// <summary>
-        /// 购物车接口
-        /// </summary>
-        /// param name="lstscancodemember"> 0:扫描刷新购物车（cashpayoption=0,cashpayamt=0)  1：抹零（cashpayoption1,cashpayamt=0)  2：现金支付（cashpayoption=1,cashpayamt=支付金额)  3:积分+现金</param>
-        /// <param name="lstscancodemember"></param>
-        /// <param name="errormsg"></param>
-        /// <returns></returns>
-        public Cart GetCart(int type, List<scancodememberModel> lstscancodemember, decimal cash, ref string errormsg)
-        {
-            try
-            {
-                string url = "/pos/order/pos/cart";
-
-                product[] lstpro = new product[lstscancodemember.Count];
-                for (int i = 0; i < lstscancodemember.Count; i++)
-                {
-                    product pro = new product();
-                    pro.skucode = lstscancodemember[i].scancodedto.skucode;
-                    pro.num = lstscancodemember[i].scancodedto.num;
-                    pro.specnum = lstscancodemember[i].scancodedto.specnum.ToString();
-                    pro.spectype = lstscancodemember[i].scancodedto.spectype;
-                    pro.goodstagid = lstscancodemember[i].scancodedto.weightflag == true ? 1 : 0;
-
-                    pro.barcode = lstscancodemember[i].scancodedto.barcode;
-
-                    lstpro[i] = pro;
-                }
-
-
-                CartPara cart = new CartPara();
-                cart.ordersubtype = "pos";
-                cart.products = lstpro;
-                cart.shopid = MainModel.CurrentShopInfo.shopid;
-
-                if (type == 0)
-                {
-                    cart.cashpayoption = 0;
-                    cart.cashpayamt = 0;
-                }
-                else if (type == 1)
-                {
-                    cart.cashpayoption = 1;
-                    cart.cashpayamt = 0;
-                }
-                else if (type == 2)
-                {
-                    cart.cashpayoption = 1;
-                    cart.cashpayamt = cash;
-                }
-                else if (type == 3)
-                {
-                    cart.cashpayoption = 1;
-                    cart.cashpayamt = 0;
-                    cart.pointpayoption = 1;
-
-                }
-
-
-
-
-                if (MainModel.CurrentMember != null)
-                {
-                    cart.uid = MainModel.CurrentMember.memberid;
-                    cart.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
-
-                    if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
-                    {
-                        string[] strs = new string[1];
-                        strs[0] = MainModel.CurrentCouponCode;
-                        cart.selectedcoupons = strs;
-                    }
-
-                }
-
-                string tempjson = JsonConvert.SerializeObject(cart);
-
-
-                string json = HttpPOST(url, tempjson);
-
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                // return;
-                if (rd.code == 0)
-                {
-                    Cart carttemp = JsonConvert.DeserializeObject<Cart>(rd.data.ToString());
-                    return carttemp;
-                }
-                else
-                {
-                    try { LogManager.WriteLog("Error", "cart:" + json); }
-                    catch { }
-                    errormsg = rd.message;
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("Error", "购物车信息获取异常：" + ex.Message);
-                errormsg = "网络连接异常，请检查网络连接";
-                return null;
-
-            }
-        }
-
-
-
-        /// <summary>
+          /// <summary>
         /// 刷新购物车
         /// </summary>
         /// param name="lstscancodemember"> 0:扫描刷新购物车（cashpayoption=0,cashpayamt=0)  1：抹零（cashpayoption1,cashpayamt=0)  2：现金支付（cashpayoption=1,cashpayamt=支付金额)  3:积分+现金</param>
@@ -370,11 +265,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <returns></returns>
         public Cart RefreshCart(Cart cart, ref string errormsg, ref int resultcode)
         {
+            return RefreshCart(cart,MainModel.CurrentMember, ref errormsg, ref resultcode);
+        }
+
+        /// <summary>
+        /// 刷新购物车
+        /// </summary>
+        /// param name="lstscancodemember"> 0:扫描刷新购物车（cashpayoption=0,cashpayamt=0)  1：抹零（cashpayoption1,cashpayamt=0)  2：现金支付（cashpayoption=1,cashpayamt=支付金额)  3:积分+现金</param>
+        /// <param name="lstscancodemember"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public Cart RefreshCart(Cart cart,Member member, ref string errormsg, ref int resultcode)
+        {
             try
             {
                
                 string url = "/pos/order/pos/cart";
-
 
                 CartPara cartpara = new CartPara();
                 cartpara.ordersubtype = "pos";
@@ -411,14 +317,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 cartpara.cashprepriority = cart.cashprepriority;
 
                 cartpara.balancedepositamt = cart.balancedepositamt;
-                //cartpara.otherpayamt = cart.otherpayamt;
-                //cartpara.otherpaycouponcode = cart.otherpaycouponcode;
-                //cartpara.otherpaytype = cart.otherpaytype;
 
-                if (MainModel.CurrentMember != null)
+                cartpara.returnwithoutorder = cart.returnwithoutorder;
+
+                if (member != null)
                 {
-                    cartpara.uid = MainModel.CurrentMember.memberid;
-                    cartpara.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
+                    cartpara.uid = member.memberid;
+                    cartpara.usertoken = member.memberheaderresponsevo.token;
 
                     if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
                     {
@@ -490,7 +395,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+
+
         public CreateOrderResult CreateOrder(Cart cart, ref string errormsg, ref int resultcode)
+        {
+            return CreateOrder(cart,MainModel.CurrentMember,ref errormsg,ref resultcode);
+        }
+
+        public CreateOrderResult CreateOrder(Cart cart,Member member, ref string errormsg, ref int resultcode)
         {
             try
             {
@@ -532,6 +444,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 order.cashprepriority = cart.cashprepriority;
 
                 order.balancedepositamt = cart.balancedepositamt;
+                order.returnwithoutorder = cart.returnwithoutorder;
+                order.smscode = cart.smscode;
                 //order.otherpayamt = cart.otherpayamt;
                 //order.otherpaycouponcode = cart.otherpaycouponcode;
                 //order.otherpaytype = cart.otherpaytype;
@@ -542,10 +456,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     order.cashpayamt = (decimal)cart.cashpayamt;
 
                 }
-                if (MainModel.CurrentMember != null)
+                if (member != null)
                 {
-                    order.uid = MainModel.CurrentMember.memberid;
-                    order.usertoken = MainModel.CurrentMember.memberheaderresponsevo.token;
+                    order.uid = member.memberid;
+                    order.usertoken = member.memberheaderresponsevo.token;
 
                     if (!string.IsNullOrEmpty(MainModel.CurrentCouponCode))
                     {
@@ -1263,6 +1177,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
+
+                LogManager.WriteLog("DEBUG","交班结果" + tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -2996,7 +2912,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
-
                 string url = "/pos/member/memberrights/item";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
