@@ -373,6 +373,12 @@
     <Compile Include="MemberCenter\FormOtherMethod.Designer.cs">
       <DependentUpon>FormOtherMethod.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormReminder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormReminder.Designer.cs">
+      <DependentUpon>FormReminder.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormSeavePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -432,6 +438,7 @@
     <Compile Include="MemberCenter\MemberCenterMediaHelper.cs" />
     <Compile Include="MemberCenter\model\BalanceConfigDetail.cs" />
     <Compile Include="MemberCenter\model\BalanceDepositRefundRequest .cs" />
+    <Compile Include="MemberCenter\model\ClassPayment.cs" />
     <Compile Include="MemberCenter\model\CustomTemplateModel.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
     <Compile Include="MemberCenter\model\GetBalanceDepositRefund.cs" />
@@ -1210,6 +1217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormOtherMethod.resx">
       <DependentUpon>FormOtherMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormReminder.resx">
+      <DependentUpon>FormReminder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormSeavePassword.resx">
       <DependentUpon>FormSeavePassword.cs</DependentUpon>

@@ -19,7 +19,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 {
     public class MainModel
     {
-
+        public static bool isokcancle;
+        public static string code = "";
+        public static decimal GetZsje = 0;
+        public static string memberid = "";
+        public static string GetPhone = "";
+        public static string UpdatePhone = "";
         #region  会员中心   变量 （待优化）
         /// <summary>
         /// 修改手机号码时输入的新手机号

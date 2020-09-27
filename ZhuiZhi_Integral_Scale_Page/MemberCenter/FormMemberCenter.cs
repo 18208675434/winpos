@@ -70,12 +70,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     phone = tempphone;
                 }
                 lblPhone.Text = phone;
-
+                MainModel.GetPhone = phone;
                 btnChangePhone.Left = lblPhone.Right;
 
                 string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
                 string birthday = CurrentMember.memberinformationresponsevo.birthdaystr;
-
+                MainModel.memberid = CurrentMember.memberid;
                 lblMemberInfo.Text = "性别：" + gender + " | " + "生日：" + birthday;
 
                 lblBalance.Text = "￥" + CurrentMember.barcoderecognitionresponse.balance;
@@ -206,7 +206,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MainModel.ShowLog("请选择充值金额", false);
                     return;
                 }
-
+                
                 if (CurrentBalanceAccount != null && !CurrentBalanceAccount.haspaypassword && CurrentBalanceAccount.needinitpassword)
                 {
                     MemberCenterHelper.ShowFormNoPayPwd();
@@ -214,6 +214,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 if (custommoney.Text != "+")
                 {
+                   
                    bool cashresult =  MemberCenterHelper.ShowFormTopUpByCash(Convert.ToInt32(ListAllTemplate.mount));
                    if (cashresult ==false)
                    {
@@ -240,6 +241,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         TopUpOK();
                     }
                 }
+               
                 else if (MemberCenterHelper.ShowFormTopUpByCash(CurrentTemplate.amount))
                 {
 
@@ -318,8 +320,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     lstbmp.Add(GetItemImg(template));
                 }
-
-
+                ListAllTemplate.mount = CurrentTemplate.amount;
+                ListAllTemplate temp = new ListAllTemplate();
+                
+                    
+                    
+              
 
                 //lstbmp.Add((Bitmap)MainModel.GetControlImage(custom));
                 CustomTemplateModel zidingyi = new CustomTemplateModel();
@@ -332,7 +338,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     CustomTemplate = zidingyi;
                     listall.CustomId = CurrentTemplate.id;
-                    ListAllTemplate.mount = Convert.ToInt64(custommoney.Text);
                 }
 
                 lstbmp.Add(GetCustomImg(listall));
@@ -495,9 +500,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     return;
                 }
-
+                
                 ListAllTemplate temp = (ListAllTemplate)selectimg.Tag;
-
+               
+               
+                ListAllTemplate.mount = temp.amount;
+              
                 if (temp.id != 0)
                 {
                     customdiscount.Text = "自定义金额";
@@ -557,7 +565,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         LoadTemplate(true);
                         ListAllTemplate.enable = true;
+                        if (custommoney.Text != "+")
+                        {
+                            ListAllTemplate.mount = int.Parse(custommoney.Text);
 
+                        }
                         custom.BackColor = Color.Blue;
                         custommoney.ForeColor = Color.White;
                         customdiscount.ForeColor = Color.White;
@@ -742,14 +754,67 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         }
 
-        private void pnlPayByOther_Paint(object sender, PaintEventArgs e)
+       
+
+        private void pnlPayByOther_Click(object sender, EventArgs e)
         {
+            
+            try
+            {
+                FormOtherMethod pay = new FormOtherMethod();
+                asf.AutoScaleControlTest(pay, 500, 197, 500 * MainModel.midScale, 197 * MainModel.midScale, true);
+                pay.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pay.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pay.Height) / 2);
+                pay.TopMost = true;
+                BackHelper.ShowFormBackGround();
+                //BackHelper.HideFormBackGround();
 
-        }
+                pay.ShowDialog();
+                pay.Dispose();
+                pay.Close();
+                if (MainModel.isokcancle == true)
+                {
+                    return;
+                }
+                if (pay.DialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+                MemberTopUpPara para = new MemberTopUpPara();    
+                para.amount = ListAllTemplate.mount;
+                para.memberid = Convert.ToInt64(MainModel.memberid);
+                para.customerpaycode = MainModel.code;
+                para.autoreward = false;
+                para.paymode = "1";
+                para.phone = MainModel.GetPhone;
+                para.shopid = MainModel.CurrentShopInfo.shopid;
+               
+                para.rewardamount =  MainModel.GetZsje;
+                string errormsg = "";
+                long result = httputil.MemberTopUp(para, ref errormsg);
 
-        private void pnlPayByOnLine_Paint(object sender, PaintEventArgs e)
-        {
+                if (result == null)
+                {
+                    MainModel.ShowLog(errormsg, false);
+                    BackHelper.HideFormBackGround();
+                    
+                   
+                }
+                else
+                {
+                    PrintUtil.PrintTopUp(result.ToString());
+                    TopUpOK();
+                    BackHelper.HideFormBackGround();
+                }
 
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("自定义充值异常" + ex.Message, true);
+                BackHelper.HideFormBackGround();
+                throw;
+            }
+            
+            
         }
     }
 }

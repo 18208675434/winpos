@@ -17,6 +17,7 @@ public class ListAllTemplate
     /// 自定义金额传值
     /// </summary>
     public static bool iszidingyi;
+    public static string zhifu = "";
     /// <summary>
     /// 自定义赠送金额
     /// </summary>

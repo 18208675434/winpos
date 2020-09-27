@@ -282,6 +282,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             label10.Text = phone;
             label10.Font = new System.Drawing.Font("微软雅黑", 18, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             MainModel.NewPhone = label10.Text;
+            MainModel.UpdatePhone = label10.Text;
 
 
 

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenter));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -41,13 +41,13 @@
             this.lblShopName = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pnlPayByOther = new System.Windows.Forms.Panel();
-            this.lblPayByOther = new System.Windows.Forms.Label();
-            this.picPayByOther = new System.Windows.Forms.PictureBox();
             this.dgvTemplate = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn6 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn7 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn8 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.pnlPayByOther = new System.Windows.Forms.Panel();
+            this.lblPayByOther = new System.Windows.Forms.Label();
+            this.picPayByOther = new System.Windows.Forms.PictureBox();
             this.pnlPayByCash = new System.Windows.Forms.Panel();
             this.lblPayByCash = new System.Windows.Forms.Label();
             this.picPayByCash = new System.Windows.Forms.PictureBox();
@@ -95,9 +95,9 @@
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).BeginInit();
             this.pnlPayByOther.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByOther)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).BeginInit();
             this.pnlPayByCash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByCash)).BeginInit();
             this.pnlPayByOnLine.SuspendLayout();
@@ -189,8 +189,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.pnlPayByOther);
             this.panel2.Controls.Add(this.dgvTemplate);
+            this.panel2.Controls.Add(this.pnlPayByOther);
             this.panel2.Controls.Add(this.pnlPayByCash);
             this.panel2.Controls.Add(this.pnlPayByOnLine);
             this.panel2.Controls.Add(this.picTopUp);
@@ -201,6 +201,76 @@
             this.panel2.Size = new System.Drawing.Size(668, 650);
             this.panel2.TabIndex = 39;
             // 
+            // dgvTemplate
+            // 
+            this.dgvTemplate.AllowUserToAddRows = false;
+            this.dgvTemplate.AllowUserToDeleteRows = false;
+            this.dgvTemplate.AllowUserToResizeColumns = false;
+            this.dgvTemplate.AllowUserToResizeRows = false;
+            this.dgvTemplate.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTemplate.BackgroundColor = System.Drawing.Color.White;
+            this.dgvTemplate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvTemplate.CausesValidation = false;
+            this.dgvTemplate.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvTemplate.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvTemplate.ColumnHeadersVisible = false;
+            this.dgvTemplate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewImageColumn6,
+            this.dataGridViewImageColumn7,
+            this.dataGridViewImageColumn8});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvTemplate.GridColor = System.Drawing.Color.White;
+            this.dgvTemplate.Location = new System.Drawing.Point(32, 97);
+            this.dgvTemplate.MultiSelect = false;
+            this.dgvTemplate.Name = "dgvTemplate";
+            this.dgvTemplate.ReadOnly = true;
+            this.dgvTemplate.RowHeadersVisible = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvTemplate.RowTemplate.Height = 110;
+            this.dgvTemplate.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvTemplate.Size = new System.Drawing.Size(615, 215);
+            this.dgvTemplate.TabIndex = 68;
+            this.dgvTemplate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTemplate_CellClick);
+            // 
+            // dataGridViewImageColumn6
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewImageColumn6.HeaderText = "第一列";
+            this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
+            this.dataGridViewImageColumn6.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn7
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewImageColumn7.HeaderText = "第二列";
+            this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
+            this.dataGridViewImageColumn7.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn8
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.NullValue = null;
+            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewImageColumn8.HeaderText = "第三列";
+            this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
+            this.dataGridViewImageColumn8.ReadOnly = true;
+            // 
             // pnlPayByOther
             // 
             this.pnlPayByOther.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(147)))), ((int)(((byte)(225)))));
@@ -210,7 +280,7 @@
             this.pnlPayByOther.Name = "pnlPayByOther";
             this.pnlPayByOther.Size = new System.Drawing.Size(211, 69);
             this.pnlPayByOther.TabIndex = 69;
-            this.pnlPayByOther.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPayByOther_Paint);
+            this.pnlPayByOther.Click += new System.EventHandler(this.pnlPayByOther_Click);
             // 
             // lblPayByOther
             // 
@@ -232,76 +302,6 @@
             this.picPayByOther.Size = new System.Drawing.Size(28, 28);
             this.picPayByOther.TabIndex = 0;
             this.picPayByOther.TabStop = false;
-            // 
-            // dgvTemplate
-            // 
-            this.dgvTemplate.AllowUserToAddRows = false;
-            this.dgvTemplate.AllowUserToDeleteRows = false;
-            this.dgvTemplate.AllowUserToResizeColumns = false;
-            this.dgvTemplate.AllowUserToResizeRows = false;
-            this.dgvTemplate.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTemplate.BackgroundColor = System.Drawing.Color.White;
-            this.dgvTemplate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvTemplate.CausesValidation = false;
-            this.dgvTemplate.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvTemplate.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dgvTemplate.ColumnHeadersVisible = false;
-            this.dgvTemplate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewImageColumn6,
-            this.dataGridViewImageColumn7,
-            this.dataGridViewImageColumn8});
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle19;
-            this.dgvTemplate.GridColor = System.Drawing.Color.White;
-            this.dgvTemplate.Location = new System.Drawing.Point(32, 97);
-            this.dgvTemplate.MultiSelect = false;
-            this.dgvTemplate.Name = "dgvTemplate";
-            this.dgvTemplate.ReadOnly = true;
-            this.dgvTemplate.RowHeadersVisible = false;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle20;
-            this.dgvTemplate.RowTemplate.Height = 110;
-            this.dgvTemplate.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvTemplate.Size = new System.Drawing.Size(615, 215);
-            this.dgvTemplate.TabIndex = 68;
-            this.dgvTemplate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTemplate_CellClick);
-            // 
-            // dataGridViewImageColumn6
-            // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.NullValue = null;
-            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle16;
-            this.dataGridViewImageColumn6.HeaderText = "第一列";
-            this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
-            this.dataGridViewImageColumn6.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn7
-            // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.NullValue = null;
-            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dataGridViewImageColumn7.HeaderText = "第二列";
-            this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
-            this.dataGridViewImageColumn7.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn8
-            // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.NullValue = null;
-            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle18;
-            this.dataGridViewImageColumn8.HeaderText = "第三列";
-            this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
-            this.dataGridViewImageColumn8.ReadOnly = true;
             // 
             // pnlPayByCash
             // 
@@ -451,7 +451,7 @@
             this.custom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.custom.Controls.Add(this.customdiscount);
             this.custom.Controls.Add(this.custommoney);
-            this.custom.Location = new System.Drawing.Point(323, -497);
+            this.custom.Location = new System.Drawing.Point(281, 497);
             this.custom.Name = "custom";
             this.custom.Size = new System.Drawing.Size(200, 100);
             this.custom.TabIndex = 56;
@@ -569,7 +569,7 @@
             this.pnlItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlItem.Controls.Add(this.lblAmountStr);
             this.pnlItem.Controls.Add(this.lblAmount);
-            this.pnlItem.Location = new System.Drawing.Point(260, -248);
+            this.pnlItem.Location = new System.Drawing.Point(260, 248);
             this.pnlItem.Name = "pnlItem";
             this.pnlItem.Size = new System.Drawing.Size(200, 100);
             this.pnlItem.TabIndex = 55;
@@ -897,10 +897,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).EndInit();
             this.pnlPayByOther.ResumeLayout(false);
             this.pnlPayByOther.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByOther)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).EndInit();
             this.pnlPayByCash.ResumeLayout(false);
             this.pnlPayByCash.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByCash)).EndInit();

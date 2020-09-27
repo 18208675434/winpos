@@ -42,14 +42,15 @@
             this.btnpw1 = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.inputc = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureCancle = new System.Windows.Forms.PictureBox();
             this.button7 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.inputc = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.inputz = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.input = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCancle)).BeginInit();
             this.SuspendLayout();
             // 
@@ -233,23 +234,6 @@
             this.label2.TabIndex = 122;
             this.label2.Text = "元";
             // 
-            // inputc
-            // 
-            this.inputc.BackColor = System.Drawing.Color.White;
-            this.inputc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.inputc.DecimalDigits = 2;
-            this.inputc.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.inputc.Location = new System.Drawing.Point(123, 43);
-            this.inputc.LockFocus = true;
-            this.inputc.MaxDeciaml = ((long)(5000));
-            this.inputc.MaxLength = 100;
-            this.inputc.Name = "inputc";
-            this.inputc.NeedBoard = false;
-            this.inputc.OnlyNumber = true;
-            this.inputc.Size = new System.Drawing.Size(276, 50);
-            this.inputc.TabIndex = 121;
-            this.inputc.WaterText = "请输入金额";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -270,6 +254,7 @@
             this.pictureCancle.Size = new System.Drawing.Size(26, 19);
             this.pictureCancle.TabIndex = 136;
             this.pictureCancle.TabStop = false;
+            this.pictureCancle.Click += new System.EventHandler(this.pictureCancle_Click);
             // 
             // button7
             // 
@@ -316,31 +301,68 @@
             this.label5.TabIndex = 140;
             this.label5.Text = "元";
             // 
+            // inputc
+            // 
+            this.inputc.BackColor = System.Drawing.Color.White;
+            this.inputc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.inputc.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.inputc.DecimalDigits = 2;
+            this.inputc.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.inputc.Location = new System.Drawing.Point(150, 344);
+            this.inputc.LockFocus = true;
+            this.inputc.MaxDeciaml = ((long)(5000));
+            this.inputc.MaxLength = 100;
+            this.inputc.Name = "inputc";
+            this.inputc.NeedBoard = false;
+            this.inputc.OnlyNumber = true;
+            this.inputc.Size = new System.Drawing.Size(276, 50);
+            this.inputc.TabIndex = 121;
+            this.inputc.WaterText = "请输入金额";
+            this.inputc.Click += new System.EventHandler(this.inputc_Click);
+            // 
             // inputz
             // 
             this.inputz.BackColor = System.Drawing.Color.White;
             this.inputz.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.inputz.DecimalDigits = 2;
+            this.inputz.DecimalDigits = 3;
             this.inputz.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.inputz.Location = new System.Drawing.Point(123, 101);
-            this.inputz.LockFocus = true;
-            this.inputz.MaxDeciaml = ((long)(5000));
+            this.inputz.Location = new System.Drawing.Point(119, 47);
+            this.inputz.LockFocus = false;
+            this.inputz.MaxDeciaml = ((long)(0));
             this.inputz.MaxLength = 100;
             this.inputz.Name = "inputz";
             this.inputz.NeedBoard = false;
             this.inputz.OnlyNumber = true;
-            this.inputz.Size = new System.Drawing.Size(276, 50);
-            this.inputz.TabIndex = 139;
-            this.inputz.WaterText = "请输入金额";
+            this.inputz.Size = new System.Drawing.Size(299, 50);
+            this.inputz.TabIndex = 143;
+            this.inputz.WaterText = "请输入或扫描实体卡号";
+            // 
+            // input
+            // 
+            this.input.BackColor = System.Drawing.Color.White;
+            this.input.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.input.DecimalDigits = 3;
+            this.input.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.input.Location = new System.Drawing.Point(119, 117);
+            this.input.LockFocus = false;
+            this.input.MaxDeciaml = ((long)(0));
+            this.input.MaxLength = 100;
+            this.input.Name = "input";
+            this.input.NeedBoard = false;
+            this.input.OnlyNumber = true;
+            this.input.Size = new System.Drawing.Size(297, 50);
+            this.input.TabIndex = 144;
+            this.input.WaterText = "请输入或扫描实体卡号";
             // 
             // Form1ZengMoney
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(485, 489);
+            this.Controls.Add(this.input);
+            this.Controls.Add(this.inputz);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.inputz);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureCancle);
             this.Controls.Add(this.button7);
@@ -363,6 +385,7 @@
             this.Name = "Form1ZengMoney";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1ZengMoney";
+            this.Load += new System.EventHandler(this.Form1ZengMoney_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCancle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -386,11 +409,12 @@
         private System.Windows.Forms.Button btnpw1;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Label label2;
-        private MyControl.NumberTextBox inputc;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
+        private MyControl.NumberTextBox inputc;
         private MyControl.NumberTextBox inputz;
+        private MyControl.NumberTextBox input;
     }
 }

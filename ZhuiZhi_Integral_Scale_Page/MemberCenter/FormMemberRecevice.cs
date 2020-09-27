@@ -41,6 +41,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             string ErrorMsgMember= "";
             MainModel.NewPhone =  txtOldCardNumber.Text;
+            txtOldCardNumber.Text = MainModel.UpdatePhone;
             HttpUtil httputil = new HttpUtil();
             MemberCenterHelper.member = httputil.GetMember(MainModel.NewPhone, ref ErrorMsgMember);
             FormChangePhoneNumber con = new FormChangePhoneNumber(MemberCenterHelper.member);
@@ -77,6 +78,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 else if (pwd.DialogResult == DialogResult.Cancel)
                 {
                     GlobalUtil.CloseOSK();
+                    BackHelper.HideFormBackGround();
                     this.Close();
                     return;
                 }

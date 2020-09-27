@@ -3523,7 +3523,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <param name="orderid"></param>
         /// <param name="erromessage"></param>
         /// <returns></returns>
-        public bool Custompaycon(ref string erromessage)
+        public List<ClassPayment> Custompaycon(ref string erromessage)
         {
             try
             {
@@ -3533,31 +3533,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("rechargeenable", rechargeenable);
                 sort.Add("locked", loked);
-                string json = HttpGET(url, sort);
+                string parajson = JsonConvert.SerializeObject(sort);
 
-                Console.WriteLine(json);
+                string json = HttpPOST(url, parajson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
 
                 if (rd.code == 0)
                 {
-                    return true;
+                    List<ClassPayment> resultobj = JsonConvert.DeserializeObject<List<ClassPayment>>(rd.data.ToString());
+                    return resultobj;
 
                 }
                 else
                 {
-                    try { LogManager.WriteLog("Error", "getbalancedepositrefundbill:" + json); }
+                    try { LogManager.WriteLog("Error", "custompayconfig:" + json); }
                     catch { }
                     erromessage = rd.message;
-                    return false;
+                    return null;
                 }
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("Error", "获取退款单详情异常：" + ex.Message);
+                LogManager.WriteLog("Error", "自定义支付方式展示异常：" + ex.Message);
                 erromessage = "网络连接异常，请检查网络连接";
-                return false;
+                return null;
             }
         }
         /// <summary>

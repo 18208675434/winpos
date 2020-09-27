@@ -45,7 +45,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            BackHelper.ShowFormBackGround();
+            //BackHelper.HideFormBackGround();
+            Form1ZengMoney zeng = new Form1ZengMoney();
+            asf.AutoScaleControlTest(zeng, 450, 520, 450 * MainModel.midScale, 520 * MainModel.midScale, true);
+            zeng.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - zeng.Width) / 2, (Screen.AllScreens[0].Bounds.Height - zeng.Height) / 2);
+            zeng.TopMost = true;
+            zeng.ShowDialog();
+            zeng.Dispose();
+            zeng.Close();
+            this.Close();
         }
     }
 }

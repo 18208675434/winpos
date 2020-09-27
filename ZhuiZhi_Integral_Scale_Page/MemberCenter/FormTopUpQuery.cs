@@ -432,14 +432,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 chongzhijine.Visible = true;
                 zengsongjine.Visible = true;
                 chongzhifangshi.Visible = true;
-                Operation.Visible = true;
+                label2.Visible = true;
 
-                //tuikuanriqi.Visible = false;
-                //tuikuandanhao.Visible = false;
-                //guanliandanhao.Visible = false;
-                //tuikuanjine.Visible = false;
-                //tuikuansongjine.Visible = false;
-                //tuikuanfangshi.Visible = false;
+                tuikuanriqi.Visible = false;
+                tuikuandanhao.Visible = false;
+                guanliandanhao.Visible = false;
+                tuikuanjine.Visible = false;
+                tuikuansongjine.Visible = false;
+                tuikuanfangshi.Visible = false;
                 DepositListRequest para = new DepositListRequest();
 
                 para.phone = txtPhone.Text;
@@ -472,17 +472,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 foreach (RowsItem order in CurrentBalanceDepos.rows)
                 {
-                    MainModel.refundquest = order.refundable;
-                    if (MainModel.refundquest == false)
+
+                    
+                    if (order.refundable == false)
                     {
                         btn();
                         dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, btncancle);
+                        
                     }
-                    else if (MainModel.refundquest == true)
+                    else
                     {
                         load();
                         dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, caozuo);
+
                     }
+
 
 
 
@@ -563,10 +567,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
 
-                if (MainModel.refundquest == false)
-                {
-                    return;
-                }
+                //if (MainModel.refundquest == false)
+                //{
+                //    return;
+                //}
                 if (!IsEnable)
                 {
                     return;
@@ -628,7 +632,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void czmx_Click(object sender, EventArgs e)
         {
-            this.Refresh();
+            LoadDgvOrder();
         }
 
         private void cztkmx_Click(object sender, EventArgs e)
@@ -636,19 +640,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
 
-                //tuikuanriqi.Visible = true;
-                //tuikuandanhao.Visible = true;
-                //guanliandanhao.Visible = true;
-                //tuikuanjine.Visible = true;
-                //tuikuansongjine.Visible = true;
-                //tuikuanfangshi.Visible = true;
+                tuikuanriqi.Visible = true;
+                tuikuandanhao.Visible = true;
+                guanliandanhao.Visible = true;
+                tuikuanjine.Visible = true;
+                tuikuansongjine.Visible = true;
+                tuikuanfangshi.Visible = true;
 
-                //xiadanshijian.Visible = false;
-                //dingdanhao.Visible = false;
-                //chongzhijine.Visible = false;
-                //zengsongjine.Visible = false;
-                //chongzhifangshi.Visible = false;
-                //Operation.Visible = false;
+                xiadanshijian.Visible = false;
+                dingdanhao.Visible = false;
+                chongzhijine.Visible = false;
+                zengsongjine.Visible = false;
+                chongzhifangshi.Visible = false;
+                label2.Visible = false;
                 LoadingHelper.ShowLoadingScreen();
                 IsEnable = false;
                 GetBalanceDepositRefund para = new GetBalanceDepositRefund();

@@ -255,6 +255,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     this.Close();
                     BackHelper.HideFormBackGround();
+                    MainModel.refundquest = true;
                     MainModel.ShowLog("退款成功", true);
 
                 }
