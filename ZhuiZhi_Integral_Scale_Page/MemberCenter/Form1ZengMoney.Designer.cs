@@ -48,7 +48,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.inputc = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.inputz = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.input = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCancle)).BeginInit();
@@ -301,25 +300,6 @@
             this.label5.TabIndex = 140;
             this.label5.Text = "元";
             // 
-            // inputc
-            // 
-            this.inputc.BackColor = System.Drawing.Color.White;
-            this.inputc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.inputc.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.inputc.DecimalDigits = 2;
-            this.inputc.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.inputc.Location = new System.Drawing.Point(150, 344);
-            this.inputc.LockFocus = true;
-            this.inputc.MaxDeciaml = ((long)(5000));
-            this.inputc.MaxLength = 100;
-            this.inputc.Name = "inputc";
-            this.inputc.NeedBoard = false;
-            this.inputc.OnlyNumber = true;
-            this.inputc.Size = new System.Drawing.Size(276, 50);
-            this.inputc.TabIndex = 121;
-            this.inputc.WaterText = "请输入金额";
-            this.inputc.Click += new System.EventHandler(this.inputc_Click);
-            // 
             // inputz
             // 
             this.inputz.BackColor = System.Drawing.Color.White;
@@ -379,7 +359,6 @@
             this.Controls.Add(this.btnpw1);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.inputc);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1ZengMoney";
@@ -413,7 +392,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private MyControl.NumberTextBox inputc;
         private MyControl.NumberTextBox inputz;
         private MyControl.NumberTextBox input;
     }

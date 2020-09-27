@@ -23,11 +23,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             if (inputz.Text.Length <= 4)
             {
-                inputc.Text += "1";
+                input.Text += "1";
             }
             else if(input.Text.Length <= 4)
             {
-                inputc.Text += "1";
+                input.Text += "1";
 
             }
             else
@@ -90,9 +90,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void button7_Click(object sender, EventArgs e)
         {
 
-            if (inputc.Text.Length > 0)
+            if (input.Text.Length > 0)
             {
-                inputc.Text = inputc.Text.Substring(0, inputc.Text.Length - 1);
+                input.Text = input.Text.Substring(0, input.Text.Length - 1);
             }
             if (inputz.Text.Length > 0)
             {
@@ -103,11 +103,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (inputc.Text == "")
+            if (input.Text == "")
             {
                 MainModel.ShowLog("不能为空", true);
             }
-            ListAllTemplate.Money = inputc.Text;
+            ListAllTemplate.Money = input.Text;
             if (inputz.Text != "")
             {
                 MainModel.GetZsje = int.Parse(inputz.Text);
