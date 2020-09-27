@@ -58,10 +58,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                     return;
                 }
 
+                 string smscode = ReturnWithoutOrderHelper.ShowFormCheckSmCode(thisCurrentCart.shopownername,thisCurrentCart.shopownerphone);
+
+                 if (string.IsNullOrEmpty(smscode))
+                 {
+                     return;
+                 }
+
             //TODO  门店负责人发送验证码
 
                          thisCurrentCart.returnwithoutorder = 1;
-                         thisCurrentCart.smscode = "180903";
+                         thisCurrentCart.smscode = smscode;
                          if (currentreturntye == ReturnType.cash)
                          {
                              thisCurrentCart.cashpayoption = 1;

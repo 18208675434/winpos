@@ -58,6 +58,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         {
             try
             {
+               
                 isfirst = true;
 
                 int cashpaytype = 0;

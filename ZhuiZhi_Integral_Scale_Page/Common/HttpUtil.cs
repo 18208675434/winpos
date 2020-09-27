@@ -319,6 +319,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 cartpara.balancedepositamt = cart.balancedepositamt;
 
                 cartpara.returnwithoutorder = cart.returnwithoutorder;
+                cartpara.smscode = cart.smscode;
 
                 if (member != null)
                 {

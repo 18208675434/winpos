@@ -1075,7 +1075,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         }
 
-
         private void LoadNewOrder()
         {
             if (ConfigUtil.HaveNewOrder())

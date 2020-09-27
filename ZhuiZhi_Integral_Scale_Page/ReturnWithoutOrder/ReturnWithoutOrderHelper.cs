@@ -12,7 +12,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
     public class ReturnWithoutOrderHelper
     {
 
-        //<summary>
+        //<summary>               
         //按比例缩放页面及控件
         //</summary>
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
@@ -87,12 +87,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
         public static string ShowFormCheckSmCode(string name,string phone){
 
-
             try
             {
-                BackHelper.ShowFormBackGround();
+              
                 FormCheckSmCode frm = new FormCheckSmCode(name,phone);
-                asf.AutoScaleControlTest(frm, 500, 260, 500 * MainModel.midScale, 260 * MainModel.midScale, true);
+                asf.AutoScaleControlTest(frm, 600, 300, 600 * MainModel.midScale, 300 * MainModel.midScale, true);
                 frm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frm.Height) / 2);
                 frm.TopMost = true;
 
@@ -100,12 +99,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
                 frm.Dispose();
                 Application.DoEvents();
-                BackHelper.HideFormBackGround();
-                return "";
+                return frm.smscode;
             }
             catch
             {
-                BackHelper.HideFormBackGround();
                 return "";
             }
 
