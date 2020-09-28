@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
@@ -22,6 +23,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             BackHelper.ShowFormBackGround();
             //BackHelper.HideFormBackGround();
             FormCustomreCharge charge = new FormCustomreCharge();
@@ -45,12 +47,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             BackHelper.ShowFormBackGround();
             //BackHelper.HideFormBackGround();
-            Form1ZengMoney zeng = new Form1ZengMoney();
-            asf.AutoScaleControlTest(zeng, 450, 520, 450 * MainModel.midScale, 520 * MainModel.midScale, true);
+            FormZsongMoney zeng = new FormZsongMoney();
+            asf.AutoScaleControlTest(zeng, 380, 470, 380 * MainModel.midScale, 470 * MainModel.midScale, true);
             zeng.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - zeng.Width) / 2, (Screen.AllScreens[0].Bounds.Height - zeng.Height) / 2);
             zeng.TopMost = true;
+           
             zeng.ShowDialog();
             zeng.Dispose();
             zeng.Close();

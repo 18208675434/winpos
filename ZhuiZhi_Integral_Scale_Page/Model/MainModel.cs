@@ -19,6 +19,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 {
     public class MainModel
     {
+        public static string rewardmount = "";
+        public static string moneyzz = "";
+        public static long idm = 0;
         public static bool isokcancle;
         public static string code = "";
         public static decimal GetZsje = 0;

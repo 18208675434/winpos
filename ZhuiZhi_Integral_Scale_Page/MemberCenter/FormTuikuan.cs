@@ -251,11 +251,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 string err = "";
 
                long  m = until.Depositbillrefund(request, ref err);
+                //获取退款的id；
+               MainModel.idm = m;
                 if (m !=  null)
                 {
                     this.Close();
                     BackHelper.HideFormBackGround();
-                    MainModel.refundquest = true;
                     MainModel.ShowLog("退款成功", true);
 
                 }

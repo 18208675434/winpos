@@ -445,7 +445,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 para.phone = txtPhone.Text;
                 para.starttime = getStampByDateTime(dtStart.Value);
                 para.endtime = getStampByDateTime(dtEnd.Value);
-
+                para.refundable = MainModel.refundquest;
                 para.page = CurrentPage;
                 para.size = 6;
 
@@ -476,12 +476,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     
                     if (order.refundable == false)
                     {
+                        MainModel.refundquest = order.refundable;
                         btn();
                         dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, btncancle);
                         
                     }
                     else
                     {
+                        MainModel.refundquest = order.refundable;
                         load();
                         dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, caozuo);
 
@@ -567,7 +569,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
 
-                //if (MainModel.refundquest == false)
+                //if (MainModel.refundquest != true)
                 //{
                 //    return;
                 //}
@@ -590,7 +592,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.Depostid = numbers;
                 MainModel.RechargeAmount = money;
                 MainModel.give = give;
-                string fangshi = dgvOrderOnLine.Rows[e.RowIndex].Cells["fangshi"].Value.ToString();
                 string BasePath = "";
                 if (MainModel.IsOffLine)
                 {
@@ -656,9 +657,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LoadingHelper.ShowLoadingScreen();
                 IsEnable = false;
                 GetBalanceDepositRefund para = new GetBalanceDepositRefund();
-                string Id = para.id;
+                
                 string ErrorMsg = "";
-                httputil.GetBalancecodepositrefoundbill(Id, ref ErrorMsg);
+
+                CurrentRefund = httputil.GetBalancecodepositrefoundbill(MainModel.idm.ToString(), ref ErrorMsg);
 
 
 
@@ -678,10 +680,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
 
-                foreach (RowsItem order in CurrentRefund.rows)
+                foreach (RowsItems order in CurrentRefund.rowss)
                 {
                     btn();
-                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi);
+                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.depositbillid + "元", order.rewardrefundamout, order.refundtypeorapi);
 
                 }
 

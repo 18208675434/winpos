@@ -247,12 +247,6 @@
     </Compile>
     <Compile Include="HelperUI\PurchaseLimitHelper.cs" />
     <Compile Include="MemberCenter\CreateMemberMediaHelper.cs" />
-    <Compile Include="MemberCenter\Form1ZengMoney.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\Form1ZengMoney.Designer.cs">
-      <DependentUpon>Form1ZengMoney.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberCenter\FormChangePhoneConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -432,6 +426,12 @@
     </Compile>
     <Compile Include="MemberCenter\FormTuikuan.Designer.cs">
       <DependentUpon>FormTuikuan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormZsongMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormZsongMoney.Designer.cs">
+      <DependentUpon>FormZsongMoney.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\MemberCenterHelper.cs" />
     <Compile Include="MemberCenter\MemberCenterHttpUtil.cs" />
@@ -1155,9 +1155,6 @@
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\Form1ZengMoney.resx">
-      <DependentUpon>Form1ZengMoney.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1247,6 +1244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormTuikuan.resx">
       <DependentUpon>FormTuikuan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormZsongMoney.resx">
+      <DependentUpon>FormZsongMoney.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormCouponPwd.resx">
       <DependentUpon>FormCouponPwd.cs</DependentUpon>

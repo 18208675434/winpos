@@ -13,6 +13,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
 
 public class ListAllTemplate
 {
+    public static decimal rewardmount = 0;
     /// <summary>
     /// 自定义金额传值
     /// </summary>

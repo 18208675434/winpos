@@ -3480,7 +3480,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <param name="mobile"></param>
         /// <param name="erromessage"></param>
         /// <returns></returns>
-        public GetBalanceDepositRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
+        public PageGetRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
         {
             
           
@@ -3498,7 +3498,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (rd.code == 0)
                 {
 
-                    GetBalanceDepositRefund resultobj = JsonConvert.DeserializeObject<GetBalanceDepositRefund>(rd.data.ToString());
+                    PageGetRefund resultobj = JsonConvert.DeserializeObject<PageGetRefund>(rd.data.ToString());
 
                     return resultobj;
                 }
