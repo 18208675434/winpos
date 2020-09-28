@@ -34,7 +34,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         }
 
 
-
         public static bool ShowFormRetunCash(Cart cart,Member member,ReturnType returntype)
         {
             try
@@ -44,7 +43,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 asf.AutoScaleControlTest(frmcash, 600, 300, 600 * MainModel.midScale, 300 * MainModel.midScale, true);
                 frmcash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmcash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmcash.Height) / 2);
                 frmcash.TopMost = true;
-
 
                 frmcash.ShowDialog();
 

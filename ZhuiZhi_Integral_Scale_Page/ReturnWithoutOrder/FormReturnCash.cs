@@ -95,9 +95,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                          }
                          else
                          {
-                             ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid);
-                             this.DialogResult = DialogResult.OK;
-                             this.Close();
+                             if (currentreturntye == ReturnType.balance)
+                             {
+                                // MemberTopUp(thisCurrentCart.totalpayment);
+                                 if (MemberTopUp(thisCurrentCart.totalpayment))
+                                 {
+                                     ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid);
+                                     this.DialogResult = DialogResult.OK;
+                                     this.Close();
+                                 }
+                                 else
+                                 {
+                                     string errormsg = "";
+                                     bool result = httputil.CancleOrder(orderresult.orderid, "取消支付", ref errormsg);
+
+                                     if (result)
+                                     {
+                                         LogManager.WriteLog("取消订单" + orderresult.orderid);
+                                     }
+                                     else
+                                     {
+                                         LogManager.WriteLog("订单取消失败" + errormsg);
+                                         // return;
+                                     }
+                                 }
+                             }
+
+                             
 
                          }
 
@@ -161,6 +185,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 LoadingHelper.CloseForm();
             }
         }
+
+
+        private bool MemberTopUp(decimal balance)
+        {
+
+            try
+            {
+
+                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.MemberTopUpPara para = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.MemberTopUpPara();
+                para.amount = balance;
+                para.memberid = Convert.ToInt64(thisCurrentMember.memberinformationresponsevo.memberid);
+                para.paymode = "0";
+                para.phone = thisCurrentMember.memberheaderresponsevo.mobile;
+                para.shopid = MainModel.CurrentShopInfo.shopid;
+
+                string errormsg = "";
+                long result = httputil.MemberTopUp(para, ref errormsg);
+
+                if (!string.IsNullOrEmpty(errormsg))
+                {
+                    MainModel.ShowLog(errormsg, false);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                    //PrintUtil.PrintTopUp(result.ToString());
+                    //TopUpOK();
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
     }
 

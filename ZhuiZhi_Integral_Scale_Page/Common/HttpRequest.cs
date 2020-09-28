@@ -70,7 +70,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                // HttpAsyncRequest(Url, "GET", Timestamp, testback, thiscode, postDataStr);
 
-
                 //接口访问完毕或 超时60
                 long beginTime = DateTime.Now.Ticks;
                 while (!WhetherGetOK)
@@ -118,7 +117,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
 
                 AsyRequetCallback testback = new AsyRequetCallback(TestBack);
-
                 string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
                 string nonce = MainModel.getNonce();
 
@@ -126,7 +124,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string postDataStr = "nonce=" + nonce + "&sign=" + MainModel.GetMD5(signstr);
 
                 Url = MainModel.URL + Url + "?" + postDataStr;
-
 
                 //异步执行防止共用变量影响
                 string thiscode = Guid.NewGuid().ToString();

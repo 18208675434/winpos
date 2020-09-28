@@ -27,6 +27,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             InitializeComponent();
 
             CurrentPhone = phone;
+            lblSendUser.Text = "验证码已发送至门店负责人（"+name+"）的手机";
 
         }
 
@@ -150,6 +151,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
+        }
+
+        private void FormCheckSmCode_Load(object sender, EventArgs e)
+        {
+            
         }
 
     }

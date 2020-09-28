@@ -404,32 +404,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
            
         }
 
-        private void btnCreateMember_Click(object sender, EventArgs e)
-        {
-            if (!IsEnable)
-            {
-                return;
-            }
-
-            if (CurrentCart == null || CurrentCart.products == null)
-            {
-                BaseUIHelper.UpdaForm(CurrentCart);
-            }
-           
-            ShowLoading(true, false);
-
-            Member member = MainHelper.CreateMember();
-
-            if (member != null)
-            {
-                LoadMember(member);
-            }
-
-            ShowLoading(false, true);
-
-        }
-
-
         private void ClearMember()
         {
             try
@@ -446,7 +420,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     picCredit.Visible = false;
 
                     Application.DoEvents();
-                    BaseUIHelper.LoadMember();
 
                    // RefreshCart();
                     //购物车有商品的话刷新一次
@@ -535,7 +508,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                        
                         IsEnable = true;
 
-                        BaseUIHelper.LoadMember();
                         Application.DoEvents();
                         ShowLoading(false, true);
 
@@ -1416,7 +1388,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         try { MainModel.frmlogin.Show(); }
                         catch { }
-                        BaseUIHelper.CloseFormMain();
 
                     }
                     else if (resultcode == MainModel.HttpMemberExpired)
@@ -2009,7 +1980,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
 
                     lblTotalPay.Text = "￥" + CurrentCart.totalpayment.ToString("f2");
-                    BaseUIHelper.UpdaForm(CurrentCart);
 
                     ClearDgvGoodSelect();
                     this.Activate();
@@ -2394,7 +2364,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
 
                     lblTotalPay.Text = "￥" + CurrentCart.totalpayment.ToString("f2");
-                    BaseUIHelper.UpdaForm(CurrentCart);
 
                     ClearDgvGoodSelect();
                     this.Activate();
@@ -3036,14 +3005,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             catch { }
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            string msg="";
-
-            PayHelper.ShowFormPayByOther(null);
-
-            //PayHelper.ShowFormVoucher(null,out msg);
-        }
 
         private void btnTopUp_Click(object sender, EventArgs e)
         {
@@ -3053,10 +3014,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (!IsEnable)
                 {
                     return;
-                }
-                if (CurrentCart == null || CurrentCart.products == null)
-                {
-                    BaseUIHelper.UpdaForm(CurrentCart);
                 }
                
                 MemberCenterHelper.ShowFormMemberCenter(ReturnMembr);
@@ -3089,8 +3046,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             while (IsRun)
             {
                 try
-                {
-                    
+                {                    
                     CurrentScaleResult = ScaleGlobalHelper.GetWeight();
 
                    

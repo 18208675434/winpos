@@ -36,7 +36,7 @@
             this.btnPassW3 = new System.Windows.Forms.Button();
             this.btnPassW2 = new System.Windows.Forms.Button();
             this.btnPassW1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblSendUser = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -131,16 +131,16 @@
             this.btnPassW1.TabIndex = 41;
             this.btnPassW1.UseVisualStyleBackColor = false;
             // 
-            // label2
+            // lblSendUser
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label2.Location = new System.Drawing.Point(37, 82);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(316, 24);
-            this.label2.TabIndex = 40;
-            this.label2.Text = "验证码已发送至门店负责人（）的手机";
+            this.lblSendUser.AutoSize = true;
+            this.lblSendUser.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblSendUser.Location = new System.Drawing.Point(37, 82);
+            this.lblSendUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSendUser.Name = "lblSendUser";
+            this.lblSendUser.Size = new System.Drawing.Size(316, 24);
+            this.lblSendUser.TabIndex = 40;
+            this.lblSendUser.Text = "验证码已发送至门店负责人（）的手机";
             // 
             // label1
             // 
@@ -184,12 +184,13 @@
             this.Controls.Add(this.btnPassW3);
             this.Controls.Add(this.btnPassW2);
             this.Controls.Add(this.btnPassW1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblSendUser);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormCheckSmCode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormCheckSmCode";
+            this.Load += new System.EventHandler(this.FormCheckSmCode_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,7 +205,7 @@
         private System.Windows.Forms.Button btnPassW3;
         private System.Windows.Forms.Button btnPassW2;
         private System.Windows.Forms.Button btnPassW1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSendUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnExit;
 

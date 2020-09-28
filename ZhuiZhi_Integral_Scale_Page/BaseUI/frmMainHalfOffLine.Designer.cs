@@ -271,6 +271,7 @@
             this.btnWithoutOrder.TabIndex = 52;
             this.btnWithoutOrder.Text = "无单退款";
             this.btnWithoutOrder.UseVisualStyleBackColor = true;
+            this.btnWithoutOrder.Visible = false;
             this.btnWithoutOrder.Click += new System.EventHandler(this.btnWithoutOrder_Click);
             // 
             // pnlAdjustInfo
