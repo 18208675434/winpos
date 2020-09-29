@@ -38,7 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblPhoneShuiyin = new System.Windows.Forms.Label();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new System.Windows.Forms.Button();
             this.btnWeek = new System.Windows.Forms.Button();
@@ -91,6 +90,8 @@
             this.btncan = new System.Windows.Forms.Button();
             this.czmx = new System.Windows.Forms.Button();
             this.cztkmx = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.panel1.SuspendLayout();
@@ -108,8 +109,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblPhoneShuiyin);
             this.panel1.Controls.Add(this.dtEnd);
             this.panel1.Controls.Add(this.btnQuery);
             this.panel1.Controls.Add(this.btnWeek);
@@ -124,30 +126,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1154, 98);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(279, 22);
+            this.label1.Location = new System.Drawing.Point(731, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(204, 20);
             this.label1.TabIndex = 101;
             this.label1.Text = "仅支持查询最近一个月的订单";
-            // 
-            // lblPhoneShuiyin
-            // 
-            this.lblPhoneShuiyin.AutoSize = true;
-            this.lblPhoneShuiyin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblPhoneShuiyin.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lblPhoneShuiyin.ForeColor = System.Drawing.Color.Gray;
-            this.lblPhoneShuiyin.Location = new System.Drawing.Point(104, 17);
-            this.lblPhoneShuiyin.Name = "lblPhoneShuiyin";
-            this.lblPhoneShuiyin.Size = new System.Drawing.Size(93, 20);
-            this.lblPhoneShuiyin.TabIndex = 46;
-            this.lblPhoneShuiyin.Text = "请输入手机号";
-            this.lblPhoneShuiyin.Click += new System.EventHandler(this.lblPhoneShuiyin_Click);
             // 
             // dtEnd
             // 
@@ -272,6 +262,7 @@
             // txtPhone
             // 
             this.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPhone.Enabled = false;
             this.txtPhone.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.txtPhone.Location = new System.Drawing.Point(96, 12);
             this.txtPhone.Margin = new System.Windows.Forms.Padding(2);
@@ -290,9 +281,9 @@
             this.lblPhone.Location = new System.Drawing.Point(14, 14);
             this.lblPhone.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(62, 21);
+            this.lblPhone.Size = new System.Drawing.Size(74, 21);
             this.lblPhone.TabIndex = 0;
-            this.lblPhone.Text = "手机号:";
+            this.lblPhone.Text = "下单用户";
             // 
             // pnlDgvHead
             // 
@@ -783,7 +774,7 @@
             this.btnOperation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOperation.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOperation.ForeColor = System.Drawing.Color.White;
-            this.btnOperation.Location = new System.Drawing.Point(651, 365);
+            this.btnOperation.Location = new System.Drawing.Point(630, 365);
             this.btnOperation.Name = "btnOperation";
             this.btnOperation.Size = new System.Drawing.Size(109, 48);
             this.btnOperation.TabIndex = 42;
@@ -808,23 +799,51 @@
             // 
             // czmx
             // 
-            this.czmx.Location = new System.Drawing.Point(12, 201);
+            this.czmx.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.czmx.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.czmx.FlatAppearance.BorderSize = 0;
+            this.czmx.Location = new System.Drawing.Point(12, 202);
             this.czmx.Name = "czmx";
             this.czmx.Size = new System.Drawing.Size(112, 50);
             this.czmx.TabIndex = 44;
             this.czmx.Text = "充值明细";
-            this.czmx.UseVisualStyleBackColor = true;
+            this.czmx.UseVisualStyleBackColor = false;
             this.czmx.Click += new System.EventHandler(this.czmx_Click);
             // 
             // cztkmx
             // 
-            this.cztkmx.Location = new System.Drawing.Point(120, 201);
+            this.cztkmx.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cztkmx.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cztkmx.FlatAppearance.BorderSize = 0;
+            this.cztkmx.Location = new System.Drawing.Point(120, 202);
             this.cztkmx.Name = "cztkmx";
             this.cztkmx.Size = new System.Drawing.Size(112, 50);
             this.cztkmx.TabIndex = 45;
             this.cztkmx.Text = "充值退款明细";
-            this.cztkmx.UseVisualStyleBackColor = true;
+            this.cztkmx.UseVisualStyleBackColor = false;
             this.cztkmx.Click += new System.EventHandler(this.cztkmx_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.textBox1.Location = new System.Drawing.Point(376, 11);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.MaxLength = 50;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(171, 30);
+            this.textBox1.TabIndex = 103;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label5.Location = new System.Drawing.Point(282, 16);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(90, 21);
+            this.label5.TabIndex = 102;
+            this.label5.Text = "充值交易单";
             // 
             // rbtnPageDown
             // 
@@ -947,7 +966,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label lblPhoneShuiyin;
         private RoundButton rbtnPageUp;
         private RoundButton rbtnPageDown;
         private System.Windows.Forms.Panel pnlMenu;
@@ -973,5 +991,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn give;
         private System.Windows.Forms.DataGridViewTextBoxColumn fangshi;
         private System.Windows.Forms.DataGridViewImageColumn Operation1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

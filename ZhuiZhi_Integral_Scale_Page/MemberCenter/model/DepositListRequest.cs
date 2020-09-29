@@ -76,6 +76,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 是否可以退款
         /// </summary>
         public bool refundable { get; set; }
+        public string id { get; set; }
 
     }
 }

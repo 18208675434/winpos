@@ -37,7 +37,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
         private PageBalanceDepositBill CurrentBalanceDepos = null;
-        private PageGetRefund CurrentRefund = null;
+        private GetBalanceDepositRefund CurrentRefund = null;
+        private PageGetRefund refundre = null;
 
         private string LastOrderid = "0";
 
@@ -299,14 +300,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void txtPhone_TextChanged(object sender, EventArgs e)
         {
-            if (txtPhone.Text.Length > 0)
-            {
-                lblPhoneShuiyin.Visible = false;
-            }
-            else
-            {
-                lblPhoneShuiyin.Visible = true;
-            }
+            
         }
 
         private void lblPhoneShuiyin_Click(object sender, EventArgs e)
@@ -315,7 +309,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             GlobalUtil.OpenOSK();
             Delay.Start(100);
             this.Activate();
-            lblPhoneShuiyin.Focus();
+            
         }
 
 
@@ -424,7 +418,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
 
 
-
                 LoadingHelper.ShowLoadingScreen();
                 IsEnable = false;
                 xiadanshijian.Visible = true;
@@ -441,8 +434,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 tuikuansongjine.Visible = false;
                 tuikuanfangshi.Visible = false;
                 DepositListRequest para = new DepositListRequest();
-
-                para.phone = txtPhone.Text;
+                para.id = textBox1.Text;
+                txtPhone.Text = MainModel.GetPhone;
                 para.starttime = getStampByDateTime(dtStart.Value);
                 para.endtime = getStampByDateTime(dtEnd.Value);
                 para.refundable = MainModel.refundquest;
@@ -473,13 +466,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 foreach (RowsItem order in CurrentBalanceDepos.rows)
                 {
 
-                    
+
                     if (order.refundable == false)
                     {
                         MainModel.refundquest = order.refundable;
                         btn();
                         dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, btncancle);
-                        
+
                     }
                     else
                     {
@@ -633,6 +626,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void czmx_Click(object sender, EventArgs e)
         {
+            label5.Text = "充值交易单号";
+
+            czmx.BackColor = Color.White;
+            cztkmx.BackColor = Color.FromArgb(200, 200, 200);
             LoadDgvOrder();
         }
 
@@ -640,7 +637,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+                label5.Text = "退款交易单号";
 
+                cztkmx.BackColor = Color.White;
+                czmx.BackColor = Color.FromArgb(200, 200, 200);
                 tuikuanriqi.Visible = true;
                 tuikuandanhao.Visible = true;
                 guanliandanhao.Visible = true;
@@ -656,36 +656,66 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 label2.Visible = false;
                 LoadingHelper.ShowLoadingScreen();
                 IsEnable = false;
-                GetBalanceDepositRefund para = new GetBalanceDepositRefund();
-                
                 string ErrorMsg = "";
+                
+                DepositListRequest para = new DepositListRequest();
 
-                CurrentRefund = httputil.GetBalancecodepositrefoundbill(MainModel.idm.ToString(), ref ErrorMsg);
+                
+                para.starttime = getStampByDateTime(dtStart.Value);
+                para.endtime = getStampByDateTime(dtEnd.Value);
+                para.refundable = MainModel.refundquest;
+                para.page = CurrentPage;
+                para.size = 6;
 
+                CurrentBalanceDepos = httputil.ListDepositbill(para, ref ErrorMsg);
 
-
-
-                if (ErrorMsg != "" || CurrentBalanceDepos == null)
-                {
-                    MainModel.ShowLog(ErrorMsg, false);
-                    return;
-                }
 
 
                 dgvOrderOnLine.Rows.Clear();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
+                    foreach (RowsItem order1 in CurrentBalanceDepos.rows)
+                    {
+                        if (order1.refundable == false)
+                        {
+                            CurrentRefund = httputil.GetBalancecodepositrefoundbill(MainModel.idm.ToString(), ref ErrorMsg);
+                            if (ErrorMsg != "" || CurrentRefund == null)
+                            {
+                                MainModel.ShowLog(ErrorMsg, false);
+                                return;
+                            }
+
+
+                            
+
+                            dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(CurrentRefund.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), CurrentRefund.id, CurrentRefund.depositbillid, CurrentRefund.capitalrefundamount, CurrentRefund.rewardrefundamount, CurrentRefund.refundtypeforapi);
+
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }  
+                        
+
+                    
+                    
+                    
+                
 
 
 
 
 
 
-                foreach (RowsItems order in CurrentRefund.rowss)
-                {
-                    btn();
-                    dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.depositbillid + "元", order.rewardrefundamout, order.refundtypeorapi);
 
-                }
+                
+
+
+
+
+
+
+                
 
                 dgvOrderOnLine.ClearSelection();
                 Application.DoEvents();
@@ -694,7 +724,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
 
-                rbtnPageDown.WhetherEnable = CurrentRefund.page * CurrentRefund.size < CurrentRefund.total;
+                //rbtnPageDown.WhetherEnable = CurrentRefund.page * CurrentRefund.size < CurrentRefund.total;
 
             }
             catch (Exception ex)
@@ -709,6 +739,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
         private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

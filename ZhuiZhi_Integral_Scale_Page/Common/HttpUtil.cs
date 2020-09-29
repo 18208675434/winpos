@@ -3478,9 +3478,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// </summary>
         /// <param name="orderid"></param>
         /// <param name="mobile"></param>
-        /// <param name="erromessage"></param>
+        /// <param name="erromessage"></param>f
         /// <returns></returns>
-        public PageGetRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
+        public GetBalanceDepositRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
         {
             
           
@@ -3492,13 +3492,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string testjson = JsonConvert.SerializeObject(Id);
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("id", Id);
+                
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 
                 if (rd.code == 0)
                 {
 
-                    PageGetRefund resultobj = JsonConvert.DeserializeObject<PageGetRefund>(rd.data.ToString());
+                    GetBalanceDepositRefund resultobj = JsonConvert.DeserializeObject<GetBalanceDepositRefund>(rd.data.ToString());
 
                     return resultobj;
                 }

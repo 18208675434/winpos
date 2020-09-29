@@ -51,7 +51,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         public string phone { get; set; }
         /// <summary>
         /// 总退款金额
-        /// </summary>
+        /// </summary>rewardrefundamout
         public string refundtotalamount { get; set; }
         /// <summary>
         /// 1.原路返回，2线下转账
