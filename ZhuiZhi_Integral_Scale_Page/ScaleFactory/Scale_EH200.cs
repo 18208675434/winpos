@@ -9,19 +9,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
     /// <summary>
     /// 顶尖电子秤
     /// </summary>
-    public class Scale_Aclas : Scale_Action
+    public class Scale_EH200 : Scale_Action
     {
 
-        [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        private IntPtr ptr = new IntPtr(1);
 
-        public static extern bool __Open(string CommName, int BaudRate);
+        [DllImport("PosWeighInterface.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        public static extern bool OpenCom(IntPtr obj, string port);
+
+
+        [DllImport("PosWeighInterface.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        public static extern bool CloseCom(IntPtr obj);
+
+
+        [DllImport("PosWeighInterface.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        public static extern bool SetTare(IntPtr obj);
+
+
+        [DllImport("PosWeighInterface.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        public static extern bool SetZeno(IntPtr obj);
+
+
+        [DllImport("PosWeighInterface.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        public static extern string CurWeight(IntPtr obj);
+
+
 
         public override bool Open(string connum, int baud)
         {
             try
             {
                 Close();
-                return __Open(connum,baud);
+                return OpenCom(ptr, connum);
             }
             catch (Exception ex)
             {
@@ -29,14 +48,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             }
         }
 
-        [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-
-        public static extern bool __Close();
         public override bool Close()
         {
             try
             {
-                return __Close();
+                return CloseCom(ptr);
             }
             catch (Exception ex)
             {
@@ -45,10 +61,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         }
 
 
+//        返回值字符串格式  
+//名称	起始位	长度	说明
+//稳定位	1	1	1 表示稳定 ；0表示未稳定
+//零点位	2	1	1 表示零位；0表示未在零位
+//去皮位	3	1	1 表示去皮；0表示未去皮
+//重量值	4	6	重量值
+//皮重值	10	5	皮重值
 
-        //不能用string 接收   否则没有连接秤的情况下会
-        [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-        public static extern string __GetWeight();
         public override ScaleResult GetScaleWeight()
         {
             ScaleResult result = new ScaleResult();
@@ -56,25 +76,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
             try
             {
-                string strresult = __GetWeight().ToString();
-                string[] strs = strresult.Split(',');
+                string strresult = CurWeight(ptr);
 
-                result.WhetherStable = strs[0] == "S";
-
-                decimal weight = 0;
-                string strweight= strs[1]+strs[2];
-                if (decimal.TryParse(strweight, out weight))
+                if (string.IsNullOrEmpty(strresult) || strresult.Length < 15)
                 {
+                    return result;
+                }
+
+
+                result.WhetherStable = strresult.Substring(0, 1) == "1";
+
+                    result.NetWeight =Convert.ToDecimal( strresult.Substring(3,6));
+                    result.TareWeight = Convert.ToDecimal(strresult.Substring(9, 5));
+                    result.TotalWeight = result.NetWeight + result.TareWeight;
+
                     result.WhetherSuccess = true;
-                    result.NetWeight = Math.Round(weight, 3); 
-                    result.TareWeight = 0.000M;
-                    result.TotalWeight = Math.Round(weight, 3);
-                }
-                else
-                {
-                    result.WhetherSuccess = false;
-                }
-
                
                 return result;
             }
@@ -89,9 +105,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
        
 
 
-        [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-
-        public static extern void __udeTare();
 
         public override ScaleResult SetTare()
         {
@@ -101,8 +114,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             try
             {
 
-                __udeTare();
-                result.WhetherSuccess = true;
+
+                result.WhetherSuccess = SetTare(ptr);
                 return result;
             }
             catch (Exception ex)
@@ -122,9 +135,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         }
 
 
-        [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-
-        public static extern void __uCleart();
         public override ScaleResult SetZero()
         {
             ScaleResult result = new ScaleResult(); 
@@ -132,8 +142,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
             try
             {
-                __uCleart();
-                result.WhetherSuccess = true;
+                result.WhetherSuccess = SetZeno(ptr);
                 return result;
             }
             catch (Exception ex)

@@ -122,7 +122,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         public void IniForm(object obj)
         {
 
-           
 
             SelectTlp(1);
 
@@ -164,10 +163,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 sortMedia.Add(media.sortnum, media);
                             }
                         }
-
-                      
-                       
-
                     }
                 }
                 else
@@ -191,19 +186,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         jsonmodel.JSON = JsonConvert.SerializeObject(posmedia);
                         jsonbll.Add(jsonmodel);
 
-
                         CurrentMediadetaildtos = posmedia.mediadetaildtos;
 
-                       
-                 
                             ParameterizedThreadStart Pts = new ParameterizedThreadStart(DownLoadFile);
                             Thread thread = new Thread(Pts);
                             thread.IsBackground = true;
-                            thread.Start(posmedia);
-                        
+                            thread.Start(posmedia);                        
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -219,19 +209,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-
                 lstPlayerUrl = new List<string>();
                 lstShowImg = new List<Image>();
-
 
                 MediaList medialist = (MediaList)obj;
 
                 foreach (Mediadetaildto media in medialist.mediadetaildtos)
                 {
-
                     try
                     {
-
                         string url = media.content;
                         string remoteUri = System.IO.Path.GetDirectoryName(url);
 
@@ -773,7 +759,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-
                 if (PlayerOpen)
                 {
                     player.Ctlcontrols.stop();
@@ -784,8 +769,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 //threadIniExedate.Priority = ThreadPriority.BelowNormal;
                 threadLoadMember.Start();
 
-                //LoadMemberThread();
-            
+                //LoadMemberThread();            
             }
             catch (Exception ex)
             {
@@ -914,21 +898,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         #endregion
 
-
-
         #region  支付提示/结果
         public void ShowPayResult(object payinfo)
         {
             try
             {
-
-
                 if (PlayerOpen)
                 {
                     player.Ctlcontrols.stop();
                     player.Visible = false;
                 }
-
 
                 FormPaySuccessMedia frmresult = new FormPaySuccessMedia(payinfo.ToString());
                 frmresult.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
@@ -943,42 +922,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-
-
-
-        public void ShowNumber()
-        {
-            //try
-            //{
-               
-            //        threadMedia.Suspend();
-            //        player.Visible = false;
-
-
-            //        frmNumber frmnumber = new frmNumber("请输入会员号", NumberType.MemberCode);
-
-            //    frmnumber.frmNumber_SizeChanged(null, null);
-            //    frmnumber.Size = new System.Drawing.Size(this.Width / 3, this.Height - 200);
-            //    // frmnumber.Location = new System.Drawing.Point(this.Width - frmnumber.Width - 50, 100);
-
-            //    frmnumber.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + Screen.AllScreens[1].Bounds.Width - frmnumber.Width - 50, 100);
-
-            //    //frmresult.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //    frmnumber.Show();
-            //    Application.DoEvents();
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogManager.WriteLog("客屏输入会员号异常" + ex.Message);
-            //}
-        }
-
+      
         public void ShowPayInfo(string lblinfo,bool isError)
         {
             try
             {
-
-
                 if (PlayerOpen)
                 {
                     player.Ctlcontrols.stop();
@@ -1011,7 +959,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LogManager.WriteLog("客屏提示支付信息异常：" + ex.Message);
             }
         }
-
 
         frmBalancePwdGuest frmbalancepwdguest = null;
         public void ShowBalancePwd(bool showorclose)
@@ -1258,13 +1205,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        private void timerNow_Tick(object sender, EventArgs e)
-        {
-           // lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd ") +GetWeek();
-        }
-
-
-
 
         private void frmMainMedia_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -1307,8 +1247,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
 
                     showcount += 1;
-
-                   
                 }
 
 

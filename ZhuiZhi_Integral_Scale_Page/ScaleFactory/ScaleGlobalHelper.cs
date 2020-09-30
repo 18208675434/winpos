@@ -81,8 +81,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
            {
                return false;
                LogManager.WriteLog("打开电子秤异常"+ex.Message);
-           }
-           
+           }          
        }
 
        /// <summary>

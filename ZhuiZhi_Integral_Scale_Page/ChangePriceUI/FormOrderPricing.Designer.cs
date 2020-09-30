@@ -135,7 +135,7 @@
             this.txtPrice.OnlyNumber = true;
             this.txtPrice.Size = new System.Drawing.Size(405, 45);
             this.txtPrice.TabIndex = 0;
-            this.txtPrice.WaterText = "请输入价格";
+            this.txtPrice.WaterText = "请输入修改价格";
             this.txtPrice.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txtPrice_DataChanged);
             // 
             // btnUnitPrice

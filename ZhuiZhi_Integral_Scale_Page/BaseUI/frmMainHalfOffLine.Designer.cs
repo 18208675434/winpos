@@ -856,8 +856,9 @@
             this.txtSearch.Location = new System.Drawing.Point(9, 8);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(275, 43);
-            this.txtSearch.TabIndex = 1;
+            this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // pnlControl
             // 

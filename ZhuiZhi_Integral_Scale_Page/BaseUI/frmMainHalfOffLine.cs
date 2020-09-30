@@ -1075,7 +1075,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         }
 
-
         private void LoadNewOrder()
         {
             if (ConfigUtil.HaveNewOrder())
@@ -1295,7 +1294,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             pbtnExitMember.Top = lblMemberPhone.Top;
                         }
 
-                       // btnTopUp.Top = pbtnExitMember.Top - (btnTopUp.Height - pbtnExitMember.Height)/2;
+                       // btnTopUp.Top = pbtnExitMember.Top - (btnTopUp.Height - pbtnExitMember.Height)/2;A
 
                         Application.DoEvents();
 
@@ -4286,6 +4285,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void btnWithoutOrder_Click(object sender, EventArgs e)
         {
             ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            txtSearch.Focus();
         }
       
         

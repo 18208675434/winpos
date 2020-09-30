@@ -438,10 +438,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
 
-
                 IsEnable = true;
                 LoadingHelper.CloseForm();
-                
             }
             catch (Exception ex)
             {

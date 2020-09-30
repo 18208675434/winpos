@@ -42,7 +42,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                 asf.AutoScaleControlTest(frmtoolmainscale, 210, 180, 210 * MainModel.midScale, 480 * MainModel.midScale, true);
                 frmtoolmainscale.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtoolmainscale.Width - 15, Convert.ToInt16(60 * MainModel.midScale) + 10);
                 frmtoolmainscale.TopMost = true;
-
             }
             catch (Exception ex)
             {

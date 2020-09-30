@@ -192,7 +192,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 para.phone = MainModel.CurrentMember.memberheaderresponsevo.mobile;
                 para.shopid = MainModel.CurrentShopInfo.shopid;
 
-
                 string errormsg = "";
                 long result = httputil.MemberTopUp(para, ref errormsg);
 

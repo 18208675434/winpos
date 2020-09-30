@@ -319,6 +319,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 cartpara.balancedepositamt = cart.balancedepositamt;
 
                 cartpara.returnwithoutorder = cart.returnwithoutorder;
+                cartpara.smscode = cart.smscode;
 
                 if (member != null)
                 {
@@ -2855,6 +2856,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+
+
+        ///// <summary>
+        ///// 用户可用券列表  2020-09-29 更换 
+        ///// </summary>
+        ///// <param name="memberid"></param>
+        ///// <param name="errormsg"></param>
+        //public List<PromotionCoupon> ListMemberCouponAvailable(string memberid, ref string errormsg)
+        //{
+        //    try
+        //    {
+
+        //        string url = "/pos/activity/membercoupon/mycouponlist";
+
+        //        SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+        //        sort.Add("memberid", memberid);
+        //        string testjson = JsonConvert.SerializeObject(sort);
+
+        //        string json = HttpGET(url, sort);
+
+        //        if (string.IsNullOrEmpty(json))
+        //        {
+        //            errormsg = "网络连接异常，请检查网络连接";
+        //            return null;
+        //        }
+
+        //        ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+        //        if (rd.code == 0)
+        //        {
+        //            string strdata = rd.data.ToString();
+        //            List<PromotionCoupon> lstuserresult = JsonConvert.DeserializeObject<List<PromotionCoupon>>(strdata);
+        //            return lstuserresult;
+        //        }
+        //        else
+        //        {
+        //            try { LogManager.WriteLog("Error", "mycouponlist:" + json); }
+        //            catch { }
+        //            errormsg = rd.message;
+        //            return null;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogManager.WriteLog("Error", "获取用户可用券列表异常：" + ex.Message);
+        //        errormsg = "网络连接异常，请检查网络连接";
+        //        return null;
+        //    }
+        //}
 
 
         /// <summary>
