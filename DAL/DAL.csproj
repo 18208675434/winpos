@@ -92,7 +92,7 @@
       <Name>Model</Name>
     </ProjectReference>
     <Reference Include="ChnCharInfo">
-      <HintPath>F:\ChnCharInfo.dll</HintPath>
+      <HintPath>..\Lib\ChnCharInfo.dll</HintPath>
     </Reference>
     <Reference Include="Maticsoft.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -106,7 +106,7 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\QiandamaPOS\bin\Release\System.Data.SQLite.DLL</HintPath>
+      <HintPath>..\Lib\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Web.Services">
       <Name>System.Web.Services</Name>
