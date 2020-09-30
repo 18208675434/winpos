@@ -1244,6 +1244,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     this.Invoke(new InvokeHandler(delegate()
                     {
+
                         ShowLoading(true,false);
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
@@ -1296,7 +1297,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                        // btnTopUp.Top = pbtnExitMember.Top - (btnTopUp.Height - pbtnExitMember.Height)/2;A
 
-                        Application.DoEvents();
+                        //Application.DoEvents();
 
                         //购物车有商品的话刷新一次
                         if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
@@ -1311,11 +1312,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                        
                         IsEnable = true;
 
-                        BaseUIHelper.LoadMember();
+                       
                         Application.DoEvents();
                         ShowLoading(false, true);
 
-                        
+                        this.BeginInvoke(new InvokeHandler(delegate()
+                        {
+                            BaseUIHelper.LoadMember();
+                        }));
                         LstAllProduct.ForEach(r => r.panelbmp = null);
 
                         sortCartByFirstCategoryid[CurrentFirstCategoryid].products.ForEach(r => r.panelbmp = null);
@@ -4017,6 +4021,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+
+
+                string errormsg = "";
+                MainModel.balanceconfigdetail = httputil.BalanceConfigDetail(ref errormsg);
+
                 bool isstart = (bool)obj;
                 if (isstart)
                 {

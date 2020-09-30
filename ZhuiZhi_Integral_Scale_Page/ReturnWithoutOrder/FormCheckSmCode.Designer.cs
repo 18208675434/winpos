@@ -200,6 +200,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormCheckSmCode";
             this.Load += new System.EventHandler(this.FormCheckSmCode_Load);
+            this.Shown += new System.EventHandler(this.FormCheckSmCode_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
