@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCheckSmCode));
             this.btnCountDown = new System.Windows.Forms.Button();
             this.btnPassW6 = new System.Windows.Forms.Button();
@@ -39,12 +40,15 @@
             this.lblSendUser = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
+            this.timerCountDown = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnCountDown
             // 
+            this.btnCountDown.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnCountDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCountDown.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCountDown.ForeColor = System.Drawing.Color.Gray;
             this.btnCountDown.Location = new System.Drawing.Point(375, 233);
             this.btnCountDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnCountDown.Name = "btnCountDown";
@@ -170,6 +174,11 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // timerCountDown
+            // 
+            this.timerCountDown.Interval = 1000;
+            this.timerCountDown.Tick += new System.EventHandler(this.timerCountDown_Tick);
+            // 
             // FormCheckSmCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -208,6 +217,7 @@
         private System.Windows.Forms.Label lblSendUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Timer timerCountDown;
 
     }
 }

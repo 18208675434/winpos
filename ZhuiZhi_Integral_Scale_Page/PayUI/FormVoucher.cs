@@ -35,24 +35,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 Application.DoEvents();
 
                 txtCode.Text = "";
-
                 timerFocus.Enabled = true;
-
                 //GlobalUtil.OpenOSK();
-
                 Delay.Start(100);
                 this.Activate();
                 txtCode.Focus();
             }
             catch { }
-
         }
-
 
 
         private void btnOK_ButtonClick(object sender, EventArgs e)
         {
-
            
         }
 
@@ -70,7 +64,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 Delay.Start(100);
                 this.Activate();
                 txtCode.Focus();
-
             }
             catch (Exception ex)
             {
@@ -120,5 +113,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
     }
 }

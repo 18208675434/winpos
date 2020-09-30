@@ -428,8 +428,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     MainModel.ShowLog("购物车添加商品异常" + ex.Message, true);
                     return null ;
-                }
-          
+                }          
         }
 
         /// <summary>

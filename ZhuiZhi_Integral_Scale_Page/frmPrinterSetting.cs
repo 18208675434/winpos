@@ -549,9 +549,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ScaleFactory.ScaleGlobalHelper.IniScale(true);
                 ScaleFactory.ScaleGlobalHelper.Open(comno, baud);
             }
-
-          
-          
         }
 
         private void cbxComNo_SelectedIndexChanged(object sender, EventArgs e)

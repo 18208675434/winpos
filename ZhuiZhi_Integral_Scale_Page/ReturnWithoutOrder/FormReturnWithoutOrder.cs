@@ -2660,8 +2660,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     RefreshCart();
                 }
-                ShowLoading(false, true);
-                 
+                ShowLoading(false, true);                 
             }
             catch (Exception ex)
             {

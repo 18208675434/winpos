@@ -29,6 +29,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             CurrentPhone = phone;
             lblSendUser.Text = "验证码已发送至门店负责人（"+name+"）的手机";
 
+            timerCountDown.Enabled = true;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -156,6 +157,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         private void FormCheckSmCode_Load(object sender, EventArgs e)
         {
             
+        }
+
+        int CurrentCountDown = 60;
+        private void timerCountDown_Tick(object sender, EventArgs e)
+        {
+
+            CurrentCountDown--;
+
+            btnCountDown.Text = "重新发送("+CurrentCountDown+")";
+
+            if (CurrentCountDown <= 0)
+            {
+                btnCountDown.Text = "重新发送";
+                btnCountDown.ForeColor = Color.White;
+                btnCountDown.BackColor = Color.FromArgb(20, 137, 205);
+
+            }
         }
 
     }

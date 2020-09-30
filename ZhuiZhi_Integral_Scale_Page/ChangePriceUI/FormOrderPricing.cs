@@ -40,7 +40,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
 
                 if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 1 && MainModel.CurrentShopInfo.posalterorderpriceflag == 1)
                 {
-                    txtPrice.WaterText = "最高可折扣" + MainModel.CurrentShopInfo.posalterorderdiscountrange;
+                    //txtPrice.WaterText = "最高可折扣" + MainModel.CurrentShopInfo.posalterorderdiscountrange;
+                    txtPrice.WaterText = "请输入折扣";
                     // btnUnitPrice.PerformClick();
                 }
                 else if (MainModel.CurrentShopInfo.posalterorderdiscountflag == 0 && MainModel.CurrentShopInfo.posalterorderpriceflag == 1)
@@ -203,13 +204,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
         private void btnUnitPrice_Click(object sender, EventArgs e)
         {
 
-
             if (CurrentChangeType == ChangeType.unitprice)
             {
                 return;
             }
 
-            txtPrice.WaterText = "最高可折扣" + MainModel.CurrentShopInfo.posalterorderdiscountrange;
+            //txtPrice.WaterText = "最高可折扣" + MainModel.CurrentShopInfo.posalterorderdiscountrange;
+            txtPrice.WaterText = "请输入折扣";
+
             txtPrice.Clear();
             btnUnitPrice.BackColor = Color.FromArgb(20, 137, 205);
             btnUnitPrice.ForeColor = Color.White;
@@ -224,7 +226,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             pnlBtnDiscount.Visible = true;
 
             CurrentChangeType = ChangeType.totaldiscount;
-
         }
 
         private void btnTotalPrice_Click(object sender, EventArgs e)
@@ -233,7 +234,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             {
                 return;
             }
-            txtPrice.WaterText = "最高可减价" + MainModel.CurrentShopInfo.posalterorderpricerange;
+            //txtPrice.WaterText = "最高可减价" + MainModel.CurrentShopInfo.posalterorderpricerange;
+            txtPrice.WaterText = "请输入修改价格";
             txtPrice.Clear();
             btnUnitPrice.BackColor = Color.White;
             btnUnitPrice.ForeColor = Color.FromArgb(20, 137, 205);

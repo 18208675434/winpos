@@ -266,7 +266,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 request.Timeout = 60 * 1000;
 
 
-
                 if (para.reqMethod.ToUpper() == "POST")
                 {
                     byte[] bytes = Encoding.UTF8.GetBytes(para.postData);
@@ -274,10 +273,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     requestStream = request.GetRequestStream();
                     requestStream.Write(bytes, 0, bytes.Length);
                 }
-                request.Timeout = 60 * 1000;
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
-                    request.Timeout = 60 * 1000;
                     Stream myResponseStream = response.GetResponseStream();
                     StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
                     retString = myStreamReader.ReadToEnd();

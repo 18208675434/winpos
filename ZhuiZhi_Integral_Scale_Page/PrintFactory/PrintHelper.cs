@@ -89,10 +89,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                         if (string.IsNullOrEmpty(stramount))
                         {
-                            stramount = "0.00";
+                            lstPrintStr.Add(pricedetail.title);
+                        }
+                        else
+                        {
+                            lstPrintStr.Add(MergeStr(pricedetail.title, stramount, BodyCharCountOfLine, PageSize));
                         }
 
-                            lstPrintStr.Add(MergeStr(pricedetail.title, stramount, BodyCharCountOfLine, PageSize));
+                            
 
 
 
