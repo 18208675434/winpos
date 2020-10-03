@@ -1936,6 +1936,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string tempjson = "{\"shopid\":\"" + shopid + "\",\"page\":" + page + ",\"size\":" + size + "}";
 
                 string json = HttpPOST(url, tempjson);
+
+                LogManager.WriteLog("DEBUG"+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)

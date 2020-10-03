@@ -66,6 +66,8 @@ namespace Maticsoft.Model
         private Int64 _scaleflag;
         private decimal _memberprice;
         private Int64 _localstatus;
+
+        private System.Collections.Generic.List<string> _barcodelist;
         /// <summary>
         /// 
         /// </summary>
@@ -518,7 +520,14 @@ namespace Maticsoft.Model
             set { _localstatus = value; }
             get { return _localstatus; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public System.Collections.Generic.List<string> BARCODELIST
+        {
+            set { _barcodelist = value; }
+            get { return _barcodelist; }
+        }
         #endregion Model
 
     }
