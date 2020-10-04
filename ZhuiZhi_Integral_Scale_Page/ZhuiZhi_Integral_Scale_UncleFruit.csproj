@@ -599,6 +599,12 @@
     <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.Designer.cs">
       <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.Designer.cs">
+      <DependentUpon>FormReturnWithoutOrderMedia.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReturnWithoutOrder\ReturnWithoutOrderHelper.cs" />
     <Compile Include="ScaleFactory\ScaleGlobalHelper.cs" />
     <Compile Include="ScaleFactory\ScaleResult.cs" />
@@ -1291,6 +1297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrder.resx">
       <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.resx">
+      <DependentUpon>FormReturnWithoutOrderMedia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScaleUI\FormSending.resx">
       <DependentUpon>FormSending.cs</DependentUpon>

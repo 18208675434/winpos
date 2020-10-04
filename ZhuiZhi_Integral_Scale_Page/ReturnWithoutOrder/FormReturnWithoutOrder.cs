@@ -227,6 +227,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 threadScale.IsBackground = true;                
                 threadScale.Start();
 
+                ReturnWithoutOrderHelper.ShowFormReturnWithoutMedia();
+
                 this.Activate();
             }
             catch (Exception ex)
@@ -290,7 +292,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 threadmqtt.Start(false);
 
                 Delay.Start(300);
-              
+                ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia();
                 
                 //ScaleGlobalHelper.Close();
                 this.Dispose();
@@ -432,6 +434,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         LoadDgvGood(true, true);
 
+                        ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart, ReturnMembr);
+
+
                 }));
             }
             catch (Exception ex)
@@ -519,6 +524,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         LoadDgvGood(true, true);
 
+                        ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart,ReturnMembr);
                     }));
                 }
             }
@@ -2050,6 +2056,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         rbtnPageDownForCart.WhetherEnable = CurrentCart.products.Count > CurrentCartPage * 5;
 
                         CurrentCart.products.Reverse();
+
+
+                        ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart,ReturnMembr);
                         Application.DoEvents();
 
                         Thread threadItemExedate = new Thread(ShowDgv);
@@ -2245,6 +2254,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 picCredit.Visible = false;
                 //lblCoupon.Text = "0张";
                 Other.CrearMemory();
+                ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart, ReturnMembr);
 
                 Application.DoEvents();
 

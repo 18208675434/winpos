@@ -63,6 +63,10 @@
             this.pnlBreakage = new System.Windows.Forms.Panel();
             this.lblBreakage = new System.Windows.Forms.Label();
             this.picBreakage = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlRefund = new System.Windows.Forms.Panel();
+            this.lblRefund = new System.Windows.Forms.Label();
+            this.picRefund = new System.Windows.Forms.PictureBox();
             this.pnlReceipt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.pnlExit.SuspendLayout();
@@ -79,6 +83,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picScaleModel)).BeginInit();
             this.pnlBreakage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).BeginInit();
+            this.pnlRefund.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picRefund)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlReceipt
@@ -284,7 +290,7 @@
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(12, 418);
+            this.lblDeviceSN.Location = new System.Drawing.Point(12, 476);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(65, 20);
             this.lblDeviceSN.TabIndex = 2;
@@ -295,7 +301,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVersion.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblVersion.Location = new System.Drawing.Point(12, 442);
+            this.lblVersion.Location = new System.Drawing.Point(12, 500);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(65, 20);
             this.lblVersion.TabIndex = 12;
@@ -431,13 +437,56 @@
             this.picBreakage.TabStop = false;
             this.picBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.panel1.Location = new System.Drawing.Point(6, 461);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(198, 1);
+            this.panel1.TabIndex = 20;
+            // 
+            // pnlRefund
+            // 
+            this.pnlRefund.Controls.Add(this.lblRefund);
+            this.pnlRefund.Controls.Add(this.picRefund);
+            this.pnlRefund.Location = new System.Drawing.Point(11, 418);
+            this.pnlRefund.Name = "pnlRefund";
+            this.pnlRefund.Size = new System.Drawing.Size(187, 39);
+            this.pnlRefund.TabIndex = 19;
+            this.pnlRefund.Click += new System.EventHandler(this.pnlRefund_Click);
+            // 
+            // lblRefund
+            // 
+            this.lblRefund.AutoSize = true;
+            this.lblRefund.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblRefund.ForeColor = System.Drawing.Color.White;
+            this.lblRefund.Location = new System.Drawing.Point(43, 8);
+            this.lblRefund.Name = "lblRefund";
+            this.lblRefund.Size = new System.Drawing.Size(88, 25);
+            this.lblRefund.TabIndex = 1;
+            this.lblRefund.Text = "无单退款";
+            this.lblRefund.Click += new System.EventHandler(this.pnlRefund_Click);
+            // 
+            // picRefund
+            // 
+            this.picRefund.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRefund.BackgroundImage")));
+            this.picRefund.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picRefund.Location = new System.Drawing.Point(13, 7);
+            this.picRefund.Name = "picRefund";
+            this.picRefund.Size = new System.Drawing.Size(24, 24);
+            this.picRefund.TabIndex = 0;
+            this.picRefund.TabStop = false;
+            this.picRefund.Click += new System.EventHandler(this.pnlRefund_Click);
+            // 
             // frmToolMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(210, 470);
+            this.ClientSize = new System.Drawing.Size(210, 530);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlLine8);
+            this.Controls.Add(this.pnlRefund);
             this.Controls.Add(this.pnlLine9);
             this.Controls.Add(this.pnlBreakage);
             this.Controls.Add(this.pnlLine7);
@@ -485,6 +534,9 @@
             this.pnlBreakage.ResumeLayout(false);
             this.pnlBreakage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).EndInit();
+            this.pnlRefund.ResumeLayout(false);
+            this.pnlRefund.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picRefund)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -526,5 +578,9 @@
         private System.Windows.Forms.Panel pnlBreakage;
         private System.Windows.Forms.Label lblBreakage;
         private System.Windows.Forms.PictureBox picBreakage;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlRefund;
+        private System.Windows.Forms.Label lblRefund;
+        private System.Windows.Forms.PictureBox picRefund;
     }
 }

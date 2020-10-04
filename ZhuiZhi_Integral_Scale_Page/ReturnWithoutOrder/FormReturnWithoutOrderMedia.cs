@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
+
+namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
+{
+    public partial class FormReturnWithoutOrderMedia : Form
+    {
+        public FormReturnWithoutOrderMedia()
+        {
+            InitializeComponent();
+
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
+        }
+
+
+
+        public void UpdateForm(Cart cart,Member member)
+        {
+            try
+            {
+
+                if (member == null)
+                {
+                    ClearMember();
+                }
+                else
+                {
+                    LoadMember(member);
+                }
+                if (cart == null || cart.products == null || cart.products.Count == 0)
+                {
+                    ClearForm();
+                }
+                else
+                {
+                    dgvGood.Rows.Clear();
+
+                    foreach (Product pro in cart.products)
+                    {
+                        dgvGood.Rows.Add(pro.skuname+"\r\n"+pro.skucode,pro.price.saleprice.ToString("f2"),pro.goodstagid==0 ? pro.num:pro.specnum,pro.price.total.ToString("f2"));
+                    }
+
+                    lblPrice.Text = cart.totalpayment.ToString("f2");
+
+                    lblGoodsCount.Text = "("+cart.productcount+"件商品)";
+                }
+                
+
+            }
+            catch { }
+        }
+
+
+        public void ClearForm()
+        {
+            try
+            {
+                dgvGood.Rows.Clear();
+                lblGoodsCount.Text = "(0件商品)";
+                lblPrice.Text = "0.00";
+
+            }
+            catch
+            {
+
+            }
+        }
+
+
+        public void LoadMember(Member member)
+        {
+            lblMobil.Text = member.memberheaderresponsevo.mobile;
+        }
+
+        public void ClearMember()
+        {
+            lblMobil.Text = "";
+
+            //lblWechartNickName.Text = "你好！";
+        }
+    }
+}

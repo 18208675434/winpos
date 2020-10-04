@@ -105,7 +105,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             }
 
         }
-        
+
+
+
+        static FormReturnWithoutOrderMedia frmMedia;
+        public static void ShowFormReturnWithoutMedia()
+        {
+            try
+            {
+                frmMedia = new FormReturnWithoutOrderMedia();
+                asf.AutoScaleControlTest(frmMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                frmMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width , 0);
+                frmMedia.TopMost = true;
+
+                frmMedia.Show();
+            }
+            catch { }
+        }
+
+        public static void CloseFormReturnWithoutMedia()
+        {
+            try
+            {
+                frmMedia.Close();
+                Application.DoEvents();
+            }
+            catch { }
+        }
+
+        public static void UpdateMediaCart(Cart cart,Member member)
+        {
+            try
+            {
+                frmMedia.UpdateForm(cart,member);
+            }
+            catch { }
+        }
 
     }
 }

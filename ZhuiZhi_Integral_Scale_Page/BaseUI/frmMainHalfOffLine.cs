@@ -610,7 +610,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     frmtoolmain = new frmToolMain();
 
-                    asf.AutoScaleControlTest(frmtoolmain, 210, 470, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 470), true);
+                    asf.AutoScaleControlTest(frmtoolmain, 210, 530, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 530), true);
                     frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                     frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtoolmain.Width - 10, pnlHead.Height + 10);
                     frmtoolmain.TopMost = true;
@@ -703,6 +703,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                      Broken();
                  }));
                 }
+
+
+                if (tooltype == ToolType.ReturnWithoutOrder)
+                {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
+                        ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
+                    }));
+                }
+
+
             }
             catch (Exception ex)
             {
