@@ -194,7 +194,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     pnlTare.Visible = false;
                 }
-
+                else
+                {
+                    pnlTare.Visible = false;
+                }
             }
             catch (Exception ex)
             {

@@ -54,6 +54,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                        currentscaletype = ScaleType.顶尖PS1X;
                        scaleaction = new Scale_Aclas_PS1X();
                    }
+                   else if (ScaleName == ScaleType.易衡.ToString())
+                   {
+                       currentscaletype = ScaleType.易衡;
+                       scaleaction = new Scale_EH200();
+                   }
 
                    scaleaction.Open(ComNo, Baud);
                }
@@ -255,6 +260,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         中科英泰,
         顶尖,
         托利多,
-        顶尖PS1X
+        顶尖PS1X,
+        易衡
     }
 }

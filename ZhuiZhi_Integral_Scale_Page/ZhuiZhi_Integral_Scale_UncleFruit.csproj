@@ -185,6 +185,7 @@
     <Compile Include="ChangePriceUI\FormPricing.Designer.cs">
       <DependentUpon>FormPricing.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\AbnormalOrderUtil.cs" />
     <Compile Include="Common\ConfigUtil.cs" />
     <Compile Include="Common\DbJsonUtil.cs" />
     <Compile Include="Common\HttpRequestbak.cs" />
