@@ -60,9 +60,13 @@
             this.lblScaleModel = new System.Windows.Forms.Label();
             this.picScaleModel = new System.Windows.Forms.PictureBox();
             this.pnlLine8 = new System.Windows.Forms.Panel();
-            this.pnlBreakage = new System.Windows.Forms.Panel();
-            this.lblBreakage = new System.Windows.Forms.Label();
             this.picBreakage = new System.Windows.Forms.PictureBox();
+            this.lblBreakage = new System.Windows.Forms.Label();
+            this.pnlBreakage = new System.Windows.Forms.Panel();
+            this.pnlLine10 = new System.Windows.Forms.Panel();
+            this.pnlBatchSaleCard = new System.Windows.Forms.Panel();
+            this.lblBatchSaleCard = new System.Windows.Forms.Label();
+            this.picBatchSaleCard = new System.Windows.Forms.PictureBox();
             this.pnlReceipt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.pnlExit.SuspendLayout();
@@ -77,8 +81,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPrintSet)).BeginInit();
             this.pnlScaleModel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picScaleModel)).BeginInit();
-            this.pnlBreakage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).BeginInit();
+            this.pnlBreakage.SuspendLayout();
+            this.pnlBatchSaleCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBatchSaleCard)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlReceipt
@@ -284,7 +290,7 @@
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(12, 418);
+            this.lblDeviceSN.Location = new System.Drawing.Point(12, 468);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(65, 20);
             this.lblDeviceSN.TabIndex = 2;
@@ -295,7 +301,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVersion.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblVersion.Location = new System.Drawing.Point(12, 442);
+            this.lblVersion.Location = new System.Drawing.Point(12, 492);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(65, 20);
             this.lblVersion.TabIndex = 12;
@@ -398,15 +404,16 @@
             this.pnlLine8.Size = new System.Drawing.Size(198, 1);
             this.pnlLine8.TabIndex = 18;
             // 
-            // pnlBreakage
+            // picBreakage
             // 
-            this.pnlBreakage.Controls.Add(this.lblBreakage);
-            this.pnlBreakage.Controls.Add(this.picBreakage);
-            this.pnlBreakage.Location = new System.Drawing.Point(11, 368);
-            this.pnlBreakage.Name = "pnlBreakage";
-            this.pnlBreakage.Size = new System.Drawing.Size(187, 39);
-            this.pnlBreakage.TabIndex = 17;
-            this.pnlBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
+            this.picBreakage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBreakage.BackgroundImage")));
+            this.picBreakage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picBreakage.Location = new System.Drawing.Point(13, 7);
+            this.picBreakage.Name = "picBreakage";
+            this.picBreakage.Size = new System.Drawing.Size(24, 24);
+            this.picBreakage.TabIndex = 0;
+            this.picBreakage.TabStop = false;
+            this.picBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
             // 
             // lblBreakage
             // 
@@ -420,25 +427,67 @@
             this.lblBreakage.Text = "报损管理";
             this.lblBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
             // 
-            // picBreakage
+            // pnlBreakage
             // 
-            this.picBreakage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBreakage.BackgroundImage")));
-            this.picBreakage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picBreakage.Location = new System.Drawing.Point(13, 7);
-            this.picBreakage.Name = "picBreakage";
-            this.picBreakage.Size = new System.Drawing.Size(24, 24);
-            this.picBreakage.TabIndex = 0;
-            this.picBreakage.TabStop = false;
-            this.picBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
+            this.pnlBreakage.Controls.Add(this.lblBreakage);
+            this.pnlBreakage.Controls.Add(this.picBreakage);
+            this.pnlBreakage.Location = new System.Drawing.Point(11, 368);
+            this.pnlBreakage.Name = "pnlBreakage";
+            this.pnlBreakage.Size = new System.Drawing.Size(187, 39);
+            this.pnlBreakage.TabIndex = 17;
+            this.pnlBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
+            // 
+            // pnlLine10
+            // 
+            this.pnlLine10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.pnlLine10.Location = new System.Drawing.Point(6, 461);
+            this.pnlLine10.Name = "pnlLine10";
+            this.pnlLine10.Size = new System.Drawing.Size(198, 1);
+            this.pnlLine10.TabIndex = 18;
+            // 
+            // pnlBatchSaleCard
+            // 
+            this.pnlBatchSaleCard.Controls.Add(this.lblBatchSaleCard);
+            this.pnlBatchSaleCard.Controls.Add(this.picBatchSaleCard);
+            this.pnlBatchSaleCard.Location = new System.Drawing.Point(11, 418);
+            this.pnlBatchSaleCard.Name = "pnlBatchSaleCard";
+            this.pnlBatchSaleCard.Size = new System.Drawing.Size(187, 39);
+            this.pnlBatchSaleCard.TabIndex = 17;
+            this.pnlBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
+            // 
+            // lblBatchSaleCard
+            // 
+            this.lblBatchSaleCard.AutoSize = true;
+            this.lblBatchSaleCard.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblBatchSaleCard.ForeColor = System.Drawing.Color.White;
+            this.lblBatchSaleCard.Location = new System.Drawing.Point(43, 8);
+            this.lblBatchSaleCard.Name = "lblBatchSaleCard";
+            this.lblBatchSaleCard.Size = new System.Drawing.Size(88, 25);
+            this.lblBatchSaleCard.TabIndex = 1;
+            this.lblBatchSaleCard.Text = "批量售卡";
+            this.lblBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
+            // 
+            // picBatchSaleCard
+            // 
+            this.picBatchSaleCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBatchSaleCard.BackgroundImage")));
+            this.picBatchSaleCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picBatchSaleCard.Location = new System.Drawing.Point(13, 7);
+            this.picBatchSaleCard.Name = "picBatchSaleCard";
+            this.picBatchSaleCard.Size = new System.Drawing.Size(24, 24);
+            this.picBatchSaleCard.TabIndex = 0;
+            this.picBatchSaleCard.TabStop = false;
+            this.picBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
             // 
             // frmToolMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(210, 470);
+            this.ClientSize = new System.Drawing.Size(210, 520);
+            this.Controls.Add(this.pnlLine10);
             this.Controls.Add(this.pnlLine8);
             this.Controls.Add(this.pnlLine9);
+            this.Controls.Add(this.pnlBatchSaleCard);
             this.Controls.Add(this.pnlBreakage);
             this.Controls.Add(this.pnlLine7);
             this.Controls.Add(this.pnlScaleModel);
@@ -482,9 +531,12 @@
             this.pnlScaleModel.ResumeLayout(false);
             this.pnlScaleModel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picScaleModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).EndInit();
             this.pnlBreakage.ResumeLayout(false);
             this.pnlBreakage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).EndInit();
+            this.pnlBatchSaleCard.ResumeLayout(false);
+            this.pnlBatchSaleCard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBatchSaleCard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,8 +575,12 @@
         private System.Windows.Forms.Label lblScaleModel;
         private System.Windows.Forms.PictureBox picScaleModel;
         private System.Windows.Forms.Panel pnlLine8;
-        private System.Windows.Forms.Panel pnlBreakage;
-        private System.Windows.Forms.Label lblBreakage;
         private System.Windows.Forms.PictureBox picBreakage;
+        private System.Windows.Forms.Label lblBreakage;
+        private System.Windows.Forms.Panel pnlBreakage;
+        private System.Windows.Forms.Panel pnlLine10;
+        private System.Windows.Forms.Panel pnlBatchSaleCard;
+        private System.Windows.Forms.Label lblBatchSaleCard;
+        private System.Windows.Forms.PictureBox picBatchSaleCard;
     }
 }

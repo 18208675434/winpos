@@ -553,7 +553,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                  }));
                 }
 
-                  
+                if (tooltype == ToolType.BatchSaleCard)
+                {
+                    this.Invoke(new InvokeHandler(delegate ()
+                    {
+                        BatchSaleCard();
+                    }));
+                }
+
 
             }
             catch (Exception ex)
@@ -845,6 +852,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 ShowLog("切换秤模式异常" + ex.Message, true);
             }
+        }
+
+        private void BatchSaleCard()
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
