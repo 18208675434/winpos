@@ -352,6 +352,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ClearForm();
 
                 Application.DoEvents();
+
+                this.Close();
             }
             catch (Exception ex)
             {

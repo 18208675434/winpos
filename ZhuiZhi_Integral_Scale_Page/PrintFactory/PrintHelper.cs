@@ -486,7 +486,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             {
                 string result = "";
 
-
                 int spacenum = 0;
 
                 //str2为空：str1 居中      str1为空：tr2 右对齐     一行文本左对齐不需要该方法

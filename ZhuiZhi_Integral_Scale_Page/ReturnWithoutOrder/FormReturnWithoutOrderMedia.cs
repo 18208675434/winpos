@@ -48,16 +48,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                         dgvGood.Rows.Add(pro.skuname+"\r\n"+pro.skucode,pro.price.saleprice.ToString("f2"),pro.goodstagid==0 ? pro.num:pro.specnum,pro.price.total.ToString("f2"));
                     }
 
+                    dgvGood.ClearSelection();
                     lblPrice.Text = cart.totalpayment.ToString("f2");
+                    int count = cart.products.Count;
+                    int goodscount = 0;
+                    foreach (Product pro in cart.products)
+                    {
+                        goodscount += pro.num;
+                    }
 
-                    lblGoodsCount.Text = "("+cart.productcount+"件商品)";
-                }
-                
-
+                    lblGoodsCount.Text = "(" + goodscount + "件商品)";
+                }  
             }
             catch { }
         }
-
 
         public void ClearForm()
         {

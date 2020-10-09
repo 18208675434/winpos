@@ -518,7 +518,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 //顶尖 电子秤端口COM2  波特率9600
             else if (scalename == ScaleType.顶尖.ToString())
             {
-                string comno = "COM2";
+                string comno = "COM1";
                 int baud = 9600;
 
                 cbxComNo.SelectedItem = comno;

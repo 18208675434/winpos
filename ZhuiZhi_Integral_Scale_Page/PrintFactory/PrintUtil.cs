@@ -34,6 +34,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return SprtPrintUtil.PrintOrder(printdetail, isRefound, ref errormsg);
                 }
+                else
+                {
+                    return YKPrintUtil.PrintOrder(printdetail, isRefound, ref errormsg);
+                }
 
                 return false;
             }
@@ -57,6 +61,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return SprtPrintUtil.ReceiptPrint(receipt, ref errormsg);
                 }
+                else
+                {
+                    return YKPrintUtil.ReceiptPrint(receipt, ref errormsg);
+
+                }
 
                 return false;
             }
@@ -79,7 +88,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return SprtPrintUtil.PrintBroken(brokenresult, ref errormsg);
                 }
+                else
+                {
+                    return YKPrintUtil.PrintBroken(brokenresult, ref errormsg);
 
+                }
                 return false;
             }
             catch {
@@ -105,6 +118,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     SprtPrintUtil.OpenCashDrawerEx();
                 }
+                else
+                {
+                    YKPrintUtil.OpenCashDrawerEx();
+                }
             }
             catch { }
         }
@@ -123,6 +140,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 else if (ScaleName == ScaleType.顶尖PS1X.ToString())
                 {
                     SprtPrintUtil.PrintTopUp(depositbillid);
+                }
+                else
+                {
+                    YKPrintUtil.PrintTopUp(depositbillid);
                 }
 
                 return true;
@@ -146,6 +167,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 else if (ScaleName == ScaleType.顶尖PS1X.ToString())
                 {
                     return SprtPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
+                }
+                else
+                {
+                    return YKPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
+
                 }
 
                 return false;
@@ -172,6 +198,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return SprtPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
                 }
+                else
+                {
+                    return YKPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
+
+                }
 
                 return false;
             }
@@ -180,8 +211,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return false;
             }
         }
-
-
        
     }
 }

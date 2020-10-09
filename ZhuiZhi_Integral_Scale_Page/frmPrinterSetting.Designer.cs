@@ -851,7 +851,8 @@
             "中科英泰",
             "顶尖",
             "托利多",
-            "顶尖PS1X"});
+            "顶尖PS1X",
+            "易衡"});
             this.cbxScaleName.Location = new System.Drawing.Point(744, 119);
             this.cbxScaleName.Name = "cbxScaleName";
             this.cbxScaleName.Size = new System.Drawing.Size(316, 29);

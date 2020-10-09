@@ -29,13 +29,18 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.lblShopName = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.dgvGood = new System.Windows.Forms.DataGridView();
+            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.refund = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblPrice = new System.Windows.Forms.Label();
@@ -50,10 +55,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.refund = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             this.panel2.SuspendLayout();
@@ -105,13 +106,6 @@
             this.dgvGood.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvGood.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvGood.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvGood.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvGood.ColumnHeadersHeight = 20;
             this.dgvGood.ColumnHeadersVisible = false;
@@ -120,14 +114,6 @@
             this.price,
             this.num,
             this.refund});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvGood.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvGood.Enabled = false;
             this.dgvGood.GridColor = System.Drawing.Color.LightGray;
             this.dgvGood.Location = new System.Drawing.Point(24, 166);
@@ -136,11 +122,49 @@
             this.dgvGood.ReadOnly = true;
             this.dgvGood.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvGood.RowHeadersVisible = false;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvGood.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvGood.RowTemplate.Height = 90;
             this.dgvGood.Size = new System.Drawing.Size(828, 590);
             this.dgvGood.TabIndex = 314;
+            // 
+            // barcode
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 14F);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.DefaultCellStyle = dataGridViewCellStyle2;
+            this.barcode.FillWeight = 120F;
+            this.barcode.HeaderText = "商品/条码";
+            this.barcode.Name = "barcode";
+            this.barcode.ReadOnly = true;
+            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // price
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.price.DefaultCellStyle = dataGridViewCellStyle3;
+            this.price.HeaderText = "单价（元）";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            // 
+            // num
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.num.DefaultCellStyle = dataGridViewCellStyle4;
+            this.num.HeaderText = "数量";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            // 
+            // refund
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.refund.DefaultCellStyle = dataGridViewCellStyle5;
+            this.refund.HeaderText = "应退";
+            this.refund.Name = "refund";
+            this.refund.ReadOnly = true;
             // 
             // panel2
             // 
@@ -150,7 +174,7 @@
             this.panel2.Controls.Add(this.lblPriceContent);
             this.panel2.Controls.Add(this.lblGoodsCount);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(870, 302);
+            this.panel2.Location = new System.Drawing.Point(870, 229);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(299, 178);
@@ -214,7 +238,7 @@
             this.pnlMember.BackColor = System.Drawing.Color.White;
             this.pnlMember.Controls.Add(this.lblWechartNickName);
             this.pnlMember.Controls.Add(this.lblMobil);
-            this.pnlMember.Location = new System.Drawing.Point(870, 166);
+            this.pnlMember.Location = new System.Drawing.Point(870, 93);
             this.pnlMember.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMember.Name = "pnlMember";
             this.pnlMember.Size = new System.Drawing.Size(299, 118);
@@ -256,7 +280,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label6.Location = new System.Drawing.Point(644, 25);
+            this.label6.Location = new System.Drawing.Point(631, 25);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 25);
@@ -267,7 +291,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label5.Location = new System.Drawing.Point(443, 25);
+            this.label5.Location = new System.Drawing.Point(431, 25);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 25);
@@ -278,7 +302,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label2.Location = new System.Drawing.Point(253, 25);
+            this.label2.Location = new System.Drawing.Point(238, 25);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 25);
@@ -296,37 +320,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "商品/条码";
             // 
-            // barcode
-            // 
-            this.barcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.barcode.DefaultCellStyle = dataGridViewCellStyle2;
-            this.barcode.FillWeight = 75.28699F;
-            this.barcode.HeaderText = "商品/条码";
-            this.barcode.Name = "barcode";
-            this.barcode.ReadOnly = true;
-            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.barcode.Width = 125;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "单价（元）";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            // 
-            // num
-            // 
-            this.num.HeaderText = "数量";
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            // 
-            // refund
-            // 
-            this.refund.HeaderText = "应退";
-            this.refund.Name = "refund";
-            this.refund.ReadOnly = true;
-            // 
             // FormReturnWithoutOrderMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -340,6 +333,7 @@
             this.Controls.Add(this.pnlHead);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormReturnWithoutOrderMedia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormReturnWithoutOrderMedia";
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();
