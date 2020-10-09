@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
@@ -122,6 +123,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
 
                     fixpricetotal = (decimal)CurrentTotalpaymentBeforeFix * doublenum / 10;
 
+
+                   
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

@@ -180,6 +180,11 @@ namespace Maticsoft.BLL
 
             return dal.GetModel(condition);
         }
+
+        public int GetSingle(string strSql)
+        {
+            return dal.GetSingle(strSql);
+        }
         #endregion  ExtensionMethod
 	}
 }

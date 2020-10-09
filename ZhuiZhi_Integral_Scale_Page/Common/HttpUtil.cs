@@ -494,7 +494,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
-                LogManager.WriteLog("DEBUG","创建订单"+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 resultcode = rd.code;
@@ -1937,7 +1936,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
-                LogManager.WriteLog("DEBUG"+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -3762,6 +3760,49 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
         #endregion
+
+
+        /// <summary>
+        /// 异常订单
+        /// </summary>
+        /// <param name="signpara"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public bool AbnormalOrder(ZhuiZhi_Integral_Scale_UncleFruit.Common.AbnormalOrderUtil.AbnormalOrder para, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/uploadabnormalorder";
+
+
+                string tempjson = JsonConvert.SerializeObject(para);
+
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+
+                    return Convert.ToBoolean(rd.data);
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "uploadabnormalorder:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "提交异常数据异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
 
         #region  访问服务端
         private HttpRequest httprequest = new HttpRequest();

@@ -597,6 +597,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         }
                         else
                         {
+
+                            AbnormalOrderUtil.RefundOrderList(resultorderid,frmrefund.Refrefundpara);
                             PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
 
                             if (ErrorMsg != "" || printdetail == null)

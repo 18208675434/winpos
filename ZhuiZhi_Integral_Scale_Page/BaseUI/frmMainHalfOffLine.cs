@@ -369,6 +369,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 try
                 {
                     ReceiptUtil.EditCancelOrder(1, CurrentCart.totalpayment + CurrentCart.totalpromoamt);
+                    AbnormalOrderUtil.WholeCancelOrderLsit(CurrentCart);
                 }
                 catch (Exception ex) { }
 
@@ -405,6 +406,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             return;
                         }
 
+                        AbnormalOrderUtil.HookOrderList(CurrentCart);
                         SerializeOrder(CurrentCart);
 
                         if (MainModel.CurrentMember != null)
@@ -794,7 +796,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 string ErrorMsg = "";
                 Receiptdetail receipt = httputil.Receipt(receiptpara, ref ErrorMsg);
 
-                
+                AbnormalOrderUtil.UploadAbnormalOrder();
+
+
                 IsEnable = true;
                 if (ErrorMsg != "" || receipt == null) //商品不存在或异常
                 {
@@ -3556,12 +3560,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 if (ZhuiZhi_Integral_Scale_UncleFruit.HelperUI.ConfirmHelper.Confirm("确认删除？", pro.title + pro.skucode))
                                 {
                                     ReceiptUtil.EditCancelSingle(1, CurrentCart.products[i].price.origintotal);
+                                    AbnormalOrderUtil.DeleteSkuList(CurrentCart.products[i]);
                                     CurrentCart.products.RemoveAt(i);
                                 }
                             }
                             else
                             {
                                 ReceiptUtil.EditCancelSingle(1, CurrentCart.products[i].price.origintotal);
+                                AbnormalOrderUtil.DeleteSkuList(CurrentCart.products[i]);
+
                                 CurrentCart.products[i].num -= 1;
                                 CurrentCart.products[i].adjustpriceinfo = null; CurrentCart.products[i].adjustpricedesc = null;  //商品数量有变化清空改价信息
                             }
@@ -3702,7 +3709,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 ShowLoading(true, false);
 
-
                 if (MainModel.WhetherHalfOffLine)
                 {
                     if (!RefreshCart())
@@ -3813,6 +3819,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     if (fixpricetaotal>0)
                     {
                         CurrentCart.fixpricetotal = fixpricetaotal;
+
+
+                        AbnormalOrderUtil.WholeAdjustOrder(CurrentCart);
+
 
                         whetherfix = true;
                         UploadOffLineDgvCart();

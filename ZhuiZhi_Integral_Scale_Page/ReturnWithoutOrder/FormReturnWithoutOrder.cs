@@ -2663,6 +2663,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 if (result)
                 {
+
                     ClearForm();
                     ClearMember();
                 }

@@ -252,7 +252,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                     }
                     else
                     {
-
+                        AbnormalOrderUtil.RefundDiffList(resultorderid,refundpara);
                         PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
 
                         if (ErrorMsg != "" || printdetail == null)

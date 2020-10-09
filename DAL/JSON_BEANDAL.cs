@@ -368,6 +368,11 @@ namespace Maticsoft.DAL
             }
         }
 
+        public int GetSingle(string strSql)
+        {
+            int rows = DbHelperSQLite.ExecuteSql(strSql);
+            return rows;
+        }
         #endregion  ExtensionMethod
 	}
 }
