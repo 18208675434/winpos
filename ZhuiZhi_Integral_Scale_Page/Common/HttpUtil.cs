@@ -15,6 +15,7 @@ using System.Threading;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
+using ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
@@ -4161,6 +4162,41 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         //    return dicresult;
         //}
 
+        #endregion
+
+        #region 实体卡
+        public Card GetCardNew(String ldcardid, ref string errormsg)
+        {
+            try
+            {
+
+
+                string url = "/pos/member/oldentitycard/getcardnew";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("ldcardid", ldcardid);
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    Card resultobj = JsonConvert.DeserializeObject<Card>(rd.data.ToString());
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "getcardnew:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "查询实体卡异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
         #endregion
     }
 }

@@ -63,9 +63,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap delete_Image {
+            get {
+                object obj = ResourceManager.GetObject("delete.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Empty {
             get {
                 object obj = ResourceManager.GetObject("Empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap picDown {
+            get {
+                object obj = ResourceManager.GetObject("picDown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

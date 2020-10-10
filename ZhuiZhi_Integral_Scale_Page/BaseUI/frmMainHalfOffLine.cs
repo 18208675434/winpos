@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BaseUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
@@ -991,7 +992,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void BatchSaleCard()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IsEnable = false;
+                BatchSaleCardHelper.ShowFormBatchSaleCardCreate();
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                ShowLog("切换批量售卡异常" + ex.Message, true);
+            }
         }
 
 

@@ -122,6 +122,14 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseUI\MainHelper.cs" />
+    <Compile Include="BatchSaleCardUI\BatchSaleCardHelper.cs" />
+    <Compile Include="BatchSaleCardUI\FormBatchSaleCardCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BatchSaleCardUI\FormBatchSaleCardCreate.Designer.cs">
+      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BatchSaleCardUI\Model\Card.cs" />
     <Compile Include="BrokenUI\BrokenHelper.cs" />
     <Compile Include="BrokenUI\FormBroken.cs">
       <SubType>Form</SubType>
@@ -1106,6 +1114,9 @@
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="BatchSaleCardUI\FormBatchSaleCardCreate.resx">
+      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BrokenUI\FormBroken.resx">
       <DependentUpon>FormBroken.cs</DependentUpon>
     </EmbeddedResource>
@@ -1531,6 +1542,8 @@
     <None Include="Resources\border_add1.bmp" />
     <Content Include="FruitLogo.ico" />
     <Content Include="Picture\rounblue.png" />
+    <None Include="Resources\delete.Image.png" />
+    <None Include="Resources\picDown.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />
