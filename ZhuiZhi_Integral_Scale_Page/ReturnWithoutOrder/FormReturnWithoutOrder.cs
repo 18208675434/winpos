@@ -163,11 +163,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 Application.DoEvents();
                 LoadBaseInfo();
 
-                ParameterizedThreadStart Pts = new ParameterizedThreadStart(ChangeMQTT);
-                Thread threadmqtt = new Thread(Pts);
-                threadmqtt.IsBackground = true;
-                threadmqtt.Start(true);
-
                 ShowLoading(true, false);
 
                 //扫描数据处理线程
@@ -175,28 +170,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 threadScanCode.IsBackground = true;
                 threadScanCode.Start();
 
-
-                //刷新焦点线程  防止客屏播放视频抢走焦点
-                threadCheckActivate = new Thread(CheckActivate);
-                threadCheckActivate.IsBackground = true;
-                threadCheckActivate.Start();
-
-                //启动电子秤同步信息线程
-                Thread threadLoadScale = new Thread(ScaleDataHelper.LoadScale);
-                threadLoadScale.IsBackground = true;
-                threadLoadScale.Start();
-
-                if (string.IsNullOrEmpty(MainModel.TvShowPage1))
-                {
-                    Thread threadTV = new Thread(ServerDataUtil.LoadTVSkus);
-                    threadTV.IsBackground = true;
-                    threadTV.Start();
-                }
-
-                //启动促销商品同步线程
-                Thread threadLoadPromotion = new Thread(ServerDataUtil.UpdatePromotion);
-                threadLoadPromotion.IsBackground = false;
-                threadLoadPromotion.Start();
 
                 LstAllProduct = CartUtil.LoadAllProduct(true);
 
@@ -227,7 +200,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 threadScale.IsBackground = true;                
                 threadScale.Start();
 
-                ReturnWithoutOrderHelper.ShowFormReturnWithoutMedia();
+                
 
                 this.Activate();
             }
@@ -286,16 +259,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             IsRun = false;
             try
             {
-                ParameterizedThreadStart Pts = new ParameterizedThreadStart(ChangeMQTT);
-                Thread threadmqtt = new Thread(Pts);
-                threadmqtt.IsBackground = true;
-                threadmqtt.Start(false);
 
-                Delay.Start(300);
-                ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia();
+
+               
                 
                 //ScaleGlobalHelper.Close();
-                this.Dispose();
+                //this.Dispose();
 
             }
             catch (Exception ex)
@@ -353,7 +322,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 Application.DoEvents();
 
-                this.Close();
+                this.Hide();
+               // this.Close();
             }
             catch (Exception ex)
             {
@@ -2959,43 +2929,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        private void ChangeMQTT(object obj)
-        {
-            try
-            {
-                bool isstart = (bool)obj;
-                if (isstart)
-                {
-                    //启用标签打印程序
-                    if (File.Exists(MainModel.ServerPath + @"MQTTClient.exe"))
-                    {
-                        System.Diagnostics.Process.Start(MainModel.ServerPath + @"MQTTClient.exe");
-                        LogManager.WriteLog("MQTT 启动");
-                    }
-                    else
-                    {
-                        LogManager.WriteLog("缺少MQTT程序");
-                    }
-                }
-                else
-                {
-                    System.Diagnostics.Process[] pro = System.Diagnostics.Process.GetProcesses();
-                    for (int i = 0; i < pro.Length - 1; i++)
-                    {
-                        if (pro[i].ProcessName == "MQTTClient")
-                        {
-                            pro[i].Kill();
-                            LogManager.WriteLog("MQTT 关闭");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("启动/关闭 MQTT程序异常");
-            }
-        }
-
         private void frmMainHalfOffLine_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
@@ -3212,7 +3145,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
+            //this.Close();
         }
       
         

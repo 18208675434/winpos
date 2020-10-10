@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 {
@@ -40,7 +41,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             try
             {
                 Close();
-                return OpenCom(ptr, connum);
+                bool result =OpenCom(ptr, connum);
+              //  LogManager.WriteLog("EH200", "open:" + result.ToString());
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -52,7 +56,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             try
             {
-                return CloseCom(ptr);
+                bool result = CloseCom(ptr);
+                //LogManager.WriteLog("EH200","close:" + result.ToString());
+
+                return result ;
             }
             catch (Exception ex)
             {
@@ -78,7 +85,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             {
                 string strresult = CurWeight(ptr);
 
-                if (string.IsNullOrEmpty(strresult) || strresult.Length < 15)
+                LogManager.WriteLog("EH200", "weight:" + strresult);
+
+                if (string.IsNullOrEmpty(strresult) || strresult.Length < 14)
                 {
                     return result;
                 }
@@ -98,6 +107,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             {
                 result.WhetherSuccess = false;
                 result.Message = "获取重量异常" + ex.Message;
+
+               // LogManager.WriteLog("EH200", "获取重量异常" + ex.Message);
 
                 return result;
             }

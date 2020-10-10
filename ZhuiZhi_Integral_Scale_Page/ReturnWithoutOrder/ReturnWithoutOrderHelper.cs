@@ -16,21 +16,50 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         //按比例缩放页面及控件
         //</summary>
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
+        private static FormReturnWithoutOrder frmreturn = null;
+        public static void IniFormReturnWithoutOrder()
+        {
+            try
+            {
+                if (frmreturn != null)
+                {
+                    try
+                    {
+                        frmreturn.Close();
+                        frmreturn.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+
+                frmreturn = new FormReturnWithoutOrder();
+                asf.AutoScaleControlTest(frmreturn, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmreturn.Location = new System.Drawing.Point(0, 0);
+
+            }
+            catch { }
+        }
+
+
         public static void ShowFormReturnWithoutOrder()
         {
             try
             {
-                FormReturnWithoutOrder frmreturn = new FormReturnWithoutOrder();
-                asf.AutoScaleControlTest(frmreturn, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                frmreturn.Location = new System.Drawing.Point(0, 0);
-
+                ReturnWithoutOrderHelper.ShowFormReturnWithoutMedia();
+                Application.DoEvents();
+                if (frmreturn == null)
+                {
+                    IniFormReturnWithoutOrder();
+                }
                 frmreturn.ShowDialog();
 
-                frmreturn.Dispose();
-
+                ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia(); 
                 Application.DoEvents();
             }
-            catch { }
+            catch {
+                frmreturn = null;
+            }
         }
 
 

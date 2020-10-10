@@ -20,13 +20,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-
+        private void FormReturnWithoutOrderMedia_Shown(object sender, EventArgs e)
+        {
+            lblTime.Text = MainModel.Titledata;
+            lblShopName.Text = "欢迎光临 " + MainModel.CurrentShopInfo.shopname;
+        }
 
         public void UpdateForm(Cart cart,Member member)
         {
             try
             {
-
                 if (member == null)
                 {
                     ClearMember();
@@ -45,7 +48,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
                     foreach (Product pro in cart.products)
                     {
-                        dgvGood.Rows.Add(pro.skuname+"\r\n"+pro.skucode,pro.price.saleprice.ToString("f2"),pro.goodstagid==0 ? pro.num:pro.specnum,pro.price.total.ToString("f2"));
+                        string title = string.IsNullOrEmpty(pro.title) ? pro.skuname : pro.title;
+                        dgvGood.Rows.Add(title + "\r\n" + pro.skucode, pro.price.saleprice.ToString("f2"), pro.goodstagid == 0 ? pro.num : pro.specnum, pro.price.total.ToString("f2"));
                     }
 
                     dgvGood.ClearSelection();
@@ -90,5 +94,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
             //lblWechartNickName.Text = "你好！";
         }
+
+       
     }
 }

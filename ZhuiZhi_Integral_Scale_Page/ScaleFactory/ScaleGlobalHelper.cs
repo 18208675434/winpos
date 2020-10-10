@@ -15,7 +15,49 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
        public static ScaleType currentscaletype = ScaleType.未指定;
 
-//       [Scale]
+       public static ScaleResult CurrentScaleResult = null;
+
+       #region 异步获取重量 全局用
+       private static  System.ComponentModel.BackgroundWorker bk;// = new System.ComponentModel.BackgroundWorker();
+
+       public static void BeginReadWeight()
+       {
+
+           if (bk != null)
+           {
+               bk.Dispose();
+           }
+           bk = new System.ComponentModel.BackgroundWorker();
+           bk.DoWork += backgroundWorker_DoWork;
+           bk.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
+
+           bk.RunWorkerAsync();
+       }
+
+       private static  void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+       {
+           try
+           {
+               IniScale(false);
+
+               if (AscalOK())
+               {
+                   CurrentScaleResult = scaleaction.GetScaleWeight();
+               }
+               System.Threading.Thread.Sleep(150);
+           }
+           catch { }
+
+       }
+
+       private static  void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+       {
+
+           bk.RunWorkerAsync();
+       }
+       #endregion
+
+       //       [Scale]
 //ComNo=COM1
 //Baud=9600
 //ScaleName=WINTEC
@@ -114,21 +156,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
        /// <returns></returns>
        public static  ScaleResult GetWeight()
        {
-           try
-           {
-               IniScale(false);
 
-               if (!AscalOK())
-               {
-                   return null;
-               }
-               return scaleaction.GetScaleWeight();
-           }
-           catch (Exception ex)
-           {
-               return null;
-               LogManager.WriteLog("获取重量异常" + ex.Message);
-           }
+           return CurrentScaleResult;
+           //try
+           //{
+           //    IniScale(false);
+
+           //    if (!AscalOK())
+           //    {
+           //        return null;
+           //    }
+
+           //    return scaleaction.GetScaleWeight();
+           //}
+           //catch (Exception ex)
+           //{
+           //    return null;
+           //    LogManager.WriteLog("获取重量异常" + ex.Message);
+           //}
        }
 
        /// <summary>
@@ -234,9 +279,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
            }
        }
 
-
-
-
        private static void IniSetType()
        {
            try
@@ -258,8 +300,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
     public enum ScaleType{
         未指定,
         中科英泰,
-        顶尖,
         托利多,
+        顶尖,
         顶尖PS1X,
         易衡
     }

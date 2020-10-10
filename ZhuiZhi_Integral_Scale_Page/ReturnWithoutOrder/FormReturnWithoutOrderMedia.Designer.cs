@@ -335,6 +335,7 @@
             this.Name = "FormReturnWithoutOrderMedia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormReturnWithoutOrderMedia";
+            this.Shown += new System.EventHandler(this.FormReturnWithoutOrderMedia_Shown);
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).EndInit();

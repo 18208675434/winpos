@@ -90,14 +90,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 
                 MemberCenterMediaHelper.ShowFormMainMedia();
 
-                
+                this.BeginInvoke(new Action(delegate()
+                {
+                    LoadBalanceAccount();
+                    LoadTemplate(true);
+                }));
+                this.BeginInvoke(new Action(delegate()
+                {
+                    LoadCoupon();
+
+                }));
                
-                LoadBalanceAccount();
-                LoadCoupon();
+                this.BeginInvoke(new Action(delegate()
+                {
+                    LoadBalanceConfigDetail();
 
-                LoadTemplate(true);
+                }));
+                //LoadBalanceAccount();
 
-                LoadBalanceConfigDetail();
+                //LoadCoupon();
+                //LoadTemplate(true);
+                //LoadBalanceConfigDetail();
+
+
                 LoadingHelper.CloseForm();
                 IsEnable = true;
 
@@ -310,7 +325,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     else
                     {
                         lblAmount.ForeColor = Color.Black;
-                        lblAmountStr.ForeColor = Color.FromArgb(150, 150, 150);
+                        lblAmountStr.ForeColor = Color.FromArgb(220, 220, 220);
                         pnlItem.BackColor = Color.White;
                     }
 

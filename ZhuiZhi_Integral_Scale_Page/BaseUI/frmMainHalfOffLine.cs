@@ -711,7 +711,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     this.Invoke(new InvokeHandler(delegate()
                     {
+
+                        if (CurrentCart == null || CurrentCart.products == null)
+                        {
+                            BaseUIHelper.UpdaForm(CurrentCart);
+                        }
+
+                        
                         ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
+
+                        if (CurrentCart == null || CurrentCart.products == null)
+                        {
+                            BaseUIHelper.IniFormMainMedia();
+                        }
                     }));
                 }
 

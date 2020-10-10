@@ -301,15 +301,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     if (!string.IsNullOrEmpty(printdetail.pickcode))
                     {
                         PrintStr(PrintHelper.getStrLine());
-                        PrintStr("请扫描下方二维码取货配送");
-                        PrintStr("  ");
+                        PrintStr("请扫描下方二维码取货配送" + "\n");
+                        //PrintStr("  " + "\n");
                         PrintHelper.GetQrBmp(printdetail.pickcode);
 
-                        string logofilepath = AppDomain.CurrentDomain.BaseDirectory + "\\headlogo.bmp";
-                        StringBuilder logobuilder = new StringBuilder(AppDomain.CurrentDomain.BaseDirectory + "\\headlogo.bmp");
+                        SetAlign(1);
+                        StringBuilder logobuilder = new StringBuilder(AppDomain.CurrentDomain.BaseDirectory + "\\orderqrcoe.bmp" );
                         PrintBitmap(logobuilder, 0);
 
-                        PrintStr(PrintHelper.MergeStr(printdetail.pickcode, "", BodyCharCountOfLine, PageSize));
+                        PrintStr("取货码："+printdetail.pickcode +"\n");
+                        SetAlign(0);
                     }
 
                     PrintStr(PrintHelper.getStrLine() + "\n");

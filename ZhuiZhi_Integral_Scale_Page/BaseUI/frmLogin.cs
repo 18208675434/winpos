@@ -74,6 +74,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             threadServerStart.IsBackground = true;
             threadServerStart.Start();
 
+            ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory.ScaleGlobalHelper.BeginReadWeight();
+
             //每十分钟更新一次
             timerTen.Interval = 10 * 60 * 1000;
             timerTen.Enabled = true;

@@ -387,10 +387,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     para.phone = txtPhone.Text;
                     para.starttime = getStampByDateTime(dtStart.Value);
                     para.endtime = getStampByDateTime(dtEnd.Value);
-
+                    
                     para.page = CurrentPage;
                     para.size = 6;
-
+                     
                     string ErrorMsg = "";
                     CurrentBalanceDepos = httputil.ListDepositbill(para, ref ErrorMsg);
 

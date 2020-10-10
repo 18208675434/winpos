@@ -1782,7 +1782,6 @@
             this.btnMeituan.TabIndex = 44;
             this.btnMeituan.Text = "美团订单";
             this.btnMeituan.UseVisualStyleBackColor = false;
-            this.btnMeituan.Visible = false;
             this.btnMeituan.Click += new System.EventHandler(this.btnMeituan_Click);
             // 
             // btnErbai
@@ -1802,7 +1801,6 @@
             this.btnErbai.TabIndex = 45;
             this.btnErbai.Text = "饿百订单";
             this.btnErbai.UseVisualStyleBackColor = false;
-            this.btnErbai.Visible = false;
             this.btnErbai.Click += new System.EventHandler(this.btnErbai_Click);
             // 
             // btnApp
@@ -1822,7 +1820,6 @@
             this.btnApp.TabIndex = 46;
             this.btnApp.Text = "小程序订单";
             this.btnApp.UseVisualStyleBackColor = false;
-            this.btnApp.Visible = false;
             this.btnApp.Click += new System.EventHandler(this.btnApp_Click);
             // 
             // btnError
@@ -1842,7 +1839,6 @@
             this.btnError.TabIndex = 47;
             this.btnError.Text = "异常订单";
             this.btnError.UseVisualStyleBackColor = false;
-            this.btnError.Visible = false;
             this.btnError.Click += new System.EventHandler(this.btnError_Click);
             // 
             // rbtnPageDown

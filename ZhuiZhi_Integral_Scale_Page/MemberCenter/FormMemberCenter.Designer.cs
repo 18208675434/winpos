@@ -69,7 +69,6 @@
             this.lblAmount = new System.Windows.Forms.Label();
             this.btnForgetPwd = new System.Windows.Forms.Button();
             this.btnChangePwd = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -380,7 +379,6 @@
             this.panel1.Controls.Add(this.pnlItem);
             this.panel1.Controls.Add(this.btnForgetPwd);
             this.panel1.Controls.Add(this.btnChangePwd);
-            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.pictureBox5);
             this.panel1.Controls.Add(this.label9);
@@ -607,19 +605,6 @@
             this.btnChangePwd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnChangePwd.UseVisualStyleBackColor = false;
             this.btnChangePwd.Click += new System.EventHandler(this.btnChangePwd_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(45, 572);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 25);
-            this.label10.TabIndex = 67;
-            this.label10.Text = "--";
-            this.label10.Visible = false;
             // 
             // label11
             // 
@@ -852,7 +837,6 @@
         private System.Windows.Forms.Label lblShopName;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label9;
