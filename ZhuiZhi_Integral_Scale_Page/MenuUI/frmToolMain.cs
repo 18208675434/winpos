@@ -133,6 +133,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             this.Hide(); //this.Close();
         }
+
+        private void pnlRechargeQuery_Click(object sender, EventArgs e)
+        {
+            if (DataReceiveHandle != null)
+                this.DataReceiveHandle.BeginInvoke(ToolType.RechangeQuery, null, null);
+
+            this.Hide(); //this.Close();
+        }
     }
 
     public enum ToolType
@@ -148,5 +156,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         ScaleModel,
         Broken,
         BatchSaleCard,
+        RechangeQuery,
     }
 }

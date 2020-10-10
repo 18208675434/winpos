@@ -3532,6 +3532,110 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+        /// <summary>
+        /// 获取充值合计
+        /// </summary>
+        public Dictionary<string, decimal> SumDepositByCondition(DepositListRequest para, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/balance/sumdepositbycondition";
+
+                string testjson = JsonConvert.SerializeObject(para);
+
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    Dictionary<string, decimal> resultobj = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(rd.data.ToString());
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "sumdepositbycondition:" + json); }
+                    catch { }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "充值合计异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 会员退款列表
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public PageBalanceDepositRefundBill ListDepositRefundBillList(DepositListRequest para, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/balance/depositrefundbilllist";
+
+                string testjson = JsonConvert.SerializeObject(para);
+
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+
+                    PageBalanceDepositRefundBill resultobj = JsonConvert.DeserializeObject<PageBalanceDepositRefundBill>(rd.data.ToString());
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "depositrefundbilllist:" + json); }
+                    catch { }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "退款列表异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+          /// <summary>
+        /// 获取退款合计
+        /// </summary>
+        public Dictionary<string, decimal> SumDepositRefundByCondition(DepositListRequest para, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/balance/sumdepositrefundbycondition";
+
+                string testjson = JsonConvert.SerializeObject(para);
+
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    Dictionary<string, decimal> resultobj = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(rd.data.ToString());
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "sumdepositrefundbycondition:" + json); }
+                    catch { }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "退款合计异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
 
 
         /// <summary>

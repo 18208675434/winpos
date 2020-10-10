@@ -17,6 +17,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
         //按比例缩放页面及控件
         //</summary>
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
+
+        #region 批量售卡
         private static FormBatchSaleCardCreate formBatchSaleCardCreate = null;
 
         public static void IniFormBatchSaleCardCreate()
@@ -59,7 +61,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
                 LogManager.WriteLog("显示批量售卡页面异常" + ex.Message);
             }
         }
+        #endregion
 
+        #region 实体卡卡号录入
         /// <summary>
         /// 实体卡卡号 不校验规则和长度
         /// </summary>
@@ -86,9 +90,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("会员号弹窗异常" + ex.Message);
+                LogManager.WriteLog("实体卡号弹窗异常" + ex.Message);
                 return "";
             }
         }
+        #endregion
+
+        #region 充值明细
+        private static FormRechargeQuery formRechangeQuery = null;
+        public static void IniFormRechangeQuery()
+        {
+            try
+            {
+                if (formRechangeQuery != null)
+                {
+                    try
+                    {
+                        formRechangeQuery.Dispose();
+                    }
+                    catch { }
+                }
+                formRechangeQuery = new FormRechargeQuery();
+                asf.AutoScaleControlTest(formRechangeQuery, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("初始化报损页面异常" + ex.Message);
+            }
+        }
+
+        public static void ShowFormRechangeQuery()
+        {
+            try
+            {
+                if (formRechangeQuery == null || formRechangeQuery.IsDisposed)
+                {
+                    IniFormRechangeQuery();
+                }
+
+                formRechangeQuery.ShowDialog();
+                formRechangeQuery.Dispose();
+            }
+            catch (Exception ex)
+            {
+                formBatchSaleCardCreate = null;
+                LogManager.WriteLog("显示批量售卡页面异常" + ex.Message);
+            }
+        }
+        #endregion
     }
 }

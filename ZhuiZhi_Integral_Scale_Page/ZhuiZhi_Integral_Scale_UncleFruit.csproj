@@ -129,6 +129,12 @@
     <Compile Include="BatchSaleCardUI\FormBatchSaleCardCreate.Designer.cs">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="BatchSaleCardUI\FormRechargeQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BatchSaleCardUI\FormRechargeQuery.Designer.cs">
+      <DependentUpon>FormRechargeQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="BatchSaleCardUI\Model\Card.cs" />
     <Compile Include="BrokenUI\BrokenHelper.cs" />
     <Compile Include="BrokenUI\FormBroken.cs">
@@ -424,6 +430,7 @@
     <Compile Include="MemberCenter\model\CreateMemberPara.cs" />
     <Compile Include="MemberCenter\model\MemberTopUpPara.cs" />
     <Compile Include="MemberCenter\model\PageBalanceDepositBill.cs" />
+    <Compile Include="MemberCenter\model\PageBalanceDepositRefundBill.cs" />
     <Compile Include="MemberCenter\model\TopUpPrint.cs" />
     <Compile Include="MemberCenter\model\ZtBalanceAccount.cs" />
     <Compile Include="MenuUI\FormCouponPwd.cs">
@@ -1116,6 +1123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BatchSaleCardUI\FormBatchSaleCardCreate.resx">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BatchSaleCardUI\FormRechargeQuery.resx">
+      <DependentUpon>FormRechargeQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BrokenUI\FormBroken.resx">
       <DependentUpon>FormBroken.cs</DependentUpon>

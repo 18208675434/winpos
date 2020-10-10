@@ -712,6 +712,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         BatchSaleCard();
                     }));
                 }
+                if (tooltype == ToolType.RechangeQuery)
+                {
+                    this.Invoke(new InvokeHandler(delegate()
+                    {
+                        RechangeQuery();
+                    }));
+                }
             }
             catch (Exception ex)
             {
@@ -1003,6 +1010,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ShowLog("切换批量售卡异常" + ex.Message, true);
             }
         }
+
+        private void RechangeQuery()
+        {
+            try
+            {
+                IsEnable = false;
+                BatchSaleCardHelper.ShowFormRechangeQuery();
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                ShowLog("切换充值明细异常" + ex.Message, true);
+            }
+        }
+
+        
 
 
         int Seconds = 0;   //执行秒数  没半分钟轮询一次接口  每秒都检查mqtt是否接收到新数据
