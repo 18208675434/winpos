@@ -75,7 +75,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(266, 21);
             this.label2.TabIndex = 1;
-            this.label2.Text = "本次充值未现金充值，只可现金退款";
+            this.label2.Text = "本次充值为现金充值，只可现金退款";
             this.label2.Visible = false;
             // 
             // label3
@@ -370,7 +370,7 @@
             this.btnOriginal.Visible = false;
             this.btnOriginal.Click += new System.EventHandler(this.btnOriginal_Click);
             // 
-            // FormTuikuan
+            // FormRechargeRefund
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -400,7 +400,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormTuikuan";
+            this.Name = "FormRechargeRefund";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormTuikuan";
             this.Load += new System.EventHandler(this.FormTuikuan_Load);

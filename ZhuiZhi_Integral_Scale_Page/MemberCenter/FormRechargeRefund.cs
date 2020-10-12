@@ -11,6 +11,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormRechargeRefund : Form
     {
         #region 全局变量
+        HttpUtil until = new HttpUtil();
         public string balance;
         public string operatorid = "";
         public string depostBillid;
@@ -21,10 +22,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public decimal rechargeAmount;
         public decimal rewardAmount;
         #endregion
-        public FormRechargeRefund(string depostBillid,string memberId,string shopId,string tenantId, string payModeForApi, decimal rechargeAmount, decimal rewardAmount)
+        public FormRechargeRefund(string depostBillid, string memberId, string shopId, string tenantId, string payModeForApi, decimal rechargeAmount, decimal rewardAmount)
         {
             InitializeComponent();
-           
+
             this.depostBillid = depostBillid;
             this.memberId = memberId;
             this.shopId = shopId;
@@ -34,6 +35,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.rewardAmount = rewardAmount;
         }
 
+        #region 数字键
 
         private void btnpw1_Click(object sender, EventArgs e)
         {
@@ -210,6 +212,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return;
             }
         }
+        #region
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -233,17 +236,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.Close();
 
         }
-        HttpUtil until = new HttpUtil();
-        DepositRefundRequest request = new DepositRefundRequest();
 
-        private void btnOk_Click(object sender, EventArgs e)
+
+
+        private void FormTuikuan_Load(object sender, EventArgs e)
         {
-            btn();
+            if (balance != "")
+            {
+                txttuikuan.Text = rechargeAmount.ToString();
+                usermoney.Text = balance;
+                usermoney.Visible = true;
+                if (payModeForApi != "现金")
+                {
+                    label2.Visible = false;
+                    btncash.Visible = true;
+                    btnOriginal.Visible = true;
+                }
+                else if (payModeForApi == "现金")
+                {
+                    label2.Visible = true;
+                    btncash.Visible = false;
+                    btnOriginal.Visible = false;
+                }
+            }
+
+
         }
-        public void btn()
+        private void btnOk_Click(object sender, EventArgs e)
         {
             try
             {
+                DepositRefundRequest request = new DepositRefundRequest();
+
                 request.refundcapital = rechargeAmount.ToString().Replace("0元", "");
                 if (btncash.BackColor == Color.Blue || payModeForApi == "现金")
                 {
@@ -254,7 +278,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     request.refundtype = 1;
                 }
                 request.memberid = memberId;
-                request.operatorid =MainModel.CurrentUser.loginaccount;
+                request.operatorid = MainModel.CurrentUser.loginaccount;
                 request.depositbillid = depostBillid;
                 request.shopid = shopId;
                 request.tenantid = tenantId;
@@ -279,47 +303,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("退款异常：" + ex.Message, true);
             }
         }
-       
-        private void FormTuikuan_Load(object sender, EventArgs e)
-        {
-            if (balance != "")
-            {
-                txttuikuan.Text = rechargeAmount.ToString();
-                usermoney.Text = balance;
-                usermoney.Visible = true;
-                if (payModeForApi != "现金")
-                {
-                    label2.Visible = false;
-                    btncash.Visible = true;
-                    btnOriginal.Visible = true;
-                }
-                else if (payModeForApi == "现金")
-                {
-                    label2.Visible = true;
-                    btncash.Visible = false;
-                    btnOriginal.Visible = false;
-                }
-            }
 
 
-        }
 
         private void btncash_Click(object sender, EventArgs e)
-        {
-            xianjin();
-        }
-
-        public void xianjin()
         {
             btncash.ForeColor = Color.White;
             btncash.BackColor = Color.Blue;
             btnOriginal.BackColor = Color.White;
         }
         private void btnOriginal_Click(object sender, EventArgs e)
-        {
-            yuan();
-        }
-        public void yuan()
         {
             btnOriginal.ForeColor = Color.White;
             btnOriginal.BackColor = Color.Blue;
