@@ -58,6 +58,7 @@
             this.newphone = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnguan = new System.Windows.Forms.Button();
+            this.btnLoss = new System.Windows.Forms.Button();
             this.btnbang = new System.Windows.Forms.Button();
             this.btnChangePhone = new System.Windows.Forms.Button();
             this.pnlCoupon = new System.Windows.Forms.Panel();
@@ -85,7 +86,6 @@
             this.lblMemberInfo = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnLoss = new System.Windows.Forms.Button();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -446,7 +446,27 @@
             this.btnguan.Text = "关联旧卡";
             this.btnguan.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnguan.UseVisualStyleBackColor = false;
+            this.btnguan.Visible = false;
             this.btnguan.Click += new System.EventHandler(this.btnguan_Click);
+            // 
+            // btnLoss
+            // 
+            this.btnLoss.BackColor = System.Drawing.Color.Transparent;
+            this.btnLoss.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoss.BackgroundImage")));
+            this.btnLoss.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoss.FlatAppearance.BorderSize = 0;
+            this.btnLoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoss.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnLoss.ForeColor = System.Drawing.Color.White;
+            this.btnLoss.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnLoss.Location = new System.Drawing.Point(292, 515);
+            this.btnLoss.Name = "btnLoss";
+            this.btnLoss.Size = new System.Drawing.Size(100, 40);
+            this.btnLoss.TabIndex = 76;
+            this.btnLoss.Text = "挂失";
+            this.btnLoss.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnLoss.UseVisualStyleBackColor = false;
+            this.btnLoss.Visible = false;
             // 
             // btnbang
             // 
@@ -465,6 +485,7 @@
             this.btnbang.Text = "绑定";
             this.btnbang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnbang.UseVisualStyleBackColor = false;
+            this.btnbang.Visible = false;
             this.btnbang.Click += new System.EventHandler(this.btnbang_Click);
             // 
             // btnChangePhone
@@ -798,24 +819,6 @@
             this.label1.Size = new System.Drawing.Size(101, 30);
             this.label1.TabIndex = 50;
             this.label1.Text = "会员中心";
-            // 
-            // btnLoss
-            // 
-            this.btnLoss.BackColor = System.Drawing.Color.Transparent;
-            this.btnLoss.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoss.BackgroundImage")));
-            this.btnLoss.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLoss.FlatAppearance.BorderSize = 0;
-            this.btnLoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoss.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnLoss.ForeColor = System.Drawing.Color.White;
-            this.btnLoss.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnLoss.Location = new System.Drawing.Point(292, 515);
-            this.btnLoss.Name = "btnLoss";
-            this.btnLoss.Size = new System.Drawing.Size(100, 40);
-            this.btnLoss.TabIndex = 76;
-            this.btnLoss.Text = "挂失";
-            this.btnLoss.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnLoss.UseVisualStyleBackColor = false;
             // 
             // FormMemberCenter
             // 
