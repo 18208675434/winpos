@@ -120,6 +120,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
         /// <summary>
         /// 礼品卡秘钥
         /// </summary>
-        GiftCardPwd
+        GiftCardPwd,
+        /// <summary>
+        /// 绑定实体卡
+        /// </summary>
+        BindingEntryCard
     }
 }

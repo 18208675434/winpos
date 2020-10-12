@@ -106,6 +106,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                     case NumberType.BindingMember: txtNum.WaterText = "请输入需绑定的会员手机号"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
                     case NumberType.GiftCardNo: txtNum.WaterText = "请输入礼品卡卡号"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
                     case NumberType.GiftCardPwd: txtNum.WaterText = "请输入礼品卡秘钥"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                    case NumberType.BindingEntryCard: txtNum.WaterText = "请输入或扫描实体卡号"; lblg.Visible = false; txtNum.Width = rbtnOK.Width; txtNum.Width = txtNum.Width - (txtNum.Left - txtNum.Left) - 4; break;
+                
                 }
 
                 rbtnOK.allbackcolor = Color.LightGray;
