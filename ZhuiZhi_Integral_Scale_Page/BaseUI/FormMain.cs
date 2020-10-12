@@ -16,6 +16,7 @@ using ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.MyControl;
 using ZhuiZhi_Integral_Scale_UncleFruit.PayUI;
@@ -867,7 +868,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 IsEnable = false;
-                BatchSaleCardHelper.ShowFormBatchSaleCardCreate();
+                MemberCenterHelper.ShowFormBatchSaleCardCreate();
                 IsEnable = true;
             }
             catch (Exception ex)
@@ -881,7 +882,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 IsEnable = false;
-                BatchSaleCardHelper.ShowFormRechangeQuery();
+                MemberCenterHelper.ShowFormRechangeQuery();
                 IsEnable = true;
             }
             catch (Exception ex)

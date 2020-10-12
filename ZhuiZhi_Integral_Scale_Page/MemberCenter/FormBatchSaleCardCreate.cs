@@ -12,7 +12,7 @@ using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
-namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
+namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormBatchSaleCardCreate : Form
     {
@@ -63,7 +63,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             try
             {
                 ShowLoading(true, false);
-                string numbervalue = BatchSaleCardHelper.ShowFormVoucher();
+                string numbervalue = MemberCenterHelper.ShowFormVoucher();
                 if (!string.IsNullOrEmpty(numbervalue))
                 {
                     string ErrorMsgMember = "";

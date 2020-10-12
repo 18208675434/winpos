@@ -18,7 +18,7 @@ using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MenuUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 
-namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
+namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormRechargeQuery : Form
     {

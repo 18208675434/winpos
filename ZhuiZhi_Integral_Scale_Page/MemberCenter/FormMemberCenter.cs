@@ -229,7 +229,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void lblTopUp_Click(object sender, EventArgs e)
         {
-            MemberCenterHelper.ShowFormTopUPQuery();
+            //MemberCenterHelper.ShowFormSingleUserRechangeQuery();
+            try
+            {
+                IsEnable = false;
+                MemberCenterHelper.ShowFormSingleUserRechangeQuery(CurrentMember.memberheaderresponsevo.mobile);
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("切换充值明细异常" + ex.Message, true);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

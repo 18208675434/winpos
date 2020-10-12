@@ -1,4 +1,4 @@
-﻿namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
+﻿namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     partial class FormBatchSaleCardCreate
     {

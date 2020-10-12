@@ -120,28 +120,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-
-        public static void ShowFormTopUPQuery()
-        {
-            try
-            {
-
-                FormTopUpQuery frmorderquery = new FormTopUpQuery();
-                asf.AutoScaleControlTest(frmorderquery, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                frmorderquery.Location = new System.Drawing.Point(0, 0);
-                frmorderquery.ShowDialog();
-                frmorderquery.Dispose();
-                Application.DoEvents();
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("显示会员充值列表异常" + ex.Message);
-            }
-
-        }
-
-
         public static bool ShowFormNoPayPwd()
         {
             try
@@ -473,5 +451,172 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
+
+
+        #region 批量售卡
+        private static FormBatchSaleCardCreate formBatchSaleCardCreate = null;
+
+        public static void IniFormBatchSaleCardCreate()
+        {
+            try
+            {
+                if (formBatchSaleCardCreate != null)
+                {
+                    try
+                    {
+                        formBatchSaleCardCreate.Dispose();
+                    }
+                    catch { }
+                }
+                formBatchSaleCardCreate = new FormBatchSaleCardCreate();
+                asf.AutoScaleControlTest(formBatchSaleCardCreate, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("初始化报损页面异常" + ex.Message);
+            }
+        }
+
+        public static void ShowFormBatchSaleCardCreate()
+        {
+            try
+            {
+                if (formBatchSaleCardCreate == null || formBatchSaleCardCreate.IsDisposed)
+                {
+                    IniFormBatchSaleCardCreate();
+                }
+
+                formBatchSaleCardCreate.ShowDialog();
+                formBatchSaleCardCreate.Dispose();
+            }
+            catch (Exception ex)
+            {
+                formBatchSaleCardCreate = null;
+                LogManager.WriteLog("显示批量售卡页面异常" + ex.Message);
+            }
+        }
+        #endregion
+
+        #region 实体卡卡号录入
+        /// <summary>
+        /// 实体卡卡号 不校验规则和长度
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns>返回录入的实体卡卡号</returns>
+        public static string ShowFormVoucher()
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormVoucher frmvoucher = new FormVoucher();
+                asf.AutoScaleControlTest(frmvoucher, 430, 240, 430 * MainModel.midScale, 240 * MainModel.midScale, true);
+                frmvoucher.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmvoucher.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmvoucher.Height) / 3);
+                frmvoucher.TopMost = true;
+
+                frmvoucher.ShowDialog();
+
+                BackHelper.HideFormBackGround();
+                frmvoucher.Dispose();
+
+                Application.DoEvents();
+                return frmvoucher.CurrentPhone;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("实体卡号弹窗异常" + ex.Message);
+                return "";
+            }
+        }
+        #endregion
+
+        #region 充值明细
+        private static FormRechargeQuery formRechangeQuery = null;
+        public static void IniFormRechangeQuery()
+        {
+            try
+            {
+                if (formRechangeQuery != null)
+                {
+                    try
+                    {
+                        formRechangeQuery.Dispose();
+                    }
+                    catch { }
+                }
+                formRechangeQuery = new FormRechargeQuery();
+                asf.AutoScaleControlTest(formRechangeQuery, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("初始化充值明细页面异常" + ex.Message);
+            }
+        }
+
+        public static void ShowFormRechangeQuery()
+        {
+            try
+            {
+                if (formRechangeQuery == null || formRechangeQuery.IsDisposed)
+                {
+                    IniFormRechangeQuery();
+                }
+
+                formRechangeQuery.ShowDialog();
+                formRechangeQuery.Dispose();
+            }
+            catch (Exception ex)
+            {
+                formBatchSaleCardCreate = null;
+                LogManager.WriteLog("显示充值明细页面异常" + ex.Message);
+            }
+        }
+        #endregion
+
+        #region 单用户充值明细
+        private static FormRechargeSingleUserQuery formSingleUserRechargeQuery = null;
+        public static void IniFormSingleUserRechangeQuery(string phone)
+        {
+            try
+            {
+                if (formSingleUserRechargeQuery != null)
+                {
+                    try
+                    {
+                        formRechangeQuery.Dispose();
+                    }
+                    catch { }
+                }
+                formSingleUserRechargeQuery = new FormRechargeSingleUserQuery(phone);
+                asf.AutoScaleControlTest(formSingleUserRechargeQuery, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("初始化单用户充值明细页面异常" + ex.Message);
+            }
+        }
+
+        public static void ShowFormSingleUserRechangeQuery(string phone)
+        {
+            try
+            {
+                if (formSingleUserRechargeQuery == null || formSingleUserRechargeQuery.IsDisposed)
+                {
+                    IniFormSingleUserRechangeQuery(phone);
+                }
+
+                formSingleUserRechargeQuery.ShowDialog();
+                formSingleUserRechargeQuery.Dispose();
+            }
+            catch (Exception ex)
+            {
+                formBatchSaleCardCreate = null;
+                LogManager.WriteLog("显示单用户充值明细页面异常" + ex.Message);
+            }
+        }
+        #endregion
     }
 }

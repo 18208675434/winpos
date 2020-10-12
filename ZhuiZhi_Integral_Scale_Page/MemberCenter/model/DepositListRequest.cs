@@ -64,5 +64,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
            /// </summary>
            public string tenantid { get; set; }
 
+           public bool refundable { get; set; }
+
     }
 }

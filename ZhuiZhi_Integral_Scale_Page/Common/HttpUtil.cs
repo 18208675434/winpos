@@ -3638,6 +3638,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
 
+
+
         /// <summary>
         /// 充值详情
         /// </summary>
@@ -3680,6 +3682,88 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 erromessage = "网络连接异常，请检查网络连接";
                 return null;
             }
+        }
+
+
+        /// <summary>
+        /// 充值记录、退款
+        /// </summary>
+        /// <param name="topuppara"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public long Depositbillrefund(DepositRefundRequest topuppara, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/member/balance/depositbillrefund";
+
+                string testjson = JsonConvert.SerializeObject(topuppara);
+
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return Convert.ToInt64(rd.data);
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "depositmember:" + json); }
+                    catch { }
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "退款异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return -1;
+            }
+
+        }
+        /// <summary>
+        /// 获取退款单详情
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="mobile"></param>
+        /// <param name="erromessage"></param>f
+        /// <returns></returns>
+        public GetBalanceDepositRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
+        {
+
+
+            try
+            {
+                string url = "/pos/member/balance/getbalancedepositrefundbill";
+
+
+                string testjson = JsonConvert.SerializeObject(Id);
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("id", Id);
+
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                if (rd.code == 0)
+                {
+
+                    GetBalanceDepositRefund resultobj = JsonConvert.DeserializeObject<GetBalanceDepositRefund>(rd.data.ToString());
+
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "GetBalancecodepositrefound:" + json); }
+                    catch { }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "充值退款明细异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+
         }
         #endregion
 

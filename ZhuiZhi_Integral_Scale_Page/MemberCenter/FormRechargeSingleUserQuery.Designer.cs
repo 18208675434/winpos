@@ -1,6 +1,6 @@
-﻿namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
+﻿namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
-    partial class FormRechargeQuery
+    partial class FormRechargeSingleUserQuery
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRechargeQuery));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRechargeSingleUserQuery));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new System.Windows.Forms.Panel();
             this.lblOperatorPhoneTip = new System.Windows.Forms.Label();
-            this.lblUserTip = new System.Windows.Forms.Label();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new System.Windows.Forms.Button();
             this.btnWeek = new System.Windows.Forms.Button();
@@ -64,51 +61,39 @@
             this.btnCancle = new System.Windows.Forms.Button();
             this.btnRechargeQuery = new System.Windows.Forms.Button();
             this.btnRechargeRtnQuery = new System.Windows.Forms.Button();
-            this.picScreen = new System.Windows.Forms.PictureBox();
             this.pnlDgvRechargeHead = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tlpDgvRecharge = new System.Windows.Forms.TableLayoutPanel();
             this.dgvRecharge = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlRechargeSum = new System.Windows.Forms.Panel();
-            this.lbRechargeGiftSum = new System.Windows.Forms.Label();
-            this.lbRechargeSum = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.tlpDgvRtn = new System.Windows.Forms.TableLayoutPanel();
             this.dgvRtn = new System.Windows.Forms.DataGridView();
+            this.pnlDgvRtnHead = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.picScreen = new System.Windows.Forms.PictureBox();
+            this.btnRefundDisable = new System.Windows.Forms.Button();
+            this.btnRefund = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlDgvRtnHead = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.pnlRtnSum = new System.Windows.Forms.Panel();
-            this.lblRtnGiftSum = new System.Windows.Forms.Label();
-            this.lblRtnSum = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RechargeRefund = new System.Windows.Forms.DataGridViewImageColumn();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.panelQuery.SuspendLayout();
@@ -117,22 +102,19 @@
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.pnlDgvRechargeHead.SuspendLayout();
             this.tlpDgvRecharge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecharge)).BeginInit();
-            this.pnlRechargeSum.SuspendLayout();
             this.tlpDgvRtn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRtn)).BeginInit();
             this.pnlDgvRtnHead.SuspendLayout();
-            this.pnlRtnSum.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).BeginInit();
             this.SuspendLayout();
             // 
             // panelQuery
             // 
             this.panelQuery.BackColor = System.Drawing.Color.White;
             this.panelQuery.Controls.Add(this.lblOperatorPhoneTip);
-            this.panelQuery.Controls.Add(this.lblUserTip);
             this.panelQuery.Controls.Add(this.dtEnd);
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.btnWeek);
@@ -162,19 +144,6 @@
             this.lblOperatorPhoneTip.TabIndex = 47;
             this.lblOperatorPhoneTip.Text = "请输入操作人手机号";
             this.lblOperatorPhoneTip.Click += new System.EventHandler(this.lblOrderID_Click);
-            // 
-            // lblUserTip
-            // 
-            this.lblUserTip.AutoSize = true;
-            this.lblUserTip.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblUserTip.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lblUserTip.ForeColor = System.Drawing.Color.Gray;
-            this.lblUserTip.Location = new System.Drawing.Point(104, 17);
-            this.lblUserTip.Name = "lblUserTip";
-            this.lblUserTip.Size = new System.Drawing.Size(107, 20);
-            this.lblUserTip.TabIndex = 46;
-            this.lblUserTip.Text = "请输入下单用户";
-            this.lblUserTip.Click += new System.EventHandler(this.lblUser_Click);
             // 
             // dtEnd
             // 
@@ -331,9 +300,7 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(171, 30);
             this.txtUser.TabIndex = 100;
-            this.txtUser.Click += new System.EventHandler(this.txt_OskClick);
-            this.txtUser.TextChanged += new System.EventHandler(this.txtUsr_TextChanged);
-            this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
+            this.txtUser.TabStop = false;
             // 
             // lblUser
             // 
@@ -489,18 +456,6 @@
             this.btnRechargeRtnQuery.UseVisualStyleBackColor = false;
             this.btnRechargeRtnQuery.Click += new System.EventHandler(this.btnRechargeRtnQuery_Click);
             // 
-            // picScreen
-            // 
-            this.picScreen.BackColor = System.Drawing.Color.Red;
-            this.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picScreen.Location = new System.Drawing.Point(0, 0);
-            this.picScreen.Name = "picScreen";
-            this.picScreen.Size = new System.Drawing.Size(10, 10);
-            this.picScreen.TabIndex = 25;
-            this.picScreen.TabStop = false;
-            this.picScreen.Visible = false;
-            this.picScreen.Click += new System.EventHandler(this.picScreen_Click);
-            // 
             // pnlDgvRechargeHead
             // 
             this.pnlDgvRechargeHead.BackColor = System.Drawing.Color.White;
@@ -508,7 +463,6 @@
             this.pnlDgvRechargeHead.Controls.Add(this.label6);
             this.pnlDgvRechargeHead.Controls.Add(this.label5);
             this.pnlDgvRechargeHead.Controls.Add(this.label7);
-            this.pnlDgvRechargeHead.Controls.Add(this.label9);
             this.pnlDgvRechargeHead.Controls.Add(this.label10);
             this.pnlDgvRechargeHead.Controls.Add(this.label11);
             this.pnlDgvRechargeHead.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -523,7 +477,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label12.ForeColor = System.Drawing.Color.DimGray;
-            this.label12.Location = new System.Drawing.Point(815, 13);
+            this.label12.Location = new System.Drawing.Point(813, 13);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 23);
             this.label12.TabIndex = 38;
@@ -534,18 +488,18 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label6.ForeColor = System.Drawing.Color.DimGray;
-            this.label6.Location = new System.Drawing.Point(1017, 13);
+            this.label6.Location = new System.Drawing.Point(1032, 13);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 23);
+            this.label6.Size = new System.Drawing.Size(44, 23);
             this.label6.TabIndex = 37;
-            this.label6.Text = "操作人";
+            this.label6.Text = "操作";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(652, 13);
+            this.label5.Location = new System.Drawing.Point(622, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 23);
             this.label5.TabIndex = 36;
@@ -556,29 +510,18 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label7.ForeColor = System.Drawing.Color.DimGray;
-            this.label7.Location = new System.Drawing.Point(484, 13);
+            this.label7.Location = new System.Drawing.Point(433, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(107, 23);
             this.label7.TabIndex = 35;
             this.label7.Text = "充值金额(元)";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label9.ForeColor = System.Drawing.Color.DimGray;
-            this.label9.Location = new System.Drawing.Point(330, 13);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(78, 23);
-            this.label9.TabIndex = 34;
-            this.label9.Text = "下单用户";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 12.5F);
             this.label10.ForeColor = System.Drawing.Color.DimGray;
-            this.label10.Location = new System.Drawing.Point(165, 13);
+            this.label10.Location = new System.Drawing.Point(214, 13);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(78, 23);
             this.label10.TabIndex = 33;
@@ -602,14 +545,13 @@
             this.tlpDgvRecharge.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpDgvRecharge.Controls.Add(this.dgvRecharge, 0, 1);
             this.tlpDgvRecharge.Controls.Add(this.pnlDgvRechargeHead, 0, 0);
-            this.tlpDgvRecharge.Controls.Add(this.pnlRechargeSum, 0, 2);
             this.tlpDgvRecharge.Location = new System.Drawing.Point(12, 250);
             this.tlpDgvRecharge.Margin = new System.Windows.Forms.Padding(0);
             this.tlpDgvRecharge.Name = "tlpDgvRecharge";
-            this.tlpDgvRecharge.RowCount = 3;
+            this.tlpDgvRecharge.RowCount = 2;
             this.tlpDgvRecharge.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpDgvRecharge.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tlpDgvRecharge.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tlpDgvRecharge.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tlpDgvRecharge.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpDgvRecharge.Size = new System.Drawing.Size(1154, 509);
             this.tlpDgvRecharge.TabIndex = 42;
             // 
@@ -641,16 +583,15 @@
             this.Column3,
             this.Column4,
             this.Column5,
-            this.Column6,
-            this.Column7});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecharge.DefaultCellStyle = dataGridViewCellStyle3;
+            this.RechargeRefund});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecharge.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRecharge.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecharge.GridColor = System.Drawing.Color.LightGray;
             this.dgvRecharge.Location = new System.Drawing.Point(2, 52);
@@ -660,23 +601,263 @@
             this.dgvRecharge.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvRecharge.RowHeadersVisible = false;
             this.dgvRecharge.RowHeadersWidth = 40;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.dgvRecharge.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.dgvRecharge.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRecharge.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dgvRecharge.RowTemplate.Height = 75;
+            this.dgvRecharge.RowTemplate.Height = 50;
             this.dgvRecharge.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvRecharge.Size = new System.Drawing.Size(1150, 377);
+            this.dgvRecharge.Size = new System.Drawing.Size(1150, 455);
             this.dgvRecharge.TabIndex = 36;
+            this.dgvRecharge.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecharge_CellContentClick);
+            // 
+            // tlpDgvRtn
+            // 
+            this.tlpDgvRtn.BackColor = System.Drawing.Color.Transparent;
+            this.tlpDgvRtn.ColumnCount = 1;
+            this.tlpDgvRtn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpDgvRtn.Controls.Add(this.dgvRtn, 0, 1);
+            this.tlpDgvRtn.Controls.Add(this.pnlDgvRtnHead, 0, 0);
+            this.tlpDgvRtn.Location = new System.Drawing.Point(12, 250);
+            this.tlpDgvRtn.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpDgvRtn.Name = "tlpDgvRtn";
+            this.tlpDgvRtn.RowCount = 2;
+            this.tlpDgvRtn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlpDgvRtn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tlpDgvRtn.Size = new System.Drawing.Size(1154, 509);
+            this.tlpDgvRtn.TabIndex = 43;
+            // 
+            // dgvRtn
+            // 
+            this.dgvRtn.AllowUserToAddRows = false;
+            this.dgvRtn.AllowUserToDeleteRows = false;
+            this.dgvRtn.AllowUserToResizeColumns = false;
+            this.dgvRtn.AllowUserToResizeRows = false;
+            this.dgvRtn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvRtn.BackgroundColor = System.Drawing.Color.White;
+            this.dgvRtn.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvRtn.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvRtn.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dgvRtn.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRtn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvRtn.ColumnHeadersHeight = 50;
+            this.dgvRtn.ColumnHeadersVisible = false;
+            this.dgvRtn.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRtn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvRtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvRtn.GridColor = System.Drawing.Color.LightGray;
+            this.dgvRtn.Location = new System.Drawing.Point(2, 52);
+            this.dgvRtn.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvRtn.Name = "dgvRtn";
+            this.dgvRtn.ReadOnly = true;
+            this.dgvRtn.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvRtn.RowHeadersVisible = false;
+            this.dgvRtn.RowHeadersWidth = 40;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.dgvRtn.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvRtn.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dgvRtn.RowTemplate.Height = 50;
+            this.dgvRtn.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvRtn.Size = new System.Drawing.Size(1150, 455);
+            this.dgvRtn.TabIndex = 36;
+            // 
+            // pnlDgvRtnHead
+            // 
+            this.pnlDgvRtnHead.BackColor = System.Drawing.Color.White;
+            this.pnlDgvRtnHead.Controls.Add(this.label2);
+            this.pnlDgvRtnHead.Controls.Add(this.label14);
+            this.pnlDgvRtnHead.Controls.Add(this.label15);
+            this.pnlDgvRtnHead.Controls.Add(this.label22);
+            this.pnlDgvRtnHead.Controls.Add(this.label17);
+            this.pnlDgvRtnHead.Controls.Add(this.label18);
+            this.pnlDgvRtnHead.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDgvRtnHead.Location = new System.Drawing.Point(0, 0);
+            this.pnlDgvRtnHead.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlDgvRtnHead.Name = "pnlDgvRtnHead";
+            this.pnlDgvRtnHead.Size = new System.Drawing.Size(1154, 50);
+            this.pnlDgvRtnHead.TabIndex = 32;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label2.ForeColor = System.Drawing.Color.DimGray;
+            this.label2.Location = new System.Drawing.Point(1032, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 23);
+            this.label2.TabIndex = 38;
+            this.label2.Text = "退款方式";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label14.ForeColor = System.Drawing.Color.DimGray;
+            this.label14.Location = new System.Drawing.Point(813, 13);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(124, 23);
+            this.label14.TabIndex = 36;
+            this.label14.Text = "退赠送金额(元)";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label15.ForeColor = System.Drawing.Color.DimGray;
+            this.label15.Location = new System.Drawing.Point(622, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(107, 23);
+            this.label15.TabIndex = 35;
+            this.label15.Text = "退款金额(元)";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label22.ForeColor = System.Drawing.Color.DimGray;
+            this.label22.Location = new System.Drawing.Point(433, 13);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(112, 23);
+            this.label22.TabIndex = 34;
+            this.label22.Text = "关联充值单号";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label17.ForeColor = System.Drawing.Color.DimGray;
+            this.label17.Location = new System.Drawing.Point(214, 13);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(78, 23);
+            this.label17.TabIndex = 33;
+            this.label17.Text = "退款单号";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("微软雅黑", 12.5F);
+            this.label18.ForeColor = System.Drawing.Color.DimGray;
+            this.label18.Location = new System.Drawing.Point(7, 13);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(78, 23);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "退单日期";
+            // 
+            // picScreen
+            // 
+            this.picScreen.BackColor = System.Drawing.Color.Red;
+            this.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picScreen.Location = new System.Drawing.Point(0, 0);
+            this.picScreen.Name = "picScreen";
+            this.picScreen.Size = new System.Drawing.Size(10, 10);
+            this.picScreen.TabIndex = 25;
+            this.picScreen.TabStop = false;
+            this.picScreen.Visible = false;
+            this.picScreen.Click += new System.EventHandler(this.picScreen_Click);
+            // 
+            // btnRefundDisable
+            // 
+            this.btnRefundDisable.BackColor = System.Drawing.Color.DarkGray;
+            this.btnRefundDisable.Enabled = false;
+            this.btnRefundDisable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefundDisable.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRefundDisable.ForeColor = System.Drawing.Color.White;
+            this.btnRefundDisable.Location = new System.Drawing.Point(568, 194);
+            this.btnRefundDisable.Name = "btnRefundDisable";
+            this.btnRefundDisable.Size = new System.Drawing.Size(80, 40);
+            this.btnRefundDisable.TabIndex = 46;
+            this.btnRefundDisable.Text = "退款";
+            this.btnRefundDisable.UseVisualStyleBackColor = false;
+            this.btnRefundDisable.Visible = false;
+            // 
+            // btnRefund
+            // 
+            this.btnRefund.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnRefund.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefund.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRefund.ForeColor = System.Drawing.Color.White;
+            this.btnRefund.Location = new System.Drawing.Point(674, 194);
+            this.btnRefund.Name = "btnRefund";
+            this.btnRefund.Size = new System.Drawing.Size(80, 40);
+            this.btnRefund.TabIndex = 45;
+            this.btnRefund.Text = "退款";
+            this.btnRefund.UseVisualStyleBackColor = false;
+            this.btnRefund.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.FillWeight = 110F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Column1";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.FillWeight = 110F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Column2";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.FillWeight = 110F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Column3";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.FillWeight = 110F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Column5";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn6.FillWeight = 60F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Column6";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // Column1
             // 
+            this.Column1.FillWeight = 110F;
             this.Column1.HeaderText = "Column1";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
+            this.Column2.FillWeight = 120F;
             this.Column2.HeaderText = "Column2";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -699,349 +880,14 @@
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             // 
-            // Column6
+            // RechargeRefund
             // 
-            this.Column6.HeaderText = "Column6";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column7.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column7.HeaderText = "Column7";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
-            // pnlRechargeSum
-            // 
-            this.pnlRechargeSum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
-            this.pnlRechargeSum.Controls.Add(this.lbRechargeGiftSum);
-            this.pnlRechargeSum.Controls.Add(this.lbRechargeSum);
-            this.pnlRechargeSum.Controls.Add(this.label1);
-            this.pnlRechargeSum.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRechargeSum.Location = new System.Drawing.Point(2, 433);
-            this.pnlRechargeSum.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlRechargeSum.Name = "pnlRechargeSum";
-            this.pnlRechargeSum.Size = new System.Drawing.Size(1150, 74);
-            this.pnlRechargeSum.TabIndex = 37;
-            // 
-            // lbRechargeGiftSum
-            // 
-            this.lbRechargeGiftSum.AutoSize = true;
-            this.lbRechargeGiftSum.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lbRechargeGiftSum.Location = new System.Drawing.Point(657, 26);
-            this.lbRechargeGiftSum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbRechargeGiftSum.Name = "lbRechargeGiftSum";
-            this.lbRechargeGiftSum.Size = new System.Drawing.Size(39, 25);
-            this.lbRechargeGiftSum.TabIndex = 5;
-            this.lbRechargeGiftSum.Text = "0.0";
-            // 
-            // lbRechargeSum
-            // 
-            this.lbRechargeSum.AutoSize = true;
-            this.lbRechargeSum.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lbRechargeSum.Location = new System.Drawing.Point(489, 26);
-            this.lbRechargeSum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbRechargeSum.Name = "lbRechargeSum";
-            this.lbRechargeSum.Size = new System.Drawing.Size(39, 25);
-            this.lbRechargeSum.TabIndex = 5;
-            this.lbRechargeSum.Text = "0.0";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label1.Location = new System.Drawing.Point(10, 26);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 25);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "查询数据合计";
-            // 
-            // tlpDgvRtn
-            // 
-            this.tlpDgvRtn.BackColor = System.Drawing.Color.Transparent;
-            this.tlpDgvRtn.ColumnCount = 1;
-            this.tlpDgvRtn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDgvRtn.Controls.Add(this.dgvRtn, 0, 1);
-            this.tlpDgvRtn.Controls.Add(this.pnlDgvRtnHead, 0, 0);
-            this.tlpDgvRtn.Controls.Add(this.pnlRtnSum, 0, 2);
-            this.tlpDgvRtn.Location = new System.Drawing.Point(12, 250);
-            this.tlpDgvRtn.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpDgvRtn.Name = "tlpDgvRtn";
-            this.tlpDgvRtn.RowCount = 3;
-            this.tlpDgvRtn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpDgvRtn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tlpDgvRtn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpDgvRtn.Size = new System.Drawing.Size(1154, 509);
-            this.tlpDgvRtn.TabIndex = 43;
-            // 
-            // dgvRtn
-            // 
-            this.dgvRtn.AllowUserToAddRows = false;
-            this.dgvRtn.AllowUserToDeleteRows = false;
-            this.dgvRtn.AllowUserToResizeColumns = false;
-            this.dgvRtn.AllowUserToResizeRows = false;
-            this.dgvRtn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvRtn.BackgroundColor = System.Drawing.Color.White;
-            this.dgvRtn.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvRtn.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvRtn.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.dgvRtn.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRtn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvRtn.ColumnHeadersHeight = 50;
-            this.dgvRtn.ColumnHeadersVisible = false;
-            this.dgvRtn.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.Column8});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRtn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvRtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRtn.GridColor = System.Drawing.Color.LightGray;
-            this.dgvRtn.Location = new System.Drawing.Point(2, 52);
-            this.dgvRtn.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvRtn.Name = "dgvRtn";
-            this.dgvRtn.ReadOnly = true;
-            this.dgvRtn.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvRtn.RowHeadersVisible = false;
-            this.dgvRtn.RowHeadersWidth = 40;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.dgvRtn.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvRtn.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dgvRtn.RowTemplate.Height = 75;
-            this.dgvRtn.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvRtn.Size = new System.Drawing.Size(1150, 377);
-            this.dgvRtn.TabIndex = 36;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Column1";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.FillWeight = 115F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Column2";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.FillWeight = 80F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Column3";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.FillWeight = 115F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Column5";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Column6";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewTextBoxColumn7.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Column7";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Column8.FillWeight = 90F;
-            this.Column8.HeaderText = "Column8";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // pnlDgvRtnHead
-            // 
-            this.pnlDgvRtnHead.BackColor = System.Drawing.Color.White;
-            this.pnlDgvRtnHead.Controls.Add(this.label2);
-            this.pnlDgvRtnHead.Controls.Add(this.label13);
-            this.pnlDgvRtnHead.Controls.Add(this.label14);
-            this.pnlDgvRtnHead.Controls.Add(this.label15);
-            this.pnlDgvRtnHead.Controls.Add(this.label22);
-            this.pnlDgvRtnHead.Controls.Add(this.label16);
-            this.pnlDgvRtnHead.Controls.Add(this.label17);
-            this.pnlDgvRtnHead.Controls.Add(this.label18);
-            this.pnlDgvRtnHead.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDgvRtnHead.Location = new System.Drawing.Point(0, 0);
-            this.pnlDgvRtnHead.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlDgvRtnHead.Name = "pnlDgvRtnHead";
-            this.pnlDgvRtnHead.Size = new System.Drawing.Size(1154, 50);
-            this.pnlDgvRtnHead.TabIndex = 32;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(910, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 23);
-            this.label2.TabIndex = 38;
-            this.label2.Text = "退款方式";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label13.ForeColor = System.Drawing.Color.DimGray;
-            this.label13.Location = new System.Drawing.Point(1040, 13);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(61, 23);
-            this.label13.TabIndex = 37;
-            this.label13.Text = "操作人";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label14.ForeColor = System.Drawing.Color.DimGray;
-            this.label14.Location = new System.Drawing.Point(756, 13);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(124, 23);
-            this.label14.TabIndex = 36;
-            this.label14.Text = "退赠送金额(元)";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label15.ForeColor = System.Drawing.Color.DimGray;
-            this.label15.Location = new System.Drawing.Point(609, 13);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(107, 23);
-            this.label15.TabIndex = 35;
-            this.label15.Text = "退款金额(元)";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label22.ForeColor = System.Drawing.Color.DimGray;
-            this.label22.Location = new System.Drawing.Point(442, 13);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(112, 23);
-            this.label22.TabIndex = 34;
-            this.label22.Text = "关联充值单号";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label16.ForeColor = System.Drawing.Color.DimGray;
-            this.label16.Location = new System.Drawing.Point(326, 13);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(78, 23);
-            this.label16.TabIndex = 34;
-            this.label16.Text = "下单用户";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label17.ForeColor = System.Drawing.Color.DimGray;
-            this.label17.Location = new System.Drawing.Point(167, 13);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(78, 23);
-            this.label17.TabIndex = 33;
-            this.label17.Text = "退款单号";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label18.ForeColor = System.Drawing.Color.DimGray;
-            this.label18.Location = new System.Drawing.Point(7, 13);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(78, 23);
-            this.label18.TabIndex = 32;
-            this.label18.Text = "退单日期";
-            // 
-            // pnlRtnSum
-            // 
-            this.pnlRtnSum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
-            this.pnlRtnSum.Controls.Add(this.lblRtnGiftSum);
-            this.pnlRtnSum.Controls.Add(this.lblRtnSum);
-            this.pnlRtnSum.Controls.Add(this.label21);
-            this.pnlRtnSum.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRtnSum.Location = new System.Drawing.Point(2, 433);
-            this.pnlRtnSum.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlRtnSum.Name = "pnlRtnSum";
-            this.pnlRtnSum.Size = new System.Drawing.Size(1150, 74);
-            this.pnlRtnSum.TabIndex = 37;
-            // 
-            // lblRtnGiftSum
-            // 
-            this.lblRtnGiftSum.AutoSize = true;
-            this.lblRtnGiftSum.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblRtnGiftSum.Location = new System.Drawing.Point(761, 26);
-            this.lblRtnGiftSum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRtnGiftSum.Name = "lblRtnGiftSum";
-            this.lblRtnGiftSum.Size = new System.Drawing.Size(39, 25);
-            this.lblRtnGiftSum.TabIndex = 5;
-            this.lblRtnGiftSum.Text = "0.0";
-            // 
-            // lblRtnSum
-            // 
-            this.lblRtnSum.AutoSize = true;
-            this.lblRtnSum.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblRtnSum.Location = new System.Drawing.Point(612, 26);
-            this.lblRtnSum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRtnSum.Name = "lblRtnSum";
-            this.lblRtnSum.Size = new System.Drawing.Size(39, 25);
-            this.lblRtnSum.TabIndex = 5;
-            this.lblRtnSum.Text = "0.0";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label21.Location = new System.Drawing.Point(12, 26);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(126, 25);
-            this.label21.TabIndex = 5;
-            this.label21.Text = "查询数据合计";
+            this.RechargeRefund.FillWeight = 70F;
+            this.RechargeRefund.HeaderText = "RechargeRefund";
+            this.RechargeRefund.Name = "RechargeRefund";
+            this.RechargeRefund.ReadOnly = true;
+            this.RechargeRefund.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RechargeRefund.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // rbtnPageDown
             // 
@@ -1083,16 +929,18 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
-            // FormRechargeQuery
+            // FormSingleUserRechargeQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1178, 760);
             this.ControlBox = false;
-            this.Controls.Add(this.tlpDgvRtn);
-            this.Controls.Add(this.tlpDgvRecharge);
             this.Controls.Add(this.pnlEmptyOrder);
+            this.Controls.Add(this.tlpDgvRecharge);
+            this.Controls.Add(this.tlpDgvRtn);
+            this.Controls.Add(this.btnRefundDisable);
+            this.Controls.Add(this.btnRefund);
             this.Controls.Add(this.picScreen);
             this.Controls.Add(this.btnRechargeRtnQuery);
             this.Controls.Add(this.rbtnPageDown);
@@ -1102,7 +950,7 @@
             this.Controls.Add(this.btnRechargeQuery);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormRechargeQuery";
+            this.Name = "FormSingleUserRechargeQuery";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.formRechargeQuery_FormClosed);
@@ -1118,19 +966,15 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).EndInit();
             this.pnlDgvRechargeHead.ResumeLayout(false);
             this.pnlDgvRechargeHead.PerformLayout();
             this.tlpDgvRecharge.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecharge)).EndInit();
-            this.pnlRechargeSum.ResumeLayout(false);
-            this.pnlRechargeSum.PerformLayout();
             this.tlpDgvRtn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRtn)).EndInit();
             this.pnlDgvRtnHead.ResumeLayout(false);
             this.pnlDgvRtnHead.PerformLayout();
-            this.pnlRtnSum.ResumeLayout(false);
-            this.pnlRtnSum.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picScreen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1158,7 +1002,6 @@
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnRechargeQuery;
         private System.Windows.Forms.Label lblOperatorPhoneTip;
-        private System.Windows.Forms.Label lblUserTip;
         private RoundButton rbtnPageUp;
         private RoundButton rbtnPageDown;
         private System.Windows.Forms.Panel pnlMenu;
@@ -1170,44 +1013,32 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TableLayoutPanel tlpDgvRecharge;
         private System.Windows.Forms.DataGridView dgvRecharge;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.Panel pnlRechargeSum;
-        private System.Windows.Forms.Label lbRechargeGiftSum;
-        private System.Windows.Forms.Label lbRechargeSum;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tlpDgvRtn;
         private System.Windows.Forms.DataGridView dgvRtn;
         private System.Windows.Forms.Panel pnlDgvRtnHead;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Panel pnlRtnSum;
-        private System.Windows.Forms.Label lblRtnGiftSum;
-        private System.Windows.Forms.Label lblRtnSum;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnRefundDisable;
+        private System.Windows.Forms.Button btnRefund;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewImageColumn RechargeRefund;
     }
 }

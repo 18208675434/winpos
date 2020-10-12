@@ -1002,7 +1002,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 IsEnable = false;
-                BatchSaleCardHelper.ShowFormBatchSaleCardCreate();
+                MemberCenterHelper.ShowFormBatchSaleCardCreate();
                 IsEnable = true;
             }
             catch (Exception ex)
@@ -1016,7 +1016,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 IsEnable = false;
-                BatchSaleCardHelper.ShowFormRechangeQuery();
+                MemberCenterHelper.ShowFormRechangeQuery();
                 IsEnable = true;
             }
             catch (Exception ex)

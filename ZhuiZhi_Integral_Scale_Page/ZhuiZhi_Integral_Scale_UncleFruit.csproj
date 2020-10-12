@@ -122,20 +122,25 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseUI\MainHelper.cs" />
-    <Compile Include="BatchSaleCardUI\BatchSaleCardHelper.cs" />
-    <Compile Include="BatchSaleCardUI\FormBatchSaleCardCreate.cs">
+    <Compile Include="MemberCenter\FormBatchSaleCardCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BatchSaleCardUI\FormBatchSaleCardCreate.Designer.cs">
+    <Compile Include="MemberCenter\FormBatchSaleCardCreate.Designer.cs">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="BatchSaleCardUI\FormRechargeQuery.cs">
+    <Compile Include="MemberCenter\FormRechargeSingleUserQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BatchSaleCardUI\FormRechargeQuery.Designer.cs">
+    <Compile Include="MemberCenter\FormRechargeSingleUserQuery.Designer.cs">
+      <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeQuery.Designer.cs">
       <DependentUpon>FormRechargeQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="BatchSaleCardUI\Model\Card.cs" />
+    <Compile Include="MemberCenter\model\Card.cs" />
     <Compile Include="BrokenUI\BrokenHelper.cs" />
     <Compile Include="BrokenUI\FormBroken.cs">
       <SubType>Form</SubType>
@@ -409,28 +414,31 @@
     <Compile Include="MemberCenter\FormTopUp.Designer.cs">
       <DependentUpon>FormTopUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormTopUpQuery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormTopUpQuery.Designer.cs">
-      <DependentUpon>FormTopUpQuery.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberCenter\FormAllCoupon.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MemberCenter\FormAllCoupon.Designer.cs">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormRechargeRefund.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeRefund.designer.cs">
+      <DependentUpon>FormRechargeRefund.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\MemberCenterHelper.cs" />
     <Compile Include="MemberCenter\MemberCenterHttpUtil.cs" />
     <Compile Include="MemberCenter\MemberCenterMediaHelper.cs" />
     <Compile Include="MemberCenter\model\BalanceConfigDetail.cs" />
+    <Compile Include="MemberCenter\model\DepositRefundRequest.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
+    <Compile Include="MemberCenter\model\GetBalanceDepositRefund.cs" />
     <Compile Include="MemberCenter\model\ListAllTemplate.cs" />
     <Compile Include="MemberCenter\model\CreateMemberPara.cs" />
     <Compile Include="MemberCenter\model\MemberTopUpPara.cs" />
     <Compile Include="MemberCenter\model\PageBalanceDepositBill.cs" />
     <Compile Include="MemberCenter\model\PageBalanceDepositRefundBill.cs" />
+    <Compile Include="MemberCenter\model\PageGetRefund.cs" />
     <Compile Include="MemberCenter\model\TopUpPrint.cs" />
     <Compile Include="MemberCenter\model\ZtBalanceAccount.cs" />
     <Compile Include="MenuUI\FormCouponPwd.cs">
@@ -1121,10 +1129,13 @@
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="BatchSaleCardUI\FormBatchSaleCardCreate.resx">
+    <EmbeddedResource Include="MemberCenter\FormBatchSaleCardCreate.resx">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BatchSaleCardUI\FormRechargeQuery.resx">
+    <EmbeddedResource Include="MemberCenter\FormRechargeSingleUserQuery.resx">
+      <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeQuery.resx">
       <DependentUpon>FormRechargeQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BrokenUI\FormBroken.resx">
@@ -1247,11 +1258,11 @@
     <EmbeddedResource Include="MemberCenter\FormTopUp.resx">
       <DependentUpon>FormTopUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormTopUpQuery.resx">
-      <DependentUpon>FormTopUpQuery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormAllCoupon.resx">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeRefund.resx">
+      <DependentUpon>FormRechargeRefund.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormCouponPwd.resx">
       <DependentUpon>FormCouponPwd.cs</DependentUpon>
