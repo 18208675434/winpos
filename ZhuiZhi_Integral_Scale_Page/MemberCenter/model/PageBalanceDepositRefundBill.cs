@@ -33,8 +33,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         public string phone { get; set; }
         public string depositbillid { get; set; }
         public decimal refundtotalamount { get; set; }
+        public decimal capitalrefundamount { get; set; }
         public decimal rewardrefundamount { get; set; }
         public int refundtype { get; set; }
+        public string refundtypeforapi { get; set; }
         [JsonProperty("operator")]
         public string operatorname { get; set; }
         /// <summary>

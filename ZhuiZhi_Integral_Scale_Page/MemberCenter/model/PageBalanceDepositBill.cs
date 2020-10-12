@@ -74,6 +74,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// <summary>
         /// 
         /// </summary>
+        public string paymodeforapi { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string phone { get; set; }
         /// <summary>
         /// 

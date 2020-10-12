@@ -84,6 +84,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
         }
         #endregion
 
+        #region 事件
+        //充值查询
+        private void btnRechargeQuery_Click(object sender, EventArgs e)
+        {
+            CurrentOrderType = OrderType.recharge;
+            CurrentPage = 1;
+            LoadDgvOrder();
+        }
+        //退款查询
+        private void btnRechargeRtnQuery_Click(object sender, EventArgs e)
+        {
+            CurrentOrderType = OrderType.rtn;
+            CurrentPage = 1;
+            LoadDgvOrder();
+        }
         #region  查询条件
         private void btnToday_Click(object sender, EventArgs e)
         {
@@ -101,7 +116,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
                 btnWeek.FlatAppearance.BorderColor = Color.Gray;
                 dtStart.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
                 dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-                CurrentInterval = 0;              
+                CurrentInterval = 0;
                 CurrentPage = 1;
                 LoadDgvOrder();
             }
@@ -184,11 +199,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             }
 
             this.Invoke(new InvokeHandler(delegate()
-               {
-                   CurrentInterval = 30;               
-                   CurrentPage = 1;
-                   LoadDgvOrder();
-               }));
+            {
+                CurrentInterval = 30;
+                CurrentPage = 1;
+                LoadDgvOrder();
+            }));
         }
 
 
@@ -202,7 +217,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             CurrentPage--;
             LoadDgvOrder();
         }
-        
+
         private void rbtnPageDown_ButtonClick(object sender, EventArgs e)
         {
             if (!IsEnable || !rbtnPageDown.WhetherEnable)
@@ -308,27 +323,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
 
         #endregion
 
-        private void btnRechargeQuery_Click(object sender, EventArgs e)
-        {
-            CurrentOrderType = OrderType.recharge;
-            CurrentPage = 1;
-            LoadDgvOrder();
-        }
-
-        private void btnRechargeRtnQuery_Click(object sender, EventArgs e)
-        {
-            CurrentOrderType = OrderType.rtn;
-            CurrentPage = 1;
-            LoadDgvOrder();
-        }
-
-        #region  
+        #endregion
+      
+        #region  方法
         private int CurrentPage = 1;
 
-        private int PageSize = 6;
-
+        private int PageSize = 5;
+        //当前类型
         private OrderType CurrentOrderType =OrderType.recharge;
 
+        /// <summary> 加载订单
+        /// </summary>
         private void LoadDgvOrder()
         {
             if (CurrentOrderType == OrderType.recharge)
@@ -341,18 +346,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             }
             else
             {
-                btnRechargeRtnQuery.BackColor = Color.FromArgb(230, 230, 230);
-                btnRechargeQuery.BackColor = Color.White;
+                btnRechargeRtnQuery.BackColor = Color.White;
+                btnRechargeQuery.BackColor = Color.FromArgb(230, 230, 230);
                 tlpDgvRecharge.Visible = false;
                 tlpDgvRtn.Visible = true;
                 LoadDgvRtnOrder();
             }
         }
 
+        /// <summary> 加载充值订单
+        /// </summary>
         private void LoadDgvRechargeOrder()
         {
             try
             {
+                pnlEmptyOrder.Visible = false;
                 LoadingHelper.ShowLoadingScreen();
                 IsEnable = false;
 
@@ -364,8 +372,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
                 para.size = PageSize;
                 para.page = CurrentPage;
 
-                para.page = CurrentPage;
-                para.size = 6;
                 string ErrorMsg = "";
                 PageBalanceDepositBill currentBalanceDepos = httputil.ListDepositbill(para, ref ErrorMsg);
                 if (ErrorMsg != "" || currentBalanceDepos == null)
@@ -380,7 +386,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
 
                 foreach (RowsItem order in currentBalanceDepos.rows)
                 {
-                    dgvRecharge.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.amount.ToString("f2") + "元", order.rewardamount.ToString("f2") + "元", GetPayModeDesc(order.paymode), order.operatorname + "\r\n" + order.operatorphone);
+                    dgvRecharge.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.amount.ToString("f2") , order.rewardamount.ToString("f2") , order.paymodeforapi, order.operatorname + "\r\n" + order.operatorphone);
                 }
                 dgvRecharge.ClearSelection();
 
@@ -392,18 +398,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
                 }
                 if(dicSum.ContainsKey("totalamount"))
                 {
-                    lbRechargeSum.Text=dicSum["totalamount"].ToString();
+                    lbRechargeSum.Text = dicSum["totalamount"].ToString("f2") + "元";
                 }
                 if (dicSum.ContainsKey("totalrewardamount"))
                 {
-                    lbRechargeGiftSum.Text = dicSum["totalrewardamount"].ToString();
+                    lbRechargeGiftSum.Text = dicSum["totalrewardamount"].ToString("f2") + "元";
                 }
                 Application.DoEvents();
 
                 pnlEmptyOrder.Visible = dgvRecharge.Rows.Count == 0;
-
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
-
                 rbtnPageDown.WhetherEnable = currentBalanceDepos.page * currentBalanceDepos.size < currentBalanceDepos.total;
 
             }
@@ -418,10 +422,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             }
         }
 
+        /// <summary> 加载退款订单
+        /// </summary>
         private void LoadDgvRtnOrder()
         {
             try
             {
+                pnlEmptyOrder.Visible = false;
                 LoadingHelper.ShowLoadingScreen();
                 IsEnable = false;
 
@@ -432,9 +439,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
                 para.endtime = getStampByDateTime(dtEnd.Value);
                 para.size = PageSize;
                 para.page = CurrentPage;
-
-                para.page = CurrentPage;
-                para.size = 6;
                 string ErrorMsg = "";
                 PageBalanceDepositRefundBill CurrentBalanceDepos = httputil.ListDepositRefundBillList(para, ref ErrorMsg);
                 if (ErrorMsg != "" || CurrentBalanceDepos == null)
@@ -449,7 +453,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
 
                 foreach (RowsRefundItem order in CurrentBalanceDepos.rows)
                 {
-                    dgvRtn.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone,order.depositbillid, order.refundtotalamount.ToString("f2") + "元", order.rewardrefundamount.ToString("f2") + "元", GetRefundTypeDesc(order.refundtype), order.operatorname + "\r\n" + order.operatorphone);
+                    dgvRtn.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.phone, order.depositbillid, order.capitalrefundamount.ToString("f2"), order.rewardrefundamount.ToString("f2"), order.refundtypeforapi, order.operatorname + "\r\n" + order.operatorphone);
                 }
                 dgvRtn.ClearSelection();
 
@@ -461,11 +465,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
                 }
                 if (dicSum.ContainsKey("totalamount"))
                 {
-                    lblRtnSum.Text = dicSum["totalamount"].ToString();
+                    lblRtnSum.Text = dicSum["totalamount"].ToString("f2") + "元";
                 }
                 if (dicSum.ContainsKey("totalrewardamount"))
                 {
-                    lblRtnGiftSum.Text = dicSum["totalrewardamount"].ToString();
+                    lblRtnGiftSum.Text = dicSum["totalrewardamount"].ToString("f2") + "元";
                 }
                 Application.DoEvents();
 
@@ -487,41 +491,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             }
         }
 
-        private String GetPayModeDesc(string paymode)
-        {
-            switch (paymode)
-            {
-                case "1":
-                    return "现金";
-                case "2":
-                    return "微信";
-                case "3":
-                    return "支付宝";
-                case "4":
-                    return "客服代充";
-                case "5":
-                    return "旧卡关联";
-                case "6":
-                    return "礼品卡";
-                case "7":
-                    return "其他";
-                default: 
-                    return "-";
-            }
-        }
-
-        private String GetRefundTypeDesc(int refundType)
-        {
-            switch (refundType)
-            {
-                case 1:
-                    return "原路返回";
-                case 2:
-                    return "线下转账";
-                default:
-                    return "-";
-            }
-        }
+      
         #endregion
 
 
@@ -534,7 +504,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
 
             return result.ToString();
         }
-
+        //时间戳转时间
         private DateTime GetDateTimeByStamp(string stamp)
         {
             try
@@ -550,6 +520,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             }
         }
 
+        //控制加载状态
         private void LoadPicScreen(bool isShown)
         {
             try
@@ -583,9 +554,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
 
      
     }
+    /// <summary> 订单类型
+    /// </summary>
     public enum OrderType
     {
+        /// <summary> 充值
+        /// </summary>
         recharge,
+        /// <summary> 退款
+        /// </summary>
         rtn,
     }
 }
