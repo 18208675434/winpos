@@ -259,7 +259,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             SendKeys.Send("{F4}");
         }
 
-        private void txtPhone_TextChanged(object sender, EventArgs e)
+        private void txtUsr_TextChanged(object sender, EventArgs e)
         {
             if (txtUser.Text.Length > 0)
             {
@@ -280,7 +280,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI
             lblUserTip.Focus();
         }
 
-        private void txtOrderID_TextChanged(object sender, EventArgs e)
+        private void txtOperatorPhone_TextChanged(object sender, EventArgs e)
         {
             if (txtOperatorPhone.Text.Length > 0)
             {
