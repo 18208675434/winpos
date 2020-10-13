@@ -83,7 +83,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 lblCreditAmount.Left = lblCredit.Right;
 
-
+                DisplayEntityCard();
                 Application.DoEvents();
 
                 IsEnable = false;
@@ -101,8 +101,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadBalanceConfigDetail();
                 LoadingHelper.CloseForm();
                 IsEnable = true;
-
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
+               
             }
             catch (Exception ex)
             {
@@ -552,43 +552,85 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                string entryCardNo = NumberHelper.ShowFormNumber("输入实体卡号", NumberType.BindingEntryCard);
-                if (!string.IsNullOrEmpty(entryCardNo))
+                string entityCardNo = NumberHelper.ShowFormNumber("输入实体卡号", NumberType.BindingEntryCard);
+                if (!string.IsNullOrEmpty(entityCardNo))
                 {
-                    LoadingHelper.ShowLoadingScreen();
-
-                    LoadingHelper.CloseForm();
+                    string err = "";                   
+                    bool flag = membercenterutil.ApplyCard(CurrentMember.memberheaderresponsevo.mobile,entityCardNo,ref err);
+                     if (flag)
+                     {
+                         MainModel.CurrentMember.memberentitycardresponsevo.cardid = entityCardNo;                       
+                         MainModel.ShowLog("绑卡成功", true);
+                         DisplayEntityCard();
+                         MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);               
+                     }
+                     else
+                     {
+                         MainModel.ShowLog("绑卡失败：" + err, true);
+                     }
+                    //先注释，之后绑卡、关联旧卡改版
+                    //EntityCard entityCard = membercenterutil.GetCard(entityCardNo, ref err);
+                    //if (entityCard != null)
+                    //{
+                    //    EntityCardMoveRequest entityCardMoveRequest = new EntityCardMoveRequest();
+                    //    entityCardMoveRequest.memberid = CurrentMember.memberid;
+                    //    entityCardMoveRequest.phone = CurrentMember.memberheaderresponsevo.mobile;
+                    //    entityCardMoveRequest.oldentitycardnumber = entityCardNo;
+                    //    bool flag = membercenterutil.EntityCardMove(entityCardMoveRequest, ref err);
+                    //    if (flag)
+                    //    {
+                    //        MainModel.ShowLog("绑卡成功", true);
+                    //        return;
+                    //    }
+                    //    else
+                    //    {
+                    //        MainModel.ShowLog("绑卡失败：" + err, true);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    MainModel.ShowLog("获取实体卡失败：" + err, true);
+                    //}
                 }
-                else
-                {
-                    Application.DoEvents();
-                    return;
-                }
-                Application.DoEvents();
-
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("ERROR", "添加绑定实体卡异常:" + ex.Message);
+                LogManager.WriteLog("ERROR", "绑定实体卡异常:" + ex.Message);
             }
-
         }
-        //关联旧卡
-        private void btnguan_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //string numbervalue = BatchSaleCardHelper.ShowFormVoucher();
-                //if (!string.IsNullOrEmpty(numbervalue))
-                //{
-                //    LoadingHelper.ShowLoadingScreen();
 
-                //    LoadingHelper.CloseForm();
-                //}
-            }
-            catch (Exception ex)
+        private void btnLoss_Click(object sender, EventArgs e)
+        {
+            string entityCardNo = "0100017261";
+            string err = "";
+            //CurrentMember.memberentitycardresponsevo.tenantid;
+            EntityCard entityCard = membercenterutil.GetCardByEncryptCardId(entityCardNo, ref err);
+            if (entityCard == null)
             {
-                LogManager.WriteLog("ERROR", "关联旧卡异常:" + ex.Message);
+                MainModel.ShowLog("绑卡失败：" + err, true);
+                return;
+            }
+            
+        }
+
+        private void DisplayEntityCard()
+        {
+            if(MainModel.CurrentMember.memberentitycardresponsevo==null)
+            {
+                return;
+            }
+            string encCardId = MainModel.CurrentMember.memberentitycardresponsevo.cardid;
+            if (!string.IsNullOrEmpty(encCardId))
+            {
+                if (encCardId.Length > 7)
+                {
+                    encCardId = encCardId.Substring(0, 3) + "".PadLeft(encCardId.Length - 7, '*') + encCardId.Substring(encCardId.Length - 4);
+                }
+                lblEntityNo.Text = encCardId;
+                lblEntityNo.Visible = true;
+                btnbang.Visible = false;
+                btnLoss.Visible = true;
+                btnRelation.Visible = true;
             }
         }
     }

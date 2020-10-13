@@ -432,6 +432,8 @@
     <Compile Include="MemberCenter\model\BalanceConfigDetail.cs" />
     <Compile Include="MemberCenter\model\DepositRefundRequest.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
+    <Compile Include="MemberCenter\model\EntityCard.cs" />
+    <Compile Include="MemberCenter\model\EntityCardMoveRequest.cs" />
     <Compile Include="MemberCenter\model\GetBalanceDepositRefund.cs" />
     <Compile Include="MemberCenter\model\ListAllTemplate.cs" />
     <Compile Include="MemberCenter\model\CreateMemberPara.cs" />

@@ -3495,7 +3495,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-
         /// <summary>
         /// 会员充值列表
         /// </summary>
