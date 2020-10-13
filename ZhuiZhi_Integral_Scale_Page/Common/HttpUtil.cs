@@ -21,7 +21,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
     public class HttpUtil
     {
-        
+
         /// <summary>
         /// 登录接口
         /// </summary>
@@ -50,7 +50,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
                 else
                 {
-                    try { LogManager.WriteLog("Error", "signin:" + json); }catch { }
+                    try { LogManager.WriteLog("Error", "signin:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return "";
                 }
@@ -86,7 +87,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
                 else
                 {
-                    try { LogManager.WriteLog("Error", "GetUser:" + json); }catch { }
+                    try { LogManager.WriteLog("Error", "GetUser:" + json); }
+                    catch { }
                     errormsg = rd.message;
                     return null;
                 }
@@ -141,7 +143,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// </summary>
         /// <param name="errormsg">返回信息</param>
         /// <returns></returns>
-        public TenantInfo GetTenantInfo( ref string errormsg)
+        public TenantInfo GetTenantInfo(ref string errormsg)
         {
             try
             {
@@ -257,7 +259,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-          /// <summary>
+        /// <summary>
         /// 刷新购物车
         /// </summary>
         /// param name="lstscancodemember"> 0:扫描刷新购物车（cashpayoption=0,cashpayamt=0)  1：抹零（cashpayoption1,cashpayamt=0)  2：现金支付（cashpayoption=1,cashpayamt=支付金额)  3:积分+现金</param>
@@ -266,7 +268,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <returns></returns>
         public Cart RefreshCart(Cart cart, ref string errormsg, ref int resultcode)
         {
-            return RefreshCart(cart,MainModel.CurrentMember, ref errormsg, ref resultcode);
+            return RefreshCart(cart, MainModel.CurrentMember, ref errormsg, ref resultcode);
         }
 
         /// <summary>
@@ -276,11 +278,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <param name="lstscancodemember"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public Cart RefreshCart(Cart cart,Member member, ref string errormsg, ref int resultcode)
+        public Cart RefreshCart(Cart cart, Member member, ref string errormsg, ref int resultcode)
         {
             try
             {
-               
+
                 string url = "/pos/order/pos/cart";
 
                 CartPara cartpara = new CartPara();
@@ -297,7 +299,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                         pro.spectype = cart.products[i].spectype;
                         pro.goodstagid = cart.products[i].goodstagid;
                         pro.barcode = cart.products[i].barcode;
-                         
+
                         pro.adjustpriceinfo = cart.products[i].adjustpriceinfo;
                         lstpro[i] = pro;
                     }
@@ -401,10 +403,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
         public CreateOrderResult CreateOrder(Cart cart, ref string errormsg, ref int resultcode)
         {
-            return CreateOrder(cart,MainModel.CurrentMember,ref errormsg,ref resultcode);
+            return CreateOrder(cart, MainModel.CurrentMember, ref errormsg, ref resultcode);
         }
 
-        public CreateOrderResult CreateOrder(Cart cart,Member member, ref string errormsg, ref int resultcode)
+        public CreateOrderResult CreateOrder(Cart cart, Member member, ref string errormsg, ref int resultcode)
         {
             try
             {
@@ -488,9 +490,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
 
 
-                        tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
-                        tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
-                    
+                    tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
+                    tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
+
                 }
 
                 string json = HttpPOST(url, tempjson);
@@ -560,7 +562,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-      
+
 
         public int QueryOrderStatus(string orderid, ref string erromessage)
         {
@@ -983,7 +985,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     url = "/pos/thirdpartyplatform/thirdpartyabnormalorder/page";
                 }
-                
+
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);
 
                 string json = HttpPOST(url, tempjson);
@@ -1180,7 +1182,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
 
-                LogManager.WriteLog("DEBUG","交班结果" + tempjson);
+                LogManager.WriteLog("DEBUG", "交班结果" + tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -1333,8 +1335,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
-                string url = "/pos/product/scalestemp/gettempforshoppaginglist"; 
-                              
+                string url = "/pos/product/scalestemp/gettempforshoppaginglist";
+
 
                 ScalePara scalepara = new ScalePara();
                 scalepara.shopid = MainModel.CurrentShopInfo.shopid;
@@ -1394,13 +1396,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "checkshoptempupdated:" + json); }
                     catch { }
-                    return false ;
+                    return false;
                 }
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("Error", "获取门店秤信息异常：" + ex.Message);
-                return false ;
+                return false;
             }
         }
 
@@ -1417,7 +1419,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string url = "/pos/order/pos/availablecashcoupons";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("shopid",MainModel.CurrentShopInfo.shopid);
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -1814,7 +1816,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
                 string parajson = JsonConvert.SerializeObject(sort);
 
-                string json = HttpPOST(url,parajson);
+                string json = HttpPOST(url, parajson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1844,7 +1846,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// 验证外部券 密码
         /// </summary>
         /// <returns></returns>
-        public bool ValidateOuterCoupon(string couponcode,string password, ref string erromessage)
+        public bool ValidateOuterCoupon(string couponcode, string password, ref string erromessage)
         {
             try
             {
@@ -1875,7 +1877,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             {
                 LogManager.WriteLog("Error", "获取validateoutercoupon异常：" + ex.Message);
                 erromessage = "网络连接异常，请检查网络连接";
-                return false ;
+                return false;
             }
         }
 
@@ -1890,7 +1892,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string url = "/pos/activity/coupon/activity/validateoutercoupon";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("code",couponcode);
+                sort.Add("code", couponcode);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -2057,7 +2059,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         #region  电视屏接口
 
         #region saas
-        public string GetTVshowpage(string shopid,string lednum, ref string erromessage)
+        public string GetTVshowpage(string shopid, string lednum, ref string erromessage)
         {
             string json = "";
             try
@@ -2069,7 +2071,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 sort.Add("shopid", shopid);
                 sort.Add("lednum", lednum);
 
-                 json = HttpGET(url, sort);
+                json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -2305,7 +2307,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string url = "/pos/account/sysuser/upload/posuser";
 
 
-              
+
                 string testjson = JsonConvert.SerializeObject(lstuser);
 
                 string json = HttpPOST(url, testjson);
@@ -2351,7 +2353,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string testjson = JsonConvert.SerializeObject(sort);
 
-                string json = HttpGET(url,sort);
+                string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -2399,7 +2401,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 if (offlineorder.fixpricetotal == 0)
                 {
-                    
+
                     tempjson = tempjson.Replace(",\"fixpricetotal\":0.0", "");
                     tempjson = tempjson.Replace(",\"fixpricepromoamt\":0.0", "");
                 }
@@ -3102,7 +3104,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <param name="lstcode"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public List<SkuMovePrice> GetSkuMovePrice( List<string> lstcode, ref string errormsg)
+        public List<SkuMovePrice> GetSkuMovePrice(List<string> lstcode, ref string errormsg)
         {
             try
             {
@@ -3110,7 +3112,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string url = "/pos/common/warehousedelivery/getskumovepriceforpos";
 
                 SortedDictionary<string, object> sort = new SortedDictionary<string, object>();
-                sort.Add("shopid",MainModel.CurrentShopInfo.shopid);
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
                 sort.Add("skucodes", lstcode);
 
                 string testjson = JsonConvert.SerializeObject(sort);
@@ -3181,7 +3183,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
-        
+
         /// <summary>
         /// 报损单据列表
         /// </summary>
@@ -3419,14 +3421,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// </summary>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public ZtBalanceAccount ZtBalanceAccount(string memberid,ref string errormsg)
+        public ZtBalanceAccount ZtBalanceAccount(string memberid, ref string errormsg)
         {
             try
             {
                 string url = "/pos/member/balance/ztbalanceaccount";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("memberid",memberid);
+                sort.Add("memberid", memberid);
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
@@ -3603,7 +3605,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-          /// <summary>
+        /// <summary>
         /// 获取退款合计
         /// </summary>
         public Dictionary<string, decimal> SumDepositRefundByCondition(DepositListRequest para, ref string errormsg)
@@ -3657,12 +3659,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpGET(url, sort);
 
-               LogManager.WriteLog(json);
+                LogManager.WriteLog(json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
 
-                if (rd.code == 0){
+                if (rd.code == 0)
+                {
 
                     TopUpPrint resultobj = JsonConvert.DeserializeObject<TopUpPrint>(rd.data.ToString());
                     return resultobj;
@@ -3707,10 +3710,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
                 else
                 {
-                    try { LogManager.WriteLog("Error", "depositmember:" + json); }
-                    catch { }
-                    return -1;
+                    erromessage = rd.message;
+                    LogManager.WriteLog("Error", "depositmember:" + json);
                 }
+                return -1;
             }
             catch (Exception ex)
             {
@@ -3829,7 +3832,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string url = "/pos/product/pos/getadjustpricerecord";
 
-              
+
                 string parajson = JsonConvert.SerializeObject(adjustpara);
 
                 string json = HttpPOST(url, parajson);
@@ -3869,7 +3872,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             {
                 string url = "/pos/order/pos/queryprint";
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-               
+
                 string json = HttpGET(url, sort);
 
                 LogManager.WriteLog(json);
@@ -3908,17 +3911,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <param name="orderid"></param>
         /// <param name="erromessage"></param>
         /// <returns></returns>
-        public PrinterPickOrderInfo QueryPrintMarUP(int type,string orderid, ref string erromessage)
+        public PrinterPickOrderInfo QueryPrintMarUP(int type, string orderid, ref string erromessage)
         {
             try
             {
                 string url = "/pos/order/pos/queryprintmarkup";
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("type", type.ToString());
-                sort.Add("orderid",orderid);
+                sort.Add("orderid", orderid);
                 string json = HttpGET(url, sort);
 
-                LogManager.WriteLog("DEBUG","补打拣货单"+json);
+                LogManager.WriteLog("DEBUG", "补打拣货单" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -3928,7 +3931,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                     PrinterPickOrderInfo resultobj = JsonConvert.DeserializeObject<PrinterPickOrderInfo>(rd.data.ToString());
                     return resultobj;
-                    
+
                 }
                 else
                 {
@@ -3954,15 +3957,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         static object lockhttpget = new object();
         public string HttpGET(string Url, SortedDictionary<string, string> sortpara)
         {
-                Other.CrearMemory();
-                return httprequest.HttpGetJson(Url, sortpara);
+            Other.CrearMemory();
+            return httprequest.HttpGetJson(Url, sortpara);
         }
 
         static object lockhttppost = new object();
         public string HttpPOST(string Url, string bodyjson)
         {
-                Other.CrearMemory();
-                return httprequest.HttpPostJson(Url, bodyjson);      
+            Other.CrearMemory();
+            return httprequest.HttpPostJson(Url, bodyjson);
         }
 
 

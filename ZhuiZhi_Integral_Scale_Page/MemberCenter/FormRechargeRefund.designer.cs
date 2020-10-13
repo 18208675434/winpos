@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRechargeRefund));
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblCashDesc = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.usermoney = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
+            this.lblBalance = new System.Windows.Forms.Label();
+            this.btnDel = new System.Windows.Forms.Button();
             this.btnpw0 = new System.Windows.Forms.Button();
             this.btnpwd = new System.Windows.Forms.Button();
             this.btnpw9 = new System.Windows.Forms.Button();
@@ -49,8 +49,8 @@
             this.btnpw1 = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.Kouchu = new System.Windows.Forms.Label();
-            this.txttuikuan = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.lblTotalRefund = new System.Windows.Forms.Label();
+            this.txtRefound = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.btncash = new System.Windows.Forms.Button();
             this.btnOriginal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -61,28 +61,28 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(13, 28);
+            this.label1.Location = new System.Drawing.Point(13, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 26);
             this.label1.TabIndex = 0;
             this.label1.Text = "充值退款";
             // 
-            // label2
+            // lblCashDesc
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(14, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(266, 21);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "本次充值为现金充值，只可现金退款";
-            this.label2.Visible = false;
+            this.lblCashDesc.AutoSize = true;
+            this.lblCashDesc.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblCashDesc.Location = new System.Drawing.Point(14, 78);
+            this.lblCashDesc.Name = "lblCashDesc";
+            this.lblCashDesc.Size = new System.Drawing.Size(266, 21);
+            this.lblCashDesc.TabIndex = 1;
+            this.lblCashDesc.Text = "本次充值为现金充值，只可现金退款";
+            this.lblCashDesc.Visible = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(232, 134);
+            this.label3.Location = new System.Drawing.Point(232, 135);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 21);
             this.label3.TabIndex = 3;
@@ -94,7 +94,7 @@
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.label4.Font = new System.Drawing.Font("微软雅黑", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(40, 186);
+            this.label4.Location = new System.Drawing.Point(40, 188);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(268, 16);
             this.label4.TabIndex = 4;
@@ -104,36 +104,37 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(18, 188);
+            this.pictureBox1.Location = new System.Drawing.Point(18, 187);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(17, 17);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // usermoney
+            // lblBalance
             // 
-            this.usermoney.AutoSize = true;
-            this.usermoney.Location = new System.Drawing.Point(18, 223);
-            this.usermoney.Name = "usermoney";
-            this.usermoney.Size = new System.Drawing.Size(11, 12);
-            this.usermoney.TabIndex = 6;
-            this.usermoney.Text = "l";
-            this.usermoney.Visible = false;
+            this.lblBalance.AutoSize = true;
+            this.lblBalance.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblBalance.Location = new System.Drawing.Point(18, 220);
+            this.lblBalance.Name = "lblBalance";
+            this.lblBalance.Size = new System.Drawing.Size(79, 19);
+            this.lblBalance.TabIndex = 6;
+            this.lblBalance.Text = "账户余额：";
+            this.lblBalance.Visible = false;
             // 
-            // button7
+            // btnDel
             // 
-            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button7.Location = new System.Drawing.Point(270, 426);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(133, 60);
-            this.button7.TabIndex = 94;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.btnDel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDel.BackgroundImage")));
+            this.btnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnDel.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDel.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDel.Location = new System.Drawing.Point(270, 426);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(133, 60);
+            this.btnDel.TabIndex = 94;
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnpw0
             // 
@@ -309,7 +310,7 @@
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(376, 27);
+            this.pictureBox2.Location = new System.Drawing.Point(376, 21);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(27, 27);
@@ -317,57 +318,65 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // Kouchu
+            // lblTotalRefund
             // 
-            this.Kouchu.AutoSize = true;
-            this.Kouchu.Location = new System.Drawing.Point(190, 222);
-            this.Kouchu.Name = "Kouchu";
-            this.Kouchu.Size = new System.Drawing.Size(41, 12);
-            this.Kouchu.TabIndex = 96;
-            this.Kouchu.Text = "label5";
-            this.Kouchu.Visible = false;
+            this.lblTotalRefund.AutoSize = true;
+            this.lblTotalRefund.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.lblTotalRefund.ForeColor = System.Drawing.Color.Red;
+            this.lblTotalRefund.Location = new System.Drawing.Point(189, 220);
+            this.lblTotalRefund.Name = "lblTotalRefund";
+            this.lblTotalRefund.Size = new System.Drawing.Size(65, 20);
+            this.lblTotalRefund.TabIndex = 96;
+            this.lblTotalRefund.Text = "退还金额";
+            this.lblTotalRefund.Visible = false;
             // 
-            // txttuikuan
+            // txtRefound
             // 
-            this.txttuikuan.BackColor = System.Drawing.Color.White;
-            this.txttuikuan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txttuikuan.DecimalDigits = 2;
-            this.txttuikuan.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txttuikuan.Location = new System.Drawing.Point(18, 116);
-            this.txttuikuan.LockFocus = true;
-            this.txttuikuan.MaxDeciaml = ((long)(0));
-            this.txttuikuan.MaxLength = 100;
-            this.txttuikuan.Name = "txttuikuan";
-            this.txttuikuan.NeedBoard = true;
-            this.txttuikuan.OnlyNumber = true;
-            this.txttuikuan.Size = new System.Drawing.Size(207, 50);
-            this.txttuikuan.TabIndex = 2;
-            this.txttuikuan.WaterText = "请输入退款金额";
+            this.txtRefound.BackColor = System.Drawing.Color.White;
+            this.txtRefound.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRefound.DecimalDigits = 2;
+            this.txtRefound.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtRefound.Location = new System.Drawing.Point(18, 120);
+            this.txtRefound.LockFocus = true;
+            this.txtRefound.MaxDeciaml = ((long)(0));
+            this.txtRefound.MaxLength = 100;
+            this.txtRefound.Name = "txtRefound";
+            this.txtRefound.NeedBoard = false;
+            this.txtRefound.OnlyNumber = true;
+            this.txtRefound.Size = new System.Drawing.Size(207, 50);
+            this.txtRefound.TabIndex = 2;
+            this.txtRefound.WaterText = "请输入退款金额";
             // 
             // btncash
             // 
             this.btncash.BackColor = System.Drawing.Color.White;
-            this.btncash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btncash.Location = new System.Drawing.Point(20, 62);
+            this.btncash.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btncash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btncash.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.btncash.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(137)))), ((int)(((byte)(205)))));
+            this.btncash.Location = new System.Drawing.Point(18, 62);
+            this.btncash.Margin = new System.Windows.Forms.Padding(2);
             this.btncash.Name = "btncash";
-            this.btncash.Size = new System.Drawing.Size(172, 41);
-            this.btncash.TabIndex = 97;
+            this.btncash.Size = new System.Drawing.Size(157, 42);
+            this.btncash.TabIndex = 99;
             this.btncash.Text = "现金退款";
             this.btncash.UseVisualStyleBackColor = false;
-            this.btncash.Visible = false;
             this.btncash.Click += new System.EventHandler(this.btncash_Click);
             // 
             // btnOriginal
             // 
-            this.btnOriginal.BackColor = System.Drawing.Color.White;
-            this.btnOriginal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOriginal.Location = new System.Drawing.Point(231, 62);
+            this.btnOriginal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(137)))), ((int)(((byte)(205)))));
+            this.btnOriginal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOriginal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOriginal.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.btnOriginal.ForeColor = System.Drawing.Color.White;
+            this.btnOriginal.Location = new System.Drawing.Point(240, 62);
+            this.btnOriginal.Margin = new System.Windows.Forms.Padding(2);
             this.btnOriginal.Name = "btnOriginal";
-            this.btnOriginal.Size = new System.Drawing.Size(172, 41);
-            this.btnOriginal.TabIndex = 98;
-            this.btnOriginal.Text = "原路返回";
+            this.btnOriginal.Size = new System.Drawing.Size(157, 42);
+            this.btnOriginal.TabIndex = 99;
+            this.btnOriginal.Text = "原路返回退款";
             this.btnOriginal.UseVisualStyleBackColor = false;
-            this.btnOriginal.Visible = false;
             this.btnOriginal.Click += new System.EventHandler(this.btnOriginal_Click);
             // 
             // FormRechargeRefund
@@ -377,9 +386,9 @@
             this.ClientSize = new System.Drawing.Size(419, 565);
             this.Controls.Add(this.btnOriginal);
             this.Controls.Add(this.btncash);
-            this.Controls.Add(this.Kouchu);
+            this.Controls.Add(this.lblTotalRefund);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.button7);
+            this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnpw0);
             this.Controls.Add(this.btnpwd);
             this.Controls.Add(this.btnpw9);
@@ -392,18 +401,18 @@
             this.Controls.Add(this.btnpw2);
             this.Controls.Add(this.btnpw1);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.usermoney);
+            this.Controls.Add(this.lblBalance);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txttuikuan);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtRefound);
+            this.Controls.Add(this.lblCashDesc);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormRechargeRefund";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormTuikuan";
-            this.Load += new System.EventHandler(this.FormTuikuan_Load);
+            this.Load += new System.EventHandler(this.FormRechargeRefund_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -414,13 +423,13 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private MyControl.NumberTextBox txttuikuan;
+        private System.Windows.Forms.Label lblCashDesc;
+        private MyControl.NumberTextBox txtRefound;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label usermoney;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label lblBalance;
+        private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.Button btnpw0;
         private System.Windows.Forms.Button btnpwd;
         private System.Windows.Forms.Button btnpw9;
@@ -434,7 +443,7 @@
         private System.Windows.Forms.Button btnpw1;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label Kouchu;
+        private System.Windows.Forms.Label lblTotalRefund;
         private System.Windows.Forms.Button btncash;
         private System.Windows.Forms.Button btnOriginal;
     }

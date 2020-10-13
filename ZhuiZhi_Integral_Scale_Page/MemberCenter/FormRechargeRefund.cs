@@ -12,15 +12,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     {
         #region 全局变量
         HttpUtil until = new HttpUtil();
-        public string balance;
-        public string operatorid = "";
-        public string depostBillid;
-        public string memberId;
-        public string shopId = "";
-        public string tenantId = "";
-        public string payModeForApi = "";
-        public decimal rechargeAmount;
-        public decimal rewardAmount;
+        decimal balance;
+        string operatorid = "";
+        string depostBillid;
+        string memberId;
+        string shopId = "";
+        string tenantId = "";
+        string payModeForApi = "";
+        decimal rechargeAmount;
+        decimal rewardAmount;
+        int refundtype = 2;//默认现金 1-原路返回退款 2-现金
         #endregion
         public FormRechargeRefund(string depostBillid, string memberId, string shopId, string tenantId, string payModeForApi, decimal rechargeAmount, decimal rewardAmount)
         {
@@ -35,248 +36,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.rewardAmount = rewardAmount;
         }
 
-        #region 数字键
 
-        private void btnpw1_Click(object sender, EventArgs e)
+
+        private void FormRechargeRefund_Load(object sender, EventArgs e)
         {
-            if (txttuikuan.Text.Length <= 4)
+            LoadBalanceAccount();
+            lblBalance.Text = "账户余额:￥" + balance.ToString("f2");
+            lblBalance.Visible = true;
+            lblTotalRefund.Location = new Point(lblBalance.Location.X + lblBalance.Width + 15, lblTotalRefund.Location.Y);
+            txtRefound.Text = rechargeAmount.ToString();
+            DisplayRefundAmount();
+            if (payModeForApi == "现金")
             {
-                txttuikuan.Text += "1";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
+                refundtype = 2;
+                lblCashDesc.Visible = true;
+                btncash.Visible = false;
+                btnOriginal.Visible = false;
             }
             else
             {
-                return;
+                refundtype = 1;
+                lblCashDesc.Visible = false;
+                btncash.Visible = true;
+                btnOriginal.Visible = true;
             }
         }
 
-        private void btnpw2_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "2";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw3_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "3";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw4_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "4";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw5_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "5";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw6_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "6";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw7_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "7";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw8_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "8";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw9_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "9";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpwd_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += ".";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnpw0_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length <= 4)
-            {
-                txttuikuan.Text += "0";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-                Kouchu.Visible = true;
-
-            }
-            else
-            {
-                return;
-            }
-        }
-        #region
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            if (txttuikuan.Text.Length > 0)
-            {
-                txttuikuan.Text = txttuikuan.Text.Substring(0, txttuikuan.Text.Length - 1);
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
-                Kouchu.ForeColor = Color.Red;
-            }
-            else
-            {
-                Kouchu.Text = "";
-                Kouchu.Visible = false;
-            }
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            BackHelper.HideFormBackGround();
-            this.Close();
-
-        }
-
-
-
-        private void FormTuikuan_Load(object sender, EventArgs e)
-        {
-            if (balance != "")
-            {
-                txttuikuan.Text = rechargeAmount.ToString();
-                usermoney.Text = balance;
-                usermoney.Visible = true;
-                if (payModeForApi != "现金")
-                {
-                    label2.Visible = false;
-                    btncash.Visible = true;
-                    btnOriginal.Visible = true;
-                }
-                else if (payModeForApi == "现金")
-                {
-                    label2.Visible = true;
-                    btncash.Visible = false;
-                    btnOriginal.Visible = false;
-                }
-            }
-
-
-        }
+        #region 事件
         private void btnOk_Click(object sender, EventArgs e)
         {
             try
             {
+                if (string.IsNullOrEmpty(txtRefound.Text))
+                {
+                    MainModel.ShowLog("请输入退款金额", true);
+                    return;
+                }
                 DepositRefundRequest request = new DepositRefundRequest();
-
-                request.refundcapital = rechargeAmount.ToString().Replace("0元", "");
-                if (btncash.BackColor == Color.Blue || payModeForApi == "现金")
-                {
-                    request.refundtype = 2;
-                }
-                else if (btnOriginal.BackColor == Color.Blue)
-                {
-                    request.refundtype = 1;
-                }
+                request.refundcapital = txtRefound.Text;
+                request.refundtype = refundtype;
                 request.memberid = memberId;
                 request.operatorid = MainModel.CurrentUser.loginaccount;
                 request.depositbillid = depostBillid;
@@ -287,7 +85,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 long refundId = until.Depositbillrefund(request, ref err); //获取退款的id               
                 if (refundId > 0)
                 {
-                    this.Tag = refundId;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     BackHelper.HideFormBackGround();
@@ -295,7 +92,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    MainModel.ShowLog("退款异常：" + err, true);
+                    MainModel.ShowLog("退款失败：" + err, true);
                 }
             }
             catch (Exception ex)
@@ -308,15 +105,197 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btncash_Click(object sender, EventArgs e)
         {
+            refundtype = 2;
             btncash.ForeColor = Color.White;
-            btncash.BackColor = Color.Blue;
+            btncash.BackColor = Color.FromArgb(20, 137, 205);
+            btnOriginal.ForeColor = Color.FromArgb(20, 137, 205);
             btnOriginal.BackColor = Color.White;
         }
         private void btnOriginal_Click(object sender, EventArgs e)
         {
+            refundtype = 1;
             btnOriginal.ForeColor = Color.White;
-            btnOriginal.BackColor = Color.Blue;
+            btnOriginal.BackColor = Color.FromArgb(20, 137, 205);
+            btncash.ForeColor = Color.FromArgb(20, 137, 205);
             btncash.BackColor = Color.White;
         }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length > 0)
+            {
+                txtRefound.Text = txtRefound.Text.Substring(0, txtRefound.Text.Length - 1);
+
+            }
+            DisplayRefundAmount();
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            BackHelper.HideFormBackGround();
+            this.Close();
+
+        }
+
+        #region 数字键
+
+        private void btnpw1_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "1";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw2_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "2";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw3_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "3";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw4_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "4";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw5_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "5";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw6_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "6";
+                DisplayRefundAmount();
+
+            }
+        }
+
+        private void btnpw7_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "7";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw8_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "8";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw9_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "9";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpwd_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += ".";
+                DisplayRefundAmount();
+            }
+        }
+
+        private void btnpw0_Click(object sender, EventArgs e)
+        {
+            if (txtRefound.Text.Length <= 4)
+            {
+                txtRefound.Text += "0";
+                DisplayRefundAmount();
+            }
+
+        }
+
+      
+        #endregion
+
+
+
+        #endregion
+
+
+        #region 方法
+        /// <summary> 加载会员余额
+        /// </summary>
+        private void LoadBalanceAccount()
+        {
+            try
+            {
+                string errormsg = "";
+                ZtBalanceAccount currentBalanceAccount = until.ZtBalanceAccount(MainModel.CurrentMember.memberinformationresponsevo.memberid, ref errormsg);
+
+                if (!string.IsNullOrEmpty(errormsg) || currentBalanceAccount == null)
+                {
+                    MainModel.ShowLog(errormsg, false);
+                }
+                else
+                {
+                    //TODO
+                    balance = currentBalanceAccount.balance;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("获取会员账户余额异常" + ex.Message, true);
+            }
+        }
+        /// <summary> 展示退款金额
+        /// </summary>
+        private void DisplayRefundAmount()
+        {
+            if (txtRefound.Text.Length == 0)
+            {
+                lblTotalRefund.Visible = false;
+            }
+            else
+            {
+                lblTotalRefund.Text = "扣除:￥" + txtRefound.Text;
+                if (rewardAmount > 0)
+                {
+                    lblTotalRefund.Text = lblTotalRefund.Text + "+￥" + rewardAmount.ToString("f2") + "(赠送金额)";
+                }
+                lblTotalRefund.ForeColor = Color.Red;
+                lblTotalRefund.Visible = true;
+            }
+
+        }
+        #endregion
+
     }
 }

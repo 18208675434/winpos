@@ -101,11 +101,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return;
             if (dgvRecharge.Columns[e.ColumnIndex].Name == "RechargeRefund")
             {
-                Bitmap bmp = (Bitmap)dgvRecharge.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                RowsItem rowsItem = (RowsItem)bmp.Tag;
+                RowsItem rowsItem = (RowsItem)dgvRecharge.Rows[e.RowIndex].Tag;
                 if (rowsItem != null)
-                {
-                    //BackHelper.ShowFormBackGround();
+                {                  
+                    BackHelper.ShowFormBackGround();
                     FormRechargeRefund tuikuan = new FormRechargeRefund(rowsItem.id, rowsItem.memberid,
                        rowsItem.shopid, rowsItem.tenantid, rowsItem.paymodeforapi, rowsItem.amount, rowsItem.rewardamount);
                     asf.AutoScaleControlTest(tuikuan, 420, 560, 420 * MainModel.midScale, 560 * MainModel.midScale, true);
@@ -115,7 +114,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         LoadDgvOrder();
                     }
-                    //BackHelper.HideFormBackGround();
+                    BackHelper.HideFormBackGround();
                 }
             }
         }
@@ -405,9 +404,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         {
                             bmpRefund = (Bitmap)MainModel.GetControlImage(btnRefund);
                         }
-                        bmpRefund.Tag = order;
                         dgvRecharge.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2"), order.rewardamount.ToString("f2"), order.paymodeforapi, bmpRefund);
-
+                        dgvRecharge.Rows[dgvRecharge.Rows.Count - 1].Tag = order;
                     }
                     else
                     {
