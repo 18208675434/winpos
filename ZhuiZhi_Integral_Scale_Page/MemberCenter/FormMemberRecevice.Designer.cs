@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberRecevice));
             this.btOldCardOK = new System.Windows.Forms.Button();
             this.labform = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtOldCardNumber = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btOldCardOK
@@ -63,18 +61,6 @@
             this.labform.TabIndex = 103;
             this.labform.Text = "输入会员账号";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(331, 19);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(27, 27);
-            this.pictureBox1.TabIndex = 105;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // txtOldCardNumber
             // 
             this.txtOldCardNumber.BackColor = System.Drawing.Color.White;
@@ -92,13 +78,24 @@
             this.txtOldCardNumber.TabIndex = 0;
             this.txtOldCardNumber.WaterText = "输入会员账号";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(322, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 21);
+            this.label1.TabIndex = 106;
+            this.label1.Text = "返回";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // FormMemberRecevice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(414, 225);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtOldCardNumber);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btOldCardOK);
             this.Controls.Add(this.labform);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -106,7 +103,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormMemberRecevice";
             this.Load += new System.EventHandler(this.FormMemberRecevice_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,8 +111,8 @@
         #endregion
 
         private MyControl.NumberTextBox txtOldCardNumber;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btOldCardOK;
         private System.Windows.Forms.Label labform;
+        private System.Windows.Forms.Label label1;
     }
 }
