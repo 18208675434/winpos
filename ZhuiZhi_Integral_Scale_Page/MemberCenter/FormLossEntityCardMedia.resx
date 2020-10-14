@@ -117,39 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="validatecode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\validatecode.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="分类选中" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\分类选中.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Round_Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Round_Search.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="delete.Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete.Image.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="商品选中" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\商品选中.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="picCircular" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\picCircular.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="card" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\card.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="picDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\picDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="phone" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\phone.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Empty.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="losscard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\losscard.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAFQAAABMCAYAAADz7pA3AAAABGdBTUEAALGPC/xhBQAAA/tJREFUeF7t
+        m09oE0EUh9P6D9GDooKC1EvwIBakbWwJ4tWDgkfxIBh6C0EqeBRJLwUJljZls0lTGqK3ogcRr0ZUvEqR
+        empB1EOLSFuqTSu26+81E7qdDtlNnDWb5P3gI+3uzux7XyabBDYBLzI+Ph4G6Uwm8xEsgG/pdLqAbffw
+        9ylxGMcpk5OTJyDtBaRZFVgDWRx3VgzjqGIYxkmswjlJXiU2IPWpaZoXxRQceyDnjUKaW15h/BUxFQcr
+        84ZCUi18yGazN6empvaIqVsybRBKbz4qQbUyhxUbHR4ePijO0TpB49cUQnSxgPnvp1Kpo+J0zR80/VaS
+        4AUrEPsIl4PT4rTNGTR6SWrcUyB1HeRwiTknSmiuoDGnz5xesQGeQ25YlNL4mZiYOI+mNm1N1gU8qfRx
+        7SpKaitV1qBBE4/tjdUb+qSBFXurUCjsFSU2TrA6z6CJ33JTfgBSP+PxTiKROCTK9X9QdFJuxId8B/F8
+        Pn9MlO3PoMjj4Jco2vfgyf+Jx1F6VYkW/BUUOCgX3SDQJeoJ6BSt1D+GYRxGQT9EgY3KJt7AXoLLoq36
+        BcXclYprdN7j29d1y7L+/0cunHwf+Gorppn4hBUbicfj+0W7nqUtGAweIPByv40TF5ucWdM0YwMDA0fK
+        fcuQk5IalwmFQhe6u7tTYBasAYvZATkhNylyJbTtDtnv6enJdHV1bdgGMxUgV+RMrNztCJmvVYMYZ8jd
+        DqnYaMoHMVVjlmV2gj+2HUxtkMNOEjpq28j8G6MkdEbayNTOTADvVCuKHbvAhdcKh8MtCfWuciJDLmmF
+        KneW6e3ttfL5vLW6uopvaK0Z6p0ckAuVIzuOQnO5nJiWQy5Ujuw4Cl1eXhbTcciFypEdR6GLi4tiOg65
+        UDmy4yjUMAwxHYdcqBzZcRQaCoWsZDJpzc/PW8VisSWh3skBuVA5suMolKkOFqoZFqoZFqoZFqoZFqoZ
+        FqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZFqoZ
+        FqqZhhFKdxH39fW5ws0dx7rnK+N7oXSDViwW27rzLaP+neYu6Fgao7q5S/d8Mr4XGo1GlU26gcZ6PZ+M
+        74XSbYSq5txAY72eT8b3QkdGRpTNuYHGej2fjO+F9vf3K5tzA431ej4Z3wslIpGIlUgkrLGxMVfQsTRG
+        NRehez47JHRJ3sjUzBIJnZY2MrUzTT9NfKjYwdQAuSShQfyzLu9kqmadXJZ/Mz8k7WSqZ2hLpkg7vq8+
+        UxzEuIDckcOSyu20Y+cgKNoPZipCrgbJXUmhIjigAzwA78AXsMjsgJyQG3LUIbSJBAJ/AV2Z8KZa7HeC
+        AAAAAElFTkSuQmCC
+</value>
   </data>
 </root>

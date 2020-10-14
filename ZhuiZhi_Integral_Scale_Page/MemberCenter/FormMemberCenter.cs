@@ -102,7 +102,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
                 IsEnable = true;
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
-               
+
             }
             catch (Exception ex)
             {
@@ -555,23 +555,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 string entityCardNo = NumberHelper.ShowFormNumber("输入实体卡号", NumberType.BindingEntryCard);
                 if (!string.IsNullOrEmpty(entityCardNo))
                 {
-                   
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    bool flag = membercenterutil.ApplyCard(CurrentMember.memberheaderresponsevo.mobile,entityCardNo,ref err);
+                    bool flag = membercenterutil.ApplyCard(CurrentMember.memberheaderresponsevo.mobile, entityCardNo, ref err);
                     LoadingHelper.CloseForm();
-                     if (flag)
-                     {
-                         MainModel.CurrentMember.memberentitycardresponsevo.cardid = entityCardNo;                       
-                         MainModel.ShowLog("绑卡成功", true);
-                         DisplayEntityCard();
-                         MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);               
-                     }
-                     else
-                     {
-                         MainModel.ShowLog("绑卡失败：" + err, true);
-                     }
-                   
+                    if (flag)
+                    {
+                        try
+                        {
+                            Member member = httputil.GetMember(CurrentMember.memberheaderresponsevo.mobile, ref err);
+                            MainModel.CurrentMember = member;
+                        }
+                        catch(Exception ex)
+                        {
+                            LogManager.WriteLog("ERROR", "获取会员信息异常:" + ex.Message);
+                            MainModel.CurrentMember.memberentitycardresponsevo.cardid = entityCardNo;
+                        }
+                       
+                        MainModel.ShowLog("绑卡成功", true);
+                        DisplayEntityCard();
+                        MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
+                    }
+                    else
+                    {
+                        MainModel.ShowLog("绑卡失败：" + err, true);
+                    }
+
                     //先注释，之后绑卡、关联旧卡改版
                     //EntityCard entityCard = membercenterutil.GetCard(entityCardNo, ref err);
                     //if (entityCard != null)
@@ -601,25 +610,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 LogManager.WriteLog("ERROR", "绑定实体卡异常:" + ex.Message);
             }
+            finally
+            {
+                LoadingHelper.CloseForm();
+            }
         }
 
         private void btnLoss_Click(object sender, EventArgs e)
         {
-            string entityCardNo = "0100017261";
-            string err = "";
-            //CurrentMember.memberentitycardresponsevo.tenantid;
-            EntityCard entityCard = membercenterutil.GetCardByEncryptCardId(entityCardNo, ref err);
-            if (entityCard == null)
+            bool flag = MemberCenterHelper.ShowFormLoss(CurrentMember.memberheaderresponsevo.mobile);
+            if (flag)
             {
-                MainModel.ShowLog("绑卡失败：" + err, true);
-                return;
-            }
-            
+                DisplayEntityCard();
+            }           
         }
 
         private void DisplayEntityCard()
         {
-            if(MainModel.CurrentMember.memberentitycardresponsevo==null)
+            if (MainModel.CurrentMember.memberentitycardresponsevo == null)
             {
                 return;
             }

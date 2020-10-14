@@ -588,7 +588,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             return null;
         }
 
-        #region
+        #region 实体卡
         /// <summary> 绑定卡(激活)
         /// </summary>
         /// <returns></returns>
@@ -619,6 +619,77 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 erromessage = "网络连接异常，请检查网络连接";
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 挂失实体卡-发送验证码
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public bool LossEntityCardGetSendsmscode(string mobile, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/memberentitycard/sendsmscode";
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("mobile", mobile);
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    LogManager.WriteLog("Error", "NewPhoneGetsmsErr:" + json);
+                    errormsg = rd.message;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", mobile + "绑卡异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 挂失实体卡
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public bool LossEntityCard(string mobile, string newcardid, string smscode, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/memberentitycard/lostcard";
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("newcardid", newcardid);
+                sort.Add("mobile", mobile);
+                sort.Add("smscode", smscode);
+                string testjson = JsonConvert.SerializeObject(sort);
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    LogManager.WriteLog("Error", "NewPhoneGetsmsErr:" + json);
+                    errormsg = rd.message;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", mobile + "绑卡异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+
+            }
+            return false;
         }
         #endregion
 

@@ -547,7 +547,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 formRechangeQuery = new FormRechargeQuery();
                 asf.AutoScaleControlTest(formRechangeQuery, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+                formRechangeQuery.Location = new System.Drawing.Point(0, 0);
             }
             catch (Exception ex)
             {
@@ -591,7 +591,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 formSingleUserRechargeQuery = new FormRechargeSingleUserQuery(phone);
                 asf.AutoScaleControlTest(formSingleUserRechargeQuery, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+                formSingleUserRechargeQuery.Location = new System.Drawing.Point(0, 0);
             }
             catch (Exception ex)
             {
@@ -618,5 +618,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
         #endregion
+
+        /// <summary> 挂失
+        /// </summary>
+        public static bool ShowFormLoss(string phone)
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormLossEntityCard formLoss = new FormLossEntityCard(phone);
+                asf.AutoScaleControlTest(formLoss, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formLoss.Location = new System.Drawing.Point(0, 0);
+                formLoss.TopMost = true;
+                formLoss.ShowDialog();               
+                Application.DoEvents();
+                BackHelper.HideFormBackGround();
+                return formLoss.DialogResult == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("初始化挂失页面异常" + ex.Message);
+                return false;
+            }
+        }
     }
 }
