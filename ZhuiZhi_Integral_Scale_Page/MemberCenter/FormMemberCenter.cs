@@ -642,7 +642,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblEntityNo.Visible = true;
                 btnbang.Visible = false;
                 btnLoss.Visible = true;
-                btnRelation.Visible = true;
+                //btnRelation.Visible = true;
             }
         }
     }
