@@ -555,8 +555,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 string entityCardNo = NumberHelper.ShowFormNumber("输入实体卡号", NumberType.BindingEntryCard);
                 if (!string.IsNullOrEmpty(entityCardNo))
                 {
-                    string err = "";                   
+                   
+                    string err = "";
+                    LoadingHelper.ShowLoadingScreen();
                     bool flag = membercenterutil.ApplyCard(CurrentMember.memberheaderresponsevo.mobile,entityCardNo,ref err);
+                    LoadingHelper.CloseForm();
                      if (flag)
                      {
                          MainModel.CurrentMember.memberentitycardresponsevo.cardid = entityCardNo;                       
@@ -568,6 +571,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                      {
                          MainModel.ShowLog("绑卡失败：" + err, true);
                      }
+                   
                     //先注释，之后绑卡、关联旧卡改版
                     //EntityCard entityCard = membercenterutil.GetCard(entityCardNo, ref err);
                     //if (entityCard != null)

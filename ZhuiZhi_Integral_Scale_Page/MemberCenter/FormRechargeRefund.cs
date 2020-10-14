@@ -71,8 +71,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     MainModel.ShowLog("请输入退款金额", true);
                     return;
-                }
-                DepositRefundRequest request = new DepositRefundRequest();
+                }               
+                DepositRefundRequest request = new DepositRefundRequest();               
                 request.refundcapital = txtRefound.Text;
                 request.refundtype = refundtype;
                 request.memberid = memberId;
@@ -81,8 +81,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 request.shopid = shopId;
                 request.tenantid = tenantId;
                 string err = "";
-
-                long refundId = until.Depositbillrefund(request, ref err); //获取退款的id               
+                LoadingHelper.ShowLoadingScreen();
+                long refundId = until.Depositbillrefund(request, ref err); //获取退款的id  
+                LoadingHelper.CloseForm();
                 if (refundId > 0)
                 {
                     this.DialogResult = DialogResult.OK;
@@ -241,7 +242,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         }
 
-      
+
         #endregion
 
 
@@ -257,8 +258,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 string errormsg = "";
+                LoadingHelper.ShowLoadingScreen();
                 ZtBalanceAccount currentBalanceAccount = until.ZtBalanceAccount(MainModel.CurrentMember.memberinformationresponsevo.memberid, ref errormsg);
-
+                LoadingHelper.CloseForm();
                 if (!string.IsNullOrEmpty(errormsg) || currentBalanceAccount == null)
                 {
                     MainModel.ShowLog(errormsg, false);
