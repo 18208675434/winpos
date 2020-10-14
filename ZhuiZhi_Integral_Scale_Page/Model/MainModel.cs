@@ -19,6 +19,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 {
     public class MainModel
     {
+
+        public static ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.BalanceConfigDetail balanceconfigdetail = null;
+
         public static string rewardmount = "";
         public static string moneyzz = "";
         public static long idm = 0;
