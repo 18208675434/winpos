@@ -988,7 +988,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         frmbalancepwdguest.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + pnlPayInfo.Location.X, pnlPayInfo.Location.Y);
                         frmbalancepwdguest.TopMost = true;
                         asf.AutoScaleControlTest(frmbalancepwdguest,704,699, pnlPayInfo.Width, pnlPayInfo.Height, true);
-
                     }
 
                     frmbalancepwdguest.ShowDialog();

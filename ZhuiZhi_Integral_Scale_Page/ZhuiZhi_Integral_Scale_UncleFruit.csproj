@@ -262,7 +262,14 @@
     <Compile Include="HelperUI\FormPurchaseLimit.Designer.cs">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperUI\FormSayOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormSayOrder.Designer.cs">
+      <DependentUpon>FormSayOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelperUI\PurchaseLimitHelper.cs" />
+    <Compile Include="HelperUI\SayOrderHelper.cs" />
     <Compile Include="MemberCenter\CreateMemberMediaHelper.cs" />
     <Compile Include="MemberCenter\FormChangePhoneConfirm.cs">
       <SubType>Form</SubType>
@@ -510,8 +517,15 @@
     <Compile Include="Model\Promotion\temp.cs" />
     <Compile Include="Model\Promotion\TripletBean.cs" />
     <Compile Include="Model\Promotion\TripletBeanForCoupon.cs" />
+    <Compile Include="Model\SyncOrder.cs" />
     <Compile Include="Model\TenantInfo.cs" />
     <Compile Include="Model\ValidateOuterCoupon.cs" />
+    <Compile Include="MyControl\KeyBoardAll.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\KeyBoardAll.Designer.cs">
+      <DependentUpon>KeyBoardAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyControl\KeyBoardNew.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1168,6 +1182,9 @@
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormSayOrder.resx">
+      <DependentUpon>FormSayOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1257,6 +1274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormAdjustRecord.resx">
       <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\KeyBoardAll.resx">
+      <DependentUpon>KeyBoardAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardNew.resx">
       <DependentUpon>KeyBoardNew.cs</DependentUpon>

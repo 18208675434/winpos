@@ -247,6 +247,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
               
                 try { MainModel.frmlogin.Hide(); LoadingHelper.CloseForm(); }
                 catch { }
+                txtSearch.Focus();
                 this.Activate();
             }
             catch (Exception ex)
@@ -724,6 +725,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         {
                             BaseUIHelper.IniFormMainMedia();
                         }
+
+                        this.Activate();
                     }));
                 }
 
@@ -1021,7 +1024,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     Seconds++;
 
-                    if (Seconds >= 30)
+                    if (Seconds >= 30 || ConfigUtil.HaveNewOrder())
                     {
                         LoadNewOrder();
                     }
@@ -1101,21 +1104,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             t.Start();
 
         }
-
+        /// <summary>
+        /// 防止重复打印
+        /// </summary>
+        private List<string> LstPrintOrderids = new List<string>();
         private void LoadNewOrder()
         {
-            if (ConfigUtil.HaveNewOrder())
-            {
+            
                 string errormsg = "";
                 PrinterPickOrderInfo orderinfo = httputil.QueryPickPrintInfo(ref errormsg);
-                if (orderinfo != null)
+                if (orderinfo != null && !string.IsNullOrEmpty(orderinfo.orderid) && !LstPrintOrderids.Contains(orderinfo.orderid))
                 {
+                    LstPrintOrderids.Add(orderinfo.orderid);
+                    //语音播报 +弹窗提示
+                    SayOrderHelper.ShowFormToast(orderinfo.saymsg);
                     string msg = "";
                     PrintUtil.PrintThirdOrder(orderinfo ,ref msg);
-                    //TODO 打印  语音播报
                 }
-
-            }
         }
 
         private void IniAllProduct()
@@ -1288,9 +1293,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         MainModel.CurrentMember = member;
 
 
-                        Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.LoadMemberInfo);
-                        threadloadMember.IsBackground = true;
-                        threadloadMember.Start();
+                        //Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.LoadMemberInfo);
+                        //threadloadMember.IsBackground = true;
+                        //threadloadMember.Start();
 
                         lblCreditStr.Text = "积分" + member.creditaccountrepvo.availablecredit.ToString();
 
@@ -1336,11 +1341,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
                             lblCoupon.Text = "共" + CartUtil.GetAllCouponCount(CurrentCart) + "张";
                         }
-                       
-                        IsEnable = true;
-
-                       
                         Application.DoEvents();
+
+                        Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.LoadMemberInfo);
+                        threadloadMember.IsBackground = true;
+                        threadloadMember.Start();
+                        IsEnable = true;
+                       
+                       
                         ShowLoading(false, true);
 
                         this.BeginInvoke(new InvokeHandler(delegate()
@@ -3001,7 +3009,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         threadItemExedate.Start();
 
                        
-
                     }
                 }
 
@@ -3645,6 +3652,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     if (delpro.skucode == OperationProduct.skucode && delpro.specnum == OperationProduct.specnum)
                     {
                         ReceiptUtil.EditCancelSingle(delpro.num, delpro.price.origintotal);
+                        AbnormalOrderUtil.DeleteSkuList(delpro);
+
                         CurrentCart.products.Remove(delpro);
                         break;
                     }
@@ -3654,7 +3663,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
-
             }
         }
 
@@ -4056,12 +4064,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
 
 
-                string errormsg = "";
-                MainModel.balanceconfigdetail = httputil.BalanceConfigDetail(ref errormsg);
+               
 
                 bool isstart = (bool)obj;
                 if (isstart)
                 {
+                    string errormsg = "";
+                    MainModel.balanceconfigdetail = httputil.BalanceConfigDetail(ref errormsg);
+
                     //启用标签打印程序
                     if (File.Exists(MainModel.ServerPath + @"MQTTClient.exe"))
                     {
@@ -4324,14 +4334,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        private void btnWithoutOrder_Click(object sender, EventArgs e)
-        {
-            ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
-        }
-
         private void txtSearch_Leave(object sender, EventArgs e)
         {
             txtSearch.Focus();
+        }
+
+        string msg = "";
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            SayOrderHelper.ShowFormToast("您有新订单！");
         }
       
         

@@ -746,7 +746,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblUser_Click(object sender, EventArgs e)
         {
            
-            GlobalUtil.OpenOSK();
+            keyBoardAll1.Show(); //GlobalUtil.OpenOSK();
             Delay.Start(100);
             this.Activate();
             txtUser.Focus();
@@ -767,7 +767,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblPwd_Click(object sender, EventArgs e)
         {
            
-            GlobalUtil.OpenOSK();
+            keyBoardAll1.Show(); //GlobalUtil.OpenOSK();
 
             Delay.Start(100);
             this.Activate();
@@ -789,7 +789,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblPhone_Click(object sender, EventArgs e)
         {
            
-            GlobalUtil.OpenOSK();
+            keyBoardAll1.Show(); //GlobalUtil.OpenOSK();
 
             Delay.Start(100);
             this.Activate();
@@ -813,7 +813,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblCheckCode_Click(object sender, EventArgs e)
         {
            
-            GlobalUtil.OpenOSK();
+            keyBoardAll1.Show(); //GlobalUtil.OpenOSK();
 
             Delay.Start(100);
             this.Activate();
@@ -836,7 +836,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblPhoneCheckCode_Click(object sender, EventArgs e)
         {
             
-            GlobalUtil.OpenOSK();
+            keyBoardAll1.Show(); //GlobalUtil.OpenOSK();
 
 
             Delay.Start(100);
@@ -1072,7 +1072,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
+                keyBoardAll1.Show(); //GlobalUtil.OpenOSK();
 
 
                 Delay.Start(100);

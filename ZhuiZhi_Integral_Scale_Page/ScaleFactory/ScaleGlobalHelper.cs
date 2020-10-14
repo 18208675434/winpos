@@ -43,6 +43,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                if (AscalOK())
                {
                    CurrentScaleResult = scaleaction.GetScaleWeight();
+
+                   if (!CurrentScaleResult.WhetherSuccess)
+                   {
+                       CurrentScaleResult.NetWeight = (decimal)0.000;
+                       CurrentScaleResult.TareWeight = (decimal)0.000;
+                       CurrentScaleResult.TotalWeight = (decimal)0.000;
+                   }
                }
                System.Threading.Thread.Sleep(150);
            }

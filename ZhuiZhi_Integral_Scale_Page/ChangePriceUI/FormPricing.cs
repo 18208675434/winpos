@@ -74,8 +74,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                         return;
                     }
                     decimal doublenum = Convert.ToDecimal(txtPrice.Text);
+                    decimal temptotal = CurrentProduct.adjustpriceinfo == null ? CurrentProduct.price.total : CurrentProduct.price.origintotal;
 
-                    if (doublenum <= 0 || (CurrentChangeType == ChangeType.unitprice && doublenum >= CurrentProduct.price.originsaleprice) || (CurrentChangeType == ChangeType.totalprice && doublenum >= CurrentProduct.price.origintotal))
+                    if (doublenum <= 0 || (CurrentChangeType == ChangeType.unitprice && doublenum >= CurrentProduct.price.originsaleprice) || (CurrentChangeType == ChangeType.totalprice && doublenum >=temptotal))
                     {
                         MainModel.ShowLog("价格只能小于当前商品价格",false);
                         return;
@@ -94,7 +95,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                         adjustpriceinfo.type = 3;
                     }
 
-                    AbnormalOrderUtil.SingleAdjustPrice(CurrentProduct);
+                    AbnormalOrderUtil.SingleAdjustPrice(CurrentProduct, CurrentProduct.price.originsaleprice-doublenum);
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -198,11 +199,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             btnTotalPrice.BackColor = Color.FromArgb(20, 137, 205);
             btnTotalPrice.ForeColor = Color.White;
             lblStrPrice.Text = "当前总价";
-            lblPrice.Text = "￥" + CurrentProduct.price.origintotal.ToString("f2");
+
+            decimal temptotal = CurrentProduct.adjustpriceinfo == null ? CurrentProduct.price.total : CurrentProduct.price.origintotal;
+
+            lblPrice.Text = "￥" + temptotal.ToString("f2");
             CurrentChangeType = ChangeType.totalprice;
         }
-
-     
 
     }
 

@@ -241,7 +241,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             this.Invoke(new InvokeHandler(delegate()
                {
-                   CurrentInterval = 30;
+
+                   CurrentInterval = (dtEnd.Value - dtStart.Value).Days;
+                   //CurrentInterval = 30;
                    LastOrderid = "0";
                    dgvOrderOnLine.Rows.Clear();
                    //QueryOrder();
@@ -321,7 +323,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblPhoneShuiyin_Click(object sender, EventArgs e)
         {
 
-            GlobalUtil.OpenOSK();
+            GlobalUtil.ShowKeyBoard(this);// GlobalUtil.ShowKeyBoard(this);// GlobalUtil.OpenOSK();
             Delay.Start(100);
             this.Activate();
             lblPhoneShuiyin.Focus();
@@ -343,7 +345,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblOrderIDShuiyin_Click(object sender, EventArgs e)
         {
 
-            GlobalUtil.OpenOSK();
+            GlobalUtil.ShowKeyBoard(this);// GlobalUtil.OpenOSK();
             Delay.Start(100);
             this.Activate();
             txtOrderID.Focus();
@@ -356,7 +358,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
+                GlobalUtil.ShowKeyBoard(this);// GlobalUtil.OpenOSK();
 
                 Delay.Start(100);
                 this.Activate();
@@ -485,17 +487,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             if (CurrentQueryOrder == null || (CurrentQueryOrder.orders.Count <= CurrentPage * PageSize && HaveNextPage))
             {
 
+                if (LastOrderid == "0" || LastOrderid == "1")
+                {
+                    LastOrderid= CurrentOrderType==OrderType.error ? "1":"0";
+                }
+
             LoadingHelper.ShowLoadingScreen();
             IsEnable = false;
             QueryOrderPara queryorderpara = new QueryOrderPara();
-            queryorderpara.customerphone = txtPhone.Text;
+            if (!string.IsNullOrEmpty(txtPhone.Text))
+            {
+                queryorderpara.customerphone = txtPhone.Text;
+
+            }
+            if (!string.IsNullOrEmpty(txtOrderID.Text))
+            {
+                queryorderpara.orderid = txtOrderID.Text;
+
+            }
             queryorderpara.interval = CurrentInterval;
             queryorderpara.shopid = MainModel.CurrentShopInfo.shopid;
             queryorderpara.orderatend = MainModel.getStampByDateTime(dtEnd.Value);
             queryorderpara.orderatstart = MainModel.getStampByDateTime(dtStart.Value);
-            queryorderpara.orderid = txtOrderID.Text;
             queryorderpara.lastorderid = LastOrderid;
             queryorderpara.source = CurrentSource;
+
+            queryorderpara.tenantid = MainModel.CurrentShopInfo.tenantid;
             string ErrorMsg = "";
             QueryOrder queryorder = httputil.QueryOrderInfo(queryorderpara, ref ErrorMsg);
 
@@ -506,7 +523,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             else
             {
 
-                if (LastOrderid == "0")
+                if (LastOrderid == "0" || LastOrderid=="1")
                 {
                     CurrentQueryOrder = queryorder;
                 }
@@ -977,9 +994,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 List<Order> lstOrder = CurrentQueryOrder.orders.GetRange(startindex, lastindex - startindex + 1);
                 foreach (Order order in lstOrder)
                 {
-
-                    dgvError.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, order.ordersubtype, order.orderstatus, order.receiverphone,order.sourceflag, bmpReprint,bmpSync);
-
+                    dgvError.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.userid, order.skuname, order.ordertype, order.status, order.phone,order.source, bmpReprint,bmpSync);
                 }
                 dgvError.ClearSelection();
                 Application.DoEvents();
@@ -1080,9 +1095,104 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         #endregion
 
-       
+        private void dgvError_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!IsEnable)
+            {
+                return;
+            }
 
-      
+            if (e.RowIndex < 0)
+                return;
+
+
+            if (dgvError.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
+            {
+               
+
+                if (!ConfirmHelper.Confirm("确认重打小票？"))
+                {
+                    return;
+                }
+                IsEnable = false;
+                LoadingHelper.ShowLoadingScreen("加载中...");
+                ReceiptUtil.EditReprintCount(1);
+
+                string orderid = dgvError.Rows[e.RowIndex].Cells["errororderid"].Value.ToString(); ;
+
+                string ErrorMsg = "";
+
+                PrinterPickOrderInfo printerinfo = httputil.QueryPrintMarUP(1, orderid, ref ErrorMsg);
+
+
+                if (printerinfo == null)
+                {
+                    MainModel.ShowLog(ErrorMsg, false);
+                }
+                else
+                {
+                    string PrintErrorMsg = "";
+
+                    bool printresult = PrintUtil.PrintThirdOrder(printerinfo, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
+
+
+
+                    if (PrintErrorMsg != "" || !printresult)
+                    {
+                        MainModel.ShowLog(PrintErrorMsg, true);
+                    }
+                    else
+                    {
+                        MainModel.ShowLog("打印完成", false);
+                    }
+                }
+
+
+                IsEnable = true;
+                LoadingHelper.CloseForm();
+            }
+
+            else if (dgvError.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpSync)
+            {
+                
+
+                if (!ConfirmHelper.Confirm("确认同步订单？"))
+                {
+                    return;
+                }
+                IsEnable = false;
+                LoadingHelper.ShowLoadingScreen("加载中...");
+                ReceiptUtil.EditReprintCount(1);
+
+                string orderid = dgvError.Rows[e.RowIndex].Cells["errororderid"].Value.ToString(); ;
+
+                string ErrorMsg = "";
+
+
+                SyncOrder sync = httputil.ThirdSyncOrder(orderid,ref ErrorMsg);
+
+
+                if (sync == null)
+                {
+                    MainModel.ShowLog(ErrorMsg, false);
+                }
+                else if (!sync.result)
+                {
+                    MainModel.ShowLog("同步失败："+sync.othererrormsg,false);
+                }
+                else
+                {
+                    MainModel.ShowLog("同步完成",false);
+
+                    Delay.Start(200);
+                    btnQuery_Click(null,null);
+                }
+
+
+                IsEnable = true;
+                LoadingHelper.CloseForm();
+            }
+        }
 
     }
 

@@ -87,6 +87,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string receiverphone { set; get; }
 
         public string sourceflag { set; get; }
+
+
+        public string userid { set; get; }
+
+        public string skuname { set; get; }
+        public string status { set; get; }
+        public string source { set; get; }
+        public string errormsg { set; get; }
+
+        public string ordertype { set; get; }
+
+        public string phone { set; get; }
     }
 
     public class QuereOrderProduct

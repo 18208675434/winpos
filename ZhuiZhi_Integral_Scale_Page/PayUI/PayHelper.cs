@@ -437,12 +437,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         //    }
         //}
 
-        public static bool ShowFormPaySuccess(string orderid)
+        public static bool ShowFormPaySuccess(string orderid,bool isrefund =false)
         {
              try
             {
 
-                frmpaysuccess = new FormPaySuccess(orderid);
+                frmpaysuccess = new FormPaySuccess(orderid,isrefund);
                 asf.AutoScaleControlTest(frmpaysuccess, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     frmpaysuccess.Location = new System.Drawing.Point(0,0);
                     frmpaysuccess.TopMost = true;
@@ -581,8 +581,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 BackHelper.ShowFormBackGround();
 
                 FormVoucher frmvoucher = new FormVoucher();
-                    asf.AutoScaleControlTest(frmvoucher, 430, 240, 430 * MainModel.midScale, 240 * MainModel.midScale, true);
-                    frmvoucher.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmvoucher.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmvoucher.Height) / 3);
+                asf.AutoScaleControlTest(frmvoucher, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmvoucher.Location = new System.Drawing.Point(0, 0);
                     frmvoucher.TopMost = true;
              
                 frmvoucher.ShowDialog();

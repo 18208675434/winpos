@@ -59,6 +59,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
         private void btnReturnCash_Click(object sender, EventArgs e)
         {
+
+            thisCurrentCart.cashpayoption = 1;
+            RefreshCart();
+
             if (ReturnWithoutOrderHelper.ShowFormRetunCash(thisCurrentCart, thisCurrentMember, ReturnType.cash))
             {
                 this.DialogResult = DialogResult.OK;
@@ -71,6 +75,44 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             }
         }
 
+        //刷新购物车
+        private bool RefreshCart()
+        {
+            try
+            {
+                this.Enabled = false;
+                LoadingHelper.ShowLoadingScreen("加载中...");
 
+                string ErrorMsgCart = "";
+                int ResultCode = -1;
+                Cart cart = httputil.RefreshCart(thisCurrentCart, ref ErrorMsgCart, ref ResultCode);
+
+
+                if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
+                {
+                    this.Enabled = true;
+                    LoadingHelper.CloseForm();
+
+                    MainModel.ShowLog(ErrorMsgCart, true);
+                    return false;
+                }
+                else
+                {
+                    thisCurrentCart = cart;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MainModel.ShowLog("刷新购物车异常" + ex.Message, true);
+                return false;
+            }
+            finally
+            {
+                this.Enabled = true;
+                LoadingHelper.CloseForm();
+            }
+        }
     }
 }

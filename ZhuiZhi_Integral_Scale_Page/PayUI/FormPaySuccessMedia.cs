@@ -15,9 +15,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
     {
        
 
-
-
-
          HttpUtil httputil = new HttpUtil();
         bool isrun = true;
 
@@ -31,6 +28,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         private string CurrentOrderID = "";
 
         /// <summary>
+        /// 当前操作单据是否无单退款
+        /// </summary>
+        private bool CurrentIsRefund = false;
+
+        /// <summary>
         /// 订单状态完成标志
         /// </summary>
         bool OrderResult = false;
@@ -39,14 +41,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         /// </summary>
         bool PrintResult = false;
 
-         public FormPaySuccessMedia(string orderid)
+         public FormPaySuccessMedia(string orderid,bool isrefund=false)
         {
             InitializeComponent();
                CurrentOrderID = orderid;
+               CurrentIsRefund = isrefund;
+
         }
 
         private void frmCashierResult_Shown(object sender, EventArgs e)
         {
+
+            if (CurrentIsRefund)
+            {
+                lblType.Text = "退款成功";
+            }
+            else
+            {
+                lblType.Text = "收银成功";
+            }
             timerClose.Enabled = true;
 
 

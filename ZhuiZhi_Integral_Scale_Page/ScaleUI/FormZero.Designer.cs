@@ -78,6 +78,7 @@
             this.Name = "FormZero";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormZero";
+            this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.Control;
             this.Deactivate += new System.EventHandler(this.FormZero_Deactivate);
             this.panel1.ResumeLayout(false);

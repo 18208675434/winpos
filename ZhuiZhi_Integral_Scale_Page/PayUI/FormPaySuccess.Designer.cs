@@ -37,7 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblCashierInfo = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblType = new System.Windows.Forms.Label();
             this.timerClose = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -119,15 +119,15 @@
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
-            // label1
+            // lblType
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 24F);
-            this.label1.Location = new System.Drawing.Point(550, 151);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 41);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "收银成功";
+            this.lblType.AutoSize = true;
+            this.lblType.Font = new System.Drawing.Font("微软雅黑", 24F);
+            this.lblType.Location = new System.Drawing.Point(550, 151);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(155, 41);
+            this.lblType.TabIndex = 8;
+            this.lblType.Text = "收银成功";
             // 
             // timerClose
             // 
@@ -147,7 +147,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblCashierInfo);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormPaySuccess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -169,7 +169,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblCashierInfo;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Timer timerClose;
     }
 }

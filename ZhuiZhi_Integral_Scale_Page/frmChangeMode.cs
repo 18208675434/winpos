@@ -144,6 +144,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 IsEnable = true;
                 LoadingHelper.CloseForm();
 
+                //同步余额参数设置
+                string errormsg = "";
+                MainModel.balanceconfigdetail = httputil.BalanceConfigDetail(ref errormsg);
+
                 //检测是否被取消了
                 if (!bgwUpdate.CancellationPending)
                 {

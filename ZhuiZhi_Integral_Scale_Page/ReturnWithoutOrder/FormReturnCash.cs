@@ -87,8 +87,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                          if (orderresult != null)
                          {
                              AbnormalOrderUtil.RefundNoOrderList(orderresult.orderid,thisCurrentCart);
-
-                             ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid);
+                             
+                             ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid,true);
                              this.DialogResult = DialogResult.OK;
                              this.Close();                         
                          }

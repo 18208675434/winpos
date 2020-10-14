@@ -102,7 +102,4 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
 }
 
 
-
-
-    
 }

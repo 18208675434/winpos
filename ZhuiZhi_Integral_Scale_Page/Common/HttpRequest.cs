@@ -403,7 +403,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 request.Headers.Add("X-ZZ-Device-Sn", MainModel.DeviceSN);
                 request.Headers.Add("POS-Authorization", MainModel.Authorization);
                 request.Headers.Add("X-ZZ-Timestamp", para.Timestamp);
-
                 request.ContentType = "application/json;charset=UTF-8";
 
                 request.KeepAlive = false;

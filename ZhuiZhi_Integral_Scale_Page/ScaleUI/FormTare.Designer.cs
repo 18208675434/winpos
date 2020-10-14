@@ -108,6 +108,7 @@
             this.Name = "FormTare";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormTare";
+            this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Deactivate += new System.EventHandler(this.FormTare_Deactivate);
             this.panel1.ResumeLayout(false);

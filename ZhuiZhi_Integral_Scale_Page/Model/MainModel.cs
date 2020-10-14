@@ -20,7 +20,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
     public class MainModel
     {
 
-
+        /// <summary>
+        /// 用户余额参数配置
+        /// </summary>
         public static ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.BalanceConfigDetail balanceconfigdetail = null;
 
         #region  会员中心   变量 （待优化）

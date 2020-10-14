@@ -42,6 +42,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                             }
                             if (productBean.price != null && newTotal != null) {
                                 productBean.price.total = newTotal;
+                                productBean.PaySubAmt = newTotal;
                             }
                             productBean.adjustpricedesc=adjustPriceDesc;
                         } else {
@@ -73,6 +74,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                         }
                         if (productBean.price != null && newTotal != null) {
                             productBean.price.total = newTotal;
+                            productBean.PaySubAmt = newTotal;
                         }
                         productBean.adjustpricedesc = adjustPriceDesc;
                     }else if (type == 3)
@@ -95,10 +97,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                            }else{
                                productBean.price.saleprice = Math.Round(amt / productBean.price.specnum, 2, MidpointRounding.AwayFromZero);
                                }
-
                              
                            }
                            productBean.price.total = amt;
+                           productBean.PaySubAmt = amt;
                            productBean.adjustpricedesc = adjustPriceDesc;
                        }
                        else

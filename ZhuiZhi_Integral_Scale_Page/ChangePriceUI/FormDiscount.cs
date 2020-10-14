@@ -87,7 +87,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                     adjustpriceinfo.beforeamt = CurrentProduct.price.originsaleprice;
                     adjustpriceinfo.type = 2; 
                     this.DialogResult = DialogResult.OK;
-                    AbnormalOrderUtil.SingleAdjustPrice(CurrentProduct);
+                    AbnormalOrderUtil.SingleAdjustPrice(CurrentProduct, CurrentProduct.price.originsaleprice*(1-doublenum));
                     this.Close();
                 }
                 catch

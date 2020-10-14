@@ -165,8 +165,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 LogManager.WriteLog("记录无单退款异常" + ex.Message);
             }
         }
-
-        public static void SingleAdjustPrice(Product pro)
+       
+        /// <summary>
+        /// 记录单品改价
+        /// </summary>
+        /// <param name="pro"></param>
+        /// <param name="amt">调整金额</param>
+        public static void SingleAdjustPrice(Product pro,decimal amt)
         {
             try
             {
@@ -175,7 +180,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 aoi.phone = MainModel.CurrentUser.loginaccount;
                 aoi.type = 8;
 
-                aoi.amt = pro.price.total;
+                aoi.amt = amt;
                 aoi.skucodes = new List<string>() { pro.skucode };
 
                 InsertToDbJson(aoi);
@@ -184,8 +189,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             {
                 LogManager.WriteLog("记录单品改价异常" + ex.Message);
             }
-        }
+        } 
 
+        /// <summary>
+        /// 整单改价
+        /// </summary>
+        /// <param name="cart"></param>
         public static void WholeAdjustOrder(Cart cart)
         {
             try

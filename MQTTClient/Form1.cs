@@ -173,6 +173,7 @@ namespace MQTTClient
                     }
                     else if (e.ApplicationMessage.Topic == "order:print:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid)
                     {
+                        LogManager.WriteLog("MQTT", "记录neworder到config");
                         INIManager.SetIni("MQTT", "NewOrder", "1", MainModel.IniPath);
                         //TODO 线上订单
                     }
