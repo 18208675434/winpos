@@ -52,14 +52,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
                  if (!RefreshCart())
                 {
                     return;
                 }
 
                  string smscode = ReturnWithoutOrderHelper.ShowFormCheckSmCode(thisCurrentCart.shopownername,thisCurrentCart.shopownerphone);
-
+                
                  if (string.IsNullOrEmpty(smscode))
                  {
                      return;
@@ -72,7 +71,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                          if (currentreturntye == ReturnType.cash)
                          {
                              thisCurrentCart.cashpayoption = 1;
-                             thisCurrentCart.cashpayamt = thisCurrentCart.totalpayment;
+                             //thisCurrentCart.cashpayamt = thisCurrentCart.totalpayment;
 
                              thisCurrentCart.balancepayoption = 0;
                          }
@@ -80,51 +79,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                          {
                              thisCurrentCart.balancepayoption = 1;
                              thisCurrentCart.cashpayoption = 0;
+                             //thisCurrentCart.balancepayamt = thisCurrentCart.totalpayment;
                          }
                          string ErrorMsg = "";
                          int ResultCode = 0;
-                         CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, ref ErrorMsg, ref ResultCode);
-                         if (ResultCode != 0 || orderresult == null)
+                         CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart,thisCurrentMember, ref ErrorMsg, ref ResultCode);
+                         if (orderresult != null)
                          {
-                             MainModel.ShowLog("异常" + ErrorMsg, true);
-                         }
-                         else if (orderresult.continuepay == 1)
-                         {
-                             //TODO  继续支付
-                             MainModel.ShowLog("需要继续支付", true);
+                             AbnormalOrderUtil.RefundNoOrderList(orderresult.orderid,thisCurrentCart);
+                             
+                             ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid,true);
+                             this.DialogResult = DialogResult.OK;
+                             this.Close();                         
                          }
                          else
                          {
-                             if (currentreturntye == ReturnType.balance)
-                             {
-                                // MemberTopUp(thisCurrentCart.totalpayment);
-                                 if (MemberTopUp(thisCurrentCart.totalpayment))
-                                 {
-                                     ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid);
-                                     this.DialogResult = DialogResult.OK;
-                                     this.Close();
-                                 }
-                                 else
-                                 {
-                                     string errormsg = "";
-                                     bool result = httputil.CancleOrder(orderresult.orderid, "取消支付", ref errormsg);
-
-                                     if (result)
-                                     {
-                                         LogManager.WriteLog("取消订单" + orderresult.orderid);
-                                     }
-                                     else
-                                     {
-                                         LogManager.WriteLog("订单取消失败" + errormsg);
-                                         // return;
-                                     }
-                                 }
-                             }
-
-                             
-
+                             MainModel.ShowLog(ErrorMsg,false);
                          }
-
         }
         private bool RefreshCart()
         {
@@ -141,7 +112,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 if (currentreturntye == ReturnType.cash)
                 {
                     thisCurrentCart.cashpayoption = 1;
-                    //thisCurrentCart.cashpayamt = thisCurrentCart.totalpayment;
+                    thisCurrentCart.cashpayamt = thisCurrentCart.totalpayment;
 
                     thisCurrentCart.balancepayoption = 0;
                     //thisCurrentCart.balancepayamt = 0;
@@ -156,7 +127,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 }
               
 
-                Cart cart = httputil.RefreshCart(thisCurrentCart, ref ErrorMsgCart, ref ResultCode);
+                Cart cart = httputil.RefreshCart(thisCurrentCart,thisCurrentMember, ref ErrorMsgCart, ref ResultCode);
 
 
                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常

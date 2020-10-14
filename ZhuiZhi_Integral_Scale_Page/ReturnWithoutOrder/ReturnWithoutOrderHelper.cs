@@ -16,21 +16,50 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         //按比例缩放页面及控件
         //</summary>
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
+        private static FormReturnWithoutOrder frmreturn = null;
+        public static void IniFormReturnWithoutOrder()
+        {
+            try
+            {
+                if (frmreturn != null)
+                {
+                    try
+                    {
+                        frmreturn.Close();
+                        frmreturn.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+
+                frmreturn = new FormReturnWithoutOrder();
+                asf.AutoScaleControlTest(frmreturn, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmreturn.Location = new System.Drawing.Point(0, 0);
+
+            }
+            catch { }
+        }
+
+
         public static void ShowFormReturnWithoutOrder()
         {
             try
             {
-                FormReturnWithoutOrder frmreturn = new FormReturnWithoutOrder();
-                asf.AutoScaleControlTest(frmreturn, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                frmreturn.Location = new System.Drawing.Point(0, 0);
-
+                ReturnWithoutOrderHelper.ShowFormReturnWithoutMedia();
+                Application.DoEvents();
+                if (frmreturn == null)
+                {
+                    IniFormReturnWithoutOrder();
+                }
                 frmreturn.ShowDialog();
 
-                frmreturn.Dispose();
-
+                ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia(); 
                 Application.DoEvents();
             }
-            catch { }
+            catch {
+                frmreturn = null;
+            }
         }
 
 
@@ -105,7 +134,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             }
 
         }
-        
+
+
+
+        static FormReturnWithoutOrderMedia frmMedia;
+        public static void ShowFormReturnWithoutMedia()
+        {
+            try
+            {
+                frmMedia = new FormReturnWithoutOrderMedia();
+                asf.AutoScaleControlTest(frmMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                frmMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width , 0);
+                frmMedia.TopMost = true;
+
+                frmMedia.Show();
+            }
+            catch { }
+        }
+
+        public static void CloseFormReturnWithoutMedia()
+        {
+            try
+            {
+                frmMedia.Close();
+                Application.DoEvents();
+            }
+            catch { }
+        }
+
+        public static void UpdateMediaCart(Cart cart,Member member)
+        {
+            try
+            {
+                frmMedia.UpdateForm(cart,member);
+            }
+            catch { }
+        }
 
     }
 }

@@ -22,6 +22,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         MemberCenterHttpUtil memberhttputil = new MemberCenterHttpUtil();
 
         private bool IsEnable =true;
+
+        private ZhuiZhi_Integral_Scale_UncleFruit.Common.HttpUtil httputil = new Common.HttpUtil();
         public FormCheckSmCode(string name,string phone)
         {
             InitializeComponent();
@@ -46,6 +48,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         protected override bool ProcessDialogKey(Keys keyData)
         {
 
+            if (!IsEnable)
+            {
+                return true;
+            }
             //char ch =(char) keyData;
 
             //MessageBox.Show(ch.ToString());
@@ -172,8 +178,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 btnCountDown.Text = "重新发送";
                 btnCountDown.ForeColor = Color.White;
                 btnCountDown.BackColor = Color.FromArgb(20, 137, 205);
-
             }
+        }
+
+        private void FormCheckSmCode_Shown(object sender, EventArgs e)
+        {
+            Application.DoEvents();
+            IsEnable =false;
+            string errormsg="";
+            string sendmsg = "";
+
+            if (httputil.SendSmsCode(CurrentPhone, "", "", ref errormsg))
+            {
+                timerCountDown.Enabled=true;
+            }
+            IsEnable = true;
+        }
+
+        private void btnCountDown_Click(object sender, EventArgs e)
+        {
+            IsEnable = false;
+            string errormsg = "";
+            string sendmsg = "";
+
+            if (httputil.SendSmsCode(CurrentPhone, "", "", ref errormsg))
+            {
+                timerCountDown.Enabled = true;
+            }
+            else
+            {
+                MainModel.ShowLog(errormsg,false);
+            }
+            IsEnable = true;
         }
 
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
@@ -114,7 +115,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         MainModel.ShowChangePhonePage = 1;
                         MainModel.ShowChangePhoneMedia = 1;
                         this.DialogResult = DialogResult.OK;
-                        
+                        BackHelper.HideFormBackGround();
                         this.Close();
                         
                     }
@@ -179,6 +180,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChengPhoneSmsCode_Load(object sender, EventArgs e)
         {
+            //if (MainModel.tick != "")
+            //{
+            //    BackHelper.ShowFormBackGround();
+            //    label1.Text = "找回密码";
+            //}
             timerCountDown.Enabled = true;
         }
 

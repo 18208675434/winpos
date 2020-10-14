@@ -114,7 +114,7 @@ namespace ToledoTest
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "顶尖设备无此功能";
+            result.Message = "爱宝设备无此功能";
             return result;
         }
 
@@ -141,7 +141,7 @@ namespace ToledoTest
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "顶尖设备无此功能";
+            result.Message = "爱宝设备无此功能";
             return result;
         }
 

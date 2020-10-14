@@ -148,7 +148,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     lblUrl.Visible = false;
                 }
+                IsRun = true;
 
+                threadScale = new Thread(ScaleThread);
+                threadScale.IsBackground = true;
+                threadScale.Start();
             }
             catch (Exception ex)
             {
@@ -163,11 +167,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 Application.DoEvents();
                 LoadBaseInfo();
 
-                ParameterizedThreadStart Pts = new ParameterizedThreadStart(ChangeMQTT);
-                Thread threadmqtt = new Thread(Pts);
-                threadmqtt.IsBackground = true;
-                threadmqtt.Start(true);
-
                 ShowLoading(true, false);
 
                 //扫描数据处理线程
@@ -175,28 +174,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 threadScanCode.IsBackground = true;
                 threadScanCode.Start();
 
-
-                //刷新焦点线程  防止客屏播放视频抢走焦点
-                threadCheckActivate = new Thread(CheckActivate);
-                threadCheckActivate.IsBackground = true;
-                threadCheckActivate.Start();
-
-                //启动电子秤同步信息线程
-                Thread threadLoadScale = new Thread(ScaleDataHelper.LoadScale);
-                threadLoadScale.IsBackground = true;
-                threadLoadScale.Start();
-
-                if (string.IsNullOrEmpty(MainModel.TvShowPage1))
-                {
-                    Thread threadTV = new Thread(ServerDataUtil.LoadTVSkus);
-                    threadTV.IsBackground = true;
-                    threadTV.Start();
-                }
-
-                //启动促销商品同步线程
-                Thread threadLoadPromotion = new Thread(ServerDataUtil.UpdatePromotion);
-                threadLoadPromotion.IsBackground = false;
-                threadLoadPromotion.Start();
 
                 LstAllProduct = CartUtil.LoadAllProduct(true);
 
@@ -223,10 +200,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     ScaleGlobalHelper.GetWeight();
                 }
                 catch { }
-                threadScale = new Thread(ScaleThread);
-                threadScale.IsBackground = true;                
-                threadScale.Start();
 
+
+
+                txtSearch.Focus();
                 this.Activate();
             }
             catch (Exception ex)
@@ -284,16 +261,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             IsRun = false;
             try
             {
-                ParameterizedThreadStart Pts = new ParameterizedThreadStart(ChangeMQTT);
-                Thread threadmqtt = new Thread(Pts);
-                threadmqtt.IsBackground = true;
-                threadmqtt.Start(false);
 
-                Delay.Start(300);
-              
+
+               
                 
                 //ScaleGlobalHelper.Close();
-                this.Dispose();
+                //this.Dispose();
 
             }
             catch (Exception ex)
@@ -350,6 +323,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ClearForm();
 
                 Application.DoEvents();
+
+                this.Hide();
+               // this.Close();
             }
             catch (Exception ex)
             {
@@ -431,6 +407,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     LstAllProduct.ForEach(r => r.panelbmp = null);
 
                         LoadDgvGood(true, true);
+
+                        ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart, ReturnMembr);
+
 
                 }));
             }
@@ -519,6 +498,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         LoadDgvGood(true, true);
 
+                        ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart,ReturnMembr);
                     }));
                 }
             }
@@ -1976,7 +1956,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     if (cart.totalpayment == 0 && cart.products != null && cart.products.Count > 0)
                     {
                         rbtnPay.ShowText = "完成";
-                        rbtnPay.AllBackColor = Color.FromArgb(255, 70, 21);
+                        rbtnPay.AllBackColor = Color.FromArgb(20, 137, 204);
                     }
 
                     lblTotalPay.Text = "￥" + CurrentCart.totalpayment.ToString("f2");
@@ -2016,7 +1996,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     CurrentCart.goodscount = goodscount;
 
                     rbtnPay.ShowText = "退款(" + goodscount + ")";
-                    rbtnPay.AllBackColor = Color.FromArgb(194, 52, 49);
+                    rbtnPay.AllBackColor = Color.FromArgb(20, 137, 204);
                     if (count == 0)
                     {
                         pnlWaiting.Show();
@@ -2050,6 +2030,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         rbtnPageDownForCart.WhetherEnable = CurrentCart.products.Count > CurrentCartPage * 5;
 
                         CurrentCart.products.Reverse();
+
+
+                        ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart,ReturnMembr);
                         Application.DoEvents();
 
                         Thread threadItemExedate = new Thread(ShowDgv);
@@ -2245,6 +2228,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 picCredit.Visible = false;
                 //lblCoupon.Text = "0张";
                 Other.CrearMemory();
+                ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart, ReturnMembr);
 
                 Application.DoEvents();
 
@@ -2266,7 +2250,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             lock (thislockOffLineDgvGood)
             {
 
-                if (!MainModel.WhetherHalfOffLine)
+                if (true)
                 {
                     ShowLoading(true, false);
 
@@ -2631,33 +2615,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ShowLoading(true,false);
 
 
-                if (MainModel.WhetherHalfOffLine)
-                {
-                    if (!RefreshCart())
-                    {
-                        ShowLoading(false, true);
-                        return;
-                    }
-                }
-
                 bool result = false;
 
                 if (ReturnMembr != null)
                 {
+                    CurrentCart.cashpayoption = 0;
+                    RefreshCart();
                     result = ReturnWithoutOrderHelper.ShowFormRetunCashOrBalance(CurrentCart,ReturnMembr);
                 }
                 else
                 {
+                    CurrentCart.cashpayoption = 1;
+                    RefreshCart();
                     result = ReturnWithoutOrderHelper.ShowFormRetunCash(CurrentCart, ReturnMembr, ReturnType.cash);
                 }
-
+                //退款完成
                 if (result)
                 {
                     ClearForm();
                     ClearMember();
+                    ShowLoading(false, true);
+                    this.Hide();
                 }
                 else
                 {
+                    CurrentCart.cashpayoption = 0;
                     RefreshCart();
                 }
                 ShowLoading(false, true);                 
@@ -2812,24 +2794,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             //}
         }
 
-
         private void LoadPnlScale()
         {
             try
             {
-
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.中科英泰.ToString() || ScaleName == ScaleType.托利多.ToString())
                 {
-                    pnlScale.Width = lblTareWeightStr.Left * 2; 
+                    pnlScale.Width = lblTareWeightStr.Left * 2;
                     pnlScale.Left = pnlCategory.Width - pnlScale.Width - 5;
                 }
-                else if (ScaleName == ScaleType.顶尖.ToString() || ScaleName==ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.爱宝.ToString() || ScaleName == ScaleType.易捷通.ToString() || ScaleName == ScaleType.易衡.ToString())
                 {
-                    pnlScale.Width = lblTareWeightStr.Left; 
+                    pnlScale.Width = lblTareWeightStr.Left;
                     pnlScale.Left = pnlCategory.Width - pnlScale.Width - 5;
-                }
+                }             
                
             }
             catch { }
@@ -2946,43 +2926,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        private void ChangeMQTT(object obj)
-        {
-            try
-            {
-                bool isstart = (bool)obj;
-                if (isstart)
-                {
-                    //启用标签打印程序
-                    if (File.Exists(MainModel.ServerPath + @"MQTTClient.exe"))
-                    {
-                        System.Diagnostics.Process.Start(MainModel.ServerPath + @"MQTTClient.exe");
-                        LogManager.WriteLog("MQTT 启动");
-                    }
-                    else
-                    {
-                        LogManager.WriteLog("缺少MQTT程序");
-                    }
-                }
-                else
-                {
-                    System.Diagnostics.Process[] pro = System.Diagnostics.Process.GetProcesses();
-                    for (int i = 0; i < pro.Length - 1; i++)
-                    {
-                        if (pro[i].ProcessName == "MQTTClient")
-                        {
-                            pro[i].Kill();
-                            LogManager.WriteLog("MQTT 关闭");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("启动/关闭 MQTT程序异常");
-            }
-        }
-
         private void frmMainHalfOffLine_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
@@ -3039,7 +2982,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
         decimal LastNetWeight = 0;
-        //顶尖秤 必须放到线程 否则会影响键盘按钮监听事件
+        //爱宝秤 必须放到线程 否则会影响键盘按钮监听事件
         private void ScaleThread(object obj)
         {
             while (IsRun)
@@ -3047,8 +2990,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 try
                 {                    
                     CurrentScaleResult = ScaleGlobalHelper.GetWeight();
-
-                   
+          
                     if (CurrentScaleResult != null && CurrentScaleResult.WhetherSuccess)
                     {
 
@@ -3199,7 +3141,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
+            //this.Close();
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            txtSearch.Focus();
         }
       
         

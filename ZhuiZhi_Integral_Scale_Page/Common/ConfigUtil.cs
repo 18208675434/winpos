@@ -74,19 +74,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return starttime;
             }
                 
-                
-              
-           
         }
 
 
         public static bool HaveNewOrder()
-        {
-            
+        {            
             string neworder = INIManager.GetIni("MQTT", "NewOrder", MainModel.IniPath);
 
             if (!string.IsNullOrEmpty(neworder) && neworder == "1")
             {
+                INIManager.SetIni("MQTT", "NewOrder","0", MainModel.IniPath);
                 return true;
             }
             else

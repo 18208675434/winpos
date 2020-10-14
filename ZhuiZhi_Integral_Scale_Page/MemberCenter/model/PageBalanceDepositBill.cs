@@ -44,7 +44,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 
         /// </summary>
         public string createdby { get; set; }
-   
+
         /// <summary>
         /// 
         /// </summary>
@@ -74,15 +74,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// <summary>
         /// 
         /// </summary>
-        public string paymodeforapi { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public string phone { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public decimal rewardamount { get; set; }
+
+        /// <summary>
+        /// 付款方式
+        /// </summary>
+        public string paymodeforapi { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -103,9 +105,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 
         /// </summary>
         public string tradedate { get; set; }
-
+        public byte Refound { get; set; }
+        /// <summary>
+        /// 是否可以退款
+        /// </summary>
         public bool refundable { get; set; }
-
     }
 
 

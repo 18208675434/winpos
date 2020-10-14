@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
@@ -86,7 +87,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                     adjustpriceinfo.beforeamt = CurrentProduct.price.originsaleprice;
                     adjustpriceinfo.type = 2; 
                     this.DialogResult = DialogResult.OK;
-
+                    AbnormalOrderUtil.SingleAdjustPrice(CurrentProduct, CurrentProduct.price.originsaleprice*(1-doublenum));
                     this.Close();
                 }
                 catch

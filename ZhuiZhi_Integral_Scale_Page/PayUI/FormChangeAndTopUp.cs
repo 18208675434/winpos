@@ -94,7 +94,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-
+            if (CreateOrder(0))
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void numTxtBalance_DataChanged(string data)
@@ -132,8 +136,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
                 string ErrorMsg = "";
                 int ResultCode = 0;
-
                 CurrentCart.balancedepositamt = balance;
+                //if (balance == 0)
+                //{
+                //    //CurrentCart.cashpayamt = CurrentTotalChange + CurrentCart.totalpayment;
+
+                //}
+                //else
+                //{
+                //    CurrentCart.balancedepositamt = balance;
+
+                //}
                 CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsg, ref ResultCode);
                 if (orderresult ==null || orderresult.continuepay==1)
                 {

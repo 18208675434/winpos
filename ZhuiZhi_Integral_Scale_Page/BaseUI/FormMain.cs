@@ -4132,7 +4132,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     pnlScale.Width = lblTareWeightStr.Left * 2; 
                     pnlScale.Left = pnlCategory.Width - pnlScale.Width - 10;
                 }
-                else if (ScaleName == ScaleType.顶尖.ToString() || ScaleName==ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.爱宝.ToString() || ScaleName==ScaleType.易捷通.ToString())
                 {
                     pnlScale.Width = lblTareWeightStr.Left; 
                     pnlScale.Left = pnlCategory.Width - pnlScale.Width - 10;

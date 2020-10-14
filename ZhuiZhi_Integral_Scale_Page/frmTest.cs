@@ -375,8 +375,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
            
             
             while (!player.status.Contains("停止"))
-            {
-                
+            {                
                 Delay.Start(100);
             }
             player.close();

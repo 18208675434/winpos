@@ -126,13 +126,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             this.Hide(); //this.Close();
         }
 
+        private void pnlRefund_Click(object sender, EventArgs e)
+        {
+            if (DataReceiveHandle != null)
+                this.DataReceiveHandle.BeginInvoke(ToolType.ReturnWithoutOrder, null, null);
+
+            this.Hide(); //this.Close();
+        }
+
         private void pnlBatchSaleCard_Click(object sender, EventArgs e)
         {
             if (DataReceiveHandle != null)
                 this.DataReceiveHandle.BeginInvoke(ToolType.BatchSaleCard, null, null);
 
             this.Hide(); //this.Close();
-        }
+    }
 
         private void pnlRechargeQuery_Click(object sender, EventArgs e)
         {
@@ -157,5 +165,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         Broken,
         BatchSaleCard,
         RechangeQuery,
+        ReturnWithoutOrder
     }
 }

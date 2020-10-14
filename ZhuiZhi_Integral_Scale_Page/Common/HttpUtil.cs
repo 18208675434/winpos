@@ -496,6 +496,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
 
                 string json = HttpPOST(url, tempjson);
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 resultcode = rd.code;
@@ -988,6 +989,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);
 
+                if (queryorderpara.source == 4)
+                {
+                    tempjson = tempjson.Replace(",\"source\":4", "");
+                }
+
                 string json = HttpPOST(url, tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
@@ -1012,43 +1018,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-        /// <summary>
-        /// 退款
-        /// </summary>
-        /// <returns></returns>
-        public string Refund(string orderid, ref string erromessage)
-        {
-            try
-            {
-                string url = "/pos/order/pos/refund";
-
-                string tempjson = JsonConvert.SerializeObject(orderid);
-                tempjson = "{\"orderid\":\"" + orderid + "\"}";
-                string json = HttpPOST(url, tempjson);
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
-                // return;
-                if (rd.code == 0)
-                {
-                    erromessage = "";
-                    return rd.data.ToString();
-
-                }
-                else
-                {
-                    try { LogManager.WriteLog("Error", "refund:" + json); }
-                    catch { }
-                    erromessage = rd.message;
-                    return "";
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("Error", "查询历史异常：" + ex.Message);
-                erromessage = "网络连接异常，请检查网络连接";
-                return "";
-            }
-        }
+        
 
         /// <summary>
         /// 退款
@@ -1937,6 +1907,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string tempjson = "{\"shopid\":\"" + shopid + "\",\"page\":" + page + ",\"size\":" + size + "}";
 
                 string json = HttpPOST(url, tempjson);
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 if (rd.code == 0)
@@ -2873,11 +2844,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
         //        string url = "/pos/activity/membercoupon/mycouponlist";
 
-        //        SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+        //        SortedDictionary<string, object> sort = new SortedDictionary<string, object>();
         //        sort.Add("memberid", memberid);
+        //        sort.Add("filter","1");
+        //        sort.Add("shopid",MainModel.CurrentShopInfo.shopid);
+        //        sort.Add("size", 10);
+        //        sort.Add("lastcouponcode",0);
         //        string testjson = JsonConvert.SerializeObject(sort);
 
-        //        string json = HttpGET(url, sort);
+        //        string json = HttpPOST(url, testjson);
 
         //        if (string.IsNullOrEmpty(json))
         //        {
@@ -3451,8 +3426,130 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+        /// <summary>
+        /// 充值记录、退款
+        /// </summary>
+        /// <param name="topuppara"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public long Depositbillrefund(BalanceDepositRefundRequest topuppara, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/member/balance/depositbillrefund";
+
+                string testjson = JsonConvert.SerializeObject(topuppara);
+
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return Convert.ToInt64(rd.data);
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "depositmember:" + json); }
+                    catch { }
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "退款异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return -1;
+            }
+        
+        }
+        /// <summary>
+        /// 获取退款单详情
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="mobile"></param>
+        /// <param name="erromessage"></param>f
+        /// <returns></returns>
+        public GetBalanceDepositRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
+        {
+            
+          
+            try
+            {
+                string url = "/pos/member/balance/getbalancedepositrefundbill";
 
 
+                string testjson = JsonConvert.SerializeObject(Id);
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("id", Id);
+                
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                
+                if (rd.code == 0)
+                {
+
+                    GetBalanceDepositRefund resultobj = JsonConvert.DeserializeObject<GetBalanceDepositRefund>(rd.data.ToString());
+
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "GetBalancecodepositrefound:" + json); }
+                    catch { }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "充值退款明细异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        
+        }
+        /// <summary>
+        /// 会员充值-自定义支付方式
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public List<ClassPayment> Custompaycon(ref string erromessage)
+        {
+            try
+            {
+                string rechargeenable = "true";
+                string loked = "false";
+                string url = "/pos/pay/custompayconfig/list";
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("rechargeenable", rechargeenable);
+                sort.Add("locked", loked);
+                string parajson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpPOST(url, parajson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                //TODO
+
+                if (rd.code == 0)
+                {
+                    List<ClassPayment> resultobj = JsonConvert.DeserializeObject<List<ClassPayment>>(rd.data.ToString());
+                    return resultobj;
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "custompayconfig:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "自定义支付方式展示异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
         /// <summary>
         /// 取消订单
         /// </summary>
@@ -3511,7 +3608,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string testjson = JsonConvert.SerializeObject(para);
 
                 string json = HttpPOST(url, testjson);
+                
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                
                 if (rd.code == 0)
                 {
 
@@ -3722,51 +3821,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
 
         }
-        /// <summary>
-        /// 获取退款单详情
-        /// </summary>
-        /// <param name="orderid"></param>
-        /// <param name="mobile"></param>
-        /// <param name="erromessage"></param>f
-        /// <returns></returns>
-        public GetBalanceDepositRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
-        {
-
-
-            try
-            {
-                string url = "/pos/member/balance/getbalancedepositrefundbill";
-
-
-                string testjson = JsonConvert.SerializeObject(Id);
-                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("id", Id);
-
-                string json = HttpGET(url, sort);
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
-                if (rd.code == 0)
-                {
-
-                    GetBalanceDepositRefund resultobj = JsonConvert.DeserializeObject<GetBalanceDepositRefund>(rd.data.ToString());
-
-                    return resultobj;
-                }
-                else
-                {
-                    try { LogManager.WriteLog("Error", "GetBalancecodepositrefound:" + json); }
-                    catch { }
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("Error", "充值退款明细异常：" + ex.Message);
-                erromessage = "网络连接异常，请检查网络连接";
-                return null;
-            }
-
-        }
+     
         #endregion
 
 
@@ -3874,7 +3929,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpGET(url, sort);
 
-                LogManager.WriteLog(json);
+                LogManager.WriteLog("DEBUG","线上订单"+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -3948,7 +4003,93 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+
+
+        /// <summary>
+        /// 同步异常订单
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public SyncOrder ThirdSyncOrder( string orderid, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/thirdpartyplatform/thirdpartyabnormalorder/syncorder";
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("orderid", orderid);
+                string json = HttpGET(url, sort);
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                //TODO
+
+                if (rd.code == 0)
+                {
+
+                    SyncOrder resultobj = JsonConvert.DeserializeObject<SyncOrder>(rd.data.ToString());
+                    return resultobj;
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "syncorder:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", orderid + "同步第三方异常订单异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
         #endregion
+
+
+        /// <summary>
+        /// 异常订单
+        /// </summary>
+        /// <param name="signpara"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public bool AbnormalOrder(ZhuiZhi_Integral_Scale_UncleFruit.Common.AbnormalOrderUtil.AbnormalOrder para, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/uploadabnormalorder";
+
+
+                string tempjson = JsonConvert.SerializeObject(para);
+
+                string json = HttpPOST(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+
+                    return Convert.ToBoolean(rd.data);
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "uploadabnormalorder:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "提交异常数据异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
 
         #region  访问服务端
         private HttpRequest httprequest = new HttpRequest();
@@ -3959,7 +4100,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             Other.CrearMemory();
             return httprequest.HttpGetJson(Url, sortpara);
         }
-
         static object lockhttppost = new object();
         public string HttpPOST(string Url, string bodyjson)
         {
@@ -4034,7 +4174,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         //        request.KeepAlive = false;
         //        request.UseDefaultCredentials = true;
         //        request.ServicePoint.Expect100Continue = false;//important
-
 
         //        System.Net.ServicePointManager.DefaultConnectionLimit = 100;
         //        request.Timeout = 60 * 1000; //3秒钟无响应 网络有问题

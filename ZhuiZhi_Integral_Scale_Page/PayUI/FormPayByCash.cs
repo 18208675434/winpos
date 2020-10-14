@@ -173,7 +173,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     }
                     else//进入找零界面
                     {
-                        if (MainModel.CurrentMember != null)
+                        if (MainModel.CurrentMember != null && MainModel.balanceconfigdetail!=null  && MainModel.balanceconfigdetail.cashtobalanceenable)
                         {
                             this.Hide();
                             string orderid = "";

@@ -45,6 +45,9 @@
             this.dataGridViewImageColumn6 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn7 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn8 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.pnlPayByOther = new System.Windows.Forms.Panel();
+            this.lblPayByOther = new System.Windows.Forms.Label();
+            this.picPayByOther = new System.Windows.Forms.PictureBox();
             this.pnlPayByCash = new System.Windows.Forms.Panel();
             this.lblPayByCash = new System.Windows.Forms.Label();
             this.picPayByCash = new System.Windows.Forms.PictureBox();
@@ -55,6 +58,9 @@
             this.lblTopUp = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.custom = new System.Windows.Forms.Panel();
+            this.customdiscount = new System.Windows.Forms.Label();
+            this.custommoney = new System.Windows.Forms.Label();
             this.lblEntityNo = new System.Windows.Forms.Label();
             this.newphone = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,13 +68,13 @@
             this.btnLoss = new System.Windows.Forms.Button();
             this.btnbang = new System.Windows.Forms.Button();
             this.btnChangePhone = new System.Windows.Forms.Button();
+            this.pnlItem = new System.Windows.Forms.Panel();
+            this.lblAmountStr = new System.Windows.Forms.Label();
+            this.lblAmount = new System.Windows.Forms.Label();
             this.pnlCoupon = new System.Windows.Forms.Panel();
             this.picCoupon = new System.Windows.Forms.PictureBox();
             this.lblCoupon = new System.Windows.Forms.Label();
             this.lblCreditAmount = new System.Windows.Forms.Label();
-            this.pnlItem = new System.Windows.Forms.Panel();
-            this.lblAmountStr = new System.Windows.Forms.Label();
-            this.lblAmount = new System.Windows.Forms.Label();
             this.btnForgetPwd = new System.Windows.Forms.Button();
             this.btnChangePwd = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -92,15 +98,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).BeginInit();
+            this.pnlPayByOther.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayByOther)).BeginInit();
             this.pnlPayByCash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByCash)).BeginInit();
             this.pnlPayByOnLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByOnLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTopUp)).BeginInit();
             this.panel1.SuspendLayout();
+            this.custom.SuspendLayout();
+            this.pnlItem.SuspendLayout();
             this.pnlCoupon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCoupon)).BeginInit();
-            this.pnlItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -183,6 +192,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.dgvTemplate);
+            this.panel2.Controls.Add(this.pnlPayByOther);
             this.panel2.Controls.Add(this.pnlPayByCash);
             this.panel2.Controls.Add(this.pnlPayByOnLine);
             this.panel2.Controls.Add(this.picTopUp);
@@ -229,7 +239,7 @@
             this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTemplate.RowTemplate.Height = 110;
             this.dgvTemplate.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvTemplate.Size = new System.Drawing.Size(615, 381);
+            this.dgvTemplate.Size = new System.Drawing.Size(615, 215);
             this.dgvTemplate.TabIndex = 68;
             this.dgvTemplate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTemplate_CellClick);
             // 
@@ -263,14 +273,46 @@
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.ReadOnly = true;
             // 
+            // pnlPayByOther
+            // 
+            this.pnlPayByOther.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(147)))), ((int)(((byte)(225)))));
+            this.pnlPayByOther.Controls.Add(this.lblPayByOther);
+            this.pnlPayByOther.Controls.Add(this.picPayByOther);
+            this.pnlPayByOther.Location = new System.Drawing.Point(447, 422);
+            this.pnlPayByOther.Name = "pnlPayByOther";
+            this.pnlPayByOther.Size = new System.Drawing.Size(211, 69);
+            this.pnlPayByOther.TabIndex = 69;
+            this.pnlPayByOther.Click += new System.EventHandler(this.pnlPayByOther_Click);
+            // 
+            // lblPayByOther
+            // 
+            this.lblPayByOther.AutoSize = true;
+            this.lblPayByOther.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblPayByOther.ForeColor = System.Drawing.Color.White;
+            this.lblPayByOther.Location = new System.Drawing.Point(81, 21);
+            this.lblPayByOther.Name = "lblPayByOther";
+            this.lblPayByOther.Size = new System.Drawing.Size(82, 24);
+            this.lblPayByOther.TabIndex = 1;
+            this.lblPayByOther.Text = "其他支付";
+            // 
+            // picPayByOther
+            // 
+            this.picPayByOther.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByOther.BackgroundImage")));
+            this.picPayByOther.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPayByOther.Location = new System.Drawing.Point(50, 18);
+            this.picPayByOther.Name = "picPayByOther";
+            this.picPayByOther.Size = new System.Drawing.Size(28, 28);
+            this.picPayByOther.TabIndex = 0;
+            this.picPayByOther.TabStop = false;
+            // 
             // pnlPayByCash
             // 
             this.pnlPayByCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(146)))), ((int)(((byte)(27)))));
             this.pnlPayByCash.Controls.Add(this.lblPayByCash);
             this.pnlPayByCash.Controls.Add(this.picPayByCash);
-            this.pnlPayByCash.Location = new System.Drawing.Point(347, 506);
+            this.pnlPayByCash.Location = new System.Drawing.Point(230, 422);
             this.pnlPayByCash.Name = "pnlPayByCash";
-            this.pnlPayByCash.Size = new System.Drawing.Size(300, 80);
+            this.pnlPayByCash.Size = new System.Drawing.Size(211, 69);
             this.pnlPayByCash.TabIndex = 57;
             this.pnlPayByCash.Click += new System.EventHandler(this.pnlPayByCash_Click);
             // 
@@ -279,7 +321,7 @@
             this.lblPayByCash.AutoSize = true;
             this.lblPayByCash.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.lblPayByCash.ForeColor = System.Drawing.Color.White;
-            this.lblPayByCash.Location = new System.Drawing.Point(121, 23);
+            this.lblPayByCash.Location = new System.Drawing.Point(87, 20);
             this.lblPayByCash.Name = "lblPayByCash";
             this.lblPayByCash.Size = new System.Drawing.Size(69, 31);
             this.lblPayByCash.TabIndex = 1;
@@ -290,7 +332,7 @@
             // 
             this.picPayByCash.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByCash.BackgroundImage")));
             this.picPayByCash.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPayByCash.Location = new System.Drawing.Point(87, 26);
+            this.picPayByCash.Location = new System.Drawing.Point(53, 23);
             this.picPayByCash.Name = "picPayByCash";
             this.picPayByCash.Size = new System.Drawing.Size(28, 28);
             this.picPayByCash.TabIndex = 0;
@@ -302,9 +344,9 @@
             this.pnlPayByOnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
             this.pnlPayByOnLine.Controls.Add(this.lblPayByOnLine);
             this.pnlPayByOnLine.Controls.Add(this.picPayByOnLine);
-            this.pnlPayByOnLine.Location = new System.Drawing.Point(32, 506);
+            this.pnlPayByOnLine.Location = new System.Drawing.Point(11, 422);
             this.pnlPayByOnLine.Name = "pnlPayByOnLine";
-            this.pnlPayByOnLine.Size = new System.Drawing.Size(300, 80);
+            this.pnlPayByOnLine.Size = new System.Drawing.Size(211, 69);
             this.pnlPayByOnLine.TabIndex = 56;
             this.pnlPayByOnLine.Click += new System.EventHandler(this.pnlPayByOnLine_Click);
             // 
@@ -313,7 +355,7 @@
             this.lblPayByOnLine.AutoSize = true;
             this.lblPayByOnLine.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.lblPayByOnLine.ForeColor = System.Drawing.Color.White;
-            this.lblPayByOnLine.Location = new System.Drawing.Point(91, 23);
+            this.lblPayByOnLine.Location = new System.Drawing.Point(43, 17);
             this.lblPayByOnLine.Name = "lblPayByOnLine";
             this.lblPayByOnLine.Size = new System.Drawing.Size(144, 31);
             this.lblPayByOnLine.TabIndex = 1;
@@ -324,7 +366,7 @@
             // 
             this.picPayByOnLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByOnLine.BackgroundImage")));
             this.picPayByOnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPayByOnLine.Location = new System.Drawing.Point(57, 26);
+            this.picPayByOnLine.Location = new System.Drawing.Point(9, 20);
             this.picPayByOnLine.Name = "picPayByOnLine";
             this.picPayByOnLine.Size = new System.Drawing.Size(28, 28);
             this.picPayByOnLine.TabIndex = 0;
@@ -372,6 +414,7 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.custom);
             this.panel1.Controls.Add(this.lblEntityNo);
             this.panel1.Controls.Add(this.newphone);
             this.panel1.Controls.Add(this.label4);
@@ -379,9 +422,9 @@
             this.panel1.Controls.Add(this.btnLoss);
             this.panel1.Controls.Add(this.btnbang);
             this.panel1.Controls.Add(this.btnChangePhone);
+            this.panel1.Controls.Add(this.pnlItem);
             this.panel1.Controls.Add(this.pnlCoupon);
             this.panel1.Controls.Add(this.lblCreditAmount);
-            this.panel1.Controls.Add(this.pnlItem);
             this.panel1.Controls.Add(this.btnForgetPwd);
             this.panel1.Controls.Add(this.btnChangePwd);
             this.panel1.Controls.Add(this.label10);
@@ -404,6 +447,41 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(460, 650);
             this.panel1.TabIndex = 38;
+            // 
+            // custom
+            // 
+            this.custom.BackColor = System.Drawing.Color.White;
+            this.custom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.custom.Controls.Add(this.customdiscount);
+            this.custom.Controls.Add(this.custommoney);
+            this.custom.Location = new System.Drawing.Point(281, 497);
+            this.custom.Name = "custom";
+            this.custom.Size = new System.Drawing.Size(200, 100);
+            this.custom.TabIndex = 56;
+            // 
+            // customdiscount
+            // 
+            this.customdiscount.BackColor = System.Drawing.Color.Transparent;
+            this.customdiscount.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.customdiscount.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.customdiscount.Location = new System.Drawing.Point(3, 62);
+            this.customdiscount.Name = "customdiscount";
+            this.customdiscount.Size = new System.Drawing.Size(192, 25);
+            this.customdiscount.TabIndex = 52;
+            this.customdiscount.Text = "自定义金额";
+            this.customdiscount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // custommoney
+            // 
+            this.custommoney.BackColor = System.Drawing.Color.Transparent;
+            this.custommoney.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.custommoney.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.custommoney.Location = new System.Drawing.Point(3, 17);
+            this.custommoney.Name = "custommoney";
+            this.custommoney.Size = new System.Drawing.Size(192, 35);
+            this.custommoney.TabIndex = 51;
+            this.custommoney.Text = "+";
+            this.custommoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblEntityNo
             // 
@@ -519,8 +597,42 @@
             this.btnChangePhone.Text = "更换手机号";
             this.btnChangePhone.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnChangePhone.UseVisualStyleBackColor = false;
-            this.btnChangePhone.Visible = false;
             this.btnChangePhone.Click += new System.EventHandler(this.btnChangePhone_Click);
+            // 
+            // pnlItem
+            // 
+            this.pnlItem.BackColor = System.Drawing.Color.White;
+            this.pnlItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlItem.Controls.Add(this.lblAmountStr);
+            this.pnlItem.Controls.Add(this.lblAmount);
+            this.pnlItem.Location = new System.Drawing.Point(260, -248);
+            this.pnlItem.Name = "pnlItem";
+            this.pnlItem.Size = new System.Drawing.Size(200, 100);
+            this.pnlItem.TabIndex = 55;
+            // 
+            // lblAmountStr
+            // 
+            this.lblAmountStr.BackColor = System.Drawing.Color.Transparent;
+            this.lblAmountStr.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblAmountStr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.lblAmountStr.Location = new System.Drawing.Point(3, 62);
+            this.lblAmountStr.Name = "lblAmountStr";
+            this.lblAmountStr.Size = new System.Drawing.Size(192, 25);
+            this.lblAmountStr.TabIndex = 52;
+            this.lblAmountStr.Text = "赠100元，100元券包";
+            this.lblAmountStr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAmount
+            // 
+            this.lblAmount.BackColor = System.Drawing.Color.Transparent;
+            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.lblAmount.ForeColor = System.Drawing.Color.Black;
+            this.lblAmount.Location = new System.Drawing.Point(3, 17);
+            this.lblAmount.Name = "lblAmount";
+            this.lblAmount.Size = new System.Drawing.Size(192, 35);
+            this.lblAmount.TabIndex = 51;
+            this.lblAmount.Text = "500元";
+            this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlCoupon
             // 
@@ -570,41 +682,6 @@
             this.lblCreditAmount.TabIndex = 74;
             this.lblCreditAmount.Text = "--";
             this.lblCreditAmount.Visible = false;
-            // 
-            // pnlItem
-            // 
-            this.pnlItem.BackColor = System.Drawing.Color.White;
-            this.pnlItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlItem.Controls.Add(this.lblAmountStr);
-            this.pnlItem.Controls.Add(this.lblAmount);
-            this.pnlItem.Location = new System.Drawing.Point(243, -160);
-            this.pnlItem.Name = "pnlItem";
-            this.pnlItem.Size = new System.Drawing.Size(200, 100);
-            this.pnlItem.TabIndex = 55;
-            // 
-            // lblAmountStr
-            // 
-            this.lblAmountStr.BackColor = System.Drawing.Color.Transparent;
-            this.lblAmountStr.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblAmountStr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.lblAmountStr.Location = new System.Drawing.Point(3, 62);
-            this.lblAmountStr.Name = "lblAmountStr";
-            this.lblAmountStr.Size = new System.Drawing.Size(192, 25);
-            this.lblAmountStr.TabIndex = 52;
-            this.lblAmountStr.Text = "赠100元，100元券包";
-            this.lblAmountStr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblAmount
-            // 
-            this.lblAmount.BackColor = System.Drawing.Color.Transparent;
-            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.lblAmount.ForeColor = System.Drawing.Color.Black;
-            this.lblAmount.Location = new System.Drawing.Point(3, 17);
-            this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(192, 35);
-            this.lblAmount.TabIndex = 51;
-            this.lblAmount.Text = "500元";
-            this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnForgetPwd
             // 
@@ -857,6 +934,9 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).EndInit();
+            this.pnlPayByOther.ResumeLayout(false);
+            this.pnlPayByOther.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayByOther)).EndInit();
             this.pnlPayByCash.ResumeLayout(false);
             this.pnlPayByCash.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByCash)).EndInit();
@@ -866,10 +946,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picTopUp)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.custom.ResumeLayout(false);
+            this.pnlItem.ResumeLayout(false);
             this.pnlCoupon.ResumeLayout(false);
             this.pnlCoupon.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCoupon)).EndInit();
-            this.pnlItem.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -889,7 +970,6 @@
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pictureBox4;
@@ -931,6 +1011,13 @@
         private System.Windows.Forms.Button btnbang;
         private System.Windows.Forms.Label newphone;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel custom;
+        private System.Windows.Forms.Label customdiscount;
+        private System.Windows.Forms.Label custommoney;
+        private System.Windows.Forms.Panel pnlPayByOther;
+        private System.Windows.Forms.Label lblPayByOther;
+        private System.Windows.Forms.PictureBox picPayByOther;
         private System.Windows.Forms.Button btnRelation;
         private System.Windows.Forms.Button btnLoss;
         private System.Windows.Forms.Label lblEntityNo;

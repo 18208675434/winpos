@@ -390,15 +390,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                 }
                 catch { }
-                this.BeginInvoke(new EventHandler(delegate
-                {
-                    UpdateFormExe(null);
 
-                }));
-                
-                //Thread threadItemExedate = new Thread(UpdateFormExe);
-                //threadItemExedate.IsBackground = false;
-                //threadItemExedate.Start();
+                //this.BeginInvoke(new EventHandler(delegate
+                //{
+                //    UpdateFormExe(null);
+
+                //}));
+
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += UpdateFormExe;
+                bk.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -410,7 +411,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         //增加线程锁  防止多线程操作datagridview 红叉情况
         private object thislock = new object();
-        private void UpdateFormExe(object obj)
+        private void UpdateFormExe(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             lock (thislock)
             {
@@ -522,7 +523,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 try
                                 {
                                     strotherpaytype = CurrentCart.paymenttypes.otherpaytypeinfo.Where(r => r.code == CurrentCart.otherpaytype).ToList()[0].name;
-                                   // strotherpaytype = CurrentCart.otherpaytypeinfo.Where(r => r.key == CurrentCart.otherpaytype).ToList()[0].value;
                                 }
                                 catch
                                 {
@@ -599,7 +599,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     {
                         picBirthday1.Visible = false;
 
-
                         picBirthday2.Visible = false;
                         picBirthday3.Visible = false;
                         picBirthday4.Visible = false;
@@ -649,7 +648,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 pnlMemberCard.Visible = true;
                                 //Application.DoEvents();
                             }
-
                         }
                         else
                         {
@@ -990,7 +988,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         frmbalancepwdguest.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width + pnlPayInfo.Location.X, pnlPayInfo.Location.Y);
                         frmbalancepwdguest.TopMost = true;
                         asf.AutoScaleControlTest(frmbalancepwdguest,704,699, pnlPayInfo.Width, pnlPayInfo.Height, true);
-
                     }
 
                     frmbalancepwdguest.ShowDialog();

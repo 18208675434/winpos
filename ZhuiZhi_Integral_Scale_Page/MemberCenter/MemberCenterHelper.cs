@@ -48,6 +48,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+                
                 BackHelper.ShowFormBackGround();
 
                 FormTopUpByCash frmpaybycash = new FormTopUpByCash(amount);
@@ -60,7 +61,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 BackHelper.HideFormBackGround();
                 Application.DoEvents();
+                
                 return frmpaybycash.DialogResult == DialogResult.OK;
+
 
             }
             catch (Exception ex)
@@ -283,7 +286,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 显示修改手机号码-支付密码验证窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhonePayPwd(Member m )
+        public static bool ShowFormChangePhonePayPwd(Member m)
         {
             try
             {
@@ -313,7 +316,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-               
+
                 BackHelper.ShowFormBackGround();
 
                 FormChangePhonePhysicalCard frmchangephoneoldcard = new FormChangePhonePhysicalCard();

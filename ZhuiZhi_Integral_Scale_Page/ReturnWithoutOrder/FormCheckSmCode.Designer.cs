@@ -56,6 +56,7 @@
             this.btnCountDown.TabIndex = 47;
             this.btnCountDown.Text = "重新发送(60)";
             this.btnCountDown.UseVisualStyleBackColor = true;
+            this.btnCountDown.Click += new System.EventHandler(this.btnCountDown_Click);
             // 
             // btnPassW6
             // 
@@ -200,6 +201,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormCheckSmCode";
             this.Load += new System.EventHandler(this.FormCheckSmCode_Load);
+            this.Shown += new System.EventHandler(this.FormCheckSmCode_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

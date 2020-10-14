@@ -217,6 +217,7 @@
     <Compile Include="ChangePriceUI\FormPricing.Designer.cs">
       <DependentUpon>FormPricing.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\AbnormalOrderUtil.cs" />
     <Compile Include="Common\ConfigUtil.cs" />
     <Compile Include="Common\DbJsonUtil.cs" />
     <Compile Include="Common\HttpRequestbak.cs" />
@@ -293,7 +294,14 @@
     <Compile Include="HelperUI\FormPurchaseLimit.Designer.cs">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperUI\FormSayOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormSayOrder.Designer.cs">
+      <DependentUpon>FormSayOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelperUI\PurchaseLimitHelper.cs" />
+    <Compile Include="HelperUI\SayOrderHelper.cs" />
     <Compile Include="MemberCenter\CreateMemberMediaHelper.cs" />
     <Compile Include="MemberCenter\FormChangePhoneConfirm.cs">
       <SubType>Form</SubType>
@@ -355,6 +363,18 @@
     <Compile Include="MemberCenter\FormCreateMemberMedia.Designer.cs">
       <DependentUpon>FormCreateMemberMedia.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormCustomMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomMoney.Designer.cs">
+      <DependentUpon>FormCustomMoney.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomreCharge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomreCharge.Designer.cs">
+      <DependentUpon>FormCustomreCharge.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormForgetPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +386,12 @@
     </Compile>
     <Compile Include="MemberCenter\FormHeBing.Designer.cs">
       <DependentUpon>FormHeBing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormIsokCancle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormIsokCancle.Designer.cs">
+      <DependentUpon>FormIsokCancle.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormMemberCenterMedia.cs">
       <SubType>Form</SubType>
@@ -390,6 +416,18 @@
     </Compile>
     <Compile Include="MemberCenter\FormNoPayPwd.Designer.cs">
       <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormOtherMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormOtherMethod.Designer.cs">
+      <DependentUpon>FormOtherMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormReminder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormReminder.Designer.cs">
+      <DependentUpon>FormReminder.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormSeavePassword.cs">
       <SubType>Form</SubType>
@@ -433,6 +471,18 @@
     <Compile Include="MemberCenter\FormAllCoupon.Designer.cs">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormTuikuan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormTuikuan.Designer.cs">
+      <DependentUpon>FormTuikuan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormZsongMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormZsongMoney.Designer.cs">
+      <DependentUpon>FormZsongMoney.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormRechargeRefund.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -443,6 +493,9 @@
     <Compile Include="MemberCenter\MemberCenterHttpUtil.cs" />
     <Compile Include="MemberCenter\MemberCenterMediaHelper.cs" />
     <Compile Include="MemberCenter\model\BalanceConfigDetail.cs" />
+    <Compile Include="MemberCenter\model\BalanceDepositRefundRequest .cs" />
+    <Compile Include="MemberCenter\model\ClassPayment.cs" />
+    <Compile Include="MemberCenter\model\CustomTemplateModel.cs" />
     <Compile Include="MemberCenter\model\DepositRefundRequest.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
     <Compile Include="MemberCenter\model\EntityCard.cs" />
@@ -547,8 +600,15 @@
     <Compile Include="Model\Promotion\temp.cs" />
     <Compile Include="Model\Promotion\TripletBean.cs" />
     <Compile Include="Model\Promotion\TripletBeanForCoupon.cs" />
+    <Compile Include="Model\SyncOrder.cs" />
     <Compile Include="Model\TenantInfo.cs" />
     <Compile Include="Model\ValidateOuterCoupon.cs" />
+    <Compile Include="MyControl\KeyBoardAll.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\KeyBoardAll.Designer.cs">
+      <DependentUpon>KeyBoardAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyControl\KeyBoardNew.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -613,6 +673,7 @@
     <Compile Include="PrintFactory\PrintHelper.cs" />
     <Compile Include="PrintFactory\SprtPrintUtil.cs" />
     <Compile Include="PrintFactory\ToledoPrintUtil.cs" />
+    <Compile Include="PrintFactory\YKPrintUtil.cs" />
     <Compile Include="ReturnWithoutOrder\FormCheckSmCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -636,6 +697,12 @@
     </Compile>
     <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.Designer.cs">
       <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.Designer.cs">
+      <DependentUpon>FormReturnWithoutOrderMedia.cs</DependentUpon>
     </Compile>
     <Compile Include="ReturnWithoutOrder\ReturnWithoutOrderHelper.cs" />
     <Compile Include="ScaleFactory\ScaleGlobalHelper.cs" />
@@ -1213,6 +1280,9 @@
     <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
       <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormSayOrder.resx">
+      <DependentUpon>FormSayOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1243,11 +1313,20 @@
     <EmbeddedResource Include="MemberCenter\FormCreateMemberMedia.resx">
       <DependentUpon>FormCreateMemberMedia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCustomMoney.resx">
+      <DependentUpon>FormCustomMoney.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCustomreCharge.resx">
+      <DependentUpon>FormCustomreCharge.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormForgetPassword.resx">
       <DependentUpon>FormForgetPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormHeBing.resx">
       <DependentUpon>FormHeBing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormIsokCancle.resx">
+      <DependentUpon>FormIsokCancle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormMemberCenterMedia.resx">
       <DependentUpon>FormMemberCenterMedia.cs</DependentUpon>
@@ -1260,6 +1339,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormNoPayPwd.resx">
       <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormOtherMethod.resx">
+      <DependentUpon>FormOtherMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormReminder.resx">
+      <DependentUpon>FormReminder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormSeavePassword.resx">
       <DependentUpon>FormSeavePassword.cs</DependentUpon>
@@ -1282,6 +1367,12 @@
     <EmbeddedResource Include="MemberCenter\FormAllCoupon.resx">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormTuikuan.resx">
+      <DependentUpon>FormTuikuan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormZsongMoney.resx">
+      <DependentUpon>FormZsongMoney.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormRechargeRefund.resx">
       <DependentUpon>FormRechargeRefund.cs</DependentUpon>
     </EmbeddedResource>
@@ -1302,6 +1393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormAdjustRecord.resx">
       <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\KeyBoardAll.resx">
+      <DependentUpon>KeyBoardAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardNew.resx">
       <DependentUpon>KeyBoardNew.cs</DependentUpon>
@@ -1345,6 +1439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrder.resx">
       <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.resx">
+      <DependentUpon>FormReturnWithoutOrderMedia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScaleUI\FormSending.resx">
       <DependentUpon>FormSending.cs</DependentUpon>
@@ -1583,7 +1680,9 @@
     <None Include="Resources\border__minus2.bmp" />
     <None Include="Resources\border_add1.bmp" />
     <Content Include="FruitLogo.ico" />
+    <Content Include="Picture\icon_wan.png" />
     <Content Include="Picture\rounblue.png" />
+    <Content Include="Picture\关闭.png" />
     <None Include="Resources\delete.Image.png" />
     <None Include="Resources\picDown.png" />
     <None Include="Resources\picCircular.png" />

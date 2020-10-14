@@ -503,7 +503,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
 
 
 
-                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                        lstdbpro = productbll.GetModelList(" BARCODE like'%," + goodcode + ",%'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
 
                         if (lstdbpro != null && lstdbpro.Count > 0)
                         {
@@ -518,11 +518,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
                     List<DBPRODUCT_BEANMODEL> lstdbpro = null;
                     if (!checkEanCodeIsError(goodcode, 13) && goodcode.Length > 2 && (goodcode.Substring(0, 2) == "25" || goodcode.Substring(0, 2) == "26"))
                     {
-                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode.Substring(2, 5) + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                        lstdbpro = productbll.GetModelList(" BARCODE like'%," + goodcode.Substring(2, 5) + ",%'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     }
                     else
                     {
-                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                        lstdbpro = productbll.GetModelList(" BARCODE like'%," + goodcode + ",%'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     }
                     // List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
@@ -757,8 +757,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
 
         #endregion
     }
-
-
 
     public class ScanModelAndDbpro
     {

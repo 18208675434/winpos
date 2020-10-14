@@ -50,6 +50,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
                 }
 
                 frmback.Show();
+
+
+               // GlobalUtil.ShowKeyBoard(frmback);
             }
             catch (Exception ex)
             {

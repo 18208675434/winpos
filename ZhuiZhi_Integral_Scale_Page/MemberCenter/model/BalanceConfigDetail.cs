@@ -15,6 +15,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
 
         public bool littleamountwithoutpasswordpayenabled { get; set; }
 
+        /// <summary>
+        /// 现金找零转存余额开关
+        /// </summary>
+        public bool cashtobalanceenable { get; set; }
+
 
     }
 }

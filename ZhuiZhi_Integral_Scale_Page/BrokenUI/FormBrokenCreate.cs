@@ -444,7 +444,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     else
                     {
                         isINNERBARCODE = false;
-                        lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
+                        lstdbpro = productbll.GetModelList(" BARCODE like'%," + goodcode + ",%'" + " and CREATE_URL_IP='" + MainModel.URL + "' ");
                         if (lstdbpro != null && lstdbpro.Count > 0)
                         {
                             dbpro = lstdbpro[0];
@@ -454,7 +454,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 else if (!CartUtil.checkEanCodeIsError(goodcode, 18) && goodcode.Length > 2 && goodcode.Substring(0, 2).Contains("22"))
                 {
                     isINNERBARCODE = false;
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode.Substring(2, 5) + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' " + " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ");
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE like'%," + goodcode.Substring(2, 5) + ",%'" + " and CREATE_URL_IP='" + MainModel.URL + "' " + " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         dbpro = lstdbpro[0];
@@ -464,7 +464,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
 
                     isINNERBARCODE = false;
-                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE='" + goodcode + "'" + " and CREATE_URL_IP='" + MainModel.URL + "' " + " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ");
+                    List<DBPRODUCT_BEANMODEL> lstdbpro = productbll.GetModelList(" BARCODE like'%," + goodcode + ",%'" + " and CREATE_URL_IP='" + MainModel.URL + "' " + " and SHOPID='" + MainModel.CurrentShopInfo.shopid + "' ");
                     if (lstdbpro != null && lstdbpro.Count > 0)
                     {
                         dbpro = lstdbpro[0];

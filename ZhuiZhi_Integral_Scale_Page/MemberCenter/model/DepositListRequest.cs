@@ -63,8 +63,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
            /// 
            /// </summary>
            public string tenantid { get; set; }
+        /// <summary>
+        /// 充值金额
+        /// </summary>
+        public decimal rewardamount { get; set; }
+        /// <summary>
+        /// 充值方式
+        /// </summary>
 
-           public bool refundable { get; set; }
-
+        public string fangshi { get; set; }
+        /// <summary>
+        /// 是否可以退款
+        /// </summary>
+        public bool refundable { get; set; }
+        public string id { get; set; }
     }
 }

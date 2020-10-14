@@ -44,6 +44,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             try
             {
                 InitializeComponent();
+
+                //使用委托的话frmmain界面会卡死
+                Control.CheckForIllegalCrossThreadCalls = false;
+
                 otherPayResult = new OtherPayResult();
                 SelectPayType = null;
                 thisCurrentCart = cart;
@@ -672,9 +676,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         //有默认金额不允许修改
         private void txtCash_DataChanged(string data)
         {
-            if (SelectPayType!=null && SelectPayType.defaultamt>0)
+            try
             {
-                txtCash.Text = SelectPayType.defaultamt.ToString("f2");
+                //数据中可能存在有默认值 的券码  
+                if (SelectPayType != null && !SelectPayType.needcouponcode && SelectPayType.defaultamt > 0)
+                {
+                    txtCash.Text = SelectPayType.defaultamt.ToString("f2");
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 

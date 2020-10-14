@@ -291,6 +291,50 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return false;
             }
         }
+
+
+        static string keyboardname = "uckeyboard";
+        public static void ShowKeyBoard(System.Windows.Forms.Form frm)
+        {
+
+
+            Size size= new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height/3);
+            Point point = new System.Drawing.Point(0, Screen.AllScreens[0].Bounds.Height *2/ 3);
+
+            ShowKeyBoard(frm,size,point);
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="frm">需要加载键盘的窗体</param>
+        /// <param name="size">键盘尺寸</param>
+        /// <param name="location">键盘位置</param>
+        public static void ShowKeyBoard(System.Windows.Forms.Form frm,Size size,Point location)
+        {
+            try
+            {
+                ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll uckey = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll();
+                uckey.Name = keyboardname;
+
+                //如果窗体已存在键盘 显示即可
+                foreach (System.Windows.Forms.Control con in frm.Controls)
+                {
+                    if (con.Name == keyboardname)
+                    {
+                        con.Show();
+                        return;
+                    }
+                }
+
+                uckey.Size = size;
+                uckey.Location = location;
+                uckey.BringToFront();
+                frm.Controls.Add(uckey);
+                uckey.BringToFront();
+            }
+            catch { }
+        }
         #endregion
 
         /// <summary>

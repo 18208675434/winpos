@@ -128,6 +128,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
+
+
+                AbnormalOrderUtil.OpenBoxList();
                 int OpenMoneyPacketCount = Convert.ToInt16(INIManager.GetIni("Receipt", "OpenMoneyPacketCount", MainModel.IniPath)) + n;
 
                 INIManager.SetIni("Receipt", "OpenMoneyPacketCount", OpenMoneyPacketCount.ToString(), MainModel.IniPath);

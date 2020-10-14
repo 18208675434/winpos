@@ -7,6 +7,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
 {
     public class MemberTopUpPara
     {
+        public decimal rewardamount  { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -15,6 +16,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 
         /// </summary>
         public string birthday { get; set; }
+        /// <summary>
+        /// 其他支付方式
+        /// </summary>
+        public string customerpaycode  { get; set; }
+        /// <summary>
+        /// 是否自动根据充值模板匹配赠金
+        /// </summary>
+        public bool autoreward  { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -28,7 +37,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// </summary>
         public string oldentitycardnumber { get; set; }
         /// <summary>
-        /// 支付方式  0现金 1其他支付 2微信 3支付宝 
+        /// 
         /// </summary>
         public string paymode { get; set; }
         /// <summary>

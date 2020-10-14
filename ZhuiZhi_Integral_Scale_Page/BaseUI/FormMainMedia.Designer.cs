@@ -541,10 +541,10 @@
             this.pnlPayInfo.Controls.Add(this.lblPayInfo2);
             this.pnlPayInfo.Controls.Add(this.lblPayInfo1);
             this.pnlPayInfo.Controls.Add(this.picPayInfo);
-            this.pnlPayInfo.Location = new System.Drawing.Point(31, 76);
+            this.pnlPayInfo.Location = new System.Drawing.Point(27, 76);
             this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPayInfo.Name = "pnlPayInfo";
-            this.pnlPayInfo.Size = new System.Drawing.Size(693, 643);
+            this.pnlPayInfo.Size = new System.Drawing.Size(697, 643);
             this.pnlPayInfo.TabIndex = 311;
             // 
             // picPayError

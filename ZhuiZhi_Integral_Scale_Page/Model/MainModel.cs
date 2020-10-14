@@ -20,15 +20,39 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
     public class MainModel
     {
 
+        public static ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.BalanceConfigDetail balanceconfigdetail = null;
+
+        public static string rewardmount = "";
+        public static string moneyzz = "";
+        public static long idm = 0;
+        public static bool isokcancle;
+        public static string code = "";
+        public static decimal GetZsje = 0;
+        public static string memberid = "";
+        public static string GetPhone = "";
+        public static string UpdatePhone = "";
         #region  会员中心   变量 （待优化）
         /// <summary>
         /// 修改手机号码时输入的新手机号
         /// </summary>
+        public static string CoustomMoney;
+        public static string ZMoney ;
         public static string NewPhone = "";
+        public static string tick = "";
         /// <summary>
         /// 获取发送的验证码
         /// </summary>
         public static string GetSmsCode = "";
+        public static string RechargeAmount;
+        public static string give;
+        //退款方式
+        public static string fangshi= "";
+        public static string MemberId ="";
+        public static string ShopId = "";
+        public static string Tenantid = "";
+        public static string Id = "";
+        public static string Depostid = "";
+        public static bool refundquest;
         /// <summary>
         /// 用户修改密码成功了码
         /// </summary>
@@ -37,7 +61,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 客屏同步忘记密码时第几次输入
         /// </summary>
         public static int inputimes = 0;
-
+        /// <summary>
+        /// 余额全局变量
+        /// </summary>
+        public static string Balance;
 
         /// <summary>
         /// 功能-修改密码同步

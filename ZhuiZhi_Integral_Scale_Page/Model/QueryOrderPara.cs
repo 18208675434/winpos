@@ -45,5 +45,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         ///  订单渠道:1(小程序) 2(美团) 3(饿百)
         /// </summary>
         public int source { set; get; }
+
+        public string tenantid { set; get; }
     }
 }

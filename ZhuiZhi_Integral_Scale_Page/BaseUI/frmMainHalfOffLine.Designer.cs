@@ -59,7 +59,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
-            this.btnWithoutOrder = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlAdjustInfo = new System.Windows.Forms.Panel();
             this.lblAdjustCount = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -246,7 +246,7 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.pnlHead.Controls.Add(this.btnWithoutOrder);
+            this.pnlHead.Controls.Add(this.button1);
             this.pnlHead.Controls.Add(this.pnlAdjustInfo);
             this.pnlHead.Controls.Add(this.btnGiftCard);
             this.pnlHead.Controls.Add(this.btnAdjustPrice);
@@ -263,16 +263,16 @@
             this.pnlHead.Size = new System.Drawing.Size(1180, 61);
             this.pnlHead.TabIndex = 32;
             // 
-            // btnWithoutOrder
+            // button1
             // 
-            this.btnWithoutOrder.Location = new System.Drawing.Point(359, 9);
-            this.btnWithoutOrder.Name = "btnWithoutOrder";
-            this.btnWithoutOrder.Size = new System.Drawing.Size(93, 43);
-            this.btnWithoutOrder.TabIndex = 52;
-            this.btnWithoutOrder.Text = "无单退款";
-            this.btnWithoutOrder.UseVisualStyleBackColor = true;
-            this.btnWithoutOrder.Visible = false;
-            this.btnWithoutOrder.Click += new System.EventHandler(this.btnWithoutOrder_Click);
+            this.button1.Location = new System.Drawing.Point(376, 9);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(53, 37);
+            this.button1.TabIndex = 52;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pnlAdjustInfo
             // 
@@ -434,7 +434,7 @@
             this.btnOrderQuery.Name = "btnOrderQuery";
             this.btnOrderQuery.Size = new System.Drawing.Size(105, 35);
             this.btnOrderQuery.TabIndex = 35;
-            this.btnOrderQuery.Text = "订单查询";
+            this.btnOrderQuery.Text = "订单列表";
             this.btnOrderQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnOrderQuery.UseVisualStyleBackColor = false;
             this.btnOrderQuery.Click += new System.EventHandler(this.btnOrderQuery_Click);
@@ -2162,6 +2162,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.ControlBox = false;
             this.Controls.Add(this.btnChangePrice);
             this.Controls.Add(this.btnDiscount);
             this.Controls.Add(this.panel1);
@@ -2188,7 +2189,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMainHalfOffLine";
-            this.Text = "果叔一体秤";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Shown += new System.EventHandler(this.FormMain_Shown);
@@ -2397,6 +2397,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnCreateMember;
         private System.Windows.Forms.Button btnLoadPhoneCopy;
-        private System.Windows.Forms.Button btnWithoutOrder;
+        private System.Windows.Forms.Button button1;
     }
 }
