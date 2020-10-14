@@ -33,6 +33,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            
+            //BackHelper.ShowFormBackGround();
+            BackHelper.HideFormBackGround();
+            
             this.Close();
             DialogResult = DialogResult.Cancel;
         }

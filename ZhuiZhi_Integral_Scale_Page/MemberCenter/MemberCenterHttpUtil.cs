@@ -312,6 +312,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return 0;
             }
         }
+        
         /// <summary>
         /// 修改手机号码 全局验证是否是会员
         /// </summary>
@@ -498,7 +499,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 throw;
             }
         }
-
+        /// <summary>
+        /// 自定义充值
+        /// </summary>
+        /// <returns></returns>
+        
         public bool CreateMember(CreateMemberPara para, ref string errormsg)
         {
             try
