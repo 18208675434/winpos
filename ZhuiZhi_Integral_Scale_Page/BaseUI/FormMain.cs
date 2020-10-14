@@ -12,9 +12,11 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BaseUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.MyControl;
 using ZhuiZhi_Integral_Scale_UncleFruit.PayUI;
@@ -553,8 +555,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                  }));
                 }
 
-                  
+                if (tooltype == ToolType.BatchSaleCard)
+                {
+                    this.Invoke(new InvokeHandler(delegate ()
+                    {
+                        BatchSaleCard();
+                    }));
+                }
 
+                if (tooltype == ToolType.RechangeQuery)
+                {
+                    this.Invoke(new InvokeHandler(delegate ()
+                    {
+                        RechangeQuery();
+                    }));
+                }
+                
             }
             catch (Exception ex)
             {
@@ -844,6 +860,34 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             catch (Exception ex)
             {
                 ShowLog("切换秤模式异常" + ex.Message, true);
+            }
+        }
+
+        private void BatchSaleCard()
+        {
+            try
+            {
+                IsEnable = false;
+                MemberCenterHelper.ShowFormBatchSaleCardCreate();
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                ShowLog("切换批量售卡异常" + ex.Message, true);
+            }
+        }
+
+        private void RechangeQuery()
+        {
+            try
+            {
+                IsEnable = false;
+                MemberCenterHelper.ShowFormRechangeQuery();
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                ShowLog("切换充值明细异常" + ex.Message, true);
             }
         }
         #endregion

@@ -24,9 +24,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private List<ListAllTemplate> LstTemplates = new List<ListAllTemplate>();
 
         bool IsEnable = true;
-        
-        
-        
+
+
+
 
         //使用密码支付  RSA公钥加密后的值
         public string PayPassWord = "";
@@ -35,7 +35,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public FormMemberCenterMedia()
         {
             InitializeComponent();
-            
+
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
         }
@@ -44,8 +44,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                lblPhone.Text = phone; 
-                
+                lblPhone.Text = phone;
+
                 lblMemberInfo.Text = memberinfo;
                 lblBalance.Text = balance;
                 lblCredit.Text = credit;
@@ -53,6 +53,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblCreditAmount.Text = creditspec;
 
                 lblCreditAmount.Left = lblCredit.Right;
+
+                if (MainModel.CurrentMember.memberentitycardresponsevo != null)
+                {
+                    string encCardId = MainModel.CurrentMember.memberentitycardresponsevo.cardid;
+                    if (!string.IsNullOrEmpty(encCardId))
+                    {
+                        if (encCardId.Length > 7)
+                        {
+                            encCardId = encCardId.Substring(0, 3) + "".PadLeft(encCardId.Length - 7, '*') + encCardId.Substring(encCardId.Length - 4);
+                        }
+                    }
+                    lblEntityCardNo.Text = encCardId;
+                }
             }
             catch { }
         }
@@ -81,9 +94,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
 
             }
+        }
+        public void UpdateEntityCardInfo(string entityCardNo)
+        {
+            try
+            {
+                lblEntityCardNo.Text = entityCardNo;
+            }
+            catch
+            {   
 
-
-
+            }
         }
         public void refresh()
         {
@@ -423,15 +444,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        private void lblPhone_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void pnlMemberInfo_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
 
     }

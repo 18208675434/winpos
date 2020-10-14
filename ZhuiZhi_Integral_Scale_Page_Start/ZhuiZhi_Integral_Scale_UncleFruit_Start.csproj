@@ -61,11 +61,11 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>C:\Users\15216\Desktop\好例子网_ICSharpCode.SharpZipLib 压缩与解压缩文件示例\压缩与解压缩文件示例\bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.ISAPPSERVICESLib">
       <HintPath>..\packages\ISWiAuto22.1.0.0\lib\Interop.ISAPPSERVICESLib.dll</HintPath>
@@ -96,7 +96,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Newtonsoft.Json.Compact">
-      <HintPath>bin\Release\Newtonsoft.Json.Compact.dll</HintPath>
+      <HintPath>..\Lib\Newtonsoft.Json.Compact.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -156,7 +156,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="QdamaPOSStart_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

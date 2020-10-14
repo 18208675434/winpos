@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 
         /// </summary>
         public string createdby { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -59,10 +61,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 
         /// </summary>
         public string memberid { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        // public string operator { get; set; }
+        [JsonProperty("operator")]
+        public string operatorname { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -79,13 +79,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 
         /// </summary>
         public decimal rewardamount { get; set; }
-        
-            /// <summary>
-            /// 付款方式
-            /// </summary>
+
+        /// <summary>
+        /// 付款方式
+        /// </summary>
         public string paymodeforapi { get; set; }
-        
-        
+
         /// <summary>
         /// 
         /// </summary>

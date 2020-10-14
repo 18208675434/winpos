@@ -76,7 +76,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pnlMemberInfo = new System.Windows.Forms.Panel();
             this.lblCreditAmount = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblEntityCardNo = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.lblCoupon = new System.Windows.Forms.Label();
@@ -848,7 +848,7 @@
             this.pnlMemberInfo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlMemberInfo.BackgroundImage")));
             this.pnlMemberInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMemberInfo.Controls.Add(this.lblCreditAmount);
-            this.pnlMemberInfo.Controls.Add(this.label10);
+            this.pnlMemberInfo.Controls.Add(this.lblEntityCardNo);
             this.pnlMemberInfo.Controls.Add(this.label11);
             this.pnlMemberInfo.Controls.Add(this.pictureBox5);
             this.pnlMemberInfo.Controls.Add(this.lblCoupon);
@@ -867,7 +867,6 @@
             this.pnlMemberInfo.Name = "pnlMemberInfo";
             this.pnlMemberInfo.Size = new System.Drawing.Size(460, 582);
             this.pnlMemberInfo.TabIndex = 38;
-            this.pnlMemberInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMemberInfo_Paint);
             // 
             // lblCreditAmount
             // 
@@ -881,18 +880,17 @@
             this.lblCreditAmount.TabIndex = 75;
             this.lblCreditAmount.Text = "--";
             // 
-            // label10
+            // lblEntityCardNo
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(170, 447);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 25);
-            this.label10.TabIndex = 67;
-            this.label10.Text = "--";
-            this.label10.Visible = false;
+            this.lblEntityCardNo.AutoSize = true;
+            this.lblEntityCardNo.BackColor = System.Drawing.Color.Transparent;
+            this.lblEntityCardNo.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblEntityCardNo.ForeColor = System.Drawing.Color.White;
+            this.lblEntityCardNo.Location = new System.Drawing.Point(170, 447);
+            this.lblEntityCardNo.Name = "lblEntityCardNo";
+            this.lblEntityCardNo.Size = new System.Drawing.Size(28, 25);
+            this.lblEntityCardNo.TabIndex = 67;
+            this.lblEntityCardNo.Text = "--";
             // 
             // label11
             // 
@@ -905,7 +903,6 @@
             this.label11.Size = new System.Drawing.Size(88, 25);
             this.label11.TabIndex = 66;
             this.label11.Text = "实体卡：";
-            this.label11.Visible = false;
             // 
             // pictureBox5
             // 
@@ -917,7 +914,6 @@
             this.pictureBox5.Size = new System.Drawing.Size(30, 30);
             this.pictureBox5.TabIndex = 65;
             this.pictureBox5.TabStop = false;
-            this.pictureBox5.Visible = false;
             // 
             // lblCoupon
             // 
@@ -1047,7 +1043,6 @@
             this.lblPhone.Size = new System.Drawing.Size(264, 50);
             this.lblPhone.TabIndex = 51;
             this.lblPhone.Text = "15200000000";
-            this.lblPhone.Click += new System.EventHandler(this.lblPhone_Click);
             // 
             // label1
             // 
@@ -3446,7 +3441,7 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlMemberInfo;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblEntityCardNo;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label lblCoupon;

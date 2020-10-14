@@ -6,11 +6,6 @@ using System.Threading;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 {
-
-
-
-
-
     public class Member
     {
         /// <summary>
@@ -32,6 +27,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public Membertenantresponsevo membertenantresponsevo { get; set; }
 
         public MemberOrderResponsevo memberorderresponsevo { get; set; }
+
+        public MemberEntityCardResponsevo memberentitycardresponsevo { get; set; }
+   
         /// <summary>
         /// 是否使用积分  主界面勾选/取消勾选积分修改状态
         /// </summary>
@@ -145,5 +143,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string lastpayat { get; set; }
 
         public string paycount { get; set; }
+    }
+
+    public class MemberEntityCardResponsevo
+    {
+        public string memberid { get; set; }
+        public string tenantid { get; set; }
+        public string cardid { get; set; }
+        public string status { get; set; }
     }
 }

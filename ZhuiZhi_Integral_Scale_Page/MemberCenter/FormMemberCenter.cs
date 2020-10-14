@@ -88,7 +88,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 lblCreditAmount.Left = lblCredit.Right;
 
-
+                DisplayEntityCard();
                 Application.DoEvents();
 
                 IsEnable = false;
@@ -106,6 +106,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadBalanceConfigDetail();
                 LoadingHelper.CloseForm();
                 IsEnable = true;
+                MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
 
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
             }
@@ -211,7 +212,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MainModel.ShowLog("请选择充值金额", false);
                     return;
                 }
-                
+
                 if (CurrentBalanceAccount != null && !CurrentBalanceAccount.haspaypassword && CurrentBalanceAccount.needinitpassword)
                 {
                     MemberCenterHelper.ShowFormNoPayPwd();
@@ -290,7 +291,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void lblTopUp_Click(object sender, EventArgs e)
         {
-            MemberCenterHelper.ShowFormTopUPQuery();
+            //MemberCenterHelper.ShowFormSingleUserRechangeQuery();
+            try
+            {
+                IsEnable = false;
+                MemberCenterHelper.ShowFormSingleUserRechangeQuery(CurrentMember.memberheaderresponsevo.mobile);
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("切换充值明细异常" + ex.Message, true);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -330,7 +341,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     if (CurrentTemplate == null && template.enabled == true)
                     {
                         CurrentTemplate = template;
-                        ListAllTemplate.mount = CurrentTemplate.amount;
                     }
                     int num = template.id;
 
@@ -369,7 +379,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     CustomTemplate = zidingyi;
                     listall.CustomId = CurrentTemplate.id;
                 }
-                else if(custommoney.Text == "+")
+                else if (custommoney.Text == "+")
                 {
                     listall.CustomId = 0;
                 }
@@ -548,7 +558,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 reward = temp.rewardamount;
                 if (ListAllTemplate.mount == 10)
                 {
-                    
+
                     CurrentTemplate.id = 41;
                 }
                 else if (ListAllTemplate.mount == 100)
@@ -835,13 +845,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             MemberCenterHelper.ShowFormChangePhoneNumber(CurrentMember);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-
-
         private void pnlPayByOther_Click(object sender, EventArgs e)
         {
 
@@ -852,15 +855,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     string numb = custommoney.Text.Replace("元", "");
                     ListAllTemplate.mount = int.Parse(numb);
                 }
-                
+
 
                 FormOtherMethod pay = new FormOtherMethod();
-                asf.AutoScaleControlTest(pay, 500, 250, 500 * MainModel.midScale, 250 * MainModel.midScale, true);
+                asf.AutoScaleControlTest(pay, 500, 197, 500 * MainModel.midScale, 197 * MainModel.midScale, true);
                 pay.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pay.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pay.Height) / 2);
                 pay.TopMost = true;
                 BackHelper.ShowFormBackGround();
                 //BackHelper.HideFormBackGround();
-                
+
                 pay.ShowDialog();
                 pay.Dispose();
                 pay.Close();
@@ -915,8 +918,105 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 BackHelper.HideFormBackGround();
                 throw;
             }
+        }
 
+        //绑卡
+        private void btnbang_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string entityCardNo = NumberHelper.ShowFormNumber("输入实体卡号", NumberType.BindingEntryCard);
+                if (!string.IsNullOrEmpty(entityCardNo))
+                {
+                    string err = "";
+                    LoadingHelper.ShowLoadingScreen();
+                    bool flag = membercenterutil.ApplyCard(CurrentMember.memberheaderresponsevo.mobile, entityCardNo, ref err);
+                    LoadingHelper.CloseForm();
+                    if (flag)
+                    {
+                        try
+                        {
+                            Member member = httputil.GetMember(CurrentMember.memberheaderresponsevo.mobile, ref err);
+                            MainModel.CurrentMember = member;
+                        }
+                        catch (Exception ex)
+                        {
+                            LogManager.WriteLog("ERROR", "获取会员信息异常:" + ex.Message);
+                            MainModel.CurrentMember.memberentitycardresponsevo.cardid = entityCardNo;
+                        }
 
+                        MainModel.ShowLog("绑卡成功", true);
+                        DisplayEntityCard();
+                        MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
+                    }
+                    else
+                    {
+                        MainModel.ShowLog("绑卡失败：" + err, true);
+                    }
+
+                    //先注释，之后绑卡、关联旧卡改版
+                    //EntityCard entityCard = membercenterutil.GetCard(entityCardNo, ref err);
+                    //if (entityCard != null)
+                    //{
+                    //    EntityCardMoveRequest entityCardMoveRequest = new EntityCardMoveRequest();
+                    //    entityCardMoveRequest.memberid = CurrentMember.memberid;
+                    //    entityCardMoveRequest.phone = CurrentMember.memberheaderresponsevo.mobile;
+                    //    entityCardMoveRequest.oldentitycardnumber = entityCardNo;
+                    //    bool flag = membercenterutil.EntityCardMove(entityCardMoveRequest, ref err);
+                    //    if (flag)
+                    //    {
+                    //        MainModel.ShowLog("绑卡成功", true);
+                    //        return;
+                    //    }
+                    //    else
+                    //    {
+                    //        MainModel.ShowLog("绑卡失败：" + err, true);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    MainModel.ShowLog("获取实体卡失败：" + err, true);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("ERROR", "绑定实体卡异常:" + ex.Message);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
+            }
+        }
+
+        private void btnLoss_Click(object sender, EventArgs e)
+        {
+            bool flag = MemberCenterHelper.ShowFormLoss(CurrentMember.memberheaderresponsevo.mobile);
+            if (flag)
+            {
+                DisplayEntityCard();
+            }
+        }
+
+        private void DisplayEntityCard()
+        {
+            if (MainModel.CurrentMember.memberentitycardresponsevo == null)
+            {
+                return;
+            }
+            string encCardId = MainModel.CurrentMember.memberentitycardresponsevo.cardid;
+            if (!string.IsNullOrEmpty(encCardId))
+            {
+                if (encCardId.Length > 7)
+                {
+                    encCardId = encCardId.Substring(0, 3) + "".PadLeft(encCardId.Length - 7, '*') + encCardId.Substring(encCardId.Length - 4);
+                }
+                lblEntityNo.Text = encCardId;
+                lblEntityNo.Visible = true;
+                btnbang.Visible = false;
+                btnLoss.Visible = true;
+                //btnRelation.Visible = true;
+            }
         }
     }
 }

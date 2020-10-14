@@ -61,9 +61,11 @@
             this.custom = new System.Windows.Forms.Panel();
             this.customdiscount = new System.Windows.Forms.Label();
             this.custommoney = new System.Windows.Forms.Label();
+            this.lblEntityNo = new System.Windows.Forms.Label();
             this.newphone = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnguan = new System.Windows.Forms.Button();
+            this.btnRelation = new System.Windows.Forms.Button();
+            this.btnLoss = new System.Windows.Forms.Button();
             this.btnbang = new System.Windows.Forms.Button();
             this.btnChangePhone = new System.Windows.Forms.Button();
             this.pnlItem = new System.Windows.Forms.Panel();
@@ -415,9 +417,11 @@
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.custom);
+            this.panel1.Controls.Add(this.lblEntityNo);
             this.panel1.Controls.Add(this.newphone);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.btnguan);
+            this.panel1.Controls.Add(this.btnRelation);
+            this.panel1.Controls.Add(this.btnLoss);
             this.panel1.Controls.Add(this.btnbang);
             this.panel1.Controls.Add(this.btnChangePhone);
             this.panel1.Controls.Add(this.pnlItem);
@@ -445,7 +449,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(460, 650);
             this.panel1.TabIndex = 38;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // custom
             // 
@@ -482,6 +485,19 @@
             this.custommoney.Text = "+";
             this.custommoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblEntityNo
+            // 
+            this.lblEntityNo.AutoSize = true;
+            this.lblEntityNo.BackColor = System.Drawing.Color.Transparent;
+            this.lblEntityNo.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblEntityNo.ForeColor = System.Drawing.Color.White;
+            this.lblEntityNo.Location = new System.Drawing.Point(172, 515);
+            this.lblEntityNo.Name = "lblEntityNo";
+            this.lblEntityNo.Size = new System.Drawing.Size(78, 23);
+            this.lblEntityNo.TabIndex = 79;
+            this.lblEntityNo.Text = "实体卡号";
+            this.lblEntityNo.Visible = false;
+            // 
             // newphone
             // 
             this.newphone.AutoSize = true;
@@ -508,24 +524,44 @@
             this.label4.Text = "账号已合并至：";
             this.label4.Visible = false;
             // 
-            // btnguan
+            // btnRelation
             // 
-            this.btnguan.BackColor = System.Drawing.Color.Transparent;
-            this.btnguan.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnguan.BackgroundImage")));
-            this.btnguan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnguan.FlatAppearance.BorderSize = 0;
-            this.btnguan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnguan.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnguan.ForeColor = System.Drawing.Color.White;
-            this.btnguan.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnguan.Location = new System.Drawing.Point(175, 585);
-            this.btnguan.Name = "btnguan";
-            this.btnguan.Size = new System.Drawing.Size(100, 40);
-            this.btnguan.TabIndex = 77;
-            this.btnguan.Text = "关联旧卡";
-            this.btnguan.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnguan.UseVisualStyleBackColor = false;
-            this.btnguan.Visible = false;
+            this.btnRelation.BackColor = System.Drawing.Color.Transparent;
+            this.btnRelation.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRelation.BackgroundImage")));
+            this.btnRelation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRelation.FlatAppearance.BorderSize = 0;
+            this.btnRelation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRelation.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnRelation.ForeColor = System.Drawing.Color.White;
+            this.btnRelation.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnRelation.Location = new System.Drawing.Point(292, 572);
+            this.btnRelation.Name = "btnRelation";
+            this.btnRelation.Size = new System.Drawing.Size(100, 40);
+            this.btnRelation.TabIndex = 76;
+            this.btnRelation.Text = "关联旧卡";
+            this.btnRelation.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnRelation.UseVisualStyleBackColor = false;
+            this.btnRelation.Visible = false;
+            // 
+            // btnLoss
+            // 
+            this.btnLoss.BackColor = System.Drawing.Color.Transparent;
+            this.btnLoss.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoss.BackgroundImage")));
+            this.btnLoss.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoss.FlatAppearance.BorderSize = 0;
+            this.btnLoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoss.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnLoss.ForeColor = System.Drawing.Color.White;
+            this.btnLoss.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnLoss.Location = new System.Drawing.Point(175, 572);
+            this.btnLoss.Name = "btnLoss";
+            this.btnLoss.Size = new System.Drawing.Size(100, 40);
+            this.btnLoss.TabIndex = 76;
+            this.btnLoss.Text = "挂失";
+            this.btnLoss.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnLoss.UseVisualStyleBackColor = false;
+            this.btnLoss.Visible = false;
+            this.btnLoss.Click += new System.EventHandler(this.btnLoss_Click);
             // 
             // btnbang
             // 
@@ -537,14 +573,14 @@
             this.btnbang.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnbang.ForeColor = System.Drawing.Color.White;
             this.btnbang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnbang.Location = new System.Drawing.Point(175, 515);
+            this.btnbang.Location = new System.Drawing.Point(175, 509);
             this.btnbang.Name = "btnbang";
             this.btnbang.Size = new System.Drawing.Size(100, 40);
             this.btnbang.TabIndex = 76;
             this.btnbang.Text = "绑定";
             this.btnbang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnbang.UseVisualStyleBackColor = false;
-            this.btnbang.Visible = false;
+            this.btnbang.Click += new System.EventHandler(this.btnbang_Click);
             // 
             // btnChangePhone
             // 
@@ -706,7 +742,7 @@
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(69, 521);
+            this.label11.Location = new System.Drawing.Point(69, 515);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(88, 25);
             this.label11.TabIndex = 66;
@@ -718,7 +754,7 @@
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox5.Location = new System.Drawing.Point(33, 516);
+            this.pictureBox5.Location = new System.Drawing.Point(33, 510);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(30, 30);
             this.pictureBox5.TabIndex = 65;
@@ -975,7 +1011,6 @@
         private System.Windows.Forms.Panel pnlCoupon;
         private System.Windows.Forms.Button btnChangePhone;
         private System.Windows.Forms.Button btnbang;
-        private System.Windows.Forms.Button btnguan;
         private System.Windows.Forms.Label newphone;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label11;
@@ -985,5 +1020,8 @@
         private System.Windows.Forms.Panel pnlPayByOther;
         private System.Windows.Forms.Label lblPayByOther;
         private System.Windows.Forms.PictureBox picPayByOther;
+        private System.Windows.Forms.Button btnRelation;
+        private System.Windows.Forms.Button btnLoss;
+        private System.Windows.Forms.Label lblEntityNo;
     }
 }

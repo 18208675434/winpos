@@ -239,5 +239,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch { }
         }
 
+        public static void UpdateEntityCardInfo(string entityCardNo)
+        {
+            if (frmmembermedia != null && HaveMedia)
+            {
+                frmmembermedia.UpdateEntityCardInfo(entityCardNo);
+            }
+        }
+
     }
 }

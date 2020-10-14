@@ -99,6 +99,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 pnlLine7.Height = 1;
                 pnlLine8.Height = 1;
                 pnlLine9.Height = 1;
+                pnlLine10.Height = 1;
 
                 lblDeviceSN.Text = "设备号:" + MainModel.DeviceSN;
                 lblVersion.Text = "版本号:" + MainModel.Version;
@@ -132,6 +133,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             this.Hide(); //this.Close();
         }
+
+        private void pnlBatchSaleCard_Click(object sender, EventArgs e)
+        {
+            if (DataReceiveHandle != null)
+                this.DataReceiveHandle.BeginInvoke(ToolType.BatchSaleCard, null, null);
+
+            this.Hide(); //this.Close();
+    }
+
+        private void pnlRechargeQuery_Click(object sender, EventArgs e)
+        {
+            if (DataReceiveHandle != null)
+                this.DataReceiveHandle.BeginInvoke(ToolType.RechangeQuery, null, null);
+
+            this.Hide(); //this.Close();
+        }
     }
 
     public enum ToolType
@@ -146,6 +163,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         PrintSet,
         ScaleModel,
         Broken,
+        BatchSaleCard,
+        RechangeQuery,
         ReturnWithoutOrder
     }
 }

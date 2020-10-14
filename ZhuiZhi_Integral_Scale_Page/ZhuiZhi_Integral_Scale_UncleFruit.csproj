@@ -65,15 +65,15 @@
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\Lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\ChnCharInfo.dll</HintPath>
+      <HintPath>..\Lib\ChnCharInfo.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\Newtonsoft.Json.Compact.dll</HintPath>
+      <HintPath>..\Lib\Newtonsoft.Json.Compact.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -89,10 +89,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\1\Desktop\ThoughtWorks.QRCode.dll</HintPath>
+      <HintPath>..\Lib\ThoughtWorks.QRCode.dll</HintPath>
     </Reference>
     <Reference Include="WzLib">
-      <HintPath>C:\Users\15216\Desktop\好例子网_TransparentPicture\TransparentPicture\Backup\TransparentPicture\bin\Debug\WzLib.dll</HintPath>
+      <HintPath>..\Lib\WzLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +122,38 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseUI\MainHelper.cs" />
+    <Compile Include="MemberCenter\LossEntityCardMediaHelper.cs" />
+    <Compile Include="MemberCenter\FormBatchSaleCardCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormBatchSaleCardCreate.Designer.cs">
+      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormLossEntityCardMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormLossEntityCardMedia.Designer.cs">
+      <DependentUpon>FormLossEntityCardMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormLossEntityCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormLossEntityCard.Designer.cs">
+      <DependentUpon>FormLossEntityCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSingleUserQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSingleUserQuery.Designer.cs">
+      <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeQuery.Designer.cs">
+      <DependentUpon>FormRechargeQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\model\Card.cs" />
     <Compile Include="BrokenUI\BrokenHelper.cs" />
     <Compile Include="BrokenUI\FormBroken.cs">
       <SubType>Form</SubType>
@@ -433,12 +465,6 @@
     <Compile Include="MemberCenter\FormTopUp.Designer.cs">
       <DependentUpon>FormTopUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormTopUpQuery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormTopUpQuery.Designer.cs">
-      <DependentUpon>FormTopUpQuery.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberCenter\FormAllCoupon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -457,6 +483,12 @@
     <Compile Include="MemberCenter\FormZsongMoney.Designer.cs">
       <DependentUpon>FormZsongMoney.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormRechargeRefund.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeRefund.designer.cs">
+      <DependentUpon>FormRechargeRefund.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\MemberCenterHelper.cs" />
     <Compile Include="MemberCenter\MemberCenterHttpUtil.cs" />
     <Compile Include="MemberCenter\MemberCenterMediaHelper.cs" />
@@ -464,12 +496,16 @@
     <Compile Include="MemberCenter\model\BalanceDepositRefundRequest .cs" />
     <Compile Include="MemberCenter\model\ClassPayment.cs" />
     <Compile Include="MemberCenter\model\CustomTemplateModel.cs" />
+    <Compile Include="MemberCenter\model\DepositRefundRequest.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
+    <Compile Include="MemberCenter\model\EntityCard.cs" />
+    <Compile Include="MemberCenter\model\EntityCardMoveRequest.cs" />
     <Compile Include="MemberCenter\model\GetBalanceDepositRefund.cs" />
     <Compile Include="MemberCenter\model\ListAllTemplate.cs" />
     <Compile Include="MemberCenter\model\CreateMemberPara.cs" />
     <Compile Include="MemberCenter\model\MemberTopUpPara.cs" />
     <Compile Include="MemberCenter\model\PageBalanceDepositBill.cs" />
+    <Compile Include="MemberCenter\model\PageBalanceDepositRefundBill.cs" />
     <Compile Include="MemberCenter\model\PageGetRefund.cs" />
     <Compile Include="MemberCenter\model\TopUpPrint.cs" />
     <Compile Include="MemberCenter\model\ZtBalanceAccount.cs" />
@@ -1175,6 +1211,21 @@
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormBatchSaleCardCreate.resx">
+      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormLossEntityCardMedia.resx">
+      <DependentUpon>FormLossEntityCardMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormLossEntityCard.resx">
+      <DependentUpon>FormLossEntityCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeSingleUserQuery.resx">
+      <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeQuery.resx">
+      <DependentUpon>FormRechargeQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BrokenUI\FormBroken.resx">
       <DependentUpon>FormBroken.cs</DependentUpon>
     </EmbeddedResource>
@@ -1313,9 +1364,6 @@
     <EmbeddedResource Include="MemberCenter\FormTopUp.resx">
       <DependentUpon>FormTopUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormTopUpQuery.resx">
-      <DependentUpon>FormTopUpQuery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormAllCoupon.resx">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
     </EmbeddedResource>
@@ -1324,6 +1372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormZsongMoney.resx">
       <DependentUpon>FormZsongMoney.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeRefund.resx">
+      <DependentUpon>FormRechargeRefund.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormCouponPwd.resx">
       <DependentUpon>FormCouponPwd.cs</DependentUpon>
@@ -1378,6 +1429,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReturnWithoutOrder\FormCheckSmCode.resx">
       <DependentUpon>FormCheckSmCode.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ReturnWithoutOrder\FormReturnCashOrBalance.resx">
       <DependentUpon>FormReturnCashOrBalance.cs</DependentUpon>
@@ -1631,6 +1683,13 @@
     <Content Include="Picture\icon_wan.png" />
     <Content Include="Picture\rounblue.png" />
     <Content Include="Picture\关闭.png" />
+    <None Include="Resources\delete.Image.png" />
+    <None Include="Resources\picDown.png" />
+    <None Include="Resources\picCircular.png" />
+    <None Include="Resources\card.png" />
+    <None Include="Resources\phone.png" />
+    <None Include="Resources\validatecode.png" />
+    <None Include="Resources\losscard.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />
@@ -1675,6 +1734,24 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+    <COMReference Include="MediaPlayer">
+      <Guid>{22D6F304-B0F6-11D0-94AB-0080C74C7E95}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="WMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -1714,9 +1791,6 @@
       <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
       <Name>Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
