@@ -7,7 +7,7 @@ using System.Text;
 namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 {
     /// <summary>
-    /// 顶尖电子秤
+    /// 爱宝电子秤
     /// </summary>
     public class Scale_Aclas : Scale_Action
     {
@@ -117,7 +117,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "顶尖设备无此功能";
+            result.Message = "爱宝设备无此功能";
             return result;
         }
 
@@ -149,7 +149,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "顶尖设备无此功能";
+            result.Message = "爱宝设备无此功能";
             return result;
         }
 

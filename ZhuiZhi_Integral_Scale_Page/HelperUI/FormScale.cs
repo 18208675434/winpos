@@ -182,7 +182,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     pnlTare.Visible = true;
                 }
-                else if (ScaleName == ScaleType.顶尖.ToString())
+                else if (ScaleName == ScaleType.爱宝.ToString())
                 {
                     pnlTare.Visible = false;
                 }
@@ -190,7 +190,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     pnlTare.Visible = true;
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     pnlTare.Visible = false;
                 }

@@ -88,9 +88,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                        currentscaletype = ScaleType.中科英泰;
                        scaleaction = new Scale_Wintec();
                    }
-                   else if (ScaleName == ScaleType.顶尖.ToString())
+                   else if (ScaleName == ScaleType.爱宝.ToString())
                    {
-                       currentscaletype = ScaleType.顶尖;
+                       currentscaletype = ScaleType.爱宝;
                        scaleaction = new Scale_Aclas();
                    }
                    else if (ScaleName == ScaleType.托利多.ToString())
@@ -98,9 +98,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                        currentscaletype = ScaleType.托利多;
                        scaleaction = new Scale_Toledo();
                    }
-                   else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                   else if (ScaleName == ScaleType.易捷通.ToString())
                    {
-                       currentscaletype = ScaleType.顶尖PS1X;
+                       currentscaletype = ScaleType.易捷通;
                        scaleaction = new Scale_Aclas_PS1X();
                    }
                    else if (ScaleName == ScaleType.易衡.ToString())
@@ -262,12 +262,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
        //不能用string 接收   否则没有连接秤的情况下会
        [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
        private static extern byte __GetWeight();
-       //顶尖电子秤未连接成功  或者没有电子秤 读取重量会直接退出  此函数判断是否顶尖电子秤或者是否打开
+       //爱宝电子秤未连接成功  或者没有电子秤 读取重量会直接退出  此函数判断是否爱宝电子秤或者是否打开
        private static bool AscalOK()
        {
            try
            {
-               if (currentscaletype != ScaleType.顶尖)
+               if (currentscaletype != ScaleType.爱宝)
                {
                    return true;
                }
@@ -308,8 +308,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         未指定,
         中科英泰,
         托利多,
-        顶尖,
-        顶尖PS1X,
+        爱宝,
+        易捷通,
         易衡
     }
 }

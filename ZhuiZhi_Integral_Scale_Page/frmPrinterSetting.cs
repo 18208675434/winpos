@@ -515,8 +515,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 //ScaleFactory.ScaleFactory.Close();
 
             }
-                //顶尖 电子秤端口COM2  波特率9600
-            else if (scalename == ScaleType.顶尖.ToString())
+                //爱宝 电子秤端口COM2  波特率9600
+            else if (scalename == ScaleType.爱宝.ToString())
             {
                 string comno = "COM1";
                 int baud = 9600;
@@ -527,7 +527,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ScaleFactory.ScaleGlobalHelper.IniScale(true);
                 ScaleFactory.ScaleGlobalHelper.Open(comno, baud);
             }
-            else if(scalename==ScaleType.顶尖PS1X.ToString())
+            else if(scalename==ScaleType.易捷通.ToString())
             {
                 string comno = "COM1";
                 int baud = 9600;
@@ -649,7 +649,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
+                GlobalUtil.ShowKeyBoard(this); //GlobalUtil.OpenOSK();
                 txt.Focus();
             }
             catch (Exception ex)

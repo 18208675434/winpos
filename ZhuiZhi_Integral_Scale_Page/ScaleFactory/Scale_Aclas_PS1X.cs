@@ -1,5 +1,5 @@
 ﻿/*
- * 果叔 易捷通—顶尖ps1X 设备   串口外接
+ * 果叔 易捷通—爱宝ps1X 设备   串口外接
  * 
  * pa1dll 创建对象和释放对象必须一对一执行，否则会无法使用 ！！！！！
  * 
@@ -81,7 +81,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             }
         }
 
-        // 顶尖PS1X  没有稳定状态 根据时间判断 ，连续三次获取重量一致则判定为稳定
+        // 易捷通  没有稳定状态 根据时间判断 ，连续三次获取重量一致则判定为稳定
         public decimal lastweight = 0;
         public int OKnum = 0;
         /// <summary>
@@ -109,7 +109,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                 //result.WhetherStable = weight == weight2;
 
                 result.WhetherStable = true;
-                weight = weight.Replace("k", "").Replace("g", "").Replace("K", "").Replace("G", "").Replace(" ", "").Trim();  //顶尖PS1X 返回信息有KG 需要过滤   重量为负值时 -号后面有空格也需要过滤
+                weight = weight.Replace("k", "").Replace("g", "").Replace("K", "").Replace("G", "").Replace(" ", "").Trim();  //易捷通 返回信息有KG 需要过滤   重量为负值时 -号后面有空格也需要过滤
                 result.NetWeight = Math.Round(Convert.ToDecimal(weight), 3);
                 result.TareWeight = 0; //无皮重信息 默认给0值
                 result.TotalWeight = result.NetWeight + result.TareWeight;
@@ -151,7 +151,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "顶尖设备无此功能";
+            result.Message = "爱宝设备无此功能";
             return result;
         }
 
@@ -178,7 +178,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "顶尖设备无此功能";
+            result.Message = "爱宝设备无此功能";
             return result;
         }
 

@@ -30,7 +30,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return ToledoPrintUtil.PrintOrder(printdetail,isRefound,ref errormsg);
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     return SprtPrintUtil.PrintOrder(printdetail, isRefound, ref errormsg);
                 }
@@ -57,7 +57,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return ToledoPrintUtil.ReceiptPrint(receipt, ref errormsg);
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     return SprtPrintUtil.ReceiptPrint(receipt, ref errormsg);
                 }
@@ -84,7 +84,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return ToledoPrintUtil.PrintBroken(brokenresult, ref errormsg);
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     return SprtPrintUtil.PrintBroken(brokenresult, ref errormsg);
                 }
@@ -114,7 +114,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     ToledoPrintUtil.OpenCashDrawerEx();
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     SprtPrintUtil.OpenCashDrawerEx();
                 }
@@ -137,7 +137,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                      ToledoPrintUtil.PrintTopUp(depositbillid);
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     SprtPrintUtil.PrintTopUp(depositbillid);
                 }
@@ -164,7 +164,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return ToledoPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     return SprtPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
                 }
@@ -194,7 +194,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     return ToledoPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
                 }
-                else if (ScaleName == ScaleType.顶尖PS1X.ToString())
+                else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     return SprtPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
                 }

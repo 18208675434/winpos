@@ -195,5 +195,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             IsEnable = true;
         }
 
+        private void btnCountDown_Click(object sender, EventArgs e)
+        {
+            IsEnable = false;
+            string errormsg = "";
+            string sendmsg = "";
+
+            if (httputil.SendSmsCode(CurrentPhone, "", "", ref errormsg))
+            {
+                timerCountDown.Enabled = true;
+            }
+            else
+            {
+                MainModel.ShowLog(errormsg,false);
+            }
+            IsEnable = true;
+        }
+
     }
 }

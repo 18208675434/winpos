@@ -56,6 +56,7 @@
             this.btnCountDown.TabIndex = 47;
             this.btnCountDown.Text = "重新发送(60)";
             this.btnCountDown.UseVisualStyleBackColor = true;
+            this.btnCountDown.Click += new System.EventHandler(this.btnCountDown_Click);
             // 
             // btnPassW6
             // 

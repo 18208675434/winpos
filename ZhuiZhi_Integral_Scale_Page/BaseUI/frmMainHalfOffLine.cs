@@ -3937,7 +3937,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     pnlScale.Width = lblTareWeightStr.Left * 2; 
                     pnlScale.Left = pnlCategory.Width - pnlScale.Width - 5;
                 }
-                else if (ScaleName == ScaleType.顶尖.ToString() || ScaleName==ScaleType.顶尖PS1X.ToString() || ScaleName==ScaleType.易衡.ToString())
+                else if (ScaleName == ScaleType.爱宝.ToString() || ScaleName==ScaleType.易捷通.ToString() || ScaleName==ScaleType.易衡.ToString())
                 {
                     pnlScale.Width = lblTareWeightStr.Left; 
                     pnlScale.Left = pnlCategory.Width - pnlScale.Width - 5;
@@ -4175,7 +4175,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
         decimal LastNetWeight = 0;
-        //顶尖秤 必须放到线程 否则会影响键盘按钮监听事件
+        //爱宝秤 必须放到线程 否则会影响键盘按钮监听事件
         private void ScaleThread(object obj)
         {
             while (IsRun)

@@ -308,7 +308,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void lblPhoneShuiyin_Click(object sender, EventArgs e)
         {
 
-            GlobalUtil.OpenOSK();
+            GlobalUtil.ShowKeyBoard(this);// GlobalUtil.OpenOSK();
             Delay.Start(100);
             this.Activate();
             lblPhoneShuiyin.Focus();
@@ -456,13 +456,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-
         private void txt_OskClick(object sender, EventArgs e)
         {
             try
             {
                 TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
+                GlobalUtil.ShowKeyBoard(this);// GlobalUtil.OpenOSK();
 
 
                 Delay.Start(100);
