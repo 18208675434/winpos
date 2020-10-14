@@ -89,7 +89,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\ThoughtWorks.QRCode.dll</HintPath>
+      <HintPath>C:\Users\1\Desktop\ThoughtWorks.QRCode.dll</HintPath>
     </Reference>
     <Reference Include="WzLib">
       <HintPath>C:\Users\15216\Desktop\好例子网_TransparentPicture\TransparentPicture\Backup\TransparentPicture\bin\Debug\WzLib.dll</HintPath>
@@ -1714,6 +1714,9 @@
       <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

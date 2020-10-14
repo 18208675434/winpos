@@ -31,7 +31,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             charge.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - charge.Width) / 2, (Screen.AllScreens[0].Bounds.Height - charge.Height) / 2);
             charge.TopMost = true;
 
-            this.Close();
+            this.Hide();
             charge.ShowDialog();
             charge.Dispose();
             charge.Close();
@@ -56,7 +56,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             zeng.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - zeng.Width) / 2, (Screen.AllScreens[0].Bounds.Height - zeng.Height) / 2);
             zeng.TopMost = true;
 
-            this.Close();
+            this.Hide();
             zeng.ShowDialog();
             zeng.Dispose();
             zeng.Close();

@@ -330,6 +330,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     if (CurrentTemplate == null && template.enabled == true)
                     {
                         CurrentTemplate = template;
+                        ListAllTemplate.mount = CurrentTemplate.amount;
                     }
                     int num = template.id;
 
@@ -854,7 +855,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 
 
                 FormOtherMethod pay = new FormOtherMethod();
-                asf.AutoScaleControlTest(pay, 500, 197, 500 * MainModel.midScale, 197 * MainModel.midScale, true);
+                asf.AutoScaleControlTest(pay, 500, 250, 500 * MainModel.midScale, 250 * MainModel.midScale, true);
                 pay.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pay.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pay.Height) / 2);
                 pay.TopMost = true;
                 BackHelper.ShowFormBackGround();

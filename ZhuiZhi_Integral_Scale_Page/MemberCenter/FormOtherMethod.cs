@@ -35,8 +35,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     if (current != null && pay.id == current.id)
                     {
 
-                        btnzffs.ForeColor = Color.Black;
-                        btnzffs.BackColor = Color.FromArgb(0, 122, 204); ;
+                        btnzffs.ForeColor = Color.White;
+                        btnzffs.BackColor = Color.Blue;
                     }
                     else
                     {
@@ -49,7 +49,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 else
                 {
                     btnzffs.ForeColor = Color.White;
-                    btnzffs.BackColor = Color.FromArgb(0, 122, 204);
+                    btnzffs.BackColor = Color.Blue;
                 }
 
                 btnzffs.Text = pay.name;
@@ -159,7 +159,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     remm.TopMost = true;
                     BackHelper.ShowFormBackGround();
                     //BackHelper.HideFormBackGround();
-                    this.Close();
+                    this.Hide();
                     remm.ShowDialog();
                     if (MainModel.isokcancle == true)
                     {
