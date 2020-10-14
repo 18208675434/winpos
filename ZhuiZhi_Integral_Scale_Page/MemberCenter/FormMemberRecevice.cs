@@ -31,7 +31,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         
         public void GetNewPhone()
         {
+            
             txtOldCardNumber.Text = MainModel.NewPhone;
+
         }
        
         private void btOldCardOK_Click(object sender, EventArgs e)
@@ -41,10 +43,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             string ErrorMsgMember= "";
             MainModel.NewPhone =  txtOldCardNumber.Text;
-            txtOldCardNumber.Text = MainModel.UpdatePhone;
+           // txtOldCardNumber.Text = MainModel.UpdatePhone;
             HttpUtil httputil = new HttpUtil();
             MemberCenterHelper.member = httputil.GetMember(MainModel.NewPhone, ref ErrorMsgMember);
-            FormChangePhoneNumber con = new FormChangePhoneNumber(MemberCenterHelper.member);
 
             if (MemberCenterHelper.member == null)
             {
@@ -68,9 +69,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
 
-                    string number = txtOldCardNumber.Text;
+                    MainModel.NewPhone = txtOldCardNumber.Text;
 
-                    con.GetPhone(number);
+                    
                     BackHelper.HideFormBackGround();
                     this.Close();
 

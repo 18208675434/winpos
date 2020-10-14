@@ -30,7 +30,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     outputmoney.Text += "1";
                     int zeng = int.Parse(outputmoney.Text);
                     int name = zeng / 10;
-                    label3.Text = "赠送" + name + ".00元";
+                    label3.Text = "赠" + name + ".00元";
                     label3.Visible = true;
 
                 }
@@ -39,7 +39,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     outputmoney.Text += "1";
                     int zeng = int.Parse(outputmoney.Text);
                     int name = zeng / 10;
-                    label3.Text = "赠送" + name + ".00元";
+                    label3.Text = "赠" + name + ".00元";
                     label3.Visible = true;
 
 
@@ -49,7 +49,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     outputmoney.Text += "1";
                     int zeng = int.Parse(outputmoney.Text);
                     int name = zeng / 10;
-                    label3.Text = "赠送" + name + ".00元";
+                    label3.Text = "赠" + name + ".00元";
                     label3.Visible = true;
 
 
@@ -81,7 +81,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -91,7 +91,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
 
@@ -102,7 +102,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -130,7 +130,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 outputmoney.Text += "3";
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -139,7 +139,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 outputmoney.Text += "3";
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
 
@@ -149,7 +149,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 outputmoney.Text += "3";
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
 
@@ -172,7 +172,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -182,7 +182,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
 
@@ -193,7 +193,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
 
@@ -216,7 +216,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -226,7 +226,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -236,7 +236,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -258,7 +258,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text.Length == 2)
@@ -267,7 +267,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -277,7 +277,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -299,7 +299,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text.Length == 2)
@@ -308,7 +308,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -318,7 +318,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -340,7 +340,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text.Length == 2)
@@ -349,7 +349,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text.Length == 1)
@@ -358,7 +358,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text == "")
@@ -379,7 +379,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text.Length == 2)
@@ -388,7 +388,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -398,7 +398,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -420,7 +420,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text.Length == 2)
@@ -429,7 +429,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -439,7 +439,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -463,7 +463,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng =int.Parse( outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
             }
             else if (outputmoney.Text.Length == 2)
@@ -472,7 +472,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -482,7 +482,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 int zeng = int.Parse(outputmoney.Text);
                 int name = zeng / 10;
-                label3.Text = "赠送" + name + ".00元";
+                label3.Text = "赠" + name + ".00元";
                 label3.Visible = true;
 
             }
@@ -516,14 +516,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     int zeng = int.Parse(outputmoney.Text);
                     int name = zeng / 10;
-                    label3.Text = "赠送" + name + ".00元";
+                    label3.Text = "赠" + name + ".00元";
                     label3.Visible = true;
                 }
                 else if (outputmoney.Text.Length == 2)
                 {
                     int zeng = int.Parse(outputmoney.Text);
                     int name = zeng / 10;
-                    label3.Text = "赠送" + name + ".00元";
+                    label3.Text = "赠" + name + ".00元";
                     label3.Visible = true;
 
                 }
@@ -531,7 +531,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     int zeng = int.Parse(outputmoney.Text);
                     int name = zeng / 10;
-                    label3.Text = "赠送" + name + ".00元";
+                    label3.Text = "赠" + name + ".00元";
                     label3.Visible = true;
 
                 }

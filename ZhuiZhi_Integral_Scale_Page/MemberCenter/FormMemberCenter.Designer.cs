@@ -569,7 +569,7 @@
             this.pnlItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlItem.Controls.Add(this.lblAmountStr);
             this.pnlItem.Controls.Add(this.lblAmount);
-            this.pnlItem.Location = new System.Drawing.Point(260, 248);
+            this.pnlItem.Location = new System.Drawing.Point(260, -248);
             this.pnlItem.Name = "pnlItem";
             this.pnlItem.Size = new System.Drawing.Size(200, 100);
             this.pnlItem.TabIndex = 55;

@@ -4420,11 +4420,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        private void rbtnPay_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
 
     }

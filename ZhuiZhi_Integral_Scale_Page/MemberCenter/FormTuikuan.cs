@@ -15,6 +15,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormTuikuan : Form
     {
+        DepositListRequest list = new DepositListRequest();
+
         public FormTuikuan()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "1";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text+ "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text+ "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -46,7 +48,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "2";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -62,7 +64,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "3";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -78,7 +80,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "4";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -94,7 +96,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "5";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -110,7 +112,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "6";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -126,7 +128,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "7";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -142,7 +144,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "8";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -158,7 +160,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "9";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -174,7 +176,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += ".";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true;
 
@@ -190,7 +192,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length <= 4)
             {
                 txttuikuan.Text += "0";
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
                 Kouchu.Visible = true ;
 
@@ -206,7 +208,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (txttuikuan.Text.Length > 0)
             {
                 txttuikuan.Text = txttuikuan.Text.Substring(0, txttuikuan.Text.Length - 1);
-                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠送金额)";
+                Kouchu.Text = "扣除:￥" + txttuikuan.Text + "+￥1.0(赠金额)";
                 Kouchu.ForeColor = Color.Red;
             }
             else
@@ -257,8 +259,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     this.Close();
                     BackHelper.HideFormBackGround();
+                    MainModel.refundquest = false;
                     MainModel.ShowLog("退款成功", true);
-
                 }
                 else
                 {

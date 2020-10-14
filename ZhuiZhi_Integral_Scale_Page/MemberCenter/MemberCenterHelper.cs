@@ -48,6 +48,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+                
                 BackHelper.ShowFormBackGround();
 
                 FormTopUpByCash frmpaybycash = new FormTopUpByCash(amount);

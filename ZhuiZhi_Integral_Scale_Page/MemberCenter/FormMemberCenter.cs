@@ -18,6 +18,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormMemberCenter : Form
     {
         private HttpUtil httputil = new HttpUtil();
+        PageBalanceDepositBill request = new PageBalanceDepositBill();
+        public static decimal reward = 0;
 
         private Member CurrentMember = null;
 
@@ -156,15 +158,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    
+
                     para.amount = CurrentTemplate.amount;
                     para.memberid = Convert.ToInt64(CurrentMember.memberinformationresponsevo.memberid);
                     para.paymode = "2";
                     para.phone = CurrentMember.memberheaderresponsevo.mobile;
                     para.shopid = MainModel.CurrentShopInfo.shopid;
-                    
+
                 }
-                
+
 
 
                 string errormsg = "";
@@ -217,21 +219,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 if (custommoney.Text != "+")
                 {
-                   
-                   bool cashresult =  MemberCenterHelper.ShowFormTopUpByCash(Convert.ToInt32(ListAllTemplate.mount));
-                   if (cashresult ==false)
-                   {
-                       return;
-                   }
+                    decimal je = Convert.ToDecimal(custommoney.Text.Replace("元", ""));
+                    string zh = customdiscount.Text.Replace("赠", "").Replace("元", "");
+                    decimal zsje = Convert.ToDecimal(zh);
+
+                    bool cashresult = MemberCenterHelper.ShowFormTopUpByCash(Convert.ToInt32(je));
+                    if (cashresult == false)
+                    {
+                        return;
+                    }
                     MemberTopUpPara para = new MemberTopUpPara();
-                    para.amount = Convert.ToInt32(ListAllTemplate.mount);
+                    para.amount = Convert.ToInt32(je);
                     para.memberid = Convert.ToInt64(CurrentMember.memberinformationresponsevo.memberid);
                     para.paymode = "0";
                     para.phone = CurrentMember.memberheaderresponsevo.mobile;
                     para.shopid = MainModel.CurrentShopInfo.shopid;
-                    
 
-                    para.rewardamount = ListAllTemplate.rewardmount;
+
+                    para.rewardamount = zsje;
                     string errormsg = "";
                     long result = httputil.MemberTopUp(para, ref errormsg);
 
@@ -243,17 +248,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         PrintUtil.PrintTopUp(result.ToString());
                         MainModel.refundquest = true;
-
                         TopUpOK();
                     }
                 }
-               
-                else if (MemberCenterHelper.ShowFormTopUpByCash(CurrentTemplate.amount))
+
+                else if (MemberCenterHelper.ShowFormTopUpByCash(ListAllTemplate.mount))
                 {
 
                     MemberTopUpPara para = new MemberTopUpPara();
-                    para.amount = CurrentTemplate.amount;
-                    para.rewardamount = ListAllTemplate.rewardmount;
+                    para.amount = ListAllTemplate.mount;
+                    para.rewardamount = reward;
 
                     para.memberid = Convert.ToInt64(CurrentMember.memberinformationresponsevo.memberid);
                     para.paymode = "0";
@@ -311,7 +315,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     string errormsg = "";
                     LstTemplates = httputil.ListAllTemplate(ref errormsg);
-                    
+
                     if (LstTemplates == null || !string.IsNullOrEmpty(errormsg))
                     {
                         MainModel.ShowLog(errormsg, false);
@@ -327,15 +331,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         CurrentTemplate = template;
                     }
-                    lstbmp.Add(GetItemImg(template));
+                    int num = template.id;
+
+                    if (custommoney.Text != "+")
+                    {
+                        template.id = 0;
+                        lstbmp.Add(GetItemImg(template));
+
+
+                    }
+                    else
+                    {
+                        template.id = num;
+                        lstbmp.Add(GetItemImg(template));
+
+
+
+                    }
                 }
-                ListAllTemplate.mount = CurrentTemplate.amount;
+
                 ListAllTemplate.rewardmount = CurrentTemplate.rewardamount;
                 ListAllTemplate temp = new ListAllTemplate();
-                
-                    
-                    
-              
+
+
+
 
                 //lstbmp.Add((Bitmap)MainModel.GetControlImage(custom));
                 CustomTemplateModel zidingyi = new CustomTemplateModel();
@@ -349,6 +368,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     CustomTemplate = zidingyi;
                     listall.CustomId = CurrentTemplate.id;
                 }
+                else if(custommoney.Text == "+")
+                {
+                    listall.CustomId = 0;
+                }
+                else
+                {
+                    CustomTemplate = zidingyi;
+                    listall.CustomId = CurrentTemplate.id;
+                }
+                temp.id = 0;
 
                 lstbmp.Add(GetCustomImg(listall));
 
@@ -510,12 +539,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     return;
                 }
-                
+
                 ListAllTemplate temp = (ListAllTemplate)selectimg.Tag;
-               
-               
+
+
                 ListAllTemplate.mount = temp.amount;
-              
+                reward = temp.rewardamount;
+                if (ListAllTemplate.mount == 10)
+                {
+                    
+                    CurrentTemplate.id = 41;
+                }
+                else if (ListAllTemplate.mount == 100)
+                {
+                    CurrentTemplate.id = 42;
+                }
+                else if (ListAllTemplate.mount == 1000)
+                {
+                    CurrentTemplate.id = 43;
+                }
                 if (temp.id != 0)
                 {
                     customdiscount.Text = "自定义金额";
@@ -526,6 +568,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     GetCustomImg(temp);
                 }
 
+                if (ListAllTemplate.mount == 10 || ListAllTemplate.mount == 100 || ListAllTemplate.mount == 1000)
+                {
+
+                    customdiscount.Text = "自定义金额";
+                    custommoney.Text = "+";
+                    custommoney.Font = new System.Drawing.Font("微软雅黑", 18, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                    customdiscount.Font = new System.Drawing.Font("微软雅黑", 18, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                    custom.BackColor = Color.White;
+                    custommoney.ForeColor = Color.Blue;
+                    customdiscount.ForeColor = Color.Blue;
+                    temp.able = true;
+                    GetCustomImg(temp);
+                    LoadTemplate(true);
+
+                    return;
+                }
 
                 if (temp.id == 0)
                 {
@@ -534,6 +592,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     asf.AutoScaleControlTest(money, 420, 197, 420 * MainModel.midScale, 197 * MainModel.midScale, true);
                     money.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - money.Width) / 2, (Screen.AllScreens[0].Bounds.Height - money.Height) / 2);
                     money.TopMost = true;
+                    BackHelper.ShowFormBackGround();
+                    //BackHelper.HideFormBackGround();
                     money.ShowDialog();
                     money.Dispose();
                     money.Close();
@@ -547,15 +607,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         GetCustomImg(temp);
                         return;
                     }
-                   
-                    
+
+
                     custommoney.Text = ListAllTemplate.CustomMoney.ToString() + "元";
                     customdiscount.Text = ListAllTemplate.ZengCustomMoney;
                     if (customdiscount.Text == "label3")
                     {
                         ListAllTemplate.enable = true;
-
-                        customdiscount.Text = "赠送0元";
+                        decimal de = Convert.ToDecimal(custommoney.Text.Replace("元", ""));
+                        ListAllTemplate.mount = de;
+                        customdiscount.Text = "赠0元";
                         customdiscount.ForeColor = Color.Blue;
                         customdiscount.Font = new System.Drawing.Font("微软雅黑", 18, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
                         LoadTemplate(true);
@@ -576,16 +637,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     else
                     {
+
+                        listall.CustomId = 41;
+
                         LoadTemplate(true);
                         ListAllTemplate.enable = true;
                         if (custommoney.Text != "+")
                         {
-                            ListAllTemplate.mount = int.Parse(custommoney.Text.Replace("元",""));
+                            ListAllTemplate.mount = int.Parse(custommoney.Text.Replace("元", ""));
 
                         }
                         custom.BackColor = Color.Blue;
                         custommoney.ForeColor = Color.White;
                         customdiscount.ForeColor = Color.White;
+                        pnlItem.BackColor = Color.White;
+                        LoadTemplate(true);
 
                     }
 
@@ -651,6 +717,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
                 CurrentTemplate = null;
+                custommoney.Text = "+";
+                custommoney.ForeColor = Color.Blue;
+                custommoney.Font = new System.Drawing.Font("微软雅黑", 20, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                customdiscount.Text = "自定义金额";
+                customdiscount.ForeColor = Color.Blue;
+                customdiscount.Font = new System.Drawing.Font("微软雅黑", 16, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
                 LoadTemplate(true);
                 LoadBalanceAccount();
 
@@ -767,20 +839,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         }
 
-       
+
 
         private void pnlPayByOther_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
+                if (custommoney.Text != "+")
+                {
+                    string numb = custommoney.Text.Replace("元", "");
+                    ListAllTemplate.mount = int.Parse(numb);
+                }
+                
+
                 FormOtherMethod pay = new FormOtherMethod();
                 asf.AutoScaleControlTest(pay, 500, 197, 500 * MainModel.midScale, 197 * MainModel.midScale, true);
                 pay.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pay.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pay.Height) / 2);
                 pay.TopMost = true;
                 BackHelper.ShowFormBackGround();
                 //BackHelper.HideFormBackGround();
-
+                
                 pay.ShowDialog();
                 pay.Dispose();
                 pay.Close();
@@ -792,7 +871,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     return;
                 }
-                MemberTopUpPara para = new MemberTopUpPara();    
+                MemberTopUpPara para = new MemberTopUpPara();
                 para.amount = ListAllTemplate.mount;
                 para.memberid = Convert.ToInt64(MainModel.memberid);
                 para.customerpaycode = MainModel.code;
@@ -800,8 +879,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 para.paymode = "1";
                 para.phone = MainModel.GetPhone;
                 para.shopid = MainModel.CurrentShopInfo.shopid;
-               
-                para.rewardamount =  MainModel.GetZsje;
+                if (custommoney.Text != "+")
+                {
+                    string zqian = customdiscount.Text.Replace("赠", "").Replace("元", "");
+                    para.rewardamount = Convert.ToDecimal(zqian);
+                }
+                else
+                {
+                    para.rewardamount = reward;
+                }
                 string errormsg = "";
                 long result = httputil.MemberTopUp(para, ref errormsg);
 
@@ -809,8 +895,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     MainModel.ShowLog(errormsg, false);
                     BackHelper.HideFormBackGround();
-                    
-                   
+
+
                 }
                 else
                 {
@@ -828,8 +914,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 BackHelper.HideFormBackGround();
                 throw;
             }
-            
-            
+
+
         }
     }
 }

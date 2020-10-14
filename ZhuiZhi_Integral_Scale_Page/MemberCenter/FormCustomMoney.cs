@@ -30,10 +30,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             asf.AutoScaleControlTest(charge, 390, 450, 390 * MainModel.midScale, 450 * MainModel.midScale, true);
             charge.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - charge.Width) / 2, (Screen.AllScreens[0].Bounds.Height - charge.Height) / 2);
             charge.TopMost = true;
+
+            this.Close();
             charge.ShowDialog();
             charge.Dispose();
             charge.Close();
-            this.Close();
         }
 
         private void pictureCancle_Click(object sender, EventArgs e)
@@ -54,7 +55,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             asf.AutoScaleControlTest(zeng, 380, 470, 380 * MainModel.midScale, 470 * MainModel.midScale, true);
             zeng.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - zeng.Width) / 2, (Screen.AllScreens[0].Bounds.Height - zeng.Height) / 2);
             zeng.TopMost = true;
-           
+
+            this.Close();
             zeng.ShowDialog();
             zeng.Dispose();
             zeng.Close();

@@ -438,13 +438,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 txtPhone.Text = MainModel.GetPhone;
                 para.starttime = getStampByDateTime(dtStart.Value);
                 para.endtime = getStampByDateTime(dtEnd.Value);
-                para.refundable = MainModel.refundquest;
+                //para.refundable = MainModel.refundquest;
                 para.page = CurrentPage;
                 para.size = 6;
 
                 string ErrorMsg = "";
                 CurrentBalanceDepos = httputil.ListDepositbill(para, ref ErrorMsg);
-
+                
 
 
 
@@ -466,17 +466,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 foreach (RowsItem order in CurrentBalanceDepos.rows)
                 {
 
-
+                    //order.refundable = MainModel.refundquest;
                     if (order.refundable == false)
                     {
-                        MainModel.refundquest = order.refundable;
                         btn();
                         dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, btncancle);
 
                     }
                     else
                     {
-                        MainModel.refundquest = order.refundable;
                         load();
                         dgvOrderOnLine.Rows.Add(GetDateTimeByStamp(order.createdat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.id, order.amount.ToString("f2") + "元", order.rewardamount, order.paymodeforapi, caozuo);
 
@@ -696,25 +694,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         }
                     }  
                         
-
-                    
-                    
-                    
-                
-
-
-
-
-
-
-
-                
-
-
-
-
-
-
                 
 
                 dgvOrderOnLine.ClearSelection();
@@ -745,7 +724,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
     }
 }

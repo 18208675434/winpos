@@ -42,6 +42,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         
         private void button2_Click(object sender, EventArgs e)
         {
+            MainModel.isokcancle = false;
+            BackHelper.HideFormBackGround();
             
             this.Close();
             

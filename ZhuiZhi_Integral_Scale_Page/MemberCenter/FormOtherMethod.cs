@@ -34,13 +34,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     if (current != null && pay.id == current.id)
                     {
-                        btnzffs.ForeColor = Color.White;
-                        btnzffs.BackColor = Color.SkyBlue;
+
+                        btnzffs.ForeColor = Color.Black;
+                        btnzffs.BackColor = Color.FromArgb(0, 122, 204); ;
                     }
                     else
                     {
-                        btnzffs.ForeColor = Color.SkyBlue;
                         btnzffs.BackColor = Color.White;
+                        btnzffs.ForeColor = Color.Black;
 
                     }
 
@@ -48,7 +49,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 else
                 {
                     btnzffs.ForeColor = Color.White;
-                    btnzffs.BackColor = Color.SkyBlue;
+                    btnzffs.BackColor = Color.FromArgb(0, 122, 204);
                 }
 
                 btnzffs.Text = pay.name;
@@ -137,7 +138,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     return;
                 }
-
+                 Load1(true);
                 Other.CrearMemory();
                 Image selectimg = (Image)dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
@@ -150,6 +151,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 ListAllTemplate.zhifu = temp.name;
                 if (temp.id != "")
                 {
+                    this.Close();
+
                     FormReminder remm = new FormReminder();
                     asf.AutoScaleControlTest(remm, 520, 170, 520 * MainModel.midScale, 170 * MainModel.midScale, true);
                     remm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - remm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - remm.Height) / 2);
@@ -158,7 +161,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     //BackHelper.HideFormBackGround();
                     this.Close();
                     remm.ShowDialog();
-                    if (remm.DialogResult == DialogResult.Cancel)
+                    if (MainModel.isokcancle == true)
                     {
                         return;
                     }
