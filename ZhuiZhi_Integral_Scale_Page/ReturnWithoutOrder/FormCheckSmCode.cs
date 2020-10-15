@@ -179,6 +179,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 btnCountDown.ForeColor = Color.White;
                 btnCountDown.BackColor = Color.FromArgb(20, 137, 205);
             }
+           
         }
 
         private void FormCheckSmCode_Shown(object sender, EventArgs e)
@@ -197,19 +198,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
         private void btnCountDown_Click(object sender, EventArgs e)
         {
-            IsEnable = false;
-            string errormsg = "";
-            string sendmsg = "";
 
-            if (httputil.SendSmsCode(CurrentPhone, "", "", ref errormsg))
+            if (btnCountDown.Text == "重新发送")
             {
-                timerCountDown.Enabled = true;
+
+                btnCountDown.ForeColor = Color.Gray;
+                btnCountDown.BackColor = Color.White;
+
+                CurrentCountDown = 60;
+                IsEnable = false;
+                string errormsg = "";
+                string sendmsg = "";
+
+                if (httputil.SendSmsCode(CurrentPhone, "", "", ref errormsg))
+                {
+                    timerCountDown.Enabled = true;
+                }
+                else
+                {
+                    MainModel.ShowLog(errormsg, false);
+                }
+                IsEnable = true;
             }
-            else
-            {
-                MainModel.ShowLog(errormsg,false);
-            }
-            IsEnable = true;
+          
         }
 
     }

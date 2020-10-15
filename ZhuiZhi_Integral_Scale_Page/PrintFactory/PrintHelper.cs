@@ -408,8 +408,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
 
 
-
-
         /// <summary>
         /// 获取交班打印信息
         /// </summary>
@@ -420,9 +418,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             List<string> lstPrintStr = new List<string>();
             try
             {
-
-
-
                 lstPrintStr.Add("订单号：" + printdetail.orderid);
                 lstPrintStr.Add("下单时间：" + printdetail.date);
                 lstPrintStr.Add("顾客姓名：" + printdetail.username);

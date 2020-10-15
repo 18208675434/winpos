@@ -28,5 +28,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// 充值方式
         /// </summary>
         public string paymodeforapi { get; set; }
+
+        public string phone { get; set; }
+
+        /// <summary>
+        /// 赠送金额
+        /// </summary>
+        public decimal rewardamount { get; set; }
     }
 }

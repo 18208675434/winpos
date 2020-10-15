@@ -127,7 +127,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
-        public static bool PrintTopUp(string depositbillid)
+        public static bool PrintTopUp(string depositbillid,bool isrefund=false)
         {
             try
             {
@@ -135,15 +135,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
-                     ToledoPrintUtil.PrintTopUp(depositbillid);
+                    ToledoPrintUtil.PrintTopUp(depositbillid, isrefund);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
-                    SprtPrintUtil.PrintTopUp(depositbillid);
+                    SprtPrintUtil.PrintTopUp(depositbillid, isrefund);
                 }
                 else
                 {
-                    YKPrintUtil.PrintTopUp(depositbillid);
+                    YKPrintUtil.PrintTopUp(depositbillid, isrefund);
                 }
 
                 return true;

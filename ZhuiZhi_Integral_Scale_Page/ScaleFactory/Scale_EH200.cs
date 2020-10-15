@@ -85,20 +85,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             {
                 string strresult = CurWeight(ptr);
 
-                LogManager.WriteLog("EH200", "weight:" + strresult);
+               // LogManager.WriteLog("EH200", "weight:" + strresult);
 
                 if (string.IsNullOrEmpty(strresult) || strresult.Length < 14)
                 {
                     return result;
                 }
 
-
                 result.WhetherStable = strresult.Substring(0, 1) == "1";
 
                     result.NetWeight =Convert.ToDecimal( strresult.Substring(3,6));
                     result.TareWeight = Convert.ToDecimal(strresult.Substring(9, 5));
                     result.TotalWeight = result.NetWeight + result.TareWeight;
-
                     result.WhetherSuccess = true;
                
                 return result;
@@ -107,14 +105,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             {
                 result.WhetherSuccess = false;
                 result.Message = "获取重量异常" + ex.Message;
-
                // LogManager.WriteLog("EH200", "获取重量异常" + ex.Message);
-
                 return result;
             }
         }
        
-
 
 
         public override ScaleResult SetTare()

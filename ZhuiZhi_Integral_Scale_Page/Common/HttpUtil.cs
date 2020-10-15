@@ -3296,6 +3296,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
 
                 string json = HttpGET(url, sort);
+                
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {

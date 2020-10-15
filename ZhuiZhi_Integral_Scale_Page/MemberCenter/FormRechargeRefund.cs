@@ -72,7 +72,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MainModel.ShowLog("请输入退款金额", true);
                     return;
                 }               
-                DepositRefundRequest request = new DepositRefundRequest();               
+                DepositRefundRequest request = new DepositRefundRequest();
                 request.refundcapital = txtRefound.Text;
                 request.refundtype = refundtype;
                 request.memberid = memberId;
@@ -86,6 +86,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
                 if (refundId > 0)
                 {
+                    //退款打印小票
+                    PrintUtil.PrintTopUp(refundId.ToString(),true);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     BackHelper.HideFormBackGround();

@@ -181,8 +181,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 }
 
-
-
                 string errormsg = "";
                 long result = httputil.MemberTopUp(para, ref errormsg);
 
@@ -242,6 +240,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         return;
                     }
+
                     MemberTopUpPara para = new MemberTopUpPara();
                     para.amount = Convert.ToInt32(je);
                     para.memberid = Convert.ToInt64(CurrentMember.memberinformationresponsevo.memberid);

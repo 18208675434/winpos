@@ -1095,8 +1095,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
 
 
-
-
             }
             catch (Exception ex)
             {
@@ -1138,7 +1136,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             btnAdjustPrice.Image = btnorderhangimage;
                             needAdjustPrice = true;  //有调价商品时需要更新增量商品
 
-                            //INIManager.SetIni("MQTT", "AdjustStartTime", result.querydate, MainModel.IniPath); //记录登录时间作为调价查询的起始时间
+                            INIManager.SetIni("MQTT", "AdjustStartTime", result.querydate, MainModel.IniPath); //记录登录时间作为调价查询的起始时间
                         }
                     }
 
