@@ -936,13 +936,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         try
                         {
-                            Member member = httputil.GetMember(CurrentMember.memberheaderresponsevo.mobile, ref err);
-                            MainModel.CurrentMember = member;
+                            CurrentMember = httputil.GetMember(CurrentMember.memberheaderresponsevo.mobile, ref err);
                         }
                         catch (Exception ex)
                         {
                             LogManager.WriteLog("ERROR", "获取会员信息异常:" + ex.Message);
-                            MainModel.CurrentMember.memberentitycardresponsevo.cardid = entityCardNo;
+                            CurrentMember.memberentitycardresponsevo.cardid = entityCardNo;
                         }
 
                         MainModel.ShowLog("绑卡成功", true);
@@ -1000,11 +999,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void DisplayEntityCard()
         {
-            if (MainModel.CurrentMember.memberentitycardresponsevo == null)
+            if (CurrentMember.memberentitycardresponsevo == null)
             {
                 return;
             }
-            string encCardId = MainModel.CurrentMember.memberentitycardresponsevo.cardid;
+            string encCardId = CurrentMember.memberentitycardresponsevo.cardid;
             if (!string.IsNullOrEmpty(encCardId))
             {
                 if (encCardId.Length > 7)

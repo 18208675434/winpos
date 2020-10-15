@@ -40,7 +40,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        public void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon)
+        public void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycardid="")
         {
             try
             {
@@ -54,18 +54,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 lblCreditAmount.Left = lblCredit.Right;
 
-                if (MainModel.CurrentMember.memberentitycardresponsevo != null)
+                string encCardId = entitycardid;
+                if (!string.IsNullOrEmpty(encCardId))
                 {
-                    string encCardId = MainModel.CurrentMember.memberentitycardresponsevo.cardid;
-                    if (!string.IsNullOrEmpty(encCardId))
+                    if (encCardId.Length > 7)
                     {
-                        if (encCardId.Length > 7)
-                        {
-                            encCardId = encCardId.Substring(0, 3) + "".PadLeft(encCardId.Length - 7, '*') + encCardId.Substring(encCardId.Length - 4);
-                        }
+                        encCardId = encCardId.Substring(0, 3) + "".PadLeft(encCardId.Length - 7, '*') + encCardId.Substring(encCardId.Length - 4);
                     }
-                    lblEntityCardNo.Text = encCardId;
                 }
+                lblEntityCardNo.Text = encCardId;
             }
             catch { }
         }
@@ -102,7 +99,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblEntityCardNo.Text = entityCardNo;
             }
             catch
-            {   
+            {
 
             }
         }
