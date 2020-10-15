@@ -925,7 +925,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMemberCenter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "FormMemberCenter";
+            this.Text = "会员中心";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMemberCenter_FormClosing);
             this.Shown += new System.EventHandler(this.FormMemberCenter_Shown);
             this.pnlHead.ResumeLayout(false);

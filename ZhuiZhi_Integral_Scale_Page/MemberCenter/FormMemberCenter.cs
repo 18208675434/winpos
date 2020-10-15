@@ -765,6 +765,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormMemberCenter_FormClosing(object sender, FormClosingEventArgs e)
         {
             MemberCenterMediaHelper.CloseFormMainMedia();
+            this.Dispose();
         }
 
         private void pnlCoupon_Click(object sender, EventArgs e)

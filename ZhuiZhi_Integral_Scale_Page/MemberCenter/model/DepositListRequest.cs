@@ -59,6 +59,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
            /// 
            /// </summary>
            public string starttime { get; set; }
+           public string shopid { get; set; }
            /// <summary>
            /// 
            /// </summary>

@@ -3371,7 +3371,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMemberCenterMedia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "FormMemberCenter";
+            this.Text = "会员中心-客屏";
             this.Load += new System.EventHandler(this.FormMemberCenterMedia_Load);
             this.pnlItem.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).EndInit();
