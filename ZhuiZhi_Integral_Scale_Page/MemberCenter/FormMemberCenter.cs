@@ -96,12 +96,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 MemberCenterMediaHelper.ShowFormMainMedia();
 
-                LoadBalanceAccount();
-                LoadCoupon();
 
-                LoadTemplate(true);
+                this.BeginInvoke(new Action(delegate()
+                {
+                    LoadCoupon();
 
-                LoadBalanceConfigDetail();
+                    LoadTemplate(true);
+                }));
+
+
+                this.BeginInvoke(new Action(delegate()
+                {
+                    LoadBalanceAccount();
+                }));
+
+                this.BeginInvoke(new Action(delegate()
+                {
+                    LoadBalanceConfigDetail();
+                }));
+
+               
+               
+
+               
                 LoadingHelper.CloseForm();
                 IsEnable = true;
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
@@ -663,7 +680,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 else
                 {
-                    if (CurrentBalanceAccount == null || (Convert.ToInt64(ListAllTemplate.CustomMoney) + Convert.ToInt64(ListAllTemplate.Money) + CurrentBalanceAccount.balance) > 5000)
+                    if (CurrentBalanceAccount == null || (Convert.ToInt64(ListAllTemplate.CustomMoney) + Convert.ToInt64(ListAllTemplate.Money)) > 5000)
                     {
                         return;
                     }
