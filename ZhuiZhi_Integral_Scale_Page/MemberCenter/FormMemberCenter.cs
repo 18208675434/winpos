@@ -107,8 +107,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
                 IsEnable = true;
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
-
-                MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
             }
             catch (Exception ex)
             {
@@ -755,6 +753,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormMemberCenter_FormClosing(object sender, FormClosingEventArgs e)
         {
             MemberCenterMediaHelper.CloseFormMainMedia();
+            this.Dispose();
         }
 
         private void pnlCoupon_Click(object sender, EventArgs e)
