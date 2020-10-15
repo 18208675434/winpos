@@ -16,6 +16,9 @@ namespace ToledoTest
         public FormTaoYu()
         {
             InitializeComponent();
+
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -58,21 +61,14 @@ namespace ToledoTest
 
         [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
 
-        public static unsafe extern char* __GetWeight();
+        public static unsafe extern byte __GetWeight();
         private unsafe void btnGetWeight_Click(object sender, EventArgs e)
         {
             try
             {
-               //char* ch = __GetWeight();
-               //byte[] bb = ch;
-               //listResult.Items.Add(ch+"");
-               // //Thread threadTV = new Thread(getweightthread);
-               // //threadTV.IsBackground = true;
-               // //threadTV.Start();
-               //// listResult.Items.Add("读取重量" + __GetWeight().ToString());
 
-               // //__GetWeight(vDest);
-               // //listResult.Items.Add(vDest.ToString());
+                listResult.Items.Add("读取重量" + __GetWeight().ToString());
+
             }
             catch (Exception ex)
             {
@@ -80,7 +76,25 @@ namespace ToledoTest
             }
         }
 
-
+        //爱宝电子秤未连接成功  或者没有电子秤 读取重量会直接退出  此函数判断是否爱宝电子秤或者是否打开
+        private static bool AscalOK()
+        {
+            try
+            {
+                if (__GetWeight().ToString() != "37")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         private void getweightthread()
         {
@@ -132,6 +146,40 @@ namespace ToledoTest
 
             listResult.Items.Add("关闭串口" +  __SetUnitValue("0公斤", "0").ToString());
            
+        }
+
+        bool isopne = false;
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if(!isopne){
+
+                Invoke((new Action(() =>
+              {
+                  isopne = __Open(txtCom.Text, 9600);
+              })));
+
+                listResult.Items.Add("打开端口" +isopne.ToString());
+
+            }
+            
+            listResult.Items.Add("读取重量" + __GetWeight().ToString());
+
+            Thread.Sleep(150);
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void FormTaoYu_Shown(object sender, EventArgs e)
+        {
+          //  backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
         }
     }
 }

@@ -38,6 +38,8 @@
             this.btnTare = new System.Windows.Forms.Button();
             this.btnZero = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClear
@@ -137,11 +139,27 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(750, 234);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(151, 58);
+            this.button2.TabIndex = 27;
+            this.button2.Text = "dowork";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // FormTaoYu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 594);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnZero);
             this.Controls.Add(this.btnTare);
@@ -156,6 +174,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "FormTaoYu";
             this.Text = "FormTaoYu";
+            this.Shown += new System.EventHandler(this.FormTaoYu_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +192,7 @@
         private System.Windows.Forms.Button btnTare;
         private System.Windows.Forms.Button btnZero;
         private System.Windows.Forms.Button button1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button2;
     }
 }

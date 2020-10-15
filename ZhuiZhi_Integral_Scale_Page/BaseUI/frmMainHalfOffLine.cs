@@ -614,7 +614,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     frmtoolmain = new frmToolMain();
 
-                    asf.AutoScaleControlTest(frmtoolmain, 210, 530, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 530), true);
+                    asf.AutoScaleControlTest(frmtoolmain, 210, 580, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 580), true);
                     frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                     frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtoolmain.Width - 10, pnlHead.Height + 10);
                     frmtoolmain.TopMost = true;
@@ -712,20 +712,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     this.Invoke(new InvokeHandler(delegate()
                     {
-
+                        ShowLoading(true, false);
                         if (CurrentCart == null || CurrentCart.products == null)
                         {
                             BaseUIHelper.UpdaForm(CurrentCart);
                         }
 
 
-                        ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
+                        FormReturnWithoutOrder frmreturn = new FormReturnWithoutOrder();
+                        asf.AutoScaleControlTest(frmreturn, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                        frmreturn.Location = new System.Drawing.Point(0, 0);
+                        frmreturn.ShowDialog();
+                        frmreturn.Dispose();
+                        Application.DoEvents();
+
+
+                       // ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
 
                         if (CurrentCart == null || CurrentCart.products == null)
                         {
                             BaseUIHelper.IniFormMainMedia();
                         }
-
+                        ShowLoading(false, true);
                         this.Activate();
                     }));
                 }
@@ -749,6 +757,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
+                ShowLoading(false , true);
                 LogManager.WriteLog("ERROR", "菜单按钮异常" + ex.Message);
             }
         }
@@ -1284,6 +1293,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 this.Invoke(new InvokeHandler(delegate()
                 {
+                    DateTime starttime = DateTime.Now;
+                    
+
                     ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.ClearMemberInfo();
                     tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100);
                     tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
@@ -1294,20 +1306,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblCredit.Visible = false;
                     picCredit.Visible = false;
 
-                    Application.DoEvents();
-                    BaseUIHelper.LoadMember();
 
+                    Console.WriteLine("clearmember 页面控件" + (DateTime.Now - starttime).TotalMilliseconds);
+                    //Application.DoEvents();
+                    this.BeginInvoke(new InvokeHandler(delegate()
+                    {
+                        BaseUIHelper.LoadMember();
+                    }));
+
+                    Console.WriteLine("clearmember 客屏" + (DateTime.Now - starttime).TotalMilliseconds);
                     // RefreshCart();
                     //购物车有商品的话刷新一次
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
                         RefreshCart();
                     }
-
+                    Console.WriteLine("clearmember 刷新购物车" + (DateTime.Now - starttime).TotalMilliseconds);
                     LstAllProduct.ForEach(r => r.panelbmp = null);
 
                     LoadDgvGood(true, true);
-
+                    Console.WriteLine("clearmember dgvgood" + (DateTime.Now - starttime).TotalMilliseconds);
                 }));
             }
             catch (Exception ex)
@@ -1435,7 +1453,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ShowLoading(true, false);
                 ClearMember();
                 Application.DoEvents();
-                RefreshCart();
+               // RefreshCart();
                 ShowLoading(false, true);
             }
             catch (Exception ex)

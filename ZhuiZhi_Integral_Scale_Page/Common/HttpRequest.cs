@@ -535,9 +535,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
     //    public bool WhetherGetOK = false;
 
-        
+
     //    Dictionary<string, string> dicResult = new Dictionary<string, string>();
-        
+
     //    public string HttpGetJson(string Url, SortedDictionary<string, string> sortpara)
     //    {
     //        try
@@ -585,7 +585,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
     //            bk.DoWork += HttpAsyncRequest_DoWork;
     //            bk.RunWorkerAsync(para);
 
-    //           // HttpAsyncRequest(Url, "GET", Timestamp, testback, thiscode, postDataStr);
+    //            // HttpAsyncRequest(Url, "GET", Timestamp, testback, thiscode, postDataStr);
 
     //            //接口访问完毕或 超时60
     //            long beginTime = DateTime.Now.Ticks;
@@ -722,11 +722,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
     //            {
     //                dicResult.Add(asyObj.ToString(), respStr);
     //            }
-               
+
     //        }
     //        catch (Exception ex)
     //        {
-    //            LogManager.WriteLog("testback异常"+ex.Message +respStr);
+    //            LogManager.WriteLog("testback异常" + ex.Message + respStr);
     //        }
     //    }
 
@@ -839,12 +839,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
     //    public class QuestPara
     //    {
-    //       public  string Url {get;set;}
-    //       public string reqMethod { get; set; }
-    //        public  string Timestamp {get;set;}
-    //        public  AsyRequetCallback callback {get;set;}
-    //        public  object ob {get;set;}
-    //        public  string postData {get;set;}
+    //        public string Url { get; set; }
+    //        public string reqMethod { get; set; }
+    //        public string Timestamp { get; set; }
+    //        public AsyRequetCallback callback { get; set; }
+    //        public object ob { get; set; }
+    //        public string postData { get; set; }
 
     //    }
 

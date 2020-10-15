@@ -53,8 +53,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                     IniFormReturnWithoutOrder();
                 }
                 frmreturn.ShowDialog();
-
-                ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia(); 
+               
+                ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia();
+                frmreturn.Dispose();
                 Application.DoEvents();
             }
             catch {
