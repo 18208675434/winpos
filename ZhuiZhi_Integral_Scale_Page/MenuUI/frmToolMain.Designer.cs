@@ -301,7 +301,7 @@
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(11, 577);
+            this.lblDeviceSN.Location = new System.Drawing.Point(11, 556);
             this.lblDeviceSN.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(65, 20);
@@ -313,7 +313,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVersion.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblVersion.Location = new System.Drawing.Point(11, 548);
+            this.lblVersion.Location = new System.Drawing.Point(11, 527);
             this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(65, 20);
@@ -530,7 +530,7 @@
             this.pnlRefund.Controls.Add(this.lblRefund);
             this.pnlRefund.Controls.Add(this.picRefund);
             this.pnlRefund.Location = new System.Drawing.Point(11, 469);
-            this.pnlRefund.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlRefund.Margin = new System.Windows.Forms.Padding(2);
             this.pnlRefund.Name = "pnlRefund";
             this.pnlRefund.Size = new System.Drawing.Size(187, 39);
             this.pnlRefund.TabIndex = 19;
@@ -554,7 +554,7 @@
             this.picRefund.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRefund.BackgroundImage")));
             this.picRefund.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picRefund.Location = new System.Drawing.Point(13, 7);
-            this.picRefund.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picRefund.Margin = new System.Windows.Forms.Padding(2);
             this.picRefund.Name = "picRefund";
             this.picRefund.Size = new System.Drawing.Size(24, 24);
             this.picRefund.TabIndex = 0;
@@ -574,7 +574,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(210, 619);
+            this.ClientSize = new System.Drawing.Size(210, 580);
             this.Controls.Add(this.pnlRechargeQuery);
             this.Controls.Add(this.pnlLine10);
             this.Controls.Add(this.pnlLine8);

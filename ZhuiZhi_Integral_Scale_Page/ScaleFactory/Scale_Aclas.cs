@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 {
     /// <summary>
-    /// 爱宝电子秤
+    /// 顶尖电子秤
     /// </summary>
     public class Scale_Aclas : Scale_Action
     {
@@ -21,7 +22,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             try
             {
                 Close();
-                return __Open(connum,baud);
+
+                bool result = __Open(connum, baud);
+
+                //LogManager.WriteLog("Scale", "open" + result.ToString());
+                return result;
             }
             catch (Exception ex)
             {
@@ -36,7 +41,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             try
             {
-                return __Close();
+                bool result = __Close();
+                    // LogManager.WriteLog("Scale", "close" + result.ToString());
+                     return result;
             }
             catch (Exception ex)
             {
@@ -57,16 +64,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             try
             {
                 string strresult = __GetWeight().ToString();
+
+               // LogManager.WriteLog("Scale", "weight" + strresult);
+
                 string[] strs = strresult.Split(',');
 
                 result.WhetherStable = strs[0] == "S";
 
                 decimal weight = 0;
-                string strweight= strs[1]+strs[2];
+                string strweight = strs[1] + strs[2];
                 if (decimal.TryParse(strweight, out weight))
                 {
                     result.WhetherSuccess = true;
-                    result.NetWeight = Math.Round(weight, 3); 
+                    result.NetWeight = Math.Round(weight, 3);
                     result.TareWeight = 0.000M;
                     result.TotalWeight = Math.Round(weight, 3);
                 }
@@ -75,7 +85,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                     result.WhetherSuccess = false;
                 }
 
-               
+
                 return result;
             }
             catch (Exception ex)
@@ -86,7 +96,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                 return result;
             }
         }
-       
+
 
 
         [DllImport("SensorDll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
@@ -117,7 +127,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "爱宝设备无此功能";
+            result.Message = "顶尖设备无此功能";
             return result;
         }
 
@@ -127,7 +137,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         public static extern void __uCleart();
         public override ScaleResult SetZero()
         {
-            ScaleResult result = new ScaleResult(); 
+            ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
 
             try
@@ -149,7 +159,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-            result.Message = "爱宝设备无此功能";
+            result.Message = "顶尖设备无此功能";
             return result;
         }
 

@@ -96,8 +96,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 MemberCenterMediaHelper.ShowFormMainMedia();
 
-
-
                 LoadBalanceAccount();
                 LoadCoupon();
 
@@ -106,8 +104,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadBalanceConfigDetail();
                 LoadingHelper.CloseForm();
                 IsEnable = true;
-                MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
-
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
             }
             catch (Exception ex)
@@ -656,16 +652,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         if (custommoney.Text != "+")
                         {
                             ListAllTemplate.mount = int.Parse(custommoney.Text.Replace("元", ""));
-
                         }
                         custom.BackColor = Color.Blue;
                         custommoney.ForeColor = Color.White;
                         customdiscount.ForeColor = Color.White;
                         pnlItem.BackColor = Color.White;
                         LoadTemplate(true);
-
                     }
-
                 }
 
                 else
@@ -816,7 +809,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             { }
-
         }
 
         private void button1_Click(object sender, EventArgs e)

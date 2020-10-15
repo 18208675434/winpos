@@ -9,8 +9,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
     public class Scale_Toledo : Scale_Action
     {
 
-
-
         public override bool Open(string connum, int baud)
         {
             try

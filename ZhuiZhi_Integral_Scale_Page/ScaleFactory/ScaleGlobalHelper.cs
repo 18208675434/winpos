@@ -22,11 +22,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
        public static void BeginReadWeight()
        {
-
+           //顶尖os2xapi开启端口 放到异步无效***
+           IniScale(true);
            if (bk != null)
            {
                bk.Dispose();
            }
+
            bk = new System.ComponentModel.BackgroundWorker();
            bk.DoWork += backgroundWorker_DoWork;
            bk.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
@@ -38,7 +40,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
        {
            try
            {
-               IniScale(false);
+               IniScale(true);
 
                if (AscalOK())
                {
@@ -108,8 +110,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                        currentscaletype = ScaleType.易衡;
                        scaleaction = new Scale_EH200();
                    }
+            
+                Action aa =   new Action(() =>
+              {
+                  scaleaction.Open(ComNo, Baud);
+              });
 
-                   scaleaction.Open(ComNo, Baud);
+                aa.Invoke();
                }
            }
            catch (Exception ex)
@@ -163,7 +170,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
        /// <returns></returns>
        public static  ScaleResult GetWeight()
        {
-
+           //if (currentscaletype != ScaleType.爱宝)
+           //{
+           //    return CurrentScaleResult;
+           //}
            return CurrentScaleResult;
            //try
            //{
