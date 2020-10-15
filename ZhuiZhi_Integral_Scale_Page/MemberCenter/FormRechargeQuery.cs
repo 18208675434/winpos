@@ -366,9 +366,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 IsEnable = false;
 
                 DepositListRequest para = new DepositListRequest();
-                para.shopid = MainModel.ShopId;
+                para.shopid = MainModel.CurrentShopInfo.shopid;
+                para.tenantid = MainModel.CurrentShopInfo.tenantid;
                 para.id = txtOrderId.Text;
-                para.tenantid = MainModel.Tenantid;
                 para.phone = txtUser.Text;            
                 para.starttime = getStampByDateTime(dtStart.Value);
                 para.endtime = getStampByDateTime(dtEnd.Value);
@@ -436,8 +436,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 IsEnable = false;
 
                 DepositListRequest para = new DepositListRequest();
-                para.shopid = MainModel.ShopId;
-                para.tenantid = MainModel.Tenantid;
+                para.shopid = MainModel.CurrentShopInfo.shopid;
+                para.tenantid = MainModel.CurrentShopInfo.tenantid;
                 para.phone = txtUser.Text;
                 para.id = txtOrderId.Text;
                 para.starttime = getStampByDateTime(dtStart.Value);
