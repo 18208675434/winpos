@@ -15,7 +15,7 @@ namespace ToledoTest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormEH200());
+            Application.Run(new FormTaoYu());
         }
     }
 }

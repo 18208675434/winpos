@@ -297,7 +297,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         public static void ShowKeyBoard(System.Windows.Forms.Form frm)
         {
 
-
             Size size= new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height/3);
             Point point = new System.Drawing.Point(0, Screen.AllScreens[0].Bounds.Height *2/ 3);
 

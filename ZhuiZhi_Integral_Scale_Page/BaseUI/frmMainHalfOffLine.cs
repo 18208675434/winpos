@@ -614,7 +614,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     frmtoolmain = new frmToolMain();
 
-                    asf.AutoScaleControlTest(frmtoolmain, 210, 530, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 530), true);
+                    asf.AutoScaleControlTest(frmtoolmain, 210, 580, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 580), true);
                     frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                     frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtoolmain.Width - 10, pnlHead.Height + 10);
                     frmtoolmain.TopMost = true;
@@ -712,20 +712,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     this.Invoke(new InvokeHandler(delegate()
                     {
-
+                        ShowLoading(true, false);
                         if (CurrentCart == null || CurrentCart.products == null)
                         {
                             BaseUIHelper.UpdaForm(CurrentCart);
                         }
 
 
-                        ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
+                        FormReturnWithoutOrder frmreturn = new FormReturnWithoutOrder();
+                        asf.AutoScaleControlTest(frmreturn, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                        frmreturn.Location = new System.Drawing.Point(0, 0);
+                        frmreturn.ShowDialog();
+                        frmreturn.Dispose();
+                        Application.DoEvents();
+
+
+                       // ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
 
                         if (CurrentCart == null || CurrentCart.products == null)
                         {
                             BaseUIHelper.IniFormMainMedia();
                         }
-
+                        ShowLoading(false, true);
                         this.Activate();
                     }));
                 }
@@ -749,6 +757,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
+                ShowLoading(false , true);
                 LogManager.WriteLog("ERROR", "菜单按钮异常" + ex.Message);
             }
         }

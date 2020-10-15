@@ -200,7 +200,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     ScaleGlobalHelper.GetWeight();
                 }
                 catch { }
-
+                ReturnWithoutOrderHelper.ShowFormReturnWithoutMedia();
 
 
                 txtSearch.Focus();
@@ -263,7 +263,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
 
 
-               
+                ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia();
                 
                 //ScaleGlobalHelper.Close();
                 //this.Dispose();
@@ -324,8 +324,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 Application.DoEvents();
 
-                this.Hide();
-               // this.Close();
+                //this.Hide();
+               this.Close();
             }
             catch (Exception ex)
             {
@@ -2635,7 +2635,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     ClearForm();
                     ClearMember();
                     ShowLoading(false, true);
-                    this.Hide();
+                    //this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -3141,8 +3142,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            //this.Close();
+            //this.Hide();
+            this.Close();
         }
 
         private void txtSearch_Leave(object sender, EventArgs e)
