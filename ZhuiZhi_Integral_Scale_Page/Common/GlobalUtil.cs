@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.MyControl;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
@@ -294,39 +295,43 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
         static string keyboardname = "uckeyboard";
-        public static void ShowKeyBoard(System.Windows.Forms.Form frm)
+
+        public static void ShowKeyBoard(System.Windows.Forms.Form frm, KeyBorderCharType type = KeyBorderCharType.CHAR)
         {
-
-
-            Size size= new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height/3);
-            Point point = new System.Drawing.Point(0, Screen.AllScreens[0].Bounds.Height *2/ 3);
-
-            ShowKeyBoard(frm,size,point);
+            Size size = new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height / 3);
+            Point point = new System.Drawing.Point(0, Screen.AllScreens[0].Bounds.Height * 2 / 3);
+            ShowKeyBoard(frm, size, point, type);
 
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="frm">需要加载键盘的窗体</param>
         /// <param name="size">键盘尺寸</param>
         /// <param name="location">键盘位置</param>
-        public static void ShowKeyBoard(System.Windows.Forms.Form frm,Size size,Point location)
+        public static void ShowKeyBoard(System.Windows.Forms.Form frm, Size size, Point location, KeyBorderCharType type = KeyBorderCharType.CHAR)
         {
             try
             {
-                ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll uckey = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll();
-                uckey.Name = keyboardname;
+                ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll uckey;
+               
 
                 //如果窗体已存在键盘 显示即可
                 foreach (System.Windows.Forms.Control con in frm.Controls)
                 {
                     if (con.Name == keyboardname)
                     {
+                        uckey = (ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll)con;
+                        uckey.CharType = type;
                         con.Show();
                         return;
                     }
                 }
-
+                uckey = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll();
+                uckey.Name = keyboardname;
+                uckey.Name = keyboardname;
+                uckey.CharType = type;
                 uckey.Size = size;
                 uckey.Location = location;
                 uckey.BringToFront();
@@ -334,6 +339,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 uckey.BringToFront();
             }
             catch { }
+        }
+
+        public static void CloseKeyBoard(System.Windows.Forms.Form frm)
+        {
+            foreach (System.Windows.Forms.Control con in frm.Controls)
+            {
+                if (con.Name == keyboardname)
+                {
+                    con.Hide();
+                    return;
+                }
+            }
         }
         #endregion
 
