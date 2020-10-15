@@ -79,7 +79,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void formRechargeQuery_FormClosed(object sender, FormClosedEventArgs e)
         {
-            GlobalUtil.CloseOSK();
         }
         #endregion
 
@@ -199,6 +198,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             this.Invoke(new InvokeHandler(delegate()
             {
+                GlobalUtil.CloseKeyBoard(this);
                 CurrentInterval = 30;
                 CurrentPage = 1;
                 LoadDgvOrder();
@@ -272,8 +272,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void lblUser_Click(object sender, EventArgs e)
         {
-
-            GlobalUtil.OpenOSK();
+            GlobalUtil.ShowKeyBoard(this, ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER);
             Delay.Start(100);
             this.Activate();
             lblUserTip.Focus();
@@ -292,10 +291,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        private void lblOrderID_Click(object sender, EventArgs e)
+        private void lblOperatorPhone_Click(object sender, EventArgs e)
         {
-
-            GlobalUtil.OpenOSK();
+            GlobalUtil.ShowKeyBoard(this, ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER);
             Delay.Start(100);
             this.Activate();
             txtOperatorPhone.Focus();
@@ -308,7 +306,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
+                GlobalUtil.ShowKeyBoard(this, ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER);
 
                 Delay.Start(100);
                 this.Activate();

@@ -161,7 +161,7 @@
             this.lblOperatorPhoneTip.Size = new System.Drawing.Size(135, 20);
             this.lblOperatorPhoneTip.TabIndex = 47;
             this.lblOperatorPhoneTip.Text = "请输入操作人手机号";
-            this.lblOperatorPhoneTip.Click += new System.EventHandler(this.lblOrderID_Click);
+            this.lblOperatorPhoneTip.Click += new System.EventHandler(this.lblOperatorPhone_Click);
             // 
             // lblUserTip
             // 

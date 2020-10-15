@@ -71,8 +71,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void formRechargeQuery_FormClosed(object sender, FormClosedEventArgs e)
         {
-            timerSeconds.Enabled = false;          
-            GlobalUtil.CloseOSK();
+            timerSeconds.Enabled = false;         
+          
             LossEntityCardMediaHelper.CloseLossEntityCardMedai();
         }
         #endregion
@@ -160,7 +160,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 TextBox txt = (TextBox)sender;
-                GlobalUtil.OpenOSK();
+                GlobalUtil.ShowKeyBoard(this, ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER);
 
                 Delay.Start(100);
                 this.Activate();
@@ -211,18 +211,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             txtSmsCode.Focus();
             if (txtSmsCode.Text.Length > 0)
             {
-
                 lblSmsCode.Visible = false;
+                if (txtSmsCode.Text.Length == 6)
+                {
+                    GlobalUtil.CloseKeyBoard(this);
+                }
             }
             else
             {
                 lblSmsCode.Visible = true;
             }
+
         }
 
         private void lblNewCardNo_Click(object sender, EventArgs e)
         {
-            GlobalUtil.OpenOSK();
+            GlobalUtil.ShowKeyBoard(this, ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER);
             Delay.Start(100);
             this.Activate();
             txtNewCardNo.Focus();
@@ -230,7 +234,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void lblSmsCode_Click(object sender, EventArgs e)
         {
-            GlobalUtil.OpenOSK();
+            GlobalUtil.ShowKeyBoard(this, ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER);
             Delay.Start(100);
             this.Activate();
             txtSmsCode.Focus();
