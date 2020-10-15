@@ -1690,6 +1690,7 @@
     <None Include="Resources\phone.png" />
     <None Include="Resources\validatecode.png" />
     <None Include="Resources\losscard.png" />
+    <None Include="Resources\menu_recharge.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />

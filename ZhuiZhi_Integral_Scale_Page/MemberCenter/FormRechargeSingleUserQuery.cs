@@ -60,13 +60,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
         }
-        private void frmRechargeQuery_Shown(object sender, EventArgs e)
+        private void FormRechargeSingleUserQuery_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
 
             btnToday_Click(null, null);
-            txtOperatorPhone.SelectionStart = 0;
-            txtOperatorPhone.Focus();
+            txtOrderId.SelectionStart = 0;
+            txtOrderId.Focus();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -90,6 +90,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnRechargeQuery_Click(object sender, EventArgs e)
         {
             CurrentOrderType = OrderType.recharge;
+            lblOrderType.Text = "充值单号:";
+            lblOrderId.Text = "请输入充值单号";
             CurrentPage = 1;
             LoadDgvOrder();
         }
@@ -123,6 +125,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnRechargeRtnQuery_Click(object sender, EventArgs e)
         {
             CurrentOrderType = OrderType.rtn;
+            lblOrderType.Text = "退款单号:";
+            lblOrderId.Text = "请输入退款单号";
             CurrentPage = 1;
             LoadDgvOrder();
         }
@@ -202,7 +206,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 btnYesterday.FlatAppearance.BorderColor = Color.Gray;
                 btnWeek.FlatAppearance.BorderColor = Color.Red;
 
-                dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd") + " 00:00:00");
+                dtStart.Value = Convert.ToDateTime(DateTime.Now.AddDays(-6).ToString("yyyy-MM-dd") + " 00:00:00");
                 dtEnd.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
                 CurrentInterval = 7;
                 CurrentPage = 1;
@@ -289,26 +293,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
 
-        private void txtOperatorPhone_TextChanged(object sender, EventArgs e)
+        private void txtOrderId_TextChanged(object sender, EventArgs e)
         {
-            if (txtOperatorPhone.Text.Length > 0)
+            if (txtOrderId.Text.Length > 0)
             {
 
-                lblOperatorPhoneTip.Visible = false;
+                lblOrderId.Visible = false;
             }
             else
             {
-                lblOperatorPhoneTip.Visible = true;
+                lblOrderId.Visible = true;
             }
         }
 
-        private void lbOperatorPhone_Click(object sender, EventArgs e)
+        private void lbOrderId_Click(object sender, EventArgs e)
         {
 
             GlobalUtil.ShowKeyBoard(this, ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER);
             Delay.Start(100);
             this.Activate();
-            txtOperatorPhone.Focus();
+            txtOrderId.Focus();
         }
 
 
@@ -377,10 +381,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 IsEnable = false;
 
                 DepositListRequest para = new DepositListRequest();
-                para.shopid = MainModel.ShopId;
-                para.tenantid = MainModel.Tenantid;
+                para.shopid =  MainModel.CurrentShopInfo.shopid;
+                para.tenantid = MainModel.CurrentShopInfo.tenantid;
                 para.phone = txtUser.Text;
-                para.operatorphone = txtOperatorPhone.Text;
+                para.id = txtOrderId.Text;
                 para.starttime = getStampByDateTime(dtStart.Value);
                 para.endtime = getStampByDateTime(dtEnd.Value);
                 para.size = PageSize;
@@ -449,10 +453,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 IsEnable = false;
 
                 DepositListRequest para = new DepositListRequest();
-                para.shopid = MainModel.ShopId;
-                para.tenantid = MainModel.Tenantid;
+                para.shopid = MainModel.CurrentShopInfo.shopid;
+                para.tenantid = MainModel.CurrentShopInfo.tenantid;
                 para.phone = txtUser.Text;
-                para.operatorphone = txtOperatorPhone.Text;
+                para.id = txtOrderId.Text;
                 para.starttime = getStampByDateTime(dtStart.Value);
                 para.endtime = getStampByDateTime(dtEnd.Value);
                 para.size = PageSize;
