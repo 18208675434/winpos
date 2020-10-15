@@ -762,12 +762,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     player.Ctlcontrols.stop();
                     player.Visible = false;
                 }
-                Thread threadLoadMember = new Thread(LoadMemberThread);
-                threadLoadMember.IsBackground = true;
-                //threadIniExedate.Priority = ThreadPriority.BelowNormal;
-                threadLoadMember.Start();
+                //Thread threadLoadMember = new Thread(LoadMemberThread);
+                //threadLoadMember.IsBackground = true;
+                //threadLoadMember.Start();
 
-                //LoadMemberThread();            
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += LoadMemberThread;
+                bk.RunWorkerAsync();
+
             }
             catch (Exception ex)
             {
@@ -775,7 +777,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        public void LoadMemberThread()
+        public void LoadMemberThread(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {

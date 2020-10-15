@@ -262,7 +262,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
 
-
                 ReturnWithoutOrderHelper.CloseFormReturnWithoutMedia();
                 
                 //ScaleGlobalHelper.Close();

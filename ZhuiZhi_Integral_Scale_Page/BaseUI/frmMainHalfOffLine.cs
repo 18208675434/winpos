@@ -1293,6 +1293,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 this.Invoke(new InvokeHandler(delegate()
                 {
+                    DateTime starttime = DateTime.Now;
+                    
+
                     ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.ClearMemberInfo();
                     tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100);
                     tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
@@ -1303,20 +1306,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblCredit.Visible = false;
                     picCredit.Visible = false;
 
-                    Application.DoEvents();
-                    BaseUIHelper.LoadMember();
 
+                    Console.WriteLine("clearmember 页面控件" + (DateTime.Now - starttime).TotalMilliseconds);
+                    //Application.DoEvents();
+                    this.BeginInvoke(new InvokeHandler(delegate()
+                    {
+                        BaseUIHelper.LoadMember();
+                    }));
+
+                    Console.WriteLine("clearmember 客屏" + (DateTime.Now - starttime).TotalMilliseconds);
                     // RefreshCart();
                     //购物车有商品的话刷新一次
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
                         RefreshCart();
                     }
-
+                    Console.WriteLine("clearmember 刷新购物车" + (DateTime.Now - starttime).TotalMilliseconds);
                     LstAllProduct.ForEach(r => r.panelbmp = null);
 
                     LoadDgvGood(true, true);
-
+                    Console.WriteLine("clearmember dgvgood" + (DateTime.Now - starttime).TotalMilliseconds);
                 }));
             }
             catch (Exception ex)
@@ -1444,7 +1453,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ShowLoading(true, false);
                 ClearMember();
                 Application.DoEvents();
-                RefreshCart();
+               // RefreshCart();
                 ShowLoading(false, true);
             }
             catch (Exception ex)
