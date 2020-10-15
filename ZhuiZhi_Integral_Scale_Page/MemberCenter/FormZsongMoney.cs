@@ -13,6 +13,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormZsongMoney : Form
     {
+        public ListAllTemplate CustomTemplate = null;
+
         public FormZsongMoney()
         {
             InitializeComponent();
@@ -38,8 +40,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void pictureCancle_Click(object sender, EventArgs e)
         {
+            CustomTemplate = null;
             this.DialogResult = DialogResult.Cancel;
-            BackHelper.HideFormBackGround();
             this.Close();
         }
 
@@ -261,12 +263,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-             ListAllTemplate.CustomMoney= int.Parse(inputc.Text);
-             ListAllTemplate.ZengCustomMoney = "赠" + inputz.Text + "元";
-            BackHelper.HideFormBackGround();
+            try {
+                if (string.IsNullOrEmpty(inputc.Text))
+                {
+                    return;
+                }
+                decimal cash = Convert.ToDecimal(inputc.Text);
 
-            this.Close();
+                CustomTemplate = new ListAllTemplate();
+                CustomTemplate.id = 0;
+                CustomTemplate.amount = cash;
+
+                if (!string.IsNullOrEmpty(inputz.Text))
+                {
+                    CustomTemplate.rewardamount = Convert.ToDecimal(inputz.Text);
+                }
+                // CustomTemplate.rewardamount = 0;
+
+                this.Close();
+            }
+            catch
+            {
+
+            }
+           
         }
 
         private void inputc_Enter(object sender, EventArgs e)

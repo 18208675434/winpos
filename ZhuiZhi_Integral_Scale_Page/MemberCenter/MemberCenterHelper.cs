@@ -645,5 +645,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
+
+
+
+
+        public static ListAllTemplate ShowFormCustomerChange()
+        {
+            try
+            {
+                FormCustomMoney money = new FormCustomMoney();
+                asf.AutoScaleControlTest(money, 420, 197, 420 * MainModel.midScale, 197 * MainModel.midScale, true);
+                money.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - money.Width) / 2, (Screen.AllScreens[0].Bounds.Height - money.Height) / 2);
+                money.TopMost = true;
+                BackHelper.ShowFormBackGround();
+                money.ShowDialog();
+                money.Dispose();
+                BackHelper.HideFormBackGround();
+
+                return money.CustomTemplate;
+                
+            }
+            catch(Exception ex)
+            {
+                BackHelper.HideFormBackGround();
+                LogManager.WriteLog("加载自定义充值金额页面异常"+ex);
+                return null;
+            }
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormCustomreCharge : Form
     {
+
+        public ListAllTemplate CustomTemplate = null;
         public FormCustomreCharge()
         {
             InitializeComponent();
@@ -541,7 +543,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void pictureCancle_Click(object sender, EventArgs e)
         {
-            BackHelper.HideFormBackGround();
             this.Close();
         }
         private HttpUtil util = new HttpUtil();
@@ -549,24 +550,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                string err = "";
-                BackHelper.HideFormBackGround();
+                if (string.IsNullOrEmpty(outputmoney.Text))
+                {
+                    return;
+                }
+
+                decimal cash = Convert.ToDecimal(outputmoney.Text);
+
+                CustomTemplate = new ListAllTemplate();
+                CustomTemplate.id = 0;
+                CustomTemplate.amount = cash;
+               // CustomTemplate.rewardamount = 0;
+
                 this.Close();
-
-                
-                if (outputmoney.Text != "" && label3.Text != "")
-                {
-                    ListAllTemplate.CustomMoney = int.Parse(outputmoney.Text);
-                    ListAllTemplate.ZengCustomMoney = label3.Text;
-                    util.Custompaycon(ref err);
-                    
-                }
-                else
-                {
-                    MainModel.ShowLog("自定义充值失败", true);
-
-                }
-
             
             }
             catch (Exception ex)

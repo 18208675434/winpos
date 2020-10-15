@@ -15,6 +15,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormCustomMoney : Form
     {
+
+        public ListAllTemplate CustomTemplate = null;
         public FormCustomMoney()
         {
             InitializeComponent();
@@ -34,15 +36,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.Hide();
             charge.ShowDialog();
             charge.Dispose();
-            charge.Close();
+
+            CustomTemplate = charge.CustomTemplate;
+
+            this.Close();
+
         }
 
         private void pictureCancle_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            BackHelper.HideFormBackGround();
-            MainModel.CoustomMoney = "+";
-            MainModel.ZMoney = "自定义金额";
+            CustomTemplate = null;
             this.Close();
         }
 
@@ -59,7 +62,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             this.Hide();
             zeng.ShowDialog();
             zeng.Dispose();
-            zeng.Close();
+            CustomTemplate = zeng.CustomTemplate;
+            this.Close();
             this.Close();
         }
     }

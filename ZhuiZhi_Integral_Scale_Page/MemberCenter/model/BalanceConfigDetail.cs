@@ -20,6 +20,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// </summary>
         public bool cashtobalanceenable { get; set; }
 
+        /// <summary>
+        /// 是否支持自定义充值
+        /// </summary>
+        public bool customrechargeenable { get; set; }
+
 
     }
 }

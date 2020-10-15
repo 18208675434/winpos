@@ -67,7 +67,7 @@ public class ListAllTemplate
     /// </summary>
     public bool enabled { get; set; }
     /// <summary>
-    /// 
+    ///  id 为0 代表为自定义充值
     /// </summary>
     public int id { get; set; }
     /// <summary>

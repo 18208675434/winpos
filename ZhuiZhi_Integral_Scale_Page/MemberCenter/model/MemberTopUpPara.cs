@@ -21,7 +21,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// </summary>
         public string customerpaycode  { get; set; }
         /// <summary>
-        /// 是否自动根据充值模板匹配赠金
+        /// 是否自动根据充值模板匹配赠金  自定义传false  非自定义 true
         /// </summary>
         public bool autoreward  { get; set; }
         /// <summary>

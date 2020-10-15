@@ -87,7 +87,7 @@
             // 
             this.pictureCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureCancle.BackgroundImage")));
             this.pictureCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureCancle.Location = new System.Drawing.Point(373, 13);
+            this.pictureCancle.Location = new System.Drawing.Point(387, 12);
             this.pictureCancle.Margin = new System.Windows.Forms.Padding(2);
             this.pictureCancle.Name = "pictureCancle";
             this.pictureCancle.Size = new System.Drawing.Size(27, 27);
