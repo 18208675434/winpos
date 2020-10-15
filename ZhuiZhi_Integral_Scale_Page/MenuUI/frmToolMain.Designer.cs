@@ -516,7 +516,7 @@
             // 
             // picRechargeQuery
             // 
-            this.picRechargeQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRechargeQuery.BackgroundImage")));
+            this.picRechargeQuery.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.menu_recharge;
             this.picRechargeQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picRechargeQuery.Location = new System.Drawing.Point(13, 7);
             this.picRechargeQuery.Name = "picRechargeQuery";

@@ -39,7 +39,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new System.Windows.Forms.Panel();
-            this.lblOperatorPhoneTip = new System.Windows.Forms.Label();
+            this.lblOrderId = new System.Windows.Forms.Label();
             this.lblUserTip = new System.Windows.Forms.Label();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new System.Windows.Forms.Button();
@@ -49,8 +49,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtOperatorPhone = new System.Windows.Forms.TextBox();
-            this.lblOperatorPhone = new System.Windows.Forms.Label();
+            this.txtOrderId = new System.Windows.Forms.TextBox();
+            this.lblOrderType = new System.Windows.Forms.Label();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.lblUser = new System.Windows.Forms.Label();
             this.pnlEmptyOrder = new System.Windows.Forms.Panel();
@@ -131,7 +131,7 @@
             // panelQuery
             // 
             this.panelQuery.BackColor = System.Drawing.Color.White;
-            this.panelQuery.Controls.Add(this.lblOperatorPhoneTip);
+            this.panelQuery.Controls.Add(this.lblOrderId);
             this.panelQuery.Controls.Add(this.lblUserTip);
             this.panelQuery.Controls.Add(this.dtEnd);
             this.panelQuery.Controls.Add(this.btnQuery);
@@ -141,8 +141,8 @@
             this.panelQuery.Controls.Add(this.label4);
             this.panelQuery.Controls.Add(this.dtStart);
             this.panelQuery.Controls.Add(this.label3);
-            this.panelQuery.Controls.Add(this.txtOperatorPhone);
-            this.panelQuery.Controls.Add(this.lblOperatorPhone);
+            this.panelQuery.Controls.Add(this.txtOrderId);
+            this.panelQuery.Controls.Add(this.lblOrderType);
             this.panelQuery.Controls.Add(this.txtUser);
             this.panelQuery.Controls.Add(this.lblUser);
             this.panelQuery.Location = new System.Drawing.Point(12, 78);
@@ -150,18 +150,18 @@
             this.panelQuery.Size = new System.Drawing.Size(1154, 98);
             this.panelQuery.TabIndex = 0;
             // 
-            // lblOperatorPhoneTip
+            // lblOrderId
             // 
-            this.lblOperatorPhoneTip.AutoSize = true;
-            this.lblOperatorPhoneTip.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblOperatorPhoneTip.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lblOperatorPhoneTip.ForeColor = System.Drawing.Color.Gray;
-            this.lblOperatorPhoneTip.Location = new System.Drawing.Point(420, 16);
-            this.lblOperatorPhoneTip.Name = "lblOperatorPhoneTip";
-            this.lblOperatorPhoneTip.Size = new System.Drawing.Size(135, 20);
-            this.lblOperatorPhoneTip.TabIndex = 47;
-            this.lblOperatorPhoneTip.Text = "请输入操作人手机号";
-            this.lblOperatorPhoneTip.Click += new System.EventHandler(this.lblOperatorPhone_Click);
+            this.lblOrderId.AutoSize = true;
+            this.lblOrderId.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblOrderId.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.lblOrderId.ForeColor = System.Drawing.Color.Gray;
+            this.lblOrderId.Location = new System.Drawing.Point(420, 16);
+            this.lblOrderId.Name = "lblOrderId";
+            this.lblOrderId.Size = new System.Drawing.Size(107, 20);
+            this.lblOrderId.TabIndex = 47;
+            this.lblOrderId.Text = "请输入充值单号";
+            this.lblOrderId.Click += new System.EventHandler(this.lblOrderId_Click);
             // 
             // lblUserTip
             // 
@@ -296,30 +296,30 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "交易日期:";
             // 
-            // txtOperatorPhone
+            // txtOrderId
             // 
-            this.txtOperatorPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtOperatorPhone.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.txtOperatorPhone.Location = new System.Drawing.Point(410, 11);
-            this.txtOperatorPhone.Margin = new System.Windows.Forms.Padding(2);
-            this.txtOperatorPhone.MaxLength = 20;
-            this.txtOperatorPhone.Name = "txtOperatorPhone";
-            this.txtOperatorPhone.Size = new System.Drawing.Size(200, 30);
-            this.txtOperatorPhone.TabIndex = 101;
-            this.txtOperatorPhone.Click += new System.EventHandler(this.txt_OskClick);
-            this.txtOperatorPhone.TextChanged += new System.EventHandler(this.txtOperatorPhone_TextChanged);
-            this.txtOperatorPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
+            this.txtOrderId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOrderId.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.txtOrderId.Location = new System.Drawing.Point(410, 11);
+            this.txtOrderId.Margin = new System.Windows.Forms.Padding(2);
+            this.txtOrderId.MaxLength = 20;
+            this.txtOrderId.Name = "txtOrderId";
+            this.txtOrderId.Size = new System.Drawing.Size(200, 30);
+            this.txtOrderId.TabIndex = 101;
+            this.txtOrderId.Click += new System.EventHandler(this.txt_OskClick);
+            this.txtOrderId.TextChanged += new System.EventHandler(this.txtOrderId_TextChanged);
+            this.txtOrderId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextNUMBER_KeyPress);
             // 
-            // lblOperatorPhone
+            // lblOrderType
             // 
-            this.lblOperatorPhone.AutoSize = true;
-            this.lblOperatorPhone.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblOperatorPhone.Location = new System.Drawing.Point(299, 14);
-            this.lblOperatorPhone.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblOperatorPhone.Name = "lblOperatorPhone";
-            this.lblOperatorPhone.Size = new System.Drawing.Size(110, 21);
-            this.lblOperatorPhone.TabIndex = 2;
-            this.lblOperatorPhone.Text = "操作人手机号:";
+            this.lblOrderType.AutoSize = true;
+            this.lblOrderType.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblOrderType.Location = new System.Drawing.Point(329, 14);
+            this.lblOrderType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblOrderType.Name = "lblOrderType";
+            this.lblOrderType.Size = new System.Drawing.Size(78, 21);
+            this.lblOrderType.TabIndex = 2;
+            this.lblOrderType.Text = "充值单号:";
             // 
             // txtUser
             // 
@@ -1145,8 +1145,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtStart;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtOperatorPhone;
-        private System.Windows.Forms.Label lblOperatorPhone;
+        private System.Windows.Forms.TextBox txtOrderId;
+        private System.Windows.Forms.Label lblOrderType;
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Button btnQuery;
@@ -1162,7 +1162,7 @@
         private System.Windows.Forms.Label lblShopName;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnRechargeQuery;
-        private System.Windows.Forms.Label lblOperatorPhoneTip;
+        private System.Windows.Forms.Label lblOrderId;
         private System.Windows.Forms.Label lblUserTip;
         private RoundButton rbtnPageUp;
         private RoundButton rbtnPageDown;

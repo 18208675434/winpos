@@ -288,10 +288,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             else
             {
                 lblTotalRefund.Text = "扣除:￥" + txtRefound.Text;
-                if (rewardAmount > 0)
-                {
-                    lblTotalRefund.Text = lblTotalRefund.Text + "+￥" + rewardAmount.ToString("f2") + "(赠送金额)";
-                }
+                //if (rewardAmount > 0)
+                //{
+                //    lblTotalRefund.Text = lblTotalRefund.Text + "+￥" + rewardAmount.ToString("f2") + "(赠送金额)";
+                //}
                 lblTotalRefund.ForeColor = Color.Red;
                 lblTotalRefund.Visible = true;
             }

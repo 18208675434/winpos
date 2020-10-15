@@ -410,6 +410,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormRechargeRefund";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormTuikuan";
             this.Load += new System.EventHandler(this.FormRechargeRefund_Load);
