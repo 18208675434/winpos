@@ -172,6 +172,73 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+        public string HttpPostJson(string Url, SortedDictionary<string, string> sortpara, string bodyjson)
+        {
+            try
+            {
+
+                if (!IsConnectInternet())
+                {
+                    return "";
+                }
+                
+                AsyRequetCallback testback = new AsyRequetCallback(TestBack);
+
+                string Timestamp = MainModel.getStampByDateTime(DateTime.Now);
+                string nonce = MainModel.getNonce();
+
+                string signstr = MainModel.PrivateKey;
+                foreach (KeyValuePair<string, string> keyvalue in sortpara)//在nonce前加入get参数进行签名
+                {
+                    signstr += keyvalue.Key + keyvalue.Value;
+                }
+                signstr = signstr + "nonce" + nonce + Timestamp + bodyjson;
+                string postDataStr = "nonce=" + nonce + "&sign=" + MainModel.GetMD5(signstr);
+
+                Url = MainModel.URL + Url + "?" ;
+                foreach (KeyValuePair<string, string> keyvalue in sortpara)//post请求加入get参数
+                {
+                    Url += keyvalue.Key + "=" + keyvalue.Value + "&";
+                }
+                Url = Url + postDataStr;
+
+                //异步执行防止共用变量影响
+                string thiscode = Guid.NewGuid().ToString();
+                HttpAsyncRequest(Url, "POST", Timestamp, testback, thiscode, bodyjson);
+
+
+                //接口访问完毕或 超时60
+                long beginTime = DateTime.Now.Ticks;
+                while (!WhetherGetOK)
+                {
+                    long endTime = DateTime.Now.Ticks;
+
+                    TimeSpan elapsedSpan = new TimeSpan(endTime - beginTime);
+
+                    if ((elapsedSpan.TotalMilliseconds) > 60000 || dicResult.Keys.Contains(thiscode))
+                        break;
+
+                    Delay.Start(20);
+                }
+
+                if (dicResult.Keys.Contains(thiscode))
+                {
+                    string result = dicResult[thiscode];
+                    dicResult.Remove(thiscode);
+                    return result;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("HttpPostJson" + ex.Message);
+                return "";
+            }
+        }
+
         public void PostGetCallbackHandler(IAsyncResult iar)
         {
             AsyncResult ar = (AsyncResult)iar;

@@ -442,7 +442,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 string ErrorMsg = "";
-                CurrentLstCoupon = httputil.ListMemberCouponAvailable(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
+                CurrentLstCoupon = httputil.MyCouponList(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
 
                 if (CurrentLstCoupon == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
