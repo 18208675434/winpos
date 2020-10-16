@@ -53,10 +53,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 19);
+            this.label1.Size = new System.Drawing.Size(145, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "自定义金额充值";
             // 
@@ -292,7 +292,7 @@
             this.outputmoney.NeedBoard = false;
             this.outputmoney.OnlyNumber = true;
             this.outputmoney.Size = new System.Drawing.Size(321, 50);
-            this.outputmoney.TabIndex = 103;
+            this.outputmoney.TabIndex = 0;
             this.outputmoney.WaterText = "请输入金额";
             // 
             // FormCustomreCharge
@@ -322,6 +322,7 @@
             this.Name = "FormCustomreCharge";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormCustomreCharge";
+            this.Shown += new System.EventHandler(this.FormCustomreCharge_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCancle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

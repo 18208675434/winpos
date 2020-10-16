@@ -295,7 +295,7 @@
             this.pictureCancle.Location = new System.Drawing.Point(348, 9);
             this.pictureCancle.Margin = new System.Windows.Forms.Padding(2);
             this.pictureCancle.Name = "pictureCancle";
-            this.pictureCancle.Size = new System.Drawing.Size(26, 19);
+            this.pictureCancle.Size = new System.Drawing.Size(30, 30);
             this.pictureCancle.TabIndex = 154;
             this.pictureCancle.TabStop = false;
             this.pictureCancle.Click += new System.EventHandler(this.pictureCancle_Click);
@@ -314,7 +314,7 @@
             this.inputz.NeedBoard = false;
             this.inputz.OnlyNumber = true;
             this.inputz.Size = new System.Drawing.Size(267, 50);
-            this.inputz.TabIndex = 156;
+            this.inputz.TabIndex = 1;
             this.inputz.WaterText = "请输入金额";
             this.inputz.Click += new System.EventHandler(this.inputz_Click);
             this.inputz.Enter += new System.EventHandler(this.inputz_Enter);
@@ -333,7 +333,7 @@
             this.inputc.NeedBoard = false;
             this.inputc.OnlyNumber = true;
             this.inputc.Size = new System.Drawing.Size(267, 50);
-            this.inputc.TabIndex = 155;
+            this.inputc.TabIndex = 0;
             this.inputc.WaterText = "请输入金额";
             this.inputc.Click += new System.EventHandler(this.inputc_Click);
             this.inputc.Enter += new System.EventHandler(this.inputc_Enter);
@@ -368,6 +368,7 @@
             this.Name = "FormZsongMoney";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormZsongMoney";
+            this.Shown += new System.EventHandler(this.FormZsongMoney_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCancle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

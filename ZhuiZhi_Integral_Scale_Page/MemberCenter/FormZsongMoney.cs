@@ -300,5 +300,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             isok = 2;
 
         }
+
+        private void FormZsongMoney_Shown(object sender, EventArgs e)
+        {
+            inputc.Focus();
+        }
     }
 }

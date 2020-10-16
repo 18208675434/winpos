@@ -422,7 +422,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 lblAmount.Text = template.amount.ToString("f2") + "元";
 
-                lblAmountStr.Text = "赠" + template.rewardamount.ToString("f2") + "元";
+                lblAmountStr.Text = "赠" + template.rewardamount.ToString("f2") + "元" +template.couponname;
 
                 Bitmap b = (Bitmap)MainModel.GetControlImage(pnlItem);
                 b.Tag = template;
@@ -472,8 +472,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 Other.CrearMemory();
                 Image selectimg = (Image)dgvTemplate.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
+               
+                if (selectimg.Tag == null && selectimg != bmpCustom)  //空白单元格（无商品）
+                {
+                    return;
+                }
+
+                ListAllTemplate temp = (ListAllTemplate)selectimg.Tag;
+
+
                 //自定义充值
-                if (selectimg == bmpCustom)
+                if (selectimg == bmpCustom || temp.id==0)
                 {
                     ListAllTemplate customtemplate = MemberCenterHelper.ShowFormCustomerChange();
                     this.Activate();
@@ -482,21 +491,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         CurrentTemplate = customtemplate;
                         LoadTemplate(false);
                     }
-                    //if (MemberCenterHelper.ShowFormCustomerChange)
-                    //CurrentTemplate = new ListAllTemplate();
-                    //CurrentTemplate.id = 0;
-                    //CurrentTemplate.amount = 1111;
-                    //CurrentTemplate.rewardamount = 11;
-                    
+
                     return;
                 }
 
-                if (selectimg.Tag == null)  //空白单元格（无商品）
-                {
-                    return;
-                }
 
-                ListAllTemplate temp = (ListAllTemplate)selectimg.Tag;
+
                 if (temp.amount  > 5000)
                 {
                     return;
@@ -802,67 +802,71 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             try
             {
-                if (custommoney.Text != "+")
-                {
-                    string numb = custommoney.Text.Replace("元", "");
-                    ListAllTemplate.mount = int.Parse(numb);
-                }
-
-
-                FormOtherMethod pay = new FormOtherMethod();
-                asf.AutoScaleControlTest(pay, 500, 197, 500 * MainModel.midScale, 197 * MainModel.midScale, true);
-                pay.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pay.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pay.Height) / 2);
-                pay.TopMost = true;
-                BackHelper.ShowFormBackGround();
-                //BackHelper.HideFormBackGround();
-
-                pay.ShowDialog();
-                pay.Dispose();
-                pay.Close();
-                if (MainModel.isokcancle == true)
+                if (!IsEnable)
                 {
                     return;
                 }
-                if (pay.DialogResult == DialogResult.Cancel)
+
+                if (CurrentTemplate == null)
+                {
+                    MainModel.ShowLog("请选择充值金额", false);
+                    return;
+                }
+
+                string error = "";
+                List<ClassPayment> payments = httputil.Custompaycon(ref error);
+                if (payments == null || payments.Count == 0)
+                {
+                    MainModel.ShowLog("暂无其他支付配置，或退出重试",false);
+                    return;
+                }
+
+
+                if (CurrentBalanceAccount != null && !CurrentBalanceAccount.haspaypassword && CurrentBalanceAccount.needinitpassword)
+                {
+                    MemberCenterHelper.ShowFormNoPayPwd();
+                    return;
+                }
+                string code = MemberCenterHelper.ShowFormOtherMethord(payments,CurrentTemplate.amount);
+
+                if (string.IsNullOrEmpty(code))
                 {
                     return;
                 }
-                MemberTopUpPara para = new MemberTopUpPara();
-                para.amount = ListAllTemplate.mount;
-                para.memberid = Convert.ToInt64(MainModel.memberid);
-                para.customerpaycode = MainModel.code;
-                para.autoreward = false;
-                para.paymode = "1";
-                para.phone = MainModel.GetPhone;
-                para.shopid = MainModel.CurrentShopInfo.shopid;
-                if (custommoney.Text != "+")
-                {
-                    string zqian = customdiscount.Text.Replace("赠", "").Replace("元", "");
-                    para.rewardamount = Convert.ToDecimal(zqian);
-                }
-                else
-                {
-                    para.rewardamount = reward;
-                }
-                string errormsg = "";
-                long result = httputil.MemberTopUp(para, ref errormsg);
 
-                if (result == null)
-                {
-                    MainModel.ShowLog(errormsg, false);
-                    BackHelper.HideFormBackGround();
+                    MemberTopUpPara para = new MemberTopUpPara();
+                    para.amount = CurrentTemplate.amount;
+                    para.memberid = Convert.ToInt64(CurrentMember.memberinformationresponsevo.memberid);
+                    para.paymode = "0";
+                    para.phone = CurrentMember.memberheaderresponsevo.mobile;
+                    para.shopid = MainModel.CurrentShopInfo.shopid;
+
+                    para.customerpaycode = code;
+                    //0 代表自定义充值
+                    if (CurrentTemplate.id == 0)
+                    {
+                        para.rewardamount = CurrentTemplate.rewardamount;
+                        para.autoreward = false;
+                    }
+                    else
+                    {
+                        para.autoreward = true;
+                    }
 
 
-                }
-                else
-                {
-                    PrintUtil.PrintTopUp(result.ToString());
-                    TopUpOK();
-                    MainModel.refundquest = true;
+                    string errormsg = "";
+                    long result = httputil.MemberTopUp(para, ref errormsg);
 
-                    BackHelper.HideFormBackGround();
-                }
-
+                    if (!string.IsNullOrEmpty(errormsg))
+                    {
+                        MainModel.ShowLog(errormsg, false);
+                    }
+                    else
+                    {
+                        PrintUtil.PrintTopUp(result.ToString());
+                        TopUpOK();
+                    }
+                
             }
             catch (Exception ex)
             {
