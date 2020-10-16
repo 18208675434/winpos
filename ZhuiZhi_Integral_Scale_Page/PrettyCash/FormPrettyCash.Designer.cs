@@ -149,6 +149,7 @@
             this.Name = "FormPrettyCash";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormPrettyCash";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormPrettyCash_Load);
             this.Shown += new System.EventHandler(this.FormPrettyCash_Shown);
             this.ResumeLayout(false);
