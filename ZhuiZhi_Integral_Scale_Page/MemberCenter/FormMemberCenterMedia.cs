@@ -380,11 +380,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 if (MainModel.inputimes == 1)
                 {
-                    lblForgetPwd.Text = "请确认支付密码";
+                    lblForgetPwd.Text = "请输入支付密码";
                 }
                 if (MainModel.inputimes == 2)
                 {
-                    lblForgetPwd.Text = "请设置支付密码";
+                    lblForgetPwd.Text = "请输入原密码";
                 }
                 if (MainModel.inputimes == 0)
                 {

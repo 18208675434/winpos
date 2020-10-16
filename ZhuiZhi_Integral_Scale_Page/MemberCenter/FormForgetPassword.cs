@@ -134,12 +134,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         inputtimes = 2;
                         MainModel.inputimes = 2;
                         label2.Text = "请输入新的支付密码";
+                        btnSend.Visible = false;
                     }
                     else
                     {
                         MainModel.ShowLog("短信验证码错误", false);
                         ShowLog("短信验证码错误", false);
-                        //this.Close();
+                        this.Close();
                     }
                 }
                 if (smscode.Length == 6 && inputtimes == 1)

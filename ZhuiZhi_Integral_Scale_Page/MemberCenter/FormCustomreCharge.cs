@@ -77,7 +77,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
         private void FormCustomreCharge_Shown(object sender, EventArgs e)
-        {
+        {          
             lblOutPutMoney.Focus();
         }
         /// <summary>

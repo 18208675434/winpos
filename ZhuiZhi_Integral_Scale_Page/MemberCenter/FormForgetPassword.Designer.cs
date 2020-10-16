@@ -57,7 +57,7 @@
             // 
             // btnPassW6
             // 
-            this.btnPassW6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW6.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW6.FlatAppearance.BorderSize = 0;
             this.btnPassW6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassW6.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -70,7 +70,7 @@
             // 
             // btnPassW5
             // 
-            this.btnPassW5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW5.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW5.FlatAppearance.BorderSize = 0;
             this.btnPassW5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassW5.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -83,7 +83,7 @@
             // 
             // btnPassW4
             // 
-            this.btnPassW4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW4.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW4.FlatAppearance.BorderSize = 0;
             this.btnPassW4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassW4.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -96,7 +96,7 @@
             // 
             // btnPassW3
             // 
-            this.btnPassW3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW3.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW3.FlatAppearance.BorderSize = 0;
             this.btnPassW3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassW3.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -109,7 +109,7 @@
             // 
             // btnPassW2
             // 
-            this.btnPassW2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW2.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW2.FlatAppearance.BorderSize = 0;
             this.btnPassW2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassW2.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -122,7 +122,7 @@
             // 
             // btnPassW1
             // 
-            this.btnPassW1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW1.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW1.FlatAppearance.BorderSize = 0;
             this.btnPassW1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassW1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
