@@ -701,7 +701,7 @@
             this.btnForgetPwd.Text = "忘记密码";
             this.btnForgetPwd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnForgetPwd.UseVisualStyleBackColor = false;
-            this.btnForgetPwd.Click += new System.EventHandler(this.button1_Click);
+            this.btnForgetPwd.Click += new System.EventHandler(this.btnForgetPwd_Click);
             // 
             // btnChangePwd
             // 

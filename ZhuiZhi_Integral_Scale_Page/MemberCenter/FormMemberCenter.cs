@@ -769,7 +769,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             { }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnForgetPwd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -778,16 +778,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 isok.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - isok.Width) / 2, (Screen.AllScreens[0].Bounds.Height - isok.Height) / 2);
                 isok.TopMost = true;
                 BackHelper.ShowFormBackGround();
-                //BackHelper.HideFormBackGround();
-                isok.ShowDialog();
-                isok.Dispose();
-                isok.Close();
-                MemberCenterHelper.ShowFormForgetPassword();
-                string err = "";
-                string smsCodeResult = membercenterutil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);
+             
+                if (isok.ShowDialog()==DialogResult.OK)
+                {                   
+                    MemberCenterHelper.ShowFormForgetPassword();
+                } 
             }
             catch (Exception ex)
             { }
+            finally
+            {
+                BackHelper.HideFormBackGround();
+            }
         }
 
         private void btnChangePhone_Click(object sender, EventArgs e)

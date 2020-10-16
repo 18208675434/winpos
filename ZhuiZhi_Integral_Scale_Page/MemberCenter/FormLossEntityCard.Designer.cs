@@ -33,9 +33,7 @@
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
-            this.picMenu = new System.Windows.Forms.PictureBox();
             this.lblShopName = new System.Windows.Forms.Label();
-            this.btnCancle = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.lblSmsCode = new System.Windows.Forms.Label();
             this.lblNewCardNo = new System.Windows.Forms.Label();
@@ -43,23 +41,12 @@
             this.txtNewCardNo = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pnlStepDesc = new System.Windows.Forms.Panel();
-            this.pnlStep4 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pnlStep3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pnlStep2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pnlStep1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlLine = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -72,18 +59,31 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.timerSeconds = new System.Windows.Forms.Timer(this.components);
+            this.pnlStep4 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pnlStep3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pnlStep2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pnlStep1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picMenu = new System.Windows.Forms.PictureBox();
+            this.btnCancle = new System.Windows.Forms.Button();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.pnlMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlStepDesc.SuspendLayout();
             this.pnlStep4.SuspendLayout();
             this.pnlStep3.SuspendLayout();
             this.pnlStep2.SuspendLayout();
             this.pnlStep1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHead
@@ -117,16 +117,6 @@
             this.lblMenu.TabIndex = 38;
             this.lblMenu.Text = "店铺";
             // 
-            // picMenu
-            // 
-            this.picMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMenu.BackgroundImage")));
-            this.picMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picMenu.Location = new System.Drawing.Point(69, 12);
-            this.picMenu.Name = "picMenu";
-            this.picMenu.Size = new System.Drawing.Size(21, 21);
-            this.picMenu.TabIndex = 0;
-            this.picMenu.TabStop = false;
-            // 
             // lblShopName
             // 
             this.lblShopName.AutoSize = true;
@@ -137,25 +127,6 @@
             this.lblShopName.Size = new System.Drawing.Size(42, 21);
             this.lblShopName.TabIndex = 42;
             this.lblShopName.Text = "店铺";
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.BackColor = System.Drawing.Color.Black;
-            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
-            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancle.FlatAppearance.BorderSize = 0;
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnCancle.ForeColor = System.Drawing.Color.White;
-            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnCancle.Location = new System.Drawing.Point(880, 14);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(95, 35);
-            this.btnCancle.TabIndex = 34;
-            this.btnCancle.Text = "返回";
-            this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCancle.UseVisualStyleBackColor = false;
-            this.btnCancle.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // pnlMain
             // 
@@ -259,33 +230,6 @@
             this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.validatecode;
-            this.pictureBox3.Location = new System.Drawing.Point(51, 293);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(35, 27);
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.phone;
-            this.pictureBox2.Location = new System.Drawing.Point(47, 196);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.card;
-            this.pictureBox1.Location = new System.Drawing.Point(47, 106);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 30);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
@@ -357,94 +301,6 @@
             this.pnlStepDesc.Name = "pnlStepDesc";
             this.pnlStepDesc.Size = new System.Drawing.Size(322, 561);
             this.pnlStepDesc.TabIndex = 37;
-            // 
-            // pnlStep4
-            // 
-            this.pnlStep4.BackColor = System.Drawing.Color.Transparent;
-            this.pnlStep4.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
-            this.pnlStep4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pnlStep4.Controls.Add(this.label5);
-            this.pnlStep4.Location = new System.Drawing.Point(37, 382);
-            this.pnlStep4.Name = "pnlStep4";
-            this.pnlStep4.Size = new System.Drawing.Size(40, 40);
-            this.pnlStep4.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(12, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(19, 19);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "4";
-            // 
-            // pnlStep3
-            // 
-            this.pnlStep3.BackColor = System.Drawing.Color.Transparent;
-            this.pnlStep3.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
-            this.pnlStep3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pnlStep3.Controls.Add(this.label3);
-            this.pnlStep3.Location = new System.Drawing.Point(37, 267);
-            this.pnlStep3.Name = "pnlStep3";
-            this.pnlStep3.Size = new System.Drawing.Size(40, 40);
-            this.pnlStep3.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(12, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(19, 19);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "3";
-            // 
-            // pnlStep2
-            // 
-            this.pnlStep2.BackColor = System.Drawing.Color.Transparent;
-            this.pnlStep2.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
-            this.pnlStep2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pnlStep2.Controls.Add(this.label2);
-            this.pnlStep2.Location = new System.Drawing.Point(37, 153);
-            this.pnlStep2.Name = "pnlStep2";
-            this.pnlStep2.Size = new System.Drawing.Size(40, 40);
-            this.pnlStep2.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 19);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "2";
-            // 
-            // pnlStep1
-            // 
-            this.pnlStep1.BackColor = System.Drawing.Color.Transparent;
-            this.pnlStep1.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
-            this.pnlStep1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pnlStep1.Controls.Add(this.label1);
-            this.pnlStep1.Location = new System.Drawing.Point(37, 41);
-            this.pnlStep1.Name = "pnlStep1";
-            this.pnlStep1.Size = new System.Drawing.Size(40, 40);
-            this.pnlStep1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(19, 19);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "1";
             // 
             // pnlLine
             // 
@@ -572,8 +428,153 @@
             // 
             // timerSeconds
             // 
-            this.timerSeconds.Interval = 1000;
+            this.timerSeconds.Interval = 10;
+            this.timerSeconds.Tag = "60";
             this.timerSeconds.Tick += new System.EventHandler(this.timerSeconds_Tick);
+            // 
+            // pnlStep4
+            // 
+            this.pnlStep4.BackColor = System.Drawing.Color.Transparent;
+            this.pnlStep4.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
+            this.pnlStep4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlStep4.Controls.Add(this.label5);
+            this.pnlStep4.Location = new System.Drawing.Point(37, 382);
+            this.pnlStep4.Name = "pnlStep4";
+            this.pnlStep4.Size = new System.Drawing.Size(40, 40);
+            this.pnlStep4.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(12, 10);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(19, 19);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "4";
+            // 
+            // pnlStep3
+            // 
+            this.pnlStep3.BackColor = System.Drawing.Color.Transparent;
+            this.pnlStep3.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
+            this.pnlStep3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlStep3.Controls.Add(this.label3);
+            this.pnlStep3.Location = new System.Drawing.Point(37, 267);
+            this.pnlStep3.Name = "pnlStep3";
+            this.pnlStep3.Size = new System.Drawing.Size(40, 40);
+            this.pnlStep3.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(12, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(19, 19);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "3";
+            // 
+            // pnlStep2
+            // 
+            this.pnlStep2.BackColor = System.Drawing.Color.Transparent;
+            this.pnlStep2.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
+            this.pnlStep2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlStep2.Controls.Add(this.label2);
+            this.pnlStep2.Location = new System.Drawing.Point(37, 153);
+            this.pnlStep2.Name = "pnlStep2";
+            this.pnlStep2.Size = new System.Drawing.Size(40, 40);
+            this.pnlStep2.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(12, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(19, 19);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "2";
+            // 
+            // pnlStep1
+            // 
+            this.pnlStep1.BackColor = System.Drawing.Color.Transparent;
+            this.pnlStep1.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picCircular;
+            this.pnlStep1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlStep1.Controls.Add(this.label1);
+            this.pnlStep1.Location = new System.Drawing.Point(37, 41);
+            this.pnlStep1.Name = "pnlStep1";
+            this.pnlStep1.Size = new System.Drawing.Size(40, 40);
+            this.pnlStep1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(19, 19);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "1";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.validatecode;
+            this.pictureBox3.Location = new System.Drawing.Point(51, 293);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(35, 27);
+            this.pictureBox3.TabIndex = 3;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.phone;
+            this.pictureBox2.Location = new System.Drawing.Point(47, 196);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.card;
+            this.pictureBox1.Location = new System.Drawing.Point(47, 106);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 30);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // picMenu
+            // 
+            this.picMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMenu.BackgroundImage")));
+            this.picMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picMenu.Location = new System.Drawing.Point(69, 12);
+            this.picMenu.Name = "picMenu";
+            this.picMenu.Size = new System.Drawing.Size(21, 21);
+            this.picMenu.TabIndex = 0;
+            this.picMenu.TabStop = false;
+            // 
+            // btnCancle
+            // 
+            this.btnCancle.BackColor = System.Drawing.Color.Black;
+            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
+            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCancle.FlatAppearance.BorderSize = 0;
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnCancle.ForeColor = System.Drawing.Color.White;
+            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnCancle.Location = new System.Drawing.Point(880, 14);
+            this.btnCancle.Name = "btnCancle";
+            this.btnCancle.Size = new System.Drawing.Size(95, 35);
+            this.btnCancle.TabIndex = 34;
+            this.btnCancle.Text = "返回";
+            this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCancle.UseVisualStyleBackColor = false;
+            this.btnCancle.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // FormLossEntityCard
             // 
@@ -599,12 +600,8 @@
             this.pnlHead.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlStepDesc.ResumeLayout(false);
             this.pnlStepDesc.PerformLayout();
             this.pnlStep4.ResumeLayout(false);
@@ -615,6 +612,10 @@
             this.pnlStep2.PerformLayout();
             this.pnlStep1.ResumeLayout(false);
             this.pnlStep1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.ResumeLayout(false);
 
         }

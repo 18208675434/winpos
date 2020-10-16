@@ -20,20 +20,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            //BackHelper.ShowFormBackGround();
-            BackHelper.HideFormBackGround();
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
-            this.Close();
-           
-            BackHelper.ShowFormBackGround();
-            
-            
+            this.DialogResult = DialogResult.OK;
+            this.Close();  
         }
     }
 }
