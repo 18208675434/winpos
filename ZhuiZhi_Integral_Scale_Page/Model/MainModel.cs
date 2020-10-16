@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 {
@@ -153,6 +154,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 商店名称
         /// </summary>
         public static string ShopName = INIManager.GetIni("System", "ShopName", MainModel.IniPath);
+
+        /// <summary> 充值金额模板集合
+        /// </summary>
+        public static List<ListAllTemplate> LstRechargeTemplates;
 
         /// <summary>
         /// 当前登录用户信息

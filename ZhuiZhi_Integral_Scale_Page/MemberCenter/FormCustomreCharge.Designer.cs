@@ -45,8 +45,8 @@
             this.btnpw1 = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.pictureCancle = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.outputmoney = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.lblRewardAmount = new System.Windows.Forms.Label();
+            this.lblOutPutMoney = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCancle)).BeginInit();
             this.SuspendLayout();
             // 
@@ -267,40 +267,41 @@
             this.pictureCancle.TabStop = false;
             this.pictureCancle.Click += new System.EventHandler(this.pictureCancle_Click);
             // 
-            // label3
+            // lblRewardAmount
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(16, 102);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 21);
-            this.label3.TabIndex = 119;
-            this.label3.Text = "label3";
-            this.label3.Visible = false;
+            this.lblRewardAmount.AutoSize = true;
+            this.lblRewardAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblRewardAmount.Location = new System.Drawing.Point(16, 102);
+            this.lblRewardAmount.Name = "lblRewardAmount";
+            this.lblRewardAmount.Size = new System.Drawing.Size(55, 21);
+            this.lblRewardAmount.TabIndex = 119;
+            this.lblRewardAmount.Text = "label3";
+            this.lblRewardAmount.Visible = false;
             // 
-            // outputmoney
+            // lblOutPutMoney
             // 
-            this.outputmoney.BackColor = System.Drawing.Color.White;
-            this.outputmoney.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.outputmoney.DecimalDigits = 3;
-            this.outputmoney.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outputmoney.Location = new System.Drawing.Point(16, 45);
-            this.outputmoney.LockFocus = true;
-            this.outputmoney.MaxDeciaml = ((long)(0));
-            this.outputmoney.MaxLength = 100;
-            this.outputmoney.Name = "outputmoney";
-            this.outputmoney.NeedBoard = false;
-            this.outputmoney.OnlyNumber = true;
-            this.outputmoney.Size = new System.Drawing.Size(321, 50);
-            this.outputmoney.TabIndex = 0;
-            this.outputmoney.WaterText = "请输入金额";
+            this.lblOutPutMoney.BackColor = System.Drawing.Color.White;
+            this.lblOutPutMoney.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblOutPutMoney.DecimalDigits = 3;
+            this.lblOutPutMoney.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblOutPutMoney.Location = new System.Drawing.Point(16, 45);
+            this.lblOutPutMoney.LockFocus = true;
+            this.lblOutPutMoney.MaxDeciaml = ((long)(0));
+            this.lblOutPutMoney.MaxLength = 100;
+            this.lblOutPutMoney.Name = "lblOutPutMoney";
+            this.lblOutPutMoney.NeedBoard = false;
+            this.lblOutPutMoney.OnlyNumber = true;
+            this.lblOutPutMoney.Size = new System.Drawing.Size(321, 50);
+            this.lblOutPutMoney.TabIndex = 0;
+            this.lblOutPutMoney.WaterText = "请输入金额";
+            this.lblOutPutMoney.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.outputmoney_DataChanged);
             // 
             // FormCustomreCharge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 441);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblRewardAmount);
             this.Controls.Add(this.pictureCancle);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.btnpw0);
@@ -316,7 +317,7 @@
             this.Controls.Add(this.btnpw1);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.outputmoney);
+            this.Controls.Add(this.lblOutPutMoney);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormCustomreCharge";
@@ -332,7 +333,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private MyControl.NumberTextBox outputmoney;
+        private MyControl.NumberTextBox lblOutPutMoney;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button btnpw0;
@@ -348,6 +349,6 @@
         private System.Windows.Forms.Button btnpw1;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.PictureBox pictureCancle;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblRewardAmount;
     }
 }

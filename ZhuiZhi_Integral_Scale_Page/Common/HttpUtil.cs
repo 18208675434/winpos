@@ -3308,6 +3308,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (rd.code == 0)
                 {
                     List<ListAllTemplate> resultobj = JsonConvert.DeserializeObject<List<ListAllTemplate>>(rd.data.ToString());
+                    resultobj.OrderBy(e => e.amount);
                     return resultobj;
                 }
                 else

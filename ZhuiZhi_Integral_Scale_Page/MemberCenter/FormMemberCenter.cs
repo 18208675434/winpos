@@ -292,13 +292,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
 
                     string errormsg = "";
-                    LstTemplates = httputil.ListAllTemplate(ref errormsg);
-
+                    LstTemplates = httputil.ListAllTemplate(ref errormsg);                    
                     if (LstTemplates == null || !string.IsNullOrEmpty(errormsg))
                     {
                         MainModel.ShowLog(errormsg, false);
                         return;
                     }
+                    MainModel.LstRechargeTemplates = LstTemplates;//刷新模板信息
                 }
 
                 List<Bitmap> lstbmp = new List<Bitmap>();
