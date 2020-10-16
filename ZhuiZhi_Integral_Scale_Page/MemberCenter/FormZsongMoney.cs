@@ -273,7 +273,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 CustomTemplate = new ListAllTemplate();
                 CustomTemplate.id = 0;
                 CustomTemplate.amount = cash;
-
+                CustomTemplate.customAndreward = true;
                 if (!string.IsNullOrEmpty(inputz.Text))
                 {
                     CustomTemplate.rewardamount = Convert.ToDecimal(inputz.Text);
