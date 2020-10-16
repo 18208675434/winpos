@@ -63,8 +63,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             Application.DoEvents();
 
             btnToday_Click(null, null);
-
-            txtOrderId.Focus();
+            txtUser.Focus();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
