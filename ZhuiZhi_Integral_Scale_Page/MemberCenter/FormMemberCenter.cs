@@ -343,7 +343,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("获取所有充值面额异常" + ex.Message, true);
+                //MainModel.ShowLog("获取所有充值面额异常" + ex.Message, true);
             }
         }
 
@@ -739,20 +739,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     pnlPayByCash.Visible = true;
 
-                    pnlPayByOnLine.Width = pnlPayByCash.Width;
+                    //pnlPayByOnLine.Width = pnlPayByCash.Width;
 
-                    picPayByOnLine.Left = (pnlPayByOnLine.Width - picPayByOnLine.Width - lblPayByOnLine.Width) / 2;
+                    //picPayByOnLine.Left = (pnlPayByOnLine.Width - picPayByOnLine.Width - lblPayByOnLine.Width) / 2;
 
-                    lblPayByOnLine.Left = picPayByOnLine.Right;
+                    //lblPayByOnLine.Left = picPayByOnLine.Right;
                 }
                 else
                 {
                     pnlPayByCash.Visible = false;
-                    pnlPayByOnLine.Width = dgvTemplate.Width;
+                    //pnlPayByOnLine.Width = dgvTemplate.Width;
 
-                    picPayByOnLine.Left = (pnlPayByOnLine.Width - picPayByOnLine.Width - lblPayByOnLine.Width) / 2;
+                    //picPayByOnLine.Left = (pnlPayByOnLine.Width - picPayByOnLine.Width - lblPayByOnLine.Width) / 2;
 
-                    lblPayByOnLine.Left = picPayByOnLine.Right;
+                    //lblPayByOnLine.Left = picPayByOnLine.Right;
                 }
             }
             catch (Exception ex) { }
@@ -837,7 +837,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MemberTopUpPara para = new MemberTopUpPara();
                     para.amount = CurrentTemplate.amount;
                     para.memberid = Convert.ToInt64(CurrentMember.memberinformationresponsevo.memberid);
-                    para.paymode = "0";
+                    para.paymode = "1";
                     para.phone = CurrentMember.memberheaderresponsevo.mobile;
                     para.shopid = MainModel.CurrentShopInfo.shopid;
 

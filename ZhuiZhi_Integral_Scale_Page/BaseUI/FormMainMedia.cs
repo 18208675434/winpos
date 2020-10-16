@@ -391,15 +391,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 catch { }
 
-                //this.BeginInvoke(new EventHandler(delegate
-                //{
-                //    UpdateFormExe(null);
+                this.BeginInvoke(new EventHandler(delegate
+                {
+                    UpdateFormExe();
 
-                //}));
+                }));
 
-                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
-                bk.DoWork += UpdateFormExe;
-                bk.RunWorkerAsync();
+                //System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                //bk.DoWork += UpdateFormExe;
+                //bk.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -411,7 +411,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         //增加线程锁  防止多线程操作datagridview 红叉情况
         private object thislock = new object();
-        private void UpdateFormExe(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void UpdateFormExe()
         {
             lock (thislock)
             {

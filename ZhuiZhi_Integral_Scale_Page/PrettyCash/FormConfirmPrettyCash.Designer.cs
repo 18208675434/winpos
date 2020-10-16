@@ -126,6 +126,7 @@
             this.Name = "FormConfirmPrettyCash";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormConfirmPrettyCash";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -681,7 +681,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 FormOtherMethod pay = new FormOtherMethod(payments, amount);
-                asf.AutoScaleControlTest(pay, 500, 260, 500 * MainModel.midScale, 260 * MainModel.midScale, true);
+                asf.AutoScaleControlTest(pay, 500, 300, 500 * MainModel.midScale, 300 * MainModel.midScale, true);
                 pay.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pay.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pay.Height) / 2);
                 pay.TopMost = true;
                 BackHelper.ShowFormBackGround();
