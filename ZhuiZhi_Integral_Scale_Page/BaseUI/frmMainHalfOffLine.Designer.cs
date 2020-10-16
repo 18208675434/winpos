@@ -1303,9 +1303,9 @@
             this.lblBalance.BackColor = System.Drawing.Color.White;
             this.lblBalance.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblBalance.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblBalance.Location = new System.Drawing.Point(282, 7);
+            this.lblBalance.Location = new System.Drawing.Point(265, 7);
             this.lblBalance.Name = "lblBalance";
-            this.lblBalance.Size = new System.Drawing.Size(82, 20);
+            this.lblBalance.Size = new System.Drawing.Size(99, 20);
             this.lblBalance.TabIndex = 52;
             this.lblBalance.Text = "0张";
             this.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1316,7 +1316,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.White;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label11.Location = new System.Drawing.Point(236, 8);
+            this.label11.Location = new System.Drawing.Point(224, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(40, 20);
             this.label11.TabIndex = 51;
@@ -1327,7 +1327,7 @@
             this.pictureBox5.BackColor = System.Drawing.Color.White;
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox5.Location = new System.Drawing.Point(214, 6);
+            this.pictureBox5.Location = new System.Drawing.Point(202, 6);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(22, 22);
             this.pictureBox5.TabIndex = 50;
