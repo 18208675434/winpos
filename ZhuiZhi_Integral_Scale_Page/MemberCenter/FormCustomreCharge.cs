@@ -16,7 +16,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormCustomreCharge : Form
     {
 
-        public ListAllTemplate CustomTemplate = new ListAllTemplate();
+        public ListAllTemplate CustomTemplate;
+        decimal rewardamount = 0;
         public FormCustomreCharge()
         {
             InitializeComponent();
@@ -551,11 +552,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     return;
                 }
-
+                CustomTemplate = new ListAllTemplate();
                 decimal cash = Convert.ToDecimal(lblOutPutMoney.Text);
                 CustomTemplate.id = 0;
                 CustomTemplate.amount = cash;
-                //CustomTemplate.rewardamount = 0;
+                CustomTemplate.rewardamount = rewardamount;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 
@@ -582,7 +583,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 decimal amount = 0;
                 decimal.TryParse(lblOutPutMoney.Text, out amount);
-                decimal rewardamount = 0;
+                rewardamount = 0;
 
                 for (int i = MainModel.LstRechargeTemplates.Count - 1; i >= 0; i--)
                 {
@@ -595,7 +596,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     amount = amount % item.amount;
                 }
 
-                CustomTemplate.rewardamount = rewardamount;
 
                 this.Invoke(new InvokeHandler(delegate()
                 {
