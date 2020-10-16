@@ -243,6 +243,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void timerSeconds_Tick(object sender, EventArgs e)
         {
+            timerSeconds.Interval = 1000;
             int left = (int)timerSeconds.Tag;
             left--;
             if (left <= 0)

@@ -32,6 +32,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public FormForgetPassword()
         {
             InitializeComponent();
+            btnSend_Click(null,null);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -231,7 +232,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 //MsgHelper.AutoShowForm(msg);
                 this.BeginInvoke(new InvokeHandler(delegate()
-                {
+                {                   
                     Delay.Start(1000);
                     this.Activate();
                 }));
@@ -242,6 +243,49 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LogManager.WriteLog(ex.Message);
             }
 
+        }
+        MemberCenterHttpUtil membercenterutil = new MemberCenterHttpUtil();
+        private void btnSend_Click(object sender, EventArgs e)
+        {          
+            try
+            {
+                if (timerSeconds.Enabled || string.IsNullOrEmpty(MainModel.CurrentMember.memberid))
+                {
+                    return;
+                }
+                string err = "";
+                LoadingHelper.ShowLoadingScreen();
+                string smsCodeResult = membercenterutil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);
+                LoadingHelper.CloseForm();              
+                if (!string.IsNullOrEmpty(err))
+                {
+                    MainModel.ShowLog("发送验证码失败：" + err, true);
+                    return;
+                }
+                timerSeconds.Tag = 60;
+                timerSeconds.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("发送验证码异常" + ex.Message, true);
+            }
+        }
+        private void timerSeconds_Tick(object sender, EventArgs e)
+        {
+            timerSeconds.Interval = 1000;
+            int left = (int)timerSeconds.Tag;
+            left--;
+            if (left <= 0)
+            {
+                timerSeconds.Enabled = false;
+                btnSend.Text = "重新发送";
+            }
+            else
+            {
+                btnSend.BackColor = Color.Gray;
+                btnSend.Text = "重新发送(" + left + ")";
+                timerSeconds.Tag = left;
+            }
         }
     }
 }
