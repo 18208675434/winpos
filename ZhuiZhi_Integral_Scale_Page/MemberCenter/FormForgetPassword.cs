@@ -139,7 +139,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         MainModel.ShowLog("短信验证码错误", false);
                         ShowLog("短信验证码错误", false);
-                        this.Close();
+                        //this.Close();
                     }
                 }
                 if (smscode.Length == 6 && inputtimes == 1)
@@ -278,6 +278,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (left <= 0)
             {
                 timerSeconds.Enabled = false;
+                btnSend.BackColor = Color.FromArgb(20, 158, 255);
                 btnSend.Text = "重新发送";
             }
             else

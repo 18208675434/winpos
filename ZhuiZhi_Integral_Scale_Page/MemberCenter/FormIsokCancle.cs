@@ -22,7 +22,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            BackHelper.HideFormBackGround();
             this.Close();
         }
 

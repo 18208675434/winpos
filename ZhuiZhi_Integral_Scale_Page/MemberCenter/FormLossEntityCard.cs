@@ -249,6 +249,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (left <= 0)
             {
                 timerSeconds.Enabled = false;
+                btnSend.BackColor = Color.FromArgb(20, 158, 255);
                 btnSend.Text = "重新发送";               
             }
             else

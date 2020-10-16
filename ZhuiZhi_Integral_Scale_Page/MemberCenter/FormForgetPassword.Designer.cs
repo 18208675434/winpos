@@ -47,7 +47,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.Location = new System.Drawing.Point(247, 154);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 39);
             this.btnCancel.TabIndex = 17;
@@ -60,8 +60,9 @@
             this.btnPassW6.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPassW6.FlatAppearance.BorderSize = 0;
             this.btnPassW6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPassW6.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPassW6.Location = new System.Drawing.Point(303, 83);
-            this.btnPassW6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassW6.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassW6.Name = "btnPassW6";
             this.btnPassW6.Size = new System.Drawing.Size(44, 44);
             this.btnPassW6.TabIndex = 16;
@@ -72,8 +73,9 @@
             this.btnPassW5.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPassW5.FlatAppearance.BorderSize = 0;
             this.btnPassW5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPassW5.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPassW5.Location = new System.Drawing.Point(246, 83);
-            this.btnPassW5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassW5.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassW5.Name = "btnPassW5";
             this.btnPassW5.Size = new System.Drawing.Size(44, 44);
             this.btnPassW5.TabIndex = 15;
@@ -84,8 +86,9 @@
             this.btnPassW4.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPassW4.FlatAppearance.BorderSize = 0;
             this.btnPassW4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPassW4.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPassW4.Location = new System.Drawing.Point(187, 83);
-            this.btnPassW4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassW4.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassW4.Name = "btnPassW4";
             this.btnPassW4.Size = new System.Drawing.Size(44, 44);
             this.btnPassW4.TabIndex = 14;
@@ -96,8 +99,9 @@
             this.btnPassW3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPassW3.FlatAppearance.BorderSize = 0;
             this.btnPassW3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPassW3.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPassW3.Location = new System.Drawing.Point(132, 83);
-            this.btnPassW3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassW3.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassW3.Name = "btnPassW3";
             this.btnPassW3.Size = new System.Drawing.Size(44, 44);
             this.btnPassW3.TabIndex = 13;
@@ -108,8 +112,9 @@
             this.btnPassW2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPassW2.FlatAppearance.BorderSize = 0;
             this.btnPassW2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPassW2.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPassW2.Location = new System.Drawing.Point(75, 83);
-            this.btnPassW2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassW2.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassW2.Name = "btnPassW2";
             this.btnPassW2.Size = new System.Drawing.Size(44, 44);
             this.btnPassW2.TabIndex = 12;
@@ -120,8 +125,9 @@
             this.btnPassW1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPassW1.FlatAppearance.BorderSize = 0;
             this.btnPassW1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPassW1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPassW1.Location = new System.Drawing.Point(15, 83);
-            this.btnPassW1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPassW1.Margin = new System.Windows.Forms.Padding(2);
             this.btnPassW1.Name = "btnPassW1";
             this.btnPassW1.Size = new System.Drawing.Size(44, 44);
             this.btnPassW1.TabIndex = 11;
@@ -188,7 +194,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormForgetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormForgetPassword";
