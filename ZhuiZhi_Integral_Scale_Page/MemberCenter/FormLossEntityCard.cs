@@ -108,6 +108,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+                this.Enabled = false;
                 if (string.IsNullOrEmpty(txtNewCardNo.Text))
                 {
                     txtNewCardNo.Focus();
@@ -148,8 +149,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("挂失异常:" + ex.Message, true);
             }
             finally
-            {
+            {               
                 LoadingHelper.CloseForm();
+                this.Enabled = true;
             }
 
         }

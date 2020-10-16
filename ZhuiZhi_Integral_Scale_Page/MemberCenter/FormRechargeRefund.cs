@@ -67,11 +67,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+                this.Enabled = false;
                 if (string.IsNullOrEmpty(txtRefound.Text))
                 {
                     MainModel.ShowLog("请输入退款金额", true);
                     return;
-                }               
+                }
+                if (Convert.ToDecimal(txtRefound.Text) >rechargeAmount)
+                {
+                     MainModel.ShowLog("不能大于充值金额", true);
+                    return;
+                }
                 DepositRefundRequest request = new DepositRefundRequest();
                 request.refundcapital = txtRefound.Text;
                 request.refundtype = refundtype;
@@ -101,6 +107,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch (Exception ex)
             {
                 MainModel.ShowLog("退款异常：" + ex.Message, true);
+            }
+            finally {
+                this.Enabled = true;
             }
         }
 

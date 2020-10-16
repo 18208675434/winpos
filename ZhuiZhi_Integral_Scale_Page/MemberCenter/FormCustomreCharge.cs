@@ -23,527 +23,36 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             InitializeComponent();
         }
 
-        private void btnpw1_Click(object sender, EventArgs e)
+        private void btnNum_Click(object sender, EventArgs e)
         {
-            try
+            Button btnNum = sender as Button;
+            if (btnNum != null && btnNum != btnDel)
             {
-                if (lblOutPutMoney.Text.Length == 3)
-                {
-                    lblOutPutMoney.Text += "1";
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    ////lblRewardAmount.Visible = true;
-
-                }
-                else if (lblOutPutMoney.Text.Length == 2)
-                {
-                    lblOutPutMoney.Text += "1";
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-
-                }
-                else if (lblOutPutMoney.Text.Length == 1)
-                {
-                    lblOutPutMoney.Text += "1";
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-
-                }
-                else if (lblOutPutMoney.Text == "")
-                {
-                    lblOutPutMoney.Text += "1";
-                }
-                else if (lblOutPutMoney.Text.Length > 3)
+                if (lblOutPutMoney.Text.Contains(".") && btnNum.Text == ".")
                 {
                     return;
                 }
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("格式输入错误" + ex.Message, true);
-                throw;
-            }
-
-        }
-
-        private void btnpw2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (lblOutPutMoney.Text.Length == 3)
+                lblOutPutMoney.Text += btnNum.Text;
+                if (lblOutPutMoney.Text.Length==1&&btnNum.Text == "0")
                 {
-                    lblOutPutMoney.Text += "2";
-
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-
-                }
-                else if (lblOutPutMoney.Text.Length == 2)
-                {
-                    lblOutPutMoney.Text += "2";
-
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-
-
-                }
-                else if (lblOutPutMoney.Text.Length == 1)
-                {
-                    lblOutPutMoney.Text += "2";
-
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-
-                }
-                else if (lblOutPutMoney.Text == "")
-                {
-                    lblOutPutMoney.Text += "2";
-                }
-                else if (lblOutPutMoney.Text.Length > 3)
-                {
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("输入格式错误" + ex.Message, true);
-                throw;
-            }
-
-        }
-
-        private void btnpw3_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += "3";
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "3";
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "3";
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "3";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
+                    lblOutPutMoney.Text += ".";
+                }                
             }
         }
 
-        private void btnpw4_Click(object sender, EventArgs e)
+        private void btnDel_Click(object sender, EventArgs e)
         {
-            if (lblOutPutMoney.Text.Length == 3)
+            if (lblOutPutMoney.Text.Length > 0)
             {
-                lblOutPutMoney.Text += "4";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
+                lblOutPutMoney.Text = lblOutPutMoney.Text.Substring(0, lblOutPutMoney.Text.Length - 1);
             }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "4";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "4";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "4";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-        }
-
-        private void btnpw5_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += "5";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "5";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "5";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "5";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-        }
-
-        private void btnpw6_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += "6";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "6";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "6";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "6";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-        }
-
-        private void btnpw7_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += "7";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "7";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "7";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "7";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-        }
-
-        private void btnpw8_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += "8";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "8";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "8";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "8";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-        }
-
-        private void btnpw9_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += "9";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "9";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "9";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "9";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-        }
-
-        private void btnpwd_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += ".";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += ".";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += ".";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += ".";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-
-
-        }
-
-        private void btnpw0_Click(object sender, EventArgs e)
-        {
-            if (lblOutPutMoney.Text.Length == 3)
-            {
-                lblOutPutMoney.Text += "0";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-            }
-            else if (lblOutPutMoney.Text.Length == 2)
-            {
-                lblOutPutMoney.Text += "0";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text.Length == 1)
-            {
-                lblOutPutMoney.Text += "0";
-
-                int zeng = int.Parse(lblOutPutMoney.Text);
-                int name = zeng / 10;
-                lblRewardAmount.Text = "赠" + name + ".00元";
-                //lblRewardAmount.Visible = true;
-
-            }
-            else if (lblOutPutMoney.Text == "")
-            {
-                lblOutPutMoney.Text += "0";
-            }
-            else if (lblOutPutMoney.Text.Length > 3)
-            {
-                return;
-            }
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-
-                if (lblOutPutMoney.Text.Length > 0)
-                {
-                    lblOutPutMoney.Text = lblOutPutMoney.Text.Substring(0, lblOutPutMoney.Text.Length - 1);
-                }
-                else if (lblOutPutMoney.Text == "")
-                {
-                    lblRewardAmount.Text = "";
-                    lblRewardAmount.Visible = false;
-                }
-                if (lblOutPutMoney.Text.Length == 3)
-                {
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-                }
-                else if (lblOutPutMoney.Text.Length == 2)
-                {
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-
-                }
-                else if (lblOutPutMoney.Text.Length == 1)
-                {
-                    int zeng = int.Parse(lblOutPutMoney.Text);
-                    int name = zeng / 10;
-                    lblRewardAmount.Text = "赠" + name + ".00元";
-                    //lblRewardAmount.Visible = true;
-
-                }
-            }
-            catch { }
         }
 
         private void pictureCancle_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private HttpUtil util = new HttpUtil();
+
         private void btnOk_Click(object sender, EventArgs e)
         {
             try
@@ -582,7 +91,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 decimal amount = 0;
-                decimal.TryParse(lblOutPutMoney.Text, out amount);
+                decimal.TryParse(data, out amount);
                 rewardamount = 0;
 
                 for (int i = MainModel.LstRechargeTemplates.Count - 1; i >= 0; i--)
@@ -595,7 +104,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     rewardamount += Convert.ToInt32(Math.Floor(amount / item.amount)) * item.rewardamount;
                     amount = amount % item.amount;
                 }
-
 
                 this.Invoke(new InvokeHandler(delegate()
                 {
@@ -614,8 +122,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-
-
             }
 
         }
