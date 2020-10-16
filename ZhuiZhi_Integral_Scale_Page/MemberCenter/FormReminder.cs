@@ -15,9 +15,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormReminder : Form
     {
-        public FormReminder()
+        public FormReminder(string name,decimal amount)
         {
             InitializeComponent();
+
+            label2.Text = "确认" + name + "支付：￥" + amount.ToString("f2");
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -31,20 +33,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             BackHelper.HideFormBackGround();
             MainModel.isokcancle = true;
+
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
 
         }
 
         private void FormReminder_Load(object sender, EventArgs e)
         {
-            label2.Text = "确认"+ListAllTemplate.zhifu+"支付：￥"+ ListAllTemplate.mount;
+           // label2.Text = "确认"+ListAllTemplate.zhifu+"支付：￥"+ ListAllTemplate.mount;
         }
         
         private void button2_Click(object sender, EventArgs e)
         {
             MainModel.isokcancle = false;
             BackHelper.HideFormBackGround();
-            
+            this.DialogResult = DialogResult.OK;
             this.Close();
             
         }

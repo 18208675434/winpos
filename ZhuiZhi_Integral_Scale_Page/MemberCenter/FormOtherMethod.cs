@@ -16,14 +16,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormOtherMethod : Form
     {
 
+        public string SelectCode = "";
+
+        public decimal currentamount = 0;
+
+        public List<ClassPayment> CurrentPayments = new List<ClassPayment>();
+
         bool IsEnable = true;
-        public FormOtherMethod()
+        public FormOtherMethod(List<ClassPayment> payments,decimal amount)
         {
             InitializeComponent();
+            CurrentPayments = payments;
+            currentamount = amount;
         }
         HttpUtil httputil = new HttpUtil();
         private ClassPayment current = null;
-        private List<ClassPayment> payment = new List<ClassPayment>();
         private Bitmap btnzffss(ClassPayment pay)
         {
             try
@@ -70,24 +77,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                  dataGridView1.Rows.Clear();
-                 if (payment == null || payment.Count == 0 || need)
-                {
 
-                    string error = "";
-
-
-                    payment = httputil.Custompaycon(ref error);
-
-                    if (payment == null || !string.IsNullOrEmpty(error))
-                    {
-                        MainModel.ShowLog(error, false);
-                        return;
-                    }
-                }
 
                 List<Bitmap> lstbmp = new List<Bitmap>();
 
-                foreach (ClassPayment template in payment)
+                foreach (ClassPayment template in CurrentPayments)
                 {
                     if (current == null && template.posenable == true)
                     {
@@ -110,13 +104,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MemberCenterMediaHelper.UpdateDgvTemplate(lstbmp);
             }
             catch (Exception)
-            {
-                
+            {                
                 throw;
             }
         }
         private void FormOtherMethod_Load(object sender, EventArgs e)
         {
+
+            btnzffs.Height = dataGridView1.RowTemplate.Height - 5;
             Load1(true);
         }
 
@@ -148,32 +143,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 ClassPayment temp = (ClassPayment)selectimg.Tag;
                 MainModel.code = temp.code;
-                ListAllTemplate.zhifu = temp.name;
-                if (temp.id != "")
-                {
-                    this.Close();
 
-                    FormReminder remm = new FormReminder();
-                    asf.AutoScaleControlTest(remm, 520, 170, 520 * MainModel.midScale, 170 * MainModel.midScale, true);
-                    remm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - remm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - remm.Height) / 2);
-                    remm.TopMost = true;
-                    BackHelper.ShowFormBackGround();
-                    //BackHelper.HideFormBackGround();
-                    this.Hide();
-                    remm.ShowDialog();
-                    if (MainModel.isokcancle == true)
-                    {
-                        return;
-                    }
-                    remm.Dispose();
-                    remm.Close();
+                FormReminder remm = new FormReminder(temp.name,currentamount);
+                asf.AutoScaleControlTest(remm, 520, 170, 520 * MainModel.midScale, 170 * MainModel.midScale, true);
+                remm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - remm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - remm.Height) / 2);
+                remm.TopMost = true;
+                BackHelper.ShowFormBackGround();
+                //BackHelper.HideFormBackGround();
+                this.Hide();
+                remm.ShowDialog();
+                remm.Dispose();
+                Application.DoEvents();
+
+                if (remm.DialogResult == DialogResult.OK)
+                {
+                    SelectCode = temp.code;
                 }
+                this.Close();
+                //ListAllTemplate.zhifu = temp.name;
+                //if (temp.id != "")
+                //{
+                //    this.Close();
+
+                //    FormReminder remm = new FormReminder();
+                //    asf.AutoScaleControlTest(remm, 520, 170, 520 * MainModel.midScale, 170 * MainModel.midScale, true);
+                //    remm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - remm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - remm.Height) / 2);
+                //    remm.TopMost = true;
+                //    BackHelper.ShowFormBackGround();
+                //    //BackHelper.HideFormBackGround();
+                //    this.Hide();
+                //    remm.ShowDialog();
+                //    if (MainModel.isokcancle == true)
+                //    {
+                //        return;
+                //    }
+                //    remm.Dispose();
+                //    remm.Close();
+                //}
             }
             catch (Exception)
             {
                 
                 throw;
             }
+        }
+
+        private void FormOtherMethod_Shown(object sender, EventArgs e)
+        {
+            
         }
     }
 }

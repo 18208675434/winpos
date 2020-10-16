@@ -648,7 +648,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
 
-
+        /// <summary>
+        /// 显示页面 自定义充值金额
+        /// </summary>
+        /// <returns></returns>
         public static ListAllTemplate ShowFormCustomerChange()
         {
             try
@@ -672,5 +675,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return null;
             }
         }
+
+        public static string ShowFormOtherMethord(List<ClassPayment> payments,decimal amount)
+        {
+            try
+            {
+                FormOtherMethod pay = new FormOtherMethod(payments, amount);
+                asf.AutoScaleControlTest(pay, 500, 260, 500 * MainModel.midScale, 260 * MainModel.midScale, true);
+                pay.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pay.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pay.Height) / 2);
+                pay.TopMost = true;
+                BackHelper.ShowFormBackGround();
+
+                pay.ShowDialog();
+                pay.Dispose();
+                BackHelper.HideFormBackGround();
+
+                return pay.SelectCode;
+
+            }
+            catch (Exception ex)
+            {
+                BackHelper.HideFormBackGround();
+                LogManager.WriteLog("加载充值其他支付方式页面异常" + ex);
+                return null;
+            }
+        }
+
     }
 }
