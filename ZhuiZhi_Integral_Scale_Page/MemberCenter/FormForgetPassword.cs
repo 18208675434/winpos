@@ -31,8 +31,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         public FormForgetPassword()
         {
-            InitializeComponent();
-            btnSend_Click(null,null);
+            InitializeComponent();         
+           
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -44,6 +44,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormForgetPassword_Shown(object sender, EventArgs e)
         {
+            btnSend_Click(null, null);
             MemberCenterMediaHelper.ShowForgetPassWord();
         }
         /// <summary>
