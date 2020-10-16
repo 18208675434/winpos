@@ -2832,56 +2832,63 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
-        ///// <summary>
-        ///// 用户可用券列表  2020-09-29 更换 
-        ///// </summary>
-        ///// <param name="memberid"></param>
-        ///// <param name="errormsg"></param>
-        //public List<PromotionCoupon> ListMemberCouponAvailable(string memberid, ref string errormsg)
-        //{
-        //    try
-        //    {
+        /// <summary>
+        /// 用户可用券列表  2020-09-29 更换 
+        /// </summary>
+        /// <param name="memberid"></param>
+        /// <param name="errormsg"></param>
+        public List<PromotionCoupon> MyCouponList(string memberid, ref string errormsg)
+        {
+            try
+            {
 
-        //        string url = "/pos/activity/membercoupon/mycouponlist";
+                string url = "/pos/activity/membercoupon/mycouponlist";
 
-        //        SortedDictionary<string, object> sort = new SortedDictionary<string, object>();
-        //        sort.Add("memberid", memberid);
-        //        sort.Add("filter","1");
-        //        sort.Add("shopid",MainModel.CurrentShopInfo.shopid);
-        //        sort.Add("size", 10);
-        //        sort.Add("lastcouponcode",0);
-        //        string testjson = JsonConvert.SerializeObject(sort);
+                SortedDictionary<string, string> sortGet = new SortedDictionary<string, string>();
+                sortGet.Add("filter", "1");
+                SortedDictionary<string, object> sortPost = new SortedDictionary<string, object>();
+                sortPost.Add("lastcouponcode", 0);
+                sortPost.Add("shopid", MainModel.CurrentShopInfo.shopid);
+                sortPost.Add("memberid", memberid);
+                sortPost.Add("size", 10);
+                
+                string testjson = JsonConvert.SerializeObject(sortPost);
 
-        //        string json = HttpPOST(url, testjson);
+                string json = HttpPOST(url, sortGet, testjson);
 
-        //        if (string.IsNullOrEmpty(json))
-        //        {
-        //            errormsg = "网络连接异常，请检查网络连接";
-        //            return null;
-        //        }
+                if (string.IsNullOrEmpty(json))
+                {
+                    errormsg = "网络连接异常，请检查网络连接";
+                    return null;
+                }
 
-        //        ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-        //        if (rd.code == 0)
-        //        {
-        //            string strdata = rd.data.ToString();
-        //            List<PromotionCoupon> lstuserresult = JsonConvert.DeserializeObject<List<PromotionCoupon>>(strdata);
-        //            return lstuserresult;
-        //        }
-        //        else
-        //        {
-        //            try { LogManager.WriteLog("Error", "mycouponlist:" + json); }
-        //            catch { }
-        //            errormsg = rd.message;
-        //            return null;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogManager.WriteLog("Error", "获取用户可用券列表异常：" + ex.Message);
-        //        errormsg = "网络连接异常，请检查网络连接";
-        //        return null;
-        //    }
-        //}
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    string strdata = rd.data.ToString();
+                    var dic= JsonConvert.DeserializeObject<Dictionary<string,object>>(strdata);
+                    if (!dic.ContainsKey("couponvos"))
+                    {
+                        return new List<PromotionCoupon>();
+                    }
+                    List<PromotionCoupon> lstuserresult = JsonConvert.DeserializeObject<List<PromotionCoupon>>(JsonConvert.SerializeObject(dic["couponvos"]));
+                    return lstuserresult;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "mycouponlist:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取用户可用券列表异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
 
 
         /// <summary>
@@ -4106,6 +4113,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             Other.CrearMemory();
             return httprequest.HttpPostJson(Url, bodyjson);
+        }
+
+        public string HttpPOST(string Url, SortedDictionary<string, string> sortpara, string bodyjson)
+        {
+            Other.CrearMemory();
+            return httprequest.HttpPostJson(Url, sortpara, bodyjson);
         }
 
 
