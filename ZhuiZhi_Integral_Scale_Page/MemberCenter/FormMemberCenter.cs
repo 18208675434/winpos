@@ -174,12 +174,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (CurrentTemplate.id == 0)
                 {
                     para.rewardamount = CurrentTemplate.rewardamount;
-                    para.autoreward = false;
                 }
-                else
-                {
-                    para.autoreward = true;
-                }
+
+                    para.autoreward= !CurrentTemplate.customAndreward;
+                
 
                 string errormsg = "";
                 long result = httputil.MemberTopUp(para, ref errormsg);
@@ -240,12 +238,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     if (CurrentTemplate.id == 0)
                     {
                         para.rewardamount = CurrentTemplate.rewardamount;
-                        para.autoreward = false;
                     }
-                    else
-                    {
-                        para.autoreward = true;
-                    }
+                    para.autoreward = !CurrentTemplate.customAndreward;
                    
 
                     string errormsg = "";
@@ -852,12 +846,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     if (CurrentTemplate.id == 0)
                     {
                         para.rewardamount = CurrentTemplate.rewardamount;
-                        para.autoreward = false;
                     }
-                    else
-                    {
-                        para.autoreward = true;
-                    }
+                    para.autoreward = !CurrentTemplate.customAndreward;
 
 
                     string errormsg = "";
