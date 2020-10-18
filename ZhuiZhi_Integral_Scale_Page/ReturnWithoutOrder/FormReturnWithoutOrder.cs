@@ -1078,9 +1078,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
 
 
-                if (!string.IsNullOrEmpty(txtSearch.Text))
+                if (!string.IsNullOrEmpty(txtSearch.Text.Trim()))
                 {
-                    string strquery = txtSearch.Text.ToUpper();
+                    string strquery = txtSearch.Text.Trim().ToUpper();
                     AllCategoryPro = AllCategoryPro.Where(r => r.AllFirstLetter.Contains(strquery) || r.skucode.Contains(strquery)).ToList();
 
                 }
