@@ -29,78 +29,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
         private List<PromotionCoupon> CurrentLstCoupon = null;
 
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            ConfirmChange();
-
-        }
-        public void ConfirmChange()
-        {
-            try
-            {
-                if (MainModel.IsMemberCenter)
-                {
-                    LoadingHelper.ShowLoadingScreen();
-                    HttpUtil httputil = new HttpUtil();
-                    string err = "";
-                    Member mermber = httputil.GetMember(MainModel.NewPhone, ref err);
-                    if (mermber == null)
-                    {
-                        return;
-                    }
-
-                    bool resule = memberchttputil.MergeMemberPhonenumber(MainModel.CurrentMember.memberheaderresponsevo.token,mermber.memberheaderresponsevo.token, ref err);
-                    string errrormsg = "";
-                    if (resule)
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                        string ErrorMsgMember = "";
-                        string phone = MainModel.NewPhone;
-                        CurrentMember = httputil.GetMember(phone, ref ErrorMsgMember);
-                        string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
-                        string birth = CurrentMember.memberinformationresponsevo.birthdaystr;
-                        string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
-                        string balance = "￥" + CurrentMember.barcoderecognitionresponse.balance;
-                        string credit = CurrentMember.creditaccountrepvo.availablecredit.ToString();
-                        string ErrorMsg = "";
-                        CurrentLstCoupon = httputil.ListMemberCouponAvailable(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
-                        string coupon = CurrentLstCoupon.Count + "张";
-                        string creditspec = "";
-                        FormMemberCenterMedia f = new FormMemberCenterMedia();
-                        f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
-                    }
-                    else
-                    {
-                        MainModel.ShowLog(errrormsg, false);
-                    }
-                }
-                else
-                {
-                    string err = "";
-                    bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
-                    if (resule)
-                    {
-                        MainModel.ShowLog(err, false);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
-                        MainModel.ShowLog(err, false);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog(ex.Message, true);
-            }
-            finally
-            {
-                LoadingHelper.CloseForm();
-            }
-        }
-
         private void FormChangePhoneConfirm_Load(object sender, EventArgs e)
         {
             if (MainModel.IsMemberCenter)
@@ -113,6 +41,48 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             else
             {
                 lblConfirmChangeNamber.Text = "确认更换手机号码为" + MainModel.NewPhone + "?";
+            }
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {       
+            try
+            {
+                bool result = false;
+                string err = "";
+                HttpUtil httputil = new HttpUtil();
+                LoadingHelper.ShowLoadingScreen();
+                if (MainModel.IsMemberCenter)
+                {
+                    Member mermber = httputil.GetMember(MainModel.NewPhone, ref err);
+                    if (mermber == null)
+                    {
+                        return;
+                    }
+                    result = memberchttputil.MergeMemberPhonenumber(MainModel.CurrentMember.memberheaderresponsevo.token, mermber.memberheaderresponsevo.token, ref err);
+                }
+                else
+                {
+                    result = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);                   
+                }              
+                if (result)
+                {
+                    MainModel.ShowLog("手机号更换成功", false);
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();                                                
+                }
+                else
+                {
+                    MainModel.ShowLog(err, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog(ex.Message, true);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
             }
         }
     }

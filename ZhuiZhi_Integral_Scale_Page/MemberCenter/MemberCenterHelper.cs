@@ -28,7 +28,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 FormMemberCenter frmcenter = new FormMemberCenter(member);
-
                 asf.AutoScaleControlTest(frmcenter, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmcenter.Location = new System.Drawing.Point(0, 0);
 
@@ -96,9 +95,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-
-
-
+        
         public static void ShowFormAllCoupon(List<PromotionCoupon> LstCoupon)
         {
             try
@@ -236,7 +233,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 显示修改手机号码界面
         /// </summary>
-        public static void ShowFormChangePhoneNumber(Member member)
+        public static bool ShowFormChangePhoneNumber(Member member)
         {
             try
             {
@@ -245,15 +242,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 asf.AutoScaleControlTest(frmchangephonenumber, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmchangephonenumber.Location = new System.Drawing.Point(0, 0);
                 frmchangephonenumber.TopMost = true;
-                frmchangephonenumber.ShowDialog();
+                bool flag=  frmchangephonenumber.ShowDialog()==DialogResult.OK;
                 frmchangephonenumber.Dispose();
                 Application.DoEvents();
-
+                return flag;
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("显示修改手机号码界面异常" + ex.Message);
             }
+            return false;
 
         }
         /// <summary>

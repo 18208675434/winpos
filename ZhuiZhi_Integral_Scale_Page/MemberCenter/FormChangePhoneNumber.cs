@@ -73,6 +73,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 type = 2;
                 ShowChangePhonePage();
+                label17.ForeColor = Color.DodgerBlue;
+                picStepTwo.BackgroundImage = pictureBox1.BackgroundImage;
+                label6.BackColor = Color.DodgerBlue;
+                lblMerge.Visible = true;
             }
         }
 
@@ -223,11 +227,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnOkChange_Click(object sender, EventArgs e)
         {
-            ConfirmChange();
-
-        }
-        public void ConfirmChange()
-        {
             string errormsg = "";
             bool resule = membercenterhttputil.GetCheckmember(MainModel.NewPhone, ref errormsg);
             if (resule)
@@ -235,6 +234,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.IsMemberCenter = true;
                 if (MemberCenterHelper.ShowFormChangePhoneConfirm())
                 {
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }
@@ -243,6 +243,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.IsMemberCenter = false;
                 if (MemberCenterHelper.ShowFormChangePhoneConfirm())
                 {
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }

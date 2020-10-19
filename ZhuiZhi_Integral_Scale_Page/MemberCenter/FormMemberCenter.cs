@@ -68,50 +68,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 //{
                 //    CurrentMember.memberheaderresponsevo.mobile = MainModel.NewPhone;
                 //}
-                string phone = CurrentMember.memberheaderresponsevo.mobile;
-
-                if (phone.Length == 11)
-                {
-                    string tempphone = phone.Substring(0, 3) + " " + phone.Substring(3, 4) + " " + phone.Substring(7, 4);
-                    phone = tempphone;
-                }
-                lblPhone.Text = phone;
-                MainModel.GetPhone = phone;
-                btnChangePhone.Left = lblPhone.Right;
-
-                string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
-                string birthday = CurrentMember.memberinformationresponsevo.birthdaystr;
-                MainModel.memberid = CurrentMember.memberid;
-                lblMemberInfo.Text = "性别：" + gender + " | " + "生日：" + birthday;
-
-                lblBalance.Text = "￥" + CurrentMember.barcoderecognitionresponse.balance;
-
-                lblCredit.Text = CurrentMember.creditaccountrepvo.availablecredit.ToString();
-
-                lblCreditAmount.Text = "=" + CurrentMember.creditaccountrepvo.creditworth.ToString("f2") + "元";
-
-                lblCreditAmount.Left = lblCredit.Right;
-
-                DisplayEntityCard();
+              
                 Application.DoEvents();
 
                 IsEnable = false;
                 LoadingHelper.ShowLoadingScreen();
 
 
-               
+                UpdateMemberInfo();
 
                 LoadTemplate(true);
-                this.BeginInvoke(new Action(delegate()
-                {
-                    LoadCoupon(); 
-                }));
-
-
-                this.BeginInvoke(new Action(delegate()
-                {
-                    LoadBalanceAccount();
-                }));
+              
 
                 this.BeginInvoke(new Action(delegate()
                 {
@@ -137,6 +104,48 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 IsEnable = true;
             }
+        }
+
+        /// <summary>
+        /// 刷新会员中心会员信息
+        /// </summary>
+        public void UpdateMemberInfo()
+        {
+            string phone = CurrentMember.memberheaderresponsevo.mobile;
+
+            if (phone.Length == 11)
+            {
+                string tempphone = phone.Substring(0, 3) + " " + phone.Substring(3, 4) + " " + phone.Substring(7, 4);
+                phone = tempphone;
+            }
+            lblPhone.Text = phone;
+            MainModel.GetPhone = phone;
+            btnChangePhone.Left = lblPhone.Right;
+
+            string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
+            string birthday = CurrentMember.memberinformationresponsevo.birthdaystr;
+            MainModel.memberid = CurrentMember.memberid;
+            lblMemberInfo.Text = "性别：" + gender + " | " + "生日：" + birthday;
+
+            lblBalance.Text = "￥" + CurrentMember.barcoderecognitionresponse.balance;
+
+            lblCredit.Text = CurrentMember.creditaccountrepvo.availablecredit.ToString();
+
+            lblCreditAmount.Text = "=" + CurrentMember.creditaccountrepvo.creditworth.ToString("f2") + "元";
+
+            lblCreditAmount.Left = lblCredit.Right;
+
+            DisplayEntityCard();
+            this.BeginInvoke(new Action(delegate()
+            {
+                LoadCoupon();
+            }));
+
+
+            this.BeginInvoke(new Action(delegate()
+            {
+                LoadBalanceAccount();
+            }));
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
@@ -796,7 +805,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnChangePhone_Click(object sender, EventArgs e)
         {
-            MemberCenterHelper.ShowFormChangePhoneNumber(CurrentMember);
+
+            if (MemberCenterHelper.ShowFormChangePhoneNumber(CurrentMember))
+            {
+                LoadingHelper.ShowLoadingScreen();
+                try
+                {
+                    string err = "";
+                    string phone = MainModel.NewPhone;
+                   MainModel.CurrentMember= CurrentMember = httputil.GetMember(phone, ref err);
+                    UpdateMemberInfo();
+                    MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
+                }
+                catch (Exception ex)
+                {
+                    MainModel.ShowLog("会员信息加载异常："+ex.Message,true);
+                }
+                finally
+                {
+                    LoadingHelper.CloseForm();
+                }
+            }
         }
 
         private void pnlPayByOther_Click(object sender, EventArgs e)
