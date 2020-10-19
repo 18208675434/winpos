@@ -58,38 +58,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
                 memberid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
 
 
-                deleteHttpMember operationMemberOperationItem = new deleteHttpMember(MemberOperationItem);
-                operationMemberOperationItem.BeginInvoke(null, null);
+                //deleteHttpMember operationMemberOperationItem = new deleteHttpMember(MemberOperationItem);
+                //operationMemberOperationItem.BeginInvoke(null, null);
 
-                deleteHttpMember operationGradesttingGetGrade = new deleteHttpMember(GradesttingGetGrade);
-                operationGradesttingGetGrade.BeginInvoke(null, null);
+                //deleteHttpMember operationGradesttingGetGrade = new deleteHttpMember(GradesttingGetGrade);
+                //operationGradesttingGetGrade.BeginInvoke(null, null);
 
-                deleteHttpMember operationGetTenantCreditConfig = new deleteHttpMember(GetTenantCreditConfig);
-                operationGetTenantCreditConfig.BeginInvoke(null, null);
+                //deleteHttpMember operationGetTenantCreditConfig = new deleteHttpMember(GetTenantCreditConfig);
+                //operationGetTenantCreditConfig.BeginInvoke(null, null);
 
-                deleteHttpMember operationGetTenantMembergradeConfig = new deleteHttpMember(GetTenantMembergradeConfig);
-                operationGetTenantMembergradeConfig.BeginInvoke(null, null);
+                //deleteHttpMember operationGetTenantMembergradeConfig = new deleteHttpMember(GetTenantMembergradeConfig);
+                //operationGetTenantMembergradeConfig.BeginInvoke(null, null);
 
-                deleteHttpMember operationListMemberCouponAvailable = new deleteHttpMember(ListMemberCouponAvailable);
-                operationListMemberCouponAvailable.BeginInvoke(null, null);
+                //deleteHttpMember operationListMemberCouponAvailable = new deleteHttpMember(ListMemberCouponAvailable);
+                //operationListMemberCouponAvailable.BeginInvoke(null, null);
 
-                deleteHttpMember operationEnjoyMemberRights = new deleteHttpMember(EnjoyMemberRights);
-                operationEnjoyMemberRights.BeginInvoke(null, null);
+                //deleteHttpMember operationEnjoyMemberRights = new deleteHttpMember(EnjoyMemberRights);
+                //operationEnjoyMemberRights.BeginInvoke(null, null);
 
-                deleteHttpMember operationGetTenantMemberRightsConfigUsing = new deleteHttpMember(GetTenantMemberRightsConfigUsing);
-                operationGetTenantMemberRightsConfigUsing.BeginInvoke(null, null);
+                //deleteHttpMember operationGetTenantMemberRightsConfigUsing = new deleteHttpMember(GetTenantMemberRightsConfigUsing);
+                //operationGetTenantMemberRightsConfigUsing.BeginInvoke(null, null);
 
-                deleteHttpMember operationGetMemberTenantItem = new deleteHttpMember(GetMemberTenantItem);
-                operationGetMemberTenantItem.BeginInvoke(null, null);
-
-
-                //GradesttingGetGrade();
-                //GetTenantCreditConfig();
-                //GetTenantMembergradeConfig();
-                //ListMemberCouponAvailable();
-                //EnjoyMemberRights();
-                //GetTenantMemberRightsConfigUsing();
-                //GetMemberTenantItem();
+                //deleteHttpMember operationGetMemberTenantItem = new deleteHttpMember(GetMemberTenantItem);
+                //operationGetMemberTenantItem.BeginInvoke(null, null);
+                
+                MemberOperationItem();
+                GradesttingGetGrade();
+                GetTenantCreditConfig();
+                GetTenantMembergradeConfig();
+                ListMemberCouponAvailable();
+                EnjoyMemberRights();
+                GetTenantMemberRightsConfigUsing();
+                GetMemberTenantItem();
             }
             catch (Exception ex)
             {
