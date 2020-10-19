@@ -407,8 +407,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        bool isfirstmembercard = true;
-
         //增加线程锁  防止多线程操作datagridview 红叉情况
         private object thislock = new object();
         private void UpdateFormExe()
@@ -627,27 +625,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
 
 
-                        if (imgmembercard == null || isfirstmembercard)
+                        if (imgmembercard == null)
                         {
-                            isfirstmembercard = false;
-                            string ErrorMsg = "";
-                            string imgurl = httputil.GetMemberCard(ref ErrorMsg);
-                            if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
-                            {
-                                //this.Invoke(new InvokeHandler(delegate()
-                                //{
 
-                                Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                                imgmembercard = _image;
-                                picMemberCard.BackgroundImage = _image;
+                            bgwLoadMemberCard.RunWorkerAsync();
+                            //string ErrorMsg = "";
+                            //string imgurl = httputil.GetMemberCard(ref ErrorMsg);
+                            //if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
+                            //{
+                            //    //this.Invoke(new InvokeHandler(delegate()
+                            //    //{
 
-                                int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
-                                picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
+                            //    Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                            //    imgmembercard = _image;
+                            //    picMemberCard.BackgroundImage = _image;
 
-                                picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
-                                pnlMemberCard.Visible = true;
-                                //Application.DoEvents();
-                            }
+                            //    int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
+                            //    picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
+
+                            //    picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
+                            //    pnlMemberCard.Visible = true;
+                            //    //Application.DoEvents();
+                            //}
                         }
                         else
                         {
@@ -1247,8 +1246,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     showcount += 1;
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -1277,6 +1274,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
             }
             catch { }
+        }
+
+        private void bgwLoadMemberCard_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string ErrorMsg = "";
+            string imgurl = httputil.GetMemberCard(ref ErrorMsg);
+            if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
+            {
+                //this.Invoke(new InvokeHandler(delegate()
+                //{
+
+                Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                imgmembercard = _image;
+
+                picMemberCard.BackgroundImage = _image;
+
+                int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
+                picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
+
+                picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
+                pnlMemberCard.Visible = true;
+            }
         }
     }
 }
