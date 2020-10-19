@@ -279,14 +279,13 @@
             this.txtNewPhoneNumber.Location = new System.Drawing.Point(16, 56);
             this.txtNewPhoneNumber.LockFocus = true;
             this.txtNewPhoneNumber.MaxDeciaml = ((long)(0));
-            this.txtNewPhoneNumber.MaxLength = 100;
+            this.txtNewPhoneNumber.MaxLength = 11;
             this.txtNewPhoneNumber.Name = "txtNewPhoneNumber";
             this.txtNewPhoneNumber.NeedBoard = false;
             this.txtNewPhoneNumber.OnlyNumber = true;
             this.txtNewPhoneNumber.Size = new System.Drawing.Size(352, 50);
             this.txtNewPhoneNumber.TabIndex = 101;
             this.txtNewPhoneNumber.WaterText = "请输入新手机号";
-            this.txtNewPhoneNumber.Load += new System.EventHandler(this.txtNewPhoneNumber_Load);
             // 
             // FormChengPhoneVerifyNewPhone
             // 

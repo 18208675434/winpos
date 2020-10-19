@@ -36,10 +36,16 @@
             this.lblShopName = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.picStepThree = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblTheStepOne = new System.Windows.Forms.Label();
+            this.picStepTwo = new System.Windows.Forms.PictureBox();
+            this.picTheFirstStep = new System.Windows.Forms.PictureBox();
+            this.lblChangePhone = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblMerge = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -48,12 +54,6 @@
             this.picChangePhoneOK = new System.Windows.Forms.PictureBox();
             this.picVerifyPhoneOK = new System.Windows.Forms.PictureBox();
             this.picVerifyMemberOK = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblTheStepOne = new System.Windows.Forms.Label();
-            this.picStepThree = new System.Windows.Forms.PictureBox();
-            this.picStepTwo = new System.Windows.Forms.PictureBox();
-            this.picTheFirstStep = new System.Windows.Forms.PictureBox();
             this.btnOkChange = new System.Windows.Forms.Button();
             this.btnVerifyNewPhone = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -69,13 +69,13 @@
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picStepThree)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picStepTwo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTheFirstStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picChangePhoneOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVerifyPhoneOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVerifyMemberOK)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picStepThree)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picStepTwo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTheFirstStep)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHead
@@ -152,10 +152,16 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.picStepThree);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.lblTheStepOne);
+            this.panel1.Controls.Add(this.picStepTwo);
+            this.panel1.Controls.Add(this.picTheFirstStep);
+            this.panel1.Controls.Add(this.lblChangePhone);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.lblMerge);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label17);
@@ -164,12 +170,6 @@
             this.panel1.Controls.Add(this.picChangePhoneOK);
             this.panel1.Controls.Add(this.picVerifyPhoneOK);
             this.panel1.Controls.Add(this.picVerifyMemberOK);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.lblTheStepOne);
-            this.panel1.Controls.Add(this.picStepThree);
-            this.panel1.Controls.Add(this.picStepTwo);
-            this.panel1.Controls.Add(this.picTheFirstStep);
             this.panel1.Controls.Add(this.btnOkChange);
             this.panel1.Controls.Add(this.btnVerifyNewPhone);
             this.panel1.Controls.Add(this.label5);
@@ -187,20 +187,91 @@
             this.panel1.Size = new System.Drawing.Size(1140, 665);
             this.panel1.TabIndex = 39;
             this.panel1.Click += new System.EventHandler(this.FormChangePhoneNumber_Load);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // label11
+            // label7
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label11.Location = new System.Drawing.Point(330, 337);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(46, 24);
-            this.label11.TabIndex = 29;
-            this.label11.Text = "修改";
-            this.label11.Visible = false;
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(64, 405);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(19, 21);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "3";
+            // 
+            // picStepThree
+            // 
+            this.picStepThree.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepThree.BackgroundImage")));
+            this.picStepThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picStepThree.Location = new System.Drawing.Point(53, 399);
+            this.picStepThree.Margin = new System.Windows.Forms.Padding(2);
+            this.picStepThree.Name = "picStepThree";
+            this.picStepThree.Size = new System.Drawing.Size(37, 33);
+            this.picStepThree.TabIndex = 13;
+            this.picStepThree.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(64, 271);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(19, 21);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "2";
+            // 
+            // lblTheStepOne
+            // 
+            this.lblTheStepOne.AutoSize = true;
+            this.lblTheStepOne.BackColor = System.Drawing.Color.DodgerBlue;
+            this.lblTheStepOne.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTheStepOne.ForeColor = System.Drawing.Color.White;
+            this.lblTheStepOne.Location = new System.Drawing.Point(65, 131);
+            this.lblTheStepOne.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTheStepOne.Name = "lblTheStepOne";
+            this.lblTheStepOne.Size = new System.Drawing.Size(16, 16);
+            this.lblTheStepOne.TabIndex = 14;
+            this.lblTheStepOne.Text = "1\r\n";
+            // 
+            // picStepTwo
+            // 
+            this.picStepTwo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepTwo.BackgroundImage")));
+            this.picStepTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picStepTwo.Location = new System.Drawing.Point(53, 265);
+            this.picStepTwo.Margin = new System.Windows.Forms.Padding(2);
+            this.picStepTwo.Name = "picStepTwo";
+            this.picStepTwo.Size = new System.Drawing.Size(37, 33);
+            this.picStepTwo.TabIndex = 12;
+            this.picStepTwo.TabStop = false;
+            // 
+            // picTheFirstStep
+            // 
+            this.picTheFirstStep.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picTheFirstStep.BackgroundImage")));
+            this.picTheFirstStep.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picTheFirstStep.Location = new System.Drawing.Point(53, 123);
+            this.picTheFirstStep.Margin = new System.Windows.Forms.Padding(2);
+            this.picTheFirstStep.Name = "picTheFirstStep";
+            this.picTheFirstStep.Size = new System.Drawing.Size(37, 33);
+            this.picTheFirstStep.TabIndex = 11;
+            this.picTheFirstStep.TabStop = false;
+            // 
+            // lblChangePhone
+            // 
+            this.lblChangePhone.AutoSize = true;
+            this.lblChangePhone.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblChangePhone.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblChangePhone.Location = new System.Drawing.Point(330, 337);
+            this.lblChangePhone.Name = "lblChangePhone";
+            this.lblChangePhone.Size = new System.Drawing.Size(46, 24);
+            this.lblChangePhone.TabIndex = 29;
+            this.lblChangePhone.Text = "修改";
+            this.lblChangePhone.Visible = false;
+            this.lblChangePhone.Click += new System.EventHandler(this.lblChangePhone_Click);
             // 
             // label10
             // 
@@ -227,20 +298,19 @@
             this.button1.Text = "确认合并";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label9
+            // lblMerge
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label9.Location = new System.Drawing.Point(323, 330);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(154, 25);
-            this.label9.TabIndex = 26;
-            this.label9.Text = "合并至原有会员?";
-            this.label9.Visible = false;
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+            this.lblMerge.AutoSize = true;
+            this.lblMerge.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMerge.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblMerge.Location = new System.Drawing.Point(323, 330);
+            this.lblMerge.Name = "lblMerge";
+            this.lblMerge.Size = new System.Drawing.Size(154, 25);
+            this.lblMerge.TabIndex = 26;
+            this.lblMerge.Text = "合并至原有会员?";
+            this.lblMerge.Visible = false;
+            this.lblMerge.Click += new System.EventHandler(this.lblMerge_Click);
             // 
             // pictureBox1
             // 
@@ -263,7 +333,6 @@
             this.label8.Size = new System.Drawing.Size(18, 101);
             this.label8.TabIndex = 23;
             this.label8.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label17
             // 
@@ -296,7 +365,6 @@
             this.lblVerifySuccess.TabIndex = 20;
             this.lblVerifySuccess.Text = "验证成功";
             this.lblVerifySuccess.Visible = false;
-            this.lblVerifySuccess.Click += new System.EventHandler(this.lblVerifySuccess_Click);
             // 
             // picChangePhoneOK
             // 
@@ -309,7 +377,6 @@
             this.picChangePhoneOK.TabIndex = 19;
             this.picChangePhoneOK.TabStop = false;
             this.picChangePhoneOK.Visible = false;
-            this.picChangePhoneOK.Click += new System.EventHandler(this.picChangePhoneOK_Click);
             // 
             // picVerifyPhoneOK
             // 
@@ -334,79 +401,6 @@
             this.picVerifyMemberOK.TabIndex = 17;
             this.picVerifyMemberOK.TabStop = false;
             this.picVerifyMemberOK.Visible = false;
-            this.picVerifyMemberOK.Click += new System.EventHandler(this.picVerifyMemberOK_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(62, 404);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(19, 21);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "3";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(62, 271);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(19, 21);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "2";
-            // 
-            // lblTheStepOne
-            // 
-            this.lblTheStepOne.AutoSize = true;
-            this.lblTheStepOne.BackColor = System.Drawing.Color.DodgerBlue;
-            this.lblTheStepOne.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTheStepOne.ForeColor = System.Drawing.Color.White;
-            this.lblTheStepOne.Location = new System.Drawing.Point(62, 129);
-            this.lblTheStepOne.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTheStepOne.Name = "lblTheStepOne";
-            this.lblTheStepOne.Size = new System.Drawing.Size(16, 16);
-            this.lblTheStepOne.TabIndex = 14;
-            this.lblTheStepOne.Text = "1\r\n";
-            // 
-            // picStepThree
-            // 
-            this.picStepThree.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepThree.BackgroundImage")));
-            this.picStepThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picStepThree.Location = new System.Drawing.Point(53, 399);
-            this.picStepThree.Margin = new System.Windows.Forms.Padding(2);
-            this.picStepThree.Name = "picStepThree";
-            this.picStepThree.Size = new System.Drawing.Size(37, 33);
-            this.picStepThree.TabIndex = 13;
-            this.picStepThree.TabStop = false;
-            // 
-            // picStepTwo
-            // 
-            this.picStepTwo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStepTwo.BackgroundImage")));
-            this.picStepTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picStepTwo.Location = new System.Drawing.Point(53, 265);
-            this.picStepTwo.Margin = new System.Windows.Forms.Padding(2);
-            this.picStepTwo.Name = "picStepTwo";
-            this.picStepTwo.Size = new System.Drawing.Size(37, 33);
-            this.picStepTwo.TabIndex = 12;
-            this.picStepTwo.TabStop = false;
-            // 
-            // picTheFirstStep
-            // 
-            this.picTheFirstStep.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picTheFirstStep.BackgroundImage")));
-            this.picTheFirstStep.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picTheFirstStep.Location = new System.Drawing.Point(53, 123);
-            this.picTheFirstStep.Margin = new System.Windows.Forms.Padding(2);
-            this.picTheFirstStep.Name = "picTheFirstStep";
-            this.picTheFirstStep.Size = new System.Drawing.Size(37, 33);
-            this.picTheFirstStep.TabIndex = 11;
-            this.picTheFirstStep.TabStop = false;
             // 
             // btnOkChange
             // 
@@ -478,6 +472,7 @@
             this.btnNewCardVerify.TabIndex = 6;
             this.btnNewCardVerify.Text = "新卡验证";
             this.btnNewCardVerify.UseVisualStyleBackColor = false;
+            this.btnNewCardVerify.Visible = false;
             this.btnNewCardVerify.Click += new System.EventHandler(this.btnNewCardVerify_Click);
             // 
             // btnOldCardVerify
@@ -494,6 +489,7 @@
             this.btnOldCardVerify.TabIndex = 5;
             this.btnOldCardVerify.Text = "老卡验证";
             this.btnOldCardVerify.UseVisualStyleBackColor = false;
+            this.btnOldCardVerify.Visible = false;
             this.btnOldCardVerify.Click += new System.EventHandler(this.btnOldCardVerify_Click);
             // 
             // btnUserPassWordVerify
@@ -508,7 +504,7 @@
             this.btnUserPassWordVerify.Name = "btnUserPassWordVerify";
             this.btnUserPassWordVerify.Size = new System.Drawing.Size(155, 44);
             this.btnUserPassWordVerify.TabIndex = 4;
-            this.btnUserPassWordVerify.Text = "会员支付密码验证";
+            this.btnUserPassWordVerify.Text = "支付密码验证";
             this.btnUserPassWordVerify.UseVisualStyleBackColor = false;
             this.btnUserPassWordVerify.Click += new System.EventHandler(this.btnUserPassWordVerify_Click);
             // 
@@ -584,13 +580,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picStepThree)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picStepTwo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTheFirstStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picChangePhoneOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVerifyPhoneOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVerifyMemberOK)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picStepThree)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picStepTwo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTheFirstStep)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -616,7 +612,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lblTheStepOne;
         private System.Windows.Forms.PictureBox picStepThree;
         private System.Windows.Forms.PictureBox picStepTwo;
         private System.Windows.Forms.PictureBox picTheFirstStep;
@@ -630,8 +625,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnVerifyNewPhone;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblChangePhone;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblMerge;
+        private System.Windows.Forms.Label lblTheStepOne;
     }
 }

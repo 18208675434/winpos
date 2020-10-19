@@ -274,8 +274,6 @@
             this.label87 = new System.Windows.Forms.Label();
             this.pictureBox31 = new System.Windows.Forms.PictureBox();
             this.timerPassWord = new System.Windows.Forms.Timer(this.components);
-            this.timerChangePhoneScd = new System.Windows.Forms.Timer(this.components);
-            this.timerChangePhonePwd = new System.Windows.Forms.Timer(this.components);
             this.pnlItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).BeginInit();
             this.pnlPayInfo.SuspendLayout();
@@ -499,8 +497,8 @@
             // tlpMember
             // 
             this.tlpMember.ColumnCount = 10;
-            this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
@@ -551,10 +549,10 @@
             this.panel3.Controls.Add(this.btnpw2);
             this.panel3.Controls.Add(this.btnpw1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(2, 2);
+            this.panel3.Location = new System.Drawing.Point(1165, 2);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1159, 739);
+            this.panel3.Size = new System.Drawing.Size(1, 739);
             this.panel3.TabIndex = 305;
             // 
             // pictureBox7
@@ -846,7 +844,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1, 737);
+            this.panel1.Size = new System.Drawing.Size(1157, 737);
             this.panel1.TabIndex = 303;
             // 
             // pictureBox4
@@ -1751,9 +1749,10 @@
             // 
             // btnChangePwd6
             // 
-            this.btnChangePwd6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangePwd6.BackColor = System.Drawing.Color.LightGray;
             this.btnChangePwd6.FlatAppearance.BorderSize = 0;
             this.btnChangePwd6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePwd6.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangePwd6.Location = new System.Drawing.Point(1059, 121);
             this.btnChangePwd6.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd6.Name = "btnChangePwd6";
@@ -1763,9 +1762,10 @@
             // 
             // btnChangePwd5
             // 
-            this.btnChangePwd5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangePwd5.BackColor = System.Drawing.Color.LightGray;
             this.btnChangePwd5.FlatAppearance.BorderSize = 0;
             this.btnChangePwd5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePwd5.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangePwd5.Location = new System.Drawing.Point(996, 121);
             this.btnChangePwd5.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd5.Name = "btnChangePwd5";
@@ -1775,9 +1775,10 @@
             // 
             // btnChangePwd4
             // 
-            this.btnChangePwd4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangePwd4.BackColor = System.Drawing.Color.LightGray;
             this.btnChangePwd4.FlatAppearance.BorderSize = 0;
             this.btnChangePwd4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePwd4.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangePwd4.Location = new System.Drawing.Point(933, 121);
             this.btnChangePwd4.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd4.Name = "btnChangePwd4";
@@ -1787,9 +1788,10 @@
             // 
             // btnChangePwd3
             // 
-            this.btnChangePwd3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangePwd3.BackColor = System.Drawing.Color.LightGray;
             this.btnChangePwd3.FlatAppearance.BorderSize = 0;
             this.btnChangePwd3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePwd3.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangePwd3.Location = new System.Drawing.Point(862, 121);
             this.btnChangePwd3.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd3.Name = "btnChangePwd3";
@@ -1799,9 +1801,10 @@
             // 
             // btnChangePwd2
             // 
-            this.btnChangePwd2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangePwd2.BackColor = System.Drawing.Color.LightGray;
             this.btnChangePwd2.FlatAppearance.BorderSize = 0;
             this.btnChangePwd2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePwd2.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangePwd2.Location = new System.Drawing.Point(796, 121);
             this.btnChangePwd2.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd2.Name = "btnChangePwd2";
@@ -1811,9 +1814,10 @@
             // 
             // btnChangePwd1
             // 
-            this.btnChangePwd1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangePwd1.BackColor = System.Drawing.Color.LightGray;
             this.btnChangePwd1.FlatAppearance.BorderSize = 0;
             this.btnChangePwd1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePwd1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangePwd1.Location = new System.Drawing.Point(727, 121);
             this.btnChangePwd1.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePwd1.Name = "btnChangePwd1";
@@ -1836,6 +1840,7 @@
             // 
             this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button8.Location = new System.Drawing.Point(980, 385);
@@ -1847,6 +1852,7 @@
             // 
             // button9
             // 
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button9.Location = new System.Drawing.Point(854, 385);
@@ -1859,6 +1865,7 @@
             // 
             // button10
             // 
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button10.Location = new System.Drawing.Point(727, 385);
@@ -1871,6 +1878,7 @@
             // 
             // button11
             // 
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button11.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button11.Location = new System.Drawing.Point(980, 323);
@@ -1883,6 +1891,7 @@
             // 
             // button12
             // 
+            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button12.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button12.Location = new System.Drawing.Point(854, 323);
@@ -1895,6 +1904,7 @@
             // 
             // button13
             // 
+            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button13.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button13.Location = new System.Drawing.Point(727, 323);
@@ -1907,6 +1917,7 @@
             // 
             // button14
             // 
+            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button14.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button14.Location = new System.Drawing.Point(980, 263);
@@ -1919,6 +1930,7 @@
             // 
             // button15
             // 
+            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button15.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button15.Location = new System.Drawing.Point(854, 263);
@@ -1931,6 +1943,7 @@
             // 
             // button16
             // 
+            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button16.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button16.Location = new System.Drawing.Point(727, 263);
@@ -1943,6 +1956,7 @@
             // 
             // button17
             // 
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button17.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button17.Location = new System.Drawing.Point(980, 202);
@@ -1955,6 +1969,7 @@
             // 
             // button18
             // 
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button18.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button18.Location = new System.Drawing.Point(854, 202);
@@ -1967,6 +1982,7 @@
             // 
             // button19
             // 
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button19.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button19.Location = new System.Drawing.Point(727, 202);
@@ -2518,9 +2534,10 @@
             // 
             // btnChangesms6
             // 
-            this.btnChangesms6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangesms6.BackColor = System.Drawing.Color.LightGray;
             this.btnChangesms6.FlatAppearance.BorderSize = 0;
             this.btnChangesms6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangesms6.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangesms6.Location = new System.Drawing.Point(1068, 118);
             this.btnChangesms6.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms6.Name = "btnChangesms6";
@@ -2530,9 +2547,10 @@
             // 
             // btnChangesms5
             // 
-            this.btnChangesms5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangesms5.BackColor = System.Drawing.Color.LightGray;
             this.btnChangesms5.FlatAppearance.BorderSize = 0;
             this.btnChangesms5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangesms5.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangesms5.Location = new System.Drawing.Point(1005, 118);
             this.btnChangesms5.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms5.Name = "btnChangesms5";
@@ -2542,9 +2560,10 @@
             // 
             // btnChangesms4
             // 
-            this.btnChangesms4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangesms4.BackColor = System.Drawing.Color.LightGray;
             this.btnChangesms4.FlatAppearance.BorderSize = 0;
             this.btnChangesms4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangesms4.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangesms4.Location = new System.Drawing.Point(942, 118);
             this.btnChangesms4.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms4.Name = "btnChangesms4";
@@ -2554,9 +2573,10 @@
             // 
             // btnChangesms3
             // 
-            this.btnChangesms3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangesms3.BackColor = System.Drawing.Color.LightGray;
             this.btnChangesms3.FlatAppearance.BorderSize = 0;
             this.btnChangesms3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangesms3.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangesms3.Location = new System.Drawing.Point(871, 118);
             this.btnChangesms3.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms3.Name = "btnChangesms3";
@@ -2566,9 +2586,10 @@
             // 
             // btnChangesms2
             // 
-            this.btnChangesms2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangesms2.BackColor = System.Drawing.Color.LightGray;
             this.btnChangesms2.FlatAppearance.BorderSize = 0;
             this.btnChangesms2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangesms2.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangesms2.Location = new System.Drawing.Point(805, 118);
             this.btnChangesms2.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms2.Name = "btnChangesms2";
@@ -2578,9 +2599,10 @@
             // 
             // btnChangesms1
             // 
-            this.btnChangesms1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnChangesms1.BackColor = System.Drawing.Color.LightGray;
             this.btnChangesms1.FlatAppearance.BorderSize = 0;
             this.btnChangesms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangesms1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChangesms1.Location = new System.Drawing.Point(737, 118);
             this.btnChangesms1.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangesms1.Name = "btnChangesms1";
@@ -2603,6 +2625,7 @@
             // 
             this.button26.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button26.BackgroundImage")));
             this.button26.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button26.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button26.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button26.Location = new System.Drawing.Point(989, 382);
@@ -2614,6 +2637,7 @@
             // 
             // button27
             // 
+            this.button27.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button27.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button27.Location = new System.Drawing.Point(863, 382);
@@ -2626,6 +2650,7 @@
             // 
             // button28
             // 
+            this.button28.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button28.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button28.Location = new System.Drawing.Point(737, 382);
@@ -2638,6 +2663,7 @@
             // 
             // button29
             // 
+            this.button29.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button29.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button29.Location = new System.Drawing.Point(989, 321);
@@ -2650,6 +2676,7 @@
             // 
             // button30
             // 
+            this.button30.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button30.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button30.Location = new System.Drawing.Point(863, 321);
@@ -2662,6 +2689,7 @@
             // 
             // button31
             // 
+            this.button31.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button31.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button31.Location = new System.Drawing.Point(737, 321);
@@ -2674,6 +2702,7 @@
             // 
             // button32
             // 
+            this.button32.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button32.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button32.Location = new System.Drawing.Point(989, 260);
@@ -2686,6 +2715,7 @@
             // 
             // button33
             // 
+            this.button33.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button33.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button33.Location = new System.Drawing.Point(863, 260);
@@ -2698,6 +2728,7 @@
             // 
             // button34
             // 
+            this.button34.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button34.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button34.Location = new System.Drawing.Point(737, 260);
@@ -2710,6 +2741,7 @@
             // 
             // button35
             // 
+            this.button35.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button35.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button35.Location = new System.Drawing.Point(989, 199);
@@ -2722,6 +2754,7 @@
             // 
             // button36
             // 
+            this.button36.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button36.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button36.Location = new System.Drawing.Point(863, 199);
@@ -2734,6 +2767,7 @@
             // 
             // button37
             // 
+            this.button37.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button37.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button37.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button37.Location = new System.Drawing.Point(737, 199);
@@ -3383,14 +3417,6 @@
             // 
             this.timerPassWord.Tick += new System.EventHandler(this.timerPassWord_Tick);
             // 
-            // timerChangePhoneScd
-            // 
-            this.timerChangePhoneScd.Tick += new System.EventHandler(this.timerChangePhoneScd_Tick);
-            // 
-            // timerChangePhonePwd
-            // 
-            this.timerChangePhonePwd.Tick += new System.EventHandler(this.timerChangePhonePwd_Tick);
-            // 
             // FormMemberCenterMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3674,8 +3700,6 @@
         private System.Windows.Forms.PictureBox pictureBox25;
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.PictureBox pictureBox26;
-        private System.Windows.Forms.Timer timerChangePhoneScd;
-        private System.Windows.Forms.Timer timerChangePhonePwd;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label73;
         private System.Windows.Forms.Button button1;

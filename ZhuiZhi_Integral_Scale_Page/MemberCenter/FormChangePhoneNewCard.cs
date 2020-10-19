@@ -25,7 +25,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhoneNewCard_Shown(object sender, EventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNewOldCard();
+            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
 
         private void FormChangePhoneNewCard_FormClosing(object sender, FormClosingEventArgs e)

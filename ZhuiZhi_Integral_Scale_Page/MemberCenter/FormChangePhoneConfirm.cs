@@ -15,7 +15,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormChangePhoneConfirm : Form
     {
         MemberCenterHttpUtil memberchttputil = new MemberCenterHttpUtil();
-        
         public FormChangePhoneConfirm()
         {
             InitializeComponent();
@@ -32,155 +31,89 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            sure();
+            ConfirmChange();
 
         }
-        //public void Hebing()
-        //{
-        //    if (MainModel.IsMemberCenter)
-        //    {
-        //        btnOK.Text = "确认合并";
-        //        MainModel.Sourcetoken = MainModel.CurrentMember.memberheaderresponsevo.token;
-        //        string err = "";
-        //        bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
-        //        string errrormsg = "";
-        //        if (resule)
-        //        {
-
-        //            bool mergeresult = memberchttputil.MergeMemberPhonenumber(ref errrormsg);
-        //            if (mergeresult)
-        //            {
-
-        //                MainModel.ShowLog(errrormsg, false);
-        //                this.DialogResult = DialogResult.OK;
-        //                this.Close();
-        //                string ErrorMsgMember = "";
-        //                HttpUtil httputil = new HttpUtil();
-        //                string phone = MainModel.NewPhone;
-        //                Member member = httputil.GetMember(phone, ref ErrorMsgMember);
-                        
-        //                string gender = member.memberinformationresponsevo.gender == 0 ? "男" : "女";
-        //                string birth = member.memberinformationresponsevo.birthdaystr;
-        //                string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
-        //                string balance = "￥" + member.barcoderecognitionresponse.balance;
-        //                MessageBox.Show(balance);
-        //                string credit = member.creditaccountrepvo.availablecredit.ToString();
-        //                string ErrorMsg = "";
-        //                CurrentLstCoupon = httputil.ListMemberCouponAvailable(member.memberinformationresponsevo.memberid, ref ErrorMsg);
-        //                string coupon = CurrentLstCoupon.Count + "张";
-        //                string creditspec = "";
-                      
-        //                FormMemberCenterMedia f = new FormMemberCenterMedia();
-        //                f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
-        //                FormMemberCenter center = new FormMemberCenter(member);
-        //                center.refresh();
-
-        //            }
-        //            else
-        //            {
-        //                MainModel.ShowLog(errrormsg, false);
-        //                this.DialogResult = DialogResult.Cancel;
-        //                this.Close();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            MainModel.ShowLog(errrormsg, false);
-        //            this.DialogResult = DialogResult.Cancel;
-        //            this.Close();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        string err = "";
-        //        bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
-        //        if (resule)
-        //        {
-        //            MainModel.ShowLog(err, false);
-        //            this.DialogResult = DialogResult.OK;
-        //            this.Close();
-        //        }
-        //        else
-        //        {
-        //            MainModel.ShowLog(err, false);
-        //            this.DialogResult = DialogResult.Cancel;
-        //            this.Close();
-        //        }
-        //    }
-        //}
-        public void sure()
+        public void ConfirmChange()
         {
-            if (MainModel.IsMemberCenter)
+            try
             {
-                btnOK.Text = "确认合并";
-                MainModel.Sourcetoken = MainModel.CurrentMember.memberheaderresponsevo.token;
-                string err = "";
-                bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
-                string errrormsg = "";
-                if (resule)
+                if (MainModel.IsMemberCenter)
                 {
-
-
-
-                    MainModel.ShowLog(errrormsg, false);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                    FormMemberRecevice r = new FormMemberRecevice();
-                    string ErrorMsgMember = "";
+                    LoadingHelper.ShowLoadingScreen();
                     HttpUtil httputil = new HttpUtil();
-                    string phone = MainModel.NewPhone;
-                    Member member = httputil.GetMember(phone, ref ErrorMsgMember);
-                    string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
-                    string birth = CurrentMember.memberinformationresponsevo.birthdaystr;
-                    string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
-                    string balance = "￥" + CurrentMember.barcoderecognitionresponse.balance;
-                    string credit = CurrentMember.creditaccountrepvo.availablecredit.ToString();
-                    string ErrorMsg = "";
-                    CurrentLstCoupon = httputil.ListMemberCouponAvailable(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
-                    string coupon = CurrentLstCoupon.Count + "张";
-                    string creditspec = "";
-                    FormMemberCenterMedia f = new FormMemberCenterMedia();
-                    f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
+                    string err = "";
+                    Member mermber = httputil.GetMember(MainModel.NewPhone, ref err);
+                    if (mermber == null)
+                    {
+                        return;
+                    }
 
-
-
+                    bool resule = memberchttputil.MergeMemberPhonenumber(MainModel.CurrentMember.memberheaderresponsevo.token,mermber.memberheaderresponsevo.token, ref err);
+                    string errrormsg = "";
+                    if (resule)
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                        string ErrorMsgMember = "";
+                        string phone = MainModel.NewPhone;
+                        CurrentMember = httputil.GetMember(phone, ref ErrorMsgMember);
+                        string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
+                        string birth = CurrentMember.memberinformationresponsevo.birthdaystr;
+                        string memberinfo = "性别：" + gender + " | " + "生日：" + birth;
+                        string balance = "￥" + CurrentMember.barcoderecognitionresponse.balance;
+                        string credit = CurrentMember.creditaccountrepvo.availablecredit.ToString();
+                        string ErrorMsg = "";
+                        CurrentLstCoupon = httputil.ListMemberCouponAvailable(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
+                        string coupon = CurrentLstCoupon.Count + "张";
+                        string creditspec = "";
+                        FormMemberCenterMedia f = new FormMemberCenterMedia();
+                        f.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon);
+                    }
+                    else
+                    {
+                        MainModel.ShowLog(errrormsg, false);
+                    }
                 }
                 else
                 {
-                    MainModel.ShowLog(errrormsg, false);
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
+                    string err = "";
+                    bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
+                    if (resule)
+                    {
+                        MainModel.ShowLog(err, false);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MainModel.ShowLog(err, false);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                string err = "";
-                bool resule = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);
-                if (resule)
-                {
-                    MainModel.ShowLog(err, false);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MainModel.ShowLog(err, false);
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
-                }
+                MainModel.ShowLog(ex.Message, true);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
             }
         }
+
         private void FormChangePhoneConfirm_Load(object sender, EventArgs e)
         {
             if (MainModel.IsMemberCenter)
             {
-                lblConfirmChangeNamber.Text = "当前修改号码已是会员，是否合并会员，合并后数据将被转移至新会员";
+                lblConfirmChangeNamber.Text = "手机号" + MainModel.NewPhone + "已注册为会员，是否合并账户？\r\n";
+                lblConfirmChangeNamber.Text = lblConfirmChangeNamber.Text + "合并后本账户的积分和余额将迁移到新手机号的账户中。\r\n订单数据将不会迁移。";
+                btnCancle.Text = "不合并";
+                btnOK.Text = "合并账户";
             }
             else
             {
                 lblConfirmChangeNamber.Text = "确认更换手机号码为" + MainModel.NewPhone + "?";
             }
-
         }
     }
 }

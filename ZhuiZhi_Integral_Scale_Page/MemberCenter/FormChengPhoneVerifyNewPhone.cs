@@ -11,17 +11,20 @@ using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
+    /// <summary>
+    /// 新手机验证
+    /// </summary>
     public partial class FormChengPhoneVerifyNewPhone : Form
     {
+        public string newphone = "";
         public FormChengPhoneVerifyNewPhone()
         {
             InitializeComponent();
-            
-
         }
 
         private void FormChengPhoneVerifyNewPhone_Shown(object sender, EventArgs e)
         {
+            txtNewPhoneNumber.Focus();
             MemberCenterMediaHelper.ShowChengPhoneVerifyNewPhone();
         }
 
@@ -54,7 +57,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    MainModel.NewPhone = txtNewPhoneNumber.Text;
+                    newphone = txtNewPhoneNumber.Text;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -80,8 +83,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnpw2_Click(object sender, EventArgs e)
         {
             txtNewPhoneNumber.Text += "2";
-            
-
         }
 
         private void btnpw3_Click(object sender, EventArgs e)
@@ -152,11 +153,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
-
-        private void txtNewPhoneNumber_Load(object sender, EventArgs e)
-        {
-            
-        }
-
     }
 }

@@ -39,7 +39,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (Screen.AllScreens.Count() > 1)
                 {
                     HaveMedia = true;
-                    frmmembermedia.Show();
+                    //frmmembermedia.Show();
                 }
                 else
                 {
@@ -191,6 +191,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
+
+        /// <summary> 更换手机-支付密码
+        /// </summary>
+        public static void UpdateChangePhonePwdUI(string pwd)
+        {
+            frmmembermedia.UpdateChangePhonePwdUI(pwd);
+        }
+
+
         /// <summary>
         /// 调用更换手机号码新旧实体卡屏
         /// </summary>
@@ -219,6 +228,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
+
+        /// <summary> 更换手机-手机验证码
+        /// </summary>
+        public static void UpdatePhoneScdUI(string smscode)
+        {
+            frmmembermedia.UpdatePhoneScdUI(smscode);
+        }
+
+
         /// <summary>
         /// 调用更换手机号码新旧实体卡屏
         /// </summary>

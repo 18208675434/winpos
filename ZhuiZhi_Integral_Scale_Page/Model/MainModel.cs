@@ -66,15 +66,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// <summary>
         /// 功能-修改密码同步
         /// </summary>
-        public static string SevaePwd = "";
-        /// <summary>
-        /// 修改手机号码验证码同步
-        /// </summary>
-        public static string ChangeScd = "";
-        /// <summary>
-        /// 修改手机号码输入密码同步
-        /// </summary>
-        public static string ChangePwd = "";
+        public static string SevaePwd = "";     
         /// <summary>
         /// 全局验证是否是会员切换界面变量
         /// </summary>
