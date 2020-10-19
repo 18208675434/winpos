@@ -141,6 +141,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch { }
         }
 
+        /// <summary> 更新忘记密码UI
+        /// </summary>
+        public static void UpdateForgetPassWordUI(int numtype, string smscode)
+        {
+            frmmembermedia.UpdateForgetPassWordUI(numtype, smscode);
+        }
+
+
         /// <summary>
         /// 调用显示密码修改成功界面
         /// </summary>

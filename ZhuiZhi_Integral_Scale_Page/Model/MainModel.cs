@@ -57,11 +57,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// <summary>
         /// 用户修改密码成功了码
         /// </summary>
-        public static bool SeavePwdok = false;
-        /// <summary>
-        /// 客屏同步忘记密码时第几次输入
-        /// </summary>
-        public static int inputimes = 0;
+        public static bool SeavePwdok = false;   
         /// <summary>
         /// 余额全局变量
         /// </summary>
@@ -71,10 +67,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 功能-修改密码同步
         /// </summary>
         public static string SevaePwd = "";
-        /// <summary>
-        /// 功能-忘记密码同步
-        /// </summary>
-        public static string SmsCode = "";
         /// <summary>
         /// 修改手机号码验证码同步
         /// </summary>
