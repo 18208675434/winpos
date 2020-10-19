@@ -28,7 +28,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 FormMemberCenter frmcenter = new FormMemberCenter(member);
-
                 asf.AutoScaleControlTest(frmcenter, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmcenter.Location = new System.Drawing.Point(0, 0);
 
@@ -48,7 +47,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                
+
                 BackHelper.ShowFormBackGround();
 
                 FormTopUpByCash frmpaybycash = new FormTopUpByCash(amount);
@@ -61,7 +60,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 BackHelper.HideFormBackGround();
                 Application.DoEvents();
-                
+
                 return frmpaybycash.DialogResult == DialogResult.OK;
 
 
@@ -96,9 +95,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-
-
-
+        
         public static void ShowFormAllCoupon(List<PromotionCoupon> LstCoupon)
         {
             try
@@ -236,7 +233,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 显示修改手机号码界面
         /// </summary>
-        public static void ShowFormChangePhoneNumber(Member member)
+        public static bool ShowFormChangePhoneNumber(Member member)
         {
             try
             {
@@ -245,15 +242,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 asf.AutoScaleControlTest(frmchangephonenumber, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmchangephonenumber.Location = new System.Drawing.Point(0, 0);
                 frmchangephonenumber.TopMost = true;
-                frmchangephonenumber.ShowDialog();
+                bool flag=  frmchangephonenumber.ShowDialog()==DialogResult.OK;
                 frmchangephonenumber.Dispose();
                 Application.DoEvents();
-
+                return flag;
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("显示修改手机号码界面异常" + ex.Message);
             }
+            return false;
 
         }
         /// <summary>
@@ -318,12 +316,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
 
                 BackHelper.ShowFormBackGround();
-
                 FormChangePhonePhysicalCard frmchangephoneoldcard = new FormChangePhonePhysicalCard();
                 asf.AutoScaleControlTest(frmchangephoneoldcard, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
                 frmchangephoneoldcard.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephoneoldcard.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephoneoldcard.Height) / 2);
                 frmchangephoneoldcard.TopMost = true;
-
                 frmchangephoneoldcard.ShowDialog();
 
                 Application.DoEvents();
@@ -344,18 +340,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                BackHelper.ShowFormBackGround();
-
                 FormChangePhoneNewCard frmchangephonenewcard = new FormChangePhoneNewCard();
                 asf.AutoScaleControlTest(frmchangephonenewcard, 380, 450, 380 * MainModel.midScale, 450 * MainModel.midScale, true);
                 frmchangephonenewcard.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonenewcard.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonenewcard.Height) / 2);
                 frmchangephonenewcard.TopMost = true;
                 frmchangephonenewcard.ShowDialog();
-
                 frmchangephonenewcard.Dispose();
-
-
-                BackHelper.HideFormBackGround();
                 Application.DoEvents();
                 return frmchangephonenewcard.DialogResult == DialogResult.OK;
 
@@ -366,31 +356,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
+
         /// <summary>
         /// 显示修改手机号码-新手机获取验证码窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhoneNewPhoneSms()
+        public static bool ShowFormChangePhoneNewPhoneSms(string newphone)
         {
             try
             {
-                BackHelper.ShowFormBackGround();
+                FormChangePhoneNewPhoneSms formChangePhoneNewPhoneSms = new FormChangePhoneNewPhoneSms(newphone);
+                asf.AutoScaleControlTest(formChangePhoneNewPhoneSms, 380, 200, 380 * MainModel.midScale, 200 * MainModel.midScale, true);
+                formChangePhoneNewPhoneSms.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formChangePhoneNewPhoneSms.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formChangePhoneNewPhoneSms.Height) / 2);
+                formChangePhoneNewPhoneSms.TopMost = true;
 
-                FormChangePhoneNewPhoneSms frmforgetpassword = new FormChangePhoneNewPhoneSms();
-                asf.AutoScaleControlTest(frmforgetpassword, 380, 200, 380 * MainModel.midScale, 200 * MainModel.midScale, true);
-                frmforgetpassword.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmforgetpassword.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmforgetpassword.Height) / 2);
-                frmforgetpassword.TopMost = true;
-
-                frmforgetpassword.ShowDialog();
-
-                BackHelper.HideFormBackGround();
-                Application.DoEvents();
-
-                return frmforgetpassword.DialogResult == DialogResult.OK;
+                DialogResult dialog = formChangePhoneNewPhoneSms.ShowDialog();
+                return dialog == DialogResult.OK;
             }
             catch (Exception ex)
             {
-
                 return false;
             }
         }
@@ -398,34 +382,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 显示修改手机号码-新手机号码验证窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChengPhoneVerifyNewPhone()
+        public static string ShowFormChengPhoneVerifyNewPhone()
         {
             try
             {
-                BackHelper.ShowFormBackGround();
-
                 FormChengPhoneVerifyNewPhone frmverifynewphone = new FormChengPhoneVerifyNewPhone();
-
                 asf.AutoScaleControlTest(frmverifynewphone, 380, 450, 380 * MainModel.midScale, 450 * MainModel.midScale, true);
                 frmverifynewphone.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmverifynewphone.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmverifynewphone.Height) / 2);
                 frmverifynewphone.TopMost = true;
-
-                frmverifynewphone.ShowDialog();
+                DialogResult dialog= frmverifynewphone.ShowDialog();
+              
                 if (frmverifynewphone.DialogResult == DialogResult.OK)
                 {
-                    ShowFormChangePhoneNewPhoneSms();
+                    return frmverifynewphone.newphone;
                 }
-                frmverifynewphone.Dispose();
-                BackHelper.HideFormBackGround();
-                Application.DoEvents();
-                return frmverifynewphone.DialogResult == DialogResult.OK;
-
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("新手机号码验证窗口异常" + ex.Message);
-                return false;
+                LogManager.WriteLog("新手机号码验证窗口异常" + ex.Message);              
             }
+              return "";
         }
         /// <summary>
         /// 修改手机号码-确认修改窗口
@@ -634,7 +610,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 asf.AutoScaleControlTest(formLoss, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 formLoss.Location = new System.Drawing.Point(0, 0);
                 formLoss.TopMost = true;
-                formLoss.ShowDialog();               
+                formLoss.ShowDialog();
                 Application.DoEvents();
                 BackHelper.HideFormBackGround();
                 return formLoss.DialogResult == DialogResult.OK;
@@ -666,17 +642,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 BackHelper.HideFormBackGround();
 
                 return money.CustomTemplate;
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 BackHelper.HideFormBackGround();
-                LogManager.WriteLog("加载自定义充值金额页面异常"+ex);
+                LogManager.WriteLog("加载自定义充值金额页面异常" + ex);
                 return null;
             }
         }
 
-        public static string ShowFormOtherMethord(List<ClassPayment> payments,decimal amount)
+        public static string ShowFormOtherMethord(List<ClassPayment> payments, decimal amount)
         {
             try
             {

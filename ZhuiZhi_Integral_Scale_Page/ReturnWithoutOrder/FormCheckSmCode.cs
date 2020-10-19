@@ -128,7 +128,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             IsEnable = false;
 
             string err = "";
-            int result = memberhttputil.ChangeNumberVerifysmscode(smscode, ref err);
+            int result = memberhttputil.ChangeNumberVerifysmscode(CurrentPhone,smscode, ref err);
             if (result == 1)
             {
                 this.DialogResult = DialogResult.OK;

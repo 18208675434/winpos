@@ -23,26 +23,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public string PayPassWord = "";
         Member member1;
         MemberCenterHttpUtil memberhttputil = new MemberCenterHttpUtil();
-        
+
         public FormChangePhonePayPwd(Member member)
         {
-            
+
             InitializeComponent();
             member1 = member;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            
-            //BackHelper.ShowFormBackGround();
             BackHelper.HideFormBackGround();
-            
+
             this.Close();
             DialogResult = DialogResult.Cancel;
         }
 
         private void FormChangePhonePayPwd_Shown(object sender, EventArgs e)
-        {
+        {            
+            MemberCenterMediaHelper.UpdateChangePhonePwdUI("");
             MemberCenterMediaHelper.ShowChangePhonePayPwd();
         }
 
@@ -67,54 +66,53 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             switch (keyData)
             {
                 //不同键盘数字键值不同
-                case Keys.D0: AddNum(0, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D1: AddNum(1, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D2: AddNum(2, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D3: AddNum(3, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D4: AddNum(4, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D5: AddNum(5, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D6: AddNum(6, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D7: AddNum(7, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D8: AddNum(8, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D9: AddNum(9, false); return !base.ProcessDialogKey(keyData); break;
+                case Keys.D0: AddNum(0, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D1: AddNum(1, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D2: AddNum(2, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D3: AddNum(3, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D4: AddNum(4, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D5: AddNum(5, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D6: AddNum(6, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D7: AddNum(7, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D8: AddNum(8, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D9: AddNum(9, false); return !base.ProcessDialogKey(keyData);
 
-                case Keys.NumPad0: AddNum(0, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad1: AddNum(1, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad2: AddNum(2, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad3: AddNum(3, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad4: AddNum(4, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad5: AddNum(5, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad6: AddNum(6, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad7: AddNum(7, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad8: AddNum(8, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad9: AddNum(9, false); return !base.ProcessDialogKey(keyData); break;
+                case Keys.NumPad0: AddNum(0, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad1: AddNum(1, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad2: AddNum(2, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad3: AddNum(3, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad4: AddNum(4, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad5: AddNum(5, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad6: AddNum(6, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad7: AddNum(7, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad8: AddNum(8, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad9: AddNum(9, false); return !base.ProcessDialogKey(keyData);
 
-                case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData); break;
-                case Keys.Enter: return !base.ProcessDialogKey(keyData); break;
+                case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData);
+                case Keys.Enter: return !base.ProcessDialogKey(keyData);
             }
 
             return base.ProcessDialogKey(keyData);
 
         }
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
-        
+
         public void AddNum(int num, bool isDel)
         {
 
-            if (isDel)
+            if (isDel && password.Length > 0)
             {
-                if (password.Length > 0)
-                {
-                    password = password.Substring(0, password.Length - 1);
-                    
-                }
+                password = password.Substring(0, password.Length - 1);
+                UpdatePassWord(password);
             }
             else
             {
-                if (password.Length < 6)
+                if (password.Length >= 6)
                 {
-                    password += num;
+                    return;
                 }
+                password += num;
+                UpdatePassWord(password);
                 if (password.Length == 6)
                 {
                     string ErrorMsg = "";
@@ -125,10 +123,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     //RSA加密
                     PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
-                    VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode,member1);
+                    VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode, member1);
                     if (ErrorMsg != "" || verifyresult == null)
                     {
-                        
+
                         this.Enabled = true;
                         LoadingHelper.CloseForm();
                         CheckUserAndMember(ResultCode, ErrorMsg);
@@ -138,11 +136,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         MainModel.BalancePwdErrorCode = -1;
                         if (verifyresult.success == 1)
                         {
-                            //BackHelper.ShowFormBackGround();
-                            
                             //校验成功
-                            password = "";
-                            MainModel.ChangePwd = "";
                             MainModel.ShowChangePhonePage = 1;
                             MainModel.ShowChangePhoneMedia = 1;
                             LoadingHelper.CloseForm();
@@ -150,43 +144,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             this.Close();
                             BackHelper.HideFormBackGround();
                         }
-                        else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
+                        else if (verifyresult.remainwrongcount > 0)
                         {
-                            
-                            MainModel.ChangePwd = "";
-                            password = "";
-                            UpdatePassWord();
                             string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
-                            
                             MainModel.ShowLog(showerrormsg, false);
                             ShowLog(showerrormsg, false);
-
                             LoadingHelper.CloseForm();
                             this.Close();
                             this.DialogResult = DialogResult.Cancel;
                             return;
-                            
                         }
                         else
                         {
-                            MainModel.ChangePwd = "";
                             password = "";
                             MainModel.ShowLog(verifyresult.hint, true);
                             ShowLog(verifyresult.hint, true);
-                            
+
                         }
                     }
                     this.Enabled = true;
                 }
             }
-            MainModel.ChangePwd = password;
-            UpdatePassWord();
+
         }
-        public void re()
-        {
-            return;
-        }
-        private void UpdatePassWord()
+        private void UpdatePassWord(string password)
         {
             switch (password.Length)
             {
@@ -200,6 +181,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
+            MemberCenterMediaHelper.UpdateChangePhonePwdUI(password);
         }
 
         /// <summary>
@@ -228,9 +210,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-
                 this.Enabled = true;
-
                 MainModel.ShowLog("密码验证错误码异常", true);
 
             }
@@ -246,8 +226,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-
-                //MsgHelper.AutoShowForm(msg);
                 this.BeginInvoke(new InvokeHandler(delegate()
                 {
                     Delay.Start(1000);
@@ -261,16 +239,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
 
         }
-
-        private void FormChangePhonePayPwd_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPassW6_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

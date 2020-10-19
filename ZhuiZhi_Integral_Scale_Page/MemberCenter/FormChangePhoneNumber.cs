@@ -24,12 +24,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
         Member member;
+
+        int type = 0;//1-手机验证码验证 2-余额支付密码验证 3-老卡验证 4-新卡验证
+        bool isnew = true;//新手机 or 合并
         public FormChangePhoneNumber(Member m)
         {
             InitializeComponent();
             member = m;
-
-
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
@@ -44,6 +45,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhoneNumber_Load(object sender, EventArgs e)
         {
+            type = 0;
             lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
         }
@@ -51,17 +53,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnSmsCodeVerify_Click(object sender, EventArgs e)
         {
             BackHelper.ShowFormBackGround();
-
-
             string errormsg = "";
             membercenterhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref errormsg);
             if (MemberCenterHelper.ShowFormChengPhoneSmsCode())
             {
+                type = 1;
                 ShowChangePhonePage();
                 label17.ForeColor = Color.DodgerBlue;
                 picStepTwo.BackgroundImage = pictureBox1.BackgroundImage;
                 label6.BackColor = Color.DodgerBlue;
-                label9.Visible = true;
+                lblMerge.Visible = true;
 
             }
         }
@@ -70,25 +71,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             if (MemberCenterHelper.ShowFormChangePhonePayPwd(member))
             {
+                type = 2;
                 ShowChangePhonePage();
+                label17.ForeColor = Color.DodgerBlue;
+                picStepTwo.BackgroundImage = pictureBox1.BackgroundImage;
+                label6.BackColor = Color.DodgerBlue;
+                lblMerge.Visible = true;
             }
         }
 
         private void btnOldCardVerify_Click(object sender, EventArgs e)
         {
-
             if (MemberCenterHelper.ShowFormChangePhonePhysicalCard())
             {
+                type = 3;
                 ShowChangePhonePage();
             }
-
-
         }
 
         private void btnNewCardVerify_Click(object sender, EventArgs e)
         {
             if (MemberCenterHelper.ShowFormChangePhoneNewCard())
             {
+                type = 4;
                 ShowChangePhonePage();
             }
         }
@@ -105,42 +110,122 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnVerifyNewPhone_Click(object sender, EventArgs e)
         {
-
-            yanzheng();
+            VerifyNewPhone();
         }
-        public void yanzheng()
+        public void VerifyNewPhone()
         {
-            if (MemberCenterHelper.ShowFormChengPhoneVerifyNewPhone())
+            try
             {
-                string name = "验证新手机号";
-
-                if (name == btnVerifyNewPhone.Text)
+                isnew = true;
+                BackHelper.ShowFormBackGround();
+                string newphone = MemberCenterHelper.ShowFormChengPhoneVerifyNewPhone();
+                if (!string.IsNullOrEmpty(newphone))
                 {
-                    ShowChangePhonePage();
-                }
+                    if (MainModel.CurrentMember.memberheaderresponsevo.mobile == newphone)
+                    {
+                        MainModel.ShowLog("亲，请输入新的手机号", false);
+                        return;
+                    }
+                    if (MemberCenterHelper.ShowFormChangePhoneNewPhoneSms(newphone))
+                    {
+                        string name = "验证新手机号";
+                        if (name == btnVerifyNewPhone.Text)
+                        {
+                            ShowChangePhonePage();
+                        }
 
-                label8.ForeColor = Color.DodgerBlue;
-                picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
-                label7.BackColor = Color.DodgerBlue;
-                label9.Visible = false;
-                label11.Visible = true;
+                        label8.ForeColor = Color.DodgerBlue;
+                        picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
+                        label7.BackColor = Color.DodgerBlue;
+                        lblMerge.Visible = false;
+                        lblChangePhone.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("验证新手机号异常：" + ex.Message, true);
+            }
+            finally
+            {
+                BackHelper.HideFormBackGround();
+            }
+           
+        }
+
+        private void lblMerge_Click(object sender, EventArgs e)
+        {
+            VerifyMember();
+        }
+
+        public void VerifyMember()
+        {
+            try
+            {
+                isnew = false;
+                string numbervalue = ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormVoucher();
+                if (!string.IsNullOrEmpty(numbervalue))
+                {
+                    if (MainModel.CurrentMember.memberheaderresponsevo.mobile == numbervalue)
+                    {
+                         MainModel.ShowLog("亲，请输入新的会员卡号", false);
+                        return;
+                    }
+                    string msg = "";
+                    Member member = new HttpUtil().GetMember(numbervalue, ref msg);
+                    if (member == null)
+                    {
+                        MainModel.ShowLog("亲，您还不是会员哦", false);
+                        return;
+                    }
+                    BackHelper.ShowFormBackGround();
+                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(member);
+                    asf.AutoScaleControlTest(pwd, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
+                    pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
+                    pwd.TopMost = true;
+                    if (pwd.ShowDialog() == DialogResult.OK)
+                    {
+                        MainModel.NewPhone = numbervalue;
+                        MainModel.ShowChangePhonePage = 2;
+                        string name = "验证新手机号";
+                        if (name == btnVerifyNewPhone.Text)
+                        {
+                            ShowChangePhonePage();
+                        }
+
+                        label8.ForeColor = Color.DodgerBlue;
+                        picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
+                        label7.BackColor = Color.DodgerBlue;
+                        lblMerge.Visible = false;
+                        lblChangePhone.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("合并时验证会员异常：" + ex.Message, true);
+            }
+            finally
+            {
+                BackHelper.HideFormBackGround();
             }
         }
-        public void yanse()
-        {
-            label8.ForeColor = Color.DodgerBlue;
-            picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
-            label7.BackColor = Color.DodgerBlue;
-            btnOkChange.Visible = true;
 
+        private void lblChangePhone_Click(object sender, EventArgs e)
+        {
+            if (isnew)//新手机
+            {
+                VerifyNewPhone();//录入的手机也可能是已存在会员
+            }
+            else//合并
+            {
+                VerifyMember();
+            }
         }
+
+
 
         private void btnOkChange_Click(object sender, EventArgs e)
-        {
-            queren();
-
-        }
-        public void queren()
         {
             string errormsg = "";
             bool resule = membercenterhttputil.GetCheckmember(MainModel.NewPhone, ref errormsg);
@@ -149,6 +234,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.IsMemberCenter = true;
                 if (MemberCenterHelper.ShowFormChangePhoneConfirm())
                 {
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }
@@ -157,6 +243,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.IsMemberCenter = false;
                 if (MemberCenterHelper.ShowFormChangePhoneConfirm())
                 {
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }
@@ -211,120 +298,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        private void picChangePhoneOK_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblVerifySuccess_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void picVerifyMemberOK_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-            BackHelper.ShowFormBackGround();
-            //BackHelper.HideFormBackGround();
-            FormMemberRecevice m = new FormMemberRecevice();
-            asf.AutoScaleControlTest(m, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
-            m.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - m.Width) / 2, (Screen.AllScreens[0].Bounds.Height - m.Height) / 2);
-            m.TopMost = true;
-            m.ShowDialog();
-            m.Dispose();
-            //this.Enabled = true;
-            
-            if (m.DialogResult == DialogResult.OK)
-            {
-                label8.ForeColor = Color.DodgerBlue;
-                picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
-                label7.BackColor = Color.DodgerBlue;
-                button1.Visible = true;
-                btnVerifyNewPhone.Visible = false;
-                label9.Visible = false;
-                label11.Visible = true;
-                
-            }
-            else
-            {
-                m.Close();
-                return;
-            }
-            
-            
-
-
-
-
-
-
-
-            this.Refresh();
-
-
-        }
-       
-        
-        
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            BackHelper.ShowFormBackGround();
-            //BackHelper.HideFormBackGround();
-            FormHeBing f = new FormHeBing();
-            asf.AutoScaleControlTest(f, 550, 200, 380 * MainModel.midScale, 200 * MainModel.midScale, true);
-            f.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - f.Width) / 2, (Screen.AllScreens[0].Bounds.Height - f.Height) / 2);
-            f.TopMost = true;
-
-            f.ShowDialog();
-
-            if (f.DialogResult == DialogResult.OK)
-            {
-                BackHelper.HideFormBackGround();
-                this.Close();
-            }
-
-        }
-
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-            BackHelper.ShowFormBackGround();
-            FormMemberRecevice menre = new FormMemberRecevice();
-            asf.AutoScaleControlTest(menre, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
-            menre.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - menre.Width) / 2, (Screen.AllScreens[0].Bounds.Height - menre.Height) / 2);
-            menre.TopMost = true;
-            
-            
-            menre.GetNewPhone();
-            menre.ShowDialog();
-            lblNewPhone.Text = MainModel.NewPhone;
-        }
-        //public void empty()
-        //{
-        //    btnVerifyNewPhone.Visible = true;
-        //    label9.Visible = true;
-        //    label10.Visible = true;
-        //    label11.Visible = true;
-        //    picStepThree.Visible = false; ;
-        //    label8.Visible = false;
-        //    button1.Visible = false;
-        //}
     }
 }

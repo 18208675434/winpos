@@ -381,12 +381,6 @@
     <Compile Include="MemberCenter\FormForgetPassword.Designer.cs">
       <DependentUpon>FormForgetPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormHeBing.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormHeBing.Designer.cs">
-      <DependentUpon>FormHeBing.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberCenter\FormIsokCancle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -404,12 +398,6 @@
     </Compile>
     <Compile Include="MemberCenter\FormMemberCenter.Designer.cs">
       <DependentUpon>FormMemberCenter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemberCenter\FormMemberRecevice.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormMemberRecevice.Designer.cs">
-      <DependentUpon>FormMemberRecevice.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormNoPayPwd.cs">
       <SubType>Form</SubType>
@@ -1322,9 +1310,6 @@
     <EmbeddedResource Include="MemberCenter\FormForgetPassword.resx">
       <DependentUpon>FormForgetPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormHeBing.resx">
-      <DependentUpon>FormHeBing.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormIsokCancle.resx">
       <DependentUpon>FormIsokCancle.cs</DependentUpon>
     </EmbeddedResource>
@@ -1333,9 +1318,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormMemberCenter.resx">
       <DependentUpon>FormMemberCenter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormMemberRecevice.resx">
-      <DependentUpon>FormMemberRecevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormNoPayPwd.resx">
       <DependentUpon>FormNoPayPwd.cs</DependentUpon>

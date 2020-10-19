@@ -280,14 +280,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 修改手机号码 新手机验证码校验
         /// </summary>
         /// <returns></returns>
-        public int ChangeNumberVerifysmscode(string newphonesmscode, ref string errormsg)
+        public int ChangeNumberVerifysmscode(string newphone, string newphonesmscode, ref string errormsg)
         {
             try
             {
                 string url = "/pos/member/verifysmscode";
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("authcode", newphonesmscode);
-                sort.Add("mobile", MainModel.NewPhone);
+                sort.Add("mobile", newphone);
                 sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
                 string testjson = JsonConvert.SerializeObject(sort);
                 string json = HttpPOST(url, testjson);
@@ -396,15 +396,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="mobile"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public bool MergeMemberPhonenumber(ref string errormsg)
+        public bool MergeMemberPhonenumber(string sourcetoken,string targettoken,ref string errormsg)
         {
             try
             {
                 string url = "/pos/member/memberheader/merge";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("sourcetoken", MainModel.Sourcetoken);
-                sort.Add("targettoken", MemberCenterHelper.member.memberheaderresponsevo.token);
+                sort.Add("sourcetoken", sourcetoken);
+                sort.Add("targettoken", targettoken);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);

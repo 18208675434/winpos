@@ -356,8 +356,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             //调用定时刷新控件   刷新客屏数据
             timerPassWord.Enabled = true;
-            timerChangePhoneScd.Enabled = true;
-            timerChangePhonePwd.Enabled = true;
 
         }
 
@@ -407,26 +405,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
             }
         }
-
-        private void timerChangePhoneScd_Tick(object sender, EventArgs e)
+        //更换手机-手机验证码验证
+        public void UpdatePhoneScdUI(string changeScd)
         {
-            switch (MainModel.ChangeScd.Length)
+            switch (changeScd.Length)
             {
                 case 0: btnChangesms1.Text = ""; btnChangesms2.Text = ""; btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 1: btnChangesms1.Text = MainModel.ChangeScd.Substring(0, 1); btnChangesms2.Text = ""; btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 2: btnChangesms1.Text = MainModel.ChangeScd.Substring(0, 1); btnChangesms2.Text = MainModel.ChangeScd.Substring(1, 1); btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 3: btnChangesms1.Text = MainModel.ChangeScd.Substring(0, 1); btnChangesms2.Text = MainModel.ChangeScd.Substring(1, 1); btnChangesms3.Text = MainModel.ChangeScd.Substring(2, 1); btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 4: btnChangesms1.Text = MainModel.ChangeScd.Substring(0, 1); btnChangesms2.Text = MainModel.ChangeScd.Substring(1, 1); btnChangesms3.Text = MainModel.ChangeScd.Substring(2, 1); btnChangesms4.Text = MainModel.ChangeScd.Substring(3, 1); btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 5: btnChangesms1.Text = MainModel.ChangeScd.Substring(0, 1); btnChangesms2.Text = MainModel.ChangeScd.Substring(1, 1); btnChangesms3.Text = MainModel.ChangeScd.Substring(2, 1); btnChangesms4.Text = MainModel.ChangeScd.Substring(3, 1); btnChangesms5.Text = MainModel.ChangeScd.Substring(4, 1); btnChangesms6.Text = ""; break;
-                case 6: btnChangesms1.Text = MainModel.ChangeScd.Substring(0, 1); btnChangesms2.Text = MainModel.ChangeScd.Substring(1, 1); btnChangesms3.Text = MainModel.ChangeScd.Substring(2, 1); btnChangesms4.Text = MainModel.ChangeScd.Substring(3, 1); btnChangesms5.Text = MainModel.ChangeScd.Substring(4, 1); btnChangesms6.Text = MainModel.ChangeScd.Substring(5, 1); break;
+                case 1: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = ""; btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
+                case 2: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
+                case 3: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
+                case 4: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = changeScd.Substring(3, 1); btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
+                case 5: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = changeScd.Substring(3, 1); btnChangesms5.Text = changeScd.Substring(4, 1); btnChangesms6.Text = ""; break;
+                case 6: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = changeScd.Substring(3, 1); btnChangesms5.Text = changeScd.Substring(4, 1); btnChangesms6.Text = changeScd.Substring(5, 1); break;
 
                 default: btnChangesms1.Text = ""; btnChangesms2.Text = ""; btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
             }
         }
 
-        private void timerChangePhonePwd_Tick(object sender, EventArgs e)
+        //更换手机-支付密码验证
+        public void UpdateChangePhonePwdUI(string changePwd)
         {
-            switch (MainModel.ChangePwd.Length)
+            switch (changePwd.Length)
             {
                 case 0: btnChangePwd1.Text = ""; btnChangePwd2.Text = ""; btnChangePwd3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
                 case 1: btnChangePwd1.Text = "*"; btnChangePwd2.Text = ""; btnChangePwd3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
@@ -439,10 +438,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 default: btnChangePwd1.Text = ""; btnChangePwd2.Text = ""; btnPassWord3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
             }
         }
-
-
-
-
-
     }
 }

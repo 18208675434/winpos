@@ -46,9 +46,10 @@
             // 
             this.btnCountDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCountDown.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCountDown.Location = new System.Drawing.Point(337, 219);
+            this.btnCountDown.Location = new System.Drawing.Point(225, 146);
+            this.btnCountDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCountDown.Name = "btnCountDown";
-            this.btnCountDown.Size = new System.Drawing.Size(198, 62);
+            this.btnCountDown.Size = new System.Drawing.Size(132, 41);
             this.btnCountDown.TabIndex = 37;
             this.btnCountDown.Text = "重新发送(60)";
             this.btnCountDown.UseVisualStyleBackColor = true;
@@ -56,67 +57,79 @@
             // 
             // btnPassW6
             // 
-            this.btnPassW6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW6.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW6.FlatAppearance.BorderSize = 0;
             this.btnPassW6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPassW6.Location = new System.Drawing.Point(468, 126);
+            this.btnPassW6.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPassW6.Location = new System.Drawing.Point(312, 84);
+            this.btnPassW6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPassW6.Name = "btnPassW6";
-            this.btnPassW6.Size = new System.Drawing.Size(66, 66);
+            this.btnPassW6.Size = new System.Drawing.Size(44, 44);
             this.btnPassW6.TabIndex = 35;
             this.btnPassW6.UseVisualStyleBackColor = false;
             // 
             // btnPassW5
             // 
-            this.btnPassW5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW5.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW5.FlatAppearance.BorderSize = 0;
             this.btnPassW5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPassW5.Location = new System.Drawing.Point(383, 126);
+            this.btnPassW5.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPassW5.Location = new System.Drawing.Point(255, 84);
+            this.btnPassW5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPassW5.Name = "btnPassW5";
-            this.btnPassW5.Size = new System.Drawing.Size(66, 66);
+            this.btnPassW5.Size = new System.Drawing.Size(44, 44);
             this.btnPassW5.TabIndex = 34;
             this.btnPassW5.UseVisualStyleBackColor = false;
             // 
             // btnPassW4
             // 
-            this.btnPassW4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW4.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW4.FlatAppearance.BorderSize = 0;
             this.btnPassW4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPassW4.Location = new System.Drawing.Point(294, 126);
+            this.btnPassW4.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPassW4.Location = new System.Drawing.Point(196, 84);
+            this.btnPassW4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPassW4.Name = "btnPassW4";
-            this.btnPassW4.Size = new System.Drawing.Size(66, 66);
+            this.btnPassW4.Size = new System.Drawing.Size(44, 44);
             this.btnPassW4.TabIndex = 33;
             this.btnPassW4.UseVisualStyleBackColor = false;
             // 
             // btnPassW3
             // 
-            this.btnPassW3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW3.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW3.FlatAppearance.BorderSize = 0;
             this.btnPassW3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPassW3.Location = new System.Drawing.Point(212, 126);
+            this.btnPassW3.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPassW3.Location = new System.Drawing.Point(141, 84);
+            this.btnPassW3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPassW3.Name = "btnPassW3";
-            this.btnPassW3.Size = new System.Drawing.Size(66, 66);
+            this.btnPassW3.Size = new System.Drawing.Size(44, 44);
             this.btnPassW3.TabIndex = 32;
             this.btnPassW3.UseVisualStyleBackColor = false;
             // 
             // btnPassW2
             // 
-            this.btnPassW2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW2.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW2.FlatAppearance.BorderSize = 0;
             this.btnPassW2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPassW2.Location = new System.Drawing.Point(126, 126);
+            this.btnPassW2.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPassW2.Location = new System.Drawing.Point(84, 84);
+            this.btnPassW2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPassW2.Name = "btnPassW2";
-            this.btnPassW2.Size = new System.Drawing.Size(66, 66);
+            this.btnPassW2.Size = new System.Drawing.Size(44, 44);
             this.btnPassW2.TabIndex = 31;
             this.btnPassW2.UseVisualStyleBackColor = false;
             // 
             // btnPassW1
             // 
-            this.btnPassW1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassW1.BackColor = System.Drawing.Color.LightGray;
             this.btnPassW1.FlatAppearance.BorderSize = 0;
             this.btnPassW1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPassW1.Location = new System.Drawing.Point(37, 126);
+            this.btnPassW1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPassW1.Location = new System.Drawing.Point(25, 84);
+            this.btnPassW1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPassW1.Name = "btnPassW1";
-            this.btnPassW1.Size = new System.Drawing.Size(66, 66);
+            this.btnPassW1.Size = new System.Drawing.Size(44, 44);
             this.btnPassW1.TabIndex = 30;
             this.btnPassW1.UseVisualStyleBackColor = false;
             // 
@@ -124,9 +137,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(27, 77);
+            this.label2.Location = new System.Drawing.Point(18, 51);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(392, 27);
+            this.label2.Size = new System.Drawing.Size(275, 20);
             this.label2.TabIndex = 29;
             this.label2.Text = "验证码已发送，请等待用户输入短信验证码";
             // 
@@ -134,9 +148,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(25, 20);
+            this.label1.Location = new System.Drawing.Point(17, 13);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 34);
+            this.label1.Size = new System.Drawing.Size(138, 25);
             this.label1.TabIndex = 28;
             this.label1.Text = "手机验证码验证";
             // 
@@ -146,9 +161,10 @@
             this.linkLabel1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel1.LinkColor = System.Drawing.SystemColors.Highlight;
-            this.linkLabel1.Location = new System.Drawing.Point(402, 20);
+            this.linkLabel1.Location = new System.Drawing.Point(268, 13);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(133, 28);
+            this.linkLabel1.Size = new System.Drawing.Size(89, 20);
             this.linkLabel1.TabIndex = 38;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "返回上一层>";
@@ -161,10 +177,10 @@
             // 
             // FormChangePhoneNewPhoneSms
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(580, 350);
+            this.ClientSize = new System.Drawing.Size(387, 233);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.btnCountDown);
             this.Controls.Add(this.btnPassW6);
@@ -176,6 +192,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormChangePhoneNewPhoneSms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormChangePhoneNewPhoneSms";
