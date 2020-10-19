@@ -37,6 +37,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                             if (productBean.price != null) {
                                 if (MoneyUtils.isBiggerThanZero(newPrice)) {
                                     productBean.price.originprice=productBean.price.saleprice;
+                                    //1019 商品连续改价
+                                    productBean.price.origintotal = productBean.price.total;
                                 }
                                 productBean.price.saleprice=amt;
                             }
@@ -69,6 +71,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                         if (productBean.price != null) {
                             if (MoneyUtils.isBiggerThanZero(newPrice)) {
                                 productBean.price.originprice = productBean.price.saleprice;
+
+                                //1019 商品连续改价
+                                productBean.price.origintotal = productBean.price.total;
                             }
                             productBean.price.saleprice = newPrice;
                         }

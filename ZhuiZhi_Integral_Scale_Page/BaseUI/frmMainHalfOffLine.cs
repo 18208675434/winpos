@@ -1317,6 +1317,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     //购物车有商品的话刷新一次
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
+                        //退出会员清空改价信息
+                        CurrentCart.products.ForEach(r => r.adjustpriceinfo = null);
                         RefreshCart();
                     }
                     Console.WriteLine("clearmember 刷新购物车" + (DateTime.Now - starttime).TotalMilliseconds);
@@ -1397,6 +1399,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         //购物车有商品的话刷新一次
                         if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                         {
+                            //登录会员清空改价信息
+                            CurrentCart.products.ForEach(r=> r.adjustpriceinfo=null);
                             RefreshCart();
                         }
                         else

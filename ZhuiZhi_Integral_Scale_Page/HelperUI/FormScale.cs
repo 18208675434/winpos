@@ -51,11 +51,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void FormScale_Load(object sender, EventArgs e)
         {
-            LoadProInfo();
-            IniForm();
+            //LoadProInfo();
+            //IniForm();
 
-            UpdateWeight();
-            bgwLoadProInfo.RunWorkerAsync();
+            //UpdateWeight();
+            //bgwLoadProInfo.RunWorkerAsync();
         }
 
         public void UpInfo(Product pro)
@@ -74,7 +74,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
 
                 UpdateWeight();
-               // bgwLoadProInfo.RunWorkerAsync();
+                bgwLoadProInfo.RunWorkerAsync();
             }
             catch (Exception ex)
             {
