@@ -1152,7 +1152,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
 
-                LogManager.WriteLog("DEBUG", "交班结果" + tempjson);
+               // LogManager.WriteLog("DEBUG", "交班结果" + tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -3938,7 +3938,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpGET(url, sort);
 
-                LogManager.WriteLog("DEBUG","线上订单"+json);
+               // LogManager.WriteLog("DEBUG","线上订单"+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -3984,7 +3984,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 sort.Add("orderid", orderid);
                 string json = HttpGET(url, sort);
 
-                LogManager.WriteLog("DEBUG", "补打拣货单" + json);
+                //LogManager.WriteLog("DEBUG", "补打拣货单" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO

@@ -13,7 +13,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
     public class MemberCenterMediaHelper
     {
-
         private static FormMemberCenterMedia frmmembermedia = null;
 
         /// <summary>

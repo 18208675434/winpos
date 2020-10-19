@@ -62,7 +62,6 @@
             this.pnlTare = new System.Windows.Forms.Panel();
             this.虚拟重量 = new System.Windows.Forms.Button();
             this.btnOK = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.bgwLoadProInfo = new System.ComponentModel.BackgroundWorker();
             this.tplBtn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic折扣)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic直降)).BeginInit();
@@ -508,10 +507,6 @@
             this.btnOK.WhetherEnable = true;
             this.btnOK.ButtonClick += new System.EventHandler(this.btnOK_ButtonClick);
             // 
-            // bgwLoadProInfo
-            // 
-            this.bgwLoadProInfo.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwLoadProInfo_DoWork);
-            // 
             // FormScale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -548,7 +543,6 @@
             this.Text = "FormScale";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormScale_FormClosed);
             this.Load += new System.EventHandler(this.FormScale_Load);
-            this.Resize += new System.EventHandler(this.FormScale_Resize);
             this.tplBtn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic折扣)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic直降)).EndInit();
@@ -597,6 +591,5 @@
         private System.Windows.Forms.PictureBox pic优享;
         private System.Windows.Forms.Panel pnlTare;
         private System.Windows.Forms.Button 虚拟重量;
-        private System.ComponentModel.BackgroundWorker bgwLoadProInfo;
     }
 }

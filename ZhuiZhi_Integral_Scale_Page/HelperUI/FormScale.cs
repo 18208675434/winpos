@@ -56,6 +56,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             //UpdateWeight();
             //bgwLoadProInfo.RunWorkerAsync();
+
+            System.Threading.Thread threadmqtt = new System.Threading.Thread(LoadProInfo);
+            threadmqtt.IsBackground = true;
+            threadmqtt.Start(true);
         }
 
         public void UpInfo(Product pro)
@@ -63,24 +67,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             CurrentNetWeight = 0;
             CurrentTotalWeight = 0;
             ParaProduct = pro;
-            LoadProInfo();
+            //LoadProInfo(null);
             IniForm();
             timerScale.Enabled = true;
         }
 
-        private void LoadProInfo()
-        {
-            try
-            {
-
-                UpdateWeight();
-                bgwLoadProInfo.RunWorkerAsync();
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("加载商品显示信息异常" + ex.StackTrace, true);
-            }
-        }
 
         private void IniForm()
         {
@@ -199,6 +190,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 this.DataReceiveHandle.BeginInvoke(0, null, null);
             }
+
+            
             this.Close();
         }
 
@@ -430,7 +423,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
        
         }
 
-        private void bgwLoadProInfo_DoWork(object sender, DoWorkEventArgs e)
+        private void LoadProInfo(object obj)
         {
             try
             {
