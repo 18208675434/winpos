@@ -356,17 +356,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             //调用定时刷新控件   刷新客屏数据
             timerPassWord.Enabled = true;
-            timerSmsCode.Enabled = true;
             timerChangePhoneScd.Enabled = true;
             timerChangePhonePwd.Enabled = true;
 
         }
 
-        private void timerSmsCode_Tick(object sender, EventArgs e)
+        public void UpdateForgetPassWordUI(int numtype, string smscode)
         {
-            if (MainModel.inputimes != 0)
+            if (numtype != 0)
             {
-                switch (MainModel.SmsCode.Length)
+                switch (smscode.Length)
                 {
                     case 0: btnPassY1.Text = ""; btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
                     case 1: btnPassY1.Text = "*"; btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
@@ -378,36 +377,35 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                     default: btnPassY1.Text = ""; btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnChangesms6.Text = ""; break;
                 }
-                if (MainModel.inputimes == 1)
+                if (numtype == 0)
                 {
-                    lblForgetPwd.Text = "请再次输入，确认支付密码";                 
-                    
+                    lblForgetPwd.Text = "请输入短信验证码";
                 }
-                if (MainModel.inputimes == 2)
+                if (numtype == 1)
                 {
                     lblForgetPwd.Text = "请输入支付密码";
                 }
-                if (MainModel.inputimes == 0)
+                if (numtype == 2)
                 {
-                    lblForgetPwd.Text = "请输入短信验证码";
+                    lblForgetPwd.Text = "请再次输入，确认支付密码";
+
                 }
             }
             else
             {
-                switch (MainModel.SmsCode.Length)
+                switch (smscode.Length)
                 {
                     case 0: btnPassY1.Text = ""; btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
-                    case 1: btnPassY1.Text = MainModel.SmsCode.Substring(0, 1); btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
-                    case 2: btnPassY1.Text = MainModel.SmsCode.Substring(0, 1); btnPassY2.Text = MainModel.SmsCode.Substring(1, 1); btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
-                    case 3: btnPassY1.Text = MainModel.SmsCode.Substring(0, 1); btnPassY2.Text = MainModel.SmsCode.Substring(1, 1); btnPassY3.Text = MainModel.SmsCode.Substring(2, 1); btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
-                    case 4: btnPassY1.Text = MainModel.SmsCode.Substring(0, 1); btnPassY2.Text = MainModel.SmsCode.Substring(1, 1); btnPassY3.Text = MainModel.SmsCode.Substring(2, 1); btnPassY4.Text = MainModel.SmsCode.Substring(3, 1); btnPassY5.Text = ""; btnPassY6.Text = ""; break;
-                    case 5: btnPassY1.Text = MainModel.SmsCode.Substring(0, 1); btnPassY2.Text = MainModel.SmsCode.Substring(1, 1); btnPassY3.Text = MainModel.SmsCode.Substring(2, 1); btnPassY4.Text = MainModel.SmsCode.Substring(3, 1); btnPassY5.Text = MainModel.SmsCode.Substring(4, 1); ; btnPassY6.Text = ""; break;
-                    case 6: btnPassY1.Text = MainModel.SmsCode.Substring(0, 1); btnPassY2.Text = MainModel.SmsCode.Substring(1, 1); btnPassY3.Text = MainModel.SmsCode.Substring(2, 1); btnPassY4.Text = MainModel.SmsCode.Substring(3, 1); btnPassY5.Text = MainModel.SmsCode.Substring(4, 1); btnPassY6.Text = MainModel.SmsCode.Substring(5, 1); break;
+                    case 1: btnPassY1.Text = smscode.Substring(0, 1); btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
+                    case 2: btnPassY1.Text = smscode.Substring(0, 1); btnPassY2.Text = smscode.Substring(1, 1); btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
+                    case 3: btnPassY1.Text = smscode.Substring(0, 1); btnPassY2.Text = smscode.Substring(1, 1); btnPassY3.Text = smscode.Substring(2, 1); btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
+                    case 4: btnPassY1.Text = smscode.Substring(0, 1); btnPassY2.Text = smscode.Substring(1, 1); btnPassY3.Text = smscode.Substring(2, 1); btnPassY4.Text = smscode.Substring(3, 1); btnPassY5.Text = ""; btnPassY6.Text = ""; break;
+                    case 5: btnPassY1.Text = smscode.Substring(0, 1); btnPassY2.Text = smscode.Substring(1, 1); btnPassY3.Text = smscode.Substring(2, 1); btnPassY4.Text = smscode.Substring(3, 1); btnPassY5.Text = smscode.Substring(4, 1); ; btnPassY6.Text = ""; break;
+                    case 6: btnPassY1.Text = smscode.Substring(0, 1); btnPassY2.Text = smscode.Substring(1, 1); btnPassY3.Text = smscode.Substring(2, 1); btnPassY4.Text = smscode.Substring(3, 1); btnPassY5.Text = smscode.Substring(4, 1); btnPassY6.Text = smscode.Substring(5, 1); break;
 
                     default: btnPassY1.Text = ""; btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
                 }
             }
-
         }
 
         private void timerChangePhoneScd_Tick(object sender, EventArgs e)

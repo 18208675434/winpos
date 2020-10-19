@@ -14,36 +14,35 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormForgetPassword : Form
     {
-        /// <summary>
+        /// <summary> 
         /// 输入验证码
         /// </summary>
         public string smscode = "";
-        //输入验证码次数
-        public int inputtimes = 0;
-        //旧密码
-        public string oldpassword = "";
+        /// <summary>  0-验证码录入 1-新密码录入 2-新密码确认
+        /// </summary>
+        public int numtype = 0;
         //存储新密码
-        public string NowNewPassWord = "";
-        //存储验证码
-        public string ServeSmscode = "";
+        public string newPassWord = "";
+        //存储短信验证码
+        public string serveSmscode = "";
 
         MemberCenterHttpUtil memberhttputil = new MemberCenterHttpUtil();
 
         public FormForgetPassword()
         {
-            InitializeComponent();         
-           
+            InitializeComponent();
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            MainModel.SmsCode = "";
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void FormForgetPassword_Shown(object sender, EventArgs e)
         {
+            UpdatePassWord(0,"");//先更改UI   
             btnSend_Click(null, null);
             MemberCenterMediaHelper.ShowForgetPassWord();
         }
@@ -55,7 +54,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormForgetPassword_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
-            {
+            {              
                 MemberCenterMediaHelper.HidePayInfo();
             }
             catch (Exception ex)
@@ -110,88 +109,74 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void AddNum(int num, bool isDel)
         {
-
-            if (isDel)
+            if (isDel && smscode.Length > 0)
             {
-                if (smscode.Length > 0)
-                {
-                    smscode = smscode.Substring(0, smscode.Length - 1);
-                }
+                smscode = smscode.Substring(0, smscode.Length - 1);
+                UpdatePassWord(numtype,smscode);//先更改UI   
             }
             else
             {
-                if (smscode.Length < 6)
+                if (smscode.Length > 6)//验证码满足6位，屏蔽录入
                 {
-                    smscode += num;
+                    return;
                 }
-                if (smscode.Length == 6 && inputtimes == 0)
-                {
-                    ServeSmscode = smscode;
-                    string err = "";
-                    string result = memberhttputil.GetVerifysmscode(smscode, ref err);
-                    if (result == "success")
-                    {
-                        smscode = "";
-                        inputtimes = 2;
-                        MainModel.inputimes = 2;
-                        label2.Text = "请输入新的支付密码";
-                        btnSend.Visible = false;
-                    }
-                    else
-                    {
-                        MainModel.ShowLog("短信验证码错误", false);
-                        ShowLog("短信验证码错误", false);
-                        this.Close();
-                    }
-                }
-                if (smscode.Length == 6 && inputtimes == 1)
-                {
-                    if (smscode == NowNewPassWord)
-                    {
-                        string ErroM = "";
-                        string newpassword = smscode;
-                        //验证密码类型
-                        int resuleCode = 0;
-                        //验证成功
-                        string result = memberhttputil.ForgetSetPassWord(MainModel.RSAEncrypt(MainModel.RSAPrivateKey, newpassword), 1, ServeSmscode, ref ErroM, ref resuleCode);
-                        smscode = "";
-                        MainModel.SmsCode = "";
-                        if (result == "true")
-                        {
-                            inputtimes = 0;
-                            MainModel.inputimes = 0;
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-                        }
-                    }
-                    if (smscode != NowNewPassWord)
-                    {
-                        label2.Text = "两次输入密码不一致，请重新输入";
-                        smscode = "";
-                        inputtimes = 2;
-                        MainModel.inputimes = 2;
-                        UpdatePassWord(inputtimes);
-                    }
+                smscode += num;
+                UpdatePassWord(numtype,smscode);//先更改UI    
+            }
 
-                }
-                if (smscode.Length == 6 && inputtimes == 2)
+            if (smscode.Length == 6 && numtype == 0)
+            {
+                serveSmscode = smscode;
+                string err = "";
+                string result = memberhttputil.GetVerifysmscode(smscode, ref err); ;
+                if (result == "success")
                 {
-                    //存储到第一次输入的新密码
-                    NowNewPassWord = smscode;
-                    label2.Text = "请等待用户确认密码";
-                    smscode = "";
-                    inputtimes = 1;
-                    MainModel.inputimes = inputtimes;
-                    UpdatePassWord(inputtimes);
+                    label2.Text = "请输入新的支付密码";
+                    btnSend.Visible = false;
+                    UpdatePassWord(1,"");//重置UI
+                }
+                else
+                {
+                    this.Close();
+                    MainModel.ShowLog("短信验证码错误", false);
+                    ShowLog("短信验证码错误", false);
                 }
             }
-            MainModel.SmsCode = smscode;
-            UpdatePassWord(inputtimes);
-
+            if (smscode.Length == 6 && numtype == 1)
+            {
+                //存储到第一次输入的新密码
+                newPassWord = smscode;
+                label2.Text = "请等待用户确认密码";
+                UpdatePassWord(2,"");//重置UI
+            }
+            if (smscode.Length == 6 && numtype == 2)
+            {
+                if (smscode == newPassWord)
+                {
+                    string ErroM = "";
+                    string newpassword = smscode;
+                    //验证密码类型
+                    int resuleCode = 0;
+                    //验证成功
+                    string result = memberhttputil.ForgetSetPassWord(MainModel.RSAEncrypt(MainModel.RSAPrivateKey, newpassword), 1, serveSmscode, ref ErroM, ref resuleCode);
+                    if (result == "true")
+                    {                      
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }                 
+                }
+                if (smscode != newPassWord)
+                {
+                    label2.Text = "两次输入密码不一致，请重新输入";
+                    UpdatePassWord(1,"");//重置UI
+                }
+            }
         }
-        private void UpdatePassWord(int inputtimes)
+        private void UpdatePassWord(int numtype, string smscode)
         {
-            if (inputtimes != 0)
+            this.numtype = numtype;
+            this.smscode = smscode;
+            if (numtype != 0)
             {
                 switch (smscode.Length)
                 {
@@ -221,6 +206,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
                 }
             }
+            MemberCenterMediaHelper.UpdateForgetPassWordUI(numtype, smscode);
 
         }
         /// <summary>
@@ -234,7 +220,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 //MsgHelper.AutoShowForm(msg);
                 this.BeginInvoke(new InvokeHandler(delegate()
-                {                   
+                {
                     Delay.Start(1000);
                     this.Activate();
                 }));
@@ -248,7 +234,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         MemberCenterHttpUtil membercenterutil = new MemberCenterHttpUtil();
         private void btnSend_Click(object sender, EventArgs e)
-        {          
+        {
             try
             {
                 if (timerSeconds.Enabled || string.IsNullOrEmpty(MainModel.CurrentMember.memberid))
@@ -258,7 +244,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 string err = "";
                 LoadingHelper.ShowLoadingScreen();
                 string smsCodeResult = membercenterutil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);
-                LoadingHelper.CloseForm();              
+                LoadingHelper.CloseForm();
                 if (!string.IsNullOrEmpty(err))
                 {
                     MainModel.ShowLog("发送验证码失败：" + err, true);

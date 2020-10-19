@@ -274,7 +274,6 @@
             this.label87 = new System.Windows.Forms.Label();
             this.pictureBox31 = new System.Windows.Forms.PictureBox();
             this.timerPassWord = new System.Windows.Forms.Timer(this.components);
-            this.timerSmsCode = new System.Windows.Forms.Timer(this.components);
             this.timerChangePhoneScd = new System.Windows.Forms.Timer(this.components);
             this.timerChangePhonePwd = new System.Windows.Forms.Timer(this.components);
             this.pnlItem.SuspendLayout();
@@ -500,8 +499,8 @@
             // tlpMember
             // 
             this.tlpMember.ColumnCount = 10;
-            this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
+            this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
             this.tlpMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0F));
@@ -552,10 +551,10 @@
             this.panel3.Controls.Add(this.btnpw2);
             this.panel3.Controls.Add(this.btnpw1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(1165, 2);
+            this.panel3.Location = new System.Drawing.Point(2, 2);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1, 739);
+            this.panel3.Size = new System.Drawing.Size(1159, 739);
             this.panel3.TabIndex = 305;
             // 
             // pictureBox7
@@ -572,7 +571,8 @@
             // 
             // btnPassWord6
             // 
-            this.btnPassWord6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassWord6.BackColor = System.Drawing.Color.LightGray;
+            this.btnPassWord6.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnPassWord6.FlatAppearance.BorderSize = 0;
             this.btnPassWord6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord6.Location = new System.Drawing.Point(359, 135);
@@ -584,7 +584,8 @@
             // 
             // btnPassWord5
             // 
-            this.btnPassWord5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassWord5.BackColor = System.Drawing.Color.LightGray;
+            this.btnPassWord5.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnPassWord5.FlatAppearance.BorderSize = 0;
             this.btnPassWord5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord5.Location = new System.Drawing.Point(297, 135);
@@ -596,7 +597,8 @@
             // 
             // btnPassWord4
             // 
-            this.btnPassWord4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassWord4.BackColor = System.Drawing.Color.LightGray;
+            this.btnPassWord4.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnPassWord4.FlatAppearance.BorderSize = 0;
             this.btnPassWord4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord4.Location = new System.Drawing.Point(233, 135);
@@ -608,7 +610,8 @@
             // 
             // btnPassWord3
             // 
-            this.btnPassWord3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassWord3.BackColor = System.Drawing.Color.LightGray;
+            this.btnPassWord3.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnPassWord3.FlatAppearance.BorderSize = 0;
             this.btnPassWord3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord3.Location = new System.Drawing.Point(163, 135);
@@ -620,7 +623,8 @@
             // 
             // btnPassWord2
             // 
-            this.btnPassWord2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassWord2.BackColor = System.Drawing.Color.LightGray;
+            this.btnPassWord2.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnPassWord2.FlatAppearance.BorderSize = 0;
             this.btnPassWord2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord2.Location = new System.Drawing.Point(97, 135);
@@ -632,7 +636,8 @@
             // 
             // btnPassWord1
             // 
-            this.btnPassWord1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPassWord1.BackColor = System.Drawing.Color.LightGray;
+            this.btnPassWord1.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnPassWord1.FlatAppearance.BorderSize = 0;
             this.btnPassWord1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPassWord1.Location = new System.Drawing.Point(28, 135);
@@ -679,6 +684,7 @@
             // 
             this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button7.Location = new System.Drawing.Point(281, 399);
@@ -690,6 +696,7 @@
             // 
             // btnpw0
             // 
+            this.btnpw0.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw0.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw0.Location = new System.Drawing.Point(155, 399);
@@ -702,6 +709,7 @@
             // 
             // btnpwd
             // 
+            this.btnpwd.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpwd.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpwd.Location = new System.Drawing.Point(28, 399);
@@ -714,6 +722,7 @@
             // 
             // btnpw9
             // 
+            this.btnpw9.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw9.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw9.Location = new System.Drawing.Point(281, 337);
@@ -726,6 +735,7 @@
             // 
             // btnpw8
             // 
+            this.btnpw8.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw8.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw8.Location = new System.Drawing.Point(155, 337);
@@ -738,6 +748,7 @@
             // 
             // btnpw7
             // 
+            this.btnpw7.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw7.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw7.Location = new System.Drawing.Point(28, 337);
@@ -750,6 +761,7 @@
             // 
             // btnpw6
             // 
+            this.btnpw6.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw6.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw6.Location = new System.Drawing.Point(281, 277);
@@ -762,6 +774,7 @@
             // 
             // btnpw5
             // 
+            this.btnpw5.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw5.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw5.Location = new System.Drawing.Point(155, 277);
@@ -774,6 +787,7 @@
             // 
             // btnpw4
             // 
+            this.btnpw4.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw4.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw4.Location = new System.Drawing.Point(28, 277);
@@ -786,6 +800,7 @@
             // 
             // btnpw3
             // 
+            this.btnpw3.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw3.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw3.Location = new System.Drawing.Point(281, 216);
@@ -798,6 +813,7 @@
             // 
             // btnpw2
             // 
+            this.btnpw2.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw2.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw2.Location = new System.Drawing.Point(155, 216);
@@ -810,6 +826,7 @@
             // 
             // btnpw1
             // 
+            this.btnpw1.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnpw1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnpw1.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnpw1.Location = new System.Drawing.Point(28, 216);
@@ -829,7 +846,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1157, 737);
+            this.panel1.Size = new System.Drawing.Size(1, 737);
             this.panel1.TabIndex = 303;
             // 
             // pictureBox4
@@ -3366,10 +3383,6 @@
             // 
             this.timerPassWord.Tick += new System.EventHandler(this.timerPassWord_Tick);
             // 
-            // timerSmsCode
-            // 
-            this.timerSmsCode.Tick += new System.EventHandler(this.timerSmsCode_Tick);
-            // 
             // timerChangePhoneScd
             // 
             this.timerChangePhoneScd.Tick += new System.EventHandler(this.timerChangePhoneScd_Tick);
@@ -3536,7 +3549,6 @@
         private System.Windows.Forms.Button btnpw2;
         private System.Windows.Forms.Button btnpw1;
         private System.Windows.Forms.Timer timerPassWord;
-        private System.Windows.Forms.Timer timerSmsCode;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
