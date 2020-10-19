@@ -38,7 +38,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (Screen.AllScreens.Count() > 1)
                 {
                     HaveMedia = true;
-                    //frmmembermedia.Show();
+                    frmmembermedia.Show();
                 }
                 else
                 {
