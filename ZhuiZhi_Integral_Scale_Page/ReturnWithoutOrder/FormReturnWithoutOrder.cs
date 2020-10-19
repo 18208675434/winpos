@@ -1196,7 +1196,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     lblGoodName.Text = pro.skuname;
                 }
-                lblGoodName.Text += "\r\n" + pro.skucode;
+                lblGoodCode.Text = pro.skucode;
                 lblPriceDetail.Text = "/" + pro.saleunit;
 
 
