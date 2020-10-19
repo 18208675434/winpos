@@ -1179,31 +1179,36 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+
                 IsEnable = false;
-                LstAllProduct = CartUtil.LoadAllProduct(true);
+                this.Invoke(new InvokeHandler(delegate()
+               {
+                   LstAllProduct = CartUtil.LoadAllProduct(true);
 
-                string currentsecondcategoryid = sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid;
-                Product pro = LstAllProduct.FirstOrDefault(r => r.secondcategoryid == currentsecondcategoryid);
+                   string currentsecondcategoryid = sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid;
+                   Product pro = LstAllProduct.FirstOrDefault(r => r.secondcategoryid == currentsecondcategoryid);
 
-                //如果之前二级分类不存在
-                if (pro == null)
-                {
-                    dgvGood.Rows.Clear();
-                    IniForm();
-                    LoadSecondDgvCategory();
-                }
-                else
-                {
-                    IniForm();
+                   //如果之前二级分类不存在
+                   if (pro == null)
+                   {
+                       dgvGood.Rows.Clear();
+                       IniForm();
+                       LoadSecondDgvCategory();
+                   }
+                   else
+                   {
+                       IniForm();
 
-                    sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid = currentsecondcategoryid;  //初始化数据后 赋值刷新前的二级分类名称
-                    LoadDgvGood(false, false);
-                }
+                       sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid = currentsecondcategoryid;  //初始化数据后 赋值刷新前的二级分类名称
+                       LoadDgvGood(false, false);
+                   }
+               }));
                 IsEnable = true;
             }
             catch (Exception ex)
             {
                 IsEnable = true;
+                LogManager.WriteLog("更新收银面板商品异常"+ex.Message);
             }
         }
 
@@ -2209,7 +2214,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblGoodName.Text = pro.skuname;
                 }
 
-                lblGoodName.Text += "\r\n"+pro.skucode;
+                lblGoodCode.Text = pro.skucode;
                 lblPriceDetail.Text = "/" + pro.saleunit;
 
 
@@ -4423,14 +4428,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             txtSearch.Focus();
         }
-
-        string msg = "";
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            SayOrderHelper.ShowFormToast("您有新订单！");
-        }
-
 
     }
 }

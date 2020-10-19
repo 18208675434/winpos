@@ -168,6 +168,7 @@
             this.keyBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardNew();
             this.rbtnPay = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.pnlGoodNotSelect = new System.Windows.Forms.Panel();
+            this.lblGoodCode = new System.Windows.Forms.Label();
             this.lblGoodName = new System.Windows.Forms.Label();
             this.lblPriceDetail = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
@@ -1722,6 +1723,7 @@
             // 
             this.pnlGoodNotSelect.BackColor = System.Drawing.Color.White;
             this.pnlGoodNotSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlGoodNotSelect.Controls.Add(this.lblGoodCode);
             this.pnlGoodNotSelect.Controls.Add(this.lblGoodName);
             this.pnlGoodNotSelect.Controls.Add(this.lblPriceDetail);
             this.pnlGoodNotSelect.Controls.Add(this.lblPrice);
@@ -1731,6 +1733,18 @@
             this.pnlGoodNotSelect.Size = new System.Drawing.Size(147, 83);
             this.pnlGoodNotSelect.TabIndex = 75;
             // 
+            // lblGoodCode
+            // 
+            this.lblGoodCode.AutoSize = true;
+            this.lblGoodCode.BackColor = System.Drawing.Color.Transparent;
+            this.lblGoodCode.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.lblGoodCode.Location = new System.Drawing.Point(6, 44);
+            this.lblGoodCode.Margin = new System.Windows.Forms.Padding(0);
+            this.lblGoodCode.Name = "lblGoodCode";
+            this.lblGoodCode.Size = new System.Drawing.Size(73, 20);
+            this.lblGoodCode.TabIndex = 17;
+            this.lblGoodCode.Text = "商品名称";
+            // 
             // lblGoodName
             // 
             this.lblGoodName.BackColor = System.Drawing.Color.Transparent;
@@ -1738,9 +1752,9 @@
             this.lblGoodName.Location = new System.Drawing.Point(6, -2);
             this.lblGoodName.Margin = new System.Windows.Forms.Padding(0);
             this.lblGoodName.Name = "lblGoodName";
-            this.lblGoodName.Size = new System.Drawing.Size(134, 65);
+            this.lblGoodName.Size = new System.Drawing.Size(134, 46);
             this.lblGoodName.TabIndex = 11;
-            this.lblGoodName.Text = "商品名称\r\ndsf\r\n234";
+            this.lblGoodName.Text = "商品名称\r\n第二行";
             // 
             // lblPriceDetail
             // 
@@ -1983,6 +1997,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Panel pnlGoodNotSelect;
+        private System.Windows.Forms.Label lblGoodCode;
         private System.Windows.Forms.Label lblGoodName;
         private System.Windows.Forms.Label lblPriceDetail;
         private System.Windows.Forms.Label lblPrice;
