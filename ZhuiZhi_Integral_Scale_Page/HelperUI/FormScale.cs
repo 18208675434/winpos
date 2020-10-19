@@ -34,6 +34,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         public FormScale()
         {
             InitializeComponent();
+            //使用委托的话frmmain界面会卡死
+            Control.CheckForIllegalCrossThreadCalls = false;
            
         }
         public FormScale(Product pro)
@@ -51,6 +53,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             LoadProInfo();
             IniForm();
+
+            UpdateWeight();
+            bgwLoadProInfo.RunWorkerAsync();
         }
 
         public void UpInfo(Product pro)
@@ -69,79 +74,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
 
                 UpdateWeight();
-                lblGoodName.Text = ParaProduct.skuname;
-                //lblPromotion.Text = ParaProduct.pricetag;
-                string imgurl = ParaProduct.mainimg;
-                string imgname = imgurl.Substring(imgurl.LastIndexOf("/") + 1) + ".bmp"; //URL 最后的值
-
-                if (File.Exists(MainModel.ProductPicPath + imgname))
-                {
-                    pnlpicItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
-                }
-                else
-                {
-                    try
-                    {
-
-                        //if (!MainModel.WhetherHalfOffLine)  //半离线状态下不加载图片
-                        //{
-                            Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                            _image.Save(MainModel.ProductPicPath + imgname);
-                            pnlpicItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
-                        //}
-                       
-                    }
-                    catch { }
-                }
-
-
-                switch (ParaProduct.pricetagid)
-                {
-                    case 1: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic会员.Image; break;
-                    case 2: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic折扣.Image; break;
-                    case 3: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic直降.Image; break;
-                    case 4: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic优享.Image; break;
-                    default: picGoodPricetag.Visible = false; break;          
-                }
-
-                if (ParaProduct.price != null)
-                {
-                    if (ParaProduct.price.saleprice == ParaProduct.price.originprice)
-                    {
-                        lblPrice.Text ="￥"+ ParaProduct.price.saleprice.ToString("f2");
-                        lblMemberPrice.Visible = false;
-                    }
-                    else
-                    {
-                        lblPrice.Text = "￥" + ParaProduct.price.saleprice.ToString("f2");
-                        lblMemberPrice.Visible = true;
-                        if (!string.IsNullOrEmpty(ParaProduct.price.salepricedesc))
-                        {
-                            lblPriceDetail.Text += "(" + ParaProduct.price.salepricedesc + ")";
-                        }
-
-                        if (ParaProduct.price.strikeout == 1)
-                        {
-                            lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Strikeout);
-                            lblMemberPrice.Text = ParaProduct.price.originprice.ToString("f2") + "/" + ParaProduct.saleunit;
-                        }
-                        else
-                        {
-                            lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Regular);
-                            lblMemberPrice.Text = ParaProduct.price.originprice.ToString("f2") + "/" + ParaProduct.saleunit;
-                        }
-
-                       
-                    }
-                }
-                else
-                {
-
-                }
-                lblPriceDetail.Text = "/" + ParaProduct.saleunit;
-                lblPriceDetail.Left = lblPrice.Left + lblPrice.Width;
-
-                lblMemberPrice.Left = Math.Max(btnCancel.Right - lblMemberPrice.Width, lblPriceDetail.Right);
+               // bgwLoadProInfo.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -495,6 +428,87 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             CurrentScaleResult.WhetherStable = true;
             CurrentScaleResult.NetWeight = 1;
        
+        }
+
+        private void bgwLoadProInfo_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                lblGoodName.Text = ParaProduct.skuname;
+                //lblPromotion.Text = ParaProduct.pricetag;
+                string imgurl = ParaProduct.mainimg;
+                string imgname = imgurl.Substring(imgurl.LastIndexOf("/") + 1) + ".bmp"; //URL 最后的值
+
+                if (File.Exists(MainModel.ProductPicPath + imgname))
+                {
+                    pnlpicItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
+                }
+                else
+                {
+                    try
+                    {
+
+                        //if (!MainModel.WhetherHalfOffLine)  //半离线状态下不加载图片
+                        //{
+                        Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                        _image.Save(MainModel.ProductPicPath + imgname);
+                        pnlpicItem.BackgroundImage = Image.FromFile(MainModel.ProductPicPath + imgname);
+                        //}
+
+                    }
+                    catch { }
+                }
+
+
+                switch (ParaProduct.pricetagid)
+                {
+                    case 1: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic会员.Image; break;
+                    case 2: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic折扣.Image; break;
+                    case 3: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic直降.Image; break;
+                    case 4: picGoodPricetag.Visible = true; picGoodPricetag.BackgroundImage = pic优享.Image; break;
+                    default: picGoodPricetag.Visible = false; break;
+                }
+
+                if (ParaProduct.price != null)
+                {
+                    if (ParaProduct.price.saleprice == ParaProduct.price.originprice)
+                    {
+                        lblPrice.Text = "￥" + ParaProduct.price.saleprice.ToString("f2");
+                        lblMemberPrice.Visible = false;
+                    }
+                    else
+                    {
+                        lblPrice.Text = "￥" + ParaProduct.price.saleprice.ToString("f2");
+                        lblMemberPrice.Visible = true;
+                        if (!string.IsNullOrEmpty(ParaProduct.price.salepricedesc))
+                        {
+                            lblPriceDetail.Text += "(" + ParaProduct.price.salepricedesc + ")";
+                        }
+
+                        if (ParaProduct.price.strikeout == 1)
+                        {
+                            lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Strikeout);
+                            lblMemberPrice.Text = ParaProduct.price.originprice.ToString("f2") + "/" + ParaProduct.saleunit;
+                        }
+                        else
+                        {
+                            lblMemberPrice.Font = new System.Drawing.Font("微软雅黑", lblMemberPrice.Font.Size, FontStyle.Regular);
+                            lblMemberPrice.Text = ParaProduct.price.originprice.ToString("f2") + "/" + ParaProduct.saleunit;
+                        }
+
+
+                    }
+                }
+                else
+                {
+
+                }
+                lblPriceDetail.Text = "/" + ParaProduct.saleunit;
+                lblPriceDetail.Left = lblPrice.Left + lblPrice.Width;
+
+                lblMemberPrice.Left = Math.Max(btnCancel.Right - lblMemberPrice.Width, lblPriceDetail.Right);
+            }
+            catch { }
         }
     }
 }

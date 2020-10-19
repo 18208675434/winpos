@@ -2205,6 +2205,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblGoodName.Text = pro.skuname;
                 }
 
+                lblGoodName.Text += "\r\n"+pro.skucode;
                 lblPriceDetail.Text = "/" + pro.saleunit;
 
 
@@ -2662,11 +2663,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 Product pro = CartUtil.GetNewProduct((Product)selectimg.Tag);
                 pro.RowNum = 1;
-                pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
-
+                //pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
+                pnlGoodNotSelect.BackColor = Color.FromArgb(207, 241, 255);
                 dgvGood.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = GetItemImg(pro);
-                pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
-
+               // pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
+                pnlGoodNotSelect.BackColor = Color.White;
 
                 Console.WriteLine("刷新dgvgood时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
