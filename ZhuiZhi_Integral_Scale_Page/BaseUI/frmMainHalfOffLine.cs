@@ -1317,6 +1317,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     //购物车有商品的话刷新一次
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
+                        //退出会员清空改价信息
+                        CurrentCart.products.ForEach(r => r.adjustpriceinfo = null);
                         RefreshCart();
                     }
                     Console.WriteLine("clearmember 刷新购物车" + (DateTime.Now - starttime).TotalMilliseconds);
@@ -1397,6 +1399,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         //购物车有商品的话刷新一次
                         if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                         {
+                            //登录会员清空改价信息
+                            CurrentCart.products.ForEach(r=> r.adjustpriceinfo=null);
                             RefreshCart();
                         }
                         else
@@ -2205,6 +2209,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblGoodName.Text = pro.skuname;
                 }
 
+                lblGoodName.Text += "\r\n"+pro.skucode;
                 lblPriceDetail.Text = "/" + pro.saleunit;
 
 
@@ -2662,11 +2667,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 Product pro = CartUtil.GetNewProduct((Product)selectimg.Tag);
                 pro.RowNum = 1;
-                pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
-
+                //pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
+                pnlGoodNotSelect.BackColor = Color.FromArgb(207, 241, 255);
                 dgvGood.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = GetItemImg(pro);
-                pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
-
+               // pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
+                pnlGoodNotSelect.BackColor = Color.White;
 
                 Console.WriteLine("刷新dgvgood时间" + (DateTime.Now - starttime).TotalMilliseconds);
 
@@ -4271,6 +4276,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         if (MainModel.WhetherAutoCart && CurrentScaleResult.WhetherStable && CurrentScaleResult.NetWeight > 0 && SelectProduct != null && SelectProduct.goodstagid != 0)
                         {
+                            //不放进委托 自动加购后点取消交易会卡死？？？？？
+                            this.Invoke(new InvokeHandler(delegate()
+                            {
+                                
                             if (CurrentCart == null)
                             {
                                 CurrentCart = new Cart();
@@ -4303,6 +4312,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                             UploadOffLineDgvCart();
                             SelectProduct = null;
+
+                            }));
                         }
                     }
                     else

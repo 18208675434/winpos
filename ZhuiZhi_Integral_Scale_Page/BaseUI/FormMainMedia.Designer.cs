@@ -114,6 +114,7 @@
             this.lblMobil = new System.Windows.Forms.Label();
             this.pnlAdvertising = new System.Windows.Forms.Panel();
             this.player = new AxWMPLib.AxWindowsMediaPlayer();
+            this.bgwLoadMemberCard = new System.ComponentModel.BackgroundWorker();
             this.tlpMedia.SuspendLayout();
             this.pnlCart.SuspendLayout();
             this.pnlDgvItem.SuspendLayout();
@@ -1069,6 +1070,10 @@
             this.player.TabIndex = 17;
             this.player.StatusChange += new System.EventHandler(this.player_StatusChange);
             // 
+            // bgwLoadMemberCard
+            // 
+            this.bgwLoadMemberCard.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwLoadMemberCard_DoWork);
+            // 
             // FormMainMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1203,5 +1208,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblPriceTag;
         private System.Windows.Forms.PictureBox picDelete;
+        private System.ComponentModel.BackgroundWorker bgwLoadMemberCard;
     }
 }

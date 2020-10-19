@@ -76,7 +76,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                     decimal doublenum = Convert.ToDecimal(txtPrice.Text);
                     decimal temptotal = CurrentProduct.adjustpriceinfo == null ? CurrentProduct.price.total : CurrentProduct.price.origintotal;
 
-                    if (doublenum <= 0 || (CurrentChangeType == ChangeType.unitprice && doublenum >= CurrentProduct.price.originsaleprice) || (CurrentChangeType == ChangeType.totalprice && doublenum >=temptotal))
+                    if (doublenum < 0)
+                    {
+                        MainModel.ShowLog("价格不能小于0", false);
+                        return;
+                    }
+
+                    if ((CurrentChangeType == ChangeType.unitprice && doublenum >= CurrentProduct.price.originsaleprice) || (CurrentChangeType == ChangeType.totalprice && doublenum >=temptotal))
                     {
                         MainModel.ShowLog("价格只能小于当前商品价格",false);
                         return;

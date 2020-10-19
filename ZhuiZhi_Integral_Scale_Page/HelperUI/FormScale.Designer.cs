@@ -543,7 +543,6 @@
             this.Text = "FormScale";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormScale_FormClosed);
             this.Load += new System.EventHandler(this.FormScale_Load);
-            this.Resize += new System.EventHandler(this.FormScale_Resize);
             this.tplBtn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic折扣)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic直降)).EndInit();

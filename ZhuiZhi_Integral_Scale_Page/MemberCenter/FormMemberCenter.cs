@@ -50,12 +50,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                if (MainModel.NewPhone != "")
-                {
-                    label4.Visible = true;
-                    newphone.Visible = true;
-                    newphone.Text = MainModel.NewPhone;
-                }
+                //if (MainModel.NewPhone != "")
+                //{
+                //    label4.Visible = true;
+                //    newphone.Visible = true;
+                //    newphone.Text = MainModel.NewPhone;
+                //}
 
                 bmpCustom =(Bitmap) MainModel.GetControlImage(custom);
 
@@ -64,10 +64,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好 ";
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
                 lblMenu.Left = picMenu.Right;
-                if (MainModel.NewPhone != "")
-                {
-                    CurrentMember.memberheaderresponsevo.mobile = MainModel.NewPhone;
-                }
+                //if (MainModel.NewPhone != "")
+                //{
+                //    CurrentMember.memberheaderresponsevo.mobile = MainModel.NewPhone;
+                //}
                 string phone = CurrentMember.memberheaderresponsevo.mobile;
 
                 if (phone.Length == 11)
@@ -130,7 +130,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("加载会员中心页面异常" + ex.Message, true);
+                //MainModel.ShowLog("加载会员中心页面异常" + ex.Message, true);
+
+                LogManager.WriteLog("加载会员中心页面异常" + ex.Message);
                 LoadingHelper.CloseForm();
 
                 IsEnable = true;

@@ -1196,7 +1196,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     lblGoodName.Text = pro.skuname;
                 }
-
+                lblGoodName.Text += "\r\n" + pro.skucode;
                 lblPriceDetail.Text = "/" + pro.saleunit;
 
 
@@ -1649,14 +1649,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     return;
                 }
 
-              
+
 
                 Product pro = CartUtil.GetNewProduct((Product)selectimg.Tag);
                 pro.RowNum = 1;
-                pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
-
+                //pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
+                pnlGoodNotSelect.BackColor = Color.FromArgb(207, 241, 255);
                 dgvGood.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = GetItemImg(pro);
-                pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
+                // pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
+                pnlGoodNotSelect.BackColor = Color.White;
 
 
                 Console.WriteLine("刷新dgvgood时间"+(DateTime.Now-starttime).TotalMilliseconds);
@@ -2988,9 +2989,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             while (IsRun)
             {
                 try
-                {                    
+                {
+
                     CurrentScaleResult = ScaleGlobalHelper.GetWeight();
-          
+
+
                     if (CurrentScaleResult != null && CurrentScaleResult.WhetherSuccess)
                     {
 
@@ -3002,44 +3005,50 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         if (MainModel.WhetherAutoCart && CurrentScaleResult.WhetherStable && CurrentScaleResult.NetWeight > 0 && SelectProduct != null && SelectProduct.goodstagid != 0)
                         {
-                            if (CurrentCart == null)
+                            //不放进委托 自动加购后点取消交易会卡死？？？？？
+                            this.Invoke(new InvokeHandler(delegate()
                             {
-                                CurrentCart = new Cart();
-                            }
-                            if (CurrentCart.products == null)
-                            {
-                                List<Product> products = new List<Product>();
-                                CurrentCart.products = products;
-                            }
 
-                            LastLstPro = new List<Product>();
-                            foreach (Product ppro in CurrentCart.products)
-                            {
-                                LastLstPro.Add((Product)MainModel.Clone(ppro));
-                            }
+                                if (CurrentCart == null)
+                                {
+                                    CurrentCart = new Cart();
+                                }
+                                if (CurrentCart.products == null)
+                                {
+                                    List<Product> products = new List<Product>();
+                                    CurrentCart.products = products;
+                                }
 
-                            SelectProduct.specnum = CurrentScaleResult.NetWeight;
-                            SelectProduct.num = 1;
-                            if (SelectProduct.price == null)
-                            {
-                                SelectProduct.price = new Price();
-                            }
-                            SelectProduct.price.specnum = SelectProduct.specnum;
-                            InsertProductToCart(SelectProduct);
+                                LastLstPro = new List<Product>();
+                                foreach (Product ppro in CurrentCart.products)
+                                {
+                                    LastLstPro.Add((Product)MainModel.Clone(ppro));
+                                }
 
-                            if (MainModel.WhetherPrint)
-                            {
-                                LabelPrintHelper.LabelPrint(SelectProduct);
-                            }
+                                SelectProduct.specnum = CurrentScaleResult.NetWeight;
+                                SelectProduct.num = 1;
+                                if (SelectProduct.price == null)
+                                {
+                                    SelectProduct.price = new Price();
+                                }
+                                SelectProduct.price.specnum = SelectProduct.specnum;
+                                InsertProductToCart(SelectProduct);
 
-                            UploadOffLineDgvCart();
-                            SelectProduct = null;
+                                if (MainModel.WhetherPrint)
+                                {
+                                    LabelPrintHelper.LabelPrint(SelectProduct);
+                                }
+
+                                UploadOffLineDgvCart();
+                                SelectProduct = null;
+
+                            }));
                         }
                     }
                     else
                     {
                         LastNetWeight = 0;
-                    } 
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -3048,7 +3057,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
                 Thread.Sleep(120);
-               
+
             }
         }
 
