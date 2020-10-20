@@ -116,67 +116,78 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public void AddNum(int num, bool isDel)
         {
 
-            if (isDel && password.Length > 0)
+            try
             {
-                password = password.Substring(0, password.Length - 1);
-                UpdatePassWord(password);
-            }
-            else
-            {
-                if (password.Length >= 6)
+                if (isDel && password.Length > 0)
                 {
-                    return;
+                    password = password.Substring(0, password.Length - 1);
+                    UpdatePassWord(password);
                 }
-                password += num;
-                UpdatePassWord(password);
-                if (password.Length == 6)
+                else
                 {
-                    string errorMsg = "";
-                    int resultCode = 0;
-
-                    this.Enabled = false;
-                    LoadingHelper.ShowLoadingScreen("密码验证中...");
-
-                    //RSA加密
-                    PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
-                    VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref errorMsg, ref resultCode, member);
-                    if (errorMsg != "" || verifyresult == null)
+                    if (password.Length >= 6)
                     {
-                        this.Enabled = true;
-                        MainModel.ShowLog("会员信息异常：" + errorMsg + "(" + resultCode + ")", true);
-                        LoadingHelper.CloseForm();                      
+                        return;
                     }
-                    else
+                    password += num;
+                    UpdatePassWord(password);
+                    if (password.Length == 6)
                     {
-                        MainModel.BalancePwdErrorCode = -1;
-                        if (verifyresult.success == 1)
+                        string errorMsg = "";
+                        int resultCode = 0;
+
+                        this.Enabled = false;
+                        LoadingHelper.ShowLoadingScreen("密码验证中...");
+                        //RSA加密
+                        PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
+                        VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref errorMsg, ref resultCode, member);
+                        if (errorMsg != "" || verifyresult == null)
                         {
-                            //校验成功
+                            this.Enabled = true;
+                            MainModel.ShowLog("会员信息异常：" + errorMsg + "(" + resultCode + ")", true);
                             LoadingHelper.CloseForm();
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-                            BackHelper.HideFormBackGround();
-                        }
-                        else if (verifyresult.remainwrongcount > 0)
-                        {
-                            string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
-                            MainModel.ShowLog(showerrormsg, false);
-                            MemberCenterMediaHelper.ShowLog(showerrormsg);
-                            LoadingHelper.CloseForm();
-                            this.Close();
-                            this.DialogResult = DialogResult.Cancel;
-                            return;
                         }
                         else
                         {
-                            password = "";
-                            MainModel.ShowLog(verifyresult.hint, true);
-                            MemberCenterMediaHelper.ShowLog(verifyresult.hint);
+                            MainModel.BalancePwdErrorCode = -1;
+                            if (verifyresult.success == 1)
+                            {
+                                //校验成功
+                                LoadingHelper.CloseForm();
+                                this.DialogResult = DialogResult.OK;
+                                this.Close();
+                                BackHelper.HideFormBackGround();
+                            }
+                            else if (verifyresult.remainwrongcount > 0)
+                            {
+                                string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
+                                MainModel.ShowLog(showerrormsg, false);
+                                MemberCenterMediaHelper.ShowLog(showerrormsg);
+                                LoadingHelper.CloseForm();
+                                this.Close();
+                                this.DialogResult = DialogResult.Cancel;
+                                return;
+                            }
+                            else
+                            {
+                                password = "";
+                                MainModel.ShowLog(verifyresult.hint, true);
+                                MemberCenterMediaHelper.ShowLog(verifyresult.hint);
+                            }
                         }
+                        this.Enabled = true;
                     }
-                    this.Enabled = true;
                 }
             }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                BackHelper.HideFormBackGround();
+                LoadingHelper.CloseForm();
+            }
+            
 
         }
         private void UpdatePassWord(string password)

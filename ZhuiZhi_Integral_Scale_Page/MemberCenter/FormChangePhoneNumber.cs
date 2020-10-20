@@ -63,7 +63,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnSmsCodeVerify_Click(object sender, EventArgs e)
         {
             BackHelper.ShowFormBackGround();
-
             if (MemberCenterHelper.ShowFormChengPhoneSmsCode())
             {
                 type = 1;
