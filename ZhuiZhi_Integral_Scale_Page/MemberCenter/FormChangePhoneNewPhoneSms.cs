@@ -143,8 +143,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     int result = memberhttputil.ChangeNumberVerifysmscode(newphone,smscode, ref err);
                     if (result == 1)
                     {
-                        MainModel.NewPhone = newphone;
-                        MainModel.ShowChangePhonePage = 2;
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }

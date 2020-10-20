@@ -25,23 +25,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhoneNewCard_Shown(object sender, EventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
 
         private void FormChangePhoneNewCard_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
             string errormsg = "";
             string newcard = txtNewCard.Text;
             bool resule = membercenterhttputil.GetMactchCardNewCard(newcard, ref errormsg);
             if (resule)
             {
-                MainModel.ShowChangePhonePage = 1;
-                MainModel.ShowChangePhoneMedia = 1;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

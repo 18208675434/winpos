@@ -35,13 +35,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChengPhoneSmsCode_Shown(object sender, EventArgs e)
         {
-            MemberCenterMediaHelper.ShowChengPhoneSmsCode();
-            MemberCenterMediaHelper.UpdatePhoneScdUI("");
+            try
+            {
+                string err = "";
+                LoadingHelper.ShowLoadingScreen();
+                memberhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);
+                if (!string.IsNullOrEmpty(err))
+                {
+                    MainModel.ShowLog("验证码发送失败：" + err, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("验证码发送异常："+ex.Message,true);
+            }
+            finally{
+                LoadingHelper.CloseForm();
+            }          
         }
 
         private void FormChengPhoneSmsCode_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
         /// <summary>
         /// 监听键盘输入
@@ -111,12 +125,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (smscode.Length == 6)
                 {
                     string err = "";
-                    string result = memberhttputil.GetVerifysmscode(smscode, ref err);
+                    string result = memberhttputil.GetVerifysmscode(MainModel.CurrentMember.memberid,smscode, ref err);
 
                     if (result == "success")
                     {
-                        MainModel.ShowChangePhonePage = 1;
-                        MainModel.ShowChangePhoneMedia = 1;
                         this.DialogResult = DialogResult.OK;
                         BackHelper.HideFormBackGround();
                         this.Close();
@@ -145,7 +157,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
-            MemberCenterMediaHelper.UpdatePhoneScdUI(smscode);
         }
 
         private void timerCountDown_Tick(object sender, EventArgs e)

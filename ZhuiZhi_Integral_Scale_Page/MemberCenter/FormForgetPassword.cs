@@ -128,7 +128,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 serveSmscode = smscode;
                 string err = "";
-                string result = memberhttputil.GetVerifysmscode(smscode, ref err); ;
+                string result = memberhttputil.GetVerifysmscode(MainModel.CurrentMember.memberid,smscode, ref err); ;
                 if (result == "success")
                 {
                     label2.Text = "请输入新的支付密码";

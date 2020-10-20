@@ -30,12 +30,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhonePhysicalCard_Shown(object sender, EventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
 
         private void FormChangePhonePhysicalCard_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -45,8 +43,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             bool result = membercenterhttputil.GetMactchCardOldCard(oldcard, ref errormsg);
             if (result)
             {
-                MainModel.ShowChangePhonePage = 1;
-                MainModel.ShowChangePhoneMedia = 1;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

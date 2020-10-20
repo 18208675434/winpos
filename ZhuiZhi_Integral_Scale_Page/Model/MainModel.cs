@@ -33,17 +33,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public static string GetPhone = "";
         public static string UpdatePhone = "";
         #region  会员中心   变量 （待优化）
-        /// <summary>
-        /// 修改手机号码时输入的新手机号
-        /// </summary>
-        public static string CoustomMoney;
-        public static string ZMoney ;
-        public static string NewPhone = "";
-        public static string tick = "";
-        /// <summary>
-        /// 获取发送的验证码
-        /// </summary>
-        public static string GetSmsCode = "";
         public static string RechargeAmount;
         public static string give;
         //退款方式
@@ -67,22 +56,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 功能-修改密码同步
         /// </summary>
         public static string SevaePwd = "";     
-        /// <summary>
-        /// 全局验证是否是会员切换界面变量
-        /// </summary>
-        public static bool IsMemberCenter = true;
-        /// <summary>
-        /// 修改手机页面 显示隐藏控件变量
-        /// </summary>
-        public static int ShowChangePhonePage = 0;
-        /// <summary>
-        /// 修改手机页面 显示隐藏控件变量 客屏
-        /// </summary>
-        public static int ShowChangePhoneMedia = 0;
-        /// <summary>
-        /// 旧会员手机号码的token
-        /// </summary>
-        public static string Sourcetoken = "";
 
 
 

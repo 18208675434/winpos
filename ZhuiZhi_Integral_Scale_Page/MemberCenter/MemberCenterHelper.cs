@@ -407,13 +407,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 修改手机号码-确认修改窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhoneConfirm()
+        public static bool ShowFormChangePhoneConfirm(string newphone,bool isMember)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
 
-                FormChangePhoneConfirm frmconfirm = new FormChangePhoneConfirm();
+                FormChangePhoneConfirm frmconfirm = new FormChangePhoneConfirm(newphone,isMember);
                 asf.AutoScaleControlTest(frmconfirm, 600, 200, 600 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmconfirm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmconfirm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmconfirm.Height) / 2);
                 frmconfirm.TopMost = true;

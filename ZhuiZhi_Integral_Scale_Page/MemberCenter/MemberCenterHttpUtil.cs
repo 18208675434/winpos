@@ -205,7 +205,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public string GetVerifysmscode(string smscode, ref string errormsg)
+        public string GetVerifysmscode(string memberid,string smscode, ref string errormsg)
         {
             try
             {
@@ -213,7 +213,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("smscode", smscode);
-                sort.Add("memberid", MainModel.CurrentMember.memberid);
+                sort.Add("memberid", memberid);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
@@ -359,7 +359,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="mobile"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public bool Updatemembermobile(string mobile, ref string errormsg)
+        public bool Updatemembermobile(string newphone, ref string errormsg)
         {
             try
             {
@@ -367,7 +367,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("token", MainModel.CurrentMember.memberheaderresponsevo.token);
-                sort.Add("mobile", MainModel.NewPhone);
+                sort.Add("mobile", newphone);
 
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);

@@ -17,17 +17,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     {
         private HttpUtil httputil = new HttpUtil();
 
-        private Member CurrentMember = null;
-
-        private ListAllTemplate CurrentTemplate = null;
-
         private List<ListAllTemplate> LstTemplates = new List<ListAllTemplate>();
-
-        bool IsEnable = true;
-
-
-
-
         //使用密码支付  RSA公钥加密后的值
         public string PayPassWord = "";
 
@@ -40,7 +30,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        public void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycardid="")
+        public void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycardid = "")
         {
             try
             {
@@ -84,8 +74,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     dgvTemplate.Rows.Add(lstbmp[i * 3 + 0], lstbmp[i * 3 + 1], lstbmp[i * 3 + 2]);
                 }
-
-
             }
             catch
             {
@@ -117,10 +105,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
@@ -135,10 +119,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
@@ -155,10 +135,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
 
             }
             catch { }
@@ -176,10 +152,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 100);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
@@ -197,51 +169,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 100);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
         /// <summary>
         /// 显示更换手机号码客屏
         /// </summary>
-        public void ShowChangePhoneNumber()
+        public void ShowChangePhoneNumber(int step, bool ismember)
         {
             try
             {
-                switch (MainModel.ShowChangePhoneMedia)
+                switch (step)
                 {
                     case 0:
-                        picTheFirstStep.Visible = true;
-                        lblTheStepOne.Visible = true;
-                        picFirstStepSuccess.Visible = false;
+                        picStepOk.Visible = false;
+                        picStep1.Visible = true;                        
+                        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenterMedia));
+                        //picStep1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
+                        //lblStep1.BackColor = Color.FromArgb(173,173,173);                      
+                        pnlLine1.BackColor = Color.FromArgb(238, 238, 238);
+                        pnlLine2.BackColor = Color.FromArgb(238, 238, 238);
+                        picStep2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
+                        lblStep2.BackColor = Color.FromArgb(173, 173, 173);
+                        picStep3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
+                        lblStep3.BackColor = Color.FromArgb(173, 173, 173); 
+                       
+                        lblStep3Tip1.Visible = false;
+                        lblStep3Tip2.Visible = false;
                         tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
                         tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
                         tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                         tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                         tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 100);
-                        tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
                         break;
                     case 1:
-                        picTheFirstStep.Visible = false;
-                        lblTheStepOne.Visible = false;
-                        picFirstStepSuccess.Visible = true;
-                        tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 100);
-                        tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
+                        pnlLine1.BackColor = Color.FromArgb(52, 147, 255);
+                        lblStep2.BackColor = Color.FromArgb(52, 147, 255);
+                        picStep2.BackgroundImage = picStep1.BackgroundImage;
+                        break;
+                    case 2:
+                        pnlLine2.BackColor = Color.FromArgb(52, 147, 255);
+                        lblStep3.BackColor = Color.FromArgb(52, 147, 255);
+                        picStep3.BackgroundImage = picStep1.BackgroundImage;
+                        if (ismember)//如果新手机是会员
+                        {
+                            lblStep3Tip1.Visible = true;
+                            lblStep3Tip2.Visible = true;
+                        }
                         break;
                     default:
                         break;
@@ -250,86 +225,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
-        /// <summary>
-        /// 显示更换手机号码支付密码验证屏
-        /// </summary>
-        public void ShowChangePhonePayPwd()
-        {
-            try
-            {
-                tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 100);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
-            }
-            catch { }
-        }
-        /// <summary>
-        /// 显示更换手机号码新旧卡验证屏
-        /// </summary>
-        public void ShowChangePhoneNewOldCard()
-        {
-            try
-            {
-                tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 100);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
-            }
-            catch { }
-        }
-        /// <summary>
-        /// 显示更换手机号码验证码验证屏
-        /// </summary>
-        public void ShowChengPhoneSmsCode()
-        {
-            try
-            {
-                tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 100);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 0);
-            }
-            catch { }
-        }
-        /// <summary>
-        /// 显示新手机号码验证屏
-        /// </summary>
-        public void ChengPhoneVerifyNewPhone()
-        {
-            try
-            {
-                tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[7] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[8] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[9] = new ColumnStyle(SizeType.Percent, 100);
-            }
-            catch { }
-        }
+
         /// <summary>
         /// 密码输入时显示*
         /// </summary>
@@ -373,7 +269,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     case 5: btnPassY1.Text = "*"; btnPassY2.Text = "*"; btnPassY3.Text = "*"; btnPassY4.Text = "*"; btnPassY5.Text = "*"; ; btnPassY6.Text = ""; break;
                     case 6: btnPassY1.Text = "*"; btnPassY2.Text = "*"; btnPassY3.Text = "*"; btnPassY4.Text = "*"; btnPassY5.Text = "*"; btnPassY6.Text = "*"; break;
 
-                    default: btnPassY1.Text = ""; btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnChangesms6.Text = ""; break;
+                    default: btnPassY1.Text = ""; btnPassY2.Text = ""; btnPassY3.Text = ""; btnPassY4.Text = ""; btnPassY5.Text = ""; btnPassY6.Text = ""; break;
                 }
                 if (numtype == 0)
                 {
@@ -405,38 +301,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
             }
         }
-        //更换手机-手机验证码验证
-        public void UpdatePhoneScdUI(string changeScd)
-        {
-            switch (changeScd.Length)
-            {
-                case 0: btnChangesms1.Text = ""; btnChangesms2.Text = ""; btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 1: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = ""; btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 2: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 3: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 4: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = changeScd.Substring(3, 1); btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-                case 5: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = changeScd.Substring(3, 1); btnChangesms5.Text = changeScd.Substring(4, 1); btnChangesms6.Text = ""; break;
-                case 6: btnChangesms1.Text = changeScd.Substring(0, 1); btnChangesms2.Text = changeScd.Substring(1, 1); btnChangesms3.Text = changeScd.Substring(2, 1); btnChangesms4.Text = changeScd.Substring(3, 1); btnChangesms5.Text = changeScd.Substring(4, 1); btnChangesms6.Text = changeScd.Substring(5, 1); break;
 
-                default: btnChangesms1.Text = ""; btnChangesms2.Text = ""; btnChangesms3.Text = ""; btnChangesms4.Text = ""; btnChangesms5.Text = ""; btnChangesms6.Text = ""; break;
-            }
-        }
-
-        //更换手机-支付密码验证
-        public void UpdateChangePhonePwdUI(string changePwd)
-        {
-            switch (changePwd.Length)
-            {
-                case 0: btnChangePwd1.Text = ""; btnChangePwd2.Text = ""; btnChangePwd3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
-                case 1: btnChangePwd1.Text = "*"; btnChangePwd2.Text = ""; btnChangePwd3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
-                case 2: btnChangePwd1.Text = "*"; btnChangePwd2.Text = "*"; btnChangePwd3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
-                case 3: btnChangePwd1.Text = "*"; btnChangePwd2.Text = "*"; btnChangePwd3.Text = "*"; ; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
-                case 4: btnChangePwd1.Text = "*"; btnChangePwd2.Text = "*"; btnChangePwd3.Text = "*"; btnChangePwd4.Text = "*"; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
-                case 5: btnChangePwd1.Text = "*"; btnChangePwd2.Text = "*"; btnChangePwd3.Text = "*"; btnChangePwd4.Text = "*"; btnChangePwd5.Text = "*"; ; btnChangePwd6.Text = ""; break;
-                case 6: btnChangePwd1.Text = "*"; btnChangePwd2.Text = "*"; btnChangePwd3.Text = "*"; btnChangePwd4.Text = "*"; btnChangePwd5.Text = "*"; btnChangePwd6.Text = "*"; break;
-
-                default: btnChangePwd1.Text = ""; btnChangePwd2.Text = ""; btnPassWord3.Text = ""; btnChangePwd4.Text = ""; btnChangePwd5.Text = ""; btnChangePwd6.Text = ""; break;
-            }
-        }
     }
 }

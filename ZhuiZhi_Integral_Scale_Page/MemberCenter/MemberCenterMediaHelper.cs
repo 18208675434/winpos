@@ -162,95 +162,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
+        #region 更换手机
         /// <summary>
-        /// 调用显示更换手机号码屏
+        /// 更换手机-客屏显示 
+        /// <param name="ismember">step3 是否是会员</param>
         /// </summary>
-        public static void ShowChangePhoneNumber()
+        public static void ShowChangePhoneNumber(int step, bool ismember = false)
         {
             try
             {
                 if (frmmembermedia != null && HaveMedia)
                 {
-                    frmmembermedia.ShowChangePhoneNumber();
+                    frmmembermedia.ShowChangePhoneNumber(step, ismember);
                 }
             }
             catch { }
         }
-        /// <summary>
-        /// 调用更换手机号码输入支付密码屏
-        /// </summary>
-        public static void ShowChangePhonePayPwd()
-        {
-            try
-            {
-                if (frmmembermedia != null && HaveMedia)
-                {
-                    frmmembermedia.ShowChangePhonePayPwd();
-                }
-            }
-            catch { }
-        }
-
-        /// <summary> 更换手机-支付密码
-        /// </summary>
-        public static void UpdateChangePhonePwdUI(string pwd)
-        {
-            frmmembermedia.UpdateChangePhonePwdUI(pwd);
-        }
+        #endregion
 
 
-        /// <summary>
-        /// 调用更换手机号码新旧实体卡屏
-        /// </summary>
-        public static void ShowChangePhoneNewOldCard()
-        {
-            try
-            {
-                if (frmmembermedia != null && HaveMedia)
-                {
-                    frmmembermedia.ShowChangePhoneNewOldCard();
-                }
-            }
-            catch { }
-        }
-        /// <summary>
-        /// 调用更换手机号码新旧实体卡屏
-        /// </summary>
-        public static void ShowChengPhoneSmsCode()
-        {
-            try
-            {
-                if (frmmembermedia != null && HaveMedia)
-                {
-                    frmmembermedia.ShowChengPhoneSmsCode();
-                }
-            }
-            catch { }
-        }
-
-        /// <summary> 更换手机-手机验证码
-        /// </summary>
-        public static void UpdatePhoneScdUI(string smscode)
-        {
-            frmmembermedia.UpdatePhoneScdUI(smscode);
-        }
-
-
-        /// <summary>
-        /// 调用更换手机号码新旧实体卡屏
-        /// </summary>
-        public static void ShowChengPhoneVerifyNewPhone()
-        {
-            try
-            {
-                if (frmmembermedia != null && HaveMedia)
-                {
-                    frmmembermedia.ChengPhoneVerifyNewPhone();
-                }
-            }
-            catch { }
-        }
-         
         public static void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon,string entitycardid="")
         {
             try
