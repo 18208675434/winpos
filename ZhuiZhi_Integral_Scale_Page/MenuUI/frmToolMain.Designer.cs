@@ -307,7 +307,7 @@
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(7, 597);
+            this.lblDeviceSN.Location = new System.Drawing.Point(7, 591);
             this.lblDeviceSN.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(65, 20);
