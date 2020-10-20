@@ -16,7 +16,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     /// </summary>
     public partial class FormChangePhoneNewPhoneSms : Form
     {
-        string newphone="";
+        string newphone = "";
         /// <summary>
         /// 输入验证码
         /// </summary>
@@ -33,42 +33,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhoneNewPhoneSms_Shown(object sender, EventArgs e)
         {
-            int result = GetNewPhoneSmscode();
+            btnSend_Click(null, null);
+
         }
 
         private void timerCountDown_Tick(object sender, EventArgs e)
         {
-            try
+            timerSeconds.Interval = 1000;
+            int left = (int)timerSeconds.Tag;
+            left--;
+            if (left <= 0)
             {
-                int countdown = Convert.ToInt32(btnCountDown.Text.Substring(5, 2));
-                countdown--;
-                if (countdown < 10)
-                {
-                    btnCountDown.Enabled = false;
-                    btnCountDown.Text = "重新发送(0" + countdown.ToString() + ")";
-                }
-                else
-                {
-                    btnCountDown.Enabled = false;
-                    btnCountDown.Text = "重新发送(" + countdown.ToString() + ")";
-                }
-                if (countdown == 0)
-                {
-                    btnCountDown.Text = "重新发送";
-                    timerCountDown.Enabled = false;
-                    btnCountDown.Enabled = true;
-                }
+                timerSeconds.Enabled = false;
+                btnSend.BackColor = Color.FromArgb(20, 158, 255);
+                btnSend.Text = "重新发送";
             }
-            catch (Exception ex)
+            else
             {
-                LogManager.WriteLog("异常" + ex.Message);
-                throw;
+                btnSend.BackColor = Color.Gray;
+                btnSend.Text = "重新发送(" + left + ")";
+                timerSeconds.Tag = left;
             }
-        }
-
-        private void FormChangePhoneNewPhoneSms_Load(object sender, EventArgs e)
-        {
-            timerCountDown.Enabled = true;
         }
         private int GetNewPhoneSmscode()
         {
@@ -140,7 +125,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (smscode.Length == 6)
                 {
                     string err = "";
-                    int result = memberhttputil.ChangeNumberVerifysmscode(newphone,smscode, ref err);
+                    int result = memberhttputil.ChangeNumberVerifysmscode(newphone, smscode, ref err);
                     if (result == 1)
                     {
                         this.DialogResult = DialogResult.OK;
@@ -171,13 +156,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        private void btnCountDown_Click(object sender, EventArgs e)
+        private void btnSend_Click(object sender, EventArgs e)
         {
-            int resule = GetNewPhoneSmscode();
-            if (resule == 1)
+            try
             {
-                btnCountDown.Text = "重新发送(60)";
-                timerCountDown.Enabled = true;
+                if (timerSeconds.Enabled || string.IsNullOrEmpty(newphone))
+                {
+                    return;
+                }
+                string msg = "";
+                int resule = GetNewPhoneSmscode();
+                if (resule != 1)
+                {
+                    MainModel.ShowLog("发送验证码失败：" + msg, true);
+                    return;
+                }
+                timerSeconds.Tag = 60;
+                timerSeconds.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("发送验证码异常" + ex.Message, true);
             }
         }
 

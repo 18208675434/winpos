@@ -89,11 +89,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 string msg = "";
                 LoadingHelper.ShowLoadingScreen();
-                bool flag = memberCenterHttpUtil.LossEntityCardGetSendsmscode(lblPhone.Text, ref msg);
-                LoadingHelper.CloseForm();
+                bool flag = memberCenterHttpUtil.LossEntityCardGetSendsmscode(lblPhone.Text, ref msg);               
                 if (!flag)
                 {                   
                     MainModel.ShowLog("发送验证码失败：" + msg, true);
+                    return;
                 }
                 timerSeconds.Tag = 60;
                 timerSeconds.Enabled = true;
@@ -101,6 +101,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch (Exception ex)
             {
                 MainModel.ShowLog("发送验证码异常" + ex.Message, true);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
             }
         }
 

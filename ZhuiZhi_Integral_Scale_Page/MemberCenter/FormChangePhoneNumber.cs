@@ -73,7 +73,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnUserPassWordVerify_Click(object sender, EventArgs e)
         {
-            if (MemberCenterHelper.ShowFormChangePhonePayPwd(member))
+            if (MemberCenterHelper.ShowFormChangePhonePayPwd(member.memberheaderresponsevo.mobile))
             {
                 type = 2;
                 StepTo(1);
@@ -163,14 +163,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         return;
                     }
                     string msg = "";
-                    Member member = new HttpUtil().GetMember(numbervalue, ref msg);
-                    if (member == null)
+                    bool isMember= membercenterhttputil.GetCheckmember(numbervalue, ref msg);                   
+                    if (!isMember)
                     {
                         MainModel.ShowLog("亲，您还不是会员哦", false);
                         return;
                     }
+                   
                     BackHelper.ShowFormBackGround();
-                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(member);
+                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(numbervalue);
                     asf.AutoScaleControlTest(pwd, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
                     pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
                     pwd.TopMost = true;

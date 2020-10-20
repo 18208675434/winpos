@@ -38,8 +38,8 @@
             this.btnPassW1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCountDown = new System.Windows.Forms.Button();
-            this.timerCountDown = new System.Windows.Forms.Timer(this.components);
+            this.btnSend = new System.Windows.Forms.Button();
+            this.timerSeconds = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnCancel
@@ -155,23 +155,26 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "手机验证码验证";
             // 
-            // btnCountDown
+            // btnSend
             // 
-            this.btnCountDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCountDown.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCountDown.Location = new System.Drawing.Point(110, 149);
-            this.btnCountDown.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCountDown.Name = "btnCountDown";
-            this.btnCountDown.Size = new System.Drawing.Size(123, 41);
-            this.btnCountDown.TabIndex = 27;
-            this.btnCountDown.Text = "重新发送(60)";
-            this.btnCountDown.UseVisualStyleBackColor = true;
-            this.btnCountDown.Click += new System.EventHandler(this.btnCountDown_Click);
+            this.btnSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSend.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSend.ForeColor = System.Drawing.Color.White;
+            this.btnSend.Location = new System.Drawing.Point(110, 149);
+            this.btnSend.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(123, 41);
+            this.btnSend.TabIndex = 27;
+            this.btnSend.Text = "发送验证码";
+            this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
-            // timerCountDown
+            // timerSeconds
             // 
-            this.timerCountDown.Interval = 1000;
-            this.timerCountDown.Tick += new System.EventHandler(this.timerCountDown_Tick);
+            this.timerSeconds.Interval = 10;
+            this.timerSeconds.Tag = "60";
+            this.timerSeconds.Tick += new System.EventHandler(this.timerCountDown_Tick);
             // 
             // FormChengPhoneSmsCode
             // 
@@ -179,7 +182,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(387, 233);
-            this.Controls.Add(this.btnCountDown);
+            this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnPassW6);
             this.Controls.Add(this.btnPassW5);
@@ -195,7 +198,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormChengPhoneSmsCode";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormChengPhoneSmsCode_FormClosing);
-            this.Load += new System.EventHandler(this.FormChengPhoneSmsCode_Load);
             this.Shown += new System.EventHandler(this.FormChengPhoneSmsCode_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -213,7 +215,7 @@
         private System.Windows.Forms.Button btnPassW1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCountDown;
-        private System.Windows.Forms.Timer timerCountDown;
+        private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.Timer timerSeconds;
     }
 }

@@ -35,23 +35,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChengPhoneSmsCode_Shown(object sender, EventArgs e)
         {
-            try
-            {
-                string err = "";
-                LoadingHelper.ShowLoadingScreen();
-                memberhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);
-                if (!string.IsNullOrEmpty(err))
-                {
-                    MainModel.ShowLog("验证码发送失败：" + err, true);
-                }
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("验证码发送异常："+ex.Message,true);
-            }
-            finally{
-                LoadingHelper.CloseForm();
-            }          
+            btnSend_Click(null,null);                
         }
 
         private void FormChengPhoneSmsCode_FormClosing(object sender, FormClosingEventArgs e)
@@ -161,52 +145,51 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void timerCountDown_Tick(object sender, EventArgs e)
         {
+            timerSeconds.Interval = 1000;
+            int left = (int)timerSeconds.Tag;
+            left--;
+            if (left <= 0)
+            {
+                timerSeconds.Enabled = false;
+                btnSend.BackColor = Color.FromArgb(20, 158, 255);
+                btnSend.Text = "重新发送";
+            }
+            else
+            {
+                btnSend.BackColor = Color.Gray;
+                btnSend.Text = "重新发送(" + left + ")";
+                timerSeconds.Tag = left;
+            }
+        }
+
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
             try
             {
-                int countdown = Convert.ToInt32(btnCountDown.Text.Substring(5, 2));
-                countdown--;
-                if (countdown < 10)
+                if (timerSeconds.Enabled)
                 {
-                    btnCountDown.Enabled = false;
-                    btnCountDown.Text = "重新发送(0" + countdown.ToString() + ")";
+                    return;
                 }
-                else
+              
+                LoadingHelper.ShowLoadingScreen();
+                string err = "";
+                string resule = memberhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);             
+                if (resule != "success")
                 {
-                    btnCountDown.Enabled = false;
-                    btnCountDown.Text = "重新发送(" + countdown.ToString() + ")";
+                    MainModel.ShowLog("发送验证码失败：" + err, true);
+                    return;
                 }
-                if (countdown == 0)
-                {
-                    btnCountDown.Text = "重新发送";
-                    timerCountDown.Enabled = false;
-                    btnCountDown.Enabled = true;
-                }
+                timerSeconds.Tag = 60;
+                timerSeconds.Enabled = true;
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("异常" + ex.Message);
-                throw;
+                MainModel.ShowLog("发送验证码异常" + ex.Message, true);
             }
-        }
-
-        private void FormChengPhoneSmsCode_Load(object sender, EventArgs e)
-        {
-            //if (MainModel.tick != "")
-            //{
-            //    BackHelper.ShowFormBackGround();
-            //    label1.Text = "找回密码";
-            //}
-            timerCountDown.Enabled = true;
-        }
-
-        private void btnCountDown_Click(object sender, EventArgs e)
-        {
-            string err = "";
-            string resule = memberhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref err);
-            if (resule == "success")
+            finally
             {
-                btnCountDown.Text = "重新发送(60)";
-                timerCountDown.Enabled = true;
+                LoadingHelper.CloseForm();
             }
         }
     }
