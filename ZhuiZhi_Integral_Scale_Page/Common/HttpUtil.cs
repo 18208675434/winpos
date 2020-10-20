@@ -3384,7 +3384,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {                   
                     //DbJsonUtil.AddBalanceInfo();
 
-                    return Convert.ToInt64(topuppara.paymode );
+                    //return Convert.ToInt64(topuppara.paymode );
+                    return Convert.ToInt64(rd.data);
                 }
                 else
                 {

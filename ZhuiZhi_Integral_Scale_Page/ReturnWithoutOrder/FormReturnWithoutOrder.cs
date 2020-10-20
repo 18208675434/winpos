@@ -2026,7 +2026,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                     rownum--;
                             }
                             dgvCart.ClearSelection();
-
+                            txtSearch.Clear();
                         rbtnPageDownForCart.WhetherEnable = CurrentCart.products.Count > CurrentCartPage * 5;
 
                         CurrentCart.products.Reverse();
