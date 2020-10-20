@@ -131,20 +131,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 UpdatePassWord(password);
                 if (password.Length == 6)
                 {
-                    string ErrorMsg = "";
-                    int ResultCode = 0;
+                    string errorMsg = "";
+                    int resultCode = 0;
 
                     this.Enabled = false;
                     LoadingHelper.ShowLoadingScreen("密码验证中...");
 
                     //RSA加密
                     PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
-                    VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode, member);
-                    if (ErrorMsg != "" || verifyresult == null)
+                    VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref errorMsg, ref resultCode, member);
+                    if (errorMsg != "" || verifyresult == null)
                     {
                         this.Enabled = true;
-                        LoadingHelper.CloseForm();
-                        CheckUserAndMember(ResultCode, ErrorMsg);
+                        MainModel.ShowLog("会员信息异常：" + errorMsg + "(" + resultCode + ")", true);
+                        LoadingHelper.CloseForm();                      
                     }
                     else
                     {
@@ -194,36 +194,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
             this.Activate();
-        }
-
-        /// <summary>
-        /// 验证支付密码是否正确
-        /// </summary>
-        /// <param name="resultcode"></param>
-        /// <param name="ErrorMsg"></param>
-        private void CheckUserAndMember(int resultcode, string errorMsg)
-        {
-            try
-            {
-                if (resultcode == MainModel.HttpUserExpired || resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.DifferentMember)
-                {
-                    this.Enabled = false;
-                    MainModel.CurrentMember = null;
-                    MainModel.BalancePwdErrorCode = resultcode;
-                    MainModel.ShowLog("会员信息异常："+resultcode, false);
-
-                }
-                else
-                {
-                    MainModel.ShowLog(errorMsg, true);
-                }
-            }
-            catch (Exception ex)
-            {
-                this.Enabled = true;
-                MainModel.ShowLog("密码验证错误码异常："+ex.Message, true);
-            }
-
         }
     }
 }

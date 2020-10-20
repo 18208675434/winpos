@@ -208,7 +208,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
             }
             MemberCenterMediaHelper.UpdateForgetPassWordUI(numtype, smscode);
-
+            this.Activate();
         }
 
         MemberCenterHttpUtil membercenterutil = new MemberCenterHttpUtil();

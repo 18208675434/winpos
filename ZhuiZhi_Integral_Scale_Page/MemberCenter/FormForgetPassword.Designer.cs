@@ -165,7 +165,7 @@
             this.btnSend.Location = new System.Drawing.Point(93, 154);
             this.btnSend.Margin = new System.Windows.Forms.Padding(2);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(154, 39);
+            this.btnSend.Size = new System.Drawing.Size(140, 39);
             this.btnSend.TabIndex = 84;
             this.btnSend.Text = "发送验证码";
             this.btnSend.UseVisualStyleBackColor = false;

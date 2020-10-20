@@ -161,10 +161,10 @@
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSend.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSend.ForeColor = System.Drawing.Color.White;
-            this.btnSend.Location = new System.Drawing.Point(110, 149);
+            this.btnSend.Location = new System.Drawing.Point(99, 149);
             this.btnSend.Margin = new System.Windows.Forms.Padding(2);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(123, 41);
+            this.btnSend.Size = new System.Drawing.Size(140, 41);
             this.btnSend.TabIndex = 27;
             this.btnSend.Text = "发送验证码";
             this.btnSend.UseVisualStyleBackColor = false;
