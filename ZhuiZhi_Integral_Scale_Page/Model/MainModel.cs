@@ -23,30 +23,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public static ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.BalanceConfigDetail balanceconfigdetail = null;
 
-        public static string rewardmount = "";
-        public static string moneyzz = "";
-        public static long idm = 0;
+     
         public static bool isokcancle;
         public static string code = "";
-        public static decimal GetZsje = 0;
         public static string memberid = "";
         public static string GetPhone = "";
-        public static string UpdatePhone = "";
-        #region  会员中心   变量 （待优化）
-        public static string RechargeAmount;
-        public static string give;
-        //退款方式
-        public static string fangshi= "";
-        public static string MemberId ="";
-        public static string ShopId = "";
-        public static string Tenantid = "";
-        public static string Id = "";
-        public static string Depostid = "";
-        public static bool refundquest;
-        /// <summary>
-        /// 用户修改密码成功了码
-        /// </summary>
-        public static bool SeavePwdok = false;   
+        #region  会员中心   变量 （待优化）   
         /// <summary>
         /// 余额全局变量
         /// </summary>
@@ -55,9 +37,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// <summary>
         /// 功能-修改密码同步
         /// </summary>
-        public static string SevaePwd = "";     
-
-
+        public static string SevaePwd = "";
 
         #endregion
         //判断客屏是否播放视屏  是的话把焦点还给主界面
