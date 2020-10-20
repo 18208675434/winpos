@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
@@ -102,7 +103,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 pnlLine10.Height = 1;
 
                 lblDeviceSN.Text = "设备号:" + MainModel.DeviceSN;
-                lblVersion.Text = "版本号:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();// MainModel.Version;
+
+                string appversion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                lblVersion.Text = "版本号:" + appversion;// MainModel.Version;
+
+                //防止exe程序未退出 更新失败 （更换版本号重新更新）
+                try
+                {
+                    Version appvertion = new Version(appversion);
+                    Version serverversion = new Version(MainModel.Version);
+                    if (serverversion > appvertion)
+                    {
+                        INIManager.SetIni("System", "Version", lblVersion.Text, MainModel.IniPath);
+                        INIManager.SetIni("System", "Version", lblVersion.Text, MainModel.StartIniPath);
+
+                        LogManager.WriteLog("appversion："+appversion  + "   serversion:"+MainModel.Version);
+                    }
+                }
+                catch
+                {
+
+                }
             }
             catch (Exception ex)
             {

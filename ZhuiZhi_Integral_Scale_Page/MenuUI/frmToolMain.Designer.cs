@@ -75,9 +75,9 @@
             this.picRefund = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlOpenCashBox = new System.Windows.Forms.Panel();
+            this.picOpenCashBox = new System.Windows.Forms.PictureBox();
             this.lblOpenCashBox = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.picOpenCashBox = new System.Windows.Forms.PictureBox();
             this.pnlReceipt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.pnlExit.SuspendLayout();
@@ -586,6 +586,17 @@
             this.pnlOpenCashBox.TabIndex = 21;
             this.pnlOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
             // 
+            // picOpenCashBox
+            // 
+            this.picOpenCashBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picOpenCashBox.BackgroundImage")));
+            this.picOpenCashBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picOpenCashBox.Location = new System.Drawing.Point(13, 7);
+            this.picOpenCashBox.Name = "picOpenCashBox";
+            this.picOpenCashBox.Size = new System.Drawing.Size(24, 24);
+            this.picOpenCashBox.TabIndex = 2;
+            this.picOpenCashBox.TabStop = false;
+            this.picOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
+            // 
             // lblOpenCashBox
             // 
             this.lblOpenCashBox.AutoSize = true;
@@ -607,21 +618,9 @@
             this.panel3.Size = new System.Drawing.Size(198, 1);
             this.panel3.TabIndex = 20;
             // 
-            // picOpenCashBox
-            // 
-            this.picOpenCashBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picOpenCashBox.BackgroundImage")));
-            this.picOpenCashBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picOpenCashBox.Location = new System.Drawing.Point(13, 7);
-            this.picOpenCashBox.Name = "picOpenCashBox";
-            this.picOpenCashBox.Size = new System.Drawing.Size(24, 24);
-            this.picOpenCashBox.TabIndex = 2;
-            this.picOpenCashBox.TabStop = false;
-            this.picOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
-            // 
             // frmToolMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(210, 620);
             this.Controls.Add(this.pnlOpenCashBox);
