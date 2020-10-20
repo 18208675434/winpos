@@ -193,6 +193,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         #endregion
 
 
+        #region 弹框显示
+        /// <summary> 显示提示框
+        /// </summary>
+        public static void ShowLog(string msg, bool iserror=false)
+        {
+            try
+            {
+                if (frmmembermedia != null && HaveMedia)
+                {
+                    frmmembermedia.ShowLog(msg,iserror);
+                }
+            }
+            catch { }
+        }
+        #endregion
+
         public static void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycardid = "")
         {
             try

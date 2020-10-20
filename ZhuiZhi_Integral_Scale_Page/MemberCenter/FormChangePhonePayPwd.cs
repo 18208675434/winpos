@@ -142,7 +142,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     VerifyBalancePwd verifyresult = memberhttputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode, member);
                     if (ErrorMsg != "" || verifyresult == null)
                     {
-
                         this.Enabled = true;
                         LoadingHelper.CloseForm();
                         CheckUserAndMember(ResultCode, ErrorMsg);
@@ -162,7 +161,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         {
                             string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
                             MainModel.ShowLog(showerrormsg, false);
-                            ShowLog(showerrormsg, false);
+                            MemberCenterMediaHelper.ShowLog(showerrormsg);
                             LoadingHelper.CloseForm();
                             this.Close();
                             this.DialogResult = DialogResult.Cancel;
@@ -172,8 +171,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         {
                             password = "";
                             MainModel.ShowLog(verifyresult.hint, true);
-                            ShowLog(verifyresult.hint, true);
-
+                            MemberCenterMediaHelper.ShowLog(verifyresult.hint);
                         }
                     }
                     this.Enabled = true;
@@ -195,7 +193,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
-
+            this.Activate();
         }
 
         /// <summary>
@@ -203,53 +201,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         /// <param name="resultcode"></param>
         /// <param name="ErrorMsg"></param>
-        private void CheckUserAndMember(int resultcode, string ErrorMsg)
+        private void CheckUserAndMember(int resultcode, string errorMsg)
         {
             try
             {
-
                 if (resultcode == MainModel.HttpUserExpired || resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.DifferentMember)
                 {
-
                     this.Enabled = false;
                     MainModel.CurrentMember = null;
                     MainModel.BalancePwdErrorCode = resultcode;
+                    MainModel.ShowLog("会员信息异常："+resultcode, false);
 
                 }
                 else
                 {
-                    MainModel.ShowLog(ErrorMsg, true);
-                    ShowLog(ErrorMsg, true);
+                    MainModel.ShowLog(errorMsg, true);
                 }
             }
             catch (Exception ex)
             {
                 this.Enabled = true;
-                MainModel.ShowLog("密码验证错误码异常", true);
-
-            }
-
-        }
-
-
-        /// <summary>
-        /// 委托解决跨线程调用
-        /// </summary>
-        private delegate void InvokeHandler();
-        private void ShowLog(string msg, bool iserror)
-        {
-            try
-            {
-                this.BeginInvoke(new InvokeHandler(delegate()
-                {
-                    Delay.Start(1000);
-                    this.Activate();
-                }));
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog(ex.Message);
+                MainModel.ShowLog("密码验证错误码异常："+ex.Message, true);
             }
 
         }

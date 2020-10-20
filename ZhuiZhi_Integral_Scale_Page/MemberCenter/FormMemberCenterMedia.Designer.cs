@@ -143,6 +143,7 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.label15 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.lblToast = new System.Windows.Forms.Label();
             this.pnlItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).BeginInit();
             this.pnl3PayInfo.SuspendLayout();
@@ -313,7 +314,7 @@
             this.pnl3PayInfo.Location = new System.Drawing.Point(1165, 2);
             this.pnl3PayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.pnl3PayInfo.Name = "pnl3PayInfo";
-            this.pnl3PayInfo.Size = new System.Drawing.Size(1, 739);
+            this.pnl3PayInfo.Size = new System.Drawing.Size(1, 719);
             this.pnl3PayInfo.TabIndex = 301;
             // 
             // lblPayInfo1
@@ -356,8 +357,9 @@
             this.tlpMember.Controls.Add(this.pnl6ChangePhone, 5, 0);
             this.tlpMember.Location = new System.Drawing.Point(9, 9);
             this.tlpMember.Name = "tlpMember";
-            this.tlpMember.RowCount = 1;
+            this.tlpMember.RowCount = 2;
             this.tlpMember.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMember.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMember.Size = new System.Drawing.Size(1163, 743);
             this.tlpMember.TabIndex = 302;
             // 
@@ -389,7 +391,7 @@
             this.pnl2PayPwdUpdate.Location = new System.Drawing.Point(1165, 2);
             this.pnl2PayPwdUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.pnl2PayPwdUpdate.Name = "pnl2PayPwdUpdate";
-            this.pnl2PayPwdUpdate.Size = new System.Drawing.Size(1, 739);
+            this.pnl2PayPwdUpdate.Size = new System.Drawing.Size(1, 719);
             this.pnl2PayPwdUpdate.TabIndex = 305;
             // 
             // pictureBox7
@@ -681,7 +683,7 @@
             this.pnlDefault.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDefault.Location = new System.Drawing.Point(3, 3);
             this.pnlDefault.Name = "pnlDefault";
-            this.pnlDefault.Size = new System.Drawing.Size(1157, 737);
+            this.pnlDefault.Size = new System.Drawing.Size(1157, 717);
             this.pnlDefault.TabIndex = 303;
             // 
             // pictureBox4
@@ -936,7 +938,7 @@
             this.pnl4PayPwdForgetSmsValidate.Location = new System.Drawing.Point(1165, 2);
             this.pnl4PayPwdForgetSmsValidate.Margin = new System.Windows.Forms.Padding(2);
             this.pnl4PayPwdForgetSmsValidate.Name = "pnl4PayPwdForgetSmsValidate";
-            this.pnl4PayPwdForgetSmsValidate.Size = new System.Drawing.Size(1, 739);
+            this.pnl4PayPwdForgetSmsValidate.Size = new System.Drawing.Size(1, 719);
             this.pnl4PayPwdForgetSmsValidate.TabIndex = 304;
             // 
             // pictureBox6
@@ -1229,7 +1231,7 @@
             this.pnl5PayPwdForgetOk.Location = new System.Drawing.Point(1165, 2);
             this.pnl5PayPwdForgetOk.Margin = new System.Windows.Forms.Padding(2);
             this.pnl5PayPwdForgetOk.Name = "pnl5PayPwdForgetOk";
-            this.pnl5PayPwdForgetOk.Size = new System.Drawing.Size(1, 739);
+            this.pnl5PayPwdForgetOk.Size = new System.Drawing.Size(1, 719);
             this.pnl5PayPwdForgetOk.TabIndex = 306;
             // 
             // label14
@@ -1306,7 +1308,7 @@
             this.pnl6ChangePhone.Location = new System.Drawing.Point(1165, 2);
             this.pnl6ChangePhone.Margin = new System.Windows.Forms.Padding(2);
             this.pnl6ChangePhone.Name = "pnl6ChangePhone";
-            this.pnl6ChangePhone.Size = new System.Drawing.Size(1, 739);
+            this.pnl6ChangePhone.Size = new System.Drawing.Size(1, 719);
             this.pnl6ChangePhone.TabIndex = 307;
             // 
             // lblStep3
@@ -1583,12 +1585,27 @@
             this.pictureBox10.TabIndex = 0;
             this.pictureBox10.TabStop = false;
             // 
+            // lblToast
+            // 
+            this.lblToast.AutoSize = true;
+            this.lblToast.BackColor = System.Drawing.Color.DimGray;
+            this.lblToast.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblToast.ForeColor = System.Drawing.Color.White;
+            this.lblToast.Location = new System.Drawing.Point(510, 264);
+            this.lblToast.Name = "lblToast";
+            this.lblToast.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.lblToast.Size = new System.Drawing.Size(62, 31);
+            this.lblToast.TabIndex = 75;
+            this.lblToast.Text = "提示";
+            this.lblToast.Visible = false;
+            // 
             // FormMemberCenterMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1180, 733);
+            this.Controls.Add(this.lblToast);
             this.Controls.Add(this.tlpMember);
             this.Controls.Add(this.pnlItem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -1629,6 +1646,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1741,5 +1759,6 @@
         private System.Windows.Forms.Label lblStep3Tip1;
         private System.Windows.Forms.Panel pnlLine1;
         private System.Windows.Forms.Panel pnlLine2;
+        private System.Windows.Forms.Label lblToast;
     }
 }

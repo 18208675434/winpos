@@ -19,17 +19,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         public string password = "";
 
-        //使用密码支付  RSA公钥加密后的值
-        public string PayPassWord = "";
         // 0-原密码录入 1-新密码录入 2-新密码确认
         public int numtype = 0;
         //旧密码
         public string oldpassword = "";
         //存储新密码
-        public string NowNewPassWord = "";
+        public string nowNewPassWord = "";
         Member member;
 
-        MemberCenterHttpUtil McHttpUtil = new MemberCenterHttpUtil();
+        MemberCenterHttpUtil mcHttpUtil = new MemberCenterHttpUtil();
 
         public FormSeavePassword(Member m)
         {
@@ -39,7 +37,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            MainModel.SevaePwd = "";
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
@@ -126,11 +123,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         this.Enabled = false;
                         LoadingHelper.ShowLoadingScreen("密码验证中...");
-                        //RSA加密
-                        PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
+                        //使用密码支付  RSA公钥加密后的值
+                        string payPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
                         string err = "";
                         int resultCode = 0;
-                        VerifyBalancePwd verifyresult = McHttpUtil.VerifyBalancePwd(PayPassWord, ref err, ref resultCode, member);
+                        VerifyBalancePwd verifyresult = mcHttpUtil.VerifyBalancePwd(payPassWord, ref err, ref resultCode, member);
                         if (err != "" || verifyresult == null)
                         {
                             this.Enabled = true;
@@ -149,27 +146,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             }
                             else if (verifyresult.remainwrongcount > 0)
                             {
-                                MainModel.SevaePwd = "";
                                 password = "";
                                 string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
                                 MainModel.ShowLog(showerrormsg, false);
-                                ShowLog(showerrormsg, false);
+                                MemberCenterMediaHelper.ShowLog(showerrormsg);
                                 this.DialogResult = DialogResult.Cancel;
                                 this.Close();
                             }
                             else
                             {
-                                MainModel.SevaePwd = "";
                                 password = "";
                                 MainModel.ShowLog(verifyresult.hint, true);
-                                ShowLog(verifyresult.hint, true);
+                                MemberCenterMediaHelper.ShowLog(verifyresult.hint);
                             }
                         }
                         this.Enabled = true;
                     }
                     catch (Exception ex)
                     {
-                        MainModel.ShowLog("验证余额密码异常" + ex.Message, true);
+                        MainModel.ShowLog("验证余额支付密码异常" + ex.Message, true);
+                        MemberCenterMediaHelper.ShowLog("验证余额支付密码异常" + ex);
                     }
                     finally
                     {
@@ -181,30 +177,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (password.Length == 6 && numtype == 1)
                 {
                     //存储到第一次输入的新密码
-                    NowNewPassWord = password;
+                    nowNewPassWord = password;
                     password = "";
                     numtype = 2;
                     UpdatePassWord();
                 }
                 if (password.Length == 6 && numtype == 2)
                 {
-                    if (password != NowNewPassWord)
+                    if (password != nowNewPassWord)
                     {
                         MainModel.ShowLog("两次输入密码不一致，请重新输入", false);
+                        MemberCenterMediaHelper.ShowLog("两次输入密码不一致，请重新输入");
                         password = "";
                         numtype = 1;
                         UpdatePassWord();
                     }
-                    else if (password == NowNewPassWord)
+                    else if (password == nowNewPassWord)
                     {
                         string ErroM = "";
                         string newpassword = password;
                         //验证密码类型
                         int resuleCode = 0;
                         //验证成功
-                        string result = McHttpUtil.UpdatePassWord(MainModel.RSAEncrypt(MainModel.RSAPrivateKey, newpassword), MainModel.RSAEncrypt(MainModel.RSAPrivateKey, oldpassword), 2, ref ErroM, ref resuleCode);
+                        string result = mcHttpUtil.UpdatePassWord(MainModel.RSAEncrypt(MainModel.RSAPrivateKey, newpassword), MainModel.RSAEncrypt(MainModel.RSAPrivateKey, oldpassword), 2, ref ErroM, ref resuleCode);
                         password = "";
-                        MainModel.SevaePwd = "";
                         if (result == "true")
                         {
                             this.DialogResult = DialogResult.OK;
@@ -214,8 +210,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 }
             }
-            MainModel.SevaePwd = password;
-            UpdatePassWord();
         }
 
         private void UpdatePassWord()
@@ -245,6 +239,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
             MemberCenterMediaHelper.UpdatePassWordUpdateUI(numtype, password);
+          
         }
 
         /// <summary>
@@ -252,59 +247,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         /// <param name="resultcode"></param>
         /// <param name="ErrorMsg"></param>
-        private void CheckUserAndMember(int resultcode, string ErrorMsg)
+        private void CheckUserAndMember(int resultcode, string errorMsg)
         {
             try
             {
-
                 if (resultcode == MainModel.HttpUserExpired || resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.DifferentMember)
                 {
-
-                    this.Enabled = false;
                     MainModel.CurrentMember = null;
                     MainModel.BalancePwdErrorCode = resultcode;
+                    MainModel.ShowLog("会员信息异常：" + resultcode, false);
+                    MemberCenterMediaHelper.ShowLog("会员信息异常：" + resultcode);
 
                 }
                 else
                 {
-                    MainModel.ShowLog(ErrorMsg, true);
-                    ShowLog(ErrorMsg, true);
+                    MainModel.ShowLog(errorMsg, true);
+                    MemberCenterMediaHelper.ShowLog(errorMsg);
                 }
             }
             catch (Exception ex)
             {
-
-                this.Enabled = true;
-
                 MainModel.ShowLog("密码验证错误码异常", true);
-
+                MemberCenterMediaHelper.ShowLog("密码验证错误码异常:" + ex.Message);
             }
-
         }
 
-
-        /// <summary>
-        /// 委托解决跨线程调用
-        /// </summary>
-        private delegate void InvokeHandler();
-        private void ShowLog(string msg, bool iserror)
-        {
-            try
-            {
-
-                //MsgHelper.AutoShowForm(msg);
-                this.BeginInvoke(new InvokeHandler(delegate()
-                {
-                    Delay.Start(1000);
-                    this.Activate();
-                }));
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog(ex.Message);
-            }
-
-        }
     }
 }
