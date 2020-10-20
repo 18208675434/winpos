@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenterMedia));
             this.pnlItem = new System.Windows.Forms.Panel();
             this.lblAmountStr = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@
             this.lblMemberInfo = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pnlPayPwdSmsValidate = new System.Windows.Forms.Panel();
+            this.pnl4PayPwdSmsValidate = new System.Windows.Forms.Panel();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.btnPassY6 = new System.Windows.Forms.Button();
             this.btnPassY5 = new System.Windows.Forms.Button();
@@ -114,7 +114,7 @@
             this.btn3 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
-            this.pnlPayPwdUpdateOk = new System.Windows.Forms.Panel();
+            this.pnl5PayPwdUpdateOk = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -160,10 +160,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.pnlPayPwdSmsValidate.SuspendLayout();
+            this.pnl4PayPwdSmsValidate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
-            this.pnlPayPwdUpdateOk.SuspendLayout();
+            this.pnl5PayPwdUpdateOk.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.pnl6ChangePhone.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picStep3)).BeginInit();
@@ -233,44 +233,44 @@
             this.dgvTemplate.CausesValidation = false;
             this.dgvTemplate.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvTemplate.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTemplate.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTemplate.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvTemplate.ColumnHeadersVisible = false;
             this.dgvTemplate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewImageColumn6,
             this.dataGridViewImageColumn7,
             this.dataGridViewImageColumn8});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvTemplate.GridColor = System.Drawing.Color.White;
             this.dgvTemplate.Location = new System.Drawing.Point(512, 91);
             this.dgvTemplate.MultiSelect = false;
             this.dgvTemplate.Name = "dgvTemplate";
             this.dgvTemplate.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTemplate.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTemplate.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvTemplate.RowHeadersVisible = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvTemplate.RowTemplate.Height = 110;
             this.dgvTemplate.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvTemplate.Size = new System.Drawing.Size(615, 582);
@@ -278,30 +278,30 @@
             // 
             // dataGridViewImageColumn6
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.NullValue = null;
+            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewImageColumn6.HeaderText = "第一列";
             this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
             this.dataGridViewImageColumn6.ReadOnly = true;
             // 
             // dataGridViewImageColumn7
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.NullValue = null;
-            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.NullValue = null;
+            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewImageColumn7.HeaderText = "第二列";
             this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
             this.dataGridViewImageColumn7.ReadOnly = true;
             // 
             // dataGridViewImageColumn8
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.NullValue = null;
-            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.NullValue = null;
+            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewImageColumn8.HeaderText = "第三列";
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.ReadOnly = true;
@@ -312,7 +312,7 @@
             this.pnlPayInfo.Controls.Add(this.lblPayInfo1);
             this.pnlPayInfo.Controls.Add(this.picPayInfo);
             this.pnlPayInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPayInfo.Location = new System.Drawing.Point(1165, 2);
+            this.pnlPayInfo.Location = new System.Drawing.Point(2, 2);
             this.pnlPayInfo.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPayInfo.Name = "pnlPayInfo";
             this.pnlPayInfo.Size = new System.Drawing.Size(1, 739);
@@ -353,8 +353,8 @@
             this.tlpMember.Controls.Add(this.pnlPayPwdUpdate, 0, 0);
             this.tlpMember.Controls.Add(this.pnlDefault, 0, 0);
             this.tlpMember.Controls.Add(this.pnlPayInfo, 1, 0);
-            this.tlpMember.Controls.Add(this.pnlPayPwdSmsValidate, 2, 0);
-            this.tlpMember.Controls.Add(this.pnlPayPwdUpdateOk, 4, 0);
+            this.tlpMember.Controls.Add(this.pnl4PayPwdSmsValidate, 2, 0);
+            this.tlpMember.Controls.Add(this.pnl5PayPwdUpdateOk, 4, 0);
             this.tlpMember.Controls.Add(this.pnl6ChangePhone, 5, 0);
             this.tlpMember.Location = new System.Drawing.Point(9, 9);
             this.tlpMember.Name = "tlpMember";
@@ -388,7 +388,7 @@
             this.pnlPayPwdUpdate.Controls.Add(this.btnpw2);
             this.pnlPayPwdUpdate.Controls.Add(this.btnpw1);
             this.pnlPayPwdUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPayPwdUpdate.Location = new System.Drawing.Point(1165, 2);
+            this.pnlPayPwdUpdate.Location = new System.Drawing.Point(2, 2);
             this.pnlPayPwdUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPayPwdUpdate.Name = "pnlPayPwdUpdate";
             this.pnlPayPwdUpdate.Size = new System.Drawing.Size(1, 739);
@@ -683,7 +683,7 @@
             this.pnlDefault.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDefault.Location = new System.Drawing.Point(3, 3);
             this.pnlDefault.Name = "pnlDefault";
-            this.pnlDefault.Size = new System.Drawing.Size(1157, 737);
+            this.pnlDefault.Size = new System.Drawing.Size(1, 737);
             this.pnlDefault.TabIndex = 303;
             // 
             // pictureBox4
@@ -910,36 +910,36 @@
             this.label1.TabIndex = 50;
             this.label1.Text = "会员中心";
             // 
-            // pnlPayPwdSmsValidate
+            // pnl4PayPwdSmsValidate
             // 
-            this.pnlPayPwdSmsValidate.Controls.Add(this.pictureBox6);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnPassY6);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnPassY5);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnPassY4);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnPassY3);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnPassY2);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnPassY1);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.picBox1);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.lblForgetPwd);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.label6);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnDel);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn0);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btnDot);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn9);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn8);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn7);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn6);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn5);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn4);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn3);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn2);
-            this.pnlPayPwdSmsValidate.Controls.Add(this.btn1);
-            this.pnlPayPwdSmsValidate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPayPwdSmsValidate.Location = new System.Drawing.Point(1165, 2);
-            this.pnlPayPwdSmsValidate.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlPayPwdSmsValidate.Name = "pnlPayPwdSmsValidate";
-            this.pnlPayPwdSmsValidate.Size = new System.Drawing.Size(1, 739);
-            this.pnlPayPwdSmsValidate.TabIndex = 304;
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.pictureBox6);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnPassY6);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnPassY5);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnPassY4);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnPassY3);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnPassY2);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnPassY1);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.picBox1);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.lblForgetPwd);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.label6);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnDel);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn0);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btnDot);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn9);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn8);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn7);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn6);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn5);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn4);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn3);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn2);
+            this.pnl4PayPwdSmsValidate.Controls.Add(this.btn1);
+            this.pnl4PayPwdSmsValidate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl4PayPwdSmsValidate.Location = new System.Drawing.Point(2, 2);
+            this.pnl4PayPwdSmsValidate.Margin = new System.Windows.Forms.Padding(2);
+            this.pnl4PayPwdSmsValidate.Name = "pnl4PayPwdSmsValidate";
+            this.pnl4PayPwdSmsValidate.Size = new System.Drawing.Size(1159, 739);
+            this.pnl4PayPwdSmsValidate.TabIndex = 304;
             // 
             // pictureBox6
             // 
@@ -1221,18 +1221,18 @@
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = true;
             // 
-            // pnlPayPwdUpdateOk
+            // pnl5PayPwdUpdateOk
             // 
-            this.pnlPayPwdUpdateOk.Controls.Add(this.label14);
-            this.pnlPayPwdUpdateOk.Controls.Add(this.label13);
-            this.pnlPayPwdUpdateOk.Controls.Add(this.label12);
-            this.pnlPayPwdUpdateOk.Controls.Add(this.pictureBox9);
-            this.pnlPayPwdUpdateOk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPayPwdUpdateOk.Location = new System.Drawing.Point(1165, 2);
-            this.pnlPayPwdUpdateOk.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlPayPwdUpdateOk.Name = "pnlPayPwdUpdateOk";
-            this.pnlPayPwdUpdateOk.Size = new System.Drawing.Size(1, 739);
-            this.pnlPayPwdUpdateOk.TabIndex = 306;
+            this.pnl5PayPwdUpdateOk.Controls.Add(this.label14);
+            this.pnl5PayPwdUpdateOk.Controls.Add(this.label13);
+            this.pnl5PayPwdUpdateOk.Controls.Add(this.label12);
+            this.pnl5PayPwdUpdateOk.Controls.Add(this.pictureBox9);
+            this.pnl5PayPwdUpdateOk.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl5PayPwdUpdateOk.Location = new System.Drawing.Point(1165, 2);
+            this.pnl5PayPwdUpdateOk.Margin = new System.Windows.Forms.Padding(2);
+            this.pnl5PayPwdUpdateOk.Name = "pnl5PayPwdUpdateOk";
+            this.pnl5PayPwdUpdateOk.Size = new System.Drawing.Size(1, 739);
+            this.pnl5PayPwdUpdateOk.TabIndex = 306;
             // 
             // label14
             // 
@@ -1620,12 +1620,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.pnlPayPwdSmsValidate.ResumeLayout(false);
-            this.pnlPayPwdSmsValidate.PerformLayout();
+            this.pnl4PayPwdSmsValidate.ResumeLayout(false);
+            this.pnl4PayPwdSmsValidate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).EndInit();
-            this.pnlPayPwdUpdateOk.ResumeLayout(false);
-            this.pnlPayPwdUpdateOk.PerformLayout();
+            this.pnl5PayPwdUpdateOk.ResumeLayout(false);
+            this.pnl5PayPwdUpdateOk.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.pnl6ChangePhone.ResumeLayout(false);
             this.pnl6ChangePhone.PerformLayout();
@@ -1672,7 +1672,7 @@
         private System.Windows.Forms.TableLayoutPanel tlpMember;
         private System.Windows.Forms.Panel pnlDefault;
         private System.Windows.Forms.Label lblCreditAmount;
-        private System.Windows.Forms.Panel pnlPayPwdSmsValidate;
+        private System.Windows.Forms.Panel pnl4PayPwdSmsValidate;
         private System.Windows.Forms.Button btnPassY6;
         private System.Windows.Forms.Button btnPassY5;
         private System.Windows.Forms.Button btnPassY4;
@@ -1719,7 +1719,7 @@
         private System.Windows.Forms.Button btnpw2;
         private System.Windows.Forms.Button btnpw1;
         private System.Windows.Forms.Timer timerPassWord;
-        private System.Windows.Forms.Panel pnlPayPwdUpdateOk;
+        private System.Windows.Forms.Panel pnl5PayPwdUpdateOk;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
