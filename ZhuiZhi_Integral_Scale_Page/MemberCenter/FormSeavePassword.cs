@@ -21,8 +21,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         //使用密码支付  RSA公钥加密后的值
         public string PayPassWord = "";
-        //输入密码次数
-        public int inputtimes = 0;
+        // 0-原密码录入 1-新密码录入 2-新密码确认
+        public int numtype = 0;
         //旧密码
         public string oldpassword = "";
         //存储新密码
@@ -74,30 +74,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             switch (keyData)
             {
                 //不同键盘数字键值不同
-                case Keys.D0: AddNum(0, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D1: AddNum(1, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D2: AddNum(2, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D3: AddNum(3, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D4: AddNum(4, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D5: AddNum(5, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D6: AddNum(6, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D7: AddNum(7, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D8: AddNum(8, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.D9: AddNum(9, false); return !base.ProcessDialogKey(keyData); break;
+                case Keys.D0: AddNum(0, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D1: AddNum(1, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D2: AddNum(2, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D3: AddNum(3, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D4: AddNum(4, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D5: AddNum(5, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D6: AddNum(6, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D7: AddNum(7, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D8: AddNum(8, false); return !base.ProcessDialogKey(keyData);
+                case Keys.D9: AddNum(9, false); return !base.ProcessDialogKey(keyData);
 
-                case Keys.NumPad0: AddNum(0, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad1: AddNum(1, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad2: AddNum(2, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad3: AddNum(3, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad4: AddNum(4, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad5: AddNum(5, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad6: AddNum(6, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad7: AddNum(7, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad8: AddNum(8, false); return !base.ProcessDialogKey(keyData); break;
-                case Keys.NumPad9: AddNum(9, false); return !base.ProcessDialogKey(keyData); break;
+                case Keys.NumPad0: AddNum(0, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad1: AddNum(1, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad2: AddNum(2, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad3: AddNum(3, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad4: AddNum(4, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad5: AddNum(5, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad6: AddNum(6, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad7: AddNum(7, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad8: AddNum(8, false); return !base.ProcessDialogKey(keyData);
+                case Keys.NumPad9: AddNum(9, false); return !base.ProcessDialogKey(keyData);
 
-                case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData); break;
-                case Keys.Enter: return !base.ProcessDialogKey(keyData); break;
+                case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData);
+                case Keys.Enter: return !base.ProcessDialogKey(keyData);
             }
 
             return base.ProcessDialogKey(keyData);
@@ -107,55 +107,47 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void AddNum(int num, bool isDel)
         {
 
-            if (isDel)
+            if (isDel && password.Length > 0)
             {
-                if (password.Length > 0)
-                {
-                    password = password.Substring(0, password.Length - 1);
-                }
+                password = password.Substring(0, password.Length - 1);
+                UpdatePassWord();
             }
             else
             {
-                if (password.Length < 6)
+                if (password.Length > 6)
                 {
-                    password += num;
+                    return;
                 }
-                if (password.Length == 6 && inputtimes == 0)
+                password += num;
+                UpdatePassWord();
+                if (password.Length == 6 && numtype == 0)
                 {
-
                     try
                     {
                         this.Enabled = false;
-
                         LoadingHelper.ShowLoadingScreen("密码验证中...");
-
                         //RSA加密
                         PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, password);
-
-                        string ErrorMsg = "";
-                        int ResultCode = 0;
-                        VerifyBalancePwd verifyresult = McHttpUtil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode,member);
-
-                        if (ErrorMsg != "" || verifyresult == null)
+                        string err = "";
+                        int resultCode = 0;
+                        VerifyBalancePwd verifyresult = McHttpUtil.VerifyBalancePwd(PayPassWord, ref err, ref resultCode, member);
+                        if (err != "" || verifyresult == null)
                         {
-
                             this.Enabled = true;
                             LoadingHelper.CloseForm();
-                            CheckUserAndMember(ResultCode, ErrorMsg);
+                            CheckUserAndMember(resultCode, err);
                         }
                         else
                         {
                             MainModel.BalancePwdErrorCode = -1;
                             if (verifyresult.success == 1)
                             {
-                                //校验成功
-                                lblTipsText.Text = "请等待用户输入支付密码";
                                 oldpassword = password;
-                                inputtimes = 2;
+                                numtype = 1;
                                 password = "";
                                 UpdatePassWord();
                             }
-                            else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
+                            else if (verifyresult.remainwrongcount > 0)
                             {
                                 MainModel.SevaePwd = "";
                                 password = "";
@@ -186,9 +178,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         this.Activate();
                     }
                 }
-                if (password.Length == 6 && inputtimes == 1)
+                if (password.Length == 6 && numtype == 1)
                 {
-                    if (password == NowNewPassWord)
+                    //存储到第一次输入的新密码
+                    NowNewPassWord = password;
+                    password = "";
+                    numtype = 2;
+                    UpdatePassWord();
+                }
+                if (password.Length == 6 && numtype == 2)
+                {
+                    if (password != NowNewPassWord)
+                    {
+                        MainModel.ShowLog("两次输入密码不一致，请重新输入", false);
+                        password = "";
+                        numtype = 1;
+                        UpdatePassWord();
+                    }
+                    else if (password == NowNewPassWord)
                     {
                         string ErroM = "";
                         string newpassword = password;
@@ -204,23 +211,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             this.Close();
                         }
                     }
-                    if (password != NowNewPassWord)
-                    {
-                        lblTipsText.Text = "两次输入密码不一致，请重新输入";
-                        password = "";
-                        inputtimes = 2;
-                        UpdatePassWord();
-                    }
 
-                }
-                if (password.Length == 6 && inputtimes == 2)
-                {
-                    //存储到第一次输入的新密码
-                    NowNewPassWord = password;
-                    lblTipsText.Text = "请等待用户确认密码";
-                    password = "";
-                    inputtimes = 1;
-                    UpdatePassWord();
                 }
             }
             MainModel.SevaePwd = password;
@@ -229,6 +220,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void UpdatePassWord()
         {
+            if (numtype == 0)
+            {
+                lblTipsText.Text = "请等待用户输入原支付密码";
+            }
+            else if (numtype == 1)
+            {
+                lblTipsText.Text = "请等待用户输入支付密码";
+            }
+            else if (numtype == 2)
+            {
+                lblTipsText.Text = "请等待用户确认密码";
+            }
             switch (password.Length)
             {
                 case 0: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
@@ -241,6 +244,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
+            MemberCenterMediaHelper.UpdatePassWordUpdateUI(numtype, password);
         }
 
         /// <summary>

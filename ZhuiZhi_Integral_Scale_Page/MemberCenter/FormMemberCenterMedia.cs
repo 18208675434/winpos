@@ -122,6 +122,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
+        #region 修改密码
         /// <summary>
         /// 显示修改密码客屏界面
         /// </summary>
@@ -135,10 +136,47 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+                UpdatePassWordUpdateUI(0, "");
 
             }
             catch { }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numtype"></param>
+        /// <param name="smscode"></param>
+        public void UpdatePassWordUpdateUI(int numtype, string smscode)
+        {
+            if (numtype == 0)
+            {
+                lblSavePwd.Text = "请输入原支付密码";
+            }
+            if (numtype == 1)
+            {
+                lblSavePwd.Text = "请输入支付密码";
+            }
+            if (numtype == 2)
+            {
+                lblSavePwd.Text = "请再次输入，确认支付密码";
+            }
+            switch (smscode.Length)
+            {
+                case 0: btnPassWord1.Text = ""; btnPassWord2.Text = ""; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
+                case 1: btnPassWord1.Text = "*"; btnPassWord2.Text = ""; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
+                case 2: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
+                case 3: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; ; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
+                case 4: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; btnPassWord4.Text = "*"; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
+                case 5: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; btnPassWord4.Text = "*"; btnPassWord5.Text = "*"; ; btnPassWord6.Text = ""; break;
+                case 6: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; btnPassWord4.Text = "*"; btnPassWord5.Text = "*"; btnPassWord6.Text = "*"; break;
+
+                default: btnPassWord1.Text = ""; btnPassWord2.Text = ""; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
+            }
+        }
+        #endregion
+
+        #region 忘记密码
         /// <summary>
         /// 显示忘记密码客屏界面
         /// </summary>
@@ -154,105 +192,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
-        }
-
-        /// <summary>
-        /// 显示修改成功客屏界面
-        /// </summary>
-        public void ShowChangePassWordOK()
-        {
-            try
-            {
-                tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
-                tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 100);
-                tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
-            }
-            catch { }
-        }
-        /// <summary>
-        /// 显示更换手机号码客屏
-        /// </summary>
-        public void ShowChangePhoneNumber(int step, bool ismember)
-        {
-            try
-            {
-                switch (step)
-                {
-                    case 0:
-                        picStepOk.Visible = false;
-                        picStep1.Visible = true;                        
-                        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenterMedia));
-                        //picStep1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
-                        //lblStep1.BackColor = Color.FromArgb(173,173,173);                      
-                        pnlLine1.BackColor = Color.FromArgb(238, 238, 238);
-                        pnlLine2.BackColor = Color.FromArgb(238, 238, 238);
-                        picStep2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
-                        lblStep2.BackColor = Color.FromArgb(173, 173, 173);
-                        picStep3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
-                        lblStep3.BackColor = Color.FromArgb(173, 173, 173); 
-                       
-                        lblStep3Tip1.Visible = false;
-                        lblStep3Tip2.Visible = false;
-                        tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
-                        tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 100);
-                        break;
-                    case 1:
-                        pnlLine1.BackColor = Color.FromArgb(52, 147, 255);
-                        lblStep2.BackColor = Color.FromArgb(52, 147, 255);
-                        picStep2.BackgroundImage = picStep1.BackgroundImage;
-                        break;
-                    case 2:
-                        pnlLine2.BackColor = Color.FromArgb(52, 147, 255);
-                        lblStep3.BackColor = Color.FromArgb(52, 147, 255);
-                        picStep3.BackgroundImage = picStep1.BackgroundImage;
-                        if (ismember)//如果新手机是会员
-                        {
-                            lblStep3Tip1.Visible = true;
-                            lblStep3Tip2.Visible = true;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// 密码输入时显示*
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timerPassWord_Tick(object sender, EventArgs e)
-        {
-
-            switch (MainModel.SevaePwd.Length)
-            {
-                case 0: btnPassWord1.Text = ""; btnPassWord2.Text = ""; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
-                case 1: btnPassWord1.Text = "*"; btnPassWord2.Text = ""; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
-                case 2: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
-                case 3: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; ; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
-                case 4: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; btnPassWord4.Text = "*"; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
-                case 5: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; btnPassWord4.Text = "*"; btnPassWord5.Text = "*"; ; btnPassWord6.Text = ""; break;
-                case 6: btnPassWord1.Text = "*"; btnPassWord2.Text = "*"; btnPassWord3.Text = "*"; btnPassWord4.Text = "*"; btnPassWord5.Text = "*"; btnPassWord6.Text = "*"; break;
-
-                default: btnPassWord1.Text = ""; btnPassWord2.Text = ""; btnPassWord3.Text = ""; btnPassWord4.Text = ""; btnPassWord5.Text = ""; btnPassWord6.Text = ""; break;
-            }
-        }
-
-        private void FormMemberCenterMedia_Load(object sender, EventArgs e)
-        {
-            //调用定时刷新控件   刷新客屏数据
-            timerPassWord.Enabled = true;
-
         }
 
         public void UpdateForgetPassWordUI(int numtype, string smscode)
@@ -302,5 +241,78 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+
+        /// <summary>
+        /// 显示修改成功客屏界面
+        /// </summary>
+        public void ShowChangePassWordOK()
+        {
+            try
+            {
+                tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 100);
+                tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+            }
+            catch { }
+        }
+        #endregion
+        #region 更换手机
+        /// <summary>
+        /// 显示更换手机号码客屏
+        /// </summary>
+        public void ShowChangePhoneNumber(int step, bool ismember)
+        {
+            try
+            {
+                switch (step)
+                {
+                    case 0:
+                        picStepOk.Visible = false;
+                        picStep1.Visible = true;
+                        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenterMedia));
+                        //picStep1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
+                        //lblStep1.BackColor = Color.FromArgb(173,173,173);                      
+                        pnlLine1.BackColor = Color.FromArgb(238, 238, 238);
+                        pnlLine2.BackColor = Color.FromArgb(238, 238, 238);
+                        picStep2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
+                        lblStep2.BackColor = Color.FromArgb(173, 173, 173);
+                        picStep3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picStep2.BackgroundImage")));
+                        lblStep3.BackColor = Color.FromArgb(173, 173, 173);
+
+                        lblStep3Tip1.Visible = false;
+                        lblStep3Tip2.Visible = false;
+                        tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
+                        tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
+                        tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
+                        tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
+                        tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
+                        tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 100);
+                        break;
+                    case 1:
+                        pnlLine1.BackColor = Color.FromArgb(52, 147, 255);
+                        lblStep2.BackColor = Color.FromArgb(52, 147, 255);
+                        picStep2.BackgroundImage = picStep1.BackgroundImage;
+                        break;
+                    case 2:
+                        pnlLine2.BackColor = Color.FromArgb(52, 147, 255);
+                        lblStep3.BackColor = Color.FromArgb(52, 147, 255);
+                        picStep3.BackgroundImage = picStep1.BackgroundImage;
+                        if (ismember)//如果新手机是会员
+                        {
+                            lblStep3Tip1.Visible = true;
+                            lblStep3Tip2.Visible = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            catch { }
+        }
+        #endregion
     }
 }
