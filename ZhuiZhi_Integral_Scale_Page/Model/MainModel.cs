@@ -34,11 +34,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public static string Balance;
 
-        /// <summary>
-        /// 功能-修改密码同步
-        /// </summary>
-        public static string SevaePwd = "";
-
         #endregion
         //判断客屏是否播放视屏  是的话把焦点还给主界面
         public static bool IsPlayer = false;

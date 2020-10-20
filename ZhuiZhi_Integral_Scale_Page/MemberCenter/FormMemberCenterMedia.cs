@@ -259,6 +259,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch { }
         }
         #endregion
+
         #region 更换手机
         /// <summary>
         /// 显示更换手机号码客屏
@@ -312,6 +313,34 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             }
             catch { }
+        }
+        #endregion
+
+        #region 弹框显示
+        /// <summary>
+        /// 委托解决跨线程调用
+        /// </summary>
+        private delegate void InvokeHandler();
+        public void ShowLog(string msg, bool iserror=false)
+        {
+            try
+            {
+                //MsgHelper.AutoShowForm(msg);
+                this.BeginInvoke(new InvokeHandler(delegate()
+                {
+                    lblToast.Text = msg;
+                    lblToast.BringToFront();                   
+                    lblToast.Visible = true;                   
+                    Delay.Start(1500);
+                    lblToast.Visible = false;
+                    //this.Activate();
+                }));
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog(ex.Message);
+            }
         }
         #endregion
     }

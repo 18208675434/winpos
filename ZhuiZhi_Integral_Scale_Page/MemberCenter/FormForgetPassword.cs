@@ -139,7 +139,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     this.Close();
                     MainModel.ShowLog("短信验证码错误", false);
-                    ShowLog("短信验证码错误", false);
+                    MemberCenterMediaHelper.ShowLog("短信验证码错误");
                 }
             }
             if (smscode.Length == 6 && numtype == 1)
@@ -168,6 +168,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (smscode != newPassWord)
                 {
                     label2.Text = "两次输入密码不一致，请重新输入";
+                    MemberCenterMediaHelper.ShowLog("两次输入密码不一致，请重新输入");
                     UpdatePassWord(1,"");//重置UI
                 }
             }
@@ -209,29 +210,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             MemberCenterMediaHelper.UpdateForgetPassWordUI(numtype, smscode);
 
         }
-        /// <summary>
-        /// 委托解决跨线程调用
-        /// </summary>
-        private delegate void InvokeHandler();
-        private void ShowLog(string msg, bool iserror)
-        {
-            try
-            {
 
-                //MsgHelper.AutoShowForm(msg);
-                this.BeginInvoke(new InvokeHandler(delegate()
-                {
-                    Delay.Start(1000);
-                    this.Activate();
-                }));
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog(ex.Message);
-            }
-
-        }
         MemberCenterHttpUtil membercenterutil = new MemberCenterHttpUtil();
         private void btnSend_Click(object sender, EventArgs e)
         {
