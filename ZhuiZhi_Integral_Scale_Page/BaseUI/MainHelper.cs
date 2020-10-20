@@ -756,6 +756,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
         }
 
         #endregion
+
     }
 
     public class ScanModelAndDbpro

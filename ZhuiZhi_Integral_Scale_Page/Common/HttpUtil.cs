@@ -3381,8 +3381,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string json = HttpPOST(url, testjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
-                {
-                    return Convert.ToInt64(rd.data);
+                {                   
+                    //DbJsonUtil.AddBalanceInfo();
+
+                    return Convert.ToInt64(topuppara.paymode );
                 }
                 else
                 {

@@ -16,7 +16,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormOtherMethod : Form
     {
 
-        public string SelectCode = "";
+        public ClassPayment SelectPayMent = null;
 
         public decimal currentamount = 0;
 
@@ -157,7 +157,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 if (remm.DialogResult == DialogResult.OK)
                 {
-                    SelectCode = temp.code;
+                    
+                    SelectPayMent = temp;
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    SelectPayMent = null;
+                    this.DialogResult = DialogResult.Cancel;
                 }
                 this.Close();
                 //ListAllTemplate.zhifu = temp.name;

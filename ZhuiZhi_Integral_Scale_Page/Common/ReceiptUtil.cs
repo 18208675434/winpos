@@ -12,6 +12,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
     public class ReceiptUtil
     {
+        #region 成员变量
+        /// <summary>
+        /// 本地订单表操作类
+        /// </summary>
+        private static DBORDER_BEANBLL orderbll = new DBORDER_BEANBLL();
+        /// <summary>
+        /// 本地交班记录表操作类
+        /// </summary>
+        private static DBRECEIPT_BEANBLL receiptbll = new DBRECEIPT_BEANBLL();
+        #endregion
+
+        #region 交班数据记录 config.ini
         /// <summary>
         /// 整笔订单取消修改
         /// </summary>
@@ -128,8 +140,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
-
-
                 AbnormalOrderUtil.OpenBoxList();
                 int OpenMoneyPacketCount = Convert.ToInt16(INIManager.GetIni("Receipt", "OpenMoneyPacketCount", MainModel.IniPath)) + n;
 
@@ -180,14 +190,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+        #endregion
 
-        /// <summary>
-        /// 本地订单表操作类
-        /// </summary>
-        private static DBORDER_BEANBLL orderbll = new DBORDER_BEANBLL();
-
-        private static DBRECEIPT_BEANBLL receiptbll = new DBRECEIPT_BEANBLL(); 
-
+        #region  离线交班数据记录
         public static Receiptdetail GetReceiptDetailOffLine()
         {
             try
@@ -406,7 +411,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             return result;
         }
 
-
-
+        #endregion
     }
 }
