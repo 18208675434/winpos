@@ -199,7 +199,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-
+                    DbJsonUtil.AddBalanceInfo("微信",para.amount);
                     if (MemberCenterHelper.ShowFormTopUpByOnline(result, CurrentMember.memberheaderresponsevo.mobile))
                     {
                         PrintUtil.PrintTopUp(result.ToString());
@@ -262,6 +262,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     else
                     {
+                        DbJsonUtil.AddBalanceInfo("现金", para.amount);
                         PrintUtil.PrintTopUp(result.ToString());
                         TopUpOK();
                     }
@@ -420,7 +421,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         lblAmount.ForeColor = Color.Black;
                         lblAmountStr.ForeColor = Color.FromArgb(150, 150, 150);
                         pnlItem.BackColor = Color.White;
-
                     }
 
                 }
@@ -433,7 +433,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 lblAmount.Text = template.amount.ToString("f2") + "元";
 
-                lblAmountStr.Text = "赠" + template.rewardamount.ToString("f2") + "元" +template.couponname;
+                lblAmountStr.Text = "";
+                if (template.rewardamount > 0)
+                {
+                    lblAmountStr.Text = "赠" + template.rewardamount.ToString("f2") + "元";
+                }
+
+                lblAmountStr.Text += template.couponname;
+
+                
 
                 Bitmap b = (Bitmap)MainModel.GetControlImage(pnlItem);
                 b.Tag = template;
@@ -858,9 +866,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MemberCenterHelper.ShowFormNoPayPwd();
                     return;
                 }
-                string code = MemberCenterHelper.ShowFormOtherMethord(payments,CurrentTemplate.amount);
 
-                if (string.IsNullOrEmpty(code))
+                ClassPayment customerpayment = MemberCenterHelper.ShowFormOtherMethord(payments,CurrentTemplate.amount);
+
+                if (customerpayment==null)
                 {
                     return;
                 }
@@ -872,7 +881,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     para.phone = CurrentMember.memberheaderresponsevo.mobile;
                     para.shopid = MainModel.CurrentShopInfo.shopid;
 
-                    para.customerpaycode = code;
+                    para.customerpaycode = customerpayment.code;
                     //0 代表自定义充值
                     if (CurrentTemplate.id == 0)
                     {
@@ -890,6 +899,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     else
                     {
+                        DbJsonUtil.AddBalanceInfo(customerpayment.name, para.amount);
                         PrintUtil.PrintTopUp(result.ToString());
                         TopUpOK();
                     }

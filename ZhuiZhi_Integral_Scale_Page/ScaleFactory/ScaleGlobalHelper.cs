@@ -40,7 +40,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
        {
            try
            {
-               IniScale(true);
+               IniScale(false);
 
                if (AscalOK())
                {
@@ -56,12 +56,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                System.Threading.Thread.Sleep(150);
            }
            catch { }
-
        }
 
        private static  void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
        {
-
            bk.RunWorkerAsync();
        }
        #endregion

@@ -102,7 +102,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 pnlLine10.Height = 1;
 
                 lblDeviceSN.Text = "设备号:" + MainModel.DeviceSN;
-                lblVersion.Text = "版本号:" + MainModel.Version;
+                lblVersion.Text = "版本号:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();// MainModel.Version;
             }
             catch (Exception ex)
             {
@@ -148,6 +148,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 this.DataReceiveHandle.BeginInvoke(ToolType.RechangeQuery, null, null);
 
             this.Hide(); //this.Close();
+        }
+
+        private void pnlOpenCashBox_Click(object sender, EventArgs e)
+        {
+            ZhuiZhi_Integral_Scale_UncleFruit.Common.PrintUtil.OpenCashDrawerEx();
+            this.Hide();
         }
     }
 

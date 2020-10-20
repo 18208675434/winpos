@@ -462,12 +462,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                             if (ErrorMsgMember != "" || member == null) //会员不存在
                             {
-                                ClearMember();
+                                ClearMember(false);
                                 ShowLog(ErrorMsgMember, false);
                             }
                             else
                             {
-                                LoadMember(member);
+                                LoadMember(member,false);
                             }
                         }
                         else
@@ -614,7 +614,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     frmtoolmain = new frmToolMain();
 
-                    asf.AutoScaleControlTest(frmtoolmain, 210, 580, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 580), true);
+                    asf.AutoScaleControlTest(frmtoolmain, 210, 620, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(MainModel.hScale * 620), true);
                     frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                     frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtoolmain.Width - 10, pnlHead.Height + 10);
                     frmtoolmain.TopMost = true;
@@ -898,7 +898,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 LogManager.WriteLog("打印机设置页面异常" + ex.Message);
             }
-
         }
 
         private void tsmReceiptQuery_Click(object sender, EventArgs e)
@@ -1058,12 +1057,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 IsEnable = true;
             }
             catch (Exception ex)
-            {
+            { 
                 ShowLog("切换充值明细异常" + ex.Message, true);
             }
         }
-
-
 
 
         int Seconds = 0;   //执行秒数  没半分钟轮询一次接口  每秒都检查mqtt是否接收到新数据
@@ -1289,8 +1286,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-
-        private void ClearMember()
+        /// <summary>
+        /// 清空会员
+        /// </summary>
+        /// <param name="clearadjust">是否清空改价信息   挂单恢复情况不清空</param>
+        private void ClearMember(bool clearadjust=true)
         {
             try
             {
@@ -1322,8 +1322,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     //购物车有商品的话刷新一次
                     if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                     {
-                        //退出会员清空改价信息
-                        CurrentCart.products.ForEach(r => r.adjustpriceinfo = null);
+                        if (clearadjust)
+                        {
+                            //退出会员清空改价信息
+                            CurrentCart.products.ForEach(r => r.adjustpriceinfo = null);
+                        }
+                       
                         RefreshCart();
                     }
                     Console.WriteLine("clearmember 刷新购物车" + (DateTime.Now - starttime).TotalMilliseconds);
@@ -1338,7 +1342,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ShowLog("清空会员异常", true);
             }
         }
-        private void LoadMember(Member member)
+
+        /// <summary>
+        /// 加载会员信息
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="clearAdjust">是否清空改价信息  挂单恢复会员订单不清空改价信息</param>
+        private void LoadMember(Member member , bool clearAdjust =true)
         {
             try
             {
@@ -1404,8 +1414,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         //购物车有商品的话刷新一次
                         if (CurrentCart != null && CurrentCart.products != null && CurrentCart.products.Count > 0)
                         {
-                            //登录会员清空改价信息
-                            CurrentCart.products.ForEach(r=> r.adjustpriceinfo=null);
+                            if (clearAdjust)
+                            {
+                                //登录会员清空改价信息
+                                CurrentCart.products.ForEach(r => r.adjustpriceinfo = null);
+                            }
+                           
                             RefreshCart();
                         }
                         else
@@ -3080,6 +3094,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         }
                         dgvCart.ClearSelection();
 
+
+                        txtSearch.Clear();
                         rbtnPageDownForCart.WhetherEnable = CurrentCart.products.Count > CurrentCartPage * 5;
 
                         CurrentCart.products.Reverse();

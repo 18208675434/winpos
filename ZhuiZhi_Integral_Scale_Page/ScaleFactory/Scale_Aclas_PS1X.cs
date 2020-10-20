@@ -43,6 +43,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
         private bool WhetherCreate = false;
 
+        private bool WhetherDestory = false;
+
         public override bool Open(string connum, int baud)
         {
             try
@@ -72,7 +74,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                 closeport();  //关闭成功返回false  所以不判断返回值 直接返回true
                 // throw new NotImplementedException();
                 //清理资源
-                destoryComm();
+
+                if (!WhetherDestory) //初始化资源重复调用会导致不能用 
+                {
+                    destoryComm();
+                    WhetherDestory = true;
+
+                }
+                //destoryComm();
                 return true;
             }
             catch (Exception ex)

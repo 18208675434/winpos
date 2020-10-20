@@ -41,7 +41,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
-        public static void AddBalanceInfo(string title, decimal amount,bool isrefund)
+
+        /// <summary>
+        /// 记录充值明细 交班时提交打印到交班小票
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="amount"></param>
+        /// <param name="isrefund"></param>
+        public static void AddBalanceInfo(string title, decimal amount,bool isrefund =false)
         {
 
             try
@@ -76,16 +83,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
                 else
                 {
-                    if (!isrefund)
-                    {
-                        CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) + amount).ToString("f2");
-                        CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) + 1).ToString();
-                    }
-                    else
-                    {
-                        CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) - amount).ToString("f2");
-                        CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) - 1).ToString();
-                    }
+
+                    CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) + amount).ToString("f2");
+                    CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) + 1).ToString();
+                    //充值退款区分充值 独立记录 互不影响
+                    //if (!isrefund)
+                    //{
+                    //    CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) + amount).ToString("f2");
+                    //    CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) + 1).ToString();
+                    //}
+                    //else
+                    //{
+                    //    CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) - amount).ToString("f2");
+                    //    CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) - 1).ToString();
+                    //}
 
                 }
 

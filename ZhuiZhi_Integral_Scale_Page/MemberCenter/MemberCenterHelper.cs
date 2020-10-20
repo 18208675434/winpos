@@ -652,7 +652,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        public static string ShowFormOtherMethord(List<ClassPayment> payments, decimal amount)
+        public static ClassPayment ShowFormOtherMethord(List<ClassPayment> payments, decimal amount)
         {
             try
             {
@@ -666,7 +666,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 pay.Dispose();
                 BackHelper.HideFormBackGround();
 
-                return pay.SelectCode;
+                return pay.SelectPayMent;
 
             }
             catch (Exception ex)

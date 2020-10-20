@@ -74,6 +74,10 @@
             this.lblRefund = new System.Windows.Forms.Label();
             this.picRefund = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlOpenCashBox = new System.Windows.Forms.Panel();
+            this.lblOpenCashBox = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.picOpenCashBox = new System.Windows.Forms.PictureBox();
             this.pnlReceipt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.pnlExit.SuspendLayout();
@@ -96,6 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picRechargeQuery)).BeginInit();
             this.pnlRefund.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRefund)).BeginInit();
+            this.pnlOpenCashBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picOpenCashBox)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlReceipt
@@ -301,7 +307,7 @@
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(11, 556);
+            this.lblDeviceSN.Location = new System.Drawing.Point(7, 597);
             this.lblDeviceSN.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(65, 20);
@@ -313,7 +319,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVersion.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblVersion.Location = new System.Drawing.Point(11, 527);
+            this.lblVersion.Location = new System.Drawing.Point(7, 568);
             this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(65, 20);
@@ -516,7 +522,7 @@
             // 
             // picRechargeQuery
             // 
-            this.picRechargeQuery.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.menu_recharge;
+            this.picRechargeQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRechargeQuery.BackgroundImage")));
             this.picRechargeQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picRechargeQuery.Location = new System.Drawing.Point(13, 7);
             this.picRechargeQuery.Name = "picRechargeQuery";
@@ -569,12 +575,57 @@
             this.panel1.Size = new System.Drawing.Size(198, 1);
             this.panel1.TabIndex = 16;
             // 
+            // pnlOpenCashBox
+            // 
+            this.pnlOpenCashBox.Controls.Add(this.picOpenCashBox);
+            this.pnlOpenCashBox.Controls.Add(this.lblOpenCashBox);
+            this.pnlOpenCashBox.Location = new System.Drawing.Point(11, 519);
+            this.pnlOpenCashBox.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlOpenCashBox.Name = "pnlOpenCashBox";
+            this.pnlOpenCashBox.Size = new System.Drawing.Size(187, 39);
+            this.pnlOpenCashBox.TabIndex = 21;
+            this.pnlOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
+            // 
+            // lblOpenCashBox
+            // 
+            this.lblOpenCashBox.AutoSize = true;
+            this.lblOpenCashBox.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblOpenCashBox.ForeColor = System.Drawing.Color.White;
+            this.lblOpenCashBox.Location = new System.Drawing.Point(43, 6);
+            this.lblOpenCashBox.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblOpenCashBox.Name = "lblOpenCashBox";
+            this.lblOpenCashBox.Size = new System.Drawing.Size(88, 25);
+            this.lblOpenCashBox.TabIndex = 1;
+            this.lblOpenCashBox.Text = "打开钱箱";
+            this.lblOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.panel3.Location = new System.Drawing.Point(6, 563);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(198, 1);
+            this.panel3.TabIndex = 20;
+            // 
+            // picOpenCashBox
+            // 
+            this.picOpenCashBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picOpenCashBox.BackgroundImage")));
+            this.picOpenCashBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picOpenCashBox.Location = new System.Drawing.Point(13, 7);
+            this.picOpenCashBox.Name = "picOpenCashBox";
+            this.picOpenCashBox.Size = new System.Drawing.Size(24, 24);
+            this.picOpenCashBox.TabIndex = 2;
+            this.picOpenCashBox.TabStop = false;
+            this.picOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
+            // 
             // frmToolMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(210, 580);
+            this.ClientSize = new System.Drawing.Size(210, 620);
+            this.Controls.Add(this.pnlOpenCashBox);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlRechargeQuery);
             this.Controls.Add(this.pnlLine10);
             this.Controls.Add(this.pnlLine8);
@@ -637,6 +688,9 @@
             this.pnlRefund.ResumeLayout(false);
             this.pnlRefund.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRefund)).EndInit();
+            this.pnlOpenCashBox.ResumeLayout(false);
+            this.pnlOpenCashBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picOpenCashBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -689,5 +743,9 @@
         private System.Windows.Forms.Label lblRechargeQuery;
         private System.Windows.Forms.PictureBox picRechargeQuery;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlOpenCashBox;
+        private System.Windows.Forms.Label lblOpenCashBox;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.PictureBox picOpenCashBox;
     }
 }
