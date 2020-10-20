@@ -41,13 +41,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhonePayPwd_Shown(object sender, EventArgs e)
         {            
-            MemberCenterMediaHelper.UpdateChangePhonePwdUI("");
-            MemberCenterMediaHelper.ShowChangePhonePayPwd();
         }
 
         private void FormChangePhonePayPwd_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
 
         /// <summary>
@@ -137,8 +134,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         if (verifyresult.success == 1)
                         {
                             //校验成功
-                            MainModel.ShowChangePhonePage = 1;
-                            MainModel.ShowChangePhoneMedia = 1;
                             LoadingHelper.CloseForm();
                             this.DialogResult = DialogResult.OK;
                             this.Close();
@@ -181,7 +176,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 default: btnPassW1.Text = ""; btnPassW2.Text = ""; btnPassW3.Text = ""; btnPassW4.Text = ""; btnPassW5.Text = ""; btnPassW6.Text = ""; break;
             }
-            MemberCenterMediaHelper.UpdateChangePhonePwdUI(password);
+
         }
 
         /// <summary>

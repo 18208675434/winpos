@@ -459,12 +459,6 @@
     <Compile Include="MemberCenter\FormAllCoupon.Designer.cs">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormTuikuan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormTuikuan.Designer.cs">
-      <DependentUpon>FormTuikuan.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberCenter\FormZsongMoney.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1348,9 +1342,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormAllCoupon.resx">
       <DependentUpon>FormAllCoupon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormTuikuan.resx">
-      <DependentUpon>FormTuikuan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormZsongMoney.resx">
       <DependentUpon>FormZsongMoney.cs</DependentUpon>

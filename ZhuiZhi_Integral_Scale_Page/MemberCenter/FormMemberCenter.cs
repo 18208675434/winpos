@@ -820,8 +820,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 try
                 {
                     string err = "";
-                    string phone = MainModel.NewPhone;
-                   MainModel.CurrentMember= CurrentMember = httputil.GetMember(phone, ref err);
+                    MainModel.CurrentMember= CurrentMember = httputil.GetMember(MainModel.CurrentMember.memberheaderresponsevo.mobile, ref err);
                     UpdateMemberInfo();
                     MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text);
                 }

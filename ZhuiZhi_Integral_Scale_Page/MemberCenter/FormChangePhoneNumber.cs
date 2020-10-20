@@ -25,6 +25,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
         Member member;
 
+        string newphone = "";//新手机号
+        int step = 0;
         int type = 0;//1-手机验证码验证 2-余额支付密码验证 3-老卡验证 4-新卡验证
         bool isnew = true;//新手机 or 合并
         public FormChangePhoneNumber(Member m)
@@ -32,11 +34,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             InitializeComponent();
             member = m;
         }
+        private void FormChangePhoneNumber_Shown(object sender, EventArgs e)
+        {
+            MemberCenterMediaHelper.ShowChangePhoneNumber(step, false);
+        }
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            MainModel.ShowChangePhonePage = 0;
-            MainModel.ShowChangePhoneMedia = 0;
             DialogResult = DialogResult.Cancel;
             this.Close();
 
@@ -50,20 +54,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
         }
 
+        private void FormChangePhoneNumber_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MemberCenterMediaHelper.HidePayInfo();
+        }
+
+        #region step1
         private void btnSmsCodeVerify_Click(object sender, EventArgs e)
         {
             BackHelper.ShowFormBackGround();
-            string errormsg = "";
-            membercenterhttputil.GetSendvalidateSmsCode(MainModel.CurrentMember.memberid, ref errormsg);
+
             if (MemberCenterHelper.ShowFormChengPhoneSmsCode())
             {
                 type = 1;
-                ShowChangePhonePage();
-                label17.ForeColor = Color.DodgerBlue;
-                picStepTwo.BackgroundImage = pictureBox1.BackgroundImage;
-                label6.BackColor = Color.DodgerBlue;
-                lblMerge.Visible = true;
-
+                StepTo(1);
             }
         }
 
@@ -72,11 +76,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (MemberCenterHelper.ShowFormChangePhonePayPwd(member))
             {
                 type = 2;
-                ShowChangePhonePage();
-                label17.ForeColor = Color.DodgerBlue;
-                picStepTwo.BackgroundImage = pictureBox1.BackgroundImage;
-                label6.BackColor = Color.DodgerBlue;
-                lblMerge.Visible = true;
+                StepTo(1);
             }
         }
 
@@ -85,7 +85,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (MemberCenterHelper.ShowFormChangePhonePhysicalCard())
             {
                 type = 3;
-                ShowChangePhonePage();
+                StepTo(1);
             }
         }
 
@@ -94,20 +94,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (MemberCenterHelper.ShowFormChangePhoneNewCard())
             {
                 type = 4;
-                ShowChangePhonePage();
+                StepTo(1);
             }
         }
 
-        private void FormChangePhoneNumber_Shown(object sender, EventArgs e)
-        {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
-        }
+        #endregion
 
-        private void FormChangePhoneNumber_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            MemberCenterMediaHelper.HidePayInfo();
-        }
-
+        #region step2
         private void btnVerifyNewPhone_Click(object sender, EventArgs e)
         {
             VerifyNewPhone();
@@ -126,19 +119,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         MainModel.ShowLog("亲，请输入新的手机号", false);
                         return;
                     }
+
+                    string err = "";
+                    isMember = membercenterhttputil.GetCheckmember(newphone, ref err);
                     if (MemberCenterHelper.ShowFormChangePhoneNewPhoneSms(newphone))
                     {
+                        this.newphone = newphone;
                         string name = "验证新手机号";
                         if (name == btnVerifyNewPhone.Text)
                         {
-                            ShowChangePhonePage();
+                            StepTo(2);
                         }
-
-                        label8.ForeColor = Color.DodgerBlue;
-                        picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
-                        label7.BackColor = Color.DodgerBlue;
-                        lblMerge.Visible = false;
-                        lblChangePhone.Visible = true;
                     }
                 }
             }
@@ -150,7 +141,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 BackHelper.HideFormBackGround();
             }
-           
+
         }
 
         private void lblMerge_Click(object sender, EventArgs e)
@@ -168,7 +159,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     if (MainModel.CurrentMember.memberheaderresponsevo.mobile == numbervalue)
                     {
-                         MainModel.ShowLog("亲，请输入新的会员卡号", false);
+                        MainModel.ShowLog("亲，请输入新的会员卡号", false);
                         return;
                     }
                     string msg = "";
@@ -185,19 +176,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     pwd.TopMost = true;
                     if (pwd.ShowDialog() == DialogResult.OK)
                     {
-                        MainModel.NewPhone = numbervalue;
-                        MainModel.ShowChangePhonePage = 2;
+                        this.isMember = true;
+                        this.newphone = numbervalue;
                         string name = "验证新手机号";
                         if (name == btnVerifyNewPhone.Text)
                         {
-                            ShowChangePhonePage();
+                            StepTo(2);
                         }
 
-                        label8.ForeColor = Color.DodgerBlue;
-                        picStepThree.BackgroundImage = pictureBox1.BackgroundImage;
-                        label7.BackColor = Color.DodgerBlue;
-                        lblMerge.Visible = false;
-                        lblChangePhone.Visible = true;
+
                     }
                 }
             }
@@ -222,81 +209,85 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 VerifyMember();
             }
         }
+        #endregion
 
-
-
+        #region step3
+        bool isMember = false;
         private void btnOkChange_Click(object sender, EventArgs e)
         {
-            string errormsg = "";
-            bool resule = membercenterhttputil.GetCheckmember(MainModel.NewPhone, ref errormsg);
-            if (resule)
+            if (MemberCenterHelper.ShowFormChangePhoneConfirm(newphone,isMember))
             {
-                MainModel.IsMemberCenter = true;
-                if (MemberCenterHelper.ShowFormChangePhoneConfirm())
-                {
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-            }
-            else
-            {
-                MainModel.IsMemberCenter = false;
-                if (MemberCenterHelper.ShowFormChangePhoneConfirm())
-                {
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
+                MemberCenterMediaHelper.ShowChangePhoneNumber(2);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
         }
+        #endregion
 
-        private void ShowChangePhonePage()
+        /// <summary> to step
+        /// </summary>
+        /// <param name="step"></param>
+        private void StepTo(int step)
         {
-            switch (MainModel.ShowChangePhonePage)
+            if (step == 0)
             {
-                case 0:
-                    btnSmsCodeVerify.Visible = true;
-                    btnUserPassWordVerify.Visible = true;
-                    btnNewCardVerify.Visible = true;
-                    btnOldCardVerify.Visible = true;
-                    btnVerifyNewPhone.Visible = false;
-                    btnOkChange.Visible = false;
-                    picVerifyMemberOK.Visible = false;
-                    picVerifyPhoneOK.Visible = false;
-                    picChangePhoneOK.Visible = false;
-                    lblVerifySuccess.Visible = false;
-                    lblNewPhone.Visible = false;
-                    break;
-                case 1:
-                    btnSmsCodeVerify.Visible = false;
-                    btnUserPassWordVerify.Visible = false;
-                    btnNewCardVerify.Visible = false;
-                    btnOldCardVerify.Visible = false;
-                    btnVerifyNewPhone.Visible = true;
-                    btnOkChange.Visible = false;
-                    picVerifyMemberOK.Visible = true;
-                    picVerifyPhoneOK.Visible = false;
-                    picChangePhoneOK.Visible = false;
-                    lblVerifySuccess.Visible = true;
-                    lblNewPhone.Visible = false;
-                    break;
-                case 2:
-                    btnSmsCodeVerify.Visible = false;
-                    btnUserPassWordVerify.Visible = false;
-                    btnNewCardVerify.Visible = false;
-                    btnOldCardVerify.Visible = false;
-                    btnVerifyNewPhone.Visible = false;
-                    btnOkChange.Visible = true;
-                    picVerifyMemberOK.Visible = true;
-                    picVerifyPhoneOK.Visible = true;
-                    picChangePhoneOK.Visible = false;
-                    lblVerifySuccess.Visible = true;
-                    lblNewPhone.Visible = true;
-                    lblNewPhone.Text = MainModel.NewPhone;
-                    break;
-                default:
-                    break;
+                isMember = false;
+                btnSmsCodeVerify.Visible = true;
+                btnUserPassWordVerify.Visible = true;
+                btnNewCardVerify.Visible = true;
+                btnOldCardVerify.Visible = true;
+                btnVerifyNewPhone.Visible = false;
+                btnOkChange.Visible = false;
+                picVerifyMemberOK.Visible = false;
+                picVerifyPhoneOK.Visible = false;
+                picChangePhoneOK.Visible = false;
+                lblVerifySuccess.Visible = false;
+                lblNewPhone.Visible = false;
+                MemberCenterMediaHelper.ShowChangePhoneNumber(0);
+            }
+            else if (step == 1)
+            {
+                lblLine1.ForeColor = Color.DodgerBlue;
+                picStep2.BackgroundImage = pictureBox1.BackgroundImage;
+                lblStep2.BackColor = Color.DodgerBlue;
+                lblMerge.Visible = true;
+
+                btnSmsCodeVerify.Visible = false;
+                btnUserPassWordVerify.Visible = false;
+                btnNewCardVerify.Visible = false;
+                btnOldCardVerify.Visible = false;
+                btnVerifyNewPhone.Visible = true;
+                btnOkChange.Visible = false;
+                picVerifyMemberOK.Visible = true;
+                picVerifyPhoneOK.Visible = false;
+                picChangePhoneOK.Visible = false;
+                lblVerifySuccess.Visible = true;
+                lblNewPhone.Visible = false;
+                MemberCenterMediaHelper.ShowChangePhoneNumber(1);
+            }
+            else if (step == 2)
+            {
+
+                lblLine2.ForeColor = Color.DodgerBlue;
+                picStep3.BackgroundImage = pictureBox1.BackgroundImage;
+                lblStep3.BackColor = Color.DodgerBlue;
+                lblMerge.Visible = false;
+                lblChangePhone.Visible = true;
+                lblNewPhone.Text = newphone;
+
+                btnSmsCodeVerify.Visible = false;
+                btnUserPassWordVerify.Visible = false;
+                btnNewCardVerify.Visible = false;
+                btnOldCardVerify.Visible = false;
+                btnVerifyNewPhone.Visible = false;
+                btnOkChange.Visible = true;
+                picVerifyMemberOK.Visible = true;
+                picVerifyPhoneOK.Visible = true;
+                picChangePhoneOK.Visible = false;
+                lblVerifySuccess.Visible = true;
+                lblNewPhone.Visible = true;
+                MemberCenterMediaHelper.ShowChangePhoneNumber(2,isMember);
             }
         }
-
     }
 }

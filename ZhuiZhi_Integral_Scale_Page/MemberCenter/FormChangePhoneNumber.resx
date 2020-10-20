@@ -142,7 +142,7 @@
         mo+W93BwAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="picStepThree.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picStep3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk12nAAAAAAAADYAAAAoAAAAZAAAAGQAAAABACAAAAAAAAAAAADEDgAAxA4AAAAAAAAAAAAA////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -814,7 +814,7 @@
         /////////////////////////////////////////////w==
 </value>
   </data>
-  <data name="picStepTwo.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picStep2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk12nAAAAAAAADYAAAAoAAAAZAAAAGQAAAABACAAAAAAAAAAAADEDgAAxA4AAAAAAAAAAAAA////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -1486,7 +1486,7 @@
         /////////////////////////////////////////////w==
 </value>
   </data>
-  <data name="picTheFirstStep.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picStep1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk12nAAAAAAAADYAAAAoAAAAZAAAAGQAAAABACAAAAAAAAAAAADEDgAAxA4AAAAAAAAAAAAA////////
         ////////////////////////////////////////////////////////////////////////////////

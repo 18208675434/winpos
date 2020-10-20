@@ -25,12 +25,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormChengPhoneVerifyNewPhone_Shown(object sender, EventArgs e)
         {
             txtNewPhoneNumber.Focus();
-            MemberCenterMediaHelper.ShowChengPhoneVerifyNewPhone();
         }
 
         private void FormChengPhoneVerifyNewPhone_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MemberCenterMediaHelper.ShowChangePhoneNumber();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

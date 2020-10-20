@@ -15,9 +15,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public partial class FormChangePhoneConfirm : Form
     {
         MemberCenterHttpUtil memberchttputil = new MemberCenterHttpUtil();
-        public FormChangePhoneConfirm()
+        private string newphone = "";
+        private bool isMember = false;
+        public FormChangePhoneConfirm(string newphone,bool isMember)
         {
             InitializeComponent();
+            this.newphone = newphone;
+            this.isMember = isMember;
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
@@ -31,16 +35,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhoneConfirm_Load(object sender, EventArgs e)
         {
-            if (MainModel.IsMemberCenter)
+            if (isMember)
             {
-                lblConfirmChangeNamber.Text = "手机号" + MainModel.NewPhone + "已注册为会员，是否合并账户？\r\n";
+                lblConfirmChangeNamber.Text = "手机号" + newphone + "已注册为会员，是否合并账户？\r\n";
                 lblConfirmChangeNamber.Text = lblConfirmChangeNamber.Text + "合并后本账户的积分和余额将迁移到新手机号的账户中。\r\n订单数据将不会迁移。";
                 btnCancle.Text = "不合并";
                 btnOK.Text = "合并账户";
             }
             else
             {
-                lblConfirmChangeNamber.Text = "确认更换手机号码为" + MainModel.NewPhone + "?";
+                lblConfirmChangeNamber.Text = "确认更换手机号码为" + newphone + "?";
             }
         }
 
@@ -52,9 +56,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 string err = "";
                 HttpUtil httputil = new HttpUtil();
                 LoadingHelper.ShowLoadingScreen();
-                if (MainModel.IsMemberCenter)
+                if (isMember)
                 {
-                    Member mermber = httputil.GetMember(MainModel.NewPhone, ref err);
+                    Member mermber = httputil.GetMember(newphone, ref err);
                     if (mermber == null)
                     {
                         return;
@@ -63,7 +67,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    result = memberchttputil.Updatemembermobile(MainModel.NewPhone, ref err);                   
+                    result = memberchttputil.Updatemembermobile(newphone, ref err);                   
                 }              
                 if (result)
                 {

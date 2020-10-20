@@ -23,41 +23,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public static ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.BalanceConfigDetail balanceconfigdetail = null;
 
-        public static string rewardmount = "";
-        public static string moneyzz = "";
-        public static long idm = 0;
+     
         public static bool isokcancle;
         public static string code = "";
-        public static decimal GetZsje = 0;
         public static string memberid = "";
         public static string GetPhone = "";
-        public static string UpdatePhone = "";
-        #region  会员中心   变量 （待优化）
-        /// <summary>
-        /// 修改手机号码时输入的新手机号
-        /// </summary>
-        public static string CoustomMoney;
-        public static string ZMoney ;
-        public static string NewPhone = "";
-        public static string tick = "";
-        /// <summary>
-        /// 获取发送的验证码
-        /// </summary>
-        public static string GetSmsCode = "";
-        public static string RechargeAmount;
-        public static string give;
-        //退款方式
-        public static string fangshi= "";
-        public static string MemberId ="";
-        public static string ShopId = "";
-        public static string Tenantid = "";
-        public static string Id = "";
-        public static string Depostid = "";
-        public static bool refundquest;
-        /// <summary>
-        /// 用户修改密码成功了码
-        /// </summary>
-        public static bool SeavePwdok = false;   
+        #region  会员中心   变量 （待优化）   
         /// <summary>
         /// 余额全局变量
         /// </summary>
@@ -66,25 +37,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// <summary>
         /// 功能-修改密码同步
         /// </summary>
-        public static string SevaePwd = "";     
-        /// <summary>
-        /// 全局验证是否是会员切换界面变量
-        /// </summary>
-        public static bool IsMemberCenter = true;
-        /// <summary>
-        /// 修改手机页面 显示隐藏控件变量
-        /// </summary>
-        public static int ShowChangePhonePage = 0;
-        /// <summary>
-        /// 修改手机页面 显示隐藏控件变量 客屏
-        /// </summary>
-        public static int ShowChangePhoneMedia = 0;
-        /// <summary>
-        /// 旧会员手机号码的token
-        /// </summary>
-        public static string Sourcetoken = "";
-
-
+        public static string SevaePwd = "";
 
         #endregion
         //判断客屏是否播放视屏  是的话把焦点还给主界面
