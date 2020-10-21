@@ -191,8 +191,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch { }
         }
         #endregion
-
-
+        
         #region 弹框显示
         /// <summary> 显示提示框
         /// </summary>
@@ -209,26 +208,50 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         #endregion
 
-        public static void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycardid = "")
+        /// <summary> 刷新客屏信息
+        /// </summary>
+        public static void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycard)
         {
             try
             {
                 if (frmmembermedia != null && HaveMedia)
                 {
-                    frmmembermedia.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon, entitycardid);
+                    frmmembermedia.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon, entitycard);
                 }
 
             }
             catch { }
         }
-
-        public static void UpdateEntityCardInfo(string entityCardNo)
+        
+        #region 绑卡
+        private static FormEntityCardBindMedia formBindEntityCardMedia = null;
+        public static void ShowFormBindEntityCardMedia(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.EntityCard entityCard)
         {
-            if (frmmembermedia != null && HaveMedia)
+            try
             {
-                frmmembermedia.UpdateEntityCardInfo(entityCardNo);
+                if (formBindEntityCardMedia == null || formBindEntityCardMedia.IsDisposed)
+                {
+                    formBindEntityCardMedia = new FormEntityCardBindMedia();
+                    asf.AutoScaleControlTest(formBindEntityCardMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                    formBindEntityCardMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                    formBindEntityCardMedia.TopMost = true;
+                    formBindEntityCardMedia.UpdateEntityCardInfo(entityCard);
+                }
+                formBindEntityCardMedia.Show();
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
+        public static void CloseLossEntityCardMedai()
+        {
+            if (formBindEntityCardMedia != null)
+            {
+                formBindEntityCardMedia.Close();
+            }
+        }
+        #endregion
     }
 }

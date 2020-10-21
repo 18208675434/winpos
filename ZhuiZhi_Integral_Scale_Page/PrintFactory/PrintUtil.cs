@@ -144,6 +144,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     return false;
                 }
 
+                DbJsonUtil.AddBalanceInfo(printdetail.paymodeforapi, printdetail.amount);
 
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 

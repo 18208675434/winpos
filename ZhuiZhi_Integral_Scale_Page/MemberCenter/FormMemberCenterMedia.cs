@@ -30,29 +30,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        public void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycardid = "")
+        public void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycard)
         {
             try
             {
                 lblPhone.Text = phone;
-
                 lblMemberInfo.Text = memberinfo;
                 lblBalance.Text = balance;
                 lblCredit.Text = credit;
                 lblCoupon.Text = coupon;
                 lblCreditAmount.Text = creditspec;
-
-                lblCreditAmount.Left = lblCredit.Right;
-
-                string encCardId = entitycardid;
-                if (!string.IsNullOrEmpty(encCardId))
-                {
-                    if (encCardId.Length > 7)
-                    {
-                        encCardId = encCardId.Substring(0, 3) + "".PadLeft(encCardId.Length - 7, '*') + encCardId.Substring(encCardId.Length - 4);
-                    }
-                }
-                lblEntityCardNo.Text = encCardId;
+                lblCreditAmount.Left = lblCredit.Right;            
+                lblEntityCardNo.Text = entitycard;
             }
             catch { }
         }

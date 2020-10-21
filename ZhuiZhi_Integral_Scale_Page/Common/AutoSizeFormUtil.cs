@@ -197,26 +197,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                         try
                         {
                             DataGridView dgv = (DataGridView)c;
-
-                            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-
-
-
                             dgv.RowTemplate.Height = Convert.ToInt16(dgv.RowTemplate.Height * hScale);
-
-
+                            dgv.ColumnHeadersDefaultCellStyle.Alignment = dgv.ColumnHeadersDefaultCellStyle.Alignment;
+                            dgv.ColumnHeadersHeight = Convert.ToInt16(dgv.ColumnHeadersHeight * hScale);
                             if (dgv.RowsDefaultCellStyle.Font != null)
                             {
-
-                                dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", Math.Min(dgv.RowsDefaultCellStyle.Font.Size * wScale, dgv.RowsDefaultCellStyle.Font.Size * hScale));
-                                dgv.RowsDefaultCellStyle = dataGridViewCellStyle1;
+                                dgv.RowsDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", Math.Min(dgv.RowsDefaultCellStyle.Font.Size * wScale, dgv.RowsDefaultCellStyle.Font.Size * hScale), dgv.RowsDefaultCellStyle.Font.Style, dgv.RowsDefaultCellStyle.Font.Unit);
+                               
                             }
                             if (dgv.ColumnHeadersDefaultCellStyle.Font != null)
                             {
-                                dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-                                dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", Math.Min(dgv.ColumnHeadersDefaultCellStyle.Font.Size * wScale, dgv.ColumnHeadersDefaultCellStyle.Font.Size * hScale));
-
-                                dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+                                dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", Math.Min(dgv.ColumnHeadersDefaultCellStyle.Font.Size * wScale, dgv.ColumnHeadersDefaultCellStyle.Font.Size * hScale), dgv.ColumnHeadersDefaultCellStyle.Font.Style, dgv.ColumnHeadersDefaultCellStyle.Font.Unit);
+                                
                             }
                             foreach (DataGridViewColumn dr in dgv.Columns)
                             {
