@@ -199,7 +199,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    DbJsonUtil.AddBalanceInfo("微信",para.amount);
+                    //DbJsonUtil.AddBalanceInfo("微信",para.amount);
                     if (MemberCenterHelper.ShowFormTopUpByOnline(result, CurrentMember.memberheaderresponsevo.mobile))
                     {
                         PrintUtil.PrintTopUp(result.ToString());
@@ -260,7 +260,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     else
                     {
-                        DbJsonUtil.AddBalanceInfo("现金", para.amount);
+                       // DbJsonUtil.AddBalanceInfo("现金", para.amount);
                         PrintUtil.PrintTopUp(result.ToString());
                         TopUpOK();
                     }
@@ -896,7 +896,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     else
                     {
-                        DbJsonUtil.AddBalanceInfo(customerpayment.name, para.amount);
+                        //DbJsonUtil.AddBalanceInfo(customerpayment.name, para.amount);
                         PrintUtil.PrintTopUp(result.ToString());
                         TopUpOK();
                     }
