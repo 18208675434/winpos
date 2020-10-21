@@ -79,7 +79,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
                 DepositRefundRequest request = new DepositRefundRequest();
-                request.refundcapital = txtRefound.Text;
+                request.refundcapital =Convert.ToDecimal( txtRefound.Text);
                 request.refundtype = refundtype;
                 request.memberid = memberId;
                 request.operatorid = MainModel.CurrentUser.loginaccount;
@@ -92,8 +92,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
                 if (refundId > 0)
                 {
+
+                    ReceiptUtil.EditDepositRefund(request.refundcapital);
                     //退款打印小票
-                    PrintUtil.PrintTopUp(refundId.ToString(),true);
+                    PrintUtil.PrintBalanceRefund(refundId.ToString());
+                    //PrintUtil.PrintTopUp(depostBillid, true);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     BackHelper.HideFormBackGround();

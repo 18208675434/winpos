@@ -52,5 +52,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public decimal cashactualamt { set; get; }
 
         public List<OrderPriceDetail> balancedepositinfo { set; get; }
+
+        /// <summary>
+        /// 会员充值 现金充值金额
+        /// </summary>
+        public string balancedepositcashamount { set; get; }
+        /// <summary>
+        /// 会员充值 充值退款订单金额
+        /// </summary>
+        public decimal depositrefundamt { set; get; }
+        /// <summary>
+        /// 会员充值 充值退款订单数量
+        /// </summary>
+        public int depositrefundcount { set; get; }
     }
 }

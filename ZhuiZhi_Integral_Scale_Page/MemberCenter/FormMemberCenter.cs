@@ -208,9 +208,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         PrintUtil.PrintTopUp(result.ToString());
                         TopUpOK();
-
                     }
-
 
                 }
             }

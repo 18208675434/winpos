@@ -1149,10 +1149,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string tempjson = JsonConvert.SerializeObject(receiptpara);
 
-                // LogManager.WriteLog("交班参数"+tempjson);
                 string json = HttpPOST(url, tempjson);
 
-               // LogManager.WriteLog("DEBUG", "交班结果" + tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -3341,6 +3339,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
 
                 string json = HttpGET(url, sort);
+                LogManager.WriteLog("DEBUG", "余额配置：" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
@@ -3768,8 +3767,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 sort.Add("depositbillid", orderid);
 
                 string json = HttpGET(url, sort);
-
-                LogManager.WriteLog(json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 //TODO
@@ -3941,10 +3938,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpGET(url, sort);
 
-               // LogManager.WriteLog("DEBUG","线上订单"+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
-                //TODO
 
                 if (rd.code == 0)
                 {
@@ -3986,11 +3980,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 sort.Add("type", type.ToString());
                 sort.Add("orderid", orderid);
                 string json = HttpGET(url, sort);
-
-                //LogManager.WriteLog("DEBUG", "补打拣货单" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
-                //TODO
 
                 if (rd.code == 0)
                 {

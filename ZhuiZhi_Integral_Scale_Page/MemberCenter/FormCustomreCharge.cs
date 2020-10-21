@@ -63,6 +63,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 CustomTemplate = new ListAllTemplate();
                 decimal cash = Convert.ToDecimal(lblOutPutMoney.Text);
+
+                if (MainModel.balanceconfigdetail != null && cash < MainModel.balanceconfigdetail.customrechargeamt)
+                {
+                    MainModel.ShowLog("数值不能小于" + MainModel.balanceconfigdetail.customrechargeamt.ToString("f2"), false);
+                    return;
+                }
+
                 CustomTemplate.id = 0;
                 CustomTemplate.amount = cash;
                 CustomTemplate.rewardamount = rewardamount;

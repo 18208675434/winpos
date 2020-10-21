@@ -166,6 +166,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LstAllProduct = CartUtil.LoadAllProduct(true);
 
                 IniForm();
+
+                txtSearch.Focus();
             }
             catch (Exception ex)
             {
@@ -324,7 +326,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     dgvCategory_CellClick(null, new DataGridViewCellEventArgs(0, 0));
                 }
-
 
             }
             catch (Exception ex)
@@ -780,7 +781,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 lblGoodName.Text = pro.skuname;
             }
-
+            lblGoodCode.Text = pro.skucode;
             lblPriceDetail.Text = "/" + pro.saleunit;
 
 
@@ -954,10 +955,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblSearchShuiyin.Visible = false;
                 }
 
-                if (!IsEnable)
-                {
-                    return;
-                }
+                //if (!IsEnable)
+                //{
+                //    return;
+                //}
                     ShowLoading(true, false);
                     Application.DoEvents();
                     CurrentGoodPage = 1;
@@ -1540,7 +1541,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     Application.DoEvents();
                     dgvCart.ClearSelection();
 
-
+                    txtSearch.Clear();
                 }
 
 
@@ -1557,6 +1558,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
         #endregion
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            txtSearch.Focus();
+        }
 
     }
 

@@ -127,23 +127,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         }
 
 
-        public static bool PrintTopUp(string depositbillid,bool isrefund=false)
+
+        private static HttpUtil httputil = new HttpUtil();
+        public static bool PrintTopUp(string depositbillid)
         {
             try
             {
+                try { LogManager.WriteLog("充值单:" + depositbillid); }
+                catch { }
+                string errormsg = "";
+                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = httputil.GetDepositbill(depositbillid, ref errormsg);
+
+                if (!string.IsNullOrEmpty(errormsg) || printdetail == null)
+                {
+                    LogManager.WriteLog(errormsg);
+                    return false;
+                }
+
+
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
-                    ToledoPrintUtil.PrintTopUp(depositbillid, isrefund);
+                    ToledoPrintUtil.PrintTopUp(printdetail);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
-                    SprtPrintUtil.PrintTopUp(depositbillid, isrefund);
+                    SprtPrintUtil.PrintTopUp(printdetail);
                 }
                 else
                 {
-                    YKPrintUtil.PrintTopUp(depositbillid, isrefund);
+                    YKPrintUtil.PrintTopUp(printdetail);
                 }
 
                 return true;
@@ -152,6 +166,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return false;
             }
         }
+
+        public static bool PrintBalanceRefund(string refundid)
+        {
+            try
+            {
+
+                string errormsg = "";
+                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.GetBalanceDepositRefund printdetail = httputil.GetBalancecodepositrefoundbill(refundid, ref errormsg);
+
+                if (!string.IsNullOrEmpty(errormsg) || printdetail == null)
+                {
+                    LogManager.WriteLog(errormsg);
+                    return false;
+                }
+
+
+                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                if (ScaleName == ScaleType.托利多.ToString())
+                {
+                    ToledoPrintUtil.PrintBalanceRefund(printdetail);
+                }
+                else if (ScaleName == ScaleType.易捷通.ToString())
+                {
+                    SprtPrintUtil.PrintBalanceRefund(printdetail);
+                }
+                else
+                {
+                    YKPrintUtil.PrintBalanceRefund(printdetail);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
 
         public static bool PrintGiftCardOrder(ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model.GiftCardPrintDetail printdetail, bool isRefound, ref string errormsg)

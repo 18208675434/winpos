@@ -190,6 +190,66 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+
+
+        /// <summary>
+        /// 会员充值 充值退款记录
+        /// </summary>
+        /// <param name="n">修改的值</param>
+        /// <returns></returns>
+        public static bool EditDepositRefund( decimal money,int n=1)
+        {
+            try
+            {
+
+                int CancelOrderCount = Convert.ToInt16(INIManager.GetIni("Receipt", "DepositRefundCount", MainModel.IniPath)) + n;
+                decimal CancelOrderTotalMoney = Convert.ToDecimal(INIManager.GetIni("Receipt", "DepositRefundMoney", MainModel.IniPath)) + Convert.ToDecimal(money);
+
+                INIManager.SetIni("Receipt", "DepositRefundCount", CancelOrderCount.ToString(), MainModel.IniPath);
+                INIManager.SetIni("Receipt", "DepositRefundMoney", CancelOrderTotalMoney.ToString("f2"), MainModel.IniPath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                INIManager.SetIni("Receipt", "DepositRefundCount", n.ToString(), MainModel.IniPath);
+                INIManager.SetIni("Receipt", "DepositRefundMoney", money.ToString("f2"), MainModel.IniPath);
+                return false;
+            }
+        }
+
+        public static int GetDepositRefundCount()
+        {
+            try
+            {
+                int count = 0;
+
+                int.TryParse(INIManager.GetIni("Receipt", "DepositRefundCount", MainModel.IniPath), out count);
+
+                return count;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public static decimal GetDepositRefundMoney()
+        {
+            try
+            {
+                decimal money = 0;
+
+                decimal.TryParse(INIManager.GetIni("Receipt", "DepositRefundMoney", MainModel.IniPath), out money);
+
+                return money;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         #endregion
 
         #region  离线交班数据记录
