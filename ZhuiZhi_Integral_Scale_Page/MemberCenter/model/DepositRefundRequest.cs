@@ -22,7 +22,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// <summary>
         /// 退回本金
         /// </summary>
-        public string refundcapital { get; set; }
+        public decimal refundcapital { get; set; }
         /// <summary>
         /// 退回方式1：原路返回2：线下退款
         /// </summary>

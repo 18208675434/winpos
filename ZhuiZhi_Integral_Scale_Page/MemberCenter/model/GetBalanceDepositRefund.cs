@@ -10,11 +10,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// <summary>
         /// 
         /// </summary>
-        public string balance { get; set; }
+        public decimal balance { get; set; }
         /// <summary>
         /// 退款本金
         /// </summary>
-        public string capitalrefundamount { get; set; }
+        public decimal capitalrefundamount { get; set; }
         /// <summary>
         /// 退款日期
         /// </summary>
@@ -52,7 +52,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// <summary>
         /// 总退款金额
         /// </summary>rewardrefundamout
-        public string refundtotalamount { get; set; }
+        public decimal refundtotalamount { get; set; }
         /// <summary>
         /// 1.原路返回，2线下转账
         /// </summary>
@@ -64,7 +64,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// <summary>
         /// 退增送金额
         /// </summary>
-        public string rewardrefundamount { get; set; }
+        public decimal rewardrefundamount { get; set; }
         public string shopid { get; set; }
         public string shopname { get; set; }
         public string status { get; set; }

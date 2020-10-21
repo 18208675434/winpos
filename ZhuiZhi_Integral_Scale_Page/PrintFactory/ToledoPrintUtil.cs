@@ -291,22 +291,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         #endregion
 
         private static HttpUtil httputil = new HttpUtil();
-        public static bool PrintTopUp(string depositbillid,bool isrefund=false)
+        public static bool PrintTopUp(TopUpPrint printdetail)
         {
             try
             {
-                string errormsg = "";
-                TopUpPrint printdetail = httputil.GetDepositbill(depositbillid, ref errormsg);
-
-                if (!string.IsNullOrEmpty(errormsg) || printdetail == null)
-                {
-                    LogManager.WriteLog(errormsg);
-                    return false;
-                }
-
-                try { LogManager.WriteLog("打印充值单:" + depositbillid); }
-                catch { }
-
+             
                 IniPrintSize();
 
                 //每次打印先清空之前内容
@@ -327,27 +316,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 lstPrintStr.Add( MainModel.GetDateTimeByStamp(printdetail.createdat).ToString("yyyy-MM-dd HH:mm:ss" + "\n"));
                 lstPrintStr.Add(PrintHelper.getStrLine());
 
-
-                if (isrefund)
+                lstPrintStr.Add(PrintHelper.MergeStr("充值消费   X1", printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
+                if (printdetail.rewardamount > 0)
                 {
-                    lstPrintStr.Add(PrintHelper.MergeStr("充值退款   X1", "-" + printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
-
-                    lstPrintStr.Add(PrintHelper.getStrLine());
-
-                    lstPrintStr.Add("退款方式：" + "\n");
-                    lstPrintStr.Add(PrintHelper.MergeStr(printdetail.paymodeforapi, "-" + printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
-
+                    lstPrintStr.Add(PrintHelper.MergeStr("    赠送金额", printdetail.rewardamount.ToString("f2"), BodyCharCountOfLine, PageSize));
                 }
-                else
-                {
-                    lstPrintStr.Add(PrintHelper.MergeStr("充值消费   X1", printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
 
-                    lstPrintStr.Add(PrintHelper.getStrLine());
+                lstPrintStr.Add(PrintHelper.getStrLine());
 
-                    lstPrintStr.Add("充值方式：" + "\n");
-                    lstPrintStr.Add(PrintHelper.MergeStr(printdetail.paymodeforapi, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add("充值方式：" + "\n");
+                lstPrintStr.Add(PrintHelper.MergeStr(printdetail.paymodeforapi, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
 
-                }
+                
 
              
                 lstPrintStr.Add(PrintHelper.getStrLine());
@@ -375,6 +355,72 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             }
         }
 
+
+
+
+        public static bool PrintBalanceRefund(GetBalanceDepositRefund printdetail)
+        {
+            try
+            {
+             
+                IniPrintSize();
+
+                //每次打印先清空之前内容
+                lstPrintStr = new List<string>();
+
+                // lstPrintStr.Add(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+
+                PrintText(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
+                PrintText(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize));
+                //lstPrintStr.Add(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(" ");
+
+                lstPrintStr.Add("订单号：" + printdetail.id + "\n");
+                lstPrintStr.Add("门店：" + MainModel.CurrentShopInfo.shopname + "\n");
+                lstPrintStr.Add("地址：" + MainModel.CurrentShopInfo.address + "\n");
+                lstPrintStr.Add("电话：" + MainModel.CurrentShopInfo.tel + "\n");
+                //lstPrintStr.Add(PrintHelper.MergeStr("收银员：" + MainModel.CurrentUser.nickname, "机：" + MainModel.CurrentShopInfo.deviceid, BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add( MainModel.GetDateTimeByStamp(printdetail.createdat).ToString("yyyy-MM-dd HH:mm:ss" + "\n"));
+                lstPrintStr.Add(PrintHelper.getStrLine());
+
+
+                lstPrintStr.Add(PrintHelper.MergeStr("充值退款   X1", "-" + printdetail.capitalrefundamount.ToString("f2"), BodyCharCountOfLine, PageSize));
+
+                if (printdetail.rewardrefundamount > 0)
+                {
+                    lstPrintStr.Add(PrintHelper.MergeStr("    赠送金额退款", "-" + printdetail.rewardrefundamount.ToString("f2"), BodyCharCountOfLine, PageSize));
+                }
+                lstPrintStr.Add(PrintHelper.getStrLine());
+
+                lstPrintStr.Add("退款方式：" + "\n");
+                lstPrintStr.Add(PrintHelper.MergeStr(printdetail.refundtypeforapi, "-" + printdetail.capitalrefundamount.ToString("f2"), BodyCharCountOfLine, PageSize));
+
+
+             
+                lstPrintStr.Add(PrintHelper.getStrLine());
+                string phone = printdetail.phone;
+                if (printdetail.phone.Length > 7)
+                {
+                    phone = printdetail.phone.Substring(0, 3) + "****" + printdetail.phone.Substring(printdetail.phone.Length - 4);
+                }
+
+                lstPrintStr.Add(PrintHelper.MergeStr("会员号", phone, BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(PrintHelper.MergeStr("账户余额", printdetail.balance.ToString("f2"), BodyCharCountOfLine, PageSize));
+
+                lstPrintStr.Add(PrintHelper.getStrLine());
+                lstPrintStr.Add("多谢惠顾，欢迎下次光临！");
+
+                PrintTextByPaperWidth(lstPrintStr);
+
+                Application.DoEvents();
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public static void IniPrintSize()
         {
             try

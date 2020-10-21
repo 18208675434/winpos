@@ -820,7 +820,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 receiptpara.reprintcount = Convert.ToInt16(INIManager.GetIni("Receipt", "ReprintCount", MainModel.IniPath));
                 //receiptpara.endtime = MainModel.getStampByDateTime(DateTime.Now);
                 receiptpara.shopid = MainModel.CurrentShopInfo.shopid;
-
+                receiptpara.depositrefundamt = ReceiptUtil.GetDepositRefundMoney();
+                receiptpara.depositrefundcount = ReceiptUtil.GetDepositRefundCount();
 
                 decimal PrettyCash = 0;
 
