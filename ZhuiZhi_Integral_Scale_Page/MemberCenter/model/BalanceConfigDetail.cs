@@ -25,6 +25,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// </summary>
         public bool customrechargeenable { get; set; }
 
-
+        /// <summary>
+        /// 自定义充值 限制最小充值金额
+        /// </summary>
+        public decimal customrechargeamt { get; set; }
     }
 }

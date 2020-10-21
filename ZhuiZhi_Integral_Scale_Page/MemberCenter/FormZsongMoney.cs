@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
@@ -269,6 +270,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
                 decimal cash = Convert.ToDecimal(inputc.Text);
+
+                if (MainModel.balanceconfigdetail != null && cash < MainModel.balanceconfigdetail.customrechargeamt)
+                {
+                    MainModel.ShowLog("数值不能小于"+MainModel.balanceconfigdetail.customrechargeamt.ToString("f2"),false);
+                    return;
+                }
 
                 CustomTemplate = new ListAllTemplate();
                 CustomTemplate.id = 0;
