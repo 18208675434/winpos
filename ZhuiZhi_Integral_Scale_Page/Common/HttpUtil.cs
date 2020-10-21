@@ -1910,7 +1910,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 if (rd.code == 0)
                 {
-                    //string datajsong = rd.data.ToString().Replace("'","''");
                     string datajsong = rd.data.ToString();
 
                     AllProduct allproduct = JsonConvert.DeserializeObject<AllProduct>(datajsong);
