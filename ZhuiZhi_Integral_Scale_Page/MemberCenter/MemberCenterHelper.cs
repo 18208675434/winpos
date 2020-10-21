@@ -127,7 +127,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 BackHelper.ShowFormBackGround();
 
                 FormEntityCardList formEntityCardList = new FormEntityCardList(outentitycards);
-                asf.AutoScaleControlTest(formEntityCardList, 900, 600, 900 * MainModel.midScale, 600 * MainModel.midScale, true);
+                asf.AutoScaleControlTest(formEntityCardList, 800, 600, 800 * MainModel.midScale, 600 * MainModel.midScale, true);
                 formEntityCardList.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formEntityCardList.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formEntityCardList.Height) / 2);
                 formEntityCardList.TopMost = true;
                 DialogResult dialog= formEntityCardList.ShowDialog();
