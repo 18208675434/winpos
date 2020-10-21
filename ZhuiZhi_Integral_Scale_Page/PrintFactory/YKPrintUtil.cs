@@ -66,8 +66,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     lstPrintStr = new List<string>();
                     SetAlign(1);
                 SetFontSize(0, 1);
-                PrintStr(new StringBuilder(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize) + "\n"));
-                PrintStr(new StringBuilder(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize) + "\n"));
+                PrintStr(new StringBuilder("欢迎光临" + "\n"));
+                PrintStr(new StringBuilder(MainModel.CurrentShopInfo.tenantname + "\n"));
                     lstPrintStr.Add(" ");
                     SetAlign(0);
                     lstPrintStr.AddRange(PrintHelper.GetOrderPrintInfo(printdetail, isRefound));
@@ -344,10 +344,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 //每次打印先清空之前内容
                 lstPrintStr = new List<string>();
 
-                // lstPrintStr.Add(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
                 SetAlign(1);
-                PrintStr(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize) + "\n");
-                PrintStr(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize) + "\n");
+                SetFontSize(0, 1);
+                PrintStr(new StringBuilder("欢迎光临" + "\n"));
+                PrintStr(new StringBuilder(MainModel.CurrentShopInfo.tenantname + "\n"));
                 //lstPrintStr.Add(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
                 lstPrintStr.Add(" ");
                 SetAlign(0);
@@ -415,10 +415,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 //每次打印先清空之前内容
                 lstPrintStr = new List<string>();
 
-                // lstPrintStr.Add(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize));
                 SetAlign(1);
-                PrintStr(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize) + "\n");
-                PrintStr(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize) + "\n");
+                SetFontSize(0, 1);
+                PrintStr(new StringBuilder("欢迎光临" + "\n"));
+                PrintStr(new StringBuilder(MainModel.CurrentShopInfo.tenantname + "\n"));
                 //lstPrintStr.Add(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", BodyCharCountOfLine, PageSize));
                 lstPrintStr.Add(" ");
                 SetAlign(0);
