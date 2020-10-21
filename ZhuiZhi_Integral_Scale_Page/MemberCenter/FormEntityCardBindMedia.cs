@@ -12,9 +12,9 @@ using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
    
-    public partial class FormBindEntityCardMedia : Form
+    public partial class FormEntityCardBindMedia : Form
     {
-        public FormBindEntityCardMedia()
+        public FormEntityCardBindMedia()
         {
             InitializeComponent();          
         }

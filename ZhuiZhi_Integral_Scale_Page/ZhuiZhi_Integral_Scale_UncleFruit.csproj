@@ -135,17 +135,23 @@
     <Compile Include="MemberCenter\FormBatchSaleCardCreate.Designer.cs">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormBindEntityCardMedia.cs">
+    <Compile Include="MemberCenter\FormEntityCardBindMedia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberCenter\FormBindEntityCardMedia.Designer.cs">
-      <DependentUpon>FormBindEntityCardMedia.cs</DependentUpon>
+    <Compile Include="MemberCenter\FormEntityCardBindMedia.Designer.cs">
+      <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormBindEntityCard.cs">
+    <Compile Include="MemberCenter\FormEntityCardBind.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberCenter\FormBindEntityCard.Designer.cs">
-      <DependentUpon>FormBindEntityCard.cs</DependentUpon>
+    <Compile Include="MemberCenter\FormEntityCardBind.Designer.cs">
+      <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardList.Designer.cs">
+      <DependentUpon>FormEntityCardList.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormRechargeSingleUserQuery.cs">
       <SubType>Form</SubType>
@@ -1205,11 +1211,14 @@
     <EmbeddedResource Include="MemberCenter\FormBatchSaleCardCreate.resx">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormBindEntityCardMedia.resx">
-      <DependentUpon>FormBindEntityCardMedia.cs</DependentUpon>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBindMedia.resx">
+      <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormBindEntityCard.resx">
-      <DependentUpon>FormBindEntityCard.cs</DependentUpon>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBind.resx">
+      <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardList.resx">
+      <DependentUpon>FormEntityCardList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormRechargeSingleUserQuery.resx">
       <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>

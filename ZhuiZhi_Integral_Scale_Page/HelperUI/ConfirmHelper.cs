@@ -45,11 +45,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
         {
             return Confirm(title, msg, true);
         }
-        public static bool Confirm(string title, string msg, bool needcancel)
+        public static bool Confirm(string title, string msg, bool needcancel,bool needBackgroud=true)
         {
             try
             {
-                BackHelper.ShowFormBackGround();
+                if (needBackgroud)
+                {
+                    BackHelper.ShowFormBackGround();
+                }
+              
                 if (frmconfirm == null)
                 {
                     frmconfirm = new FormConfirm();
@@ -65,7 +69,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
             }
             catch (Exception ex)
             {
-                BackHelper.HideFormBackGround();
+                if (needBackgroud)
+                {
+                    BackHelper.HideFormBackGround();
+                }
                 frmconfirm = null;
                 LogManager.WriteLog("确认弹窗出现异常"+ex.Message);
                 return false;

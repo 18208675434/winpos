@@ -1,6 +1,6 @@
 ﻿namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
-    partial class FormBindEntityCardMedia
+    partial class FormEntityCardBindMedia
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBindEntityCardMedia));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEntityCardBindMedia));
             this.pnlHead = new System.Windows.Forms.Panel();
             this.lblShopName = new System.Windows.Forms.Label();
             this.tlpType = new System.Windows.Forms.TableLayoutPanel();

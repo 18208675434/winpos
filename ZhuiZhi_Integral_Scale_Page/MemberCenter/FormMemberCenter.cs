@@ -759,7 +759,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
 
-                //MemberCenterHelper.ShowFormAllCoupon(MainModel.CurrentMember.outentitycards);
+                MemberCenterHelper.ShowFormEntityCardList(MainModel.CurrentMember.outentitycards);
 
             }
             catch (Exception ex)
@@ -970,5 +970,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
             }
         }
+
     }
 }

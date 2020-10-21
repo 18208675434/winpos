@@ -224,14 +224,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         
         #region 绑卡
-        private static FormBindEntityCardMedia formBindEntityCardMedia = null;
+        private static FormEntityCardBindMedia formBindEntityCardMedia = null;
         public static void ShowFormBindEntityCardMedia(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.EntityCard entityCard)
         {
             try
             {
                 if (formBindEntityCardMedia == null || formBindEntityCardMedia.IsDisposed)
                 {
-                    formBindEntityCardMedia = new FormBindEntityCardMedia();
+                    formBindEntityCardMedia = new FormEntityCardBindMedia();
                     asf.AutoScaleControlTest(formBindEntityCardMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
                     formBindEntityCardMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
                     formBindEntityCardMedia.TopMost = true;

@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenter));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
+            this.picMenu = new System.Windows.Forms.PictureBox();
             this.lblShopName = new System.Windows.Forms.Label();
+            this.btnCancle = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvTemplate = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn6 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -45,16 +47,16 @@
             this.dataGridViewImageColumn8 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlPayByOther = new System.Windows.Forms.Panel();
             this.lblPayByOther = new System.Windows.Forms.Label();
+            this.picPayByOther = new System.Windows.Forms.PictureBox();
             this.pnlPayByCash = new System.Windows.Forms.Panel();
             this.lblPayByCash = new System.Windows.Forms.Label();
+            this.picPayByCash = new System.Windows.Forms.PictureBox();
             this.pnlPayByOnLine = new System.Windows.Forms.Panel();
             this.lblPayByOnLine = new System.Windows.Forms.Label();
-            this.lblTopUp = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.picPayByOther = new System.Windows.Forms.PictureBox();
-            this.picPayByCash = new System.Windows.Forms.PictureBox();
             this.picPayByOnLine = new System.Windows.Forms.PictureBox();
             this.picTopUp = new System.Windows.Forms.PictureBox();
+            this.lblTopUp = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.custom = new System.Windows.Forms.Panel();
             this.customdiscount = new System.Windows.Forms.Label();
@@ -67,6 +69,9 @@
             this.pnlItem = new System.Windows.Forms.Panel();
             this.lblAmountStr = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
+            this.pnlEntityCard = new System.Windows.Forms.Panel();
+            this.picEntityCard = new System.Windows.Forms.PictureBox();
+            this.lblEntityCard = new System.Windows.Forms.Label();
             this.pnlCoupon = new System.Windows.Forms.Panel();
             this.picCoupon = new System.Windows.Forms.PictureBox();
             this.lblCoupon = new System.Windows.Forms.Label();
@@ -88,25 +93,23 @@
             this.lblMemberInfo = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.picMenu = new System.Windows.Forms.PictureBox();
-            this.btnCancle = new System.Windows.Forms.Button();
-            this.pnlEntityCard = new System.Windows.Forms.Panel();
-            this.picEntityCard = new System.Windows.Forms.PictureBox();
-            this.lblEntityCard = new System.Windows.Forms.Label();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).BeginInit();
             this.pnlPayByOther.SuspendLayout();
-            this.pnlPayByCash.SuspendLayout();
-            this.pnlPayByOnLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByOther)).BeginInit();
+            this.pnlPayByCash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByCash)).BeginInit();
+            this.pnlPayByOnLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByOnLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTopUp)).BeginInit();
             this.panel1.SuspendLayout();
             this.custom.SuspendLayout();
             this.pnlItem.SuspendLayout();
+            this.pnlEntityCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEntityCard)).BeginInit();
             this.pnlCoupon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCoupon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -114,9 +117,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
-            this.pnlEntityCard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picEntityCard)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHead
@@ -150,6 +150,16 @@
             this.lblMenu.TabIndex = 38;
             this.lblMenu.Text = "店铺";
             // 
+            // picMenu
+            // 
+            this.picMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMenu.BackgroundImage")));
+            this.picMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picMenu.Location = new System.Drawing.Point(69, 12);
+            this.picMenu.Name = "picMenu";
+            this.picMenu.Size = new System.Drawing.Size(21, 21);
+            this.picMenu.TabIndex = 0;
+            this.picMenu.TabStop = false;
+            // 
             // lblShopName
             // 
             this.lblShopName.AutoSize = true;
@@ -160,6 +170,25 @@
             this.lblShopName.Size = new System.Drawing.Size(42, 21);
             this.lblShopName.TabIndex = 42;
             this.lblShopName.Text = "店铺";
+            // 
+            // btnCancle
+            // 
+            this.btnCancle.BackColor = System.Drawing.Color.Black;
+            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
+            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCancle.FlatAppearance.BorderSize = 0;
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnCancle.ForeColor = System.Drawing.Color.White;
+            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnCancle.Location = new System.Drawing.Point(880, 14);
+            this.btnCancle.Name = "btnCancle";
+            this.btnCancle.Size = new System.Drawing.Size(95, 35);
+            this.btnCancle.TabIndex = 34;
+            this.btnCancle.Text = "返回";
+            this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCancle.UseVisualStyleBackColor = false;
+            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // panel2
             // 
@@ -193,23 +222,23 @@
             this.dataGridViewImageColumn6,
             this.dataGridViewImageColumn7,
             this.dataGridViewImageColumn8});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvTemplate.GridColor = System.Drawing.Color.White;
             this.dgvTemplate.Location = new System.Drawing.Point(32, 97);
             this.dgvTemplate.MultiSelect = false;
             this.dgvTemplate.Name = "dgvTemplate";
             this.dgvTemplate.ReadOnly = true;
             this.dgvTemplate.RowHeadersVisible = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTemplate.RowTemplate.Height = 110;
             this.dgvTemplate.Size = new System.Drawing.Size(615, 450);
             this.dgvTemplate.TabIndex = 68;
@@ -217,30 +246,30 @@
             // 
             // dataGridViewImageColumn6
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.NullValue = null;
-            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewImageColumn6.HeaderText = "第一列";
             this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
             this.dataGridViewImageColumn6.ReadOnly = true;
             // 
             // dataGridViewImageColumn7
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.NullValue = null;
-            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewImageColumn7.HeaderText = "第二列";
             this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
             this.dataGridViewImageColumn7.ReadOnly = true;
             // 
             // dataGridViewImageColumn8
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.NullValue = null;
-            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.NullValue = null;
+            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewImageColumn8.HeaderText = "第三列";
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.ReadOnly = true;
@@ -268,6 +297,17 @@
             this.lblPayByOther.Text = "其他支付";
             this.lblPayByOther.Click += new System.EventHandler(this.pnlPayByOther_Click);
             // 
+            // picPayByOther
+            // 
+            this.picPayByOther.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByOther.BackgroundImage")));
+            this.picPayByOther.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPayByOther.Enabled = false;
+            this.picPayByOther.Location = new System.Drawing.Point(32, 21);
+            this.picPayByOther.Name = "picPayByOther";
+            this.picPayByOther.Size = new System.Drawing.Size(28, 28);
+            this.picPayByOther.TabIndex = 0;
+            this.picPayByOther.TabStop = false;
+            // 
             // pnlPayByCash
             // 
             this.pnlPayByCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(146)))), ((int)(((byte)(27)))));
@@ -291,6 +331,17 @@
             this.lblPayByCash.Text = "现金";
             this.lblPayByCash.Click += new System.EventHandler(this.pnlPayByCash_Click);
             // 
+            // picPayByCash
+            // 
+            this.picPayByCash.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByCash.BackgroundImage")));
+            this.picPayByCash.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPayByCash.Location = new System.Drawing.Point(53, 21);
+            this.picPayByCash.Name = "picPayByCash";
+            this.picPayByCash.Size = new System.Drawing.Size(28, 28);
+            this.picPayByCash.TabIndex = 0;
+            this.picPayByCash.TabStop = false;
+            this.picPayByCash.Click += new System.EventHandler(this.pnlPayByCash_Click);
+            // 
             // pnlPayByOnLine
             // 
             this.pnlPayByOnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
@@ -313,6 +364,29 @@
             this.lblPayByOnLine.TabIndex = 1;
             this.lblPayByOnLine.Text = "微信/支付宝";
             this.lblPayByOnLine.Click += new System.EventHandler(this.pnlPayByOnLine_Click);
+            // 
+            // picPayByOnLine
+            // 
+            this.picPayByOnLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByOnLine.BackgroundImage")));
+            this.picPayByOnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPayByOnLine.Location = new System.Drawing.Point(21, 21);
+            this.picPayByOnLine.Name = "picPayByOnLine";
+            this.picPayByOnLine.Size = new System.Drawing.Size(28, 28);
+            this.picPayByOnLine.TabIndex = 0;
+            this.picPayByOnLine.TabStop = false;
+            this.picPayByOnLine.Click += new System.EventHandler(this.pnlPayByOnLine_Click);
+            // 
+            // picTopUp
+            // 
+            this.picTopUp.BackColor = System.Drawing.Color.Transparent;
+            this.picTopUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picTopUp.BackgroundImage")));
+            this.picTopUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picTopUp.Location = new System.Drawing.Point(510, 46);
+            this.picTopUp.Name = "picTopUp";
+            this.picTopUp.Size = new System.Drawing.Size(30, 30);
+            this.picTopUp.TabIndex = 54;
+            this.picTopUp.TabStop = false;
+            this.picTopUp.Click += new System.EventHandler(this.lblTopUp_Click);
             // 
             // lblTopUp
             // 
@@ -338,51 +412,6 @@
             this.label3.Size = new System.Drawing.Size(110, 31);
             this.label3.TabIndex = 51;
             this.label3.Text = "快捷充值";
-            // 
-            // picPayByOther
-            // 
-            this.picPayByOther.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByOther.BackgroundImage")));
-            this.picPayByOther.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPayByOther.Enabled = false;
-            this.picPayByOther.Location = new System.Drawing.Point(32, 21);
-            this.picPayByOther.Name = "picPayByOther";
-            this.picPayByOther.Size = new System.Drawing.Size(28, 28);
-            this.picPayByOther.TabIndex = 0;
-            this.picPayByOther.TabStop = false;
-            // 
-            // picPayByCash
-            // 
-            this.picPayByCash.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByCash.BackgroundImage")));
-            this.picPayByCash.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPayByCash.Location = new System.Drawing.Point(53, 21);
-            this.picPayByCash.Name = "picPayByCash";
-            this.picPayByCash.Size = new System.Drawing.Size(28, 28);
-            this.picPayByCash.TabIndex = 0;
-            this.picPayByCash.TabStop = false;
-            this.picPayByCash.Click += new System.EventHandler(this.pnlPayByCash_Click);
-            // 
-            // picPayByOnLine
-            // 
-            this.picPayByOnLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPayByOnLine.BackgroundImage")));
-            this.picPayByOnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPayByOnLine.Location = new System.Drawing.Point(21, 21);
-            this.picPayByOnLine.Name = "picPayByOnLine";
-            this.picPayByOnLine.Size = new System.Drawing.Size(28, 28);
-            this.picPayByOnLine.TabIndex = 0;
-            this.picPayByOnLine.TabStop = false;
-            this.picPayByOnLine.Click += new System.EventHandler(this.pnlPayByOnLine_Click);
-            // 
-            // picTopUp
-            // 
-            this.picTopUp.BackColor = System.Drawing.Color.Transparent;
-            this.picTopUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picTopUp.BackgroundImage")));
-            this.picTopUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picTopUp.Location = new System.Drawing.Point(510, 46);
-            this.picTopUp.Name = "picTopUp";
-            this.picTopUp.Size = new System.Drawing.Size(30, 30);
-            this.picTopUp.TabIndex = 54;
-            this.picTopUp.TabStop = false;
-            this.picTopUp.Click += new System.EventHandler(this.lblTopUp_Click);
             // 
             // panel1
             // 
@@ -566,6 +595,42 @@
             this.lblAmount.TabIndex = 51;
             this.lblAmount.Text = "500元";
             this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlEntityCard
+            // 
+            this.pnlEntityCard.BackColor = System.Drawing.Color.Transparent;
+            this.pnlEntityCard.Controls.Add(this.picEntityCard);
+            this.pnlEntityCard.Controls.Add(this.lblEntityCard);
+            this.pnlEntityCard.Location = new System.Drawing.Point(155, 504);
+            this.pnlEntityCard.Name = "pnlEntityCard";
+            this.pnlEntityCard.Size = new System.Drawing.Size(135, 51);
+            this.pnlEntityCard.TabIndex = 75;
+            this.pnlEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
+            // 
+            // picEntityCard
+            // 
+            this.picEntityCard.BackColor = System.Drawing.Color.Transparent;
+            this.picEntityCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picEntityCard.BackgroundImage")));
+            this.picEntityCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picEntityCard.Location = new System.Drawing.Point(51, 15);
+            this.picEntityCard.Name = "picEntityCard";
+            this.picEntityCard.Size = new System.Drawing.Size(20, 20);
+            this.picEntityCard.TabIndex = 73;
+            this.picEntityCard.TabStop = false;
+            this.picEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
+            // 
+            // lblEntityCard
+            // 
+            this.lblEntityCard.AutoSize = true;
+            this.lblEntityCard.BackColor = System.Drawing.Color.Transparent;
+            this.lblEntityCard.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblEntityCard.ForeColor = System.Drawing.Color.White;
+            this.lblEntityCard.Location = new System.Drawing.Point(15, 11);
+            this.lblEntityCard.Name = "lblEntityCard";
+            this.lblEntityCard.Size = new System.Drawing.Size(28, 25);
+            this.lblEntityCard.TabIndex = 61;
+            this.lblEntityCard.Text = "--";
+            this.lblEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
             // 
             // pnlCoupon
             // 
@@ -829,71 +894,6 @@
             this.label1.TabIndex = 50;
             this.label1.Text = "会员中心";
             // 
-            // picMenu
-            // 
-            this.picMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMenu.BackgroundImage")));
-            this.picMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picMenu.Location = new System.Drawing.Point(69, 12);
-            this.picMenu.Name = "picMenu";
-            this.picMenu.Size = new System.Drawing.Size(21, 21);
-            this.picMenu.TabIndex = 0;
-            this.picMenu.TabStop = false;
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.BackColor = System.Drawing.Color.Black;
-            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
-            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancle.FlatAppearance.BorderSize = 0;
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnCancle.ForeColor = System.Drawing.Color.White;
-            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnCancle.Location = new System.Drawing.Point(880, 14);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(95, 35);
-            this.btnCancle.TabIndex = 34;
-            this.btnCancle.Text = "返回";
-            this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCancle.UseVisualStyleBackColor = false;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
-            // 
-            // pnlEntityCard
-            // 
-            this.pnlEntityCard.BackColor = System.Drawing.Color.Transparent;
-            this.pnlEntityCard.Controls.Add(this.picEntityCard);
-            this.pnlEntityCard.Controls.Add(this.lblEntityCard);
-            this.pnlEntityCard.Location = new System.Drawing.Point(155, 504);
-            this.pnlEntityCard.Name = "pnlEntityCard";
-            this.pnlEntityCard.Size = new System.Drawing.Size(135, 51);
-            this.pnlEntityCard.TabIndex = 75;
-            this.pnlEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
-            // 
-            // picEntityCard
-            // 
-            this.picEntityCard.BackColor = System.Drawing.Color.Transparent;
-            this.picEntityCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picEntityCard.BackgroundImage")));
-            this.picEntityCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picEntityCard.Location = new System.Drawing.Point(51, 15);
-            this.picEntityCard.Name = "picEntityCard";
-            this.picEntityCard.Size = new System.Drawing.Size(20, 20);
-            this.picEntityCard.TabIndex = 73;
-            this.picEntityCard.TabStop = false;
-            this.picEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
-            // 
-            // lblEntityCard
-            // 
-            this.lblEntityCard.AutoSize = true;
-            this.lblEntityCard.BackColor = System.Drawing.Color.Transparent;
-            this.lblEntityCard.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblEntityCard.ForeColor = System.Drawing.Color.White;
-            this.lblEntityCard.Location = new System.Drawing.Point(15, 11);
-            this.lblEntityCard.Name = "lblEntityCard";
-            this.lblEntityCard.Size = new System.Drawing.Size(28, 25);
-            this.lblEntityCard.TabIndex = 61;
-            this.lblEntityCard.Text = "--";
-            this.lblEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
-            // 
             // FormMemberCenter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -913,23 +913,27 @@
             this.pnlHead.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplate)).EndInit();
             this.pnlPayByOther.ResumeLayout(false);
             this.pnlPayByOther.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayByOther)).EndInit();
             this.pnlPayByCash.ResumeLayout(false);
             this.pnlPayByCash.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPayByCash)).EndInit();
             this.pnlPayByOnLine.ResumeLayout(false);
             this.pnlPayByOnLine.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPayByOther)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPayByCash)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPayByOnLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTopUp)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.custom.ResumeLayout(false);
             this.pnlItem.ResumeLayout(false);
+            this.pnlEntityCard.ResumeLayout(false);
+            this.pnlEntityCard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEntityCard)).EndInit();
             this.pnlCoupon.ResumeLayout(false);
             this.pnlCoupon.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCoupon)).EndInit();
@@ -938,10 +942,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
-            this.pnlEntityCard.ResumeLayout(false);
-            this.pnlEntityCard.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picEntityCard)).EndInit();
             this.ResumeLayout(false);
 
         }
