@@ -122,24 +122,36 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseUI\MainHelper.cs" />
-    <Compile Include="MemberCenter\LossEntityCardMediaHelper.cs" />
+    <Compile Include="HelperUI\DialogHelper.cs" />
+    <Compile Include="HelperUI\FormCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormCode.Designer.cs">
+      <DependentUpon>FormCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormBatchSaleCardCreate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MemberCenter\FormBatchSaleCardCreate.Designer.cs">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormLossEntityCardMedia.cs">
+    <Compile Include="MemberCenter\FormEntityCardBindMedia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberCenter\FormLossEntityCardMedia.Designer.cs">
-      <DependentUpon>FormLossEntityCardMedia.cs</DependentUpon>
+    <Compile Include="MemberCenter\FormEntityCardBindMedia.Designer.cs">
+      <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormLossEntityCard.cs">
+    <Compile Include="MemberCenter\FormEntityCardBind.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberCenter\FormLossEntityCard.Designer.cs">
-      <DependentUpon>FormLossEntityCard.cs</DependentUpon>
+    <Compile Include="MemberCenter\FormEntityCardBind.Designer.cs">
+      <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardList.Designer.cs">
+      <DependentUpon>FormEntityCardList.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormRechargeSingleUserQuery.cs">
       <SubType>Form</SubType>
@@ -1193,14 +1205,20 @@
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormCode.resx">
+      <DependentUpon>FormCode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormBatchSaleCardCreate.resx">
       <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormLossEntityCardMedia.resx">
-      <DependentUpon>FormLossEntityCardMedia.cs</DependentUpon>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBindMedia.resx">
+      <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormLossEntityCard.resx">
-      <DependentUpon>FormLossEntityCard.cs</DependentUpon>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBind.resx">
+      <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardList.resx">
+      <DependentUpon>FormEntityCardList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormRechargeSingleUserQuery.resx">
       <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>
@@ -1664,6 +1682,8 @@
     <None Include="Resources\validatecode.png" />
     <None Include="Resources\losscard.png" />
     <None Include="Resources\menu_recharge.png" />
+    <None Include="Resources\amount.png" />
+    <None Include="Resources\balance.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />

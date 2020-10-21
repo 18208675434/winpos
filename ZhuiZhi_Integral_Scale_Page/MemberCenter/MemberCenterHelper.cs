@@ -95,7 +95,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-        
+
         public static void ShowFormAllCoupon(List<PromotionCoupon> LstCoupon)
         {
             try
@@ -118,6 +118,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 BackHelper.HideFormBackGround();
                 LogManager.WriteLog("显示会员优惠券列表异常" + ex.Message);
             }
+        }
+
+        public static bool ShowFormEntityCardList(List<OutEntityCardResponseDto> outentitycards)
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormEntityCardList formEntityCardList = new FormEntityCardList(outentitycards);
+                asf.AutoScaleControlTest(formEntityCardList, 800, 600, 800 * MainModel.midScale, 600 * MainModel.midScale, true);
+                formEntityCardList.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formEntityCardList.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formEntityCardList.Height) / 2);
+                formEntityCardList.TopMost = true;
+                DialogResult dialog= formEntityCardList.ShowDialog();
+                BackHelper.HideFormBackGround();
+
+                formEntityCardList.Dispose();
+                Application.DoEvents();
+                return dialog == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                BackHelper.HideFormBackGround();
+                LogManager.WriteLog("显示会员优惠券列表异常" + ex.Message);
+            }
+            return false;
         }
 
         public static bool ShowFormNoPayPwd()
@@ -242,7 +267,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 asf.AutoScaleControlTest(frmchangephonenumber, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmchangephonenumber.Location = new System.Drawing.Point(0, 0);
                 frmchangephonenumber.TopMost = true;
-                bool flag=  frmchangephonenumber.ShowDialog()==DialogResult.OK;
+                bool flag = frmchangephonenumber.ShowDialog() == DialogResult.OK;
                 frmchangephonenumber.Dispose();
                 Application.DoEvents();
                 return flag;
@@ -390,8 +415,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 asf.AutoScaleControlTest(frmverifynewphone, 380, 450, 380 * MainModel.midScale, 450 * MainModel.midScale, true);
                 frmverifynewphone.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmverifynewphone.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmverifynewphone.Height) / 2);
                 frmverifynewphone.TopMost = true;
-                DialogResult dialog= frmverifynewphone.ShowDialog();
-              
+                DialogResult dialog = frmverifynewphone.ShowDialog();
+
                 if (frmverifynewphone.DialogResult == DialogResult.OK)
                 {
                     return frmverifynewphone.newphone;
@@ -399,21 +424,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("新手机号码验证窗口异常" + ex.Message);              
+                LogManager.WriteLog("新手机号码验证窗口异常" + ex.Message);
             }
-              return "";
+            return "";
         }
         /// <summary>
         /// 修改手机号码-确认修改窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhoneConfirm(string newphone,bool isMember)
+        public static bool ShowFormChangePhoneConfirm(string newphone, bool isMember)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
 
-                FormChangePhoneConfirm frmconfirm = new FormChangePhoneConfirm(newphone,isMember);
+                FormChangePhoneConfirm frmconfirm = new FormChangePhoneConfirm(newphone, isMember);
                 asf.AutoScaleControlTest(frmconfirm, 600, 200, 600 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmconfirm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmconfirm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmconfirm.Height) / 2);
                 frmconfirm.TopMost = true;
@@ -598,26 +623,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         #endregion
 
-        /// <summary> 挂失
+        /// <summary> 绑定实体卡
         /// </summary>
-        public static bool ShowFormLoss(string phone)
+        public static bool ShowFormBindEntityCard(EntityCard entityCard)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
 
-                FormLossEntityCard formLoss = new FormLossEntityCard(phone);
-                asf.AutoScaleControlTest(formLoss, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                formLoss.Location = new System.Drawing.Point(0, 0);
-                formLoss.TopMost = true;
-                formLoss.ShowDialog();
+                FormEntityCardBind formBindEntityCard = new FormEntityCardBind(entityCard);
+                asf.AutoScaleControlTest(formBindEntityCard, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formBindEntityCard.Location = new System.Drawing.Point(0, 0);
+                formBindEntityCard.TopMost = true;
+                formBindEntityCard.ShowDialog();
                 Application.DoEvents();
                 BackHelper.HideFormBackGround();
-                return formLoss.DialogResult == DialogResult.OK;
+                return formBindEntityCard.DialogResult == DialogResult.OK;
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("初始化挂失页面异常" + ex.Message);
+                LogManager.WriteLog("绑定实体卡页面异常" + ex.Message);
                 return false;
             }
         }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenter));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -64,20 +64,20 @@
             this.lblEntityNo = new System.Windows.Forms.Label();
             this.newphone = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnRelation = new System.Windows.Forms.Button();
-            this.btnLoss = new System.Windows.Forms.Button();
             this.btnbang = new System.Windows.Forms.Button();
             this.btnChangePhone = new System.Windows.Forms.Button();
             this.pnlItem = new System.Windows.Forms.Panel();
             this.lblAmountStr = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
+            this.pnlEntityCard = new System.Windows.Forms.Panel();
+            this.picEntityCard = new System.Windows.Forms.PictureBox();
+            this.lblEntityCard = new System.Windows.Forms.Label();
             this.pnlCoupon = new System.Windows.Forms.Panel();
             this.picCoupon = new System.Windows.Forms.PictureBox();
             this.lblCoupon = new System.Windows.Forms.Label();
             this.lblCreditAmount = new System.Windows.Forms.Label();
             this.btnForgetPwd = new System.Windows.Forms.Button();
             this.btnChangePwd = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -108,6 +108,8 @@
             this.panel1.SuspendLayout();
             this.custom.SuspendLayout();
             this.pnlItem.SuspendLayout();
+            this.pnlEntityCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEntityCard)).BeginInit();
             this.pnlCoupon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCoupon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -220,23 +222,23 @@
             this.dataGridViewImageColumn6,
             this.dataGridViewImageColumn7,
             this.dataGridViewImageColumn8});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvTemplate.GridColor = System.Drawing.Color.White;
             this.dgvTemplate.Location = new System.Drawing.Point(32, 97);
             this.dgvTemplate.MultiSelect = false;
             this.dgvTemplate.Name = "dgvTemplate";
             this.dgvTemplate.ReadOnly = true;
             this.dgvTemplate.RowHeadersVisible = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTemplate.RowTemplate.Height = 110;
             this.dgvTemplate.Size = new System.Drawing.Size(615, 450);
             this.dgvTemplate.TabIndex = 68;
@@ -244,30 +246,30 @@
             // 
             // dataGridViewImageColumn6
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.NullValue = null;
-            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewImageColumn6.HeaderText = "第一列";
             this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
             this.dataGridViewImageColumn6.ReadOnly = true;
             // 
             // dataGridViewImageColumn7
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.NullValue = null;
-            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewImageColumn7.HeaderText = "第二列";
             this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
             this.dataGridViewImageColumn7.ReadOnly = true;
             // 
             // dataGridViewImageColumn8
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.NullValue = null;
-            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.NullValue = null;
+            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewImageColumn8.HeaderText = "第三列";
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.ReadOnly = true;
@@ -419,16 +421,14 @@
             this.panel1.Controls.Add(this.lblEntityNo);
             this.panel1.Controls.Add(this.newphone);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.btnRelation);
-            this.panel1.Controls.Add(this.btnLoss);
             this.panel1.Controls.Add(this.btnbang);
             this.panel1.Controls.Add(this.btnChangePhone);
             this.panel1.Controls.Add(this.pnlItem);
+            this.panel1.Controls.Add(this.pnlEntityCard);
             this.panel1.Controls.Add(this.pnlCoupon);
             this.panel1.Controls.Add(this.lblCreditAmount);
             this.panel1.Controls.Add(this.btnForgetPwd);
             this.panel1.Controls.Add(this.btnChangePwd);
-            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.pictureBox5);
             this.panel1.Controls.Add(this.label9);
@@ -490,7 +490,7 @@
             this.lblEntityNo.BackColor = System.Drawing.Color.Transparent;
             this.lblEntityNo.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblEntityNo.ForeColor = System.Drawing.Color.White;
-            this.lblEntityNo.Location = new System.Drawing.Point(172, 515);
+            this.lblEntityNo.Location = new System.Drawing.Point(352, 389);
             this.lblEntityNo.Name = "lblEntityNo";
             this.lblEntityNo.Size = new System.Drawing.Size(78, 23);
             this.lblEntityNo.TabIndex = 79;
@@ -523,45 +523,6 @@
             this.label4.Text = "账号已合并至：";
             this.label4.Visible = false;
             // 
-            // btnRelation
-            // 
-            this.btnRelation.BackColor = System.Drawing.Color.Transparent;
-            this.btnRelation.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRelation.BackgroundImage")));
-            this.btnRelation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRelation.FlatAppearance.BorderSize = 0;
-            this.btnRelation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRelation.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnRelation.ForeColor = System.Drawing.Color.White;
-            this.btnRelation.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnRelation.Location = new System.Drawing.Point(292, 572);
-            this.btnRelation.Name = "btnRelation";
-            this.btnRelation.Size = new System.Drawing.Size(100, 40);
-            this.btnRelation.TabIndex = 76;
-            this.btnRelation.Text = "关联旧卡";
-            this.btnRelation.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnRelation.UseVisualStyleBackColor = false;
-            this.btnRelation.Visible = false;
-            // 
-            // btnLoss
-            // 
-            this.btnLoss.BackColor = System.Drawing.Color.Transparent;
-            this.btnLoss.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoss.BackgroundImage")));
-            this.btnLoss.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLoss.FlatAppearance.BorderSize = 0;
-            this.btnLoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoss.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnLoss.ForeColor = System.Drawing.Color.White;
-            this.btnLoss.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnLoss.Location = new System.Drawing.Point(175, 572);
-            this.btnLoss.Name = "btnLoss";
-            this.btnLoss.Size = new System.Drawing.Size(100, 40);
-            this.btnLoss.TabIndex = 76;
-            this.btnLoss.Text = "挂失";
-            this.btnLoss.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnLoss.UseVisualStyleBackColor = false;
-            this.btnLoss.Visible = false;
-            this.btnLoss.Click += new System.EventHandler(this.btnLoss_Click);
-            // 
             // btnbang
             // 
             this.btnbang.BackColor = System.Drawing.Color.Transparent;
@@ -572,11 +533,11 @@
             this.btnbang.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnbang.ForeColor = System.Drawing.Color.White;
             this.btnbang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnbang.Location = new System.Drawing.Point(175, 509);
+            this.btnbang.Location = new System.Drawing.Point(175, 572);
             this.btnbang.Name = "btnbang";
             this.btnbang.Size = new System.Drawing.Size(100, 40);
             this.btnbang.TabIndex = 76;
-            this.btnbang.Text = "绑定";
+            this.btnbang.Text = "绑实体卡定";
             this.btnbang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnbang.UseVisualStyleBackColor = false;
             this.btnbang.Click += new System.EventHandler(this.btnbang_Click);
@@ -634,6 +595,42 @@
             this.lblAmount.TabIndex = 51;
             this.lblAmount.Text = "500元";
             this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlEntityCard
+            // 
+            this.pnlEntityCard.BackColor = System.Drawing.Color.Transparent;
+            this.pnlEntityCard.Controls.Add(this.picEntityCard);
+            this.pnlEntityCard.Controls.Add(this.lblEntityCard);
+            this.pnlEntityCard.Location = new System.Drawing.Point(155, 504);
+            this.pnlEntityCard.Name = "pnlEntityCard";
+            this.pnlEntityCard.Size = new System.Drawing.Size(135, 51);
+            this.pnlEntityCard.TabIndex = 75;
+            this.pnlEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
+            // 
+            // picEntityCard
+            // 
+            this.picEntityCard.BackColor = System.Drawing.Color.Transparent;
+            this.picEntityCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picEntityCard.BackgroundImage")));
+            this.picEntityCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picEntityCard.Location = new System.Drawing.Point(51, 15);
+            this.picEntityCard.Name = "picEntityCard";
+            this.picEntityCard.Size = new System.Drawing.Size(20, 20);
+            this.picEntityCard.TabIndex = 73;
+            this.picEntityCard.TabStop = false;
+            this.picEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
+            // 
+            // lblEntityCard
+            // 
+            this.lblEntityCard.AutoSize = true;
+            this.lblEntityCard.BackColor = System.Drawing.Color.Transparent;
+            this.lblEntityCard.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblEntityCard.ForeColor = System.Drawing.Color.White;
+            this.lblEntityCard.Location = new System.Drawing.Point(15, 11);
+            this.lblEntityCard.Name = "lblEntityCard";
+            this.lblEntityCard.Size = new System.Drawing.Size(28, 25);
+            this.lblEntityCard.TabIndex = 61;
+            this.lblEntityCard.Text = "--";
+            this.lblEntityCard.Click += new System.EventHandler(this.pnlEntityCard_Click);
             // 
             // pnlCoupon
             // 
@@ -722,19 +719,6 @@
             this.btnChangePwd.UseVisualStyleBackColor = false;
             this.btnChangePwd.Click += new System.EventHandler(this.btnChangePwd_Click);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(45, 572);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 25);
-            this.label10.TabIndex = 67;
-            this.label10.Text = "--";
-            this.label10.Visible = false;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -746,7 +730,6 @@
             this.label11.Size = new System.Drawing.Size(88, 25);
             this.label11.TabIndex = 66;
             this.label11.Text = "实体卡：";
-            this.label11.Visible = false;
             // 
             // pictureBox5
             // 
@@ -758,7 +741,6 @@
             this.pictureBox5.Size = new System.Drawing.Size(30, 30);
             this.pictureBox5.TabIndex = 65;
             this.pictureBox5.TabStop = false;
-            this.pictureBox5.Visible = false;
             // 
             // label9
             // 
@@ -949,6 +931,9 @@
             this.panel1.PerformLayout();
             this.custom.ResumeLayout(false);
             this.pnlItem.ResumeLayout(false);
+            this.pnlEntityCard.ResumeLayout(false);
+            this.pnlEntityCard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEntityCard)).EndInit();
             this.pnlCoupon.ResumeLayout(false);
             this.pnlCoupon.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCoupon)).EndInit();
@@ -970,7 +955,6 @@
         private System.Windows.Forms.Label lblShopName;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pictureBox4;
@@ -1019,8 +1003,9 @@
         private System.Windows.Forms.Panel pnlPayByOther;
         private System.Windows.Forms.Label lblPayByOther;
         private System.Windows.Forms.PictureBox picPayByOther;
-        private System.Windows.Forms.Button btnRelation;
-        private System.Windows.Forms.Button btnLoss;
         private System.Windows.Forms.Label lblEntityNo;
+        private System.Windows.Forms.Panel pnlEntityCard;
+        private System.Windows.Forms.PictureBox picEntityCard;
+        private System.Windows.Forms.Label lblEntityCard;
     }
 }

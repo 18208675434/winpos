@@ -445,7 +445,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public static AutoSizeFormUtil AuroSizeUtil = new AutoSizeFormUtil();
 
 
-        public static void ShowLog(string msg, bool iserror)
+        public static void ShowLog(string msg, bool iserror=false)
         {
             if (!string.IsNullOrEmpty(msg))
             {
