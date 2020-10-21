@@ -598,26 +598,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         #endregion
 
-        /// <summary> 挂失
+        /// <summary> 绑定实体卡
         /// </summary>
-        public static bool ShowFormLoss(string phone)
+        public static bool ShowFormBindEntityCard(EntityCard entityCard)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
 
-                FormLossEntityCard formLoss = new FormLossEntityCard(phone);
-                asf.AutoScaleControlTest(formLoss, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                formLoss.Location = new System.Drawing.Point(0, 0);
-                formLoss.TopMost = true;
-                formLoss.ShowDialog();
+                FormBindEntityCard formBindEntityCard = new FormBindEntityCard(entityCard);
+                asf.AutoScaleControlTest(formBindEntityCard, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formBindEntityCard.Location = new System.Drawing.Point(0, 0);
+                formBindEntityCard.TopMost = true;
+                formBindEntityCard.ShowDialog();
                 Application.DoEvents();
                 BackHelper.HideFormBackGround();
-                return formLoss.DialogResult == DialogResult.OK;
+                return formBindEntityCard.DialogResult == DialogResult.OK;
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("初始化挂失页面异常" + ex.Message);
+                LogManager.WriteLog("绑定实体卡页面异常" + ex.Message);
                 return false;
             }
         }

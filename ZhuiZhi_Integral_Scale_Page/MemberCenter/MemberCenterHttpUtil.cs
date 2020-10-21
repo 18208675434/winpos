@@ -533,6 +533,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+       
+
+        #region 实体卡
         /// <summary> 获取实体卡 预留
         /// </summary>
         /// <returns></returns>
@@ -583,6 +586,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 else
                 {
                     LogManager.WriteLog("Error", "GetCard:" + oldcardid + "失败" + json);
+                    errormsg = rd.message;
                 }
             }
             catch (Exception ex)
@@ -593,7 +597,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             return null;
         }
 
-        #region 实体卡
         /// <summary> 绑定卡(激活)
         /// </summary>
         /// <returns></returns>
