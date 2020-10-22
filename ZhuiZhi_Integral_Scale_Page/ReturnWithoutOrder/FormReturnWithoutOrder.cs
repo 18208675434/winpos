@@ -2834,8 +2834,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     pnlScale.Width = lblTareWeightStr.Left;
                     pnlScale.Left = pnlCategory.Width - pnlScale.Width - 5;
-                }             
-               
+                }
+                lblStable.Left = pnlScale.Width - lblStable.Width;
             }
             catch { }
         }
@@ -3014,7 +3014,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 try
                 {
-
+                    //不放进委托 自动加购后点取消交易会卡死？？？？？
+                            this.Invoke(new InvokeHandler(delegate()
+                            {
                     CurrentScaleResult = ScaleGlobalHelper.GetWeight();
 
 
@@ -3029,9 +3031,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         lblStable.Visible = CurrentScaleResult.WhetherStable;
                         if (MainModel.WhetherAutoCart && CurrentScaleResult.WhetherStable && CurrentScaleResult.NetWeight > 0 && SelectProduct != null && SelectProduct.goodstagid != 0)
                         {
-                            //不放进委托 自动加购后点取消交易会卡死？？？？？
-                            this.Invoke(new InvokeHandler(delegate()
-                            {
+                            
 
                                 if (CurrentCart == null)
                                 {
@@ -3066,7 +3066,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 UploadOffLineDgvCart();
                                 SelectProduct = null;
 
-                            }));
+                           
                         }
                     }
                     else
@@ -3074,6 +3074,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         lblStable.Visible = false;
                         LastNetWeight = 0;
                     }
+                            }));
                 }
                 catch (Exception ex)
                 {
