@@ -214,10 +214,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 //修改充值金额
                 if (po.X < (dgvCard.Left + txtRechargeAmount.Right + 10) && po.X > (dgvCard.Left + txtRechargeAmount.Left - 10))
                 {
-                    //string amount= NumberHelper.ShowFormNumber("",NumberType.ProWeight)
-                    rechargeCardInfo.rechargeamount = 200;
-                    rechargeCardInfo.rewardamount = 20;
-                    RefreshDgv();
+                    ListAllTemplate customtemplate = MemberCenterHelper.ShowFormCustomerChange();
+                    this.Activate();
+                    if (customtemplate != null)
+                    {
+                        rechargeCardInfo.rechargeamount = customtemplate.amount;
+                        rechargeCardInfo.rewardamount = customtemplate.rewardamount;
+                        RefreshDgv();                  
+                    }
+                   
                 }
 
                 //删除

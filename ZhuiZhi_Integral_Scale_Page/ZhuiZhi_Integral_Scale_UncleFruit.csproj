@@ -147,6 +147,12 @@
     <Compile Include="MemberCenter\FormEntityCardBind.Designer.cs">
       <DependentUpon>FormEntityCardBind.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormRechargeAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeAmount.Designer.cs">
+      <DependentUpon>FormRechargeAmount.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormEntityCardList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1203,6 +1209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardBind.resx">
       <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeAmount.resx">
+      <DependentUpon>FormRechargeAmount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardList.resx">
       <DependentUpon>FormEntityCardList.cs</DependentUpon>

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBatchSaleCardCreate));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -293,7 +293,7 @@
             this.pnlMember.Controls.Add(this.label18);
             this.pnlMember.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnlMember.Location = new System.Drawing.Point(855, 218);
-            this.pnlMember.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlMember.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMember.Name = "pnlMember";
             this.pnlMember.Size = new System.Drawing.Size(300, 219);
             this.pnlMember.TabIndex = 55;
@@ -576,26 +576,26 @@
             this.dgvCard.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCard.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvCard.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCard.ColumnHeadersHeight = 30;
             this.dgvCard.ColumnHeadersVisible = false;
             this.dgvCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cardNo});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCard.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCard.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCard.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvCard.GridColor = System.Drawing.Color.LightGray;
             this.dgvCard.Location = new System.Drawing.Point(11, 140);
@@ -614,12 +614,12 @@
             // 
             // cardNo
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle8.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle8.NullValue")));
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cardNo.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cardNo.DefaultCellStyle = dataGridViewCellStyle2;
             this.cardNo.FillWeight = 100.195F;
             this.cardNo.HeaderText = "实体卡";
             this.cardNo.Name = "cardNo";
@@ -660,7 +660,7 @@
             this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
             this.txtRechargeAmount.LockFocus = true;
-            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
             this.txtRechargeAmount.MaxDeciaml = ((long)(5000));
             this.txtRechargeAmount.MaxLength = 32767;
             this.txtRechargeAmount.Name = "txtRechargeAmount";
@@ -750,7 +750,7 @@
             this.rbtnPageDown.Image = null;
             this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
             this.rbtnPageDown.Location = new System.Drawing.Point(686, 689);
-            this.rbtnPageDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbtnPageDown.Margin = new System.Windows.Forms.Padding(4);
             this.rbtnPageDown.Name = "rbtnPageDown";
             this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
             this.rbtnPageDown.PenWidth = 1;
@@ -770,7 +770,7 @@
             this.rbtnPageUp.Image = null;
             this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
             this.rbtnPageUp.Location = new System.Drawing.Point(536, 689);
-            this.rbtnPageUp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbtnPageUp.Margin = new System.Windows.Forms.Padding(4);
             this.rbtnPageUp.Name = "rbtnPageUp";
             this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
             this.rbtnPageUp.PenWidth = 1;
@@ -808,9 +808,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.dgvCard);
             this.Controls.Add(this.pnlDgvItem);
             this.Controls.Add(this.btnGetCard);
-            this.Controls.Add(this.dgvCard);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);
             this.Controls.Add(this.pnlPayType);
@@ -819,7 +819,7 @@
             this.Controls.Add(this.pnlDgvHead);
             this.Controls.Add(this.pnlHead);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormBatchSaleCardCreate";
             this.Text = "FormBatchSaleCardCreate";
             this.pnlHead.ResumeLayout(false);
