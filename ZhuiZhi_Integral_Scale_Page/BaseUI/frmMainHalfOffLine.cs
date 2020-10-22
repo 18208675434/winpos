@@ -614,7 +614,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     frmtoolmain = new frmToolMain();
 
-                    asf.AutoScaleControlTest(frmtoolmain, 210, 620, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(Screen.AllScreens[0].Bounds.Height - pnlHead.Height-20), true);
+                    asf.AutoScaleControlTest(frmtoolmain, 210, 670, Convert.ToInt32(MainModel.wScale * 210), Convert.ToInt32(Screen.AllScreens[0].Bounds.Height - pnlHead.Height-20), true);
                     frmtoolmain.DataReceiveHandle += frmToolMain_DataReceiveHandle;
                     frmtoolmain.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width - frmtoolmain.Width - 10, pnlHead.Height);
                     frmtoolmain.TopMost = true;

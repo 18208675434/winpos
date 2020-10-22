@@ -78,6 +78,7 @@
             this.picOpenCashBox = new System.Windows.Forms.PictureBox();
             this.lblOpenCashBox = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.pnlReceipt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.pnlExit.SuspendLayout();
@@ -307,7 +308,7 @@
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(7, 591);
+            this.lblDeviceSN.Location = new System.Drawing.Point(7, 641);
             this.lblDeviceSN.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(65, 20);
@@ -319,7 +320,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVersion.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblVersion.Location = new System.Drawing.Point(7, 568);
+            this.lblVersion.Location = new System.Drawing.Point(7, 618);
             this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(65, 20);
@@ -468,11 +469,10 @@
             // 
             this.pnlBatchSaleCard.Controls.Add(this.lblBatchSaleCard);
             this.pnlBatchSaleCard.Controls.Add(this.picBatchSaleCard);
-            this.pnlBatchSaleCard.Location = new System.Drawing.Point(138, 568);
+            this.pnlBatchSaleCard.Location = new System.Drawing.Point(11, 568);
             this.pnlBatchSaleCard.Name = "pnlBatchSaleCard";
             this.pnlBatchSaleCard.Size = new System.Drawing.Size(187, 39);
             this.pnlBatchSaleCard.TabIndex = 17;
-            this.pnlBatchSaleCard.Visible = false;
             this.pnlBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
             // 
             // lblBatchSaleCard
@@ -618,12 +618,21 @@
             this.panel3.Size = new System.Drawing.Size(198, 1);
             this.panel3.TabIndex = 20;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.panel2.Location = new System.Drawing.Point(6, 611);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(198, 1);
+            this.panel2.TabIndex = 20;
+            // 
             // frmToolMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(210, 620);
+            this.ClientSize = new System.Drawing.Size(210, 670);
             this.Controls.Add(this.pnlOpenCashBox);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlRechargeQuery);
             this.Controls.Add(this.pnlLine10);
@@ -746,5 +755,6 @@
         private System.Windows.Forms.Label lblOpenCashBox;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox picOpenCashBox;
+        private System.Windows.Forms.Panel panel2;
     }
 }
