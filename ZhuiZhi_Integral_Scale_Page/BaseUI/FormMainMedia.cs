@@ -65,9 +65,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
-          
-            //PlayerThread();
-        }
+                  }
         private void frmMainMedia_Load(object sender, EventArgs e)
         {
 
@@ -96,6 +94,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             panel2.Width = tlpnlRight.Width;
             pnlMember.Height = Convert.ToInt16(tlpnlRight.Height * 35 / 100);
             panel2.Height =Convert.ToInt16(tlpnlRight.Height*65/100);
+
+            picBirthday1.Visible = false;
+            picBirthday2.Visible = false;
+            picBirthday3.Visible = false;
+            picBirthday4.Visible = false;
+
+            bgwLoadMemberCard.RunWorkerAsync();
         }
 
         #endregion
@@ -293,9 +298,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        private bool LoadMediaResult = false;
-        private bool DownLoadImgResult = false;
-        private bool DownLoadMp4Result = false;
         private List<Mediadetaildto> CurrentMediadetaildtos = new List<Mediadetaildto>();
         private void PlayerThread()
         {
@@ -382,7 +384,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 try
                 {
-
                     if (PlayerOpen)
                     {
                         player.Ctlcontrols.stop();
@@ -591,111 +592,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             Application.DoEvents();
                         }
                     }
-
-                    //离线模式不展示会员相关信息
-                    if (MainModel.IsOffLine)
-                    {
-                        picBirthday1.Visible = false;
-
-                        picBirthday2.Visible = false;
-                        picBirthday3.Visible = false;
-                        picBirthday4.Visible = false;
-
-                        this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
-                        this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
-                        this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
-
-                        pnlMemberCard.Visible = false;
-
-                    }
-
-                    else if (MainModel.CurrentMember == null)
-                    {
-
-                        pnlCart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-                        picBirthday1.Visible = false;
-
-
-                        picBirthday2.Visible = false;
-                        picBirthday3.Visible = false;
-                        picBirthday4.Visible = false;
-
-                        this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
-                        this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
-                        this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 35);
-
-
-                        if (imgmembercard == null)
-                        {
-
-                            bgwLoadMemberCard.RunWorkerAsync();
-                            //string ErrorMsg = "";
-                            //string imgurl = httputil.GetMemberCard(ref ErrorMsg);
-                            //if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
-                            //{
-                            //    //this.Invoke(new InvokeHandler(delegate()
-                            //    //{
-
-                            //    Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                            //    imgmembercard = _image;
-                            //    picMemberCard.BackgroundImage = _image;
-
-                            //    int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
-                            //    picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
-
-                            //    picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
-                            //    pnlMemberCard.Visible = true;
-                            //    //Application.DoEvents();
-                            //}
-                        }
-                        else
-                        {
-                            // Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                            picMemberCard.BackgroundImage = imgmembercard;
-                            int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
-                            picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
-
-                            picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
-                            pnlMemberCard.Visible = true;
-                        }                     
-                    }
-                    else
-                    {
-                        this.tlpnlRight.RowStyles[0] = new RowStyle(SizeType.Percent, 35);
-                        this.tlpnlRight.RowStyles[1] = new RowStyle(SizeType.Percent, 65);
-                        this.tlpnlRight.RowStyles[2] = new RowStyle(SizeType.Percent, 0);
-                        pnlMemberCard.Visible = false;
-
-                        if (CurrentMember.membertenantresponsevo.onbirthday)
-                        {
-                            // pnlBirthday.Visible = true;
-                            if (!lblWechartNickName.Text.Contains("生日快乐！"))
-                            {
-                                lblWechartNickName.Text += "生日快乐！";
-                            }
-                            picBirthday1.Visible = false;
-                            picBirthday2.Visible = false;
-                            picBirthday3.Visible = false;
-                            picBirthday4.Visible = false;
-
-                            pnlCart.BackColor = Color.DarkSlateBlue;
-                            Application.DoEvents();
-                            picBirthday1.Visible = true;
-                            picBirthday2.Visible = true;
-                            picBirthday3.Visible = true;
-                            picBirthday4.Visible = true;
-                        }
-                        else
-                        {
-                            pnlCart.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-                            picBirthday1.Visible = false;
-                            picBirthday2.Visible = false;
-                            picBirthday3.Visible = false;
-                            picBirthday4.Visible = false;
-
-                            lblWechartNickName.Text = lblWechartNickName.Text.Replace("生日快乐！", "");
-                        }
-                    }
                     this.Enabled = true;
                 }
                 catch (Exception ex)
@@ -799,14 +695,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblMobil.Text = mobil;
 
                     lblWechartNickName.Text =  "  你好！";
-                    //if (!string.IsNullOrEmpty(CurrentMember.memberinformationresponsevo.nickname))
-                    //{
-                    //    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.nickname + "  你好！";
-                    //}
-                    //else
-                    //{
-                    //    lblWechartNickName.Text = CurrentMember.memberinformationresponsevo.wechatnickname + "  你好！";
-                    //}
 
                     pnlMemberCard.Visible = false;
 
@@ -821,10 +709,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         {
                             lblWechartNickName.Text += "生日快乐！";
                         }
-                        picBirthday1.Visible = false;
-                        picBirthday2.Visible = false;
-                        picBirthday3.Visible = false;
-                        picBirthday4.Visible = false;
+                        //picBirthday1.Visible = false;
+                        //picBirthday2.Visible = false;
+                        //picBirthday3.Visible = false;
+                        //picBirthday4.Visible = false;
 
                         pnlCart.BackColor = Color.DarkSlateBlue;
                         Application.DoEvents();
@@ -870,25 +758,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
                         picMemberCard.BackgroundImage = _image;
-
-                        int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
-                        picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
-
-                        picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
-
                         pnlMemberCard.Visible = true;
-                        //Application.DoEvents();
                     }
 
                 }
 
-
-
-                //frmMain.listener.Stop();
-
-                //frmMain.listener.Start();
-
-                Console.WriteLine("会员加载时间" + (DateTime.Now - starttime).TotalMilliseconds);
             }
             catch (Exception ex)
             {
@@ -1289,11 +1163,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 imgmembercard = _image;
 
                 picMemberCard.BackgroundImage = _image;
-
-                int picwidth = Math.Min(pnlMemberCard.Width, pnlMemberCard.Height) * 4 / 5;
-                picMemberCard.Size = new System.Drawing.Size(picwidth, picwidth);
-
-                picMemberCard.Location = new System.Drawing.Point((pnlMemberCard.Width - picwidth) / 2, 10);
                 pnlMemberCard.Visible = true;
             }
         }

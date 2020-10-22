@@ -69,10 +69,6 @@
             this.pnlMemberCard = new System.Windows.Forms.Panel();
             this.lblmemberCard = new System.Windows.Forms.Label();
             this.picMemberCard = new System.Windows.Forms.PictureBox();
-            this.picBirthday4 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
-            this.picBirthday3 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
-            this.picBirthday2 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
-            this.picBirthday1 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
             this.pnlHead = new System.Windows.Forms.Panel();
             this.lblShopName = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
@@ -115,6 +111,10 @@
             this.pnlAdvertising = new System.Windows.Forms.Panel();
             this.player = new AxWMPLib.AxWindowsMediaPlayer();
             this.bgwLoadMemberCard = new System.ComponentModel.BackgroundWorker();
+            this.picBirthday4 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.picBirthday3 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.picBirthday2 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.picBirthday1 = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
             this.tlpMedia.SuspendLayout();
             this.pnlCart.SuspendLayout();
             this.pnlDgvItem.SuspendLayout();
@@ -442,64 +442,12 @@
             // 
             // picMemberCard
             // 
-            this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picMemberCard.Location = new System.Drawing.Point(12, 3);
             this.picMemberCard.Name = "picMemberCard";
             this.picMemberCard.Size = new System.Drawing.Size(220, 220);
             this.picMemberCard.TabIndex = 0;
             this.picMemberCard.TabStop = false;
-            // 
-            // picBirthday4
-            // 
-            this.picBirthday4.CanMove = false;
-            this.picBirthday4.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday4.Image")));
-            this.picBirthday4.IsFocus = false;
-            this.picBirthday4.Location = new System.Drawing.Point(752, 461);
-            this.picBirthday4.Name = "picBirthday4";
-            this.picBirthday4.Size = new System.Drawing.Size(251, 272);
-            this.picBirthday4.TabIndex = 309;
-            this.picBirthday4.Text = "transparentPic2";
-            this.picBirthday4.unitScale = null;
-            this.picBirthday4.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
-            // 
-            // picBirthday3
-            // 
-            this.picBirthday3.CanMove = false;
-            this.picBirthday3.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday3.Image")));
-            this.picBirthday3.IsFocus = false;
-            this.picBirthday3.Location = new System.Drawing.Point(7, 583);
-            this.picBirthday3.Name = "picBirthday3";
-            this.picBirthday3.Size = new System.Drawing.Size(77, 151);
-            this.picBirthday3.TabIndex = 308;
-            this.picBirthday3.Text = "transparentPic1";
-            this.picBirthday3.unitScale = null;
-            this.picBirthday3.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
-            // 
-            // picBirthday2
-            // 
-            this.picBirthday2.CanMove = false;
-            this.picBirthday2.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday2.Image")));
-            this.picBirthday2.IsFocus = false;
-            this.picBirthday2.Location = new System.Drawing.Point(627, 5);
-            this.picBirthday2.Name = "picBirthday2";
-            this.picBirthday2.Size = new System.Drawing.Size(387, 84);
-            this.picBirthday2.TabIndex = 307;
-            this.picBirthday2.Text = "transparentPic1";
-            this.picBirthday2.unitScale = null;
-            this.picBirthday2.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
-            // 
-            // picBirthday1
-            // 
-            this.picBirthday1.CanMove = false;
-            this.picBirthday1.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday1.Image")));
-            this.picBirthday1.IsFocus = false;
-            this.picBirthday1.Location = new System.Drawing.Point(3, 4);
-            this.picBirthday1.Name = "picBirthday1";
-            this.picBirthday1.Size = new System.Drawing.Size(513, 85);
-            this.picBirthday1.TabIndex = 306;
-            this.picBirthday1.Text = "transparentPic1";
-            this.picBirthday1.unitScale = null;
-            this.picBirthday1.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
             // 
             // pnlHead
             // 
@@ -1073,6 +1021,58 @@
             // bgwLoadMemberCard
             // 
             this.bgwLoadMemberCard.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwLoadMemberCard_DoWork);
+            // 
+            // picBirthday4
+            // 
+            this.picBirthday4.CanMove = false;
+            this.picBirthday4.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday4.Image")));
+            this.picBirthday4.IsFocus = false;
+            this.picBirthday4.Location = new System.Drawing.Point(752, 461);
+            this.picBirthday4.Name = "picBirthday4";
+            this.picBirthday4.Size = new System.Drawing.Size(251, 272);
+            this.picBirthday4.TabIndex = 309;
+            this.picBirthday4.Text = "transparentPic2";
+            this.picBirthday4.unitScale = null;
+            this.picBirthday4.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            // 
+            // picBirthday3
+            // 
+            this.picBirthday3.CanMove = false;
+            this.picBirthday3.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday3.Image")));
+            this.picBirthday3.IsFocus = false;
+            this.picBirthday3.Location = new System.Drawing.Point(7, 583);
+            this.picBirthday3.Name = "picBirthday3";
+            this.picBirthday3.Size = new System.Drawing.Size(77, 151);
+            this.picBirthday3.TabIndex = 308;
+            this.picBirthday3.Text = "transparentPic1";
+            this.picBirthday3.unitScale = null;
+            this.picBirthday3.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            // 
+            // picBirthday2
+            // 
+            this.picBirthday2.CanMove = false;
+            this.picBirthday2.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday2.Image")));
+            this.picBirthday2.IsFocus = false;
+            this.picBirthday2.Location = new System.Drawing.Point(627, 5);
+            this.picBirthday2.Name = "picBirthday2";
+            this.picBirthday2.Size = new System.Drawing.Size(387, 84);
+            this.picBirthday2.TabIndex = 307;
+            this.picBirthday2.Text = "transparentPic1";
+            this.picBirthday2.unitScale = null;
+            this.picBirthday2.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
+            // 
+            // picBirthday1
+            // 
+            this.picBirthday1.CanMove = false;
+            this.picBirthday1.Image = ((System.Drawing.Image)(resources.GetObject("picBirthday1.Image")));
+            this.picBirthday1.IsFocus = false;
+            this.picBirthday1.Location = new System.Drawing.Point(3, 4);
+            this.picBirthday1.Name = "picBirthday1";
+            this.picBirthday1.Size = new System.Drawing.Size(513, 85);
+            this.picBirthday1.TabIndex = 306;
+            this.picBirthday1.Text = "transparentPic1";
+            this.picBirthday1.unitScale = null;
+            this.picBirthday1.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
             // 
             // FormMainMedia
             // 
