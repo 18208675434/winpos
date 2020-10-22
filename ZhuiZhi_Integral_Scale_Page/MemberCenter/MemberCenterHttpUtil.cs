@@ -536,7 +536,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
         #region 实体卡
-        /// <summary> 获取旧实体卡
+        /// <summary> 获取实体卡
         /// </summary>
         /// <returns></returns>
         public OutEntityCardResponseDto GetCardNew(string oldcardid, ref string errormsg)
@@ -555,7 +555,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    LogManager.WriteLog("Error", "GetCard:" + oldcardid + "失败" + json);
+                    LogManager.WriteLog("Error", "getcardnew:" + oldcardid + "失败" + json);
                     errormsg = rd.message;
                 }
             }
@@ -658,8 +658,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             return false;
         }
-        #endregion
-
 
         /// <summary> 绑卡、关联旧卡
         /// </summary>
@@ -690,6 +688,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
+        #endregion
+
+
+       
 
         #region  访问服务端
         private HttpRequest httprequest = new HttpRequest();

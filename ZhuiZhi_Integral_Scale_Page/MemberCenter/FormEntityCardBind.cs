@@ -62,6 +62,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             lblEntityCardNo.Text = entityCard.outcardid;
             lblMemberId.Text = MainModel.CurrentMember.memberheaderresponsevo.mobile;
             lblBalance.Text = "￥" + entityCard.balance.ToString("f2");
+            lblBalaceDesc.Location = new Point(lblBalance.Right + 20, lblBalance.Location.Y);
             MemberCenterMediaHelper.ShowFormBindEntityCardMedia(entityCard);
         }
 

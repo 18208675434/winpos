@@ -17,7 +17,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     {
         MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
         List<OutEntityCardResponseDto> outentitycards;
-        bool isLoss = false;
         public FormEntityCardList(List<OutEntityCardResponseDto> outentitycards)
         {
             InitializeComponent();
@@ -65,9 +64,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                             MainModel.ShowLog(err);
                             return;
                         }
-                        dgvData.Rows[e.RowIndex].Cells["colButton"].Value=Resources.ResourcePos.empty;
-                        dgvData.Rows[e.RowIndex].Cells["status"].Style.ForeColor = Color.FromArgb(153, 153, 153);
-                        isLoss = true;
+                        MainModel.CurrentMember = new HttpUtil().GetMember(MainModel.CurrentMember.memberheaderresponsevo.mobile, ref err);                       
+                        MainModel.ShowLog("挂失成功");
+                        //entityCard.status = "LOST";
+                        //dgvData.Rows[e.RowIndex].Tag = entityCard;
+                        //dgvData.Rows[e.RowIndex].Cells["colButton"].Value=Resources.ResourcePos.empty;
+                        //dgvData.Rows[e.RowIndex].Cells["status"].Value = GetStatusDesc(entityCard.status);
+                        //dgvData.Rows[e.RowIndex].Cells["status"].Style.ForeColor = Color.FromArgb(153, 153, 153);
+                        //dgvData.Rows[e.RowIndex].Cells["status"].Style.SelectionForeColor = Color.FromArgb(153, 153, 153);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
                     }
                 }
             }
@@ -117,10 +123,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if (isLoss)
-            {
-                this.DialogResult = DialogResult.OK;
-            }
             this.Close();
         }
 

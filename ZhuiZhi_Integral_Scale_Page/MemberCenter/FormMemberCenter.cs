@@ -755,7 +755,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
 
-                MemberCenterHelper.ShowFormEntityCardList(MainModel.CurrentMember.outentitycards);
+                if (MemberCenterHelper.ShowFormEntityCardList(MainModel.CurrentMember.outentitycards))
+                {
+                    UpdateMemberInfo();
+                }
 
             }
             catch (Exception ex)
