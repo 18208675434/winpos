@@ -69,7 +69,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    EntityCard entityCard = memberCenterHttpUtil.GetCard(cardid, ref err);
+                    OutEntityCardResponseDto entityCard = memberCenterHttpUtil.GetCard(cardid, ref err);
                     LoadingHelper.CloseForm();
                     if (err != "" || entityCard == null) //会员不存在
                     {

@@ -941,7 +941,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    EntityCard entityCard = membercenterutil.GetCard(entityCardNo, ref err);
+                    OutEntityCardResponseDto entityCard = membercenterutil.GetCard(entityCardNo, ref err);
                     LoadingHelper.CloseForm();
                     if (!string.IsNullOrEmpty(err) || entityCard == null)
                     {

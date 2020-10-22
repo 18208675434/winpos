@@ -102,11 +102,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     dgvData.Rows.Add(item.outcardid, type, status, bmpLoss);
                     dgvData.Rows[dgvData.Rows.Count - 1].Cells["status"].Style.ForeColor = Color.FromArgb(20, 137, 205);
+                    dgvData.Rows[dgvData.Rows.Count - 1].Cells["status"].Style.SelectionForeColor = Color.FromArgb(20, 137, 205);
                 }
                 else
                 {                   
                     dgvData.Rows.Add(item.outcardid, type, status, Resources.ResourcePos.empty);
                     dgvData.Rows[dgvData.Rows.Count - 1].Cells["status"].Style.ForeColor = Color.FromArgb(153, 153, 153);
+                    dgvData.Rows[dgvData.Rows.Count - 1].Cells["status"].Style.SelectionForeColor = Color.FromArgb(153, 153, 153);
                 }                
 
                 dgvData.Rows[dgvData.Rows.Count - 1].Tag = item;
@@ -204,11 +206,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             if (type == "OLD_CARD")
             {
-                return "老卡";
+                return "旧卡";
             }
             if (type == "NEW_CARD")
             {
-                return "新卡";
+                return "实体卡";
             }
             return "";
         }

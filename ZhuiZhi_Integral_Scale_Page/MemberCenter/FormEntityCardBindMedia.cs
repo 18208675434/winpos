@@ -24,7 +24,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             lblShopName.Text = ZhuiZhi_Integral_Scale_UncleFruit.Model.MainModel.Titledata + "   " + ZhuiZhi_Integral_Scale_UncleFruit.Model.MainModel.CurrentShopInfo.shopname;          
         }
-        public void UpdateEntityCardInfo(EntityCard entityCard)
+        public void UpdateEntityCardInfo(OutEntityCardResponseDto entityCard)
         {
             lblEntityCardNo.Text = entityCard.outcardid;
             lblMemberId.Text = MainModel.CurrentMember.memberheaderresponsevo.mobile;

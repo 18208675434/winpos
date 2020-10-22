@@ -37,11 +37,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         //按比例缩放页面及控件
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
-        EntityCard entityCard;//实体卡
+        OutEntityCardResponseDto entityCard;//实体卡
         #endregion
 
         #region  页面加载与退出
-        public FormEntityCardBind(EntityCard entityCard)
+        public FormEntityCardBind(OutEntityCardResponseDto entityCard)
         {
             InitializeComponent();
             this.entityCard = entityCard;

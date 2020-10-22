@@ -576,7 +576,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         /// <summary> 绑定实体卡
         /// </summary>
-        public static bool ShowFormBindEntityCard(EntityCard entityCard)
+        public static bool ShowFormBindEntityCard(OutEntityCardResponseDto entityCard)
         {
             try
             {
