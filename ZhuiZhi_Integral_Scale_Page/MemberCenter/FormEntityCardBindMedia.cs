@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
@@ -26,7 +27,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public void UpdateEntityCardInfo(EntityCard entityCard)
         {
             lblEntityCardNo.Text = entityCard.outcardid;
-            lblMemberId.Text = entityCard.memberid;
+            lblMemberId.Text = MainModel.CurrentMember.memberheaderresponsevo.mobile;
             lblBalance.Text = "￥" + entityCard.balance.ToString("f2");
         }
     }

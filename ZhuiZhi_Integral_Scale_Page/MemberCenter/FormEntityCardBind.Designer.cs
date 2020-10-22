@@ -239,16 +239,18 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.balance;
+            this.pictureBox2.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.balance;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.Location = new System.Drawing.Point(47, 206);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.Size = new System.Drawing.Size(40, 38);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.card;
+            this.pictureBox1.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.card;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(47, 106);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(40, 30);

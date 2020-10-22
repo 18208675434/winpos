@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMemberCenter));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -62,8 +62,8 @@
             this.customdiscount = new System.Windows.Forms.Label();
             this.custommoney = new System.Windows.Forms.Label();
             this.lblEntityNo = new System.Windows.Forms.Label();
-            this.newphone = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblNewPhone = new System.Windows.Forms.Label();
+            this.lblNewPhoneDesc = new System.Windows.Forms.Label();
             this.btnbang = new System.Windows.Forms.Button();
             this.btnChangePhone = new System.Windows.Forms.Button();
             this.pnlItem = new System.Windows.Forms.Panel();
@@ -222,23 +222,23 @@
             this.dataGridViewImageColumn6,
             this.dataGridViewImageColumn7,
             this.dataGridViewImageColumn8});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvTemplate.GridColor = System.Drawing.Color.White;
             this.dgvTemplate.Location = new System.Drawing.Point(32, 97);
             this.dgvTemplate.MultiSelect = false;
             this.dgvTemplate.Name = "dgvTemplate";
             this.dgvTemplate.ReadOnly = true;
             this.dgvTemplate.RowHeadersVisible = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.White;
+            this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvTemplate.RowTemplate.Height = 110;
             this.dgvTemplate.Size = new System.Drawing.Size(615, 450);
             this.dgvTemplate.TabIndex = 68;
@@ -246,30 +246,30 @@
             // 
             // dataGridViewImageColumn6
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.NullValue = null;
+            this.dataGridViewImageColumn6.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewImageColumn6.HeaderText = "第一列";
             this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
             this.dataGridViewImageColumn6.ReadOnly = true;
             // 
             // dataGridViewImageColumn7
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.NullValue = null;
+            this.dataGridViewImageColumn7.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewImageColumn7.HeaderText = "第二列";
             this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
             this.dataGridViewImageColumn7.ReadOnly = true;
             // 
             // dataGridViewImageColumn8
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.NullValue = null;
-            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.NullValue = null;
+            this.dataGridViewImageColumn8.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewImageColumn8.HeaderText = "第三列";
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.ReadOnly = true;
@@ -419,8 +419,8 @@
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.custom);
             this.panel1.Controls.Add(this.lblEntityNo);
-            this.panel1.Controls.Add(this.newphone);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblNewPhone);
+            this.panel1.Controls.Add(this.lblNewPhoneDesc);
             this.panel1.Controls.Add(this.btnbang);
             this.panel1.Controls.Add(this.btnChangePhone);
             this.panel1.Controls.Add(this.pnlItem);
@@ -497,31 +497,31 @@
             this.lblEntityNo.Text = "实体卡号";
             this.lblEntityNo.Visible = false;
             // 
-            // newphone
+            // lblNewPhone
             // 
-            this.newphone.AutoSize = true;
-            this.newphone.BackColor = System.Drawing.Color.Transparent;
-            this.newphone.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.newphone.ForeColor = System.Drawing.Color.White;
-            this.newphone.Location = new System.Drawing.Point(159, 160);
-            this.newphone.Name = "newphone";
-            this.newphone.Size = new System.Drawing.Size(95, 23);
-            this.newphone.TabIndex = 79;
-            this.newphone.Text = "newphone";
-            this.newphone.Visible = false;
+            this.lblNewPhone.AutoSize = true;
+            this.lblNewPhone.BackColor = System.Drawing.Color.Transparent;
+            this.lblNewPhone.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblNewPhone.ForeColor = System.Drawing.Color.White;
+            this.lblNewPhone.Location = new System.Drawing.Point(159, 142);
+            this.lblNewPhone.Name = "lblNewPhone";
+            this.lblNewPhone.Size = new System.Drawing.Size(95, 23);
+            this.lblNewPhone.TabIndex = 79;
+            this.lblNewPhone.Text = "newphone";
+            this.lblNewPhone.Visible = false;
             // 
-            // label4
+            // lblNewPhoneDesc
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(38, 160);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 23);
-            this.label4.TabIndex = 78;
-            this.label4.Text = "账号已合并至：";
-            this.label4.Visible = false;
+            this.lblNewPhoneDesc.AutoSize = true;
+            this.lblNewPhoneDesc.BackColor = System.Drawing.Color.Transparent;
+            this.lblNewPhoneDesc.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblNewPhoneDesc.ForeColor = System.Drawing.Color.White;
+            this.lblNewPhoneDesc.Location = new System.Drawing.Point(38, 142);
+            this.lblNewPhoneDesc.Name = "lblNewPhoneDesc";
+            this.lblNewPhoneDesc.Size = new System.Drawing.Size(129, 23);
+            this.lblNewPhoneDesc.TabIndex = 78;
+            this.lblNewPhoneDesc.Text = "账号已合并至：";
+            this.lblNewPhoneDesc.Visible = false;
             // 
             // btnbang
             // 
@@ -552,7 +552,7 @@
             this.btnChangePhone.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnChangePhone.ForeColor = System.Drawing.Color.White;
             this.btnChangePhone.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnChangePhone.Location = new System.Drawing.Point(292, 120);
+            this.btnChangePhone.Location = new System.Drawing.Point(292, 95);
             this.btnChangePhone.Name = "btnChangePhone";
             this.btnChangePhone.Size = new System.Drawing.Size(107, 40);
             this.btnChangePhone.TabIndex = 70;
@@ -864,7 +864,7 @@
             this.lblMemberInfo.BackColor = System.Drawing.Color.Transparent;
             this.lblMemberInfo.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblMemberInfo.ForeColor = System.Drawing.Color.LightGray;
-            this.lblMemberInfo.Location = new System.Drawing.Point(37, 181);
+            this.lblMemberInfo.Location = new System.Drawing.Point(37, 169);
             this.lblMemberInfo.Name = "lblMemberInfo";
             this.lblMemberInfo.Size = new System.Drawing.Size(82, 24);
             this.lblMemberInfo.TabIndex = 52;
@@ -876,7 +876,7 @@
             this.lblPhone.BackColor = System.Drawing.Color.Transparent;
             this.lblPhone.Font = new System.Drawing.Font("微软雅黑", 28F);
             this.lblPhone.ForeColor = System.Drawing.Color.White;
-            this.lblPhone.Location = new System.Drawing.Point(24, 110);
+            this.lblPhone.Location = new System.Drawing.Point(24, 85);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(264, 50);
             this.lblPhone.TabIndex = 51;
@@ -994,8 +994,8 @@
         private System.Windows.Forms.Panel pnlCoupon;
         private System.Windows.Forms.Button btnChangePhone;
         private System.Windows.Forms.Button btnbang;
-        private System.Windows.Forms.Label newphone;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblNewPhone;
+        private System.Windows.Forms.Label lblNewPhoneDesc;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel custom;
         private System.Windows.Forms.Label customdiscount;

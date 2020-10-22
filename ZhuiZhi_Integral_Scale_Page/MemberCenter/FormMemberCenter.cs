@@ -50,13 +50,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                //if (MainModel.NewPhone != "")
-                //{
-                //    label4.Visible = true;
-                //    newphone.Visible = true;
-                //    newphone.Text = MainModel.NewPhone;
-                //}
-
                 bmpCustom = (Bitmap)MainModel.GetControlImage(custom);
 
                 lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
@@ -64,10 +57,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好 ";
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
                 lblMenu.Left = picMenu.Right;
-                //if (MainModel.NewPhone != "")
-                //{
-                //    CurrentMember.memberheaderresponsevo.mobile = MainModel.NewPhone;
-                //}
+               
 
                 Application.DoEvents();
 
@@ -118,6 +108,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 string tempphone = phone.Substring(0, 3) + " " + phone.Substring(3, 4) + " " + phone.Substring(7, 4);
                 phone = tempphone;
             }
+
+            if (CurrentMember.mergememberrecordresponsevo != null)
+            {
+                lblNewPhoneDesc.Visible = true;
+                lblNewPhone.Visible = true;
+                lblNewPhone.Text = CurrentMember.mergememberrecordresponsevo.targetmobile;
+            }
+
             lblPhone.Text = phone;
             MainModel.GetPhone = phone;
             btnChangePhone.Left = lblPhone.Right;
@@ -840,9 +838,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 LoadingHelper.ShowLoadingScreen();
                 try
-                {
-                    string err = "";
-                    MainModel.CurrentMember = CurrentMember = httputil.GetMember(MainModel.CurrentMember.memberheaderresponsevo.mobile, ref err);
+                {                   
+                    CurrentMember = MainModel.CurrentMember;
                     UpdateMemberInfo();
                     MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
                 }

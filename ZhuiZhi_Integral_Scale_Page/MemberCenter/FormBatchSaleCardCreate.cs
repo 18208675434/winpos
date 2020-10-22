@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
@@ -25,7 +26,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 接口访问类
         /// </summary>
-        HttpUtil httputil = new HttpUtil();
+        MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
         #endregion
 
         #region 分页事件
@@ -62,47 +63,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                ShowLoading(true, false);
-                string numbervalue = MemberCenterHelper.ShowFormVoucher();
-                if (!string.IsNullOrEmpty(numbervalue))
-                {
-                    string ErrorMsgMember = "";
-                    Card card = httputil.GetCardNew(numbervalue, ref ErrorMsgMember);
 
-                    if (ErrorMsgMember != "" || card == null) //会员不存在
+                string cardid = DialogHelper.ShowFormCode("输入实体卡号", "请输入实体卡卡号");
+                if (!string.IsNullOrEmpty(cardid))
+                {
+                    string err = "";
+                    LoadingHelper.ShowLoadingScreen();
+                    EntityCard entityCard = memberCenterHttpUtil.GetCard(cardid, ref err);
+                    LoadingHelper.CloseForm();
+                    if (err != "" || entityCard == null) //会员不存在
                     {
-                        ShowLog(ErrorMsgMember, false);
+                        MainModel.ShowLog(err);
+                        return;
                     }
                     else
                     {
-                        int index = dgvCard.Rows.Count + 1;
-                        CurrentCards.Add(new RechargeCardInfo() 
-                        { CardNo = index * 1000000 + "", RechargeAmount = (index % 2) * 100, GiftAmount = (index % 2) * 10, 
-                            CardStatus = (index % 2), MemberNo = "B" + index * 1000000 });
+                        CurrentCards.Insert(0, new RechargeCardInfo()
+                        {
+                            CardNo = cardid,
+                            Status = entityCard.status,
+                            MemberId = entityCard.memberid
+                        });
+
+                        //int index = dgvCard.Rows.Count + 1;
+                        //CurrentCards.Add(new RechargeCardInfo() 
+                        //{ CardNo = index * 1000000 + "", RechargeAmount = (index % 2) * 100, RewardAmount = (index % 2) * 10, 
+                        //    Status = (index % 2)+"", MemberNo = "B" + index * 1000000 });
                         RefreshDgv();
                     }
                 }
-                ShowLoading(false, true);
             }
             catch (Exception ex)
             {
-                ShowLoading(false, true);
-
-                LogManager.WriteLog("获取实体卡异常" + ex.Message);
+                MainModel.ShowLog("获取实体卡异常" + ex.Message, true);
             }
-        }
-
-        private void ShowLog(string msg, bool iserror)
-        {
-            //ParameterizedThreadStart Pts = new ParameterizedThreadStart(showlogthread);
-            //Thread threadmqtt = new Thread(Pts);
-            //threadmqtt.IsBackground = true;
-            //threadmqtt.Start(msg);
-
-            //if (iserror)
-            //{
-            //    LogManager.WriteLog(msg);
-            //}
         }
 
         public void RefreshDgv()
@@ -113,7 +107,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             foreach (var item in CurrentCards)
             {
                 totalRechargeAmount += item.RechargeAmount;
-                totalGiftAmount += item.GiftAmount;
+                totalGiftAmount += item.RewardAmount;
             }
             totalRechargeAll = totalRechargeAmount + totalGiftAmount;
             lbCardSum.Text = string.Format("({0}个实体卡卡号)", CurrentCards.Count);
@@ -134,7 +128,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
 
-                CurrentCards.Reverse();
+                //CurrentCards.Reverse();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
                 int startindex = (CurrentPage - 1) * PageSize;
                 int lastindex = Math.Min(CurrentCards.Count - 1, startindex + PageSize - 1);
@@ -169,8 +163,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 lblCardNo.Text = rechargeCardInfo.CardNo;
                 txtRechargeAmount.Text = rechargeCardInfo.RechargeAmount.ToString();
-                lblGiftAmount.Text = rechargeCardInfo.GiftAmount.ToString();
-                if (rechargeCardInfo.CardStatus == 0)
+                lblGiftAmount.Text = rechargeCardInfo.RewardAmount.ToString();
+                if (rechargeCardInfo.Status == "0")
                 {
                     lblCardStatus.Text = "未开卡";
                     lblCardStatus.Location = new Point(lblCardStatus.Location.X, lblCardNo.Location.Y);
@@ -179,7 +173,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 else
                 {
                     lblCardStatus.Text = "已开卡";
-                    lblMemberNo.Text = "会员卡号：" + rechargeCardInfo.MemberNo;
+                    lblMemberNo.Text = "会员卡号：" + rechargeCardInfo.MemberId;
                     lblCardStatus.Location = new Point(lblCardStatus.Location.X, locationY);
                     lblMemberNo.Visible = true;
                 }
@@ -221,7 +215,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (po.X < (dgvCard.Left + txtRechargeAmount.Right + 10) && po.X > (dgvCard.Left + txtRechargeAmount.Left - 10))
                 {
                     rechargeCardInfo.RechargeAmount = 200;
-                    rechargeCardInfo.GiftAmount = 20;
+                    rechargeCardInfo.RewardAmount = 20;
                     RefreshDgv();
                 }
 
@@ -240,76 +234,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 MainModel.ShowLog("操作购物车商品异常" + ex.Message, true);
             }
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="showloading">显示等待框</param>
-        /// <param name="isenable">页面是否可操作</param>
-        private void ShowLoading(bool showloading, bool isenable)
-        {
-            //try
-            //{
-            //    IsEnable = isenable;
-            //    if (this.IsHandleCreated)
-            //    {
-            //        this.Invoke(new InvokeHandler(delegate()
-            //        {
-            //            pnlLoading.Visible = showloading;
-
-            //        }));
-            //    }
-            //    else
-            //    {
-            //        pnlLoading.Visible = showloading;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogManager.WriteLog("显示等待异常" + ex.Message);
-            //}
-
         }
     }
 
     public class RechargeCardInfo
     {
         string cardNo;
-        string memberNo;
+        string memberId;
 
-        int rechargeAmount;
-        int giftAmount;
-        int cardStatus;
+        decimal rechargeAmount;
+        decimal rewardAmount;
+        string status;
 
 
-        public String CardNo
+        public string CardNo
         {
             get { return cardNo; }
             set { cardNo = value; }
         }
 
-        public String MemberNo
+        public string MemberId
         {
-            get { return memberNo; }
-            set { memberNo = value; }
+            get { return memberId; }
+            set { memberId = value; }
         }
 
-        public int RechargeAmount
+        public decimal RechargeAmount
         {
             get { return rechargeAmount; }
             set { rechargeAmount = value; }
         }
-        public int GiftAmount
+        public decimal RewardAmount
         {
-            get { return giftAmount; }
-            set { giftAmount = value; }
+            get { return rewardAmount; }
+            set { rewardAmount = value; }
         }
-        public int CardStatus
+        public string Status
         {
-            get { return cardStatus; }
-            set { cardStatus = value; }
+            get { return status; }
+            set { status = value; }
         }
     }
 }
