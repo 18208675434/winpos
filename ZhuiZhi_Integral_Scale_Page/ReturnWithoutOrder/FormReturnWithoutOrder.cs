@@ -2440,10 +2440,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     LastLstPro.Add((Product)MainModel.Clone(ppro));
                 }
 
-               
+
                 Point po = GlobalUtil.GetCursorPos();
                 //增加标品
-                if ( pro.goodstagid == 0 && po.X < (dgvCart.Left + picAdd.Right + 10) && po.X > (dgvCart.Left + picAdd.Left-10))
+                if (pro.goodstagid == 0 && po.X < (dgvCart.Left + picAdd.Right + 10) && po.X > (dgvCart.Left + picAdd.Left))
                 {
                     for (int i = 0; i < CurrentCart.products.Count; i++)
                     {
@@ -2458,7 +2458,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     UploadOffLineDgvCart();
                 }
 
-                else if (pro.goodstagid == 0 && po.X < (dgvCart.Left + picMinus.Right + 10) && po.X > (dgvCart.Left + picMinus.Left - 10))
+                else if (pro.goodstagid == 0 && po.X < (dgvCart.Left + picMinus.Right) && po.X > (dgvCart.Left + picMinus.Left - 10))
                 {
                     for (int i = 0; i < CurrentCart.products.Count; i++)
                     {
@@ -2469,18 +2469,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                 if (ZhuiZhi_Integral_Scale_UncleFruit.HelperUI.ConfirmHelper.Confirm("确认删除？", pro.title + pro.skucode))
                                 {
                                     ReceiptUtil.EditCancelSingle(1, CurrentCart.products[i].price.origintotal);
+                                    AbnormalOrderUtil.DeleteSkuList(CurrentCart.products[i]);
                                     CurrentCart.products.RemoveAt(i);
                                 }
                             }
                             else
                             {
                                 ReceiptUtil.EditCancelSingle(1, CurrentCart.products[i].price.origintotal);
+                                AbnormalOrderUtil.DeleteSkuList(CurrentCart.products[i]);
+
                                 CurrentCart.products[i].num -= 1;
                                 CurrentCart.products[i].adjustpriceinfo = null; CurrentCart.products[i].adjustpricedesc = null;  //商品数量有变化清空改价信息
                             }
                             break;
                         }
                     }
+                    UploadOffLineDgvCart();
+                }
+                //自定义标品数量
+                else if (pro.goodstagid == 0 && po.X > (dgvCart.Left + picMinus.Right) && po.X < (dgvCart.Left + picAdd.Left))
+                {
+                    string numstr = NumberHelper.ShowFormNumber(pro.skuname, NumberType.ProNum);
+                    if (string.IsNullOrEmpty(numstr))
+                    {
+                        return;
+                    }
+                    int newnum = Convert.ToInt16(numstr);
+                    for (int i = 0; i < CurrentCart.products.Count; i++)
+                    {
+                        if (CurrentCart.products[i].barcode == pro.barcode)
+                        {
+                            CurrentCart.products[i].num = newnum;
+                            CurrentCart.products[i].adjustpriceinfo = null; CurrentCart.products[i].adjustpricedesc = null;  //商品数量有变化清空改价信息
+                            break;
+                        }
+                    }
+
                     UploadOffLineDgvCart();
                 }
                 else if (pro.goodstagid != 0 && po.X < (dgvCart.Left + lblProNum.Right + 10) && po.X > (dgvCart.Left + lblProNum.Left - 10))
@@ -2491,7 +2515,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     {
                         for (int i = 0; i < CurrentCart.products.Count; i++)
                         {
-                            if (CurrentCart.products[i].skucode == pro.skucode && CurrentCart.products[i].specnum==pro.specnum)
+                            if (CurrentCart.products[i].skucode == pro.skucode && CurrentCart.products[i].specnum == pro.specnum)
                             {
                                 CurrentCart.products[i].specnum = newweight;
                                 CurrentCart.products[i].price.specnum = newweight;
@@ -2500,7 +2524,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             }
                         }
                     }
-                   
+
                     UploadOffLineDgvCart();
 
                 }
