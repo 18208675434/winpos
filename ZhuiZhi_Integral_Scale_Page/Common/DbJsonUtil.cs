@@ -29,6 +29,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (jsonmodel != null && jsonmodel.JSON != null)
                 {
                     List<OrderPriceDetail> TotalDetail = JsonConvert.DeserializeObject<List<OrderPriceDetail>>(jsonmodel.JSON);
+
+                    jsonbll.Delete(balancedepositinfo);
                     return TotalDetail;
                 }
                 else
@@ -84,19 +86,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 else
                 {
 
-                    CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) + amount).ToString("f2");
-                    CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) + 1).ToString();
-                    //充值退款区分充值 独立记录 互不影响
-                    //if (!isrefund)
-                    //{
-                    //    CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) + amount).ToString("f2");
-                    //    CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) + 1).ToString();
-                    //}
-                    //else
-                    //{
-                    //    CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) - amount).ToString("f2");
-                    //    CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) - 1).ToString();
-                    //}
+                    //CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) + amount).ToString("f2");
+                    //CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) + 1).ToString();
+                    //充值退款要本地合计
+                    if (!isrefund)
+                    {
+                        CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) + amount).ToString("f2");
+                        CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) + 1).ToString();
+                    }
+                    else
+                    {
+                        CurrentDetail.amount = (Convert.ToDecimal(CurrentDetail.amount) - amount).ToString("f2");
+                        CurrentDetail.subtitle = (Convert.ToInt16(CurrentDetail.subtitle) - 1).ToString();
+                    }
 
                 }
 

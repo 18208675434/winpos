@@ -477,5 +477,23 @@ public class ImplOfflineSingleCalculateNew {
         }
         return null;
     }
+
+
+    //private bool IsLoginMember()
+    //{
+    //    try
+    //    {
+    //        if (!romotionCache.getInstance().isLoginMember)
+    //        {
+    //            return false;
+    //        }
+
+    //        //if(MainModel.CurrentMember.ou)
+
+    //    }
+    //    catch {
+    //        return false;
+    //    }
+    //}
 }
 }
