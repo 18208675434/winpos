@@ -335,7 +335,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 显示修改手机号码-旧卡验证窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhonePhysicalCard()
+        public static bool ShowFormEntityCardVerify()
         {
             try
             {

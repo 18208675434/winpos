@@ -58,8 +58,7 @@
             this.btnVerifyNewPhone = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnNewCardVerify = new System.Windows.Forms.Button();
-            this.btnOldCardVerify = new System.Windows.Forms.Button();
+            this.btnEntityCardVerify = new System.Windows.Forms.Button();
             this.btnUserPassWordVerify = new System.Windows.Forms.Button();
             this.btnSmsCodeVerify = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -174,8 +173,7 @@
             this.panel1.Controls.Add(this.btnVerifyNewPhone);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.btnNewCardVerify);
-            this.panel1.Controls.Add(this.btnOldCardVerify);
+            this.panel1.Controls.Add(this.btnEntityCardVerify);
             this.panel1.Controls.Add(this.btnUserPassWordVerify);
             this.panel1.Controls.Add(this.btnSmsCodeVerify);
             this.panel1.Controls.Add(this.label3);
@@ -458,39 +456,21 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "验证新手机号";
             // 
-            // btnNewCardVerify
+            // btnEntityCardVerify
             // 
-            this.btnNewCardVerify.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnNewCardVerify.FlatAppearance.BorderSize = 0;
-            this.btnNewCardVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewCardVerify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnNewCardVerify.ForeColor = System.Drawing.Color.White;
-            this.btnNewCardVerify.Location = new System.Drawing.Point(686, 183);
-            this.btnNewCardVerify.Margin = new System.Windows.Forms.Padding(2);
-            this.btnNewCardVerify.Name = "btnNewCardVerify";
-            this.btnNewCardVerify.Size = new System.Drawing.Size(155, 44);
-            this.btnNewCardVerify.TabIndex = 6;
-            this.btnNewCardVerify.Text = "新卡验证";
-            this.btnNewCardVerify.UseVisualStyleBackColor = false;
-            this.btnNewCardVerify.Visible = false;
-            this.btnNewCardVerify.Click += new System.EventHandler(this.btnNewCardVerify_Click);
-            // 
-            // btnOldCardVerify
-            // 
-            this.btnOldCardVerify.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnOldCardVerify.FlatAppearance.BorderSize = 0;
-            this.btnOldCardVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOldCardVerify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOldCardVerify.ForeColor = System.Drawing.Color.White;
-            this.btnOldCardVerify.Location = new System.Drawing.Point(498, 183);
-            this.btnOldCardVerify.Margin = new System.Windows.Forms.Padding(2);
-            this.btnOldCardVerify.Name = "btnOldCardVerify";
-            this.btnOldCardVerify.Size = new System.Drawing.Size(155, 44);
-            this.btnOldCardVerify.TabIndex = 5;
-            this.btnOldCardVerify.Text = "老卡验证";
-            this.btnOldCardVerify.UseVisualStyleBackColor = false;
-            this.btnOldCardVerify.Visible = false;
-            this.btnOldCardVerify.Click += new System.EventHandler(this.btnOldCardVerify_Click);
+            this.btnEntityCardVerify.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnEntityCardVerify.FlatAppearance.BorderSize = 0;
+            this.btnEntityCardVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntityCardVerify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEntityCardVerify.ForeColor = System.Drawing.Color.White;
+            this.btnEntityCardVerify.Location = new System.Drawing.Point(498, 183);
+            this.btnEntityCardVerify.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEntityCardVerify.Name = "btnEntityCardVerify";
+            this.btnEntityCardVerify.Size = new System.Drawing.Size(155, 44);
+            this.btnEntityCardVerify.TabIndex = 5;
+            this.btnEntityCardVerify.Text = "实体卡验证";
+            this.btnEntityCardVerify.UseVisualStyleBackColor = false;
+            this.btnEntityCardVerify.Click += new System.EventHandler(this.btnEntityCardVerify_Click);
             // 
             // btnUserPassWordVerify
             // 
@@ -604,8 +584,7 @@
         private System.Windows.Forms.Button btnOkChange;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnNewCardVerify;
-        private System.Windows.Forms.Button btnOldCardVerify;
+        private System.Windows.Forms.Button btnEntityCardVerify;
         private System.Windows.Forms.Button btnUserPassWordVerify;
         private System.Windows.Forms.Button btnSmsCodeVerify;
         private System.Windows.Forms.Label label3;
