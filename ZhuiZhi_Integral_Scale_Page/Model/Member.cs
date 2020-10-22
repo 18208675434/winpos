@@ -32,6 +32,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
         public List<OutEntityCardResponseDto> outentitycards { get; set; }
 
+        public MergeMemberRecordResponseVo mergememberrecordresponsevo { get; set; }
+
         /// <summary>
         /// 是否使用积分  主界面勾选/取消勾选积分修改状态
         /// </summary>
@@ -178,5 +180,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string type { get; set; } //类型
         public string updatedat { get; set; } //更新时间
         public string updatedby { get; set; } //更新人
+    }
+
+    public class MergeMemberRecordResponseVo
+    {
+        public string createdat { get; set; }
+        public string createdby { get; set; }
+        public string id { get; set; }
+        public decimal sourcebalance { get; set; }
+        public decimal sourcecredit { get; set; }
+        public string sourcememberid { get; set; }
+        public string sourcemobile { get; set; }
+        public decimal targetbalance { get; set; }
+        public decimal targetcredit { get; set; }
+        public string targetmemberid { get; set; }
+        public string targetmobile { get; set; }
+        public string tenantid { get; set; }
+        public string updatedat { get; set; }
+        public string updatedby { get; set; }
     }
 }

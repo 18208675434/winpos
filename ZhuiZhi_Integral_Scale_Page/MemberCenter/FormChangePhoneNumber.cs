@@ -215,6 +215,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (MemberCenterHelper.ShowFormChangePhoneConfirm(newphone, isMember))
             {
                 MemberCenterMediaHelper.ShowChangePhoneNumber(2);
+                string err = "";
+                LoadingHelper.ShowLoadingScreen();
+                MainModel.CurrentMember =new HttpUtil().GetMember(newphone, ref err);
+                LoadingHelper.CloseForm();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -284,5 +288,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MemberCenterMediaHelper.ShowChangePhoneNumber(2, isMember);
             }
         }
+
     }
 }

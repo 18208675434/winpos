@@ -44,7 +44,6 @@
             this.picStep1 = new System.Windows.Forms.PictureBox();
             this.lblChangePhone = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.lblMerge = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblLine2 = new System.Windows.Forms.Label();
@@ -159,7 +158,6 @@
             this.panel1.Controls.Add(this.picStep1);
             this.panel1.Controls.Add(this.lblChangePhone);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.lblMerge);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.lblLine2);
@@ -280,22 +278,6 @@
             this.label10.TabIndex = 28;
             this.label10.Text = "label10";
             this.label10.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(134, 471);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 44);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "确认合并";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
             // 
             // lblMerge
             // 
@@ -603,7 +585,6 @@
         private System.Windows.Forms.Label lblLine2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnVerifyNewPhone;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblChangePhone;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblMerge;
