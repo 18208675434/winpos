@@ -60,7 +60,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             Application.DoEvents();
             lblEntityCardNo.Text = entityCard.outcardid;
-            lblMemberId.Text = entityCard.memberid;
+            lblMemberId.Text = MainModel.CurrentMember.memberheaderresponsevo.mobile;
             lblBalance.Text = "￥" + entityCard.balance.ToString("f2");
             MemberCenterMediaHelper.ShowFormBindEntityCardMedia(entityCard);
         }
