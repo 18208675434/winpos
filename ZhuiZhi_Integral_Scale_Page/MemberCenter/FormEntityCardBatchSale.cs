@@ -15,7 +15,7 @@ using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
-    public partial class FormBatchSaleCardCreate : Form
+    public partial class FormEntityCardBatchSale : Form
     {
         #region 成员变量
         /// <summary>
@@ -54,7 +54,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         #endregion
 
-        public FormBatchSaleCardCreate()
+        public FormEntityCardBatchSale()
         {
             InitializeComponent();
         }
@@ -97,6 +97,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 MainModel.ShowLog("获取实体卡异常" + ex.Message, true);
             }
+        }
+
+        private void btnBatchSetRechargeAmount_Click(object sender, EventArgs e)
+        {
+            MemberCenterHelper.ShowFormRechargeAmount();
         }
 
         public void RefreshDgv()
@@ -258,6 +263,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             return status;
         }
+
+        
     }
 
     public class RechargeCardInfo

@@ -1040,7 +1040,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 IsEnable = false;
-                MemberCenterHelper.ShowFormBatchSaleCardCreate();
+                MemberCenterHelper.ShowFormEntityCardBatchSale();
                 IsEnable = true;
             }
             catch (Exception ex)

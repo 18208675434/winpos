@@ -129,11 +129,11 @@
     <Compile Include="HelperUI\FormCode.Designer.cs">
       <DependentUpon>FormCode.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormBatchSaleCardCreate.cs">
+    <Compile Include="MemberCenter\FormEntityCardBatchSale.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberCenter\FormBatchSaleCardCreate.Designer.cs">
-      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    <Compile Include="MemberCenter\FormEntityCardBatchSale.Designer.cs">
+      <DependentUpon>FormEntityCardBatchSale.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormEntityCardBindMedia.cs">
       <SubType>Form</SubType>
@@ -1201,8 +1201,8 @@
     <EmbeddedResource Include="HelperUI\FormCode.resx">
       <DependentUpon>FormCode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormBatchSaleCardCreate.resx">
-      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBatchSale.resx">
+      <DependentUpon>FormEntityCardBatchSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardBindMedia.resx">
       <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>

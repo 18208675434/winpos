@@ -27,18 +27,58 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             BindData();
         }
 
+        private int CurrentPage = 1;
+
+        private int PageSize = 7;
+        private void rbtnPageUp_ButtonClick(object sender, EventArgs e)
+        {
+
+            if (!rbtnPageUp.WhetherEnable)
+            {
+                return;
+            }
+            CurrentPage--;
+            BindData();
+        }
+
+        private void rbtnPageDown_ButtonClick(object sender, EventArgs e)
+        {
+            if (!rbtnPageDown.WhetherEnable)
+            {
+                return;
+            }
+            CurrentPage++;
+            BindData();
+        }
+
         void BindData()
         {
-            foreach (var item in MainModel.LstRechargeTemplates)
+            string errormsg = "";
+            if (MainModel.LstRechargeTemplates == null)
             {
-                listData.Items.Add(GetItem(item));
+                LoadingHelper.ShowLoadingScreen();
+                MainModel.LstRechargeTemplates = new HttpUtil().ListAllTemplate(ref errormsg);
+                LoadingHelper.CloseForm();
             }
+
+            if (MainModel.LstRechargeTemplates != null)
+            {
+                foreach (var item in MainModel.LstRechargeTemplates)
+                {
+                    if (MainModel.LstRechargeTemplates.Count + 1 > 7)
+                    {
+                        //计算分页按钮位置
+                    }
+                    dgvData.Rows.Add(GetItem(item));
+                }
+            }
+            dgvData.ClearSelection();
         }
 
         Bitmap GetItem(ListAllTemplate item)
         {
             lblAmount.Text = item.amount.ToString();
-            lblRewardAmount.Text = item.rewardamount.ToString();
+            lblRewardAmount.Text = string.Format("赠送金额{0}元", item.rewardamount.ToString());
             Bitmap picItem = (Bitmap)MainModel.GetControlImage(pnlItem);
             return picItem;
         }
@@ -109,5 +149,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
         #endregion
+
+        private void pnlItem_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

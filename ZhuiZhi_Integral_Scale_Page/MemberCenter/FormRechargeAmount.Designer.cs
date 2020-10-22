@@ -29,16 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRechargeAmount));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlItem = new System.Windows.Forms.Panel();
+            this.lblAmount = new System.Windows.Forms.Label();
             this.picCheck = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblRewardAmount = new System.Windows.Forms.Label();
-            this.lblAmount = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.listData = new System.Windows.Forms.ListBox();
+            this.dgvData = new System.Windows.Forms.DataGridView();
+            this.cardNo = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.pnlItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCheck)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -53,21 +63,30 @@
             // 
             // pnlItem
             // 
-            this.pnlItem.BackColor = System.Drawing.Color.White;
-            this.pnlItem.Controls.Add(this.picCheck);
-            this.pnlItem.Controls.Add(this.label1);
-            this.pnlItem.Controls.Add(this.lblRewardAmount);
-            this.pnlItem.Controls.Add(this.lblAmount);
-            this.pnlItem.Location = new System.Drawing.Point(22, 662);
+            this.pnlItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.pnlItem.Controls.Add(this.panel1);
+            this.pnlItem.Location = new System.Drawing.Point(18, 235);
             this.pnlItem.Name = "pnlItem";
-            this.pnlItem.Size = new System.Drawing.Size(538, 100);
-            this.pnlItem.TabIndex = 72;
+            this.pnlItem.Size = new System.Drawing.Size(410, 80);
+            this.pnlItem.TabIndex = 70;
+            this.pnlItem.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlItem_Paint);
+            // 
+            // lblAmount
+            // 
+            this.lblAmount.AutoSize = true;
+            this.lblAmount.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblAmount.ForeColor = System.Drawing.Color.Red;
+            this.lblAmount.Location = new System.Drawing.Point(28, 13);
+            this.lblAmount.Name = "lblAmount";
+            this.lblAmount.Size = new System.Drawing.Size(107, 36);
+            this.lblAmount.TabIndex = 0;
+            this.lblAmount.Text = "lblAmt";
             // 
             // picCheck
             // 
             this.picCheck.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.check;
             this.picCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picCheck.Location = new System.Drawing.Point(479, 33);
+            this.picCheck.Location = new System.Drawing.Point(354, 17);
             this.picCheck.Name = "picCheck";
             this.picCheck.Size = new System.Drawing.Size(34, 34);
             this.picCheck.TabIndex = 1;
@@ -76,34 +95,23 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(24, 33);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(4, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 30);
+            this.label1.Size = new System.Drawing.Size(31, 26);
             this.label1.TabIndex = 0;
             this.label1.Text = "￥";
             // 
             // lblRewardAmount
             // 
             this.lblRewardAmount.AutoSize = true;
-            this.lblRewardAmount.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblRewardAmount.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblRewardAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.lblRewardAmount.Location = new System.Drawing.Point(263, 40);
+            this.lblRewardAmount.Location = new System.Drawing.Point(167, 21);
             this.lblRewardAmount.Name = "lblRewardAmount";
-            this.lblRewardAmount.Size = new System.Drawing.Size(137, 22);
+            this.lblRewardAmount.Size = new System.Drawing.Size(119, 26);
             this.lblRewardAmount.TabIndex = 0;
             this.lblRewardAmount.Text = "赠送金额0元";
-            // 
-            // lblAmount
-            // 
-            this.lblAmount.AutoSize = true;
-            this.lblAmount.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblAmount.ForeColor = System.Drawing.Color.Red;
-            this.lblAmount.Location = new System.Drawing.Point(49, 32);
-            this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(168, 33);
-            this.lblAmount.TabIndex = 0;
-            this.lblAmount.Text = "lblAmount";
             // 
             // btnCancel
             // 
@@ -115,32 +123,145 @@
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.btnCancel.Location = new System.Drawing.Point(555, 13);
+            this.btnCancel.Location = new System.Drawing.Point(400, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(30, 30);
             this.btnCancel.TabIndex = 71;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // listData
+            // dgvData
             // 
-            this.listData.FormattingEnabled = true;
-            this.listData.ItemHeight = 12;
-            this.listData.Location = new System.Drawing.Point(22, 63);
-            this.listData.Name = "listData";
-            this.listData.Size = new System.Drawing.Size(540, 376);
-            this.listData.TabIndex = 73;
+            this.dgvData.AllowUserToAddRows = false;
+            this.dgvData.AllowUserToDeleteRows = false;
+            this.dgvData.AllowUserToResizeColumns = false;
+            this.dgvData.AllowUserToResizeRows = false;
+            this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvData.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dgvData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.dgvData.ColumnHeadersHeight = 30;
+            this.dgvData.ColumnHeadersVisible = false;
+            this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cardNo});
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvData.DefaultCellStyle = dataGridViewCellStyle15;
+            this.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvData.GridColor = System.Drawing.Color.LightGray;
+            this.dgvData.Location = new System.Drawing.Point(18, 56);
+            this.dgvData.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvData.MultiSelect = false;
+            this.dgvData.Name = "dgvData";
+            this.dgvData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            this.dgvData.RowHeadersVisible = false;
+            this.dgvData.RowHeadersWidth = 4;
+            this.dgvData.RowTemplate.Height = 76;
+            this.dgvData.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvData.Size = new System.Drawing.Size(410, 530);
+            this.dgvData.TabIndex = 130;
+            // 
+            // cardNo
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle14.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle14.NullValue")));
+            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cardNo.DefaultCellStyle = dataGridViewCellStyle14;
+            this.cardNo.FillWeight = 100.195F;
+            this.cardNo.HeaderText = "实体卡";
+            this.cardNo.Name = "cardNo";
+            this.cardNo.ReadOnly = true;
+            this.cardNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.cardNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lblRewardAmount);
+            this.panel1.Controls.Add(this.lblAmount);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.picCheck);
+            this.panel1.Location = new System.Drawing.Point(0, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(410, 66);
+            this.panel1.TabIndex = 131;
+            // 
+            // rbtnPageDown
+            // 
+            this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
+            this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageDown.Image = null;
+            this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageDown.Location = new System.Drawing.Point(219, 537);
+            this.rbtnPageDown.Margin = new System.Windows.Forms.Padding(4);
+            this.rbtnPageDown.Name = "rbtnPageDown";
+            this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageDown.PenWidth = 1;
+            this.rbtnPageDown.RoundRadius = 10;
+            this.rbtnPageDown.ShowImg = false;
+            this.rbtnPageDown.ShowText = "下一页";
+            this.rbtnPageDown.Size = new System.Drawing.Size(140, 50);
+            this.rbtnPageDown.TabIndex = 132;
+            this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageDown.WhetherEnable = false;
+            // 
+            // rbtnPageUp
+            // 
+            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
+            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageUp.Image = null;
+            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageUp.Location = new System.Drawing.Point(69, 537);
+            this.rbtnPageUp.Margin = new System.Windows.Forms.Padding(4);
+            this.rbtnPageUp.Name = "rbtnPageUp";
+            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageUp.PenWidth = 1;
+            this.rbtnPageUp.RoundRadius = 10;
+            this.rbtnPageUp.ShowImg = false;
+            this.rbtnPageUp.ShowText = "上一页";
+            this.rbtnPageUp.Size = new System.Drawing.Size(140, 50);
+            this.rbtnPageUp.TabIndex = 131;
+            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageUp.WhetherEnable = false;
             // 
             // FormRechargeAmount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(610, 800);
-            this.Controls.Add(this.listData);
-            this.Controls.Add(this.pnlItem);
+            this.ClientSize = new System.Drawing.Size(450, 600);
+            this.Controls.Add(this.rbtnPageDown);
+            this.Controls.Add(this.rbtnPageUp);
+            this.Controls.Add(this.dgvData);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.pnlItem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormRechargeAmount";
             this.ShowInTaskbar = false;
@@ -149,8 +270,10 @@
             this.Shown += new System.EventHandler(this.FormRechargeAmount_Shown);
             this.Resize += new System.EventHandler(this.FormConfirm_Resize);
             this.pnlItem.ResumeLayout(false);
-            this.pnlItem.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCheck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,6 +288,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox picCheck;
         private System.Windows.Forms.Label lblRewardAmount;
-        private System.Windows.Forms.ListBox listData;
+        private System.Windows.Forms.DataGridView dgvData;
+        private System.Windows.Forms.DataGridViewImageColumn cardNo;
+        private System.Windows.Forms.Panel panel1;
+        private RoundButton rbtnPageDown;
+        private RoundButton rbtnPageUp;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
-    partial class FormBatchSaleCardCreate
+    partial class FormEntityCardBatchSale
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBatchSaleCardCreate));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEntityCardBatchSale));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -74,7 +74,6 @@
             this.cardNo = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlDgvItem = new System.Windows.Forms.Panel();
             this.pnlDgvItemContent = new System.Windows.Forms.Panel();
-            this.txtRechargeAmount = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.lblGiftAmount = new System.Windows.Forms.Label();
             this.lblCardNo = new System.Windows.Forms.Label();
             this.lblMemberNo = new System.Windows.Forms.Label();
@@ -82,9 +81,10 @@
             this.picDelete = new System.Windows.Forms.PictureBox();
             this.picDown = new System.Windows.Forms.PictureBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnGetCard = new System.Windows.Forms.Button();
+            this.txtRechargeAmount = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.btnGetCard = new System.Windows.Forms.Button();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -438,6 +438,7 @@
             this.btnBatchSetRechargeAmount.TabIndex = 81;
             this.btnBatchSetRechargeAmount.Text = "批量设置充值金额";
             this.btnBatchSetRechargeAmount.UseVisualStyleBackColor = false;
+            this.btnBatchSetRechargeAmount.Click += new System.EventHandler(this.btnBatchSetRechargeAmount_Click);
             // 
             // pnlPayType
             // 
@@ -651,25 +652,6 @@
             this.pnlDgvItemContent.Size = new System.Drawing.Size(808, 88);
             this.pnlDgvItemContent.TabIndex = 71;
             // 
-            // txtRechargeAmount
-            // 
-            this.txtRechargeAmount.BackColor = System.Drawing.Color.White;
-            this.txtRechargeAmount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtRechargeAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRechargeAmount.DecimalDigits = 2;
-            this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
-            this.txtRechargeAmount.LockFocus = true;
-            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRechargeAmount.MaxDeciaml = ((long)(5000));
-            this.txtRechargeAmount.MaxLength = 32767;
-            this.txtRechargeAmount.Name = "txtRechargeAmount";
-            this.txtRechargeAmount.NeedBoard = false;
-            this.txtRechargeAmount.OnlyNumber = true;
-            this.txtRechargeAmount.Size = new System.Drawing.Size(163, 44);
-            this.txtRechargeAmount.TabIndex = 132;
-            this.txtRechargeAmount.WaterText = "请选择";
-            // 
             // lblGiftAmount
             // 
             this.lblGiftAmount.AutoSize = true;
@@ -743,6 +725,44 @@
             this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewImageColumn1.Width = 227;
             // 
+            // btnGetCard
+            // 
+            this.btnGetCard.BackColor = System.Drawing.Color.White;
+            this.btnGetCard.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnGetCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGetCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGetCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetCard.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnGetCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.btnGetCard.Location = new System.Drawing.Point(855, 83);
+            this.btnGetCard.Name = "btnGetCard";
+            this.btnGetCard.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnGetCard.Size = new System.Drawing.Size(300, 42);
+            this.btnGetCard.TabIndex = 134;
+            this.btnGetCard.Text = "点击输入实体卡卡号";
+            this.btnGetCard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGetCard.UseVisualStyleBackColor = false;
+            this.btnGetCard.Click += new System.EventHandler(this.btnGetCard_Click);
+            // 
+            // txtRechargeAmount
+            // 
+            this.txtRechargeAmount.BackColor = System.Drawing.Color.White;
+            this.txtRechargeAmount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtRechargeAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRechargeAmount.DecimalDigits = 2;
+            this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
+            this.txtRechargeAmount.LockFocus = true;
+            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRechargeAmount.MaxDeciaml = ((long)(5000));
+            this.txtRechargeAmount.MaxLength = 32767;
+            this.txtRechargeAmount.Name = "txtRechargeAmount";
+            this.txtRechargeAmount.NeedBoard = false;
+            this.txtRechargeAmount.OnlyNumber = true;
+            this.txtRechargeAmount.Size = new System.Drawing.Size(163, 44);
+            this.txtRechargeAmount.TabIndex = 132;
+            this.txtRechargeAmount.WaterText = "请选择";
+            // 
             // rbtnPageDown
             // 
             this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
@@ -783,26 +803,7 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.Click += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
-            // btnGetCard
-            // 
-            this.btnGetCard.BackColor = System.Drawing.Color.White;
-            this.btnGetCard.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnGetCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnGetCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnGetCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGetCard.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btnGetCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.btnGetCard.Location = new System.Drawing.Point(855, 83);
-            this.btnGetCard.Name = "btnGetCard";
-            this.btnGetCard.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btnGetCard.Size = new System.Drawing.Size(300, 42);
-            this.btnGetCard.TabIndex = 134;
-            this.btnGetCard.Text = "点击输入实体卡卡号";
-            this.btnGetCard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGetCard.UseVisualStyleBackColor = false;
-            this.btnGetCard.Click += new System.EventHandler(this.btnGetCard_Click);
-            // 
-            // FormBatchSaleCardCreate
+            // FormEntityCardBatchSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -820,7 +821,7 @@
             this.Controls.Add(this.pnlHead);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "FormBatchSaleCardCreate";
+            this.Name = "FormEntityCardBatchSale";
             this.Text = "FormBatchSaleCardCreate";
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();

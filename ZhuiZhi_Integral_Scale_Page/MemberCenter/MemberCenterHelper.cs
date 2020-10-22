@@ -152,7 +152,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 BackHelper.ShowFormBackGround();
 
                 FormRechargeAmount formRechargeAmount = new FormRechargeAmount();
-                asf.AutoScaleControlTest(formRechargeAmount, 610, 800, 610 * MainModel.midScale, 800 * MainModel.midScale, true);
+                asf.AutoScaleControlTest(formRechargeAmount, 450, 600, 450 * MainModel.midScale, 600 * MainModel.midScale, true);
                 formRechargeAmount.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formRechargeAmount.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formRechargeAmount.Height) / 2);
                 formRechargeAmount.TopMost = true;
                 DialogResult dialog = formRechargeAmount.ShowDialog();
@@ -434,23 +434,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
         #region 批量售卡
-        private static FormBatchSaleCardCreate formBatchSaleCardCreate = null;
+        private static FormEntityCardBatchSale formEntityCardBatchSale = null;
 
-        public static void IniFormBatchSaleCardCreate()
+        public static void IniFormEntityCardBatchSale()
         {
             try
             {
-                if (formBatchSaleCardCreate != null)
+                if (formEntityCardBatchSale != null)
                 {
                     try
                     {
-                        formBatchSaleCardCreate.Dispose();
+                        formEntityCardBatchSale.Dispose();
                     }
                     catch { }
                 }
-                formBatchSaleCardCreate = new FormBatchSaleCardCreate();
-                asf.AutoScaleControlTest(formBatchSaleCardCreate, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+                formEntityCardBatchSale = new FormEntityCardBatchSale();
+                asf.AutoScaleControlTest(formEntityCardBatchSale, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formEntityCardBatchSale.Location = new System.Drawing.Point(0, 0);
             }
             catch (Exception ex)
             {
@@ -458,21 +458,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        public static void ShowFormBatchSaleCardCreate()
+        public static void ShowFormEntityCardBatchSale()
         {
             try
             {
-                if (formBatchSaleCardCreate == null || formBatchSaleCardCreate.IsDisposed)
+                if (formEntityCardBatchSale == null || formEntityCardBatchSale.IsDisposed)
                 {
-                    IniFormBatchSaleCardCreate();
+                    IniFormEntityCardBatchSale();
                 }
 
-                formBatchSaleCardCreate.ShowDialog();
-                formBatchSaleCardCreate.Dispose();
+                formEntityCardBatchSale.ShowDialog();
+                formEntityCardBatchSale.Dispose();
             }
             catch (Exception ex)
             {
-                formBatchSaleCardCreate = null;
+                formEntityCardBatchSale = null;
                 LogManager.WriteLog("显示批量售卡页面异常" + ex.Message);
             }
         }
@@ -549,7 +549,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                formBatchSaleCardCreate = null;
+                formEntityCardBatchSale = null;
                 LogManager.WriteLog("显示充值明细页面异常" + ex.Message);
             }
         }
@@ -593,7 +593,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                formBatchSaleCardCreate = null;
+                formEntityCardBatchSale = null;
                 LogManager.WriteLog("显示单用户充值明细页面异常" + ex.Message);
             }
         }
