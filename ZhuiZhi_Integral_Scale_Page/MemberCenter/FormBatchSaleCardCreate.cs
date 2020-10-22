@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BatchSaleCardUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
@@ -25,7 +26,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 接口访问类
         /// </summary>
-        HttpUtil httputil = new HttpUtil();
+        MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
         #endregion
 
         #region 分页事件
@@ -68,20 +69,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    Card card = httputil.GetCardNew(cardid, ref err);
+                    EntityCard entityCard = memberCenterHttpUtil.GetCard(cardid, ref err);
                     LoadingHelper.CloseForm();
-                    if (err != "" || card == null) //会员不存在
+                    if (err != "" || entityCard == null) //会员不存在
                     {
-                       MainModel.ShowLog(err);
+                        MainModel.ShowLog(err);
                         return;
                     }
                     else
                     {
-                        CurrentCards.Insert(0,new RechargeCardInfo()
+                        CurrentCards.Insert(0, new RechargeCardInfo()
                         {
                             CardNo = cardid,
-                            Status = card.Status,
-                            MemberNo =card.Memberid
+                            Status = entityCard.status,
+                            MemberId = entityCard.memberid
                         });
 
                         //int index = dgvCard.Rows.Count + 1;
@@ -94,7 +95,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("获取实体卡异常" + ex.Message,true);
+                MainModel.ShowLog("获取实体卡异常" + ex.Message, true);
             }
         }
 
@@ -172,7 +173,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 else
                 {
                     lblCardStatus.Text = "已开卡";
-                    lblMemberNo.Text = "会员卡号：" + rechargeCardInfo.MemberNo;
+                    lblMemberNo.Text = "会员卡号：" + rechargeCardInfo.MemberId;
                     lblCardStatus.Location = new Point(lblCardStatus.Location.X, locationY);
                     lblMemberNo.Visible = true;
                 }
@@ -239,23 +240,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
     public class RechargeCardInfo
     {
         string cardNo;
-        string memberNo;
+        string memberId;
 
         decimal rechargeAmount;
         decimal rewardAmount;
         string status;
 
 
-        public String CardNo
+        public string CardNo
         {
             get { return cardNo; }
             set { cardNo = value; }
         }
 
-        public String MemberNo
+        public string MemberId
         {
-            get { return memberNo; }
-            set { memberNo = value; }
+            get { return memberId; }
+            set { memberId = value; }
         }
 
         public decimal RechargeAmount
