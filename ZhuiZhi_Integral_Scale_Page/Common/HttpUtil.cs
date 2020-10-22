@@ -1151,8 +1151,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
-                LogManager.WriteLog("DEBUG", "交班结果：" + json);
-
 
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
