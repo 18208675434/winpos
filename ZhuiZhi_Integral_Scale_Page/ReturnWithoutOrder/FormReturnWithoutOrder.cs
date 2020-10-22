@@ -3026,7 +3026,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         picNetWeight.Left = lblNetWeight.Right;
                         lblTareWeight.Text = CurrentScaleResult.TareWeight + "";
                         picTareWeight.Left = lblTareWeight.Right;
-
+                        lblStable.Visible = CurrentScaleResult.WhetherStable;
                         if (MainModel.WhetherAutoCart && CurrentScaleResult.WhetherStable && CurrentScaleResult.NetWeight > 0 && SelectProduct != null && SelectProduct.goodstagid != 0)
                         {
                             //不放进委托 自动加购后点取消交易会卡死？？？？？
@@ -3071,6 +3071,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     else
                     {
+                        lblStable.Visible = false;
                         LastNetWeight = 0;
                     }
                 }
