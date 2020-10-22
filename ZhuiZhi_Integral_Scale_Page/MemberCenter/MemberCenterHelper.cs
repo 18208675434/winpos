@@ -331,56 +331,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-        /// <summary>
-        /// 显示修改手机号码-旧卡验证窗口
-        /// </summary>
-        /// <returns></returns>
-        public static bool ShowFormEntityCardVerify()
-        {
-            try
-            {
-
-                BackHelper.ShowFormBackGround();
-                FormChangePhonePhysicalCard frmchangephoneoldcard = new FormChangePhonePhysicalCard();
-                asf.AutoScaleControlTest(frmchangephoneoldcard, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
-                frmchangephoneoldcard.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephoneoldcard.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephoneoldcard.Height) / 2);
-                frmchangephoneoldcard.TopMost = true;
-                frmchangephoneoldcard.ShowDialog();
-
-                Application.DoEvents();
-                BackHelper.HideFormBackGround();
-                return frmchangephoneoldcard.DialogResult == DialogResult.OK;
-            }
-            catch (Exception ex)
-            {
-
-                return false;
-            }
-        }
-        /// <summary>
-        /// 显示修改手机号码-新卡验证窗口
-        /// </summary>
-        /// <returns></returns>
-        public static bool ShowFormChangePhoneNewCard()
-        {
-            try
-            {
-                FormChangePhoneNewCard frmchangephonenewcard = new FormChangePhoneNewCard();
-                asf.AutoScaleControlTest(frmchangephonenewcard, 380, 450, 380 * MainModel.midScale, 450 * MainModel.midScale, true);
-                frmchangephonenewcard.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonenewcard.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonenewcard.Height) / 2);
-                frmchangephonenewcard.TopMost = true;
-                frmchangephonenewcard.ShowDialog();
-                frmchangephonenewcard.Dispose();
-                Application.DoEvents();
-                return frmchangephonenewcard.DialogResult == DialogResult.OK;
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("更换手机号码新卡验证异常" + ex.Message);
-                return false;
-            }
-        }
+       
 
         /// <summary>
         /// 显示修改手机号码-新手机获取验证码窗口

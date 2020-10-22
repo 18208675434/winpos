@@ -321,12 +321,6 @@
     <Compile Include="MemberCenter\FormChangePhoneConfirm.Designer.cs">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormChangePhoneNewCard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormChangePhoneNewCard.Designer.cs">
-      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberCenter\FormChangePhoneNewPhoneSms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -344,12 +338,6 @@
     </Compile>
     <Compile Include="MemberCenter\FormChangePhonePayPwd.Designer.cs">
       <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.Designer.cs">
-      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormChengPhoneSmsCode.cs">
       <SubType>Form</SubType>
@@ -1286,9 +1274,6 @@
     <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormChangePhoneNewCard.resx">
-      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhoneNewPhoneSms.resx">
       <DependentUpon>FormChangePhoneNewPhoneSms.cs</DependentUpon>
     </EmbeddedResource>
@@ -1297,9 +1282,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhonePayPwd.resx">
       <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormChangePhonePhysicalCard.resx">
-      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChengPhoneSmsCode.resx">
       <DependentUpon>FormChengPhoneSmsCode.cs</DependentUpon>
