@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
@@ -225,7 +226,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         
         #region 绑卡
         private static FormEntityCardBindMedia formBindEntityCardMedia = null;
-        public static void ShowFormBindEntityCardMedia(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.EntityCard entityCard)
+        public static void ShowFormBindEntityCardMedia(OutEntityCardResponseDto entityCard)
         {
             try
             {

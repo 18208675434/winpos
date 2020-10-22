@@ -536,11 +536,41 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
         #region 实体卡
+        /// <summary> 获取实体卡
+        /// </summary>
+        /// <returns></returns>
+        public OutEntityCardResponseDto GetCardNew(string oldcardid, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/oldentitycard/getcardnew";
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("oldcardid", oldcardid);
+                string json = HttpGET(url, sort);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    OutEntityCardResponseDto entityCard = JsonConvert.DeserializeObject<OutEntityCardResponseDto>(rd.data.ToString());
+                    return entityCard;
+                }
+                else
+                {
+                    LogManager.WriteLog("Error", "getcardnew:" + oldcardid + "失败" + json);
+                    errormsg = rd.message;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "GetCard异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+            }
+            return null;
+        }
 
         /// <summary> 获取旧实体卡
         /// </summary>
         /// <returns></returns>
-        public EntityCard GetCard(string oldcardid, ref string errormsg)
+        public OutEntityCardResponseDto GetCard(string oldcardid, ref string errormsg)
         {
             try
             {
@@ -551,7 +581,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
-                    EntityCard entityCard = JsonConvert.DeserializeObject<EntityCard>(rd.data.ToString());
+                    OutEntityCardResponseDto entityCard = JsonConvert.DeserializeObject<OutEntityCardResponseDto>(rd.data.ToString());
                     return entityCard;
                 }
                 else
@@ -628,8 +658,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             return false;
         }
-        #endregion
-
 
         /// <summary> 绑卡、关联旧卡
         /// </summary>
@@ -660,6 +688,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
+        #endregion
+
+
+       
 
         #region  访问服务端
         private HttpRequest httprequest = new HttpRequest();

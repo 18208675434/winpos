@@ -765,7 +765,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
 
-                MemberCenterHelper.ShowFormEntityCardList(MainModel.CurrentMember.outentitycards);
+                if (MemberCenterHelper.ShowFormEntityCardList(MainModel.CurrentMember.outentitycards))
+                {
+                    UpdateMemberInfo();
+                }
 
             }
             catch (Exception ex)
@@ -951,7 +954,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    EntityCard entityCard = membercenterutil.GetCard(entityCardNo, ref err);
+                    OutEntityCardResponseDto entityCard = membercenterutil.GetCard(entityCardNo, ref err);
                     LoadingHelper.CloseForm();
                     if (!string.IsNullOrEmpty(err) || entityCard == null)
                     {

@@ -34,7 +34,7 @@
             this.tlpType = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblBalanceDesc = new System.Windows.Forms.Label();
             this.lblMemberId = new System.Windows.Forms.Label();
             this.lblEntityCardNo = new System.Windows.Forms.Label();
             this.lblBalance = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.lblBalanceDesc);
             this.panel1.Controls.Add(this.lblMemberId);
             this.panel1.Controls.Add(this.lblEntityCardNo);
             this.panel1.Controls.Add(this.lblBalance);
@@ -120,17 +120,17 @@
             this.label2.TabIndex = 111;
             this.label2.Text = "会员账号：";
             // 
-            // label3
+            // lblBalanceDesc
             // 
-            this.label3.AutoSize = true;
-            this.label3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(107, 300);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(276, 21);
-            this.label3.TabIndex = 112;
-            this.label3.Text = "(关联后实体卡余额将会转入会员账户)";
+            this.lblBalanceDesc.AutoSize = true;
+            this.lblBalanceDesc.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblBalanceDesc.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblBalanceDesc.ForeColor = System.Drawing.Color.Gray;
+            this.lblBalanceDesc.Location = new System.Drawing.Point(341, 262);
+            this.lblBalanceDesc.Name = "lblBalanceDesc";
+            this.lblBalanceDesc.Size = new System.Drawing.Size(276, 21);
+            this.lblBalanceDesc.TabIndex = 112;
+            this.lblBalanceDesc.Text = "(关联后实体卡余额将会转入会员账户)";
             // 
             // lblMemberId
             // 
@@ -158,7 +158,7 @@
             // 
             this.lblBalance.AutoSize = true;
             this.lblBalance.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblBalance.Location = new System.Drawing.Point(220, 256);
+            this.lblBalance.Location = new System.Drawing.Point(220, 258);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(106, 25);
             this.lblBalance.TabIndex = 104;
@@ -269,7 +269,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblBalanceDesc;
         private System.Windows.Forms.Label lblMemberId;
         private System.Windows.Forms.Label lblEntityCardNo;
         private System.Windows.Forms.Label lblBalance;
