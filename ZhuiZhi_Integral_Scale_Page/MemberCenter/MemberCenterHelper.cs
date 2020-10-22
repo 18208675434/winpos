@@ -145,6 +145,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             return false;
         }
 
+        public static bool ShowFormRechargeAmount()
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormRechargeAmount formRechargeAmount = new FormRechargeAmount();
+                asf.AutoScaleControlTest(formRechargeAmount, 610, 800, 610 * MainModel.midScale, 800 * MainModel.midScale, true);
+                formRechargeAmount.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formRechargeAmount.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formRechargeAmount.Height) / 2);
+                formRechargeAmount.TopMost = true;
+                DialogResult dialog = formRechargeAmount.ShowDialog();
+                BackHelper.HideFormBackGround();
+
+                formRechargeAmount.Dispose();
+                Application.DoEvents();
+                return dialog == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                BackHelper.HideFormBackGround();
+                LogManager.WriteLog("显示会员优惠券列表异常" + ex.Message);
+            }
+            return false;
+        }
+
         public static bool ShowFormNoPayPwd()
         {
             try

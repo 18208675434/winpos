@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
@@ -18,21 +19,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
         public FormRechargeAmount()
         {
-            InitializeComponent();         
+            InitializeComponent();
         }
 
         private void FormRechargeAmount_Shown(object sender, EventArgs e)
         {
-          
+            BindData();
         }
 
         void BindData()
         {
-            foreach (var item in  MainModel.LstRechargeTemplates)
+            foreach (var item in MainModel.LstRechargeTemplates)
             {
-
+                listData.Items.Add(GetItem(item));
             }
         }
+
+        Bitmap GetItem(ListAllTemplate item)
+        {
+            lblAmount.Text = item.amount.ToString();
+            lblRewardAmount.Text = item.rewardamount.ToString();
+            Bitmap picItem = (Bitmap)MainModel.GetControlImage(pnlItem);
+            return picItem;
+        }
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {
