@@ -171,7 +171,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                    
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    member = httpUtil.GetMember(newphone, ref err);
+                    member = httpUtil.GetMember(numbervalue, ref err);
                     LoadingHelper.CloseForm();
                     if (!string.IsNullOrEmpty(err))
                     {
