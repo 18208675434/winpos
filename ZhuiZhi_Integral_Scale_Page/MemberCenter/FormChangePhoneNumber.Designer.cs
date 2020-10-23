@@ -261,7 +261,7 @@
             this.lblChangePhone.AutoSize = true;
             this.lblChangePhone.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblChangePhone.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblChangePhone.Location = new System.Drawing.Point(330, 337);
+            this.lblChangePhone.Location = new System.Drawing.Point(348, 337);
             this.lblChangePhone.Name = "lblChangePhone";
             this.lblChangePhone.Size = new System.Drawing.Size(46, 24);
             this.lblChangePhone.TabIndex = 29;
@@ -284,7 +284,7 @@
             this.lblMerge.AutoSize = true;
             this.lblMerge.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblMerge.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.lblMerge.Location = new System.Drawing.Point(323, 330);
+            this.lblMerge.Location = new System.Drawing.Point(341, 330);
             this.lblMerge.Name = "lblMerge";
             this.lblMerge.Size = new System.Drawing.Size(154, 25);
             this.lblMerge.TabIndex = 26;
