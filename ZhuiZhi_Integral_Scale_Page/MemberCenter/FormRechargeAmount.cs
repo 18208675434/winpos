@@ -57,18 +57,41 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex<0)
+            if (e.RowIndex < 0)
             {
                 return;
             }
+
             Bitmap bmp = (Bitmap)dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-            ListAllTemplate listAllTemplate = (ListAllTemplate)bmp.Tag;           
+            listAllTemplate = (ListAllTemplate)bmp.Tag;
             if (listAllTemplate.id == 0)
             {
-                listAllTemplate = MemberCenterHelper.ShowFormCustomerChange();
+                FormBackGround tempfrmback=null;
+                try
+                {
+                    tempfrmback = new FormBackGround();
+                    tempfrmback = new FormBackGround();
+                    tempfrmback.Location = new System.Drawing.Point(0, 0);
+                    tempfrmback.TopMost = true;
+                    tempfrmback.Show();
+
+                    listAllTemplate = MemberCenterHelper.ShowFormCustomerChange();
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                    if (tempfrmback != null)
+                    {
+                        tempfrmback.Close();
+                    }
+                }
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
+
+
         }
 
         #region 分页

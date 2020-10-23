@@ -21,7 +21,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 当前购物车商品
         /// </summary>
-        private List<RechargeCardInfo> CurrentCards = new List<RechargeCardInfo>();
+        private List<RechargeCardInfo> lstCard = new List<RechargeCardInfo>();
 
         /// <summary>
         /// 接口访问类
@@ -63,34 +63,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-
                 string cardid = DialogHelper.ShowFormCode("输入实体卡号", "请输入实体卡卡号");
                 if (!string.IsNullOrEmpty(cardid))
                 {
+                    if (lstCard.Exists(e1=>e1.cardid==cardid))
+                    {
+                        MainModel.ShowLog("实体卡号："+cardid+" 已存在");
+                         return;
+                    }
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    OutEntityCardResponseDto entityCard = memberCenterHttpUtil.GetCardNew(cardid, ref err);
+                    OutEntityCardResponseDto entityCard = memberCenterHttpUtil.GetCard(cardid, ref err);
                     LoadingHelper.CloseForm();
                     if (err != "" || entityCard == null) //会员不存在
                     {
                         MainModel.ShowLog(err);
                         return;
                     }
-                    else
+                    if (entityCard.balance>0)
                     {
-                        CurrentCards.Insert(0, new RechargeCardInfo()
-                        {
-                            cardid = cardid,
-                            status = entityCard.status,
-                            memberid = entityCard.mobile
-                        });
-
-                        //int index = dgvCard.Rows.Count + 1;
-                        //CurrentCards.Add(new RechargeCardInfo() 
-                        //{ CardNo = index * 1000000 + "", RechargeAmount = (index % 2) * 100, RewardAmount = (index % 2) * 10, 
-                        //    Status = (index % 2)+"", MemberNo = "B" + index * 1000000 });
-                        RefreshDgv();
+                        MainModel.ShowLog("批量售卡仅支持未开卡且无预储值金额的实体卡，请检查后重试");
+                        return;
                     }
+                    lstCard.Insert(0, new RechargeCardInfo()
+                    {
+                        cardid = cardid,
+                        status = entityCard.status,
+                        memberid = entityCard.mobile
+                    });
+
+                    //int index = dgvCard.Rows.Count + 1;
+                    //CurrentCards.Add(new RechargeCardInfo() 
+                    //{ CardNo = index * 1000000 + "", RechargeAmount = (index % 2) * 100, RewardAmount = (index % 2) * 10, 
+                    //    Status = (index % 2)+"", MemberNo = "B" + index * 1000000 });
+                    RefreshDgv();
                 }
             }
             catch (Exception ex)
@@ -101,7 +107,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnBatchSetRechargeAmount_Click(object sender, EventArgs e)
         {
-            if (dgvCard.Rows.Count==0)
+            if (dgvCard.Rows.Count == 0)
             {
                 MainModel.ShowLog("请添加实体卡");
                 return;
@@ -109,11 +115,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
             if (customtemplate != null)
             {
-                foreach (var item in CurrentCards)
+                foreach (var item in lstCard)
                 {
                     item.rechargeamount = customtemplate.amount;
                     item.rewardamount = customtemplate.rewardamount;
-                }              
+                }
                 RefreshDgv();
             }
             this.Activate();
@@ -124,13 +130,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             decimal totalRechargeAmount = 0;
             decimal totalGiftAmount = 0;
             decimal totalRechargeAll = 0;
-            foreach (var item in CurrentCards)
+            foreach (var item in lstCard)
             {
                 totalRechargeAmount += item.rechargeamount;
                 totalGiftAmount += item.rewardamount;
             }
             totalRechargeAll = totalRechargeAmount + totalGiftAmount;
-            lbCardSum.Text = string.Format("({0}个实体卡卡号)", CurrentCards.Count);
+            lbCardSum.Text = string.Format("({0}个实体卡卡号)", lstCard.Count);
             lblTotalRechargeAmount.Text = "￥" + totalRechargeAmount.ToString("f2");
             lblTotalGiftAmount.Text = "￥" + totalGiftAmount.ToString("f2");
             lblTotalRechargeAll.Text = "￥" + totalRechargeAll.ToString("f2");
@@ -143,7 +149,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 dgvCard.Rows.Clear();
-                if (CurrentCards == null || CurrentCards.Count == 0)
+                if (lstCard == null || lstCard.Count == 0)
                 {
                     return;
                 }
@@ -151,16 +157,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 //CurrentCards.Reverse();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
                 int startindex = (CurrentPage - 1) * PageSize;
-                int lastindex = Math.Min(CurrentCards.Count - 1, startindex + PageSize - 1);
+                int lastindex = Math.Min(lstCard.Count - 1, startindex + PageSize - 1);
 
-                List<RechargeCardInfo> lstLoadingCards = CurrentCards.GetRange(startindex, lastindex - startindex + 1);
+                List<RechargeCardInfo> lstLoadingCards = lstCard.GetRange(startindex, lastindex - startindex + 1);
                 foreach (RechargeCardInfo rechargeCardInfo in lstLoadingCards)
                 {
                     dgvCard.Rows.Add(GetDgvRow(rechargeCardInfo));
                 }
 
-                rbtnPageDown.WhetherEnable = CurrentCards.Count > CurrentPage * PageSize;
-                CurrentCards.Reverse();
+                rbtnPageDown.WhetherEnable = lstCard.Count > CurrentPage * PageSize;
+               
                 Application.DoEvents();
                 dgvCard.ClearSelection();
                 this.Activate();
@@ -184,19 +190,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblCardNo.Text = rechargeCardInfo.cardid;
                 txtRechargeAmount.Text = rechargeCardInfo.rechargeamount.ToString();
                 lblGiftAmount.Text = rechargeCardInfo.rewardamount.ToString();
-                if (rechargeCardInfo.status == "0")
-                {
+                //if (rechargeCardInfo.status == "0")
+                //{
                     lblCardStatus.Text = GetStatusDesc(rechargeCardInfo.status);
                     lblCardStatus.Location = new Point(lblCardStatus.Location.X, lblCardNo.Location.Y);
                     lblMemberNo.Visible = false;
-                }
-                else
-                {
-                    lblCardStatus.Text = "已开卡";
-                    lblMemberNo.Text = "会员卡号：" + rechargeCardInfo.memberid;
-                    lblCardStatus.Location = new Point(lblCardStatus.Location.X, locationY);
-                    lblMemberNo.Visible = true;
-                }
+                //}
+                //else
+                //{
+                //    lblCardStatus.Text = "已开卡";
+                //    lblMemberNo.Text = "会员卡号：" + rechargeCardInfo.memberid;
+                //    lblCardStatus.Location = new Point(lblCardStatus.Location.X, locationY);
+                //    lblMemberNo.Visible = true;
+                //}
 
 
                 Bitmap bmpPro = new Bitmap(pnlDgvItemContent.Width, pnlDgvItemContent.Height);
@@ -226,20 +232,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
 
                 Bitmap bmp = (Bitmap)dgvCard.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
                 RechargeCardInfo rechargeCardInfo = (RechargeCardInfo)bmp.Tag;
-
                 Point po = GlobalUtil.GetCursorPos();
 
                 //修改充值金额
                 if (po.X < (dgvCard.Left + txtRechargeAmount.Right + 10) && po.X > (dgvCard.Left + txtRechargeAmount.Left - 10))
                 {
-                    ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();                   
+                    ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
                     if (customtemplate != null)
                     {
                         rechargeCardInfo.rechargeamount = customtemplate.amount;
                         rechargeCardInfo.rewardamount = customtemplate.rewardamount;
-                        RefreshDgv();                  
+                        RefreshDgv();
                     }
                     this.Activate();
                 }
@@ -249,7 +253,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     if (ConfirmHelper.Confirm("确认删除？", "实体卡卡号：" + rechargeCardInfo.cardid))
                     {
-                        CurrentCards.Remove(rechargeCardInfo);
+                        lstCard.Remove(rechargeCardInfo);
                         RefreshDgv();
                     }
                 }
@@ -263,22 +267,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         string GetStatusDesc(string status)
         {
-            if (status == "INIT")
-            {
-                return "未使用";
-            }
-            if (status == "LOST")
-            {
-                return "已挂失";
-            }
-            if (status == "ACTIVE")
-            {
-                return "已激活";
-            }
-            return status;
+            return "未开卡";//返回军事未开卡数据
+            //if (status == "INIT")
+            //{
+            //    return "未使用";
+            //}
+            //if (status == "LOST")
+            //{
+            //    return "已挂失";
+            //}
+            //if (status == "ACTIVE")
+            //{
+            //    return "已激活";
+            //}
+            //return status;
         }
 
-        
+
     }
 
     public class RechargeCardInfo
@@ -292,5 +297,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
     }
 
-  
+
 }

@@ -662,8 +662,8 @@
             this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
             this.txtRechargeAmount.LockFocus = true;
             this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRechargeAmount.MaxDeciaml = ((long)(5000));
-            this.txtRechargeAmount.MaxLength = 32767;
+            this.txtRechargeAmount.MaxDeciaml = ((long)(50000));
+            this.txtRechargeAmount.MaxLength = 10;
             this.txtRechargeAmount.Name = "txtRechargeAmount";
             this.txtRechargeAmount.NeedBoard = false;
             this.txtRechargeAmount.OnlyNumber = true;

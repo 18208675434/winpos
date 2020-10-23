@@ -171,7 +171,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                    
                     string err = "";
                     LoadingHelper.ShowLoadingScreen();
-                    member = httpUtil.GetMember(newphone, ref err);
+                    var newNember = httpUtil.GetMember(numbervalue, ref err);
                     LoadingHelper.CloseForm();
                     if (!string.IsNullOrEmpty(err))
                     {
@@ -180,7 +180,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
 
                     BackHelper.ShowFormBackGround();
-                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(member);
+                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(newNember);
                     asf.AutoScaleControlTest(pwd, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
                     pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
                     pwd.TopMost = true;

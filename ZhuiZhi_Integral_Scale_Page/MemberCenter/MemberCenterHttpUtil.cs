@@ -359,14 +359,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="mobile"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public bool Updatemembermobile(string newphone, ref string errormsg)
+        public bool Updatemembermobile(string token,string newphone, ref string errormsg)
         {
             try
             {
                 string url = "/pos/member/memberheader/updatemembermobile";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("token", MainModel.CurrentMember.memberheaderresponsevo.token);
+                sort.Add("token",token);
                 sort.Add("mobile", newphone);
 
                 string json = HttpGET(url, sort);
