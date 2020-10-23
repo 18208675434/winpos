@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEntityCardBatchSale));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -74,6 +74,7 @@
             this.cardNo = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlDgvItem = new System.Windows.Forms.Panel();
             this.pnlDgvItemContent = new System.Windows.Forms.Panel();
+            this.txtRechargeAmount = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.lblGiftAmount = new System.Windows.Forms.Label();
             this.lblCardNo = new System.Windows.Forms.Label();
             this.lblMemberNo = new System.Windows.Forms.Label();
@@ -82,7 +83,6 @@
             this.picDown = new System.Windows.Forms.PictureBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnGetCard = new System.Windows.Forms.Button();
-            this.txtRechargeAmount = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.pnlHead.SuspendLayout();
@@ -577,26 +577,26 @@
             this.dgvCard.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCard.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvCard.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCard.ColumnHeadersHeight = 30;
             this.dgvCard.ColumnHeadersVisible = false;
             this.dgvCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cardNo});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCard.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCard.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCard.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvCard.GridColor = System.Drawing.Color.LightGray;
             this.dgvCard.Location = new System.Drawing.Point(11, 140);
@@ -615,12 +615,12 @@
             // 
             // cardNo
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cardNo.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle5.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle5.NullValue")));
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cardNo.DefaultCellStyle = dataGridViewCellStyle5;
             this.cardNo.FillWeight = 100.195F;
             this.cardNo.HeaderText = "实体卡";
             this.cardNo.Name = "cardNo";
@@ -651,6 +651,25 @@
             this.pnlDgvItemContent.Name = "pnlDgvItemContent";
             this.pnlDgvItemContent.Size = new System.Drawing.Size(808, 88);
             this.pnlDgvItemContent.TabIndex = 71;
+            // 
+            // txtRechargeAmount
+            // 
+            this.txtRechargeAmount.BackColor = System.Drawing.Color.White;
+            this.txtRechargeAmount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtRechargeAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRechargeAmount.DecimalDigits = 2;
+            this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
+            this.txtRechargeAmount.LockFocus = true;
+            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRechargeAmount.MaxDeciaml = ((long)(5000));
+            this.txtRechargeAmount.MaxLength = 32767;
+            this.txtRechargeAmount.Name = "txtRechargeAmount";
+            this.txtRechargeAmount.NeedBoard = false;
+            this.txtRechargeAmount.OnlyNumber = true;
+            this.txtRechargeAmount.Size = new System.Drawing.Size(163, 44);
+            this.txtRechargeAmount.TabIndex = 132;
+            this.txtRechargeAmount.WaterText = "请选择";
             // 
             // lblGiftAmount
             // 
@@ -744,25 +763,6 @@
             this.btnGetCard.UseVisualStyleBackColor = false;
             this.btnGetCard.Click += new System.EventHandler(this.btnGetCard_Click);
             // 
-            // txtRechargeAmount
-            // 
-            this.txtRechargeAmount.BackColor = System.Drawing.Color.White;
-            this.txtRechargeAmount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtRechargeAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRechargeAmount.DecimalDigits = 2;
-            this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
-            this.txtRechargeAmount.LockFocus = true;
-            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRechargeAmount.MaxDeciaml = ((long)(5000));
-            this.txtRechargeAmount.MaxLength = 32767;
-            this.txtRechargeAmount.Name = "txtRechargeAmount";
-            this.txtRechargeAmount.NeedBoard = false;
-            this.txtRechargeAmount.OnlyNumber = true;
-            this.txtRechargeAmount.Size = new System.Drawing.Size(163, 44);
-            this.txtRechargeAmount.TabIndex = 132;
-            this.txtRechargeAmount.WaterText = "请选择";
-            // 
             // rbtnPageDown
             // 
             this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
@@ -781,7 +781,7 @@
             this.rbtnPageDown.TabIndex = 133;
             this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
             this.rbtnPageDown.WhetherEnable = false;
-            this.rbtnPageDown.Click += new System.EventHandler(this.rbtnPageDown_ButtonClick);
+            this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
             // 
             // rbtnPageUp
             // 
@@ -801,7 +801,7 @@
             this.rbtnPageUp.TabIndex = 132;
             this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
             this.rbtnPageUp.WhetherEnable = false;
-            this.rbtnPageUp.Click += new System.EventHandler(this.rbtnPageUp_ButtonClick);
+            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
             // FormEntityCardBatchSale
             // 

@@ -1675,6 +1675,7 @@
     <None Include="Resources\amount.png" />
     <None Include="Resources\balance.png" />
     <None Include="Resources\check.png" />
+    <None Include="Resources\add.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />

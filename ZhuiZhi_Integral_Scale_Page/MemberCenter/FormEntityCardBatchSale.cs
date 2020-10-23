@@ -101,7 +101,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnBatchSetRechargeAmount_Click(object sender, EventArgs e)
         {
-            MemberCenterHelper.ShowFormRechargeAmount();
+            if (dgvCard.Rows.Count==0)
+            {
+                MainModel.ShowLog("请添加实体卡");
+                return;
+            }
+            ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
+            if (customtemplate != null)
+            {
+                foreach (var item in CurrentCards)
+                {
+                    item.rechargeamount = customtemplate.amount;
+                    item.rewardamount = customtemplate.rewardamount;
+                }              
+                RefreshDgv();
+            }
+            this.Activate();
         }
 
         public void RefreshDgv()
@@ -219,15 +234,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 //修改充值金额
                 if (po.X < (dgvCard.Left + txtRechargeAmount.Right + 10) && po.X > (dgvCard.Left + txtRechargeAmount.Left - 10))
                 {
-                    ListAllTemplate customtemplate = MemberCenterHelper.ShowFormCustomerChange();
-                    this.Activate();
+                    ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();                   
                     if (customtemplate != null)
                     {
                         rechargeCardInfo.rechargeamount = customtemplate.amount;
                         rechargeCardInfo.rewardamount = customtemplate.rewardamount;
                         RefreshDgv();                  
                     }
-                   
+                    this.Activate();
                 }
 
                 //删除

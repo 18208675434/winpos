@@ -16,7 +16,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
     public partial class FormRechargeAmount : Form
     {
+        public ListAllTemplate listAllTemplate;
         MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
+        List<ListAllTemplate> lstRechargeTemplates;
         public FormRechargeAmount()
         {
             InitializeComponent();
@@ -24,9 +26,52 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormRechargeAmount_Shown(object sender, EventArgs e)
         {
+            string errormsg = "";
+            if (MainModel.LstRechargeTemplates == null)
+            {
+                LoadingHelper.ShowLoadingScreen();
+                MainModel.LstRechargeTemplates = new HttpUtil().ListAllTemplate(ref errormsg);
+                LoadingHelper.CloseForm();
+
+            }
+            if (lstRechargeTemplates == null)
+            {
+                if (MainModel.LstRechargeTemplates != null)
+                {
+                    lstRechargeTemplates = MainModel.LstRechargeTemplates.GetRange(0, MainModel.LstRechargeTemplates.Count);
+                }
+                else
+                {
+                    lstRechargeTemplates = new List<ListAllTemplate>();
+                }
+                lstRechargeTemplates.Add(new ListAllTemplate());
+            }
+
+            if (lstRechargeTemplates.Count > 7)
+            {
+                //计算分页按钮位置
+                this.dgvData.Height = this.dgvData.Height - dgvData.Height / 7;
+            }
             BindData();
         }
 
+        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex<0)
+            {
+                return;
+            }
+            Bitmap bmp = (Bitmap)dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            ListAllTemplate listAllTemplate = (ListAllTemplate)bmp.Tag;           
+            if (listAllTemplate.id == 0)
+            {
+                listAllTemplate = MemberCenterHelper.ShowFormCustomerChange();
+            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        #region 分页
         private int CurrentPage = 1;
 
         private int PageSize = 7;
@@ -50,29 +95,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             CurrentPage++;
             BindData();
         }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
 
         void BindData()
         {
-            string errormsg = "";
-            if (MainModel.LstRechargeTemplates == null)
-            {
-                LoadingHelper.ShowLoadingScreen();
-                MainModel.LstRechargeTemplates = new HttpUtil().ListAllTemplate(ref errormsg);
-                LoadingHelper.CloseForm();
-            }
+            dgvData.Rows.Clear();
+            rbtnPageUp.WhetherEnable = CurrentPage > 1;
+            int startindex = (CurrentPage - 1) * PageSize;
+            int lastindex = Math.Min(lstRechargeTemplates.Count - 1, startindex + PageSize - 1);
 
-            if (MainModel.LstRechargeTemplates != null)
+            List<ListAllTemplate> pageRechargeTemplates = lstRechargeTemplates.GetRange(startindex, lastindex - startindex + 1);
+            foreach (var item in pageRechargeTemplates)
             {
-                foreach (var item in MainModel.LstRechargeTemplates)
+                if (item.id > 0)
                 {
-                    if (MainModel.LstRechargeTemplates.Count + 1 > 7)
-                    {
-                        //计算分页按钮位置
-                    }
-                    dgvData.Rows.Add(GetItem(item));
+                    pnlCustom.Visible = false;
+                    pnlTemplate.Visible = true;
                 }
+                else
+                {
+                    pnlCustom.Visible = true;
+                    pnlTemplate.Visible = false;
+                }
+                Bitmap bitmap = GetItem(item);
+                bitmap.Tag = item;
+                dgvData.Rows.Add(bitmap);
             }
+            rbtnPageDown.WhetherEnable = lstRechargeTemplates.Count > CurrentPage * PageSize;
+            Application.DoEvents();
             dgvData.ClearSelection();
+            this.Activate();
         }
 
         Bitmap GetItem(ListAllTemplate item)
@@ -83,11 +139,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             return picItem;
         }
 
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         #region 窗体处理
         private void FormConfirm_Resize(object sender, EventArgs e)
@@ -150,9 +201,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         #endregion
 
-        private void pnlItem_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
     }
 }

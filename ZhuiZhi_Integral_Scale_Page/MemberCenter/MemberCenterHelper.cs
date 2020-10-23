@@ -145,7 +145,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             return false;
         }
 
-        public static bool ShowFormRechargeAmount()
+        /// <summary> 返回充值模板
+        /// </summary>
+        /// <returns></returns>
+        public static ListAllTemplate ShowFormRechargeAmount()
         {
             try
             {
@@ -160,14 +163,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 formRechargeAmount.Dispose();
                 Application.DoEvents();
-                return dialog == DialogResult.OK;
+                if (dialog == DialogResult.OK)
+                {
+                    return formRechargeAmount.listAllTemplate;
+                }
             }
             catch (Exception ex)
             {
                 BackHelper.HideFormBackGround();
                 LogManager.WriteLog("显示会员优惠券列表异常" + ex.Message);
             }
-            return false;
+            return null;
         }
 
         public static bool ShowFormNoPayPwd()
