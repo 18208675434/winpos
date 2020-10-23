@@ -1377,7 +1377,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             member.entrancecode = member.memberheaderresponsevo.mobile;
                         }
                         
-                        lblMemberPhone.Text = "手机号：" + member.entrancecode;
+                        lblMemberPhone.Text = "手机号：" + member.memberinfo;
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 
@@ -3921,18 +3921,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         if (MainModel.CurrentMember != null)
                         {
-                            string ErrorMsgMember = "";
-                            Member member = httputil.GetMember(MainModel.CurrentMember.entrancecode, ref ErrorMsgMember);
-
-                            if (ErrorMsgMember != "" || member == null) //会员不存在
-                            {
-                                ClearMember();
-                                ShowLog(ErrorMsgMember, false);
-                            }
-                            else
-                            {
-                                LoadMember(member);
-                            }
+                            LoadMember(MainModel.CurrentMember);
                         }
                         else
                         {
