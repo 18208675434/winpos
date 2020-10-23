@@ -58,17 +58,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
                 lblMenu.Left = picMenu.Right;
                
-
                 Application.DoEvents();
 
                 IsEnable = false;
                 LoadingHelper.ShowLoadingScreen();
 
-
                 UpdateMemberInfo();
-
                 LoadTemplate(true);
-
 
                 this.BeginInvoke(new Action(delegate()
                 {
@@ -698,28 +694,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                IsEnable = false;
-                listall.CustomId = 0;
 
-                LoadingHelper.ShowLoadingScreen();
                 MainModel.ShowLog("充值成功", false);
 
+                this.Close();
+                //IsEnable = false;
+                //listall.CustomId = 0;
 
-                CurrentTemplate = null;
-                custommoney.Text = "+";
-                custommoney.ForeColor = Color.Blue;
-                custommoney.Font = new System.Drawing.Font("微软雅黑", 20, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                customdiscount.Text = "自定义金额";
-                customdiscount.ForeColor = Color.Blue;
-                customdiscount.Font = new System.Drawing.Font("微软雅黑", 16, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                LoadTemplate(false);
-                LoadBalanceAccount();
-
-                MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
+                //LoadingHelper.ShowLoadingScreen();
+                //MainModel.ShowLog("充值成功", false);
 
 
-                IsEnable = true;
-                LoadingHelper.CloseForm();
+                //CurrentTemplate = null;
+                //custommoney.Text = "+";
+                //custommoney.ForeColor = Color.Blue;
+                //custommoney.Font = new System.Drawing.Font("微软雅黑", 20, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                //customdiscount.Text = "自定义金额";
+                //customdiscount.ForeColor = Color.Blue;
+                //customdiscount.Font = new System.Drawing.Font("微软雅黑", 16, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                //LoadTemplate(false);
+                //LoadBalanceAccount();
+
+                //MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
+
+
+                //IsEnable = true;
+                //LoadingHelper.CloseForm();
 
             }
             catch (Exception ex)
