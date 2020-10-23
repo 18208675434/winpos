@@ -253,7 +253,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
                 cartoriginaltotal += pro.price.origintotal;
                 if (pro.pricetagid == 1 || pro.pricetagid == 4)
                 {
-                    cartmemberpromo += Math.Abs(pro.price.origintotal - pro.price.total);
+                    if (IsEnjoyMemberPrice())
+                    {
+                        cartmemberpromo += Math.Abs(pro.price.origintotal - pro.price.total);
+
+                    }
                 }
 
                 pro.price.originsaleprice = pro.price.saleprice;
@@ -267,6 +271,38 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
 
             AddOrderPriceDetail(cart, "商品金额", cart.totalpayment, "");
 
+        }
+
+        private static bool IsEnjoyMemberPrice()
+        {
+            try
+            {
+                if (!PromotionCache.getInstance().isLoginMember)
+                {
+                    return false;
+                }
+
+                if (MainModel.CurrentMember.outentitycards == null || MainModel.CurrentMember.outentitycards.Count == 0)
+                {
+                    return true;
+                }
+
+                OutEntityCardResponseDto outcard = MainModel.CurrentMember.outentitycards.FirstOrDefault(r => r.outcardid == MainModel.CurrentMember.entrancecode);
+
+                if (outcard == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return outcard.enjoymemberprice;
+                }
+
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

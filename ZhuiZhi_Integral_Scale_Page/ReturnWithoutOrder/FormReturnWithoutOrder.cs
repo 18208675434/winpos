@@ -613,6 +613,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+
+                lblSearchShuiyin.Visible = string.IsNullOrEmpty(txtSearch.Text);
                 if (isfresh)
                 {
                     return;
@@ -621,7 +623,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 Thread threadItemExedate = new Thread(Upthread);
                 threadItemExedate.IsBackground = true;
                 threadItemExedate.Start();
-
             }
             catch (Exception ex)
             {
@@ -648,14 +649,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-                    if (txtSearch.Text.Length == 0)
-                    {
-                        lblSearchShuiyin.Visible = true;
-                    }
-                    else
-                    {
-                        lblSearchShuiyin.Visible = false;
-                    }
 
                     if (!IsEnable)
                     {

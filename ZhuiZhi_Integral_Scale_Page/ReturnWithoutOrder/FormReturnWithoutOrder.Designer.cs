@@ -143,6 +143,7 @@
             this.dataGridViewImageColumn17 = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnKboard = new System.Windows.Forms.Button();
             this.pnlScale = new System.Windows.Forms.Panel();
+            this.lblStable = new System.Windows.Forms.Label();
             this.picTareWeight = new System.Windows.Forms.PictureBox();
             this.lblTareWeight = new System.Windows.Forms.Label();
             this.picNetWeight = new System.Windows.Forms.PictureBox();
@@ -173,7 +174,6 @@
             this.rbtnPageUpForCart = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.keyBoard = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardNew();
             this.rbtnPay = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.lblStable = new System.Windows.Forms.Label();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -562,12 +562,14 @@
             // 
             // txtSearch
             // 
+            this.txtSearch.AcceptsReturn = true;
             this.txtSearch.BackColor = System.Drawing.Color.White;
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.Font = new System.Drawing.Font("微软雅黑", 24F);
             this.txtSearch.Location = new System.Drawing.Point(9, 8);
+            this.txtSearch.Multiline = true;
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(275, 43);
+            this.txtSearch.Size = new System.Drawing.Size(275, 42);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
@@ -1425,6 +1427,19 @@
             this.pnlScale.Size = new System.Drawing.Size(415, 51);
             this.pnlScale.TabIndex = 34;
             // 
+            // lblStable
+            // 
+            this.lblStable.AutoSize = true;
+            this.lblStable.BackColor = System.Drawing.Color.Transparent;
+            this.lblStable.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.lblStable.ForeColor = System.Drawing.Color.LawnGreen;
+            this.lblStable.Location = new System.Drawing.Point(388, 4);
+            this.lblStable.Name = "lblStable";
+            this.lblStable.Size = new System.Drawing.Size(24, 40);
+            this.lblStable.TabIndex = 49;
+            this.lblStable.Text = "稳\r\n定";
+            this.lblStable.Visible = false;
+            // 
             // picTareWeight
             // 
             this.picTareWeight.BackColor = System.Drawing.Color.Transparent;
@@ -1795,19 +1810,6 @@
             this.rbtnPay.TextForeColor = System.Drawing.Color.White;
             this.rbtnPay.WhetherEnable = false;
             this.rbtnPay.ButtonClick += new System.EventHandler(this.rbtnPay_ButtonClick);
-            // 
-            // lblStable
-            // 
-            this.lblStable.AutoSize = true;
-            this.lblStable.BackColor = System.Drawing.Color.Transparent;
-            this.lblStable.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.lblStable.ForeColor = System.Drawing.Color.LawnGreen;
-            this.lblStable.Location = new System.Drawing.Point(388, 4);
-            this.lblStable.Name = "lblStable";
-            this.lblStable.Size = new System.Drawing.Size(24, 40);
-            this.lblStable.TabIndex = 49;
-            this.lblStable.Text = "稳\r\n定";
-            this.lblStable.Visible = false;
             // 
             // FormReturnWithoutOrder
             // 

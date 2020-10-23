@@ -1372,6 +1372,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
+                        if (string.IsNullOrEmpty(member.entrancecode))
+                        {
+                            member.entrancecode = member.memberheaderresponsevo.mobile;
+                        }
+                        
                         lblMemberPhone.Text = "手机号：" + member.entrancecode;
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
@@ -1648,6 +1653,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+
+                lblSearchShuiyin.Visible = string.IsNullOrEmpty(txtSearch.Text);
                 if (isfresh)
                 {
                     return;
@@ -1682,15 +1689,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     txtSearch.Clear();
                 }
                 else
-                {
-                    if (txtSearch.Text.Length == 0)
-                    {
-                        lblSearchShuiyin.Visible = true;
-                    }
-                    else
-                    {
-                        lblSearchShuiyin.Visible = false;
-                    }
+                {              
 
                     if (!IsEnable)
                     {
@@ -3919,7 +3918,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
                     else if (resultcode == 0)
                     {
-                        RefreshCart();
+
+                        if (MainModel.CurrentMember != null)
+                        {
+                            string ErrorMsgMember = "";
+                            Member member = httputil.GetMember(MainModel.CurrentMember.entrancecode, ref ErrorMsgMember);
+
+                            if (ErrorMsgMember != "" || member == null) //会员不存在
+                            {
+                                ClearMember();
+                                ShowLog(ErrorMsgMember, false);
+                            }
+                            else
+                            {
+                                LoadMember(member);
+                            }
+                        }
+                        else
+                        {
+                            RefreshCart();
+                        }
+                       
                     }
                     else
                     {
