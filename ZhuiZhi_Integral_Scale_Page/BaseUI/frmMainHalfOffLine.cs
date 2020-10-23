@@ -832,6 +832,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 receiptpara.balancedepositinfo = DbJsonUtil.GetBalanceInfo();
 
+                if (receiptpara.balancedepositinfo != null)
+                {
+                    OrderPriceDetail cashpricedetail = receiptpara.balancedepositinfo.FirstOrDefault(r=> r.title=="现金");
+
+                    if (cashpricedetail != null)
+                    {
+                        receiptpara.balancedepositcashamount = cashpricedetail.amount;
+                    }
+                }
+
                 IsEnable = false;
                 string ErrorMsg = "";
                 Receiptdetail receipt = httputil.Receipt(receiptpara, ref ErrorMsg);

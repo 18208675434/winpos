@@ -69,6 +69,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MainModel.ShowLog("数值不能小于" + MainModel.balanceconfigdetail.customrechargeamt.ToString("f2"), false);
                     return;
                 }
+                if (cash <= 0)
+                {
+                    MainModel.ShowLog("充值金额不正确",false);
+                    return ;
+                }
 
                 CustomTemplate.id = 0;
                 CustomTemplate.amount = cash;

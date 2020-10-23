@@ -313,7 +313,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (CurrentPage > 1)
                 {
                     rbtnPageUp.WhetherEnable = true;
-                }
+                } 
                 else
                 {
                     rbtnPageUp.WhetherEnable = false;

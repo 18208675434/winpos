@@ -92,8 +92,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
                 if (refundId > 0)
                 {
-
+                    //现金退款 开钱箱
+                    if (refundtype == 2)
+                    {
+                        DbJsonUtil.AddBalanceInfo("现金", request.refundcapital,true);
+                        PrintUtil.OpenCashDrawerEx();
+                    }
+                    else
+                    {
+                        DbJsonUtil.AddBalanceInfo(payModeForApi, request.refundcapital, true);
+                    }
                     ReceiptUtil.EditDepositRefund(request.refundcapital);
+
+                    
                     //退款打印小票
                     PrintUtil.PrintBalanceRefund(refundId.ToString());
                     //PrintUtil.PrintTopUp(depostBillid, true);

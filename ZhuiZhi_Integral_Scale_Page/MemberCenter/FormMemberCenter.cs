@@ -78,9 +78,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
                 IsEnable = true;
                 MemberCenterMediaHelper.ShowFormMainMedia();
-                if (CurrentShowlstbmp != null && CurrentShowlstbmp.Count > 0)
+                if (AllShowlstbmp != null && AllShowlstbmp.Count > 0)
                 {
-                    MemberCenterMediaHelper.UpdateDgvTemplate(CurrentShowlstbmp);
+                    MemberCenterMediaHelper.UpdateDgvTemplate(AllShowlstbmp);
                 }
 
                 MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
@@ -201,7 +201,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    DbJsonUtil.AddBalanceInfo("微信", para.amount);
+                    //DbJsonUtil.AddBalanceInfo("微信", para.amount);
                     if (MemberCenterHelper.ShowFormTopUpByOnline(result, CurrentMember.memberheaderresponsevo.mobile))
                     {
                         PrintUtil.PrintTopUp(result.ToString());
@@ -262,7 +262,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     else
                     {
-                        DbJsonUtil.AddBalanceInfo("现金", para.amount);
+                        //DbJsonUtil.AddBalanceInfo("现金", para.amount);
                         PrintUtil.PrintTopUp(result.ToString());
                         TopUpOK();
                     }
@@ -289,7 +289,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        List<Bitmap> CurrentShowlstbmp = null;
+
+        private int CurrentPage = 1;
+        List<Bitmap> AllShowlstbmp = null;
         private void LoadTemplate(bool needrefresh)
         {
             try
@@ -313,7 +315,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MainModel.LstRechargeTemplates = LstTemplates;//刷新模板信息
                 }
 
-                CurrentShowlstbmp = new List<Bitmap>();
+                AllShowlstbmp = new List<Bitmap>();
 
                 foreach (ListAllTemplate template in LstTemplates)
                 {
@@ -321,37 +323,66 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         CurrentTemplate = template;
                     }
-                    CurrentShowlstbmp.Add(GetItemImg(template));
+                    AllShowlstbmp.Add(GetItemImg(template));
                 }
 
                 if (MainModel.balanceconfigdetail != null && MainModel.balanceconfigdetail.customrechargeenable)
                 {
                     if (CurrentTemplate.id == 0)
                     {
-                        CurrentShowlstbmp.Add(GetItemImg(CurrentTemplate));
+                        AllShowlstbmp.Add(GetItemImg(CurrentTemplate));
                     }
                     else
                     {
-                        CurrentShowlstbmp.Add(bmpCustom);
+                        AllShowlstbmp.Add(bmpCustom);
                     }
-
                 }
 
-                int emptycount = 3 - CurrentShowlstbmp.Count % 3;
+              
+
+                //当前页展示的图片集合
+               List<Bitmap> ThisPageShowlstbmp = new List<Bitmap>();
+
+               if (AllShowlstbmp.Count > 12)
+               {
+                   rbtnPageUp.Visible = true;
+                   rbtnPageDown.Visible = true;
+
+                   rbtnPageUp.WhetherEnable = CurrentPage > 1;
+                   rbtnPageDown.WhetherEnable = AllShowlstbmp.Count > CurrentPage * 11;
+
+                   int startindex = (CurrentPage - 1) * 12;
+
+                   int lastindex = Math.Min(AllShowlstbmp.Count - 1, startindex + 11);
+
+
+                   ThisPageShowlstbmp = AllShowlstbmp.GetRange(startindex, lastindex - startindex + 1);
+
+               }
+               else
+               {
+                   rbtnPageUp.Visible = false ;
+                   rbtnPageDown.Visible = false ;
+                   ThisPageShowlstbmp = AllShowlstbmp;
+                   CurrentPage = 1;
+               }
+
+
+               int emptycount = 3 - ThisPageShowlstbmp.Count % 3;
 
                 for (int i = 0; i < emptycount; i++)
                 {
-                    CurrentShowlstbmp.Add(Resources.ResourcePos.empty);
+                    ThisPageShowlstbmp.Add(Resources.ResourcePos.empty);
                 }
-                int rowcount = CurrentShowlstbmp.Count / 3;
+                int rowcount = ThisPageShowlstbmp.Count / 3;
 
                 for (int i = 0; i < rowcount; i++)
                 {
-                    dgvTemplate.Rows.Add(CurrentShowlstbmp[i * 3 + 0], CurrentShowlstbmp[i * 3 + 1], CurrentShowlstbmp[i * 3 + 2]);
+                    dgvTemplate.Rows.Add(ThisPageShowlstbmp[i * 3 + 0], ThisPageShowlstbmp[i * 3 + 1], ThisPageShowlstbmp[i * 3 + 2]);
                 }
 
                 Application.DoEvents();
-                MemberCenterMediaHelper.UpdateDgvTemplate(CurrentShowlstbmp);
+                MemberCenterMediaHelper.UpdateDgvTemplate(ThisPageShowlstbmp);
             }
             catch (Exception ex)
             {
@@ -359,49 +390,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        /// <summary>
-        /// 自定义图片截图
-        /// </summary>
-        /// <param name="temp"></param>
-        /// <returns></returns>
-        public Bitmap GetCustomImg(ListAllTemplate temp)
+        private void rbtnPageUp_ButtonClick(object sender, EventArgs e)
         {
-            try
+
+            if (!IsEnable || !rbtnPageUp.WhetherEnable)
             {
-
-                if (CurrentBalanceAccount != null && (ListAllTemplate.mount + ListAllTemplate.CustomMoney) <= 5000)
-                {
-
-                    if (CustomTemplate != null && temp.CustomId == CurrentTemplate.id)
-                    {
-                        custommoney.ForeColor = Color.White;
-                        customdiscount.ForeColor = Color.White;
-                        custom.BackColor = Color.FromArgb(68, 147, 225);
-                    }
-                    else
-                    {
-                        custommoney.ForeColor = Color.Blue;
-                        customdiscount.ForeColor = Color.Blue;
-                        custom.BackColor = Color.White;
-                    }
-
-                }
-                else
-                {
-                    custommoney.ForeColor = Color.White;
-                    customdiscount.ForeColor = Color.White;
-                    custom.BackColor = Color.FromArgb(200, 200, 200);
-                }
-                Bitmap b = (Bitmap)MainModel.GetControlImage(custom);
-                b.Tag = temp;
-                return b;
+                return;
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            CurrentPage--;
+            LoadTemplate(false);
         }
+
+        private void rbtnPageDown_ButtonClick(object sender, EventArgs e)
+        {
+            if (!IsEnable || !rbtnPageDown.WhetherEnable)
+            {
+                return;
+            }
+            CurrentPage++;
+            LoadTemplate(false);
+        }
+
+
         private Bitmap GetItemImg(ListAllTemplate template)
         {
             try
@@ -920,7 +930,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    DbJsonUtil.AddBalanceInfo(customerpayment.name, para.amount);
+                    //DbJsonUtil.AddBalanceInfo(customerpayment.name, para.amount);
                     PrintUtil.PrintTopUp(result.ToString());
                     TopUpOK();
                 }
