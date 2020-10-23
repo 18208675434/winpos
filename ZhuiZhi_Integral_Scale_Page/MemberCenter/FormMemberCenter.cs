@@ -961,7 +961,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     else
                     {
                         bool flag = MemberCenterHelper.ShowFormBindEntityCard(entityCard);
-                        MainModel.CurrentMember = CurrentMember = httputil.GetMember(CurrentMember.memberheaderresponsevo.mobile, ref err);
+                        MainModel.CurrentMember = CurrentMember = httputil.GetMember(CurrentMember.entrancecode, ref err);
                         UpdateMemberInfo();
                     }
                 }

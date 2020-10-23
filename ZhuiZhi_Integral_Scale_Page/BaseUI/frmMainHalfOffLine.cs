@@ -4284,7 +4284,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (MainModel.CurrentMember != null)
                 {
                     string ErrorMsgMember = "";
-                    Member member = httputil.GetMember(MainModel.CurrentMember.memberheaderresponsevo.mobile, ref ErrorMsgMember);
+                    Member member = httputil.GetMember(MainModel.CurrentMember.entrancecode, ref ErrorMsgMember);
 
                     if (ErrorMsgMember != "" || member == null) //会员不存在
                     {
