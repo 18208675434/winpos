@@ -29,9 +29,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// <summary>
         /// 当前订单ID
         /// </summary>
-         string CurrentOrderID = "";
+        string CurrentOrderID = "";
 
-         string CurrentMobile = "";
+        string CurrentMobile = "";
 
 
         /// <summary>
@@ -50,40 +50,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         DateTime StartTime;
 
         bool isrun = true;
-
-        private bool IsScan = true;
-
+        tradePara trade = null;// 批量售卡使用
         //<summary>
         //按比例缩放页面及控件
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
-        public FormTopUpByOnLine(string orderid ,string mobile)
+        public FormTopUpByOnLine(string orderid, string mobile = "", tradePara trade = null)
         {
             InitializeComponent();
+            this.trade = trade;
             CurrentOrderID = orderid;
-
             CurrentMobile = mobile;
         }
 
         private void lblExit_Click(object sender, EventArgs e)
         {
-            
-            string errormsg = "";
-            bool result = httputil.CancleBalanceOrder(CurrentOrderID,CurrentMobile,ref errormsg);
+            if (trade == null)
+            {
+                string errormsg = "";
+                bool result = httputil.CancleBalanceOrder(CurrentOrderID, CurrentMobile, ref errormsg);
 
-            if (result )
-            {
-                LogManager.WriteLog("取消订单"+CurrentOrderID);
-            }
-            else
-            {
-                LogManager.WriteLog("订单取消失败" + errormsg);
-               // return;
+                if (result)
+                {
+                    LogManager.WriteLog("取消订单" + CurrentOrderID);
+                }
+                else
+                {
+                    LogManager.WriteLog("订单取消失败" + errormsg);
+                    // return;
+                }
             }
             isrun = false;
             this.DialogResult = DialogResult.Cancel;
-           
+
             this.Close();
         }
 
@@ -94,9 +94,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             StartTime = DateTime.Now;
             CurrentAuthCode = authcode;
             AuthCodeTrade();
-           // SyncTrade();
-           // timerAuthCodeTrade.Enabled = true;
-           // timerSyncTrade.Enabled = true;
+            // SyncTrade();
+            // timerAuthCodeTrade.Enabled = true;
+            // timerSyncTrade.Enabled = true;
         }
 
 
@@ -106,29 +106,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 string ErrorMsg = "";
 
-                tradePara trade = new tradePara();
-                trade.orderid = CurrentOrderID;
+                if (trade==null)
+                {
+                    trade = new tradePara();
+                    trade.orderid = CurrentOrderID;
+                    trade.ordertype = 2;
+                }
+               
                 trade.authcode = CurrentAuthCode;
-                trade.ordertype = 2;
-
-
 
                 AuthcodeTrade codetrade = httputil.AuthCodeTrade(trade, ref ErrorMsg);
-                Console.WriteLine("authcodetrade"+CurrentOrderID+"    "+CurrentAuthCode);
+                Console.WriteLine("authcodetrade" + CurrentOrderID + "    " + CurrentAuthCode);
                 if (ErrorMsg != "" || codetrade == null)
                 {
 
-                    MainModel.ShowLog(ErrorMsg,false);
+                    MainModel.ShowLog(ErrorMsg, false);
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
 
-                   
+
 
                 }
                 else
                 {
                     if (codetrade.status == "SUCCESS")
-                    {                       
+                    {
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
@@ -136,12 +138,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     {
 
                         pnlLoading.Visible = true;
-                        timerAuthCodeTrade.Enabled = false;
                         timerSyncTrade.Enabled = true;
                         CurrentPayID = codetrade.payid;
-                        SyncTrade(CurrentOrderID, CurrentPayID);  
+                        SyncTrade(CurrentOrderID, CurrentPayID);
                     }
-                 
+
                 }
             }
             catch (Exception ex)
@@ -156,11 +157,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-               
+
 
                 string errormsg = "";
                 string retunerrormsg = "";
-                synctrade sync = httputil.SyncTrade(orderid, payid, ref errormsg,ref retunerrormsg);
+                synctrade sync = httputil.SyncTrade(orderid, payid, ref errormsg, ref retunerrormsg);
                 Console.WriteLine("synctrade" + orderid + "    " + payid);
                 if (errormsg != "" || sync == null)
                 {
@@ -184,10 +185,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else if (sync.status == "FAIL")
                 {
-                    MainModel.ShowLog("支付失败",false);
+                    MainModel.ShowLog("支付失败", false);
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
-                  
+
                 }
                 else if (sync.status == "SUCCESS")
                 {
@@ -204,26 +205,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             catch
             {
 
-            }          
-           
+            }
+
         }
 
-      
 
-
-        private void timerAuthCodeTrade_Tick(object sender, EventArgs e)
-        {
-            //if ((DateTime.Now - StartTime).TotalMinutes > 1 || (DateTime.Now - StartTime).TotalSeconds > 60)
-            //{
-            //    ShowLog("交易超时失败！",false);
-            //    isrun = false;
-            //}
-
-            //if (isrun)
-            //{
-            //    AuthCodeTrade();
-            //}
-        }
 
         private void timerSyncTrade_Tick(object sender, EventArgs e)
         {
@@ -248,7 +234,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     this.DialogResult = DialogResult.Cancel;
 
                     this.Close();
-                   
+
                 }
                 else
                 {
@@ -262,7 +248,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         public void frmOnLinePayResult_SizeChanged(object sender, EventArgs e)
         {
-           // asf.ControlAutoSize(this);
+            // asf.ControlAutoSize(this);
         }
 
         private void frmOnLinePayResult_FormClosing(object sender, FormClosingEventArgs e)
@@ -273,13 +259,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 pnlLoading.Visible = false;
                 isrun = false;
 
-            timerAuthCodeTrade.Enabled = false;
-            timerSyncTrade.Enabled = false;
-            MemberCenterMediaHelper.HidePayInfo();
+                timerSyncTrade.Enabled = false;
+                MemberCenterMediaHelper.HidePayInfo();
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("ERROR","在线收银页面关闭异常"+ex.Message);
+                LogManager.WriteLog("ERROR", "在线收银页面关闭异常" + ex.Message);
             }
         }
 
@@ -288,49 +273,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             MemberCenterMediaHelper.ShowPayInfo();
         }
-
-
-
-
-
-        private void AutoScaleControl()
-        {
-
-            try
-            {
-                float wScale = (float)Screen.AllScreens[0].Bounds.Width / 3 / this.Width;
-                float hScale = (float)Screen.AllScreens[0].Bounds.Height * 3 / 5 / this.Height;
-
-                this.Size = new System.Drawing.Size(Convert.ToInt32(Screen.AllScreens[0].Bounds.Width / 3), Convert.ToInt32(Screen.AllScreens[0].Bounds.Height * 3 / 5));
-
-
-
-                foreach (Control c in this.Controls)
-                {
-                    c.Left = (int)Math.Ceiling(c.Left * wScale);
-                    c.Top = (int)Math.Ceiling(c.Top * hScale);
-
-                    c.Width = (int)Math.Ceiling(c.Width * wScale);
-                    c.Height = (int)Math.Ceiling(c.Height * hScale);
-
-                    float wSize = c.Font.Size * wScale;
-                    float hSize = c.Font.Size * hScale;
-
-
-
-                    c.Font = new Font(c.Font.Name, Math.Min(hSize, wSize), c.Font.Style, c.Font.Unit);
-
-
-                }
-            }
-            catch
-            {
-
-            }
-
-        }
-
-
 
         //数据处理过程不接受新数据
         bool isScan = true;

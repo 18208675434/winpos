@@ -26,7 +26,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 接口访问类
         /// </summary>
-        HttpUtil httpUtil =new HttpUtil();
+        HttpUtil httpUtil = new HttpUtil();
         MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
         #endregion
 
@@ -62,6 +62,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnGetCard_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             try
             {
                 string cardid = DialogHelper.ShowFormCode("输入实体卡号", "请输入实体卡卡号");
@@ -108,6 +112,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnBatchSetRechargeAmount_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             if (dgvCard.Rows.Count == 0)
             {
                 MainModel.ShowLog("请添加实体卡");
@@ -228,6 +236,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void dgvCard_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             try
             {
                 if (e.RowIndex < 0)
@@ -269,8 +281,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
         #region 支付
-        bool IsEnable;
-
+        bool IsEnable = true;//支付过程中不可用
         private void pnlPayByCash_Click(object sender, EventArgs e)
         {
             Pay(PayMode.cash);
@@ -284,7 +295,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void pnlPayByOther_Click(object sender, EventArgs e)
         {
-
 
             Pay(PayMode.other);
         }
@@ -314,6 +324,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+                if (!IsEnable)
+                {
+                    return;
+                }
+                IsEnable = false;
                 if (dgvCard.Rows.Count == 0)
                 {
                     MainModel.ShowLog("请添加实体卡");
@@ -362,25 +377,44 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MainModel.ShowLog("支付单号不见了，请退出重试");
                     return;
                 }
+                bool payResult = true;
                 if (paymode == PayMode.online)//在线支付需单独处理
-                {//AuthCodeTradeRequestVo 
-                    if (MemberCenterHelper.ShowFormTopUpByOnline(Convert.ToInt64(batchoperatorid), ""))
+                {
+                    tradePara trade = new tradePara();
+                    trade.orderid = batchoperatorid;
+                    trade.totalfee = totalPay;
+                    trade.ordertype = 2;
+                    trade.tradebatchorderrequestdtos = new List<TradeBatchOrderRequestDto>();
+                    foreach (var item in result.depositdetails)
                     {
-                        //PrintUtil.PrintTopUp(result.ToString());
-                        MainModel.ShowLog("支付成功");
-                        lstCard.Clear();
-                        Refresh();
+                        trade.tradebatchorderrequestdtos.Add(new TradeBatchOrderRequestDto()
+                        {
+                            buyid = item.memberid,
+                            orderid = item.depositbillid,
+                            ordertype = 2,
+                            totalfee = item.capitalamount
+                        });
                     }
+                    payResult = MemberCenterHelper.ShowFormTopUpByOnline(Convert.ToInt64(batchoperatorid), "", trade);
                 }
-
+                if (payResult)
+                {
+                    //PrintUtil.PrintTopUp(result.ToString());
+                    MainModel.ShowLog("支付成功");
+                    CurrentPage = 1;
+                    lstCard.Clear();
+                    RefreshDgv();
+                }
             }
             catch (Exception ex)
             {
                 MainModel.ShowLog("在线充值异常" + ex.Message, true);
             }
+            finally
+            {
+                IsEnable = true;
+            }
         }
-
-
         #endregion
     }
 
@@ -400,6 +434,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public decimal rewardamount { get; set; }
         public bool autoreward { get; set; }
         public string status { get; set; }
-
     }
 }
