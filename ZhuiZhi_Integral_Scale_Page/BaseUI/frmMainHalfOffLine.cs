@@ -1372,7 +1372,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
-                        lblMemberPhone.Text = "手机号：" + member.memberheaderresponsevo.mobile;
+                        lblMemberPhone.Text = "手机号：" + member.entrancecode;
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 
@@ -4284,7 +4284,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (MainModel.CurrentMember != null)
                 {
                     string ErrorMsgMember = "";
-                    Member member = httputil.GetMember(MainModel.CurrentMember.memberheaderresponsevo.mobile, ref ErrorMsgMember);
+                    Member member = httputil.GetMember(MainModel.CurrentMember.entrancecode, ref ErrorMsgMember);
 
                     if (ErrorMsgMember != "" || member == null) //会员不存在
                     {

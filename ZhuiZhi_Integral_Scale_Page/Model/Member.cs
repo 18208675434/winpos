@@ -38,6 +38,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 是否使用积分  主界面勾选/取消勾选积分修改状态
         /// </summary>
         public bool isUsePoint { get; set; }
+
+        /// <summary>
+        /// 登录会员凭证  （用于区分手机号 和实体卡登录）
+        /// </summary>
+        public string entrancecode { get; set; }
     }
 
     public class Memberheaderresponsevo

@@ -46,7 +46,8 @@ public class ImplOfflineSingleCalculateNew {
                     productBean.canmixcoupon=currentPriceTriplet.getPromoTriplet().CANMIXCOUPON==1?true:false;///.setCanmixcoupon(currentPriceTriplet.getPromoTriplet().getCanmixcoupon());
                 }
                 if (EnumPromotionType.MEMBER_PRICE_ACTION.Equals(currentPriceTriplet.getPriceKind()) || EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION.Equals(currentPriceTriplet.getPriceKind())) {
-                    if (PromotionCache.getInstance().isLoginMember) {
+                    if (IsEnjoyMemberPrice())
+                    {
                         mPriceBean.saleprice=currentPriceTriplet.getOriginprice();
                        // mPriceBean.setSaleprice(Double.parseDouble(String.format("%.2f", currentPriceTriplet.getOriginprice())));
                     } else {
@@ -100,7 +101,8 @@ public class ImplOfflineSingleCalculateNew {
         TripletBeanForCoupon memberGradePricePair = null;
         DBPROMOTION_CACHE_BEANMODEL memberGradeDiscountPricePromo = null;
         bool gradeMember = false;
-        if (PromotionCache.getInstance().isLoginMember) {
+        if (IsEnjoyMemberPrice())
+        {
             if (PromotionCache.getInstance().getMemberRightsForGradeBean() != null) 
             {
                 gradeMember = PromotionCache.getInstance().getMemberRightsForGradeBean().isGradeMember();
@@ -192,7 +194,8 @@ public class ImplOfflineSingleCalculateNew {
         if (currentPriceTriplet != null) {
             if (productBean.price != null && currentPriceTriplet.getPromoTriplet() != null && !string.IsNullOrEmpty(currentPriceTriplet.getPromoTriplet().CODE) && !string.IsNullOrEmpty(currentPriceTriplet.getPromoTriplet().COSTCENTERINFO)) {
                 if (!PromotionCache.getInstance().isOffline && (EnumPromotionType.MEMBER_PRICE_ACTION.Equals(currentPriceTriplet.getPriceKind()) || EnumPromotionType.MEMBER_PRICE_DISCOUNT_ACTION.Equals(currentPriceTriplet.getPriceKind()))) {
-                    if (PromotionCache.getInstance().isLoginMember) {
+                    if (IsEnjoyMemberPrice())
+                    {
                         productBean.price.saleprice=currentPriceTriplet.getOriginprice();//.setSaleprice(Double.parseDouble(String.format("%.2f", currentPriceTriplet.getOriginprice())));
                         productBean.price.originpricedesc="非会员价";//.setOriginpricedesc("非会员价");
                         productBean.pricetagid=currentPriceTriplet.getPricetagid();//.setPricetagid(currentPriceTriplet.getPricetagid());
@@ -478,22 +481,40 @@ public class ImplOfflineSingleCalculateNew {
         return null;
     }
 
+    /// <summary>
+    /// 是否享受会员价
+    /// </summary>
+    /// <returns></returns>
+    private bool IsEnjoyMemberPrice()
+    {
+        try
+        {
+            if (!PromotionCache.getInstance().isLoginMember)
+            {
+                return false;
+            }
 
-    //private bool IsLoginMember()
-    //{
-    //    try
-    //    {
-    //        if (!romotionCache.getInstance().isLoginMember)
-    //        {
-    //            return false;
-    //        }
+            if (MainModel.CurrentMember.outentitycards == null || MainModel.CurrentMember.outentitycards.Count == 0)
+            {
+                return true;
+            }
 
-    //        //if(MainModel.CurrentMember.ou)
+            OutEntityCardResponseDto outcard = MainModel.CurrentMember.outentitycards.FirstOrDefault(r=>r.outcardid==MainModel.CurrentMember.entrancecode);
 
-    //    }
-    //    catch {
-    //        return false;
-    //    }
-    //}
+            if (outcard == null)
+            {
+                return true;
+            }
+            else
+            {
+                return outcard.enjoymemberprice;
+            }
+
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
 }

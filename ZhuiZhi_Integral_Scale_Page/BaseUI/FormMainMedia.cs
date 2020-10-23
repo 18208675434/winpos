@@ -687,12 +687,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 if (CurrentMember != null && CurrentMember.memberinformationresponsevo != null && CurrentMember.memberheaderresponsevo != null)
                 {
-                    string mobil = CurrentMember.memberheaderresponsevo.mobile;
-                    if (mobil.Length > 8)
-                    {
-                        mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
-                    }
-                    lblMobil.Text = mobil;
+                    //string mobil = CurrentMember.memberheaderresponsevo.mobile;
+                    //if (mobil.Length > 8)
+                    //{
+                    //    mobil = mobil.Substring(0, mobil.Length - 8) + "****" + mobil.Substring(mobil.Length - 4);
+                    //}
+                    lblMobil.Text = CurrentMember.entrancecode;
 
                     lblWechartNickName.Text =  "  你好！";
 

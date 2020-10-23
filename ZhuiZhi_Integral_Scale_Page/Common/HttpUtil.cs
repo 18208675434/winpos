@@ -1229,6 +1229,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string tempjson = "{\"memberinfo\":\"" + memberinfo + "\"}";
 
                 string json = HttpPOST(url, tempjson);
+
+                LogManager.WriteLog("DEBUG","member"+json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1236,6 +1238,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     erromessage = "";
                     Member member = JsonConvert.DeserializeObject<Member>(rd.data.ToString());
+                    member.entrancecode = memberinfo;
                     return member;
                 }
                 else
@@ -1305,7 +1308,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             try
             {
                 string url = "/pos/product/scalestemp/gettempforshoppaginglist";
-
 
                 ScalePara scalepara = new ScalePara();
                 scalepara.shopid = MainModel.CurrentShopInfo.shopid;
