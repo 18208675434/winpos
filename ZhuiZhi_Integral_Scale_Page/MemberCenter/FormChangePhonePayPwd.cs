@@ -64,6 +64,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhonePayPwd_FormClosing(object sender, FormClosingEventArgs e)
         {
+            BackHelper.HideFormBackGround();
         }
 
         /// <summary>
@@ -183,8 +184,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
             }
             finally
-            {
-                BackHelper.HideFormBackGround();
+            {            
                 LoadingHelper.CloseForm();
             }
             
