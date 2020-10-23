@@ -1151,6 +1151,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
