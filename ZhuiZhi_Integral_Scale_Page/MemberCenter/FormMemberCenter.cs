@@ -113,7 +113,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
 
             lblPhone.Text = phone;
-            MainModel.GetPhone = phone;
             btnChangePhone.Left = lblPhone.Right;
 
             string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";

@@ -15,7 +15,7 @@ using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
-    public partial class FormBatchSaleCardCreate : Form
+    public partial class FormEntityCardBatchSale : Form
     {
         #region 成员变量
         /// <summary>
@@ -54,7 +54,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         #endregion
 
-        public FormBatchSaleCardCreate()
+        public FormEntityCardBatchSale()
         {
             InitializeComponent();
         }
@@ -97,6 +97,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 MainModel.ShowLog("获取实体卡异常" + ex.Message, true);
             }
+        }
+
+        private void btnBatchSetRechargeAmount_Click(object sender, EventArgs e)
+        {
+            if (dgvCard.Rows.Count==0)
+            {
+                MainModel.ShowLog("请添加实体卡");
+                return;
+            }
+            ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
+            if (customtemplate != null)
+            {
+                foreach (var item in CurrentCards)
+                {
+                    item.rechargeamount = customtemplate.amount;
+                    item.rewardamount = customtemplate.rewardamount;
+                }              
+                RefreshDgv();
+            }
+            this.Activate();
         }
 
         public void RefreshDgv()
@@ -214,10 +234,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 //修改充值金额
                 if (po.X < (dgvCard.Left + txtRechargeAmount.Right + 10) && po.X > (dgvCard.Left + txtRechargeAmount.Left - 10))
                 {
-                    //string amount= NumberHelper.ShowFormNumber("",NumberType.ProWeight)
-                    rechargeCardInfo.rechargeamount = 200;
-                    rechargeCardInfo.rewardamount = 20;
-                    RefreshDgv();
+                    ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();                   
+                    if (customtemplate != null)
+                    {
+                        rechargeCardInfo.rechargeamount = customtemplate.amount;
+                        rechargeCardInfo.rewardamount = customtemplate.rewardamount;
+                        RefreshDgv();                  
+                    }
+                    this.Activate();
                 }
 
                 //删除
@@ -253,6 +277,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             return status;
         }
+
+        
     }
 
     public class RechargeCardInfo
