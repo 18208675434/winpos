@@ -611,33 +611,69 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            try{
-            if (txtSearch.Text.Length == 0)
+            try
             {
-                lblSearchShuiyin.Visible = true;
-            }
-            else
-            {
-                lblSearchShuiyin.Visible = false;
-            }
-           
-            if (!IsEnable)
-            {
-                return;
-            }
-           
-                Application.DoEvents();
+                if (isfresh)
+                {
+                    return;
+                }
 
-                CurrentGoodPage = 1;
-                LoadDgvGood(false, false);
+                Thread threadItemExedate = new Thread(Upthread);
+                threadItemExedate.IsBackground = true;
+                threadItemExedate.Start();
 
-          
-            }catch(Exception ex){
-                ShowLog("查询面板商品异常"+ex.Message,true);
+            }
+            catch (Exception ex)
+            {
+                ShowLog("查询面板商品异常" + ex.Message, true);
             }
 
         }
+        bool isfresh = false;
+        private void Upthread()
+        {
+            try
+            {
+                isfresh = true;
+                //搜索延时150毫秒 有回车代表扫描数据 没有则做条件查询
+                Delay.Start(150);
 
+                string result = txtSearch.Text;
+
+                if (result.Contains("\r\n"))
+                {
+                    QueueScanCode.Enqueue(result.ToString().Trim());
+
+                    txtSearch.Clear();
+                }
+                else
+                {
+                    if (txtSearch.Text.Length == 0)
+                    {
+                        lblSearchShuiyin.Visible = true;
+                    }
+                    else
+                    {
+                        lblSearchShuiyin.Visible = false;
+                    }
+
+                    if (!IsEnable)
+                    {
+                        return;
+                    }
+
+                    Application.DoEvents();
+
+                    CurrentGoodPage = 1;
+                    LoadDgvGood(false, false);
+                }
+            }
+            catch { }
+            finally
+            {
+                isfresh = false;
+            }
+        }
 
 
         /// <summary>
