@@ -21,15 +21,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public string password = "";
         //使用密码支付  RSA公钥加密后的值
         public string PayPassWord = "";
-        string newphone;
         Member member = null;
         MemberCenterHttpUtil memberhttputil = new MemberCenterHttpUtil();
 
-        public FormChangePhonePayPwd(string newphone)
+        public FormChangePhonePayPwd(Member member)
         {
 
             InitializeComponent();
-            this.newphone = newphone;
+            this.member = member;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -42,24 +41,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhonePayPwd_Shown(object sender, EventArgs e)
         {
-            try
-            {
-                string err = "";
-                LoadingHelper.ShowLoadingScreen();
-                member = new HttpUtil().GetMember(newphone, ref err);
-                if (!string.IsNullOrEmpty(err))
-                {
-                    MainModel.ShowLog("会员信息获取失败：" + err, false);
-                }
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("获取会员信息异常：" + ex.Message, true);
-            }
-            finally
-            {
-                LoadingHelper.CloseForm();
-            }
+           
         }
 
         private void FormChangePhonePayPwd_FormClosing(object sender, FormClosingEventArgs e)

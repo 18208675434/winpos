@@ -340,12 +340,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 显示修改手机号码-支付密码验证窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhonePayPwd(string newphone)
+        public static bool ShowFormChangePhonePayPwd(Member member)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
-                FormChangePhonePayPwd frmchangephonepaypwd = new FormChangePhonePayPwd(newphone);
+                FormChangePhonePayPwd frmchangephonepaypwd = new FormChangePhonePayPwd(member);
                 asf.AutoScaleControlTest(frmchangephonepaypwd, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmchangephonepaypwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonepaypwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonepaypwd.Height) / 2);
                 frmchangephonepaypwd.TopMost = true;

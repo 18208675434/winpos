@@ -22,6 +22,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 调用接口
         /// </summary>
+        HttpUtil httpUtil= new HttpUtil();
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
         Member member;
 
@@ -69,7 +70,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnUserPassWordVerify_Click(object sender, EventArgs e)
         {
-            if (MemberCenterHelper.ShowFormChangePhonePayPwd(member.memberheaderresponsevo.mobile))
+            if (MemberCenterHelper.ShowFormChangePhonePayPwd(member))
             {
                 StepTo(1);
             }
@@ -159,15 +160,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         return;
                     }
                     string msg = "";
+                    LoadingHelper.ShowLoadingScreen();
                     bool isMember = membercenterhttputil.GetCheckmember(numbervalue, ref msg);
+                    LoadingHelper.CloseForm();
                     if (!isMember)
                     {
                         MainModel.ShowLog("亲，您还不是会员哦", false);
                         return;
                     }
+                   
+                    string err = "";
+                    LoadingHelper.ShowLoadingScreen();
+                    member = httpUtil.GetMember(newphone, ref err);
+                    LoadingHelper.CloseForm();
+                    if (!string.IsNullOrEmpty(err))
+                    {
+                        MainModel.ShowLog(err);
+                        return;
+                    }
 
                     BackHelper.ShowFormBackGround();
-                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(numbervalue);
+                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(member);
                     asf.AutoScaleControlTest(pwd, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
                     pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
                     pwd.TopMost = true;
@@ -180,8 +193,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         {
                             StepTo(2);
                         }
-
-
                     }
                 }
             }
