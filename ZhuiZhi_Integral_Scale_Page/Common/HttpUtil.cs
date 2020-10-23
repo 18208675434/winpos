@@ -966,6 +966,51 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
         /// <summary>
+        /// 查询收银机订单详情（弹窗详情展示） 2020-10-23
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public WebOrderDetail GetWebOrderDetail(string orderid, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/web/detail";
+
+                string tempjson = JsonConvert.SerializeObject(orderid);
+                  SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("orderid",orderid);
+
+                string json = HttpGET(url, sort);
+
+              //  LogManager.WriteLog("DEBUG","weborder"+json);
+                    //h(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    WebOrderDetail resultobj = JsonConvert.DeserializeObject<WebOrderDetail>(rd.data.ToString());
+                    return resultobj;
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "webdetail:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "查询订单详情异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
         /// 订单查询
         /// </summary>
         /// <returns></returns>
@@ -1017,6 +1062,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+
+
 
         
 
