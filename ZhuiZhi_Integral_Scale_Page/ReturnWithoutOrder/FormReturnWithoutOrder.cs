@@ -429,7 +429,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
-                        lblMemberPhone.Text = "手机号：" + member.memberheaderresponsevo.mobile;
+                        lblMemberPhone.Text = "手机号：" + member.entrancecode;
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 

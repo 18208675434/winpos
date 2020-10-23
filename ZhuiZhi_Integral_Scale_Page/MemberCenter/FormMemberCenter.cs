@@ -689,7 +689,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-
         private void TopUpOK()
         {
             try
@@ -716,7 +715,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 //LoadBalanceAccount();
 
                 //MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
-
 
                 //IsEnable = true;
                 //LoadingHelper.CloseForm();
