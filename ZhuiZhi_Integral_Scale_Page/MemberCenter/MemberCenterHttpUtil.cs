@@ -359,14 +359,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="mobile"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public bool Updatemembermobile(string newphone, ref string errormsg)
+        public bool Updatemembermobile(string token,string newphone, ref string errormsg)
         {
             try
             {
                 string url = "/pos/member/memberheader/updatemembermobile";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("token", MainModel.CurrentMember.memberheaderresponsevo.token);
+                sort.Add("token",token);
                 sort.Add("mobile", newphone);
 
                 string json = HttpGET(url, sort);
@@ -532,9 +532,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-
-
-
+        
         #region 实体卡
         /// <summary> 获取实体卡
         /// </summary>
@@ -688,10 +686,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
+
+        /// <summary> 实体卡-批量充值
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public EntityCardBatchDepositResponse BacthEntityCard(EntityCardBatchDepositRequest request, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/member/balance/deposit/bacthentitycard";
+                string testjson = JsonConvert.SerializeObject(request);
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    EntityCardBatchDepositResponse result = JsonConvert.DeserializeObject<EntityCardBatchDepositResponse>(rd.data.ToString());
+                    return result;
+                }
+                else
+                {
+                    LogManager.WriteLog("Error", "bacthentitycard:" + json);
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "bacthentitycard:" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
         #endregion
-
-
-       
 
         #region  访问服务端
         private HttpRequest httprequest = new HttpRequest();

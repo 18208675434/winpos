@@ -28,10 +28,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             this.Close();
         }
-        private Member CurrentMember = null;
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
-        private List<PromotionCoupon> CurrentLstCoupon = null;
-
         private void FormChangePhoneConfirm_Load(object sender, EventArgs e)
         {
             if (isMember)
@@ -66,7 +63,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    result = memberchttputil.Updatemembermobile(newphone, ref err);                   
+                    result = memberchttputil.Updatemembermobile(MainModel.CurrentMember.memberheaderresponsevo.token,newphone, ref err);                   
                 }              
                 if (result)
                 {

@@ -27,10 +27,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormEntityCardList_Shown(object sender, EventArgs e)
         {
             BindEntityCards();
-            //BindEntityCards();
-            //BindEntityCards();
-            //BindEntityCards();
-            //BindEntityCards();
         }
 
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
