@@ -27,7 +27,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public static bool isokcancle;
         public static string code = "";
         public static string memberid = "";
-        public static string GetPhone = "";
         #region  会员中心   变量 （待优化）   
         /// <summary>
         /// 余额全局变量
