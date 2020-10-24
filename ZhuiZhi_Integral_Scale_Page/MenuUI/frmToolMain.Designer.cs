@@ -473,7 +473,6 @@
             this.pnlBatchSaleCard.Name = "pnlBatchSaleCard";
             this.pnlBatchSaleCard.Size = new System.Drawing.Size(187, 39);
             this.pnlBatchSaleCard.TabIndex = 17;
-            this.pnlBatchSaleCard.Visible = false;
             this.pnlBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
             // 
             // lblBatchSaleCard
@@ -626,7 +625,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(198, 1);
             this.panel2.TabIndex = 20;
-            this.panel2.Visible = false;
             // 
             // frmToolMain
             // 

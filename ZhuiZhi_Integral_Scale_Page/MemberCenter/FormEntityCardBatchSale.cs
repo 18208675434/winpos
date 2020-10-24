@@ -26,7 +26,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 接口访问类
         /// </summary>
-        HttpUtil httpUtil =new HttpUtil();
+        HttpUtil httpUtil = new HttpUtil();
         MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
         #endregion
 
@@ -60,8 +60,46 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             InitializeComponent();
         }
 
+        private void FormEntityCardBatchSale_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
+                lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
+                picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
+                lblMenu.Left = picMenu.Right;
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("加载批量售卡页面异常" + ex.Message, true);
+            }
+        }
+
+
+        private void FormEntityCardBatchSale_Shown(object sender, EventArgs e)
+        {
+            MemberCenterMediaHelper.ShowFormEntityCardBatchSaleMedia();
+        }
+
+
+        private void FormEntityCardBatchSale_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MemberCenterMediaHelper.CloseFormEntityCardBatchSaleMedia();
+        }
+
+        private void btnRechargeQuery_Click(object sender, EventArgs e)
+        {
+            MemberCenterHelper.ShowFormRechangeQuery();
+        }
+
+
         private void btnGetCard_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             try
             {
                 string cardid = DialogHelper.ShowFormCode("输入实体卡号", "请输入实体卡卡号");
@@ -93,10 +131,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         memberid = entityCard.mobile
                     });
 
-                    //int index = dgvCard.Rows.Count + 1;
-                    //CurrentCards.Add(new RechargeCardInfo() 
-                    //{ CardNo = index * 1000000 + "", RechargeAmount = (index % 2) * 100, RewardAmount = (index % 2) * 10, 
-                    //    Status = (index % 2)+"", MemberNo = "B" + index * 1000000 });
                     RefreshDgv();
                 }
             }
@@ -108,6 +142,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnBatchSetRechargeAmount_Click(object sender, EventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             if (dgvCard.Rows.Count == 0)
             {
                 MainModel.ShowLog("请添加实体卡");
@@ -152,12 +190,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 dgvCard.Rows.Clear();
-                if (lstCard == null || lstCard.Count == 0)
+                if (lstCard == null)
                 {
                     return;
                 }
-
-                //CurrentCards.Reverse();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
                 int startindex = (CurrentPage - 1) * PageSize;
                 int lastindex = Math.Min(lstCard.Count - 1, startindex + PageSize - 1);
@@ -172,6 +208,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 Application.DoEvents();
                 dgvCard.ClearSelection();
+
+                MemberCenterMediaHelper.UpdateFormEntityCardBatchSaleMedia(lbCardSum.Text, lblTotalRechargeAmount.Text, lblTotalGiftAmount.Text, lblTotalRechargeAll.Text, lblTotalPay.Text, lstLoadingCards);
                 this.Activate();
 
             }
@@ -228,6 +266,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void dgvCard_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!IsEnable)
+            {
+                return;
+            }
             try
             {
                 if (e.RowIndex < 0)
@@ -269,8 +311,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
         #region 支付
-        bool IsEnable;
-
+        bool IsEnable = true;//支付过程中不可用
         private void pnlPayByCash_Click(object sender, EventArgs e)
         {
             Pay(PayMode.cash);
@@ -284,7 +325,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void pnlPayByOther_Click(object sender, EventArgs e)
         {
-
 
             Pay(PayMode.other);
         }
@@ -314,6 +354,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+                if (!IsEnable)
+                {
+                    return;
+                }
+                IsEnable = false;
                 if (dgvCard.Rows.Count == 0)
                 {
                     MainModel.ShowLog("请添加实体卡");
@@ -362,26 +407,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MainModel.ShowLog("支付单号不见了，请退出重试");
                     return;
                 }
-                if (paymode == PayMode.online)//在线支付需单独处理
-                {//AuthCodeTradeRequestVo 
-                    if (MemberCenterHelper.ShowFormTopUpByOnline(Convert.ToInt64(batchoperatorid), ""))
-                    {
-                        //PrintUtil.PrintTopUp(result.ToString());
-                        MainModel.ShowLog("支付成功");
-                        lstCard.Clear();
-                        Refresh();
-                    }
-                }
+                bool payResult = true;
 
+
+                if (paymode == PayMode.online)//在线支付需单独处理
+                {
+                    tradePara trade = new tradePara();
+                    trade.orderid = batchoperatorid;
+                    trade.totalfee = totalPay;
+                    trade.ordertype = 2;
+                    trade.tradebatchorderrequestdtos = new List<TradeBatchOrderRequestDto>();
+                    foreach (var item in result.depositdetails)
+                    {
+                        trade.tradebatchorderrequestdtos.Add(new TradeBatchOrderRequestDto()
+                        {
+                            buyid = item.memberid,
+                            orderid = item.depositbillid,
+                            ordertype = 2,
+                            totalfee = item.capitalamount
+                        });
+                    }
+                    payResult = MemberCenterHelper.ShowFormTopUpByOnline(Convert.ToInt64(batchoperatorid), "", trade);
+                }
+                if (payResult)
+                {
+                    List<string> orderids = new List<string>();
+                    foreach (var item in result.depositdetails)
+                    {
+                        orderids.Add(item.depositbillid);
+                    }
+                    PrintUtil.PrintEntityCardBatchSale(batchoperatorid,orderids);
+                    MainModel.ShowLog("支付成功");
+                    CurrentPage = 1;
+                    lstCard.Clear();
+                    RefreshDgv();
+                }
             }
             catch (Exception ex)
             {
                 MainModel.ShowLog("在线充值异常" + ex.Message, true);
             }
+            finally
+            {
+                IsEnable = true;
+            }
         }
-
-
         #endregion
+
+
     }
 
     enum PayMode
@@ -400,6 +473,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public decimal rewardamount { get; set; }
         public bool autoreward { get; set; }
         public string status { get; set; }
-
     }
 }

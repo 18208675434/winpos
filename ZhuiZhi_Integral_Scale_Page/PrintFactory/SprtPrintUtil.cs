@@ -265,7 +265,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         #endregion
 
         private static HttpUtil httputil = new HttpUtil();
-        public static bool PrintTopUp(TopUpPrint printdetail)
+        public static bool PrintTopUp(TopUpPrint printdetail, bool isEntityCardBatchSale = false)
         {
             try
             {
@@ -309,16 +309,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     lstPrintStr.Add(PrintHelper.MergeStr(printdetail.paymodeforapi, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
 
 
-
-                lstPrintStr.Add(PrintHelper.getStrLine());
-                string phone = printdetail.phone;
-                if (printdetail.phone.Length > 7)
+                 if (!isEntityCardBatchSale)//批量售卡不打印会员号和账户余额
                 {
-                    phone = printdetail.phone.Substring(0, 3) + "****" + printdetail.phone.Substring(printdetail.phone.Length - 4);
-                }
+                    lstPrintStr.Add(PrintHelper.getStrLine());
+                    string phone = printdetail.phone;
+                    if (printdetail.phone.Length > 7)
+                    {
+                        phone = printdetail.phone.Substring(0, 3) + "****" + printdetail.phone.Substring(printdetail.phone.Length - 4);
+                    }
 
-                lstPrintStr.Add(PrintHelper.MergeStr("会员号", phone, BodyCharCountOfLine, PageSize));
-                lstPrintStr.Add(PrintHelper.MergeStr("账户余额", printdetail.balance.ToString("f2"), BodyCharCountOfLine, PageSize));
+                    lstPrintStr.Add(PrintHelper.MergeStr("会员号", phone, BodyCharCountOfLine, PageSize));
+                    lstPrintStr.Add(PrintHelper.MergeStr("账户余额", printdetail.balance.ToString("f2"), BodyCharCountOfLine, PageSize));
+                }
 
                 lstPrintStr.Add(PrintHelper.getStrLine());
                 lstPrintStr.Add("多谢惠顾，欢迎下次光临！");

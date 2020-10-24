@@ -32,13 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlHead = new System.Windows.Forms.Panel();
-            this.pnlMenu = new System.Windows.Forms.Panel();
-            this.lblMenu = new System.Windows.Forms.Label();
-            this.picMenu = new System.Windows.Forms.PictureBox();
-            this.btnCancle = new System.Windows.Forms.Button();
-            this.btnMenu = new System.Windows.Forms.Button();
-            this.lblShopName = new System.Windows.Forms.Label();
             this.pnlDgvHead = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -74,6 +67,7 @@
             this.cardNo = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlDgvItem = new System.Windows.Forms.Panel();
             this.pnlDgvItemContent = new System.Windows.Forms.Panel();
+            this.txtRechargeAmount = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.lblGiftAmount = new System.Windows.Forms.Label();
             this.lblCardNo = new System.Windows.Forms.Label();
             this.lblMemberNo = new System.Windows.Forms.Label();
@@ -82,12 +76,15 @@
             this.picDown = new System.Windows.Forms.PictureBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnGetCard = new System.Windows.Forms.Button();
-            this.txtRechargeAmount = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.pnlHead.SuspendLayout();
-            this.pnlMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
+            this.pnlHead = new System.Windows.Forms.Panel();
+            this.pnlMenu = new System.Windows.Forms.Panel();
+            this.lblMenu = new System.Windows.Forms.Label();
+            this.picMenu = new System.Windows.Forms.PictureBox();
+            this.btnRechargeQuery = new System.Windows.Forms.Button();
+            this.btnCancle = new System.Windows.Forms.Button();
+            this.lblShopName = new System.Windows.Forms.Label();
             this.pnlDgvHead.SuspendLayout();
             this.pnlMember.SuspendLayout();
             this.pnlPayType.SuspendLayout();
@@ -103,104 +100,10 @@
             this.pnlDgvItemContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDown)).BeginInit();
+            this.pnlHead.SuspendLayout();
+            this.pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pnlHead
-            // 
-            this.pnlHead.BackColor = System.Drawing.Color.Black;
-            this.pnlHead.Controls.Add(this.pnlMenu);
-            this.pnlHead.Controls.Add(this.btnCancle);
-            this.pnlHead.Controls.Add(this.btnMenu);
-            this.pnlHead.Controls.Add(this.lblShopName);
-            this.pnlHead.Font = new System.Drawing.Font("宋体", 9F);
-            this.pnlHead.Location = new System.Drawing.Point(0, 0);
-            this.pnlHead.Name = "pnlHead";
-            this.pnlHead.Size = new System.Drawing.Size(1180, 60);
-            this.pnlHead.TabIndex = 32;
-            // 
-            // pnlMenu
-            // 
-            this.pnlMenu.Controls.Add(this.lblMenu);
-            this.pnlMenu.Controls.Add(this.picMenu);
-            this.pnlMenu.Location = new System.Drawing.Point(1020, 8);
-            this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(150, 45);
-            this.pnlMenu.TabIndex = 49;
-            // 
-            // lblMenu
-            // 
-            this.lblMenu.AutoSize = true;
-            this.lblMenu.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblMenu.ForeColor = System.Drawing.Color.White;
-            this.lblMenu.Location = new System.Drawing.Point(103, 12);
-            this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(42, 21);
-            this.lblMenu.TabIndex = 38;
-            this.lblMenu.Text = "店铺";
-            // 
-            // picMenu
-            // 
-            this.picMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMenu.BackgroundImage")));
-            this.picMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picMenu.Location = new System.Drawing.Point(69, 12);
-            this.picMenu.Name = "picMenu";
-            this.picMenu.Size = new System.Drawing.Size(21, 21);
-            this.picMenu.TabIndex = 0;
-            this.picMenu.TabStop = false;
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.BackColor = System.Drawing.Color.Black;
-            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
-            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancle.FlatAppearance.BorderSize = 0;
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
-            this.btnCancle.ForeColor = System.Drawing.Color.White;
-            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnCancle.Location = new System.Drawing.Point(880, 14);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(95, 35);
-            this.btnCancle.TabIndex = 43;
-            this.btnCancle.Text = "返回";
-            this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCancle.UseVisualStyleBackColor = false;
-            this.btnCancle.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.AutoSize = true;
-            this.btnMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMenu.BackColor = System.Drawing.Color.Black;
-            this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMenu.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatAppearance.BorderSize = 0;
-            this.btnMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenu.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.btnMenu.ForeColor = System.Drawing.Color.White;
-            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenu.Location = new System.Drawing.Point(714, 16);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(142, 30);
-            this.btnMenu.TabIndex = 40;
-            this.btnMenu.Text = "某某某，你好  ∨";
-            this.btnMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnMenu.UseVisualStyleBackColor = false;
-            // 
-            // lblShopName
-            // 
-            this.lblShopName.AutoSize = true;
-            this.lblShopName.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lblShopName.ForeColor = System.Drawing.Color.White;
-            this.lblShopName.Location = new System.Drawing.Point(20, 20);
-            this.lblShopName.Name = "lblShopName";
-            this.lblShopName.Size = new System.Drawing.Size(42, 21);
-            this.lblShopName.TabIndex = 37;
-            this.lblShopName.Text = "店铺";
             // 
             // pnlDgvHead
             // 
@@ -662,6 +565,25 @@
             this.pnlDgvItemContent.Size = new System.Drawing.Size(808, 88);
             this.pnlDgvItemContent.TabIndex = 71;
             // 
+            // txtRechargeAmount
+            // 
+            this.txtRechargeAmount.BackColor = System.Drawing.Color.White;
+            this.txtRechargeAmount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtRechargeAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRechargeAmount.DecimalDigits = 2;
+            this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
+            this.txtRechargeAmount.LockFocus = true;
+            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRechargeAmount.MaxDeciaml = ((long)(50000));
+            this.txtRechargeAmount.MaxLength = 10;
+            this.txtRechargeAmount.Name = "txtRechargeAmount";
+            this.txtRechargeAmount.NeedBoard = false;
+            this.txtRechargeAmount.OnlyNumber = true;
+            this.txtRechargeAmount.Size = new System.Drawing.Size(163, 44);
+            this.txtRechargeAmount.TabIndex = 132;
+            this.txtRechargeAmount.WaterText = "请选择";
+            // 
             // lblGiftAmount
             // 
             this.lblGiftAmount.AutoSize = true;
@@ -754,25 +676,6 @@
             this.btnGetCard.UseVisualStyleBackColor = false;
             this.btnGetCard.Click += new System.EventHandler(this.btnGetCard_Click);
             // 
-            // txtRechargeAmount
-            // 
-            this.txtRechargeAmount.BackColor = System.Drawing.Color.White;
-            this.txtRechargeAmount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtRechargeAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRechargeAmount.DecimalDigits = 2;
-            this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
-            this.txtRechargeAmount.LockFocus = true;
-            this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRechargeAmount.MaxDeciaml = ((long)(50000));
-            this.txtRechargeAmount.MaxLength = 10;
-            this.txtRechargeAmount.Name = "txtRechargeAmount";
-            this.txtRechargeAmount.NeedBoard = false;
-            this.txtRechargeAmount.OnlyNumber = true;
-            this.txtRechargeAmount.Size = new System.Drawing.Size(163, 44);
-            this.txtRechargeAmount.TabIndex = 132;
-            this.txtRechargeAmount.WaterText = "请选择";
-            // 
             // rbtnPageDown
             // 
             this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
@@ -813,12 +716,105 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
+            // pnlHead
+            // 
+            this.pnlHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.pnlHead.Controls.Add(this.pnlMenu);
+            this.pnlHead.Controls.Add(this.btnRechargeQuery);
+            this.pnlHead.Controls.Add(this.btnCancle);
+            this.pnlHead.Controls.Add(this.lblShopName);
+            this.pnlHead.Font = new System.Drawing.Font("宋体", 9F);
+            this.pnlHead.Location = new System.Drawing.Point(0, 0);
+            this.pnlHead.Name = "pnlHead";
+            this.pnlHead.Size = new System.Drawing.Size(1180, 60);
+            this.pnlHead.TabIndex = 135;
+            // 
+            // pnlMenu
+            // 
+            this.pnlMenu.Controls.Add(this.lblMenu);
+            this.pnlMenu.Controls.Add(this.picMenu);
+            this.pnlMenu.Location = new System.Drawing.Point(1020, 8);
+            this.pnlMenu.Name = "pnlMenu";
+            this.pnlMenu.Size = new System.Drawing.Size(150, 45);
+            this.pnlMenu.TabIndex = 48;
+            // 
+            // lblMenu
+            // 
+            this.lblMenu.AutoSize = true;
+            this.lblMenu.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblMenu.ForeColor = System.Drawing.Color.White;
+            this.lblMenu.Location = new System.Drawing.Point(103, 12);
+            this.lblMenu.Name = "lblMenu";
+            this.lblMenu.Size = new System.Drawing.Size(42, 21);
+            this.lblMenu.TabIndex = 38;
+            this.lblMenu.Text = "店铺";
+            // 
+            // picMenu
+            // 
+            this.picMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMenu.BackgroundImage")));
+            this.picMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picMenu.Location = new System.Drawing.Point(69, 12);
+            this.picMenu.Name = "picMenu";
+            this.picMenu.Size = new System.Drawing.Size(21, 21);
+            this.picMenu.TabIndex = 0;
+            this.picMenu.TabStop = false;
+            // 
+            // btnRechargeQuery
+            // 
+            this.btnRechargeQuery.BackColor = System.Drawing.Color.Black;
+            this.btnRechargeQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRechargeQuery.BackgroundImage")));
+            this.btnRechargeQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRechargeQuery.FlatAppearance.BorderSize = 0;
+            this.btnRechargeQuery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRechargeQuery.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnRechargeQuery.ForeColor = System.Drawing.Color.White;
+            this.btnRechargeQuery.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnRechargeQuery.Location = new System.Drawing.Point(897, 14);
+            this.btnRechargeQuery.Name = "btnRechargeQuery";
+            this.btnRechargeQuery.Size = new System.Drawing.Size(95, 35);
+            this.btnRechargeQuery.TabIndex = 41;
+            this.btnRechargeQuery.Text = "充值明细";
+            this.btnRechargeQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnRechargeQuery.UseVisualStyleBackColor = false;
+            this.btnRechargeQuery.Click += new System.EventHandler(this.btnRechargeQuery_Click);
+            // 
+            // btnCancle
+            // 
+            this.btnCancle.BackColor = System.Drawing.Color.Black;
+            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
+            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCancle.FlatAppearance.BorderSize = 0;
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnCancle.ForeColor = System.Drawing.Color.White;
+            this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnCancle.Location = new System.Drawing.Point(781, 14);
+            this.btnCancle.Name = "btnCancle";
+            this.btnCancle.Size = new System.Drawing.Size(95, 35);
+            this.btnCancle.TabIndex = 41;
+            this.btnCancle.Text = "返回";
+            this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCancle.UseVisualStyleBackColor = false;
+            this.btnCancle.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // lblShopName
+            // 
+            this.lblShopName.AutoSize = true;
+            this.lblShopName.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblShopName.ForeColor = System.Drawing.Color.White;
+            this.lblShopName.Location = new System.Drawing.Point(20, 20);
+            this.lblShopName.Name = "lblShopName";
+            this.lblShopName.Size = new System.Drawing.Size(42, 21);
+            this.lblShopName.TabIndex = 37;
+            this.lblShopName.Text = "店铺";
+            // 
             // FormEntityCardBatchSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.pnlHead);
             this.Controls.Add(this.dgvCard);
             this.Controls.Add(this.pnlDgvItem);
             this.Controls.Add(this.btnGetCard);
@@ -828,16 +824,13 @@
             this.Controls.Add(this.btnBatchSetRechargeAmount);
             this.Controls.Add(this.pnlMember);
             this.Controls.Add(this.pnlDgvHead);
-            this.Controls.Add(this.pnlHead);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormEntityCardBatchSale";
             this.Text = "FormBatchSaleCardCreate";
-            this.pnlHead.ResumeLayout(false);
-            this.pnlHead.PerformLayout();
-            this.pnlMenu.ResumeLayout(false);
-            this.pnlMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormEntityCardBatchSale_FormClosed);
+            this.Load += new System.EventHandler(this.FormEntityCardBatchSale_Load);
+            this.Shown += new System.EventHandler(this.FormEntityCardBatchSale_Shown);
             this.pnlDgvHead.ResumeLayout(false);
             this.pnlDgvHead.PerformLayout();
             this.pnlMember.ResumeLayout(false);
@@ -860,19 +853,17 @@
             this.pnlDgvItemContent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDown)).EndInit();
+            this.pnlHead.ResumeLayout(false);
+            this.pnlHead.PerformLayout();
+            this.pnlMenu.ResumeLayout(false);
+            this.pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlHead;
-        private System.Windows.Forms.Panel pnlMenu;
-        private System.Windows.Forms.Label lblMenu;
-        private System.Windows.Forms.PictureBox picMenu;
-        private System.Windows.Forms.Button btnCancle;
-        private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.Label lblShopName;
         private System.Windows.Forms.Panel pnlDgvHead;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
@@ -919,5 +910,12 @@
         private System.Windows.Forms.Label lblTotalPay;
         private System.Windows.Forms.PictureBox picDown;
         private System.Windows.Forms.Button btnGetCard;
+        private System.Windows.Forms.Panel pnlHead;
+        private System.Windows.Forms.Panel pnlMenu;
+        private System.Windows.Forms.Label lblMenu;
+        private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.Button btnCancle;
+        private System.Windows.Forms.Label lblShopName;
+        private System.Windows.Forms.Button btnRechargeQuery;
     }
 }

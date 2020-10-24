@@ -72,13 +72,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        public static bool ShowFormTopUpByOnline(long orderid, string mobile)
+        public static bool ShowFormTopUpByOnline(long orderid, string mobile, tradePara trade = null)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
-
-                FormTopUpByOnLine frmpaybycash = new FormTopUpByOnLine(orderid.ToString(), mobile);
+                FormTopUpByOnLine frmpaybycash = new FormTopUpByOnLine(orderid.ToString(), mobile, trade);
                 asf.AutoScaleControlTest(frmpaybycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
                 frmpaybycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybycash.Height) / 2);
                 frmpaybycash.TopMost = true;
@@ -130,7 +129,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 asf.AutoScaleControlTest(formEntityCardList, 800, 600, 800 * MainModel.midScale, 600 * MainModel.midScale, true);
                 formEntityCardList.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formEntityCardList.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formEntityCardList.Height) / 2);
                 formEntityCardList.TopMost = true;
-                DialogResult dialog= formEntityCardList.ShowDialog();
+                DialogResult dialog = formEntityCardList.ShowDialog();
                 BackHelper.HideFormBackGround();
 
                 formEntityCardList.Dispose();
@@ -362,7 +361,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-       
+
 
         /// <summary>
         /// 显示修改手机号码-新手机获取验证码窗口

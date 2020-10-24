@@ -359,14 +359,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="mobile"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public bool Updatemembermobile(string token,string newphone, ref string errormsg)
+        public bool Updatemembermobile(string token, string newphone, ref string errormsg)
         {
             try
             {
                 string url = "/pos/member/memberheader/updatemembermobile";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("token",token);
+                sort.Add("token", token);
                 sort.Add("mobile", newphone);
 
                 string json = HttpGET(url, sort);
@@ -532,7 +532,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-        
+
         #region 实体卡
         /// <summary> 获取实体卡
         /// </summary>
@@ -718,6 +718,44 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 erromessage = "网络连接异常，请检查网络连接";
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 获取批量售卡详情
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="mobile"></param>
+        /// <param name="erromessage"></param>f
+        /// <returns></returns>
+        public List<EntityCardBatchDepositLine> GetDepositBillByIds(List<string> ids, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/member/balance/getdepositbillbyids";
+                SortedDictionary<string, string[]> sort = new SortedDictionary<string, string[]>();
+                sort.Add("ids", ids.ToArray());
+                string testjson = JsonConvert.SerializeObject(sort);
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    List<EntityCardBatchDepositLine> resultobj = JsonConvert.DeserializeObject<List<EntityCardBatchDepositLine>>(rd.data.ToString());
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "GetBalancecodepositrefound:" + json); }
+                    catch { }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "充值退款明细异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+
         }
         #endregion
 

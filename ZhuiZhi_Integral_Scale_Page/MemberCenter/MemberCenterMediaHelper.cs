@@ -14,6 +14,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
     public class MemberCenterMediaHelper
     {
+        //static MemberCenterHelper(){
+        //    HaveMedia=Screen.AllScreens.Count() > 1;
+        //}
         private static FormMemberCenterMedia frmmembermedia = null;
 
         /// <summary>
@@ -21,7 +24,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
-        private static bool HaveMedia = false;
+        private static bool HaveMedia = Screen.AllScreens.Count() > 1;
 
         public static void ShowFormMainMedia()
         {
@@ -35,21 +38,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     frmmembermedia.TopMost = true;
                 }
 
-
-                if (Screen.AllScreens.Count() > 1)
+                if (HaveMedia)
                 {
-                    HaveMedia = true;
                     frmmembermedia.Show();
-                }
-                else
-                {
-                    HaveMedia = false;
                 }
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("显示客屏异常" + ex.Message);
-
             }
         }
 
@@ -192,17 +188,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch { }
         }
         #endregion
-        
+
         #region 弹框显示
         /// <summary> 显示提示框
         /// </summary>
-        public static void ShowLog(string msg, bool iserror=false)
+        public static void ShowLog(string msg, bool iserror = false)
         {
             try
             {
                 if (frmmembermedia != null && HaveMedia)
                 {
-                    frmmembermedia.ShowLog(msg,iserror);
+                    frmmembermedia.ShowLog(msg, iserror);
                 }
             }
             catch { }
@@ -223,7 +219,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
-        
+
         #region 绑卡
         private static FormEntityCardBindMedia formBindEntityCardMedia = null;
         public static void ShowFormBindEntityCardMedia(OutEntityCardResponseDto entityCard)
@@ -251,6 +247,51 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (formBindEntityCardMedia != null)
             {
                 formBindEntityCardMedia.Close();
+            }
+        }
+        #endregion
+
+        #region 批量售卡
+        private static ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.FormEntityCardBatchSaleMedia formEntityCardBatchSaleMedia = null;
+        public static void ShowFormEntityCardBatchSaleMedia()
+        {
+            try
+            {
+                if (formEntityCardBatchSaleMedia == null || formEntityCardBatchSaleMedia.IsDisposed)
+                {
+                    formEntityCardBatchSaleMedia = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.FormEntityCardBatchSaleMedia();
+                    asf.AutoScaleControlTest(formEntityCardBatchSaleMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                    formEntityCardBatchSaleMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                    //formEntityCardBatchSaleMedia.TopMost = true;
+                }
+                formEntityCardBatchSaleMedia.Show();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary> 刷新客屏信息
+        /// </summary>
+        public static void UpdateFormEntityCardBatchSaleMedia(string cardSum, string totalRechargeAmount, string totalGiftAmount, string totalRechargeAll, string totalPay, List<ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.RechargeCardInfo> lstCard)
+        {
+            try
+            {
+                if (formEntityCardBatchSaleMedia != null && HaveMedia)
+                {
+                    formEntityCardBatchSaleMedia.UpdateFormEntityCardBatchSaleMedia(cardSum, totalRechargeAmount, totalGiftAmount, totalRechargeAll, totalPay, lstCard);
+                }
+            }
+            catch { }
+        }
+
+
+        public static void CloseFormEntityCardBatchSaleMedia()
+        {
+            if (formEntityCardBatchSaleMedia != null)
+            {
+                formEntityCardBatchSaleMedia.Close();
             }
         }
         #endregion
