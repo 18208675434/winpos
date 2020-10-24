@@ -43,6 +43,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 登录会员凭证  （用于区分手机号 和实体卡登录）
         /// </summary>
         public string entrancecode { get; set; }
+
+        /// <summary>
+        /// deng
+        /// </summary>
+        public string memberinfo { get; set; }
     }
 
     public class Memberheaderresponsevo

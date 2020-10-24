@@ -853,12 +853,14 @@
             // 
             // txtSearch
             // 
+            this.txtSearch.AcceptsReturn = true;
             this.txtSearch.BackColor = System.Drawing.Color.White;
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.Font = new System.Drawing.Font("微软雅黑", 24F);
             this.txtSearch.Location = new System.Drawing.Point(9, 8);
+            this.txtSearch.Multiline = true;
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(275, 43);
+            this.txtSearch.Size = new System.Drawing.Size(275, 42);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
@@ -2205,6 +2207,7 @@
             this.Controls.Add(this.dgvGood);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.Name = "frmMainHalfOffLine";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);

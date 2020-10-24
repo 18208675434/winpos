@@ -429,7 +429,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
-                        lblMemberPhone.Text = "手机号：" + member.entrancecode;
+                        lblMemberPhone.Text = "手机号：" + member.memberinfo;
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 
@@ -611,33 +611,62 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            try{
-            if (txtSearch.Text.Length == 0)
+            try
             {
-                lblSearchShuiyin.Visible = true;
-            }
-            else
-            {
-                lblSearchShuiyin.Visible = false;
-            }
-           
-            if (!IsEnable)
-            {
-                return;
-            }
-           
-                Application.DoEvents();
 
-                CurrentGoodPage = 1;
-                LoadDgvGood(false, false);
+                lblSearchShuiyin.Visible = string.IsNullOrEmpty(txtSearch.Text);
+                if (isfresh)
+                {
+                    return;
+                }
 
-          
-            }catch(Exception ex){
-                ShowLog("查询面板商品异常"+ex.Message,true);
+                Thread threadItemExedate = new Thread(Upthread);
+                threadItemExedate.IsBackground = true;
+                threadItemExedate.Start();
+            }
+            catch (Exception ex)
+            {
+                ShowLog("查询面板商品异常" + ex.Message, true);
             }
 
         }
+        bool isfresh = false;
+        private void Upthread()
+        {
+            try
+            {
+                isfresh = true;
+                //搜索延时150毫秒 有回车代表扫描数据 没有则做条件查询
+                Delay.Start(150);
 
+                string result = txtSearch.Text;
+
+                if (result.Contains("\r\n"))
+                {
+                    QueueScanCode.Enqueue(result.ToString().Trim());
+
+                    txtSearch.Clear();
+                }
+                else
+                {
+
+                    if (!IsEnable)
+                    {
+                        return;
+                    }
+
+                    Application.DoEvents();
+
+                    CurrentGoodPage = 1;
+                    LoadDgvGood(false, false);
+                }
+            }
+            catch { }
+            finally
+            {
+                isfresh = false;
+            }
+        }
 
 
         /// <summary>

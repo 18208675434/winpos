@@ -314,6 +314,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 }               
                 else
                 {
+
+                    if (thisCurrentCart.balancepayamt == 0)
+                    {
+                        thisCurrentCart.balancepayoption = 0;
+                    }
                     RefreshCart();
                 }
 
