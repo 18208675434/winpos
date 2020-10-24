@@ -588,7 +588,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         {
             int i;
          
-            i = YkOpenDevice(11, 0);
+            i = YkOpenDevice(GetYKComNo(), GetYKBaud());
 
             return i;
         }
@@ -756,5 +756,47 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             i = SetCashBoxDriveMode();
             CloseDevice();
         }
+
+
+
+
+
+        public static int GetYKComNo()
+        {
+            try
+            {
+               string comno = INIManager.GetIni("Scale", "PrintComNo", MainModel.IniPath);
+
+               return Convert.ToInt16(comno);
+            }
+            catch {
+                return 11;
+            }
+        }
+
+
+        public static int GetYKBaud()
+        {
+            try
+            {
+                string comno = INIManager.GetIni("Scale", "PrintBaud", MainModel.IniPath);
+
+                if (string.IsNullOrEmpty(comno))
+                {
+                    return 9600;
+                }
+                else
+                {
+                    return Convert.ToInt32(comno);
+                }
+                
+            }
+            catch
+            {
+                return 9600;
+            }
+        }
+
+
     }
 }

@@ -106,9 +106,10 @@
             this.picOpenHalfOffLine = new System.Windows.Forms.PictureBox();
             this.linklblPrint = new System.Windows.Forms.LinkLabel();
             this.label25 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxPrintBaud = new System.Windows.Forms.ComboBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbxPrintComNo = new System.Windows.Forms.ComboBox();
+            this.pnlYKPrint = new System.Windows.Forms.Panel();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -131,6 +132,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCloseHalfOffLine)).BeginInit();
             this.pnlOpenHalfOffLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenHalfOffLine)).BeginInit();
+            this.pnlYKPrint.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbxPrint
@@ -1049,15 +1051,15 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label25.Location = new System.Drawing.Point(645, 328);
+            this.label25.Location = new System.Drawing.Point(13, 72);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(93, 20);
             this.label25.TabIndex = 103;
             this.label25.Text = "打印机波特率";
             // 
-            // comboBox1
+            // cbxPrintBaud
             // 
-            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] {
+            this.cbxPrintBaud.AutoCompleteCustomSource.AddRange(new string[] {
             "COM1",
             "COM2",
             "COM3",
@@ -1072,33 +1074,34 @@
             "LPT2",
             "USB",
             "NET"});
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbxPrintBaud.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPrintBaud.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxPrintBaud.FormattingEnabled = true;
+            this.cbxPrintBaud.Items.AddRange(new object[] {
             "9600",
             "19200",
             "38400",
             "57600",
             "115200"});
-            this.comboBox1.Location = new System.Drawing.Point(744, 323);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(316, 29);
-            this.comboBox1.TabIndex = 102;
+            this.cbxPrintBaud.Location = new System.Drawing.Point(112, 67);
+            this.cbxPrintBaud.Name = "cbxPrintBaud";
+            this.cbxPrintBaud.Size = new System.Drawing.Size(316, 29);
+            this.cbxPrintBaud.TabIndex = 102;
+            this.cbxPrintBaud.SelectedIndexChanged += new System.EventHandler(this.cbxPrintBaud_SelectedIndexChanged);
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label27.Location = new System.Drawing.Point(659, 281);
+            this.label27.Location = new System.Drawing.Point(27, 25);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(79, 20);
             this.label27.TabIndex = 101;
             this.label27.Text = "打印机端口";
             // 
-            // comboBox2
+            // cbxPrintComNo
             // 
-            this.comboBox2.AutoCompleteCustomSource.AddRange(new string[] {
+            this.cbxPrintComNo.AutoCompleteCustomSource.AddRange(new string[] {
             "COM1",
             "COM2",
             "COM3",
@@ -1113,20 +1116,40 @@
             "LPT2",
             "USB",
             "NET"});
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.cbxPrintComNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPrintComNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxPrintComNo.FormattingEnabled = true;
+            this.cbxPrintComNo.Items.AddRange(new object[] {
             "COM1",
             "COM2",
             "COM3",
             "COM4",
             "COM5",
-            "COM6"});
-            this.comboBox2.Location = new System.Drawing.Point(744, 276);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(316, 29);
-            this.comboBox2.TabIndex = 100;
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "COM10",
+            "LPT1",
+            "LPT2",
+            "USB",
+            "NET"});
+            this.cbxPrintComNo.Location = new System.Drawing.Point(112, 20);
+            this.cbxPrintComNo.Name = "cbxPrintComNo";
+            this.cbxPrintComNo.Size = new System.Drawing.Size(316, 29);
+            this.cbxPrintComNo.TabIndex = 100;
+            this.cbxPrintComNo.SelectedIndexChanged += new System.EventHandler(this.cbxPrintComNo_SelectedIndexChanged);
+            // 
+            // pnlYKPrint
+            // 
+            this.pnlYKPrint.Controls.Add(this.label25);
+            this.pnlYKPrint.Controls.Add(this.cbxPrintBaud);
+            this.pnlYKPrint.Controls.Add(this.label27);
+            this.pnlYKPrint.Controls.Add(this.cbxPrintComNo);
+            this.pnlYKPrint.Location = new System.Drawing.Point(632, 256);
+            this.pnlYKPrint.Name = "pnlYKPrint";
+            this.pnlYKPrint.Size = new System.Drawing.Size(457, 117);
+            this.pnlYKPrint.TabIndex = 104;
             // 
             // frmPrinterSetting
             // 
@@ -1134,10 +1157,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1180, 760);
-            this.Controls.Add(this.label25);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label27);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.pnlYKPrint);
             this.Controls.Add(this.linklblPrint);
             this.Controls.Add(this.pnlCloseHalfOffLine);
             this.Controls.Add(this.pnlOpenHalfOffLine);
@@ -1228,6 +1248,8 @@
             this.pnlOpenHalfOffLine.ResumeLayout(false);
             this.pnlOpenHalfOffLine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenHalfOffLine)).EndInit();
+            this.pnlYKPrint.ResumeLayout(false);
+            this.pnlYKPrint.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1312,8 +1334,9 @@
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.PictureBox picMenu;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxPrintBaud;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbxPrintComNo;
+        private System.Windows.Forms.Panel pnlYKPrint;
     }
 }
