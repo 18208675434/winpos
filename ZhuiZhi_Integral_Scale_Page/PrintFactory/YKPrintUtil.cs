@@ -312,12 +312,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     PrintStr(PrintHelper.getStrLine() + "\n");
 
-
                     PrintStr("多谢惠顾，欢迎下次光临！                         " + " \n \n \n \n \n \n.");
                     CloseDevice();
                     Application.DoEvents();
                     return true;
-
                 }
                 catch (Exception ex)
                 {
@@ -364,7 +362,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 if (printdetail.rewardamount > 0)
                 {
                     lstPrintStr.Add(PrintHelper.MergeStr("    赠送金额", printdetail.rewardamount.ToString("f2"), BodyCharCountOfLine, PageSize));
-
                 }
 
                 lstPrintStr.Add(PrintHelper.getStrLine());

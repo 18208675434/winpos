@@ -263,7 +263,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                         PrintBitmapFile("orderqrcoe.bmp");
 
                         BeginPrint(7);
-                        PrintText(PrintHelper.MergeStr(printdetail.pickcode, "", BodyCharCountOfLine, PageSize), 22);
+                        PrintText(PrintHelper.MergeStr("取货码："+printdetail.pickcode, "", BodyCharCountOfLine, PageSize), 22);
                     }
 
                     PrintText(PrintHelper.getStrLine(), 22);
