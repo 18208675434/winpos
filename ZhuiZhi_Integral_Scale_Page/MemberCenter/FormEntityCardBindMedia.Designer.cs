@@ -244,7 +244,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormEntityCardBindMedia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "挂失补办";
+            this.Text = "绑定实体卡";
             this.Shown += new System.EventHandler(this.FormLossEntityCardMedia_Shown);
             this.pnlHead.ResumeLayout(false);
             this.pnlHead.PerformLayout();

@@ -129,34 +129,10 @@
         qvaYtFXacedodFT64c7R6Kq0587R6Kn0VIf+279DT3LyCexDO5c7tdAEAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnCancle.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAKYAAAAyCAYAAADWf6AiAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJ
-        TUUH4gwIDiEoJKhF1AAAAVVJREFUeF7t3TFSwlAUhtEsQF0ZcTdqm4LtWFnYsSiw13cxjyEMY5f4F6c4
-        k7zA7b5Jyjt8frx3Y3NoTs03bKiaq/Z20zQNpUe5b+4NwNb2Pczd1cPX5rHpwcKqKsJ2rebemt7hWA/r
-        FVqH+mExBGvrn+450HoxVouHOhznw1OzGIK13YRZDVaLxzrUTVkMwBauw5zjPPd4uak/wdaESSRhEkmY
-        RBImkYRJJGESSZhEEiaRhEkkYRJJmEQSJpGESSRhEkmYRBImkYRJJGESSZhEEiaRhEkkYRJJmEQSJpGE
-        SSRhEkmYRBImkYRJJGESSZhEEiaRhEkkYRJJmEQSJpGESSRhEumvMC2g4t/cRFmr+6rFUx36yr5al7YY
-        grXdhLlY2VfroM+vz+aleWgWw7CWOchqrkdZzktOi7XQpLishe6em/qsfzX3BmAt1Vy1N/5+1qfhB/BJ
-        mo+W93BwAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAYAAAAVibZIAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAUBJREFUSEu1lL1KA0EURtVCQbG0UYy9bfogEi2tLMTa2mBhl/cQm0Bs9AVU0MJX
-        EMFKfACLoCL+m6zny9wwrO7q7jgeOGRy57sfyQYylEeSJBXcwCO8wa69HuMqViz6O4RHcAWv8R2z0Fz3
-        yg3baj6EdvAJi6Dcrq1mQ6CGD0qX4BEXrCINF/N4rlQA2puyKg/DbSz6tb+iT7toVR6GB/3rcJpW5WF4
-        5u6CaVmVh+G/lLbcXTANq/Iw3MLQH0p7NavyMJzB0EegvUmrSsNFFV+UKsEzVq0iGwLreKV0AZRbs9V8
-        CI1hHe/wJ25xCUdt9TtcTmMDL/ENi/CKF7iJ6WfKYA4PseyfyQDttXF2UDiB+xiDPRxX6TLeaxIB9dRV
-        qvaYtFXacedodFT64c7R6Kq0587R6Kn0VIf+279DT3LyCexDO5c7tdAEAAAAAElFTkSuQmCC
-</value>
-  </data>
   <metadata name="cardNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="dataGridViewCellStyle5.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG

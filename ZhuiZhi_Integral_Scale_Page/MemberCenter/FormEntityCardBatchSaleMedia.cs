@@ -22,7 +22,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             InitializeComponent();
         }
 
-        public void RefreshDgv(string cardSum, string totalRechargeAmount, string totalGiftAmount, string totalRechargeAll, string totalPay, List<RechargeCardInfo> lstCard)
+        private void FormEntityCardBatchSaleMedia_Shown(object sender, EventArgs e)
+        {
+            lblShopName.Text = ZhuiZhi_Integral_Scale_UncleFruit.Model.MainModel.Titledata + "   " + ZhuiZhi_Integral_Scale_UncleFruit.Model.MainModel.CurrentShopInfo.shopname;
+        }
+
+        public void UpdateFormEntityCardBatchSaleMedia(string cardSum, string totalRechargeAmount, string totalGiftAmount, string totalRechargeAll, string totalPay, List<RechargeCardInfo> lstCard)
         {
             lbCardSum.Text = cardSum;
             lblTotalRechargeAmount.Text = totalRechargeAmount;
@@ -45,9 +50,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     dgvCard.Rows.Add(GetDgvRow(rechargeCardInfo));
                 }
-                Application.DoEvents();
                 dgvCard.ClearSelection();
-                this.Activate();
             }
             catch (Exception ex)
             {
@@ -95,9 +98,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

@@ -60,6 +60,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             InitializeComponent();
         }
 
+        private void FormEntityCardBatchSale_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
+                lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
+                picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
+                lblMenu.Left = picMenu.Right;
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                MainModel.ShowLog("加载批量售卡页面异常" + ex.Message, true);
+            }
+        }
+
+
+        private void FormEntityCardBatchSale_Shown(object sender, EventArgs e)
+        {
+            MemberCenterMediaHelper.ShowFormEntityCardBatchSaleMedia();
+        }
+
+
+        private void FormEntityCardBatchSale_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MemberCenterMediaHelper.CloseFormEntityCardBatchSaleMedia();
+        }
+
+        private void btnRechargeQuery_Click(object sender, EventArgs e)
+        {
+            MemberCenterHelper.ShowFormRechangeQuery();
+        }
+
+       
         private void btnGetCard_Click(object sender, EventArgs e)
         {
             if (!IsEnable)
@@ -97,10 +131,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         memberid = entityCard.mobile
                     });
 
-                    //int index = dgvCard.Rows.Count + 1;
-                    //CurrentCards.Add(new RechargeCardInfo() 
-                    //{ CardNo = index * 1000000 + "", RechargeAmount = (index % 2) * 100, RewardAmount = (index % 2) * 10, 
-                    //    Status = (index % 2)+"", MemberNo = "B" + index * 1000000 });
                     RefreshDgv();
                 }
             }
@@ -160,12 +190,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 dgvCard.Rows.Clear();
-                if (lstCard == null || lstCard.Count == 0)
+                if (lstCard == null)
                 {
                     return;
                 }
-
-                //CurrentCards.Reverse();
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
                 int startindex = (CurrentPage - 1) * PageSize;
                 int lastindex = Math.Min(lstCard.Count - 1, startindex + PageSize - 1);
@@ -180,6 +208,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 Application.DoEvents();
                 dgvCard.ClearSelection();
+
+                MemberCenterMediaHelper.UpdateFormEntityCardBatchSaleMedia(lbCardSum.Text, lblTotalRechargeAmount.Text, lblTotalGiftAmount.Text, lblTotalRechargeAll.Text, lblTotalPay.Text, lstLoadingCards);
                 this.Activate();
 
             }
@@ -416,6 +446,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
         #endregion
+
+        
     }
 
     enum PayMode
