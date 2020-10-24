@@ -3206,8 +3206,41 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+        /// <summary> 红冲
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public bool CreateredWarehouseotherdeliveryByPos(string id, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/common/warehousedelivery/createredwarehouseotherdeliverybypos";
 
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("id",id);
+                string json = HttpGET(url, sort);
 
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return rd.data.ToString()=="true";
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "createredwarehouseotherdeliverybypos:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "红冲异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
 
         /// <summary>
         /// 报损 详情
