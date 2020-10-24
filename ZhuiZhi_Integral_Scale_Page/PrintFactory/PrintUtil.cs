@@ -274,7 +274,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// </summary>
         /// <param name="orderids"></param>
         /// <returns></returns>
-        public static bool PrintEntityCardBatchSale(List<string> orderids)
+        public static bool PrintEntityCardBatchSale(string batchoperatorid, List<string> orderids)
         {
             try
             {
@@ -295,10 +295,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     amount += item.amount;
                     rewardAmount += item.rewardamount;
                 }
+                printdetail.id = batchoperatorid;
                 printdetail.amount = amount;
                 printdetail.rewardamount = rewardAmount;
                 printdetail.paymodeforapi = result[0].paymodeforapi;
                 printdetail.paymode = result[0].paymode;
+                printdetail.createdat = MainModel.getStampByDateTime(DateTime.Now);
 
                 DbJsonUtil.AddBalanceInfo(result[0].paymodeforapi, printdetail.amount);
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);

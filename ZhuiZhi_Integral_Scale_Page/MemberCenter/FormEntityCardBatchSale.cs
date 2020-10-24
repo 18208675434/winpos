@@ -436,7 +436,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         orderids.Add(item.depositbillid);
                     }
-                    PrintUtil.PrintEntityCardBatchSale(orderids);
+                    PrintUtil.PrintEntityCardBatchSale(batchoperatorid,orderids);
                     MainModel.ShowLog("支付成功");
                     CurrentPage = 1;
                     lstCard.Clear();
