@@ -15,6 +15,7 @@ using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory;
 using ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory;
+using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
@@ -265,6 +266,61 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return false;
             }
         }
-       
+
+        static MemberCenterHttpUtil memberCenterHttpUtil=new MemberCenterHttpUtil();
+      
+        /// <summary>
+        /// 批量售卡 小票打印
+        /// </summary>
+        /// <param name="orderids"></param>
+        /// <returns></returns>
+        public static bool PrintEntityCardBatchSale(List<string> orderids)
+        {
+            try
+            {
+                string errormsg = "";
+                var result= memberCenterHttpUtil.GetDepositBillByIds(orderids, ref errormsg);
+                if (!string.IsNullOrEmpty(errormsg) || result == null || result.Count == 0)
+                {
+                    LogManager.WriteLog(errormsg);
+                    return false;
+                }
+                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint();
+
+                decimal amount = 0;
+                decimal rewardAmount = 0;
+
+                foreach (var item in result)
+                {
+                    amount += item.amount;
+                    rewardAmount += item.rewardamount;
+                }
+                printdetail.amount = amount;
+                printdetail.rewardamount = rewardAmount;
+                printdetail.paymodeforapi = result[0].paymodeforapi;
+                printdetail.paymode = result[0].paymode;
+
+                DbJsonUtil.AddBalanceInfo(result[0].paymodeforapi, printdetail.amount);
+                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                if (ScaleName == ScaleType.托利多.ToString())
+                {
+                    ToledoPrintUtil.PrintTopUp(printdetail,true);
+                }
+                else if (ScaleName == ScaleType.易捷通.ToString())
+                {
+                    SprtPrintUtil.PrintTopUp(printdetail, true);
+                }
+                else
+                {
+                    YKPrintUtil.PrintTopUp(printdetail, true);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

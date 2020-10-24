@@ -93,7 +93,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             MemberCenterHelper.ShowFormRechangeQuery();
         }
 
-       
+
         private void btnGetCard_Click(object sender, EventArgs e)
         {
             if (!IsEnable)
@@ -408,6 +408,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
                 bool payResult = true;
+
+
                 if (paymode == PayMode.online)//在线支付需单独处理
                 {
                     tradePara trade = new tradePara();
@@ -429,7 +431,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 if (payResult)
                 {
-                    //PrintUtil.PrintTopUp(result.ToString());
+                    List<string> orderids = new List<string>();
+                    foreach (var item in result.depositdetails)
+                    {
+                        orderids.Add(item.depositbillid);
+                    }
+                    PrintUtil.PrintEntityCardBatchSale(orderids);
                     MainModel.ShowLog("支付成功");
                     CurrentPage = 1;
                     lstCard.Clear();
@@ -447,7 +454,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         #endregion
 
-        
+
     }
 
     enum PayMode
