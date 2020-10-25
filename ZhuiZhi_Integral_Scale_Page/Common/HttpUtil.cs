@@ -3437,6 +3437,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
                 else
                 {
+                    errormsg = rd.message;
                     try { LogManager.WriteLog("Error", "depositmember:" + json); }
                     catch { }
                     return -1;
