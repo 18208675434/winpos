@@ -105,6 +105,11 @@
             this.lblOpenHalfOffLine = new System.Windows.Forms.Label();
             this.picOpenHalfOffLine = new System.Windows.Forms.PictureBox();
             this.linklblPrint = new System.Windows.Forms.LinkLabel();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cbxPrintBaud = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.cbxPrintComNo = new System.Windows.Forms.ComboBox();
+            this.pnlYKPrint = new System.Windows.Forms.Panel();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -127,6 +132,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCloseHalfOffLine)).BeginInit();
             this.pnlOpenHalfOffLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenHalfOffLine)).BeginInit();
+            this.pnlYKPrint.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbxPrint
@@ -947,7 +953,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Black;
-            this.panel6.Location = new System.Drawing.Point(687, 303);
+            this.panel6.Location = new System.Drawing.Point(687, 445);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(8, 25);
             this.panel6.TabIndex = 96;
@@ -956,7 +962,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label6.Location = new System.Drawing.Point(701, 304);
+            this.label6.Location = new System.Drawing.Point(701, 446);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(190, 24);
             this.label6.TabIndex = 95;
@@ -966,7 +972,7 @@
             // 
             this.pnlCloseHalfOffLine.Controls.Add(this.lblCloseHalfOffLine);
             this.pnlCloseHalfOffLine.Controls.Add(this.picCloseHalfOffLine);
-            this.pnlCloseHalfOffLine.Location = new System.Drawing.Point(799, 350);
+            this.pnlCloseHalfOffLine.Location = new System.Drawing.Point(799, 492);
             this.pnlCloseHalfOffLine.Name = "pnlCloseHalfOffLine";
             this.pnlCloseHalfOffLine.Size = new System.Drawing.Size(72, 33);
             this.pnlCloseHalfOffLine.TabIndex = 98;
@@ -999,7 +1005,7 @@
             // 
             this.pnlOpenHalfOffLine.Controls.Add(this.lblOpenHalfOffLine);
             this.pnlOpenHalfOffLine.Controls.Add(this.picOpenHalfOffLine);
-            this.pnlOpenHalfOffLine.Location = new System.Drawing.Point(705, 350);
+            this.pnlOpenHalfOffLine.Location = new System.Drawing.Point(705, 492);
             this.pnlOpenHalfOffLine.Name = "pnlOpenHalfOffLine";
             this.pnlOpenHalfOffLine.Size = new System.Drawing.Size(72, 33);
             this.pnlOpenHalfOffLine.TabIndex = 97;
@@ -1041,12 +1047,117 @@
             this.linklblPrint.Visible = false;
             this.linklblPrint.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklblPrint_LinkClicked);
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.label25.Location = new System.Drawing.Point(13, 72);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(93, 20);
+            this.label25.TabIndex = 103;
+            this.label25.Text = "打印机波特率";
+            // 
+            // cbxPrintBaud
+            // 
+            this.cbxPrintBaud.AutoCompleteCustomSource.AddRange(new string[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "COM10",
+            "LPT1",
+            "LPT2",
+            "USB",
+            "NET"});
+            this.cbxPrintBaud.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPrintBaud.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxPrintBaud.FormattingEnabled = true;
+            this.cbxPrintBaud.Items.AddRange(new object[] {
+            "9600",
+            "19200",
+            "38400",
+            "57600",
+            "115200"});
+            this.cbxPrintBaud.Location = new System.Drawing.Point(112, 67);
+            this.cbxPrintBaud.Name = "cbxPrintBaud";
+            this.cbxPrintBaud.Size = new System.Drawing.Size(316, 29);
+            this.cbxPrintBaud.TabIndex = 102;
+            this.cbxPrintBaud.SelectedIndexChanged += new System.EventHandler(this.cbxPrintBaud_SelectedIndexChanged);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.label27.Location = new System.Drawing.Point(27, 25);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(79, 20);
+            this.label27.TabIndex = 101;
+            this.label27.Text = "打印机端口";
+            // 
+            // cbxPrintComNo
+            // 
+            this.cbxPrintComNo.AutoCompleteCustomSource.AddRange(new string[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "COM10",
+            "LPT1",
+            "LPT2",
+            "USB",
+            "NET"});
+            this.cbxPrintComNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPrintComNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxPrintComNo.FormattingEnabled = true;
+            this.cbxPrintComNo.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "COM10",
+            "LPT1",
+            "LPT2",
+            "USB",
+            "NET"});
+            this.cbxPrintComNo.Location = new System.Drawing.Point(112, 20);
+            this.cbxPrintComNo.Name = "cbxPrintComNo";
+            this.cbxPrintComNo.Size = new System.Drawing.Size(316, 29);
+            this.cbxPrintComNo.TabIndex = 100;
+            this.cbxPrintComNo.SelectedIndexChanged += new System.EventHandler(this.cbxPrintComNo_SelectedIndexChanged);
+            // 
+            // pnlYKPrint
+            // 
+            this.pnlYKPrint.Controls.Add(this.label25);
+            this.pnlYKPrint.Controls.Add(this.cbxPrintBaud);
+            this.pnlYKPrint.Controls.Add(this.label27);
+            this.pnlYKPrint.Controls.Add(this.cbxPrintComNo);
+            this.pnlYKPrint.Location = new System.Drawing.Point(632, 256);
+            this.pnlYKPrint.Name = "pnlYKPrint";
+            this.pnlYKPrint.Size = new System.Drawing.Size(457, 117);
+            this.pnlYKPrint.TabIndex = 104;
+            // 
             // frmPrinterSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.pnlYKPrint);
             this.Controls.Add(this.linklblPrint);
             this.Controls.Add(this.pnlCloseHalfOffLine);
             this.Controls.Add(this.pnlOpenHalfOffLine);
@@ -1101,7 +1212,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPrinterSetting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "frmPrinterSetting";
+            this.Text = " ";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrinterSetting_FormClosed);
             this.Shown += new System.EventHandler(this.frmPrinterSetting_Shown);
             this.pnlHead.ResumeLayout(false);
@@ -1137,6 +1248,8 @@
             this.pnlOpenHalfOffLine.ResumeLayout(false);
             this.pnlOpenHalfOffLine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenHalfOffLine)).EndInit();
+            this.pnlYKPrint.ResumeLayout(false);
+            this.pnlYKPrint.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1220,5 +1333,10 @@
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ComboBox cbxPrintBaud;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox cbxPrintComNo;
+        private System.Windows.Forms.Panel pnlYKPrint;
     }
 }

@@ -1170,16 +1170,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private List<string> LstPrintOrderids = new List<string>();
         private void LoadNewOrder()
         {
-
+            try{
             string errormsg = "";
             PrinterPickOrderInfo orderinfo = httputil.QueryPickPrintInfo(ref errormsg);
             if (orderinfo != null && !string.IsNullOrEmpty(orderinfo.orderid) && !LstPrintOrderids.Contains(orderinfo.orderid))
             {
                 LstPrintOrderids.Add(orderinfo.orderid);
-                //语音播报 +弹窗提示
-                SayOrderHelper.ShowFormToast(orderinfo.saymsg);
+
+                this.Invoke(new InvokeHandler(delegate()
+               {
+                   //语音播报 +弹窗提示
+                   SayOrderHelper.ShowFormToast(orderinfo.saymsg);
+               }));
                 string msg = "";
                 PrintUtil.PrintThirdOrder(orderinfo, ref msg);
+            }
+            }catch(Exception ex){
+                LogManager.WriteLog("加载线上订单异常"+ex.Message);
             }
         }
 

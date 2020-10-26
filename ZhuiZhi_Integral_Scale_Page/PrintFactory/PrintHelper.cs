@@ -70,7 +70,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     lstPrintStr.AddRange(PrintHelper.MergeStr(pro.title, pro.price.saleprice.ToString("f2"), num, pro.price.total.ToString("f2"), BodyCharCountOfLine));
 
 
-                    if (pro.price.promoamt > 0)
+                    if (pro.price.promoamt > 0 && !isRefound)
                     {
                         lstPrintStr.Add(MergeStr("", "原价"+pro.price.origintotal.ToString("f2")+" 已优惠" + pro.price.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize - 6));
                     }

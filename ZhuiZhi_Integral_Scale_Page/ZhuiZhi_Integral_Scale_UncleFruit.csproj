@@ -540,6 +540,12 @@
     <Compile Include="MenuUI\FormAdjustRecord.Designer.cs">
       <DependentUpon>FormAdjustRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetail.Designer.cs">
+      <DependentUpon>FormWebOrderDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\AdjustPriceDynamic.cs" />
     <Compile Include="Model\AdjustPriceRecord.cs" />
     <Compile Include="Model\HalfOffLine\Coupons.cs" />
@@ -598,6 +604,7 @@
     <Compile Include="Model\SyncOrder.cs" />
     <Compile Include="Model\TenantInfo.cs" />
     <Compile Include="Model\ValidateOuterCoupon.cs" />
+    <Compile Include="Model\WebOrderDetail.cs" />
     <Compile Include="MyControl\KeyBoardAll.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1385,6 +1392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormAdjustRecord.resx">
       <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormWebOrderDetail.resx">
+      <DependentUpon>FormWebOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardAll.resx">
       <DependentUpon>KeyBoardAll.cs</DependentUpon>

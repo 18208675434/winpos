@@ -21,32 +21,72 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
     public class PrintUtil
     {
+
+        private static bool IsOrdeRefund =false;
         public static bool PrintOrder(PrintDetail printdetail, bool isRefound, ref string errormsg)
         {
             try
             {
-                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+                //string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
-                if (ScaleName == ScaleType.托利多.ToString())
-                {
-                    return ToledoPrintUtil.PrintOrder(printdetail,isRefound,ref errormsg);
-                }
-                else if (ScaleName == ScaleType.易捷通.ToString())
-                {
-                    return SprtPrintUtil.PrintOrder(printdetail, isRefound, ref errormsg);
-                }
-                else
-                {
-                    return YKPrintUtil.PrintOrder(printdetail, isRefound, ref errormsg);
-                }
+                //if (ScaleName == ScaleType.托利多.ToString())
+                //{
+                //    return ToledoPrintUtil.PrintOrder(printdetail,isRefound,ref errormsg);
+                //}
+                //else if (ScaleName == ScaleType.易捷通.ToString())
+                //{
+                //    return SprtPrintUtil.PrintOrder(printdetail, isRefound, ref errormsg);
+                //}
+                //else
+                //{
+                //    return YKPrintUtil.PrintOrder(printdetail, isRefound, ref errormsg);
+                //}
 
-                return false;
+                //return false;
+
+                //QuestPara para = e.Argument as QuestPara;
+                isRefound =isRefound;
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += HttpAsyncRequest_DoWork;
+                bk.RunWorkerAsync(printdetail);
+
+                return true;
             }
             catch {
                 return false;
             }
         }
 
+        public static  void HttpAsyncRequest_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+            try
+            {
+                string errrormsg="";
+                PrintDetail printdetail = e.Argument as PrintDetail;
+                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                if (ScaleName == ScaleType.托利多.ToString())
+                {
+                    ToledoPrintUtil.PrintOrder(printdetail, IsOrdeRefund, ref errrormsg);
+                }
+                else if (ScaleName == ScaleType.易捷通.ToString())
+                {
+                    SprtPrintUtil.PrintOrder(printdetail, IsOrdeRefund, ref errrormsg);
+                }
+                else
+                {
+                    YKPrintUtil.PrintOrder(printdetail, IsOrdeRefund, ref errrormsg);
+                }
+
+
+            }
+            catch
+            {
+                 
+            }
+            
+        }
 
         public static bool ReceiptPrint(Receiptdetail receipt, ref string errormsg)
         {

@@ -1194,6 +1194,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string error = "";
+            httputil.GetWebOrderDetail("8153660200030010",ref error);
+        }
+
     }
 
     public enum OrderType
