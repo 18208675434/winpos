@@ -153,6 +153,12 @@
     <Compile Include="MemberCenter\FormEntityCardBind.Designer.cs">
       <DependentUpon>FormEntityCardBind.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormPayOnLineMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormPayOnLineMedia.Designer.cs">
+      <DependentUpon>FormPayOnLineMedia.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormRechargeAmount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1233,6 +1239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardBind.resx">
       <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormPayOnLineMedia.resx">
+      <DependentUpon>FormPayOnLineMedia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormRechargeAmount.resx">
       <DependentUpon>FormRechargeAmount.cs</DependentUpon>
