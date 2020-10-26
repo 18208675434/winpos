@@ -492,6 +492,7 @@
             this.Name = "frmRefundSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmRefundSelect";
+            this.TopMost = true;
             this.Shown += new System.EventHandler(this.frmRefundSelect_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.picExit)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

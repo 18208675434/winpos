@@ -8,6 +8,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
     public class WebOrderDetail
     {
+
+        public decimal givechangeamt { set; get; }
         public String orderid{set;get;}
         public String shopid{set;get;}
         public String shopname{set;get;}

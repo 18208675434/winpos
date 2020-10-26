@@ -546,6 +546,12 @@
     <Compile Include="MenuUI\FormWebOrderDetail.Designer.cs">
       <DependentUpon>FormWebOrderDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetailBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetailBack.Designer.cs">
+      <DependentUpon>FormWebOrderDetailBack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\AdjustPriceDynamic.cs" />
     <Compile Include="Model\AdjustPriceRecord.cs" />
     <Compile Include="Model\HalfOffLine\Coupons.cs" />
@@ -1395,6 +1401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormWebOrderDetail.resx">
       <DependentUpon>FormWebOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormWebOrderDetailBack.resx">
+      <DependentUpon>FormWebOrderDetailBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardAll.resx">
       <DependentUpon>KeyBoardAll.cs</DependentUpon>
