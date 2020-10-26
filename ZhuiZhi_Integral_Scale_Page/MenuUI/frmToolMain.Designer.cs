@@ -506,7 +506,7 @@
             // 
             // picRechargeQuery
             // 
-            this.picRechargeQuery.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.batchsale;
+            this.picRechargeQuery.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.menu_recharge;
             this.picRechargeQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picRechargeQuery.Location = new System.Drawing.Point(13, 7);
             this.picRechargeQuery.Name = "picRechargeQuery";
@@ -540,7 +540,7 @@
             // 
             // picBatchSaleCard
             // 
-            this.picBatchSaleCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBatchSaleCard.BackgroundImage")));
+            this.picBatchSaleCard.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.batchsale;
             this.picBatchSaleCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picBatchSaleCard.Location = new System.Drawing.Point(13, 7);
             this.picBatchSaleCard.Name = "picBatchSaleCard";
