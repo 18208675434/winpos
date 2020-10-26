@@ -4193,8 +4193,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             try
             {
                 string url = "/pos/order/pos/uploadabnormalorder";
-
-
                 string tempjson = JsonConvert.SerializeObject(para);
 
                 string json = HttpPOST(url, tempjson);
@@ -4204,7 +4202,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (rd.code == 0)
                 {
                     erromessage = "";
-
 
                     return Convert.ToBoolean(rd.data);
                 }
