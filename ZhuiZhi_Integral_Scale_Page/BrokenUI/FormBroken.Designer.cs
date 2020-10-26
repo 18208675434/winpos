@@ -71,6 +71,7 @@
             this.BrokenStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.redop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.op = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlLine = new System.Windows.Forms.Panel();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnCeate = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
@@ -433,7 +434,7 @@
             dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BrokenNum.DefaultCellStyle = dataGridViewCellStyle5;
             this.BrokenNum.FillWeight = 12F;
-            this.BrokenNum.HeaderText = "报损种类数量";
+            this.BrokenNum.HeaderText = "商品种类数";
             this.BrokenNum.Name = "BrokenNum";
             this.BrokenNum.ReadOnly = true;
             // 
@@ -518,6 +519,14 @@
             this.op.ReadOnly = true;
             this.op.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // pnlLine
+            // 
+            this.pnlLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.pnlLine.Location = new System.Drawing.Point(12, 244);
+            this.pnlLine.Name = "pnlLine";
+            this.pnlLine.Size = new System.Drawing.Size(1155, 1);
+            this.pnlLine.TabIndex = 53;
+            // 
             // rbtnPageDown
             // 
             this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
@@ -600,6 +609,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.pnlLine);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);
             this.Controls.Add(this.pnlEmptyOrder);
@@ -661,5 +671,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BrokenStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn redop;
         private System.Windows.Forms.DataGridViewTextBoxColumn op;
+        private System.Windows.Forms.Panel pnlLine;
     }
 }
