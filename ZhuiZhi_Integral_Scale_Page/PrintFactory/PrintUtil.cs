@@ -322,7 +322,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 var result= memberCenterHttpUtil.GetDepositBillByIds(orderids, ref errormsg);
                 if (!string.IsNullOrEmpty(errormsg) || result == null || result.Count == 0)
                 {
-                    LogManager.WriteLog(errormsg);
+                    MainModel.ShowLog(errormsg,true);
                     return false;
                 }
                 ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint();

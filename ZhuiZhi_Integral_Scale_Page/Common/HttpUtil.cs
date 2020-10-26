@@ -3759,6 +3759,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "listdepositbill:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }
@@ -3792,6 +3793,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "sumdepositbycondition:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }
@@ -3830,6 +3832,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "depositrefundbilllist:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }
@@ -3863,6 +3866,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "sumdepositrefundbycondition:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }

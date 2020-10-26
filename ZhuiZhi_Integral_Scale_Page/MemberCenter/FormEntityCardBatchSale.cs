@@ -387,9 +387,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     ClassPayment customerpayment = MemberCenterHelper.ShowFormOtherMethord(payments, totalPay);
                     if (customerpayment == null || string.IsNullOrEmpty(customerpayment.code))
-                    {
+                    {                       
                         return;
                     }
+                    customerpaycode = customerpayment.code;
                 }
 
                 EntityCardBatchDepositRequest request = BuildRequest((int)paymode + "", customerpaycode);
@@ -438,9 +439,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     PrintUtil.PrintEntityCardBatchSale(batchoperatorid,orderids);
                     MainModel.ShowLog("支付成功");
-                    CurrentPage = 1;
-                    lstCard.Clear();
-                    RefreshDgv();
+                    //CurrentPage = 1;
+                    //lstCard.Clear();
+                    //RefreshDgv();
+                    this.Close();
                 }
             }
             catch (Exception ex)
