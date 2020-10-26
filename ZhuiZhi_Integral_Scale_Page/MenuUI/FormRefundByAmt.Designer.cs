@@ -359,6 +359,7 @@
             this.Name = "FormRefundByAmt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormRefundByAmt";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRefundByAmt_FormClosing);
             this.Shown += new System.EventHandler(this.FormRefundByAmt_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).EndInit();
