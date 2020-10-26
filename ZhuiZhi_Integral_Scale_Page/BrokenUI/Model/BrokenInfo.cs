@@ -29,6 +29,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
         public string username { get; set; }
         public long warehouseid { get; set; }
         public string warehousename { get; set; }
+
+        public string redtype { get; set; }
     }
 
 }

@@ -335,7 +335,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             request.paymode = payMode;
             request.customerpaycode = customerpaycode;
             request.shopid = MainModel.CurrentShopInfo.shopid;
-            //request.operatorid = MainModel.CurrentUser.loginaccount;
+            request.operatorid = MainModel.CurrentUser.loginaccount;
             request.requestdetails = new List<EntityCardBatchDepositRequestDetail>();
             foreach (var item in lstCard)
             {

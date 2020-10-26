@@ -9,13 +9,14 @@ using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.HelperUI;
 using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
 {
     public partial class FormBroken : Form
     {
-        #region 
+        #region
         bool IsEnable = true;
 
         HttpUtil httputil = new HttpUtil();
@@ -34,7 +35,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
         {
             try
             {
-              
+
                 lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
@@ -43,14 +44,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("加载报损页面异常"+ex.Message,true);
+                MainModel.ShowLog("加载报损页面异常" + ex.Message, true);
             }
         }
 
         private void FormBroken_Shown(object sender, EventArgs e)
         {
 
-            btnToday_Click(null,null);
+            btnToday_Click(null, null);
 
             Application.DoEvents();
 
@@ -215,7 +216,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
             catch (Exception ex)
             {
                 IsEnable = true;
-                LogManager.WriteLog("新建报损页面异常"+ex.Message);
+                LogManager.WriteLog("新建报损页面异常" + ex.Message);
             }
         }
 
@@ -225,7 +226,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
         }
 
 
-        private void dgvBroken_CellClick(object sender, DataGridViewCellEventArgs e)
+         private void dgvBroken_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -235,22 +236,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
                 }
 
                 if (e.RowIndex < 0)
-                    return; 
-                 
-                int id =Convert.ToInt32( dgvBroken.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    return;
 
-                BrokenInfo brokeninfo = CurrentPageBroken.rows.Where(r=> r.id==id).ToList()[0];
-                if (dgvBroken.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == "详细")
+                int id = Convert.ToInt32(dgvBroken.Rows[e.RowIndex].Cells["ID"].Value.ToString());
+
+                BrokenInfo brokeninfo = CurrentPageBroken.rows.Where(r => r.id == id).ToList()[0];
+                if (dgvBroken.Columns[e.ColumnIndex].Name == "redop")
+                {
+                    BackHelper.ShowFormBackGround();
+                    if (ConfirmHelper.Confirm("提示", "确认红冲此报损单？\r\n确认后将会生成一张商品但金额为负的报损单抵消原单。", true, false))
+                    {
+                        LoadingHelper.ShowLoadingScreen();
+                        string err = "";
+                        if (!httputil.CreateredWarehouseotherdeliveryByPos(id + "", ref err))
+                        {
+                            MainModel.ShowLog(err);
+                        }
+                        LoadDgvBroken(true);
+
+                    }
+                }
+                else if (dgvBroken.Columns[e.ColumnIndex].Name== "op")
                 {
                     FormBrokenDetail frmdetail = new FormBrokenDetail(brokeninfo);
                     asf.AutoScaleControlTest(frmdetail, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     frmdetail.Location = new System.Drawing.Point(0, 0);
-                    frmdetail.ShowDialog();                  
+                    frmdetail.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("显示报损详情异常"+ex.Message ,true);
+                MainModel.ShowLog("显示报损详情异常" + ex.Message, true);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
+                BackHelper.HideFormBackGround();
             }
         }
 
@@ -282,7 +303,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
             try
             {
                 dgvBroken.Rows.Clear();
-                if (CurrentPageBroken==null || needRefresh)
+                if (CurrentPageBroken == null || needRefresh)
                 {
                     LoadingHelper.ShowLoadingScreen();
 
@@ -302,18 +323,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
 
                     CurrentPageBroken = httputil.GetPageBroken(para, ref ErrorMsg);
 
-                   
+
                     if (ErrorMsg != "" || CurrentPageBroken == null)
                     {
                         MainModel.ShowLog(ErrorMsg, false);
                         return;
                     }
-                    
+
                 }
 
 
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
-              
+
                 int startindex = (CurrentPage - 1) * 6;
 
                 int lastindex = Math.Min(CurrentPageBroken.rows.Count - 1, startindex + 5);
@@ -322,18 +343,36 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
 
                 foreach (BrokenInfo brokeninfo in lstLoading)
                 {
-                    string createdat = "    " + MainModel.GetDateTimeByStamp(brokeninfo.createdat).ToString("yyyy-MM-dd HH:mm:ss");
+                    string createdat =  MainModel.GetDateTimeByStamp(brokeninfo.createdat).ToString("yyyy-MM-dd HH:mm:ss");
                     string detaildesc = brokeninfo.detaildesc;
                     string skuamount = brokeninfo.skuamount.ToString();
                     string totalamount = brokeninfo.totalamount.ToString("f2");
                     string username = brokeninfo.username;
                     string operation = "详细";
-
-                    dgvBroken.Rows.Add(brokeninfo.id, createdat, detaildesc, skuamount, totalamount, username, operation);
+                    string remark = brokeninfo.remark;//brokeninfo.businesstype
+                    string status = "已提交";
+                    string redoperation = "";
+                    if (!string.IsNullOrEmpty(brokeninfo.redtype))
+                    {
+                        status = brokeninfo.redtype.ToLower()=="true" ? "已红冲" : "被红冲";                      
+                    }
+                    else
+                    {
+                        redoperation = "    红冲";
+                    }
+                    dgvBroken.Rows.Add(createdat, brokeninfo.id, detaildesc, skuamount, totalamount, remark, username, status, redoperation, operation);
+                    if (!string.IsNullOrEmpty(brokeninfo.redtype))
+                    {
+                        if (brokeninfo.redtype.ToLower() == "true")
+                        {
+                            dgvBroken.Rows[dgvBroken.Rows.Count - 1].Cells["BrokenCash"].Style.ForeColor = Color.Red;
+                        }                       
+                        dgvBroken.Rows[dgvBroken.Rows.Count - 1].Cells["BrokenStatus"].Style.ForeColor = Color.Red;
+                    }
                 }
 
                 rbtnPageDown.WhetherEnable = CurrentPageBroken.rows.Count > CurrentPage * 6;
-            
+
 
             }
             catch (Exception ex)
@@ -366,6 +405,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
             CurrentPage++;
             LoadDgvBroken(false);
         }
+
+      
 
     }
 }
