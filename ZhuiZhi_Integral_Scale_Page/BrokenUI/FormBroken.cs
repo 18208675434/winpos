@@ -358,7 +358,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
                     }
                     else
                     {
-                        redoperation = "红冲";
+                        redoperation = "    红冲";
                     }
                     dgvBroken.Rows.Add(createdat, brokeninfo.id, detaildesc, skuamount, totalamount, remark, username, status, redoperation, operation);
                     if (!string.IsNullOrEmpty(brokeninfo.redtype))
