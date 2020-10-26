@@ -45,7 +45,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
 
         private void FormWebOrderDetail_Shown(object sender, EventArgs e)
         {
-
+            lblOrderStatus.Text = CurrentOrder.orderstatus;
             LoadBtnStatus();
             Application.DoEvents();
             LoadOrderInfo();
@@ -104,7 +104,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                 btnRefund.BackColor=Color.FromArgb(220,220,220);
                 btnRefundByAmt.BackColor =Color.FromArgb(220,220,220);
             }
-            if (CurrentOrderDetail.supportspecifiedamountrefund != 1)
+            if (CurrentOrder.supportspecifiedamountrefund != 1)
             {
                 btnRefundByAmt.BackColor = Color.FromArgb(220, 220, 220);
             }
