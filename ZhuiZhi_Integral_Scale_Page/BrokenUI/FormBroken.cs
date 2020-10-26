@@ -243,6 +243,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
                 BrokenInfo brokeninfo = CurrentPageBroken.rows.Where(r => r.id == id).ToList()[0];
                 if (dgvBroken.Columns[e.ColumnIndex].Name == "redop")
                 {
+                    BackHelper.ShowFormBackGround();
                     if (ConfirmHelper.Confirm("提示", "确认红冲此报损单？\r\n确认后将会生成一张商品但金额为负的报损单抵消原单。", true, false))
                     {
                         LoadingHelper.ShowLoadingScreen();
@@ -270,6 +271,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
             finally
             {
                 LoadingHelper.CloseForm();
+                BackHelper.HideFormBackGround();
             }
         }
 
@@ -341,16 +343,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI
 
                 foreach (BrokenInfo brokeninfo in lstLoading)
                 {
-                    string createdat = "    " + MainModel.GetDateTimeByStamp(brokeninfo.createdat).ToString("yyyy-MM-dd HH:mm:ss");
+                    string createdat =  MainModel.GetDateTimeByStamp(brokeninfo.createdat).ToString("yyyy-MM-dd HH:mm:ss");
                     string detaildesc = brokeninfo.detaildesc;
                     string skuamount = brokeninfo.skuamount.ToString();
                     string totalamount = brokeninfo.totalamount.ToString("f2");
                     string username = brokeninfo.username;
                     string operation = "详细";
-                    string remark = brokeninfo.remark;
-                    string status = brokeninfo.redtype ? "已红冲" : "已提交";
-                    string redoperation = brokeninfo.redtype ? "" : "红冲";
+                    string remark = brokeninfo.remark;//brokeninfo.businesstype
+                    string status = "已提交";
+                    string redoperation = "";
+                    if (!string.IsNullOrEmpty(brokeninfo.redtype))
+                    {
+                        status = brokeninfo.redtype.ToLower()=="true" ? "已红冲" : "被红冲";                      
+                    }
+                    else
+                    {
+                        redoperation = "红冲";
+                    }
                     dgvBroken.Rows.Add(createdat, brokeninfo.id, detaildesc, skuamount, totalamount, remark, username, status, redoperation, operation);
+                    if (!string.IsNullOrEmpty(brokeninfo.redtype))
+                    {
+                        if (brokeninfo.redtype.ToLower() == "true")
+                        {
+                            dgvBroken.Rows[dgvBroken.Rows.Count - 1].Cells["BrokenCash"].Style.ForeColor = Color.Red;
+                        }                       
+                        dgvBroken.Rows[dgvBroken.Rows.Count - 1].Cells["BrokenStatus"].Style.ForeColor = Color.Red;
+                    }
                 }
 
                 rbtnPageDown.WhetherEnable = CurrentPageBroken.rows.Count > CurrentPage * 6;

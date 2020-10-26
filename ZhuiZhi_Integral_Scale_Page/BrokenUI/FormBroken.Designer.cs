@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -60,10 +61,6 @@
             this.pnlEmptyOrder = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnCeate = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnQuery = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.BrokenData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BrokenDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,6 +71,10 @@
             this.BrokenStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.redop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.op = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnCeate = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnQuery = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -289,17 +290,19 @@
             this.dgvBroken.BackgroundColor = System.Drawing.Color.White;
             this.dgvBroken.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvBroken.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvBroken.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dgvBroken.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvBroken.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvBroken.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBroken.ColumnHeadersHeight = 50;
+            this.dgvBroken.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvBroken.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.BrokenData,
             this.ID,
@@ -321,20 +324,29 @@
             this.dgvBroken.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvBroken.EnableHeadersVisualStyles = false;
             this.dgvBroken.GridColor = System.Drawing.Color.LightGray;
-            this.dgvBroken.Location = new System.Drawing.Point(12, 177);
+            this.dgvBroken.Location = new System.Drawing.Point(12, 194);
             this.dgvBroken.Margin = new System.Windows.Forms.Padding(2);
             this.dgvBroken.Name = "dgvBroken";
             this.dgvBroken.ReadOnly = true;
             this.dgvBroken.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBroken.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBroken.RowHeadersVisible = false;
             this.dgvBroken.RowHeadersWidth = 10;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.dgvBroken.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.dgvBroken.RowsDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvBroken.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.dgvBroken.RowTemplate.Height = 75;
             this.dgvBroken.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvBroken.Size = new System.Drawing.Size(1155, 521);
+            this.dgvBroken.Size = new System.Drawing.Size(1155, 500);
             this.dgvBroken.TabIndex = 35;
             this.dgvBroken.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBroken_CellContentClick);
             // 
@@ -372,6 +384,139 @@
             this.pictureBox1.Size = new System.Drawing.Size(38, 36);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
+            // 
+            // BrokenData
+            // 
+            this.BrokenData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BrokenData.DefaultCellStyle = dataGridViewCellStyle2;
+            this.BrokenData.FillWeight = 10F;
+            this.BrokenData.HeaderText = "报损时间";
+            this.BrokenData.Name = "BrokenData";
+            this.BrokenData.ReadOnly = true;
+            // 
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.ID.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ID.FillWeight = 10F;
+            this.ID.HeaderText = "报损单号";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // BrokenDetail
+            // 
+            this.BrokenDetail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BrokenDetail.DefaultCellStyle = dataGridViewCellStyle4;
+            this.BrokenDetail.FillWeight = 18F;
+            this.BrokenDetail.HeaderText = "报损明细";
+            this.BrokenDetail.Name = "BrokenDetail";
+            this.BrokenDetail.ReadOnly = true;
+            // 
+            // BrokenNum
+            // 
+            this.BrokenNum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.BrokenNum.DefaultCellStyle = dataGridViewCellStyle5;
+            this.BrokenNum.FillWeight = 12F;
+            this.BrokenNum.HeaderText = "报损种类数量";
+            this.BrokenNum.Name = "BrokenNum";
+            this.BrokenNum.ReadOnly = true;
+            // 
+            // BrokenCash
+            // 
+            this.BrokenCash.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.BrokenCash.DefaultCellStyle = dataGridViewCellStyle6;
+            this.BrokenCash.FillWeight = 13F;
+            this.BrokenCash.HeaderText = "成本总金额(元)";
+            this.BrokenCash.Name = "BrokenCash";
+            this.BrokenCash.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column3.FillWeight = 15F;
+            this.Column3.HeaderText = "备注";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Column2.FillWeight = 8F;
+            this.Column2.HeaderText = "操作人";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // BrokenStatus
+            // 
+            this.BrokenStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.BrokenStatus.DefaultCellStyle = dataGridViewCellStyle9;
+            this.BrokenStatus.FillWeight = 7F;
+            this.BrokenStatus.HeaderText = "状态";
+            this.BrokenStatus.Name = "BrokenStatus";
+            this.BrokenStatus.ReadOnly = true;
+            // 
+            // redop
+            // 
+            this.redop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            this.redop.DefaultCellStyle = dataGridViewCellStyle10;
+            this.redop.FillWeight = 6F;
+            this.redop.HeaderText = "";
+            this.redop.Name = "redop";
+            this.redop.ReadOnly = true;
+            this.redop.Width = 27;
+            // 
+            // op
+            // 
+            this.op.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            this.op.DefaultCellStyle = dataGridViewCellStyle11;
+            this.op.FillWeight = 7F;
+            this.op.HeaderText = "操作";
+            this.op.Name = "op";
+            this.op.ReadOnly = true;
+            this.op.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // rbtnPageDown
             // 
@@ -449,134 +594,11 @@
             this.rbtnQuery.WhetherEnable = true;
             this.rbtnQuery.ButtonClick += new System.EventHandler(this.rbtnQuery_ButtonClick);
             // 
-            // BrokenData
-            // 
-            this.BrokenData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BrokenData.DefaultCellStyle = dataGridViewCellStyle2;
-            this.BrokenData.FillWeight = 10F;
-            this.BrokenData.HeaderText = "报损时间";
-            this.BrokenData.Name = "BrokenData";
-            this.BrokenData.ReadOnly = true;
-            // 
-            // ID
-            // 
-            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.ID.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ID.FillWeight = 10F;
-            this.ID.HeaderText = "报损单号";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // BrokenDetail
-            // 
-            this.BrokenDetail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BrokenDetail.DefaultCellStyle = dataGridViewCellStyle4;
-            this.BrokenDetail.FillWeight = 18F;
-            this.BrokenDetail.HeaderText = "报损明细";
-            this.BrokenDetail.Name = "BrokenDetail";
-            this.BrokenDetail.ReadOnly = true;
-            // 
-            // BrokenNum
-            // 
-            this.BrokenNum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            this.BrokenNum.DefaultCellStyle = dataGridViewCellStyle5;
-            this.BrokenNum.FillWeight = 12F;
-            this.BrokenNum.HeaderText = "报损种类数量";
-            this.BrokenNum.Name = "BrokenNum";
-            this.BrokenNum.ReadOnly = true;
-            // 
-            // BrokenCash
-            // 
-            this.BrokenCash.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            this.BrokenCash.DefaultCellStyle = dataGridViewCellStyle6;
-            this.BrokenCash.FillWeight = 13F;
-            this.BrokenCash.HeaderText = "成本总金额(元)";
-            this.BrokenCash.Name = "BrokenCash";
-            this.BrokenCash.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Column3.FillWeight = 15F;
-            this.Column3.HeaderText = "备注";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Column2.FillWeight = 8F;
-            this.Column2.HeaderText = "操作人";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // BrokenStatus
-            // 
-            this.BrokenStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            this.BrokenStatus.DefaultCellStyle = dataGridViewCellStyle9;
-            this.BrokenStatus.FillWeight = 7F;
-            this.BrokenStatus.HeaderText = "状态";
-            this.BrokenStatus.Name = "BrokenStatus";
-            this.BrokenStatus.ReadOnly = true;
-            // 
-            // redop
-            // 
-            this.redop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
-            this.redop.DefaultCellStyle = dataGridViewCellStyle10;
-            this.redop.FillWeight = 6F;
-            this.redop.HeaderText = "";
-            this.redop.Name = "redop";
-            this.redop.ReadOnly = true;
-            // 
-            // op
-            // 
-            this.op.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
-            this.op.DefaultCellStyle = dataGridViewCellStyle11;
-            this.op.FillWeight = 6F;
-            this.op.HeaderText = "操作";
-            this.op.Name = "op";
-            this.op.ReadOnly = true;
-            this.op.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // FormBroken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);

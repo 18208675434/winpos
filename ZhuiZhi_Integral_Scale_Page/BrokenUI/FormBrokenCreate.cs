@@ -1136,6 +1136,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 IsEnable = false;
                 string errormsg = "";
+                LoadingHelper.ShowLoadingScreen();
                 CreateBrokenResult result = httputil.CreateBroken(BrokenHelper.GetParaCreateBroken(CurrentProducts), ref errormsg);
                
                 if (result == null || !string.IsNullOrEmpty(errormsg))
@@ -1155,6 +1156,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 IsEnable = true;
                 MainModel.ShowLog("确认报损异常" + ex.Message, true);
+            }
+            finally
+            {
+                LoadingHelper.CloseForm();
             }
         }
 
