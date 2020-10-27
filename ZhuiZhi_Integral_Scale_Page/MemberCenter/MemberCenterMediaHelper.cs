@@ -84,14 +84,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+        #region 客屏提示支付窗体
+
+        private static FormPayOnLineMedia frmonlinemedia = null;
+
         public static void ShowPayInfo()
         {
             try
             {
-                if (frmmembermedia != null && HaveMedia)
+
+                if (Screen.AllScreens.Count() > 1)
                 {
-                    frmmembermedia.ShowPayInfo();
+                    if (frmonlinemedia == null)
+                    {
+                        frmonlinemedia = new FormPayOnLineMedia();
+                        asf.AutoScaleControlTest(frmonlinemedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height,true);
+                        frmonlinemedia.Location = new Point(Screen.AllScreens[0].Bounds.Width,0);
+                        frmonlinemedia.TopMost = true;
+                    }
+
+                    frmonlinemedia.Show();
                 }
+               
             }
             catch { }
         }
@@ -100,13 +114,46 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                if (frmmembermedia != null && HaveMedia)
+
+                if (frmonlinemedia != null)
                 {
-                    frmmembermedia.HidePayInfo();
+                    frmonlinemedia.Close();
+                    frmonlinemedia = null;
                 }
+                //if (frmmembermedia != null && HaveMedia)
+                //{
+                //    frmmembermedia.HidePayInfo();
+                //}
             }
             catch { }
         }
+
+        //public static void ShowPayInfo()
+        //{
+        //    try
+        //    {
+        //        if (frmmembermedia != null && HaveMedia)
+        //        {
+        //            frmmembermedia.ShowPayInfo();
+        //        }
+        //    }
+        //    catch { }
+        //}
+
+        //public static void HidePayInfo()
+        //{
+        //    try
+        //    {
+        //        if (frmmembermedia != null && HaveMedia)
+        //        {
+        //            frmmembermedia.HidePayInfo();
+        //        }
+        //    }
+        //    catch { }
+        //}
+        #endregion
+
+       
         #region 修改密码
         /// <summary>
         /// 调用显示修改密码客屏界面

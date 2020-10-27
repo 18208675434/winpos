@@ -301,7 +301,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
 
                     string errormsg = "";
-                    LstTemplates = httputil.ListAllTemplate(ref errormsg,CurrentMember.memberid);
+                    LstTemplates = httputil.ListAllTemplate(ref errormsg);
                     if (LstTemplates == null || !string.IsNullOrEmpty(errormsg))
                     {
                         MainModel.ShowLog(errormsg, false);
