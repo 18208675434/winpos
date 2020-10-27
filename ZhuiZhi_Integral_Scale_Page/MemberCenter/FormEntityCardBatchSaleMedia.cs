@@ -30,7 +30,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public void UpdateFormEntityCardBatchSaleMedia(string cardSum, string totalRechargeAmount, string totalGiftAmount, string totalRechargeAll, string totalPay, List<RechargeCardInfo> lstCard)
         {
             lbCardSum.Text = cardSum;
-            lblTotalRechargeAmount.Text = totalRechargeAmount;
+            if (string.IsNullOrEmpty(totalRechargeAmount))
+            {
+                lblTotalRechargeAmount.Text = "请选择";
+            }
+            else
+            {
+                lblTotalRechargeAmount.Text = totalRechargeAmount;
+            }
             lblTotalGiftAmount.Text = totalGiftAmount;
             lblTotalRechargeAll.Text = totalRechargeAll;
             lblTotalPay.Text = totalPay;

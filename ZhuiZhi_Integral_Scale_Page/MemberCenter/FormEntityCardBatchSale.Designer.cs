@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEntityCardBatchSale));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDgvHead = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -161,7 +161,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(140, 26);
+            this.label7.Location = new System.Drawing.Point(143, 23);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(112, 24);
@@ -491,26 +491,26 @@
             this.dgvCard.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCard.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvCard.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvCard.ColumnHeadersHeight = 30;
             this.dgvCard.ColumnHeadersVisible = false;
             this.dgvCard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cardNo});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCard.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCard.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvCard.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvCard.GridColor = System.Drawing.Color.LightGray;
             this.dgvCard.Location = new System.Drawing.Point(11, 140);
@@ -529,12 +529,12 @@
             // 
             // cardNo
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cardNo.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle17.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle17.NullValue")));
+            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cardNo.DefaultCellStyle = dataGridViewCellStyle17;
             this.cardNo.FillWeight = 100.195F;
             this.cardNo.HeaderText = "实体卡";
             this.cardNo.Name = "cardNo";
@@ -574,7 +574,7 @@
             this.txtRechargeAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRechargeAmount.DecimalDigits = 2;
             this.txtRechargeAmount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 25);
+            this.txtRechargeAmount.Location = new System.Drawing.Point(140, 21);
             this.txtRechargeAmount.LockFocus = true;
             this.txtRechargeAmount.Margin = new System.Windows.Forms.Padding(4);
             this.txtRechargeAmount.MaxDeciaml = ((long)(50000));
@@ -644,7 +644,7 @@
             this.picDown.BackColor = System.Drawing.Color.White;
             this.picDown.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.picDown;
             this.picDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picDown.Location = new System.Drawing.Point(282, 44);
+            this.picDown.Location = new System.Drawing.Point(282, 40);
             this.picDown.Name = "picDown";
             this.picDown.Size = new System.Drawing.Size(11, 9);
             this.picDown.TabIndex = 136;
@@ -655,7 +655,8 @@
             this.lblRechargeAmountWarterTxt.AutoSize = true;
             this.lblRechargeAmountWarterTxt.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblRechargeAmountWarterTxt.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblRechargeAmountWarterTxt.Location = new System.Drawing.Point(155, 37);
+            this.lblRechargeAmountWarterTxt.Location = new System.Drawing.Point(145, 32);
+            this.lblRechargeAmountWarterTxt.Margin = new System.Windows.Forms.Padding(0);
             this.lblRechargeAmountWarterTxt.Name = "lblRechargeAmountWarterTxt";
             this.lblRechargeAmountWarterTxt.Size = new System.Drawing.Size(58, 21);
             this.lblRechargeAmountWarterTxt.TabIndex = 137;
