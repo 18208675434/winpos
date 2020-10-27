@@ -218,58 +218,67 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     PrintText(PrintHelper.MergeStr(MainModel.CurrentShopInfo.shopname, "", HeadCharCountOfLine, PageSize), 32);
                     PrintText(printdetail.serialcode, 40);
 
-                    PrintText("订单号：" + printdetail.orderid, 22);
-                    PrintText("下单时间：" + printdetail.date, 22);
-                    PrintText("顾客姓名：" + printdetail.username, 22);
-                    PrintText("顾客电话：" + printdetail.tel, 22);
-                    PrintText("配送地址：" + printdetail.address, 22);
+                    PrintText("订单号：" + printdetail.orderid, 25);
+                    PrintText("下单时间：" + printdetail.date, 25);
+                    PrintText("顾客姓名：" + printdetail.username, 25);
+                    PrintText("顾客电话：" + printdetail.tel, 25);
+
+                    List<string> lstaddress = PrintHelper.substr("配送地址：" + printdetail.address,BodyCharCountOfLine);
+                    foreach (string str in lstaddress)
+                    {
+                        PrintText(str,25);
+                    }
                     PrintText("备注：");
                     if (!string.IsNullOrEmpty(printdetail.remark))
                     {
                         PrintText(printdetail.remark, 32);
                     }
-                    PrintText("期望送达时间：" + printdetail.expecttimedesc, 32);
+                    PrintText("期望送达时间：" + printdetail.expecttimedesc, 30);
 
 
 
-                    PrintText(PrintHelper.getStrLine(), 22);
+                    PrintText(PrintHelper.getStrLine(), 25);
 
                     //PrintTextRange(PrintHelper.PrintHelper.MergeStr("商品", "单价", "重量(kg)", "金额", BodyCharCountOfLine));
 
-                    PrintText("商品    单价   数量    金额", 22);
+                    PrintText("商品    单价   数量    金额", 25);
                     foreach (PickProduct pro in printdetail.productdetaillist)
                     {
                         List<string> lstpro = PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, BodyCharCountOfLine);
 
                         foreach (string str in lstpro)
                         {
-                            PrintText(str, 22);
+                            PrintText(str, 25);
                         }
 
                     }
-                    PrintText(PrintHelper.getStrLine(), 22);
+                    PrintText(PrintHelper.getStrLine(), 25);
 
-                    PrintText(PrintHelper.MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize), 22);
-                    PrintText(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize), 22);
-                    PrintText(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize), 22);
+                    PrintText(PrintHelper.MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize), 25);
+                    if (Convert.ToDecimal( printdetail.deliveryamt) > 0)
+                    {
+                        PrintText(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize), 25);
+                    }
+                    
+                    PrintText(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize), 25);
 
                     if (!string.IsNullOrEmpty(printdetail.pickcode))
                     {
-                        PrintText(PrintHelper.getStrLine(), 22);
-                        PrintText("请扫描下方二维码取货配送", 22);
-                        PrintText("  ", 22);
+                        PrintText(PrintHelper.getStrLine(), 25);
+                        PrintText("请扫描下方二维码取货配送", 25);
+                        PrintText("  ", 25);
                         BeginPrint(0);
                         PrintHelper.GetQrBmp(printdetail.pickcode);
                         PrintBitmapFile("orderqrcoe.bmp");
 
                         BeginPrint(7);
-                        PrintText(PrintHelper.MergeStr("取货码："+printdetail.pickcode, "", BodyCharCountOfLine, PageSize), 22);
+                        PrintText(PrintHelper.MergeStr("取货码："+printdetail.pickcode, "", BodyCharCountOfLine, PageSize), 25);
                     }
 
-                    PrintText(PrintHelper.getStrLine(), 22);
+                    PrintText(PrintHelper.getStrLine(), 25);
 
 
-                    PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes("多谢惠顾，欢迎下次光临！" + " \r\n \r\n \r\n \r\n \r\n \r\n"), 22, 60);
+                    PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes("多谢惠顾，欢迎下次光临！" + " \r\n \r\n \r\n \r\n \r\n \r\n"), 25, 60);
                     BeginPrint(0);
                     BeginPrint(8); //切纸
                     Application.DoEvents();
@@ -503,7 +512,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 //末尾打印空白行走纸
                 strprint += "  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n ";
 
-                int result = PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes(strprint), 22, 60);
+                int result = PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes(strprint), 25, 60);
 
                 BeginPrint();
 

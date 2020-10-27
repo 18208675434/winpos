@@ -593,9 +593,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnAdjustPrice_Click(object sender, EventArgs e)
         {
+
             ZhuiZhi_Integral_Scale_UncleFruit.MenuUI.MenuHelper.ShowFormAdjustPrice();
             pnlAdjustInfo.Visible = false;
             btnAdjustPrice.Image = null;
+            Application.DoEvents();
         }
 
 
@@ -1080,9 +1082,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                 timerTask.Enabled = false;
-                //防止异步加载窗体控件 出现红叉
-                if (this.ContainsFocus && IsEnable)
-                {
+                ////防止异步加载窗体控件 出现红叉
+                //if (this.ContainsFocus && IsEnable)
+                //{
                     Seconds++;
 
                     if (Seconds >= 30 || ConfigUtil.HaveNewOrder())
@@ -1099,7 +1101,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         Seconds = 0;
                         UpdateProduct(needAdjustPrice, needLoadIncrementProduct);
                     }
-                }
+               // }
 
 
             }
@@ -1383,7 +1385,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             member.entrancecode = member.memberheaderresponsevo.mobile;
                         }
                         
-                        lblMemberPhone.Text = "手机号：" + member.memberinfo;
+                        lblMemberPhone.Text = "会员账号：" + member.memberinfo;
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 
@@ -3392,7 +3394,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     lblProNum.Font = new Font("微软雅黑", lblTotal.Font.Size + 1); //散称字体放大一号
                     lblProNum.Text = pro.price.specnum + pro.price.unit;
                     lblProNum.Left = picMinus.Left;
-
                 }
 
                 //单品改价

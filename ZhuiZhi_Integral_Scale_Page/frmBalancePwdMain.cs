@@ -59,7 +59,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 //this.Activate();
                 if (MainModel.BalanceClose)
                 {
-
+                    timerLoadPwd.Enabled = false;
                     PassWord = MainModel.BalancePwd;
                     Securitycode = MainModel.BalanceSecuritycode;
 
@@ -180,11 +180,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-                MainModel.BalanceEnter = false;
+                //MainModel.BalanceEnter = false;
                 //MainModel.BalanceClose = false;
                 //MainModel.BalancePayPwd = "";
-                MainModel.BalancePwd = "";
-                MainModel.BalanceSecuritycode = "";
+                //MainModel.BalancePwd = "";
+                //MainModel.BalanceSecuritycode = "";
                 ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.ShowBalancePwd(false);
                 
                 Application.DoEvents();
@@ -243,9 +243,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     {
 
                         MainModel.BalancePayPwd = PayPassWord;
-                        MainModel.BalanceClose = true;
+                       
                         MainModel.BalanceSecuritycode = verifyresult.securitycode;
                         this.DialogResult = DialogResult.OK;
+                        MainModel.BalanceClose = true;
                         //this.Close();
                     }
                     else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)

@@ -409,7 +409,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         ReturnWithoutOrderHelper.UpdateMediaCart(CurrentCart, ReturnMembr);
 
-
                 }));
             }
             catch (Exception ex)
@@ -429,7 +428,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
-                        lblMemberPhone.Text = "手机号：" + member.memberinfo;
+                        lblMemberPhone.Text = "会员账号：" + member.memberinfo;
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 

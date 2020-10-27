@@ -251,7 +251,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     PrintStr("下单时间：" + printdetail.date + "\n");
                     PrintStr("顾客姓名：" + printdetail.username + "\n");
                     PrintStr("顾客电话：" + printdetail.tel + "\n");
-                    PrintStr("配送地址：" + printdetail.address + "\n");
+                    List<string> lstaddress = PrintHelper.substr("配送地址：" + printdetail.address, BodyCharCountOfLine);
+                    foreach (string str in lstaddress)
+                    {
+                        PrintStr(str+"\n");
+                    }
+                    //PrintStr("配送地址：" + printdetail.address + "\n");
                     PrintStr("备注：" + "\n");
 
                     SetFontSize(0, 1);
@@ -292,7 +297,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     PrintStr(PrintHelper.getStrLine() + "\n");
 
                     PrintStr(PrintHelper.MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize) + "\n");
-                    PrintStr(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize) + "\n");
+                    if (Convert.ToDecimal(printdetail.deliveryamt) > 0)
+                    {
+                        PrintStr(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    
                     PrintStr(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize) + "\n");
 
                     if (!string.IsNullOrEmpty(printdetail.pickcode))

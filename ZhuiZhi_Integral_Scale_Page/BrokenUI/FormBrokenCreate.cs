@@ -116,7 +116,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 lblUserName.Text = MainModel.CurrentUser.nickname;
 
-
                 //扫描数据处理线程
                 threadScanCode = new Thread(ScanCodeThread);
                 threadScanCode.IsBackground = true;

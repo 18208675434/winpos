@@ -279,6 +279,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             }
         }
 
+
+        //判断进入会员支付没有会员  且 退出时有会员则退出该页面
+        bool needexit = true;
+        /// <summary>
+        /// 如果之前没有会员 扫码会员 但不支付需要退出该页面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pnlPayByBalance_Click(object sender, EventArgs e)
         {
             try
@@ -287,6 +295,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 {
                     return;
                 }
+
+                needexit = MainModel.CurrentMember == null;
                 IsEnable = false;
 
                 Cart outcart = new Cart();
@@ -319,7 +329,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                     {
                         thisCurrentCart.balancepayoption = 0;
                     }
-                    RefreshCart();
+
+                    //扫余额码等会员  且取消支付 返回收银页面
+                    if (needexit && MainModel.CurrentMember != null && thisCurrentCart.balancepayamt==0)
+                    {
+                        PayResult = 0;
+                        this.Close();
+                    }
+                    else
+                    {
+                        RefreshCart();
+                    }
+                    
                 }
 
                 Application.DoEvents();

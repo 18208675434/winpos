@@ -428,7 +428,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "下单时间：" + printdetail.date + "\r\n");
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "顾客姓名：" + printdetail.username + "\r\n");
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "顾客电话：" + printdetail.tel + "\r\n");
-                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "配送地址：" + printdetail.address + "\r\n");
+                    List<string> lstaddress = PrintHelper.substr("配送地址：" + printdetail.address, BodyCharCountOfLine);
+                    foreach (string str in lstaddress)
+                    {
+                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, str + "\r\n");
+
+                    }
+                   // POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "配送地址：" + printdetail.address + "\r\n");
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "备注：" + "\r\n");
                     if (!string.IsNullOrEmpty(printdetail.remark))
                     {
@@ -468,7 +474,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.getStrLine() + "\r\n");
 
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize) + "\r\n");
-                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize) + "\r\n");
+
+
+                    if (Convert.ToDecimal(printdetail.deliveryamt) > 0)
+                    {
+                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize) + "\r\n");
+                    } ///
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize) + "\r\n");
 
                     if (!string.IsNullOrEmpty(printdetail.pickcode))
