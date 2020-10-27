@@ -151,6 +151,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("请添加实体卡");
                 return;
             }
+            if (dgvCard.Rows.Count>=20)
+            {
+                 MainModel.ShowLog("单词批量你最多添加20个");
+                return;
+            }
             ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
             if (customtemplate != null)
             {
@@ -229,7 +234,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     locationY = lblCardStatus.Location.Y;
                 }
                 lblCardNo.Text = rechargeCardInfo.cardid;
-                txtRechargeAmount.Text = rechargeCardInfo.rechargeamount.ToString();
+                if (rechargeCardInfo.rechargeamount > 0)
+                {
+                    txtRechargeAmount.Text = rechargeCardInfo.rechargeamount.ToString();
+                }
                 lblGiftAmount.Text = rechargeCardInfo.rewardamount.ToString();
                 if (string.IsNullOrEmpty(rechargeCardInfo.memberid))
                 {
