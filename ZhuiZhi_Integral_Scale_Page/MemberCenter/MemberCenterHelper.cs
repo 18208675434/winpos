@@ -683,5 +683,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+        #region 支付结果
+        public static bool ShowRechargeSuccess(string batchoperatorid, List<string> orderids)
+        {
+            try
+            {
+                FormRechargeSuccess formRechargeSuccess = new FormRechargeSuccess(batchoperatorid, orderids);
+                asf.AutoScaleControlTest(formRechargeSuccess, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formRechargeSuccess.Location = new System.Drawing.Point(0, 0);
+                formRechargeSuccess.TopMost = true;
+
+
+                formRechargeSuccess.ShowDialog();
+
+                formRechargeSuccess.Dispose();
+                return formRechargeSuccess.DialogResult == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("充值支付弹窗出现异常" + ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
+
     }
 }

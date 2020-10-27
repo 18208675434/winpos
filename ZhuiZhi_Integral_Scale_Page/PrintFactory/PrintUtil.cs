@@ -314,35 +314,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// </summary>
         /// <param name="orderids"></param>
         /// <returns></returns>
-        public static bool PrintEntityCardBatchSale(string batchoperatorid, List<string> orderids)
+        public static bool PrintEntityCardBatchSale(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail, bool isEntityCardBatchSale=false)
         {
             try
             {
-                string errormsg = "";
-                var result= memberCenterHttpUtil.GetDepositBillByIds(orderids, ref errormsg);
-                if (!string.IsNullOrEmpty(errormsg) || result == null || result.Count == 0)
-                {
-                    MainModel.ShowLog(errormsg,true);
-                    return false;
-                }
-                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint();
-
-                decimal amount = 0;
-                decimal rewardAmount = 0;
-
-                foreach (var item in result)
-                {
-                    amount += item.amount;
-                    rewardAmount += item.rewardamount;
-                }
-                printdetail.id = batchoperatorid;
-                printdetail.amount = amount;
-                printdetail.rewardamount = rewardAmount;
-                printdetail.paymodeforapi = result[0].paymodeforapi;
-                printdetail.paymode = result[0].paymode;
-                printdetail.createdat = MainModel.getStampByDateTime(DateTime.Now);
-
-                DbJsonUtil.AddBalanceInfo(result[0].paymodeforapi, printdetail.amount);
+                DbJsonUtil.AddBalanceInfo(printdetail.paymodeforapi, printdetail.amount);
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.托利多.ToString())

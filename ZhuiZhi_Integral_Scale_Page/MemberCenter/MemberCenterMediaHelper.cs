@@ -262,7 +262,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     formEntityCardBatchSaleMedia = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.FormEntityCardBatchSaleMedia();
                     asf.AutoScaleControlTest(formEntityCardBatchSaleMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
                     formEntityCardBatchSaleMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
-                    //formEntityCardBatchSaleMedia.TopMost = true;
+                    formEntityCardBatchSaleMedia.TopMost = true;
                 }
                 formEntityCardBatchSaleMedia.Show();
             }
@@ -292,6 +292,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (formEntityCardBatchSaleMedia != null)
             {
                 formEntityCardBatchSaleMedia.Close();
+            }
+        }
+
+
+        public static void ShowFormRechargeSuccessMedia()
+        {
+            try
+            {
+                FormRechargeSuccessMedia formRechargeSuccessMedia = new FormRechargeSuccessMedia();
+                asf.AutoScaleControlTest(formRechargeSuccessMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                formRechargeSuccessMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                formRechargeSuccessMedia.TopMost = true;
+                formRechargeSuccessMedia.ShowDialog();
+                formRechargeSuccessMedia.Dispose();
+            }
+            catch (Exception ex)
+            {
+
             }
         }
         #endregion

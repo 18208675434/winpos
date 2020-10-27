@@ -437,12 +437,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         orderids.Add(item.depositbillid);
                     }
-                    PrintUtil.PrintEntityCardBatchSale(batchoperatorid,orderids);
-                    MainModel.ShowLog("支付成功");
-                    //CurrentPage = 1;
-                    //lstCard.Clear();
-                    //RefreshDgv();
-                    this.Close();
+                    if (!MemberCenterHelper.ShowRechargeSuccess(batchoperatorid, orderids))
+                    {
+                        this.Close();
+                        return;
+                    }
+                    CurrentPage = 1;
+                    lstCard.Clear();
+                    RefreshDgv();                   
                 }
             }
             catch (Exception ex)
