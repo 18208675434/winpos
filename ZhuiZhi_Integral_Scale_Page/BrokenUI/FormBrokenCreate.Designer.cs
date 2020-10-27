@@ -71,7 +71,9 @@
             this.pnlMember = new System.Windows.Forms.Panel();
             this.lblUserName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblTotalSaleAmount = new System.Windows.Forms.Label();
             this.lblTotalPrice = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSkuAmount = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -487,7 +489,7 @@
             this.btnScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScan.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnScan.ForeColor = System.Drawing.Color.White;
-            this.btnScan.Location = new System.Drawing.Point(1029, 455);
+            this.btnScan.Location = new System.Drawing.Point(1029, 501);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(87, 47);
             this.btnScan.TabIndex = 38;
@@ -550,7 +552,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(890, 484);
+            this.button1.Location = new System.Drawing.Point(890, 530);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 47);
             this.button1.TabIndex = 48;
@@ -565,7 +567,9 @@
             this.pnlMember.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMember.Controls.Add(this.lblUserName);
             this.pnlMember.Controls.Add(this.label4);
+            this.pnlMember.Controls.Add(this.lblTotalSaleAmount);
             this.pnlMember.Controls.Add(this.lblTotalPrice);
+            this.pnlMember.Controls.Add(this.label3);
             this.pnlMember.Controls.Add(this.label2);
             this.pnlMember.Controls.Add(this.lblSkuAmount);
             this.pnlMember.Controls.Add(this.label17);
@@ -574,14 +578,14 @@
             this.pnlMember.Location = new System.Drawing.Point(846, 141);
             this.pnlMember.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMember.Name = "pnlMember";
-            this.pnlMember.Size = new System.Drawing.Size(320, 157);
+            this.pnlMember.Size = new System.Drawing.Size(320, 184);
             this.pnlMember.TabIndex = 54;
             // 
             // lblUserName
             // 
             this.lblUserName.BackColor = System.Drawing.Color.White;
             this.lblUserName.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblUserName.Location = new System.Drawing.Point(171, 113);
+            this.lblUserName.Location = new System.Drawing.Point(171, 145);
             this.lblUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(131, 21);
@@ -594,12 +598,24 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label4.Location = new System.Drawing.Point(11, 113);
+            this.label4.Location = new System.Drawing.Point(11, 145);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 24);
             this.label4.TabIndex = 7;
             this.label4.Text = "操作人";
+            // 
+            // lblTotalSaleAmount
+            // 
+            this.lblTotalSaleAmount.BackColor = System.Drawing.Color.White;
+            this.lblTotalSaleAmount.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblTotalSaleAmount.Location = new System.Drawing.Point(172, 111);
+            this.lblTotalSaleAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalSaleAmount.Name = "lblTotalSaleAmount";
+            this.lblTotalSaleAmount.Size = new System.Drawing.Size(131, 21);
+            this.lblTotalSaleAmount.TabIndex = 6;
+            this.lblTotalSaleAmount.Text = "￥0.00";
+            this.lblTotalSaleAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblTotalPrice
             // 
@@ -613,6 +629,18 @@
             this.lblTotalPrice.Text = "￥0.00";
             this.lblTotalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label3.Location = new System.Drawing.Point(11, 111);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 24);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "销售总金额";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -621,9 +649,9 @@
             this.label2.Location = new System.Drawing.Point(11, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 24);
+            this.label2.Size = new System.Drawing.Size(100, 24);
             this.label2.TabIndex = 5;
-            this.label2.Text = "报损金额";
+            this.label2.Text = "成本总金额";
             // 
             // lblSkuAmount
             // 
@@ -645,9 +673,9 @@
             this.label17.Location = new System.Drawing.Point(11, 47);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(82, 24);
+            this.label17.Size = new System.Drawing.Size(118, 24);
             this.label17.TabIndex = 1;
-            this.label17.Text = "报损种类";
+            this.label17.Text = "报损种类数量";
             // 
             // label18
             // 
@@ -692,7 +720,7 @@
             this.dgvType.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.typekey,
             this.typeValue});
-            this.dgvType.Location = new System.Drawing.Point(846, 303);
+            this.dgvType.Location = new System.Drawing.Point(846, 349);
             this.dgvType.Name = "dgvType";
             this.dgvType.RowHeadersVisible = false;
             this.dgvType.RowTemplate.Height = 40;
@@ -894,5 +922,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn typekey;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeValue;
         private System.Windows.Forms.Button btnBatchBroken;
+        private System.Windows.Forms.Label lblTotalSaleAmount;
+        private System.Windows.Forms.Label label3;
     }
 }

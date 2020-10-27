@@ -151,9 +151,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("请添加实体卡");
                 return;
             }
-            if (dgvCard.Rows.Count>=20)
+            if (dgvCard.Rows.Count >= 20)
             {
-                 MainModel.ShowLog("单词批量你最多添加20个");
+                MainModel.ShowLog("单词批量你最多添加20个");
                 return;
             }
             ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
@@ -244,7 +244,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     txtRechargeAmount.Text = "";
                     lblRechargeAmountWarterTxt.Visible = true;
                 }
-               
+
                 lblGiftAmount.Text = rechargeCardInfo.rewardamount.ToString();
                 if (string.IsNullOrEmpty(rechargeCardInfo.memberid))
                 {
@@ -276,7 +276,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (sender == btnCancle)
+            {
+                this.Close();
+            }
+            else if (ConfirmHelper.Confirm("确认取消交易？"))
+            {
+                this.Close();
+            }
         }
 
         private void dgvCard_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -402,7 +409,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     ClassPayment customerpayment = MemberCenterHelper.ShowFormOtherMethord(payments, totalPay);
                     if (customerpayment == null || string.IsNullOrEmpty(customerpayment.code))
-                    {                       
+                    {
                         return;
                     }
                     customerpaycode = customerpayment.code;
@@ -459,7 +466,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     CurrentPage = 1;
                     lstCard.Clear();
-                    RefreshDgv();                   
+                    RefreshDgv();
                 }
             }
             catch (Exception ex)

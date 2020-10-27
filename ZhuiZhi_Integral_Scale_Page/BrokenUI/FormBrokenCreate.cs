@@ -257,6 +257,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         dgvGood.Rows.Clear();
                         lblSkuAmount.Text = "0";
                         lblTotalPrice.Text = "￥0.00";
+                        lblTotalSaleAmount.Text = "￥0.00";
                         btnOK.Tag = 0;
                         btnOK.BackColor = Color.Silver;
                         btnBatchBroken.Tag = 0;
@@ -1225,7 +1226,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
                 decimal totalprice = 0;
-
+                decimal totalsaleamount = 0;
 
                 int startindex = (CurrentPage - 1) * 6;
 
@@ -1240,7 +1241,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                        // dgvGood.Rows.Insert(0, GetDgvRow(pro));
 
                         dgvGood.Rows.Add(GetDgvRow(pro));
- 
+                        
                     
                 }
                 //每页只显示6条记录，总金额要计算所有的
@@ -1249,12 +1250,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                       if (!pro.weightflag)
                         {
                             totalprice += pro.num * pro.deliveryprice;
-
+                           
                         }
                         else
                         {
                             totalprice += pro.specnum * pro.deliveryprice;
                         }
+                      totalsaleamount += pro.num * pro.saleprice;
                 }
 
                 rbtnPageDown.WhetherEnable = CurrentProducts.Count > CurrentPage * 6;
@@ -1262,6 +1264,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 lblSkuAmount.Text = CurrentProducts.Count.ToString();
                 lblTotalPrice.Text = "￥" + totalprice.ToString("f2");
+                lblTotalSaleAmount.Text = "￥" + totalsaleamount.ToString("f2");
                 lblUserName.Text = MainModel.CurrentUser.nickname;
                 Application.DoEvents();
 

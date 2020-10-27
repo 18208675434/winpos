@@ -51,7 +51,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 lblRedType.Text = brokeninfo.redtype.ToLower() == "true" ? "已红冲" : "被红冲";
             }
             lblId.Text = brokeninfo.id + "";
-            lblDate.Text = brokeninfo.createdat;
+            lblDate.Text = MainModel.GetDateTimeByStamp(brokeninfo.createdat).ToString("yyyy-MM-dd HH:mm:ss"); 
             lblUserName.Text = brokeninfo.username;
 
 

@@ -404,11 +404,11 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(50, 30);
+            this.label5.Location = new System.Drawing.Point(36, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 24);
+            this.label5.Size = new System.Drawing.Size(82, 24);
             this.label5.TabIndex = 1;
-            this.label5.Text = "取消";
+            this.label5.Text = "取消交易";
             this.label5.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // pnlPayByCash

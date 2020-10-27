@@ -20,6 +20,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         public FormEntityCardList(List<OutEntityCardResponseDto> outentitycards)
         {
             InitializeComponent();
+            if (outentitycards.Count>8)
+            {
+                rbtnPageDown.Visible = true;
+                rbtnPageUp.Visible = true;
+            }
             dgvData.AutoGenerateColumns = false;          
             this.outentitycards = outentitycards;
         }
@@ -87,11 +92,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+        #region 分页事件
+        private int CurrentPage = 1;
+        private int PageSize = 8;
+        private void rbtnPageUp_ButtonClick(object sender, EventArgs e)
+        {
+            if (!rbtnPageUp.WhetherEnable)
+            {
+                return;
+            }
+            CurrentPage--;
+            BindEntityCards();
+        }
+
+        private void rbtnPageDown_ButtonClick(object sender, EventArgs e)
+        {
+            if (!rbtnPageDown.WhetherEnable)
+            {
+                return;
+            }
+            CurrentPage++;
+            BindEntityCards();
+        }
+
+        #endregion
+
         private Bitmap bmpLoss;
         void BindEntityCards()
         {
             dgvData.Rows.Clear();
-            foreach (var item in outentitycards)
+            if (outentitycards == null)
+            {
+                return;
+            }
+            rbtnPageUp.WhetherEnable = CurrentPage > 1;
+            int startindex = (CurrentPage - 1) * PageSize;
+            int lastindex = Math.Min(outentitycards.Count - 1, startindex + PageSize - 1);
+
+            List<OutEntityCardResponseDto> lstLoadingCards = outentitycards.GetRange(startindex, lastindex - startindex + 1);
+            foreach (var item in lstLoadingCards)
             {
                 if (bmpLoss == null)
                 {
@@ -107,14 +146,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     dgvData.Rows[dgvData.Rows.Count - 1].Cells["status"].Style.SelectionForeColor = Color.FromArgb(20, 137, 205);
                 }
                 else
-                {                   
+                {
                     dgvData.Rows.Add(item.outcardid, type, status, Resources.ResourcePos.empty);
                     dgvData.Rows[dgvData.Rows.Count - 1].Cells["status"].Style.ForeColor = Color.FromArgb(153, 153, 153);
                     dgvData.Rows[dgvData.Rows.Count - 1].Cells["status"].Style.SelectionForeColor = Color.FromArgb(153, 153, 153);
-                }                
+                }
 
                 dgvData.Rows[dgvData.Rows.Count - 1].Tag = item;
             }
+
+            rbtnPageDown.WhetherEnable = outentitycards.Count > CurrentPage * PageSize;
+            Application.DoEvents();
+            dgvData.ClearSelection();           
         }
 
         private void btnClose_Click(object sender, EventArgs e)
