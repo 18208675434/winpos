@@ -100,7 +100,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
       
             LoadDgvType();
             btnScan.Select();
-           
+
+            CurrentProducts = DbJsonUtil.GetRecord<List<BrokenProduct>>(DbJsonUtil.BrokenProducts);
+            LoadDgvCart();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -113,9 +115,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 lblMenu.Left = picMenu.Right;
 
                 lblUserName.Text = MainModel.CurrentUser.nickname;
-                //∨ 从右往左排列 被当成图形   从左向右 右侧间距太大
-                btnMenu.Text = MainModel.CurrentUser.nickname + "，你好";
-                btnMenu.Left = Math.Max(pnlHead.Width - btnMenu.Width - 10, btnCancle.Left + btnCancle.Width);
+
 
                 //扫描数据处理线程
                 threadScanCode = new Thread(ScanCodeThread);
@@ -848,6 +848,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 if (frmpanel.DialogResult == DialogResult.OK)
                 {
+                    if (CurrentProducts == null)
+                    {
+                        CurrentProducts = new List<BrokenProduct>();
+                    } 
                     foreach (Product pro in frmpanel.CurrentCart.products)
                     {
                        
@@ -1116,7 +1120,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
+
+            if (CurrentProducts != null && CurrentProducts.Count > 0)
+            {
+                DbJsonUtil.AddAndUpdateRecord<List<BrokenProduct>>(DbJsonUtil.BrokenProducts, CurrentProducts);
+            }
+            else
+            {
+                DbJsonUtil.DelRecord(DbJsonUtil.BrokenProducts);
+            }
             this.Close();
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            if (CurrentProducts != null && CurrentProducts.Count > 0)
+            {
+                if (ConfirmHelper.Confirm("确认清空所有数据"))
+                {
+                    CurrentProducts = null;
+                    LoadDgvCart();
+                }
+            }
+            
         }
 
               
@@ -1149,6 +1174,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     string errormsg1 = "";
                     PrintUtil.PrintBroken(result, ref errormsg1);
+
+                    DbJsonUtil.DelRecord(DbJsonUtil.BrokenProducts);
                     this.Close();
                     IsEnable = true;
                 }
@@ -1216,6 +1243,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 dgvGood.Rows.Clear();
                 if(CurrentProducts ==null || CurrentProducts.Count==0){
+
+                    lblSkuAmount.Text ="0";
+                    lblTotalPrice.Text = "￥" + "0.00";
+                    lblTotalSaleAmount.Text = "￥" + "0.00";
                     return;
                 }
 
@@ -1350,6 +1381,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             dgvType.Visible = false;
         }
 
+      
       
 
     }

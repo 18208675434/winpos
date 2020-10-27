@@ -16,7 +16,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
         private static string balancedepositinfo = "balancedepositinfo"; //充值明细
         public static string EntityCardBatchSale = "entitycardbatchsale"; //批量售卡
-
+        public static string BrokenProducts = "brokenproducts"; //报损
         private static string TopUP = "充值明细:";
         private static string TotalAmount = "总计:";
         private static JSON_BEANBLL jsonbll = new JSON_BEANBLL();
