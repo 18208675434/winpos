@@ -316,7 +316,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 Delay.Start(300);
 
-
                 //ScaleGlobalHelper.Close();
                 this.Dispose();
 

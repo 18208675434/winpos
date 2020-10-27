@@ -22,7 +22,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
     public class PrintUtil
     {
 
-        private static bool IsOrdeRefund =false;
         public static bool PrintOrder(PrintDetail printdetail, bool isRefound, ref string errormsg)
         {
             try
@@ -45,7 +44,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 //return false;
 
                 //QuestPara para = e.Argument as QuestPara;
-                isRefound =isRefound;
+                printdetail.isrefund = isRefound;
                 System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
                 bk.DoWork += HttpAsyncRequest_DoWork;
                 bk.RunWorkerAsync(printdetail);
@@ -68,15 +67,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
-                    ToledoPrintUtil.PrintOrder(printdetail, IsOrdeRefund, ref errrormsg);
+                    ToledoPrintUtil.PrintOrder(printdetail, printdetail.isrefund, ref errrormsg);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
-                    SprtPrintUtil.PrintOrder(printdetail, IsOrdeRefund, ref errrormsg);
+                    SprtPrintUtil.PrintOrder(printdetail, printdetail.isrefund, ref errrormsg);
                 }
                 else
                 {
-                    YKPrintUtil.PrintOrder(printdetail, IsOrdeRefund, ref errrormsg);
+                    YKPrintUtil.PrintOrder(printdetail, printdetail.isrefund, ref errrormsg);
                 }
 
 
