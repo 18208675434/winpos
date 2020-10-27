@@ -74,6 +74,7 @@
             this.lblCardStatus = new System.Windows.Forms.Label();
             this.picDelete = new System.Windows.Forms.PictureBox();
             this.picDown = new System.Windows.Forms.PictureBox();
+            this.lblRechargeAmountWarterTxt = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnGetCard = new System.Windows.Forms.Button();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
@@ -172,7 +173,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label6.Location = new System.Drawing.Point(13, 23);
+            this.label6.Location = new System.Drawing.Point(15, 23);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 24);
@@ -560,6 +561,7 @@
             this.pnlDgvItemContent.Controls.Add(this.lblCardStatus);
             this.pnlDgvItemContent.Controls.Add(this.picDelete);
             this.pnlDgvItemContent.Controls.Add(this.picDown);
+            this.pnlDgvItemContent.Controls.Add(this.lblRechargeAmountWarterTxt);
             this.pnlDgvItemContent.Location = new System.Drawing.Point(2, 16);
             this.pnlDgvItemContent.Name = "pnlDgvItemContent";
             this.pnlDgvItemContent.Size = new System.Drawing.Size(808, 88);
@@ -647,6 +649,17 @@
             this.picDown.Size = new System.Drawing.Size(11, 9);
             this.picDown.TabIndex = 136;
             this.picDown.TabStop = false;
+            // 
+            // lblRechargeAmountWarterTxt
+            // 
+            this.lblRechargeAmountWarterTxt.AutoSize = true;
+            this.lblRechargeAmountWarterTxt.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblRechargeAmountWarterTxt.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblRechargeAmountWarterTxt.Location = new System.Drawing.Point(155, 37);
+            this.lblRechargeAmountWarterTxt.Name = "lblRechargeAmountWarterTxt";
+            this.lblRechargeAmountWarterTxt.Size = new System.Drawing.Size(58, 21);
+            this.lblRechargeAmountWarterTxt.TabIndex = 137;
+            this.lblRechargeAmountWarterTxt.Text = "请选择";
             // 
             // dataGridViewImageColumn1
             // 
@@ -814,9 +827,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
-            this.Controls.Add(this.pnlHead);
             this.Controls.Add(this.dgvCard);
             this.Controls.Add(this.pnlDgvItem);
+            this.Controls.Add(this.pnlHead);
             this.Controls.Add(this.btnGetCard);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);
@@ -917,5 +930,6 @@
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Label lblShopName;
         private System.Windows.Forms.Button btnRechargeQuery;
+        private System.Windows.Forms.Label lblRechargeAmountWarterTxt;
     }
 }
