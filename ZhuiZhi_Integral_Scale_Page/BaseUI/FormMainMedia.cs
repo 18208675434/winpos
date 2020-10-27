@@ -846,6 +846,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             thread.Start(showorclose);
         }
 
+        public void ShowBalancePwdLog(string msg)
+        {
+            try
+            {
+                if (frmbalancepwdguest != null)
+                {
+                    frmbalancepwdguest.ShowLog(msg,false);
+                }
+            }
+            catch { }
+        }
         private void SowBalancePwdThread(object obj)
         {
             try

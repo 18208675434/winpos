@@ -166,7 +166,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 case Keys.NumPad9: btn9.PerformClick(); return !base.ProcessDialogKey(keyData); break;
 
                 case Keys.Back: btnDel.PerformClick(); return base.ProcessDialogKey(keyData); break;
-                case Keys.Enter: btnOK.PerformClick(); return !base.ProcessDialogKey(keyData); break;
+                case Keys.Enter: MainModel.BalanceEnter=true; return !base.ProcessDialogKey(keyData); break;
             }
 
             return base.ProcessDialogKey(keyData);
@@ -176,87 +176,89 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (PassWord.Length == 0)
-                {
-                    MainModel.ShowLog("请输入密码", false);
-                    ShowLog("请输入密码", false);
-                    return;
-                }
 
-                if (PassWord.Length != 6)
-                {
-                    MainModel.ShowLog("密码位数不够", false);
-                    ShowLog("密码位数不够", false);
-                    return;
-                }
-                this.Enabled = false;
+            MainModel.BalanceEnter = true;
+            //try
+            //{
+            //    if (PassWord.Length == 0)
+            //    {
+            //        MainModel.ShowLog("请输入密码", false);
+            //        ShowLog("请输入密码", false);
+            //        return;
+            //    }
 
-                LoadingHelper.ShowLoadingScreen("密码验证中...");
+            //    if (PassWord.Length != 6)
+            //    {
+            //        MainModel.ShowLog("密码位数不够", false);
+            //        ShowLog("密码位数不够", false);
+            //        return;
+            //    }
+            //    this.Enabled = false;
+
+            //    LoadingHelper.ShowLoadingScreen("密码验证中...");
 
 
-                PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, PassWord);
+            //    PayPassWord = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, PassWord);
 
 
-                string ErrorMsg = "";
-                int ResultCode = 0;
-                VerifyBalancePwd verifyresult = httputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode);
+            //    string ErrorMsg = "";
+            //    int ResultCode = 0;
+            //    VerifyBalancePwd verifyresult = httputil.VerifyBalancePwd(PayPassWord, ref ErrorMsg, ref ResultCode);
 
-                if (ErrorMsg != "" || verifyresult == null)
-                {
-                    LoadingHelper.CloseForm();
-                    this.Enabled = true;
+            //    if (ErrorMsg != "" || verifyresult == null)
+            //    {
+            //        LoadingHelper.CloseForm();
+            //        this.Enabled = true;
 
-                    CheckUserAndMember(ResultCode,ErrorMsg);
-                    // if(ResultCode==)
+            //        CheckUserAndMember(ResultCode,ErrorMsg);
+            //        // if(ResultCode==)
                    
                    
-                    //MainModel.ShowLog(ErrorMsg, true);
-                    //ShowLog(ErrorMsg, true);
-                }
-                else
-                {
-                    MainModel.BalancePwdErrorCode = -1;
-                    if (verifyresult.success == 1)
-                    {
+            //        //MainModel.ShowLog(ErrorMsg, true);
+            //        //ShowLog(ErrorMsg, true);
+            //    }
+            //    else
+            //    {
+            //        MainModel.BalancePwdErrorCode = -1;
+            //        if (verifyresult.success == 1)
+            //        {
 
-                        MainModel.BalancePayPwd = PayPassWord;
-                        MainModel.BalanceClose = true;
-                        MainModel.BalanceSecuritycode = verifyresult.securitycode;
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
-                    {
-                        MainModel.BalancePwd = "";
-                        PassWord = "";
-                        UpdatePassWord();
-                        string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
-                        MainModel.ShowLog(showerrormsg, false);
-                        ShowLog(showerrormsg, false);
-                    }
-                    else
-                    {
-                        MainModel.BalancePwd = "";
-                        PassWord = "";
-                        MainModel.ShowLog(verifyresult.hint, true);
-                        ShowLog(verifyresult.hint, true);
-                    }
-                }
+            //            MainModel.BalancePayPwd = PayPassWord;
+            //            MainModel.BalanceClose = true;
+            //            MainModel.BalanceSecuritycode = verifyresult.securitycode;
+            //            this.DialogResult = DialogResult.OK;
+            //            this.Close();
+            //        }
+            //        else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
+            //        {
+            //            MainModel.BalancePwd = "";
+            //            PassWord = "";
+            //            UpdatePassWord();
+            //            string showerrormsg = verifyresult.hint + verifyresult.wrongcount + "次，剩余" + verifyresult.remainwrongcount + "次";
+            //            MainModel.ShowLog(showerrormsg, false);
+            //            ShowLog(showerrormsg, false);
+            //        }
+            //        else
+            //        {
+            //            MainModel.BalancePwd = "";
+            //            PassWord = "";
+            //            MainModel.ShowLog(verifyresult.hint, true);
+            //            ShowLog(verifyresult.hint, true);
+            //        }
+            //    }
 
-                this.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MainModel.ShowLog("验证余额密码异常"+ex.Message,true);
-            }
-            finally
-            {
-                this.Enabled = true;
-                LoadingHelper.CloseForm();
-                this.Activate();
-            }
+            //    this.Enabled = true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MainModel.ShowLog("验证余额密码异常"+ex.Message,true);
+            //}
+            //finally
+            //{
+            //    this.Enabled = true;
+            //    LoadingHelper.CloseForm();
+            //    //this.Activate();
+            //}
 
         }
 
@@ -272,12 +274,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 PassWord = MainModel.BalancePwd;
                 UpdatePassWord();
 
-                //回车按键使用后失效
-                if (MainModel.BalanceEnter)
-                {
-                    MainModel.BalanceEnter = false;
-                    btnOK.PerformClick();
-                }
+                ////回车按键使用后失效
+                //if (MainModel.BalanceEnter)
+                //{
+                //    MainModel.BalanceEnter = false;
+                //    btnOK.PerformClick();
+                //}
             }
             catch (Exception ex)
             {
@@ -289,7 +291,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// 委托解决跨线程调用
         /// </summary>
         private delegate void InvokeHandler();
-        private void ShowLog(string msg, bool iserror)
+        public void ShowLog(string msg, bool iserror)
         {
             try
             {
@@ -302,7 +304,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         Delay.Start(1000);
                         lblToast.Visible = false;
 
-                        this.Activate();
+                        //this.Activate();
                     }));
                     
             }
