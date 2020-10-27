@@ -110,7 +110,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             printdetail.paymodeforapi = result[0].paymodeforapi;
             printdetail.paymode = result[0].paymode;
             printdetail.createdat = MainModel.getStampByDateTime(DateTime.Now);
-            return PrintUtil.PrintEntityCardBatchSale(printdetail);
+            return PrintUtil.PrintTopUp(printdetail,true);
         }
 
         private void FormPaySuccess_FormClosing(object sender, FormClosingEventArgs e)

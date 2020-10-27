@@ -199,7 +199,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     //DbJsonUtil.AddBalanceInfo("微信", para.amount);
                     if (MemberCenterHelper.ShowFormTopUpByOnline(result, CurrentMember.memberheaderresponsevo.mobile))
                     {
-                        PrintUtil.PrintTopUp(result.ToString());
+                        PrintTopUp(result.ToString());
                         TopUpOK();
                     }
 
@@ -258,7 +258,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     else
                     {
                         //DbJsonUtil.AddBalanceInfo("现金", para.amount);
-                        PrintUtil.PrintTopUp(result.ToString());
+                        PrintTopUp(result.ToString());
                         TopUpOK();
                     }
                 }
@@ -928,7 +928,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 else
                 {
                     //DbJsonUtil.AddBalanceInfo(customerpayment.name, para.amount);
-                    PrintUtil.PrintTopUp(result.ToString());
+                    PrintTopUp(result.ToString());
                     TopUpOK();
                 }
 
@@ -973,6 +973,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             finally
             {
                 LoadingHelper.CloseForm();
+            }
+        }
+
+        /// <summary> 打印小票
+        /// </summary>
+        /// <param name="depositbillid"></param>
+        /// <returns></returns>
+         bool PrintTopUp(string depositbillid)
+        {
+            try
+            {
+                try { LogManager.WriteLog("充值单:" + depositbillid); }
+                catch { }
+                string errormsg = "";
+                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = httputil.GetDepositbill(depositbillid, ref errormsg);
+
+                if (!string.IsNullOrEmpty(errormsg) || printdetail == null)
+                {
+                    LogManager.WriteLog(errormsg);
+                    return false;
+                }
+                return PrintUtil.PrintTopUp(printdetail);
+            }
+            catch
+            {
+                return false;
             }
         }
 
