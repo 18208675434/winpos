@@ -199,8 +199,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     //DbJsonUtil.AddBalanceInfo("微信", para.amount);
                     if (MemberCenterHelper.ShowFormTopUpByOnline(result, CurrentMember.memberheaderresponsevo.mobile))
                     {
-                        PrintUtil.PrintTopUp(result.ToString());
-                        TopUpOK();
+                        TopUpOK(result.ToString());
                     }
 
                 }
@@ -258,8 +257,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     else
                     {
                         //DbJsonUtil.AddBalanceInfo("现金", para.amount);
-                        PrintUtil.PrintTopUp(result.ToString());
-                        TopUpOK();
+                     
+                        TopUpOK(result.ToString());
                     }
                 }
             }
@@ -688,36 +687,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        private void TopUpOK()
+        private void TopUpOK(string depositbillid)
         {
             try
             {
-
-                MainModel.ShowLog("充值成功", false);
-
-                this.Close();
-                //IsEnable = false;
-                //listall.CustomId = 0;
-
-                //LoadingHelper.ShowLoadingScreen();
-                //MainModel.ShowLog("充值成功", false);
-
-
-                //CurrentTemplate = null;
-                //custommoney.Text = "+";
-                //custommoney.ForeColor = Color.Blue;
-                //custommoney.Font = new System.Drawing.Font("微软雅黑", 20, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                //customdiscount.Text = "自定义金额";
-                //customdiscount.ForeColor = Color.Blue;
-                //customdiscount.Font = new System.Drawing.Font("微软雅黑", 16, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                //LoadTemplate(false);
-                //LoadBalanceAccount();
-
-                //MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
-
-                //IsEnable = true;
-                //LoadingHelper.CloseForm();
-
+                if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid))
+                {
+                    this.Close();
+                    return;
+                }  
             }
             catch (Exception ex)
             {
@@ -927,9 +905,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 else
                 {
-                    //DbJsonUtil.AddBalanceInfo(customerpayment.name, para.amount);
-                    PrintUtil.PrintTopUp(result.ToString());
-                    TopUpOK();
+                    TopUpOK(result.ToString());
                 }
 
             }
@@ -975,6 +951,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
             }
         }
-
     }
 }

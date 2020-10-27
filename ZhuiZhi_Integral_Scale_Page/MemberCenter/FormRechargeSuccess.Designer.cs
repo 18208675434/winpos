@@ -83,7 +83,7 @@
             // 
             this.lblMsg.AutoSize = true;
             this.lblMsg.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblMsg.Location = new System.Drawing.Point(412, 457);
+            this.lblMsg.Location = new System.Drawing.Point(420, 457);
             this.lblMsg.Name = "lblMsg";
             this.lblMsg.Size = new System.Drawing.Size(316, 25);
             this.lblMsg.TabIndex = 12;

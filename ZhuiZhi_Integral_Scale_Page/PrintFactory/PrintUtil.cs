@@ -169,36 +169,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
         private static HttpUtil httputil = new HttpUtil();
-        public static bool PrintTopUp(string depositbillid)
+        public static bool PrintTopUp(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail, bool isEntityCardBatchSale = false)
         {
             try
             {
-                try { LogManager.WriteLog("充值单:" + depositbillid); }
-                catch { }
-                string errormsg = "";
-                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = httputil.GetDepositbill(depositbillid, ref errormsg);
-
-                if (!string.IsNullOrEmpty(errormsg) || printdetail == null)
-                {
-                    LogManager.WriteLog(errormsg);
-                    return false;
-                }
-
                 DbJsonUtil.AddBalanceInfo(printdetail.paymodeforapi, printdetail.amount);
 
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
-                    ToledoPrintUtil.PrintTopUp(printdetail);
+                    ToledoPrintUtil.PrintTopUp(printdetail, isEntityCardBatchSale);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
-                    SprtPrintUtil.PrintTopUp(printdetail);
+                    SprtPrintUtil.PrintTopUp(printdetail, isEntityCardBatchSale);
                 }
                 else
                 {
-                    YKPrintUtil.PrintTopUp(printdetail);
+                    YKPrintUtil.PrintTopUp(printdetail, isEntityCardBatchSale);
                 }
 
                 return true;
@@ -308,36 +297,5 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
         static MemberCenterHttpUtil memberCenterHttpUtil=new MemberCenterHttpUtil();
       
-        /// <summary>
-        /// 批量售卡 小票打印
-        /// </summary>
-        /// <param name="orderids"></param>
-        /// <returns></returns>
-        public static bool PrintEntityCardBatchSale(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail, bool isEntityCardBatchSale=false)
-        {
-            try
-            {
-                DbJsonUtil.AddBalanceInfo(printdetail.paymodeforapi, printdetail.amount);
-                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
-
-                if (ScaleName == ScaleType.托利多.ToString())
-                {
-                    ToledoPrintUtil.PrintTopUp(printdetail,true);
-                }
-                else if (ScaleName == ScaleType.易捷通.ToString())
-                {
-                    SprtPrintUtil.PrintTopUp(printdetail, true);
-                }
-                else
-                {
-                    YKPrintUtil.PrintTopUp(printdetail, true);
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

@@ -684,7 +684,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
         #region 支付结果
-        public static bool ShowRechargeSuccess(string batchoperatorid, List<string> orderids)
+        public static bool ShowRechargeSuccess(string batchoperatorid, List<string> orderids=null)
         {
             try
             {

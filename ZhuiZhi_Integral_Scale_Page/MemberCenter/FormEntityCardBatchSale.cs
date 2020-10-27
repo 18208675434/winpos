@@ -80,6 +80,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormEntityCardBatchSale_Shown(object sender, EventArgs e)
         {
             MemberCenterMediaHelper.ShowFormEntityCardBatchSaleMedia();
+            LoadingHelper.ShowLoadingScreen();
+            lstCard = DbJsonUtil.GetRecord<List<RechargeCardInfo>>(DbJsonUtil.EntityCardBatchSale);
+            if (lstCard==null)
+            {
+                lstCard = new List<RechargeCardInfo>();
+            }
+            RefreshDgv();
+            LoadingHelper.CloseForm();         
+          
         }
 
 
@@ -129,8 +138,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         cardid = cardid,
                         status = entityCard.status,
                         memberid = entityCard.mobile
-                    });
-
+                    });                  
                     RefreshDgv();
                 }
             }
@@ -151,6 +159,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog("请添加实体卡");
                 return;
             }
+            if (dgvCard.Rows.Count >= 20)
+            {
+                MainModel.ShowLog("单词批量你最多添加20个");
+                return;
+            }
             ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
             if (customtemplate != null)
             {
@@ -167,6 +180,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         public void RefreshDgv()
         {
+            LoadingHelper.ShowLoadingScreen();
+            DbJsonUtil.AddAndUpdateRecord<List<RechargeCardInfo>>(DbJsonUtil.EntityCardBatchSale, lstCard);
+            LoadingHelper.CloseForm();
             decimal totalRechargeAmount = 0;
             decimal totalGiftAmount = 0;
             decimal totalRechargeAll = 0;
@@ -182,6 +198,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             lblTotalRechargeAll.Text = "￥" + totalRechargeAll.ToString("f2");
             lblTotalPay.Text = "￥" + totalRechargeAmount.ToString("f2");
             lblTotalPay.Tag = totalRechargeAmount;
+
             LoadDgvCart();
         }
 
@@ -229,7 +246,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     locationY = lblCardStatus.Location.Y;
                 }
                 lblCardNo.Text = rechargeCardInfo.cardid;
-                txtRechargeAmount.Text = rechargeCardInfo.rechargeamount.ToString();
+                if (rechargeCardInfo.rechargeamount > 0)
+                {
+                    lblRechargeAmountWarterTxt.Visible = false;
+                    txtRechargeAmount.Text = rechargeCardInfo.rechargeamount.ToString();
+                }
+                else
+                {
+                    txtRechargeAmount.Text = "";
+                    lblRechargeAmountWarterTxt.Visible = true;
+                }
+
                 lblGiftAmount.Text = rechargeCardInfo.rewardamount.ToString();
                 if (string.IsNullOrEmpty(rechargeCardInfo.memberid))
                 {
@@ -261,7 +288,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (sender == btnCancle)
+            {
+                this.Close();
+            }
+            else if (ConfirmHelper.Confirm("确认取消交易？"))
+            {
+                LoadingHelper.ShowLoadingScreen();
+                DbJsonUtil.DelRecord(DbJsonUtil.EntityCardBatchSale);
+                LoadingHelper.CloseForm();
+                this.Close();
+            }
         }
 
         private void dgvCard_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -359,6 +396,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
                 IsEnable = false;
+                LoadingHelper.ShowLoadingScreen();
                 if (dgvCard.Rows.Count == 0)
                 {
                     MainModel.ShowLog("请添加实体卡");
@@ -387,7 +425,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     ClassPayment customerpayment = MemberCenterHelper.ShowFormOtherMethord(payments, totalPay);
                     if (customerpayment == null || string.IsNullOrEmpty(customerpayment.code))
-                    {                       
+                    {
                         return;
                     }
                     customerpaycode = customerpayment.code;
@@ -432,6 +470,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 if (payResult)
                 {
+                    DbJsonUtil.DelRecord(DbJsonUtil.EntityCardBatchSale);
                     List<string> orderids = new List<string>();
                     foreach (var item in result.depositdetails)
                     {
@@ -444,7 +483,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     CurrentPage = 1;
                     lstCard.Clear();
-                    RefreshDgv();                   
+                    RefreshDgv();
                 }
             }
             catch (Exception ex)
@@ -453,6 +492,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             finally
             {
+                LoadingHelper.CloseForm();
                 IsEnable = true;
             }
         }

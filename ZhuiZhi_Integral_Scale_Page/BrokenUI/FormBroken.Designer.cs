@@ -50,6 +50,8 @@
             this.btnCancle = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rbtnCeate = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnQuery = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
             this.btnWeek = new System.Windows.Forms.Button();
             this.btnYesterday = new System.Windows.Forms.Button();
@@ -64,8 +66,6 @@
             this.pnlLine = new System.Windows.Forms.Panel();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnCeate = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnQuery = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.BrokenData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BrokenDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -174,6 +174,44 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1160, 99);
             this.panel1.TabIndex = 34;
+            // 
+            // rbtnCeate
+            // 
+            this.rbtnCeate.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
+            this.rbtnCeate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
+            this.rbtnCeate.Image = null;
+            this.rbtnCeate.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnCeate.Location = new System.Drawing.Point(980, 24);
+            this.rbtnCeate.Name = "rbtnCeate";
+            this.rbtnCeate.PenColor = System.Drawing.Color.Black;
+            this.rbtnCeate.PenWidth = 1;
+            this.rbtnCeate.RoundRadius = 1;
+            this.rbtnCeate.ShowImg = false;
+            this.rbtnCeate.ShowText = "新建报损";
+            this.rbtnCeate.Size = new System.Drawing.Size(147, 52);
+            this.rbtnCeate.TabIndex = 24;
+            this.rbtnCeate.TextForeColor = System.Drawing.Color.White;
+            this.rbtnCeate.WhetherEnable = true;
+            this.rbtnCeate.ButtonClick += new System.EventHandler(this.rbtnCeate_ButtonClick);
+            // 
+            // rbtnQuery
+            // 
+            this.rbtnQuery.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
+            this.rbtnQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
+            this.rbtnQuery.Image = null;
+            this.rbtnQuery.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnQuery.Location = new System.Drawing.Point(843, 24);
+            this.rbtnQuery.Name = "rbtnQuery";
+            this.rbtnQuery.PenColor = System.Drawing.Color.Black;
+            this.rbtnQuery.PenWidth = 1;
+            this.rbtnQuery.RoundRadius = 1;
+            this.rbtnQuery.ShowImg = false;
+            this.rbtnQuery.ShowText = "查询";
+            this.rbtnQuery.Size = new System.Drawing.Size(120, 52);
+            this.rbtnQuery.TabIndex = 23;
+            this.rbtnQuery.TextForeColor = System.Drawing.Color.White;
+            this.rbtnQuery.WhetherEnable = true;
+            this.rbtnQuery.ButtonClick += new System.EventHandler(this.rbtnQuery_ButtonClick);
             // 
             // dtEnd
             // 
@@ -433,44 +471,6 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
-            // rbtnCeate
-            // 
-            this.rbtnCeate.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
-            this.rbtnCeate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
-            this.rbtnCeate.Image = null;
-            this.rbtnCeate.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnCeate.Location = new System.Drawing.Point(980, 24);
-            this.rbtnCeate.Name = "rbtnCeate";
-            this.rbtnCeate.PenColor = System.Drawing.Color.Black;
-            this.rbtnCeate.PenWidth = 1;
-            this.rbtnCeate.RoundRadius = 1;
-            this.rbtnCeate.ShowImg = false;
-            this.rbtnCeate.ShowText = "新建报损";
-            this.rbtnCeate.Size = new System.Drawing.Size(147, 52);
-            this.rbtnCeate.TabIndex = 24;
-            this.rbtnCeate.TextForeColor = System.Drawing.Color.White;
-            this.rbtnCeate.WhetherEnable = true;
-            this.rbtnCeate.ButtonClick += new System.EventHandler(this.rbtnCeate_ButtonClick);
-            // 
-            // rbtnQuery
-            // 
-            this.rbtnQuery.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
-            this.rbtnQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
-            this.rbtnQuery.Image = null;
-            this.rbtnQuery.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnQuery.Location = new System.Drawing.Point(843, 24);
-            this.rbtnQuery.Name = "rbtnQuery";
-            this.rbtnQuery.PenColor = System.Drawing.Color.Black;
-            this.rbtnQuery.PenWidth = 1;
-            this.rbtnQuery.RoundRadius = 1;
-            this.rbtnQuery.ShowImg = false;
-            this.rbtnQuery.ShowText = "查询";
-            this.rbtnQuery.Size = new System.Drawing.Size(120, 52);
-            this.rbtnQuery.TabIndex = 23;
-            this.rbtnQuery.TextForeColor = System.Drawing.Color.White;
-            this.rbtnQuery.WhetherEnable = true;
-            this.rbtnQuery.ButtonClick += new System.EventHandler(this.rbtnQuery_ButtonClick);
-            // 
             // BrokenData
             // 
             this.BrokenData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -521,7 +521,7 @@
             dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.BrokenNum.DefaultCellStyle = dataGridViewCellStyle5;
             this.BrokenNum.FillWeight = 12F;
-            this.BrokenNum.HeaderText = "商品种类数";
+            this.BrokenNum.HeaderText = "报损种类数";
             this.BrokenNum.Name = "BrokenNum";
             this.BrokenNum.ReadOnly = true;
             this.BrokenNum.Width = 130;

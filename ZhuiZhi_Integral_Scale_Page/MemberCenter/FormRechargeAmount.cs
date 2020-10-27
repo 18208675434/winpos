@@ -66,14 +66,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             listAllTemplate = (ListAllTemplate)bmp.Tag;
             if (listAllTemplate.id == 0)
             {
-                FormBackGround tempfrmback=null;
+                this.Hide();
+                //FormBackGround tempfrmback=null;
                 try
                 {
-                    tempfrmback = new FormBackGround();
-                    tempfrmback = new FormBackGround();
-                    tempfrmback.Location = new System.Drawing.Point(0, 0);
-                    tempfrmback.TopMost = true;
-                    tempfrmback.Show();
+                    //tempfrmback = new FormBackGround();
+                    //tempfrmback = new FormBackGround();
+                    //tempfrmback.Location = new System.Drawing.Point(0, 0);
+                    //tempfrmback.TopMost = true;
+                    //tempfrmback.Show();
 
                     listAllTemplate = MemberCenterHelper.ShowFormCustomerChange();
                 }
@@ -82,16 +83,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 finally
                 {
-                    if (tempfrmback != null)
-                    {
-                        tempfrmback.Close();
-                    }
+                    //if (tempfrmback != null)
+                    //{
+                    //    tempfrmback.Close();
+                    //}
                 }
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
-
-
         }
 
         #region 分页

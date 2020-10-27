@@ -44,6 +44,8 @@
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colButton = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnLoss = new System.Windows.Forms.Button();
+            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,8 +160,8 @@
             this.dgvData.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvData.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.dgvData.RowTemplate.Height = 50;
-            this.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvData.Size = new System.Drawing.Size(754, 430);
+            this.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvData.Size = new System.Drawing.Size(754, 445);
             this.dgvData.TabIndex = 131;
             this.dgvData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellContentClick);
             // 
@@ -218,12 +220,56 @@
             this.btnLoss.UseVisualStyleBackColor = false;
             this.btnLoss.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // rbtnPageDown
+            // 
+            this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
+            this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageDown.Image = null;
+            this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageDown.Location = new System.Drawing.Point(474, 534);
+            this.rbtnPageDown.Margin = new System.Windows.Forms.Padding(4);
+            this.rbtnPageDown.Name = "rbtnPageDown";
+            this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageDown.PenWidth = 1;
+            this.rbtnPageDown.RoundRadius = 10;
+            this.rbtnPageDown.ShowImg = false;
+            this.rbtnPageDown.ShowText = "下一页";
+            this.rbtnPageDown.Size = new System.Drawing.Size(140, 50);
+            this.rbtnPageDown.TabIndex = 135;
+            this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageDown.Visible = false;
+            this.rbtnPageDown.WhetherEnable = false;
+            this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
+            // 
+            // rbtnPageUp
+            // 
+            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
+            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageUp.Image = null;
+            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageUp.Location = new System.Drawing.Point(324, 534);
+            this.rbtnPageUp.Margin = new System.Windows.Forms.Padding(4);
+            this.rbtnPageUp.Name = "rbtnPageUp";
+            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageUp.PenWidth = 1;
+            this.rbtnPageUp.RoundRadius = 10;
+            this.rbtnPageUp.ShowImg = false;
+            this.rbtnPageUp.ShowText = "上一页";
+            this.rbtnPageUp.Size = new System.Drawing.Size(140, 50);
+            this.rbtnPageUp.TabIndex = 134;
+            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageUp.Visible = false;
+            this.rbtnPageUp.WhetherEnable = false;
+            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
+            // 
             // FormEntityCardList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.rbtnPageDown);
+            this.Controls.Add(this.rbtnPageUp);
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.btnLoss);
             this.Controls.Add(this.panel1);
@@ -257,5 +303,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewImageColumn colButton;
+        private RoundButton rbtnPageDown;
+        private RoundButton rbtnPageUp;
     }
 }
