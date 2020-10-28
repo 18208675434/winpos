@@ -414,7 +414,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
 
                 string customerpaycode = "";
-                if (paymode == PayMode.other)
+                if (paymode == PayMode.other)//其它支付
                 {
                     string error = "";
                     List<ClassPayment> payments = httpUtil.Custompaycon(ref error);
@@ -431,6 +431,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     customerpaycode = customerpayment.code;
                 }
 
+                if (paymode == PayMode.cash)//现金支付
+                {
+                    if (!MemberCenterHelper.ShowFormTopUpByCash(totalPay))
+                    {
+                        return;
+                    }
+                }
                 EntityCardBatchDepositRequest request = BuildRequest((int)paymode + "", customerpaycode);
                 request.paymode = (int)paymode + "";
                 string err = "";
@@ -483,9 +490,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     CurrentPage = 1;
                     lstCard.Clear();
-                    RefreshDgv();                   
+                    RefreshDgv();
+                    
                 }
-                IsEnable = true;
             }
             catch (Exception ex)
             {
@@ -494,6 +501,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             finally
             {
                 LoadingHelper.CloseForm();
+                IsEnable = true;
             }
         }
         #endregion
