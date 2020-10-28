@@ -445,9 +445,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 }
                 lstPrintStr.Add(getStrLine());
 
-                lstPrintStr.Add(MergeStr("商品金额：", printdetail.productamt,  BodyCharCountOfLine,PageSize));
-                lstPrintStr.Add(MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize));
-                lstPrintStr.Add(MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MergeStr("商品金额：", printdetail.productamt.ToString("f2"),  BodyCharCountOfLine,PageSize));
+                lstPrintStr.Add(MergeStr("配送费：", printdetail.deliveryamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MergeStr("实付金额：", printdetail.totalpayment.ToString("f2"), BodyCharCountOfLine, PageSize));
                
 
                 lstPrintStr.Add(getStrLine());
