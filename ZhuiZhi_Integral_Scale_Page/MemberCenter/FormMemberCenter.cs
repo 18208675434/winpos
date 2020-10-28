@@ -462,26 +462,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private List<PromotionCoupon> CurrentLstCoupon = null;
 
-        private void LoadCoupon()
+        /// <summary>
+        /// 加载会员中心-优惠券
+        /// </summary>
+        /// <param name="lastcouponcode"></param>
+        private void LoadCoupon(string lastcouponcode="0")
         {
             try
             {
-                string ErrorMsg = "";
-                CurrentLstCoupon = httputil.MyCouponList(CurrentMember.memberinformationresponsevo.memberid, ref ErrorMsg);
-
-                if (CurrentLstCoupon == null || !string.IsNullOrEmpty(ErrorMsg))
+                if (lastcouponcode=="0")//首次调用，清空优惠券缓存
                 {
-                    MainModel.ShowLog(ErrorMsg, false);
+                    CurrentLstCoupon = new List<PromotionCoupon>();
                 }
-                else
+                int totalSize = 0;
+                string ErrorMsg = "";              
+                List<PromotionCoupon> pageLstCoupon = httputil.MyCouponList(CurrentMember.memberinformationresponsevo.memberid,15,ref lastcouponcode, ref totalSize, ref ErrorMsg);
+                if (pageLstCoupon == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
-                    lblCoupon.Text = CurrentLstCoupon.Count + "张";
+                    return;
+                }               
+                CurrentLstCoupon.AddRange(pageLstCoupon);
+                if (totalSize <= CurrentLstCoupon.Count)//递归完成退出
+                {
+                    lblCoupon.Text = totalSize + "张";
                     picCoupon.Left = lblCoupon.Right;
+                    return;
                 }
+                LoadCoupon(lastcouponcode);
             }
             catch (Exception ex)
             {
+                lblCoupon.Text = "0张";
+                picCoupon.Left = lblCoupon.Right;
                 MainModel.ShowLog("加载优惠券异常" + ex.Message, true);
+                return;
             }
         }
 
