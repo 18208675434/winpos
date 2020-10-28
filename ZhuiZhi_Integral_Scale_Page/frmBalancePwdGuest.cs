@@ -42,42 +42,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
 
 
-        private void CheckUserAndMember(int resultcode, string ErrorMsg)
-        {
-            try
-            {
-
-                if (resultcode == MainModel.HttpUserExpired || resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.DifferentMember)
-                {
-
-                    this.Enabled = false;
-                    MainModel.CurrentMember = null;
-
-                    MainModel.BalancePwdErrorCode = resultcode;
-                    MainModel.BalanceClose = true;
-
-
-                }
-                else
-                {
-                    MainModel.ShowLog(ErrorMsg, true);
-                    ShowLog(ErrorMsg, true);
-                }              
-            }
-            catch (Exception ex)
-            {
-
-                this.Enabled = true;
-
-                MainModel.ShowLog("密码验证错误码异常", true);
-
-            }
-
-        }
-
-
-
-
         private void btn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -166,7 +130,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 case Keys.NumPad9: btn9.PerformClick(); return !base.ProcessDialogKey(keyData); break;
 
                 case Keys.Back: btnDel.PerformClick(); return base.ProcessDialogKey(keyData); break;
-                case Keys.Enter: MainModel.BalanceEnter=true; return !base.ProcessDialogKey(keyData); break;
+                case Keys.Enter: btnOK_Click(null,null); return !base.ProcessDialogKey(keyData); break;
             }
 
             return base.ProcessDialogKey(keyData);
