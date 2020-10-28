@@ -41,9 +41,9 @@ namespace Maticsoft.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into DBPRODUCT_BEAN(");
-            strSql.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG)");
+            strSql.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG,MEMBERPRICE,LOCALSTATUS)");
             strSql.Append(" values (");
-            strSql.Append("@SKUCODE,@GOODS_ID,@CATEGORYID,@CATEGORYNAME,@ORIGINPRICE,@SALEPRICE,@SPECIAL_PRICE,@TOTALSTOCKQTY,@SALESUNIT,@SHOPID,@TENANTID,@TITLE,@SKUNAME,@BARCODE,@SPECDESC,@GOODSTAGID,@WEIGHTFLAG,@NUM,@SPECNUM,@SPECTYPE,@PRICETAG,@PRICETAGID,@CREATE_URL_IP,@TAGFORMAT,@BARCODEFORMAT,@BESTDAYS,@SPINFO,@QRCODECONTENT,@INGREDIENT,@LOCATION,@SPEC,@STORE_TYPE,@COMPANY,@REMARK,@SPECIALMESSAGE,@FIRSTCATEGORYID,@FIRSTCATEGORYNAME,@SECONDCATEGORYID,@SECONDCATEGORYNAME,@PANELFLAG,@PANELSHOWFLAG,@MAINIMG,@STATUS,@SPECIAL_STATUS,@IS_QUERY_BARCODE,@CREATEDAT,@SALECOUNT,@INNERBARCODE,@FIRST_LETTER,@ALL_FIRST_LETTER,@SHELFLIFE,@SKUTYPE,@SCALEFLAG)");
+            strSql.Append("@SKUCODE,@GOODS_ID,@CATEGORYID,@CATEGORYNAME,@ORIGINPRICE,@SALEPRICE,@SPECIAL_PRICE,@TOTALSTOCKQTY,@SALESUNIT,@SHOPID,@TENANTID,@TITLE,@SKUNAME,@BARCODE,@SPECDESC,@GOODSTAGID,@WEIGHTFLAG,@NUM,@SPECNUM,@SPECTYPE,@PRICETAG,@PRICETAGID,@CREATE_URL_IP,@TAGFORMAT,@BARCODEFORMAT,@BESTDAYS,@SPINFO,@QRCODECONTENT,@INGREDIENT,@LOCATION,@SPEC,@STORE_TYPE,@COMPANY,@REMARK,@SPECIALMESSAGE,@FIRSTCATEGORYID,@FIRSTCATEGORYNAME,@SECONDCATEGORYID,@SECONDCATEGORYNAME,@PANELFLAG,@PANELSHOWFLAG,@MAINIMG,@STATUS,@SPECIAL_STATUS,@IS_QUERY_BARCODE,@CREATEDAT,@SALECOUNT,@INNERBARCODE,@FIRST_LETTER,@ALL_FIRST_LETTER,@SHELFLIFE,@SKUTYPE,@SCALEFLAG,@MEMBERPRICE,@LOCALSTATUS)");
             strSql.Append(";select LAST_INSERT_ROWID()");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@SKUCODE", DbType.String),
@@ -98,7 +98,10 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@ALL_FIRST_LETTER", DbType.String),
 					new SQLiteParameter("@SHELFLIFE", DbType.Int64,8),
 					new SQLiteParameter("@SKUTYPE", DbType.Int64,8),
-					new SQLiteParameter("@SCALEFLAG", DbType.Int64,8)};
+					new SQLiteParameter("@SCALEFLAG", DbType.Int64,8),
+                    new SQLiteParameter("@LOCALSTATUS", DbType.Int64,8),
+                                           new SQLiteParameter("@MEMBERPRICE", DbType.Decimal,4)
+                                           };
             parameters[0].Value = model.SKUCODE;
             parameters[1].Value = model.GOODS_ID;
             parameters[2].Value = model.CATEGORYID;
@@ -147,11 +150,13 @@ namespace Maticsoft.DAL
             parameters[45].Value = model.CREATEDAT;
             parameters[46].Value = model.SALECOUNT;
             parameters[47].Value = model.INNERBARCODE;
-            parameters[48].Value = model.FIRST_LETTER;
-            parameters[49].Value = model.ALL_FIRST_LETTER;
+            parameters[48].Value = ConvertToFirstPinYin(model.SKUNAME);
+            parameters[49].Value = ConvertToPinYin(model.SKUNAME);
             parameters[50].Value = model.SHELFLIFE;
             parameters[51].Value = model.SKUTYPE;
             parameters[52].Value = model.SCALEFLAG;
+            parameters[53].Value = model.LOCALSTATUS;
+            parameters[54].Value = model.MEMBERPRICE;
 
             object obj = DbHelperSQLite.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -222,7 +227,9 @@ namespace Maticsoft.DAL
             strSql.Append("ALL_FIRST_LETTER=@ALL_FIRST_LETTER,");
             strSql.Append("SHELFLIFE=@SHELFLIFE,");
             strSql.Append("SKUTYPE=@SKUTYPE,");
-            strSql.Append("SCALEFLAG=@SCALEFLAG");
+            strSql.Append("SCALEFLAG=@SCALEFLAG,");
+            strSql.Append("LOCALSTATUS=@LOCALSTATUS,");
+            strSql.Append("MEMBERPRICE=@MEMBERPRICE");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@SKUCODE", DbType.String),
@@ -278,6 +285,8 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@SHELFLIFE", DbType.Int64,8),
 					new SQLiteParameter("@SKUTYPE", DbType.Int64,8),
 					new SQLiteParameter("@SCALEFLAG", DbType.Int64,8),
+                    new SQLiteParameter("@LOCALSTATUS", DbType.Int64,8),
+                    new SQLiteParameter("@MEMBERPRICE", DbType.Decimal,4),
 					new SQLiteParameter("@_id", DbType.Int64,8)};
             parameters[0].Value = model.SKUCODE;
             parameters[1].Value = model.GOODS_ID;
@@ -327,12 +336,14 @@ namespace Maticsoft.DAL
             parameters[45].Value = model.CREATEDAT;
             parameters[46].Value = model.SALECOUNT;
             parameters[47].Value = model.INNERBARCODE;
-            parameters[48].Value = model.FIRST_LETTER;
-            parameters[49].Value = model.ALL_FIRST_LETTER;
+            parameters[48].Value = ConvertToFirstPinYin(model.SKUNAME);
+            parameters[49].Value = ConvertToPinYin(model.SKUNAME);
             parameters[50].Value = model.SHELFLIFE;
             parameters[51].Value = model.SKUTYPE;
             parameters[52].Value = model.SCALEFLAG;
-            parameters[53].Value = model._id;
+            parameters[53].Value = model.LOCALSTATUS;
+            parameters[54].Value = model.MEMBERPRICE;
+            parameters[55].Value = model._id;
 
             int rows = DbHelperSQLite.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -396,7 +407,7 @@ namespace Maticsoft.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG from DBPRODUCT_BEAN ");
+            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG,MEMBERPRICE,LOCALSTATUS, from DBPRODUCT_BEAN ");
             strSql.Append(" where _id=@_id");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@_id", DbType.Int64,4)
@@ -640,6 +651,15 @@ namespace Maticsoft.DAL
                 {
                     model.SCALEFLAG = Int64.Parse(row["SCALEFLAG"].ToString());
                 }
+                if (row["LOCALSTATUS"] != null && row["LOCALSTATUS"].ToString() != "")
+                {
+                    model.LOCALSTATUS = Int64.Parse(row["LOCALSTATUS"].ToString());
+                }
+
+                if (row["MEMBERPRICE"] != null && row["MEMBERPRICE"].ToString() != "")
+                {
+                    model.MEMBERPRICE = decimal.Parse(row["MEMBERPRICE"].ToString());
+                }
             }
             return model;
         }
@@ -650,7 +670,7 @@ namespace Maticsoft.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG ");
+            strSql.Append("select _id,SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG,MEMBERPRICE,LOCALSTATUS ");
             strSql.Append(" FROM DBPRODUCT_BEAN ");
             if (strWhere.Trim() != "")
             {
@@ -824,7 +844,9 @@ namespace Maticsoft.DAL
             strSql.Append("ALL_FIRST_LETTER=@ALL_FIRST_LETTER,");
             strSql.Append("SHELFLIFE=@SHELFLIFE,");
             strSql.Append("SKUTYPE=@SKUTYPE,");
-            strSql.Append("SCALEFLAG=@SCALEFLAG");
+            strSql.Append("SCALEFLAG=@SCALEFLAG,");
+            strSql.Append("LOCALSTATUS=@LOCALSTATUS,");
+            strSql.Append("MEMBERPRICE=@MEMBERPRICE");
             strSql.Append(" where SKUCODE=@SKUCODE");
             SQLiteParameter[] parameters = {
 					new SQLiteParameter("@SKUCODE", DbType.String),
@@ -880,6 +902,8 @@ namespace Maticsoft.DAL
 					new SQLiteParameter("@SHELFLIFE", DbType.Int64,8),
 					new SQLiteParameter("@SKUTYPE", DbType.Int64,8),
                     new SQLiteParameter("@SCALEFLAG", DbType.Int64,8),
+                    new SQLiteParameter("@LOCALSTATUS", DbType.Int64,8),
+                    new SQLiteParameter("@MEMBERPRICE", DbType.Decimal,4),
 					new SQLiteParameter("@_id", DbType.Int64,8)};
             parameters[0].Value = model.SKUCODE;
             parameters[1].Value = model.GOODS_ID;
@@ -929,12 +953,14 @@ namespace Maticsoft.DAL
             parameters[45].Value = model.CREATEDAT;
             parameters[46].Value = model.SALECOUNT;
             parameters[47].Value = model.INNERBARCODE;
-            parameters[48].Value = model.FIRST_LETTER;
-            parameters[49].Value = model.ALL_FIRST_LETTER;
+            parameters[48].Value = ConvertToFirstPinYin(model.SKUNAME);
+            parameters[49].Value = ConvertToPinYin(model.SKUNAME);
             parameters[50].Value = model.SHELFLIFE;
             parameters[51].Value = model.SKUTYPE;
             parameters[52].Value = model.SCALEFLAG;
-            parameters[53].Value = model._id;
+            parameters[53].Value = model.LOCALSTATUS;
+            parameters[54].Value = model.MEMBERPRICE;
+            parameters[55].Value = model._id;
 
             int rows = DbHelperSQLite.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -948,7 +974,6 @@ namespace Maticsoft.DAL
         }
 
 
-
         public bool AddProduct(System.Collections.Generic.List<Maticsoft.Model.DBPRODUCT_BEANMODEL> lstmodel,string URL)
         {
 
@@ -956,88 +981,34 @@ namespace Maticsoft.DAL
             //lststring.Add("delete  from DBPRODUCT_BEAN");
             foreach (Maticsoft.Model.DBPRODUCT_BEANMODEL model in lstmodel)
             {
+                string barcode = model.BARCODE;
+                if (model.BARCODELIST != null && model.BARCODELIST.Count > 0)
+                {
+
+                    foreach (string code in model.BARCODELIST)
+                    {
+                        barcode += "," + code + ",";
+                    }
+                }
+
                 //根据skucode  删除后增加 ，有的话就更新 没有新增
                 string strdel = "delete from DBPRODUCT_BEAN where SKUCODE='"+model.SKUCODE+"'";
                 StringBuilder strSqladd = new StringBuilder();
                 strSqladd.Append("insert into DBPRODUCT_BEAN(");
-                strSqladd.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG)");
+                strSqladd.Append("SKUCODE,GOODS_ID,CATEGORYID,CATEGORYNAME,ORIGINPRICE,SALEPRICE,SPECIAL_PRICE,TOTALSTOCKQTY,SALESUNIT,SHOPID,TENANTID,TITLE,SKUNAME,BARCODE,SPECDESC,GOODSTAGID,WEIGHTFLAG,NUM,SPECNUM,SPECTYPE,PRICETAG,PRICETAGID,CREATE_URL_IP,TAGFORMAT,BARCODEFORMAT,BESTDAYS,SPINFO,QRCODECONTENT,INGREDIENT,LOCATION,SPEC,STORE_TYPE,COMPANY,REMARK,SPECIALMESSAGE,FIRSTCATEGORYID,FIRSTCATEGORYNAME,SECONDCATEGORYID,SECONDCATEGORYNAME,PANELFLAG,PANELSHOWFLAG,MAINIMG,STATUS,SPECIAL_STATUS,IS_QUERY_BARCODE,CREATEDAT,SALECOUNT,INNERBARCODE,FIRST_LETTER,ALL_FIRST_LETTER,SHELFLIFE,SKUTYPE,SCALEFLAG,MEMBERPRICE,LOCALSTATUS)");
                 strSqladd.Append(" values (");
                 if (model.SKUCODE.Length >= 8)
                 {
-                    strSqladd.Append("'" + model.SKUCODE + "','" + model.SKUCODE.Substring(2, 5) + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + model.BARCODE + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE+"," + model.SCALEFLAG + ")");
+                    strSqladd.Append("'" + model.SKUCODE + "','" + model.SKUCODE.Substring(2, 5) + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + barcode + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE + "," + model.SCALEFLAG + "," + model.MEMBERPRICE + "," + model.LOCALSTATUS + ")");
                 }
                 else
                 {
-                    strSqladd.Append("'" + model.SKUCODE + "','" + model.GOODS_ID + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + model.BARCODE + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE + "," + model.SCALEFLAG + ")");
+                    strSqladd.Append("'" + model.SKUCODE + "','" + model.GOODS_ID + "','" + model.CATEGORYID + "','" + model.CATEGORYNAME + "'," + model.ORIGINPRICE + "," + model.SALEPRICE + "," + model.SPECIAL_PRICE + "," + model.TOTALSTOCKQTY + ",'" + model.SALESUNIT + "','" + model.SHOPID + "','" + model.TENANTID + "','" + model.TITLE + "','" + model.SKUNAME + "','" + barcode + "','" + model.SPECDESC + "'," + model.GOODSTAGID + "," + model.WEIGHTFLAG + "," + model.NUM + "," + model.SPECNUM + "," + model.SPECTYPE + ",'" + model.PRICETAG + "'," + model.PRICETAGID + ",'" + URL + "','" + model.TAGFORMAT + "','" + model.BARCODEFORMAT + "'," + model.BESTDAYS + ",'" + model.SPINFO + "','" + model.QRCODECONTENT + "','" + model.INGREDIENT + "','" + model.LOCATION + "','" + model.SPEC + "','" + model.STORE_TYPE + "','" + model.COMPANY + "','" + model.REMARK + "','" + model.SPECIALMESSAGE + "','" + model.FIRSTCATEGORYID + "','" + model.FIRSTCATEGORYNAME + "','" + model.SECONDCATEGORYID + "','" + model.SECONDCATEGORYNAME + "','" + model.PANELFLAG + "'," + model.PANELSHOWFLAG + ",'" + model.MAINIMG + "'," + model.STATUS + "," + model.SPECIAL_STATUS + "," + model.IS_QUERY_BARCODE + "," + model.CREATEDAT + "," + model.SALECOUNT + ",'" + model.INNERBARCODE + "','" + model.FIRST_LETTER + "','" + model.ALL_FIRST_LETTER + "'," + model.SHELFLIFE + "," + model.SKUTYPE + "," + model.SCALEFLAG + "," + model.MEMBERPRICE + "," + model.LOCALSTATUS + ")");
 
                 }
 
 
-                //StringBuilder strSql = new StringBuilder();
-                //strSql.Append("update DBPRODUCT_BEAN set ");
-                //strSql.Append("SKUCODE='" + model.SKUCODE + "',");
-                //if (model.SKUCODE.Length == 8)
-                //{
-                //    strSql.Append("GOODS_ID='" + model.SKUCODE.Substring(2,5) + "',");
-                //}
-                //else
-                //{
-                //    strSql.Append("GOODS_ID='" + model.GOODS_ID + "',");
-                //}
                 
-                //strSql.Append("CATEGORYID='" + model.CATEGORYID + "',");
-                //strSql.Append("CATEGORYNAME='" + model.CATEGORYNAME + "',");
-                //strSql.Append("ORIGINPRICE=" + model.ORIGINPRICE + ",");
-                //strSql.Append("SALEPRICE=" + model.SALEPRICE + ",");
-                //strSql.Append("SPECIAL_PRICE=" + model.SPECIAL_PRICE + ",");
-                //strSql.Append("TOTALSTOCKQTY=" + model.TOTALSTOCKQTY + ",");
-                //strSql.Append("SALESUNIT='" + model.SALESUNIT + "',");
-                //strSql.Append("SHOPID='" + model.SHOPID + "',");
-                //strSql.Append("TENANTID='" + model.TENANTID + "',");
-                //strSql.Append("TITLE='" + model.TITLE + "',");
-                //strSql.Append("SKUNAME='" + model.SKUNAME + "',");
-                //strSql.Append("BARCODE='" + model.BARCODE + "',");
-                //strSql.Append("SPECDESC='" + model.SPECDESC + "',");
-                //strSql.Append("GOODSTAGID=" + model.GOODSTAGID + ",");
-                //strSql.Append("WEIGHTFLAG=" + model.WEIGHTFLAG + ",");
-                //strSql.Append("NUM=" + model.NUM + ",");
-                //strSql.Append("SPECNUM=" + model.SPECNUM + ",");
-                //strSql.Append("SPECTYPE=" + model.SPECTYPE + ",");
-                //strSql.Append("PRICETAG='" + model.PRICETAG + "',");
-                //strSql.Append("PRICETAGID=" + model.PRICETAGID + ",");
-                //strSql.Append("CREATE_URL_IP='" + model.CREATE_URL_IP + "',");
-                //strSql.Append("TAGFORMAT='" + model.TAGFORMAT + "',");
-                //strSql.Append("BARCODEFORMAT='" + model.BARCODEFORMAT + "',");
-                //strSql.Append("BESTDAYS=" + model.BESTDAYS + ",");
-                //strSql.Append("SPINFO='" + model.SPINFO + "',");
-                //strSql.Append("QRCODECONTENT='" + model.QRCODECONTENT + "',");
-                //strSql.Append("INGREDIENT='" + model.INGREDIENT + "',");
-                //strSql.Append("LOCATION='" + model.LOCATION + "',");
-                //strSql.Append("SPEC='" + model.SPEC + "',");
-                //strSql.Append("STORE_TYPE='" + model.STORE_TYPE + "',");
-                //strSql.Append("COMPANY='" + model.COMPANY + "',");
-                //strSql.Append("REMARK='" + model.REMARK + "',");
-                //strSql.Append("SPECIALMESSAGE='" + model.SPECIALMESSAGE + "',");
-                //strSql.Append("FIRSTCATEGORYID='" + model.FIRSTCATEGORYID + "',");
-                //strSql.Append("FIRSTCATEGORYNAME='" + model.FIRSTCATEGORYNAME + "',");
-                //strSql.Append("SECONDCATEGORYID='" + model.SECONDCATEGORYID + "',");
-                //strSql.Append("SECONDCATEGORYNAME='" + model.SECONDCATEGORYNAME + "',");
-                //strSql.Append("PANELFLAG='" + model.PANELFLAG + "',");
-                //strSql.Append("PANELSHOWFLAG=" + model.PANELSHOWFLAG + ",");
-                //strSql.Append("MAINIMG='" + model.MAINIMG + "',");
-                //strSql.Append("STATUS=" + model.STATUS + ",");
-                //strSql.Append("SPECIAL_STATUS=" + model.SPECIAL_STATUS + ",");
-                //strSql.Append("IS_QUERY_BARCODE=" + model.IS_QUERY_BARCODE + "");
-                //strSql.Append(" where SKUCODE=" + model.SKUCODE + "");
-
-                //if (ExistsBySkuCode(model.SKUCODE))
-                //{
-                //    lststring.Add(strSql.ToString());
-                //}
-                //else
-                //{
-                //    lststring.Add(strSqladd.ToString());
-                //}
                 lststring.Add(strdel.ToString());
                 
                 lststring.Add(strSqladd.ToString());
@@ -1068,8 +1039,7 @@ namespace Maticsoft.DAL
                     if (!sort.ContainsKey(dr["firstcategoryid"].ToString()))
                     {
                         sort.Add(dr["firstcategoryid"].ToString(), dr["firstcategoryname"].ToString());
-                    }
-                    
+                    }                    
                 }
             }
             return sort;
@@ -1134,7 +1104,161 @@ namespace Maticsoft.DAL
             }
         }
 
+        /// <summary>
+        /// 执行指定的sql语句
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <returns></returns>
+        public bool ExecuteSql(string strSql)
+        {
+            int rows = DbHelperSQLite.ExecuteSql(strSql.ToString());
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 		#endregion  ExtensionMethod
+
+        #region other
+        /// <summary>
+        /// 这个办法是用来获得一个字符串的每个字的拼音首字母构成所需的字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GetChineseSpell(string strText)
+        {
+            try
+            {
+                int len = strText.Length;
+                string myStr = "";
+                for (int i = 0; i < len; i++)
+                {
+                    myStr += getSpell(strText.Substring(i, 1));
+                }
+                return myStr.ToUpper();
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+
+        /// <summary>
+        /// 用来获得一个字的拼音首字母
+        /// </summary>
+        /// <param name="cnChar"></param>
+        /// <returns></returns>
+        private static string getSpell(string cnChar)
+        {
+            try
+            {
+                if (cnChar.Length > 1)
+                {
+                    cnChar = cnChar.Substring(0, 1);
+                }
+
+                //将汉字转化为ASNI码,二进制序列
+                byte[] arrCN = Encoding.Default.GetBytes(cnChar);
+                if (arrCN.Length > 1)
+                {
+                    int area = (short)arrCN[0];
+                    int pos = (short)arrCN[1];
+                    int code = (area << 8) + pos;
+                    int[] areacode = {45217,45253,45761,46318,46826,47010,47297,47614,48119,48119,49062,
+                49324,49896,50371,50614,50622,50906,51387,51446,52218,52698,52698,52698,52980,53689,54481};
+                    for (int i = 0; i < 26; i++)
+                    {
+                        int max = 55290;
+                        if (i != 25)
+                        {
+                            max = areacode[i + 1];
+                        }
+                        if (areacode[i] <= code && code < max)
+                        {
+                            return Encoding.Default.GetString(new byte[] { (byte)(65 + i) }).ToUpper();
+                        }
+                    }
+                    return "*";
+                }
+                else
+                {
+                    return cnChar;
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+
+        /// <summary>
+        /// 微软官方类库， 通过ascii码会出现有些字查不到
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private string ConvertToPinYin(string str)
+        {
+            try
+            {
+                string PYstr = "";
+                foreach (char item in str.ToCharArray())
+                {
+                    if (Microsoft.International.Converters.PinYinConverter.ChineseChar.IsValidChar(item))
+                    {
+                        Microsoft.International.Converters.PinYinConverter.ChineseChar cc = new Microsoft.International.Converters.PinYinConverter.ChineseChar(item);
+                        PYstr += cc.Pinyins[0].Substring(0, 1).ToUpper();
+                    }
+                    else
+                    {
+                        PYstr += item.ToString().ToUpper();                      
+                    }
+                }
+                return PYstr;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+
+        private string ConvertToFirstPinYin(string str)
+        {
+            try
+            {
+                string PYstr = "";
+                foreach (char item in str.ToCharArray())
+                {
+                    if (Microsoft.International.Converters.PinYinConverter.ChineseChar.IsValidChar(item))
+                    {
+                        Microsoft.International.Converters.PinYinConverter.ChineseChar cc = new Microsoft.International.Converters.PinYinConverter.ChineseChar(item);
+
+                        PYstr += cc.Pinyins[0].Substring(0, 1).ToUpper();
+                        break;
+                    }
+                    else
+                    {
+                        PYstr += item.ToString().ToUpper();
+                        break;
+                    }
+                }
+                return PYstr;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+
+        #endregion
 	}
 }
 

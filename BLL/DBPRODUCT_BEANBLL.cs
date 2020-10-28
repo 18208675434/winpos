@@ -173,6 +173,16 @@ namespace Maticsoft.BLL
             return dal.GetModelByGoodsID(goodid, creaturl);
         }
 
+        /// <summary>
+        /// 执行指定的sql语句
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <returns></returns>
+        public bool ExecuteSql(string strSql)
+        {
+            return dal.ExecuteSql(strSql);
+        }
+
 		#endregion  ExtensionMethod
 	}
 }

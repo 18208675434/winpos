@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ISWiAuto22</id>
+    <version>1.0.0</version>
+    <title>ISWiAuto22</title>
+    <authors>paYa</authors>
+    <owners>paYa</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>InstallShield 2015 Automation Interface</description>
+    <summary>InstallShield 2015 Automation Interface</summary>
+    <copyright>Copyright paYa 2017</copyright>
+    <language>en-US</language>
+  </metadata>
+</package>

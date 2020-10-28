@@ -64,6 +64,10 @@ namespace Maticsoft.Model
         private Int64 _shelflife;
         private Int64 _skutype;
         private Int64 _scaleflag;
+        private decimal _memberprice;
+        private Int64 _localstatus;
+
+        private System.Collections.Generic.List<string> _barcodelist;
         /// <summary>
         /// 
         /// </summary>
@@ -496,6 +500,33 @@ namespace Maticsoft.Model
         {
             set { _scaleflag = value; }
             get { return _scaleflag; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal MEMBERPRICE
+        {
+            set { _memberprice = value; }
+            get { return _memberprice; }
+        }
+
+         /// <summary>
+        /// 
+        /// </summary>
+        public Int64 LOCALSTATUS
+
+        {
+            set { _localstatus = value; }
+            get { return _localstatus; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public System.Collections.Generic.List<string> BARCODELIST
+        {
+            set { _barcodelist = value; }
+            get { return _barcodelist; }
         }
         #endregion Model
 

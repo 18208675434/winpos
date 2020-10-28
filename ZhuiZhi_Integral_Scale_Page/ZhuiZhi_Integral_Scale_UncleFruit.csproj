@@ -1,0 +1,1797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8F74C97F-B3CA-4BC4-A0D2-358FF59E2B32}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZhuiZhi_Integral_Scale_UncleFruit</RootNamespace>
+    <AssemblyName>ZhuiZhi_Integral_Scale_UncleFruit</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FruitLogo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\ChnCharInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Newtonsoft.Json.Compact.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="WzLib">
+      <HintPath>..\Lib\WzLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseUI\BaseUIHelper.cs" />
+    <Compile Include="BaseUI\FormIni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseUI\FormIni.Designer.cs">
+      <DependentUpon>FormIni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUI\frmMainHalfOffLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseUI\frmMainHalfOffLine.Designer.cs">
+      <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUI\FormMainScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseUI\FormMainScale.Designer.cs">
+      <DependentUpon>FormMainScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUI\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseUI\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUI\MainHelper.cs" />
+    <Compile Include="HelperUI\DialogHelper.cs" />
+    <Compile Include="HelperUI\FormCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormCode.Designer.cs">
+      <DependentUpon>FormCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormBatchSaleCardCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormBatchSaleCardCreate.Designer.cs">
+      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardBindMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardBindMedia.Designer.cs">
+      <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardBind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardBind.Designer.cs">
+      <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardList.Designer.cs">
+      <DependentUpon>FormEntityCardList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSingleUserQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSingleUserQuery.Designer.cs">
+      <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeQuery.Designer.cs">
+      <DependentUpon>FormRechargeQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\model\Card.cs" />
+    <Compile Include="BrokenUI\BrokenHelper.cs" />
+    <Compile Include="BrokenUI\FormBroken.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBroken.Designer.cs">
+      <DependentUpon>FormBroken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenBatch.Designer.cs">
+      <DependentUpon>FormBrokenBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenDetail.Designer.cs">
+      <DependentUpon>FormBrokenDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenNumber.Designer.cs">
+      <DependentUpon>FormBrokenNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrokenUI\FormPanelGoodsForBroken.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormPanelGoodsForBroken.Designer.cs">
+      <DependentUpon>FormPanelGoodsForBroken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenScale.Designer.cs">
+      <DependentUpon>FormBrokenScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrokenUI\Model\BrokenInfo.cs" />
+    <Compile Include="BrokenUI\Model\BrokenProduct.cs" />
+    <Compile Include="BrokenUI\Model\BrokenType.cs" />
+    <Compile Include="BrokenUI\Model\CreateBrokenResult.cs" />
+    <Compile Include="BrokenUI\Model\PageBroken.cs" />
+    <Compile Include="BrokenUI\Model\PageSku.cs" />
+    <Compile Include="BrokenUI\Model\SkuMovePrice.cs" />
+    <Compile Include="ChangePriceUI\ChangePriceHelper.cs" />
+    <Compile Include="ChangePriceUI\FormDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePriceUI\FormDiscount.Designer.cs">
+      <DependentUpon>FormDiscount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePriceUI\FormOrderPricing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePriceUI\FormOrderPricing.Designer.cs">
+      <DependentUpon>FormOrderPricing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePriceUI\FormPricing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePriceUI\FormPricing.Designer.cs">
+      <DependentUpon>FormPricing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\AbnormalOrderUtil.cs" />
+    <Compile Include="Common\ConfigUtil.cs" />
+    <Compile Include="Common\DbJsonUtil.cs" />
+    <Compile Include="Common\HttpRequestbak.cs" />
+    <Compile Include="Common\HttpRequest.cs" />
+    <Compile Include="Common\BunnyPrintUtil.cs" />
+    <Compile Include="Common\MyHttpUtil.cs" />
+    <Compile Include="GiftCard\FormGiftCardMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardMedia.Designer.cs">
+      <DependentUpon>FormGiftCardMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardNum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardNum.Designer.cs">
+      <DependentUpon>FormGiftCardNum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCard.Designer.cs">
+      <DependentUpon>FormGiftCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardRecord.Designer.cs">
+      <DependentUpon>FormGiftCardRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardByCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardByCash.Designer.cs">
+      <DependentUpon>FormGiftCardByCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPayFail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPayFail.Designer.cs">
+      <DependentUpon>FormGiftCardPayFail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPaySuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardPaySuccess.Designer.cs">
+      <DependentUpon>FormGiftCardPaySuccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardByOnLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GiftCard\FormGiftCardByOnLine.Designer.cs">
+      <DependentUpon>FormGiftCardByOnLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GiftCard\GiftCardHelper.cs" />
+    <Compile Include="GiftCard\GiftCardHttp.cs" />
+    <Compile Include="GiftCard\GiftCardMediaHelper.cs" />
+    <Compile Include="GiftCard\Model\BindingResult.cs" />
+    <Compile Include="GiftCard\Model\GiftCardPrintDetail.cs" />
+    <Compile Include="GiftCard\Model\GiftCardRecord.cs" />
+    <Compile Include="GiftCard\Model\GiftCardPaySuccess.cs" />
+    <Compile Include="GiftCard\Model\CartAloneUpdate.cs" />
+    <Compile Include="GiftCard\Model\CartAloneUpdatePara.cs" />
+    <Compile Include="GiftCard\Model\CreateCardOrder.cs" />
+    <Compile Include="GiftCard\Model\CreateCardOrderPara.cs" />
+    <Compile Include="GiftCard\Model\GiftCardDetail.cs" />
+    <Compile Include="GiftCard\Model\CardProduct.cs" />
+    <Compile Include="GiftCard\Model\BindingMemberPara.cs" />
+    <Compile Include="GiftCard\Model\GiftCardRecordPara.cs" />
+    <Compile Include="GiftCard\Model\ValidateGiftCard.cs" />
+    <Compile Include="HelperUI\FormPurchaseLimit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormPurchaseLimit.Designer.cs">
+      <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormSayOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormSayOrder.Designer.cs">
+      <DependentUpon>FormSayOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\PurchaseLimitHelper.cs" />
+    <Compile Include="HelperUI\SayOrderHelper.cs" />
+    <Compile Include="MemberCenter\CreateMemberMediaHelper.cs" />
+    <Compile Include="MemberCenter\FormChangePhoneConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneConfirm.Designer.cs">
+      <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewCard.Designer.cs">
+      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewPhoneSms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNewPhoneSms.Designer.cs">
+      <DependentUpon>FormChangePhoneNewPhoneSms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhoneNumber.Designer.cs">
+      <DependentUpon>FormChangePhoneNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePayPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePayPwd.Designer.cs">
+      <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.Designer.cs">
+      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneSmsCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneSmsCode.Designer.cs">
+      <DependentUpon>FormChengPhoneSmsCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneVerifyNewPhone.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormChengPhoneVerifyNewPhone.Designer.cs">
+      <DependentUpon>FormChengPhoneVerifyNewPhone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormCreateMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCreateMember.Designer.cs">
+      <DependentUpon>FormCreateMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormCreateMemberMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCreateMemberMedia.Designer.cs">
+      <DependentUpon>FormCreateMemberMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomMoney.Designer.cs">
+      <DependentUpon>FormCustomMoney.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomreCharge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormCustomreCharge.Designer.cs">
+      <DependentUpon>FormCustomreCharge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormForgetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormForgetPassword.Designer.cs">
+      <DependentUpon>FormForgetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormIsokCancle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormIsokCancle.Designer.cs">
+      <DependentUpon>FormIsokCancle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormMemberCenterMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormMemberCenterMedia.Designer.cs">
+      <DependentUpon>FormMemberCenterMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormMemberCenter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormMemberCenter.Designer.cs">
+      <DependentUpon>FormMemberCenter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormNoPayPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormNoPayPwd.Designer.cs">
+      <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormOtherMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormOtherMethod.Designer.cs">
+      <DependentUpon>FormOtherMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormReminder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormReminder.Designer.cs">
+      <DependentUpon>FormReminder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormSeavePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormSeavePassword.Designer.cs">
+      <DependentUpon>FormSeavePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormSevePassWoedOK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormSevePassWoedOK.Designer.cs">
+      <DependentUpon>FormSevePassWoedOK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormTopUpByOnLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormTopUpByOnLine.Designer.cs">
+      <DependentUpon>FormTopUpByOnLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormTopUpByCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormTopUpByCash.Designer.cs">
+      <DependentUpon>FormTopUpByCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormTestHttp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormTestHttp.Designer.cs">
+      <DependentUpon>FormTestHttp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormTopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormTopUp.Designer.cs">
+      <DependentUpon>FormTopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormAllCoupon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormAllCoupon.Designer.cs">
+      <DependentUpon>FormAllCoupon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormZsongMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormZsongMoney.Designer.cs">
+      <DependentUpon>FormZsongMoney.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeRefund.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeRefund.designer.cs">
+      <DependentUpon>FormRechargeRefund.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\MemberCenterHelper.cs" />
+    <Compile Include="MemberCenter\MemberCenterHttpUtil.cs" />
+    <Compile Include="MemberCenter\MemberCenterMediaHelper.cs" />
+    <Compile Include="MemberCenter\model\BalanceConfigDetail.cs" />
+    <Compile Include="MemberCenter\model\BalanceDepositRefundRequest .cs" />
+    <Compile Include="MemberCenter\model\ClassPayment.cs" />
+    <Compile Include="MemberCenter\model\CustomTemplateModel.cs" />
+    <Compile Include="MemberCenter\model\DepositRefundRequest.cs" />
+    <Compile Include="MemberCenter\model\DepositListRequest.cs" />
+    <Compile Include="MemberCenter\model\EntityCard.cs" />
+    <Compile Include="MemberCenter\model\EntityCardMoveRequest.cs" />
+    <Compile Include="MemberCenter\model\GetBalanceDepositRefund.cs" />
+    <Compile Include="MemberCenter\model\ListAllTemplate.cs" />
+    <Compile Include="MemberCenter\model\CreateMemberPara.cs" />
+    <Compile Include="MemberCenter\model\MemberTopUpPara.cs" />
+    <Compile Include="MemberCenter\model\PageBalanceDepositBill.cs" />
+    <Compile Include="MemberCenter\model\PageBalanceDepositRefundBill.cs" />
+    <Compile Include="MemberCenter\model\PageGetRefund.cs" />
+    <Compile Include="MemberCenter\model\TopUpPrint.cs" />
+    <Compile Include="MemberCenter\model\ZtBalanceAccount.cs" />
+    <Compile Include="MenuUI\FormCouponPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormCouponPwd.Designer.cs">
+      <DependentUpon>FormCouponPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormOrderHangItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormOrderHangItem.Designer.cs">
+      <DependentUpon>FormOrderHangItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundByAmtBak.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundByAmtBak.Designer.cs">
+      <DependentUpon>FormRefundByAmtBak.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundByAmt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundByAmt.Designer.cs">
+      <DependentUpon>FormRefundByAmt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormRefundConfirm.Designer.cs">
+      <DependentUpon>FormRefundConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormAdjustRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormAdjustRecord.Designer.cs">
+      <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AdjustPriceDynamic.cs" />
+    <Compile Include="Model\AdjustPriceRecord.cs" />
+    <Compile Include="Model\HalfOffLine\Coupons.cs" />
+    <Compile Include="Model\HalfOffLine\Gradesettinggetgrade.cs" />
+    <Compile Include="Model\HalfOffLine\HalfOffLineUtil.cs" />
+    <Compile Include="Model\HalfOffLine\MemberDiscount.cs" />
+    <Compile Include="Model\HalfOffLine\Memberoperationitem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberrightsItem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberTenantItem.cs" />
+    <Compile Include="Model\HalfOffLine\MemberTenantmembergradeconfig.cs" />
+    <Compile Include="Model\HalfOffLine\PromotionCoupon.cs" />
+    <Compile Include="Model\HalfOffLine\TenantCreditConfig.cs" />
+    <Compile Include="Model\HalfOffLine\Tenantmemberrightsdiscountconfig.cs" />
+    <Compile Include="Model\PaymentCouponDetail.cs" />
+    <Compile Include="Model\PrinterPickOrderInfo.cs" />
+    <Compile Include="Model\promotionaction\AbstractPromoAction.cs" />
+    <Compile Include="Model\promotionaction\CombinedSellingPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\CycleDesignatedDiscountPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\DesignatedDiscountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\FixedTradeOffOrderAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderDiscountPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderDynamicAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderPaymentPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\OrderStepAmountOffPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\PackageSellingPromotionAction.cs" />
+    <Compile Include="Model\promotionaction\PromoAction.cs" />
+    <Compile Include="Model\promotionaction\PromoActionFactory.cs" />
+    <Compile Include="Model\promotionaction\StepDiscountOffPromotionAction.cs" />
+    <Compile Include="Model\Promotion\ActivityEnabledTimeInfo.cs" />
+    <Compile Include="Model\Promotion\AmountDistributor.cs" />
+    <Compile Include="Model\Promotion\CalculateAvailablePointsCommandImpl.cs" />
+    <Compile Include="Model\Promotion\CalculateBean.cs" />
+    <Compile Include="Model\Promotion\CollectionUtils.cs" />
+    <Compile Include="Model\Promotion\CommonConstant.cs" />
+    <Compile Include="Model\Promotion\EnumPromotionType.cs" />
+    <Compile Include="Model\Promotion\EvaluateScopePromotion.cs" />
+    <Compile Include="Model\Promotion\ImplApplyPayPromoCalculate.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineAdjsutPrice.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineCouponsCalculate.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineOrderPromotion.cs" />
+    <Compile Include="Model\Promotion\ImplOfflineSingleCalculateNew.cs" />
+    <Compile Include="Model\Promotion\MemberRightsForGradeBean.cs" />
+    <Compile Include="Model\Promotion\MoneyUtils.cs" />
+    <Compile Include="Model\Promotion\OffLinePromos.cs" />
+    <Compile Include="Model\Promotion\OrderThresholdUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionCache.cs" />
+    <Compile Include="Model\Promotion\PromotionConditionUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionContextConvertUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionInfoUtils.cs" />
+    <Compile Include="Model\Promotion\PromotionRealmDetail.cs" />
+    <Compile Include="Model\Promotion\PromotionsInvalidBean.cs" />
+    <Compile Include="Model\Promotion\temp.cs" />
+    <Compile Include="Model\Promotion\TripletBean.cs" />
+    <Compile Include="Model\Promotion\TripletBeanForCoupon.cs" />
+    <Compile Include="Model\SyncOrder.cs" />
+    <Compile Include="Model\TenantInfo.cs" />
+    <Compile Include="Model\ValidateOuterCoupon.cs" />
+    <Compile Include="MyControl\KeyBoardAll.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\KeyBoardAll.Designer.cs">
+      <DependentUpon>KeyBoardAll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\KeyBoardNew.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\KeyBoardNew.Designer.cs">
+      <DependentUpon>KeyBoardNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\myTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\myTextBox.Designer.cs">
+      <DependentUpon>myTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\NumberBoard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\NumberBoard.Designer.cs">
+      <DependentUpon>NumberBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\NumberTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\NumberTextBox.Designer.cs">
+      <DependentUpon>NumberTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormChangeAndTopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormChangeAndTopUp.Designer.cs">
+      <DependentUpon>FormChangeAndTopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayByOther.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayByOther.Designer.cs">
+      <DependentUpon>FormPayByOther.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormVoucher.Designer.cs">
+      <DependentUpon>FormVoucher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrettyCash\FormConfirmPrettyCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrettyCash\FormConfirmPrettyCash.Designer.cs">
+      <DependentUpon>FormConfirmPrettyCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrettyCash\FormGetCashNum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrettyCash\FormGetCashNum.Designer.cs">
+      <DependentUpon>FormGetCashNum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrettyCash\FormPrettyCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrettyCash\FormPrettyCash.Designer.cs">
+      <DependentUpon>FormPrettyCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrettyCash\PrettyCashHelper.cs" />
+    <Compile Include="PrintFactory\PrintHelper.cs" />
+    <Compile Include="PrintFactory\SprtPrintUtil.cs" />
+    <Compile Include="PrintFactory\ToledoPrintUtil.cs" />
+    <Compile Include="PrintFactory\YKPrintUtil.cs" />
+    <Compile Include="ReturnWithoutOrder\FormCheckSmCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormCheckSmCode.Designer.cs">
+      <DependentUpon>FormCheckSmCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCashOrBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCashOrBalance.Designer.cs">
+      <DependentUpon>FormReturnCashOrBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnCash.Designer.cs">
+      <DependentUpon>FormReturnCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrder.Designer.cs">
+      <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.Designer.cs">
+      <DependentUpon>FormReturnWithoutOrderMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnWithoutOrder\ReturnWithoutOrderHelper.cs" />
+    <Compile Include="ScaleFactory\ScaleGlobalHelper.cs" />
+    <Compile Include="ScaleFactory\ScaleResult.cs" />
+    <Compile Include="ScaleFactory\Scale_EH200.cs" />
+    <Compile Include="ScaleFactory\Scale_Aclas.cs" />
+    <Compile Include="ScaleFactory\Scale_Aclas_PS1X.cs" />
+    <Compile Include="ScaleFactory\Scale_Action.cs" />
+    <Compile Include="ScaleFactory\Scale_Toledo.cs" />
+    <Compile Include="ScaleFactory\Scale_Wintec.cs" />
+    <Compile Include="ScaleUI\FormSending.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScaleUI\FormSending.Designer.cs">
+      <DependentUpon>FormSending.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScaleUI\FormTare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScaleUI\FormTare.Designer.cs">
+      <DependentUpon>FormTare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\AutoSizeFormUtil.cs" />
+    <Compile Include="Common\CartUtil.cs" />
+    <Compile Include="Common\GlobalUtil.cs" />
+    <Compile Include="Common\HttpServer.cs" />
+    <Compile Include="Common\HttpUtil.cs" />
+    <Compile Include="Common\LoadingHelper.cs" />
+    <Compile Include="Common\NumberUtil.cs" />
+    <Compile Include="Common\OrderUtil.cs" />
+    <Compile Include="PrintFactory\PrintUtil.cs" />
+    <Compile Include="Common\ReceiptUtil.cs" />
+    <Compile Include="ScaleUI\ScaleUtil.cs" />
+    <Compile Include="Common\ScanerHook.cs" />
+    <Compile Include="Common\ScanItem.cs" />
+    <Compile Include="Common\ServerDataUtil.cs" />
+    <Compile Include="Common\TableClass.cs" />
+    <Compile Include="Common\ValidCode.cs" />
+    <Compile Include="Common\WClass.cs" />
+    <Compile Include="Devices\ToledoUtil.cs" />
+    <Compile Include="BrokenUI\FormBrokenCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenUI\FormBrokenCreate.Designer.cs">
+      <DependentUpon>FormBrokenCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPanelGoods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPanelGoods.Designer.cs">
+      <DependentUpon>frmPanelGoods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormToolMainScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormToolMainScale.Designer.cs">
+      <DependentUpon>FormToolMainScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\ChangeScaleModelHelper.cs" />
+    <Compile Include="HelperUI\FormChangeScaleModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormChangeScaleModel.Designer.cs">
+      <DependentUpon>FormChangeScaleModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormLabelPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormLabelPrint.Designer.cs">
+      <DependentUpon>FormLabelPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormScale.Designer.cs">
+      <DependentUpon>FormScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormScaleBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScaleBack.Designer.cs">
+      <DependentUpon>FormScaleBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTestShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTestShow.Designer.cs">
+      <DependentUpon>FormTestShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddUser.Designer.cs">
+      <DependentUpon>frmAddUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormToast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormToast.Designer.cs">
+      <DependentUpon>FormToast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\LabelPrintHelper.cs" />
+    <Compile Include="HelperUI\ScaleHelper.cs" />
+    <Compile Include="HelperUI\ToastHelper.cs" />
+    <Compile Include="MenuUI\MenuHelper.cs" />
+    <Compile Include="MyControl\KeyBoard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\KeyBoard.Designer.cs">
+      <DependentUpon>KeyBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\frmBalanceOnLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\frmBalanceOnLine.Designer.cs">
+      <DependentUpon>frmBalanceOnLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBalancePwdGuest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBalancePwdGuest.Designer.cs">
+      <DependentUpon>frmBalancePwdGuest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBalancePwdMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBalancePwdMain.Designer.cs">
+      <DependentUpon>frmBalancePwdMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayBalanceToMix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayBalanceToMix.Designer.cs">
+      <DependentUpon>FormPayBalanceToMix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayByCashCoupon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayByCashCoupon.Designer.cs">
+      <DependentUpon>FormPayByCashCoupon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCashierResultMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCashierResultMedia.Designer.cs">
+      <DependentUpon>frmCashierResultMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeMode.Designer.cs">
+      <DependentUpon>frmChangeMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeUrl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeUrl.Designer.cs">
+      <DependentUpon>frmChangeUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfirmChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmChange.Designer.cs">
+      <DependentUpon>frmConfirmChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfirmReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmReceipt.Designer.cs">
+      <DependentUpon>frmConfirmReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConfirmReceiptBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConfirmReceiptBack.Designer.cs">
+      <DependentUpon>FrmConfirmReceiptBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCoupon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCoupon.Designer.cs">
+      <DependentUpon>frmCoupon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCouponOutcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCouponOutcs.Designer.cs">
+      <DependentUpon>frmCouponOutcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\frmExpense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\frmExpense.Designer.cs">
+      <DependentUpon>frmExpense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\frmExpenseSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\frmExpenseSave.Designer.cs">
+      <DependentUpon>frmExpenseSave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInit.Designer.cs">
+      <DependentUpon>frmInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoading.Designer.cs">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoadingTop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoadingTop.Designer.cs">
+      <DependentUpon>frmLoadingTop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoginOffLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoginOffLine.Designer.cs">
+      <DependentUpon>frmLoginOffLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUI\FormMainMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseUI\FormMainMedia.Designer.cs">
+      <DependentUpon>FormMainMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayCashToOnLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayCashToOnLine.Designer.cs">
+      <DependentUpon>FormPayCashToOnLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCashPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCashPay.Designer.cs">
+      <DependentUpon>frmCashPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCashierResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCashierResult.Designer.cs">
+      <DependentUpon>frmCashierResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayByBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayByBalance.Designer.cs">
+      <DependentUpon>FormPayByBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayByOnLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayByOnLine.Designer.cs">
+      <DependentUpon>FormPayByOnLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayCashToChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayCashToChange.Designer.cs">
+      <DependentUpon>FormPayCashToChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUI\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseUI\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\frmOrderHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\frmOrderHang.Designer.cs">
+      <DependentUpon>frmOrderHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\frmOrderQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\frmOrderQuery.Designer.cs">
+      <DependentUpon>frmOrderQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayFail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayFail.Designer.cs">
+      <DependentUpon>FormPayFail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FrmPayTimeOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FrmPayTimeOut.Designer.cs">
+      <DependentUpon>FrmPayTimeOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrinterInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrinterInfo.Designer.cs">
+      <DependentUpon>frmPrinterInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrinterSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrinterSetting.Designer.cs">
+      <DependentUpon>frmPrinterSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\frmReceiptQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\frmReceiptQuery.Designer.cs">
+      <DependentUpon>frmReceiptQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRefundSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRefundSelect.Designer.cs">
+      <DependentUpon>frmRefundSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTest.Designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\frmToolMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\frmToolMain.Designer.cs">
+      <DependentUpon>frmToolMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserExpired.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserExpired.Designer.cs">
+      <DependentUpon>frmUserExpired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\BackHelper.cs" />
+    <Compile Include="HelperUI\ConfirmHelper.cs" />
+    <Compile Include="HelperUI\FormBackGround.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormBackGround.Designer.cs">
+      <DependentUpon>FormBackGround.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormConfirm.Designer.cs">
+      <DependentUpon>FormConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\FormNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperUI\FormNumber.Designer.cs">
+      <DependentUpon>FormNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperUI\NumberHelper.cs" />
+    <Compile Include="Model\AllProduct.cs" />
+    <Compile Include="Model\AuthCodeImage.cs" />
+    <Compile Include="Model\AuthcodeTrade.cs" />
+    <Compile Include="Model\BalanceTrade.cs" />
+    <Compile Include="Model\ConditionType.cs" />
+    <Compile Include="Model\Expense.cs" />
+    <Compile Include="Model\ExpenseType.cs" />
+    <Compile Include="Model\Member.cs" />
+    <Compile Include="Model\OffLineOrder.cs" />
+    <Compile Include="Model\OffLineReceipt.cs" />
+    <Compile Include="Model\OffLineUser.cs" />
+    <Compile Include="Model\PanelProductPara.cs" />
+    <Compile Include="Model\QueryExpense.cs" />
+    <Compile Include="Model\QueryExpensePara.cs" />
+    <Compile Include="Model\QueryOrder.cs" />
+    <Compile Include="Model\QueryOrderPara.cs" />
+    <Compile Include="Model\QueryReceiptPara.cs" />
+    <Compile Include="Model\QueryTrade.cs" />
+    <Compile Include="Model\Receiptdetail.cs" />
+    <Compile Include="Model\ReceiptPara.cs" />
+    <Compile Include="Model\ReceiptQuery.cs" />
+    <Compile Include="Model\RefundPara.cs" />
+    <Compile Include="Model\SaveExpensePara.cs" />
+    <Compile Include="Model\Scale.cs" />
+    <Compile Include="Model\ScalePara.cs" />
+    <Compile Include="Model\SignWithSmsPara.cs" />
+    <Compile Include="Model\synctrade.cs" />
+    <Compile Include="Model\syncPara.cs" />
+    <Compile Include="Model\tradePara.cs" />
+    <Compile Include="Model\Cart.cs" />
+    <Compile Include="Model\CartPara.cs" />
+    <Compile Include="Model\CreateOrderPara.cs" />
+    <Compile Include="Model\CreateOrderResult.cs" />
+    <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\MediaList.cs" />
+    <Compile Include="Model\OrderPriceDetail.cs" />
+    <Compile Include="Model\Price.cs" />
+    <Compile Include="Model\PrintDetail.cs" />
+    <Compile Include="Model\product.cs" />
+    <Compile Include="Model\ResultData.cs" />
+    <Compile Include="Model\DeviceShopInfo.cs" />
+    <Compile Include="Model\scancodememberModel.cs" />
+    <Compile Include="Model\TVShowSkus.cs" />
+    <Compile Include="Model\userModel.cs" />
+    <Compile Include="Model\VerifyBalancePwd.cs" />
+    <Compile Include="MyControl\CircleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\CircleButton.Designer.cs">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\EnumUnitType.cs" />
+    <Compile Include="MyControl\RoundButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\RoundButton.Designer.cs">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\RoundPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\RoundPanel.Designer.cs">
+      <DependentUpon>RoundPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyEnum\IniEnum.cs" />
+    <Compile Include="PayUI\FormModifyPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormModifyPrice.Designer.cs">
+      <DependentUpon>FormModifyPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPay.Designer.cs">
+      <DependentUpon>FormPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPayByCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPayByCash.Designer.cs">
+      <DependentUpon>FormPayByCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPaySuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPaySuccess.Designer.cs">
+      <DependentUpon>FormPaySuccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\FormPaySuccessMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayUI\FormPaySuccessMedia.Designer.cs">
+      <DependentUpon>FormPaySuccessMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayUI\ModifyPriceHelper.cs" />
+    <Compile Include="PayUI\PayHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ResourcePos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourcePos.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\transparentPic.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControl\transparentPic.Designer.cs">
+      <DependentUpon>transparentPic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\WaterTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControl\WaterTextBox.Designer.cs">
+      <DependentUpon>WaterTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScaleUI\FormZero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScaleUI\FormZero.Designer.cs">
+      <DependentUpon>FormZero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScaleUI\frmScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScaleUI\frmScale.Designer.cs">
+      <DependentUpon>frmScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScaleUI\frmScaleResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScaleUI\frmScaleResult.Designer.cs">
+      <DependentUpon>frmScaleResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScaleUI\ScaleDataHelper.cs" />
+    <EmbeddedResource Include="BaseUI\FormIni.resx">
+      <DependentUpon>FormIni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseUI\frmMainHalfOffLine.resx">
+      <DependentUpon>frmMainHalfOffLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseUI\FormMainScale.resx">
+      <DependentUpon>FormMainScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseUI\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormCode.resx">
+      <DependentUpon>FormCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormBatchSaleCardCreate.resx">
+      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBindMedia.resx">
+      <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBind.resx">
+      <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardList.resx">
+      <DependentUpon>FormEntityCardList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeSingleUserQuery.resx">
+      <DependentUpon>FormRechargeSingleUserQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeQuery.resx">
+      <DependentUpon>FormRechargeQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBroken.resx">
+      <DependentUpon>FormBroken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBrokenBatch.resx">
+      <DependentUpon>FormBrokenBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBrokenDetail.resx">
+      <DependentUpon>FormBrokenDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBrokenNumber.resx">
+      <DependentUpon>FormBrokenNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormPanelGoodsForBroken.resx">
+      <DependentUpon>FormPanelGoodsForBroken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBrokenScale.resx">
+      <DependentUpon>FormBrokenScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePriceUI\FormDiscount.resx">
+      <DependentUpon>FormDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePriceUI\FormOrderPricing.resx">
+      <DependentUpon>FormOrderPricing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePriceUI\FormPricing.resx">
+      <DependentUpon>FormPricing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardMedia.resx">
+      <DependentUpon>FormGiftCardMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardNum.resx">
+      <DependentUpon>FormGiftCardNum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCard.resx">
+      <DependentUpon>FormGiftCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardRecord.resx">
+      <DependentUpon>FormGiftCardRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardByCash.resx">
+      <DependentUpon>FormGiftCardByCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardPayFail.resx">
+      <DependentUpon>FormGiftCardPayFail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardPaySuccess.resx">
+      <DependentUpon>FormGiftCardPaySuccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GiftCard\FormGiftCardByOnLine.resx">
+      <DependentUpon>FormGiftCardByOnLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormPurchaseLimit.resx">
+      <DependentUpon>FormPurchaseLimit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormSayOrder.resx">
+      <DependentUpon>FormSayOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
+      <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneNewCard.resx">
+      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneNewPhoneSms.resx">
+      <DependentUpon>FormChangePhoneNewPhoneSms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhoneNumber.resx">
+      <DependentUpon>FormChangePhoneNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhonePayPwd.resx">
+      <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChangePhonePhysicalCard.resx">
+      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChengPhoneSmsCode.resx">
+      <DependentUpon>FormChengPhoneSmsCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormChengPhoneVerifyNewPhone.resx">
+      <DependentUpon>FormChengPhoneVerifyNewPhone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCreateMember.resx">
+      <DependentUpon>FormCreateMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCreateMemberMedia.resx">
+      <DependentUpon>FormCreateMemberMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCustomMoney.resx">
+      <DependentUpon>FormCustomMoney.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormCustomreCharge.resx">
+      <DependentUpon>FormCustomreCharge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormForgetPassword.resx">
+      <DependentUpon>FormForgetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormIsokCancle.resx">
+      <DependentUpon>FormIsokCancle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormMemberCenterMedia.resx">
+      <DependentUpon>FormMemberCenterMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormMemberCenter.resx">
+      <DependentUpon>FormMemberCenter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormNoPayPwd.resx">
+      <DependentUpon>FormNoPayPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormOtherMethod.resx">
+      <DependentUpon>FormOtherMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormReminder.resx">
+      <DependentUpon>FormReminder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormSeavePassword.resx">
+      <DependentUpon>FormSeavePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormSevePassWoedOK.resx">
+      <DependentUpon>FormSevePassWoedOK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormTopUpByOnLine.resx">
+      <DependentUpon>FormTopUpByOnLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormTopUpByCash.resx">
+      <DependentUpon>FormTopUpByCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormTestHttp.resx">
+      <DependentUpon>FormTestHttp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormTopUp.resx">
+      <DependentUpon>FormTopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormAllCoupon.resx">
+      <DependentUpon>FormAllCoupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormZsongMoney.resx">
+      <DependentUpon>FormZsongMoney.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeRefund.resx">
+      <DependentUpon>FormRechargeRefund.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormCouponPwd.resx">
+      <DependentUpon>FormCouponPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormOrderHangItem.resx">
+      <DependentUpon>FormOrderHangItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormRefundByAmtBak.resx">
+      <DependentUpon>FormRefundByAmtBak.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormRefundByAmt.resx">
+      <DependentUpon>FormRefundByAmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormRefundConfirm.resx">
+      <DependentUpon>FormRefundConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormAdjustRecord.resx">
+      <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\KeyBoardAll.resx">
+      <DependentUpon>KeyBoardAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\KeyBoardNew.resx">
+      <DependentUpon>KeyBoardNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\myTextBox.resx">
+      <DependentUpon>myTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\NumberBoard.resx">
+      <DependentUpon>NumberBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\NumberTextBox.resx">
+      <DependentUpon>NumberTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormChangeAndTopUp.resx">
+      <DependentUpon>FormChangeAndTopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayByOther.resx">
+      <DependentUpon>FormPayByOther.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormVoucher.resx">
+      <DependentUpon>FormVoucher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrettyCash\FormConfirmPrettyCash.resx">
+      <DependentUpon>FormConfirmPrettyCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrettyCash\FormGetCashNum.resx">
+      <DependentUpon>FormGetCashNum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrettyCash\FormPrettyCash.resx">
+      <DependentUpon>FormPrettyCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormCheckSmCode.resx">
+      <DependentUpon>FormCheckSmCode.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnCashOrBalance.resx">
+      <DependentUpon>FormReturnCashOrBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnCash.resx">
+      <DependentUpon>FormReturnCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrder.resx">
+      <DependentUpon>FormReturnWithoutOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnWithoutOrder\FormReturnWithoutOrderMedia.resx">
+      <DependentUpon>FormReturnWithoutOrderMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleUI\FormSending.resx">
+      <DependentUpon>FormSending.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleUI\FormTare.resx">
+      <DependentUpon>FormTare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenUI\FormBrokenCreate.resx">
+      <DependentUpon>FormBrokenCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPanelGoods.resx">
+      <DependentUpon>frmPanelGoods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormToolMainScale.resx">
+      <DependentUpon>FormToolMainScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormChangeScaleModel.resx">
+      <DependentUpon>FormChangeScaleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormLabelPrint.resx">
+      <DependentUpon>FormLabelPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormScale.resx">
+      <DependentUpon>FormScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScaleBack.resx">
+      <DependentUpon>FormScaleBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTestShow.resx">
+      <DependentUpon>FormTestShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddUser.resx">
+      <DependentUpon>frmAddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormToast.resx">
+      <DependentUpon>FormToast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\KeyBoard.resx">
+      <DependentUpon>KeyBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\frmBalanceOnLine.resx">
+      <DependentUpon>frmBalanceOnLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBalancePwdGuest.resx">
+      <DependentUpon>frmBalancePwdGuest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBalancePwdMain.resx">
+      <DependentUpon>frmBalancePwdMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayBalanceToMix.resx">
+      <DependentUpon>FormPayBalanceToMix.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayByCashCoupon.resx">
+      <DependentUpon>FormPayByCashCoupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCashierResultMedia.resx">
+      <DependentUpon>frmCashierResultMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeMode.resx">
+      <DependentUpon>frmChangeMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeUrl.resx">
+      <DependentUpon>frmChangeUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfirmChange.resx">
+      <DependentUpon>frmConfirmChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfirmReceipt.resx">
+      <DependentUpon>frmConfirmReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConfirmReceiptBack.resx">
+      <DependentUpon>FrmConfirmReceiptBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCoupon.resx">
+      <DependentUpon>frmCoupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCouponOutcs.resx">
+      <DependentUpon>frmCouponOutcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\frmExpense.resx">
+      <DependentUpon>frmExpense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\frmExpenseSave.resx">
+      <DependentUpon>frmExpenseSave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInit.resx">
+      <DependentUpon>frmInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoading.resx">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoadingTop.resx">
+      <DependentUpon>frmLoadingTop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoginOffLine.resx">
+      <DependentUpon>frmLoginOffLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseUI\FormMainMedia.resx">
+      <DependentUpon>FormMainMedia.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayCashToOnLine.resx">
+      <DependentUpon>FormPayCashToOnLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCashPay.resx">
+      <DependentUpon>frmCashPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCashierResult.resx">
+      <DependentUpon>frmCashierResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayByBalance.resx">
+      <DependentUpon>FormPayByBalance.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayByOnLine.resx">
+      <DependentUpon>FormPayByOnLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayCashToChange.resx">
+      <DependentUpon>FormPayCashToChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseUI\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\frmOrderHang.resx">
+      <DependentUpon>frmOrderHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\frmOrderQuery.resx">
+      <DependentUpon>frmOrderQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayFail.resx">
+      <DependentUpon>FormPayFail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FrmPayTimeOut.resx">
+      <DependentUpon>FrmPayTimeOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrinterInfo.resx">
+      <DependentUpon>frmPrinterInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrinterSetting.resx">
+      <DependentUpon>frmPrinterSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\frmReceiptQuery.resx">
+      <DependentUpon>frmReceiptQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRefundSelect.resx">
+      <DependentUpon>frmRefundSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\frmToolMain.resx">
+      <DependentUpon>frmToolMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserExpired.resx">
+      <DependentUpon>frmUserExpired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormBackGround.resx">
+      <DependentUpon>FormBackGround.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormConfirm.resx">
+      <DependentUpon>FormConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperUI\FormNumber.resx">
+      <DependentUpon>FormNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\CircleButton.resx">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\RoundButton.resx">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\RoundPanel.resx">
+      <DependentUpon>RoundPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormModifyPrice.resx">
+      <DependentUpon>FormModifyPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPay.resx">
+      <DependentUpon>FormPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPayByCash.resx">
+      <DependentUpon>FormPayByCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPaySuccess.resx">
+      <DependentUpon>FormPaySuccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayUI\FormPaySuccessMedia.resx">
+      <DependentUpon>FormPaySuccessMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Resources\ResourcePos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourcePos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleUI\FormZero.resx">
+      <DependentUpon>FormZero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleUI\frmScale.resx">
+      <DependentUpon>frmScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScaleUI\frmScaleResult.resx">
+      <DependentUpon>frmScaleResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\member.bmp" />
+    <None Include="Resources\member1.bmp" />
+    <None Include="Resources\member11.bmp" />
+    <Content Include="20200522073456194_easyicon_net_128.ico" />
+    <None Include="Resources\qrlogo.png" />
+    <None Include="Resources\border__minus2.bmp" />
+    <None Include="Resources\border_add1.bmp" />
+    <Content Include="FruitLogo.ico" />
+    <Content Include="Picture\icon_wan.png" />
+    <Content Include="Picture\rounblue.png" />
+    <Content Include="Picture\关闭.png" />
+    <None Include="Resources\delete.Image.png" />
+    <None Include="Resources\picDown.png" />
+    <None Include="Resources\picCircular.png" />
+    <None Include="Resources\card.png" />
+    <None Include="Resources\phone.png" />
+    <None Include="Resources\validatecode.png" />
+    <None Include="Resources\losscard.png" />
+    <None Include="Resources\menu_recharge.png" />
+    <None Include="Resources\amount.png" />
+    <None Include="Resources\balance.png" />
+    <Content Include="一体秤.ico" />
+    <None Include="Resources\border__minus.bmp" />
+    <None Include="Resources\border__minus1.bmp" />
+    <None Include="Resources\border_add.bmp" />
+    <None Include="Resources\Empty.png" />
+    <None Include="Resources\border_weight.bmp" />
+    <Content Include="Resources\FixDisenable.bmp" />
+    <Content Include="Resources\FixEnable.bmp" />
+    <None Include="Resources\Qustion.bmp" />
+    <None Include="Resources\OffLineType.bmp" />
+    <None Include="Resources\OnLineType.bmp" />
+    <None Include="Resources\Round_Search.bmp" />
+    <None Include="Resources\分类选中.bmp" />
+    <None Include="Resources\商品选中.bmp" />
+    <Content Include="SaasLogo.ico" />
+    <None Include="Resources\Line_red.bmp" />
+    <None Include="Resources\border_white.bmp" />
+    <None Include="Resources\Image1.png" />
+    <None Include="Resources\ReprintReceipt.bmp" />
+    <None Include="Resources\DelHang.bmp" />
+    <None Include="Resources\Continue.bmp" />
+    <None Include="Resources\test.bmp" />
+    <None Include="Resources\Image1.bmp" />
+    <None Include="Resources\Refund.bmp" />
+    <None Include="Resources\Reprint1.bmp" />
+    <None Include="Resources\Reprint.bmp" />
+    <None Include="Resources\border_gray.bmp" />
+    <None Include="Resources\border_red.bmp" />
+    <None Include="Resources\White.bmp" />
+    <None Include="Picture\add.png" />
+    <None Include="Picture\minus.png" />
+    <None Include="Picture\icon_delete.png" />
+    <None Include="Picture\add1.png" />
+    <Content Include="README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MediaPlayer">
+      <Guid>{22D6F304-B0F6-11D0-94AB-0080C74C7E95}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{9fe00521-3a8b-42b1-814e-585e99407b2e}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

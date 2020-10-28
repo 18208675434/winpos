@@ -57,8 +57,7 @@ namespace MQTTClient
                 mqttClient = new MqttClientFactory().CreateMqttClient() as MqttClient;
                 mqttClient.ApplicationMessageReceived += MqttClient_ApplicationMessageReceived;
                 mqttClient.Connected += MqttClient_Connected;
-                mqttClient.Disconnected += MqttClient_Disconnected;
-                
+                mqttClient.Disconnected += MqttClient_Disconnected;                
             }
 
             try
@@ -100,7 +99,7 @@ namespace MQTTClient
             {
                 Invoke((new Action(() =>
                 {
-                    txtReceiveMessage.AppendText("连接到MQTT服务器失败！" + Environment.NewLine + ex.Message + Environment.NewLine);
+                   // txtReceiveMessage.AppendText("连接到MQTT服务器失败！" + Environment.NewLine + ex.Message + Environment.NewLine);
                     LogManager.WriteLog("MQTT", "连接到MQTT服务器失败！" + Environment.NewLine + ex.Message);
                 })));
             }
@@ -116,10 +115,17 @@ namespace MQTTClient
             Invoke((new Action(() =>
             {
                 LogManager.WriteLog("MQTT","已连接到MQTT服务器！");
-                txtReceiveMessage.AppendText("已连接到MQTT服务器！" + Environment.NewLine);
+               // txtReceiveMessage.AppendText("已连接到MQTT服务器！" + Environment.NewLine);
 
-                string topic = "promo:change:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
-                SubScribe(topic);
+                string topicpromo = "promo:change:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
+                SubScribe(topicpromo);
+
+                string topicprice = "sku:adjust:increment:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
+                SubScribe(topicprice);
+
+                //线上订单
+                string topicorder = "order:print:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid;
+                SubScribe(topicorder);
             })));
         }
 
@@ -132,7 +138,8 @@ namespace MQTTClient
         {
             Invoke((new Action(() =>
             {
-                txtReceiveMessage.AppendText("已断开MQTT连接！" + Environment.NewLine);
+               // txtReceiveMessage.AppendText("已断开MQTT连接！" + Environment.NewLine);
+                LogManager.WriteLog("MQTT", "已断开MQTT连接！");
             })));
         }
 
@@ -146,46 +153,65 @@ namespace MQTTClient
             Invoke((new Action(() =>
             {
                 try
-                {
+                {                   
                     string json = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
 
+                    LogManager.WriteLog("MQTT", "接收到消息" + e.ApplicationMessage.Topic+"  " + json);
 
-                    //LogManager.WriteLog("MQTT", "接收到消息" + json);
-                    DBPROMOTION_CACHE_BEANMODEL promotion = JsonConvert.DeserializeObject<DBPROMOTION_CACHE_BEANMODEL>(json);
-
-                    if (promotion != null)
+                    if (e.ApplicationMessage.Topic == "promo:change:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid)
                     {
+                       INIManager.SetIni("MQTT", "ChangeType", "3",MainModel.IniPath);
+                    }
+                    else if (e.ApplicationMessage.Topic == "sku:adjust:increment:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid)
+                    {
+                        AdjustTypes type = JsonConvert.DeserializeObject<AdjustTypes>(json);
 
-                        LogManager.WriteLog("MQTT", "接收到商品变更" + promotion.CODE);
-
-                        INIManager.SetIni("MQTT", "IsChange","1", MainModel.IniPath);
-                        if (promotionbll.ExistsByCode(promotion.CODE))
+                        if (type != null)
                         {
-                            promotion.TENANTID = CurrentShopInfo.tenantid;
-                            promotion.SHOPID = CurrentShopInfo.shopid;
-                            promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
-                            promotionbll.UpdateByCode(promotion);
-                        }
-                        else
-                        {
-                            promotion.TENANTID = CurrentShopInfo.tenantid;
-                            promotion.SHOPID = CurrentShopInfo.shopid;
-                            promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
-                            promotionbll.Add(promotion);
+                            INIManager.SetIni("MQTT", "ChangeType", type.adjustTypes.ToString(), MainModel.IniPath);
                         }
                     }
-                    else
+                    else if (e.ApplicationMessage.Topic == "order:print:" + CurrentShopInfo.tenantid + ":" + CurrentShopInfo.shopid)
                     {
-                        LogManager.WriteLog("MQTT", "接收到不正确信息" + json);
+                        LogManager.WriteLog("MQTT", "记录neworder到config");
+                        INIManager.SetIni("MQTT", "NewOrder", "1", MainModel.IniPath);
+                        //TODO 线上订单
                     }
+
+                    //DBPROMOTION_CACHE_BEANMODEL promotion = JsonConvert.DeserializeObject<DBPROMOTION_CACHE_BEANMODEL>(json);
+
+                    //if (promotion != null)
+                    //{
+
+                    //    LogManager.WriteLog("MQTT", "接收到商品变更" + promotion.CODE);
+
+                    //    INIManager.SetIni("MQTT", "IsChange","1", MainModel.IniPath);
+                    //    if (promotionbll.ExistsByCode(promotion.CODE))
+                    //    {
+                    //        promotion.TENANTID = CurrentShopInfo.tenantid;
+                    //        promotion.SHOPID = CurrentShopInfo.shopid;
+                    //        promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
+                    //        promotionbll.UpdateByCode(promotion);
+                    //    }
+                    //    else
+                    //    {
+                    //        promotion.TENANTID = CurrentShopInfo.tenantid;
+                    //        promotion.SHOPID = CurrentShopInfo.shopid;
+                    //        promotion.CREATE_URL_IP = INIManager.GetIni("System", "URL", MainModel.IniPath);
+                    //        promotionbll.Add(promotion);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    LogManager.WriteLog("MQTT", "接收到不正确信息" + json);
+                    //}
                    
-
                 }
                 catch (Exception ex)
                 {
                     LogManager.WriteLog("MQTT","更新MQTT促销异常" + ex.Message + ex.StackTrace);
                 }
-                txtReceiveMessage.AppendText( Encoding.UTF8.GetString(e.ApplicationMessage.Payload)+Environment.NewLine);
+                //txtReceiveMessage.AppendText( Encoding.UTF8.GetString(e.ApplicationMessage.Payload)+Environment.NewLine);
             })));
         }
 
@@ -220,7 +246,7 @@ namespace MQTTClient
             });
 
                 LogManager.WriteLog("MQTT", "已订阅[" + topic + "]主题");
-                txtReceiveMessage.AppendText("已订阅["+topic+"]主题" + Environment.NewLine);
+                //txtReceiveMessage.AppendText("已订阅["+topic+"]主题" + Environment.NewLine);
                 txtSubTopic.Enabled = false;
                 btnSubscribe.Enabled = false;
             }

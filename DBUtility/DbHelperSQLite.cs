@@ -125,6 +125,7 @@ namespace Maticsoft.DBUtility
                 {
                     for (int n = 0; n < SQLStringList.Count; n++)
                     {
+
                         try
                         {
                             string strsql = SQLStringList[n].ToString();
@@ -133,7 +134,11 @@ namespace Maticsoft.DBUtility
                                 cmd.CommandText = strsql;
                                 cmd.ExecuteNonQuery();
                             }
-                        }catch{}
+                        }
+                        catch (Exception ex)
+                        {
+                            
+                        }
                     }
                     tx.Commit();                    
                 }

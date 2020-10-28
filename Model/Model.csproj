@@ -118,6 +118,7 @@
     <Compile Include="JSON_BEANMODEL.cs" />
     <Compile Include="SYSTEM_USER_BEANMODEL.cs" />
     <Compile Include="android_metadataMODEL.cs" />
+    <Compile Include="UpdateSqlLite.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

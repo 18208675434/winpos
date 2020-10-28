@@ -117,6 +117,7 @@
     <Compile Include="DBSTEELYARD_BEANBLL.cs" />
     <Compile Include="DBSWITCH_KEY_BEANBLL.cs" />
     <Compile Include="DBTRANSFER_SCALE_STATUS_BEANBLL.cs" />
+    <Compile Include="GlobalBLL.cs" />
     <Compile Include="JSON_BEANBLL.cs" />
     <Compile Include="SYSTEM_USER_BEANBLL.cs" />
     <Compile Include="android_metadataBLL.cs" />

@@ -169,7 +169,6 @@ namespace Maticsoft.BLL
         /// </summary>
         public bool Delete(string condition)
         {
-
             return dal.Delete(condition);
         }
 
@@ -180,6 +179,11 @@ namespace Maticsoft.BLL
         {
 
             return dal.GetModel(condition);
+        }
+
+        public int GetSingle(string strSql)
+        {
+            return dal.GetSingle(strSql);
         }
         #endregion  ExtensionMethod
 	}

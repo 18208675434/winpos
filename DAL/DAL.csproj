@@ -91,6 +91,9 @@
       <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <Reference Include="ChnCharInfo">
+      <HintPath>..\Lib\ChnCharInfo.dll</HintPath>
+    </Reference>
     <Reference Include="Maticsoft.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Maticsoft.Common.dll</HintPath>
@@ -103,7 +106,7 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\QiandamaPOS\bin\Release\System.Data.SQLite.DLL</HintPath>
+      <HintPath>..\Lib\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Web.Services">
       <Name>System.Web.Services</Name>
@@ -115,6 +118,7 @@
       <Project>{0988C62E-247F-471F-A183-DB509C7A3839}</Project>
       <Name>DBUtility</Name>
     </ProjectReference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs">
@@ -132,6 +136,7 @@
     <Compile Include="DBSTEELYARD_BEANDAL.cs" />
     <Compile Include="DBSWITCH_KEY_BEANDAL.cs" />
     <Compile Include="DBTRANSFER_SCALE_STATUS_BEANDAL.cs" />
+    <Compile Include="GlobalDAL.cs" />
     <Compile Include="JSON_BEANDAL.cs" />
     <Compile Include="SYSTEM_USER_BEANDAL.cs" />
     <Compile Include="android_metadataDAL.cs" />
