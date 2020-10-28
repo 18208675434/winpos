@@ -18,7 +18,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         MemberCenterHttpUtil memberCenterHttpUtil = new MemberCenterHttpUtil();
         HttpUtil httputil = new HttpUtil();
-        bool isrun = true;
+        bool isprint = true;
 
         /// <summary>
         /// 委托解决跨线程调用
@@ -27,26 +27,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 当前执行的订单号
         /// </summary>
-        string billid;
-        List<string> orderids;//批量充值使用
+       public string billid=null;
+       public List<string> orderids=null;//批量充值使用
 
 
         //<summary>
         //按比例缩放页面及控件
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
-        public FormRechargeSuccess(string billid, List<string> orderids)
+        public FormRechargeSuccess()
         {
             InitializeComponent();
-            this.billid = billid;
-            this.orderids = orderids;
+            //this.billid = billid;
+            //this.orderids = orderids;
         }
 
 
         private void frmCashierResult_Shown(object sender, EventArgs e)
         {
+            isprint = true;
             MemberCenterMediaHelper.ShowFormRechargeSuccessMedia();
-            lblType.Text = "充值成功";
+  
+            lblSecond.Text = "2";
             timerClose.Enabled = true;
 
             Thread threadPrint = new Thread(SEDPrint);
@@ -58,21 +60,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                if (isrun)
+                if (orderids == null)
                 {
-                    if (orderids == null)
-                    {
-                        PrintTopUp();
-                    }
-                    else
-                    {
-                        PrintEntityCardBatchSale();
-                    }
+                    PrintTopUp();
                 }
+                else
+                {
+                    PrintEntityCardBatchSale();
+                }
+              
             }
             catch (Exception ex)
             {
                 MainModel.ShowLog("获取订单打印详情异常" + ex.Message, true);
+            }finally
+            {
+                isprint = false;
             }
 
         }
@@ -84,9 +87,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void timerClose_Tick(object sender, EventArgs e)
         {
-            lblSecond.Text = (Convert.ToInt16(lblSecond.Text) - 1).ToString();
+            timerClose.Interval = 500;
+            int left = Convert.ToInt16(lblSecond.Text) - 1;
+            if (left < 0) left = 0;
+            lblSecond.Text = left.ToString();
 
-            if (lblSecond.Text == "0")
+            if (!isprint && left == 0)
             {
                 this.Close();
             }
@@ -144,17 +150,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             printdetail.paymodeforapi = result[0].paymodeforapi;
             printdetail.paymode = result[0].paymode;
             printdetail.createdat = MainModel.getStampByDateTime(DateTime.Now);
-            return PrintUtil.PrintTopUp(printdetail,true);
+            return PrintUtil.PrintTopUp(printdetail, true);
         }
 
-      
+
 
         private void FormPaySuccess_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                isrun = false;
                 timerClose.Enabled = false;
+                MemberCenterMediaHelper.CloseFormRechargeSuccessMedia();
             }
             catch { }
         }

@@ -98,14 +98,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     if (frmonlinemedia == null)
                     {
                         frmonlinemedia = new FormPayOnLineMedia();
-                        asf.AutoScaleControlTest(frmonlinemedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height,true);
-                        frmonlinemedia.Location = new Point(Screen.AllScreens[0].Bounds.Width,0);
+                        asf.AutoScaleControlTest(frmonlinemedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                        frmonlinemedia.Location = new Point(Screen.AllScreens[0].Bounds.Width, 0);
                         frmonlinemedia.TopMost = true;
                     }
 
                     frmonlinemedia.Show();
                 }
-               
+
             }
             catch { }
         }
@@ -153,7 +153,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         //}
         #endregion
 
-       
+
         #region 修改密码
         /// <summary>
         /// 调用显示修改密码客屏界面
@@ -198,7 +198,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         public static void UpdateForgetPassWordUI(int numtype, string smscode)
         {
-            frmmembermedia.UpdateForgetPassWordUI(numtype, smscode);
+            try
+            {
+                if (frmmembermedia != null && HaveMedia)
+                {
+                    frmmembermedia.UpdateForgetPassWordUI(numtype, smscode);
+                }
+            }
+            catch { }
         }
 
 
@@ -341,22 +348,34 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 formEntityCardBatchSaleMedia.Close();
             }
         }
+        #endregion
 
-
+        #region 充值成功
+        private static FormRechargeSuccessMedia formRechargeSuccessMedia = null;
         public static void ShowFormRechargeSuccessMedia()
         {
             try
             {
-                FormRechargeSuccessMedia formRechargeSuccessMedia = new FormRechargeSuccessMedia();
-                asf.AutoScaleControlTest(formRechargeSuccessMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
-                formRechargeSuccessMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
-                formRechargeSuccessMedia.TopMost = true;
-                formRechargeSuccessMedia.ShowDialog();
-                formRechargeSuccessMedia.Dispose();
+                if (formRechargeSuccessMedia == null || formRechargeSuccessMedia.IsDisposed)
+                {
+                    formRechargeSuccessMedia = new FormRechargeSuccessMedia();
+                    asf.AutoScaleControlTest(formRechargeSuccessMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                    formRechargeSuccessMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                    formRechargeSuccessMedia.TopMost = true;
+                }
+                formRechargeSuccessMedia.Show();
             }
             catch (Exception ex)
             {
 
+            }
+        }
+
+        public static void CloseFormRechargeSuccessMedia()
+        {
+            if (formRechargeSuccessMedia != null)
+            {
+                formRechargeSuccessMedia.Close();
             }
         }
         #endregion

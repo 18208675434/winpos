@@ -171,7 +171,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     item.rechargeamount = customtemplate.amount;
                     item.rewardamount = customtemplate.rewardamount;
-                    item.autoreward = customtemplate.id > 0;
+                    item.autoreward = !customtemplate.customAndreward;// customtemplate.id > 0
                 }
                 RefreshDgv();
             }
@@ -324,7 +324,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         rechargeCardInfo.rechargeamount = customtemplate.amount;
                         rechargeCardInfo.rewardamount = customtemplate.rewardamount;
-                        rechargeCardInfo.autoreward = customtemplate.id > 0;
+                        rechargeCardInfo.autoreward = !customtemplate.customAndreward;// customtemplate.id > 0
                         RefreshDgv();
                     }
                     this.Activate();
@@ -484,6 +484,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     CurrentPage = 1;
                     lstCard.Clear();
                     RefreshDgv();
+                    IsEnable = true;
                 }
             }
             catch (Exception ex)
@@ -493,12 +494,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             finally
             {
                 LoadingHelper.CloseForm();
-                IsEnable = true;
             }
         }
         #endregion
-
-
     }
 
     enum PayMode
