@@ -21,7 +21,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 {
     public class PrintUtil
     {
-
+        #region 打印订单
         public static bool PrintOrder(PrintDetail printdetail, bool isRefound, ref string errormsg)
         {
             try
@@ -86,62 +86,122 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
             
         }
+        #endregion
+
+        #region 打印交班单
 
         public static bool ReceiptPrint(Receiptdetail receipt, ref string errormsg)
         {
             try
             {
+               
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += ReceiptPrint_DoWork;
+                bk.RunWorkerAsync(receipt);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static void ReceiptPrint_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                string errormsg = "";
+                Receiptdetail receipt = e.Argument as Receiptdetail;
+
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
-                    return ToledoPrintUtil.ReceiptPrint(receipt, ref errormsg);
+                     ToledoPrintUtil.ReceiptPrint(receipt, ref errormsg);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
-                    return SprtPrintUtil.ReceiptPrint(receipt, ref errormsg);
+                     SprtPrintUtil.ReceiptPrint(receipt, ref errormsg);
                 }
                 else
                 {
-                    return YKPrintUtil.ReceiptPrint(receipt, ref errormsg);
+                     YKPrintUtil.ReceiptPrint(receipt, ref errormsg);
 
                 }
 
-                return false;
+                return ;
             }
             catch {
-                return false;
+                return ;
             }
         }
+        #endregion
+
+        #region 打印报损单
 
         public static bool PrintBroken(CreateBrokenResult brokenresult, ref string errormsg)
         {
             try
             {
-                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += PrintBroken_DoWork;
+                bk.RunWorkerAsync(brokenresult);
 
-                if (ScaleName == ScaleType.托利多.ToString())
-                {
-                    return ToledoPrintUtil.PrintBroken(brokenresult, ref errormsg);
-                }
-                else if (ScaleName == ScaleType.易捷通.ToString())
-                {
-                    return SprtPrintUtil.PrintBroken(brokenresult, ref errormsg);
-                }
-                else
-                {
-                    return YKPrintUtil.PrintBroken(brokenresult, ref errormsg);
-
-                }
-                return false;
+                return true;
             }
-            catch {
+            catch
+            {
                 return false;
             }
         }
 
+        public static void PrintBroken_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                string errormsg = "";
+                CreateBrokenResult brokenresult = e.Argument as CreateBrokenResult;
+                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
+                if (ScaleName == ScaleType.托利多.ToString())
+                {
+                     ToledoPrintUtil.PrintBroken(brokenresult, ref errormsg);
+                }
+                else if (ScaleName == ScaleType.易捷通.ToString())
+                {
+                     SprtPrintUtil.PrintBroken(brokenresult, ref errormsg);
+                }
+                else
+                {
+                     YKPrintUtil.PrintBroken(brokenresult, ref errormsg);
+
+                }
+                return;
+            }
+            catch {
+                return;
+            }
+        }
+        #endregion
+
+        #region 开钱箱
         public static void OpenCashDrawerEx()
+        {
+            try
+            {
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += OpenCashDrawerEx_DoWork;
+                bk.RunWorkerAsync();
+
+                return;
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        public static void OpenCashDrawerEx_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {
@@ -165,50 +225,89 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
             catch { }
         }
+        #endregion
 
 
-
-        private static HttpUtil httputil = new HttpUtil();
+        #region 打印充值单
         public static bool PrintTopUp(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail, bool isEntityCardBatchSale = false)
         {
             try
             {
+                printdetail.isEntityCardBatchSale = isEntityCardBatchSale;
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += PrintTopUp_DoWork;
+                bk.RunWorkerAsync(printdetail);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static void PrintTopUp_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+
+                ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = e.Argument as ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint;
+
                 DbJsonUtil.AddBalanceInfo(printdetail.paymodeforapi, printdetail.amount);
 
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
-                    ToledoPrintUtil.PrintTopUp(printdetail, isEntityCardBatchSale);
+                    ToledoPrintUtil.PrintTopUp(printdetail, printdetail.isEntityCardBatchSale);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
-                    SprtPrintUtil.PrintTopUp(printdetail, isEntityCardBatchSale);
+                    SprtPrintUtil.PrintTopUp(printdetail, printdetail.isEntityCardBatchSale);
                 }
                 else
                 {
-                    YKPrintUtil.PrintTopUp(printdetail, isEntityCardBatchSale);
+                    YKPrintUtil.PrintTopUp(printdetail, printdetail.isEntityCardBatchSale);
                 }
 
-                return true;
+                return;
             }
             catch {
-                return false;
+                return;
             }
         }
+        #endregion
+
+        #region 余额充值退款
 
         public static bool PrintBalanceRefund(string refundid)
         {
             try
             {
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += PrintBalanceRefund_DoWork;
+                bk.RunWorkerAsync(refundid);
 
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static HttpUtil httputil = new HttpUtil();
+        public static void PrintBalanceRefund_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
                 string errormsg = "";
+                string refundid = e.Argument as string;
                 ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.GetBalanceDepositRefund printdetail = httputil.GetBalancecodepositrefoundbill(refundid, ref errormsg);
 
                 if (!string.IsNullOrEmpty(errormsg) || printdetail == null)
                 {
                     LogManager.WriteLog(errormsg);
-                    return false;
+                    return;
                 }
 
 
@@ -227,6 +326,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                     YKPrintUtil.PrintBalanceRefund(printdetail);
                 }
 
+                return;
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        #endregion
+
+        #region 打印礼品卡订单
+        public static bool PrintGiftCardOrder(ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model.GiftCardPrintDetail printdetail, bool isRefound, ref string errormsg)
+        {
+            try
+            {
+                printdetail.isRefound = isRefound;
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += PrintGiftCardOrder_DoWork;
+                bk.RunWorkerAsync(printdetail);
+
                 return true;
             }
             catch
@@ -235,67 +354,91 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-
-
-        public static bool PrintGiftCardOrder(ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model.GiftCardPrintDetail printdetail, bool isRefound, ref string errormsg)
+        public static void PrintGiftCardOrder_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {
+
+                string errormsg = "";
+                ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model.GiftCardPrintDetail printdetail = e.Argument as ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model.GiftCardPrintDetail;
+
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
-                    return ToledoPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
+                     ToledoPrintUtil.PrintGiftCardOrder(printdetail, printdetail.isRefound, ref errormsg);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
-                    return SprtPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
+                     SprtPrintUtil.PrintGiftCardOrder(printdetail, printdetail.isRefound, ref errormsg);
                 }
                 else
                 {
-                    return YKPrintUtil.PrintGiftCardOrder(printdetail, isRefound, ref errormsg);
-
+                     YKPrintUtil.PrintGiftCardOrder(printdetail, printdetail.isRefound, ref errormsg);
                 }
 
-                return false;
+                return;
             }
             catch
             {
-                return false;
+                return;
             }
         }
+        #endregion
 
 
-
+        #region 打印线上订单
         public static bool PrintThirdOrder(PrinterPickOrderInfo printdetail, ref string errormsg)
         {
             try
             {
-                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+                System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
+                bk.DoWork += PrintThirdOrder_DoWork;
+                bk.RunWorkerAsync(printdetail);
 
-                if (ScaleName == ScaleType.托利多.ToString())
-                {
-                    return ToledoPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
-                }
-                else if (ScaleName == ScaleType.易捷通.ToString())
-                {
-                    return SprtPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
-                }
-                else
-                {
-                    return YKPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
-
-                }
-
-                return false;
+                return true;
             }
             catch
             {
                 return false;
             }
         }
+
+        public static void PrintThirdOrder_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+
+                string errormsg = "";
+                PrinterPickOrderInfo printdetail = e.Argument as PrinterPickOrderInfo;
+
+
+                string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                if (ScaleName == ScaleType.托利多.ToString())
+                {
+                     ToledoPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
+                }
+                else if (ScaleName == ScaleType.易捷通.ToString())
+                {
+                     SprtPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
+                }
+                else
+                {
+                     YKPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
+                }
+
+                return;
+            }
+            catch
+            {
+                return;
+            }
+        }
       
     }
+
+        #endregion
 
     public enum PrintType
     {

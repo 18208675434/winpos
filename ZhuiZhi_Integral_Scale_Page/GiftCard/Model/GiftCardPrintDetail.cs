@@ -59,6 +59,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard.Model
         /// 
         /// </summary>
         public List<PaydetailItem> paydetail { get; set; }
+
+        public bool isRefound { get; set; }
     }
 
     public class PayinfoItem
