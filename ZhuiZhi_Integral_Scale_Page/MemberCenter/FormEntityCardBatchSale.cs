@@ -430,10 +430,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     customerpaycode = customerpayment.code;
                 }
-
+                decimal realCash = 0;
                 if (paymode == PayMode.cash)//现金支付
                 {
-                    if (!MemberCenterHelper.ShowFormTopUpByCash(totalPay))
+                    if (!MemberCenterHelper.ShowFormTopUpByCash(totalPay,ref realCash))
                     {
                         return;
                     }
@@ -483,7 +483,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         orderids.Add(item.depositbillid);
                     }
-                    if (!MemberCenterHelper.ShowRechargeSuccess(batchoperatorid, orderids))
+                    if (!MemberCenterHelper.ShowRechargeSuccess(batchoperatorid, totalPay, realCash, orderids))
                     {
                         this.Close();
                         return;

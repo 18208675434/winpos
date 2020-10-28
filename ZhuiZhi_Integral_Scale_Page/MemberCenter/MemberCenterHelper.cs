@@ -43,27 +43,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
 
-        public static bool ShowFormTopUpByCash(decimal amount)
+        public static bool ShowFormTopUpByCash(decimal amount,ref decimal realCash)
         {
             try
             {
-
                 BackHelper.ShowFormBackGround();
 
                 FormTopUpByCash frmpaybycash = new FormTopUpByCash(amount);
                 asf.AutoScaleControlTest(frmpaybycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
                 frmpaybycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybycash.Height) / 2);
                 frmpaybycash.TopMost = true;
-                frmpaybycash.ShowDialog();
+                bool flag =frmpaybycash.ShowDialog() == DialogResult.OK;
+                if (flag)
+                {
+                    realCash = frmpaybycash.RealCash;
+                }
                 frmpaybycash.Dispose();
-
-
+               
                 BackHelper.HideFormBackGround();
                 Application.DoEvents();
 
-                return frmpaybycash.DialogResult == DialogResult.OK;
-
-
+                return flag;
             }
             catch (Exception ex)
             {
@@ -685,7 +685,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         #region 充值结果
         private static FormRechargeSuccess formRechargeSuccess = null;
-        public static bool ShowRechargeSuccess(string billid, List<string> orderids = null)
+        public static bool ShowRechargeSuccess(string billid,decimal acmount,decimal realCash, List<string> orderids = null)
         {
             try
             {
