@@ -483,9 +483,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                     CurrentPage = 1;
                     lstCard.Clear();
-                    RefreshDgv();
-                    IsEnable = true;
+                    RefreshDgv();                   
                 }
+                IsEnable = true;
             }
             catch (Exception ex)
             {
