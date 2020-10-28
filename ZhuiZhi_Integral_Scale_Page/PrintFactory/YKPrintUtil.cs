@@ -99,7 +99,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 try
                 {
                     try { LogManager.WriteLog("打印订单:" + printdetail.orderid); }
-                    catch { }
+                    catch { } 
 
 
                     IniPrintSize();
@@ -118,8 +118,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     SetAlign(1);
                         SetFontSize(0, 1);
-                        PrintStr(new StringBuilder(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize) + "\n"));
-                        PrintStr(new StringBuilder(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize) + "\n"));
+                        PrintStr(new StringBuilder("欢迎光临" + "\n"));
+                        PrintStr(new StringBuilder(MainModel.CurrentShopInfo.tenantname + "\n"));
                     lstPrintStr.Add(" ");
                     SetAlign(0);
                     lstPrintStr.AddRange(PrintHelper.GetGiftCardOrderPrintInfo(printdetail, isRefound));
@@ -244,9 +244,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     PrintStr(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname + "\n", "", HeadCharCountOfLine, PageSize));
                     PrintStr(PrintHelper.MergeStr( MainModel.CurrentShopInfo.shopname + "\n", "", HeadCharCountOfLine, PageSize));
 
+                   
+                    PrintStr(printdetail.serialcode + "\n");
                     SetFontSize(0, 0);
-                    PrintStr(PrintHelper.MergeStr(printdetail.serialcode + "\n", "", HeadCharCountOfLine, PageSize));
-
                     PrintStr("订单号：" + printdetail.orderid + "\n");
                     PrintStr("下单时间：" + printdetail.date + "\n");
                     PrintStr("顾客姓名：" + printdetail.username + "\n");
