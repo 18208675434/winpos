@@ -1107,7 +1107,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
-
+                LogManager.WriteLog("线上订单校验异常"+ex.Message);
             }
             finally
             {

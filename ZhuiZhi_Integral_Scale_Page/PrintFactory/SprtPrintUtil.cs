@@ -460,16 +460,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     }
 
-                    foreach (PickProduct pro in printdetail.productdetaillist)
-                    {
-                        List<string> lstpro = PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, BodyCharCountOfLine);
-
-                        foreach (string str in lstpro)
-                        {
-                            POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, str + "\r\n");
-                        }
-
-                    }
 
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.getStrLine() + "\r\n");
 

@@ -65,7 +65,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 aoi.date = MainModel.getStampByDateTime(DateTime.Now);
                 aoi.phone = MainModel.CurrentUser.loginaccount;
                 aoi.type = 3;
-
+                aoi.orderid = cart.orderplaceid;
                 aoi.amt = cart.totalpayment;
                 aoi.skucodes = cart.products.Select(r => r.skucode).ToList();
 
