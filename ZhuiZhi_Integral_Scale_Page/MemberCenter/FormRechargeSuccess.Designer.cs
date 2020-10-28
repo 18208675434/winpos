@@ -131,7 +131,7 @@
             // 
             // timerClose
             // 
-            this.timerClose.Interval = 1000;
+            this.timerClose.Interval = 10;
             this.timerClose.Tick += new System.EventHandler(this.timerClose_Tick);
             // 
             // FormRechargeSuccess

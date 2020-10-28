@@ -188,8 +188,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
                 string errormsg = "";
+                LoadingHelper.ShowLoadingScreen();
                 long result = httputil.MemberTopUp(para, ref errormsg);
-
+                LoadingHelper.CloseForm();
                 if (!string.IsNullOrEmpty(errormsg))
                 {
                     MainModel.ShowLog(errormsg, false);
@@ -248,8 +249,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
                     string errormsg = "";
+                    LoadingHelper.ShowLoadingScreen();
                     long result = httputil.MemberTopUp(para, ref errormsg);
-
+                    LoadingHelper.CloseForm();
                     if (!string.IsNullOrEmpty(errormsg))
                     {
                         MainModel.ShowLog(errormsg, false);
@@ -691,11 +693,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+                this.Hide();
                 if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid))
                 {
                     this.Close();
                     return;
-                }  
+                }
+                this.Show();
             }
             catch (Exception ex)
             {
@@ -897,8 +901,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
                 string errormsg = "";
+                LoadingHelper.ShowLoadingScreen();
                 long result = httputil.MemberTopUp(para, ref errormsg);
-
+                LoadingHelper.CloseForm();
                 if (!string.IsNullOrEmpty(errormsg))
                 {
                     MainModel.ShowLog(errormsg, false);

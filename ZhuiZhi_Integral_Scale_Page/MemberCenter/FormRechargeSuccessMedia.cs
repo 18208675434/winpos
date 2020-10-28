@@ -27,8 +27,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void timerClose_Tick(object sender, EventArgs e)
         {
-            lblSecond.Text = (Convert.ToInt16(lblSecond.Text) - 1).ToString();
-            if (lblSecond.Text == "0")
+            timerClose.Interval = 500;
+            int left = Convert.ToInt16(lblSecond.Text) - 1;
+            if (left < 0) left = 0;
+            lblSecond.Text = left.ToString();
+            if (left ==0)
             {
                 this.Close();
             }
