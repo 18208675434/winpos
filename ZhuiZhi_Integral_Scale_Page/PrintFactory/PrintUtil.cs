@@ -46,7 +46,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 //QuestPara para = e.Argument as QuestPara;
                 printdetail.isrefund = isRefound;
                 System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
-                bk.DoWork += HttpAsyncRequest_DoWork;
+                bk.DoWork += PrintOrder_DoWork;
                 bk.RunWorkerAsync(printdetail);
 
                 return true;
@@ -56,7 +56,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-        public static  void HttpAsyncRequest_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        public static void PrintOrder_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
             try
@@ -294,8 +294,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return false;
             }
         }
-
-        static MemberCenterHttpUtil memberCenterHttpUtil=new MemberCenterHttpUtil();
       
+    }
+
+    public enum PrintType
+    {
+
     }
 }

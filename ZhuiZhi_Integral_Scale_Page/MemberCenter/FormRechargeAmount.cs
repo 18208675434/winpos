@@ -27,13 +27,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormRechargeAmount_Shown(object sender, EventArgs e)
         {
             string errormsg = "";
-            if (MainModel.LstRechargeTemplates == null)
-            {
+    
                 LoadingHelper.ShowLoadingScreen();
                 MainModel.LstRechargeTemplates = new HttpUtil().ListAllTemplate(ref errormsg);
                 LoadingHelper.CloseForm();
 
-            }
+        
             if (lstRechargeTemplates == null)
             {
                 if (MainModel.LstRechargeTemplates != null)
