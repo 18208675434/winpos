@@ -250,7 +250,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 AbnormalOrder ao = new AbnormalOrder();
                 ao.openboxlist = lstaoi.Where(r => r.type == 1).ToList();
                 ao.hookorderlist = lstaoi.Where(r => r.type == 2).ToList();
-                ao.wholecancelorderlist = lstaoi.Where(r => r.type == 13).ToList();
+                ao.wholecancelorderlist = lstaoi.Where(r => r.type == 3).ToList();
                 ao.deleteskulist = lstaoi.Where(r => r.type == 4).ToList();
                 ao.refundorderlist = lstaoi.Where(r => r.type == 5).ToList(); ;
                 ao.refunddifflist = lstaoi.Where(r => r.type == 6).ToList();

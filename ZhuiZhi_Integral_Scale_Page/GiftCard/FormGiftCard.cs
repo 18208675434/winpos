@@ -758,7 +758,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
 
                     pnlPayByOnLine.Tag = 1;
                     pnlPayByOnLine.BackColor = Color.FromArgb(255, 70, 21);
-                    pnlLoading.Visible = true;
+                    pnlLoading.Visible = false;
 
                     pnlWaiting.Visible = false;
                 }
