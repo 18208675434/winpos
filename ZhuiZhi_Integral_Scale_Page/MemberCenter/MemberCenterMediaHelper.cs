@@ -340,23 +340,35 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 formEntityCardBatchSaleMedia.Close();
             }
-        }
+        }     
+        #endregion
 
-
+        #region 充值成功
+        private static FormRechargeSuccessMedia formRechargeSuccessMedia = null;
         public static void ShowFormRechargeSuccessMedia()
         {
             try
             {
-                FormRechargeSuccessMedia formRechargeSuccessMedia = new FormRechargeSuccessMedia();
-                asf.AutoScaleControlTest(formRechargeSuccessMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
-                formRechargeSuccessMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
-                formRechargeSuccessMedia.TopMost = true;
-                formRechargeSuccessMedia.ShowDialog();
-                formRechargeSuccessMedia.Dispose();
+                if (formRechargeSuccessMedia == null || formRechargeSuccessMedia.IsDisposed)
+                {
+                    formRechargeSuccessMedia = new FormRechargeSuccessMedia();
+                    asf.AutoScaleControlTest(formRechargeSuccessMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                    formRechargeSuccessMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                    formRechargeSuccessMedia.TopMost = true;
+                }
+                formRechargeSuccessMedia.Show();
             }
             catch (Exception ex)
             {
 
+            }
+        }
+
+        public static void CloseFormRechargeSuccessMedia()
+        {
+            if (formRechargeSuccessMedia != null)
+            {
+                formRechargeSuccessMedia.Close();
             }
         }
         #endregion

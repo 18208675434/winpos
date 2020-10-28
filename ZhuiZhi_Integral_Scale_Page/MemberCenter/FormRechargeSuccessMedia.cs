@@ -21,6 +21,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void frmCashierResult_Shown(object sender, EventArgs e)
         {
+            lblSecond.Text = "2";
             timerClose.Enabled = true;
         }
 

@@ -27,19 +27,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 当前执行的订单号
         /// </summary>
-        string billid;
-        List<string> orderids;//批量充值使用
+       public string billid=null;
+       public List<string> orderids=null;//批量充值使用
 
 
         //<summary>
         //按比例缩放页面及控件
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
-        public FormRechargeSuccess(string billid, List<string> orderids)
+        public FormRechargeSuccess()
         {
             InitializeComponent();
-            this.billid = billid;
-            this.orderids = orderids;
+            //this.billid = billid;
+            //this.orderids = orderids;
         }
 
 
@@ -47,7 +47,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             isprint = true;
             MemberCenterMediaHelper.ShowFormRechargeSuccessMedia();
-            lblType.Text = "充值成功";
+  
+            lblSecond.Text = "2";
             timerClose.Enabled = true;
 
             Thread threadPrint = new Thread(SEDPrint);
@@ -159,6 +160,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 timerClose.Enabled = false;
+                MemberCenterMediaHelper.CloseFormRechargeSuccessMedia();
             }
             catch { }
         }

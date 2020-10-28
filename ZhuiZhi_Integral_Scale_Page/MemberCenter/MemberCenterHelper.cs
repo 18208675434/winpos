@@ -683,26 +683,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        #region 支付结果
-        public static bool ShowRechargeSuccess(string batchoperatorid, List<string> orderids=null)
+        #region 充值结果
+        private static FormRechargeSuccess formRechargeSuccess = null;
+        public static bool ShowRechargeSuccess(string billid, List<string> orderids = null)
         {
             try
             {
-                FormRechargeSuccess formRechargeSuccess = new FormRechargeSuccess(batchoperatorid, orderids);
-                asf.AutoScaleControlTest(formRechargeSuccess, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                formRechargeSuccess.Location = new System.Drawing.Point(0, 0);
-                formRechargeSuccess.TopMost = true;
-
-
-                formRechargeSuccess.ShowDialog();
-
+                if (formRechargeSuccess == null || formRechargeSuccess.IsDisposed)
+                {
+                    formRechargeSuccess = new FormRechargeSuccess();
+                    asf.AutoScaleControlTest(formRechargeSuccess, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                    formRechargeSuccess.Location = new System.Drawing.Point(0, 0);
+                    formRechargeSuccess.TopMost = true;
+                }
+                formRechargeSuccess.billid = billid;
+                formRechargeSuccess.orderids = orderids;//批量售卡使用
+                bool flag = formRechargeSuccess.ShowDialog() == DialogResult.OK;
                 formRechargeSuccess.Dispose();
-                return formRechargeSuccess.DialogResult == DialogResult.OK;
+                return flag;
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("充值支付弹窗出现异常" + ex.Message);
                 return false;
+            }
+        }
+
+        public static void CloseFormRechargeSuccessMedia()
+        {
+            if (formRechargeSuccess != null)
+            {
+                formRechargeSuccess.Close();
             }
         }
         #endregion
