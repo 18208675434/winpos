@@ -254,13 +254,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     }
                     PrintText(PrintHelper.getStrLine(), 25);
 
-                    PrintText(PrintHelper.MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize), 25);
-                    if (Convert.ToDecimal( printdetail.deliveryamt) > 0)
+
+                    PrintText(PrintHelper.MergeStr("商品金额：", printdetail.productamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    if (printdetail.deliveryamt > 0)
                     {
-                        PrintText(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize), 25);
+                        PrintText(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.promoamt > 0)
+                    {
+                        PrintText(PrintHelper.MergeStr("活动优惠：", printdetail.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.couponamt > 0)
+                    {
+                        PrintText(PrintHelper.MergeStr("优惠券抵：", printdetail.couponamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.pointpayamt > 0)
+                    {
+                        PrintText(PrintHelper.MergeStr("积分抵现：", printdetail.pointpayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.balancepayamt > 0)
+                    {
+                        PrintText(PrintHelper.MergeStr("余额支付：", printdetail.balancepayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
                     }
                     
-                    PrintText(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize), 25);
+                    PrintText(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment.ToString("f2"), BodyCharCountOfLine, PageSize), 25);
 
                     if (!string.IsNullOrEmpty(printdetail.pickcode))
                     {
