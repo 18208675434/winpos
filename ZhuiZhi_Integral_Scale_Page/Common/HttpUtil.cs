@@ -3382,56 +3382,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// </summary>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public List<ListAllTemplate> ListAllTemplate(ref string errormsg)
-        {
-            try
-            {
-                string url = "/pos/member/balance/listalltemplate";
-
-                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-
-                string json = HttpGET(url, sort);
-
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                if (rd.code == 0)
-                {
-                    List<ListAllTemplate> resultobj = JsonConvert.DeserializeObject<List<ListAllTemplate>>(rd.data.ToString());
-                    resultobj.OrderBy(e => e.amount);
-                    return resultobj;
-                }
-                else
-                {
-                    try { LogManager.WriteLog("Error", "listalltemplate:" + json); }
-                    catch { }
-                    errormsg = rd.message;
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("Error", "获取用户信息异常：" + ex.Message);
-                errormsg = "网络连接异常，请检查网络连接";
-                return null;
-            }
-        }
-
-        ///// <summary>
-        ///// 商户所有 充值面额设置
-        ///// </summary>
-        ///// <param name="errormsg"></param>
-        ///// <returns></returns>
-        //public List<ListAllTemplate> ListAllTemplate(ref string errormsg,string memberid="")
+        //public List<ListAllTemplate> ListAllTemplate(ref string errormsg)
         //{
         //    try
         //    {
-        //        string url = "/pos/member/balance/listalltemplatebyshopid";
+        //        string url = "/pos/member/balance/listalltemplate";
 
         //        SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-        //        sort.Add("shopid",MainModel.CurrentShopInfo.shopid);
-        //        if (string.IsNullOrEmpty(memberid))
-        //        {
-        //            sort.Add("memberid",memberid);
-        //        }
 
         //        string json = HttpGET(url, sort);
 
@@ -3457,6 +3414,49 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         //        return null;
         //    }
         //}
+
+        /// <summary>
+        /// 商户所有 充值面额设置
+        /// </summary>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public List<ListAllTemplate> ListAllTemplate(ref string errormsg, string memberid = "")
+        {
+            try
+            {
+                string url = "/pos/member/balance/listalltemplatebyshopid";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+                if (!string.IsNullOrEmpty(memberid))
+                {
+                    sort.Add("memberid", memberid);
+                }
+
+                string json = HttpGET(url, sort);
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    List<ListAllTemplate> resultobj = JsonConvert.DeserializeObject<List<ListAllTemplate>>(rd.data.ToString());
+                    resultobj.OrderBy(e => e.amount);
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "listalltemplate:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "获取用户信息异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
 
 
         /// <summary>
@@ -3621,7 +3621,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             try
             {
                 string url = "/pos/member/balance/getbalancedepositrefundbill";
-
 
                 string testjson = JsonConvert.SerializeObject(Id);
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
