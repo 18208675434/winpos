@@ -171,7 +171,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     item.rechargeamount = customtemplate.amount;
                     item.rewardamount = customtemplate.rewardamount;
-                    item.autoreward = customtemplate.id > 0;
+                    item.autoreward = !customtemplate.customAndreward;// customtemplate.id > 0
                 }
                 RefreshDgv();
             }
@@ -324,7 +324,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         rechargeCardInfo.rechargeamount = customtemplate.amount;
                         rechargeCardInfo.rewardamount = customtemplate.rewardamount;
-                        rechargeCardInfo.autoreward = customtemplate.id > 0;
+                        rechargeCardInfo.autoreward = !customtemplate.customAndreward;// customtemplate.id > 0
                         RefreshDgv();
                     }
                     this.Activate();
