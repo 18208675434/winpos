@@ -33,8 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenCreate));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenCreate));
             this.dgvGood = new System.Windows.Forms.DataGridView();
             this.barcode = new System.Windows.Forms.DataGridViewImageColumn();
             this.label13 = new System.Windows.Forms.Label();
@@ -47,7 +47,6 @@
             this.lblMenu = new System.Windows.Forms.Label();
             this.picMenu = new System.Windows.Forms.PictureBox();
             this.btnCancle = new System.Windows.Forms.Button();
-            this.btnMenu = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
             this.pnlDgvHead = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -86,6 +85,7 @@
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.picLoading = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -225,9 +225,9 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.Black;
+            this.pnlHead.Controls.Add(this.btnClear);
             this.pnlHead.Controls.Add(this.pnlMenu);
             this.pnlHead.Controls.Add(this.btnCancle);
-            this.pnlHead.Controls.Add(this.btnMenu);
             this.pnlHead.Controls.Add(this.lblShopName);
             this.pnlHead.Font = new System.Drawing.Font("宋体", 9F);
             this.pnlHead.Location = new System.Drawing.Point(0, 0);
@@ -276,7 +276,7 @@
             this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnCancle.ForeColor = System.Drawing.Color.White;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnCancle.Location = new System.Drawing.Point(880, 14);
+            this.btnCancle.Location = new System.Drawing.Point(785, 14);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(95, 35);
             this.btnCancle.TabIndex = 43;
@@ -284,30 +284,6 @@
             this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnCancle.UseVisualStyleBackColor = false;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.AutoSize = true;
-            this.btnMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMenu.BackColor = System.Drawing.Color.Black;
-            this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMenu.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatAppearance.BorderSize = 0;
-            this.btnMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenu.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.btnMenu.ForeColor = System.Drawing.Color.White;
-            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenu.Location = new System.Drawing.Point(714, 16);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(142, 30);
-            this.btnMenu.TabIndex = 40;
-            this.btnMenu.Text = "某某某，你好  ∨";
-            this.btnMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnMenu.UseVisualStyleBackColor = false;
             // 
             // lblShopName
             // 
@@ -816,6 +792,25 @@
             this.picLoading.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
             this.picLoading.Visible = false;
             // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Black;
+            this.btnClear.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClear.BackgroundImage")));
+            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnClear.Location = new System.Drawing.Point(902, 14);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(95, 35);
+            this.btnClear.TabIndex = 50;
+            this.btnClear.Text = "清空";
+            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // FormBrokenCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -885,7 +880,6 @@
         //private UserControl.transparentPic picBirthday;
         private System.Windows.Forms.Panel pnlHead;
         private System.Windows.Forms.Label lblShopName;
-        private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Button btnScan;
         // private UserControl.transparentPic picLoading;
         private System.Windows.Forms.Panel pnlDgvHead;
@@ -924,5 +918,6 @@
         private System.Windows.Forms.Button btnBatchBroken;
         private System.Windows.Forms.Label lblTotalSaleAmount;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnClear;
     }
 }

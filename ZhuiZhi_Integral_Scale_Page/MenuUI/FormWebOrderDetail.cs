@@ -220,70 +220,81 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
             {
                 return;
             }
-           
-                    IsEnable = false;
+            try
+            {
 
-                    BackHelper.ShowFormBackGround();
-                    frmRefundSelect frmrefund = new frmRefundSelect(CurrentOrder);
-                  
-                    frmrefund.ShowDialog();
+                IsEnable = false;
 
-                    BackHelper.HideFormBackGround();
+                BackHelper.ShowFormBackGround();
+                frmRefundSelect frmrefund = new frmRefundSelect(CurrentOrder);
 
-                    if (frmrefund.DialogResult == DialogResult.OK)
+                frmrefund.ShowDialog();
+
+                BackHelper.HideFormBackGround();
+
+                if (frmrefund.DialogResult == DialogResult.OK)
+                {
+                    string totalpay = MenuHelper.GetTotalPayInfo(frmrefund.Reforder);
+
+                    if (!ConfirmHelper.Confirm("确认退款？", "应退 " + totalpay))
                     {
-                        string totalpay = MenuHelper.GetTotalPayInfo(frmrefund.Reforder);
+                        return;
+                    }
 
-                        if (!ConfirmHelper.Confirm("确认退款？", "应退 " + totalpay))
+
+                    string orderid = CurrentOrder.orderid;
+                    string ErrorMsg = "";
+                    string resultorderid = httputil.Refund(frmrefund.Refrefundpara, ref ErrorMsg);
+                    if (ErrorMsg != "")
+                    {
+                        MainModel.ShowLog(ErrorMsg, true);
+                    }
+                    else
+                    {
+
+                        AbnormalOrderUtil.RefundOrderList(resultorderid, frmrefund.Refrefundpara);
+                        PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
+
+                        if (ErrorMsg != "" || printdetail == null)
                         {
-                            return;
-                        }
-
-
-                        string orderid = CurrentOrder.orderid;
-                        string ErrorMsg = "";
-                        string resultorderid = httputil.Refund(frmrefund.Refrefundpara, ref ErrorMsg);
-                        if (ErrorMsg != "")
-                        {
+                            LoadingHelper.CloseForm();
                             MainModel.ShowLog(ErrorMsg, true);
                         }
                         else
                         {
+                            //SEDPrint(printdetail);
+                            string PrintErrorMsg = "";
+                            bool printresult = PrintUtil.PrintOrder(printdetail, true, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
 
-                            AbnormalOrderUtil.RefundOrderList(resultorderid, frmrefund.Refrefundpara);
-                            PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
-
-                            if (ErrorMsg != "" || printdetail == null)
+                            if (PrintErrorMsg != "" || !printresult)
                             {
-                                LoadingHelper.CloseForm();
-                                MainModel.ShowLog(ErrorMsg, true);
+                                MainModel.ShowLog(PrintErrorMsg, true);
                             }
                             else
                             {
-                                //SEDPrint(printdetail);
-                                string PrintErrorMsg = "";
-                                bool printresult = PrintUtil.PrintOrder(printdetail, true, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
-
-                                if (PrintErrorMsg != "" || !printresult)
-                                {
-                                    MainModel.ShowLog(PrintErrorMsg, true);
-                                }
-                                else
-                                {
-                                    // MainModel.ShowLog("打印完成", false);
-                                }
-
+                                // MainModel.ShowLog("打印完成", false);
                             }
 
-                            MainModel.ShowLog("退款成功", false);
-                            try { PrintUtil.OpenCashDrawerEx(); }
-                            catch { }
                         }
 
-                        CloseForm();
-
+                        MainModel.ShowLog("退款成功", false);
+                        try { PrintUtil.OpenCashDrawerEx(); }
+                        catch { }
                     }
-                    IsEnable = true;
+
+                    CloseForm();
+
+                }
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsEnable = true;
+            }
                     
         }
 

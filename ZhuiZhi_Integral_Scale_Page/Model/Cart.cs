@@ -247,6 +247,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string specdesc { get; set; }
         public Price price { get; set; }
         public string barcode { get; set; }
+        /// <summary>
+        /// 0 标品  1 散称
+        /// </summary>
         public int goodstagid { get; set; }
         public string goodstag { get; set; }
         public decimal specnum { get; set; }

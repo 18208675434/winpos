@@ -587,7 +587,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 return str;
             }
         }
-        private static List<string> substr(string str, int linelength)
+        public static List<string> substr(string str, int linelength)
         {
             try
             {

@@ -1064,7 +1064,7 @@
             this.lblMemberPhone.Name = "lblMemberPhone";
             this.lblMemberPhone.Size = new System.Drawing.Size(168, 20);
             this.lblMemberPhone.TabIndex = 25;
-            this.lblMemberPhone.Text = "手机号：12345678901";
+            this.lblMemberPhone.Text = "会员账号：12345678901";
             // 
             // pnlWaitingMember
             // 

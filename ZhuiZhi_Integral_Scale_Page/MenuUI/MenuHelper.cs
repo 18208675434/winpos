@@ -102,8 +102,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                 BackHelper.ShowFormBackGround();
                 FormRefundByAmt frmitem = new FormRefundByAmt(order);
 
-                asf.AutoScaleControlTest(frmitem, 600, 460, 600 * MainModel.midScale, 460 * MainModel.midScale, true);
-                frmitem.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmitem.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmitem.Height) / 2);
+                asf.AutoScaleControlTest(frmitem, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmitem.Location = new System.Drawing.Point(0,0);
                 frmitem.TopMost = true;
 
 

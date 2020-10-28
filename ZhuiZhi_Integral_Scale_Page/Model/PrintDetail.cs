@@ -9,6 +9,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
 
     public class PrintDetail
     {
+        /// <summary>
+        /// 是否退款标识
+        /// </summary>
+        public bool isrefund { get; set; }
         public string title { get; set; }
         public decimal totalpayment { get; set; }
         public ProductDetail[] products { get; set; }

@@ -166,6 +166,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
             }
         }
 
+        public static void ShowBalancePwdLog(string msg)
+        {
+            try
+            {
+                if (frmmainmedia != null && HaveMedia)
+                {
+                    frmmainmedia.ShowBalancePwdLog(msg);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("跟新客屏购物车异常" + ex.Message);
+            }
+        }
+
+
+
         public static void LoadMember()
         {
             try

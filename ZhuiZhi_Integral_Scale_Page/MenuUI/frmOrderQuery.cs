@@ -610,7 +610,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     LoadingHelper.CloseForm();
                     btnQuery_Click(null, null);
                 }
-                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpDetail)
+                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpDetail) //订单详情
                 {
                     string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
 
@@ -634,7 +634,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     FormWebOrderDetailBack frmback = new FormWebOrderDetailBack(SelectOrder);
 
                     frmback.ShowDialog();
-
+                    btnQuery_Click(null, null);
                 }
                 
             }
