@@ -427,7 +427,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                      YKPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
                 }
-
                 return;
             }
             catch
