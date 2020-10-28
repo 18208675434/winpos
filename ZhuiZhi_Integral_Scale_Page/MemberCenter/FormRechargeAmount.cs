@@ -27,25 +27,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void FormRechargeAmount_Shown(object sender, EventArgs e)
         {
             string errormsg = "";
-    
-                LoadingHelper.ShowLoadingScreen();
-                MainModel.LstRechargeTemplates = new HttpUtil().ListAllTemplate(ref errormsg);
-                LoadingHelper.CloseForm();
 
-        
+            LoadingHelper.ShowLoadingScreen();
+            lstRechargeTemplates = new HttpUtil().ListAllTemplate(ref errormsg);
+            LoadingHelper.CloseForm();
+
             if (lstRechargeTemplates == null)
             {
-                if (MainModel.LstRechargeTemplates != null)
-                {
-                    lstRechargeTemplates = MainModel.LstRechargeTemplates.GetRange(0, MainModel.LstRechargeTemplates.Count);
-                }
-                else
-                {
-                    lstRechargeTemplates = new List<ListAllTemplate>();
-                }
-                lstRechargeTemplates.Add(new ListAllTemplate());
+                lstRechargeTemplates = new List<ListAllTemplate>();
             }
-
+            lstRechargeTemplates.Add(new ListAllTemplate() { id = -1 });
+        
             if (lstRechargeTemplates.Count > 7)
             {
                 //计算分页按钮位置
@@ -63,7 +55,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             Bitmap bmp = (Bitmap)dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             listAllTemplate = (ListAllTemplate)bmp.Tag;
-            if (listAllTemplate.id == 0)
+            if (listAllTemplate.id == -1)
             {
                 this.Hide();
                 //FormBackGround tempfrmback=null;
@@ -132,7 +124,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             List<ListAllTemplate> pageRechargeTemplates = lstRechargeTemplates.GetRange(startindex, lastindex - startindex + 1);
             foreach (var item in pageRechargeTemplates)
             {
-                if (item.id > 0)
+                if (item.id >= 0)
                 {
                     pnlCustom.Visible = false;
                     pnlTemplate.Visible = true;
@@ -156,6 +148,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             lblAmount.Text = item.amount.ToString();
             lblRewardAmount.Text = string.Format("赠送金额{0}元", item.rewardamount.ToString());
+
+
+            //lblRewardAmount.Text = "";
+            //if (item.rewardamount > 0)
+            //{
+            //    lblRewardAmount.Text = "赠" + item.rewardamount.ToString("f2") + "元";
+            //}
+            //lblRewardAmount.Text += item.couponname;
             Bitmap picItem = (Bitmap)MainModel.GetControlImage(pnlItem);
             return picItem;
         }
