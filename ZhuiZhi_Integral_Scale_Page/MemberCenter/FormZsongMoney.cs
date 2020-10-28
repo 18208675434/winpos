@@ -282,7 +282,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
                 CustomTemplate = new ListAllTemplate();
-                CustomTemplate.id = 0;
+                CustomTemplate.id = -1;
                 CustomTemplate.amount = cash;
                 CustomTemplate.customAndreward = true;
                 if (!string.IsNullOrEmpty(inputz.Text))

@@ -75,7 +75,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return ;
                 }
 
-                CustomTemplate.id = 0;
+                CustomTemplate.id = -1;
                 CustomTemplate.amount = cash;
                 CustomTemplate.rewardamount = rewardamount;
                 this.DialogResult = DialogResult.OK;
