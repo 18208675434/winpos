@@ -463,14 +463,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.getStrLine() + "\r\n");
 
-                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize) + "\r\n");
-
-
-                    if (Convert.ToDecimal(printdetail.deliveryamt) > 0)
+                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("实付金额：", printdetail.productamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\r\n");
+                    if (printdetail.deliveryamt > 0)
                     {
-                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize) + "\r\n");
-                    } ///
-                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize) + "\r\n");
+                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("配送费：", printdetail.deliveryamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\r\n");
+                    }
+                    if (printdetail.promoamt > 0)
+                    {
+                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("活动优惠：", printdetail.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\r\n");
+                    }
+                    if (printdetail.couponamt > 0)
+                    {
+                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("优惠券抵：", printdetail.couponamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\r\n");
+                    }
+                    if (printdetail.pointpayamt > 0)
+                    {
+                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("积分抵现：", printdetail.pointpayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\r\n");
+                    }
+                    if (printdetail.balancepayamt > 0)
+                    {
+                        POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("余额支付：", printdetail.balancepayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\r\n");
+                    }
+                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("实付金额：", printdetail.totalpayment.ToString("f2"), BodyCharCountOfLine, PageSize) + "\r\n");
 
                     if (!string.IsNullOrEmpty(printdetail.pickcode))
                     {
