@@ -1191,7 +1191,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
         }
 
-        private void btnBatchBrokenbtnBatchBroken_Click(object sender, EventArgs e)
+        private void btnBatchBroken_Click(object sender, EventArgs e)
         {
             try
             {
