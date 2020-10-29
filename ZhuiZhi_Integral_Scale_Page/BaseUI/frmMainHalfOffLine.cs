@@ -1376,6 +1376,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     this.Invoke(new InvokeHandler(delegate()
                     {
 
+                        ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.CurrentMemberid = member.memberheaderresponsevo.memberid;
                         ShowLoading(true, false);
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
