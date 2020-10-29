@@ -712,7 +712,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 this.Hide();
-                if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid,acmount,realCash))
+                if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid,realCash))
                 {
                     this.Close();
                     return;

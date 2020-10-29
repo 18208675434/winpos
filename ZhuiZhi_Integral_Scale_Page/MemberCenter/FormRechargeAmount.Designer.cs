@@ -313,8 +313,8 @@
             this.Controls.Add(this.rbtnPageUp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.pnlItem);
             this.Controls.Add(this.dgvData);
+            this.Controls.Add(this.pnlItem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormRechargeAmount";
             this.ShowInTaskbar = false;

@@ -483,7 +483,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         orderids.Add(item.depositbillid);
                     }
-                    if (!MemberCenterHelper.ShowRechargeSuccess(batchoperatorid, totalPay, realCash, orderids))
+                    if (!MemberCenterHelper.ShowRechargeSuccess(batchoperatorid, realCash, orderids))
                     {
                         this.Close();
                         return;
