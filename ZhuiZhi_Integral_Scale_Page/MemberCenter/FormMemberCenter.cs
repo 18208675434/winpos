@@ -136,9 +136,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadCoupon();
             }));
 
-            if (MainModel.CurrentMember.outentitycards != null)
+            if (CurrentMember.outentitycards != null)
             {
-                lblEntityCard.Text = MainModel.CurrentMember.outentitycards.Count + "张";
+                lblEntityCard.Text = CurrentMember.outentitycards.Count + "张";
                 picEntityCard.Left = lblEntityCard.Right;
             }
 
@@ -756,13 +756,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                if (MainModel.CurrentMember.outentitycards == null || MainModel.CurrentMember.outentitycards.Count == 0)
+                if (CurrentMember.outentitycards == null || CurrentMember.outentitycards.Count == 0)
                 {
                     MainModel.ShowLog("暂无实体卡", false);
                     return;
                 }
 
-                if (MemberCenterHelper.ShowFormEntityCardList(MainModel.CurrentMember.outentitycards))
+                if (MemberCenterHelper.ShowFormEntityCardList(CurrentMember.outentitycards))
                 {
                     UpdateMemberInfo();
                 }
