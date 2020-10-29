@@ -116,6 +116,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public static bool WhetherHalfOffLine = true;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public static bool WhetherShowWithJin = true;
+
+        /// <summary>
         /// 接口返回code 100031;//店员登录失效
         /// </summary>
         public static int HttpUserExpired = 100031;

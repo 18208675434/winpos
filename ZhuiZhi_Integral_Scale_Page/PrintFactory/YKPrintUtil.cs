@@ -201,7 +201,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     //每次打印先清空之前内容
                     lstPrintStr = new List<string>();
 
-                    PrintStr( new StringBuilder(PrintHelper.MergeStr("报损单", "", HeadCharCountOfLine, PageSize)));
+                    PrintStr(new StringBuilder(PrintHelper.MergeStr("报损单", "", HeadCharCountOfLine, PageSize) + "\n"));
                     lstPrintStr.Add(" ");
 
                     PrintTextByPaperWidth(PrintHelper.GetBrokenPrintInfo(brokenresult));
