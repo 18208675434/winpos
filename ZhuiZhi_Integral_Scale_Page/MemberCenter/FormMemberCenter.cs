@@ -480,7 +480,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 int totalSize = 0;
                 string ErrorMsg = "";              
-                List<PromotionCoupon> pageLstCoupon = httputil.MyCouponList(CurrentMember.memberinformationresponsevo.memberid,15,ref lastcouponcode, ref totalSize, ref ErrorMsg);
+                List<PromotionCoupon> pageLstCoupon = httputil.MyCouponList(CurrentMember.memberinformationresponsevo.memberid,30,ref lastcouponcode, ref totalSize, ref ErrorMsg);
                 if (pageLstCoupon == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
                     return;
