@@ -435,9 +435,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         ReturnMembr = member;
 
 
-                        Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.LoadMemberInfo);
-                        threadloadMember.IsBackground = true;
-                        threadloadMember.Start();
+                        //Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.LoadMemberInfo);
+                        //threadloadMember.IsBackground = true;
+                        //threadloadMember.Start();
 
                         lblCreditStr.Text = "积分" + member.creditaccountrepvo.availablecredit.ToString();
 
@@ -480,7 +480,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         }
                         else
                         {
-                            CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
+                            //CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
                         }
                        
                         IsEnable = true;
@@ -1910,10 +1910,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             lblCredit.Visible = true;
                             picCredit.Visible = true;
 
-                            //有会员登录每次刷新购物车都刷一次优惠券接口
-                            Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.ListMemberCouponAvailable);
-                            threadloadMember.IsBackground = true;
-                            threadloadMember.Start();
+                            ////有会员登录每次刷新购物车都刷一次优惠券接口
+                            //Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.ListMemberCouponAvailable);
+                            //threadloadMember.IsBackground = true;
+                            //threadloadMember.Start();
 
                         }
                     }
@@ -1940,7 +1940,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-                    CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
+                   // CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
                     ClearForm();
                     return true;
                 }
@@ -2330,7 +2330,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     if (CurrentCart.products == null || CurrentCart.products.Count == 0)
                     {
-                        CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
+                        //CurrentCart.unavailablecoupons = CartUtil.GetAllOrderCoupon();
                     }
 
                     if (ReturnMembr != null && ReturnMembr.isUsePoint)
@@ -2343,10 +2343,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             lblCredit.Visible = true;
                             picCredit.Visible = true;
 
-                            //有会员登录每次刷新购物车都刷一次优惠券接口
-                            Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.ListMemberCouponAvailable);
-                            threadloadMember.IsBackground = true;
-                            threadloadMember.Start();
+                            ////有会员登录每次刷新购物车都刷一次优惠券接口
+                            //Thread threadloadMember = new Thread(ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine.HalfOffLineUtil.ListMemberCouponAvailable);
+                            //threadloadMember.IsBackground = true;
+                            //threadloadMember.Start();
                         }
                     }
                     else

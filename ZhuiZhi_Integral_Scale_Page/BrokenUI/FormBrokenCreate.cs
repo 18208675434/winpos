@@ -1281,13 +1281,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                       if (!pro.weightflag)
                         {
                             totalprice += pro.num * pro.deliveryprice;
-                           
+                            totalsaleamount += pro.num * pro.saleprice;
                         }
                         else
                         {
                             totalprice += pro.specnum * pro.deliveryprice;
+                            totalsaleamount+= pro.specnum * pro.saleprice;
                         }
-                      totalsaleamount += pro.num * pro.saleprice;
+                      
                 }
 
                 rbtnPageDown.WhetherEnable = CurrentProducts.Count > CurrentPage * 6;
