@@ -161,7 +161,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             if (dgvCard.Rows.Count >= 20)
             {
-                MainModel.ShowLog("单词批量你最多添加20个");
+                MainModel.ShowLog("单次批量你最多添加20个");
                 return;
             }
             ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
