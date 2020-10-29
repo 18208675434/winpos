@@ -43,27 +43,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
 
-        public static bool ShowFormTopUpByCash(decimal amount)
+        public static bool ShowFormTopUpByCash(decimal amount,ref decimal realCash)
         {
             try
             {
-
                 BackHelper.ShowFormBackGround();
 
                 FormTopUpByCash frmpaybycash = new FormTopUpByCash(amount);
                 asf.AutoScaleControlTest(frmpaybycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
                 frmpaybycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybycash.Height) / 2);
                 frmpaybycash.TopMost = true;
-                frmpaybycash.ShowDialog();
+                bool flag =frmpaybycash.ShowDialog() == DialogResult.OK;
+                if (flag)
+                {
+                    realCash = frmpaybycash.RealCash;
+                }
                 frmpaybycash.Dispose();
-
-
+               
                 BackHelper.HideFormBackGround();
                 Application.DoEvents();
 
-                return frmpaybycash.DialogResult == DialogResult.OK;
-
-
+                return flag;
             }
             catch (Exception ex)
             {
@@ -685,7 +685,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         #region 充值结果
         private static FormRechargeSuccess formRechargeSuccess = null;
-        public static bool ShowRechargeSuccess(string billid, List<string> orderids = null)
+        /// <summary>
+        /// 充值成功页面
+        /// </summary>
+        /// <param name="billid">单号</param>
+        /// <param name="realCash">实际支付金额，计划打印找零使用，暂未使用</param>
+        /// <param name="orderids">子订单id，批量售卡使用</param>
+        /// <returns></returns>
+        public static bool ShowRechargeSuccess(string billid,decimal realCash, List<string> orderids = null)
         {
             try
             {
@@ -698,6 +705,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 formRechargeSuccess.billid = billid;
                 formRechargeSuccess.orderids = orderids;//批量售卡使用
+                formRechargeSuccess.realCash = realCash;
                 bool flag = formRechargeSuccess.ShowDialog() == DialogResult.OK;
                 formRechargeSuccess.Dispose();
                 return flag;

@@ -39,7 +39,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         //充值金额
         public decimal TopUpAmount = 0;
 
-
+        public decimal RealCash =0;
 
         public FormTopUpByCash(decimal topupquantity)
         {
@@ -126,6 +126,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                         Application.DoEvents();
                         if (frmpaycashtochange.DialogResult == DialogResult.OK)
                         {
+                            RealCash = doublenum;
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                         }

@@ -29,7 +29,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
        public string billid=null;
        public List<string> orderids=null;//批量充值使用
-
+       public decimal realCash = 0;//实付
 
         //<summary>
         //按比例缩放页面及控件
@@ -134,7 +134,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 MainModel.ShowLog(errormsg, true);
                 return false;
             }
-            ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint printdetail = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.TopUpPrint();
+            model.TopUpPrint printdetail = new model.TopUpPrint();
 
             decimal amount = 0;
             decimal rewardAmount = 0;
@@ -150,6 +150,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             printdetail.paymodeforapi = result[0].paymodeforapi;
             printdetail.paymode = result[0].paymode;
             printdetail.createdat = MainModel.getStampByDateTime(DateTime.Now);
+            printdetail.realCash = realCash;
             return PrintUtil.PrintTopUp(printdetail, true);
         }
 

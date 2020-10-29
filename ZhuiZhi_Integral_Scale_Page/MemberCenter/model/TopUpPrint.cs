@@ -36,6 +36,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model
         /// </summary>
         public decimal rewardamount { get; set; }
 
+        public decimal realCash { get; set; }//实付,打印小票使用
+
         public bool isEntityCardBatchSale { get; set; }
     }
 }

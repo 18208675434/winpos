@@ -102,7 +102,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             btnScan.Select();
 
             CurrentProducts = DbJsonUtil.GetRecord<List<BrokenProduct>>(DbJsonUtil.BrokenProducts);
-            LoadDgvCart();
+            //LoadDgvCart();
+            RefreshCart();
         }
 
         private void frmMain_Load(object sender, EventArgs e)

@@ -234,7 +234,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MemberCenterHelper.ShowFormNoPayPwd();
                     return;
                 }
-                if (MemberCenterHelper.ShowFormTopUpByCash(CurrentTemplate.amount))
+                decimal realCash = 0;
+                if (MemberCenterHelper.ShowFormTopUpByCash(CurrentTemplate.amount,ref realCash))
                 {
 
                     MemberTopUpPara para = new MemberTopUpPara();
@@ -263,7 +264,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     {
                         //DbJsonUtil.AddBalanceInfo("现金", para.amount);
                      
-                        TopUpOK(result.ToString());
+                        TopUpOK(result.ToString(), CurrentTemplate.amount, realCash);
                     }
                 }
             }
@@ -706,12 +707,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        private void TopUpOK(string depositbillid)
+        private void TopUpOK(string depositbillid, decimal acmount = 0, decimal realCash = 0)
         {
             try
             {
                 this.Hide();
-                if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid))
+                if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid,realCash))
                 {
                     this.Close();
                     return;
