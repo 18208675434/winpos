@@ -284,6 +284,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.WhetherPrint = INIManager.GetIni("CashierSet", "WhetherPrint", MainModel.IniPath) == "1";
                 MainModel.WhetherAutoPrint = INIManager.GetIni("CashierSet", "WhetherAutoPrint", MainModel.IniPath) == "1";
                 MainModel.WhetherHalfOffLine = INIManager.GetIni("System", "WhetherHalfOffLine", MainModel.IniPath) == "1";
+                MainModel.WhetherShowWithJin = INIManager.GetIni("System", "WhetherShowWithJin", MainModel.IniPath) == "1";
                 #endregion
 
                 //判断是否支持整单改价
@@ -900,14 +901,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     return;
                 }
+                bool tempwhethershowwithjin = MainModel.WhetherShowWithJin;
+                IsEnable = false;
                 frmPrinterSetting frmprintset = new frmPrinterSetting();
                 asf.AutoScaleControlTest(frmprintset, 1170, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmprintset.ShowDialog();
 
+                if (tempwhethershowwithjin != MainModel.WhetherShowWithJin)
+                {
+                    LstAllProduct.ForEach(r => r.panelbmp = null);
+
+                    sortCartByFirstCategoryid[CurrentFirstCategoryid].products.ForEach(r => r.panelbmp = null);
+
+
+                    LoadDgvGood(true, true);
+                }
+
                 LoadPnlScale();
+
+                IsEnable = true;
             }
             catch (Exception ex)
             {
+                IsEnable = true;
                 LogManager.WriteLog("打印机设置页面异常" + ex.Message);
             }
         }
@@ -2281,31 +2297,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
 
                 lblGoodCode.Text = pro.skucode;
-                lblPriceDetail.Text = "/" + pro.saleunit;
+               
 
 
                 if (pro.price != null)
                 {
-                    if (pro.price.saleprice == pro.price.originprice)
+                    if (pro.goodstagid != 0 && MainModel.WhetherShowWithJin)
                     {
-                        lblPrice.Text = "￥" + pro.price.saleprice.ToString("f2");
+
+                        lblPrice.Text = "￥" + Math.Round(pro.price.saleprice / 2, 2, MidpointRounding.AwayFromZero).ToString("f2");
+                        lblPriceDetail.Text = "/斤";
                     }
                     else
                     {
                         lblPrice.Text = "￥" + pro.price.saleprice.ToString("f2");
+                        lblPriceDetail.Text = "/" + pro.saleunit;
                     }
+                        
+                   
                 }
                 else
                 {
                 }
 
-                if (pro.price != null && pro.price.saleprice == pro.price.originprice)
-                {
-                    lblPrice.Text = "￥" + pro.price.saleprice.ToString("f2");
-                }
-                else
-                {
-                }
 
                 lblPriceDetail.Left = lblPrice.Left + lblPrice.Width - 3;
 
