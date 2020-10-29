@@ -407,11 +407,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     return;
                 }
-                if (totalPay == 0)
-                {
-                    MainModel.ShowLog("请设置充值金额");
-                    return;
-                }
+                //if (totalPay == 0)
+                //{
+                //    MainModel.ShowLog("请设置充值金额");
+                //    return;
+                //}
 
                 string customerpaycode = "";
                 if (paymode == PayMode.other)//其它支付
