@@ -246,7 +246,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     locationY = lblCardStatus.Location.Y;
                 }
                 lblCardNo.Text = rechargeCardInfo.cardid;
-                if (rechargeCardInfo.rechargeamount > 0)
+                if (rechargeCardInfo.rechargeamount > 0||rechargeCardInfo.rewardamount>0)
                 {
                     lblRechargeAmountWarterTxt.Visible = false;
                     txtRechargeAmount.Text = rechargeCardInfo.rechargeamount.ToString();
