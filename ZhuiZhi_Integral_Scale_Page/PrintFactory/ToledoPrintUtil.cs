@@ -255,26 +255,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     PrintText(PrintHelper.getStrLine(), 25);
 
 
-                    PrintText(PrintHelper.MergeStr("商品金额：", printdetail.productamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    PrintText(PrintHelper.MergeStr("商品金额：", printdetail.productamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n",25);
                     if (printdetail.deliveryamt > 0)
                     {
-                        PrintText(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                        PrintText(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n", 25);
                     }
                     if (printdetail.promoamt > 0)
                     {
-                        PrintText(PrintHelper.MergeStr("活动优惠：", printdetail.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                        PrintText(PrintHelper.MergeStr("活动优惠：", printdetail.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n", 25);
                     }
                     if (printdetail.couponamt > 0)
                     {
-                        PrintText(PrintHelper.MergeStr("优惠券抵：", printdetail.couponamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                        PrintText(PrintHelper.MergeStr("优惠券抵：", printdetail.couponamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n", 25);
                     }
                     if (printdetail.pointpayamt > 0)
                     {
-                        PrintText(PrintHelper.MergeStr("积分抵现：", printdetail.pointpayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                        PrintText(PrintHelper.MergeStr("积分抵现：", printdetail.pointpayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n", 25);
                     }
                     if (printdetail.balancepayamt > 0)
                     {
-                        PrintText(PrintHelper.MergeStr("余额支付：", printdetail.balancepayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                        PrintText(PrintHelper.MergeStr("余额支付：", printdetail.balancepayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n", 25);
                     }
                     
                     PrintText(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment.ToString("f2"), BodyCharCountOfLine, PageSize), 25);
