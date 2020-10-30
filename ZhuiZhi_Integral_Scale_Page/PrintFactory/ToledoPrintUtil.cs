@@ -233,7 +233,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     {
                         PrintText(printdetail.remark, 32);
                     }
-                    PrintText("期望送达时间：" + printdetail.expecttimedesc, 30);
+                    PrintText("期望送达时间：" , 32);
+                    PrintText( printdetail.expecttimedesc, 32);
 
 
 
