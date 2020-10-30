@@ -27,7 +27,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public static bool isokcancle;
         public static string code = "";
         public static string memberid = "";
-        public static string GetPhone = "";
         #region  会员中心   变量 （待优化）   
         /// <summary>
         /// 余额全局变量
@@ -115,6 +114,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// 在线模式想 半离线是否开启
         /// </summary>
         public static bool WhetherHalfOffLine = true;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool WhetherShowWithJin = true;
 
         /// <summary>
         /// 接口返回code 100031;//店员登录失效

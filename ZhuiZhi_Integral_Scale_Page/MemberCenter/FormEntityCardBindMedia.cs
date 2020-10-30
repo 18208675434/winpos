@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 using ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
@@ -23,11 +24,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             lblShopName.Text = ZhuiZhi_Integral_Scale_UncleFruit.Model.MainModel.Titledata + "   " + ZhuiZhi_Integral_Scale_UncleFruit.Model.MainModel.CurrentShopInfo.shopname;          
         }
-        public void UpdateEntityCardInfo(EntityCard entityCard)
+        public void UpdateEntityCardInfo(OutEntityCardResponseDto entityCard)
         {
             lblEntityCardNo.Text = entityCard.outcardid;
-            lblMemberId.Text = entityCard.memberid;
+            lblMemberId.Text = MainModel.CurrentMember.memberheaderresponsevo.mobile;
             lblBalance.Text = "￥" + entityCard.balance.ToString("f2");
+            lblBalance.Location = new Point(lblBalance.Right + 20, lblBalance.Location.Y);
         }
     }
 }

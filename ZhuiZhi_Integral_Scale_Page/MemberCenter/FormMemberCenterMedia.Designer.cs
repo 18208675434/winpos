@@ -39,7 +39,6 @@
             this.pnlItem = new System.Windows.Forms.Panel();
             this.lblAmountStr = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.dgvTemplate = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn6 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn7 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -72,7 +71,6 @@
             this.btnpw2 = new System.Windows.Forms.Button();
             this.btnpw1 = new System.Windows.Forms.Button();
             this.pnlDefault = new System.Windows.Forms.Panel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pnlMemberInfo = new System.Windows.Forms.Panel();
             this.lblCreditAmount = new System.Windows.Forms.Label();
             this.lblEntityCardNo = new System.Windows.Forms.Label();
@@ -153,7 +151,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.pnlDefault.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.pnlMemberInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -208,18 +205,6 @@
             this.lblAmount.Text = "500元";
             this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(99, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(150, 35);
-            this.label3.TabIndex = 57;
-            this.label3.Text = "您正在充值";
-            // 
             // dgvTemplate
             // 
             this.dgvTemplate.AllowUserToAddRows = false;
@@ -254,7 +239,7 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvTemplate.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTemplate.GridColor = System.Drawing.Color.White;
-            this.dgvTemplate.Location = new System.Drawing.Point(512, 91);
+            this.dgvTemplate.Location = new System.Drawing.Point(512, 56);
             this.dgvTemplate.MultiSelect = false;
             this.dgvTemplate.Name = "dgvTemplate";
             this.dgvTemplate.ReadOnly = true;
@@ -677,25 +662,12 @@
             // pnlDefault
             // 
             this.pnlDefault.Controls.Add(this.dgvTemplate);
-            this.pnlDefault.Controls.Add(this.label3);
-            this.pnlDefault.Controls.Add(this.pictureBox4);
             this.pnlDefault.Controls.Add(this.pnlMemberInfo);
             this.pnlDefault.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDefault.Location = new System.Drawing.Point(3, 3);
             this.pnlDefault.Name = "pnlDefault";
             this.pnlDefault.Size = new System.Drawing.Size(1157, 717);
             this.pnlDefault.TabIndex = 303;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(32, 30);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox4.TabIndex = 56;
-            this.pictureBox4.TabStop = false;
             // 
             // pnlMemberInfo
             // 
@@ -717,7 +689,7 @@
             this.pnlMemberInfo.Controls.Add(this.lblMemberInfo);
             this.pnlMemberInfo.Controls.Add(this.lblPhone);
             this.pnlMemberInfo.Controls.Add(this.label1);
-            this.pnlMemberInfo.Location = new System.Drawing.Point(32, 91);
+            this.pnlMemberInfo.Location = new System.Drawing.Point(32, 56);
             this.pnlMemberInfo.Name = "pnlMemberInfo";
             this.pnlMemberInfo.Size = new System.Drawing.Size(460, 582);
             this.pnlMemberInfo.TabIndex = 38;
@@ -1623,8 +1595,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.pnlDefault.ResumeLayout(false);
-            this.pnlDefault.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.pnlMemberInfo.ResumeLayout(false);
             this.pnlMemberInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -1672,8 +1642,6 @@
         private System.Windows.Forms.Panel pnlItem;
         private System.Windows.Forms.Label lblAmountStr;
         private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.DataGridView dgvTemplate;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn6;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn7;

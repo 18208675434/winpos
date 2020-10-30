@@ -18,12 +18,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public String username{set;get;} //用户名称
         public List<PickProduct> productdetaillist { set; get; } //商品信息
        //public PrinterInfo printerInfo{set;get;} //打印机信息
-        public String productamt{set;get;} //商品金额"{set;get;}
-        public String deliveryamt{set;get;}//配送费
-        public String promoamt{set;get;} //活动优惠
-        public String couponamt{set;get;} //优惠券抵
-        public String pointpayamt{set;get;} //积分抵现"{set;get;}
-        public String totalpayment{set;get;} //实付金额"{set;get;}
+        public decimal productamt{set;get;} //商品金额"{set;get;}
+        public decimal deliveryamt{set;get;}//配送费
+        public decimal promoamt{set;get;} //活动优惠
+        public decimal couponamt{set;get;} //优惠券抵
+        public decimal pointpayamt{set;get;} //积分抵现"{set;get;}
+        public decimal totalpayment{set;get;} //实付金额"{set;get;}
         public String pickcode{set;get;}//提货码
         public String pickname{set;get;}
         public String remark{set;get;} //备注
@@ -35,6 +35,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public String remindmsg{set;get;}
         public String saymsg{set;get;}
         public int printstatus{set;get;}
+        /// <summary>
+        /// 余额支付金额
+        /// </summary>
+        public decimal balancepayamt { set; get; }
     }
 
     public class PickProduct

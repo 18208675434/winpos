@@ -205,7 +205,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public string GetVerifysmscode(string memberid,string smscode, ref string errormsg)
+        public string GetVerifysmscode(string memberid, string smscode, ref string errormsg)
         {
             try
             {
@@ -312,7 +312,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return 0;
             }
         }
-        
+
         /// <summary>
         /// 修改手机号码 全局验证是否是会员
         /// </summary>
@@ -359,14 +359,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="mobile"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public bool Updatemembermobile(string newphone, ref string errormsg)
+        public bool Updatemembermobile(string token, string newphone, ref string errormsg)
         {
             try
             {
                 string url = "/pos/member/memberheader/updatemembermobile";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("token", MainModel.CurrentMember.memberheaderresponsevo.token);
+                sort.Add("token", token);
                 sort.Add("mobile", newphone);
 
                 string json = HttpGET(url, sort);
@@ -396,7 +396,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="mobile"></param>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public bool MergeMemberPhonenumber(string sourcetoken,string targettoken,ref string errormsg)
+        public bool MergeMemberPhonenumber(string sourcetoken, string targettoken, ref string errormsg)
         {
             try
             {
@@ -503,7 +503,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 自定义充值
         /// </summary>
         /// <returns></returns>
-        
+
         public bool CreateMember(CreateMemberPara para, ref string errormsg)
         {
             try
@@ -533,34 +533,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-       
-
         #region 实体卡
-        /// <summary> 获取实体卡 预留
+        /// <summary> 获取实体卡
         /// </summary>
         /// <returns></returns>
-        public EntityCard GetCardByEncryptCardId(string encryptcardid, ref string errormsg)
+        public OutEntityCardResponseDto GetCardNew(string oldcardid, ref string errormsg)
         {
             try
             {
-                string url = "/pos/member/memberentitycard/getcardbyencryptcardid";
+                string url = "/pos/member/oldentitycard/getcardnew";
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("encryptcardid", encryptcardid);
+                sort.Add("oldcardid", oldcardid);
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
-                    EntityCard entityCard = JsonConvert.DeserializeObject<EntityCard>(rd.data.ToString());
+                    OutEntityCardResponseDto entityCard = JsonConvert.DeserializeObject<OutEntityCardResponseDto>(rd.data.ToString());
                     return entityCard;
                 }
                 else
                 {
-                    LogManager.WriteLog("Error", "GetCardByEncryptCardId:" + encryptcardid + "失败" + json);
+                    LogManager.WriteLog("Error", "getcardnew:" + oldcardid + "失败" + json);
+                    errormsg = rd.message;
                 }
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("Error", "GetCardByEncryptCardId异常：" + ex.Message);
+                LogManager.WriteLog("Error", "GetCard异常：" + ex.Message);
                 errormsg = "网络连接异常，请检查网络连接";
             }
             return null;
@@ -569,7 +568,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary> 获取旧实体卡
         /// </summary>
         /// <returns></returns>
-        public EntityCard GetCard(string oldcardid, ref string errormsg)
+        public OutEntityCardResponseDto GetCard(string oldcardid, ref string errormsg)
         {
             try
             {
@@ -580,7 +579,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
-                    EntityCard entityCard = JsonConvert.DeserializeObject<EntityCard>(rd.data.ToString());
+                    OutEntityCardResponseDto entityCard = JsonConvert.DeserializeObject<OutEntityCardResponseDto>(rd.data.ToString());
                     return entityCard;
                 }
                 else
@@ -597,68 +596,30 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             return null;
         }
 
-        /// <summary> 绑定卡(激活)
-        /// </summary>
-        /// <returns></returns>
-        public bool ApplyCard(string mobile, string cardid, ref string erromessage)
+        public bool MatchCard(string memberid, string outcardid, ref string errormsg)
         {
             try
             {
+                string url = "/pos/member/outentitycard/mactchcard";
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("mobile", mobile);
-                sort.Add("cardid", cardid);
-                string url = "/pos/member/memberentitycard/applycard";
+                sort.Add("memberid", memberid);
+                sort.Add("outcardid", outcardid);
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
-                    return true;
+                    return rd.data.ToString() == "true";
                 }
                 else
                 {
-                    LogManager.WriteLog("Error", "EntityCardMove:" + mobile + "绑卡失败:" + json);
-                    erromessage = rd.message;
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("Error", mobile + "绑卡异常：" + ex.Message);
-                erromessage = "网络连接异常，请检查网络连接";
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 挂失实体卡-发送验证码
-        /// </summary>
-        /// <param name="mobile"></param>
-        /// <param name="errormsg"></param>
-        /// <returns></returns>
-        public bool LossEntityCardGetSendsmscode(string mobile, ref string errormsg)
-        {
-            try
-            {
-                string url = "/pos/member/memberentitycard/sendsmscode";
-                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
-                sort.Add("mobile", mobile);
-                string json = HttpGET(url, sort);
-                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                if (rd.code == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    LogManager.WriteLog("Error", "NewPhoneGetsmsErr:" + json);
+                    LogManager.WriteLog("Error", "mactchcard:" + json);
                     errormsg = rd.message;
                 }
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("Error", mobile + "绑卡异常：" + ex.Message);
+                LogManager.WriteLog("Error", "mactchcard：" + ex.Message);
                 errormsg = "网络连接异常，请检查网络连接";
-
             }
             return false;
         }
@@ -668,7 +629,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <param name="outcardid">实体卡号</param>
         /// </summary>
         /// <returns></returns>
-        public bool LossEntityCard(string outcardid,ref string errormsg)
+        public bool LossEntityCard(string outcardid, ref string errormsg)
         {
             try
             {
@@ -695,8 +656,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             return false;
         }
-        #endregion
-
 
         /// <summary> 绑卡、关联旧卡
         /// </summary>
@@ -727,6 +686,78 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
+
+        /// <summary> 实体卡-批量充值
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public EntityCardBatchDepositResponse BacthEntityCard(EntityCardBatchDepositRequest request, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/member/balance/deposit/bacthentitycard";
+                string testjson = JsonConvert.SerializeObject(request);
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    EntityCardBatchDepositResponse result = JsonConvert.DeserializeObject<EntityCardBatchDepositResponse>(rd.data.ToString());
+                    return result;
+                }
+                else
+                {
+                    LogManager.WriteLog("Error", "bacthentitycard:" + json);
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "bacthentitycard:" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取批量售卡详情
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="mobile"></param>
+        /// <param name="erromessage"></param>f
+        /// <returns></returns>
+        public List<EntityCardBatchDepositLine> GetDepositBillByIds(List<string> ids, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/member/balance/getdepositbillbyids";
+                SortedDictionary<string, string[]> sort = new SortedDictionary<string, string[]>();
+                sort.Add("ids", ids.ToArray());
+                string testjson = JsonConvert.SerializeObject(sort);
+                string json = HttpPOST(url, testjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    List<EntityCardBatchDepositLine> resultobj = JsonConvert.DeserializeObject<List<EntityCardBatchDepositLine>>(rd.data.ToString());
+                    return resultobj;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "GetBalancecodepositrefound:" + json); }
+                    catch { }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "充值退款明细异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+
+        }
+        #endregion
 
         #region  访问服务端
         private HttpRequest httprequest = new HttpRequest();

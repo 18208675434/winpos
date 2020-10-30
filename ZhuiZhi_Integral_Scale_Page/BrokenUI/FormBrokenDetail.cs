@@ -33,7 +33,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         #region  页面加载
 
         BrokenInfo brokeninfo = new BrokenInfo();
-           public FormBrokenDetail(BrokenInfo  bi)
+        public FormBrokenDetail(BrokenInfo bi)
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -46,10 +46,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
             picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
             lblMenu.Left = picMenu.Right;
+            if (!string.IsNullOrEmpty(brokeninfo.redtype))
+            {
+                lblRedType.Text = brokeninfo.redtype.ToLower() == "true" ? "已红冲" : "被红冲";
+            }
+            lblId.Text = brokeninfo.id + "";
+            lblDate.Text = MainModel.GetDateTimeByStamp(brokeninfo.createdat).ToString("yyyy-MM-dd HH:mm:ss"); 
+            lblUserName.Text = brokeninfo.username;
+
 
             lblSkuAmount.Text = brokeninfo.skuamount.ToString();
             lblBrokenAmount.Text = "￥" + brokeninfo.totalamount.ToString("f2");
-            lblUserName.Text = brokeninfo.username;
+
 
             Application.DoEvents();
 
@@ -57,11 +65,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
-        {   
+        {
             this.Dispose();
         }
 
@@ -114,7 +122,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void LoadDgvCart(bool needRefresh)
         {
 
-             try
+            try
             {
 
                 picLoading.Visible = true;
@@ -130,12 +138,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     if (!string.IsNullOrEmpty(errormsg))
                     {
-                        MainModel.ShowLog(errormsg,true);
+                        MainModel.ShowLog(errormsg, true);
                         return;
                     }
                 }
 
-                if (CurrentPageSku == null || CurrentPageSku.rows==null)
+                if (CurrentPageSku == null || CurrentPageSku.rows == null)
                 {
                     return;
                 }
@@ -149,28 +157,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 List<BrokenSku> lstLoadingSku = CurrentPageSku.rows.GetRange(startindex, lastindex - startindex + 1);
 
                 foreach (BrokenSku sku in lstLoadingSku)
-                        {
-                            string deliveryprice = sku.deliveryprice == 0 ? "--" : sku.deliveryprice.ToString("f2");
-                            string quantity = sku.deliveryquantity.ToString();
-                            if (sku.weightflag)
-                            {
-                                //quantity += sku.salesunit;
-                                quantity += "KG";
-                            }
-                            dgvGood.Rows.Add("    " + sku.skuname, deliveryprice, quantity, BrokenHelper.GetBrokenTypeName(sku.actiontype));
-                        }
+                {
+                    string deliveryprice = sku.deliveryprice == 0 ? "--" : sku.deliveryprice.ToString("f2");
+                    string quantity = sku.deliveryquantity.ToString();
+                    if (sku.weightflag)
+                    {
+                        //quantity += sku.salesunit;
+                        quantity += "KG";
+                    }
+                    dgvGood.Rows.Add("    " + sku.skuname, deliveryprice, quantity, BrokenHelper.GetBrokenTypeName(sku.actiontype));
+                }
 
                 rbtnPageDown.WhetherEnable = CurrentPageSku.rows.Count > CurrentPage * 6;
-                               
+
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("显示报损详细异常"+ex.Message,true);
+                MainModel.ShowLog("显示报损详细异常" + ex.Message, true);
             }
-                  finally
-                  {
-                      picLoading.Visible = false;
-                  }
+            finally
+            {
+                picLoading.Visible = false;
+            }
         }
 
         #endregion

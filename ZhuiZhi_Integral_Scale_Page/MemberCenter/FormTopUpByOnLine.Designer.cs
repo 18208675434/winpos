@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPayByOnLine));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTopUpByOnLine));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblExit = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timerAuthCodeTrade = new System.Windows.Forms.Timer(this.components);
             this.timerSyncTrade = new System.Windows.Forms.Timer(this.components);
             this.pnlLoading = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,11 +82,6 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // timerAuthCodeTrade
-            // 
-            this.timerAuthCodeTrade.Interval = 2000;
-            this.timerAuthCodeTrade.Tick += new System.EventHandler(this.timerAuthCodeTrade_Tick);
-            // 
             // timerSyncTrade
             // 
             this.timerSyncTrade.Interval = 2000;
@@ -104,7 +98,7 @@
             this.pnlLoading.TabIndex = 63;
             this.pnlLoading.Visible = false;
             // 
-            // FormPayByOnLine
+            // FormTopUpByOnLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,13 +113,14 @@
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "FormPayByOnLine";
+            this.Name = "FormTopUpByOnLine";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmPayOnline";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmOnLinePayResult_FormClosing);
             this.Shown += new System.EventHandler(this.frmOnLinePayResult_Shown);
             this.SizeChanged += new System.EventHandler(this.frmOnLinePayResult_SizeChanged);
+            this.Leave += new System.EventHandler(this.FormTopUpByOnLine_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -138,7 +133,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblExit;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Timer timerAuthCodeTrade;
         private System.Windows.Forms.Timer timerSyncTrade;
         private System.Windows.Forms.Panel pnlLoading;
     }

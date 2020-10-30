@@ -129,11 +129,17 @@
     <Compile Include="HelperUI\FormCode.Designer.cs">
       <DependentUpon>FormCode.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormBatchSaleCardCreate.cs">
+    <Compile Include="MemberCenter\FormEntityCardBatchSaleMedia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberCenter\FormBatchSaleCardCreate.Designer.cs">
-      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    <Compile Include="MemberCenter\FormEntityCardBatchSaleMedia.Designer.cs">
+      <DependentUpon>FormEntityCardBatchSaleMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardBatchSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormEntityCardBatchSale.Designer.cs">
+      <DependentUpon>FormEntityCardBatchSale.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormEntityCardBindMedia.cs">
       <SubType>Form</SubType>
@@ -146,6 +152,30 @@
     </Compile>
     <Compile Include="MemberCenter\FormEntityCardBind.Designer.cs">
       <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormPayOnLineMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormPayOnLineMedia.Designer.cs">
+      <DependentUpon>FormPayOnLineMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSuccessMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSuccessMedia.Designer.cs">
+      <DependentUpon>FormRechargeSuccessMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeSuccess.Designer.cs">
+      <DependentUpon>FormRechargeSuccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormRechargeAmount.Designer.cs">
+      <DependentUpon>FormRechargeAmount.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormEntityCardList.cs">
       <SubType>Form</SubType>
@@ -321,12 +351,6 @@
     <Compile Include="MemberCenter\FormChangePhoneConfirm.Designer.cs">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberCenter\FormChangePhoneNewCard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormChangePhoneNewCard.Designer.cs">
-      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberCenter\FormChangePhoneNewPhoneSms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -344,12 +368,6 @@
     </Compile>
     <Compile Include="MemberCenter\FormChangePhonePayPwd.Designer.cs">
       <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberCenter\FormChangePhonePhysicalCard.Designer.cs">
-      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberCenter\FormChengPhoneSmsCode.cs">
       <SubType>Form</SubType>
@@ -492,7 +510,8 @@
     <Compile Include="MemberCenter\model\CustomTemplateModel.cs" />
     <Compile Include="MemberCenter\model\DepositRefundRequest.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
-    <Compile Include="MemberCenter\model\EntityCard.cs" />
+    <Compile Include="MemberCenter\model\EntityCardBatchDepositRequest.cs" />
+    <Compile Include="MemberCenter\model\EntityCardBatchDepositResponse.cs" />
     <Compile Include="MemberCenter\model\EntityCardMoveRequest.cs" />
     <Compile Include="MemberCenter\model\GetBalanceDepositRefund.cs" />
     <Compile Include="MemberCenter\model\ListAllTemplate.cs" />
@@ -538,6 +557,18 @@
     </Compile>
     <Compile Include="MenuUI\FormAdjustRecord.Designer.cs">
       <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetail.Designer.cs">
+      <DependentUpon>FormWebOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetailBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuUI\FormWebOrderDetailBack.Designer.cs">
+      <DependentUpon>FormWebOrderDetailBack.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\AdjustPriceDynamic.cs" />
     <Compile Include="Model\AdjustPriceRecord.cs" />
@@ -597,6 +628,7 @@
     <Compile Include="Model\SyncOrder.cs" />
     <Compile Include="Model\TenantInfo.cs" />
     <Compile Include="Model\ValidateOuterCoupon.cs" />
+    <Compile Include="Model\WebOrderDetail.cs" />
     <Compile Include="MyControl\KeyBoardAll.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1208,14 +1240,29 @@
     <EmbeddedResource Include="HelperUI\FormCode.resx">
       <DependentUpon>FormCode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormBatchSaleCardCreate.resx">
-      <DependentUpon>FormBatchSaleCardCreate.cs</DependentUpon>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBatchSaleMedia.resx">
+      <DependentUpon>FormEntityCardBatchSaleMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormEntityCardBatchSale.resx">
+      <DependentUpon>FormEntityCardBatchSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardBindMedia.resx">
       <DependentUpon>FormEntityCardBindMedia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardBind.resx">
       <DependentUpon>FormEntityCardBind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeSuccessMedia.resx">
+      <DependentUpon>FormRechargeSuccessMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeSuccess.resx">
+      <DependentUpon>FormRechargeSuccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormPayOnLineMedia.resx">
+      <DependentUpon>FormPayOnLineMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormRechargeAmount.resx">
+      <DependentUpon>FormRechargeAmount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardList.resx">
       <DependentUpon>FormEntityCardList.cs</DependentUpon>
@@ -1286,9 +1333,6 @@
     <EmbeddedResource Include="MemberCenter\FormChangePhoneConfirm.resx">
       <DependentUpon>FormChangePhoneConfirm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormChangePhoneNewCard.resx">
-      <DependentUpon>FormChangePhoneNewCard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhoneNewPhoneSms.resx">
       <DependentUpon>FormChangePhoneNewPhoneSms.cs</DependentUpon>
     </EmbeddedResource>
@@ -1297,9 +1341,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChangePhonePayPwd.resx">
       <DependentUpon>FormChangePhonePayPwd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MemberCenter\FormChangePhonePhysicalCard.resx">
-      <DependentUpon>FormChangePhonePhysicalCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormChengPhoneSmsCode.resx">
       <DependentUpon>FormChengPhoneSmsCode.cs</DependentUpon>
@@ -1384,6 +1425,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormAdjustRecord.resx">
       <DependentUpon>FormAdjustRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormWebOrderDetail.resx">
+      <DependentUpon>FormWebOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuUI\FormWebOrderDetailBack.resx">
+      <DependentUpon>FormWebOrderDetailBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyControl\KeyBoardAll.resx">
       <DependentUpon>KeyBoardAll.cs</DependentUpon>
@@ -1684,6 +1731,10 @@
     <None Include="Resources\menu_recharge.png" />
     <None Include="Resources\amount.png" />
     <None Include="Resources\balance.png" />
+    <None Include="Resources\check.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\batchsale.png" />
+    <None Include="Resources\menu_recharge1.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />

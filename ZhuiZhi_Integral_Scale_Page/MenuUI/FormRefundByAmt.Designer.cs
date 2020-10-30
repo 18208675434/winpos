@@ -46,12 +46,14 @@
             this.numTxt1 = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.numTxt2 = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.numTxt3 = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
-            this.numTxt4 = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.keyBoardAll1 = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBoardAll();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).BeginInit();
             this.pnlItem.SuspendLayout();
             this.pnlControl.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -95,7 +97,7 @@
             this.dgvProduct.Name = "dgvProduct";
             this.dgvProduct.RowHeadersVisible = false;
             this.dgvProduct.RowTemplate.Height = 70;
-            this.dgvProduct.Size = new System.Drawing.Size(576, 300);
+            this.dgvProduct.Size = new System.Drawing.Size(576, 220);
             this.dgvProduct.TabIndex = 66;
             this.dgvProduct.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProduct_CellEnter);
             this.dgvProduct.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProduct_CellLeave);
@@ -124,7 +126,7 @@
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(448, 392);
+            this.btnOK.Location = new System.Drawing.Point(448, 307);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(140, 56);
             this.btnOK.TabIndex = 67;
@@ -139,7 +141,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnCancel.ForeColor = System.Drawing.Color.Black;
-            this.btnCancel.Location = new System.Drawing.Point(302, 392);
+            this.btnCancel.Location = new System.Drawing.Point(302, 307);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 56);
             this.btnCancel.TabIndex = 68;
@@ -203,6 +205,7 @@
             // 
             // pnlControl
             // 
+            this.pnlControl.BackColor = System.Drawing.Color.White;
             this.pnlControl.Controls.Add(this.pnlItem);
             this.pnlControl.Location = new System.Drawing.Point(7, -213);
             this.pnlControl.Name = "pnlControl";
@@ -237,10 +240,11 @@
             this.numTxt1.MaxDeciaml = ((long)(1000000));
             this.numTxt1.MaxLength = 32767;
             this.numTxt1.Name = "numTxt1";
-            this.numTxt1.NeedBoard = true;
+            this.numTxt1.NeedBoard = false;
             this.numTxt1.OnlyNumber = true;
             this.numTxt1.Size = new System.Drawing.Size(150, 40);
             this.numTxt1.TabIndex = 0;
+            this.numTxt1.Visible = false;
             this.numTxt1.WaterText = "请输入退款金额";
             this.numTxt1.Leave += new System.EventHandler(this.numTxt_Leave);
             // 
@@ -255,10 +259,11 @@
             this.numTxt2.MaxDeciaml = ((long)(1000000));
             this.numTxt2.MaxLength = 32767;
             this.numTxt2.Name = "numTxt2";
-            this.numTxt2.NeedBoard = true;
+            this.numTxt2.NeedBoard = false;
             this.numTxt2.OnlyNumber = true;
             this.numTxt2.Size = new System.Drawing.Size(150, 40);
             this.numTxt2.TabIndex = 75;
+            this.numTxt2.Visible = false;
             this.numTxt2.WaterText = "请输入退款金额";
             this.numTxt2.Leave += new System.EventHandler(this.numTxt_Leave);
             // 
@@ -273,30 +278,13 @@
             this.numTxt3.MaxDeciaml = ((long)(1000000));
             this.numTxt3.MaxLength = 32767;
             this.numTxt3.Name = "numTxt3";
-            this.numTxt3.NeedBoard = true;
+            this.numTxt3.NeedBoard = false;
             this.numTxt3.OnlyNumber = true;
             this.numTxt3.Size = new System.Drawing.Size(150, 40);
             this.numTxt3.TabIndex = 76;
+            this.numTxt3.Visible = false;
             this.numTxt3.WaterText = "请输入退款金额";
             this.numTxt3.Leave += new System.EventHandler(this.numTxt_Leave);
-            // 
-            // numTxt4
-            // 
-            this.numTxt4.BackColor = System.Drawing.Color.Gainsboro;
-            this.numTxt4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numTxt4.DecimalDigits = 2;
-            this.numTxt4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numTxt4.Location = new System.Drawing.Point(433, 313);
-            this.numTxt4.LockFocus = false;
-            this.numTxt4.MaxDeciaml = ((long)(1000000));
-            this.numTxt4.MaxLength = 32767;
-            this.numTxt4.Name = "numTxt4";
-            this.numTxt4.NeedBoard = true;
-            this.numTxt4.OnlyNumber = true;
-            this.numTxt4.Size = new System.Drawing.Size(150, 40);
-            this.numTxt4.TabIndex = 77;
-            this.numTxt4.WaterText = "请输入退款金额";
-            this.numTxt4.Leave += new System.EventHandler(this.numTxt_Leave);
             // 
             // rbtnPageDown
             // 
@@ -304,7 +292,7 @@
             this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
             this.rbtnPageDown.Image = null;
             this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnPageDown.Location = new System.Drawing.Point(156, 392);
+            this.rbtnPageDown.Location = new System.Drawing.Point(156, 307);
             this.rbtnPageDown.Name = "rbtnPageDown";
             this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
             this.rbtnPageDown.PenWidth = 1;
@@ -323,7 +311,7 @@
             this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
             this.rbtnPageUp.Image = null;
             this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnPageUp.Location = new System.Drawing.Point(10, 392);
+            this.rbtnPageUp.Location = new System.Drawing.Point(10, 307);
             this.rbtnPageUp.Name = "rbtnPageUp";
             this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
             this.rbtnPageUp.PenWidth = 1;
@@ -336,37 +324,59 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.rbtnPageDown);
+            this.panel1.Controls.Add(this.rbtnPageUp);
+            this.panel1.Controls.Add(this.numTxt3);
+            this.panel1.Controls.Add(this.numTxt2);
+            this.panel1.Controls.Add(this.numTxt1);
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Controls.Add(this.btnOK);
+            this.panel1.Controls.Add(this.dgvProduct);
+            this.panel1.Controls.Add(this.lblCash);
+            this.panel1.Controls.Add(this.btnCancle);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(290, 48);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(600, 370);
+            this.panel1.TabIndex = 80;
+            // 
+            // keyBoardAll1
+            // 
+            this.keyBoardAll1.AllowHide = false;
+            this.keyBoardAll1.CharType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.KeyBorderCharType.NUMBER;
+            this.keyBoardAll1.Location = new System.Drawing.Point(8, 465);
+            this.keyBoardAll1.Name = "keyBoardAll1";
+            this.keyBoardAll1.Size = new System.Drawing.Size(1165, 289);
+            this.keyBoardAll1.TabIndex = 81;
+            // 
             // FormRefundByAmt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(600, 460);
-            this.Controls.Add(this.rbtnPageDown);
-            this.Controls.Add(this.rbtnPageUp);
-            this.Controls.Add(this.numTxt4);
-            this.Controls.Add(this.numTxt3);
-            this.Controls.Add(this.numTxt2);
-            this.Controls.Add(this.numTxt1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.keyBoardAll1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlControl);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.dgvProduct);
-            this.Controls.Add(this.lblCash);
-            this.Controls.Add(this.btnCancle);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormRefundByAmt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormRefundByAmt";
+            this.TopMost = true;
+            this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRefundByAmt_FormClosing);
+            this.Load += new System.EventHandler(this.FormRefundByAmt_Load);
             this.Shown += new System.EventHandler(this.FormRefundByAmt_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).EndInit();
             this.pnlItem.ResumeLayout(false);
             this.pnlItem.PerformLayout();
             this.pnlControl.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -388,8 +398,9 @@
         private MyControl.NumberTextBox numTxt1;
         private MyControl.NumberTextBox numTxt2;
         private MyControl.NumberTextBox numTxt3;
-        private MyControl.NumberTextBox numTxt4;
         private RoundButton rbtnPageDown;
         private RoundButton rbtnPageUp;
+        private System.Windows.Forms.Panel panel1;
+        private MyControl.KeyBoardAll keyBoardAll1;
     }
 }

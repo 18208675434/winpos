@@ -207,7 +207,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void frmReceiptQuery_Shown(object sender, EventArgs e)
         {
-           
+
+            MaxAdjustID = ConfigUtil.GetLastAdjustPriceID();
+
             lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
             picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
@@ -217,8 +219,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             Application.DoEvents();
             btnToday_Click(null,null);
             txtSkuCode.Focus();
-
-            MaxAdjustID = ConfigUtil.GetLastAdjustPriceID();
+           
 
             INIManager.SetIni("MQTT", "AdjustStartTime", MainModel.getStampByDateTime(DateTime.Now), MainModel.IniPath); //记录登录时间作为调价查询的起始时间
         }

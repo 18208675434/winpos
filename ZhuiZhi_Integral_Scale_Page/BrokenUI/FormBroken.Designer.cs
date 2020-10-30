@@ -30,14 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBroken));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
@@ -45,6 +50,8 @@
             this.btnCancle = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rbtnCeate = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnQuery = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
             this.btnWeek = new System.Windows.Forms.Button();
             this.btnYesterday = new System.Windows.Forms.Button();
@@ -52,33 +59,27 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.pnlDgvHead = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.dgvBroken = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrokenData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrokenDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrokenNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrokenCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrokenStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Operation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlEmptyOrder = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlLine = new System.Windows.Forms.Panel();
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnCeate = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnQuery = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.BrokenData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrokenDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrokenNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrokenCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrokenStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.redop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.op = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
             this.panel1.SuspendLayout();
-            this.pnlDgvHead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBroken)).BeginInit();
             this.pnlEmptyOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -168,11 +169,49 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.dtStart);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(12, 79);
+            this.panel1.Location = new System.Drawing.Point(9, 79);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1155, 99);
+            this.panel1.Size = new System.Drawing.Size(1160, 99);
             this.panel1.TabIndex = 34;
+            // 
+            // rbtnCeate
+            // 
+            this.rbtnCeate.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
+            this.rbtnCeate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
+            this.rbtnCeate.Image = null;
+            this.rbtnCeate.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnCeate.Location = new System.Drawing.Point(980, 24);
+            this.rbtnCeate.Name = "rbtnCeate";
+            this.rbtnCeate.PenColor = System.Drawing.Color.Black;
+            this.rbtnCeate.PenWidth = 1;
+            this.rbtnCeate.RoundRadius = 1;
+            this.rbtnCeate.ShowImg = false;
+            this.rbtnCeate.ShowText = "新建报损";
+            this.rbtnCeate.Size = new System.Drawing.Size(147, 52);
+            this.rbtnCeate.TabIndex = 24;
+            this.rbtnCeate.TextForeColor = System.Drawing.Color.White;
+            this.rbtnCeate.WhetherEnable = true;
+            this.rbtnCeate.ButtonClick += new System.EventHandler(this.rbtnCeate_ButtonClick);
+            // 
+            // rbtnQuery
+            // 
+            this.rbtnQuery.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
+            this.rbtnQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
+            this.rbtnQuery.Image = null;
+            this.rbtnQuery.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnQuery.Location = new System.Drawing.Point(843, 24);
+            this.rbtnQuery.Name = "rbtnQuery";
+            this.rbtnQuery.PenColor = System.Drawing.Color.Black;
+            this.rbtnQuery.PenWidth = 1;
+            this.rbtnQuery.RoundRadius = 1;
+            this.rbtnQuery.ShowImg = false;
+            this.rbtnQuery.ShowText = "查询";
+            this.rbtnQuery.Size = new System.Drawing.Size(120, 52);
+            this.rbtnQuery.TabIndex = 23;
+            this.rbtnQuery.TextForeColor = System.Drawing.Color.White;
+            this.rbtnQuery.WhetherEnable = true;
+            this.rbtnQuery.ButtonClick += new System.EventHandler(this.rbtnQuery_ButtonClick);
             // 
             // dtEnd
             // 
@@ -280,86 +319,6 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "报损时间:";
             // 
-            // pnlDgvHead
-            // 
-            this.pnlDgvHead.BackColor = System.Drawing.Color.White;
-            this.pnlDgvHead.Controls.Add(this.label12);
-            this.pnlDgvHead.Controls.Add(this.label5);
-            this.pnlDgvHead.Controls.Add(this.label7);
-            this.pnlDgvHead.Controls.Add(this.label9);
-            this.pnlDgvHead.Controls.Add(this.label10);
-            this.pnlDgvHead.Controls.Add(this.label11);
-            this.pnlDgvHead.Location = new System.Drawing.Point(12, 192);
-            this.pnlDgvHead.Name = "pnlDgvHead";
-            this.pnlDgvHead.Size = new System.Drawing.Size(1155, 58);
-            this.pnlDgvHead.TabIndex = 36;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(1058, 18);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 23);
-            this.label12.TabIndex = 38;
-            this.label12.Text = "操作";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(892, 18);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 23);
-            this.label5.TabIndex = 36;
-            this.label5.Text = "操作人";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(729, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 23);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "报损金额(元)";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(564, 18);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(78, 23);
-            this.label9.TabIndex = 34;
-            this.label9.Text = "报损种类";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(222, 18);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(78, 23);
-            this.label10.TabIndex = 33;
-            this.label10.Text = "报损明细";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 12.5F);
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(20, 18);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 23);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "报损时间";
-            // 
             // dgvBroken
             // 
             this.dgvBroken.AllowUserToAddRows = false;
@@ -370,127 +329,66 @@
             this.dgvBroken.BackgroundColor = System.Drawing.Color.White;
             this.dgvBroken.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvBroken.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvBroken.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.dgvBroken.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvBroken.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dgvBroken.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvBroken.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBroken.ColumnHeadersHeight = 50;
-            this.dgvBroken.ColumnHeadersVisible = false;
+            this.dgvBroken.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvBroken.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
             this.BrokenData,
+            this.ID,
             this.BrokenDetail,
             this.BrokenNum,
             this.BrokenCash,
+            this.Column3,
+            this.Column2,
             this.BrokenStatus,
-            this.Operation});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 13F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBroken.DefaultCellStyle = dataGridViewCellStyle8;
+            this.redop,
+            this.op});
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 13F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBroken.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvBroken.EnableHeadersVisualStyles = false;
             this.dgvBroken.GridColor = System.Drawing.Color.LightGray;
-            this.dgvBroken.Location = new System.Drawing.Point(12, 251);
+            this.dgvBroken.Location = new System.Drawing.Point(9, 194);
             this.dgvBroken.Margin = new System.Windows.Forms.Padding(2);
             this.dgvBroken.Name = "dgvBroken";
             this.dgvBroken.ReadOnly = true;
             this.dgvBroken.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBroken.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBroken.RowHeadersVisible = false;
-            this.dgvBroken.RowHeadersWidth = 40;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.dgvBroken.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvBroken.RowHeadersWidth = 10;
+            this.dgvBroken.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.dgvBroken.RowsDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvBroken.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.dgvBroken.RowTemplate.Height = 75;
             this.dgvBroken.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvBroken.Size = new System.Drawing.Size(1155, 447);
+            this.dgvBroken.Size = new System.Drawing.Size(1160, 500);
             this.dgvBroken.TabIndex = 35;
-            this.dgvBroken.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBroken_CellClick);
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // BrokenData
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            this.BrokenData.DefaultCellStyle = dataGridViewCellStyle2;
-            this.BrokenData.FillWeight = 20F;
-            this.BrokenData.HeaderText = "报损时间";
-            this.BrokenData.Name = "BrokenData";
-            this.BrokenData.ReadOnly = true;
-            // 
-            // BrokenDetail
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            this.BrokenDetail.DefaultCellStyle = dataGridViewCellStyle3;
-            this.BrokenDetail.FillWeight = 30F;
-            this.BrokenDetail.HeaderText = "报损明细";
-            this.BrokenDetail.Name = "BrokenDetail";
-            this.BrokenDetail.ReadOnly = true;
-            // 
-            // BrokenNum
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.BrokenNum.DefaultCellStyle = dataGridViewCellStyle4;
-            this.BrokenNum.FillWeight = 15F;
-            this.BrokenNum.HeaderText = "报损数量";
-            this.BrokenNum.Name = "BrokenNum";
-            this.BrokenNum.ReadOnly = true;
-            // 
-            // BrokenCash
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            this.BrokenCash.DefaultCellStyle = dataGridViewCellStyle5;
-            this.BrokenCash.FillWeight = 15F;
-            this.BrokenCash.HeaderText = "报损金额(元)";
-            this.BrokenCash.Name = "BrokenCash";
-            this.BrokenCash.ReadOnly = true;
-            // 
-            // BrokenStatus
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            this.BrokenStatus.DefaultCellStyle = dataGridViewCellStyle6;
-            this.BrokenStatus.FillWeight = 15F;
-            this.BrokenStatus.HeaderText = "状态";
-            this.BrokenStatus.Name = "BrokenStatus";
-            this.BrokenStatus.ReadOnly = true;
-            // 
-            // Operation
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 10F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
-            this.Operation.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Operation.FillWeight = 8F;
-            this.Operation.HeaderText = "操作";
-            this.Operation.Name = "Operation";
-            this.Operation.ReadOnly = true;
-            this.Operation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBroken.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBroken_CellContentClick);
             // 
             // pnlEmptyOrder
             // 
@@ -526,6 +424,14 @@
             this.pictureBox1.Size = new System.Drawing.Size(38, 36);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
+            // 
+            // pnlLine
+            // 
+            this.pnlLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.pnlLine.Location = new System.Drawing.Point(12, 244);
+            this.pnlLine.Name = "pnlLine";
+            this.pnlLine.Size = new System.Drawing.Size(1155, 1);
+            this.pnlLine.TabIndex = 53;
             // 
             // rbtnPageDown
             // 
@@ -565,54 +471,159 @@
             this.rbtnPageUp.WhetherEnable = false;
             this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
-            // rbtnCeate
+            // BrokenData
             // 
-            this.rbtnCeate.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
-            this.rbtnCeate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
-            this.rbtnCeate.Image = null;
-            this.rbtnCeate.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnCeate.Location = new System.Drawing.Point(980, 24);
-            this.rbtnCeate.Name = "rbtnCeate";
-            this.rbtnCeate.PenColor = System.Drawing.Color.Black;
-            this.rbtnCeate.PenWidth = 1;
-            this.rbtnCeate.RoundRadius = 1;
-            this.rbtnCeate.ShowImg = false;
-            this.rbtnCeate.ShowText = "新建报损";
-            this.rbtnCeate.Size = new System.Drawing.Size(147, 52);
-            this.rbtnCeate.TabIndex = 24;
-            this.rbtnCeate.TextForeColor = System.Drawing.Color.White;
-            this.rbtnCeate.WhetherEnable = true;
-            this.rbtnCeate.ButtonClick += new System.EventHandler(this.rbtnCeate_ButtonClick);
+            this.BrokenData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BrokenData.DefaultCellStyle = dataGridViewCellStyle2;
+            this.BrokenData.FillWeight = 10F;
+            this.BrokenData.HeaderText = "报损时间";
+            this.BrokenData.MinimumWidth = 80;
+            this.BrokenData.Name = "BrokenData";
+            this.BrokenData.ReadOnly = true;
             // 
-            // rbtnQuery
+            // ID
             // 
-            this.rbtnQuery.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
-            this.rbtnQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
-            this.rbtnQuery.Image = null;
-            this.rbtnQuery.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnQuery.Location = new System.Drawing.Point(843, 24);
-            this.rbtnQuery.Name = "rbtnQuery";
-            this.rbtnQuery.PenColor = System.Drawing.Color.Black;
-            this.rbtnQuery.PenWidth = 1;
-            this.rbtnQuery.RoundRadius = 1;
-            this.rbtnQuery.ShowImg = false;
-            this.rbtnQuery.ShowText = "查询";
-            this.rbtnQuery.Size = new System.Drawing.Size(120, 52);
-            this.rbtnQuery.TabIndex = 23;
-            this.rbtnQuery.TextForeColor = System.Drawing.Color.White;
-            this.rbtnQuery.WhetherEnable = true;
-            this.rbtnQuery.ButtonClick += new System.EventHandler(this.rbtnQuery_ButtonClick);
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.ID.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ID.FillWeight = 10F;
+            this.ID.HeaderText = "报损单号";
+            this.ID.MinimumWidth = 80;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // BrokenDetail
+            // 
+            this.BrokenDetail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BrokenDetail.DefaultCellStyle = dataGridViewCellStyle4;
+            this.BrokenDetail.FillWeight = 30F;
+            this.BrokenDetail.HeaderText = "报损明细";
+            this.BrokenDetail.Name = "BrokenDetail";
+            this.BrokenDetail.ReadOnly = true;
+            // 
+            // BrokenNum
+            // 
+            this.BrokenNum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.BrokenNum.DefaultCellStyle = dataGridViewCellStyle5;
+            this.BrokenNum.FillWeight = 12F;
+            this.BrokenNum.HeaderText = "报损种类数";
+            this.BrokenNum.Name = "BrokenNum";
+            this.BrokenNum.ReadOnly = true;
+            this.BrokenNum.Width = 130;
+            // 
+            // BrokenCash
+            // 
+            this.BrokenCash.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.BrokenCash.DefaultCellStyle = dataGridViewCellStyle6;
+            this.BrokenCash.FillWeight = 13F;
+            this.BrokenCash.HeaderText = "成本总金额(元)";
+            this.BrokenCash.Name = "BrokenCash";
+            this.BrokenCash.ReadOnly = true;
+            this.BrokenCash.Width = 160;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column3.FillWeight = 20F;
+            this.Column3.HeaderText = "备注";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Column2.FillWeight = 8F;
+            this.Column2.HeaderText = "操作人";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 95;
+            // 
+            // BrokenStatus
+            // 
+            this.BrokenStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.BrokenStatus.DefaultCellStyle = dataGridViewCellStyle9;
+            this.BrokenStatus.FillWeight = 7F;
+            this.BrokenStatus.HeaderText = "状态";
+            this.BrokenStatus.MinimumWidth = 60;
+            this.BrokenStatus.Name = "BrokenStatus";
+            this.BrokenStatus.ReadOnly = true;
+            this.BrokenStatus.Width = 70;
+            // 
+            // redop
+            // 
+            this.redop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            this.redop.DefaultCellStyle = dataGridViewCellStyle10;
+            this.redop.FillWeight = 6F;
+            this.redop.HeaderText = "";
+            this.redop.MinimumWidth = 40;
+            this.redop.Name = "redop";
+            this.redop.ReadOnly = true;
+            this.redop.Width = 60;
+            // 
+            // op
+            // 
+            this.op.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 10F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(140)))), ((int)(((byte)(206)))));
+            this.op.DefaultCellStyle = dataGridViewCellStyle11;
+            this.op.FillWeight = 6F;
+            this.op.HeaderText = "操作";
+            this.op.MinimumWidth = 60;
+            this.op.Name = "op";
+            this.op.ReadOnly = true;
+            this.op.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.op.Width = 70;
             // 
             // FormBroken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.pnlLine);
             this.Controls.Add(this.rbtnPageDown);
             this.Controls.Add(this.rbtnPageUp);
             this.Controls.Add(this.pnlEmptyOrder);
-            this.Controls.Add(this.pnlDgvHead);
             this.Controls.Add(this.dgvBroken);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlHead);
@@ -629,8 +640,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.pnlDgvHead.ResumeLayout(false);
-            this.pnlDgvHead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBroken)).EndInit();
             this.pnlEmptyOrder.ResumeLayout(false);
             this.pnlEmptyOrder.PerformLayout();
@@ -654,28 +663,25 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtStart;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel pnlDgvHead;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridView dgvBroken;
         private System.Windows.Forms.Panel pnlEmptyOrder;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenDetail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenCash;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Operation;
         private RoundButton rbtnPageDown;
         private RoundButton rbtnPageUp;
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.PictureBox picMenu;
+        private System.Windows.Forms.Panel pnlLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenDetail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenCash;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BrokenStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn redop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn op;
     }
 }

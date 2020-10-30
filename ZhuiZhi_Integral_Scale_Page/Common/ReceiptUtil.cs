@@ -181,6 +181,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 INIManager.SetIni("Receipt", "RefundCount","0", MainModel.IniPath);
                 INIManager.SetIni("Receipt", "RefundMoney", "0", MainModel.IniPath);
                 INIManager.SetIni("Receipt", "PrettyCash", "", MainModel.IniPath);
+                INIManager.SetIni("Receipt", "DepositRefundCount", "0", MainModel.IniPath);
+                INIManager.SetIni("Receipt", "DepositRefundMoney", "0", MainModel.IniPath);
+
                 return true;
             }
             catch (Exception ex)

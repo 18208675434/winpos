@@ -198,7 +198,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                         {
                             DataGridView dgv = (DataGridView)c;
                             dgv.RowTemplate.Height = Convert.ToInt16(dgv.RowTemplate.Height * hScale);
-                            dgv.ColumnHeadersDefaultCellStyle.Alignment = dgv.ColumnHeadersDefaultCellStyle.Alignment;
                             dgv.ColumnHeadersHeight = Convert.ToInt16(dgv.ColumnHeadersHeight * hScale);
                             if (dgv.RowsDefaultCellStyle.Font != null)
                             {
@@ -218,9 +217,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                                 if (dr.DefaultCellStyle.Font != null)
                                 {
                                     dr.DefaultCellStyle.Font = new Font(dr.DefaultCellStyle.Font.Name, Math.Min(dr.DefaultCellStyle.Font.Size * wScale, dr.DefaultCellStyle.Font.Size * hScale), dr.DefaultCellStyle.Font.Style, dr.DefaultCellStyle.Font.Unit);
-                                    dr.DefaultCellStyle.Alignment = dr.DefaultCellStyle.Alignment;
-                                }
-
+                               }
                             }
 
                             dgv.AllowUserToResizeColumns = false;

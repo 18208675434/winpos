@@ -70,7 +70,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     lstPrintStr.AddRange(PrintHelper.MergeStr(pro.title, pro.price.saleprice.ToString("f2"), num, pro.price.total.ToString("f2"), BodyCharCountOfLine));
 
 
-                    if (pro.price.promoamt > 0)
+                    if (pro.price.promoamt > 0 && !isRefound)
                     {
                         lstPrintStr.Add(MergeStr("", "原价"+pro.price.origintotal.ToString("f2")+" 已优惠" + pro.price.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize - 6));
                     }
@@ -327,9 +327,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                             }
                         }
                         catch (Exception ex) { }
-
-                        lstPrintStr.Add(MergeStr("总计", totalamount.ToString("f2"), BodyCharCountOfLine, PageSize));
+                       
                     }
+
+                    lstPrintStr.Add(MergeStr("总计", totalamount.ToString("f2"), BodyCharCountOfLine, PageSize));
                 }
 
                 lstPrintStr.Add(getStrLine());
@@ -392,9 +393,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 lstPrintStr.Add(getStrLine());
 
                 lstPrintStr.Add(MergeStr("总计件数", brokenresult.totalqty.ToString(), BodyCharCountOfLine, PageSize));
-                lstPrintStr.Add(MergeStr("报损金额", brokenresult.totalamt.ToString("f2") + "元", BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MergeStr("成本总金额", brokenresult.totalamt.ToString("f2") + "元", BodyCharCountOfLine, PageSize));
 
-
+                lstPrintStr.Add(MergeStr("销售总金额", brokenresult.totalsaleamt.ToString("f2") + "元", BodyCharCountOfLine, PageSize));
 
                 lstPrintStr.Add(getStrLine());
 
@@ -444,9 +445,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 }
                 lstPrintStr.Add(getStrLine());
 
-                lstPrintStr.Add(MergeStr("商品金额：", printdetail.productamt,  BodyCharCountOfLine,PageSize));
-                lstPrintStr.Add(MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize));
-                lstPrintStr.Add(MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MergeStr("商品金额：", printdetail.productamt.ToString("f2"),  BodyCharCountOfLine,PageSize));
+                lstPrintStr.Add(MergeStr("配送费：", printdetail.deliveryamt.ToString("f2"), BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MergeStr("实付金额：", printdetail.totalpayment.ToString("f2"), BodyCharCountOfLine, PageSize));
                
 
                 lstPrintStr.Add(getStrLine());
@@ -586,7 +587,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 return str;
             }
         }
-        private static List<string> substr(string str, int linelength)
+        public static List<string> substr(string str, int linelength)
         {
             try
             {

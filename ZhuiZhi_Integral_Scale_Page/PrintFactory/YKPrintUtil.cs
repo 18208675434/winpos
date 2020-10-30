@@ -99,7 +99,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 try
                 {
                     try { LogManager.WriteLog("打印订单:" + printdetail.orderid); }
-                    catch { }
+                    catch { } 
 
 
                     IniPrintSize();
@@ -118,8 +118,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     SetAlign(1);
                         SetFontSize(0, 1);
-                        PrintStr(new StringBuilder(PrintHelper.MergeStr("欢迎光临", "", HeadCharCountOfLine, PageSize) + "\n"));
-                        PrintStr(new StringBuilder(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname, "", HeadCharCountOfLine, PageSize) + "\n"));
+                        PrintStr(new StringBuilder("欢迎光临" + "\n"));
+                        PrintStr(new StringBuilder(MainModel.CurrentShopInfo.tenantname + "\n"));
                     lstPrintStr.Add(" ");
                     SetAlign(0);
                     lstPrintStr.AddRange(PrintHelper.GetGiftCardOrderPrintInfo(printdetail, isRefound));
@@ -201,7 +201,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     //每次打印先清空之前内容
                     lstPrintStr = new List<string>();
 
-                    PrintStr( new StringBuilder(PrintHelper.MergeStr("报损单", "", HeadCharCountOfLine, PageSize)));
+                    PrintStr(new StringBuilder(PrintHelper.MergeStr("报损单", "", HeadCharCountOfLine, PageSize) + "\n"));
                     lstPrintStr.Add(" ");
 
                     PrintTextByPaperWidth(PrintHelper.GetBrokenPrintInfo(brokenresult));
@@ -244,14 +244,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     PrintStr(PrintHelper.MergeStr(MainModel.CurrentShopInfo.tenantname + "\n", "", HeadCharCountOfLine, PageSize));
                     PrintStr(PrintHelper.MergeStr( MainModel.CurrentShopInfo.shopname + "\n", "", HeadCharCountOfLine, PageSize));
 
+                   
+                    PrintStr(printdetail.serialcode + "\n");
                     SetFontSize(0, 0);
-                    PrintStr(PrintHelper.MergeStr(printdetail.serialcode + "\n", "", HeadCharCountOfLine, PageSize));
-
                     PrintStr("订单号：" + printdetail.orderid + "\n");
                     PrintStr("下单时间：" + printdetail.date + "\n");
                     PrintStr("顾客姓名：" + printdetail.username + "\n");
                     PrintStr("顾客电话：" + printdetail.tel + "\n");
-                    PrintStr("配送地址：" + printdetail.address + "\n");
+                    List<string> lstaddress = PrintHelper.substr("配送地址：" + printdetail.address, BodyCharCountOfLine);
+                    foreach (string str in lstaddress)
+                    {
+                        PrintStr(str+"\n");
+                    }
+                    //PrintStr("配送地址：" + printdetail.address + "\n");
                     PrintStr("备注：" + "\n");
 
                     SetFontSize(0, 1);
@@ -259,7 +264,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     {
                         PrintStr( printdetail.remark + "\n");
                     }
-                    PrintStr( "期望送达时间：" + printdetail.expecttimedesc + "\n");
+                    PrintStr( "期望送达时间："  + "\n");
+                    PrintStr( printdetail.expecttimedesc + "\n");
 
 
                     SetFontSize(0, 0);
@@ -279,21 +285,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     }
 
-                    foreach (PickProduct pro in printdetail.productdetaillist)
-                    {
-                        List<string> lstpro = PrintHelper.MergeStr(pro.skuname, pro.price, pro.num, pro.money, BodyCharCountOfLine);
-
-                        foreach (string str in lstpro)
-                        {
-                            PrintStr(str + "\n");
-                        }
-                    }
 
                     PrintStr(PrintHelper.getStrLine() + "\n");
 
-                    PrintStr(PrintHelper.MergeStr("商品金额：", printdetail.productamt, BodyCharCountOfLine, PageSize) + "\n");
-                    PrintStr(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt, BodyCharCountOfLine, PageSize) + "\n");
-                    PrintStr(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment, BodyCharCountOfLine, PageSize) + "\n");
+                    PrintStr(PrintHelper.MergeStr("商品金额：", printdetail.productamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    if (printdetail.deliveryamt > 0)
+                    {
+                        PrintStr(PrintHelper.MergeStr("配送费：", printdetail.deliveryamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.promoamt > 0)
+                    {
+                        PrintStr(PrintHelper.MergeStr("活动优惠：", printdetail.promoamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.couponamt > 0)
+                    {
+                        PrintStr(PrintHelper.MergeStr("优惠券抵：", printdetail.couponamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.pointpayamt > 0)
+                    {
+                        PrintStr(PrintHelper.MergeStr("积分抵现：", printdetail.pointpayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    if (printdetail.balancepayamt > 0)
+                    {
+                        PrintStr(PrintHelper.MergeStr("余额支付：", printdetail.balancepayamt.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
+                    }
+                    
+                    PrintStr(PrintHelper.MergeStr("实付金额：", printdetail.totalpayment.ToString("f2"), BodyCharCountOfLine, PageSize) + "\n");
 
                     if (!string.IsNullOrEmpty(printdetail.pickcode))
                     {
@@ -312,12 +329,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     PrintStr(PrintHelper.getStrLine() + "\n");
 
-
                     PrintStr("多谢惠顾，欢迎下次光临！                         " + " \n \n \n \n \n \n.");
                     CloseDevice();
                     Application.DoEvents();
                     return true;
-
                 }
                 catch (Exception ex)
                 {
@@ -330,7 +345,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
         #endregion
 
-        public static bool PrintTopUp(TopUpPrint printdetail)
+        public static bool PrintTopUp(TopUpPrint printdetail, bool isEntityCardBatchSale = false)
         {
             try
             {
@@ -364,7 +379,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 if (printdetail.rewardamount > 0)
                 {
                     lstPrintStr.Add(PrintHelper.MergeStr("    赠送金额", printdetail.rewardamount.ToString("f2"), BodyCharCountOfLine, PageSize));
-
                 }
 
                 lstPrintStr.Add(PrintHelper.getStrLine());
@@ -372,21 +386,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 lstPrintStr.Add("充值方式：" + "\n");
                 lstPrintStr.Add(PrintHelper.MergeStr(printdetail.paymodeforapi, printdetail.amount.ToString("f2"), BodyCharCountOfLine, PageSize));
 
-                
-                
-                lstPrintStr.Add(PrintHelper.getStrLine());
-
-                string phone = printdetail.phone;
-                if (printdetail.phone.Length > 7)
+                if (!isEntityCardBatchSale)//批量售卡不打印会员号和账户余额
                 {
-                    phone = printdetail.phone.Substring(0, 3) + "****" + printdetail.phone.Substring(printdetail.phone.Length - 4);
+                    lstPrintStr.Add(PrintHelper.getStrLine());
+
+                    string phone = printdetail.phone;
+                    if (printdetail.phone.Length > 7)
+                    {
+                        phone = printdetail.phone.Substring(0, 3) + "****" + printdetail.phone.Substring(printdetail.phone.Length - 4);
+                    }
+
+                    lstPrintStr.Add(PrintHelper.MergeStr("会员号", phone, BodyCharCountOfLine, PageSize));
+                    lstPrintStr.Add(PrintHelper.MergeStr("账户余额", printdetail.balance.ToString("f2"), BodyCharCountOfLine, PageSize));
                 }
 
-                lstPrintStr.Add(PrintHelper.MergeStr("会员号", phone, BodyCharCountOfLine, PageSize));
-                lstPrintStr.Add(PrintHelper.MergeStr("账户余额", printdetail.balance.ToString("f2"), BodyCharCountOfLine, PageSize));
-
                 lstPrintStr.Add(PrintHelper.getStrLine());
-                lstPrintStr.Add("多谢惠顾，欢迎下次光临！");
+                lstPrintStr.Add("多谢惠顾，欢迎下次光临！");               
 
                 PrintTextByPaperWidth(lstPrintStr);
 
@@ -590,7 +605,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         {
             int i;
          
-            i = YkOpenDevice(11, 0);
+            i = YkOpenDevice(GetYKComNo(), GetYKBaud());
 
             return i;
         }
@@ -758,5 +773,47 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             i = SetCashBoxDriveMode();
             CloseDevice();
         }
+
+
+
+
+
+        public static int GetYKComNo()
+        {
+            try
+            {
+               string comno = INIManager.GetIni("Scale", "PrintComNo", MainModel.IniPath);
+
+               return Convert.ToInt16(comno);
+            }
+            catch {
+                return 11;
+            }
+        }
+
+
+        public static int GetYKBaud()
+        {
+            try
+            {
+                string comno = INIManager.GetIni("Scale", "PrintBaud", MainModel.IniPath);
+
+                if (string.IsNullOrEmpty(comno))
+                {
+                    return 9600;
+                }
+                else
+                {
+                    return Convert.ToInt32(comno);
+                }
+                
+            }
+            catch
+            {
+                return 9600;
+            }
+        }
+
+
     }
 }

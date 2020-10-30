@@ -33,8 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenCreate));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokenCreate));
             this.dgvGood = new System.Windows.Forms.DataGridView();
             this.barcode = new System.Windows.Forms.DataGridViewImageColumn();
             this.label13 = new System.Windows.Forms.Label();
@@ -47,7 +47,6 @@
             this.lblMenu = new System.Windows.Forms.Label();
             this.picMenu = new System.Windows.Forms.PictureBox();
             this.btnCancle = new System.Windows.Forms.Button();
-            this.btnMenu = new System.Windows.Forms.Button();
             this.lblShopName = new System.Windows.Forms.Label();
             this.pnlDgvHead = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,7 +70,9 @@
             this.pnlMember = new System.Windows.Forms.Panel();
             this.lblUserName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblTotalSaleAmount = new System.Windows.Forms.Label();
             this.lblTotalPrice = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSkuAmount = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -84,6 +85,7 @@
             this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.picLoading = new ZhuiZhi_Integral_Scale_UncleFruit.transparentPic(this.components);
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGood)).BeginInit();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -223,9 +225,9 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.Black;
+            this.pnlHead.Controls.Add(this.btnClear);
             this.pnlHead.Controls.Add(this.pnlMenu);
             this.pnlHead.Controls.Add(this.btnCancle);
-            this.pnlHead.Controls.Add(this.btnMenu);
             this.pnlHead.Controls.Add(this.lblShopName);
             this.pnlHead.Font = new System.Drawing.Font("宋体", 9F);
             this.pnlHead.Location = new System.Drawing.Point(0, 0);
@@ -274,7 +276,7 @@
             this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnCancle.ForeColor = System.Drawing.Color.White;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnCancle.Location = new System.Drawing.Point(880, 14);
+            this.btnCancle.Location = new System.Drawing.Point(785, 14);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(95, 35);
             this.btnCancle.TabIndex = 43;
@@ -282,30 +284,6 @@
             this.btnCancle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnCancle.UseVisualStyleBackColor = false;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.AutoSize = true;
-            this.btnMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMenu.BackColor = System.Drawing.Color.Black;
-            this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMenu.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatAppearance.BorderSize = 0;
-            this.btnMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenu.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.btnMenu.ForeColor = System.Drawing.Color.White;
-            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenu.Location = new System.Drawing.Point(714, 16);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(142, 30);
-            this.btnMenu.TabIndex = 40;
-            this.btnMenu.Text = "某某某，你好  ∨";
-            this.btnMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnMenu.UseVisualStyleBackColor = false;
             // 
             // lblShopName
             // 
@@ -487,7 +465,7 @@
             this.btnScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScan.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnScan.ForeColor = System.Drawing.Color.White;
-            this.btnScan.Location = new System.Drawing.Point(1029, 455);
+            this.btnScan.Location = new System.Drawing.Point(1029, 501);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(87, 47);
             this.btnScan.TabIndex = 38;
@@ -550,7 +528,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(890, 484);
+            this.button1.Location = new System.Drawing.Point(890, 530);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 47);
             this.button1.TabIndex = 48;
@@ -565,7 +543,9 @@
             this.pnlMember.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMember.Controls.Add(this.lblUserName);
             this.pnlMember.Controls.Add(this.label4);
+            this.pnlMember.Controls.Add(this.lblTotalSaleAmount);
             this.pnlMember.Controls.Add(this.lblTotalPrice);
+            this.pnlMember.Controls.Add(this.label3);
             this.pnlMember.Controls.Add(this.label2);
             this.pnlMember.Controls.Add(this.lblSkuAmount);
             this.pnlMember.Controls.Add(this.label17);
@@ -574,14 +554,14 @@
             this.pnlMember.Location = new System.Drawing.Point(846, 141);
             this.pnlMember.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMember.Name = "pnlMember";
-            this.pnlMember.Size = new System.Drawing.Size(320, 157);
+            this.pnlMember.Size = new System.Drawing.Size(320, 184);
             this.pnlMember.TabIndex = 54;
             // 
             // lblUserName
             // 
             this.lblUserName.BackColor = System.Drawing.Color.White;
             this.lblUserName.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.lblUserName.Location = new System.Drawing.Point(171, 113);
+            this.lblUserName.Location = new System.Drawing.Point(171, 145);
             this.lblUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(131, 21);
@@ -594,12 +574,24 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label4.Location = new System.Drawing.Point(11, 113);
+            this.label4.Location = new System.Drawing.Point(11, 145);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 24);
             this.label4.TabIndex = 7;
             this.label4.Text = "操作人";
+            // 
+            // lblTotalSaleAmount
+            // 
+            this.lblTotalSaleAmount.BackColor = System.Drawing.Color.White;
+            this.lblTotalSaleAmount.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblTotalSaleAmount.Location = new System.Drawing.Point(172, 111);
+            this.lblTotalSaleAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalSaleAmount.Name = "lblTotalSaleAmount";
+            this.lblTotalSaleAmount.Size = new System.Drawing.Size(131, 21);
+            this.lblTotalSaleAmount.TabIndex = 6;
+            this.lblTotalSaleAmount.Text = "￥0.00";
+            this.lblTotalSaleAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblTotalPrice
             // 
@@ -613,6 +605,18 @@
             this.lblTotalPrice.Text = "￥0.00";
             this.lblTotalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label3.Location = new System.Drawing.Point(11, 111);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 24);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "销售总金额";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -621,9 +625,9 @@
             this.label2.Location = new System.Drawing.Point(11, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 24);
+            this.label2.Size = new System.Drawing.Size(100, 24);
             this.label2.TabIndex = 5;
-            this.label2.Text = "报损金额";
+            this.label2.Text = "成本总金额";
             // 
             // lblSkuAmount
             // 
@@ -645,9 +649,9 @@
             this.label17.Location = new System.Drawing.Point(11, 47);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(82, 24);
+            this.label17.Size = new System.Drawing.Size(118, 24);
             this.label17.TabIndex = 1;
-            this.label17.Text = "报损种类";
+            this.label17.Text = "报损种类数量";
             // 
             // label18
             // 
@@ -692,7 +696,7 @@
             this.dgvType.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.typekey,
             this.typeValue});
-            this.dgvType.Location = new System.Drawing.Point(846, 303);
+            this.dgvType.Location = new System.Drawing.Point(846, 349);
             this.dgvType.Name = "dgvType";
             this.dgvType.RowHeadersVisible = false;
             this.dgvType.RowTemplate.Height = 40;
@@ -788,11 +792,30 @@
             this.picLoading.UnitType = ZhuiZhi_Integral_Scale_UncleFruit.MyControl.EnumUnitType.Station;
             this.picLoading.Visible = false;
             // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Black;
+            this.btnClear.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClear.BackgroundImage")));
+            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnClear.Location = new System.Drawing.Point(902, 14);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(95, 35);
+            this.btnClear.TabIndex = 50;
+            this.btnClear.Text = "清空";
+            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // FormBrokenCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(241)))), ((int)(((byte)(246)))));
             this.ClientSize = new System.Drawing.Size(1180, 760);
             this.Controls.Add(this.btnBatchBroken);
             this.Controls.Add(this.dgvType);
@@ -857,7 +880,6 @@
         //private UserControl.transparentPic picBirthday;
         private System.Windows.Forms.Panel pnlHead;
         private System.Windows.Forms.Label lblShopName;
-        private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Button btnScan;
         // private UserControl.transparentPic picLoading;
         private System.Windows.Forms.Panel pnlDgvHead;
@@ -894,5 +916,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn typekey;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeValue;
         private System.Windows.Forms.Button btnBatchBroken;
+        private System.Windows.Forms.Label lblTotalSaleAmount;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnClear;
     }
 }

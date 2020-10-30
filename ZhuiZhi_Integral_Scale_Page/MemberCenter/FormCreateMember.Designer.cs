@@ -51,12 +51,12 @@
             this.pnlMan = new System.Windows.Forms.Panel();
             this.lblMan = new System.Windows.Forms.Label();
             this.picMan = new System.Windows.Forms.PictureBox();
-            this.dtStart = new System.Windows.Forms.DateTimePicker();
-            this.picNotSelect = new System.Windows.Forms.PictureBox();
-            this.picSelect = new System.Windows.Forms.PictureBox();
             this.txtPhone = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.txtBirthday = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.txtName = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.picNotSelect = new System.Windows.Forms.PictureBox();
+            this.picSelect = new System.Windows.Forms.PictureBox();
             this.tlpType.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -337,41 +337,6 @@
             this.picMan.TabStop = false;
             this.picMan.Click += new System.EventHandler(this.pnlMan_Click);
             // 
-            // dtStart
-            // 
-            this.dtStart.CalendarFont = new System.Drawing.Font("微软雅黑", 18F);
-            this.dtStart.CustomFormat = "yyyy-MM-dd";
-            this.dtStart.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStart.Location = new System.Drawing.Point(101, 134);
-            this.dtStart.Margin = new System.Windows.Forms.Padding(2);
-            this.dtStart.Name = "dtStart";
-            this.dtStart.Size = new System.Drawing.Size(210, 30);
-            this.dtStart.TabIndex = 93;
-            this.dtStart.Value = new System.DateTime(2020, 9, 23, 0, 0, 0, 0);
-            this.dtStart.CloseUp += new System.EventHandler(this.dtStart_CloseUp);
-            this.dtStart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dtStart_MouseDown);
-            // 
-            // picNotSelect
-            // 
-            this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
-            this.picNotSelect.Location = new System.Drawing.Point(150, 16);
-            this.picNotSelect.Name = "picNotSelect";
-            this.picNotSelect.Size = new System.Drawing.Size(36, 28);
-            this.picNotSelect.TabIndex = 51;
-            this.picNotSelect.TabStop = false;
-            this.picNotSelect.Visible = false;
-            // 
-            // picSelect
-            // 
-            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
-            this.picSelect.Location = new System.Drawing.Point(203, 16);
-            this.picSelect.Name = "picSelect";
-            this.picSelect.Size = new System.Drawing.Size(36, 28);
-            this.picSelect.TabIndex = 88;
-            this.picSelect.TabStop = false;
-            this.picSelect.Visible = false;
-            // 
             // txtPhone
             // 
             this.txtPhone.BackColor = System.Drawing.Color.White;
@@ -410,6 +375,21 @@
             this.txtBirthday.Enter += new System.EventHandler(this.txtBirthday_Enter);
             this.txtBirthday.Leave += new System.EventHandler(this.txtBirthday_Leave);
             // 
+            // dtStart
+            // 
+            this.dtStart.CalendarFont = new System.Drawing.Font("微软雅黑", 18F);
+            this.dtStart.CustomFormat = "yyyy-MM-dd";
+            this.dtStart.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtStart.Location = new System.Drawing.Point(101, 134);
+            this.dtStart.Margin = new System.Windows.Forms.Padding(2);
+            this.dtStart.Name = "dtStart";
+            this.dtStart.Size = new System.Drawing.Size(210, 30);
+            this.dtStart.TabIndex = 93;
+            this.dtStart.Value = new System.DateTime(2020, 10, 22, 0, 0, 0, 0);
+            this.dtStart.CloseUp += new System.EventHandler(this.dtStart_CloseUp);
+            this.dtStart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dtStart_MouseDown);
+            // 
             // txtName
             // 
             this.txtName.BackColor = System.Drawing.Color.White;
@@ -427,6 +407,26 @@
             this.txtName.TabIndex = 81;
             this.txtName.WaterText = "请输入会员姓名，可不填";
             this.txtName.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txt_DataChanged);
+            // 
+            // picNotSelect
+            // 
+            this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
+            this.picNotSelect.Location = new System.Drawing.Point(150, 16);
+            this.picNotSelect.Name = "picNotSelect";
+            this.picNotSelect.Size = new System.Drawing.Size(36, 28);
+            this.picNotSelect.TabIndex = 51;
+            this.picNotSelect.TabStop = false;
+            this.picNotSelect.Visible = false;
+            // 
+            // picSelect
+            // 
+            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
+            this.picSelect.Location = new System.Drawing.Point(203, 16);
+            this.picSelect.Name = "picSelect";
+            this.picSelect.Size = new System.Drawing.Size(36, 28);
+            this.picSelect.TabIndex = 88;
+            this.picSelect.TabStop = false;
+            this.picSelect.Visible = false;
             // 
             // FormCreateMember
             // 
