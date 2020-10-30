@@ -52,6 +52,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         public FormPayByCash()
         {
             InitializeComponent();
+            btnNext.Enabled = true;
         }
 
         public void UpInfo(Cart cart)
@@ -68,7 +69,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 thisCurrentCart = cart;
                 txtCash.Text = thisCurrentCart.payamtbeforecash.ToString("f2");
                 btnNext.Focus();
-
+                btnNext.Enabled = true;
                 lblPrice.Text = "￥" + thisCurrentCart.payamtbeforecash.ToString("f2");
 
                 txtCash.SelectAll();
@@ -120,6 +121,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
             try
             {
+                this.Enabled = false;
                 try
                 {
                     double doublenum = Convert.ToDouble(txtCash.Text);
@@ -165,6 +167,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                         }
                         else
                         {
+                            btnNext.Enabled = false;
                             ReturnResultCode = 1;
                             ReruntOrderId = orderresult.orderid;
                             this.Close();
@@ -179,6 +182,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                             string orderid = "";
                             if (PayHelper.ShowFormChangeAndTopup(thisCurrentCart,out orderid))
                             {
+                                btnNext.Enabled = false;
                                 ReturnResultCode = 1;
                                 ReruntOrderId = orderid;
                                 this.Close();
@@ -214,6 +218,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                             }
                             else
                             {
+                                btnNext.Enabled = false;
                                 ReturnResultCode = 1;
                                 ReruntOrderId = orderresult.orderid;
                                 this.Close();
@@ -229,6 +234,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
                 }
                 else
                 {
+                    btnNext.Enabled = false;
                     ReturnResultCode = 2;
                     this.Close();
                 }
@@ -238,6 +244,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
                 MainModel.ShowLog("现金支付异常：" + ex.StackTrace, false);
             }
+            finally
+            {
+                this.Enabled = true;
+            }
         }
 
 
@@ -245,7 +255,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
         {
             try
             {
-                this.Enabled = false;
+                //this.Enabled = false;
                 LoadingHelper.ShowLoadingScreen("加载中...");
 
                 string ErrorMsgCart = "";
@@ -258,7 +268,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
 
                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
                 {
-                    this.Enabled = true;
+                    //this.Enabled = true;
                     LoadingHelper.CloseForm();
                     //fd
                     CheckUserAndMember(ResultCode);
@@ -287,7 +297,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             }
             finally
             {
-                this.Enabled = true;
+                //this.Enabled = true;
                 LoadingHelper.CloseForm();
             }
         }
@@ -422,6 +432,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
                 btnNext.BackColor = Color.Silver;
             }
+        }
+
+        private void FormPayByCash_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Enabled = false;
         }
     }
 }
