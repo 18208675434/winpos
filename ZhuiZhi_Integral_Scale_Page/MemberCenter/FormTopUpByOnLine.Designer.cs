@@ -120,6 +120,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmOnLinePayResult_FormClosing);
             this.Shown += new System.EventHandler(this.frmOnLinePayResult_Shown);
             this.SizeChanged += new System.EventHandler(this.frmOnLinePayResult_SizeChanged);
+            this.Leave += new System.EventHandler(this.FormTopUpByOnLine_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

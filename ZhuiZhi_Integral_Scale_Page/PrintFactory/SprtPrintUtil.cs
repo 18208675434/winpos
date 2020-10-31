@@ -440,7 +440,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     {
                         POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, printdetail.remark + "\r\n");
                     }
-                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, "期望送达时间：" + printdetail.expecttimedesc + "\r\n");
+                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0, "期望送达时间：" + "\r\n");
+                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 1, 0,  printdetail.expecttimedesc + "\r\n");
 
 
 

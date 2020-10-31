@@ -264,7 +264,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     {
                         PrintStr( printdetail.remark + "\n");
                     }
-                    PrintStr( "期望送达时间：" + printdetail.expecttimedesc + "\n");
+                    PrintStr( "期望送达时间："  + "\n");
+                    PrintStr( printdetail.expecttimedesc + "\n");
 
 
                     SetFontSize(0, 0);
