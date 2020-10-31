@@ -59,16 +59,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 //this.Activate();
                 if (MainModel.BalanceClose)
                 {
-                    timerLoadPwd.Enabled = false;
+                    timerLoadPwd.Enabled = false;           
                     PassWord = MainModel.BalancePwd;
                     Securitycode = MainModel.BalanceSecuritycode;
-
-
                     //MainModel.BalanceClose = false;
                     MainModel.BalanceEnter = false;
-                    MainModel.BalancePayPwd = "";
-                    MainModel.BalancePwd = "";
-                    MainModel.BalanceSecuritycode = "";
+                    //MainModel.BalancePayPwd = "";
+                    //MainModel.BalancePwd = "";
+                    //MainModel.BalanceSecuritycode = "";
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
