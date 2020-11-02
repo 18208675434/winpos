@@ -587,6 +587,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 ScaleFactory.ScaleGlobalHelper.IniScale(true);
                 ScaleFactory.ScaleGlobalHelper.Open(comno, baud);
             }
+            else if (scalename == ScaleType.龙飞.ToString())
+            {
+                string comno = "COM1";
+                int baud = 19200;
+
+                cbxComNo.SelectedItem = comno;
+                cbxBaud.SelectedItem = baud.ToString();
+
+                ScaleFactory.ScaleGlobalHelper.IniScale(true);
+                ScaleFactory.ScaleGlobalHelper.Open(comno, baud);
+            }
         }
 
         private void cbxComNo_SelectedIndexChanged(object sender, EventArgs e)

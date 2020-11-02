@@ -108,11 +108,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                        currentscaletype = ScaleType.易衡;
                        scaleaction = new Scale_EH200();
                    }
-            
-                Action aa =   new Action(() =>
-              {
-                  scaleaction.Open(ComNo, Baud);
-              });
+                    else if (ScaleName == ScaleType.龙飞.ToString())
+                    {
+                        currentscaletype = ScaleType.龙飞;
+                        scaleaction = new Scale_LF();
+                    }
+
+                    Action aa =   new Action(() =>
+                  {
+                      scaleaction.Open(ComNo, Baud);
+                  });
 
                 aa.Invoke();
                }
@@ -318,6 +323,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         托利多,
         爱宝,
         易捷通,
-        易衡
+        易衡,
+        龙飞
     }
 }

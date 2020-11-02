@@ -870,7 +870,8 @@
             "爱宝",
             "托利多",
             "易捷通",
-            "易衡"});
+            "易衡",
+            "龙飞"});
             this.cbxScaleName.Location = new System.Drawing.Point(744, 119);
             this.cbxScaleName.Name = "cbxScaleName";
             this.cbxScaleName.Size = new System.Drawing.Size(316, 29);
