@@ -1935,7 +1935,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                return;
                            }
                            Cart curCart = null;
-                           if (sortCartByFirstCategoryid == null || !sortCartByFirstCategoryid.ContainsKey("CurrentFirstCategoryid"))
+                           if (sortCartByFirstCategoryid == null || !sortCartByFirstCategoryid.ContainsKey(CurrentFirstCategoryid))
                            {
                                return;
                            }
@@ -4294,7 +4294,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (MainModel.CurrentMember != null)
                 {
                     string ErrorMsgMember = "";
-                    Member member = httputil.GetMember(MainModel.CurrentMember.entrancecode, ref ErrorMsgMember);
+                    Member member = httputil.GetMember(MainModel.CurrentMember.memberinfo, ref ErrorMsgMember);
 
                     if (ErrorMsgMember != "" || member == null) //会员不存在
                     {

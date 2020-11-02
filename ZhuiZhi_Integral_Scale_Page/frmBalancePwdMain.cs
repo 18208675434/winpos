@@ -238,7 +238,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         MainModel.BalanceSecuritycode = verifyresult.securitycode;
                         this.DialogResult = DialogResult.OK;
                         MainModel.BalanceClose = true;
-                        //this.Close();
                     }
                     else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
                     {
@@ -254,7 +253,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         ShowLog(verifyresult.hint, true);
                     }
                 }
-
                 this.Enabled = true;
             }
             catch (Exception ex)
@@ -267,7 +265,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LoadingHelper.CloseForm();
                 //this.Activate();
             }
-
         }
 
 
@@ -275,7 +272,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-
                 if (resultcode == MainModel.HttpUserExpired || resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.DifferentMember)
                 {
 

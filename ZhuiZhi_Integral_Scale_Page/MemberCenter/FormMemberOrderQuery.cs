@@ -87,6 +87,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void frmOrderQuery_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
+            txtPhone.Text = CurrentCustomerID;
             LoadBmp();
 
             btnToday_Click(null, null);
@@ -502,7 +503,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 queryorderpara.orderid = txtOrderID.Text;
             }
             queryorderpara.interval = CurrentInterval;
-            queryorderpara.shopid = MainModel.CurrentShopInfo.shopid;
+            //queryorderpara.shopid = MainModel.CurrentShopInfo.shopid;
             queryorderpara.orderatend = MainModel.getStampByDateTime(dtEnd.Value);
             queryorderpara.orderatstart = MainModel.getStampByDateTime(dtStart.Value);
             queryorderpara.lastorderid = LastOrderid;
