@@ -155,8 +155,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         */
         [DllImport("lf_pos_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
         public static extern int read_standard(string buf);
+
         #endregion
-        
+
         int icdev;
         public override bool Open(string connum, int baud)
         {

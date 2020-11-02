@@ -698,6 +698,7 @@
     <Compile Include="PrettyCash\PrettyCashHelper.cs" />
     <Compile Include="PrintFactory\PrintHelper.cs" />
     <Compile Include="PrintFactory\SprtPrintUtil.cs" />
+    <Compile Include="PrintFactory\LFPrintUtil.cs" />
     <Compile Include="PrintFactory\ToledoPrintUtil.cs" />
     <Compile Include="PrintFactory\YKPrintUtil.cs" />
     <Compile Include="ReturnWithoutOrder\FormCheckSmCode.cs">
