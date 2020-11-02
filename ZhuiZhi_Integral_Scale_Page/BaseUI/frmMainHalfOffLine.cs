@@ -225,8 +225,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 LoadPnlScale();
                 ShowLoading(false, true);
-                timerScale.Enabled = true;
-
                 timerTask.Enabled = true;
 
                 try
@@ -316,7 +314,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 threadmqtt.Start(false);
 
                 Delay.Start(300);
-
+                timerTask.Enabled = false;
                 //ScaleGlobalHelper.Close();
                 this.Dispose();
 
@@ -1223,7 +1221,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                    //如果之前二级分类不存在
                    if (pro == null)
                    {
-                       dgvGood.Rows.Clear();
+                       DgvGoodRowClear();
                        IniForm();
                        LoadSecondDgvCategory();
                    }
@@ -2186,7 +2184,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     if (AllCategoryPro == null || AllCategoryPro.Count == 0)
                     {
-                        dgvGood.Rows.Clear();
+                        DgvGoodRowClear();
                         return;
                     }
 
@@ -2204,7 +2202,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     if (!paging.success)
                     {
                         MainModel.ShowLog("分页出现异常，请重试", true);
-                        dgvGood.Rows.Clear();
+                        DgvGoodRowClear();
                         CurrentGoodPage = 1;
                         return;
                     }
@@ -2721,7 +2719,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                             if (lastimg.Tag != null && ((Product)lastimg.Tag).skucode == LastSkuCode)
                             {
-                                dgvGood.Rows[i].Cells[j].Value = GetItemImg((Product)lastimg.Tag);
+                                this.Invoke(new InvokeHandler(delegate ()
+                                {
+                                    dgvGood.Rows[i].Cells[j].Value = GetItemImg((Product)lastimg.Tag);
+                                }));                               
                                 break;
                             }
                         }
@@ -2754,7 +2755,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 pro.RowNum = 1;
                 //pnlGoodNotSelect.BackgroundImage = picGoodSelect.Image;
                 pnlGoodNotSelect.BackColor = Color.FromArgb(207, 241, 255);
-                dgvGood.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = GetItemImg(pro);
+                this.Invoke(new InvokeHandler(delegate ()
+                {
+                    dgvGood.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = GetItemImg(pro);
+                }));               
                // pnlGoodNotSelect.BackgroundImage = picGoodNotSelect.Image;
                 pnlGoodNotSelect.BackColor = Color.White;
 
@@ -2783,7 +2787,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     if (!MainModel.WhetherAutoCart)
                     {
-                        timerScale.Enabled = false;
                         if (ScaleHelper.ShowFormScale(pro))
                         {
                             InsertProductToCart(pro);
@@ -2792,8 +2795,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                             SelectProduct = null;
                         }
-
-                        timerScale.Enabled = true;
                     }
 
                 }
@@ -2823,7 +2824,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 if (lastimg.Tag != null)
                 {
-                    dgc.Value = GetItemImg((Product)lastimg.Tag);
+                    this.Invoke(new InvokeHandler(delegate ()
+                    {
+                        dgc.Value = GetItemImg((Product)lastimg.Tag);
+                    }));                    
                 }
 
             }
@@ -3098,7 +3102,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 catch (Exception ex)
                 {
-                    dgvGood.Refresh();
+                    DgvGoodRefresh();                    
                     LogManager.WriteLog("更新显示列表异常" + ex.Message + ex.StackTrace);
                 }
             }
@@ -3628,7 +3632,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 catch (Exception ex)
                 {
-                    dgvGood.Refresh();
+                    DgvGoodRefresh();
                     LogManager.WriteLog("更新显示列表异常" + ex.Message + ex.StackTrace);
                 }
             }
@@ -4052,72 +4056,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         #region
         private ScaleResult CurrentScaleResult = null;
-        /// <summary>
-        /// 定时获取电子秤数据 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timerScale_Tick(object sender, EventArgs e)
-        {
-
-
-            //try
-            //{
-            //    timerScale.Enabled = false;
-            //    CurrentScaleResult = ScaleGlobalHelper.GetWeight();
-            //    if (CurrentScaleResult!=null && CurrentScaleResult.WhetherSuccess)
-            //    {
-            //        lblNetWeight.Text = CurrentScaleResult.NetWeight + "";
-            //        picNetWeight.Left = lblNetWeight.Right;
-            //        lblTareWeight.Text=CurrentScaleResult.TareWeight+"";
-            //        picTareWeight.Left = lblTareWeight.Right;
-
-            //        if (MainModel.WhetherAutoCart && CurrentScaleResult.WhetherStable && CurrentScaleResult.NetWeight>0 && SelectProduct!=null && SelectProduct.goodstagid!=0)
-            //        {
-            //            if (CurrentCart == null)
-            //            {
-            //                CurrentCart = new Cart();
-            //            }
-            //            if (CurrentCart.products == null)
-            //            {
-            //                List<Product> products = new List<Product>();
-            //                CurrentCart.products = products;
-            //            }
-
-            //            LastLstPro = new List<Product>();
-            //            foreach (Product ppro in CurrentCart.products)
-            //            {
-            //                LastLstPro.Add((Product)MainModel.Clone(ppro));
-            //            }
-
-            //            SelectProduct.specnum = CurrentScaleResult.NetWeight;
-            //            SelectProduct.num = 1;
-            //            if (SelectProduct.price == null)
-            //            {
-            //                SelectProduct.price = new Price();
-            //            }
-            //            SelectProduct.price.specnum=SelectProduct.specnum;
-            //            InsertProductToCart(SelectProduct);
-
-            //                    if (MainModel.WhetherPrint)
-            //                    {                                    
-            //                        LabelPrintHelper.LabelPrint(SelectProduct);
-            //                    }
-
-            //                    UploadOffLineDgvCart();
-            //                    SelectProduct = null;
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogManager.WriteLog("SCALE", "获取电子秤重量信息异常" + ex.Message);
-            //}
-            //finally
-            //{
-            //    timerScale.Enabled = true;
-            //}
-        }
+       
 
 
         private void LoadPnlScale()
@@ -4515,7 +4454,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 sortCartByFirstCategoryid[CurrentFirstCategoryid].SelectSecondCategoryid = kv.Key;
 
                 LoadSecondDgvCategory();
-                dgvGood.Rows.Clear();
+                DgvGoodRowClear();
 
                 CurrentGoodPage = 1;
                 //说明是第一次加载
@@ -4543,5 +4482,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             txtSearch.Focus();
         }
 
+        private void DgvGoodRowClear()
+        {
+            this.Invoke(new InvokeHandler(delegate ()
+            {
+                dgvGood.Rows.Clear();
+            }));          
+        }
+
+        private void DgvGoodRefresh()
+        {
+            this.Invoke(new InvokeHandler(delegate ()
+            {
+                dgvGood.Refresh();
+            }));
+        }
     }
 }
