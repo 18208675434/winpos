@@ -733,6 +733,7 @@
     <Compile Include="ReturnWithoutOrder\ReturnWithoutOrderHelper.cs" />
     <Compile Include="ScaleFactory\ScaleGlobalHelper.cs" />
     <Compile Include="ScaleFactory\ScaleResult.cs" />
+    <Compile Include="ScaleFactory\Scale_LF.cs" />
     <Compile Include="ScaleFactory\Scale_EH200.cs" />
     <Compile Include="ScaleFactory\Scale_Aclas.cs" />
     <Compile Include="ScaleFactory\Scale_Aclas_PS1X.cs" />
