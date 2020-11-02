@@ -522,9 +522,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                 foreach (string str in lstprints)
                 {
-
                     strprint += str + "\r\n"; //每行前面加两个空格 防止纸张偏打印不全 两边都留间距
-
                 }
 
                 //末尾打印空白行走纸
@@ -533,8 +531,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 int result = PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes(strprint), 25, 60);
 
                 BeginPrint();
-
-
 
                 return true;
             }

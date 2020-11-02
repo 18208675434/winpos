@@ -195,6 +195,12 @@
     <Compile Include="MemberCenter\FormRechargeQuery.Designer.cs">
       <DependentUpon>FormRechargeQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormMemberOrderQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormMemberOrderQuery.Designer.cs">
+      <DependentUpon>FormMemberOrderQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\model\Card.cs" />
     <Compile Include="BrokenUI\BrokenHelper.cs" />
     <Compile Include="BrokenUI\FormBroken.cs">
@@ -1407,6 +1413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormRechargeRefund.resx">
       <DependentUpon>FormRechargeRefund.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormMemberOrderQuery.resx">
+      <DependentUpon>FormMemberOrderQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuUI\FormCouponPwd.resx">
       <DependentUpon>FormCouponPwd.cs</DependentUpon>

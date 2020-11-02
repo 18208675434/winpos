@@ -896,14 +896,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
+                LogManager.WriteLog("DEBUG","余额密码验证"+json  +"传参"+tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
                 resultcode = rd.code;
-
+                
                 if (rd.code == 0)
                 {
                     VerifyBalancePwd verifyresult = JsonConvert.DeserializeObject<VerifyBalancePwd>(rd.data.ToString());
-
+                    
                     return verifyresult;
 
                 }
@@ -1030,6 +1030,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 else if (queryorderpara.source == 4)
                 {
                     url = "/pos/thirdpartyplatform/thirdpartyabnormalorder/page";
+                }
+
+                //通过customerid 区分是否会员页面进入
+                if (!string.IsNullOrEmpty(queryorderpara.customerid))
+                {
+                    url += "/person";
                 }
 
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);

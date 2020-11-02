@@ -531,7 +531,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
                     MainModel.CurrentTenatnIfno = tenantinfo;
 
-
                     return true;
                 }
             }

@@ -203,7 +203,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                frmbalancepwd.TopMost = true;
 
                                frmbalancepwd.ShowDialog();
-
+                               frmbalancepwd.Dispose();
+                               Application.DoEvents();
+                               this.Activate();
                                CheckUserAndMember(MainModel.BalancePwdErrorCode,"");
 
                                if (frmbalancepwd.DialogResult == DialogResult.OK)
@@ -228,7 +230,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                                        else
                                        {
                                            CheckUserAndMember(ResultCode,ErrorMsgCart);
-                                           //MainModel.ShowLog(ErrorMsgCart, true);
                                        }
                                        
                                    }else
@@ -379,7 +380,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 frmbalancepwd.TopMost = true;
 
                 frmbalancepwd.ShowDialog();
-
+                frmbalancepwd.Dispose();
+                Application.DoEvents();
+                this.Activate();
                 CheckUserAndMember(MainModel.BalancePwdErrorCode, "");
 
                 if (frmbalancepwd.DialogResult == DialogResult.OK)
@@ -471,7 +474,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             finally
             {
-                this.Enabled = true;                
+                this.Enabled = true;
             }
         }
 
