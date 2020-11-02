@@ -546,14 +546,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private void frmLogin_SizeChanged(object sender, EventArgs e)
         {
                       
-            if (this.WindowState != FormWindowState.Minimized)
-            {
-                MainModel.HideTaskThread();
-            }
-            else
-            {
-                MainModel.ShowTaskThread();
-            }
+            //if (this.WindowState != FormWindowState.Minimized)
+            //{
+            //    MainModel.HideTaskThread();
+            //}
+            //else
+            //{
+            //    MainModel.ShowTaskThread();
+            //}
 
             //asf.ControlAutoSize(this); 
         }
