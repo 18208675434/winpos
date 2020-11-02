@@ -393,9 +393,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 lstPrintStr.Add(getStrLine());
 
                 lstPrintStr.Add(MergeStr("总计件数", brokenresult.totalqty.ToString(), BodyCharCountOfLine, PageSize));
-                lstPrintStr.Add(MergeStr("报损金额", brokenresult.totalamt.ToString("f2") + "元", BodyCharCountOfLine, PageSize));
+                lstPrintStr.Add(MergeStr("成本总金额", brokenresult.totalamt.ToString("f2") + "元", BodyCharCountOfLine, PageSize));
 
-
+                lstPrintStr.Add(MergeStr("销售总金额", brokenresult.totalsaleamt.ToString("f2") + "元", BodyCharCountOfLine, PageSize));
 
                 lstPrintStr.Add(getStrLine());
 

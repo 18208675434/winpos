@@ -30,6 +30,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             LoadingHelper.ShowLoadingScreen();
             lstRechargeTemplates = new HttpUtil().ListAllTemplate(ref errormsg);
+            MainModel.LstRechargeTemplates = lstRechargeTemplates;
             LoadingHelper.CloseForm();
 
             if (lstRechargeTemplates == null)

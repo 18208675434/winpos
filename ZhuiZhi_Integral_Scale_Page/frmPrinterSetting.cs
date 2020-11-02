@@ -81,6 +81,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LoadScaleSet();
                 UpdatePrint();
                 LoadHalfOffLineIni();
+                LoadShowWithJinIni();
                 IsLoadSuccess = true;
             }
             catch (Exception ex)
@@ -467,6 +468,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.ShowLog("保存偏移量异常" + ex.Message, true);
             }
         }
+
+
+        private void linklblPrint_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+
+                PrintDialog dlg = new PrintDialog();
+                dlg.ShowDialog();
+            }
+            catch { }
+        }
         #endregion
 
         #region 电子秤设置
@@ -758,19 +771,52 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         #endregion
 
-        private void linklblPrint_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+
+        #region 面板商品重量显示是否为：斤
+
+        private void LoadShowWithJinIni()
         {
-            try{
-          
-            PrintDialog dlg = new PrintDialog();
-            dlg.ShowDialog();
-            }catch{}
+
+            string WhetherShowWithJin = INIManager.GetIni("System", "WhetherShowWithJin", MainModel.IniPath);
+
+
+            if (WhetherShowWithJin == "1")
+            {
+                MainModel.WhetherShowWithJin = true;
+                picOpenShowWithJin.BackgroundImage = picSelect.Image;
+                picCloseShowWithJin.BackgroundImage = picNotSelect.Image;
+
+
+            }
+            else
+            {
+                MainModel.WhetherShowWithJin = false;
+                picOpenShowWithJin.BackgroundImage = picNotSelect.Image;
+                picCloseShowWithJin.BackgroundImage = picSelect.Image;
+
+            }
+        }
+        private void pnlOpenShowWithJin_Click(object sender, EventArgs e)
+        {
+            MainModel.WhetherShowWithJin = true;
+            picOpenShowWithJin.BackgroundImage = picSelect.Image;
+            picCloseShowWithJin.BackgroundImage = picNotSelect.Image;
+            INIManager.SetIni("System", "WhetherShowWithJin", "1", MainModel.IniPath);
         }
 
-     
+        private void pnlCloseShowWithJin_Click(object sender, EventArgs e)
+        {
+            MainModel.WhetherShowWithJin = false;
+            picOpenShowWithJin.BackgroundImage = picNotSelect.Image;
+            picCloseShowWithJin.BackgroundImage = picSelect.Image;
+            INIManager.SetIni("System", "WhetherShowWithJin", "0", MainModel.IniPath);
+        }
 
-      
-     
+        #endregion
+
+
+
+
     }
 
 }

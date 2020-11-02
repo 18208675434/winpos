@@ -249,7 +249,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
                 double doublenum = Convert.ToDouble(txtCash.Text);
 
-                if (doublenum > 0)
+                if (doublenum >= 0)
                 {
                     btnNext.BackColor = Color.OrangeRed;
                 }

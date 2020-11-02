@@ -782,27 +782,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 lblGoodName.Text = pro.skuname;
             }
             lblGoodCode.Text = pro.skucode;
-            lblPriceDetail.Text = "/" + pro.saleunit;
+            //lblPriceDetail.Text = "/" + pro.saleunit;
 
 
             if (pro.price != null)
             {
-                if (pro.price.saleprice == pro.price.originprice)
+                if (pro.goodstagid != 0 && MainModel.WhetherShowWithJin)
                 {
-                    lblPrice.Text = "￥" + pro.price.saleprice.ToString("f2");
+
+                    lblPrice.Text = "￥" + Math.Round(pro.price.saleprice / 2, 2, MidpointRounding.AwayFromZero).ToString("f2");
+                    lblPriceDetail.Text = "/斤";
                 }
                 else
                 {
                     lblPrice.Text = "￥" + pro.price.saleprice.ToString("f2");
+                    lblPriceDetail.Text = "/" + pro.saleunit;
                 }
-            }
-            else
-            {
-            }
 
-            if (pro.price != null && pro.price.saleprice == pro.price.originprice)
-            {
-                lblPrice.Text = "￥" + pro.price.saleprice.ToString("f2");
+
             }
             else
             {

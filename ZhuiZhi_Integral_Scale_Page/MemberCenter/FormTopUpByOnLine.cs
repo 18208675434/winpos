@@ -272,6 +272,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
 
             MemberCenterMediaHelper.ShowPayInfo();
+
+            //焦点在客屏会导致扫码无响应   加载完毕 刷新一次焦点
+            this.Activate();
         }
 
         //数据处理过程不接受新数据
@@ -331,6 +334,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 return false;
             }
 
+        }
+
+        private void FormTopUpByOnLine_Leave(object sender, EventArgs e)
+        {
+            this.Activate();
         }
 
     }

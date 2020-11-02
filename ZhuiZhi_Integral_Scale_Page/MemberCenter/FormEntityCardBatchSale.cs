@@ -161,7 +161,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             if (dgvCard.Rows.Count >= 20)
             {
-                MainModel.ShowLog("单词批量你最多添加20个");
+                MainModel.ShowLog("单次批量你最多添加20个");
                 return;
             }
             ListAllTemplate customtemplate = MemberCenterHelper.ShowFormRechargeAmount();
@@ -246,7 +246,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     locationY = lblCardStatus.Location.Y;
                 }
                 lblCardNo.Text = rechargeCardInfo.cardid;
-                if (rechargeCardInfo.rechargeamount > 0)
+                if (rechargeCardInfo.rechargeamount > 0||rechargeCardInfo.rewardamount>0)
                 {
                     lblRechargeAmountWarterTxt.Visible = false;
                     txtRechargeAmount.Text = rechargeCardInfo.rechargeamount.ToString();
@@ -407,11 +407,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
                     return;
                 }
-                if (totalPay == 0)
-                {
-                    MainModel.ShowLog("请设置充值金额");
-                    return;
-                }
+                //if (totalPay == 0)
+                //{
+                //    MainModel.ShowLog("请设置充值金额");
+                //    return;
+                //}
 
                 string customerpaycode = "";
                 if (paymode == PayMode.other)//其它支付
