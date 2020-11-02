@@ -96,7 +96,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PayUI
             {
                 //ShowLog("验证用户/会员异常", true);
             }
-
         }
 
 

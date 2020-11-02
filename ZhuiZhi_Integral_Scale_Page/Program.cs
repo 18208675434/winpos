@@ -26,10 +26,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             //如果前进程已经存在
             if (processList.Length > 1)
             {
-                if (MessageBox.Show("检测到系统已在运行，不允许重复运行系统？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+                if (MessageBox.Show("检测到系统已在运行，点击确定将重新启动？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
                     != DialogResult.OK)
+                {
                     return;
-                return;
+                }
+                else
+                {
+                    //是否当前 进程， 如果之前有允许 则排名靠后
+                    bool iscurrent = true;
+                    foreach (System.Diagnostics.Process process in processList)
+                    {
+                        if (process.ProcessName == currentProcess.ProcessName)
+                        {
+                            if (iscurrent)
+                            {
+                                iscurrent = false;
+                            }
+                            else
+                            {
+                                process.Kill();
+                            }
+                            
+                        }
+
+                    }
+                }
+                    
             }
             
             //处理未捕获的异常
