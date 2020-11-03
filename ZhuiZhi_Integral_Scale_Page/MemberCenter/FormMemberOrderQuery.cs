@@ -630,7 +630,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         return;
                     }
 
-                    FormWebOrderDetailBack frmback = new FormWebOrderDetailBack(SelectOrder);
+                    FormWebOrderDetailBack frmback = new FormWebOrderDetailBack(SelectOrder,true);
 
                     frmback.ShowDialog();
                     btnQuery_Click(null, null);

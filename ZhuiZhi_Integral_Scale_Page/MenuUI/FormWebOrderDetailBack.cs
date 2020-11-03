@@ -15,16 +15,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
 
         public Order paraOrder = null;
         FormWebOrderDetail frmwebdetial = null;
-
+        public bool pataneedhide=false;
         //<summary>
         //按比例缩放页面及控件
         //</summary>
         ZhuiZhi_Integral_Scale_UncleFruit.Common.AutoSizeFormUtil asf = new ZhuiZhi_Integral_Scale_UncleFruit.Common.AutoSizeFormUtil();
 
-        public FormWebOrderDetailBack( Order order)
+        public FormWebOrderDetailBack( Order order,bool needhide =false)
         {
             InitializeComponent();
             paraOrder = order;
+            pataneedhide = needhide;
         }
 
 
@@ -32,7 +33,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
         {
             try
             {
-                frmwebdetial = new FormWebOrderDetail(paraOrder);
+                frmwebdetial = new FormWebOrderDetail(paraOrder, pataneedhide);
                 frmwebdetial.Location = new Point(0,0);
 
                 asf.AutoScaleControlTest(frmwebdetial, 1100, 760, Screen.AllScreens[0].Bounds.Width*85/100, Screen.AllScreens[0].Bounds.Height, true);

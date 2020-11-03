@@ -51,7 +51,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
         private void FormWebOrderDetail_Shown(object sender, EventArgs e)
         {
 
-            lblShopName.Text = "(" + MainModel.CurrentShopInfo.shopname + ")";
+            
             lblOrderStatus.Text = CurrentOrder.orderstatus;
             LoadBtnStatus();
             Application.DoEvents();
@@ -85,6 +85,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                     return;
                 }
 
+                lblShopName.Text = "(" + CurrentOrderDetail.shopname +")";
                 dgvBaseInfo.Rows.Add("订单类型：" + CurrentOrderDetail.ordersubtype, "用户姓名：" + CurrentOrderDetail.customername, "下单用户：" + CurrentOrderDetail.registerphone);
                 dgvBaseInfo.Rows.Add("订单号：" + CurrentOrderDetail.orderid, "下单时间：" + MainModel.GetDateTimeByStamp(CurrentOrderDetail.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), "支付时间：" + MainModel.GetDateTimeByStamp(CurrentOrderDetail.payat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"));
 
