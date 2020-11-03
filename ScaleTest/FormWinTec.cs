@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ToledoTest
+namespace ScaleTest
 {
     public partial class FormWinTec : Form
     {

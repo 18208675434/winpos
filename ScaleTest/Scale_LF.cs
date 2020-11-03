@@ -1,7 +1,6 @@
 ﻿/*
- * 果叔 易捷通—爱宝ps1X 设备   串口外接
+ * 果叔 龙飞设备 设备   串口外接
  * 
- * pa1dll 创建对象和释放对象必须一对一执行，否则会无法使用 ！！！！！
  * 
  * */
 using System;
@@ -9,10 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 
-namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
-{ 
+namespace ScaleTest
+{
     public class Scale_LF : Scale_Action
     {
         #region api
@@ -284,4 +282,3 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         }
     }
 }
-

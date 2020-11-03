@@ -7,14 +7,14 @@
     <ProjectGuid>{817DF502-8031-429B-BE33-BE66CF3B30D3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ToledoTest</RootNamespace>
-    <AssemblyName>ToledoTest</AssemblyName>
+    <RootNamespace>ScaleTest</RootNamespace>
+    <AssemblyName>ScaleTest</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -54,6 +54,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormScaleTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScaleTest.Designer.cs">
+      <DependentUpon>FormScaleTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormEH200.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,13 +84,19 @@
     <Compile Include="FormWinTec.Designer.cs">
       <DependentUpon>FormWinTec.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scale_Action.cs" />
     <Compile Include="Scale_EH200.cs" />
+    <Compile Include="Scale_LF.cs" />
     <Compile Include="WinTecUtil.cs" />
     <Compile Include="ToledoUtil.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScaleTest.resx">
+      <DependentUpon>FormScaleTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEH200.resx">
       <DependentUpon>FormEH200.cs</DependentUpon>

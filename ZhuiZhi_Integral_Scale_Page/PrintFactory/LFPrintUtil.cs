@@ -477,7 +477,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         #region 打印 method
         public static bool PrintText(string printtext, int fontsize = 32)
         {
-            int result = PrintTextAlias(printtext, fontsize);
+            int result = PrintText_stdcall(printtext, fontsize);
             return result==0;
         }
 
@@ -509,7 +509,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         public static bool PrintBitmapFile(string BmpFileName)
         {
             //LabelAngle  0不旋转
-            int result = PrintBitmapFile(BmpFileName, 0);
+            int result = PrintBitmapFile_stdcall(BmpFileName, 0);
             return true;
         }
 
@@ -517,14 +517,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         {
             try
             {
-                int flag = BeginPrintAlias();
+                int flag = BeginPrint_stdcall();
                 if (flag != 0)
                 {
                     return false;
                 }
                 if (isautoend)
                 {
-                    flag = ClosePrinterEx();//结束打印 切纸
+                    flag = ClosePrinterEx_stdcall();//结束打印 切纸
                     if (flag != 0)
                     {
                         return false;
@@ -550,7 +550,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         st= OpenPrinter_stdcall (); 
         */
         [DllImport("lf_pos_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-        public static extern int OpenPrinter();
+        public static extern int OpenPrinter_stdcall();
 
         /*功能	开始打印
         函数名	int BeginPrint (void)
@@ -559,8 +559,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         返回值	HS_OK
         HS_ERROR
          */
-        [DllImport("lf_pos_dll.dll",EntryPoint = "BeginPrint", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-        public static extern int BeginPrintAlias();
+        [DllImport("lf_pos_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        public static extern int BeginPrint_stdcall();
 
         /*功能	关闭打印
         函数名	int ClosePrinterEx (void)
@@ -570,7 +570,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         HS_ERROR
          */
         [DllImport("lf_pos_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-        public static extern int ClosePrinterEx();
+        public static extern int ClosePrinterEx_stdcall();
 
         /*功能 格式化待打印字符串
         函数名 int PrintText(char* str, int FontSize)
@@ -582,7 +582,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         HS_ERROR
          */
         [DllImport("lf_pos_dll.dll",EntryPoint = "PrintText", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-        public static extern int PrintTextAlias(string str, int FontSize);  
+        public static extern int PrintText_stdcall(string str, int FontSize);  
 
         /*功能	开钱箱
         函数名	int OpenCashDrawerEx(void)
@@ -594,11 +594,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         备注	
         */
         [DllImport("lf_pos_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-        public static extern int OpenCashDrawerEx();
+        public static extern int OpenCashDrawerEx_stdcall();
 
         /*暂无*/
         [DllImport("lf_pos_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
-        public static extern int PrintBitmapFile(string BmpFileName, int LabelAngle);
+        public static extern int PrintBitmapFile_stdcall(string BmpFileName, int LabelAngle);
         #endregion
         #endregion
 
