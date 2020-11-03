@@ -383,9 +383,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             }
         }
 
-
-
-
         public static bool PrintBalanceRefund(GetBalanceDepositRefund printdetail)
         {
             try
@@ -473,7 +470,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
             }
         }
 
-
+        private const int HS_OK = 240;
         #region 打印 method
         public static bool PrintText(string printtext, int fontsize = 32)
         {

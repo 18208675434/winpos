@@ -12,7 +12,7 @@ using System.Text;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
-{ 
+{
     public class Scale_LF : Scale_Action
     {
         #region api
@@ -132,7 +132,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
         #endregion
 
-
+        private const int HS_OK = 240;
         public override bool Open(string connum, int baud)
         {
             return true;
@@ -160,10 +160,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                 int li_ret = 0;
                 byte[] ls_buf_temp = new byte[32];
                 li_ret = read_standard_stdcall(ls_buf_temp);
-                if (li_ret == 240 || li_ret == -1 || li_ret == -2)
+                if (li_ret == HS_OK || li_ret == -1 || li_ret == -2)
                 {
                     string fixSeparator = "P";//正常:P 欠载:┗━┛
-                    if (li_ret != 240)
+                    if (li_ret != HS_OK)
                     {
                         fixSeparator = "┗━┛";
                     }
@@ -186,7 +186,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                 else
                 {
                     result.WhetherSuccess = false;
-                    result.Message = "获取重量异常";
+                    result.Message = "获取重量异常:" + li_ret;
                 }
                 return result;
             }
@@ -208,8 +208,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                 byte[] buf = Encoding.Default.GetBytes("0");
                 int li_ret = send_tare_stdcall(buf);
 
-                result.WhetherSuccess = li_ret == 240;
-                result.Message = li_ret + "";
+                result.WhetherSuccess = li_ret == HS_OK;
+                if (li_ret != HS_OK)
+                {
+                    result.Message = li_ret + "";
+                }
                 return result;
             }
             catch (Exception ex)
@@ -230,8 +233,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                 byte[] buf = Encoding.Default.GetBytes(Math.Round(num / 1000d, 3) + "");
                 int li_ret = send_tare_stdcall(buf);
 
-                result.WhetherSuccess = li_ret == 240;
-                result.Message = li_ret + "";
+                result.WhetherSuccess = li_ret == HS_OK;
+                if (li_ret != HS_OK)
+                {
+                    result.Message = li_ret + "";
+                }
                 return result;
             }
             catch (Exception ex)
@@ -250,8 +256,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             try
             {
                 int li_ret = send_zero_stdcall();
-                result.WhetherSuccess = li_ret == 240;
-                result.Message = li_ret + "";
+                result.WhetherSuccess = li_ret == HS_OK;
+                if (li_ret != HS_OK)
+                {
+                    result.Message = li_ret + "";
+                }
                 return result;
             }
             catch (Exception ex)
@@ -271,8 +280,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             {
                 byte[] buf = Encoding.Default.GetBytes("0");
                 int li_ret = clear_tare_stdcall(buf);
-                result.WhetherSuccess = li_ret == 240;
-                result.Message = li_ret + "";
+                result.WhetherSuccess = li_ret == HS_OK;
+                if (li_ret != HS_OK)
+                {
+                    result.Message = li_ret + "";
+                }
                 return result;
             }
             catch (Exception ex)
@@ -284,4 +296,3 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         }
     }
 }
-
