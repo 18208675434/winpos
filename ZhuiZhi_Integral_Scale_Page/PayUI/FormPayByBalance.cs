@@ -392,13 +392,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     string ErrorMsgCart = "";
                     int ResultCode = 0;
 
-                    string paypassword = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, frmbalancepwd.Securitycode + ":" + frmbalancepwd.PassWord);
+
+                    string tempsecuritycode = frmbalancepwd.Securitycode;
+
+                    if(string.IsNullOrEmpty(tempsecuritycode)){
+                        tempsecuritycode=MainModel.BalanceSecuritycode;
+                    }
+                    string paypassword = MainModel.RSAEncrypt(MainModel.RSAPrivateKey, tempsecuritycode + ":" + frmbalancepwd.PassWord);
 
                     CurrentCart.paypassword = paypassword;
 
                     Cart pwdcart = httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCode);
                     if (pwdcart == null || !string.IsNullOrEmpty(ErrorMsgCart))
                     {
+                        if (string.IsNullOrEmpty(tempsecuritycode))
+                        {
+                            MainModel.ShowLog("安全码为空",true);
+                        }
+
                         if (ResultCode == 100011)
                         {
                             MainModel.ShowLog("非当前登录用户的付款码，请确认后重新支付", true);

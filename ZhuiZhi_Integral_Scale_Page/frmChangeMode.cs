@@ -113,7 +113,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
 
-
                 IsEnable = false;
                 LoadingHelper.ShowLoadingScreen("请稍候...");
 
