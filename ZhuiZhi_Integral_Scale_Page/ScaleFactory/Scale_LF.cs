@@ -173,9 +173,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
                         int status = Convert.ToInt32(ls_buf.Substring(0, 1));
                         string[] weight = System.Text.RegularExpressions.Regex.Split(ls_buf.Substring(1), fixSeparator);
                         result.WhetherStable = (status == 1 || status == 3 || status == 5 || status == 7);
-                        result.NetWeight = Convert.ToDecimal(weight[0]) * 1000;
-                        result.TareWeight = Convert.ToDecimal(weight[1]) * 1000;
-                        result.TotalWeight = result.NetWeight + result.TareWeight;
+                        result.NetWeight = Math.Round(Convert.ToDecimal(weight[0]),3);
+                        result.TareWeight = Math.Round(Convert.ToDecimal(weight[1]), 3);
+                        result.TotalWeight = Math.Round(result.NetWeight + result.TareWeight, 3);
                         result.WhetherSuccess = true;
                     }
                     else// 首字节为 0x00 时，因 0x00 表示字符串的结束符而取不到任何信息
@@ -227,25 +227,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
         {
             ScaleResult result = new ScaleResult();
             result.WhetherSuccess = false;
-
-            try
-            {
-                byte[] buf = Encoding.Default.GetBytes(Math.Round(num / 1000d, 3) + "");
-                int li_ret = send_tare_stdcall(buf);
-
-                result.WhetherSuccess = li_ret == HS_OK;
-                if (li_ret != HS_OK)
-                {
-                    result.Message = li_ret + "";
-                }
-                return result;
-            }
-            catch (Exception ex)
-            {
-                result.WhetherSuccess = false;
-                result.Message = "设置皮重异常" + ex.Message;
-                return result;
-            }
+            result.Message = "龙飞设备无此功能";
+            return result;
         }
 
         public override ScaleResult SetZero()
