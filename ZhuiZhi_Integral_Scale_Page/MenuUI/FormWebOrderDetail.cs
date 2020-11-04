@@ -36,15 +36,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
         #endregion
 
         #region 页面加载与退出
-        public FormWebOrderDetail(Order order)
+        public FormWebOrderDetail(Order order,bool needhide=false)
         {
             InitializeComponent();
 
             CurrentOrder = order;
+
+            if (needhide)
+            {
+                pnlOpetion.Visible = false;
+            }
         }
 
         private void FormWebOrderDetail_Shown(object sender, EventArgs e)
         {
+
+            
             lblOrderStatus.Text = CurrentOrder.orderstatus;
             LoadBtnStatus();
             Application.DoEvents();
@@ -78,19 +85,62 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                     return;
                 }
 
+                lblShopName.Text = "(" + CurrentOrderDetail.shopname +")";
                 dgvBaseInfo.Rows.Add("订单类型：" + CurrentOrderDetail.ordersubtype, "用户姓名：" + CurrentOrderDetail.customername, "下单用户：" + CurrentOrderDetail.registerphone);
                 dgvBaseInfo.Rows.Add("订单号：" + CurrentOrderDetail.orderid, "下单时间：" + MainModel.GetDateTimeByStamp(CurrentOrderDetail.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), "支付时间：" + MainModel.GetDateTimeByStamp(CurrentOrderDetail.payat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"));
 
 
+
+
                 dgvPayInfo.Rows.Add("订单金额(元)："+CurrentOrderDetail.orderamt.ToString("f2"), "商品金额(元)："+CurrentOrderDetail.productamt.ToString("f2"), "优惠金额(元)："+CurrentOrderDetail.promoamt.ToString("f2"));
                 dgvPayInfo.Rows.Add("门店优惠(元)：" + CurrentOrderDetail.pshoppromoamt.ToString("f2"), "平台优惠(元)：" + CurrentOrderDetail.pplatformpromoamt.ToString("f2"), "抹零金额(元)：" + CurrentOrderDetail.givechangeamt.ToString("f2"));
-                dgvPayInfo.Rows.Add("应收金额(元)：" + CurrentOrderDetail.payamtafterpromo.ToString("f2"), "现金支付(元)：" + CurrentOrderDetail.cashpayamt.ToString("f2"), "");
+                //dgvPayInfo.Rows.Add("应收金额(元)：" + CurrentOrderDetail.payamtafterpromo.ToString("f2"), "现金支付(元)：" + CurrentOrderDetail.cashpayamt.ToString("f2"), "");
+
+                List<string> lstpayinfo = new List<string>();
+                lstpayinfo.Add("应收金额(元)：" + CurrentOrderDetail.payamtafterpromo.ToString("f2"));
+
+                if (CurrentOrderDetail.balancepayamt > 0)
+                {
+                    lstpayinfo.Add("余额抵扣(元)：" + CurrentOrderDetail.balancepayamt.ToString("f2"));
+
+                }
+                if (CurrentOrderDetail.cashpayamt > 0)
+                {
+                    lstpayinfo.Add("现金支付(元)：" + CurrentOrderDetail.cashpayamt.ToString("f2"));
+
+                }
+                if (CurrentOrderDetail.alipayamt > 0)
+                {
+                    lstpayinfo.Add("支付宝支付(元)：" + CurrentOrderDetail.alipayamt.ToString("f2"));
+
+                }
+                if (CurrentOrderDetail.wechatpayamt > 0)
+                {
+                    lstpayinfo.Add("微信支付(元)：" + CurrentOrderDetail.wechatpayamt.ToString("f2"));
+                }
+
+                if (CurrentOrderDetail.otherpaydetailinfos != null && CurrentOrderDetail.otherpaydetailinfos.Count > 0)
+                {
+                    foreach (PayDetailInfo itempay in CurrentOrderDetail.otherpaydetailinfos)
+                    {
+                        lstpayinfo.Add(itempay.type+"支付(元)：" + itempay.amount.ToString("f2"));
+                    }
+                }
+
+                int tempcount = 6 - lstpayinfo.Count;
+                for (int i = 0; i < tempcount; i++)
+                {
+                    lstpayinfo.Add("");
+                }
+                dgvPayInfo.Rows.Add(lstpayinfo[0], lstpayinfo[1], lstpayinfo[2]);
+                dgvPayInfo.Rows.Add(lstpayinfo[3], lstpayinfo[4], lstpayinfo[5]);
 
 
-                LoadDgvOrderItems();
+
+                    LoadDgvOrderItems();
 
             }catch(Exception ex){
-
+                MainModel.ShowLog(ex.Message,true);
             }
         }
 
@@ -140,13 +190,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
 
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
 
-                int startindex = (CurrentPage - 1) * 6;
+                int startindex = (CurrentPage - 1) * 5;
 
-                int lastindex = Math.Min(CurrentOrderDetail.orderitems.Count - 1, startindex + 5);
+                int lastindex = Math.Min(CurrentOrderDetail.orderitems.Count - 1, startindex + 4);
 
                 dgvOrderItems.Rows.Clear();
                 List<Orderitems> lstOrder = CurrentOrderDetail.orderitems.GetRange(startindex, lastindex - startindex + 1);
-
 
 
                 foreach (Orderitems item in lstOrder)
@@ -154,7 +203,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                     dgvOrderItems.Rows.Add(item.goodsname, item.bulk == 1 ? "散称" : "标品", item.listprice.ToString("f2"), item.saleprice.ToString("f2"), item.qty.ToString(), item.productamt.ToString("f2"));
                 }
 
-                rbtnPageDown.WhetherEnable = CurrentOrderDetail.orderitems.Count > CurrentPage * 6;
+                rbtnPageDown.WhetherEnable = CurrentOrderDetail.orderitems.Count > CurrentPage * 5;
 
             }
             catch

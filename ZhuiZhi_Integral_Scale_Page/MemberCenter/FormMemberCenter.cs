@@ -974,5 +974,31 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LoadingHelper.CloseForm();
             }
         }
+
+        private void btnMemberOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsEnable)
+                {
+                    return;
+                }
+                IsEnable = false;
+                FormMemberOrderQuery frmorderquery = new FormMemberOrderQuery(CurrentMember.memberinfo);
+                asf.AutoScaleControlTest(frmorderquery, 1178, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmorderquery.Location = new System.Drawing.Point(0, 0);
+                frmorderquery.ShowDialog();
+                frmorderquery.Dispose();
+                IsEnable = true;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("开启订单查询页面异常" + ex.Message);
+            }
+            finally
+            {
+                IsEnable = true;
+            }
+        }
     }
 }

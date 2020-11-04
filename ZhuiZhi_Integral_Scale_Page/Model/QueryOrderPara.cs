@@ -47,5 +47,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public int source { set; get; }
 
         public string tenantid { set; get; }
+       /// <summary>
+       /// member.memberinfo   查询会员订单的时候用
+       /// </summary>
+        public string customerid { set; get; }
     }
 }

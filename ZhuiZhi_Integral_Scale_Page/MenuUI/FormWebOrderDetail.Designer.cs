@@ -51,10 +51,12 @@
             this.lblOrderStatus = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlOpetion = new System.Windows.Forms.Panel();
             this.btnCancelOrder = new System.Windows.Forms.Button();
             this.btnReprint = new System.Windows.Forms.Button();
             this.btnRefundByAmt = new System.Windows.Forms.Button();
@@ -77,12 +79,11 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.picClose = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.lblShopName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.pnlOpetion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBaseInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPayInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderItems)).BeginInit();
@@ -93,6 +94,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.panel1.Controls.Add(this.lblShopName);
             this.panel1.Controls.Add(this.lblOrderStatus);
             this.panel1.Controls.Add(this.lblPhone);
             this.panel1.Location = new System.Drawing.Point(12, 21);
@@ -134,6 +136,44 @@
             this.panel2.Size = new System.Drawing.Size(976, 54);
             this.panel2.TabIndex = 3;
             // 
+            // rbtnPageDown
+            // 
+            this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
+            this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageDown.Image = null;
+            this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageDown.Location = new System.Drawing.Point(847, 7);
+            this.rbtnPageDown.Name = "rbtnPageDown";
+            this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageDown.PenWidth = 1;
+            this.rbtnPageDown.RoundRadius = 1;
+            this.rbtnPageDown.ShowImg = false;
+            this.rbtnPageDown.ShowText = "下一页";
+            this.rbtnPageDown.Size = new System.Drawing.Size(120, 40);
+            this.rbtnPageDown.TabIndex = 43;
+            this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageDown.WhetherEnable = false;
+            this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
+            // 
+            // rbtnPageUp
+            // 
+            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
+            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageUp.Image = null;
+            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageUp.Location = new System.Drawing.Point(721, 7);
+            this.rbtnPageUp.Name = "rbtnPageUp";
+            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageUp.PenWidth = 1;
+            this.rbtnPageUp.RoundRadius = 1;
+            this.rbtnPageUp.ShowImg = false;
+            this.rbtnPageUp.ShowText = "上一页";
+            this.rbtnPageUp.Size = new System.Drawing.Size(120, 40);
+            this.rbtnPageUp.TabIndex = 42;
+            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageUp.WhetherEnable = false;
+            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -149,7 +189,7 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Location = new System.Drawing.Point(12, 500);
+            this.panel3.Location = new System.Drawing.Point(12, 458);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(976, 54);
             this.panel3.TabIndex = 4;
@@ -165,18 +205,18 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "支付明细";
             // 
-            // panel4
+            // pnlOpetion
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panel4.Controls.Add(this.btnCancelOrder);
-            this.panel4.Controls.Add(this.btnReprint);
-            this.panel4.Controls.Add(this.btnRefundByAmt);
-            this.panel4.Controls.Add(this.btnRefund);
-            this.panel4.Controls.Add(this.label10);
-            this.panel4.Location = new System.Drawing.Point(0, 685);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1000, 76);
-            this.panel4.TabIndex = 4;
+            this.pnlOpetion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.pnlOpetion.Controls.Add(this.btnCancelOrder);
+            this.pnlOpetion.Controls.Add(this.btnReprint);
+            this.pnlOpetion.Controls.Add(this.btnRefundByAmt);
+            this.pnlOpetion.Controls.Add(this.btnRefund);
+            this.pnlOpetion.Controls.Add(this.label10);
+            this.pnlOpetion.Location = new System.Drawing.Point(0, 685);
+            this.pnlOpetion.Name = "pnlOpetion";
+            this.pnlOpetion.Size = new System.Drawing.Size(1000, 76);
+            this.pnlOpetion.TabIndex = 4;
             // 
             // btnCancelOrder
             // 
@@ -378,7 +418,7 @@
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPayInfo.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvPayInfo.GridColor = System.Drawing.Color.LightGray;
-            this.dgvPayInfo.Location = new System.Drawing.Point(12, 557);
+            this.dgvPayInfo.Location = new System.Drawing.Point(12, 513);
             this.dgvPayInfo.Margin = new System.Windows.Forms.Padding(0);
             this.dgvPayInfo.MultiSelect = false;
             this.dgvPayInfo.Name = "dgvPayInfo";
@@ -389,7 +429,7 @@
             this.dgvPayInfo.RowTemplate.Height = 40;
             this.dgvPayInfo.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPayInfo.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvPayInfo.Size = new System.Drawing.Size(976, 125);
+            this.dgvPayInfo.Size = new System.Drawing.Size(976, 170);
             this.dgvPayInfo.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn1
@@ -474,7 +514,7 @@
             this.dgvOrderItems.RowTemplate.Height = 40;
             this.dgvOrderItems.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvOrderItems.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvOrderItems.Size = new System.Drawing.Size(976, 274);
+            this.dgvOrderItems.Size = new System.Drawing.Size(976, 229);
             this.dgvOrderItems.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn4
@@ -560,43 +600,17 @@
             this.panel5.Size = new System.Drawing.Size(100, 760);
             this.panel5.TabIndex = 9;
             // 
-            // rbtnPageDown
+            // lblShopName
             // 
-            this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
-            this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
-            this.rbtnPageDown.Image = null;
-            this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnPageDown.Location = new System.Drawing.Point(847, 7);
-            this.rbtnPageDown.Name = "rbtnPageDown";
-            this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
-            this.rbtnPageDown.PenWidth = 1;
-            this.rbtnPageDown.RoundRadius = 1;
-            this.rbtnPageDown.ShowImg = false;
-            this.rbtnPageDown.ShowText = "下一页";
-            this.rbtnPageDown.Size = new System.Drawing.Size(120, 40);
-            this.rbtnPageDown.TabIndex = 43;
-            this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
-            this.rbtnPageDown.WhetherEnable = false;
-            this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
-            // 
-            // rbtnPageUp
-            // 
-            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
-            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
-            this.rbtnPageUp.Image = null;
-            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnPageUp.Location = new System.Drawing.Point(721, 7);
-            this.rbtnPageUp.Name = "rbtnPageUp";
-            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
-            this.rbtnPageUp.PenWidth = 1;
-            this.rbtnPageUp.RoundRadius = 1;
-            this.rbtnPageUp.ShowImg = false;
-            this.rbtnPageUp.ShowText = "上一页";
-            this.rbtnPageUp.Size = new System.Drawing.Size(120, 40);
-            this.rbtnPageUp.TabIndex = 42;
-            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
-            this.rbtnPageUp.WhetherEnable = false;
-            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
+            this.lblShopName.AutoSize = true;
+            this.lblShopName.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lblShopName.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblShopName.Location = new System.Drawing.Point(111, 16);
+            this.lblShopName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblShopName.Name = "lblShopName";
+            this.lblShopName.Size = new System.Drawing.Size(26, 24);
+            this.lblShopName.TabIndex = 3;
+            this.lblShopName.Text = "--";
             // 
             // FormWebOrderDetail
             // 
@@ -608,7 +622,7 @@
             this.Controls.Add(this.dgvOrderItems);
             this.Controls.Add(this.dgvPayInfo);
             this.Controls.Add(this.dgvBaseInfo);
-            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.pnlOpetion);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -624,8 +638,8 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.pnlOpetion.ResumeLayout(false);
+            this.pnlOpetion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBaseInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPayInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderItems)).EndInit();
@@ -644,7 +658,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnlOpetion;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnReprint;
         private System.Windows.Forms.Button btnRefundByAmt;
@@ -669,5 +683,6 @@
         private System.Windows.Forms.PictureBox picClose;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnCancelOrder;
+        private System.Windows.Forms.Label lblShopName;
     }
 }

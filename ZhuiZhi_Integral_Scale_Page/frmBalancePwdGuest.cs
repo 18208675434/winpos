@@ -38,7 +38,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void frmBalancePwdGuest_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            timerLoadPwd.Enabled = false;
         }
 
 
@@ -224,11 +224,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             //    //this.Activate();
             //}
 
-        }
-
-        private void frmBalancePwdGuest_Deactivate(object sender, EventArgs e)
-        {
-            this.Focus();
         }
 
         private void timerLoadPwd_Tick(object sender, EventArgs e)

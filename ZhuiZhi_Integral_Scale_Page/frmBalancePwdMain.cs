@@ -44,7 +44,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 this.tableLayoutPanel1.RowStyles[0] = new RowStyle(SizeType.Percent, 0);
                 this.tableLayoutPanel1.RowStyles[1] = new RowStyle(SizeType.Percent, 100);
             }
-         
+
         }
 
         private void lblExit_Click(object sender, EventArgs e)
@@ -59,14 +59,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 //this.Activate();
                 if (MainModel.BalanceClose)
                 {
-                    timerLoadPwd.Enabled = false;           
+                    MainModel.BalanceClose = false;
+                    timerLoadPwd.Enabled = false;
                     PassWord = MainModel.BalancePwd;
-                    Securitycode = MainModel.BalanceSecuritycode;
-                    //MainModel.BalanceClose = false;
+
+                    if (string.IsNullOrEmpty(Securitycode))
+                    {
+                        Securitycode = MainModel.BalanceSecuritycode;
+                    }
                     MainModel.BalanceEnter = false;
-                    //MainModel.BalancePayPwd = "";
-                    //MainModel.BalancePwd = "";
-                    //MainModel.BalanceSecuritycode = "";
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -89,9 +90,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     default: btnValue1.Text = ""; btnValue2.Text = ""; btnValue3.Text = ""; btnValue4.Text = ""; btnValue5.Text = ""; btnValue6.Text = ""; break;
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
-                LogManager.WriteLog("余额密码主界面更新异常"+ex.Message+ex.StackTrace);
+                LogManager.WriteLog("余额密码主界面更新异常" + ex.Message + ex.StackTrace);
             }
         }
 
@@ -108,8 +109,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             //*获取按键后使之失效，防止有焦点事件获取按键信息   !base.ProcessDialogKey(keyData)
             switch (keyData)
             {
-                    //不同键盘数字键值不同
-                case Keys.D0: AddNum(0, false); return !base.ProcessDialogKey(keyData); break;                
+                //不同键盘数字键值不同
+                case Keys.D0: AddNum(0, false); return !base.ProcessDialogKey(keyData); break;
                 case Keys.D1: AddNum(1, false); return !base.ProcessDialogKey(keyData); break;
                 case Keys.D2: AddNum(2, false); return !base.ProcessDialogKey(keyData); break;
                 case Keys.D3: AddNum(3, false); return !base.ProcessDialogKey(keyData); break;
@@ -132,7 +133,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 case Keys.NumPad9: AddNum(9, false); return !base.ProcessDialogKey(keyData); break;
 
                 case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData); break;
-                case Keys.Enter:InputOK() ; return !base.ProcessDialogKey(keyData); break;
+                case Keys.Enter: InputOK(); return !base.ProcessDialogKey(keyData); break;
             }
 
             return base.ProcessDialogKey(keyData);
@@ -145,7 +146,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             {
                 if (MainModel.BalancePwd.Length > 0)
                 {
-                    MainModel.BalancePwd = MainModel.BalancePwd.Substring(0,MainModel.BalancePwd.Length-1);
+                    MainModel.BalancePwd = MainModel.BalancePwd.Substring(0, MainModel.BalancePwd.Length - 1);
                 }
             }
             else
@@ -178,18 +179,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-                //MainModel.BalanceEnter = false;
-                //MainModel.BalanceClose = false;
-                //MainModel.BalancePayPwd = "";
-                //MainModel.BalancePwd = "";
-                //MainModel.BalanceSecuritycode = "";
+                timerLoadPwd.Enabled = false;
                 ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.ShowBalancePwd(false);
-                
+
                 Application.DoEvents();
             }
             catch (Exception ex)
             {
-                LogManager.WriteLog("余额密码主屏界面关闭异常"+ex.Message+ex.StackTrace);
+                LogManager.WriteLog("余额密码主屏界面关闭异常" + ex.Message + ex.StackTrace);
             }
         }
 
@@ -228,11 +225,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     this.Enabled = true;
 
                     CheckUserAndMember(ResultCode, ErrorMsg);
-                    // if(ResultCode==)
-
-
-                    //MainModel.ShowLog(ErrorMsg, true);
-                    //ShowLog(ErrorMsg, true);
                 }
                 else
                 {
@@ -241,11 +233,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     {
 
                         MainModel.BalancePayPwd = PayPassWord;
-                       
+
+                        Securitycode = verifyresult.securitycode;
                         MainModel.BalanceSecuritycode = verifyresult.securitycode;
                         this.DialogResult = DialogResult.OK;
                         MainModel.BalanceClose = true;
-                        //this.Close();
                     }
                     else if (verifyresult.remainwrongcount != null && verifyresult.remainwrongcount > 0)
                     {
@@ -261,7 +253,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         ShowLog(verifyresult.hint, true);
                     }
                 }
-
                 this.Enabled = true;
             }
             catch (Exception ex)
@@ -274,7 +265,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LoadingHelper.CloseForm();
                 //this.Activate();
             }
-
         }
 
 
@@ -282,7 +272,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
-
                 if (resultcode == MainModel.HttpUserExpired || resultcode == MainModel.HttpMemberExpired || resultcode == MainModel.DifferentMember)
                 {
 
@@ -290,9 +279,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     MainModel.CurrentMember = null;
 
                     MainModel.BalancePwdErrorCode = resultcode;
-                    MainModel.BalanceClose = true;
+                    //MainModel.BalanceClose = true;
+                    this.Invoke(new Action(delegate()
+                    {
+                        if (resultcode == MainModel.HttpUserExpired)
+                        {
+                            ShowLog("店员登录失效，请退出系统重新登录");
 
-
+                        }
+                        else if (resultcode == MainModel.HttpMemberExpired)
+                        {
+                            ShowLog("会员登录已过期，请重新登录会员");
+                        }
+                        else
+                        {
+                             ShowLog(ErrorMsg, false);
+                        }
+                    }));
                 }
                 else
                 {
@@ -310,13 +313,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         }
 
-        private void ShowLog(string msg,bool error =false)
+        private void ShowLog(string msg, bool error = false)
         {
             try
             {
                 ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.ShowBalancePwdLog(msg);
-                MainModel.ShowLog(msg,false);
-                
+                MainModel.ShowLog(msg, false);
+                LogManager.WriteLog(msg);
             }
             catch { }
         }
