@@ -19,7 +19,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         private HttpUtil httputil = new HttpUtil();
 
         private ReturnType currentreturntye = ReturnType.cash;
-        public FormReturnCash(Cart cart,Member member,ReturnType type)
+        public FormReturnCash(Cart cart, Member member, ReturnType type)
         {
             InitializeComponent();
             thisCurrentCart = cart;
@@ -33,15 +33,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
             switch (currentreturntye)
             {
-                case ReturnType.cash: lblType.Text = "确认退回现金？";break;
-                case ReturnType.balance:lblType.Text ="确认退回余额？";break;
+                case ReturnType.cash: lblType.Text = "确认退回现金？"; break;
+                case ReturnType.balance: lblType.Text = "确认退回余额？"; break;
                 default: break;
             }
         }
 
         private void FormReturnCash_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -52,50 +52,51 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-                 if (!RefreshCart())
-                {
-                    return;
-                }
+            if (!RefreshCart())
+            {
+                return;
+            }
 
-                 string smscode = ReturnWithoutOrderHelper.ShowFormCheckSmCode(thisCurrentCart.shopownername,thisCurrentCart.shopownerphone);
-                
-                 if (string.IsNullOrEmpty(smscode))
-                 {
-                     return;
-                 }
+            string smscode = ReturnWithoutOrderHelper.ShowFormCheckSmCode(thisCurrentCart.shopownername, thisCurrentCart.shopownerphone);
+
+            if (string.IsNullOrEmpty(smscode))
+            {
+                return;
+            }
 
             //TODO  门店负责人发送验证码
 
-                         thisCurrentCart.returnwithoutorder = 1;
-                         thisCurrentCart.smscode = smscode;
-                         if (currentreturntye == ReturnType.cash)
-                         {
-                             thisCurrentCart.cashpayoption = 1;
-                             //thisCurrentCart.cashpayamt = thisCurrentCart.totalpayment;
+            thisCurrentCart.returnwithoutorder = 1;
+            thisCurrentCart.smscode = smscode;
+            if (currentreturntye == ReturnType.cash)
+            {
+                thisCurrentCart.cashpayoption = 1;
+                //thisCurrentCart.cashpayamt = thisCurrentCart.totalpayment;
 
-                             thisCurrentCart.balancepayoption = 0;
-                         }
-                         else if (currentreturntye == ReturnType.balance)
-                         {
-                             thisCurrentCart.balancepayoption = 1;
-                             thisCurrentCart.cashpayoption = 0;
-                             //thisCurrentCart.balancepayamt = thisCurrentCart.totalpayment;
-                         }
-                         string ErrorMsg = "";
-                         int ResultCode = 0;
-                         CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart,thisCurrentMember, ref ErrorMsg, ref ResultCode);
-                         if (orderresult != null)
-                         {
-                             AbnormalOrderUtil.RefundNoOrderList(orderresult.orderid,thisCurrentCart);
-                             
-                             ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid,true);
-                             this.DialogResult = DialogResult.OK;
-                             this.Close();                         
-                         }
-                         else
-                         {
-                             MainModel.ShowLog(ErrorMsg,false);
-                         }
+                thisCurrentCart.balancepayoption = 0;
+                PrintUtil.OpenCashDrawerEx();
+            }
+            else if (currentreturntye == ReturnType.balance)
+            {
+                thisCurrentCart.balancepayoption = 1;
+                thisCurrentCart.cashpayoption = 0;
+                //thisCurrentCart.balancepayamt = thisCurrentCart.totalpayment;
+            }
+            string ErrorMsg = "";
+            int ResultCode = 0;
+            CreateOrderResult orderresult = httputil.CreateOrder(thisCurrentCart, thisCurrentMember, ref ErrorMsg, ref ResultCode);
+            if (orderresult != null)
+            {
+                AbnormalOrderUtil.RefundNoOrderList(orderresult.orderid, thisCurrentCart);
+
+                ZhuiZhi_Integral_Scale_UncleFruit.PayUI.PayHelper.ShowFormPaySuccess(orderresult.orderid, true);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MainModel.ShowLog(ErrorMsg, false);
+            }
         }
         private bool RefreshCart()
         {
@@ -125,9 +126,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                     //thisCurrentCart.cashpayamt = 0;
 
                 }
-              
 
-                Cart cart = httputil.RefreshCart(thisCurrentCart,thisCurrentMember, ref ErrorMsgCart, ref ResultCode);
+
+                Cart cart = httputil.RefreshCart(thisCurrentCart, thisCurrentMember, ref ErrorMsgCart, ref ResultCode);
 
 
                 if (ErrorMsgCart != "" || cart == null) //商品不存在或异常
