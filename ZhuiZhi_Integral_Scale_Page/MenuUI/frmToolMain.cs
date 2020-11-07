@@ -114,8 +114,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     Version serverversion = new Version(MainModel.Version);
                     if (serverversion > appvertion)
                     {
-                        INIManager.SetIni("System", "Version", lblVersion.Text, MainModel.IniPath);
-                        INIManager.SetIni("System", "Version", lblVersion.Text, MainModel.StartIniPath);
+                        INIManager.SetIni("System", "Version", appversion, MainModel.IniPath);
+                        INIManager.SetIni("System", "Version", appversion, MainModel.StartIniPath);
 
                         LogManager.WriteLog("appversion："+appversion  + "   serversion:"+MainModel.Version);
                     }

@@ -21,13 +21,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         //2020-07-30 修改
         /// <summary>
         /// ORDER(1, "订单支付"),
-    //RECHARGE(2, "会员储值卡充值"),
-    //TENANT_RECHARGE(4, "商户充值"),
-    //MEMBER_RIGHTS_RECHARGE(8, "会员权益充值"),
-    //ICP_ORDER(16, "ICP订单支付"),
-    //ALONE_ORDER(32, "独立订单支付"),
+        /// RECHARGE(2, "会员储值卡充值"),
+        /// TENANT_RECHARGE(4, "商户充值"),
+        /// MEMBER_RIGHTS_RECHARGE(8, "会员权益充值"),
+        /// ICP_ORDER(16, "ICP订单支付"),
+        /// ALONE_ORDER(32, "独立订单支付"),
         /// </summary>
         public int ordertype { set; get; }
+        public decimal totalfee { get; set; } //批量售卡使用
+
+        public List<TradeBatchOrderRequestDto> tradebatchorderrequestdtos { get; set; } //批量售卡使用
     }
-    
+
+
+    public class TradeBatchOrderRequestDto
+    {
+        public string buyid { set; get; }
+        public string orderid { set; get; }
+        public int ordertype { set; get; }
+        public decimal totalfee { set; get; }
+    }
 }

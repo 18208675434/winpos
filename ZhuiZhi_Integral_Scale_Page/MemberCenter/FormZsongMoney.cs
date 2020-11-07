@@ -271,14 +271,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 }
                 decimal cash = Convert.ToDecimal(inputc.Text);
 
+                decimal custommoney = 0;
+                decimal.TryParse(inputz.Text,out custommoney);
+
                 if (MainModel.balanceconfigdetail != null && cash < MainModel.balanceconfigdetail.customrechargeamt)
                 {
                     MainModel.ShowLog("数值不能小于"+MainModel.balanceconfigdetail.customrechargeamt.ToString("f2"),false);
                     return;
                 }
-
+                //允许充值金额为0  赠送金额不为0 的情况
+                if (cash <= 0 && custommoney==0)
+                {
+                    MainModel.ShowLog("充值金额不正确", false);
+                    return;
+                }
                 CustomTemplate = new ListAllTemplate();
-                CustomTemplate.id = 0;
+                CustomTemplate.id = -1;
                 CustomTemplate.amount = cash;
                 CustomTemplate.customAndreward = true;
                 if (!string.IsNullOrEmpty(inputz.Text))

@@ -81,6 +81,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 LoadScaleSet();
                 UpdatePrint();
                 LoadHalfOffLineIni();
+                LoadShowWithJinIni();
                 IsLoadSuccess = true;
             }
             catch (Exception ex)
@@ -467,6 +468,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.ShowLog("保存偏移量异常" + ex.Message, true);
             }
         }
+
+
+        private void linklblPrint_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+
+                PrintDialog dlg = new PrintDialog();
+                dlg.ShowDialog();
+            }
+            catch { }
+        }
         #endregion
 
         #region 电子秤设置
@@ -478,9 +491,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 string Baud = INIManager.GetIni("Scale", "Baud", MainModel.IniPath);
                 string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
 
+
+
                 cbxScaleName.Text = ScaleName;
                 cbxComNo.Text = ComNo;
                 cbxBaud.Text = Baud;
+
+                pnlYKPrint.Visible = ScaleName == ScaleType.爱宝.ToString() || ScaleName == ScaleType.易衡.ToString(); ;
+
+                int printcomno = ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory.YKPrintUtil.GetYKComNo();
+                string printbaud = ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory.YKPrintUtil.GetYKBaud().ToString();
+
+                cbxPrintComNo.SelectedIndex = printcomno - 1;
+                cbxPrintBaud.Text = printbaud;
+
             }
             catch (Exception ex)
             {
@@ -497,7 +521,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             string scalename = cbxScaleName.SelectedItem.ToString();
             INIManager.SetIni("Scale", "ScaleName", scalename, MainModel.IniPath);
-
+            pnlYKPrint.Visible = scalename == ScaleType.爱宝.ToString() || scalename == ScaleType.易衡.ToString(); ;
             //中科英泰 S373电子秤端口COM6 波特率9600
             if (scalename == ScaleType.中科英泰.ToString())
             {
@@ -524,8 +548,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 cbxComNo.SelectedItem = comno;
                 cbxBaud.SelectedItem = baud.ToString();
 
+                cbxPrintComNo.SelectedIndex = 2;
+
                 ScaleFactory.ScaleGlobalHelper.IniScale(true);
                 ScaleFactory.ScaleGlobalHelper.Open(comno, baud);
+
             }
             else if(scalename==ScaleType.易捷通.ToString())
             {
@@ -552,6 +579,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
              else if (scalename == ScaleType.易衡.ToString())
             {
                 string comno = "COM4";
+                int baud = 19200;
+
+                cbxComNo.SelectedItem = comno;
+                cbxBaud.SelectedItem = baud.ToString();
+
+                ScaleFactory.ScaleGlobalHelper.IniScale(true);
+                ScaleFactory.ScaleGlobalHelper.Open(comno, baud);
+            }
+            else if (scalename == ScaleType.龙飞.ToString())
+            {
+                string comno = "COM1";
                 int baud = 19200;
 
                 cbxComNo.SelectedItem = comno;
@@ -639,6 +677,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.ShowLog("更新电子秤配置文件异常"+ex.StackTrace,true);
             }
         }
+
+        private void cbxPrintComNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string printcom = (cbxPrintComNo.SelectedIndex + 1).ToString();
+                INIManager.SetIni("Scale", "PrintComNo", printcom, MainModel.IniPath);
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        private void cbxPrintBaud_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string baud = cbxPrintBaud.Text;
+                INIManager.SetIni("Scale", "PrintBaud", baud, MainModel.IniPath);
+
+            }
+            catch { }
+        }
         #endregion
 
    
@@ -718,17 +782,52 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         #endregion
 
-        private void linklblPrint_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+
+        #region 面板商品重量显示是否为：斤
+
+        private void LoadShowWithJinIni()
         {
-            try{
-          
-            PrintDialog dlg = new PrintDialog();
-            dlg.ShowDialog();
-            }catch{}
+
+            string WhetherShowWithJin = INIManager.GetIni("System", "WhetherShowWithJin", MainModel.IniPath);
+
+
+            if (WhetherShowWithJin == "1")
+            {
+                MainModel.WhetherShowWithJin = true;
+                picOpenShowWithJin.BackgroundImage = picSelect.Image;
+                picCloseShowWithJin.BackgroundImage = picNotSelect.Image;
+
+
+            }
+            else
+            {
+                MainModel.WhetherShowWithJin = false;
+                picOpenShowWithJin.BackgroundImage = picNotSelect.Image;
+                picCloseShowWithJin.BackgroundImage = picSelect.Image;
+
+            }
+        }
+        private void pnlOpenShowWithJin_Click(object sender, EventArgs e)
+        {
+            MainModel.WhetherShowWithJin = true;
+            picOpenShowWithJin.BackgroundImage = picSelect.Image;
+            picCloseShowWithJin.BackgroundImage = picNotSelect.Image;
+            INIManager.SetIni("System", "WhetherShowWithJin", "1", MainModel.IniPath);
         }
 
-      
-     
+        private void pnlCloseShowWithJin_Click(object sender, EventArgs e)
+        {
+            MainModel.WhetherShowWithJin = false;
+            picOpenShowWithJin.BackgroundImage = picNotSelect.Image;
+            picCloseShowWithJin.BackgroundImage = picSelect.Image;
+            INIManager.SetIni("System", "WhetherShowWithJin", "0", MainModel.IniPath);
+        }
+
+        #endregion
+
+
+
+
     }
 
 }

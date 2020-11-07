@@ -37,11 +37,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         //按比例缩放页面及控件
         //</summary>
         AutoSizeFormUtil asf = new AutoSizeFormUtil();
-        EntityCard entityCard;//实体卡
+        OutEntityCardResponseDto entityCard;//实体卡
         #endregion
 
         #region  页面加载与退出
-        public FormEntityCardBind(EntityCard entityCard)
+        public FormEntityCardBind(OutEntityCardResponseDto entityCard)
         {
             InitializeComponent();
             this.entityCard = entityCard;
@@ -60,8 +60,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             Application.DoEvents();
             lblEntityCardNo.Text = entityCard.outcardid;
-            lblMemberId.Text = entityCard.memberid;
+            lblMemberId.Text = MainModel.CurrentMember.memberheaderresponsevo.mobile;
             lblBalance.Text = "￥" + entityCard.balance.ToString("f2");
+            lblBalaceDesc.Location = new Point(lblBalance.Right + 20, lblBalance.Location.Y);
             MemberCenterMediaHelper.ShowFormBindEntityCardMedia(entityCard);
         }
 
@@ -93,7 +94,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     bool flag = new MemberCenterHttpUtil().EntityCardMove(entityCardMoveRequest, ref err);
                     if (!flag)
                     {
-                        MainModel.ShowLog("绑卡失败：" + err);
+                        MainModel.ShowLog(err);
                         return;
                     }
                     MainModel.ShowLog("绑卡成功");

@@ -39,14 +39,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblBalaceDesc = new System.Windows.Forms.Label();
             this.lblMemberId = new System.Windows.Forms.Label();
             this.lblEntityCardNo = new System.Windows.Forms.Label();
             this.lblBalance = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pnlHead.SuspendLayout();
@@ -134,14 +133,13 @@
             this.pnlMain.Controls.Add(this.btnCancel);
             this.pnlMain.Controls.Add(this.label1);
             this.pnlMain.Controls.Add(this.btnOk);
-            this.pnlMain.Controls.Add(this.label2);
+            this.pnlMain.Controls.Add(this.lblBalaceDesc);
             this.pnlMain.Controls.Add(this.lblMemberId);
             this.pnlMain.Controls.Add(this.lblEntityCardNo);
             this.pnlMain.Controls.Add(this.lblBalance);
             this.pnlMain.Controls.Add(this.pictureBox2);
             this.pnlMain.Controls.Add(this.pictureBox1);
             this.pnlMain.Controls.Add(this.lblTitle);
-            this.pnlMain.Controls.Add(this.label14);
             this.pnlMain.Controls.Add(this.label15);
             this.pnlMain.Controls.Add(this.label13);
             this.pnlMain.Location = new System.Drawing.Point(24, 88);
@@ -193,17 +191,17 @@
             this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // label2
+            // lblBalaceDesc
             // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(103, 245);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(276, 21);
-            this.label2.TabIndex = 102;
-            this.label2.Text = "(关联后实体卡余额将会转入会员账户)";
+            this.lblBalaceDesc.AutoSize = true;
+            this.lblBalaceDesc.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblBalaceDesc.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lblBalaceDesc.ForeColor = System.Drawing.Color.Gray;
+            this.lblBalaceDesc.Location = new System.Drawing.Point(328, 212);
+            this.lblBalaceDesc.Name = "lblBalaceDesc";
+            this.lblBalaceDesc.Size = new System.Drawing.Size(276, 21);
+            this.lblBalaceDesc.TabIndex = 102;
+            this.lblBalaceDesc.Text = "(关联后实体卡余额将会转入会员账户)";
             // 
             // lblMemberId
             // 
@@ -231,7 +229,7 @@
             // 
             this.lblBalance.AutoSize = true;
             this.lblBalance.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblBalance.Location = new System.Drawing.Point(216, 205);
+            this.lblBalance.Location = new System.Drawing.Point(216, 208);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(106, 25);
             this.lblBalance.TabIndex = 1;
@@ -239,16 +237,18 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.balance;
+            this.pictureBox2.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.balance;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.Location = new System.Drawing.Point(47, 206);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.Size = new System.Drawing.Size(40, 38);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.card;
+            this.pictureBox1.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.card;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(47, 106);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(40, 30);
@@ -264,17 +264,6 @@
             this.lblTitle.Size = new System.Drawing.Size(125, 22);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "关联实体卡";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(37, 194);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(16, 16);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "*";
             // 
             // label15
             // 
@@ -341,11 +330,10 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblMemberId;
         private System.Windows.Forms.Label lblEntityCardNo;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblBalaceDesc;
     }
 }

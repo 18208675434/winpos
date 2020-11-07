@@ -18,7 +18,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MyControl
     public partial class KeyBoardAll : System.Windows.Forms.UserControl
     {
 
-        bool allowhide = false;
+        bool allowhide = true;
         [Category("扩展属性"), Description("是否允许收起键盘")]
         public bool AllowHide
         {

@@ -128,7 +128,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             CreateMemberPara para = new CreateMemberPara();
             para.mobile = txtPhone.Text;
-            if (string.IsNullOrEmpty(txtBirthday.Text))
+            if (!string.IsNullOrEmpty(txtBirthday.Text))
             {
                 para.birthday = MainModel.getStampByDateTime(dtStart.Value);
             }

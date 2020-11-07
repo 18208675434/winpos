@@ -43,7 +43,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private string LastOrderid = "0";
 
-
         private Bitmap bmpReprint;//重打小票
         private Bitmap bmpRefund;//退款
         private Bitmap bmpNotRefund;//不允许退款
@@ -51,6 +50,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         private Bitmap bmpRefundByAmt;//退差价
         private Bitmap bmpCancelOrder;//取消订单
         private Bitmap bmpWhite;
+        private Bitmap bmpDetail;
 
         /// <summary>
         /// this.enable=false; 页面不可用页面不可控；  通过该标志控制页面是否可用
@@ -102,6 +102,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 bmpSync = (Bitmap)MainModel.GetControlImage(btnSync);
                 bmpCancelOrder = (Bitmap)MainModel.GetControlImage(btnCancelOrder);
                 bmpWhite = Resources.ResourcePos.White;
+                bmpDetail = (Bitmap)MainModel.GetControlImage(btnDetail);
             }
             catch (Exception ex)
             {
@@ -553,6 +554,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         #region  在线模式订单
 
+        FormWebOrderDetail frmweborderdetail = null;
+
         private void dgvOrderOnLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -565,92 +568,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 if (e.RowIndex < 0)
                     return;
 
-                if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefund)
-                {
-                    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                    IsEnable = false;
-
-                    // Order SelectOrder =(Order) CurrentQueryOrder.orders.Where(r => r.orderid == selectorderid).ToList()[0];
-                    Order SelectOrder = null;
-                    for (int i = 0; i < CurrentQueryOrder.orders.Count; i++)
-                    {
-                        if (CurrentQueryOrder.orders[i].orderid == selectorderid)
-                        {
-                            SelectOrder = CurrentQueryOrder.orders[i];
-                            break;
-                        }
-                    }
-
-                    if (SelectOrder == null)
-                    {
-                         MainModel.ShowLog("订单不存在，请刷新", false);
-                        
-                        return;
-                    }
-                    LoadPicScreen(true);
-
-                    frmRefundSelect frmrefund = new frmRefundSelect(SelectOrder);
-                    this.Invoke(new InvokeHandler(delegate()
-                     {
-                         frmrefund.ShowDialog();
-                     }));
-                     LoadPicScreen(false);
-                    if (frmrefund.DialogResult == DialogResult.OK)
-                    {
-                        string totalpay = MenuHelper.GetTotalPayInfo(frmrefund.Reforder);
-
-                        if (!ConfirmHelper.Confirm("确认退款？", "应退 " + totalpay))
-                        {
-                            return;
-                        }
-
-                       
-                        string orderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                        string ErrorMsg = "";
-                        string resultorderid = httputil.Refund(frmrefund.Refrefundpara, ref ErrorMsg);
-                        if (ErrorMsg != "")
-                        {
-                             MainModel.ShowLog(ErrorMsg, true);
-                        }
-                        else
-                        {
-
-                            AbnormalOrderUtil.RefundOrderList(resultorderid,frmrefund.Refrefundpara);
-                            PrintDetail printdetail = httputil.GetPrintDetail(resultorderid, ref ErrorMsg);
-
-                            if (ErrorMsg != "" || printdetail == null)
-                            {
-                                LoadingHelper.CloseForm();
-                                MainModel.ShowLog(ErrorMsg, true);
-                            }
-                            else
-                            {
-                                //SEDPrint(printdetail);
-                                string PrintErrorMsg = "";
-                                bool printresult = PrintUtil.PrintOrder(printdetail, true, ref PrintErrorMsg); //PrintUtil.PrintOrder(printdetail, false, ref PrintErrorMsg);
-
-                                if (PrintErrorMsg != "" || !printresult)
-                                {
-                                    MainModel.ShowLog(PrintErrorMsg, true);
-                                }
-                                else
-                                {
-                                   // MainModel.ShowLog("打印完成", false);
-                                }
-
-                            }
-
-                             MainModel.ShowLog("退款成功", false);
-                             try { PrintUtil.OpenCashDrawerEx(); }
-                             catch { }
-                        }
-                        IsEnable = true;
-                        //后端订单信息更新需要时间，延时刷新
-                        Delay.Start(300);
-                        btnQuery_Click(null, null);
-                    }
-                }
-                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
+                if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpReprint)
                 {
                     IsEnable = false;
 
@@ -669,7 +587,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     if (ErrorMsg != "" || printdetail == null)
                     {
                         LoadingHelper.CloseForm();
-                         MainModel.ShowLog(ErrorMsg, true);
+                        MainModel.ShowLog(ErrorMsg, true);
                     }
                     else
                     {
@@ -679,11 +597,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                         if (PrintErrorMsg != "" || !printresult)
                         {
-                             MainModel.ShowLog(PrintErrorMsg, true);
+                            MainModel.ShowLog(PrintErrorMsg, true);
                         }
                         else
                         {
-                             MainModel.ShowLog("打印完成", false);
+                            MainModel.ShowLog("打印完成", false);
                         }
 
                     }
@@ -692,10 +610,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     LoadingHelper.CloseForm();
                     btnQuery_Click(null, null);
                 }
-                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpRefundByAmt)
+                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpDetail) //订单详情
                 {
                     string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-                    IsEnable = false;
 
                     Order SelectOrder = null;
                     for (int i = 0; i < CurrentQueryOrder.orders.Count; i++)
@@ -714,37 +631,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         return;
                     }
 
-                    MenuHelper.ShowFormRefundByAmt(SelectOrder);
+                    FormWebOrderDetailBack frmback = new FormWebOrderDetailBack(SelectOrder);
 
+                    frmback.ShowDialog();
                     btnQuery_Click(null, null);
                 }
-                else if (dgvOrderOnLine.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == bmpCancelOrder)
-                {
-                    string selectorderid = dgvOrderOnLine.Rows[e.RowIndex].Cells["orderid"].Value.ToString();
-
-                    if (!ConfirmHelper.Confirm("确认取消订单？"))
-                    {
-                        return;
-                    }
-                    IsEnable = false;
-                    LoadingHelper.ShowLoadingScreen();
-                    string errormsg="";
-                    if (httputil.CancleOrder(selectorderid, "", ref errormsg))
-                    {
-                        Delay.Start(300);
-                        IsEnable = true;
-                        LoadingHelper.CloseForm();
-                        MainModel.ShowLog("订单取消成功",false);
-                        btnQuery_Click(null, null);
-                    }
-                    else
-                    {
-                        IsEnable = true;
-                        LoadingHelper.CloseForm();
-                        MainModel.ShowLog("订单取消失败", false);
-                    }
-
-                }
+                
             }
             catch (Exception ex)
             {
@@ -806,21 +698,33 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 foreach (Order order in lstOrder)
                 {
                     string totalpay = MenuHelper.GetTotalPayInfo(order);
-                    if (order.orderstatusvalue == 1)
-                    {
-                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpCancelOrder, bmpWhite);
 
-                    }
-                     else if (order.orderstatusvalue == 5)
+                   if (order.orderstatusvalue == 5)
                     {
-                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite, bmpWhite);
+                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpDetail, bmpWhite);
                     }
                     else
                     {
 
                         Bitmap tempbmprefund = order.supportspecifiedamountrefund == 1 ? bmpRefundByAmt : bmpWhite;
-                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund, tempbmprefund);
+                        dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpDetail, bmpReprint);
                     }
+
+                    //if (order.orderstatusvalue == 1)
+                    //{
+                    //    dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpCancelOrder, bmpWhite);
+
+                    //}
+                    // else if (order.orderstatusvalue == 5)
+                    //{
+                    //    dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpWhite, bmpWhite, bmpWhite);
+                    //}
+                    //else
+                    //{
+
+                    //    Bitmap tempbmprefund = order.supportspecifiedamountrefund == 1 ? bmpRefundByAmt : bmpWhite;
+                    //    dgvOrderOnLine.Rows.Add(MainModel.GetDateTimeByStamp(order.orderat.ToString()).ToString("yyyy-MM-dd HH:mm:ss"), order.orderid, order.customerphone, order.title, totalpay, order.orderstatus, bmpReprint, bmpRefund, tempbmprefund);
+                    //}
 
                 }
                 dgvOrderOnLine.ClearSelection();
@@ -1192,6 +1096,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 IsEnable = true;
                 LoadingHelper.CloseForm();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string error = "";
+            httputil.GetWebOrderDetail("8153660200030010",ref error);
         }
 
     }

@@ -29,47 +29,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.HelperUI
             //}
         }
 
-
+        public delegate void deleteAutoToast(string msg);
         public static void ShowFormToast(string msg)
         {
 
-            System.ComponentModel.BackgroundWorker bk = new System.ComponentModel.BackgroundWorker();
-            bk.DoWork += ShowFormToast_DoWork;
-            bk.RunWorkerAsync(msg);
 
-
-            //try
-            //{
-            //    if (frmsayorder == null || frmsayorder.IsDisposed)
-            //    {
-            //        IniFormToast();
-            //    }
-            //    frmsayorder.UpdateSayMsg(msg);
-            //    frmsayorder.Show();
-
-            //    Delay.Start(1500);
-
-            //    frmsayorder.Hide();
-            //}
-            //catch (Exception ex)
-            //{
-            //    frmsayorder = null;
-            //    LogManager.WriteLog("显示toast异常" + ex.Message);
-            //}
+            deleteAutoToast operation = new deleteAutoToast(ShowFormToast_DoWork);
+            operation.Invoke(msg); //不能异步执行
         }
 
-        public static void ShowFormToast_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        public static void ShowFormToast_DoWork(string msg)
         {
             try
             {
 
-                string saymsg = e.Argument as string;
+                string saymsg = msg;
                 FormSayOrder frmsayorder = new FormSayOrder(saymsg);
                  frmsayorder.TopMost = true;
                  frmsayorder.Show();
                  System.Windows.Forms.Application.DoEvents();
-                 System.Threading.Thread.Sleep(2000);
-
+                 Delay.Start(2000);
                  frmsayorder.Close();
 
             }

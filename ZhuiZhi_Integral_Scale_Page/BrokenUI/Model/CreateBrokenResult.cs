@@ -10,9 +10,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BrokenUI.Model
     {
         public string createdat { get; set; }
         public List<Itemlist> itemlist { get; set; }
+        /// <summary>
+        /// 成本总金额
+        /// </summary>
         public decimal totalamt { get; set; }
         public decimal totalqty { get; set; }
         public string username { get; set; }
+        /// <summary>
+        /// 销售总金额
+        /// </summary>
+        public decimal totalsaleamt { get; set; }
     }
 
     public class Itemlist

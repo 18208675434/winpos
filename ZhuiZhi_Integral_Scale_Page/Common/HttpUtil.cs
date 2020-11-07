@@ -896,14 +896,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
+                LogManager.WriteLog("DEBUG","余额密码验证"+json  +"传参"+tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-
                 resultcode = rd.code;
-
+                
                 if (rd.code == 0)
                 {
                     VerifyBalancePwd verifyresult = JsonConvert.DeserializeObject<VerifyBalancePwd>(rd.data.ToString());
-
+                    
                     return verifyresult;
 
                 }
@@ -966,6 +966,51 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
         /// <summary>
+        /// 查询收银机订单详情（弹窗详情展示） 2020-10-23
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="erromessage"></param>
+        /// <returns></returns>
+        public WebOrderDetail GetWebOrderDetail(string orderid, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/web/detail";
+
+                string tempjson = JsonConvert.SerializeObject(orderid);
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("orderid", orderid);
+
+                string json = HttpGET(url, sort);
+
+                //  LogManager.WriteLog("DEBUG","weborder"+json);
+                //h(url, tempjson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    WebOrderDetail resultobj = JsonConvert.DeserializeObject<WebOrderDetail>(rd.data.ToString());
+                    return resultobj;
+
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "webdetail:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "查询订单详情异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return null;
+            }
+        }
+
+        /// <summary>
         /// 订单查询
         /// </summary>
         /// <returns></returns>
@@ -985,6 +1030,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 else if (queryorderpara.source == 4)
                 {
                     url = "/pos/thirdpartyplatform/thirdpartyabnormalorder/page";
+                }
+
+                //通过customerid 区分是否会员页面进入
+                if (!string.IsNullOrEmpty(queryorderpara.customerid))
+                {
+                    url += "/person";
                 }
 
                 string tempjson = JsonConvert.SerializeObject(queryorderpara);
@@ -1018,7 +1069,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
-        
+
+
+
 
         /// <summary>
         /// 退款
@@ -1151,6 +1204,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
 
@@ -1228,6 +1282,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string tempjson = "{\"memberinfo\":\"" + memberinfo + "\"}";
 
                 string json = HttpPOST(url, tempjson);
+
+                LogManager.WriteLog("DEBUG", "member" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1235,6 +1291,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     erromessage = "";
                     Member member = JsonConvert.DeserializeObject<Member>(rd.data.ToString());
+                    member.entrancecode = memberinfo;
                     return member;
                 }
                 else
@@ -1304,7 +1361,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             try
             {
                 string url = "/pos/product/scalestemp/gettempforshoppaginglist";
-
 
                 ScalePara scalepara = new ScalePara();
                 scalepara.shopid = MainModel.CurrentShopInfo.shopid;
@@ -2834,7 +2890,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// </summary>
         /// <param name="memberid"></param>
         /// <param name="errormsg"></param>
-        public List<PromotionCoupon> MyCouponList(string memberid, ref string errormsg)
+        public List<PromotionCoupon> MyCouponList(string memberid, int size, ref string lastcouponcode, ref int totalSize, ref string errormsg)
         {
             try
             {
@@ -2844,11 +2900,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 SortedDictionary<string, string> sortGet = new SortedDictionary<string, string>();
                 sortGet.Add("filter", "1");
                 SortedDictionary<string, object> sortPost = new SortedDictionary<string, object>();
-                sortPost.Add("lastcouponcode", 0);
+                sortPost.Add("lastcouponcode", lastcouponcode);//0
                 sortPost.Add("shopid", MainModel.CurrentShopInfo.shopid);
                 sortPost.Add("memberid", memberid);
-                sortPost.Add("size", 10);
-                
+                sortPost.Add("size", size);//10
+
                 string testjson = JsonConvert.SerializeObject(sortPost);
 
                 string json = HttpPOST(url, sortGet, testjson);
@@ -2863,10 +2919,18 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (rd.code == 0)
                 {
                     string strdata = rd.data.ToString();
-                    var dic= JsonConvert.DeserializeObject<Dictionary<string,object>>(strdata);
+                    var dic = JsonConvert.DeserializeObject<Dictionary<string, object>>(strdata);
                     if (!dic.ContainsKey("couponvos"))
                     {
                         return new List<PromotionCoupon>();
+                    }
+                    if (dic.ContainsKey("total"))
+                    {
+                        totalSize = Convert.ToInt32(dic["total"]);
+                    }
+                    if (dic.ContainsKey("lastcouponcode"))
+                    {
+                        lastcouponcode = dic["lastcouponcode"].ToString();
                     }
                     List<PromotionCoupon> lstuserresult = JsonConvert.DeserializeObject<List<PromotionCoupon>>(JsonConvert.SerializeObject(dic["couponvos"]));
                     return lstuserresult;
@@ -3203,8 +3267,41 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+        /// <summary> 红冲
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public bool CreateredWarehouseotherdeliveryByPos(string id, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/common/warehousedelivery/createredwarehouseotherdeliverybypos";
 
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("id", id);
+                string json = HttpGET(url, sort);
 
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return rd.data.ToString() == "true";
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "createredwarehouseotherdeliverybypos:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "红冲异常 ：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
 
         /// <summary>
         /// 报损 详情
@@ -3287,24 +3384,71 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
         #region 会员中心
         /// <summary>
+        /// 商户所有 充值面额设置  2020-10-26 修改接口
+        /// </summary>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        //public List<ListAllTemplate> ListAllTemplate(ref string errormsg)
+        //{
+        //    try
+        //    {
+        //        string url = "/pos/member/balance/listalltemplate";
+
+        //        SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+        //        string json = HttpGET(url, sort);
+
+        //        ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+        //        if (rd.code == 0)
+        //        {
+        //            List<ListAllTemplate> resultobj = JsonConvert.DeserializeObject<List<ListAllTemplate>>(rd.data.ToString());
+        //            resultobj.OrderBy(e => e.amount);
+        //            return resultobj;
+        //        }
+        //        else
+        //        {
+        //            try { LogManager.WriteLog("Error", "listalltemplate:" + json); }
+        //            catch { }
+        //            errormsg = rd.message;
+        //            return null;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogManager.WriteLog("Error", "获取用户信息异常：" + ex.Message);
+        //        errormsg = "网络连接异常，请检查网络连接";
+        //        return null;
+        //    }
+        //}
+
+        /// <summary>
         /// 商户所有 充值面额设置
         /// </summary>
         /// <param name="errormsg"></param>
         /// <returns></returns>
-        public List<ListAllTemplate> ListAllTemplate(ref string errormsg)
+        public List<ListAllTemplate> ListAllTemplate(ref string errormsg, string memberid = "")
         {
             try
             {
-                string url = "/pos/member/balance/listalltemplate";
+                string url = "/pos/member/balance/listalltemplatebyshopid";
 
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+                sort.Add("shopid", MainModel.CurrentShopInfo.shopid);
+                if (!string.IsNullOrEmpty(memberid))
+                {
+                    sort.Add("memberid", memberid);
+                }
 
                 string json = HttpGET(url, sort);
-                
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
                     List<ListAllTemplate> resultobj = JsonConvert.DeserializeObject<List<ListAllTemplate>>(rd.data.ToString());
+                    for (int i = 0; i < resultobj.Count; i++)
+                    {
+                        resultobj[i].id = i+1;
+                    }
                     resultobj.OrderBy(e => e.amount);
                     return resultobj;
                 }
@@ -3323,6 +3467,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 return null;
             }
         }
+
 
         /// <summary>
         /// 商户充值设置详情
@@ -3347,7 +3492,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
                 else
                 {
-                    try { LogManager.WriteLog("Error", "listalltemplate:" + json); }
+                    try { LogManager.WriteLog("Error", "balanceconfigdetail:" + json); }
                     catch { }
                     errormsg = rd.message;
                     return null;
@@ -3379,7 +3524,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string json = HttpPOST(url, testjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
-                {                   
+                {
                     //DbJsonUtil.AddBalanceInfo();
 
                     //return Convert.ToInt64(topuppara.paymode );
@@ -3387,6 +3532,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 }
                 else
                 {
+                    errormsg = rd.message;
                     try { LogManager.WriteLog("Error", "depositmember:" + json); }
                     catch { }
                     return -1;
@@ -3469,7 +3615,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 erromessage = "网络连接异常，请检查网络连接";
                 return -1;
             }
-        
+
         }
         /// <summary>
         /// 获取退款单详情
@@ -3480,20 +3626,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <returns></returns>
         public GetBalanceDepositRefund GetBalancecodepositrefoundbill(string Id, ref string erromessage)
         {
-            
-          
+
+
             try
             {
                 string url = "/pos/member/balance/getbalancedepositrefundbill";
 
-
                 string testjson = JsonConvert.SerializeObject(Id);
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
                 sort.Add("id", Id);
-                
+
                 string json = HttpGET(url, sort);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                
+
                 if (rd.code == 0)
                 {
 
@@ -3514,7 +3659,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 erromessage = "网络连接异常，请检查网络连接";
                 return null;
             }
-        
+
         }
         /// <summary>
         /// 会员充值-自定义支付方式
@@ -3618,9 +3763,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 string testjson = JsonConvert.SerializeObject(para);
 
                 string json = HttpPOST(url, testjson);
-                
+
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
-                
+
                 if (rd.code == 0)
                 {
 
@@ -3631,6 +3776,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "listdepositbill:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }
@@ -3664,6 +3810,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "sumdepositbycondition:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }
@@ -3702,6 +3849,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "depositrefundbilllist:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }
@@ -3735,6 +3883,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     try { LogManager.WriteLog("Error", "sumdepositrefundbycondition:" + json); }
                     catch { }
+                    errormsg = rd.message;
                     return null;
                 }
             }
@@ -3829,7 +3978,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
 
         }
-     
+
         #endregion
 
 
@@ -4012,7 +4161,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         /// <param name="orderid"></param>
         /// <param name="erromessage"></param>
         /// <returns></returns>
-        public SyncOrder ThirdSyncOrder( string orderid, ref string erromessage)
+        public SyncOrder ThirdSyncOrder(string orderid, ref string erromessage)
         {
             try
             {
@@ -4061,8 +4210,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             try
             {
                 string url = "/pos/order/pos/uploadabnormalorder";
-
-
                 string tempjson = JsonConvert.SerializeObject(para);
 
                 string json = HttpPOST(url, tempjson);
@@ -4072,7 +4219,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (rd.code == 0)
                 {
                     erromessage = "";
-
 
                     return Convert.ToBoolean(rd.data);
                 }

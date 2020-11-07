@@ -31,22 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmToolMain));
             this.pnlReceipt = new System.Windows.Forms.Panel();
             this.lblReceipt = new System.Windows.Forms.Label();
-            this.picReceipt = new System.Windows.Forms.PictureBox();
             this.pnlExit = new System.Windows.Forms.Panel();
             this.lblExit = new System.Windows.Forms.Label();
-            this.picExit = new System.Windows.Forms.PictureBox();
             this.pnlScale = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pnlChangeMode = new System.Windows.Forms.Panel();
             this.lblChangeMode = new System.Windows.Forms.Label();
-            this.picChangeMode = new System.Windows.Forms.PictureBox();
             this.pnlReceiptQuery = new System.Windows.Forms.Panel();
             this.lblReceiptQuery = new System.Windows.Forms.Label();
-            this.picReceiptQuery = new System.Windows.Forms.PictureBox();
             this.pnlPrintSet = new System.Windows.Forms.Panel();
             this.lblPrintSet = new System.Windows.Forms.Label();
-            this.picPrintSet = new System.Windows.Forms.PictureBox();
             this.lblDeviceSN = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.pnlLine1 = new System.Windows.Forms.Panel();
@@ -58,50 +52,57 @@
             this.pnlLine9 = new System.Windows.Forms.Panel();
             this.pnlScaleModel = new System.Windows.Forms.Panel();
             this.lblScaleModel = new System.Windows.Forms.Label();
-            this.picScaleModel = new System.Windows.Forms.PictureBox();
             this.pnlLine8 = new System.Windows.Forms.Panel();
             this.lblBreakage = new System.Windows.Forms.Label();
             this.pnlBreakage = new System.Windows.Forms.Panel();
-            this.picBreakage = new System.Windows.Forms.PictureBox();
             this.pnlLine10 = new System.Windows.Forms.Panel();
             this.pnlBatchSaleCard = new System.Windows.Forms.Panel();
             this.lblBatchSaleCard = new System.Windows.Forms.Label();
-            this.picBatchSaleCard = new System.Windows.Forms.PictureBox();
             this.pnlRechargeQuery = new System.Windows.Forms.Panel();
             this.lblRechargeQuery = new System.Windows.Forms.Label();
-            this.picRechargeQuery = new System.Windows.Forms.PictureBox();
             this.pnlRefund = new System.Windows.Forms.Panel();
             this.lblRefund = new System.Windows.Forms.Label();
-            this.picRefund = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlOpenCashBox = new System.Windows.Forms.Panel();
-            this.picOpenCashBox = new System.Windows.Forms.PictureBox();
             this.lblOpenCashBox = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.picOpenCashBox = new System.Windows.Forms.PictureBox();
+            this.picRechargeQuery = new System.Windows.Forms.PictureBox();
+            this.picRefund = new System.Windows.Forms.PictureBox();
+            this.picBreakage = new System.Windows.Forms.PictureBox();
+            this.picBatchSaleCard = new System.Windows.Forms.PictureBox();
+            this.picScaleModel = new System.Windows.Forms.PictureBox();
+            this.picPrintSet = new System.Windows.Forms.PictureBox();
+            this.picReceiptQuery = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.picChangeMode = new System.Windows.Forms.PictureBox();
+            this.picExit = new System.Windows.Forms.PictureBox();
+            this.picReceipt = new System.Windows.Forms.PictureBox();
             this.pnlReceipt.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.pnlExit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picExit)).BeginInit();
             this.pnlScale.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.pnlChangeMode.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picChangeMode)).BeginInit();
             this.pnlReceiptQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picReceiptQuery)).BeginInit();
             this.pnlPrintSet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPrintSet)).BeginInit();
             this.pnlScaleModel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picScaleModel)).BeginInit();
             this.pnlBreakage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).BeginInit();
             this.pnlBatchSaleCard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBatchSaleCard)).BeginInit();
             this.pnlRechargeQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRechargeQuery)).BeginInit();
             this.pnlRefund.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRefund)).BeginInit();
             this.pnlOpenCashBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenCashBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRechargeQuery)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRefund)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBatchSaleCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picScaleModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPrintSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picReceiptQuery)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picChangeMode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlReceipt
@@ -126,17 +127,6 @@
             this.lblReceipt.Text = "交班";
             this.lblReceipt.Click += new System.EventHandler(this.pnlReceipt_Click);
             // 
-            // picReceipt
-            // 
-            this.picReceipt.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picReceipt.BackgroundImage")));
-            this.picReceipt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picReceipt.Location = new System.Drawing.Point(13, 7);
-            this.picReceipt.Name = "picReceipt";
-            this.picReceipt.Size = new System.Drawing.Size(24, 24);
-            this.picReceipt.TabIndex = 0;
-            this.picReceipt.TabStop = false;
-            this.picReceipt.Click += new System.EventHandler(this.pnlReceipt_Click);
-            // 
             // pnlExit
             // 
             this.pnlExit.Controls.Add(this.lblExit);
@@ -158,17 +148,6 @@
             this.lblExit.TabIndex = 1;
             this.lblExit.Text = "退出";
             this.lblExit.Click += new System.EventHandler(this.pnlExit_Click);
-            // 
-            // picExit
-            // 
-            this.picExit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picExit.BackgroundImage")));
-            this.picExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picExit.Location = new System.Drawing.Point(13, 7);
-            this.picExit.Name = "picExit";
-            this.picExit.Size = new System.Drawing.Size(24, 24);
-            this.picExit.TabIndex = 0;
-            this.picExit.TabStop = false;
-            this.picExit.Click += new System.EventHandler(this.pnlExit_Click);
             // 
             // pnlScale
             // 
@@ -192,17 +171,6 @@
             this.label7.Text = "电子秤管理";
             this.label7.Click += new System.EventHandler(this.pnlScale_Click);
             // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(13, 7);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pnlScale_Click);
-            // 
             // pnlChangeMode
             // 
             this.pnlChangeMode.Controls.Add(this.lblChangeMode);
@@ -224,17 +192,6 @@
             this.lblChangeMode.TabIndex = 1;
             this.lblChangeMode.Text = "同步数据";
             this.lblChangeMode.Click += new System.EventHandler(this.pnlChangeMode_Click);
-            // 
-            // picChangeMode
-            // 
-            this.picChangeMode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picChangeMode.BackgroundImage")));
-            this.picChangeMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picChangeMode.Location = new System.Drawing.Point(13, 7);
-            this.picChangeMode.Name = "picChangeMode";
-            this.picChangeMode.Size = new System.Drawing.Size(24, 24);
-            this.picChangeMode.TabIndex = 0;
-            this.picChangeMode.TabStop = false;
-            this.picChangeMode.Click += new System.EventHandler(this.pnlChangeMode_Click);
             // 
             // pnlReceiptQuery
             // 
@@ -258,17 +215,6 @@
             this.lblReceiptQuery.Text = "交班查询";
             this.lblReceiptQuery.Click += new System.EventHandler(this.pnlReceiptQuery_Click);
             // 
-            // picReceiptQuery
-            // 
-            this.picReceiptQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picReceiptQuery.BackgroundImage")));
-            this.picReceiptQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picReceiptQuery.Location = new System.Drawing.Point(13, 7);
-            this.picReceiptQuery.Name = "picReceiptQuery";
-            this.picReceiptQuery.Size = new System.Drawing.Size(24, 24);
-            this.picReceiptQuery.TabIndex = 0;
-            this.picReceiptQuery.TabStop = false;
-            this.picReceiptQuery.Click += new System.EventHandler(this.pnlReceiptQuery_Click);
-            // 
             // pnlPrintSet
             // 
             this.pnlPrintSet.Controls.Add(this.lblPrintSet);
@@ -291,23 +237,12 @@
             this.lblPrintSet.Text = "设备管理";
             this.lblPrintSet.Click += new System.EventHandler(this.pnlPrintSet_Click);
             // 
-            // picPrintSet
-            // 
-            this.picPrintSet.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPrintSet.BackgroundImage")));
-            this.picPrintSet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPrintSet.Location = new System.Drawing.Point(13, 7);
-            this.picPrintSet.Name = "picPrintSet";
-            this.picPrintSet.Size = new System.Drawing.Size(24, 24);
-            this.picPrintSet.TabIndex = 0;
-            this.picPrintSet.TabStop = false;
-            this.picPrintSet.Click += new System.EventHandler(this.pnlPrintSet_Click);
-            // 
             // lblDeviceSN
             // 
             this.lblDeviceSN.AutoSize = true;
             this.lblDeviceSN.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblDeviceSN.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDeviceSN.Location = new System.Drawing.Point(7, 591);
+            this.lblDeviceSN.Location = new System.Drawing.Point(7, 641);
             this.lblDeviceSN.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDeviceSN.Name = "lblDeviceSN";
             this.lblDeviceSN.Size = new System.Drawing.Size(65, 20);
@@ -319,7 +254,7 @@
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblVersion.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblVersion.Location = new System.Drawing.Point(7, 568);
+            this.lblVersion.Location = new System.Drawing.Point(7, 618);
             this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(65, 20);
@@ -404,17 +339,6 @@
             this.lblScaleModel.Text = "切换秤模式";
             this.lblScaleModel.Click += new System.EventHandler(this.pnlScaleModel_Click);
             // 
-            // picScaleModel
-            // 
-            this.picScaleModel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picScaleModel.BackgroundImage")));
-            this.picScaleModel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picScaleModel.Location = new System.Drawing.Point(13, 7);
-            this.picScaleModel.Name = "picScaleModel";
-            this.picScaleModel.Size = new System.Drawing.Size(24, 24);
-            this.picScaleModel.TabIndex = 0;
-            this.picScaleModel.TabStop = false;
-            this.picScaleModel.Click += new System.EventHandler(this.pnlScaleModel_Click);
-            // 
             // pnlLine8
             // 
             this.pnlLine8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
@@ -445,17 +369,6 @@
             this.pnlBreakage.TabIndex = 17;
             this.pnlBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
             // 
-            // picBreakage
-            // 
-            this.picBreakage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBreakage.BackgroundImage")));
-            this.picBreakage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picBreakage.Location = new System.Drawing.Point(13, 7);
-            this.picBreakage.Name = "picBreakage";
-            this.picBreakage.Size = new System.Drawing.Size(24, 24);
-            this.picBreakage.TabIndex = 0;
-            this.picBreakage.TabStop = false;
-            this.picBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
-            // 
             // pnlLine10
             // 
             this.pnlLine10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
@@ -468,11 +381,10 @@
             // 
             this.pnlBatchSaleCard.Controls.Add(this.lblBatchSaleCard);
             this.pnlBatchSaleCard.Controls.Add(this.picBatchSaleCard);
-            this.pnlBatchSaleCard.Location = new System.Drawing.Point(138, 568);
+            this.pnlBatchSaleCard.Location = new System.Drawing.Point(11, 568);
             this.pnlBatchSaleCard.Name = "pnlBatchSaleCard";
             this.pnlBatchSaleCard.Size = new System.Drawing.Size(187, 39);
             this.pnlBatchSaleCard.TabIndex = 17;
-            this.pnlBatchSaleCard.Visible = false;
             this.pnlBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
             // 
             // lblBatchSaleCard
@@ -486,17 +398,6 @@
             this.lblBatchSaleCard.TabIndex = 1;
             this.lblBatchSaleCard.Text = "批量售卡";
             this.lblBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
-            // 
-            // picBatchSaleCard
-            // 
-            this.picBatchSaleCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBatchSaleCard.BackgroundImage")));
-            this.picBatchSaleCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picBatchSaleCard.Location = new System.Drawing.Point(13, 7);
-            this.picBatchSaleCard.Name = "picBatchSaleCard";
-            this.picBatchSaleCard.Size = new System.Drawing.Size(24, 24);
-            this.picBatchSaleCard.TabIndex = 0;
-            this.picBatchSaleCard.TabStop = false;
-            this.picBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
             // 
             // pnlRechargeQuery
             // 
@@ -519,17 +420,6 @@
             this.lblRechargeQuery.TabIndex = 1;
             this.lblRechargeQuery.Text = "充值明细";
             this.lblRechargeQuery.Click += new System.EventHandler(this.pnlRechargeQuery_Click);
-            // 
-            // picRechargeQuery
-            // 
-            this.picRechargeQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRechargeQuery.BackgroundImage")));
-            this.picRechargeQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picRechargeQuery.Location = new System.Drawing.Point(13, 7);
-            this.picRechargeQuery.Name = "picRechargeQuery";
-            this.picRechargeQuery.Size = new System.Drawing.Size(24, 24);
-            this.picRechargeQuery.TabIndex = 0;
-            this.picRechargeQuery.TabStop = false;
-            this.picRechargeQuery.Click += new System.EventHandler(this.pnlRechargeQuery_Click);
             // 
             // pnlRefund
             // 
@@ -555,18 +445,6 @@
             this.lblRefund.Text = "无单退款";
             this.lblRefund.Click += new System.EventHandler(this.pnlRefund_Click);
             // 
-            // picRefund
-            // 
-            this.picRefund.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRefund.BackgroundImage")));
-            this.picRefund.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picRefund.Location = new System.Drawing.Point(13, 7);
-            this.picRefund.Margin = new System.Windows.Forms.Padding(2);
-            this.picRefund.Name = "picRefund";
-            this.picRefund.Size = new System.Drawing.Size(24, 24);
-            this.picRefund.TabIndex = 0;
-            this.picRefund.TabStop = false;
-            this.picRefund.Click += new System.EventHandler(this.pnlRefund_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
@@ -585,17 +463,6 @@
             this.pnlOpenCashBox.Size = new System.Drawing.Size(187, 39);
             this.pnlOpenCashBox.TabIndex = 21;
             this.pnlOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
-            // 
-            // picOpenCashBox
-            // 
-            this.picOpenCashBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picOpenCashBox.BackgroundImage")));
-            this.picOpenCashBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picOpenCashBox.Location = new System.Drawing.Point(13, 7);
-            this.picOpenCashBox.Name = "picOpenCashBox";
-            this.picOpenCashBox.Size = new System.Drawing.Size(24, 24);
-            this.picOpenCashBox.TabIndex = 2;
-            this.picOpenCashBox.TabStop = false;
-            this.picOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
             // 
             // lblOpenCashBox
             // 
@@ -618,12 +485,154 @@
             this.panel3.Size = new System.Drawing.Size(198, 1);
             this.panel3.TabIndex = 20;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.panel2.Location = new System.Drawing.Point(6, 611);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(198, 1);
+            this.panel2.TabIndex = 20;
+            // 
+            // picOpenCashBox
+            // 
+            this.picOpenCashBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picOpenCashBox.BackgroundImage")));
+            this.picOpenCashBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picOpenCashBox.Location = new System.Drawing.Point(13, 7);
+            this.picOpenCashBox.Name = "picOpenCashBox";
+            this.picOpenCashBox.Size = new System.Drawing.Size(24, 24);
+            this.picOpenCashBox.TabIndex = 2;
+            this.picOpenCashBox.TabStop = false;
+            this.picOpenCashBox.Click += new System.EventHandler(this.pnlOpenCashBox_Click);
+            // 
+            // picRechargeQuery
+            // 
+            this.picRechargeQuery.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.menu_recharge;
+            this.picRechargeQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picRechargeQuery.Location = new System.Drawing.Point(13, 7);
+            this.picRechargeQuery.Name = "picRechargeQuery";
+            this.picRechargeQuery.Size = new System.Drawing.Size(24, 24);
+            this.picRechargeQuery.TabIndex = 0;
+            this.picRechargeQuery.TabStop = false;
+            this.picRechargeQuery.Click += new System.EventHandler(this.pnlRechargeQuery_Click);
+            // 
+            // picRefund
+            // 
+            this.picRefund.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRefund.BackgroundImage")));
+            this.picRefund.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picRefund.Location = new System.Drawing.Point(13, 7);
+            this.picRefund.Margin = new System.Windows.Forms.Padding(2);
+            this.picRefund.Name = "picRefund";
+            this.picRefund.Size = new System.Drawing.Size(24, 24);
+            this.picRefund.TabIndex = 0;
+            this.picRefund.TabStop = false;
+            this.picRefund.Click += new System.EventHandler(this.pnlRefund_Click);
+            // 
+            // picBreakage
+            // 
+            this.picBreakage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBreakage.BackgroundImage")));
+            this.picBreakage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picBreakage.Location = new System.Drawing.Point(13, 7);
+            this.picBreakage.Name = "picBreakage";
+            this.picBreakage.Size = new System.Drawing.Size(24, 24);
+            this.picBreakage.TabIndex = 0;
+            this.picBreakage.TabStop = false;
+            this.picBreakage.Click += new System.EventHandler(this.pnlBreakage_Click);
+            // 
+            // picBatchSaleCard
+            // 
+            this.picBatchSaleCard.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.batchsale;
+            this.picBatchSaleCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picBatchSaleCard.Location = new System.Drawing.Point(13, 7);
+            this.picBatchSaleCard.Name = "picBatchSaleCard";
+            this.picBatchSaleCard.Size = new System.Drawing.Size(24, 24);
+            this.picBatchSaleCard.TabIndex = 0;
+            this.picBatchSaleCard.TabStop = false;
+            this.picBatchSaleCard.Click += new System.EventHandler(this.pnlBatchSaleCard_Click);
+            // 
+            // picScaleModel
+            // 
+            this.picScaleModel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picScaleModel.BackgroundImage")));
+            this.picScaleModel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picScaleModel.Location = new System.Drawing.Point(13, 7);
+            this.picScaleModel.Name = "picScaleModel";
+            this.picScaleModel.Size = new System.Drawing.Size(24, 24);
+            this.picScaleModel.TabIndex = 0;
+            this.picScaleModel.TabStop = false;
+            this.picScaleModel.Click += new System.EventHandler(this.pnlScaleModel_Click);
+            // 
+            // picPrintSet
+            // 
+            this.picPrintSet.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPrintSet.BackgroundImage")));
+            this.picPrintSet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPrintSet.Location = new System.Drawing.Point(13, 7);
+            this.picPrintSet.Name = "picPrintSet";
+            this.picPrintSet.Size = new System.Drawing.Size(24, 24);
+            this.picPrintSet.TabIndex = 0;
+            this.picPrintSet.TabStop = false;
+            this.picPrintSet.Click += new System.EventHandler(this.pnlPrintSet_Click);
+            // 
+            // picReceiptQuery
+            // 
+            this.picReceiptQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picReceiptQuery.BackgroundImage")));
+            this.picReceiptQuery.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picReceiptQuery.Location = new System.Drawing.Point(13, 7);
+            this.picReceiptQuery.Name = "picReceiptQuery";
+            this.picReceiptQuery.Size = new System.Drawing.Size(24, 24);
+            this.picReceiptQuery.TabIndex = 0;
+            this.picReceiptQuery.TabStop = false;
+            this.picReceiptQuery.Click += new System.EventHandler(this.pnlReceiptQuery_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox4.Location = new System.Drawing.Point(13, 7);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pnlScale_Click);
+            // 
+            // picChangeMode
+            // 
+            this.picChangeMode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picChangeMode.BackgroundImage")));
+            this.picChangeMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picChangeMode.Location = new System.Drawing.Point(13, 7);
+            this.picChangeMode.Name = "picChangeMode";
+            this.picChangeMode.Size = new System.Drawing.Size(24, 24);
+            this.picChangeMode.TabIndex = 0;
+            this.picChangeMode.TabStop = false;
+            this.picChangeMode.Click += new System.EventHandler(this.pnlChangeMode_Click);
+            // 
+            // picExit
+            // 
+            this.picExit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picExit.BackgroundImage")));
+            this.picExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picExit.Location = new System.Drawing.Point(13, 7);
+            this.picExit.Name = "picExit";
+            this.picExit.Size = new System.Drawing.Size(24, 24);
+            this.picExit.TabIndex = 0;
+            this.picExit.TabStop = false;
+            this.picExit.Click += new System.EventHandler(this.pnlExit_Click);
+            // 
+            // picReceipt
+            // 
+            this.picReceipt.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picReceipt.BackgroundImage")));
+            this.picReceipt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picReceipt.Location = new System.Drawing.Point(13, 7);
+            this.picReceipt.Name = "picReceipt";
+            this.picReceipt.Size = new System.Drawing.Size(24, 24);
+            this.picReceipt.TabIndex = 0;
+            this.picReceipt.TabStop = false;
+            this.picReceipt.Click += new System.EventHandler(this.pnlReceipt_Click);
+            // 
             // frmToolMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(210, 620);
+            this.ClientSize = new System.Drawing.Size(210, 670);
             this.Controls.Add(this.pnlOpenCashBox);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlRechargeQuery);
             this.Controls.Add(this.pnlLine10);
@@ -656,40 +665,40 @@
             this.Shown += new System.EventHandler(this.frmToolMain_Shown);
             this.pnlReceipt.ResumeLayout(false);
             this.pnlReceipt.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).EndInit();
             this.pnlExit.ResumeLayout(false);
             this.pnlExit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picExit)).EndInit();
             this.pnlScale.ResumeLayout(false);
             this.pnlScale.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.pnlChangeMode.ResumeLayout(false);
             this.pnlChangeMode.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picChangeMode)).EndInit();
             this.pnlReceiptQuery.ResumeLayout(false);
             this.pnlReceiptQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picReceiptQuery)).EndInit();
             this.pnlPrintSet.ResumeLayout(false);
             this.pnlPrintSet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPrintSet)).EndInit();
             this.pnlScaleModel.ResumeLayout(false);
             this.pnlScaleModel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picScaleModel)).EndInit();
             this.pnlBreakage.ResumeLayout(false);
             this.pnlBreakage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).EndInit();
             this.pnlBatchSaleCard.ResumeLayout(false);
             this.pnlBatchSaleCard.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBatchSaleCard)).EndInit();
             this.pnlRechargeQuery.ResumeLayout(false);
             this.pnlRechargeQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRechargeQuery)).EndInit();
             this.pnlRefund.ResumeLayout(false);
             this.pnlRefund.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRefund)).EndInit();
             this.pnlOpenCashBox.ResumeLayout(false);
             this.pnlOpenCashBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenCashBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRechargeQuery)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRefund)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBreakage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBatchSaleCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picScaleModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPrintSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picReceiptQuery)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picChangeMode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picReceipt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -746,5 +755,6 @@
         private System.Windows.Forms.Label lblOpenCashBox;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox picOpenCashBox;
+        private System.Windows.Forms.Panel panel2;
     }
 }

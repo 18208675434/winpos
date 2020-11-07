@@ -74,7 +74,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                         return;
                     }
                     decimal doublenum = Convert.ToDecimal(txtPrice.Text);
-                    decimal temptotal = CurrentProduct.adjustpriceinfo == null ? CurrentProduct.price.total : CurrentProduct.price.origintotal;
+                   // decimal temptotal = CurrentProduct.adjustpriceinfo == null ? CurrentProduct.price.total : CurrentProduct.price.origintotal;
+
+
+                    decimal temptotal = CurrentProduct.price.total;
+                    if (CurrentProduct.adjustpriceinfo != null)
+                    {
+                        if (CurrentProduct.goodstagid == 0)
+                        {
+                            temptotal = CurrentProduct.adjustpriceinfo.beforeamt * CurrentProduct.num;
+                        }
+                        else
+                        {
+                            temptotal = CurrentProduct.adjustpriceinfo.beforeamt * CurrentProduct.price.specnum;
+                        }
+                    }
 
                     if (doublenum < 0)
                     {
@@ -206,7 +220,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
             btnTotalPrice.ForeColor = Color.White;
             lblStrPrice.Text = "当前总价";
 
-            decimal temptotal = CurrentProduct.adjustpriceinfo == null ? CurrentProduct.price.total : CurrentProduct.price.origintotal;
+            decimal temptotal = CurrentProduct.price.total;
+            if (CurrentProduct.adjustpriceinfo != null)
+            {
+                if (CurrentProduct.goodstagid == 0)
+                {
+                    temptotal = CurrentProduct.adjustpriceinfo.beforeamt * CurrentProduct.num;
+                }
+                else
+                {
+                    temptotal = CurrentProduct.adjustpriceinfo.beforeamt * CurrentProduct.price.specnum;
+                }
+            }
+            //CurrentProduct.adjustpriceinfo == null ? CurrentProduct.price.total : CurrentProduct.price.origintotal;
 
             lblPrice.Text = "￥" + temptotal.ToString("f2");
             CurrentChangeType = ChangeType.totalprice;

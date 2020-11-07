@@ -50,8 +50,8 @@
             this.btnValue2 = new System.Windows.Forms.Button();
             this.btnValue1 = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
-            this.timerLoadPwd = new System.Windows.Forms.Timer(this.components);
             this.lblToast = new System.Windows.Forms.Label();
+            this.timerLoadPwd = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btn00
@@ -333,10 +333,6 @@
             this.btnDel.UseVisualStyleBackColor = true;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
-            // timerLoadPwd
-            // 
-            this.timerLoadPwd.Tick += new System.EventHandler(this.timerLoadPwd_Tick);
-            // 
             // lblToast
             // 
             this.lblToast.AutoSize = true;
@@ -350,6 +346,10 @@
             this.lblToast.TabIndex = 74;
             this.lblToast.Text = "提示";
             this.lblToast.Visible = false;
+            // 
+            // timerLoadPwd
+            // 
+            this.timerLoadPwd.Tick += new System.EventHandler(this.timerLoadPwd_Tick);
             // 
             // frmBalancePwdGuest
             // 
@@ -383,7 +383,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmBalancePwdGuest";
             this.TopMost = true;
-            this.Deactivate += new System.EventHandler(this.frmBalancePwdGuest_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmBalancePwdGuest_FormClosing);
             this.Shown += new System.EventHandler(this.frmBalancePwdGuest_Shown);
             this.ResumeLayout(false);
@@ -413,7 +412,7 @@
         private System.Windows.Forms.Button btnValue3;
         private System.Windows.Forms.Button btnValue2;
         private System.Windows.Forms.Button btnValue1;
-        private System.Windows.Forms.Timer timerLoadPwd;
         private System.Windows.Forms.Label lblToast;
+        private System.Windows.Forms.Timer timerLoadPwd;
     }
 }

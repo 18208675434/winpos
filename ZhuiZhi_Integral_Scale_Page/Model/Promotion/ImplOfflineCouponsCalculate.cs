@@ -117,6 +117,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                 tripletBean.setPromoTriplet(dbPromotionCacheBean);
             }
             if (tripletBean == null) {
+                //2020-10-28 修改 促销表查不到可能是其他门店优惠券 列为不可用优惠券
+                setUnavailablecoupons(unavailablecoupons, coupon, decimal.Zero, cartBean); 
                 continue;
             }
 

@@ -22,12 +22,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// <summary>
         /// 调用接口
         /// </summary>
+        HttpUtil httpUtil= new HttpUtil();
         MemberCenterHttpUtil membercenterhttputil = new MemberCenterHttpUtil();
         Member member;
 
         string newphone = "";//新手机号
-        int step = 0;
-        int type = 0;//1-手机验证码验证 2-余额支付密码验证 3-老卡验证 4-新卡验证
+        int step = 0;       
         bool isnew = true;//新手机 or 合并
         public FormChangePhoneNumber(Member m)
         {
@@ -49,7 +49,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private void FormChangePhoneNumber_Load(object sender, EventArgs e)
         {
-            type = 0;
             lblShopName.Text = MainModel.Titledata + "   " + MainModel.CurrentShopInfo.shopname;
             lblMenu.Text = MainModel.CurrentUser.nickname + ",你好";
         }
@@ -65,37 +64,36 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             BackHelper.ShowFormBackGround();
             if (MemberCenterHelper.ShowFormChengPhoneSmsCode())
             {
-                type = 1;
                 StepTo(1);
             }
         }
 
         private void btnUserPassWordVerify_Click(object sender, EventArgs e)
         {
-            if (MemberCenterHelper.ShowFormChangePhonePayPwd(member.memberheaderresponsevo.mobile))
+            if (MemberCenterHelper.ShowFormChangePhonePayPwd(member))
             {
-                type = 2;
                 StepTo(1);
             }
         }
 
-        private void btnOldCardVerify_Click(object sender, EventArgs e)
+        private void btnEntityCardVerify_Click(object sender, EventArgs e)
         {
-            if (MemberCenterHelper.ShowFormChangePhonePhysicalCard())
+            string cardid = DialogHelper.ShowFormCode("输入实体卡号", "请输入实体卡卡号");
+            if (!string.IsNullOrEmpty(cardid))
             {
-                type = 3;
+                string err = "";
+                LoadingHelper.ShowLoadingScreen();
+                bool result = membercenterhttputil.MatchCard(MainModel.CurrentMember.memberid, cardid, ref err);
+                LoadingHelper.CloseForm();
+                if (!result)
+                {
+                    MainModel.ShowLog(err);
+                    return;
+                }
                 StepTo(1);
             }
         }
 
-        private void btnNewCardVerify_Click(object sender, EventArgs e)
-        {
-            if (MemberCenterHelper.ShowFormChangePhoneNewCard())
-            {
-                type = 4;
-                StepTo(1);
-            }
-        }
 
         #endregion
 
@@ -162,15 +160,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         return;
                     }
                     string msg = "";
-                    bool isMember= membercenterhttputil.GetCheckmember(numbervalue, ref msg);                   
+                    LoadingHelper.ShowLoadingScreen();
+                    bool isMember = membercenterhttputil.GetCheckmember(numbervalue, ref msg);
+                    LoadingHelper.CloseForm();
                     if (!isMember)
                     {
                         MainModel.ShowLog("亲，您还不是会员哦", false);
                         return;
                     }
                    
+                    string err = "";
+                    LoadingHelper.ShowLoadingScreen();
+                    var newNember = httpUtil.GetMember(numbervalue, ref err);
+                    LoadingHelper.CloseForm();
+                    if (!string.IsNullOrEmpty(err))
+                    {
+                        MainModel.ShowLog(err);
+                        return;
+                    }
+
                     BackHelper.ShowFormBackGround();
-                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(numbervalue);
+                    FormChangePhonePayPwd pwd = new FormChangePhonePayPwd(newNember);
                     asf.AutoScaleControlTest(pwd, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
                     pwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - pwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - pwd.Height) / 2);
                     pwd.TopMost = true;
@@ -183,8 +193,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         {
                             StepTo(2);
                         }
-
-
                     }
                 }
             }
@@ -215,9 +223,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         bool isMember = false;
         private void btnOkChange_Click(object sender, EventArgs e)
         {
-            if (MemberCenterHelper.ShowFormChangePhoneConfirm(newphone,isMember))
+            if (MemberCenterHelper.ShowFormChangePhoneConfirm(newphone, isMember))
             {
                 MemberCenterMediaHelper.ShowChangePhoneNumber(2);
+                string err = "";
+                LoadingHelper.ShowLoadingScreen();
+                MainModel.CurrentMember =new HttpUtil().GetMember(newphone, ref err);
+                LoadingHelper.CloseForm();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -234,8 +246,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 isMember = false;
                 btnSmsCodeVerify.Visible = true;
                 btnUserPassWordVerify.Visible = true;
-                btnNewCardVerify.Visible = true;
-                btnOldCardVerify.Visible = true;
+                btnEntityCardVerify.Visible = true;
                 btnVerifyNewPhone.Visible = false;
                 btnOkChange.Visible = false;
                 picVerifyMemberOK.Visible = false;
@@ -254,8 +265,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 btnSmsCodeVerify.Visible = false;
                 btnUserPassWordVerify.Visible = false;
-                btnNewCardVerify.Visible = false;
-                btnOldCardVerify.Visible = false;
+                btnEntityCardVerify.Visible = false;
+
                 btnVerifyNewPhone.Visible = true;
                 btnOkChange.Visible = false;
                 picVerifyMemberOK.Visible = true;
@@ -277,8 +288,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
                 btnSmsCodeVerify.Visible = false;
                 btnUserPassWordVerify.Visible = false;
-                btnNewCardVerify.Visible = false;
-                btnOldCardVerify.Visible = false;
+                btnEntityCardVerify.Visible = false;
                 btnVerifyNewPhone.Visible = false;
                 btnOkChange.Visible = true;
                 picVerifyMemberOK.Visible = true;
@@ -286,8 +296,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 picChangePhoneOK.Visible = false;
                 lblVerifySuccess.Visible = true;
                 lblNewPhone.Visible = true;
-                MemberCenterMediaHelper.ShowChangePhoneNumber(2,isMember);
+                MemberCenterMediaHelper.ShowChangePhoneNumber(2, isMember);
             }
         }
+
     }
 }

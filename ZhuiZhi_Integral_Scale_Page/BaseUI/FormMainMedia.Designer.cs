@@ -442,7 +442,7 @@
             // 
             // picMemberCard
             // 
-            this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picMemberCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picMemberCard.Location = new System.Drawing.Point(12, 3);
             this.picMemberCard.Name = "picMemberCard";
             this.picMemberCard.Size = new System.Drawing.Size(220, 220);
@@ -860,7 +860,7 @@
             // 
             // tlpnlRight
             // 
-            this.tlpnlRight.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tlpnlRight.BackColor = System.Drawing.Color.Transparent;
             this.tlpnlRight.ColumnCount = 1;
             this.tlpnlRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpnlRight.Controls.Add(this.panel2, 0, 1);
@@ -869,9 +869,9 @@
             this.tlpnlRight.Margin = new System.Windows.Forms.Padding(2);
             this.tlpnlRight.Name = "tlpnlRight";
             this.tlpnlRight.RowCount = 3;
-            this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
             this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0F));
+            this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tlpnlRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tlpnlRight.Size = new System.Drawing.Size(248, 389);
             this.tlpnlRight.TabIndex = 305;
             // 
@@ -885,7 +885,7 @@
             this.panel2.Controls.Add(this.lblPriceContent);
             this.panel2.Controls.Add(this.lblGoodsCount);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(2, 138);
+            this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(244, 248);
@@ -1027,7 +1027,7 @@
             this.pnlMember.Location = new System.Drawing.Point(2, 2);
             this.pnlMember.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMember.Name = "pnlMember";
-            this.pnlMember.Size = new System.Drawing.Size(244, 118);
+            this.pnlMember.Size = new System.Drawing.Size(244, 1);
             this.pnlMember.TabIndex = 6;
             // 
             // lblWechartNickName

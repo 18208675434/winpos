@@ -373,7 +373,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 para.endtime = getStampByDateTime(dtEnd.Value);
                 para.size = PageSize;
                 para.page = CurrentPage;
-
+                //para.pagination = "true";
                 string ErrorMsg = "";
                 PageBalanceDepositBill currentBalanceDepos = httputil.ListDepositbill(para, ref ErrorMsg);
                 if (ErrorMsg != "" || currentBalanceDepos == null)
@@ -443,6 +443,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 para.endtime = getStampByDateTime(dtEnd.Value);
                 para.size = PageSize;
                 para.page = CurrentPage;
+                para.pagination = "true";
                 string ErrorMsg = "";
                 PageBalanceDepositRefundBill CurrentBalanceDepos = httputil.ListDepositRefundBillList(para, ref ErrorMsg);
                 if (ErrorMsg != "" || CurrentBalanceDepos == null)

@@ -38,17 +38,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
             this.Close();
         }
 
+        private void FormRefundByAmt_Load(object sender, EventArgs e)
+        {
+          
+
+        }
+
+
         private void FormRefundByAmt_Shown(object sender, EventArgs e)
         {
-            Application.DoEvents();
+
             loadDgvGood();
 
             numTxt1.BorderStyle = BorderStyle.None;
             numTxt2.BorderStyle = BorderStyle.None;
             numTxt3.BorderStyle = BorderStyle.None;
-            numTxt4.BorderStyle = BorderStyle.None;
 
             Application.DoEvents();
+
             numTxt1.Focus();
         }
 
@@ -67,16 +74,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
 
                 rbtnPageUp.WhetherEnable = CurrentPage > 1;
 
-                int startindex = (CurrentPage - 1) * 4;
+                int startindex = (CurrentPage - 1) * 3;
 
-                int lastindex = Math.Min(CurrentOrder.products.Count - 1, startindex + 3);
+                int lastindex = Math.Min(CurrentOrder.products.Count - 1, startindex + 2);
 
                 List<QuereOrderProduct> lstLoading = CurrentOrder.products.GetRange(startindex, lastindex - startindex + 1);
 
                 numTxt1.Visible = false;
                 numTxt2.Visible = false;
                 numTxt3.Visible = false;
-                numTxt4.Visible = false;
                 for (int i = 0; i < lstLoading.Count; i++)
                 {
                     QuereOrderProduct pro = lstLoading[i];
@@ -90,11 +96,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
                        case 0: numTxt1.Visible = true; numTxt1.Text = refundamt; numTxt1.WaterText = WaterText; numTxt1.Tag = pro; numTxt1.Enabled = pro.supportspecifiedamountrefund == 1; break;
                        case 1: numTxt2.Visible = true; numTxt2.Text = refundamt; numTxt2.WaterText = WaterText; numTxt2.Tag = pro; numTxt2.Enabled = pro.supportspecifiedamountrefund == 1; break;
                        case 2: numTxt3.Visible = true; numTxt3.Text = refundamt; numTxt3.WaterText = WaterText; numTxt3.Tag = pro; numTxt3.Enabled = pro.supportspecifiedamountrefund == 1; break;
-                       case 3: numTxt4.Visible = true; numTxt4.Text = refundamt; numTxt4.WaterText = WaterText; numTxt4.Tag = pro; numTxt4.Enabled = pro.supportspecifiedamountrefund == 1; break;
                        default: break;
                    }
                 }
-                rbtnPageDown.WhetherEnable = CurrentOrder.products.Count > CurrentPage * 4;
+                rbtnPageDown.WhetherEnable = CurrentOrder.products.Count > CurrentPage * 3;
             }
             catch (Exception ex)
             {
@@ -337,8 +342,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
 
         private void FormRefundByAmt_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GlobalUtil.CloseOSK();
+           // GlobalUtil.CloseOSK();
         }
 
+     
     }
 }

@@ -37,12 +37,12 @@
             this.btnValue2 = new System.Windows.Forms.Button();
             this.btnValue1 = new System.Windows.Forms.Button();
             this.lblExit = new System.Windows.Forms.Label();
-            this.timerLoadPwd = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnl2 = new System.Windows.Forms.Panel();
             this.pnl1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.timerLoadPwd = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.pnl2.SuspendLayout();
             this.pnl1.SuspendLayout();
@@ -142,10 +142,6 @@
             this.lblExit.Text = "取消收银";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
             // 
-            // timerLoadPwd
-            // 
-            this.timerLoadPwd.Tick += new System.EventHandler(this.timerLoadPwd_Tick);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -207,6 +203,10 @@
             this.label2.Text = "系统检测用户账户存在风险";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // timerLoadPwd
+            // 
+            this.timerLoadPwd.Tick += new System.EventHandler(this.timerLoadPwd_Tick);
+            // 
             // frmBalancePwdMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -240,11 +240,11 @@
         private System.Windows.Forms.Button btnValue2;
         private System.Windows.Forms.Button btnValue1;
         private System.Windows.Forms.Label lblExit;
-        private System.Windows.Forms.Timer timerLoadPwd;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnl2;
         private System.Windows.Forms.Panel pnl1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer timerLoadPwd;
     }
 }

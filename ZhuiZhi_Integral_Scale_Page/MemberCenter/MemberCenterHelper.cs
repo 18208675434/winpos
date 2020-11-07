@@ -43,27 +43,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
 
 
-        public static bool ShowFormTopUpByCash(decimal amount)
+        public static bool ShowFormTopUpByCash(decimal amount,ref decimal realCash)
         {
             try
             {
-
                 BackHelper.ShowFormBackGround();
 
                 FormTopUpByCash frmpaybycash = new FormTopUpByCash(amount);
                 asf.AutoScaleControlTest(frmpaybycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
                 frmpaybycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybycash.Height) / 2);
                 frmpaybycash.TopMost = true;
-                frmpaybycash.ShowDialog();
+                bool flag =frmpaybycash.ShowDialog() == DialogResult.OK;
+                if (flag)
+                {
+                    realCash = frmpaybycash.RealCash;
+                }
                 frmpaybycash.Dispose();
-
-
+               
                 BackHelper.HideFormBackGround();
                 Application.DoEvents();
 
-                return frmpaybycash.DialogResult == DialogResult.OK;
-
-
+                return flag;
             }
             catch (Exception ex)
             {
@@ -72,13 +72,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        public static bool ShowFormTopUpByOnline(long orderid, string mobile)
+        public static bool ShowFormTopUpByOnline(long orderid, string mobile, tradePara trade = null)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
-
-                FormTopUpByOnLine frmpaybycash = new FormTopUpByOnLine(orderid.ToString(), mobile);
+                FormTopUpByOnLine frmpaybycash = new FormTopUpByOnLine(orderid.ToString(), mobile, trade);
                 asf.AutoScaleControlTest(frmpaybycash, 380, 520, 380 * MainModel.midScale, 520 * MainModel.midScale, true);
                 frmpaybycash.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmpaybycash.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmpaybycash.Height) / 2);
                 frmpaybycash.TopMost = true;
@@ -130,7 +129,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 asf.AutoScaleControlTest(formEntityCardList, 800, 600, 800 * MainModel.midScale, 600 * MainModel.midScale, true);
                 formEntityCardList.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formEntityCardList.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formEntityCardList.Height) / 2);
                 formEntityCardList.TopMost = true;
-                DialogResult dialog= formEntityCardList.ShowDialog();
+                DialogResult dialog = formEntityCardList.ShowDialog();
                 BackHelper.HideFormBackGround();
 
                 formEntityCardList.Dispose();
@@ -143,6 +142,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 LogManager.WriteLog("显示会员优惠券列表异常" + ex.Message);
             }
             return false;
+        }
+
+        /// <summary> 返回充值模板
+        /// </summary>
+        /// <returns></returns>
+        public static ListAllTemplate ShowFormRechargeAmount()
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormRechargeAmount formRechargeAmount = new FormRechargeAmount();
+                asf.AutoScaleControlTest(formRechargeAmount, 450, 600, 450 * MainModel.midScale, 600 * MainModel.midScale, true);
+                formRechargeAmount.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formRechargeAmount.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formRechargeAmount.Height) / 2);
+                formRechargeAmount.TopMost = true;
+                DialogResult dialog = formRechargeAmount.ShowDialog();
+                BackHelper.HideFormBackGround();
+
+                formRechargeAmount.Dispose();
+                Application.DoEvents();
+                if (dialog == DialogResult.OK)
+                {
+                    return formRechargeAmount.listAllTemplate;
+                }
+            }
+            catch (Exception ex)
+            {
+                BackHelper.HideFormBackGround();
+                LogManager.WriteLog("显示会员优惠券列表异常" + ex.Message);
+            }
+            return null;
         }
 
         public static bool ShowFormNoPayPwd()
@@ -309,12 +339,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 显示修改手机号码-支付密码验证窗口
         /// </summary>
         /// <returns></returns>
-        public static bool ShowFormChangePhonePayPwd(string newphone)
+        public static bool ShowFormChangePhonePayPwd(Member member)
         {
             try
             {
                 BackHelper.ShowFormBackGround();
-                FormChangePhonePayPwd frmchangephonepaypwd = new FormChangePhonePayPwd(newphone);
+                FormChangePhonePayPwd frmchangephonepaypwd = new FormChangePhonePayPwd(member);
                 asf.AutoScaleControlTest(frmchangephonepaypwd, 370, 200, 370 * MainModel.midScale, 200 * MainModel.midScale, true);
                 frmchangephonepaypwd.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonepaypwd.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonepaypwd.Height) / 2);
                 frmchangephonepaypwd.TopMost = true;
@@ -331,56 +361,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return false;
             }
         }
-        /// <summary>
-        /// 显示修改手机号码-旧卡验证窗口
-        /// </summary>
-        /// <returns></returns>
-        public static bool ShowFormChangePhonePhysicalCard()
-        {
-            try
-            {
 
-                BackHelper.ShowFormBackGround();
-                FormChangePhonePhysicalCard frmchangephoneoldcard = new FormChangePhonePhysicalCard();
-                asf.AutoScaleControlTest(frmchangephoneoldcard, 380, 197, 380 * MainModel.midScale, 197 * MainModel.midScale, true);
-                frmchangephoneoldcard.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephoneoldcard.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephoneoldcard.Height) / 2);
-                frmchangephoneoldcard.TopMost = true;
-                frmchangephoneoldcard.ShowDialog();
-
-                Application.DoEvents();
-                BackHelper.HideFormBackGround();
-                return frmchangephoneoldcard.DialogResult == DialogResult.OK;
-            }
-            catch (Exception ex)
-            {
-
-                return false;
-            }
-        }
-        /// <summary>
-        /// 显示修改手机号码-新卡验证窗口
-        /// </summary>
-        /// <returns></returns>
-        public static bool ShowFormChangePhoneNewCard()
-        {
-            try
-            {
-                FormChangePhoneNewCard frmchangephonenewcard = new FormChangePhoneNewCard();
-                asf.AutoScaleControlTest(frmchangephonenewcard, 380, 450, 380 * MainModel.midScale, 450 * MainModel.midScale, true);
-                frmchangephonenewcard.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frmchangephonenewcard.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frmchangephonenewcard.Height) / 2);
-                frmchangephonenewcard.TopMost = true;
-                frmchangephonenewcard.ShowDialog();
-                frmchangephonenewcard.Dispose();
-                Application.DoEvents();
-                return frmchangephonenewcard.DialogResult == DialogResult.OK;
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.WriteLog("更换手机号码新卡验证异常" + ex.Message);
-                return false;
-            }
-        }
 
         /// <summary>
         /// 显示修改手机号码-新手机获取验证码窗口
@@ -458,23 +439,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
 
         #region 批量售卡
-        private static FormBatchSaleCardCreate formBatchSaleCardCreate = null;
+        private static FormEntityCardBatchSale formEntityCardBatchSale = null;
 
-        public static void IniFormBatchSaleCardCreate()
+        public static void IniFormEntityCardBatchSale()
         {
             try
             {
-                if (formBatchSaleCardCreate != null)
+                if (formEntityCardBatchSale != null)
                 {
                     try
                     {
-                        formBatchSaleCardCreate.Dispose();
+                        formEntityCardBatchSale.Dispose();
                     }
                     catch { }
                 }
-                formBatchSaleCardCreate = new FormBatchSaleCardCreate();
-                asf.AutoScaleControlTest(formBatchSaleCardCreate, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                formBatchSaleCardCreate.Location = new System.Drawing.Point(0, 0);
+                formEntityCardBatchSale = new FormEntityCardBatchSale();
+                asf.AutoScaleControlTest(formEntityCardBatchSale, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                formEntityCardBatchSale.Location = new System.Drawing.Point(0, 0);
             }
             catch (Exception ex)
             {
@@ -482,21 +463,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
-        public static void ShowFormBatchSaleCardCreate()
+        public static void ShowFormEntityCardBatchSale()
         {
             try
             {
-                if (formBatchSaleCardCreate == null || formBatchSaleCardCreate.IsDisposed)
+                if (formEntityCardBatchSale == null || formEntityCardBatchSale.IsDisposed)
                 {
-                    IniFormBatchSaleCardCreate();
+                    IniFormEntityCardBatchSale();
                 }
 
-                formBatchSaleCardCreate.ShowDialog();
-                formBatchSaleCardCreate.Dispose();
+                formEntityCardBatchSale.ShowDialog();
+                formEntityCardBatchSale.Dispose();
             }
             catch (Exception ex)
             {
-                formBatchSaleCardCreate = null;
+                formEntityCardBatchSale = null;
                 LogManager.WriteLog("显示批量售卡页面异常" + ex.Message);
             }
         }
@@ -573,7 +554,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                formBatchSaleCardCreate = null;
+                formEntityCardBatchSale = null;
                 LogManager.WriteLog("显示充值明细页面异常" + ex.Message);
             }
         }
@@ -617,7 +598,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                formBatchSaleCardCreate = null;
+                formEntityCardBatchSale = null;
                 LogManager.WriteLog("显示单用户充值明细页面异常" + ex.Message);
             }
         }
@@ -625,7 +606,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         /// <summary> 绑定实体卡
         /// </summary>
-        public static bool ShowFormBindEntityCard(EntityCard entityCard)
+        public static bool ShowFormBindEntityCard(OutEntityCardResponseDto entityCard)
         {
             try
             {
@@ -701,6 +682,50 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 return null;
             }
         }
+
+        #region 充值结果
+        private static FormRechargeSuccess formRechargeSuccess = null;
+        /// <summary>
+        /// 充值成功页面
+        /// </summary>
+        /// <param name="billid">单号</param>
+        /// <param name="realCash">实际支付金额，计划打印找零使用，暂未使用</param>
+        /// <param name="orderids">子订单id，批量售卡使用</param>
+        /// <returns></returns>
+        public static bool ShowRechargeSuccess(string billid,decimal realCash, List<string> orderids = null)
+        {
+            try
+            {
+                if (formRechargeSuccess == null || formRechargeSuccess.IsDisposed)
+                {
+                    formRechargeSuccess = new FormRechargeSuccess();
+                    asf.AutoScaleControlTest(formRechargeSuccess, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                    formRechargeSuccess.Location = new System.Drawing.Point(0, 0);
+                    formRechargeSuccess.TopMost = true;
+                }
+                formRechargeSuccess.billid = billid;
+                formRechargeSuccess.orderids = orderids;//批量售卡使用
+                formRechargeSuccess.realCash = realCash;
+                bool flag = formRechargeSuccess.ShowDialog() == DialogResult.OK;
+                formRechargeSuccess.Dispose();
+                return flag;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("充值支付弹窗出现异常" + ex.Message);
+                return false;
+            }
+        }
+
+        public static void CloseFormRechargeSuccessMedia()
+        {
+            if (formRechargeSuccess != null)
+            {
+                formRechargeSuccess.Close();
+            }
+        }
+        #endregion
+
 
     }
 }

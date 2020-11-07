@@ -63,6 +63,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap add {
+            get {
+                object obj = ResourceManager.GetObject("add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap amount {
             get {
                 object obj = ResourceManager.GetObject("amount", resourceCulture);
@@ -83,9 +93,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap batchsale {
+            get {
+                object obj = ResourceManager.GetObject("batchsale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap card {
             get {
                 object obj = ResourceManager.GetObject("card", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap check {
+            get {
+                object obj = ResourceManager.GetObject("check", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,6 +156,16 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Properties {
         internal static System.Drawing.Bitmap menu_recharge {
             get {
                 object obj = ResourceManager.GetObject("menu_recharge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_recharge1 {
+            get {
+                object obj = ResourceManager.GetObject("menu_recharge1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

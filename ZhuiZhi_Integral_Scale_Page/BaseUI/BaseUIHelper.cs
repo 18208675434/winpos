@@ -20,7 +20,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
         /// <summary>
         /// 是否有客屏
         /// </summary>
-        private static bool HaveMedia = false;
+        private static bool HaveMedia = Screen.AllScreens.Count() > 1;
         private static FormMainMedia frmmainmedia = null;
         public static void IniFormMainMedia()
         {            
@@ -43,22 +43,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
             try
             {
 
-                if (frmmainmedia == null || frmmainmedia.IsDisposed)
+                if (HaveMedia)
                 {
-                    frmmainmedia = new FormMainMedia();
-                    asf.AutoScaleControlTest(frmmainmedia, 1020, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height + 20, true);
-                    frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
-                }
-
-
-                if (Screen.AllScreens.Count() > 1)
-                {
-                    HaveMedia = true;
+                    if (frmmainmedia == null || frmmainmedia.IsDisposed)
+                    {
+                        frmmainmedia = new FormMainMedia();
+                        asf.AutoScaleControlTest(frmmainmedia, 1020, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height + 20, true);
+                        frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
+                    }
                     frmmainmedia.Show();
-                }
-                else
-                {
-                    HaveMedia = false;
                 }
             }
             catch (Exception ex)
@@ -165,6 +158,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
                 LogManager.WriteLog("跟新客屏购物车异常" + ex.Message);
             }
         }
+
+        public static void ShowBalancePwdLog(string msg)
+        {
+            try
+            {
+                if (frmmainmedia != null && HaveMedia)
+                {
+                    frmmainmedia.ShowBalancePwdLog(msg);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("跟新客屏购物车异常" + ex.Message);
+            }
+        }
+
+
 
         public static void LoadMember()
         {

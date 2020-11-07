@@ -35,12 +35,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHead = new System.Windows.Forms.Panel();
+            this.btnMemberOrder = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
             this.picMenu = new System.Windows.Forms.PictureBox();
             this.lblShopName = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.dgvTemplate = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn6 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn7 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -58,12 +61,12 @@
             this.lblTopUp = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblNewPhone = new System.Windows.Forms.Label();
             this.custom = new System.Windows.Forms.Panel();
             this.customdiscount = new System.Windows.Forms.Label();
             this.custommoney = new System.Windows.Forms.Label();
             this.lblEntityNo = new System.Windows.Forms.Label();
-            this.newphone = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblNewPhoneDesc = new System.Windows.Forms.Label();
             this.btnbang = new System.Windows.Forms.Button();
             this.btnChangePhone = new System.Windows.Forms.Button();
             this.pnlItem = new System.Windows.Forms.Panel();
@@ -122,6 +125,7 @@
             // pnlHead
             // 
             this.pnlHead.BackColor = System.Drawing.Color.Black;
+            this.pnlHead.Controls.Add(this.btnMemberOrder);
             this.pnlHead.Controls.Add(this.pnlMenu);
             this.pnlHead.Controls.Add(this.lblShopName);
             this.pnlHead.Controls.Add(this.btnCancle);
@@ -129,6 +133,25 @@
             this.pnlHead.Name = "pnlHead";
             this.pnlHead.Size = new System.Drawing.Size(1180, 60);
             this.pnlHead.TabIndex = 37;
+            // 
+            // btnMemberOrder
+            // 
+            this.btnMemberOrder.BackColor = System.Drawing.Color.Black;
+            this.btnMemberOrder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMemberOrder.BackgroundImage")));
+            this.btnMemberOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMemberOrder.FlatAppearance.BorderSize = 0;
+            this.btnMemberOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMemberOrder.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnMemberOrder.ForeColor = System.Drawing.Color.White;
+            this.btnMemberOrder.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnMemberOrder.Location = new System.Drawing.Point(871, 14);
+            this.btnMemberOrder.Name = "btnMemberOrder";
+            this.btnMemberOrder.Size = new System.Drawing.Size(120, 35);
+            this.btnMemberOrder.TabIndex = 50;
+            this.btnMemberOrder.Text = "订单查询";
+            this.btnMemberOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnMemberOrder.UseVisualStyleBackColor = false;
+            this.btnMemberOrder.Click += new System.EventHandler(this.btnMemberOrder_Click);
             // 
             // pnlMenu
             // 
@@ -181,7 +204,7 @@
             this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnCancle.ForeColor = System.Drawing.Color.White;
             this.btnCancle.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnCancle.Location = new System.Drawing.Point(880, 14);
+            this.btnCancle.Location = new System.Drawing.Point(753, 14);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(95, 35);
             this.btnCancle.TabIndex = 34;
@@ -193,6 +216,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.rbtnPageDown);
+            this.panel2.Controls.Add(this.rbtnPageUp);
             this.panel2.Controls.Add(this.dgvTemplate);
             this.panel2.Controls.Add(this.pnlPayByOther);
             this.panel2.Controls.Add(this.pnlPayByCash);
@@ -204,6 +229,44 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(668, 650);
             this.panel2.TabIndex = 39;
+            // 
+            // rbtnPageDown
+            // 
+            this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
+            this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageDown.Image = null;
+            this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageDown.Location = new System.Drawing.Point(336, 39);
+            this.rbtnPageDown.Name = "rbtnPageDown";
+            this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageDown.PenWidth = 1;
+            this.rbtnPageDown.RoundRadius = 1;
+            this.rbtnPageDown.ShowImg = false;
+            this.rbtnPageDown.ShowText = "下一页";
+            this.rbtnPageDown.Size = new System.Drawing.Size(150, 48);
+            this.rbtnPageDown.TabIndex = 71;
+            this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageDown.WhetherEnable = false;
+            this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
+            // 
+            // rbtnPageUp
+            // 
+            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
+            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageUp.Image = null;
+            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageUp.Location = new System.Drawing.Point(176, 39);
+            this.rbtnPageUp.Name = "rbtnPageUp";
+            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageUp.PenWidth = 1;
+            this.rbtnPageUp.RoundRadius = 1;
+            this.rbtnPageUp.ShowImg = false;
+            this.rbtnPageUp.ShowText = "上一页";
+            this.rbtnPageUp.Size = new System.Drawing.Size(150, 48);
+            this.rbtnPageUp.TabIndex = 70;
+            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageUp.WhetherEnable = false;
+            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
             // dgvTemplate
             // 
@@ -240,7 +303,8 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
             this.dgvTemplate.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTemplate.RowTemplate.Height = 110;
-            this.dgvTemplate.Size = new System.Drawing.Size(615, 450);
+            this.dgvTemplate.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvTemplate.Size = new System.Drawing.Size(615, 445);
             this.dgvTemplate.TabIndex = 68;
             this.dgvTemplate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTemplate_CellClick);
             // 
@@ -279,7 +343,7 @@
             this.pnlPayByOther.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(147)))), ((int)(((byte)(225)))));
             this.pnlPayByOther.Controls.Add(this.lblPayByOther);
             this.pnlPayByOther.Controls.Add(this.picPayByOther);
-            this.pnlPayByOther.Location = new System.Drawing.Point(457, 563);
+            this.pnlPayByOther.Location = new System.Drawing.Point(457, 559);
             this.pnlPayByOther.Name = "pnlPayByOther";
             this.pnlPayByOther.Size = new System.Drawing.Size(190, 69);
             this.pnlPayByOther.TabIndex = 69;
@@ -313,7 +377,7 @@
             this.pnlPayByCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(146)))), ((int)(((byte)(27)))));
             this.pnlPayByCash.Controls.Add(this.lblPayByCash);
             this.pnlPayByCash.Controls.Add(this.picPayByCash);
-            this.pnlPayByCash.Location = new System.Drawing.Point(244, 563);
+            this.pnlPayByCash.Location = new System.Drawing.Point(244, 559);
             this.pnlPayByCash.Name = "pnlPayByCash";
             this.pnlPayByCash.Size = new System.Drawing.Size(190, 69);
             this.pnlPayByCash.TabIndex = 57;
@@ -347,7 +411,7 @@
             this.pnlPayByOnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(70)))), ((int)(((byte)(21)))));
             this.pnlPayByOnLine.Controls.Add(this.lblPayByOnLine);
             this.pnlPayByOnLine.Controls.Add(this.picPayByOnLine);
-            this.pnlPayByOnLine.Location = new System.Drawing.Point(32, 563);
+            this.pnlPayByOnLine.Location = new System.Drawing.Point(32, 559);
             this.pnlPayByOnLine.Name = "pnlPayByOnLine";
             this.pnlPayByOnLine.Size = new System.Drawing.Size(190, 69);
             this.pnlPayByOnLine.TabIndex = 56;
@@ -417,10 +481,10 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.lblNewPhone);
             this.panel1.Controls.Add(this.custom);
             this.panel1.Controls.Add(this.lblEntityNo);
-            this.panel1.Controls.Add(this.newphone);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblNewPhoneDesc);
             this.panel1.Controls.Add(this.btnbang);
             this.panel1.Controls.Add(this.btnChangePhone);
             this.panel1.Controls.Add(this.pnlItem);
@@ -448,6 +512,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(460, 650);
             this.panel1.TabIndex = 38;
+            // 
+            // lblNewPhone
+            // 
+            this.lblNewPhone.AutoSize = true;
+            this.lblNewPhone.BackColor = System.Drawing.Color.Transparent;
+            this.lblNewPhone.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblNewPhone.ForeColor = System.Drawing.Color.White;
+            this.lblNewPhone.Location = new System.Drawing.Point(186, 142);
+            this.lblNewPhone.Name = "lblNewPhone";
+            this.lblNewPhone.Size = new System.Drawing.Size(24, 23);
+            this.lblNewPhone.TabIndex = 79;
+            this.lblNewPhone.Text = "--";
+            this.lblNewPhone.Visible = false;
             // 
             // custom
             // 
@@ -497,31 +574,18 @@
             this.lblEntityNo.Text = "实体卡号";
             this.lblEntityNo.Visible = false;
             // 
-            // newphone
+            // lblNewPhoneDesc
             // 
-            this.newphone.AutoSize = true;
-            this.newphone.BackColor = System.Drawing.Color.Transparent;
-            this.newphone.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.newphone.ForeColor = System.Drawing.Color.White;
-            this.newphone.Location = new System.Drawing.Point(159, 160);
-            this.newphone.Name = "newphone";
-            this.newphone.Size = new System.Drawing.Size(95, 23);
-            this.newphone.TabIndex = 79;
-            this.newphone.Text = "newphone";
-            this.newphone.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(38, 160);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 23);
-            this.label4.TabIndex = 78;
-            this.label4.Text = "账号已合并至：";
-            this.label4.Visible = false;
+            this.lblNewPhoneDesc.AutoSize = true;
+            this.lblNewPhoneDesc.BackColor = System.Drawing.Color.Transparent;
+            this.lblNewPhoneDesc.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblNewPhoneDesc.ForeColor = System.Drawing.Color.White;
+            this.lblNewPhoneDesc.Location = new System.Drawing.Point(38, 142);
+            this.lblNewPhoneDesc.Name = "lblNewPhoneDesc";
+            this.lblNewPhoneDesc.Size = new System.Drawing.Size(129, 23);
+            this.lblNewPhoneDesc.TabIndex = 78;
+            this.lblNewPhoneDesc.Text = "账号已合并至：";
+            this.lblNewPhoneDesc.Visible = false;
             // 
             // btnbang
             // 
@@ -552,7 +616,7 @@
             this.btnChangePhone.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnChangePhone.ForeColor = System.Drawing.Color.White;
             this.btnChangePhone.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnChangePhone.Location = new System.Drawing.Point(292, 120);
+            this.btnChangePhone.Location = new System.Drawing.Point(292, 95);
             this.btnChangePhone.Name = "btnChangePhone";
             this.btnChangePhone.Size = new System.Drawing.Size(107, 40);
             this.btnChangePhone.TabIndex = 70;
@@ -864,7 +928,7 @@
             this.lblMemberInfo.BackColor = System.Drawing.Color.Transparent;
             this.lblMemberInfo.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblMemberInfo.ForeColor = System.Drawing.Color.LightGray;
-            this.lblMemberInfo.Location = new System.Drawing.Point(37, 181);
+            this.lblMemberInfo.Location = new System.Drawing.Point(37, 169);
             this.lblMemberInfo.Name = "lblMemberInfo";
             this.lblMemberInfo.Size = new System.Drawing.Size(82, 24);
             this.lblMemberInfo.TabIndex = 52;
@@ -876,11 +940,11 @@
             this.lblPhone.BackColor = System.Drawing.Color.Transparent;
             this.lblPhone.Font = new System.Drawing.Font("微软雅黑", 28F);
             this.lblPhone.ForeColor = System.Drawing.Color.White;
-            this.lblPhone.Location = new System.Drawing.Point(24, 110);
+            this.lblPhone.Location = new System.Drawing.Point(24, 85);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(264, 50);
+            this.lblPhone.Size = new System.Drawing.Size(54, 50);
             this.lblPhone.TabIndex = 51;
-            this.lblPhone.Text = "15200000000";
+            this.lblPhone.Text = "--";
             // 
             // label1
             // 
@@ -994,8 +1058,8 @@
         private System.Windows.Forms.Panel pnlCoupon;
         private System.Windows.Forms.Button btnChangePhone;
         private System.Windows.Forms.Button btnbang;
-        private System.Windows.Forms.Label newphone;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblNewPhone;
+        private System.Windows.Forms.Label lblNewPhoneDesc;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel custom;
         private System.Windows.Forms.Label customdiscount;
@@ -1007,5 +1071,8 @@
         private System.Windows.Forms.Panel pnlEntityCard;
         private System.Windows.Forms.PictureBox picEntityCard;
         private System.Windows.Forms.Label lblEntityCard;
+        private RoundButton rbtnPageDown;
+        private RoundButton rbtnPageUp;
+        private System.Windows.Forms.Button btnMemberOrder;
     }
 }

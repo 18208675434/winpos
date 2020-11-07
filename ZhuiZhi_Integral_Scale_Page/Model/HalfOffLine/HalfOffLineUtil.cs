@@ -10,7 +10,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
     public class HalfOffLineUtil
     {
         private static HttpUtil httputil = new HttpUtil();
-        private static string memberid = "";
+        public static string CurrentMemberid = "";
 
         /// <summary>
         /// 当前会员标签信息
@@ -55,7 +55,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
         {
             try
             {
-                memberid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
+                //会员信息接口异步拉取，需先同步会员ID 
+                CurrentMemberid = MainModel.CurrentMember.memberheaderresponsevo.memberid;
 
 
                 //deleteHttpMember operationMemberOperationItem = new deleteHttpMember(MemberOperationItem);
@@ -129,7 +130,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                Memberoperationitem objresult= httputil.MemberOperationItem(memberid, ref ErrorMsg);
+                Memberoperationitem objresult= httputil.MemberOperationItem(CurrentMemberid, ref ErrorMsg);
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
                     listvalidatePromotionMemberTags = null;
@@ -156,7 +157,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                Gradesettinggetgrade objresult = httputil.GradesttingGetGrade(memberid, ref ErrorMsg);
+                Gradesettinggetgrade objresult = httputil.GradesttingGetGrade(CurrentMemberid, ref ErrorMsg);
 
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
@@ -239,8 +240,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
         {
             try
             {
+                
+                if (string.IsNullOrEmpty(CurrentMemberid))
+                {
+                    return;
+                }
                 string ErrorMsg = "";
-                List<PromotionCoupon> objresult = httputil.ListMemberCouponAvailable(memberid, ref ErrorMsg);
+                List<PromotionCoupon> objresult = httputil.ListMemberCouponAvailable(CurrentMemberid, ref ErrorMsg);
 
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
@@ -263,7 +269,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                bool objresult = httputil.EnjoyMemberRights(memberid, ref ErrorMsg);
+                bool objresult = httputil.EnjoyMemberRights(CurrentMemberid, ref ErrorMsg);
 
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
@@ -286,7 +292,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                MemberrightsItem objresult = httputil.GetTenantMemberRightsConfigUsing(memberid, ref ErrorMsg);
+                MemberrightsItem objresult = httputil.GetTenantMemberRightsConfigUsing(CurrentMemberid, ref ErrorMsg);
 
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
@@ -337,7 +343,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.HalfOffLine
             try
             {
                 string ErrorMsg = "";
-                MemberTenantItem objresult = httputil.GetmemberTenantItem(memberid, ref ErrorMsg);
+                MemberTenantItem objresult = httputil.GetmemberTenantItem(CurrentMemberid, ref ErrorMsg);
                 if (objresult == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
                     membertenantitem = null;

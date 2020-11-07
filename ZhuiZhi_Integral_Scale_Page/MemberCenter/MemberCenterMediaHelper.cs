@@ -7,12 +7,16 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.Common;
+using ZhuiZhi_Integral_Scale_UncleFruit.Model;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 {
 
     public class MemberCenterMediaHelper
     {
+        //static MemberCenterHelper(){
+        //    HaveMedia=Screen.AllScreens.Count() > 1;
+        //}
         private static FormMemberCenterMedia frmmembermedia = null;
 
         /// <summary>
@@ -20,7 +24,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         private static AutoSizeFormUtil asf = new AutoSizeFormUtil();
 
-        private static bool HaveMedia = false;
+        private static bool HaveMedia = Screen.AllScreens.Count() > 1;
 
         public static void ShowFormMainMedia()
         {
@@ -34,21 +38,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     frmmembermedia.TopMost = true;
                 }
 
-
-                if (Screen.AllScreens.Count() > 1)
+                if (HaveMedia)
                 {
-                    HaveMedia = true;
                     frmmembermedia.Show();
-                }
-                else
-                {
-                    HaveMedia = false;
                 }
             }
             catch (Exception ex)
             {
                 LogManager.WriteLog("显示客屏异常" + ex.Message);
-
             }
         }
 
@@ -87,14 +84,28 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+        #region 客屏提示支付窗体
+
+        private static FormPayOnLineMedia frmonlinemedia = null;
+
         public static void ShowPayInfo()
         {
             try
             {
-                if (frmmembermedia != null && HaveMedia)
+
+                if (Screen.AllScreens.Count() > 1)
                 {
-                    frmmembermedia.ShowPayInfo();
+                    if (frmonlinemedia == null)
+                    {
+                        frmonlinemedia = new FormPayOnLineMedia();
+                        asf.AutoScaleControlTest(frmonlinemedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                        frmonlinemedia.Location = new Point(Screen.AllScreens[0].Bounds.Width, 0);
+                        frmonlinemedia.TopMost = true;
+                    }
+
+                    frmonlinemedia.Show();
                 }
+
             }
             catch { }
         }
@@ -103,13 +114,46 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                if (frmmembermedia != null && HaveMedia)
+
+                if (frmonlinemedia != null)
                 {
-                    frmmembermedia.HidePayInfo();
+                    frmonlinemedia.Close();
+                    frmonlinemedia = null;
                 }
+                //if (frmmembermedia != null && HaveMedia)
+                //{
+                //    frmmembermedia.HidePayInfo();
+                //}
             }
             catch { }
         }
+
+        //public static void ShowPayInfo()
+        //{
+        //    try
+        //    {
+        //        if (frmmembermedia != null && HaveMedia)
+        //        {
+        //            frmmembermedia.ShowPayInfo();
+        //        }
+        //    }
+        //    catch { }
+        //}
+
+        //public static void HidePayInfo()
+        //{
+        //    try
+        //    {
+        //        if (frmmembermedia != null && HaveMedia)
+        //        {
+        //            frmmembermedia.HidePayInfo();
+        //        }
+        //    }
+        //    catch { }
+        //}
+        #endregion
+
+
         #region 修改密码
         /// <summary>
         /// 调用显示修改密码客屏界面
@@ -154,7 +198,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// </summary>
         public static void UpdateForgetPassWordUI(int numtype, string smscode)
         {
-            frmmembermedia.UpdateForgetPassWordUI(numtype, smscode);
+            try
+            {
+                if (frmmembermedia != null && HaveMedia)
+                {
+                    frmmembermedia.UpdateForgetPassWordUI(numtype, smscode);
+                }
+            }
+            catch { }
         }
 
 
@@ -191,17 +242,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             catch { }
         }
         #endregion
-        
+
         #region 弹框显示
         /// <summary> 显示提示框
         /// </summary>
-        public static void ShowLog(string msg, bool iserror=false)
+        public static void ShowLog(string msg, bool iserror = false)
         {
             try
             {
                 if (frmmembermedia != null && HaveMedia)
                 {
-                    frmmembermedia.ShowLog(msg,iserror);
+                    frmmembermedia.ShowLog(msg, iserror);
                 }
             }
             catch { }
@@ -222,10 +273,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch { }
         }
-        
+
         #region 绑卡
         private static FormEntityCardBindMedia formBindEntityCardMedia = null;
-        public static void ShowFormBindEntityCardMedia(ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.model.EntityCard entityCard)
+        public static void ShowFormBindEntityCardMedia(OutEntityCardResponseDto entityCard)
         {
             try
             {
@@ -250,6 +301,81 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             if (formBindEntityCardMedia != null)
             {
                 formBindEntityCardMedia.Close();
+            }
+        }
+        #endregion
+
+        #region 批量售卡
+        private static ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.FormEntityCardBatchSaleMedia formEntityCardBatchSaleMedia = null;
+        public static void ShowFormEntityCardBatchSaleMedia()
+        {
+            try
+            {
+                if (formEntityCardBatchSaleMedia == null || formEntityCardBatchSaleMedia.IsDisposed)
+                {
+                    formEntityCardBatchSaleMedia = new ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.FormEntityCardBatchSaleMedia();
+                    asf.AutoScaleControlTest(formEntityCardBatchSaleMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                    formEntityCardBatchSaleMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                    formEntityCardBatchSaleMedia.TopMost = true;
+                }
+                formEntityCardBatchSaleMedia.Show();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary> 刷新客屏信息
+        /// </summary>
+        public static void UpdateFormEntityCardBatchSaleMedia(string cardSum, string totalRechargeAmount, string totalGiftAmount, string totalRechargeAll, string totalPay, List<ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter.RechargeCardInfo> lstCard)
+        {
+            try
+            {
+                if (formEntityCardBatchSaleMedia != null && HaveMedia)
+                {
+                    formEntityCardBatchSaleMedia.UpdateFormEntityCardBatchSaleMedia(cardSum, totalRechargeAmount, totalGiftAmount, totalRechargeAll, totalPay, lstCard);
+                }
+            }
+            catch { }
+        }
+
+
+        public static void CloseFormEntityCardBatchSaleMedia()
+        {
+            if (formEntityCardBatchSaleMedia != null)
+            {
+                formEntityCardBatchSaleMedia.Close();
+            }
+        }
+        #endregion
+
+        #region 充值成功
+        private static FormRechargeSuccessMedia formRechargeSuccessMedia = null;
+        public static void ShowFormRechargeSuccessMedia()
+        {
+            try
+            {
+                if (formRechargeSuccessMedia == null || formRechargeSuccessMedia.IsDisposed)
+                {
+                    formRechargeSuccessMedia = new FormRechargeSuccessMedia();
+                    asf.AutoScaleControlTest(formRechargeSuccessMedia, 1180, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                    formRechargeSuccessMedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
+                    formRechargeSuccessMedia.TopMost = true;
+                }
+                formRechargeSuccessMedia.Show();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public static void CloseFormRechargeSuccessMedia()
+        {
+            if (formRechargeSuccessMedia != null)
+            {
+                formRechargeSuccessMedia.Close();
             }
         }
         #endregion
