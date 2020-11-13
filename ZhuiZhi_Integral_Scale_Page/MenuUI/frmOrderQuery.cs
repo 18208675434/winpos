@@ -243,8 +243,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             this.Invoke(new InvokeHandler(delegate()
                {
 
-                   CurrentInterval = (dtEnd.Value - dtStart.Value).Days;
-                   //CurrentInterval = 30;
+                  // CurrentInterval = (dtEnd.Value - dtStart.Value).Days;
+                   CurrentInterval = 30;
                    LastOrderid = "0";
                    dgvOrderOnLine.Rows.Clear();
                    //QueryOrder();
