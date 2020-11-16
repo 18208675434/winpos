@@ -1162,19 +1162,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void bgwLoadMemberCard_DoWork(object sender, DoWorkEventArgs e)
         {
-            string ErrorMsg = "";
-            string imgurl = httputil.GetMemberCard(ref ErrorMsg);
-            if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
+            try
             {
-                //this.Invoke(new InvokeHandler(delegate()
-                //{
+                string ErrorMsg = "";
+                string imgurl = httputil.GetMemberCard(ref ErrorMsg);
+                if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
+                {
+                    //this.Invoke(new InvokeHandler(delegate()
+                    //{
 
-                Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                imgmembercard = _image;
+                    Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                    imgmembercard = _image;
 
-                picMemberCard.BackgroundImage = _image;
-                pnlMemberCard.Visible = true;
+                    picMemberCard.BackgroundImage = _image;
+                    pnlMemberCard.Visible = true;
+                }
             }
+            catch { }
         }
     }
 }
