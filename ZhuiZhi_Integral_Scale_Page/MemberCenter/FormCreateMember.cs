@@ -141,7 +141,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 para.gender = "1";
             }
-
+            para.nickname = txtName.Text;
             string errormsg = "";
 
             if (memberhttp.CreateMember(para, ref errormsg))

@@ -533,6 +533,39 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+
+        public bool UpdateMember(CreateMemberPara para, ref string errormsg)
+        {
+            try
+            {
+                string url = "/pos/member/memberheader/update/member";
+
+                JsonSerializerSettings jSetting = new JsonSerializerSettings();
+                jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+
+                string parajson = JsonConvert.SerializeObject(para, Formatting.Indented, jSetting);
+                string json = HttpPOST(url, parajson);
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+                if (rd.code == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "updatemember:" + json); }
+                    catch { }
+                    errormsg = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "创建会员异常：" + ex.Message);
+                errormsg = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
+
         #region 实体卡
         /// <summary> 获取实体卡
         /// </summary>

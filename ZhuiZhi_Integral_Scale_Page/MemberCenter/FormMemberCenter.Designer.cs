@@ -61,6 +61,7 @@
             this.lblTopUp = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnEditMember = new System.Windows.Forms.Button();
             this.lblNewPhone = new System.Windows.Forms.Label();
             this.custom = new System.Windows.Forms.Panel();
             this.customdiscount = new System.Windows.Forms.Label();
@@ -481,6 +482,7 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.btnEditMember);
             this.panel1.Controls.Add(this.lblNewPhone);
             this.panel1.Controls.Add(this.custom);
             this.panel1.Controls.Add(this.lblEntityNo);
@@ -512,6 +514,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(460, 650);
             this.panel1.TabIndex = 38;
+            // 
+            // btnEditMember
+            // 
+            this.btnEditMember.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditMember.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEditMember.BackgroundImage")));
+            this.btnEditMember.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEditMember.FlatAppearance.BorderSize = 0;
+            this.btnEditMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditMember.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.btnEditMember.ForeColor = System.Drawing.Color.White;
+            this.btnEditMember.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnEditMember.Location = new System.Drawing.Point(382, 92);
+            this.btnEditMember.Name = "btnEditMember";
+            this.btnEditMember.Size = new System.Drawing.Size(70, 40);
+            this.btnEditMember.TabIndex = 80;
+            this.btnEditMember.Text = "编辑";
+            this.btnEditMember.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnEditMember.UseVisualStyleBackColor = false;
+            this.btnEditMember.Click += new System.EventHandler(this.btnEditMember_Click);
             // 
             // lblNewPhone
             // 
@@ -613,12 +634,12 @@
             this.btnChangePhone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnChangePhone.FlatAppearance.BorderSize = 0;
             this.btnChangePhone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangePhone.Font = new System.Drawing.Font("微软雅黑", 11.5F);
+            this.btnChangePhone.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.btnChangePhone.ForeColor = System.Drawing.Color.White;
             this.btnChangePhone.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnChangePhone.Location = new System.Drawing.Point(292, 95);
+            this.btnChangePhone.Location = new System.Drawing.Point(276, 92);
             this.btnChangePhone.Name = "btnChangePhone";
-            this.btnChangePhone.Size = new System.Drawing.Size(107, 40);
+            this.btnChangePhone.Size = new System.Drawing.Size(100, 40);
             this.btnChangePhone.TabIndex = 70;
             this.btnChangePhone.Text = "更换手机号";
             this.btnChangePhone.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -938,11 +959,11 @@
             // 
             this.lblPhone.AutoSize = true;
             this.lblPhone.BackColor = System.Drawing.Color.Transparent;
-            this.lblPhone.Font = new System.Drawing.Font("微软雅黑", 28F);
+            this.lblPhone.Font = new System.Drawing.Font("微软雅黑", 24F);
             this.lblPhone.ForeColor = System.Drawing.Color.White;
-            this.lblPhone.Location = new System.Drawing.Point(24, 85);
+            this.lblPhone.Location = new System.Drawing.Point(26, 85);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(54, 50);
+            this.lblPhone.Size = new System.Drawing.Size(46, 41);
             this.lblPhone.TabIndex = 51;
             this.lblPhone.Text = "--";
             // 
@@ -1074,5 +1095,6 @@
         private RoundButton rbtnPageDown;
         private RoundButton rbtnPageUp;
         private System.Windows.Forms.Button btnMemberOrder;
+        private System.Windows.Forms.Button btnEditMember;
     }
 }

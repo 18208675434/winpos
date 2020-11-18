@@ -1403,7 +1403,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             member.entrancecode = member.memberheaderresponsevo.mobile;
                         }
 
-                        lblMemberPhone.Text = "会员账号：" + member.memberinfo;
+                        lblMemberPhone.Text = "会员账号：" + member.memberinfo+MainHelper.GetMemberName(member,true);
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 

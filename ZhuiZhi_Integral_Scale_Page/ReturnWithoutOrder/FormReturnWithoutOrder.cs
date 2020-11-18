@@ -428,8 +428,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
-                        lblMemberPhone.Text = "会员账号：" + member.memberinfo;
-
+                        //lblMemberPhone.Text = "会员账号：" + member.memberinfo;
+                        lblMemberPhone.Text = "会员账号：" + member.memberinfo + MainHelper.GetMemberName(member, true);
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 
                         ReturnMembr = member;

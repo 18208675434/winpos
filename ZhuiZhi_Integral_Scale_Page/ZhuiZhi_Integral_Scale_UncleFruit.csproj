@@ -129,6 +129,12 @@
     <Compile Include="HelperUI\FormCode.Designer.cs">
       <DependentUpon>FormCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberCenter\FormEditMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberCenter\FormEditMember.Designer.cs">
+      <DependentUpon>FormEditMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberCenter\FormEntityCardBatchSaleMedia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -516,6 +522,7 @@
     <Compile Include="MemberCenter\model\CustomTemplateModel.cs" />
     <Compile Include="MemberCenter\model\DepositRefundRequest.cs" />
     <Compile Include="MemberCenter\model\DepositListRequest.cs" />
+    <Compile Include="MemberCenter\model\EditMemberPara.cs" />
     <Compile Include="MemberCenter\model\EntityCardBatchDepositRequest.cs" />
     <Compile Include="MemberCenter\model\EntityCardBatchDepositResponse.cs" />
     <Compile Include="MemberCenter\model\EntityCardMoveRequest.cs" />
@@ -1248,6 +1255,9 @@
     <EmbeddedResource Include="HelperUI\FormCode.resx">
       <DependentUpon>FormCode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberCenter\FormEditMember.resx">
+      <DependentUpon>FormEditMember.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberCenter\FormEntityCardBatchSaleMedia.resx">
       <DependentUpon>FormEntityCardBatchSaleMedia.cs</DependentUpon>
     </EmbeddedResource>
@@ -1746,6 +1756,7 @@
     <None Include="Resources\add.png" />
     <None Include="Resources\batchsale.png" />
     <None Include="Resources\menu_recharge1.png" />
+    <None Include="Resources\日期.png" />
     <Content Include="一体秤.ico" />
     <None Include="Resources\border__minus.bmp" />
     <None Include="Resources\border__minus1.bmp" />

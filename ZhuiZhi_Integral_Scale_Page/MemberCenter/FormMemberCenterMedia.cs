@@ -94,11 +94,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
 
-        public void HidePayInfo()
+        public void ShowMemberInfo()
         {
             try
             {
@@ -108,6 +109,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
@@ -125,6 +127,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
                 UpdatePassWordUpdateUI(0, "");
 
             }
@@ -179,6 +182,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 100);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
@@ -244,6 +248,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                 tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 100);
                 tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
             }
             catch { }
         }
@@ -280,6 +285,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                         tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
                         tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
                         tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 100);
+                        tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 0);
                         break;
                     case 1:
                         pnlLine1.BackColor = Color.FromArgb(52, 147, 255);
@@ -330,6 +336,54 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 LogManager.WriteLog(ex.Message);
             }
+        }
+        #endregion
+
+        #region 修改会员
+
+        public void ShowEidtMember()
+        {
+            try
+            {
+                tlpMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[3] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[4] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[5] = new ColumnStyle(SizeType.Percent, 0);
+                tlpMember.ColumnStyles[6] = new ColumnStyle(SizeType.Percent, 100);
+            }
+            catch { }
+        }
+
+        public void UpdateEditMemberInfo(string name, string birthday, string genger)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(name))
+                {
+                    lblMemberName.Text = "可不填";
+                    lblMemberName.ForeColor = Color.Silver;
+                }
+                else
+                {
+                    lblMemberName.Text = name;
+                    lblMemberName.ForeColor = Color.Black;
+                }
+
+                if (string.IsNullOrEmpty(birthday))
+                {
+                    lblMemberBirthday.Text = "可不填";
+                    lblMemberBirthday.ForeColor = Color.Silver;
+                }
+                else
+                {
+                    lblMemberBirthday.Text = birthday;
+                    lblMemberBirthday.ForeColor = Color.Black;
+                }
+                lblGender.Text = genger;
+            }
+            catch { }
         }
         #endregion
     }

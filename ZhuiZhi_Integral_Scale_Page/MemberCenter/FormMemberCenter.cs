@@ -116,12 +116,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
 
             lblPhone.Text = phone;
-            btnChangePhone.Left = lblPhone.Right;
+            //btnChangePhone.Left = lblPhone.Right;
 
             string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
             string birthday = CurrentMember.memberinformationresponsevo.birthdaystr;
             MainModel.memberid = CurrentMember.memberid;
-            lblMemberInfo.Text = "性别：" + gender + " | " + "生日：" + birthday;
+            string membername = ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.MainHelper.GetMemberName(CurrentMember);
+            if (string.IsNullOrEmpty(membername.Trim()))
+            {
+                lblMemberInfo.Text = "性别：" + gender + " | " + "生日：" + birthday;
+            }
+            else
+            {
+                lblMemberInfo.Text = "姓名：" + membername + " | " + "性别：" + gender + " | " + "生日：" + birthday;
+            }
+            
 
             lblBalance.Text = "￥" + CurrentMember.barcoderecognitionresponse.balance;
 
@@ -998,6 +1007,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             finally
             {
                 IsEnable = true;
+            }
+        }
+
+        private void btnEditMember_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MemberCenterHelper.ShowFormEditMember(CurrentMember))
+                {
+                    string err = "";
+                    MainModel.CurrentMember = CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+                    UpdateMemberInfo();
+                }
+            }
+            catch 
+            {
+                
             }
         }
     }

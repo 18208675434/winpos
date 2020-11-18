@@ -727,5 +727,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         #endregion
 
 
+
+        /// <summary>
+        /// 显示用户找修改成功窗口
+        /// </summary>
+        /// <returns></returns>
+        public static bool ShowFormEditMember(Member member)
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormEditMember frmeditmember = new FormEditMember(member);
+                asf.AutoScaleControlTest(frmeditmember, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmeditmember.Location = new System.Drawing.Point(0,0);
+                frmeditmember.TopMost = true;
+
+                frmeditmember.ShowDialog();
+                Application.DoEvents();
+                BackHelper.HideFormBackGround();
+                return frmeditmember.DialogResult == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
     }
 }
