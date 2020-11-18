@@ -1012,9 +1012,9 @@
             this.lblBalance.BackColor = System.Drawing.Color.White;
             this.lblBalance.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.lblBalance.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblBalance.Location = new System.Drawing.Point(249, 7);
+            this.lblBalance.Location = new System.Drawing.Point(187, 7);
             this.lblBalance.Name = "lblBalance";
-            this.lblBalance.Size = new System.Drawing.Size(96, 20);
+            this.lblBalance.Size = new System.Drawing.Size(158, 20);
             this.lblBalance.TabIndex = 52;
             this.lblBalance.Text = "0张";
             this.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1062,7 +1062,7 @@
             this.lblMemberPhone.Location = new System.Drawing.Point(6, 27);
             this.lblMemberPhone.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMemberPhone.Name = "lblMemberPhone";
-            this.lblMemberPhone.Size = new System.Drawing.Size(168, 20);
+            this.lblMemberPhone.Size = new System.Drawing.Size(183, 20);
             this.lblMemberPhone.TabIndex = 25;
             this.lblMemberPhone.Text = "会员账号：12345678901";
             // 

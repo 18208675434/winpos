@@ -107,7 +107,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// <summary>
         /// 无单退款 会员 需与主收银页面区分开
         /// </summary>
-        private Member ReturnMembr = null;
+        public Member ReturnMembr = null;
         #endregion
 
         #region 页面加载与退出
@@ -3008,9 +3008,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     return;
                 }
                
-                MemberCenterHelper.ShowFormMemberCenter(ReturnMembr);
+               bool memberupdate =  MemberCenterHelper.ShowFormMemberCenter(ReturnMembr,true);
 
-                if (ReturnMembr != null)
+               if (memberupdate)
                 {
                     string ErrorMsgMember = "";
                     Member member = httputil.GetMember(ReturnMembr.memberheaderresponsevo.mobile, ref ErrorMsgMember);

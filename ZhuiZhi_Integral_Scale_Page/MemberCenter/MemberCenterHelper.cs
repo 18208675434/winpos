@@ -23,11 +23,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 手机号新值
         /// </summary>
         public static Member member = new Member();
-        public static void ShowFormMemberCenter(Member member)
+        public static bool ShowFormMemberCenter(Member member,bool isreturnwithoutorder)
         {
             try
             {
-                FormMemberCenter frmcenter = new FormMemberCenter(member);
+                FormMemberCenter frmcenter = new FormMemberCenter(member,isreturnwithoutorder);
                 asf.AutoScaleControlTest(frmcenter, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmcenter.Location = new System.Drawing.Point(0, 0);
 
@@ -35,10 +35,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 frmcenter.Dispose();
                 Application.DoEvents();
 
+                return frmcenter.DialogResult == DialogResult.OK;
+
             }
             catch (Exception ex)
             {
                 MainModel.ShowLog("显示会员中心页面异常" + ex.Message, true);
+                return false;
             }
         }
 

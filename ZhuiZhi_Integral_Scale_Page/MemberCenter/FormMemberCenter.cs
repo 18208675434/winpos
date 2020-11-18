@@ -23,6 +23,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private Member CurrentMember = null;
 
+        private bool IsReturnWithoutOrder = false;
+
         private ListAllTemplate CurrentTemplate = null;
         private CustomTemplateModel CustomTemplate = null;
 
@@ -40,13 +42,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         //自定义充值模板ID
         private int CustomID = -1;
-        public FormMemberCenter(Member member)
+        public FormMemberCenter(Member member, bool isreturnwithoutorder)
         {
             InitializeComponent();
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
             CurrentMember = member;
+            IsReturnWithoutOrder = isreturnwithoutorder;
         }
 
         private void FormMemberCenter_Shown(object sender, EventArgs e)
@@ -160,6 +163,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnCancle_Click(object sender, EventArgs e)
         {
             ListAllTemplate.enable = false;
+
+            //if (this.DialogResult != DialogResult.OK)
+            //{
+            //    this.DialogResult = DialogResult.Cancel;
+            //}
             this.Close();
         }
 
@@ -370,7 +378,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                }
                else
                {
-                   rbtnPageUp.Visible = false ;
+                   rbtnPageUp.Visible = false;
                    rbtnPageDown.Visible = false ;
                    ThisPageShowlstbmp = AllShowlstbmp;
                    CurrentPage = 1;
@@ -395,7 +403,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("获取所有充值面额异常" + ex.Message, true);
+               // MainModel.ShowLog("获取所有充值面额异常" + ex.Message, true);
+
+                LogManager.WriteLog("获取所有充值面额异常" + ex.Message);
             }
         }
 
@@ -724,6 +734,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid,realCash))
                 {
                     this.Close();
+                    this.DialogResult = DialogResult.OK;
                     return;
                 }
                 this.Show();
@@ -969,7 +980,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     else
                     {
                         bool flag = MemberCenterHelper.ShowFormBindEntityCard(entityCard);
-                        MainModel.CurrentMember = CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+                         CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+
+                        if (!IsReturnWithoutOrder)
+                        {
+                            MainModel.CurrentMember = CurrentMember;
+                        }
                         UpdateMemberInfo();
                     }
                 }
@@ -1014,10 +1030,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
+
+                if (!IsEnable)
+                {
+                    return;
+                }
+                Application.DoEvents();
                 if (MemberCenterHelper.ShowFormEditMember(CurrentMember))
                 {
+                    this.DialogResult = DialogResult.OK;
                     string err = "";
-                    MainModel.CurrentMember = CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+                    CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+
+                    if (!IsReturnWithoutOrder)
+                    {
+                        MainModel.CurrentMember = CurrentMember;
+                    }
                     UpdateMemberInfo();
                 }
             }

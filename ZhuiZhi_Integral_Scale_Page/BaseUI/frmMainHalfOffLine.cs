@@ -725,7 +725,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         frmreturn.ShowDialog();
                         frmreturn.Dispose();
                         Application.DoEvents();
+                        if (MainModel.CurrentMember != null || frmreturn.ReturnMembr != null && MainModel.CurrentMember.memberinfo == frmreturn.ReturnMembr.memberinfo)
+                        {
+                            string ErrorMsgMember = "";
+                            Member member = httputil.GetMember(MainModel.CurrentMember.memberinfo, ref ErrorMsgMember);
 
+                            if (ErrorMsgMember != "" || member == null) //会员不存在
+                            {
+                                ClearMember();
+                                ShowLog(ErrorMsgMember, false);
+                            }
+                            else
+                            {
+                                LoadMember(member);
+                            }
+                        }
 
                         // ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
 
@@ -4289,9 +4303,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     BaseUIHelper.UpdaForm(CurrentCart);
                 }
 
-                MemberCenterHelper.ShowFormMemberCenter(MainModel.CurrentMember);
+                bool memberupdate = MemberCenterHelper.ShowFormMemberCenter(MainModel.CurrentMember,false);
 
-                if (MainModel.CurrentMember != null)
+                if (memberupdate)
                 {
                     string ErrorMsgMember = "";
                     Member member = httputil.GetMember(MainModel.CurrentMember.memberinfo, ref ErrorMsgMember);
