@@ -42,8 +42,6 @@
             this.lblShopName = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
-            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.dgvTemplate = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn6 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn7 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -97,6 +95,8 @@
             this.lblMemberInfo = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.rbtnPageDown = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
+            this.rbtnPageUp = new ZhuiZhi_Integral_Scale_UncleFruit.RoundButton();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -230,44 +230,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(668, 650);
             this.panel2.TabIndex = 39;
-            // 
-            // rbtnPageDown
-            // 
-            this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
-            this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
-            this.rbtnPageDown.Image = null;
-            this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnPageDown.Location = new System.Drawing.Point(336, 39);
-            this.rbtnPageDown.Name = "rbtnPageDown";
-            this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
-            this.rbtnPageDown.PenWidth = 1;
-            this.rbtnPageDown.RoundRadius = 1;
-            this.rbtnPageDown.ShowImg = false;
-            this.rbtnPageDown.ShowText = "下一页";
-            this.rbtnPageDown.Size = new System.Drawing.Size(150, 48);
-            this.rbtnPageDown.TabIndex = 71;
-            this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
-            this.rbtnPageDown.WhetherEnable = false;
-            this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
-            // 
-            // rbtnPageUp
-            // 
-            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
-            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
-            this.rbtnPageUp.Image = null;
-            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
-            this.rbtnPageUp.Location = new System.Drawing.Point(176, 39);
-            this.rbtnPageUp.Name = "rbtnPageUp";
-            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
-            this.rbtnPageUp.PenWidth = 1;
-            this.rbtnPageUp.RoundRadius = 1;
-            this.rbtnPageUp.ShowImg = false;
-            this.rbtnPageUp.ShowText = "上一页";
-            this.rbtnPageUp.Size = new System.Drawing.Size(150, 48);
-            this.rbtnPageUp.TabIndex = 70;
-            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
-            this.rbtnPageUp.WhetherEnable = false;
-            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
             // dgvTemplate
             // 
@@ -540,7 +502,7 @@
             this.lblNewPhone.BackColor = System.Drawing.Color.Transparent;
             this.lblNewPhone.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblNewPhone.ForeColor = System.Drawing.Color.White;
-            this.lblNewPhone.Location = new System.Drawing.Point(186, 142);
+            this.lblNewPhone.Location = new System.Drawing.Point(177, 142);
             this.lblNewPhone.Name = "lblNewPhone";
             this.lblNewPhone.Size = new System.Drawing.Size(24, 23);
             this.lblNewPhone.TabIndex = 79;
@@ -601,7 +563,7 @@
             this.lblNewPhoneDesc.BackColor = System.Drawing.Color.Transparent;
             this.lblNewPhoneDesc.Font = new System.Drawing.Font("微软雅黑", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblNewPhoneDesc.ForeColor = System.Drawing.Color.White;
-            this.lblNewPhoneDesc.Location = new System.Drawing.Point(38, 142);
+            this.lblNewPhoneDesc.Location = new System.Drawing.Point(29, 142);
             this.lblNewPhoneDesc.Name = "lblNewPhoneDesc";
             this.lblNewPhoneDesc.Size = new System.Drawing.Size(129, 23);
             this.lblNewPhoneDesc.TabIndex = 78;
@@ -618,11 +580,11 @@
             this.btnbang.Font = new System.Drawing.Font("微软雅黑", 11.5F);
             this.btnbang.ForeColor = System.Drawing.Color.White;
             this.btnbang.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btnbang.Location = new System.Drawing.Point(175, 572);
+            this.btnbang.Location = new System.Drawing.Point(175, 568);
             this.btnbang.Name = "btnbang";
-            this.btnbang.Size = new System.Drawing.Size(100, 40);
+            this.btnbang.Size = new System.Drawing.Size(135, 40);
             this.btnbang.TabIndex = 76;
-            this.btnbang.Text = "绑实体卡定";
+            this.btnbang.Text = "绑定实体卡";
             this.btnbang.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnbang.UseVisualStyleBackColor = false;
             this.btnbang.Click += new System.EventHandler(this.btnbang_Click);
@@ -949,7 +911,7 @@
             this.lblMemberInfo.BackColor = System.Drawing.Color.Transparent;
             this.lblMemberInfo.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.lblMemberInfo.ForeColor = System.Drawing.Color.LightGray;
-            this.lblMemberInfo.Location = new System.Drawing.Point(37, 169);
+            this.lblMemberInfo.Location = new System.Drawing.Point(28, 169);
             this.lblMemberInfo.Name = "lblMemberInfo";
             this.lblMemberInfo.Size = new System.Drawing.Size(82, 24);
             this.lblMemberInfo.TabIndex = 52;
@@ -978,6 +940,44 @@
             this.label1.Size = new System.Drawing.Size(101, 30);
             this.label1.TabIndex = 50;
             this.label1.Text = "会员中心";
+            // 
+            // rbtnPageDown
+            // 
+            this.rbtnPageDown.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(191)))), ((int)(((byte)(136)))));
+            this.rbtnPageDown.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageDown.Image = null;
+            this.rbtnPageDown.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageDown.Location = new System.Drawing.Point(336, 39);
+            this.rbtnPageDown.Name = "rbtnPageDown";
+            this.rbtnPageDown.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageDown.PenWidth = 1;
+            this.rbtnPageDown.RoundRadius = 1;
+            this.rbtnPageDown.ShowImg = false;
+            this.rbtnPageDown.ShowText = "下一页";
+            this.rbtnPageDown.Size = new System.Drawing.Size(150, 48);
+            this.rbtnPageDown.TabIndex = 71;
+            this.rbtnPageDown.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageDown.WhetherEnable = false;
+            this.rbtnPageDown.ButtonClick += new System.EventHandler(this.rbtnPageDown_ButtonClick);
+            // 
+            // rbtnPageUp
+            // 
+            this.rbtnPageUp.AllBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(160)))), ((int)(((byte)(110)))));
+            this.rbtnPageUp.BackColor = System.Drawing.Color.Silver;
+            this.rbtnPageUp.Image = null;
+            this.rbtnPageUp.ImageSize = new System.Drawing.Size(0, 0);
+            this.rbtnPageUp.Location = new System.Drawing.Point(176, 39);
+            this.rbtnPageUp.Name = "rbtnPageUp";
+            this.rbtnPageUp.PenColor = System.Drawing.Color.Black;
+            this.rbtnPageUp.PenWidth = 1;
+            this.rbtnPageUp.RoundRadius = 1;
+            this.rbtnPageUp.ShowImg = false;
+            this.rbtnPageUp.ShowText = "上一页";
+            this.rbtnPageUp.Size = new System.Drawing.Size(150, 48);
+            this.rbtnPageUp.TabIndex = 70;
+            this.rbtnPageUp.TextForeColor = System.Drawing.Color.White;
+            this.rbtnPageUp.WhetherEnable = false;
+            this.rbtnPageUp.ButtonClick += new System.EventHandler(this.rbtnPageUp_ButtonClick);
             // 
             // FormMemberCenter
             // 

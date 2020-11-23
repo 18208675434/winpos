@@ -44,10 +44,10 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtBirthday = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
-            this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtName = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
+            this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBirthday)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelect)).BeginInit();
@@ -71,11 +71,9 @@
             this.panel1.Controls.Add(this.btnOK);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.txtBirthday);
-           
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtName);
-
             this.panel1.Controls.Add(this.dtStart);
             this.panel1.Location = new System.Drawing.Point(397, 162);
             this.panel1.Name = "panel1";
@@ -86,7 +84,7 @@
             // 
             this.picBirthday.BackgroundImage = global::ZhuiZhi_Integral_Scale_UncleFruit.Properties.Resources.日期;
             this.picBirthday.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picBirthday.Location = new System.Drawing.Point(350, 145);
+            this.picBirthday.Location = new System.Drawing.Point(342, 145);
             this.picBirthday.Name = "picBirthday";
             this.picBirthday.Size = new System.Drawing.Size(40, 30);
             this.picBirthday.TabIndex = 98;
@@ -134,7 +132,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.label1.Location = new System.Drawing.Point(9, 23);
+            this.label1.Location = new System.Drawing.Point(15, 23);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 27);
@@ -145,7 +143,7 @@
             // 
             this.pnlWoman.Controls.Add(this.lblWoman);
             this.pnlWoman.Controls.Add(this.picWoman);
-            this.pnlWoman.Location = new System.Drawing.Point(230, 198);
+            this.pnlWoman.Location = new System.Drawing.Point(222, 198);
             this.pnlWoman.Name = "pnlWoman";
             this.pnlWoman.Size = new System.Drawing.Size(95, 44);
             this.pnlWoman.TabIndex = 88;
@@ -178,7 +176,7 @@
             // 
             this.pnlMan.Controls.Add(this.lblMan);
             this.pnlMan.Controls.Add(this.picMan);
-            this.pnlMan.Location = new System.Drawing.Point(108, 198);
+            this.pnlMan.Location = new System.Drawing.Point(100, 198);
             this.pnlMan.Name = "pnlMan";
             this.pnlMan.Size = new System.Drawing.Size(95, 44);
             this.pnlMan.TabIndex = 87;
@@ -214,9 +212,9 @@
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(13, 280);
+            this.btnOK.Location = new System.Drawing.Point(20, 280);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(392, 70);
+            this.btnOK.Size = new System.Drawing.Size(377, 70);
             this.btnOK.TabIndex = 86;
             this.btnOK.Text = "确认修改";
             this.btnOK.UseVisualStyleBackColor = false;
@@ -226,7 +224,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label4.Location = new System.Drawing.Point(9, 208);
+            this.label4.Location = new System.Drawing.Point(16, 208);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 24);
@@ -239,7 +237,7 @@
             this.txtBirthday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBirthday.DecimalDigits = 3;
             this.txtBirthday.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtBirthday.Location = new System.Drawing.Point(107, 134);
+            this.txtBirthday.Location = new System.Drawing.Point(99, 134);
             this.txtBirthday.LockFocus = false;
             this.txtBirthday.MaxDeciaml = ((long)(0));
             this.txtBirthday.MaxLength = 100;
@@ -252,25 +250,11 @@
             this.txtBirthday.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txt_DataChanged);
             this.txtBirthday.Enter += new System.EventHandler(this.txtBirthday_Enter);
             // 
-            // dtStart
-            // 
-            this.dtStart.CalendarFont = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dtStart.CustomFormat = "yyyy-MM-dd";
-            this.dtStart.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStart.Location = new System.Drawing.Point(107, 72);
-            this.dtStart.Margin = new System.Windows.Forms.Padding(2);
-            this.dtStart.Name = "dtStart";
-            this.dtStart.Size = new System.Drawing.Size(210, 30);
-            this.dtStart.TabIndex = 93;
-            this.dtStart.Value = new System.DateTime(2020, 11, 18, 0, 0, 0, 0);
-            this.dtStart.CloseUp += new System.EventHandler(this.dtStart_CloseUp);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label2.Location = new System.Drawing.Point(9, 83);
+            this.label2.Location = new System.Drawing.Point(16, 83);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 24);
@@ -281,7 +265,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label3.Location = new System.Drawing.Point(9, 145);
+            this.label3.Location = new System.Drawing.Point(16, 145);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 24);
@@ -294,7 +278,7 @@
             this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtName.DecimalDigits = 3;
             this.txtName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtName.Location = new System.Drawing.Point(107, 72);
+            this.txtName.Location = new System.Drawing.Point(99, 72);
             this.txtName.LockFocus = false;
             this.txtName.MaxDeciaml = ((long)(0));
             this.txtName.MaxLength = 100;
@@ -305,6 +289,20 @@
             this.txtName.TabIndex = 81;
             this.txtName.WaterText = "请输入会员姓名，可不填";
             this.txtName.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txt_DataChanged);
+            // 
+            // dtStart
+            // 
+            this.dtStart.CalendarFont = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dtStart.CustomFormat = "yyyy-MM-dd";
+            this.dtStart.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtStart.Location = new System.Drawing.Point(99, 72);
+            this.dtStart.Margin = new System.Windows.Forms.Padding(2);
+            this.dtStart.Name = "dtStart";
+            this.dtStart.Size = new System.Drawing.Size(210, 30);
+            this.dtStart.TabIndex = 93;
+            this.dtStart.Value = new System.DateTime(2020, 11, 18, 0, 0, 0, 0);
+            this.dtStart.CloseUp += new System.EventHandler(this.dtStart_CloseUp);
             // 
             // FormEditMember
             // 
