@@ -4024,8 +4024,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-
-                    PayHelper.ShowFormPaySuccess(orderresult.orderid);
+                    PayHelper.ShowFormPaySuccess(orderresult.orderid); 
                     ClearForm();
                     ClearMember();
                 }

@@ -296,7 +296,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                         PrintBitmapFile("orderqrcoe.bmp");
 
                         BeginPrint(7);
-                        PrintText(PrintHelper.MergeStr("取货码："+printdetail.pickcode, "", BodyCharCountOfLine, PageSize), 25);
+                        PrintText(PrintHelper.MergeStr("取货码："+printdetail.pickcode, "", BodyCharCountOfLine, PageSize) + "\n", 25);
                     }
 
                     PrintText(PrintHelper.getStrLine() + "\n", 25);
@@ -513,7 +513,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         public static extern int PrintText(byte[] str, int FontSize);
         public static bool PrintText(string printtext, int fontsize = 32)
         {
-            int result = PrintText(System.Text.Encoding.Default.GetBytes(printtext + "\n"), fontsize);
+            int result = PrintText(System.Text.Encoding.Default.GetBytes(printtext), fontsize);
             return true;
         }
 
@@ -557,7 +557,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         public static bool PrintBitmapFile(string BmpFileName)
         {
             //LabelAngle  0不旋转
-            int result = PrintBitmapFile(BmpFileName, 0);
+            int result = PrintBitmapFile(BmpFileName, 1);
             return true;
         }
     }
