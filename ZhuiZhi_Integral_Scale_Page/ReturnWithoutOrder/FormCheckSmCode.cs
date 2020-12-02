@@ -84,7 +84,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 case Keys.NumPad9: AddNum(9, false); return !base.ProcessDialogKey(keyData); break;
 
                 case Keys.Back: AddNum(0, true); return base.ProcessDialogKey(keyData); break;
-                case Keys.Enter: CheckSmsCode(smscode); return !base.ProcessDialogKey(keyData); break;
+                case Keys.Enter: return !base.ProcessDialogKey(keyData); break;
             }
 
             return base.ProcessDialogKey(keyData);

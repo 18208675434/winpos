@@ -2690,6 +2690,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 else
                 {
                     CurrentCart.cashpayoption = 0;
+                    CurrentCart.cashpayamt = 0;
                     RefreshCart();
                 }
                 ShowLoading(false, true);                 
