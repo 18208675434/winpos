@@ -497,7 +497,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 cbxComNo.Text = ComNo;
                 cbxBaud.Text = Baud;
 
-                pnlYKPrint.Visible = ScaleName == ScaleType.爱宝.ToString() || ScaleName == ScaleType.易衡.ToString(); ;
+                pnlYKPrint.Visible = ScaleName == ScaleType.爱宝.ToString() || ScaleName == ScaleType.易衡.ToString() || ScaleName == ScaleType.龙飞.ToString(); ;
 
                 int printcomno = ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory.YKPrintUtil.GetYKComNo();
                 string printbaud = ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory.YKPrintUtil.GetYKBaud().ToString();
@@ -521,7 +521,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             string scalename = cbxScaleName.SelectedItem.ToString();
             INIManager.SetIni("Scale", "ScaleName", scalename, MainModel.IniPath);
-            pnlYKPrint.Visible = scalename == ScaleType.爱宝.ToString() || scalename == ScaleType.易衡.ToString(); ;
+            pnlYKPrint.Visible = scalename == ScaleType.爱宝.ToString() || scalename == ScaleType.易衡.ToString() || scalename == ScaleType.龙飞.ToString(); ;
             //中科英泰 S373电子秤端口COM6 波特率9600
             if (scalename == ScaleType.中科英泰.ToString())
             {
