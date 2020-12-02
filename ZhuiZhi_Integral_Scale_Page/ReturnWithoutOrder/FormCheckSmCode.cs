@@ -15,7 +15,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
     {
         public string CurrentPhone = "";
         public string smscode = "";
-
+        public string CurrentSmsContent = "";
         /// <summary>
         /// 会员中心访问接口
         /// </summary>
@@ -24,11 +24,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         private bool IsEnable =true;
 
         private ZhuiZhi_Integral_Scale_UncleFruit.Common.HttpUtil httputil = new Common.HttpUtil();
-        public FormCheckSmCode(string name,string phone)
+        public FormCheckSmCode(string name,string phone,string smscontent)
         {
             InitializeComponent();
 
             CurrentPhone = phone;
+            CurrentSmsContent = smscontent;
             lblSendUser.Text = "验证码已发送至门店负责人（"+name+"）的手机";
 
             timerCountDown.Enabled = true;
@@ -127,19 +128,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             }
             IsEnable = false;
 
-            string err = "";
-            int result = memberhttputil.ChangeNumberVerifysmscode(CurrentPhone,smscode, ref err);
-            if (result == 1)
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                MainModel.ShowLog(err,false);
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
-            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+            //string err = "";
+            //int result = memberhttputil.ChangeNumberVerifysmscode(CurrentPhone,smscode, ref err);
+            //if (result == 1)
+            //{
+            //    this.DialogResult = DialogResult.OK;
+            //    this.Close();
+            //}
+            //else
+            //{
+            //    MainModel.ShowLog(err,false);
+            //    this.DialogResult = DialogResult.Cancel;
+            //    this.Close();
+            //}
 
 
         }
@@ -189,7 +193,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
             string errormsg="";
             string sendmsg = "";
 
-            if (httputil.SendSmsCode(CurrentPhone, "", "", ref errormsg))
+            if (httputil.SendSmsCodeForReturnWithOutOrder(CurrentPhone, CurrentSmsContent, ref errormsg))
             {
                 timerCountDown.Enabled=true;
             }
@@ -210,7 +214,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 string errormsg = "";
                 string sendmsg = "";
 
-                if (httputil.SendSmsCode(CurrentPhone, "", "", ref errormsg))
+                if (httputil.SendSmsCodeForReturnWithOutOrder(CurrentPhone, CurrentSmsContent, ref errormsg))
                 {
                     timerCountDown.Enabled = true;
                 }

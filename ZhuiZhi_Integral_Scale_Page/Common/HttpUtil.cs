@@ -896,7 +896,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
-                LogManager.WriteLog("DEBUG","余额密码验证"+json  +"传参"+tempjson);
+               // LogManager.WriteLog("DEBUG","余额密码验证"+json  +"传参"+tempjson);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 resultcode = rd.code;
                 
@@ -1283,7 +1283,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
                 string json = HttpPOST(url, tempjson);
 
-                LogManager.WriteLog("DEBUG", "member" + json);
+                //LogManager.WriteLog("DEBUG", "member" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
 
                 // return;
@@ -1705,7 +1705,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             {
                 string url = "/pos/account/sendsmscode";
 
-
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
 
                 sort.Add("phone", phone);
@@ -1740,6 +1739,51 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
         }
 
+
+        /// <summary>
+        /// 无单退款获取短信验证码
+        /// </summary>
+        /// <returns></returns>
+        public bool SendSmsCodeForReturnWithOutOrder(string phone, string smscontent, ref string erromessage)
+        {
+            try
+            {
+                string url = "/pos/order/pos/sendsmscode";
+
+                SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
+
+                sort.Add("phone", phone);
+                sort.Add("content", smscontent);
+
+                string parajson = JsonConvert.SerializeObject(sort);
+
+                string json = HttpPOST(url, parajson);
+
+                ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
+
+                // return;
+                if (rd.code == 0)
+                {
+                    erromessage = "";
+
+                    //bool smcSuccess = Convert.ToBoolean(rd.data.ToString());
+                    return true;
+                }
+                else
+                {
+                    try { LogManager.WriteLog("Error", "sendsmscode:" + json); }
+                    catch { }
+                    erromessage = rd.message;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog("Error", "无单退款发送验证码异常：" + ex.Message);
+                erromessage = "网络连接异常，请检查网络连接";
+                return false;
+            }
+        }
 
 
         /// <summary>
@@ -3483,7 +3527,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 SortedDictionary<string, string> sort = new SortedDictionary<string, string>();
 
                 string json = HttpGET(url, sort);
-                LogManager.WriteLog("DEBUG", "余额配置：" + json);
+                //LogManager.WriteLog("DEBUG", "余额配置：" + json);
                 ResultData rd = JsonConvert.DeserializeObject<ResultData>(json);
                 if (rd.code == 0)
                 {
