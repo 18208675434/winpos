@@ -64,7 +64,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
-                  }
+
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.  
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲  
+
+
+        }
         private void frmMainMedia_Load(object sender, EventArgs e)
         {
 
@@ -1114,8 +1120,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                    
                     if (showcount < lstShowImg.Count)
                     {
-                        player.Visible = false;
-                        pnlAdvertising.BackgroundImage = lstShowImg[showcount];
+
+                        Invoke((new Action(() =>
+                        {
+                            player.Visible = false;
+                            pnlAdvertising.BackgroundImage = lstShowImg[showcount];
+                        })));
+                        //player.Visible = false;
+                        //pnlAdvertising.BackgroundImage = lstShowImg[showcount];
                     }
                     else
                     {                      
