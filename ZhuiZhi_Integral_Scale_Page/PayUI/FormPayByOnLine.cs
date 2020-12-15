@@ -264,9 +264,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             this.DataReceiveHandle.BeginInvoke(3, "", null, null);
                         this.Close();
                         
-                    }
-
-                  
+                    }         
                 }
                 else if (sync.status == "SUCCESS")
                 {
