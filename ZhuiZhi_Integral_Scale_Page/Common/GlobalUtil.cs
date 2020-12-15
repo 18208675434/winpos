@@ -637,6 +637,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
             }
 
         }
+
+
+        public static Bitmap KiResizeImage(Bitmap bmp, int newW, int newH)
+        {
+            try
+            {
+                Bitmap b = new Bitmap(newW, newH);
+                Graphics g = Graphics.FromImage(b);
+
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+                g.DrawImage(bmp, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
+                g.Dispose();
+
+                return b;
+            }
+            catch
+            {
+                return bmp;
+            }
+        }
+
+
     }
 
 
@@ -668,10 +691,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
 
 
 
-
-        
-
-}
+    }
 
     public enum SortType
     {

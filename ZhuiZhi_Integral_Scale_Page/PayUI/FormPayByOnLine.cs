@@ -105,12 +105,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         public void PayOnLine(string authcode)
         {
-            StartTime = DateTime.Now;
-            CurrentAuthCode = authcode;
-            AuthCodeTrade();
-           // SyncTrade();
-           // timerAuthCodeTrade.Enabled = true;
-           // timerSyncTrade.Enabled = true;
+            try
+            {
+                scancode = new StringBuilder();
+                if (IsScan)
+                {
+                    IsScan = false;
+                    StartTime = DateTime.Now;
+                    CurrentAuthCode = authcode;
+                    AuthCodeTrade();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
@@ -125,68 +135,17 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 {
 
                     IsScan = false;
-                    FormPayFail frmpayfail = new FormPayFail(ErrorMsg);
-                    asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
-                    frmpayfail.Location = new System.Drawing.Point(0, 0);
-                    frmpayfail.TopMost = true;
-                    frmpayfail.ShowDialog();
-
-                    if (frmpayfail.DialogResult == DialogResult.OK) //重新尝试
-                    {
-                        string errormsg = "";
-                        bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsg);
-
-                        string ErrorMsgCart = "";
-                        int ResultCodecart = 0;
-                        CurrentCart= httputil.RefreshCart(CurrentCart, ref ErrorMsgCart, ref ResultCodecart);
-
-
-                  
-
-                        string ErrorMsgre = "";
-                        int ResultCode = -1;
-                        CreateOrderResult orderresult = httputil.CreateOrder(CurrentCart, ref ErrorMsgre, ref ResultCode);
-                        if (ResultCode != 0 || orderresult == null)
-                        {
-                            MainModel.ShowLog("重建订单异常"+ErrorMsgre,true);
-                        }
-                        else
-                        {
-                            CurrentOrderID = orderresult.orderid;
-                            
-                        }
-
-                        IsScan = true;
-                        //ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.BaseUIHelper.ShowPayInfo("请出示微信/支付宝付款码", false);
-                    }
-                    else
-                    {
-                        string errormsg = "";
-                        bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsg);
-
-                        if (result)
-                        {
-                            LogManager.WriteLog("取消订单" + CurrentOrderID);
-                        }
-                        else
-                        {
-                            MainModel.ShowLog("订单取消失败" + errormsg, true);
-                            // return;
-                        }
-                        isrun = false;
-                        
-                        this.DialogResult = DialogResult.Abort;
-                        if (DataReceiveHandle != null)
-                            this.DataReceiveHandle.BeginInvoke(3, "", null, null);
-                        this.Close();
-                    }
-
-                    IsScan = true;
+                    MainModel.ShowLog(ErrorMsg);
+                    this.DialogResult = DialogResult.Abort;
+                    if (DataReceiveHandle != null)
+                        this.DataReceiveHandle.BeginInvoke(3, "", null, null);
+                    this.Close();
                 }
                 else
                 {
                     if (codetrade.status == "SUCCESS")
                     {
+                        IsScan = false;
                         if (DataReceiveHandle != null)
                             this.DataReceiveHandle.BeginInvoke(1, codetrade.orderid, null, null);
                         isrun = false;
@@ -248,7 +207,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     pnlLoading.Visible = false;
                     timerSyncTrade.Enabled = false;
 
-                    IsScan = false;
                     FormPayFail frmpayfail = new FormPayFail(retunerrormsg);
                     asf.AutoScaleControlTest(frmpayfail,1178,760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                     frmpayfail.Location = new System.Drawing.Point(0, 0);
@@ -257,18 +215,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     if (frmpayfail.DialogResult == DialogResult.OK) //重新尝试
                     {
+                        IsScan = true;
 
                         string errormsgre = "";
                         bool result = httputil.CancleOrder(CurrentOrderID, "取消支付", ref errormsgre);
-                        //if (result)
-                        //{
-                        //    LogManager.WriteLog("取消订单" + CurrentOrderID);
-                        //}
-                        //else
-                        //{
-                        //    MainModel.ShowLog("订单取消失败" + errormsg, true);
-                        //    // return;
-                        //}
+
 
                         string ErrorMsgCart = "";
                         int ResultCodecart = 0;
@@ -291,7 +242,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             Console.WriteLine("新订单号"+orderresult.orderid);
 
                         }
-                        IsScan = true;
                     }
                     else
                     {
@@ -336,7 +286,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch
             {
-
+                IsScan = true;
             }          
            
         }
@@ -513,10 +463,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 if (keyData == Keys.Enter)
                 {
-                    isScan = false;
                     PayOnLine(scancode.ToString());
                     scancode = new StringBuilder();
-                    isScan = true;
                     return false;
                 }
                 if (keyData == Keys.Space)
@@ -527,7 +475,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
-                isScan = true;
                 LogManager.WriteLog("监听键盘事件异常" + ex.Message);
                 return false;
             }

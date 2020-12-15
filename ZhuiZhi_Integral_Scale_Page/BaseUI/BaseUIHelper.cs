@@ -48,8 +48,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
                     if (frmmainmedia == null || frmmainmedia.IsDisposed)
                     {
                         frmmainmedia = new FormMainMedia();
-                        asf.AutoScaleControlTest(frmmainmedia, 1020, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height + 20, true);
-                        frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, -20);
+                        asf.AutoScaleControlTest(frmmainmedia, 1020, 760, Screen.AllScreens[1].Bounds.Width, Screen.AllScreens[1].Bounds.Height, true);
+                        frmmainmedia.Location = new System.Drawing.Point(Screen.AllScreens[0].Bounds.Width, 0);
                     }
                     frmmainmedia.Show();
                 }
