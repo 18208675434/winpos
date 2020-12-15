@@ -64,7 +64,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             zeng.Dispose();
             CustomTemplate = zeng.CustomTemplate;
             this.Close();
-            this.Close();
         }
     }
 }
