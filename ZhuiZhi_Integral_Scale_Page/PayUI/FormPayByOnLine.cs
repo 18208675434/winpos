@@ -278,8 +278,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 if (isrun)
                 {
-                    //Delay.Start(10);
-                    //SyncTrade(orderid, payid);
+
                 }
             }
             catch
