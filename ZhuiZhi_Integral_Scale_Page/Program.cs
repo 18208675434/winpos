@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BaseUI;
+using System.IO;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
@@ -54,7 +55,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                     
             }
-            
+
+            try
+            {
+                File.Copy(@"C:\iSmartSystem\pos_ad_dll.dll", AppDomain.CurrentDomain.BaseDirectory + "\\pos_ad_dll.dll", true);
+            }
+            catch { }
+
             //处理未捕获的异常
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             //处理UI线程异常

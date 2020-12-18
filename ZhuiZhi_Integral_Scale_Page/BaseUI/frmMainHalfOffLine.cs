@@ -1739,7 +1739,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     Application.DoEvents();
 
                     CurrentGoodPage = 1;
-                    LoadDgvGood(false, false);
+                    Invoke((new Action(() =>
+                    {
+                        LoadDgvGood(false, false);
+                    })));
                 }
             }
             catch { }
@@ -2247,42 +2250,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     }
 
-
-                    Invoke((new Action(() =>
+                    if (this.IsHandleCreated)
                     {
+                        dgvGood.Invoke((new Action(() =>
+                         {
 
-                        dgvGood.Rows.Clear();
+                             dgvGood.Rows.Clear();
 
-                        for (int i = 0; i < lstLaodingPro.Count; i++)
-                        {
+                             for (int i = 0; i < lstLaodingPro.Count; i++)
+                             {
 
-                            if (lstLaodingPro[i].panelbmp == null)
-                            {
-                                lstLaodingPro[i].panelbmp = GetItemImg(lstLaodingPro[i]);
-                            }
-                            lstshowimg.Add(lstLaodingPro[i].panelbmp);
+                                 if (lstLaodingPro[i].panelbmp == null)
+                                 {
+                                     lstLaodingPro[i].panelbmp = GetItemImg(lstLaodingPro[i]);
+                                 }
+                                 lstshowimg.Add(lstLaodingPro[i].panelbmp);
 
-                        }
+                             }
 
-                        if (paging.havedownpage)
-                        {
-                            lstshowimg.Add(imgPageDownForGood);
-                        }
+                             if (paging.havedownpage)
+                             {
+                                 lstshowimg.Add(imgPageDownForGood);
+                             }
 
 
 
-                        for (int i = 0; i < paging.makeupcount; i++)
-                        {
-                            lstshowimg.Add(ResourcePos.empty);
-                        }
+                             for (int i = 0; i < paging.makeupcount; i++)
+                             {
+                                 lstshowimg.Add(ResourcePos.empty);
+                             }
 
-                        int rowcount = lstshowimg.Count / 5;
+                             int rowcount = lstshowimg.Count / 5;
 
-                        for (int i = 0; i < rowcount; i++)
-                        {
-                            dgvGood.Rows.Add(lstshowimg[i * 5 + 0], lstshowimg[i * 5 + 1], lstshowimg[i * 5 + 2], lstshowimg[i * 5 + 3], lstshowimg[i * 5 + 4]);
-                        }
-                    })));
+                             for (int i = 0; i < rowcount; i++)
+                             {
+                                 dgvGood.Rows.Add(lstshowimg[i * 5 + 0], lstshowimg[i * 5 + 1], lstshowimg[i * 5 + 2], lstshowimg[i * 5 + 3], lstshowimg[i * 5 + 4]);
+                             }
+                         })));
+
+                    }
                     IsEnable = true;
 
                 }
@@ -3956,12 +3962,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 else
                 {
                     int resultcode = PayHelper.ShowFormPay(CurrentCart);
-                    ShowLoading(false, true);
+                    
                     Application.DoEvents();
                     if (resultcode == 1)
                     {
                         ClearForm();
-                        ClearMember();
+                        if (MainModel.CurrentMember != null)
+                        {
+                            ClearMember();
+                        }
 
                     }
                     else if (resultcode == 0)
@@ -3975,13 +3984,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         {
                             RefreshCart();
                         }
-
                     }
                     else
                     {
                         CheckUserAndMember(resultcode, "");
                     }
-
+                    ShowLoading(false, true);
                     //0726防止会员其他页面过期 本页面会员还在展示
                     if (MainModel.CurrentMember == null && tplMember.ColumnStyles[1].Width > 0)
                     {
@@ -3992,6 +4000,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
+                ShowLoading(false, true);
                 ShowLog("结算异常" + ex.Message, true);
             }
         }
