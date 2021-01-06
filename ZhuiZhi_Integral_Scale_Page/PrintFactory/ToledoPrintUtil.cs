@@ -68,7 +68,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                     lstPrintStr.AddRange(PrintHelper.GetOrderPrintInfo(printdetail, isRefound));
 
-                    PrintTextByPaperWidth(lstPrintStr);
+                    PrintTextByPaperWidth(lstPrintStr,true);
 
                     Application.DoEvents();
                     return true;
@@ -514,7 +514,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
         [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
         public static extern int PrintTextByPaperWidth(byte[] str, int FontSize, int PaperWidth);
-        public static bool PrintTextByPaperWidth(List<string> lstprints)
+        public static bool PrintTextByPaperWidth(List<string> lstprints, bool needsuncode = false)
         {
             try
             {
@@ -526,12 +526,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 }
 
                 //末尾打印空白行走纸
-                strprint += "  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n ";
+                //strprint += "  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n ";
 
                 int result = PrintTextByPaperWidth(System.Text.Encoding.Default.GetBytes(strprint), 25, 60);
 
-                BeginPrint();
+                BeginPrint(0);
+                //if (needsuncode && System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName))
+                //{
 
+                //    PrintBitmapFile(PrintHelper.SunCodeName);
+                //    BeginPrint(7);                 
+                //}
+
+                if (needsuncode)
+                {
+                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName) )
+                    {
+                        PrintText(PrintHelper.getStrLine() + " \r\n", 24);
+                        BeginPrint(0);
+                        PrintBitmapFile(PrintHelper.SunCodeName);
+
+                        BeginPrint(7);
+                        PrintText(" \r\n" + PrintHelper.MergeStr("微信扫码登录小程序", "", PrintHelper.BodyCharCountOfLine, PrintHelper.PageSize) + " \r\n", 24);
+                    }
+                    PrintText(PrintHelper.getStrLine() + " \r\n", 24);
+                    PrintText("多谢惠顾，欢迎下次光临！ \r\n", 24);
+                }
+
+
+                PrintText(" \r\n", 24);
+                PrintText(" \r\n", 24);
+                PrintText(" \r\n", 24);
+                PrintText(" \r\n", 24);
+                BeginPrint(0);
+                BeginPrint(8); //切纸
+                Application.DoEvents();
+                return true;
                 return true;
             }
             catch (Exception ex)

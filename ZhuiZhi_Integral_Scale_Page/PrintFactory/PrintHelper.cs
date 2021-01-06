@@ -39,7 +39,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         /// </summary>
         public static int HeadCharCountOfLine = 25;
 
-
+        public static string SunCodeName = "guoshusuncode.bmp";
         /// <summary>
         /// 获取交班打印信息
         /// </summary>
@@ -147,9 +147,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     }
                 }
 
-                lstPrintStr.Add(getStrLine());
+                //lstPrintStr.Add(getStrLine());
 
-                lstPrintStr.Add("多谢惠顾，欢迎下次光临！");
+                //lstPrintStr.Add("多谢惠顾，欢迎下次光临！");
 
                 return lstPrintStr;
             }
