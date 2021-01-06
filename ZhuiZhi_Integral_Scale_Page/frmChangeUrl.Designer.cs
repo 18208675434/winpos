@@ -93,7 +93,7 @@
             this.rdoZheng.Size = new System.Drawing.Size(567, 25);
             this.rdoZheng.TabIndex = 10;
             this.rdoZheng.TabStop = true;
-            this.rdoZheng.Text = "https://pos.a72hongjie.com    fbNZhX5LSUUhKnCpZo6uZLUVQpmewP";
+            this.rdoZheng.Text = "https://pos.fruitgs.com    fbNZhX5LSUUhKnCpZo6uZLUVQpmewP";
             this.rdoZheng.UseVisualStyleBackColor = true;
             this.rdoZheng.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
@@ -106,7 +106,7 @@
             this.rdoQa.Size = new System.Drawing.Size(462, 25);
             this.rdoQa.TabIndex = 9;
             this.rdoQa.TabStop = true;
-            this.rdoQa.Text = "https://pos-qa.a72hongjie.com    kVl55eO1n3DZhWC8Z7";
+            this.rdoQa.Text = "https://pos-qa.fruitgs.com    kVl55eO1n3DZhWC8Z7";
             this.rdoQa.UseVisualStyleBackColor = true;
             this.rdoQa.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
@@ -119,7 +119,7 @@
             this.rdoStage.Size = new System.Drawing.Size(484, 25);
             this.rdoStage.TabIndex = 8;
             this.rdoStage.TabStop = true;
-            this.rdoStage.Text = "https://pos-stage.a72hongjie.com    kVl55eO1n3DZhWC8Z7";
+            this.rdoStage.Text = "https://pos-stage.fruitgs.com    kVl55eO1n3DZhWC8Z7";
             this.rdoStage.UseVisualStyleBackColor = true;
             this.rdoStage.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 

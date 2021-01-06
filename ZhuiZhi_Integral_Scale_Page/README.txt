@@ -10,3 +10,6 @@
 2、登录退出会员 清空改价信息
 
 
+pos.fruitgs.com
+pos-qa.fruitgs.com
+pos-stage.fruitgs.com

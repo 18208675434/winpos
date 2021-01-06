@@ -670,8 +670,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         {
             get
             {
-                //TODO
-                if (URL.Contains("https://pos.a72hongjie.com"))
+                //TODO  
+                if (URL.Contains("https://pos.fruitgs.com"))
                 {
                     return "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIWSVenS4KZRSQB5S4dt25JRy/wX33do4nqK7CHzr+v6cNAsT0icoIFpFksmoIM5KNmvnsF3uRzr2rvg6IlV8gUCAwEAAQ==";
                 }

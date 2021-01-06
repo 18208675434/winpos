@@ -41,19 +41,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 if (rdoStage.Checked)
                 {
-                    INIManager.SetIni("MQTT", "Server", "mqtt-stage.a72hongjie.com", MainModel.IniPath);
+                    INIManager.SetIni("MQTT", "Server", "mqtt-stage.fruitgs.com", MainModel.IniPath);
                     INIManager.SetIni("MQTT", "UserName", "zhuizhi_android", MainModel.IniPath);
                     INIManager.SetIni("MQTT", "PassWord", "123456", MainModel.IniPath);
                 }
                 else if (rdoQa.Checked)
                 {
-                    INIManager.SetIni("MQTT", "Server", "mqtt-qa.a72hongjie.com", MainModel.IniPath);
+                    INIManager.SetIni("MQTT", "Server", "mqtt-qa.fruitgs.com", MainModel.IniPath);
                     INIManager.SetIni("MQTT", "UserName", "zhuizhi_android", MainModel.IniPath);
                     INIManager.SetIni("MQTT", "PassWord", "123456", MainModel.IniPath);
                 }
                 else if (rdoZheng.Checked)
                 {
-                    INIManager.SetIni("MQTT", "Server", "mqtt-online.a72hongjie.com", MainModel.IniPath);
+                    INIManager.SetIni("MQTT", "Server", "mqtt-online.fruitgs.com", MainModel.IniPath);
                     INIManager.SetIni("MQTT", "UserName", "zhuizhi_winpos", MainModel.IniPath);
                     INIManager.SetIni("MQTT", "PassWord", "cYbylCBf", MainModel.IniPath);
                 }
@@ -67,30 +67,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            //https://pos-stage.zhuizhikeji.com    kVl55eO1n3DZhWC8Z7
             if (rdoStage.Checked)
             {                                      
-                TXTURL.Text = "https://pos-stage.a72hongjie.com";
+                TXTURL.Text = "https://pos-stage.fruitgs.com";
                 txtPrivateKey.Text = "kVl55eO1n3DZhWC8Z7";
             }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            //https://pos-qa.zhuizhikeji.com    kVl55eO1n3DZhWC8Z7
             if (rdoQa.Checked)
             {
-                TXTURL.Text = "https://pos-qa.a72hongjie.com";
+                TXTURL.Text = "https://pos-qa.fruitgs.com";
                 txtPrivateKey.Text = "kVl55eO1n3DZhWC8Z7";
             }
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            // https://pos.zhuizhikeji.com    fbNZhX5LSUUhKnCpZo6uZLUVQpmewP
             if (rdoZheng.Checked)
             {
-                TXTURL.Text = "https://pos.a72hongjie.com";
+                TXTURL.Text = "https://pos.fruitgs.com";
                 txtPrivateKey.Text = "fbNZhX5LSUUhKnCpZo6uZLUVQpmewP";
             }
         }
