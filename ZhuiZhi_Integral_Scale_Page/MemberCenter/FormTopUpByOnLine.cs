@@ -139,19 +139,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-                    if (codetrade.status == "SUCCESS")
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
+                    //if (codetrade.status == "SUCCESS")
+                    //{
+                    //    this.DialogResult = DialogResult.OK;
+                    //    this.Close();
+                    //}
+                    //else
+                    //{
 
                         pnlLoading.Visible = true;
                         timerSyncTrade.Enabled = true;
                         CurrentPayID = codetrade.payid;
                         SyncTrade(CurrentOrderID, CurrentPayID);
-                    }
+                  //  }
 
                 }
             }

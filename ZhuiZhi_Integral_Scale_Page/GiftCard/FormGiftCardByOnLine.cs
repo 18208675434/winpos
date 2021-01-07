@@ -122,13 +122,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                 }
                 else
                 {
-                    if (codetrade.status == "SUCCESS")
-                    {                       
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
+                    //if (codetrade.status == "SUCCESS")
+                    //{                       
+                    //    this.DialogResult = DialogResult.OK;
+                    //    this.Close();
+                    //}
+                    //else
+                    //{
 
                         pnlLoading.Visible = true;
                         timerAuthCodeTrade.Enabled = false;
@@ -137,7 +137,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.GiftCard
                         SyncTrade(CurrentOrderID, CurrentPayID);  
                     }
                  
-                }
+               // }
             }
             catch (Exception ex)
             {

@@ -538,7 +538,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                         PrintBitmap(logobuilder, 33);
 
                         PrintStr(" " + "\n");
-                        PrintStr("微信扫码登录小程序" + "\n");
+                        PrintStr("上果叔到家，抢实惠好物！" + "\n");
                         SetAlign(0);
                     }
                     PrintStr(new StringBuilder(PrintHelper.getStrLine() + "\n"));

@@ -578,7 +578,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                             POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.getStrLine() + "\r\n");
                             POS_Output_PrintBmpDirectA(m_hPrinter, MainModel.ServerPath + "\\" + PrintHelper.SunCodeName);
                             POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "  \r\n");
-                            POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("微信扫码登录小程序", "", PrintHelper.BodyCharCountOfLine, PrintHelper.PageSize) + "\r\n");
+                            POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("上果叔到家，抢实惠好物！", "", PrintHelper.BodyCharCountOfLine, PrintHelper.PageSize) + "\r\n");
                         }
                         catch { }
                     }

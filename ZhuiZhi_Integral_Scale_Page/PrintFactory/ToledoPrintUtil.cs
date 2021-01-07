@@ -547,7 +547,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                         PrintBitmapFile(PrintHelper.SunCodeName);
 
                         BeginPrint(7);
-                        PrintText(" \r\n" + PrintHelper.MergeStr("微信扫码登录小程序", "", PrintHelper.BodyCharCountOfLine, PrintHelper.PageSize) + " \r\n", 24);
+                        PrintText(" \r\n" + PrintHelper.MergeStr("上果叔到家，抢实惠好物！", "", PrintHelper.BodyCharCountOfLine, PrintHelper.PageSize) + " \r\n", 24);
                     }
                     PrintText(PrintHelper.getStrLine() + " \r\n", 24);
                     PrintText("多谢惠顾，欢迎下次光临！ \r\n", 24);

@@ -143,24 +143,24 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-                    if (codetrade.status == "SUCCESS")
-                    {
-                        IsScan = false;
-                        if (DataReceiveHandle != null)
-                            this.DataReceiveHandle.BeginInvoke(1, codetrade.orderid, null, null);
-                        isrun = false;
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
+                    //if (codetrade.status == "SUCCESS")
+                    //{
+                    //    IsScan = false;
+                    //    if (DataReceiveHandle != null)
+                    //        this.DataReceiveHandle.BeginInvoke(1, codetrade.orderid, null, null);
+                    //    isrun = false;
+                    //    this.DialogResult = DialogResult.OK;
+                    //    this.Close();
+                    //}
+                    //else
+                    //{
 
                         pnlLoading.Visible = true;
                         timerAuthCodeTrade.Enabled = false;
                         timerSyncTrade.Enabled = true;
                         CurrentPayID = codetrade.payid;
                         SyncTrade(CurrentOrderID, CurrentPayID);  
-                    }
+                   // }
                  
                 }
             }
