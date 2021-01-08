@@ -387,6 +387,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+
+                //果叔反馈收银会出现客屏没有轮播广告  特殊处理 未测试复现
+               if( MainModel.frmMainmediaCart==null || MainModel.frmMainmediaCart.products==null || MainModel.frmMainmediaCart.products.Count == 0)
+                {
+                    IniForm(null);
+                    return;
+                }
+
+
                 try
                 {
                     if (PlayerOpen)
@@ -1141,6 +1150,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
 
                     showcount += 1;
+                }
+                else if (CurrentSelectMode == 1 && lstPlayerUrl.Count > 0 && !player.status.Contains("正在播放"))
+                {
+                    player.Visible = true;
+                    PlayerThread();
+
                 }
             }
             catch (Exception ex)

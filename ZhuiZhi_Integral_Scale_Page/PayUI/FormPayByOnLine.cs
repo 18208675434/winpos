@@ -159,7 +159,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         timerAuthCodeTrade.Enabled = false;
                         timerSyncTrade.Enabled = true;
                         CurrentPayID = codetrade.payid;
-                        SyncTrade(CurrentOrderID, CurrentPayID);  
+                        SyncTrade(CurrentOrderID, CurrentPayID);
                    // }
                  
                 }
@@ -177,7 +177,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             try
             {
                
-
                 string errormsg = "";
                 string retunerrormsg = "";
                 synctrade sync = httputil.SyncTrade(orderid, payid, ref errormsg,ref retunerrormsg);

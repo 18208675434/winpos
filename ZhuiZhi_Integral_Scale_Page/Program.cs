@@ -64,7 +64,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 string localmqtt = INIManager.GetIni("MQTT", "Server", Model.MainModel.IniPath);
                 INIManager.SetIni("MQTT", "Server", localmqtt.Replace("a72hongjie", "fruitgs"), Model.MainModel.IniPath);
 
-
+                Model.MainModel.URL = INIManager.GetIni("System", "URL", Model.MainModel.IniPath);
 
                 File.Copy(@"C:\iSmartSystem\pos_ad_dll.dll", AppDomain.CurrentDomain.BaseDirectory + "\\pos_ad_dll.dll", true);
             }

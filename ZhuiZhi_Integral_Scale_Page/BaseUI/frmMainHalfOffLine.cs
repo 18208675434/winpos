@@ -3572,6 +3572,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         rbtnPay.WhetherEnable = false;
 
                         ClearForm();
+                        return;
                     }
                     else
                     {
