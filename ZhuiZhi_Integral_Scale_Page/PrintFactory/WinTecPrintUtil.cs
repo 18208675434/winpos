@@ -546,7 +546,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                 if (needsuncode)
                 {
-                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName))
+                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName) && MainModel.WhetherPrintSunCode)
                     {
                         PrintText(PrintHelper.getStrLine() + " \r\n", 24);
                         BeginPrint(0);

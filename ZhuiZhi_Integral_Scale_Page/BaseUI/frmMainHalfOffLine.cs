@@ -283,6 +283,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.WhetherAutoPrint = INIManager.GetIni("CashierSet", "WhetherAutoPrint", MainModel.IniPath) == "1";
                 MainModel.WhetherHalfOffLine = INIManager.GetIni("System", "WhetherHalfOffLine", MainModel.IniPath) == "1";
                 MainModel.WhetherShowWithJin = INIManager.GetIni("System", "WhetherShowWithJin", MainModel.IniPath) == "1";
+
+                //默认开启
+                MainModel.WhetherPrintSunCode = INIManager.GetIni("Print", "PrintSunCode", MainModel.IniPath) != "0";
                 #endregion
 
                 //判断是否支持整单改价

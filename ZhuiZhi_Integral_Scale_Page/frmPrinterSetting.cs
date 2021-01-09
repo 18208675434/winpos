@@ -82,6 +82,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 UpdatePrint();
                 LoadHalfOffLineIni();
                 LoadShowWithJinIni();
+                LoadPrintSunCode();
                 IsLoadSuccess = true;
             }
             catch (Exception ex)
@@ -827,7 +828,46 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
 
 
+        #region 是否打印小程序太阳码
 
+
+        private void LoadPrintSunCode()
+        {
+            string WhetherPrintSunCode = INIManager.GetIni("Print", "PrintSunCode", MainModel.IniPath);
+
+            //默认开启
+            if (WhetherPrintSunCode != "0")
+            {
+                MainModel.WhetherPrintSunCode = true;
+                picOpenPrintSunCode.BackgroundImage = picSelect.Image;
+                picClosePrintSunCode.BackgroundImage = picNotSelect.Image;
+            }
+            else
+            {
+                MainModel.WhetherPrintSunCode = false;
+                picOpenPrintSunCode.BackgroundImage = picNotSelect.Image;
+                picClosePrintSunCode.BackgroundImage = picSelect.Image;
+
+            }
+        }
+        private void pnlOpenPrintSunCode_Click(object sender, EventArgs e)
+        {
+            MainModel.WhetherPrintSunCode = true;
+            picOpenPrintSunCode.BackgroundImage = picSelect.Image;
+            picClosePrintSunCode.BackgroundImage = picNotSelect.Image;
+
+            INIManager.SetIni("Print", "PrintSunCode", "1", MainModel.IniPath);
+        }
+
+        private void pnlClosePrintSunCode_Click(object sender, EventArgs e)
+        {
+            MainModel.WhetherPrintSunCode = false;
+            picOpenPrintSunCode.BackgroundImage = picNotSelect.Image;
+            picClosePrintSunCode.BackgroundImage = picSelect.Image;
+            INIManager.SetIni("Print", "PrintSunCode", "0", MainModel.IniPath);
+        }
+
+        #endregion
     }
 
 }

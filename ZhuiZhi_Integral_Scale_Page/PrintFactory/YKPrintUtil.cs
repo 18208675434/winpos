@@ -530,7 +530,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                 if (needsuncode)
                 {
-                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName) )
+                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName) && MainModel.WhetherPrintSunCode)
                     {
                         PrintStr(new StringBuilder(PrintHelper.getStrLine() + "\n"));
                         SetAlign(1);
@@ -689,7 +689,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         public static int PrintBitmap([MarshalAs(UnmanagedType.LPStr)]StringBuilder szBmpFile, int m)
         {
             int i;
-            i = YkPrintBitmap(szBmpFile, m);
+
+           // string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                i = YkPrintBitmap(szBmpFile, m);
+            
+            
             return i;
         }
         public static int FeedPaper()

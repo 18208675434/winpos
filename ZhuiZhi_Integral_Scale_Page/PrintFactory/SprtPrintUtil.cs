@@ -571,7 +571,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                 if (needsuncode)
                 {
-                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName))
+                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName) && MainModel.WhetherPrintSunCode)
                     {
                         try
                         {
@@ -590,7 +590,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 //末尾打印空白行走纸
                 string strswhite = "  \r\n  \r\n  \r\n";
                 POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, strswhite + "\r\n");
-
 
                 POS_Control_ReSet(m_hPrinter);
 

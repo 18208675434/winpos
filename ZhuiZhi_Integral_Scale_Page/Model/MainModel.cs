@@ -120,6 +120,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public static bool WhetherShowWithJin = true;
 
+
+        /// <summary>
+        /// 是否打印小程序太阳码
+        /// </summary>
+        public static bool WhetherPrintSunCode = true;
+
         /// <summary>
         /// 接口返回code 100031;//店员登录失效
         /// </summary>
