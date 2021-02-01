@@ -239,5 +239,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 日期 {
+            get {
+                object obj = ResourceManager.GetObject("日期", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

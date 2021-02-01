@@ -107,7 +107,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         /// <summary>
         /// 无单退款 会员 需与主收银页面区分开
         /// </summary>
-        private Member ReturnMembr = null;
+        public Member ReturnMembr = null;
         #endregion
 
         #region 页面加载与退出
@@ -428,8 +428,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         tplMember.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0);
                         tplMember.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100);
 
-                        lblMemberPhone.Text = "会员账号：" + member.memberinfo;
-
+                        //lblMemberPhone.Text = "会员账号：" + member.memberinfo;
+                        lblMemberPhone.Text = "会员账号：" + member.memberinfo + MainHelper.GetMemberName(member, true);
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 
                         ReturnMembr = member;
@@ -2690,6 +2690,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 else
                 {
                     CurrentCart.cashpayoption = 0;
+                    CurrentCart.cashpayamt = 0;
                     RefreshCart();
                 }
                 ShowLoading(false, true);                 
@@ -3008,9 +3009,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     return;
                 }
                
-                MemberCenterHelper.ShowFormMemberCenter(ReturnMembr);
+               bool memberupdate =  MemberCenterHelper.ShowFormMemberCenter(ReturnMembr,true);
 
-                if (ReturnMembr != null)
+               if (memberupdate)
                 {
                     string ErrorMsgMember = "";
                     Member member = httputil.GetMember(ReturnMembr.memberheaderresponsevo.mobile, ref ErrorMsgMember);

@@ -15,7 +15,7 @@ namespace ScaleTest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormScaleTest());
+            Application.Run(new FormWinTec());
         }
     }
 }

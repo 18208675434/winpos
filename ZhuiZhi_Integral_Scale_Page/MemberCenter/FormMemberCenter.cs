@@ -23,6 +23,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         private Member CurrentMember = null;
 
+        private bool IsReturnWithoutOrder = false;
+
         private ListAllTemplate CurrentTemplate = null;
         private CustomTemplateModel CustomTemplate = null;
 
@@ -40,13 +42,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
         //自定义充值模板ID
         private int CustomID = -1;
-        public FormMemberCenter(Member member)
+        public FormMemberCenter(Member member, bool isreturnwithoutorder)
         {
             InitializeComponent();
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
             CurrentMember = member;
+            IsReturnWithoutOrder = isreturnwithoutorder;
         }
 
         private void FormMemberCenter_Shown(object sender, EventArgs e)
@@ -60,7 +63,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 lblMenu.Text = MainModel.CurrentUser.nickname + ",你好 ";
                 picMenu.Left = pnlMenu.Width - picMenu.Width - lblMenu.Width;
                 lblMenu.Left = picMenu.Right;
-               
+
                 Application.DoEvents();
 
                 IsEnable = false;
@@ -69,7 +72,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 UpdateMemberInfo();
                 LoadTemplate(true);
 
-                this.BeginInvoke(new Action(delegate()
+                this.BeginInvoke(new Action(delegate ()
                 {
                     LoadBalanceConfigDetail();
                 }));
@@ -82,7 +85,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     MemberCenterMediaHelper.UpdateDgvTemplate(AllShowlstbmp);
                 }
 
-                MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
+                MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text, lblEntityCard.Text);
             }
             catch (Exception ex)
             {
@@ -116,12 +119,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
 
             lblPhone.Text = phone;
-            btnChangePhone.Left = lblPhone.Right;
+            //btnChangePhone.Left = lblPhone.Right;
 
             string gender = CurrentMember.memberinformationresponsevo.gender == 0 ? "男" : "女";
             string birthday = CurrentMember.memberinformationresponsevo.birthdaystr;
             MainModel.memberid = CurrentMember.memberid;
-            lblMemberInfo.Text = "性别：" + gender + " | " + "生日：" + birthday;
+            string membername = ZhuiZhi_Integral_Scale_UncleFruit.BaseUI.MainHelper.GetMemberName(CurrentMember);
+            if (string.IsNullOrEmpty(membername.Trim()))
+            {
+                lblMemberInfo.Text = "性别：" + gender + " | " + "生日：" + birthday;
+            }
+            else
+            {
+                lblMemberInfo.Text = "姓名：" + membername + " | " + "性别：" + gender + " | " + "生日：" + birthday;
+            }
+
 
             lblBalance.Text = "￥" + CurrentMember.barcoderecognitionresponse.balance;
 
@@ -131,7 +143,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
 
             lblCreditAmount.Left = lblCredit.Right;
 
-            this.BeginInvoke(new Action(delegate()
+            this.BeginInvoke(new Action(delegate ()
             {
                 LoadCoupon();
             }));
@@ -142,7 +154,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 picEntityCard.Left = lblEntityCard.Right;
             }
 
-            this.BeginInvoke(new Action(delegate()
+            this.BeginInvoke(new Action(delegate ()
             {
                 LoadBalanceAccount();
             }));
@@ -151,6 +163,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         private void btnCancle_Click(object sender, EventArgs e)
         {
             ListAllTemplate.enable = false;
+
+            //if (this.DialogResult != DialogResult.OK)
+            //{
+            //    this.DialogResult = DialogResult.Cancel;
+            //}
             this.Close();
         }
 
@@ -235,7 +252,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     return;
                 }
                 decimal realCash = 0;
-                if (MemberCenterHelper.ShowFormTopUpByCash(CurrentTemplate.amount,ref realCash))
+                if (MemberCenterHelper.ShowFormTopUpByCash(CurrentTemplate.amount, ref realCash))
                 {
 
                     MemberTopUpPara para = new MemberTopUpPara();
@@ -263,7 +280,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     else
                     {
                         //DbJsonUtil.AddBalanceInfo("现金", para.amount);
-                     
+
                         TopUpOK(result.ToString(), CurrentTemplate.amount, realCash);
                     }
                 }
@@ -306,7 +323,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 {
 
                     string errormsg = "";
-                    LstTemplates = httputil.ListAllTemplate(ref errormsg,CurrentMember.memberid);
+                    LstTemplates = httputil.ListAllTemplate(ref errormsg, CurrentMember.memberid);
                     if (LstTemplates == null || !string.IsNullOrEmpty(errormsg))
                     {
                         MainModel.ShowLog(errormsg, false);
@@ -338,37 +355,37 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     }
                 }
 
-              
+
 
                 //当前页展示的图片集合
-               List<Bitmap> ThisPageShowlstbmp = new List<Bitmap>();
+                List<Bitmap> ThisPageShowlstbmp = new List<Bitmap>();
 
-               if (AllShowlstbmp.Count > 12)
-               {
-                   rbtnPageUp.Visible = true;
-                   rbtnPageDown.Visible = true;
+                if (AllShowlstbmp.Count > 12)
+                {
+                    rbtnPageUp.Visible = true;
+                    rbtnPageDown.Visible = true;
 
-                   rbtnPageUp.WhetherEnable = CurrentPage > 1;
-                   rbtnPageDown.WhetherEnable = AllShowlstbmp.Count > CurrentPage * 11;
+                    rbtnPageUp.WhetherEnable = CurrentPage > 1;
+                    rbtnPageDown.WhetherEnable = AllShowlstbmp.Count > CurrentPage * 11;
 
-                   int startindex = (CurrentPage - 1) * 12;
+                    int startindex = (CurrentPage - 1) * 12;
 
-                   int lastindex = Math.Min(AllShowlstbmp.Count - 1, startindex + 11);
-
-
-                   ThisPageShowlstbmp = AllShowlstbmp.GetRange(startindex, lastindex - startindex + 1);
-
-               }
-               else
-               {
-                   rbtnPageUp.Visible = false ;
-                   rbtnPageDown.Visible = false ;
-                   ThisPageShowlstbmp = AllShowlstbmp;
-                   CurrentPage = 1;
-               }
+                    int lastindex = Math.Min(AllShowlstbmp.Count - 1, startindex + 11);
 
 
-               int emptycount = 3 - ThisPageShowlstbmp.Count % 3;
+                    ThisPageShowlstbmp = AllShowlstbmp.GetRange(startindex, lastindex - startindex + 1);
+
+                }
+                else
+                {
+                    rbtnPageUp.Visible = false;
+                    rbtnPageDown.Visible = false;
+                    ThisPageShowlstbmp = AllShowlstbmp;
+                    CurrentPage = 1;
+                }
+
+
+                int emptycount = 3 - ThisPageShowlstbmp.Count % 3;
 
                 for (int i = 0; i < emptycount; i++)
                 {
@@ -386,7 +403,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
             catch (Exception ex)
             {
-                MainModel.ShowLog("获取所有充值面额异常" + ex.Message, true);
+                // MainModel.ShowLog("获取所有充值面额异常" + ex.Message, true);
+
+                LogManager.WriteLog("获取所有充值面额异常" + ex.Message);
             }
         }
 
@@ -470,21 +489,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 加载会员中心-优惠券
         /// </summary>
         /// <param name="lastcouponcode"></param>
-        private void LoadCoupon(string lastcouponcode="0")
+        private void LoadCoupon(string lastcouponcode = "0")
         {
             try
             {
-                if (lastcouponcode=="0")//首次调用，清空优惠券缓存
+                if (lastcouponcode == "0")//首次调用，清空优惠券缓存
                 {
                     CurrentLstCoupon = new List<PromotionCoupon>();
                 }
                 int totalSize = 0;
-                string ErrorMsg = "";              
-                List<PromotionCoupon> pageLstCoupon = httputil.MyCouponList(CurrentMember.memberinformationresponsevo.memberid,30,ref lastcouponcode, ref totalSize, ref ErrorMsg);
+                string ErrorMsg = "";
+                List<PromotionCoupon> pageLstCoupon = httputil.MyCouponList(CurrentMember.memberinformationresponsevo.memberid, 30, ref lastcouponcode, ref totalSize, ref ErrorMsg);
                 if (pageLstCoupon == null || !string.IsNullOrEmpty(ErrorMsg))
                 {
                     return;
-                }               
+                }
                 CurrentLstCoupon.AddRange(pageLstCoupon);
                 if (totalSize <= CurrentLstCoupon.Count)//递归完成退出
                 {
@@ -528,18 +547,40 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 //自定义充值
                 if (selectimg == bmpCustom || temp.id == CustomID)
                 {
-                    ListAllTemplate customtemplate = MemberCenterHelper.ShowFormCustomerChange();
-                    this.Activate();
-                    if (customtemplate != null)
-                    {
-                        CurrentTemplate = customtemplate;
-                        LoadTemplate(false);
-                    }
+                    //ListAllTemplate customtemplate = MemberCenterHelper.ShowFormCustomerChange();
+                    //this.Activate();
+                    //if (customtemplate != null)
+                    //{
+                    //    CurrentTemplate = customtemplate;
+                    //    LoadTemplate(false);
+                    //}
 
+                    try
+                    {
+                        BackHelper.ShowFormBackGround();
+                        FormCustomreCharge formCustomreCharge = new FormCustomreCharge();
+                        asf.AutoScaleControlTest(formCustomreCharge, 390, 450, 390 * MainModel.midScale, 450 * MainModel.midScale, true);
+                        formCustomreCharge.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - formCustomreCharge.Width) / 2, (Screen.AllScreens[0].Bounds.Height - formCustomreCharge.Height) / 2);
+                        formCustomreCharge.TopMost = true;
+                        formCustomreCharge.ShowDialog();
+                        ListAllTemplate customTemplate = formCustomreCharge.CustomTemplate;
+                        formCustomreCharge.Dispose();                      
+                        if (customTemplate != null)
+                        {
+                            CurrentTemplate = customTemplate;
+                            LoadTemplate(false);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MainModel.ShowLog(":"+ex.Message,true);
+                    }
+                    finally{
+                        BackHelper.HideFormBackGround();
+                    }
+                   
                     return;
                 }
-
-
 
                 if (temp.amount > 5000)
                 {
@@ -712,9 +753,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             try
             {
                 this.Hide();
-                if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid,realCash))
+                if (!MemberCenterHelper.ShowRechargeSuccess(depositbillid, realCash))
                 {
                     this.Close();
+                    this.DialogResult = DialogResult.OK;
                     return;
                 }
                 this.Show();
@@ -848,10 +890,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             {
                 LoadingHelper.ShowLoadingScreen();
                 try
-                {                   
+                {
                     CurrentMember = MainModel.CurrentMember;
                     UpdateMemberInfo();
-                    MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text,lblEntityCard.Text);
+                    MemberCenterMediaHelper.UpdatememberInfo(lblPhone.Text, lblMemberInfo.Text, lblBalance.Text, lblCredit.Text, lblCreditAmount.Text, lblCoupon.Text, lblEntityCard.Text);
                 }
                 catch (Exception ex)
                 {
@@ -945,7 +987,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         {
             try
             {
-                string entityCardNo = DialogHelper.ShowFormCode("绑定实体卡","请输入实体卡号");
+                string entityCardNo = DialogHelper.ShowFormCode("绑定实体卡", "请输入实体卡号");
                 if (!string.IsNullOrEmpty(entityCardNo))
                 {
                     string err = "";
@@ -960,7 +1002,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                     else
                     {
                         bool flag = MemberCenterHelper.ShowFormBindEntityCard(entityCard);
-                        MainModel.CurrentMember = CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+                        CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+
+                        if (!IsReturnWithoutOrder)
+                        {
+                            MainModel.CurrentMember = CurrentMember;
+                        }
                         UpdateMemberInfo();
                     }
                 }
@@ -998,6 +1045,35 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             finally
             {
                 IsEnable = true;
+            }
+        }
+
+        private void btnEditMember_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (!IsEnable)
+                {
+                    return;
+                }
+                Application.DoEvents();
+                if (MemberCenterHelper.ShowFormEditMember(CurrentMember))
+                {
+                    this.DialogResult = DialogResult.OK;
+                    string err = "";
+                    CurrentMember = httputil.GetMember(CurrentMember.memberinfo, ref err);
+
+                    if (!IsReturnWithoutOrder)
+                    {
+                        MainModel.CurrentMember = CurrentMember;
+                    }
+                    UpdateMemberInfo();
+                }
+            }
+            catch
+            {
+
             }
         }
     }

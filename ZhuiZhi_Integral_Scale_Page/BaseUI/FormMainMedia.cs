@@ -64,7 +64,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
             //使用委托的话frmmain界面会卡死
             Control.CheckForIllegalCrossThreadCalls = false;
-                  }
+
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.  
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲  
+
+
+        }
         private void frmMainMedia_Load(object sender, EventArgs e)
         {
 
@@ -381,6 +387,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
         {
             try
             {
+
+                //果叔反馈收银会出现客屏没有轮播广告  特殊处理 未测试复现
+               if( MainModel.frmMainmediaCart==null || MainModel.frmMainmediaCart.products==null || MainModel.frmMainmediaCart.products.Count == 0)
+                {
+                    IniForm(null);
+                    return;
+                }
+
+
                 try
                 {
                     if (PlayerOpen)
@@ -1114,8 +1129,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                    
                     if (showcount < lstShowImg.Count)
                     {
-                        player.Visible = false;
-                        pnlAdvertising.BackgroundImage = lstShowImg[showcount];
+
+                        Invoke((new Action(() =>
+                        {
+                            player.Visible = false;
+                            pnlAdvertising.BackgroundImage = lstShowImg[showcount];
+                        })));
+                        //player.Visible = false;
+                        //pnlAdvertising.BackgroundImage = lstShowImg[showcount];
                     }
                     else
                     {                      
@@ -1129,6 +1150,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     }
 
                     showcount += 1;
+                }
+                else if (CurrentSelectMode == 1 && lstPlayerUrl.Count > 0 && !player.status.Contains("正在播放"))
+                {
+                    player.Visible = true;
+                    PlayerThread();
+
                 }
             }
             catch (Exception ex)
@@ -1162,19 +1189,23 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         private void bgwLoadMemberCard_DoWork(object sender, DoWorkEventArgs e)
         {
-            string ErrorMsg = "";
-            string imgurl = httputil.GetMemberCard(ref ErrorMsg);
-            if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
+            try
             {
-                //this.Invoke(new InvokeHandler(delegate()
-                //{
+                string ErrorMsg = "";
+                string imgurl = httputil.GetMemberCard(ref ErrorMsg);
+                if (!string.IsNullOrEmpty(imgurl) && string.IsNullOrEmpty(ErrorMsg))
+                {
+                    //this.Invoke(new InvokeHandler(delegate()
+                    //{
 
-                Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                imgmembercard = _image;
+                    Image _image = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
+                    imgmembercard = _image;
 
-                picMemberCard.BackgroundImage = _image;
-                pnlMemberCard.Visible = true;
+                    picMemberCard.BackgroundImage = _image;
+                    pnlMemberCard.Visible = true;
+                }
             }
+            catch { }
         }
     }
 }

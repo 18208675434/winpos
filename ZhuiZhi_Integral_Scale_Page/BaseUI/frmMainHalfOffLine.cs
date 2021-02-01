@@ -283,6 +283,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 MainModel.WhetherAutoPrint = INIManager.GetIni("CashierSet", "WhetherAutoPrint", MainModel.IniPath) == "1";
                 MainModel.WhetherHalfOffLine = INIManager.GetIni("System", "WhetherHalfOffLine", MainModel.IniPath) == "1";
                 MainModel.WhetherShowWithJin = INIManager.GetIni("System", "WhetherShowWithJin", MainModel.IniPath) == "1";
+
+                //默认开启
+                MainModel.WhetherPrintSunCode = INIManager.GetIni("Print", "PrintSunCode", MainModel.IniPath) != "0";
                 #endregion
 
                 //判断是否支持整单改价
@@ -725,7 +728,21 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         frmreturn.ShowDialog();
                         frmreturn.Dispose();
                         Application.DoEvents();
+                        if (MainModel.CurrentMember != null || frmreturn.ReturnMembr != null && MainModel.CurrentMember.memberinfo == frmreturn.ReturnMembr.memberinfo)
+                        {
+                            string ErrorMsgMember = "";
+                            Member member = httputil.GetMember(MainModel.CurrentMember.memberinfo, ref ErrorMsgMember);
 
+                            if (ErrorMsgMember != "" || member == null) //会员不存在
+                            {
+                                ClearMember();
+                                ShowLog(ErrorMsgMember, false);
+                            }
+                            else
+                            {
+                                LoadMember(member);
+                            }
+                        }
 
                         // ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder.ReturnWithoutOrderHelper.ShowFormReturnWithoutOrder();
 
@@ -1403,7 +1420,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             member.entrancecode = member.memberheaderresponsevo.mobile;
                         }
 
-                        lblMemberPhone.Text = "会员账号：" + member.memberinfo;
+                        lblMemberPhone.Text = "会员账号：" + member.memberinfo+MainHelper.GetMemberName(member,true);
 
                         pbtnExitMember.Left = lblMemberPhone.Right + 5;
 
@@ -1725,7 +1742,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     Application.DoEvents();
 
                     CurrentGoodPage = 1;
-                    LoadDgvGood(false, false);
+                    Invoke((new Action(() =>
+                    {
+                        LoadDgvGood(false, false);
+                    })));
                 }
             }
             catch { }
@@ -2233,42 +2253,45 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                     }
 
-
-                    Invoke((new Action(() =>
+                    if (this.IsHandleCreated)
                     {
+                        dgvGood.Invoke((new Action(() =>
+                         {
 
-                        dgvGood.Rows.Clear();
+                             dgvGood.Rows.Clear();
 
-                        for (int i = 0; i < lstLaodingPro.Count; i++)
-                        {
+                             for (int i = 0; i < lstLaodingPro.Count; i++)
+                             {
 
-                            if (lstLaodingPro[i].panelbmp == null)
-                            {
-                                lstLaodingPro[i].panelbmp = GetItemImg(lstLaodingPro[i]);
-                            }
-                            lstshowimg.Add(lstLaodingPro[i].panelbmp);
+                                 if (lstLaodingPro[i].panelbmp == null)
+                                 {
+                                     lstLaodingPro[i].panelbmp = GetItemImg(lstLaodingPro[i]);
+                                 }
+                                 lstshowimg.Add(lstLaodingPro[i].panelbmp);
 
-                        }
+                             }
 
-                        if (paging.havedownpage)
-                        {
-                            lstshowimg.Add(imgPageDownForGood);
-                        }
+                             if (paging.havedownpage)
+                             {
+                                 lstshowimg.Add(imgPageDownForGood);
+                             }
 
 
 
-                        for (int i = 0; i < paging.makeupcount; i++)
-                        {
-                            lstshowimg.Add(ResourcePos.empty);
-                        }
+                             for (int i = 0; i < paging.makeupcount; i++)
+                             {
+                                 lstshowimg.Add(ResourcePos.empty);
+                             }
 
-                        int rowcount = lstshowimg.Count / 5;
+                             int rowcount = lstshowimg.Count / 5;
 
-                        for (int i = 0; i < rowcount; i++)
-                        {
-                            dgvGood.Rows.Add(lstshowimg[i * 5 + 0], lstshowimg[i * 5 + 1], lstshowimg[i * 5 + 2], lstshowimg[i * 5 + 3], lstshowimg[i * 5 + 4]);
-                        }
-                    })));
+                             for (int i = 0; i < rowcount; i++)
+                             {
+                                 dgvGood.Rows.Add(lstshowimg[i * 5 + 0], lstshowimg[i * 5 + 1], lstshowimg[i * 5 + 2], lstshowimg[i * 5 + 3], lstshowimg[i * 5 + 4]);
+                             }
+                         })));
+
+                    }
                     IsEnable = true;
 
                 }
@@ -3552,6 +3575,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         rbtnPay.WhetherEnable = false;
 
                         ClearForm();
+                        return;
                     }
                     else
                     {
@@ -3942,12 +3966,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 else
                 {
                     int resultcode = PayHelper.ShowFormPay(CurrentCart);
-                    ShowLoading(false, true);
+                    
                     Application.DoEvents();
                     if (resultcode == 1)
                     {
                         ClearForm();
-                        ClearMember();
+                        if (MainModel.CurrentMember != null)
+                        {
+                            ClearMember();
+                        }
 
                     }
                     else if (resultcode == 0)
@@ -3961,13 +3988,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                         {
                             RefreshCart();
                         }
-
                     }
                     else
                     {
                         CheckUserAndMember(resultcode, "");
                     }
-
+                    ShowLoading(false, true);
                     //0726防止会员其他页面过期 本页面会员还在展示
                     if (MainModel.CurrentMember == null && tplMember.ColumnStyles[1].Width > 0)
                     {
@@ -3978,6 +4004,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
+                ShowLoading(false, true);
                 ShowLog("结算异常" + ex.Message, true);
             }
         }
@@ -4010,8 +4037,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-
-                    PayHelper.ShowFormPaySuccess(orderresult.orderid);
+                    PayHelper.ShowFormPaySuccess(orderresult.orderid); 
                     ClearForm();
                     ClearMember();
                 }
@@ -4289,9 +4315,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     BaseUIHelper.UpdaForm(CurrentCart);
                 }
 
-                MemberCenterHelper.ShowFormMemberCenter(MainModel.CurrentMember);
+                bool memberupdate = MemberCenterHelper.ShowFormMemberCenter(MainModel.CurrentMember,false);
 
-                if (MainModel.CurrentMember != null)
+                if (memberupdate)
                 {
                     string ErrorMsgMember = "";
                     Member member = httputil.GetMember(MainModel.CurrentMember.memberinfo, ref ErrorMsgMember);

@@ -69,6 +69,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     ToledoPrintUtil.PrintOrder(printdetail, printdetail.isrefund, ref errrormsg);
                 }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.PrintOrder(printdetail, printdetail.isrefund, ref errrormsg);
+                }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     SprtPrintUtil.PrintOrder(printdetail, printdetail.isrefund, ref errrormsg);
@@ -119,6 +123,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                      ToledoPrintUtil.ReceiptPrint(receipt, ref errormsg);
                 }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.ReceiptPrint(receipt, ref errormsg);
+                }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                      SprtPrintUtil.ReceiptPrint(receipt, ref errormsg);
@@ -167,6 +175,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                      ToledoPrintUtil.PrintBroken(brokenresult, ref errormsg);
                 }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.PrintBroken(brokenresult, ref errormsg);
+                }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                      SprtPrintUtil.PrintBroken(brokenresult, ref errormsg);
@@ -214,6 +226,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     ToledoPrintUtil.OpenCashDrawerEx();
                 }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.OpenCashDrawerEx();
+                }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     SprtPrintUtil.OpenCashDrawerEx();
@@ -259,6 +275,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
                     ToledoPrintUtil.PrintTopUp(printdetail, printdetail.isEntityCardBatchSale);
+                }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.PrintTopUp(printdetail, printdetail.isEntityCardBatchSale);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
@@ -317,6 +337,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                     ToledoPrintUtil.PrintBalanceRefund(printdetail);
                 }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.PrintBalanceRefund(printdetail);
+                }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                     SprtPrintUtil.PrintBalanceRefund(printdetail);
@@ -368,6 +392,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 {
                      ToledoPrintUtil.PrintGiftCardOrder(printdetail, printdetail.isRefound, ref errormsg);
                 }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.PrintGiftCardOrder(printdetail, printdetail.isRefound, ref errormsg);
+                }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {
                      SprtPrintUtil.PrintGiftCardOrder(printdetail, printdetail.isRefound, ref errormsg);
@@ -418,6 +446,10 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
                 if (ScaleName == ScaleType.托利多.ToString())
                 {
                      ToledoPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
+                }
+                else if (ScaleName == ScaleType.中科英泰.ToString())
+                {
+                    WinTecPrintUtil.PrintThirdOrder(printdetail, ref errormsg);
                 }
                 else if (ScaleName == ScaleType.易捷通.ToString())
                 {

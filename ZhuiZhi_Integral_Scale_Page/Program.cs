@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ZhuiZhi_Integral_Scale_UncleFruit.BaseUI;
+using System.IO;
 
 namespace ZhuiZhi_Integral_Scale_UncleFruit
 {
@@ -49,12 +50,25 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                             }
                             
                         }
-
                     }
                 }
-                    
+                
             }
-            
+
+            try
+            {
+                //2020-12-18 切换域名
+                string localurl = INIManager.GetIni("System", "URL", Model.MainModel.IniPath);
+                INIManager.SetIni("System", "URL",localurl.Replace("a72hongjie", "fruitgs"), Model.MainModel.IniPath);
+                INIManager.SetIni("System", "URL", localurl.Replace("a72hongjie", "fruitgs"), Model.MainModel.StartIniPath);
+                string localmqtt = INIManager.GetIni("MQTT", "Server", Model.MainModel.IniPath);
+                INIManager.SetIni("MQTT", "Server", localmqtt.Replace("a72hongjie", "fruitgs"), Model.MainModel.IniPath);
+
+                Model.MainModel.URL = INIManager.GetIni("System", "URL", Model.MainModel.IniPath);
+
+                File.Copy(@"C:\iSmartSystem\pos_ad_dll.dll", AppDomain.CurrentDomain.BaseDirectory + "\\pos_ad_dll.dll", true);
+            }
+            catch { }
             //处理未捕获的异常
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             //处理UI线程异常

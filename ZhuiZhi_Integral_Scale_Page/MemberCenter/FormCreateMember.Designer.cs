@@ -32,7 +32,6 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.btnCreateByScan = new System.Windows.Forms.Button();
             this.btnCreateByWrite = new System.Windows.Forms.Button();
-            this.btnCancle = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,33 +39,34 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.tlpType = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlWoman = new System.Windows.Forms.Panel();
             this.lblWoman = new System.Windows.Forms.Label();
-            this.picWoman = new System.Windows.Forms.PictureBox();
             this.pnlMan = new System.Windows.Forms.Panel();
             this.lblMan = new System.Windows.Forms.Label();
-            this.picMan = new System.Windows.Forms.PictureBox();
             this.txtPhone = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.txtBirthday = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.txtName = new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox();
-            this.picNotSelect = new System.Windows.Forms.PictureBox();
             this.picSelect = new System.Windows.Forms.PictureBox();
+            this.picNotSelect = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picWoman = new System.Windows.Forms.PictureBox();
+            this.picMan = new System.Windows.Forms.PictureBox();
+            this.btnCancle = new System.Windows.Forms.Button();
             this.tlpType.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.pnlWoman.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picWoman)).BeginInit();
             this.pnlMan.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picNotSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelect)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picNotSelect)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picWoman)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMan)).BeginInit();
             this.SuspendLayout();
             // 
             // lblInfo
@@ -110,23 +110,6 @@
             this.btnCreateByWrite.Text = "填表注册";
             this.btnCreateByWrite.UseVisualStyleBackColor = false;
             this.btnCreateByWrite.Click += new System.EventHandler(this.btnCreateByWrite_Click);
-            // 
-            // btnCancle
-            // 
-            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
-            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCancle.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCancle.FlatAppearance.BorderSize = 0;
-            this.btnCancle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnCancle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.btnCancle.Location = new System.Drawing.Point(376, 12);
-            this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(32, 32);
-            this.btnCancle.TabIndex = 77;
-            this.btnCancle.UseVisualStyleBackColor = true;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // label1
             // 
@@ -212,16 +195,6 @@
             this.panel2.Size = new System.Drawing.Size(405, 385);
             this.panel2.TabIndex = 1;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(67, 142);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(283, 240);
-            this.pictureBox1.TabIndex = 50;
-            this.pictureBox1.TabStop = false;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -293,17 +266,6 @@
             this.lblWoman.Text = "女";
             this.lblWoman.Click += new System.EventHandler(this.pnlWoman_Click);
             // 
-            // picWoman
-            // 
-            this.picWoman.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picWoman.BackgroundImage")));
-            this.picWoman.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picWoman.Location = new System.Drawing.Point(3, 6);
-            this.picWoman.Name = "picWoman";
-            this.picWoman.Size = new System.Drawing.Size(36, 28);
-            this.picWoman.TabIndex = 0;
-            this.picWoman.TabStop = false;
-            this.picWoman.Click += new System.EventHandler(this.pnlWoman_Click);
-            // 
             // pnlMan
             // 
             this.pnlMan.Controls.Add(this.lblMan);
@@ -325,17 +287,6 @@
             this.lblMan.TabIndex = 50;
             this.lblMan.Text = "男";
             this.lblMan.Click += new System.EventHandler(this.pnlMan_Click);
-            // 
-            // picMan
-            // 
-            this.picMan.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMan.BackgroundImage")));
-            this.picMan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picMan.Location = new System.Drawing.Point(3, 6);
-            this.picMan.Name = "picMan";
-            this.picMan.Size = new System.Drawing.Size(36, 28);
-            this.picMan.TabIndex = 0;
-            this.picMan.TabStop = false;
-            this.picMan.Click += new System.EventHandler(this.pnlMan_Click);
             // 
             // txtPhone
             // 
@@ -408,6 +359,16 @@
             this.txtName.WaterText = "请输入会员姓名，可不填";
             this.txtName.DataChanged += new ZhuiZhi_Integral_Scale_UncleFruit.MyControl.NumberTextBox.DataRecHandleDelegate(this.txt_DataChanged);
             // 
+            // picSelect
+            // 
+            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
+            this.picSelect.Location = new System.Drawing.Point(203, 16);
+            this.picSelect.Name = "picSelect";
+            this.picSelect.Size = new System.Drawing.Size(36, 28);
+            this.picSelect.TabIndex = 88;
+            this.picSelect.TabStop = false;
+            this.picSelect.Visible = false;
+            // 
             // picNotSelect
             // 
             this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
@@ -418,15 +379,54 @@
             this.picNotSelect.TabStop = false;
             this.picNotSelect.Visible = false;
             // 
-            // picSelect
+            // pictureBox1
             // 
-            this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
-            this.picSelect.Location = new System.Drawing.Point(203, 16);
-            this.picSelect.Name = "picSelect";
-            this.picSelect.Size = new System.Drawing.Size(36, 28);
-            this.picSelect.TabIndex = 88;
-            this.picSelect.TabStop = false;
-            this.picSelect.Visible = false;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(67, 142);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(283, 240);
+            this.pictureBox1.TabIndex = 50;
+            this.pictureBox1.TabStop = false;
+            // 
+            // picWoman
+            // 
+            this.picWoman.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picWoman.BackgroundImage")));
+            this.picWoman.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picWoman.Location = new System.Drawing.Point(3, 6);
+            this.picWoman.Name = "picWoman";
+            this.picWoman.Size = new System.Drawing.Size(36, 28);
+            this.picWoman.TabIndex = 0;
+            this.picWoman.TabStop = false;
+            this.picWoman.Click += new System.EventHandler(this.pnlWoman_Click);
+            // 
+            // picMan
+            // 
+            this.picMan.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMan.BackgroundImage")));
+            this.picMan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picMan.Location = new System.Drawing.Point(3, 6);
+            this.picMan.Name = "picMan";
+            this.picMan.Size = new System.Drawing.Size(36, 28);
+            this.picMan.TabIndex = 0;
+            this.picMan.TabStop = false;
+            this.picMan.Click += new System.EventHandler(this.pnlMan_Click);
+            // 
+            // btnCancle
+            // 
+            this.btnCancle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancle.BackgroundImage")));
+            this.btnCancle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCancle.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCancle.FlatAppearance.BorderSize = 0;
+            this.btnCancle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnCancle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancle.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.btnCancle.Location = new System.Drawing.Point(376, 12);
+            this.btnCancle.Name = "btnCancle";
+            this.btnCancle.Size = new System.Drawing.Size(32, 32);
+            this.btnCancle.TabIndex = 77;
+            this.btnCancle.UseVisualStyleBackColor = true;
+            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // FormCreateMember
             // 
@@ -451,17 +451,17 @@
             this.tlpType.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlWoman.ResumeLayout(false);
             this.pnlWoman.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picWoman)).EndInit();
             this.pnlMan.ResumeLayout(false);
             this.pnlMan.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picNotSelect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSelect)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picNotSelect)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picWoman)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMan)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

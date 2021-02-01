@@ -76,6 +76,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         [DllImport("POS_SDK.dll", CharSet = CharSet.Ansi, EntryPoint = "POS_Output_PrintFontStringA")]
         static extern Int32 POS_Output_PrintFontStringA(Int32 printID, Int32 iFont, Int32 iThick, Int32 iWidth, Int32 iHeight, Int32 iUnderLine, String lpString);
 
+        [DllImport("POS_SDK.dll", CharSet = CharSet.Ansi, EntryPoint = "POS_Output_PrintBmpDirectA")]
+        static extern Int32 POS_Output_PrintBmpDirectA(Int32 printID, String strPath);
 
         [DllImport("POS_SDK.dll", CharSet = CharSet.Ansi, EntryPoint = "POS_Control_ReSet")]
         static extern Int32 POS_Control_ReSet(Int32 printID);
@@ -127,7 +129,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
 
 
-                    PrintTextByPaperWidth(PrintHelper.GetOrderPrintInfo(printdetail, isRefound));
+                    PrintTextByPaperWidth(PrintHelper.GetOrderPrintInfo(printdetail, isRefound),true);
 
                     Application.DoEvents();
                     return true;
@@ -553,7 +555,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         /// 初始值-1  标识为未开启打印机   开启打印机获取返回值 打印和开钱箱都需要传该值 否则打印报错
         /// </summary>
         private static int m_hPrinter = -1;
-        public static bool PrintTextByPaperWidth(List<string> lstprints)
+        public static bool PrintTextByPaperWidth(List<string> lstprints, bool needsuncode = false)
         {
             try
             {
@@ -567,10 +569,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, str + "\r\n");
                 }
 
+                if (needsuncode)
+                {
+                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName) && MainModel.WhetherPrintSunCode)
+                    {
+                        try
+                        {
+                            POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.getStrLine() + "\r\n");
+                            POS_Output_PrintBmpDirectA(m_hPrinter, MainModel.ServerPath + "\\" + PrintHelper.SunCodeName);
+                            POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "  \r\n");
+                            POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.MergeStr("上果叔到家，抢实惠好物！", "", PrintHelper.BodyCharCountOfLine, PrintHelper.PageSize) + "\r\n");
+                        }
+                        catch { }
+                    }
+                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, PrintHelper.getStrLine() + "\r\n");
+                    POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, "多谢惠顾，欢迎下次光临！" + "\r\n");
+
+                }
+
                 //末尾打印空白行走纸
                 string strswhite = "  \r\n  \r\n  \r\n";
                 POS_Output_PrintFontStringA(m_hPrinter, 0, 0, 0, 0, 0, strswhite + "\r\n");
-
 
                 POS_Control_ReSet(m_hPrinter);
 

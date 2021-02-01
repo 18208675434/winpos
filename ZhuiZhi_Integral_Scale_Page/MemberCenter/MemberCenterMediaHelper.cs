@@ -84,6 +84,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
 
+        /// <summary> 刷新客屏信息
+        /// </summary>
+        public static void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycard)
+        {
+            try
+            {
+                if (frmmembermedia != null && HaveMedia)
+                {
+                    frmmembermedia.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon, entitycard);
+                }
+
+            }
+            catch { }
+        }
+
+
+        public static void ShowMemberInfo()
+        {
+            frmmembermedia.ShowMemberInfo();
+        }
+
         #region 客屏提示支付窗体
 
         private static FormPayOnLineMedia frmonlinemedia = null;
@@ -259,20 +280,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         }
         #endregion
 
-        /// <summary> 刷新客屏信息
-        /// </summary>
-        public static void UpdatememberInfo(string phone, string memberinfo, string balance, string credit, string creditspec, string coupon, string entitycard)
-        {
-            try
-            {
-                if (frmmembermedia != null && HaveMedia)
-                {
-                    frmmembermedia.UpdatememberInfo(phone, memberinfo, balance, credit, creditspec, coupon, entitycard);
-                }
-
-            }
-            catch { }
-        }
 
         #region 绑卡
         private static FormEntityCardBindMedia formBindEntityCardMedia = null;
@@ -379,5 +386,29 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
             }
         }
         #endregion
+
+        #region 修改会员
+
+
+        public static  void ShowEidtMember()
+        {
+            try
+            {
+                frmmembermedia.ShowEidtMember();
+            }
+            catch { }
+        }
+
+        public static  void UpdateEditMemberInfo(string name, string birthday, string genger)
+        {
+            try
+            {
+                frmmembermedia.UpdateEditMemberInfo(name,birthday,genger);
+            }
+            catch { }
+        }
+
+        #endregion
+
     }
 }

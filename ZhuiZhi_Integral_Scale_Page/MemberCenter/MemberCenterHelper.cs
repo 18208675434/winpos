@@ -23,11 +23,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         /// 手机号新值
         /// </summary>
         public static Member member = new Member();
-        public static void ShowFormMemberCenter(Member member)
+        public static bool ShowFormMemberCenter(Member member,bool isreturnwithoutorder)
         {
             try
             {
-                FormMemberCenter frmcenter = new FormMemberCenter(member);
+                FormMemberCenter frmcenter = new FormMemberCenter(member,isreturnwithoutorder);
                 asf.AutoScaleControlTest(frmcenter, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
                 frmcenter.Location = new System.Drawing.Point(0, 0);
 
@@ -35,10 +35,13 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
                 frmcenter.Dispose();
                 Application.DoEvents();
 
+                return frmcenter.DialogResult == DialogResult.OK;
+
             }
             catch (Exception ex)
             {
                 MainModel.ShowLog("显示会员中心页面异常" + ex.Message, true);
+                return false;
             }
         }
 
@@ -727,5 +730,32 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MemberCenter
         #endregion
 
 
+
+        /// <summary>
+        /// 显示用户找修改成功窗口
+        /// </summary>
+        /// <returns></returns>
+        public static bool ShowFormEditMember(Member member)
+        {
+            try
+            {
+                BackHelper.ShowFormBackGround();
+
+                FormEditMember frmeditmember = new FormEditMember(member);
+                asf.AutoScaleControlTest(frmeditmember, 1180, 760, Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height, true);
+                frmeditmember.Location = new System.Drawing.Point(0,0);
+                frmeditmember.TopMost = true;
+
+                frmeditmember.ShowDialog();
+                Application.DoEvents();
+                BackHelper.HideFormBackGround();
+                return frmeditmember.DialogResult == DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
     }
 }

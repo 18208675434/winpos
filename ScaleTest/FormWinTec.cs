@@ -115,7 +115,7 @@ namespace ScaleTest
         }
 
 
-        [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention =
+        [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention =
 CallingConvention.StdCall)]
         public static extern int PrintText(byte[] str, int FontSize);
         private void button2_Click(object sender, EventArgs e)
@@ -132,7 +132,9 @@ CallingConvention.StdCall)]
         }
 
 
-        [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+
+
         public static extern int BeginPrint(int PrintType);
 
         private void button3_Click(object sender, EventArgs e)
@@ -148,7 +150,7 @@ CallingConvention.StdCall)]
             }
         }
 
-           [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+           [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
         public static extern int CutPaper_stdcall(int PrintType);
         
 

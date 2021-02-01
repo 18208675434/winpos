@@ -85,7 +85,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
         long currentTime = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
                 string strwhere = " TENANTID='" + tenantId + "' and SHOPID ='" + shopId  + "' and ENABLED =1  and CREATE_URL_IP ='" + MainModel.URL + "' and ENABLEDFROM <" + currentTime + " and ENABLEDTO >" + currentTime;
         if(MainModel.IsOffLine){
-            strwhere+="and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
+            strwhere+=" and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
         }
         list=promotionbll.GetModelList(strwhere);
 
@@ -148,7 +148,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                         long currentTime = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
                 string strwhere = " TENANTID='" + tenantId + "' and SHOPID ='" + shopId  + "' and ENABLED =1  and CREATE_URL_IP ='" + MainModel.URL + "' and ENABLEDFROM <" + currentTime + " and ENABLEDTO >" + currentTime;
         if(MainModel.IsOffLine){
-            strwhere+="and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
+            strwhere+=" and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
         }
         list=promotionbll.GetModelList(strwhere);
             }
@@ -345,7 +345,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
  long currentTime = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
                 string strwhere = " TENANTID='" + tenantId + "' and SHOPID ='" + shopId  + "' and ENABLED =1  and CREATE_URL_IP ='" + MainModel.URL + "' and ENABLEDFROM <" + currentTime + " and ENABLEDTO >" + currentTime;
         if(MainModel.IsOffLine){
-            strwhere+="and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
+            strwhere+=" and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
         }
         listTemp=promotionbll.GetModelList(strwhere);   
     }
@@ -361,7 +361,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model.Promotion
                   long currentTime = Convert.ToInt64(MainModel.getStampByDateTime(DateTime.Now));
                 string strwhere = " TENANTID='" + tenantId + "' and SHOPID ='" + shopId  + "' and ENABLED =1  and CREATE_URL_IP ='" + MainModel.URL + "' and ENABLEDFROM <" + currentTime + " and ENABLEDTO >" + currentTime;
         if(MainModel.IsOffLine){
-            strwhere+="and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
+            strwhere+=" and (( PROMOTYPE = '" + EnumPromotionType.ITEM + "' AND ( PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_ACTION + "' OR PROMOACTION = '" + EnumPromotionType.PROMOTION_PRICE_DISCOUNT_ACTION + "')) OR PROMOTYPE = '" + EnumPromotionType.ORDER + "')";
         }
         list=promotionbll.GetModelList(strwhere);
             }

@@ -133,9 +133,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
                 string devicesn = GlobalUtil.GetMacAddress(currentmac);
 
-                //测试  
-                //devicesn = "F8A2D6F25CDB";
-
                 //没有网络的时候获取不到MAC地址  ？？？  会被替换
                 if (devicesn.Length > 10)
                 {

@@ -249,10 +249,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.MenuUI
 
                     string ErrorMsg1 = "";
                     string resultorderid = httputil.Refund(refundpara, ref ErrorMsg1);
-                    if (ErrorMsg != "")
+                    if (ErrorMsg1 != "" || string.IsNullOrEmpty(resultorderid))
                     {
-                        MainModel.ShowLog(ErrorMsg, true);
-                        this.Show();
+                        MainModel.ShowLog(ErrorMsg1, true);
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
                         return;
                     }
                     else

@@ -57,7 +57,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
                 return;
             }
 
-            string smscode = ReturnWithoutOrderHelper.ShowFormCheckSmCode(thisCurrentCart.shopownername, thisCurrentCart.shopownerphone);
+            string smscode = ReturnWithoutOrderHelper.ShowFormCheckSmCode(thisCurrentCart.shopownername, thisCurrentCart.shopownerphone,thisCurrentCart.smscontent);
 
             if (string.IsNullOrEmpty(smscode))
             {

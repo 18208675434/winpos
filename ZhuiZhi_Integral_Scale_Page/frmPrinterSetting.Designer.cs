@@ -118,6 +118,14 @@
             this.picOpenShowWithJin = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
+            this.pnlClosePrintSunCode = new System.Windows.Forms.Panel();
+            this.lblCosePrintSunCode = new System.Windows.Forms.Label();
+            this.picClosePrintSunCode = new System.Windows.Forms.PictureBox();
+            this.pnlOpenPrintSunCode = new System.Windows.Forms.Panel();
+            this.lblOpenPrintSunCode = new System.Windows.Forms.Label();
+            this.picOpenPrintSunCode = new System.Windows.Forms.PictureBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
             this.pnlHead.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMenu)).BeginInit();
@@ -145,6 +153,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCloseShowWithJin)).BeginInit();
             this.pnlOpenShowWithJin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenShowWithJin)).BeginInit();
+            this.pnlClosePrintSunCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picClosePrintSunCode)).BeginInit();
+            this.pnlOpenPrintSunCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picOpenPrintSunCode)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxPrint
@@ -498,7 +510,7 @@
             // 
             this.picSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picSelect.Image = ((System.Drawing.Image)(resources.GetObject("picSelect.Image")));
-            this.picSelect.Location = new System.Drawing.Point(177, 711);
+            this.picSelect.Location = new System.Drawing.Point(415, 723);
             this.picSelect.Name = "picSelect";
             this.picSelect.Size = new System.Drawing.Size(23, 23);
             this.picSelect.TabIndex = 65;
@@ -509,7 +521,7 @@
             // 
             this.picNotSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picNotSelect.Image = ((System.Drawing.Image)(resources.GetObject("picNotSelect.Image")));
-            this.picNotSelect.Location = new System.Drawing.Point(210, 711);
+            this.picNotSelect.Location = new System.Drawing.Point(448, 723);
             this.picNotSelect.Name = "picNotSelect";
             this.picNotSelect.Size = new System.Drawing.Size(23, 25);
             this.picNotSelect.TabIndex = 67;
@@ -966,7 +978,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Black;
-            this.panel6.Location = new System.Drawing.Point(687, 445);
+            this.panel6.Location = new System.Drawing.Point(687, 392);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(8, 25);
             this.panel6.TabIndex = 96;
@@ -975,7 +987,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label6.Location = new System.Drawing.Point(701, 446);
+            this.label6.Location = new System.Drawing.Point(701, 393);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(190, 24);
             this.label6.TabIndex = 95;
@@ -985,7 +997,7 @@
             // 
             this.pnlCloseHalfOffLine.Controls.Add(this.lblCloseHalfOffLine);
             this.pnlCloseHalfOffLine.Controls.Add(this.picCloseHalfOffLine);
-            this.pnlCloseHalfOffLine.Location = new System.Drawing.Point(799, 492);
+            this.pnlCloseHalfOffLine.Location = new System.Drawing.Point(799, 439);
             this.pnlCloseHalfOffLine.Name = "pnlCloseHalfOffLine";
             this.pnlCloseHalfOffLine.Size = new System.Drawing.Size(72, 33);
             this.pnlCloseHalfOffLine.TabIndex = 98;
@@ -1018,7 +1030,7 @@
             // 
             this.pnlOpenHalfOffLine.Controls.Add(this.lblOpenHalfOffLine);
             this.pnlOpenHalfOffLine.Controls.Add(this.picOpenHalfOffLine);
-            this.pnlOpenHalfOffLine.Location = new System.Drawing.Point(705, 492);
+            this.pnlOpenHalfOffLine.Location = new System.Drawing.Point(705, 439);
             this.pnlOpenHalfOffLine.Name = "pnlOpenHalfOffLine";
             this.pnlOpenHalfOffLine.Size = new System.Drawing.Size(72, 33);
             this.pnlOpenHalfOffLine.TabIndex = 97;
@@ -1168,7 +1180,7 @@
             // 
             this.pnlCloseShowWithJin.Controls.Add(this.lblCloseShowWithJin);
             this.pnlCloseShowWithJin.Controls.Add(this.picCloseShowWithJin);
-            this.pnlCloseShowWithJin.Location = new System.Drawing.Point(799, 600);
+            this.pnlCloseShowWithJin.Location = new System.Drawing.Point(799, 547);
             this.pnlCloseShowWithJin.Name = "pnlCloseShowWithJin";
             this.pnlCloseShowWithJin.Size = new System.Drawing.Size(72, 33);
             this.pnlCloseShowWithJin.TabIndex = 102;
@@ -1201,7 +1213,7 @@
             // 
             this.pnlOpenShowWithJin.Controls.Add(this.lblOpenShowWithJin);
             this.pnlOpenShowWithJin.Controls.Add(this.picOpenShowWithJin);
-            this.pnlOpenShowWithJin.Location = new System.Drawing.Point(705, 600);
+            this.pnlOpenShowWithJin.Location = new System.Drawing.Point(705, 547);
             this.pnlOpenShowWithJin.Name = "pnlOpenShowWithJin";
             this.pnlOpenShowWithJin.Size = new System.Drawing.Size(72, 33);
             this.pnlOpenShowWithJin.TabIndex = 101;
@@ -1233,7 +1245,7 @@
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.Black;
-            this.panel9.Location = new System.Drawing.Point(687, 553);
+            this.panel9.Location = new System.Drawing.Point(687, 500);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(8, 25);
             this.panel9.TabIndex = 100;
@@ -1242,11 +1254,95 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label30.Location = new System.Drawing.Point(701, 554);
+            this.label30.Location = new System.Drawing.Point(701, 501);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(244, 24);
             this.label30.TabIndex = 99;
             this.label30.Text = "是否显示称重商品单位为：斤";
+            // 
+            // pnlClosePrintSunCode
+            // 
+            this.pnlClosePrintSunCode.Controls.Add(this.lblCosePrintSunCode);
+            this.pnlClosePrintSunCode.Controls.Add(this.picClosePrintSunCode);
+            this.pnlClosePrintSunCode.Location = new System.Drawing.Point(799, 651);
+            this.pnlClosePrintSunCode.Name = "pnlClosePrintSunCode";
+            this.pnlClosePrintSunCode.Size = new System.Drawing.Size(72, 33);
+            this.pnlClosePrintSunCode.TabIndex = 108;
+            this.pnlClosePrintSunCode.Click += new System.EventHandler(this.pnlClosePrintSunCode_Click);
+            // 
+            // lblCosePrintSunCode
+            // 
+            this.lblCosePrintSunCode.AutoSize = true;
+            this.lblCosePrintSunCode.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.lblCosePrintSunCode.ForeColor = System.Drawing.Color.DimGray;
+            this.lblCosePrintSunCode.Location = new System.Drawing.Point(29, 5);
+            this.lblCosePrintSunCode.Name = "lblCosePrintSunCode";
+            this.lblCosePrintSunCode.Size = new System.Drawing.Size(32, 17);
+            this.lblCosePrintSunCode.TabIndex = 1;
+            this.lblCosePrintSunCode.Text = "关闭";
+            this.lblCosePrintSunCode.Click += new System.EventHandler(this.pnlClosePrintSunCode_Click);
+            // 
+            // picClosePrintSunCode
+            // 
+            this.picClosePrintSunCode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picClosePrintSunCode.BackgroundImage")));
+            this.picClosePrintSunCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picClosePrintSunCode.Location = new System.Drawing.Point(6, 4);
+            this.picClosePrintSunCode.Name = "picClosePrintSunCode";
+            this.picClosePrintSunCode.Size = new System.Drawing.Size(18, 18);
+            this.picClosePrintSunCode.TabIndex = 0;
+            this.picClosePrintSunCode.TabStop = false;
+            this.picClosePrintSunCode.Click += new System.EventHandler(this.pnlClosePrintSunCode_Click);
+            // 
+            // pnlOpenPrintSunCode
+            // 
+            this.pnlOpenPrintSunCode.Controls.Add(this.lblOpenPrintSunCode);
+            this.pnlOpenPrintSunCode.Controls.Add(this.picOpenPrintSunCode);
+            this.pnlOpenPrintSunCode.Location = new System.Drawing.Point(705, 651);
+            this.pnlOpenPrintSunCode.Name = "pnlOpenPrintSunCode";
+            this.pnlOpenPrintSunCode.Size = new System.Drawing.Size(72, 33);
+            this.pnlOpenPrintSunCode.TabIndex = 107;
+            this.pnlOpenPrintSunCode.Click += new System.EventHandler(this.pnlOpenPrintSunCode_Click);
+            // 
+            // lblOpenPrintSunCode
+            // 
+            this.lblOpenPrintSunCode.AutoSize = true;
+            this.lblOpenPrintSunCode.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.lblOpenPrintSunCode.ForeColor = System.Drawing.Color.DimGray;
+            this.lblOpenPrintSunCode.Location = new System.Drawing.Point(29, 5);
+            this.lblOpenPrintSunCode.Name = "lblOpenPrintSunCode";
+            this.lblOpenPrintSunCode.Size = new System.Drawing.Size(32, 17);
+            this.lblOpenPrintSunCode.TabIndex = 1;
+            this.lblOpenPrintSunCode.Text = "开启";
+            this.lblOpenPrintSunCode.Click += new System.EventHandler(this.pnlOpenPrintSunCode_Click);
+            // 
+            // picOpenPrintSunCode
+            // 
+            this.picOpenPrintSunCode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picOpenPrintSunCode.BackgroundImage")));
+            this.picOpenPrintSunCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picOpenPrintSunCode.Location = new System.Drawing.Point(5, 3);
+            this.picOpenPrintSunCode.Name = "picOpenPrintSunCode";
+            this.picOpenPrintSunCode.Size = new System.Drawing.Size(20, 20);
+            this.picOpenPrintSunCode.TabIndex = 0;
+            this.picOpenPrintSunCode.TabStop = false;
+            this.picOpenPrintSunCode.Click += new System.EventHandler(this.pnlOpenPrintSunCode_Click);
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.Black;
+            this.panel10.Location = new System.Drawing.Point(687, 604);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(8, 25);
+            this.panel10.TabIndex = 106;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label32.Location = new System.Drawing.Point(701, 605);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(190, 24);
+            this.label32.TabIndex = 105;
+            this.label32.Text = "是否打印小程序太阳码";
             // 
             // frmPrinterSetting
             // 
@@ -1254,6 +1350,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1180, 760);
+            this.Controls.Add(this.pnlClosePrintSunCode);
+            this.Controls.Add(this.pnlOpenPrintSunCode);
+            this.Controls.Add(this.panel10);
+            this.Controls.Add(this.label32);
             this.Controls.Add(this.pnlCloseShowWithJin);
             this.Controls.Add(this.pnlYKPrint);
             this.Controls.Add(this.pnlOpenShowWithJin);
@@ -1357,6 +1457,12 @@
             this.pnlOpenShowWithJin.ResumeLayout(false);
             this.pnlOpenShowWithJin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenShowWithJin)).EndInit();
+            this.pnlClosePrintSunCode.ResumeLayout(false);
+            this.pnlClosePrintSunCode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picClosePrintSunCode)).EndInit();
+            this.pnlOpenPrintSunCode.ResumeLayout(false);
+            this.pnlOpenPrintSunCode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picOpenPrintSunCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1453,5 +1559,13 @@
         private System.Windows.Forms.PictureBox picOpenShowWithJin;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Panel pnlClosePrintSunCode;
+        private System.Windows.Forms.Label lblCosePrintSunCode;
+        private System.Windows.Forms.PictureBox picClosePrintSunCode;
+        private System.Windows.Forms.Panel pnlOpenPrintSunCode;
+        private System.Windows.Forms.Label lblOpenPrintSunCode;
+        private System.Windows.Forms.PictureBox picOpenPrintSunCode;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label32;
     }
 }

@@ -9,7 +9,7 @@ namespace ScaleTest
     public class WinTecUtil
     {
 
-        [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+        [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
         public static extern bool OpenADCom_stdcall(int port,int baud);
         public static bool OpenADCom(int com ,int baud)
         {
@@ -27,7 +27,7 @@ namespace ScaleTest
             }
         }
 
-        [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
+        [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
         public static extern int read_standard_stdcall(byte[] str);
         /// <summary>
         /// 获取秤称重信息
@@ -105,7 +105,7 @@ namespace ScaleTest
         }
 
 
-        [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
+        [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
         public static extern int send_pre_tare(byte[] str);
         /// <summary>
         /// 设置预置皮重，根据传入的皮重参数进行去皮（需要转换为KG单位）
@@ -152,7 +152,7 @@ namespace ScaleTest
 
 
 
-        [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
+        [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
         public static extern int set_tare_bykey(byte[] str);
         /// <summary>
         /// 按键去皮，根据秤盘上当前重量进行自动去皮
@@ -201,7 +201,7 @@ namespace ScaleTest
         }
 
 
-        [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
+        [DllImport("wintec.dll", CharSet = CharSet.Ansi, CallingConvention =CallingConvention.StdCall)]
         public static extern int send_zero();
         /// <summary>
         /// 清零

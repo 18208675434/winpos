@@ -791,6 +791,42 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.BaseUI
             }
         }
 
+        /// <summary>
+        /// 获取会员姓名
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="needbrackets">是否需要括号</param>
+        /// <returns></returns>
+        public static string GetMemberName(Member member,bool needbrackets=false)
+        {
+           
+            try
+            {
+                string resultname = "";
+                
+                if (member == null || member.memberinformationresponsevo==null)
+                {
+                    return "";
+                }
+                resultname = member.memberinformationresponsevo.nickname;
+
+                if (resultname.Length > 4)
+                {
+                    resultname = resultname.Substring(0, 3) + "x";
+                }
+                if (!string.IsNullOrEmpty(resultname.Trim()) && needbrackets)
+                {
+                    resultname = "(" + resultname + ")";
+                }
+
+                return resultname;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         #endregion
 
     }

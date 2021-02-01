@@ -190,6 +190,11 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         public string smscode { set; get; }
 
         /// <summary>
+        /// 无单退款 文案展示
+        /// </summary>
+        public string smscontent { set; get; }
+
+        /// <summary>
         /// 门店负责人电话
         /// </summary>
         public string shopownerphone { set; get; }

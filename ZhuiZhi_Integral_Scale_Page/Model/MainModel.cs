@@ -120,6 +120,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         /// </summary>
         public static bool WhetherShowWithJin = true;
 
+
+        /// <summary>
+        /// 是否打印小程序太阳码
+        /// </summary>
+        public static bool WhetherPrintSunCode = true;
+
         /// <summary>
         /// 接口返回code 100031;//店员登录失效
         /// </summary>
@@ -670,8 +676,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Model
         {
             get
             {
-                //TODO
-                if (URL.Contains("https://pos.a72hongjie.com"))
+                //TODO  
+                if (URL.Contains("https://pos.fruitgs.com"))
                 {
                     return "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIWSVenS4KZRSQB5S4dt25JRy/wX33do4nqK7CHzr+v6cNAsT0icoIFpFksmoIM5KNmvnsF3uRzr2rvg6IlV8gUCAwEAAQ==";
                 }

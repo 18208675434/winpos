@@ -199,12 +199,15 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.Common
         {
             try
             {
+
+
                 AbnormalOrderItemVo aoi = new AbnormalOrderItemVo();
                 aoi.date = MainModel.getStampByDateTime(DateTime.Now);
                 aoi.phone = MainModel.CurrentUser.loginaccount;
                 aoi.type = 9;
 
-                aoi.amt = cart.totalpayment;
+                decimal tempamt = cart.totalpaymentbeforefix - cart.fixpricetotal;
+                aoi.amt = tempamt;
                 aoi.skucodes = cart.products.Select(r => r.skucode).ToList();
 
                 InsertToDbJson(aoi);

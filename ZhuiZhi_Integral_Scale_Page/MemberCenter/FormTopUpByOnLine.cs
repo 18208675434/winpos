@@ -91,12 +91,22 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
 
         public void PayOnLine(string authcode)
         {
-            StartTime = DateTime.Now;
-            CurrentAuthCode = authcode;
-            AuthCodeTrade();
-            // SyncTrade();
-            // timerAuthCodeTrade.Enabled = true;
-            // timerSyncTrade.Enabled = true;
+            try
+            {
+                scancode = new StringBuilder();
+                if (isScan)
+                {
+                    isScan = false;
+                    StartTime = DateTime.Now;
+                    CurrentAuthCode = authcode;
+                    AuthCodeTrade();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
@@ -129,19 +139,19 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 else
                 {
-                    if (codetrade.status == "SUCCESS")
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
+                    //if (codetrade.status == "SUCCESS")
+                    //{
+                    //    this.DialogResult = DialogResult.OK;
+                    //    this.Close();
+                    //}
+                    //else
+                    //{
 
                         pnlLoading.Visible = true;
                         timerSyncTrade.Enabled = true;
                         CurrentPayID = codetrade.payid;
                         SyncTrade(CurrentOrderID, CurrentPayID);
-                    }
+                  //  }
 
                 }
             }
@@ -169,6 +179,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     timerSyncTrade.Enabled = false;
 
                     MainModel.ShowLog(errormsg, true);
+                    isScan = true;
                 }
                 else if (sync.status == "REQUEST_SUCCESS")
                 {
@@ -182,6 +193,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                     pnlLoading.Visible = false;
                     timerSyncTrade.Enabled = false;
                     MainModel.ShowLog("交易关闭,请重新扫码付款！", false);
+                    isScan = true;
                 }
                 else if (sync.status == "FAIL")
                 {
@@ -315,10 +327,8 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
                 }
                 if (keyData == Keys.Enter)
                 {
-                    isScan = false;
                     PayOnLine(scancode.ToString());
                     scancode = new StringBuilder();
-                    isScan = true;
                     return false;
                 }
                 if (keyData == Keys.Space)
@@ -329,7 +339,6 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit
             }
             catch (Exception ex)
             {
-                isScan = true;
                 LogManager.WriteLog("监听键盘事件异常" + ex.Message);
                 return false;
             }

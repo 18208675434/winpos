@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * 中科英泰 S373
+ * 
+ * 
+ * 动态连接库为  pos_ad_dll.dll 因名称冲突 修改为 WintecScale.dll
+ * **/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,7 +38,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             return true;
         }
 
-            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+            [DllImport("WintecScale.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
             public static extern int read_standard_stdcall(byte[] str);
             /// <summary>
             /// 获取秤称重信息
@@ -136,7 +143,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
 
 
-            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+            [DllImport("WintecScale.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
             public static extern int clear_tare(byte[] str);
             /// <summary>
             /// 清除皮重
@@ -180,7 +187,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             }
 
 
-            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+            [DllImport("WintecScale.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
             public static extern int send_pre_tare(byte[] str);
             /// <summary>
             /// 设置预置皮重，根据传入的皮重参数进行去皮（需要转换为KG单位）   预置皮重前需要先去皮  抹零必须是六位字符串  三位小数00.000
@@ -227,7 +234,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
 
 
 
-            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+            [DllImport("WintecScale.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
             public static extern int set_tare_bykey(byte[] str);
             /// <summary>
             /// 按键去皮，根据秤盘上当前重量进行自动去皮
@@ -276,7 +283,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ScaleFactory
             }
 
 
-            [DllImport("pos_ad_dll.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
+            [DllImport("WintecScale.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
             public static extern int send_zero();
             /// <summary>
             /// 清零

@@ -113,12 +113,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ReturnWithoutOrder
         }
 
 
-        public static string ShowFormCheckSmCode(string name,string phone){
+        public static string ShowFormCheckSmCode(string name,string phone,string smscontent){
 
             try
             {
               
-                FormCheckSmCode frm = new FormCheckSmCode(name,phone);
+                FormCheckSmCode frm = new FormCheckSmCode(name,phone,smscontent);
                 asf.AutoScaleControlTest(frm, 600, 300, 600 * MainModel.midScale, 300 * MainModel.midScale, true);
                 frm.Location = new System.Drawing.Point((Screen.AllScreens[0].Bounds.Width - frm.Width) / 2, (Screen.AllScreens[0].Bounds.Height - frm.Height) / 2);
                 frm.TopMost = true;

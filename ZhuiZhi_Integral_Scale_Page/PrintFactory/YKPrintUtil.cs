@@ -72,7 +72,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                     SetAlign(0);
                     lstPrintStr.AddRange(PrintHelper.GetOrderPrintInfo(printdetail, isRefound));
 
-                    PrintTextByPaperWidth(lstPrintStr);
+                    PrintTextByPaperWidth(lstPrintStr,true);
                     YkPrnAndFeedLine(4);
                     CloseDevice();
                     Application.DoEvents();
@@ -321,7 +321,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
                         SetAlign(1);
                         StringBuilder logobuilder = new StringBuilder(AppDomain.CurrentDomain.BaseDirectory + "\\orderqrcoe.bmp" );
-                        PrintBitmap(logobuilder, 0);
+                        PrintBitmap(logobuilder, 33);
 
                         PrintStr("取货码："+printdetail.pickcode +"\n");
                         SetAlign(0);
@@ -513,7 +513,7 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
 
 
-           public static bool PrintTextByPaperWidth(List<string> lstprints)
+        public static bool PrintTextByPaperWidth(List<string> lstprints, bool needsuncode = false )
         {
             try
             {
@@ -524,8 +524,26 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
                 {
                     sb.Append( str + "\n");
                 }
+              
 
                  PrintStr(sb);
+
+                if (needsuncode)
+                {
+                    if (System.IO.File.Exists(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName) && MainModel.WhetherPrintSunCode)
+                    {
+                        PrintStr(new StringBuilder(PrintHelper.getStrLine() + "\n"));
+                        SetAlign(1);
+                        StringBuilder logobuilder = new StringBuilder(MainModel.ServerPath + "\\" + PrintHelper.SunCodeName);
+                        PrintBitmap(logobuilder, 33);
+
+                        PrintStr(" " + "\n");
+                        PrintStr("上果叔到家，抢实惠好物！" + "\n");
+                        SetAlign(0);
+                    }
+                    PrintStr(new StringBuilder(PrintHelper.getStrLine() + "\n"));
+                    PrintStr(new StringBuilder("多谢惠顾，欢迎下次光临！" + "\n"));
+                }
 
                 return true;
             }
@@ -592,6 +610,9 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
 
         [DllImport("YkPosdll.dll")]
         static extern int YkSetAlign(int n);
+
+        [DllImport("YkPosdll.dll")]
+        static extern int YkPrintBitmap([MarshalAs(UnmanagedType.LPStr)]StringBuilder szBmpFile, int m);
 
         /// <summary>
         /// 打印后走纸行数
@@ -668,7 +689,12 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.PrintFactory
         public static int PrintBitmap([MarshalAs(UnmanagedType.LPStr)]StringBuilder szBmpFile, int m)
         {
             int i;
-            i = YkDownloadBitmapAndPrint(szBmpFile, m);
+
+           // string ScaleName = INIManager.GetIni("Scale", "ScaleName", MainModel.IniPath);
+
+                i = YkPrintBitmap(szBmpFile, m);
+            
+            
             return i;
         }
         public static int FeedPaper()
