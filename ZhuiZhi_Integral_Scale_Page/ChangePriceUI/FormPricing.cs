@@ -102,7 +102,27 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                         return;
                     }
 
-                   
+                    //fmj 2023.2.20 start
+                    //单价调价
+                    if (CurrentChangeType == ChangeType.unitprice)
+                    {
+                        if (ChangePriceUtil.PriceImpose(doublenum, CurrentProduct.price.originsaleprice, Lessthen.LESS))
+                        {
+                            MainModel.ShowLog("低于最高可调单价￥" + ChangePriceUtil.ThenPriceRange(CurrentProduct.price.originsaleprice), false);
+                            return;
+                        }
+                    }
+                    //总价调价
+                    else if (CurrentChangeType == ChangeType.totalprice)
+                    {
+                        if (ChangePriceUtil.PriceImpose(doublenum, temptotal, Lessthen.LESS))
+                        {
+                            MainModel.ShowLog("低于最高可调总价￥" + ChangePriceUtil.ThenPriceRange(temptotal), false);
+                            return;
+                        }
+                    }
+                    //end
+
                     adjustpriceinfo.amt = doublenum;
                     adjustpriceinfo.beforeamt = CurrentProduct.price.originsaleprice;
 

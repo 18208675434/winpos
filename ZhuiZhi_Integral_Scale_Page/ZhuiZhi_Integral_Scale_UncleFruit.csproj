@@ -122,6 +122,7 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseUI\MainHelper.cs" />
+    <Compile Include="Common\ChangePriceUtil.cs" />
     <Compile Include="HelperUI\DialogHelper.cs" />
     <Compile Include="HelperUI\FormCode.cs">
       <SubType>Form</SubType>

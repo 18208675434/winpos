@@ -78,12 +78,20 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                     }
                     decimal doublenum = Convert.ToDecimal(txtPrice.Text)/10;
 
-                    if (doublenum <= 0 || doublenum>=1)
+                    /*if (doublenum <= 0 || doublenum>=1)
                     {
                         MainModel.ShowLog("请输入正确的折扣",false);
                         return;
-                    }
-                    adjustpriceinfo.amt = doublenum;
+                    }*/
+                //fmj 2023.2.20 start
+                if ((doublenum * 10) < MainModel.CurrentShopInfo.posalterorderdiscountrange)
+                {
+                    MainModel.ShowLog($"低于最低折扣{MainModel.CurrentShopInfo.posalterorderdiscountrange}折!", false);
+                    return;
+                }
+                //end
+
+                adjustpriceinfo.amt = doublenum;
                     adjustpriceinfo.beforeamt = CurrentProduct.price.originsaleprice;
                     adjustpriceinfo.type = 2; 
                     this.DialogResult = DialogResult.OK;

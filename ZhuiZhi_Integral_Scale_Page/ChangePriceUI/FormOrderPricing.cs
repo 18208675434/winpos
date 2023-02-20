@@ -107,6 +107,14 @@ namespace ZhuiZhi_Integral_Scale_UncleFruit.ChangePriceUI
                         return;
                     }
 
+                    ///fmj 2023.2.20 start
+                    if (ChangePriceUtil.PriceImpose(doublenum, CurrentTotalpaymentBeforeFix, Lessthen.LESS))
+                    {
+                        MainModel.ShowLog("低于最高可减金额￥" + ChangePriceUtil.ThenPriceRange(CurrentTotalpaymentBeforeFix), false);
+                        return;
+                    }
+                    //end
+
                     fixpricetotal = doublenum;
 
                     this.DialogResult = DialogResult.OK;
